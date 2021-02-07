@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Hello, Servlet!</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Hello, world!</h2>
+                <p>
+                    練習這個範例之前，請先確認你至少使用 Java SE 7 與 Tomcat 7，否則無法編譯與執行！
+                </p>
+                <hr>
+                <section>
+                    <h3>原始碼</h3>
+                    <p>
+                        請在 Tomcat 的 webapps 資料夾裡，建立名為 helloworld 的資料夾，然後 helloworld 資料夾裡面建立名為 Main.java 的純文字文件，輸入如下 Hello, world! 程式碼：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.IOException;
+                            import java.io.PrintWriter;
+                            import javax.servlet.annotation.WebServlet;
+                            import javax.servlet.http.HttpServlet;
+                            import javax.servlet.http.HttpServletRequest;
+                            import javax.servlet.http.HttpServletResponse;
+                            import javax.servlet.ServletException;
+
+                            @WebServlet(name="Main", urlPatterns={"/Main"}, loadOnStartup=1)
+                            public class Main extends HttpServlet{
+                                @Override public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+                                    PrintWriter out = response.getWriter();
+                                    out.println("Hello, world!");
+                                    out.close();
+                                }
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>編譯</h3>
+                    <p>
+                        啟動命令提示字元，進入 [TOMCAT]\webapps\helloworld\ 這個路徑，然後輸入如下編譯指令：<br>
+                        <br>
+                        <kbd>javac -cp ..\..\lib\servlet-api.jar -encoding UTF-8 *.java</kbd><br>
+                        <br>
+                        編譯成功的話，在 [TOMCAT]\webapps\helloworld\ 可以看到 <var>Main.class</var>，這就是我們的 Servlet。<br>
+                        <br>
+                        編譯失敗的話，因為這個範例用到 Annotation 語法，所以至少要 Java SE 7 才能編譯。或者你可以刪掉原始碼的 import javax.servlet.annotation.WebServlet; 和 @WebServlet(name="Main", urlPatterns={"/Main"}, loadOnStartup=1) 來通過編譯，然後改用 web.xml 來描述，可參考下一節《怎麼寫 web.xml》的內容。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>部署</h3>
+                    <p>
+                        請在 [TOMCAT]\webapps\helloworld\ 建立名為 WEB-INF 的資料夾，然後 WEB-INF 資料夾裡面再建立名為 classes 的資料夾，再把 <var>Main.class</var> 放在這個 classes 資料夾裡面。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>執行</h3>
+                    <p>
+                        啟動或重新啟動 Tomcat，然後開啟網頁瀏覽器，在網址列輸入：<br>
+                        <br>
+                        <kbd>http://localhost:8080/helloworld/Main</kbd><br>
+                        <br>
+                        注意大小寫！<br>
+                        <br>
+                        成功的話，就能在瀏覽器看到 Hello, world! 這經典文句。<br>
+                        <br>
+                        失敗的話，請確認你的 JDK 版本是否比 JRE 版本還要新，導致編譯出來的 Servlet 無法被 Tomcat 執行<ins>[1]</ins>。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>怎麼寫 web.xml</h2>
+                <p>
+                    在 Java SE 7 之前並沒有 @WebServlet 可用，因此必須寫 web.xml 來描述。<br>
+                    <br>
+                    請在 WEB-INF 資料夾裡面，建立名為 web.xml 的純文字文件，寫入：<br>
+                    <br>
+                    <textarea class='brush:xml'>
+                        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                        &lt;web-app&gt;
+                            &lt;servlet&gt;
+                                &lt;servlet-name&gt;Main&lt;/servlet-name&gt;
+                                &lt;servlet-class&gt;Main&lt;/servlet-class&gt;
+                                &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+                            &lt;/servlet&gt;
+                            &lt;servlet-mapping&gt;
+                                &lt;servlet-name&gt;Main&lt;/servlet-name&gt;
+                                &lt;url-pattern&gt;/Main&lt;/url-pattern&gt;
+                            &lt;/servlet-mapping&gt;
+                        &lt;/web-app&gt;
+                       </textarea>
+                    <br>
+                    然後重新啟動 Tomcat，就能執行了。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>檢討 Hello, world!</h2>
+                <hr>
+                <section>
+                    <h3>Servlet 的組成結構</h3>
+                    <p>
+                        第一次接觸 Servlet，很容易被硬性規定的檔案組織、還有 web.xml 整慘！<br>
+                        <br>
+                        截至目前為止，我們看到寫一個 Servlet 的話，資料夾的檔案結構如下：<br>
+                        <br>
+                        <code>
+                            helloworld\WEB-INF\classes\Main.class<br>
+                            helloworld\WEB-INF\web.xml<br>
+                        </code>
+                        <br>
+                        雖然忙起來的時候很複雜，列出來看其實很單純。<br>
+                        <br>
+                        不過，為了範例一步驟一步驟指導的方便，所以把原始碼寫在：<br>
+                        <br>
+                        <code>
+                            helloworld\Main.java<br>
+                        </code>
+                        <br>
+                        這是很要命的錯誤示範！因為：<br>
+                        <br>
+                        <code>
+                            http://localhost:8080/helloworld/Main.java<br>
+                        </code>
+                        <br>
+                        原始碼是會被下載的 0.0<br>
+                        <br>
+                        應該獨立一個專案進行維護原始碼的工作，由專案負責上傳編譯好的程式到指定位置。如果真覺得把原始碼跟 Webapp 放在一起比較好管理，至少也要放在 WEB-INF 裡面。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>web.xml 與 @WebServlet</h3>
+                    <p>
+                        因為 Hello, world! 目的是盡快看到程式能正常動作，所以為了避免出錯，無論 @WebServlet 或 web.xml 的設定值，每項都是類別名稱：Main。<br>
+                        <br>
+                        如果你希望進一步了解各項設定的話，首先將 web.xml 改寫為：<br>
+                        <br>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                            &lt;web-app&gt;
+                                &lt;servlet&gt;
+                                    &lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+                                    &lt;servlet-class&gt;Main&lt;/servlet-class&gt;
+                                    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+                                &lt;/servlet&gt;
+                                &lt;servlet-mapping&gt;
+                                    &lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+                                    &lt;url-pattern&gt;/helloworld.view&lt;/url-pattern&gt;
+                                &lt;/servlet-mapping&gt;
+                            &lt;/web-app&gt;
+                        </textarea>
+                        <br>
+                        這樣改以後，必須在網頁瀏覽器的網址列改為輸入：<br>
+                        <br>
+                        <kbd>http://localhost:8080/helloworld/helloworld.view</kbd><br>
+                        <br>
+                        這時 Tomcat 會依 helloword.view 找 servlet-name 同樣為 HelloWorld 的 servlet-class 來執行，所以就是 Main.class 了！<br>
+                        <br>
+                        load-on-startup 則是 Tomcat 啟動時，就載入 Main.class，這樣比使用者呼叫時才建立更有執行效率。不過，1 並不是 true 的意思，這是個優先順序值，數值越小有越高的優先權；0 表示不預先載入。<br>
+                        <br>
+                        看到這裡，知道為何每次修改完 Servlet 都要重新啟動 Tomcat 了吧？<br>
+                        <br>
+                        至於 @WebServlet，其實跟 web.xml 對照起來的話，只是…<br>
+                        <br>
+                        @WebServlet(name="<var>servlet-name</var>", urlPatterns={"/<var>url-pattern</var>"}, loadOnStartup=1)<br>
+                        <br>
+                        因為 @WebServlet 是在宣告 Main 前，對 Main 下的標註，所以不需要 server-class 就知道是 Main。<br>
+                        <br>
+                        helloworld.view 的 view 純粹只是慣例，你也可以不加，這樣輸入網址時，只要：<br>
+                        <br>
+                        <kbd>http://localhost:8080/helloworld/helloworld</kbd><br>
+                        <br>
+                        但是加了比較能清楚表達我想看的是 Servlet：<br>
+                        <br>
+                        <samp>
+                            http://twideem.github.io/helloworld.html<br>
+                            http://twideem.github.io/helloworld.jsp<br>
+                            http://twideem.github.io/helloworld.view<br>
+                            http://twideem.github.io/helloworld<br>
+                        </samp>
+                        <br>
+                        加上去確實看起來比較容易分辨。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 有安裝 JRE 的話，Tomcat 可能會用 JRE 來跑 Java，而不是 JAVA_HOME。結果編譯出來的程式太新，Tomcat 想載入 *.class 時發現不相容。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>JSP &amp; SQL 快速入門</h1>
+                <p>本文介紹如何搭配 Tomcat 與 MySQL，建立可用 JSP 來練習 SQL 的程式設計環境。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>MySQL</h2>
+                <p>
+                    MySQL 是最容易安裝與使用的關聯性資料庫伺服器，尤其被 Sun Microsystems 收購後，相當於 Java 家族的成員之一。
+                </p>
+                <hr>
+                <section>
+                    <h3>下載</h3>
+                    <p>
+                        請至 <a href='http://www.mysql.com' target='_blank'>http://www.mysql.com</a> 下載 MySQL Community Server，為了方便設定伺服器環境，建議下載 Installer 的版本<ins>[1]</ins>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>安裝</h3>
+                    <p>
+                        不要安裝在 C:\Program Files 底下，建議改安裝在 D 槽，避免 Windows 系統保護權限問題，安裝後無法正常啟動 MySQL 服務。<br>
+                        <br>
+                        安裝後第一次執行 MySQL 時，會出現設定精靈，過程中，建議設定為「Install As Windows Service」，交由作業系統啟動 MySQL 服務，並且允許帳號可以從遠端登入伺服器。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>執行</h3>
+                    <p>
+                        安裝 MySQL 資料庫伺服器的主要目的，是為了從外部操作環境（例如 JDK 或 Tomcat）登入伺服器，來存取 MySQL 內部資料，因此應用上比較沒有「如何執行 MySQL」的問題。只要將 MySQL 啟動為 Windows 的「服務」即可。<br>
+                        <br>
+                        但你還是可以透過 MySQL Command Line Clent 來輸入 SQL 指令，直接從 MySQL 內部操作資料庫。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Connector/J</h2>
+                <p>
+                    要讓 Java 操作 MySQL，你必須下載一種叫做 JDBC 的驅動程式。
+                </p>
+                <hr>
+                <section>
+                    <h3>下載</h3>
+                    <p>
+                        請至 <a href='http://dev.mysql.com/downloads/connector/j/' target='_blank'>http://dev.mysql.com/downloads/connector/j/</a> 下載 Connector/J。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>安裝</h3>
+                    <p>
+                        解壓後，將 mysql-connector-java-5.1.22-bin.jar 放到 Tomcat 所在資料夾底下的 lib 資料夾，然後重新啟動 Tomcat。<br>
+                        <br>
+                        5.1.22 是版本號碼，視年份日期而有不同。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Hello, world!</h2>
+                <hr>
+                <section>
+                    <h3>建立程式檔案</h3>
+                    <p>
+                        請建立一份純文字文件，檔名為 hello.jsp，然後丟到 Tomcat 所在資料夾的 webapps 資料夾的 ROOT 資料夾裡面<ins>[2]</ins>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>程式碼</h3>
+                    <p>
+                        在 hello.jsp 文件裡面，輸入如下程式碼：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            &lt;%@ page import="java.sql.*" %&gt;
+                            &lt;%
+                                try{
+                                    //驅動 JDBC 程式
+                                    Class.forName("com.mysql.jdbc.Driver");
+                                    //登入 MySQL 帳密，假設帳號為 root，密碼為 abc123。
+                                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "abc123");
+                                    //開啟指令主控台
+                                    Statement statement = connection.createStatement();
+                                    /* 下達 SQL 指令 */
+                                    //建立含 mycolumn 欄位的資料表 mytable
+                                    statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
+                                    //將 Hello, world! 這筆資料寫入 mycolumn 欄位
+                                    statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES("Hello, world!")");
+                                    //從 mytable 資料表提取所有資料
+                                    ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
+                                    //輸出所提取的資料
+                                    while(result_set.next()){
+                                        out.println(result_set.getString("mycolumn"));
+                                    }
+                                    //關閉程式
+                                    result_set.close();
+                                    statement.close();
+                                    connection.close();
+                                }
+                                catch(Exception exception){
+                                    out.println("ERROR");
+                                }
+                            %&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>執行程式</h3>
+                    <p>
+                        開啟瀏覽器，輸入如下網址：<br>
+                        <br>
+                        <kbd>http://127.0.0.1:8080/hello.jsp</kbd><br>
+                        <br>
+                        順利的話，輸出結果如下：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/19950524A_01.png' alt='插圖' width='570'><br>
+                    </figure>
+                    <p>
+                        但是這個範例重新整理的話，會顯示 ERROR，因為重複建立名為 mytable 的資料表。<br>
+                        <br>
+                        你必須用 MySQL 的 Command Line Client 輸入：<br>
+                        <br>
+                        <kbd>
+                            DROP TABLE mytable<br>
+                        </kbd>
+                        <br>
+                        將資料表刪除，才能再執行成功一次。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 JSP 使用 SQL 指令</h2>
+                <p>
+                    Java 使用 java.sql.Statement 提供的三個方法來操作 SQL 指令：
+                </p>
+                <hr>
+                <section>
+                    <h3>java.sql.Statement</h3>
+                    <table>
+                        <tr><td>executeUpdate("SQL 指令")</td><td>用來操作 INSERT、DELETE、UPDATE 指令。</td></tr>
+                        <tr><td>executeQuery("SQL 指令")</td><td>用來操作 SELECT 指令。</td></tr>
+                        <tr><td>execute("SQL 指令")</td><td>其它 SQL 指令。</td></tr>
+                    </table>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 JSP 取用 SQL 資料</h2>
+                <p>
+                    Java 使用 java.sql.ResultSet 來保存 java.sql.Statement.executeQuery() 所傳回 SELECT 指令的資料，讓我們在程式中可以更靈活操作資料。
+                </p>
+                <hr>
+                <section>
+                    <h3>ResultSet 提供的操作方式</h3>
+                    <table>
+                        <tr><td>getRow()</td><td>取得游標位置</td></tr>
+                        <tr><td>next()</td><td>向下移動游標</td></tr>
+                        <tr><td>previous()</td><td>向上移動游標</td></tr>
+                        <tr><td>relative(int)</td><td>上下移動游標，以正負值控制。</td></tr>
+                        <tr><td>absolute(int)</td><td>設置游標位置。</td></tr>
+                        <tr><td>beforFirst()</td><td>游標移到最前一筆的位置。</td></tr>
+                        <tr><td>afterLast()</td><td>游標移到最後一筆的位置。</td></tr>
+                        <tr><td>first()</td><td>游標移到資料開始的位置。</td></tr>
+                        <tr><td>last()</td><td>游標移到資料結束的位置。</td></tr>
+                        <tr><td>isBeforFirst()</td><td>游標是否在最前一筆的位置。</td></tr>
+                        <tr><td>isAfterLast()</td><td>游標是否在最後一筆的位置。</td></tr>
+                        <tr><td>ifFirst()</td><td>游標是否在資料最開始的位置。</td></tr>
+                        <tr><td>ifLast()</td><td>游標是否在資料已結束的位置。</td></tr>
+                        <tr><td>deleteRow()</td><td>刪除欄位資料。</td></tr>
+                        <tr><td>refreshRow()</td><td>更新前的資料。</td></tr>
+                        <tr><td>getFetchSize()</td><td>取得可包含最大資料筆數。</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <p>
+                    但在那之前，你必須知道 java.sql.Connection 的 createStatement() 可接受 resultSetType 和 resultSetConcurrency 兩個參數，前者用來設定游標的移動方式，後者用來設定資料是否可以改寫。<br>
+                    <br>
+                    經過適當的設定，才有辦法使用前面所列的功能。
+                </p>
+                <hr>
+                <section>
+                    <h3>ResultSet 的 resultSetType 常數</h3>
+                    <table>
+                        <tr><td>TYPE_FORWARD_ONLY</td><td>游標只能向下移動。</td></tr>
+                        <tr><td>TYPE_SCROLL_INSENSITIVE</td><td>游標可上下移動，當其它 ResultSet 搬動資料時同步影響游標位置。</td></tr>
+                        <tr><td>TYPE_SCROLL_SENSITIVE</td><td>游標可上下移動，當其它 ResultSet 搬動資料時不影響游標位置。</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>ResultSet 的 resultSetConcurrency 常數</h3>
+                    <table>
+                        <tr><td>CONCUR_READ_ONLY</td><td>ResultSet 的資料唯讀。</td></tr>
+                        <tr><td>CONCUR_UPDATABLE</td><td>ResultSet 的資料可更改。</td></tr>
+                    </table>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 如果下載直接解壓就能執行的版本，你必須到主控台，使用 MySQL 提供的工具指令，來設定資料庫伺服器，例如 root 帳密、啟動服務…之類。<br>
+                    [2] 將寫好的 JSP 丟到 [TOMCAT]/webapps/ROOT/ 裡面來執行，其實是相當不適宜的做法！但本單元屬於 Hello, world! 性質的文章，為了能在無需設定伺服器環境的情況下，直接能嘗試 JSP 與 SQL 之間的程式互動，所以才採行這種權宜之計。正確的做法，應該要在 [tomcat]/conf/server.xml 向 Tomcat 配置一個 WEBAPP 才對！<br>
+                    [*] MySQL 預設埠號：3306。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

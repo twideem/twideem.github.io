@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>強化 jEdit 操作功能</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>設定文件使用的緩衝區編碼為 UTF-8</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Encoding → Default character encoding = UTF-8
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>設定文件使用的格式為 Unix</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → General → Default line separator = Unix(\n)
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>設定顯示區域使用的字型為支援 Unicode 的 DialogInput</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Text Area → Text Font = DialogInput
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>避免自動對齊功能使用 Tab 字元</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → global defaults → Soft (emulated with spaces) tabs = (核取)<br>
+                    <br>
+                    [功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → Java → Use default settings
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>避免按 { 字元時自動縮排</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → global defaults → Indent width = 1<br>
+                    <br>
+                    [功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → Java → Use default settings
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>樣板</h2>
+                <p>
+                    jEdit 也有像 NetBeans IDE 的 Code Templates 或 Notepad++ 的 FingerText，敲簡單幾個字後按 Tab 鍵，會轉換成程式片段。請到如下位置設定：<br>
+                    <br>
+                    [功能表] → Utilities → Global Options → jEdit → Abbreviations<br>
+                    <br>
+                    預設按 Ctrl + ; 鍵轉換，可到：<br>
+                    <br>
+                    [功能表] → Utilities → Global Options → jEdit → Shortcuts<br>
+                    <br>
+                    將 Expand Abbreviation 設定成 Tab 鍵。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>縱向選取</h2>
+                <p>
+                    按 Alt + \ 後，即可用 Shift + 方向鍵縱向選取，適合多行修改。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>複合選取</h2>
+                <p>
+                    按 Ctrl + \ 後，可用 Shift + 方向鍵跳躍式選取不同區塊來修改。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>如何 Ctrl + Y 復原</h2>
+                <p>
+                    Ctrl + e，然後按 Ctrl + z。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>多行縮排</h2>
+                <p>
+                    選取多行然後按 Tab 鍵，會將這整行增加縮排。<br>
+                    <br>
+                    選取多行然後按 Shift + Tab 鍵，則是將這整行減少縮排。<br>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>自訂語法高亮度關鍵字</h2>
+                <p>
+                    進入 jEdit 所在資料夾，再修改 modes 裡面各語法的 xml 檔。
+                </p>
+                <hr>
+                <section>
+                    <h3>*.html 的 &lt;style&gt;&lt;/style&gt; 遇到含 : 字元的屬性就解析錯誤</h3>
+                    <p>
+                        jEdit 5.1.0 有這個問題，但 jEdit 5.2pre1 有解決。<br>
+                        <br>
+                        可以考慮把 html.xml 裡面的如下語法給刪除：<br>
+                        <br>
+                        &lt;!-- stylesheet --&gt;<br>
+                        &lt;SEQ_REGEXP TYPE="MARKUP" DELEGATE="STYLE_TAG"<br>
+                        &nbsp; &nbsp; HASH_CHAR="&amp;lt;"&gt;&amp;lt;(?=STYLE\b)&lt;/SEQ_REGEXP&gt;
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>套用第三方語法高亮度配色主題</h2>
+                <p>
+                    jEidt 雖然能修改高亮度顏色，但資料與整個 jEdit 的組態檔放在一起，無法個別保存，不容易將自訂好的主題配色分享給他人套用。<br>
+                    <br>
+                    透過 Plugins 下載 Editor Scheme 即可解決這個缺憾，可以自行製作多種主題配色，而且已內建多套主題配色。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>顯示空白字元</h2>
+                <p>
+                    到 Plugins 下載 WhiteSpace。<br>
+                    <br>
+                    記得到 Plugin Options 設定預設開啟，順便調整顏色。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取消 80 字元準線</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Text Area → Wrap guide = (不核取)
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>開啟行號</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Gutter → Line numbering = (核取)
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>設定行號的字型</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → Gutter → Gutter font = DialogInput
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>顯示檔案瀏覽器</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → Docking → File Browser = Left
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>關閉預設的緩衝區選擇器</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → jEdit → View → Show buffer switcher = (不核取)
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>開啟頁簽式緩衝區選擇器</h2>
+                <p>
+                    下載 Plugins：「BufferTabs」。<br>
+                    <br>
+                    [功能表] → Plugins → Plugin Options → BufferTabs → Enable BufferTabs by default = (核取)
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>設定頁簽式緩衝區選擇器的位置</h2>
+                <p>
+                    [功能表] → Plugins → Plugin Options → BufferTabs → Location on BufferTabs = top
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>啟用 Java Swing 外觀</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → Apperance :<br>
+                    <br>
+                    1. Draw window borders using Swing look &amp; fell = (核取)<br>
+                    2. Draw dialog box borders using Swing look &amp; fell = (核取)<br>
+                    <br>
+                    重新啟動 jEdit。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>更換工具列圖示</h2>
+                <p>
+                    將下載回來的 JAR 檔案放到 JRE 的 lib\ext 裡面。<br>
+                    <br>
+                    例如 gnome_jedit_icons.jar 檔案。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>手動調整程式視窗大小</h2>
+                <p>
+                    修改 Documents and Settings\[User]\.jedit\perspective.xml：<br>
+                    <br>
+                    WIDTH="800" HEIGHT="600"
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取消自動備份</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → Autosave &amp; Backuspan = (全部空白)
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>開啟檔案時預設為作用中文件所在資料夾</h2>
+                <p>
+                    [功能表] → Utilities → Global Options → File System Browser → General→ Default path = Parent directory of current buffer
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>備份整個設定檔</h2>
+                <p>
+                    將 Documents and Settings\[User]\.jedit 資料夾保存起來，以後再放回使用者資料夾即可。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>事件速成範例集</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>元件</h2>
+                <hr>
+                <section>
+                    <h3>Shown（元件顯示出來）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addComponentListener(new java.awt.event.ComponentAdapter(){
+                                public void componentShown(java.awt.event.ComponentEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Hidden（元件隱藏起來）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addComponentListener(new java.awt.event.ComponentAdapter(){
+                                public void componentHidden(java.awt.event.ComponentEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Moved（位置移動）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addComponentListener(new java.awt.event.ComponentAdapter(){
+                                public void componentMoved(java.awt.event.ComponentEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Resized（尺寸變化）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addComponentListener(new java.awt.event.ComponentAdapter(){
+                                public void componentResized(java.awt.event.ComponentEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Focus Gained（獲得駐點）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addFocusListener(new java.awt.event.FocusAdapter(){
+                                public void focusGained(java.awt.event.FocusEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Focus Lost（失去駐點）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addFocusListener(new java.awt.event.FocusAdapter(){
+                                public void focusLost(java.awt.event.FocusEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Property Change（屬性變化）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addPropertyChangeListener(new java.beans.PropertyChangeListener(){
+                                public void propertyChange(java.beans.PropertyChangeEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>State Changed（狀態改變）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addChangeListener(new javax.swing.event.ChangeListener(){
+                                public void stateChanged(javax.swing.event.ChangeEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>視窗</h2>
+                <hr>
+                <section>
+                    <h3>Opened（開啟視窗）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addWindowListener(new java.awt.event.WindowAdapter(){
+                                public void windowOpened(java.awt.event.WindowEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Closed（關閉視窗）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addWindowListener(new java.awt.event.WindowAdapter(){
+                                public void windowClosing(java.awt.event.WindowEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Activated（視窗作用中）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addWindowListener(new java.awt.event.WindowAdapter(){
+                                public void windowActivated(java.awt.event.WindowEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>GainedFocus、LostFocus（駐點）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addWindowFocusListener(new java.awt.event.WindowFocusListener(){
+                                public void windowGainedFocus(java.awt.event.WindowEvent e){
+
+                                }
+                                public void windowLostFocus(java.awt.event.WindowEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>State Changed（狀態變化）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addWindowStateListener(new java.awt.event.WindowStateListener(){
+                                public void windowStateChanged(java.awt.event.WindowEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>滑鼠</h2>
+                <hr>
+                <section>
+                    <h3>Clicked（按一下滑鼠鍵）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseListener(new java.awt.event.MouseAdapter(){
+                                public void mouseClicked(java.awt.event.MouseEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Pressed（按下滑鼠鍵）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseListener(new java.awt.event.MouseAdapter(){
+                                public void mousePressed(java.awt.event.MouseEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Released（放開滑鼠鍵）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseListener(new java.awt.event.MouseAdapter(){
+                                public void mouseReleased(java.awt.event.MouseEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Moved（滑鼠游標經過）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseMotionListener(new java.awt.event.MouseMotionAdapter(){
+                                public void mouseMoved(java.awt.event.MouseEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Exited（滑鼠游標離開）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseListener(new java.awt.event.MouseAdapter(){
+                                public void mouseExited(java.awt.event.MouseEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Wheel（滑動滾輪）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseWheelListener(new java.awt.event.MouseWheelListener(){
+                                public void mouseWheelMoved(java.awt.event.MouseWheelEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Dragged（拖曳）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addMouseMotionListener(new java.awt.event.MouseMotionAdapter(){
+                                public void mouseDragged(java.awt.event.MouseEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>MouseEvent 傳回值</h3>
+                    <p>
+                        可根據 <code>getButton()</code> 的傳回值，判斷使用者按下哪一個滑鼠鍵：
+                    </p>
+                    <table>
+                        <tr><td>MouseEvent.BUTTON1</td><td>左鍵</td></tr>
+                        <tr><td>MouseEvent.BUTTON2</td><td>中鍵</td></tr>
+                        <tr><td>MouseEvent.BUTTON3</td><td>右鍵</td></tr>
+                    </table>
+                    <p>
+                        綜合範例如下：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            addMouseListener(new java.awt.event.MouseAdapter(){
+                                public void mousePressed(java.awt.event.MouseEvent e){
+                                    switch(e.getButton()){
+                                        case java.awt.event.MouseEvent.BUTTON1:
+                                            setTitle("你按了滑鼠左鍵。");
+                                            break;
+                                        case java.awt.event.MouseEvent.BUTTON2:
+                                            setTitle("你按了滑鼠中鍵。");
+                                            break;
+                                        case java.awt.event.MouseEvent.BUTTON3:
+                                            setTitle("你按了滑鼠右鍵。");
+                                            break;
+                                    }
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>MouseWheelEvent 傳回值</h3>
+                    <p>
+                        根據 <code>getWheelRotation()</code> 傳回值是正數還是負數，可判斷使用者滾輪是往上滾動還是往下：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            addMouseWheelListener(new java.awt.event.MouseWheelListener(){
+                                public void mouseWheelMoved(java.awt.event.MouseWheelEvent e){
+                                    if(e.getWheelRotation()&lt;0){
+                                        setTitle("滾輪往上");
+                                    }
+                                    else{
+                                        setTitle("滾輪往下");
+                                    }
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>補充</h3>
+                    <p>
+                        可用 <code>e.isAltDown()</code>、<code>e.isShiftDown()</code>、<code>e.isControlDown()</code> 判斷是否同時按下 Alt、Shift、Ctrl 組合鍵。（可參考下一節「鍵盤」的綜合範例。）
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>鍵盤</h2>
+                <hr>
+                <section>
+                    <h3>Pressed（按下鍵盤）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addKeyListener(new java.awt.event.KeyAdapter(){
+                                public void keyPressed(java.awt.event.KeyEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Released（放開鍵盤）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addKeyListener(new java.awt.event.KeyAdapter(){
+                                public void keyReleased(java.awt.event.KeyEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Typed（敲擊鍵盤）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addKeyListener(new java.awt.event.KeyAdapter(){
+                                public void keyTyped(java.awt.event.KeyEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>KeyEvent 傳回值</h3>
+                    <p>
+                        可根據 <code>e.getKeyCode()</code> 的傳回值，判斷使用者按下哪一個滑鼠鍵：<br>
+                        <br>
+                        <code>
+                            KeyEvent.VK_A ~ KeyEvent.VK_Z<br>
+                            KeyEvent.VK_0 ~ KeyEvent.VK_9<br>
+                            KeyEvent.VK_NUMPAD0 ~ KeyEvent.VK_NUMPAD9<br>
+                            KeyEvent.VK_F1 ~ KeyEvent.VK_F12
+                        </code>
+                    </p>
+                    <table>
+                        <tr><td>KeyEvent.VK_BACK_QUOTE</td><td>`</td></tr>
+                        <tr><td>KeyEvent.VK_MINUS</td><td>-</td></tr>
+                        <tr><td>KeyEvent.VK_EQUALS</td><td>=</td></tr>
+                        <tr><td>KeyEvent.VK_OPEN_BRACKET</td><td>[</td></tr>
+                        <tr><td>KeyEvent.VK_CLOSE_BRACKET</td><td>]</td></tr>
+                        <tr><td>KeyEvent.VK_BACK_SLASH</td><td>\</td></tr>
+                        <tr><td>KeyEvent.VK_SEMICOLON</td><td>;</td></tr>
+                        <tr><td>KeyEvent.VK_COMMA</td><td>,</td></tr>
+                        <tr><td>KeyEvent.VK_PERIOD</td><td>.</td></tr>
+                        <tr><td>KeyEvent.VK_SLASH</td><td>/</td></tr>
+                    </table>
+                    <p>
+                        <code>
+                            KeyEvent.VK_ESCAPE<br>
+                            KeyEvent.VK_TAB<br>
+                            KeyEvent.VK_CAPS_LOCK<br>
+                            KeyEvent.VK_SHIFT<br>
+                            KeyEvent.VK_CONTROL<br>
+                            KeyEvent.VK_WINDOWS<br>
+                            KeyEvent.VK_ALT<br>
+                            KeyEvent.VK_SPACE<br>
+                            KeyEvent.VK_BACKSPACE<br>
+                            KeyEvent.VK_ENTER<br>
+                            <br>
+                            KeyEvent.VK_PAUSE<br>
+                            KeyEvent.VK_PRINTSCREEN<br>
+                            KeyEvent.VK_INSERT<br>
+                            KeyEvent.VK_DELETE<br>
+                            KeyEvent.VK_HOME<br>
+                            KeyEvent.VK_END<br>
+                            KeyEvent.VK_PAGE_UP<br>
+                            KeyEvent.VK_PAGE_DOWN<br>
+                            <br>
+                            KeyEvent.VK_UP<br>
+                            KeyEvent.VK_DOWN<br>
+                            KeyEvent.VK_LEFT<br>
+                            KeyEvent.VK_RIGHT<br>
+                        </code>
+                        <br>
+                        還有更多傳回值，請參考 Java Platform SE 的 API 文件。<br>
+                        <br>
+                        根據 <code>e.isAltDown()</code>、<code>e.isShiftDown()</code>、<code>e.isControlDown()</code> 可判斷是否搭配 Alt、Shift、Ctrl 組合鍵。<br>
+                        <br>
+                        綜合範例如下：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            addKeyListener(new java.awt.event.KeyAdapter(){
+                                public void keyPressed(java.awt.event.KeyEvent e){
+                                    if(e.isShiftDown()&amp;&amp;e.getKeyCode()==java.awt.event.KeyEvent.VK_A){
+                                        setTitle("HELLO");
+                                    }
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>按鈕</h2>
+                <hr>
+                <section>
+                    <h3>Action Performed（標準觸發）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            addActionListener(new java.awt.event.ActionListener(){
+                                public void actionPerformed(java.awt.event.ActionEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    適用於以下按鈕性質的元件：JButton、JCheckBox、JComboBox、JFormattedTextField、JMenu、JPasswordField、JRadioButton、JTextField。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>捲軸（JScrollBar）</h2>
+                <hr>
+                <section>
+                    <h3>Adjustment Value Changed（刻度變化）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.awt.event.*;
+
+                            addAdjustmentListener(new AdjustmentListener(){
+                                public void adjustmentValueChanged(AdjustmentEvent e){
+
+                                }
+                            });
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>表格（JTable）</h2>
+                <p>
+                    （草稿中）
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>移除事件</h2>
+                <p>
+                    可透過以下方式，取消登記過的事件：<br>
+                    <br>
+                    <code>
+                        removeComponentListener(ComponentListener)<br>
+                        removeFocusListener(FocusListener)<br>
+                        removeHierarchyBoundsListener(HierarchyBoundsListener)<br>
+                        removeHierarchyListener(HierarchyListener)<br>
+                        removeInputMethodListener(InputMethodListener)<br>
+                        removeKeyListener(KeyListener)<br>
+                        removeMouseListener(MouseListener)<br>
+                        removeMouseMotionListener(MouseMotionListener)<br>
+                        removeMouseWheelListener(MouseWheelListener)<br>
+                        removePropertyChangeListener(PropertyChangeListener)
+                    </code>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

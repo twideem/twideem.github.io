@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Orac=3</h1>
+            </header>
+
+            <hr id='20180327'>
+
+            <section>
+                <h2>為什麼我討厭 Oracle</h2>
+                <hr>
+                <section>
+                    <h3>JDeveloper</h3>
+                    <p>
+                        2006 年，我最喜歡的整合開發環境，是 JDeveloper 10g。<br>
+                        <br>
+                        這是 Oracle 免費開放下載使用的 Java 開發工具，裡面有媲美 NetBeans IDE 的視覺化開發環境、媲美 Eclipse 的文字編輯器、以及能「圖：碼」互轉的 UML 物件導向管理系統，加上可以彌補 Linux 沒有 Visual Studio 可用的缺憾，那兩年，我都用 JDeveloper 寫 HTML 網頁、跑 Java 和 JSP 程式、玩 UML 這實在體會不出來有實際幫助的東西。<br>
+                        <br>
+                        直到 NetBeans IDE 追上功能，且 JDeveloper 版本越新操作介面用起來越 LAG，加上下載 NetBeans IDE 只要 200MB，JDeveloper 要 1GB 才換掉。<br>
+                        <br>
+                        當時我很感激 Oracle 免費釋出 JDeveloper，讓我能享受高階程式設計的樂趣。真沒想到 12 年後，會變成我仇視的第三家公司。（第一是 Samsung，第二是 Apple Computer，第四家有可能是 Amazon<ins>[1]</ins>。）
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Google 的 Android 侵犯 Java API 著作權</h3>
+                    <section>
+                        <h4>Oracle 做得對</h4>
+                        <p>
+                            幾乎每個人都說，是 Android 救了 Java 語言，因為除了伺服器後端，根本沒人拿 Java 來開發軟體。在 Ruby、Python、Node.js 相繼崛起之際，要不是 Android 使用 Java 語言開發 App，恐怕早跌落到不三不四的名次去了，哪能繼續連年穩坐排行榜第一。<br>
+                            <br>
+                            然而，做為始終就在 Windows 和 Linux 寫 Java 程式的我，並不認為這樣就能合理化 Google 的違法使用。Android 雖然指定使用 Java 開發程式，但編譯出來的程式是跑在他自己研發的 Dalvik VM 上，而不是 Java VM，且不完全相容。這種行徑就跟當年 Windows 內建的 MSJVM 一樣，都在分裂、瓦解 Java 的版圖。<br>
+                            <br>
+                            而 Java 授權開宗明義的要旨，就是禁止分裂 Java 程式，這世上只能有一個 Java 程式規格，不能分裂出不相容官方規格的 Java 出來，否則你就違反 Java 授權規定。<br>
+                            <br>
+                            別說 Oracle 告 Google，就算 Sun Microsystems 還掛牌營運，想必要不到使用費、討不到賠償，也會告上去吧？
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Google 問題出在哪</h4>
+                        <p>
+                            Google 自己開發 Dalvik VM 不是問題，架構、用途和 Java VM 一樣也沒關係，但不應該拿 Java 程式來跑，應該用別的程式語言才對。<br>
+                            <br>
+                            Microsoft 當年的 MSJVM 被判違反 Sun Microsystems 的 Java VM 授權規定後，也是自己開發了 .NET Framework 的 VM 做替代，使用的是自家 C# 和 VB.NET 語言，這就不牴觸 Java 的精神，Sun Microsystems 也樂意和他公平競爭。<br>
+                            <br>
+                            既然要跑 Java 程式，又不乖乖向官方商談 Java VM 的授權，當然有問題！因為 Java 只有在 PC 上的一般用途免費，若拿在嵌入式系統當技術，則要向官方洽談費用！這點從 Sun Microsystems 開始就是如此，只是 Oracle 更強勢、更敢要。<br>
+                            <br>
+                            所以在我看來，Google 就是又要繞開 Java VM 的規定，又要偷吃 Java 語言的豆腐。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>搞錯方向</h4>
+                        <p>
+                            當然，沒有 Android 的加持，Java 絕對迅速衰退、不再風光。就像當年 Microsoft 和 Sun Microsystems 和解，答應不再發展自己的 MSJVM，從此 Windows 不再內建 MSJVM 後，Java 的使用率就大幅下滑。因為下載的 Java 應用軟體不再點兩下就能執行，還得專程去下載 JRE 來安裝，有三成的人嫌麻煩，乾脆把不能跑的 Java 程式刪除算了！還有三成的人，則是 JRE 裝了也不像 MSJVM 點兩下就能執行，而要下指令執行，誰有閒工夫跟你研究怎麼執行 Java 應用程式？又是刪一刪算了～<br>
+                            <br>
+                            但因為 Android 讓 Java 持續風光、沒有走向衰退，就能合理化 Dalvik VM 跑的是 Java 程式、在 Dalvik VM 跑的 Java 程式卻又不相容 Java VM 的行徑嗎？Java 程式語言風風光光的同時，卻在形成不相容的 Java 程式問題。越風光地讓更多人用 Java 語言寫 Android 應用程式，就越助長 Java 的分裂。這種風光是好事還是壞事？隨每個人立場不同而有不一樣的答案。<br>
+                            <br>
+                            在 PC 寫 Java 應用程式的我，認為是壞事。在智慧型手機寫 App 的 Java 程式設計師，則覺得是好事，Android 救了 Java 語言，也救了他的 Java 技術。學 Java 程式設計是為了自己的競爭力，誰管 Oracle 在 Java 市場的競爭力是否正被剝奪？<br>
+                            <br>
+                            但既然了解 Java 的宗旨，基於公平正義，在 Oracle 控告 Google 的 Android 侵犯 Java API 著作權一事，我是站在 Oracle 這一邊的。只是 Oracle 告錯方向，告 API 其實跟有損 Java 利益扯不上關係，還惹來歷史關鍵性的爭議，後來方向改成 Android 執行 Java 程式的平台系統，抄襲了一萬多行代碼，才讓案情大逆轉。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>都幫 Oracle 說話，是哪裡討厭這家公司？</h3>
+                    <p>
+                        雖然支持 Oracle 告 Google，但明眼人都看得出來，這跟過去 Sun Microsystems 告 Microsoft 是為了保護 Java 規格不被破壞不一樣，Oracle 要的就是 Google 變相支付 Java VM 的費用，收到錢就好，其實根本不管 Java 規格的死活。不然怎會把重點放在侵犯著作權，要求賠償，而不是禁止 Android 的 VM 跑 Java 程式？<br>
+                        <br>
+                        過去 Microsoft 惡名昭彰的，就是挾 Windows 市佔率優勢，綁定自家規格妨礙競爭。見到別人的規格勢頭正強怎麼辦？同樣挾市佔優勢，想辦法攪和、亂搞別人的規格，然後變成自己規格才能正常在 Windows 運作，掌握權就在自己手裡了。<br>
+                        <br>
+                        有鑑於此，Sun Microsystems 告上法院，要求 Microsoft 不得在 Windows 內建 MSJVM，附帶賠償條件。由於展現強烈的動機是禁止內建 MSJVM，賠償只是附帶的，終於勝訴。至少 Microsoft 付給 Sun Microsystems 的是反托拉斯條款，並不是支付費用<ins>[2]</ins>。<br>
+                        <br>
+                        相比之下，我看到 Oracle 展現強烈的動機是 Google 應該支付費用，而不是禁止 Android 破壞 Java 程式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>戴上有色眼鏡後，看 Oracle 就是惡形惡狀。</h3>
+                    <p>
+                        看到 Oracle 這張嘴臉後，往後再看他的新聞，就覺得所作所為都同樣一個模式：唯利是圖，看不出有什麼技術過人之處<ins>[3]</ins>，靠領導人 Larry Ellison 是商業天才，很懂得商業競爭罷了。<br>
+                        <br>
+                        為什麼我討厭 Oracle？就跟我討厭 Samsung 和 Apple 一樣：<br>
+                        <br>
+                        <q>「只知道藉由競爭保障自己獲利，不懂得藉由合作共造產業利益。」</q><br>
+                        <br>
+                        這就是我的答案。<br>
+                        <br>
+                        但 Oracle 很邪惡嗎？其實也不，他雖然唯利是圖，卻是一家嚴守法律的公司，只在雙方皆受法律保障下收取費用。你會看到 Oracle 死要錢的模樣四處向廠商和用戶收取「有法律效力的授權契約」費用，結果感覺活像政府機關催繳稅收一樣，還可以上訴的。但你很少看到 Oracle 為了扳倒對手四處拿專利跟人開戰，這點來講比 Apple 好多了，Oracle 只是很敢去要原本就屬於他的錢，Apple 則是很敢去搶佔不屬於他的錢。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20140318'>
+
+            <section>
+                <h2>Java 與 JavaScript 不再免費？</h2>
+                <p>
+                    多核心處理器時代來臨時，一台電腦抵多台用，沒想到 Oracle 藉此修改軟體授權的計價方案，改成照核心數計價，而不是照幾台電腦計價。這樣就算只有一台電腦，八核心的話也收好幾台的錢，何樂不為？<br>
+                    <br>
+                    腦筋動得這麼快的公司，當然不會放過手上 Java 和 JavaScript 的籌碼，在這兩個使用率最高的程式語言上撈一筆。
+                </p>
+                <hr id='20161219'>
+                <section>
+                    <h3>Java</h3>
+                    <section>
+                        <h4>Java 8</h4>
+                        <p>
+                            如果你執行 Java 時，下 -XX:+UnlockCommercialFeature 參數啟用 Oracle Java SE Advanced &amp; Suite Products 和 Java SE Advanced Desktop 功能，或者 Oracle 認為你不是在一般用途的電腦運算（General Purpose）使用 Java SE，是要向 Oracle 支付費用的。<br>
+                            <br>
+                            Oracle Java SE Advanced 系列產品功能算是個陷阱，它隨附在免費下載的 Java SE 裡面，只要用到就該付費。<!--這就像免費下載了繪圖軟體，但官方說只有繪圖是免費的，如果你按儲存則是商業版功能，必須付費。但我沒限制你沒付費不能按，而是大辣辣放在那給你按，只要你按了我就可以要你付費。-->通常你不會下那落落長的參數啟用付費功能，但開發應用軟體的人如果下這參數給你用，Oracle 的規定是使用者付費？還是開發商付費？照常理當然是找開發商付費，是他要用到商業功能來設計軟體的。但 Oracle 並不是照常理收費的公司，而是一家認為真正在用商業功能的人是使用者，所以是找使用者付費。<br>
+                            <br>
+                            而一般用途運算，<!--由 Oracle 說了算，因為授權書上沒詳細載明。但-->大致上原則是在桌上型電腦、筆記型電腦、平板電腦、伺服器開發 Java 程式來執行是免費的，如果要將 JVM 當嵌入式系統拿到其它設備使用，就必須向 Oracle 洽談費用事宜。這不難理解，因為 Oracle 只有為個人電腦提供 Java SE，如果想在沒 Java SE 的裝置使用 Java，本來就只能找官方洽談技術支援。如果有監視器、錄放影機、收銀機、自動提款機、行動電話是跑 Java 程式的，想也知道要授權才能合法使用，Oracle 根本沒有提供這些裝置的 Java SE。<ins>[4]</ins><br>
+                            <br>
+                            舉些實例來看吧：<br>
+                            <br>
+                            <samp>
+                                1、用 JDK 寫 Java Application，放上網分享給大家用 JRE 執行，屬於在 PC 開發 Java 程式來執行的用途，符合規定。<br>
+                                2、架設伺服器時用 JVM 當程式引擎，就像拿 Perl 直譯器當 CGI 程式引擎一樣，寫寫程式、載入 API 來用，也是符合規定的用途。<br>
+                                3、將 JVM 拿到非 PC 裝置當嵌入式系統，或將 JVM 改成伺服器系統讓客端電腦多工操作，則不符合 JVM 一般用途運算的定義。<br>
+                            </samp>
+                            <br>
+                            總之不用太擔心，你在個人電腦桌面環境使用的 Java SE 依然免費，就跟以前 Sun Microsystems 一樣沒變，Oracle 也沒價目表，根本不想向你收費。有價目表的，就是你啟用了 Oracle Java SE Advanced 系列產品，個人桌面使用大概台幣兩千塊，整家公司使用大概一萬五。<br>
+                            <br>
+                            一般用途運算外，想用 Java 技術的話，除了向官方洽談技術支援，就是改用 OpenJDK 的原始碼自行編譯，不要安裝 JRE 來執行 Java 程式。這也是從 Sun Microsystems 時代就這樣做，只是大多由廠商主動商談授權費，不主動的話官方不積極追討，除非像 Blu-ray Disc 這種有名的東西，才有積極向播放器廠商收取費用<ins>[5]</ins>。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Java 11</h4>
+                        <p>
+                            Java 11 開始又改了，全面使用 OTN<ins>[6]</ins> 協議，取代舊的 BCL<ins>[7]</ins> 協議，Oracle JDK 確定不再免費，屬於向官方取得授權然後商業使用的軟體，Oracle 要求一般免費使用者選擇 OpenJDK。這裡有個陷阱，Oracle JDK 依然是免費下載的，但只能評估和測試用，正式用在企業營運得向官方洽談授權費用。<br>
+                            <br>
+                            換句話說，現在連「一般用途的電腦運算（General Purpose）」都不成立<ins>[8]</ins>，只要是企業用、有營收，就不可能免費使用 Oracle JDK！若只在自己電腦使用，Oracle 會視為評估和測試用途，不會向你收錢。但不要公開散佈或在網路運轉你用 Oracle JDK 產生的 Java 應用程式或系統，否則 Oracle 片面認定你販售或營利該 Java 程式的話，就準備催收了！因為你已經不是在評估和測試 Oracle JDK，你有在用 Oracle JDK 營利了～<br>
+                            <br>
+                            寫的 Java 程式不能散佈和公開，那不就跟沒寫一樣？所以以後想寫 Java 程式，請用 OpenJDK，不要用 Oracle JDK。可以說 Oracle JDK 並不是過去的 Java SE Development Kit，而是 Oracle 的 JDK 產品，是給企業用的，而不是給大家下載使用的免費軟體資源。<br>
+                            <br>
+                            也因此，你可以發現到，Java SE 11 開始，Oracle 官網不再提供 JRE 了，只有 JDK，明確告訴大家他們的 Java 產品就是授權用，不再提供 JRE 這種免費開放給大眾使用的軟體了！但 Oracle 會全力為 OpenJDK 提供技術，讓各家的 OpenJDK 都能和 Oracle JDK 一致，方便 OpenJDK 填補 JRE 的缺。<br>
+                            <br>
+                            還是一頭霧水的話：<br>
+                            <br>
+                            <samp>
+                                Java 11 開始，Oracle 官網下載的 JDK，只有評估和測試是免費的，評估完想散佈或商轉你用 Oracle JDK 做的 Java 程式，一律得向官方洽談授權費用。<br>
+                                <br>
+                                Oracle 官網不再提供免費的 Java 讓大家使用，Oracle 只提供商業用途的 JDK，至於過去免費的 Java，Oracle 轉移到 OpenJDK 了！<br>
+                                <br>
+                                而且是 Oracle 自己建議非 Oracle JDK 客戶的一般使用者改用 OpenJDK！為了讓 OpenJDK 能銜接過去免費開放使用的 JRE 應用，Oracle 還釋出一些 JRE 的專利給 OpenJDK，讓一般使用者仍有免費散佈和公開 Java 程式的方案，又不至於在相容性上產生問題。<br>
+                            </samp>
+                            <br>
+                            Oracle 確實要在 Java 上賺錢了，但也幫免費使用 Java 寫程式的一般使用者鋪好 OpenJDK 這條路。Oracle 只是不做沒搞頭的生意，但不至於做出讓 Java 程式設計師斷頭的事，沒你想的那麼邪惡…只是那張嘴臉看了很醜陋而已。
+                        </p>
+                    </section>
+                </section>
+                <hr id='20180417'>
+                <section>
+                    <h3>JavaScript</h3>
+                    <p>
+                        擁有 JavaScript 商標權的 Oracle 決定捍衛自己的權益了！任何公開營運行為，未經 Oracle 授權，都不能冠上 JavaScript 這個名稱，包括網站名稱、軟體名稱。<br>
+                        <br>
+                        由於只有商標權，而不是著作權：「畢竟這是 Netscape 發明的產品，只是發明完卻被 Sun Microsystems 註冊商標。」因此你還是可以在網路提及 JavaScript 這項程式語言、使用 JavaScript 這項技術，只有公司行號、商品名稱、活動主題…之類的企業行為，不能使用 JavaScript 當招牌攬客而已。<br>
+                        <br>
+                        你可以寫 JavaScript 教學文章、也可以在文章標題使用 JavaScript，但網站名稱不能用到 JavaScript 字樣，否則 Oracle 就有權寄律師函要求你改名。你可以自由、免費的使用 JavaScript 程式語言，開發 RIA 並線上營運，但 RIA 名稱不能有 JavaScript 字樣，否則 Oracle 就有權寄律師函要求你改名。<br>
+                        <br>
+                        想讓大家知道你是 JavaScript 相關行業的話，可以改用 ECMAScript 字樣，因為 Ecma International 是制定標準化的組織，除非你冒充這組織行事，否則不太可能指稱你侵犯商標權。或者改用 JS 簡寫、j 縮寫，通常一看就知道是 JavaScript。但不要用 ScriptJava，你不是第一個單字倒過來放的人，這招早被判輸好幾次，行不通的～
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 目前不是，但這是一家把 JavaScript 基本功能包裝一下申請專利，然後拿來告其他網站侵犯他專利，阻礙同業競爭的公司。<br>
+                    [2] 雖然 Microsoft 付了 7 億美元的和解金、9 億美元訴訟費後，自己主動簽下上億美元的權利金，希望對方不計前嫌，想和 Sun Microsystems 繼續合作，大概也是受對方所堅持的意念而敬服吧～<br>
+                    [3] 是很強，但稱不上高人一等吧？技術比 Oracle 領先的公司不少，只是業務和客服遠遠比不上他而已。這些公司持續發展領先技術在業界努力時，Oracle 持續發表業配文在業界取勝。<br>
+                    [4] 那是怎麼移植進去的？這問題出在 Oracle 的 Java SE 下載時不是用裝置分類的，而是用作業系統分類的：Windows、Linux、macOS、Solaris，其中 Linux 可以移植到各種裝置上，然後再把 JRE 安裝進去就行了～<br>
+                    [5] 2005 年 BDA 推出 Blu-ray Disc Java 標準規格，讓藍光光碟可以跑程式和使用者互動。而製造藍光播放機的廠商為了實現這功能，只得嵌入 JVM 去跑 Java 程式，心不甘情不願地付錢給 Sun Microsystems。<br>
+                    [6] Oracle Technology Network License Agreement<br>
+                    [7] Oracle Binary Code License Agreement<br>
+                    [8] 應該說 General Purpose 還在，只是更明確定義企業使用就是要授權，一般使用的話，只開放你免費評估 Oracle JDK 功能，就像試用版一樣，試用滿意、決定使用 Oracle JDK 了，請向官方商談授權合約！
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

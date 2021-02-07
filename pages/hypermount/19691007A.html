@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>快取與離線應用</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>離線模式</h2>
+                <p>
+                    將檔案放在「快取」以後，沒有網路連線也能使用網頁。
+                </p>
+                <hr>
+                <section>
+                    <h3>cache.manifest</h3>
+                    <p>
+                        指定 index.html 和 style.css 為快取：<br>
+                        <br>
+                        <textarea class='brush:txt'>
+                            CACHE MANIFEST
+
+                            CACHE:
+                            index.html
+                            style.css
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>index.html</h3>
+                    <p>
+                        <textarea class='brush:html;highlight:[2]'>
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang='zh-TW' manifest='cache.manifest'&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset='utf-8'/&gt;
+                                    &lt;link href='style.css' rel='stylesheet'/&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;p&gt;Hello, world!&lt;/p&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>style.css</h3>
+                    <p>
+                        <textarea class='brush:css'>
+                            p { color:blue }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    測試時，先以網頁瀏覽器開啟 webhosting 的 index.html，然後中斷連線，再重新整理網頁，並不會發生「找不到伺服器」的訊息，而是像保持連線那樣正常顯示網頁。<br>
+                    <br>
+                    必須注意的是，快取通常在 cache.manifest 的檔案修改日期變動過，才會更新 index.html 和 style.css，修改 index.html 或 style.css 是不會更新快取的。所以，雖然 cache.manifest 內容沒變，也應該重新儲存一下更新修改日期，確保對方能更新檔案。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

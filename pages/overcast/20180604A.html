@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <title>木魚</title>
+        <link href='../../favicon.png' rel='icon'>
+    </head>
+
+    <body style='margin:0'>
+        <button onclick='knock()'>0</button>
+        <p>從 <input value='0' style='width:60px;text-align:center' onchange='change()'> 起跳（<button onclick='save()'>儲存</button> <button onclick='load()'>載入</button> <button onclick='localStorage.clear()'>清除</button>），每 <input value='10' style='width:30px;text-align:center'> 次敲一下鐘（<button onclick='limit(4)'>4</button> <button onclick='limit(10)'>10</button> <button onclick='limit(18)'>18</button> <button onclick='limit(108)'>108</button>），或做為達到遍數時的提示音效。其它配色：<button onclick='lazurite()'>青金石</button>。</p>
+        <script>
+            var elements=[document.getElementsByTagName('button')[0],document.getElementsByTagName('input')[0],document.getElementsByTagName('input')[1]]
+            var audio=[new Audio('../../objects/audio/20180604A_01.mp3'),new Audio('../../objects/audio/20180604A_02.mp3')]
+            function change(){
+                elements[0].innerHTML=Number(elements[1].value)
+                view(elements[0].innerHTML)
+            }
+            function increment(){
+                return Number(elements[0].innerHTML)+1
+            }
+            function knock(){
+                elements[0].innerHTML=increment()
+                audio[0].currentTime=0
+                audio[0].play()
+                ring()
+            }
+            function lazurite(){
+                elements[0].style.backgroundColor='MIDNIGHTBLUE'
+                elements[0].style.color='MINTCREAM'
+            }
+            function limit(x){
+                elements[2].value=x
+            }
+            function load(){
+                elements[0].innerHTML=localStorage.counts||0
+                view(elements[0].innerHTML)
+            }
+            function ring(){
+                if(Number(elements[0].innerHTML)%Number(elements[2].value)==0){
+                    audio[1].currentTime=0
+                    audio[1].play()
+                }
+            }
+            function save(){
+                localStorage.counts=elements[0].innerHTML
+            }
+            function view(x){
+                elements[0].innerHTML=x
+            }
+            elements[0].style.width='100%'
+            elements[0].style.height=window.innerHeight+'px'
+            elements[0].style.backgroundColor='BURLYWOOD'
+            elements[0].style.color='SADDLEBROWN'
+            elements[0].style.fontSize='100pt'
+            elements[0].style.fontFamily='Arial'
+            elements[0].focus()
+            elements[2].value=4
+            audio[0].play()
+            audio[1].play()
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>java.util.StringTokenizer</h1>
+                <p>
+                    可以分解字串的工具，不過到了 Java SE 5.0 可用更方便的 java.util.Scanner 來取代。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Example 1</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.util.StringTokenizer;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringTokenizer string_tokenizer = new StringTokenizer("AAA BBB CCC");
+
+                                while(string_tokenizer.hasMoreTokens()){
+                                    System.out.println(string_tokenizer.nextToken());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA<br>
+                        BBB<br>
+                        CCC
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Example 2</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.util.StringTokenizer;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringTokenizer string_tokenizer = new StringTokenizer("AAA:BBB:CCC", ":");
+
+                                while(string_tokenizer.hasMoreTokens()){
+                                    System.out.println(string_tokenizer.nextToken());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA<br>
+                        BBB<br>
+                        CCC
+                    </output>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

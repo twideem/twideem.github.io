@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>
+            input{width:440px}
+            button{width:60px}
+        </style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>仮名快敲工具</h1>
+                <p>有時候搜尋日文關鍵字只想簡單打個仮名，不需要安裝日文輸入法，因此設計了這個工具。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>工具</h2>
+                <p>
+                    <input><button>轉換</button><button>清除</button>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>用法</h2>
+                <p>
+                    １、「小書き」以 x 開頭，例如「ゃ、ゅ、ょ」請輸入 xya、xyu、xyo。<br>
+                    ２、不支援拗音與促音，所以像「きゃ」「いっ」請兩個字分開打。<br>
+                    ３、「ぢ」請輸入 di 或 zhi，因為 zi、ji 由「じ」優先使用。<br>
+                    ４、「づ」請輸入 du 或 zhu，因為 zu 由「ず」優先使用。<br>
+                    ５、按空白鍵可將最後的「じ、ず、わ、え、お、ヴ」轉為「ぢ、づ、は、へ、を、ゔ」。<br>
+                    ５、「ん」請輸入 nn。<br>
+                    ６、「々」請先打出「おなじ」或「どう」然後按空白鍵轉換。再按空白鍵的話轉「ゝ」。<br>
+                    ７、標點符號可按 <kbd>, . - : [ ] ( ) ? ! ~</kbd>，部份符號可按空白鍵變換，請自行嘗試。<br>
+                    ８、要打片仮名，請先打完平仮名，再按「轉換」鈕。<br>
+                    ９、輸入完直接按 Enter 可 Google 搜尋關鍵字。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 有更好的免安裝日文輸入法！在「<a href='http://translate.google.com.tw/?hl=zh-TW&amp;tab=wT#ja/zh-TW/' target='_blank'>Google 翻譯</a>」的輸入欄選擇日文，然後點一下左下角的「開啟輸入法」，就能敲日文，還可以選漢字！
+                </p>
+            </footer>
+
+        </article>
+
+        <script>
+            /*
+            雖然每次輸入，就從頭到尾跑完全部 RegExp 條件批配的 replace，是相當蠢的設計，
+            但實際執行起來卻還是很順暢，所以就不改寫為 if(array){for} 了。
+            因為這麼「直接」「不加掩飾」的表達方式，看上去也蠻有趣的：
+            「一個敲起來明明很順手的日文輸入工具，居然用這麼天真愚蠢的寫法就能完成～」
+            */
+            var a=document.getElementsByTagName('input')[0]
+            a.focus()
+            a.addEventListener('keyup',function(x){
+                a.value=a.value.replace(/(xtsu|xtu)/i,'っ')
+                a.value=a.value.replace(/(chi|ti)/i,'ち')
+                a.value=a.value.replace(/(shi|si)/i,'し')
+                a.value=a.value.replace(/(tsu|tu)/i,'つ')
+                a.value=a.value.replace(/(xya)/i,'ゃ')
+                a.value=a.value.replace(/(xyu)/i,'ゅ')
+                a.value=a.value.replace(/(xyo)/i,'ょ')
+                a.value=a.value.replace(/(zhi|di)/i,'ぢ')
+                a.value=a.value.replace(/(zhu|du)/i,'づ')
+                a.value=a.value.replace(/(ba)/i,'ば')
+                a.value=a.value.replace(/(be)/i,'べ')
+                a.value=a.value.replace(/(bi)/i,'び')
+                a.value=a.value.replace(/(bo)/i,'ぼ')
+                a.value=a.value.replace(/(bu)/i,'ぶ')
+                a.value=a.value.replace(/(da)/i,'だ')
+                a.value=a.value.replace(/(de)/i,'で')
+                a.value=a.value.replace(/(do)/i,'ど')
+                a.value=a.value.replace(/(fu|hu)/i,'ふ')
+                a.value=a.value.replace(/(ga)/i,'が')
+                a.value=a.value.replace(/(ge)/i,'げ')
+                a.value=a.value.replace(/(gi)/i,'ぎ')
+                a.value=a.value.replace(/(go)/i,'ご')
+                a.value=a.value.replace(/(gu)/i,'ぐ')
+                a.value=a.value.replace(/(ha)/i,'は')
+                a.value=a.value.replace(/(he)/i,'へ')
+                a.value=a.value.replace(/(hi)/i,'ひ')
+                a.value=a.value.replace(/(ho)/i,'ほ')
+                a.value=a.value.replace(/(ji|zi)/i,'じ')
+                a.value=a.value.replace(/(ka)/i,'か')
+                a.value=a.value.replace(/(ke)/i,'け')
+                a.value=a.value.replace(/(ki)/i,'き')
+                a.value=a.value.replace(/(ko)/i,'こ')
+                a.value=a.value.replace(/(ku)/i,'く')
+                a.value=a.value.replace(/(la|ra)/i,'ら')
+                a.value=a.value.replace(/(le|re)/i,'れ')
+                a.value=a.value.replace(/(li|ri)/i,'り')
+                a.value=a.value.replace(/(lo|ro)/i,'ろ')
+                a.value=a.value.replace(/(lu|ru)/i,'る')
+                a.value=a.value.replace(/(ma)/i,'ま')
+                a.value=a.value.replace(/(me)/i,'め')
+                a.value=a.value.replace(/(mi)/i,'み')
+                a.value=a.value.replace(/(mm|mn|nm|nn|n\')/i,'ん')
+                a.value=a.value.replace(/(mo)/i,'も')
+                a.value=a.value.replace(/(mu)/i,'む')
+                a.value=a.value.replace(/(na)/i,'な')
+                a.value=a.value.replace(/(ni)/i,'に')
+                a.value=a.value.replace(/(nu)/i,'ぬ')
+                a.value=a.value.replace(/(ne)/i,'ね')
+                a.value=a.value.replace(/(no)/i,'の')
+                a.value=a.value.replace(/(pa)/i,'ぱ')
+                a.value=a.value.replace(/(pe)/i,'ぺ')
+                a.value=a.value.replace(/(pi)/i,'ぴ')
+                a.value=a.value.replace(/(po)/i,'ぽ')
+                a.value=a.value.replace(/(pu)/i,'ぷ')
+                a.value=a.value.replace(/(sa)/i,'さ')
+                a.value=a.value.replace(/(se)/i,'せ')
+                a.value=a.value.replace(/(so)/i,'そ')
+                a.value=a.value.replace(/(su)/i,'す')
+                a.value=a.value.replace(/(ta)/i,'た')
+                a.value=a.value.replace(/(te)/i,'て')
+                a.value=a.value.replace(/(to)/i,'と')
+                a.value=a.value.replace(/(vu)/i,'ヴ')
+                a.value=a.value.replace(/(wa)/i,'わ')
+                a.value=a.value.replace(/(we|wye)/i,'ゑ')
+                a.value=a.value.replace(/(wi|wyi)/i,'ゐ')
+                a.value=a.value.replace(/(wo)/i,'を')
+                a.value=a.value.replace(/(xa)/i,'ぁ')
+                a.value=a.value.replace(/(xe)/i,'ぇ')
+                a.value=a.value.replace(/(xi)/i,'ぃ')
+                a.value=a.value.replace(/(xo)/i,'ぉ')
+                a.value=a.value.replace(/(xu)/i,'ぅ')
+                a.value=a.value.replace(/(ya)/i,'や')
+                a.value=a.value.replace(/(yo)/i,'よ')
+                a.value=a.value.replace(/(yu)/i,'ゆ')
+                a.value=a.value.replace(/(za)/i,'ざ')
+                a.value=a.value.replace(/(zu)/i,'ず')
+                a.value=a.value.replace(/(ze)/i,'ぜ')
+                a.value=a.value.replace(/(zo)/i,'ぞ')
+                a.value=a.value.replace(/[a]/i,'あ')
+                a.value=a.value.replace(/[i]/i,'い')
+                a.value=a.value.replace(/[u]/i,'う')
+                a.value=a.value.replace(/[e]/i,'え')
+                a.value=a.value.replace(/[o]/i,'お')
+                a.value=a.value.replace(/[,]/i,'、')
+                a.value=a.value.replace(/[\.]/i,'。')
+                a.value=a.value.replace(/[-]/i,'ー')
+                a.value=a.value.replace(/[;|:]/i,'：')
+                a.value=a.value.replace(/[\[]/i,'「')
+                a.value=a.value.replace(/[\]]/i,'」')
+                a.value=a.value.replace(/[\(]/i,'（')
+                a.value=a.value.replace(/[\)]/i,'）')
+                a.value=a.value.replace(/[\~]/i,'～')
+                a.value=a.value.replace(/[\!]/i,'！')
+                a.value=a.value.replace(/[\?]/i,'？')
+                a.value=a.value.replace(/[\s]$/,'')
+                if(x.which==32){
+                    a.value=a.value.replace(/(々)$/,'ゝ')
+                    a.value=a.value.replace(/(おなじ|どう)$/,'々')
+                    a.value=a.value.replace(/(どう)$/,'')
+                    a.value=a.value.replace(/[え]$/,'へ')
+                    a.value=a.value.replace(/[お]$/,'を')
+                    a.value=a.value.replace(/[じ]$/,'ぢ')
+                    a.value=a.value.replace(/[ず]$/,'づ')
+                    a.value=a.value.replace(/[わ]$/,'は')
+                    a.value=a.value.replace(/[ヴ]$/,'ゔ')
+                    a.value=a.value.replace(/[。]$/,'．')
+                    a.value=a.value.replace(/[、]$/,'，')
+                    a.value=a.value.replace(/[ー]$/,'…')
+                    a.value=a.value.replace(/[：]$/,'；')
+                    a.value=a.value.replace(/[「]$/,'『')
+                    a.value=a.value.replace(/[」]$/,'』')
+                    a.value=a.value.replace(/[（]$/,'《')
+                    a.value=a.value.replace(/[）]$/,'》')
+                }
+            })
+            a.addEventListener('keydown',function(x){
+                if(x.which==13) location.href='http://www.google.com/search?q='+a.value
+            })
+            document.getElementsByTagName('button')[0].addEventListener('click',function(){
+                a.value=a.value.replace(/[あ]/g,'ア')
+                a.value=a.value.replace(/[ぁ]/g,'ァ')
+                a.value=a.value.replace(/[い]/g,'イ')
+                a.value=a.value.replace(/[ぃ]/g,'ィ')
+                a.value=a.value.replace(/[う]/g,'ウ')
+                a.value=a.value.replace(/[ぅ]/g,'ゥ')
+                a.value=a.value.replace(/[え]/g,'エ')
+                a.value=a.value.replace(/[ぇ]/g,'ェ')
+                a.value=a.value.replace(/[お]/g,'オ')
+                a.value=a.value.replace(/[ぉ]/g,'ォ')
+                a.value=a.value.replace(/[か]/g,'カ')
+                a.value=a.value.replace(/[き]/g,'キ')
+                a.value=a.value.replace(/[く]/g,'ク')
+                a.value=a.value.replace(/[け]/g,'ケ')
+                a.value=a.value.replace(/[こ]/g,'コ')
+                a.value=a.value.replace(/[が]/g,'ガ')
+                a.value=a.value.replace(/[ぎ]/g,'ギ')
+                a.value=a.value.replace(/[ぐ]/g,'グ')
+                a.value=a.value.replace(/[げ]/g,'ゲ')
+                a.value=a.value.replace(/[ご]/g,'ゴ')
+                a.value=a.value.replace(/[さ]/g,'サ')
+                a.value=a.value.replace(/[し]/g,'シ')
+                a.value=a.value.replace(/[す]/g,'ス')
+                a.value=a.value.replace(/[せ]/g,'セ')
+                a.value=a.value.replace(/[そ]/g,'ソ')
+                a.value=a.value.replace(/[ざ]/g,'ザ')
+                a.value=a.value.replace(/[じ]/g,'ジ')
+                a.value=a.value.replace(/[ず]/g,'ズ')
+                a.value=a.value.replace(/[ぜ]/g,'ゼ')
+                a.value=a.value.replace(/[ぞ]/g,'ゾ')
+                a.value=a.value.replace(/[た]/g,'タ')
+                a.value=a.value.replace(/[ち]/g,'チ')
+                a.value=a.value.replace(/[つ]/g,'ツ')
+                a.value=a.value.replace(/[っ]/g,'ッ')
+                a.value=a.value.replace(/[て]/g,'テ')
+                a.value=a.value.replace(/[と]/g,'ト')
+                a.value=a.value.replace(/[だ]/g,'ダ')
+                a.value=a.value.replace(/[ぢ]/g,'ヂ')
+                a.value=a.value.replace(/[づ]/g,'ヅ')
+                a.value=a.value.replace(/[で]/g,'デ')
+                a.value=a.value.replace(/[ど]/g,'ド')
+                a.value=a.value.replace(/[な]/g,'ナ')
+                a.value=a.value.replace(/[に]/g,'ニ')
+                a.value=a.value.replace(/[ぬ]/g,'ヌ')
+                a.value=a.value.replace(/[ね]/g,'ネ')
+                a.value=a.value.replace(/[の]/g,'ノ')
+                a.value=a.value.replace(/[は]/g,'ハ')
+                a.value=a.value.replace(/[ひ]/g,'ヒ')
+                a.value=a.value.replace(/[ふ]/g,'フ')
+                a.value=a.value.replace(/[へ]/g,'ヘ')
+                a.value=a.value.replace(/[ほ]/g,'ホ')
+                a.value=a.value.replace(/[ぱ]/g,'パ')
+                a.value=a.value.replace(/[ぴ]/g,'ピ')
+                a.value=a.value.replace(/[ぷ]/g,'プ')
+                a.value=a.value.replace(/[ぺ]/g,'ペ')
+                a.value=a.value.replace(/[ぽ]/g,'ポ')
+                a.value=a.value.replace(/[ば]/g,'バ')
+                a.value=a.value.replace(/[び]/g,'ビ')
+                a.value=a.value.replace(/[ぶ]/g,'ブ')
+                a.value=a.value.replace(/[べ]/g,'ベ')
+                a.value=a.value.replace(/[ぼ]/g,'ボ')
+                a.value=a.value.replace(/[ま]/g,'マ')
+                a.value=a.value.replace(/[み]/g,'ミ')
+                a.value=a.value.replace(/[む]/g,'ム')
+                a.value=a.value.replace(/[め]/g,'メ')
+                a.value=a.value.replace(/[も]/g,'モ')
+                a.value=a.value.replace(/[や]/g,'ヤ')
+                a.value=a.value.replace(/[ゆ]/g,'ユ')
+                a.value=a.value.replace(/[よ]/g,'ヨ')
+                a.value=a.value.replace(/[ゃ]/g,'ャ')
+                a.value=a.value.replace(/[ゅ]/g,'ュ')
+                a.value=a.value.replace(/[ょ]/g,'ョ')
+                a.value=a.value.replace(/[ら]/g,'ラ')
+                a.value=a.value.replace(/[り]/g,'リ')
+                a.value=a.value.replace(/[る]/g,'ル')
+                a.value=a.value.replace(/[れ]/g,'レ')
+                a.value=a.value.replace(/[ろ]/g,'ロ')
+                a.value=a.value.replace(/[わ]/g,'ワ')
+                a.value=a.value.replace(/[ゐ]/g,'ヰ')
+                a.value=a.value.replace(/[ゑ]/g,'ヱ')
+                a.value=a.value.replace(/[を]/g,'ヲ')
+                a.value=a.value.replace(/[ん]/g,'ン')
+                a.value=a.value.replace(/[ゝ]/g,'ヽ')
+            })
+            document.getElementsByTagName('button')[1].addEventListener('click',function(){
+                a.value=''
+            })
+        </script>
+
+    </body>
+
+</html>

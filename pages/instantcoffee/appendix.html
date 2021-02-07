@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>附錄</h1>
+            </header>
+
+            <hr id='19790322A'>
+
+            <section>
+                <h2>我對 MVC 架構的看法</h2>
+                <p>
+                    我覺得 MVC 只是站在「軟體設計」立場，來重新定義「硬體設計」的 PU + OU + IU 三者，使「運算、輸出、輸入」的概念，能更適切反映圖型介面軟體使用者內心的想法。<br>
+                    <br>
+                    使用圖型化軟體的人，感官的認知是：<br>
+                    <br>
+                    <samp>軟體功能（M）、操作介面（V）、使用方式（C）</samp><br>
+                    <br>
+                    而不是使用命令列時認為的：<br>
+                    <br>
+                    <samp>計算（P）、輸出（O）、輸入（I）</samp><br>
+                    <br>
+                    為何要重新定義？因為兩者確實是有差異的。對軟體使用者來說，操作介面（V）往往等同於軟體功能（M）本身，但是對硬體使用者來說，輸入（I）感覺上才是計算（P）的本質。<br>
+                    <br>
+                    換句話說，使用圖型化軟體時重心放在「輸出」，操作命令式硬體時重心放在「輸入」。<br>
+                    <br>
+                    重新站在 MVC 的角度來作設計，能讓我們更精準地回饋使用者想要的事情。
+                </p>
+            </section>
+
+            <hr id='19950130A'>
+
+            <section>
+                <h2>工程師的學養</h2>
+                <p>
+                    雖然程式設計師並沒有比別的行業崇高，但該保有孤傲的氣節時，即使會搞到眾叛親離、旁人無法諒解，也應該堅守下去。
+                </p>
+                <hr>
+                <section>
+                    <h3>沒有立場地勇於客觀剖析出優缺點</h3>
+                    <p>
+                        如果你從《程式語言的演進》一路讀到《不要違反 Java 的物件導向思維》，應該可以發現，雖然我常常指出 Java 有哪些缺點，但並不是為了反 Java 批評用的。<br>
+                        <br>
+                        而網路上很多人有種刻板觀念，看到有人指出某甲缺點，就認為他反某甲，看到有人指出某乙優點，就認為他挺某乙。<br>
+                        <br>
+                        做為工程師，你不能繼續秉持這種二分與對立的觀點來看待事情，必須勇敢認清自己所用的東西有那些缺點；認清事實，你會發現自己能夠客觀地應用這些優缺點，成功扮演工程師縝密洞悉問題的專業角色。<br>
+                        <br>
+                        記住這句話：「優點、缺點，其實都是特點！」我們是基於剖析出「特點」的視野，指出了「優點」與「缺點」，而不是為了支持或反對而挑出有哪些優缺點。<br>
+                        <br>
+                        除此之外，也要有勇敢指出缺點的素養，不要因為怕被人戴帽子、栽贓、攻訐，而違背良心附和他人說話。有句俗話說：「自古聖賢皆寂寞」，專業人士也是一樣，當你擔起專業人士的職責大任做出任何評估，就會有一群低俗的人說三道四，認為你是某派立場的人；專業的你必須忍受「客觀剖析優缺點各有其用途」時的寂寞<ins>[1]</ins>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>把握時間剖析專業問題，不要浪費時間向低俗的人多做解釋。</h3>
+                    <p>
+                        以《不要違反 Java 的物件導向思維》這篇文章來說，如果礙於低俗的人說三道四，我們就無法針對「Java 不是純正的物件導向程式語言」這件事，進一步探討出兩全其美的解決做法。他們會抨擊你不該批評 Java，認為你是反 Java、不想使用 Java 的人；但其實就是為了更深入地使用 Java，才會正視 Java 的缺陷在哪裡，來進一步盤算該怎樣處理。<br>
+                        <br>
+                        然而，對只知道採二分與對立觀點來攻擊你的人，再怎樣解釋都是沒用的。況且，我們需要探究的重點是事件本身，而不是浪費時間來證明「我不是如你所說某派立場的人」，所以也不建議多做解釋。<br>
+                        <br>
+                        會讓你的專案議題給擱置下來，扯到其他話題的人，請不要跟他認真。認真的話，問題不是出在對方身上，而是出在你自己跟著低俗。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 如果還是無法釋懷，請告訴自己：「低俗之輩所說的話不用在意，你跟他本來就是不同層級的人，跟他計較反而貶低自己的身分地位。」
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20071123A1'>
+
+            <section>
+                <h2>Java 已死？死者為大！</h2>
+                <p>
+                    我不需要著手整理 Java 已死的內容，因為在網路上已經有廣泛的討論，這部分我只提出這一點：「請嚴肅看待這個議題，別以為那些言論盡是嘴砲。」
+                </p>
+                <hr>
+                <section>
+                    <h3>死者為大</h3>
+                    <p>
+                        所謂 Java 已死，是指 Java 變成冷門的程式語言。<br>
+                        <br>
+                        但這並非 Java 程式的功能不再強悍，而是這強悍的代價，往往是語法過於繁贅，開發效率不如其他新興語言來得高。不是大家都需要企業級應用的程式功能，於是大家又一窩蜂跑去使用更快速解決「一般性問題」的熱門語言！<br>
+                        <br>
+                        但你不需要忌諱個「死」字，冷門不見得不好。<br>
+                        <br>
+                        當 Java 依然是企業級應用最剽悍的程式語言，偏偏它冷門得只剩下「少數人」會使用時，反而是你的競爭優勢，待遇也會比「一般人」來得優渥<ins>[1]</ins>：「物以稀為貴。」量產出來的人才其實不值錢！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Java 已死</h3>
+                    <p>
+                        整個《爪哇即溶咖啡》系列，或許你可以看到我總是指出 Java 的缺點，但我喜歡 Java，純粹只是成長環境的關係，讓我這個人一向看缺點來喜歡一件事情。<br>
+                        <br>
+                        如果只看優點，那就像一場已經 The End 的電玩，還需要破關嗎？所以我看到 Java 充滿缺點，感覺就是一場還沒 The End 的遊戲，讓我更熱衷參與這場遊戲。<br>
+                        <br>
+                        當我看到「Java 已死」的討論時，其實很多論述我很認同，很多人的程度之高，就像科學性驗證般對未來估算一樣，明確道出 Java 未來衰亡的跡象。<br>
+                        <br>
+                        但那又如何？那種「Java 已死」只是一種 Game Over，打過電玩的人應該知道那跟 The End 是兩碼子事，甚至 Game Over 表示重新再來繼續玩，The End 才是真的沒了。<br>
+                        <br>
+                        Java 的熱門地位，會被其他新興語言取而代之，像是應用層面越來越廣泛的玩樂級程式語言 Ruby，以及適合發展開放原始碼的國際語言 Python，因此我同意 Java 將會變得「相對冷門」的觀點。但冷門的 Java 有冷門時期的附加價值，特別是在企業級應用的這塊，Ruby 完全看不出來有能力和它抗衡，甚至其它程式語言也看不出來有辦法和 Java 在這塊較勁。只要 Java 仍有無可取代的地方，變冷門反而讓使用者站穩後天優勢的條件。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 就像網頁程式設計師一樣，其實根本不容易找到工作，因為太多人會，職缺常常輪不到你，就算輪到你了，也因為隨時可以叫你走人換別人來做，薪水通常被壓低。如果 Java 簡單到像寫 HTML5 的 JavaScript 一樣大家都會，你覺得 Java 已死導致沒幾個人會，是件壞事嗎？
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20071123A2'>
+
+            <section>
+                <h2>怎麼就沒有 C# 已死的消息？</h2>
+                <hr>
+                <section>
+                    <h3>真的不能小看 Microsoft 對於軟體和系統的專業見識</h3>
+                    <p>
+                        進入「行動上網（平板電腦、智慧型手機）」的時代，Microsoft 節節敗退，變成只懂「辦公室電腦」、不懂「消費者裝置」的公司，已經鳥掉了，敗給 Google 與 Apple 只是早晚的問題～<br>
+                        <br>
+                        但檢視 Microsoft 過去提出過的規格性技術，真的不能小看他對於作業系統與軟體開發的專業見識，總是能及時提出有效的解決方案，幫助開發人員進入狀況。這些東西很多都像 XMLHttpRequest 一樣，成為各家發揚光大的基礎技術，卻源自 Microsoft 的發明。<br>
+                        <br>
+                        C# 也是，該追加哪些新語法、新技術、新功能，時機拿捏得比 Java 精準，做法也實現得比 Java 漂亮。這家不太喜歡鳥標準規範的公司，確實經常做得比標準規範出來的規格來得完善～<br>
+                        <br>
+                        只是時代已經走向「電腦不是拿來工作的」，而是「日常生活用的裝置」，未來 Microsoft 的專業只能服務到「各大企業」，從中賺取利潤，卻無法再像過去那樣，服務到「大眾市場」，失去這部分的利潤<ins>[1]</ins>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>為何我不用 C#</h3>
+                    <p>
+                        <samp>C# = .NET = 綁死 Windows = 要花錢才受用（包括 Visual Studio）</samp><br>
+                        <br>
+                        我知道讓公司花點「小錢」的話<ins>[2]</ins>，選擇 Microsoft 陣營的技術，其實是最有效的解決方案，從軟體、諮詢到教育，都有專人包辦，能夠讓失敗的風險降至最低；類似想開店創業的人，嘗試加入有信譽的加盟店一樣，很多你沒想到的事，他都能幫你事前與善後。<br>
+                        <br>
+                        但我通常不是為了公司寫程式，而是為了自己寫程式，這樣就不是小錢了。所以我不使用 C#，而用 Java，它可以讓我自由搭配如何進行程式開發的平台，例如 Linux + JDK + NetBeans IDE or Geany + Tomcat with Apache……每個環節都能恣意抽換。<br>
+                        <br>
+                        我想這也是程式語言來講 C# 明明要比 Java 更好，卻無法像 Java 獲得青睞的主要原因吧？
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>C# 已死？</h3>
+                    <p>
+                        它並沒有活在我的世界裡，原本就沒有生命，所以不會發生死的情況。<br>
+                        <br>
+                        對我來說：它本來就不是活的。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 除非 Microsoft 的雲端系統能幹掉 Google 與 Apple：「也幹掉自己的 Windows！」才能救回大眾市場。不過這幾乎是不可能的！第一，要 Microsoft 讓雲端系統幹掉 Windows 作業系統，等於「揮刀自宮」的做法，而 Microsoft 名義上依然是武林盟主、認為自己武功天下第一，「欲練神功」的意願不會很高。第二，網路平台不是 Microsoft 的強項，Google 才是，就算他「欲練神功，揮刀自宮」了，可能也打不過人家的「獨孤九劍」。<br>
+                        [2] 對企業來說，十幾二十萬真的只是小錢，跟大老闆包養外遇對象的錢差不多而已。
+                    </p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>re:怎麼就沒有 C# 已死的消息？</h2>
+                <hr>
+                <section>
+                    <h3>.NET Core</h3>
+                    <p>
+                        2016 年，Microsoft 開源 .NET Core，已經不再是 Windows only！<br>
+                        <br>
+                        我真覺得 Satya Nadella 太讚了，他不斷讓 Microsoft 對開放原始碼做出貢獻，逐步擺脫靠軟體市佔率形成專屬規格藉以獲利的形象。<br>
+                        <br>
+                        你可以酸說這是在刷存在感，現在最長時間被使用的電腦是智慧型手機、最多時間被使用的作業系統是 Android，Windows 可有可無的時代或將到來。Android 超越 Windows 成為人類主流的操作平台，同時讓開放原始碼也成為主流的解決方案，而不是退求其次的選擇。Microsoft 不在開放原始碼吸引使用者，如何填補 Windows 市佔率雖高卻是冷僻裝置的存在感？<br>
+                        <br>
+                        但我不這麼認為，Microsoft 正走向正確的路，Satya Nadella 將繼續這樣領導公司，我們使用者則從中獲得更多選擇，不再被公司與產品綁死。<br>
+                        <br>
+                        我不喜歡夾市占率優勢來剷除競爭對手的 Bill Gates，也不喜歡視開放原始碼為癌症與病毒的 Steve Ballmer，但我喜歡接納並照顧 Linux 使用者的 Satya Nadella，他提升我對 Microsoft 形象的好感。<br>
+                        <br>
+                        或許 Windows 會衰退，但 Micorosft 不會只有 Windows，它可以靠開放原始碼社群的使用率與支持度，為衰退的 Windows 附加價值，多少彌補損失，讓使用 Windows 的你和我不感到孤單。<br>
+                        <br>
+                        未來隨著開放原始碼社群為 .NET 貢獻越來越多專案（開源界的產品），C# 會做得比 Java 更好。維護 C# 技術規格的，是 Microsoft 那群有見識的菁英，擴張 C# 應用領域的，是開源社群有活力的天才，兩者相加很值得期待。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>.NET Core 3</h3>
+                    <p>
+                        等了半年，預計支援 Windows Forms 的 .NET Core 3（<a href='https://blogs.msdn.microsoft.com/dotnet/2018/05/07/net-core-3-and-support-for-windows-desktop-applications/' target='_blank'>.NET Core 3 and Support for Windows Desktop Applications</a>），推出預覽版（<a href='https://blogs.windows.com/buildingapps/2018/12/04/announcing-open-source-of-wpf-windows-forms-and-winui-at-microsoft-connect-2018/#pjmmxuGfCbmSOWMS.97' target='_blank'>Announcing Open Source of WPF, Windows Forms, and WinUI at Microsoft Connect(); 2018</a>），已經心動想改用 C# 寫程式了（<a href='https://dotnet.microsoft.com/download/dotnet-core/3.0' target='_blank'>.NET Core 3.0 downloads</a>）！<br>
+                        <br>
+                        不喜歡 Oracle 所以不再用 Java 寫程式已經一年，哪天懷念起 20 年來寫 Java 程式的生活，再寫 C# 吧～<br>
+                        <br>
+                        這一年來，都用 Python 寫應用程式和 CGI，搭配 JavaScript 設計 RIA，過著輕鬆寫意的生活。Python 無論 CLI 也好、GUI 也好，都是理想的解決方案，再寫寫 CGI 讓 RIA 做更多事，真是滿意到不行。（是的，直接寫 CGI，不是用 Django，因為我喜歡用內建功能搞定工作的感覺。）<br>
+                        <br>
+                        不過寫 Python 的日子過得太平順了，難免憧憬來趟冒險的生活。於是最近開始投入以亂七八糟為特性的 PHP，寫 CLI 應用程式和 RIA 動態網頁。沒想到就像闖進不再受拘束的世界、拋開世俗的規條一樣，我居然喜歡上 PHP 亂七八糟的生活方式了！而且就像《回到未來三》Emmett Brown 博士想留在美國舊西部開拓生活一樣，我不大想回去過 Pythonic 的生活了～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>.NET 5</h3>
+                    <p>
+                        隨著第一個長期支援版的 .NET Core 3.1 問市，象徵 .NET Core 已是穩定、健全的技術，鼓勵業界使用外，Microsoft 還將下一版命名為 .NET 5，而不是 .NET Core 4，原因是避免與不再繼續發展下去的 .NET Framework 4.8 混淆：「未來 .NET 會持續發展的只有 .NET Core。」<br>
+                        <br>
+                        預計 2020 年底推出 .NET 5、然後 2021 年底推出 .NET 6、2022 年推出 .NET 7…每年推出一個版本。至於 .NET Framework 4.8 是最後一版了，不會再有 4.9 和 5.0。<br>
+                        <br>
+                        雖然 .NET Core 可以做的事將比 .NET Framework 還要多，但 .NET Core 在 Windows 作業系統方面無法完全取代 .NET Framework，所以 .NET Framework 4.8 還不會死，等於被放生而已！.NET Core 跳過 4 直接用 5，其實也表示 .NET Framework 4.8 是個獨立的存在，與其說避免 .NET Core 持續發展時跟 .NET Framework 混在一起，不如說是避免 .NET Framework 4.8 被 .NET Core 4 這樣的名稱混在一起！因為 Microsoft 還打算讓 .NET Framework 持續存在下去、與 .NET Core 共存一陣子看看，並沒有要立刻讓 .NET 5 淘汰 .NET Framework 4.8。<br>
+                        <br>
+                        無論 .NET 如何發展：「任 .NET Framework 自生自滅，讓 .NET Core 取而代之。」都跟 C# 已死無關，反而看到的是 C# 活得更好！
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [*] 光想像用 .NET Core 寫 C# 和 ASP.NET 程式，搭配 Visual Studio Code 文字編輯器，便嘴角上揚了。對比現在寒酸的形象，那是多麼專業人士形象的帥氣場景啊！
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20140423A'>
+
+            <section>
+                <h2>某批踢踢 Java 新手問題</h2>
+                <p>
+                    批踢踢 Java 看板有人因為看不懂書本的某段範例程式，所以上來發問，出處：<br>
+                    <br>
+                    <a href='http://www.ptt.cc/bbs/java/M.1398257921.A.B10.html' target='_blank'>http://www.ptt.cc/bbs/java/M.1398257921.A.B10.html</a><br>
+                    <br>
+                    他看不懂如下第二行程式是在做什麼？為什麼會這樣寫？<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[2]'>
+                        JTextArea outputArea = new JTextArea(10,20);
+                        Container c = getContentPane();
+                        c.add(outputArea);
+                    </textarea>
+                    <br>
+                    對新手來說，或許這樣寫他就看得懂了：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[2]'>
+                        JTextArea outputArea = new JTextArea(10,20);
+                        this.getContentPane().add(outputArea);
+                    </textarea>
+                    <br>
+                    因為這是新手才有的「莫名其妙」問題，所以老手常常不曉得從何答起，於是…<br>
+                    <br>
+                    <a href='http://www.ptt.cc/bbs/java/M.1398335903.A.D8A.html' target='_blank'>http://www.ptt.cc/bbs/java/M.1398335903.A.D8A.html</a><br>
+                    <br>
+                    我對該板這次的管理是對是錯沒有意見，因為我覺得是兩方出現代溝而已。但我不曾出沒於程式設計的討論區回答問題，是十多年前逛論壇時，看到的不是新手被酸爾爾，而是被電。那時我覺得還是寫教學文章給「新手」搜尋好了，不想在論壇出沒，省得看到新手發個問題卻被罵白癡<ins>[1]</ins>，旁觀者心情也會跟著受影響～
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 十多年前的事。現在有「涉及人身攻擊」的觀念，變成用冷嘲熱諷的話語酸新手。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20030113A'>
+
+            <section>
+                <h2>為何使用 StringBuilder</h2>
+                <hr>
+                <section>
+                    <h3>假想一個浪費的情況</h3>
+                    <p>
+                        假想一下…<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = "AAA";
+                            String b = "【" + a + "】";
+                        </textarea>
+                        <br>
+                        跑起來其實等於…<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = "AAA";
+                            String b = String.valueOf("【").concat(a).concat(String.valueOf("】"));
+                        </textarea>
+                        <br>
+                        valueOf() 與 concat() 都會 new 一個 String 來回傳，而且這些都是沒被參照而等待回收的物件。換句話說，用太多 + 來串連字串，等於製造大量的垃圾。<br>
+                        <br>
+                        於是 Java 提供 StringBuilder，它能減少 new 出一堆 String 物件的情況，解決程式設計人員對浪費系統資源的疑慮。使用方式如下：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = "AAA";
+                            String b = new StringBuilder("【").append(a).append("】").toString();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>StringBuilder 使用時機</h3>
+                    <p>
+                        嚴格來說，String 物件所保存的內容，並不是字串資料，而是字串資料的位址。所以每次變動字串資料時，它會新建一個用來存放新字串資料的物件，然後指向新物件的位址。<br>
+                        <br>
+                        StringBuilder 則實際保存一份字串資料做為自己的內容，當你變動資料時，它直接修改自己所保存的那份資料，而不是配置新的資料。<br>
+                        <br>
+                        所以，當你頻繁改動 String 物件所保存的字串內容，其實是頻繁改動 String 物件指向新的物件，這時使用 StringBuilder 比較適合。但如果物件所保存的字串幾乎是唯讀的用途，只讀取不改寫，那使用 String 比較省事。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>String 使用時機</h3>
+                    <p>
+                        其實 Java 已經最佳化過 String 了，所以也不用每次遇到串接文字資料的場合，都非得用 StringBuilder() 來取代 + 不行。<br>
+                        <br>
+                        只有在對 String 變數的內容加以更動的情況下，才會有增加負擔的問題，但如果整行單純只是用 + 來串接文字資料是沒問題的。例如：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = "X" + "Y" + "Z";
+                        </textarea>
+                        <br>
+                        編譯時其實已最佳化成相當如下的程式來處理：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = new StringBuilder("X").append("Y").append("Z").toString();
+                        </textarea>
+                        <br>
+                        所以不用那麼忌諱用 + 來串接文字資料。<br>
+                        <br>
+                        如下面程式對 String 物件的資料加以更動的話，才考慮改用 StringBuilder：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = "X";
+                            a += "Y" + "Z";
+                        </textarea>
+                        <br>
+                        但還是以「可讀性」為優先，這不是鐵律！雖然 StringBuilder 解決程式設計人員對浪費系統資源的「疑慮」，但對一般 Application 開發者來說，真正因為大量使用 String 影響程式執行的情況，並沒有想像得那麼多。開發必須供上千人、上萬人使用的系統時，為保障伺服主機執行正常，減少垃圾才會視為鐵律。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>注意事項</h3>
+                    <p>
+                        下面程式的 a = b 是無法通過編譯的，因為 b 並不是一個能夠讓 String 指向的位址：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            String a = "AAA";
+                            StringBuilder b = new StringBuilder("BBB");
+                            a = b;
+                        </textarea>
+                        <br>
+                        你必須改成 a = b.toString()，或者使用其它 StringBuilder 提供的字串擷取功能，讓 StringBuilder 傳回能夠讓 String 物件指向的位址才行。<br>
+                        <br>
+                        再看一個例子，才能讓你觀念更清晰…<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            StringBuilder a = new StringBuilder("AAA");
+                            StringBuilder b = new StringBuilder("AAA");
+                            if(a==b) System.out.ptint("HELLO");
+                        </textarea>
+                        <br>
+                        這段程式並不會顯示 HELLO，因為 a 與 b 各保存一份自己的 "AAA"，而不是像 String 物件一樣，指向同一份 "AAA" 資料的記憶體位址，所以直接比較兩者時，比較的不是字串資料，而是兩個 StringBuilder 物件的記憶體位址是否相等。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20070214A'>
+
+            <section>
+                <h2>re:自己剖析屬性檔</h2>
+                <p>
+                    繼承自 java.util.Properties 版，使用多載的方式，而不是覆寫：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.nio.file.Files;
+                        import java.nio.file.Paths;
+                        import java.util.HashSet;
+                        import java.util.Iterator;
+
+                        public class Properties extends java.util.Properties{
+
+                            public void load(String path){
+
+                                Iterator&lt;String&gt; iterator = null;
+
+                                try{
+                                    iterator = Files.readAllLines(Paths.get(path)).iterator();
+                                }
+                                catch(Exception exception) {
+                                    exception.printStackTrace();
+                                }
+
+                                while(iterator.hasNext()){
+                                    String[] strings = iterator.next().split("=");
+                                    setProperty(strings[0],strings[1]);
+                                }
+
+                            }
+
+                            public void store(String path){
+
+                                Iterator&lt;String&gt; iterator = stringPropertyNames().iterator();
+                                HashSet&lt;String&gt; hash_set = new HashSet&lt;&gt;();
+
+                                while(iterator.hasNext()){
+                                    String key = iterator.next();
+                                    hash_set.add(key + "=" + getProperty(key));
+                                }
+
+                                try{
+                                    Files.write(Paths.get(path), hash_set);
+                                }
+                                catch(Exception exception) {
+                                    exception.printStackTrace();
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    不認為參數型別不同就表示不同名稱的函式，就不要多載成 load(String) 和 store(String)，而是寫成新的函式如 loadFromTXT(String) 和 storeToTXT(String)，或者乾脆覆寫 load(InputStream) 和 store(OutputStream) 版本，因為會用這個新 Properties 的人，心裡早有準備會有不同行為了。<br>
+                    <br>
+                    為了避免破壞檔案資料，本文示範的是多載，因為 store(String) 之後可以 load(String) 再 store(OutputStream) 救回來，store(OutputStream) 之後可以 load(InputStream) 再 store(String) 還原。<br>
+                    <br>
+                    最好是不要繼承 java.util.Properties，既然目的是自己剖析屬性檔，而無關多型，用 java.util.HashMap 重新寫一個就好。
+                </p>
+            </section>
+
+            <hr id='20030728A'>
+
+            <section>
+                <h2>使用 Java DB 設計內嵌式資料庫</h2>
+                <p>
+                    從 JDK 6 開始，內建改名為 Java DB 的 Apache Derby，這是完全以 Java 寫成的資料庫，不但可以內嵌，還提供整套資料庫管理系統，並且能夠做為資料庫伺服器使用。<br>
+                    <br>
+                    但並不是內建於 JRE，而是 JDK，所以還是得設定 CLASSPATH 指定 [JAVA_HOME]\db\lib\derby.jar 才能使用。加上處理速度不快，建議還是使用 SQLite 做為內嵌資料庫。<br>
+                    <br>
+                    想要用的人，範例如下：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.sql.Connection;
+                        import java.sql.DriverManager;
+                        import java.sql.ResultSet;
+                        import java.sql.Statement;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    //驅動 Java DB 並建立名為 mydatabase 的資料庫
+                                    Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                                    Connection connection = DriverManager.getConnection("jdbc:derby:mydatabase;create=true");
+                                    //連接指令
+                                    Statement statement = connection.createStatement();
+                                    //建立含 mycolumn 欄位的資料表 mytable
+                                    statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
+                                    //將 Hello, SQLite! 這筆資料寫入 mycolumn 欄位
+                                    statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES("Hello, JavaDB!")");
+                                    //從 mytable 資料表提取所有資料
+                                    ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
+                                    //取出資料
+                                    while(result_set.next()){
+                                        System.out.println(result_set.getString("mycolumn"));
+                                    }
+                                    //關閉
+                                    result_set.close();
+                                    statement.close();
+                                    connection.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    程式執行時，會在執行處產生 mydatabase 資料夾，並輸出如下結果：<br>
+                    <br>
+                    <output>
+                        Hello, JavaDB!<br>
+                    </output>
+                    <br>
+                    如果 JRE 也內建 derby.jar 就好了～
+                </p>
+            </section>
+
+            <hr id='20030811A'>
+
+            <section>
+                <h2>re:SAX 基本範例：快速剖析 XML 文件裡的資料</h2>
+                <p>
+                    大多數人視 SAX 為 Java 內建 XML 處理套件中最基本的解決方案，於是有「先會 SAX 再學 DOM」的傾向<ins>[1]</ins>。但我個人則視 SAX 為遇到 DOM 處理效率不彰時才使用的方案，可以的話我盡量不使用 SAX。因為它並沒有讓原始碼更 simple，反而增加維護的複雜度；SAX 所 simple 是資料本身。<br>
+                    <br>
+                    例如，除了本範例用到的 startElement() 和 characters()，DefaultHandler 還提供了 startDocument()、endDocument()、endElement()…更多時機點，可以描述資料的使用情況。但我覺得把資料拆散在不同執行場合，破壞了傳統程式設計對資料集中起來管理的思惟，會使程式維護起來不直覺。<br>
+                    <br>
+                    當然，這只是我對 SAX 的看法。如果你覺得 SAX 是最適合用來剖析 XML 文件的方案，需要寫入檔案時才用 DOM<ins>[2]</ins>，那網路有篇非常詳盡的 SAX 教學文章：《<a href='http://www.ibm.com/developerworks/cn/xml/x-saxhandle/' target='_blank'>使用 SAX 處理 XML 文檔</a>》，可幫助你全盤掌握 SAX 的應用。<br>
+                    <br>
+                    我喜歡在 DOM 將 XML 模型轉為 SAX 來剖析，資料結構的處理情況會更直覺。
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 畢竟事件驅動的 SAX 可以剖析由程式碼直接描述所產生的 XML 資料，這點來講，DOM 只能剖析存在於記憶體的 XML 結構。但我從未遇過這樣的開發場合，因為 XML 不是這樣用的！<br>
+                        [2] SAX 只能讀取 XML 檔案的資料，不能將資料寫入 XML 檔案。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20120428A'>
+
+            <section>
+                <h2>re:Lambda expressions</h2>
+                <p>
+                    就像 Java SE 5 的 Generics 能對資料群體進行抽象，Java SE 8 的 Lambdas 能對行為群體進行抽象，又是一次非常重大的變革。
+                </p>
+                <hr>
+                <section>
+                    <h3>官方 Lambda expressions 教程</h3>
+                    <p>
+                        其實我對 Java SE 8 設計 Lambda 過程是基於怎樣的原理、以及導入 Lambda 算式是訴諸怎樣的理念，並不是很清楚<ins>[1]</ins>，大多是基於對 JavaScript 匿名函式的認知看待它。<br>
+                        <br>
+                        所以本文<ins>[2]</ins> 多有錯謬的地方，建議閱讀《The Java Tutorials》針對 Lambda expressions 提供的教程：<br>
+                        <br>
+                        <a href='http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html' target='_blank'>http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html</a><br>
+                        <a href='http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html' target='_blank'>http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html</a><br>
+                        <br>
+                        用官方的觀點與做法，來導入 Java SE 8 的 Lambda expressions！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>使用 Lambda 的時機</h3>
+                    <p>
+                        Java 是訴諸「物件導向程式設計」的靜態型別語言，亦即由編譯器規範我們的原始碼應該符合哪些守則，好讓原始碼能夠依據前後文的關係詮釋語意，以利大型專案的管理。<br>
+                        <br>
+                        而 Java 的 Lambda expressions 像是訴諸「超級指令」的動態型別語言蜜糖，它用來讓「前後文簡化在一起」。對程序導向程式設計來說，因為減少跳著讀程式碼的工作，所以能夠提升可讀性。但對物件導向程式設計來說，雖然不用「跳讀」，卻失去前後文關係的推演，變成得在簡化後的程式碼「判讀」來解釋語義，而不是詮釋語意；注意這裡用的語義（semiotics）與語意（semantics）是不同字眼。<br>
+                        <br>
+                        我個人對 Java 的 Lambda 實用度持保留態度，可能要再過一兩年時間，累積眾家將這語法機制導入大型專案的經驗，匯集到下一本《Effective Java》，才能知道怎樣用才好？甚至該不該用～
+                    </p>
+                    <section>
+                        <h4>寫完即丟的程式碼用 Lambda expressions</h4>
+                        <p>
+                            一些寫完即丟、不需要重複使用的程式，就用 Lambda 來處理。不過這方面 Java 的 Lambda 沒有 JavaScript 的一級函式容易使用。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>以 Stream API 實作介面功能</h4>
+                        <p>
+                            在「實作」部分用 Stream API 讓細節更簡短、清晰，「介面」部分繼續用過去物件導向的設計與實作分離。也就是只在「實作」物件公開的「介面」時，才用 Java 官方基於 Lambda expressions 設計的 API 讓內部細節更簡短而清晰地表現功能設計，至於實作與介面分離的做法並沒有變化，物件導向設計依然是物件導向設計。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>不自己設計基於 Lambda 的功能來用</h4>
+                        <p>
+                            我傾向用 Java 現成的 API、或 Comparator 和 Runnable 這種「標準案例」就好，而不考慮自己設計基於 Lambda 的功能來用。因為這些經典用法已經像是設計模式一樣，大家熟悉它寓含的前後文關係了。如此既能提高程序導向式的可讀性，又能降低物件導向式的判讀性。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>不要妄想用函數式風格寫 Java 程式</h4>
+                        <p>
+                            Java SE 8 的函式不是物件，所以不適合寫函數式風格的程式。加上 Java 是強型別（不會自動轉型）且完全物件導向的程式語言（傳入的參數要寫得落落長），寫出來的函數式程式也不好看。<br>
+                            <br>
+                            如果你希望用函數式風格寫程式，請改用致力於將物件導向程式設計與函數式程式設計完美整合在一起的 Scala，因為 Java SE 8 用 functional interface 取代 first class function 的設計，顯然在抗拒函數式程式設計。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>用匿名類別直接跑程式碼比較方便</h4>
+                        <p>
+                            既然函式不是物件，Java 的匿名函式也就無法直接寫個 class 來調用 method，做這件事要繼續用匿名類別：<br>
+                            <br>
+                            <textarea class='brush:java'>
+                                //匿名函式不能像這樣跑程式
+                                (Consumer&lt;String&gt; consumer = x -> System.out.println(x)).accept("Hello");
+
+                                //更別說像這樣跑程式
+                                ((Consumer&lt;String&gt;) x -> System.out.println(x)).accept("Hello");
+
+                                //必須用匿名類別
+                                new Consumer&lt;String&gt;(){
+                                    @Override public void accept(String string){
+                                        System.out.print(string);
+                                    }
+                                }.accept("Hello");
+                            </textarea>
+                            <br>
+                            習慣在 JavaScript 將一級函式物件做為參數與傳回值來跑程式碼的人，在 Java 的 Lambda expressions 容易發生鬼擋牆，因為要用匿名類別來做匿名函式該做的事就跟見鬼了一樣。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>特殊體驗</h3>
+                    <p>
+                        在使用 Java SE 8 的 Lambda expressions 時，我發現自己會有兩種目的，久而久之，分開稱為「匿名函式（Lambda）」和「匿名算式（Lambda expressions）」。<br>
+                        <br>
+                        也就是有時候我是為了「傳匿名函式作參數」，這時我稱自己正在 Lambda。有時候是為了「寫匿名的算式」，這時我稱自己在用 Lambda expressions。<br>
+                        <br>
+                        不過這樣只會更難認知 Java SE 8 的 Lambda expressions 是怎麼一回事，所以看看就好，不用真的這樣區分。我只是把自己的特殊體驗 PO 出來分享而已～
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 或者說不是很認同它的原理與理念，所以不完全接受官方說法，以免扭曲我對 Lambda expressions 的認知。我居然還要站在 Java 為了相容語法舊包袱的立場，才能正確使用 Lambda expressions，然後還得定義說這樣的 Lambda 才是對的…變成這樣不太好，所以我不是很清楚 Java SE 8 設計 Lambda 的原理和理念。只是，試著去了解時，對 Java 維護團隊能夠一邊相容語法舊包袱、一邊實現新功能進來的智慧，感到讚嘆不已～<br>
+                        [2]「本文」包括本站的《Lambda expressions》這篇文章，並不是只有這篇 re:Lambda expressions 回文。
+                    </p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>re:使用 Lambda 的時機</h2>
+                <p>
+                    Java SE 9 推出半年後，Java SE 10 都推出了！Java SE 8 的 Lambda expressions 用了這麼久，我的看法也變明確：「函式介面的 Lambda expressions 用起來規則太複雜，讀起來又帶有不確定性，沒有一級函式的直覺與實用性。所以在 Java 寫物件導向程式時我不用 Lambda expressions，只有在操作的 API 是函數式風格時才用。」
+                </p>
+                <hr>
+                <section>
+                    <h3>除了操作 Stream API 以外，我不使用 Lambda expressions。</h3>
+                    <p>
+                        可以跑 Lambda 的時機、以及類型推導的規則，都太複雜了，不是每個寫 Java 的人都能熟記與掌握。所以大量用了 Lambda expressions 的 Java 程式，只會造成程式設計師的壓力。寫 Lambda expressions 看似字數減少更簡潔，其實要讀懂在做什麼事，得用推測的，不像過去光看物件的操作方式，便清楚掌握會做哪些事。於是我決定不使用 Lambda expressions，以免閱讀程式時帶來不確定性。<br>
+                        <br>
+                        我只有在 Stream API 的場合才會使用 Lambda expressions，因為把範圍限縮在這套 API 的話，是很容易熟記與掌握的！且這套 API 函數式設計得很好，行為表達很明確。但在其他寫 Java 物件導向程式設計的場合，我是不用 Lambda expressions 的。<br>
+                        <br>
+                        出現在 Stream API 的 Lambda expressions 不難理解在做什麼，但出現在其它 Java 程式碼的 Lambda expressions，有時候要推測才知道做什麼，所以閱讀原始碼時若要修改程式，理解效率會下降。不過，閱讀原始碼時若要追加程式的話，因為容易找出重點在哪個環節，效率是上升的。但就我個人而言，易理解比較重要，所以我不會逮到機會就用 Lambda expressions，而是沒事別用。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>空前設計 <i>v.</i> 先前就有的一級函式物件設計</h3>
+                    <p>
+                        當初我對 Java SE 8 拿 interface 來實現 Lambda expressions 感到佩服，這是集眾菁英們聰明才智完成的空前設計！所以我安裝 Java SE 8 後，把玩的不是 Lambda expressions 好不好用，而是玩味 Lambda expressions 設計上的細節，讚嘆人類智能表現總是一再克服困難，感慨我這輩子都無法達成這些神人的成就。<br>
+                        <br>
+                        實際用了以後，看來抄別人的做法，加入 function 型態做為 first class，讓隨處都能 Lambda expressions 才是較好的做法。因為充滿限制讓程式碼與思維都無法保持一致性，最後為了保持 Java 一致性的精神，我選擇無視 Lambda expressions 的存在。<br>
+                        <br>
+                        Java 的 Lambda expressions 是展現人類高度智能表現的空前設計，但我寧可用先前就有的一級函式物件設計～<br>
+                        <br>
+                        就像在 Python 我不想把程式寫成 class 來用，在 Java 我也是同樣心情，不想把程式寫成 Lambda expressions。Python 的類別寫法又醜又蠢，Java 的匿名函式也是一樣。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20140426A'>
+
+            <section>
+                <h2>萬惡的 null</h2>
+                <p>
+                    在「有還是沒有」雙重身份變來變去的 null，很容易形成系統設計上的瑕疵，但不見得就是萬惡之源。<br>
+                    <br>
+                    例如有些資料庫軟體，很明確地使用 null 做為欄位的初始資料，然後軟體私底下自己會處理類似 java.util.Optional 的設計。在這樣的情況，我們發現使用 null 做為初始資料的設計，比為了防範 null 而導入 Optinoal 要來得優雅。<br>
+                    <br>
+                    但如果我們無法明確定義 null 是什麼就使用它，然後有一天 null 又成為除錯的禍源時，那麼長期以來在「語法編譯」「執行例外」都百分百合乎規矩的它不但很難追蹤，甚至連「邏輯問題」中它也存在得很合情合理時，這隻 null 會像歷史懸案一樣難搞，不禁咒罵：「萬惡的 null～」<br>
+                    <br>
+                    很多大師級人物都主張不要用 null，但雖然 null 有它禍害的一面，在某些場合也有它優雅的一面，因此我不主張「萬惡的 null」。我認為應該先試著定義 null 能否是很明確的單一什麼，能的話優先使用 null，不能的話就引進 java.util.Optional。<br>
+                    <br>
+                    當然，幾乎都是無法明確定義出 null 是單一什麼的情況居多，久而久之就認為 null 什麼都不是，直接導入 Optional 來定義它，或者放任 null 成為萬惡的根源～
+                </p>
+            </section>
+
+            <hr id='20101016A'>
+
+            <section>
+                <h2>暫且不要導入模塊化</h2>
+                <p>
+                    Java 9 最大的亮點，就是新的模組化方案！<br>
+                    <br>
+                    舊的模組化有許多弊端，像是以類別路徑為基礎的封裝做法，新舊模組只會彼此覆蓋，互不相容，新的模組化方案有更多細節的微調，能解決長久以來的積弊。<br>
+                    <br>
+                    然而，Java 9 的模塊化功能，是屬於平台上的特性，而不是語法上的特性，它對程式設計沒有多大幫助，不要想說這是新的特性就急著導入它，應該順著未來趨勢的發展，被動地慢慢導入它。<br>
+                    <br>
+                    Java 9 雖然導入新的模組化方案，但連 Java 平台本身都還未通盤地以模塊化架構規範套件，可說是在準備階段而已。因此目前還不需要去關注模塊化的議題，等到 Java 平台自己也理出頭緒規範好模塊後，我們再「被迫」照規矩導入即可。這感覺就像你不見得非要把 Java 程式封裝成 JAR 來用，但等大家都用 JAR 釋出套件時，我們就必須了解怎麼將 JAR 套件導入到程式裡面。<br>
+                    <br>
+                    我建議在 Java 9 的階段，暫且不要去管模塊化這功能，搶鮮導入模塊化不會帶來助益，反而會有徒增困擾的風險。等 Java 平台的模塊化架構好了，我們再來了解怎樣切割，讓程式依賴更小的環境便能執行。目前 Java 9 可以切割的，就 Java SE、JDK、JavaFX 這幾塊，雖然對客戶端應用程式的發布還是很有用，但還是不小塊，吸引力不大。<br>
+                    <br>
+                    至於為何 Java 9 給了鋸子，自己卻沒鋸好東西來，只是示範這鋸子真的能鋸東西而已？我想，或許是為了在 Java 10 或 Java 11 有新的資料型態架構後，再全新模塊化 Java 平台吧？純屬臆測就是了～
+                </p>
+            </section>
+
+            <hr id='20001009A'>
+
+            <section>
+                <h2>Java Swing <i>v.</i> JavaFX</h2>
+                <p>
+                    由於 JavaFX 比 Java Swing 容易使用<ins>[1]</ins>，因此網路上看到有人在推薦 JavaFX 時，會把 Java Swing 說成是很難的技術，好像只有專家才知道怎麼用。<br>
+                    <br>
+                    這點我很不認同，比起 C++ 語言的 Qt、GTK+、wxWidgets…等視窗程式設計套件，不僅寫法繁贅，光部署套件好讓它正常運作，就容易讓人搞到頭大了，相較之下用 Java 的 Swing 來開發視窗應用程式，已經簡單、易用多了！使用 Java Swing 只需要關注元件有哪些功能可操作，完全不需要再管視窗程式是如何與作業系統交換訊息，因此你在 Java API 文件查到什麼功能，直接就能敲進程式碼跑看看情況怎樣，哪有什麼技術高深之處？（查 API 是很累沒錯，但沒什麼高深的技術吧？）<br>
+                    <br>
+                    Java Swing 問題出在它提供的元件近八年來沒在擴充，已經不敷使用<ins>[2]</ins>，許多新版作業系統標榜的酷炫功能寫不出來；想自己根據 Java Swing 架構設計出來用，確實是專家才知道的事。這點 JavaFX 不僅有各式新穎的元件可用，而且因為能夠 RIA 的關係，可以很有彈性地用更多種架構自訂元件，還經常寫寫 CSS 就能改造出來。<br>
+                    <br>
+                    Java Swing 只能說是功能有限，能做的事不夠多，但要說它很難、只有專家才會用，實在太離譜了：「Java Swing 其實連新手都會用。」（而且要求不多的話，其實很好用。）<br>
+                    <br>
+                    當然，有了既能寫設計 Rich Internet Applications 又能打造 Desktop Application 的 JavaFX，只能 Desktop Application 而且很兩光的 Java Swing，被取代是遲早的事。不過，用 Java 寫 Application 一直很冷門，Java 熱門的是做為企業伺服端的解決方案，所以網路上不少人說 Java Swing 不會被淘汰，因為它從來就沒流行過 XDDD<br>
+                    <br>
+                    JavaFX 讓 Java 更適合打造 Application，如果 Java 因此能成為開發應用軟體的熱門語言，網路上有各式各樣 Java 打造的 APP 可用，那真是我們 Java 程式設計師這輩子冀望見到的榮景啊～！也希望 Oracle 能翻譯官網那豐富的 JavaFX 教學文章，幫助大家不用買書，就能快速、有效掌握 JavaFX 的用法，好讓 Java Application 能推廣起來。
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 應該說 JavaFX 有更多靈活的方式可以使用，所以容易使用。否則 JavaFX 整套學起來，並沒有比 Java Swing 單純。<br>
+                        [2] 連選擇日期的對話視窗，盼幾年了就是等不到 Orz
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='19780722A'>
+
+            <section>
+                <h2>舊版 JRE 跑新版 JDK 編譯出來的程式？</h2>
+                <p>
+                    Linux 安裝 IcedTea 做為 JRE 時，它會以系統變數的路徑，取代環境變數的 JAVA_HOME 路徑。而 IcedTea 版本通常較舊，結果雖然用 JDK 的 javac 來編譯程式<ins>[1]</ins>，執行時卻因為系統變數優先，跑 IcedTea 的 java，而不是 JAVA_HOME 的 java。<br>
+                    <br>
+                    Windows 也有可能。例如有些人透過修改 JAVA_HOME 環境變數，來切換新舊版 JDK 編譯程式。剛修改時一切正常，但下次開機時，Microsoft 為了加快開機速度所採用的混合啟動技術，有可能套用之前殘留的系統變數值。發生這種情況的話，會變成一下用未修改前的新版 JDK 路徑編譯程式，一下卻用舊版 JRE 來執行<ins>[2]</ins>。
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [1] IcedTea 沒有 javac，因此不會取代 JDK 的 javac。<br>
+                        [2] 這時要用傳統的、開機很慢的方式關機，讓作業系統重新整理系統變數。
+                    </p>
+                </footer>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

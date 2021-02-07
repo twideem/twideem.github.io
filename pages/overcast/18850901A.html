@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../scripts/toolkit.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>😊→⏱→🤤→🍜→😋</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                <button onclick='f()' style='width:100%;font-size:16pt'>倒數三分鐘等吃泡麵</button>
+            </p>
+
+        </article>
+
+        <script>
+            var a=document.getElementsByTagName('button')[0]
+            var b=180
+            var c=[new Audio('../../objects/audio/20180604A_01.mp3'),new Audio('../../objects/audio/20180604A_02.mp3')]
+            function f(){
+                a.disabled=true
+                var d=setInterval(function(){
+                    if(b>1){
+                        b--
+                        a.innerHTML='還有 '+Math.floor(b/60)+' 分 '+b%60+' 秒'
+                        c[0].currentTime=0
+                        c[0].play()
+                    }
+                    else{
+                        a.innerHTML='可以吃泡麵了'
+                        c[1].currentTime=0
+                        c[1].play()
+                        clearInterval(d)
+                    }
+                    document.title=a.innerHTML
+                },1000)
+            }
+            if(!Web.hosting()) a.onclick()
+        </script>
+
+    </body>
+
+</html>

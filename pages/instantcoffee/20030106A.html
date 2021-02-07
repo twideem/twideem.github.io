@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>String</h1>
+                <p>
+                    請把 String 視為進入 Java 程式設計的第一課，它比你所想的還要不簡單！<br>
+                    <br>
+                    你應該對 String 的種種功能感到興奮、有趣，而不是覺得怎麼光一個 String 就這麼麻煩…否則勸你還是趁早放棄物件導向程式語言，因為可以操控物件的各式各樣功能來完成任務，是物件導向程式設計人員最基本的樂趣～
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>比較字串內容</h2>
+                <p>
+                    有三種，而且比較的原理不同，請務必釐清箇中差異，否則依賴比對字串來動作的程式將設計失敗：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "HELLO";
+                                String b = "HELLO";
+
+                                if(a==b){
+                                    System.out.println("兩物件指向同一筆資料。");
+                                }
+
+                                if(a.intern()==b.intern()){
+                                    System.out.println("兩物件傳回的資料相同。");
+                                }
+
+                                if(a.equals(b)){
+                                    System.out.println("兩物件的資料相同。");
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        兩物件指向同一筆資料。<br>
+                        兩物件傳回的資料相同。<br>
+                        兩物件的資料相同。<br>
+                    </output>
+                    <br>
+                    光看範例還是無法釐清差異所在的話，可進一步參考「<a href='20060822A.html'>String==String？</a>」這篇的說明。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>從字串中尋找文字所在位置</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "ABCDEFG";
+
+                                System.out.println(a.indexOf("D"));
+                                System.out.println(a.indexOf("FG"));
+                                System.out.println(a.indexOf("Z"));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        3<br>
+                        5<br>
+                        -1<br>
+                    </output>
+                    <br>
+                    找不到的話傳回 -1，因此這個功能也常常用來檢查字串中有沒有特定文字，例如：<br>
+                    <br>
+                    <code>
+                        if(a.indexOf("#")&lt;0){<br>
+                        　doSomething();<br>
+                        }<br>
+                    </code>
+                    <br>
+                    另外還有類似的 lastIndexOf() 可用，差別在於改從字串尾端往前尋找，但結果不變。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>以 Regular Expression 比對資料</h2>
+                <p>
+                    雖然 indexOf() 就可用來檢查字串中有沒有特定資料，但主要任務並非如此，所以可以選用真正專門用來執行這樣任務的 matches()，它可用 Regular Expression 語法來檢查資料。<br>
+                    <br>
+                    底下範例用 Regular Expression 設定條件，檢查字串的資料是否符合 Hex 寫法的 RGB 值：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "#6699CC";
+                                String b = "#RRGGBB";
+
+                                System.out.println(a.matches("[#]?[\\da-fA-F]{6}"));
+                                System.out.println(b.matches("[#]?[\\da-fA-F]{6}"));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        true<br>
+                        false
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取得某個位置的字元</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "ABCDEFG";
+
+                                System.out.print(a.charAt(3));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        D<br>
+                    </output>
+                    <br>
+                    因為要指定第一個字元的話是 0，所以指定為 3 所獲得的字元為 D。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>擷取字串</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "ABCDEFG";
+
+                                System.out.println(a.substring(2,4));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        CD<br>
+                    </output>
+                    <br>
+                    不是很直覺的參數，容易誤以為是第三個字元到第五個字元，但其實第二個參數是「終點」，並不是「從…到…」，要特別記住。<br>
+                    <br>
+                    也可以不用第二個參數，這樣則是從指定的某個字元開始擷取往後的所有字串內容。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>混搭 indexOf() 與 substring()</h2>
+                <p>
+                    底下範例從 <var>[password=abc123]</var> 這組字串中<ins>[1]</ins>，擷取出 password 與 abc123。<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String section = "[password=abc123]";
+
+                                String name = section.substring(section.indexOf("[")+1, section.indexOf("="));
+                                String value = section.substring(section.indexOf("=")+1, section.indexOf("]"));
+
+                                System.out.println(name);
+                                System.out.println(value);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        password<br>
+                        abc123
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>分離字串</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String string = "AAA,BBB,CCC";
+                                String[] strings = string.split(",");
+
+                                System.out.print(strings[2]);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        CCC<br>
+                    </output>
+                    <br>
+                    上面的程式可以簡化成：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+                                System.out.print("AAA,BBB,CCC".split(",")[2]);
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    這招尤其適合用來快速取得 CSV 格式中想要的資料！特別是以純文字文件的「行」為 row，以 split() 的陣列索引值為 column，一個「資料表」很簡單就實現了。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>替換字串中的文字資料</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "HELLO";
+                                String b = a.replace("L", "-");
+
+                                System.out.print(b);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        HE--O<br>
+                    </output>
+                    <br>
+                    值得注意的是，b 雖然是 HE--O，但 a 依然是 HELLO。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>以 Regular Expression 一次替換多種條件</h2>
+                <p>
+                    如果想替換掉的文字不只一個，又不想多寫一行程式來替換，可以使用 Regular Expression 做為條件。下面的範例，一行就將 HELLO 中的 L 和 O 全部替換為 - 符號：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "HELLO";
+                                String b = a.replaceAll("L|O", "-");
+
+                                System.out.print(b);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        HE---
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>連接字串</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "ABCDEFG";
+                                String b = a.concat("HIJKLMNOP");
+
+                                System.out.println(b);
+                                System.out.println(a);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABCDEFGHIJKLMNOP<br>
+                        ABCDEFG<br>
+                    </output>
+                    <br>
+                    這個範例值得注意的是，b 雖然獲得連接了字串的內容，但 a 本身的資料並未改變。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>削掉頭尾空白</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = " ABCDEFG"; //注意 A 的前面留了一個空白
+
+                                System.out.println(a);
+                                System.out.println(a.trim());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        &nbsp;ABCDEFG<br>
+                        ABCDEFG
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>轉換為大小寫</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "Twideem Civs";
+
+                                System.out.println(a.toUpperCase());
+                                System.out.println(a.toLowerCase());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        TWIDEEM CIVS<br>
+                        twideem civs<br>
+                    </output>
+                    <br>
+                    有時候需要檢查字串內容時，先全部轉為大寫或小寫，再來處理會比較適合。所以這個功能雖然只適用於英文字母，但還是用得到，尤其是設計登入介面，處理英文字母的帳號。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>將數值轉為字串</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                int a = 123;
+                                int b = 456;
+
+                                System.out.println(a+b);
+                                System.out.println(String.valueOf(a)+String.valueOf(b));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        579<br>
+                        123456<br>
+                    </output>
+                    <br>
+                    如果想將兩個數值資料用 + 串起來成為文字，會變成兩個數值進行加法運算，而不是串接。這時就適合用 valueOf() 功能。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>將物件型態的字串轉輸出為基本型態 char 的陣列</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "ABCDEFG";
+                                char[] b = a.toCharArray();
+
+                                for(int n=0; n&lt;b.length; n++){
+                                    b[n]+=1;
+                                }
+
+                                System.out.println(b);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        BCDEFGH<br>
+                    </output>
+                    <br>
+                    適合逐一針對字串裡面每個字元進行運算的場合。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>字串編碼的轉換</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        （草稿中）
+                    </textarea>
+                    <br>
+                    <output>
+                        （草稿中）
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>字串的 Unicode 值</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String a = "猜猜我是誰";
+                                char[] b = a.toCharArray();
+
+                                for(int n=0; n&lt;b.length; n++){
+                                    System.out.println(b[n] + " \\u" + Integer.toHexString(b[n]) + " &amp;#" + (int)b[n] +";");
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        猜 \u731c &amp;#29468;<br>
+                        猜 \u731c &amp;#29468;<br>
+                        我 \u6211 &amp;#25105;<br>
+                        是 \u662f &amp;#26159;<br>
+                        誰 \u8ab0 &amp;#35504;
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>直接對字串資料操作物件功能</h2>
+                <p>
+                    以 "" 括住的資料，本身就是 String 物件了，因此可以直接對其呼叫 Stirng 的功能：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+                                System.out.print("ABCDEFG".indexOf("D"));
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        3
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 這組字串的結構，是過去 Windows 95/98 時代很常見到「INI 組態檔」資料格式。當時應用軟體常常這樣的格式，將軟體的設定值寫在純文字文件來保存。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

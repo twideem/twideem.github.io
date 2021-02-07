@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Enterprise JavaBean</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                1998 年初 Enterprise JavaBean 正式發布，以容器的概念來整合遠端應用程式，並規範開發者如何實作與使用者如何互動，企圖將商務ｅ化流程分為：使用者介面、伺服端設計、資料庫系統、商業邏輯四個層次。但整體架構粗糙，不能迎合企業需求，反而要企業來迎合 EJB，不切實際。<br>
+                <br>
+                1999 年底發布的 1.1 版，可用 XML 描述系統與組態，規格上沒什麼改善。到 2001 年中發布了 2.0，EJB 規格正式成熟，不但能迎合企業需求，更能讓企業藉由迎合 EJB 來改善ｅ化。<br>
+                <br>
+                但批評也隨之而來，那就是太 Enterprise 了，要以專案管理的方式<ins>[1]</ins> 建立出一個團隊，才有足夠力氣寫好 EJB，否則單靠一個普通的 Java 程式設計師，在實作 EJB 2.0 一大堆規範時<ins>[2]</ins> 會疲於奔命，開發效率低落。不過規格落定，已經不可能更改，甚至 Sun Microsystems 認為 EJB 2.0 設想得很好、走在時代的尖端、是企業ｅ化的最高準則，自視得很，不屑他人的批評。於是想將商業邏輯切割出來的人用 Spring，想將資料庫系統切割出來的人用 Hibernate，漸漸 Spring + Hibernate 的組合蔚為流行。這組合容易上手，開發效率較高，結果連企業都改用 Struts 整合 Spring + Hibernate，而不是 Enterprise JavaBean。<br>
+                <br>
+                拖到 2006 年中，Enterprise JavaBean 才發布 3.0 徹底改變規格，和 Struts + Spring + Hibernate 一樣走輕量級路線。問題是，這代表 EJB 2.0 規格將被淘汰，而大家既然熟於 Struts + Spring + Hibernate 了，又何必學 EJB 3.0？
+            </p>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 配置好人力、時程、資金的方式。<br>
+                    [2] 很多要你規範的問題，只有極少數企業會碰到，大多數情況根本不會發生。但不照著實作的話，就不符合 EJB 2.0 規格，無法啟用。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

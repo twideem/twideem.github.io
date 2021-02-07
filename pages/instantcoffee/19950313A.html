@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>演算法與資料結構</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>資料結構</h2>
+                <p>
+                    一般來講，電腦程式設計常見的資料結構有…<br>
+                    <br>
+                    <samp>
+                        線性結構　　　陣列（Array）<br>
+                        　　　　　　　鏈結串列（Linked list）<br>
+                        　　　　　　　堆疊（Stack）<br>
+                        　　　　　　　佇列（Queue）<br>
+                        非線性結構　　樹（Tree）<br>
+                        　　　　　　　圖（Graph）<br>
+                        行為結構　　　雜湊（Hash）
+                    </samp>
+                </p>
+                <hr>
+                <section>
+                    <h3>陣列</h3>
+                    <p>
+                        在記憶體的連續空間裡，存放一串資料，然後只要照著順序存取記憶體裡面的資料即可，因此是存取效率最高的資料結構！不過，要在資料中插入或刪除資料的話，必須搬動後面的資料，資料量大時，會有效率低落的問題。<br>
+                        <br>
+                        這個資料結構正式名稱其實是「循序串列（Sequential list）」，但程式語言提供的「Array（陣列）」語法就是現成的「循序串列」，用久了便直接叫它「陣列」～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>鏈結串列</h3>
+                    <p>
+                        如果資料筆數太長，就不見得能在記憶體裡找到足夠的連續空間。於是除了保存資料內容以外，還保存指向其它資料的記憶體位置，這樣就可將支離破碎的資料連接起來使用。<br>
+                        <br>
+                        當然，必須額外透過指標來存取不同筆的資料，效率會降低。不過，中途插入或刪除資料的話，只要改變指向的記憶體位置即可，效率反而比陣列來得高！<br>
+                        <br>
+                        只指向下一筆資料記憶體位置的，叫做單向鏈結串列，還指向上一筆資料記憶體位置的，叫做雙向鏈結串列。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>堆疊</h3>
+                    <p>
+                        只從線性結構的頂部存取資料！不妨想像成堆高積木一樣，存入資料時不斷往上堆高，要取出資料時也是從最高位置著手，好像害怕從底部抽掉積木會垮掉一樣。這種結構的資料有「後進先出（Last in, first out. LIFO.）」的特性，存入資料的動作叫 push，取出資料的動作叫 pop。<br>
+                        <br>
+                        雖然沒有強制規定，但適合使用陣列來設計堆疊。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>佇列</h3>
+                    <p>
+                        從線性結構的尾部存入資料，再從頭部取出資料，也就是從線性結構的兩端來存取資料。這種結構的資料有「先進先出（First in, first out. FIFO.）」的特性，存入資料叫 enqueue 或 unshift，取出資料叫 dequeue 或 shift，或者跟堆疊一樣用 push 和 pop。<br>
+                        <br>
+                        雖然沒有強制規定，但通常使用鏈結串列來設計佇列。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>樹</h3>
+                    <p>
+                        以「節點（node）」的觀念來表示資料。通常由一個根節點開始，展開一或多個子節點，每個子節點又有一或多個子節點，枝枝繁生開來，整個資料結構就像一棵樹的形狀一樣。<br>
+                        <br>
+                        善用節點的特性，可以讓你歸類資料，例如將大於 5 的資料放在某節點的右邊、小於 5 的就放在左邊，是一種能藉由資料的歸屬，來表現資料屬性的結構！這讓我們在設計演算法時能做更多元的思維，當解決問題遇到瓶頸時，不妨檢索樹狀資料結構的特性，說不定就能獲得靈感進而突破。<br>
+                        <br>
+                        最基本的樹，是每個節點只有左、右兩個子節點的樹，叫做「二元樹（Binary tree）」，不但能用陣列做為樹的資料結構，然後套上數學公式（以 2 為因子的各種算式）即可找出節點，而且所有樹都能轉為二元樹，可說是樹資料結構的最基本型態。<br>
+                        <br>
+                        雖然直接以陣列就能設計二元樹的資料結構，但裡面會留下一堆沒用到的空資料，深度越大，白白浪費掉的占用空間就越加驚人，所以若使用物件導向程式語言的話，有個最理想的做法，就是設計一個支援左右節點的類別，用鏈結串列來保存該物件！<br>
+                        <br>
+                        還有一種高竿的人很喜歡用來提升資料進出與搜尋效率的樹資料結構，叫做「堆積樹（Heap tree）」，當你不滿於所有基本資料結構，想在其中有所突破時，就是上網查詢相關資料看看的時機了！你會發現問題不在於資料結構本身過於基本、簡陋，只要懂得換個角度靈活思考、應用，也能找出新的解法，醍醐灌頂後功力大增。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>圖</h3>
+                    <p>
+                        像樹狀結構，但重點不是放在「節點」與其歸屬關係，而是放在連接節點的「邊（edge）」與其路徑關係來解決問題。由於節點與節點之間可以任意關聯，連接起來就像畫星座一樣出現各式圖形而得名。<br>
+                        <br>
+                        數學早已有「圖論」的分支，所以使用圖形資料結構，可以幫助我們進行更具深度的演算法設計，解決更多難題。<br>
+                        <br>
+                        A 點和 B 點之間，有 A 到 B 和 B 到 A 兩種向性，可見邊是有單向和雙向之分的！因此通常使用二維陣列來設計圖的資料結構，將 A 視為 1、B 視為 2 的話，那要表達 A 點到 B 點有邊，就將 [1][2] 填上資料，B 點到 A 點有邊，就將 [2][1] 填上資料。這資料可以填上 1 表示 True，也可以填上長度，要計算最短或最長距離時，顯然這個資料結構本身就是模型，有利於找出解法！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>雜湊</h3>
+                    <p>
+                        可視為一種用關鍵字來儲存資料的結構，因此在取出資料時具有最快的效率，例如給予關鍵字直接就能取得資料，是設計「搜尋演算法」時非常受歡迎的資料結構。<br>
+                        <br>
+                        但是在存入資料時，可能因為用關鍵字來保存資料的手法設計得很複雜，而影響效率。<br>
+                        <br>
+                        不過，也因為保存資料的手法可能是透過某種數學計算技巧改良而來，所以有時候設計出來變成一種可以節省空間的資料結構，而被當作能夠壓縮資料的結構亂用。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>演算法</h2>
+                <p>
+                    本節將介紹設計演算法時常用的思維：遞歸、迭代、預處理、記憶、分治、貪食、隨機、窮舉。大多數演算法，都是基於這些思維或手法而設計～
+                </p>
+                <hr>
+                <section>
+                    <h3>遞歸法（Recursion）</h3>
+                    <p>
+                        重複使用同樣一套計算過程的手法，就叫遞歸法<ins>[1]</ins>。<br>
+                        <br>
+                        例如階乘 n!=1*2*3*..*n 的公式，就適合用遞歸法來設計：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static int 階乘(int x){
+                                    if(x&lt;=1){
+                                        return 1;
+                                    }
+                                    else{
+                                        return x*階乘(x-1);
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    System.out.print(階乘(4));
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            24
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>迭代法（Iterative method）</h3>
+                    <p>
+                        重複使用計算出來的結果，就叫迭代法。<br>
+                        <br>
+                        例如不斷用前兩個數值相加來做為下一個數值的費氏數列：0、1、1、2、3、5、8…，就適合用遞推法來設計：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static int 費氏數列(int x){
+                                    if(x==1||x==2){
+                                        return 1;
+                                    }
+                                    else{
+                                        return 費氏數列(x-1)+費氏數列(x-2);
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    System.out.print(費氏數列(12));
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            144
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>預處理（Precalculation）</h3>
+                    <p>
+                        其實事先準備好答案，也是一種解題的手法，例如費氏數列就可以事先將答案準備好：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                private static int[] array={0,1,1,2,3,5,8,13,21,34,55,89,144,233};
+
+                                public static int 費氏數列(int x){
+                                    return array[x];
+                                }
+
+                                public static void main(String[] args){
+                                    System.out.print(費氏數列(12));
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            144<br>
+                        </output>
+                        <br>
+                        雖然寫死，但有時候設計演算法必須著重執行效率時，這招依然是絕活！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>記憶法（Memoization）</h3>
+                    <p>
+                        將計算的結果保存起來，以備下次遇到同樣問題時使用。如此既能發揮「預處理」的執行效率，又沒有答案寫死無法套公式擴充的問題。再以費氏數列為例：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                private static int[] array=new int[100];
+
+                                static{
+                                    array[1]=1;
+                                    array[2]=1;
+                                }
+
+                                public static int 費氏數列(int x){
+                                    if(array[x]==0){
+                                        array[x]=費氏數列(x-1)+費氏數列(x-2);
+                                    }
+                                    return array[x];
+                                }
+
+                                public static void main(String[] args){
+                                    System.out.print(費氏數列(12));
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            144
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>分治法（Divide and conquer algorithms）</h3>
+                    <p>
+                        將一個大問題分成多個小問題，然後逐一擊破解決。<br>
+                        <br>
+                        例如「找出偽幣」的問題，有 12 枚銀幣，其中一枚是假的，重量較輕，這時決定用天平找出偽幣：「不斷將銀幣分成兩堆來比重量，直到挑出最輕的那個為止。」就可用分治法來設計<ins>[2]</ins>：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                private static int[] array={1,1,1,1,1,1,1,1,1,0,1,1}; //第 10 枚較輕
+
+                                public static void 找出偽幣(int start, int end){
+                                    //分成左右兩堆重量。
+                                    int left=0, right=0;
+                                    for(int n=start-1; n&lt;(start+end)/2; n++) left+=array[n];
+                                    for(int n=(start+end)/2; n&lt;end; n++) right+=array[n];
+                                    //分成各個子問題來解決：左邊較輕。
+                                    if(left&lt;right){
+                                        找出偽幣(start, (start+end)/2);
+                                    }
+                                    //分成各個子問題來解決：右邊較輕。
+                                    else if(left&gt;right){
+                                        找出偽幣((start+end)/2+1, end);
+                                    }
+                                    //分成各個子問題來解決：一樣輕。
+                                    else if(left==right){
+                                        if(start==end){
+                                            System.out.print(end);
+                                        }
+                                        else if(array[start-1]&lt;array[end-1]){
+                                            System.out.print(start);
+                                        }
+                                        else{
+                                            System.out.print(end-1);
+                                        }
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    找出偽幣(1,12);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            10<br>
+                        </output>
+                        <br>
+                        另外有一種說法，出現兩次或以上遞迴的函式，就是分治法。從外表上來看確實是這樣沒錯，值得參考。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>貪食法（Greedy algorithm）</h3>
+                    <p>
+                        一次給予最具突破性的答案，不斷用取巧的方式求最佳解。<br>
+                        <br>
+                        底下以「找錢」為例，我們希望用面額最大的錢來找，例如找 50 元的話就給一枚 50 元硬幣，不要給五枚 10 元硬幣：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void 找錢(int x){
+                                    int[] array={500,100,50,10,5,1}; //可以找的錢有這些面額
+                                    while(x>0){
+                                        for(int n=0; n&lt;array.length; n++){
+                                            if(x&gt;=array[n]){
+                                                x-=array[n];
+                                                System.out.println(array[n]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    找錢(256); //假設要找 256 元
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            100<br>
+                            100<br>
+                            50<br>
+                            5<br>
+                            1<br>
+                        </output>
+                        <br>
+                        輸出的結果代表：兩張 100 元紙鈔，一枚 50 元硬幣，一枚 5 元硬幣，一枚 1 元硬幣。是最佳解沒錯！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>隨機法（Randomized algorithm）</h3>
+                    <p>
+                        有名的「蒙地卡羅法」，是用隨機採樣的統計方式，來模擬出接近 Pi 的答案：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static double 蒙地卡羅法(double x){
+                                    double a=0, b=0, c=0;
+                                    for(double n=1; n&lt;x; n++) {
+                                        a=Math.random();
+                                        b=Math.random();
+                                        if((a*a+b*b)&lt;=1){
+                                            c++;
+                                        }
+                                    }
+                                    return 4.0*c/x;
+                                }
+
+                                public static void main(String[] args){
+                                    System.out.print(蒙地卡羅法(1000000));
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            每次執行結果不同，例如 3.138376 或 3.141896。<br>
+                        </output>
+                        <br>
+                        雖然知道有這樣的思維方式，也很想試試看，但我從未成功設計出這類的演算法 Orz
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>窮舉法（Enumeration）</h3>
+                    <p>
+                        逐一嘗試所有可能性，最後總會解出答案或完成任務，這一千零一招可是有名稱的，叫窮舉法。<br>
+                        <br>
+                        簡單的像是：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void 列出偶數(int x){
+                                    for(int n=2; n&lt;=x; n++){
+                                        if(n%2==0){
+                                            System.out.printf("%d ", n);
+                                        }
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    列出偶數(40);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40<br>
+                        </output>
+                        <br>
+                        複雜的像是解雞兔同籠問題：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void 雞兔同籠(int head, int foot){
+
+                                    System.out.printf("今有雉兔同籠，上有 %d 頭，下有 %d 足，問雞兔各幾何？%n", head, foot);
+
+                                    int chicken=0, rabbit=0;
+                                    for(int n=0; n&lt;head; n++){
+                                        int m=head-n;
+                                        if(n*2+m*4==foot) {
+                                            chicken=n;
+                                            rabbit=m;
+                                        }
+                                    }
+
+                                    System.out.printf("雉 %d，兔 %d。", chicken, rabbit);
+
+                                }
+
+                                public static void main(String[] args){
+                                    雞兔同籠(35,94);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            今有雉兔同籠，上有 35 頭，下有 94 足，問雉兔各幾何？<br>
+                            雉 23，兔 12。
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>估算程式</h2>
+                <p>
+                    設計演算法時，需要懂得評估自己程式的執行效率。本節示範如何估算程式，以及藉由估算結果提升程式執行效率。
+                </p>
+                <hr>
+                <section>
+                    <h3>N<sup>4</sup></h3>
+                    <p>
+                        所謂估算程式，就是在整個程式裡，找最耗時的區塊來做為基準，然後降低其執行次數。<br>
+                        <br>
+                        來看底下的範例，它從 a 裡面抽出數字四次，相加起來能夠等於 e 的話輸出 true，否則輸出 false。<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int e=8; //2+2+2+2=8，讓程式傳回 true。
+                                    int[] a={2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+                                             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+                                             5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+                                    boolean i=false;
+
+                                    for(int m=0; m&lt;a.length; m++){
+                                        for(int n=0; n&lt;a.length; n++){
+                                            for(int o=0; o&lt;a.length; o++){
+                                                for(int p=0; p&lt;a.length; p++){
+                                                    if(a[m]+a[n]+a[o]+a[p]==e){
+                                                        i=true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    System.out.print(i);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            true<br>
+                        </output>
+                        <br>
+                        首先來看 <code>boolean i=false;</code> 這行程式，它比起下來的 <code>for</code> 迴圈來說，影響的時間微不足道，所以要評估程式的演算法時，沒必要理會它，我們需要改良的對象只有耗時間的 for 迴圈！<br>
+                        <br>
+                        而這個程式來說，耗時間的 for 總共用了四次，而且每次都與前一次的執行次數一致，於是我們評估這程式的演算法步驟為 N<sup>4</sup>。<br>
+                        <br>
+                        也就是以迴圈這耗時間的程式為基準：N，然後這程式等於四道迴圈：N x N x N x N，因此簡稱為 N<sup>4</sup>。<br>
+                        <br>
+                        這個 N<sup>4</sup> 程式，在我一台 2.8GHz 單核心處理器上跑，大概要花兩分鐘的時間。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>N<sup>3</sup> log N</h3>
+                    <p>
+                        底下程式將最內部迴圈的 <code>a[m]+a[n]+a[o]+a[p]==e</code>，改用 java.util.Arrays 內建的 Binary search，搜尋這則 <code>e-a[m]-a[n]-a[o]</code> 式子的值：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int e=8;
+                                    int[] a={2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+                                             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+                                             5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+                                    boolean i=false;
+
+                                    for(int m=0; m&lt;a.length; m++){
+                                        for(int n=0; n&lt;a.length; n++){
+                                            for(int o=0; o&lt;a.length; o++){
+                                                if(Arrays.binarySearch(a, e-a[m]-a[n]-a[o])!=-1){
+                                                    i=true;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    System.out.print(i);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            true<br>
+                        </output>
+                        <br>
+                        這樣可以消除一層迴圈，因此外層迴圈剩下 N x N x N 估算為 N<sup>3</sup>，而最內層的計算時間只剩原本的一半不到，這種情況叫做對數時間，估算時寫作 log N。所以整個估算結果表示為 N<sup>3</sup> log N。<br>
+                        <br>
+                        以範例的資料長度 a.length 是 300 來講，N<sup>4</sup> 與 N<sup>3</sup> log N 的差距為：<br>
+                        <br>
+                        <var>300<sup>4</sup> : 300<sup>3</sup> log 300</var><br>
+                        <br>
+                        約 120 倍，現在這 N<sup>3</sup> log N 的程式只剩十秒鐘不到就能執行完畢。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>N<sup>2</sup> log N</h3>
+                    <p>
+                        十秒還是很久！不曉得哪位精於設計演算法的人，發明了將陣列分成兩組，結果再消除掉一層迴圈的做法，真厲害<ins>[3]</ins>：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int e=8;
+                                    int[] a={2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+                                             3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+                                             5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+                                    int[] b=new int[a.length*a.length];
+                                    boolean i=false;
+
+                                    for(int m=0; m&lt;a.length; m++){
+                                        for(int n=0; n&lt;a.length; n++){
+                                            b[m*a.length+n]=a[m]+a[n];
+                                        }
+                                    }
+
+                                    Arrays.sort(b);
+
+                                    for(int m=0; m&lt;a.length; m++){
+                                        for(int n=0; n&lt;a.length; n++){
+                                            if(Arrays.binarySearch(b, e-a[m]-a[n])!=-1){
+                                                i=true;
+                                            }
+                                        }
+                                    }
+
+                                    System.out.print(i);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            true<br>
+                        </output>
+                        <br>
+                        現在迴圈剩下 N x N 估算為 N<sup>2</sup>，而最內層的計算時間依然是 log N 的 Binary search，所以整個估算結果表示為 N<sup>2</sup> log N。<br>
+                        <br>
+                        這個 N<sup>2</sup> log N 演算法的程式，能在三秒鐘之內完成。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>演算法的分析</h3>
+                    <p>
+                        在需要更精確評估演算法的場合，會用到以下符號：<br>
+                        <br>
+                        <samp>
+                            Ο(ƒ)　實際執行次數 ƒ 大於等於評估次數。<br>
+                            Ω(ƒ)　實際執行次數 ƒ 小於等於評估次數。<br>
+                            Θ(ƒ)　實際執行次數 ƒ 等於評估次數。<br>
+                        </samp>
+                        <br>
+                        有時候還會用到這個符號：<br>
+                        <br>
+                        <samp>
+                            ο(ƒ)　實際執行次數只會大於評估次數，也就是不會等於評估次數。<br>
+                        </samp>
+                        <br>
+                        評估演算法的效率必須講究實際，因此都是指「最壞的情況下程式執行次數為多少」，所以預設都是以 Ο(ƒ) 做為基準。以上述範例的 N<sup>4</sup>、N<sup>3</sup> log N、以及 N<sup>2</sup> log N 來講，更精準的寫法是：<br>
+                        <br>
+                        <samp>
+                            Ο(N<sup>4</sup>)<br>
+                            Ο(N<sup>3</sup> log N)<br>
+                            Ο(N<sup>2</sup> log N)<br>
+                        </samp>
+                        <br>
+                        當我們估算出程式的演算法步驟後，就要朝降低次數的方向邁進。這時我們會參考如下稱之為「成長率」的排列：<br>
+                        <br>
+                        <samp>
+                            Ο(С)<br>
+                            Ο(log N)<br>
+                            Ο(log<sup>2</sup> N)<br>
+                            Ο(N)<br>
+                            Ο(N log N)<br>
+                            Ο(N<sup>2</sup>)<br>
+                            Ο(N<sup>3</sup>)<br>
+                            Ο(2<sup>N</sup>)<br>
+                        </samp>
+                        <br>
+                        資料量（N）大時，越上面代表越佳時效的演算法，最下面是最糟糕的情況。藉由估算，可以找出程式執行效率不佳的問題在哪，然後參考成長率，來改良程式設計。不過，資料量小的話，設計或套用演算法反而可能變慢，不妨自己將 N 套入上述排列的結果看看，雖然 N=1000 時落差很大，但 N=2 時卻多此一舉。<ins>[4]</ins><br>
+                        <br>
+                        另外，演算法的評估可是一門學問，甚至有些演算法該如何評估其成長率會引起一番在爭論。例如 Shell sort 這個演算法，在不同資料結構會有不同的表現，最後是經由反覆實驗才被估算為平均 Ο(N<sup>7/6</sup>) 的非典型<ins>[5]</ins> 案例，可見演算法分析有時候不是那麼簡單的事。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>時間與空間</h2>
+                <p>
+                    以上介紹的都是「時間複雜度」的演算法。<br>
+                    <br>
+                    然而，如果發明了時間很快的演算法，但必須用 1TB 的 RAM 才能運作，那恐怕也稱不上好的演算法<ins>[6]</ins>～<br>
+                    <br>
+                    因此有時候「空間複雜度」也是演算法設計的焦點。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>排序演算法</h2>
+                <p>
+                    常見的有四大類，以及各自的改良版本：<br>
+                    <br>
+                    <samp>
+                        交換排序（Exchange sort）　 快速排序（Quicksort）<br>
+                        插入排序（Insertion sort）　希爾排序（Shellsort）<br>
+                        選擇排序（Selection sort）　堆積排序（Heapsort）<br>
+                        合併排序（Merge sort）　　　串列排序（Strand sort）<br>
+                    </samp>
+                    <br>
+                    Java API 的 Array 與 List 已經有專家們設計好的排序，一般而言我們不可能寫出比他們更快的排序演算法，所以寫 Java 程式很少會需要自己設計排序。<br>
+                    <br>
+                    但身為程式設計師，能夠寫出應急用的簡單排序演算法是基本能力，至少要挑一個來熟記～
+                </p>
+                <hr>
+                <section>
+                    <h3>Exchange sort</h3>
+                    <p>
+                        交換相鄰兩資料，把小的逐步往前放：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int[] array={4,3,2,1};
+
+                                    for(int m=0; m&lt;array.length-1; m++){
+                                        for(int n=array.length-1; n>m; n--){
+                                            if(array[n]&lt;array[n-1]){
+                                                int e=array[n];
+                                                array[n]=array[n-1];
+                                                array[n-1]=e;
+                                            }
+                                        }
+                                    }
+
+                                    for(int a:array) System.out.print(a);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            1234<br>
+                        </output>
+                        <br>
+                        資料排序的演變過程為：4321→4312→4132→1432→1423→1243→1234。由於資料就像氣泡往上冒一樣，所以又叫「氣泡排序法」。<br>
+                        <br>
+                        不過把大的資料逐步往後放，程式碼會比較好背：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int[] array={4,3,2,1};
+
+                                    for(int m=0; m&lt;array.length-1; m++){
+                                        for(int n=0; n&lt;array.length-1; n++){
+                                            if(array[n]>array[n+1]){
+                                                int e=array[n];
+                                                array[n]=array[n+1];
+                                                array[n+1]=e;
+                                            }
+                                        }
+                                    }
+
+                                    for(int n:array) System.out.print(n);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            1234<br>
+                        </output>
+                        <br>
+                        資料排序的演變過程為：4321→3421→3241→3214→2314→2134→1234，可以戲稱為「沉石排序法」。為了提升效率，可將內層迴圈的條件句改為 <code>n&lt;array.length-1-m</code> 逐步縮小比對的範圍。但這是應急用的，好背就好，省略無所謂。使用交換排序法，目的是會動就好，沒在講效率的～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Insertion sort</h3>
+                    <p>
+                        照順序將資料插入到適合它的位置：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int[] array={4,3,2,1};
+
+                                    for(int m=1; m&lt;array.length; m++){
+                                        int e=array[m];
+                                        int n=m;
+                                        while(n&gt;0&amp;&amp;array[n-1]&gt;e){
+                                            array[n]=array[n-1];
+                                            --n;
+                                        }
+                                        array[n]=e;
+                                    }
+
+                                    for(int a:array) System.out.print(a);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            1234<br>
+                        </output>
+                        <br>
+                        資料排序的演變過程為：4321→3421→2341→1234。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Selection sort</h3>
+                    <p>
+                        不斷挑出最小的值，把它丟到前頭，然後縮小範圍繼續挑：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int[] array={4,3,2,1};
+
+                                    int m,n;
+                                    for(m=0; m&lt;array.length-1; m++){
+                                        int min=m;
+                                        for(n=m+1; n&lt;array.length; n++){
+                                            if(array[n]&lt;array[min]){
+                                                min=n;
+                                            }
+                                        }
+                                        int e=array[m];
+                                        array[m]=array[min];
+                                        array[min]=e;
+                                    }
+
+                                    for(int a:array) System.out.print(a);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            1234<br>
+                        </output>
+                        <br>
+                        資料排序的演變過程為：4321→1324→1234。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Index Sort（索引值排序）</h3>
+                    <p>
+                        以上三種排序演算法，太久沒用還是會忘記，臨時才想到要用，往往測試到覺得沒問題時，已經耗掉十分鐘～<br>
+                        <br>
+                        如果要趕在一分鐘內搞定一個排序程式來用，那就用另外一個陣列來保存資料，利用陣列索引值本身就是一種順序的特性來設計吧！<br>
+                        <br>
+                        尤其以上三種排序演算法出現速度很慢的情況時，這個以空間成本換取時間效率的排序方式，更是解決問題的好招。
+                    </p>
+                    <section>
+                        <h4>資料不重複、不含 0、不為負數</h4>
+                        <p>
+                            看想要排序的陣列最大一筆資料是多少，以此為尺寸建立另外一個陣列，然後以舊陣列資料為索引值，寫到新陣列裡面：<br>
+                            <br>
+                            <textarea class='brush:java'>
+                                public class Main{
+
+                                    public static void main(String[] args){
+                                        //想要排序的陣列
+                                        int[] array={4,3,2,1};
+                                        //另外建立的陣列
+                                        int[] sort=new int[5];
+                                        //以舊陣列資料為索引值寫到新陣列裡面
+                                        for(int n=0; n&lt;array.length; n++){
+                                            sort[array[n]]=array[n];
+                                        }
+                                        //輸出新陣列的資料
+                                        for(int n:sort){
+                                            if(n&gt;0){
+                                                System.out.print(n);
+                                            }
+                                        }
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                1234<br>
+                            </output>
+                            <br>
+                            如果資料要有 0，那另外建立的陣列填充為 -1 即可。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>資料重複、含 0、都是正數沒有負數</h4>
+                        <p>
+                            看想要排序的陣列最大一筆資料是多少，以此為尺寸建立另外一個陣列，然後用新陣列的索引值，累計舊陣列資料出現的次數：<br>
+                            <br>
+                            <textarea class='brush:java'>
+                                public class Main{
+
+                                    public static void main(String[] args){
+                                        //想要排序的陣列
+                                        int[] array={4,3,2,1,0,3,2,1,0,2,1,0,1,0,0};
+                                        //另外建立的陣列
+                                        int[] sort=new int[5];
+                                        //用新陣列的索引值累計舊陣列資料出現的次數
+                                        for(int n=0; n&lt;array.length; n++){
+                                            sort[array[n]]+=1;
+                                        }
+                                        //輸出結果
+                                        for(int m=0; m&lt;sort.length; m++){
+                                            for(int n=1; n&lt;=sort[m]; n++){
+                                                System.out.print(m);
+                                            }
+                                        }
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                000001111222334
+                            </output>
+                        </p>
+                        <p>
+                            這種演算法的缺點，就是資料很大的話，會浪費很多記憶體空間。再怎麼以空間成本換取時間效率，看到 <code>long[] sort=new long[4294967295];</code> 這行程式還是會心揪一下！<br>
+                            <br>
+                            這時應該選個更適合的資料結構取代陣列，例如鏈結串列，來節省空間～
+                        </p>
+                    </section>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1]「遞歸」與「迭代」是設計演算法的方式，而「遞迴」是程式語言的功能。這就像用「for 迴圈」設計「窮舉法」一樣，我們用「遞迴函式」來設計「遞歸法」與「迭代法」。相對的，窮舉法與遞推、遞歸法，也不是非得用迴圈與遞迴來設計，端視程式語言的功能，可用其它方式實作，例如 Java SE 8 的 Lambda expressions 或 Stream API。<br>
+                    [2] 為了更清楚地示範「分治法」，我把「尋找偽幣」的範例修改成「依電腦程式的特性」判斷偽幣，而不是「依數學物理的原理」篩選偽幣，所以交作業別用這個範例，否則會被打叉 XDDD<br>
+                    [3] 或許數理好的人覺得沒什麼，只是很簡單的列舉與移項法則。但像我這種數理差的人，沒看過有這則範例的話，這輩子不可能寫得出來 XDDD<br>
+                    [4] 雖然 N=2 或 N=10 之類的，就算多此一舉套用了其實會變慢的演算法，也感覺不出來：「才 2 到 10 步驟而已是能慢到多少？感覺得出來比能打到時速 170 公里的快速球還厲害！」所以乾脆打預防針套用高檔一點的演算法，也大有人在。<br>
+                    [5] 換句話說，列出來的只是常見的典型估算結果，其實還有許多不常見的非典型的成長率。<br>
+                    [6] 因為沒有人的主記憶體這麼高，只在特定電腦才能執行，等於派不上用場的演算法。<br>
+                    [*] Niklaus Wirth 著作的《<a href='http://www.inf.ethz.ch/personal/wirth/AD.pdf' target='_blank'>Algorithms and Data Structures</a>》！
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

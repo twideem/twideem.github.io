@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>在 VirtualBox 裡的 Ubuntu 安裝「客戶端額外功能」</h1>
+                <p>
+                    有些人在嘗試 VirtualBox 時，忽略了應該隨即安裝「客戶端額外功能」，以致於無法正常使用 1024x768 的全螢幕、或者無法在虛擬的 Linux 裡面分享 Windows 的資料夾……等等之類，結果誤以為這軟體不好用就給移除了，相當可惜。<br>
+                    <br>
+                    本文將為從未學過 Linux 的人，示範如何在 Ubuntu 安裝「客戶端額外功能」。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>安裝客戶端額外功能</h2>
+                <hr>
+                <section>
+                    <h3>步驟一</h3>
+                    <p>
+                        首先在 VirtualBox 啟動 Ubuntu，確認進入的是使用者的桌面，而不是訪客 (guest) 的桌面，這樣才有系統管理者的權限安裝程式：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_01.jpg' alt='插圖'>
+                    </figure>
+                    <p>
+                        右上角會顯示用戶的名稱，例如這張圖顯示 Twideem Civs。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟二</h3>
+                    <p>
+                        接下來請執行 VirtualBox 功能表的「裝置」→「安裝客戶端額外功能」：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_02.jpg' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟三</h3>
+                    <p>
+                        稍待片刻，讓 VirtualBox 將所需要的安裝檔案，以光碟映像檔的方式掛載於光碟機，讓你就像放入光碟片一樣，裡面有需要的安裝程式。掛載這片看不見的光碟後，桌面會自動顯示光碟機圖示：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_03.jpg' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟四</h3>
+                    <p>
+                        我們可以「用 Windows 的習慣」看看這光碟片裡面有哪些東西：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_04.jpg' alt='插圖'>
+                    </figure>
+                    <p>
+                        之所以刻意括號，是因為在 Linux 有使用權限的問題，一般安裝程式幾乎都無法用「點兩下圖示」的 Windows 習慣方式來順利完成動作。<ins>[1]</ins><br>
+                        <br>
+                        但是起碼打開視窗後，可以方便看清楚我們需要的安裝檔案叫「VBoxLinuxAdditionals-x86.run」，接下來我們要使用「終端機」以輸入指令的方式啟動這個檔案。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟五</h3>
+                    <p>
+                        要進入「終端機」，請執行 Ubuntu 的「應用程式」→「附屬應用程式」→「終端機」：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_05.jpg' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟六</h3>
+                    <p>
+                        現在要以下達指令的方式在終端機啟動光碟片裡面的安裝程式，請依照以下動作完成。<br>
+                        <br>
+                        首先要以下達指令的方式在終端機「開啟光碟機的資料夾」，請輸入：<br>
+                        <br>
+                        <kbd>cd /media/cdrom0</kbd><br>
+                        <br>
+                        輸入完畢按 Enter，指令執行正確的話，指令列會看到 $ 符號的前面顯示光碟機的路徑，表示已經順利進入光碟機。 (不是那樣順利的話，請自行研究問題出在哪。)<br>
+                        <br>
+                        緊接著要執行光碟片裡面的「VBoxLinuxAdditionals-x86.run」，請輸入：<br>
+                        <br>
+                        <kbd>sudo ./VBoxLinuxAdditions-x86.run</kbd><br>
+                        <br>
+                        或者以偷懶的寫法輸入：<ins>[2]</ins><br>
+                        <br>
+                        <kbd>sudo ./*x86.run</kbd><br>
+                        <br>
+                        如圖：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_06.jpg' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟七</h3>
+                    <p>
+                        剛剛指令有寫到 sudo 這樣的東西，這指令表示想要以系統管理員的權限來操作系統，因此接下來會詢問你系統管理員密碼。在 Ubuntu 則輸入自己的用戶密碼即可獲得系統管理員權限：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_07.jpg' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟八</h3>
+                    <p>
+                        終於順利展開安裝程式，請耐心等候。在虛擬系統執行程式本來就很慢，所以並不是當機。完成所有安裝動作後，畫面如下，請比對看看確認一下：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20090613B_08.jpg' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟九</h3>
+                    <p>
+                        最後！必須重新啟動 Ubuntu，「安裝客戶端額外功能」的安裝就全部完成了。<br>
+                        <br>
+                        安裝了這些東西，就能夠享受 VirtualBox 精心規劃的許多人性化操作！<br>
+                        <br>
+                        尤其是「分享資料夾」的功能，先在 Windows 作業系統指定想要讓 Linux 可以存取的資料夾，然後在虛擬的 Ubuntu 裡面，以 vboxsf 這樣的磁碟格式將資料夾掛載進去，超級好用。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 通常只有 Linux 自己專屬的「套件」，才能以按兩下圖示的方式來安裝，例如在 Debian 執行 deb 檔或在 RedHat 執行 rpm 檔。正統、標準、適用於所有 Linux 作業系統的執行檔 (例如 bin、sh、run 檔)，最好還是用下達指令的方式來執行。<br>
+                    [2] 事實上建議使用這種寫法，免得落落長、而且大小寫打錯還找不到檔案。<br>
+                    [*] 本文已過時，新版本的 VirtaulBox 與 Ubuntu 使用方式已有大幅改變，請參考更新的文章。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

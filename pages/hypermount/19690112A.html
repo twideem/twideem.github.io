@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>資料</h1>
+                <p>程式設計的基本做法，就是設立一堆可用來保存運算結果的資料，然後加以存取。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>資料</h2>
+                <p>
+                    在 JavaScript 程式設計，有以下幾種資料。
+                </p>
+                <hr>
+                <section>
+                    <h3>數值</h3>
+                    <p>
+                        可以使用 0 到 9 來組成數值，做為程式設計的資料。但是要注意是否超過了 JavaScript 所能處理的範圍，畢竟電腦是有極限的，太大的天文數字其實無法計算～<br>
+                        <br>
+                        特殊情況下，可能會用 NaN 表示「非數值」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>文字</h3>
+                    <p>
+                        如果資料是文字的話，會用兩個 " 符號（雙引號）將文字包起來，例如：<br>
+                        <br>
+                        <samp>"Hello, world!"</samp><br>
+                        <br>
+                        有趣的是，如果我的文字就是 " 符號怎麼辦？這時要用所謂的 escape sequence（跳脫字元）來表示：<br>
+                        <br>
+                        <code>\"</code><br>
+                        <br>
+                        例如 &lt;a href="google.com"&gt;Google&lt;/a&gt; 寫成：<br>
+                        <br>
+                        <samp>"&lt;a href=\"google.com\"&gt;Google&lt;/a&gt;"</samp><br>
+                        <br>
+                        雖然很醜，但這是無可奈何的事，進入程式設計領域，你必須訓練自己看習慣～<br>
+                        <br>
+                        既然可用 \ 倒斜線加上 " 來表示原本無法處理的符號，那為何不加入更多特殊字元到倒斜線來用？這想法太棒了！於是我們有更多 escape sequence 可用：
+                    </p>
+                    <table>
+                        <tr><td>\'</td><td>單引號。</td></tr>
+                        <tr><td>\\</td><td>倒斜線，夠冏吧，這算不算自婊？</td></tr>
+                        <tr><td>\b</td><td>表示 Backspace 字元。</td></tr>
+                        <tr><td>\n</td><td>表示換行字元。</td></tr>
+                        <tr><td>\r</td><td>表示 Enter 字元。</td></tr>
+                        <tr><td>\t</td><td>表示 Tab 字元。</td></tr>
+                    </table>
+                    <p>
+                        雖然還有更多，但常常特殊到顯示出來 Windows 也沒反應，有些字元是別的作業系統才有在用的，所以就不全列出來了～<br>
+                        <br>
+                        單引號的部分值得進一步說明。傳統程式設計的文字資料，通常分為「單一字元」以及把多個單一字元串在一起的「字串」，其中單引號用來表示「字元資料」，然後以雙引號來表示「字串資料」，例如：<br>
+                        <br>
+                        <samp>
+                            'H' 'e' 'l' 'l' 'o'<br>
+                            "Hello"<br>
+                        </samp>
+                        <br>
+                        但 JavaScript 會自動轉型，不需要嚴苛的資料型態觀念，因此可用單引號取代雙引號來表示字串，所以下面的寫法在 JavaScript 是正常的：<br>
+                        <br>
+                        <samp>'Hello'</samp><br>
+                        <br>
+                        而且在一份 HTML 文件就是以雙引號來表示設定值的情況下，也建議使用單引號來表示文字資料，避免與 HTML 的雙引號混搭造成辨識上的困擾。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>開關</h3>
+                    <p>
+                        有時候會使用 false 和 true 表示電腦工學的 0（關）和 1（開）。<br>
+                        <br>
+                        雖然我們不見得非得用 true 和 false 來表示開與關的狀態，例如我們可用字串 '開' '關' 來表示，端視我們自己的行事風格。但進行「數位邏輯運算」時，JavaScript 都是以 true 和 false 做為資料。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>位址</h3>
+                    <p>
+                        「記憶體位址」也是一種資料可以在程式設計使用！<br>
+                        <br>
+                        在 JavaScript 裡，宣告一個變數或者產生一個物件時，就會配置一個記憶體空間，然後回傳該空間的編號位址，讓我們可以保存起來，做為往後存取該記憶體空間的依據。<br>
+                        <br>
+                        題外話，在傳統程式設計中，往往可以自行指定究竟是哪個記憶體位址，然後直接修改記憶體裡面的資料，這種做法稱為「指標」。在過去組合語言的時代，原本就是要自己負責由哪個腳位輸出入資料，因此「指標」的存在是自然而然要有的功能。但現代的電腦都是透過「作業系統」來操作，記憶體區塊必須保護起來不允許修改，不然隨隨便便就能改壞作業系統的狀態造成當機。因此「指標」到了現代成為一種危險的功能，甚至二十世紀 90 年代起的高階程式語言紛紛禁用「指標」。<br>
+                        <br>
+                        因此，JavaScript 只能間接由系統傳回記憶體位址，讓我們存取資料，無法直接指定說要跳轉到哪個位址來存取～
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>變數</h2>
+                <p>
+                    如果建立的資料，可以在程式執行期間修改，就叫做「變數」。<br>
+                    <br>
+                    瀏覽器關閉後，保存於變數的資料會消失，除非你另外保存起來。甚至在程式執行過程中，離開了區域變數的作用範疇（scope），原本保存在裡面的資料也會消失，這類議題稱為變數的「生命週期（lifetime）」。
+                </p>
+                <hr>
+                <section>
+                    <h3>宣告變數</h3>
+                    <p>
+                        <code>
+                            var 變數名稱;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>存入資料</h3>
+                    <p>
+                        <code>
+                            變數名稱 = 資料;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取出資料</h3>
+                    <p>
+                        <code>
+                            需要這筆資料的程式 = 變數名稱;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>初始資料</h3>
+                    <p>
+                        使用 var 指令，然後自行取一個「識別字」做為變數名稱，往後就能呼叫該名稱來存取它的資料。<br>
+                        <br>
+                        另外也可以在宣告變數時就立刻給它資料，這種做法稱為「初始值」：<br>
+                        <br>
+                        <code>
+                            var 變數名稱 = 資料;<br>
+                        </code>
+                        <br>
+                        變數的使用範例如下：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var name;
+                            name = '趴趴熊';
+                            document.write(name);
+                        </textarea>
+                        <br>
+                        對於變數如果還有疑惑，不妨想像說，在記憶體配置一筆資料後，總要取個名字來呼喚他。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>沒有資料</h3>
+                    <p>
+                        如果變數還沒賦予資料或物件，就試圖取用變數的話，系統會傳回 <var>undefined</var>。<br>
+                        <br>
+                        你可以用：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var a;
+                            if(a==undefined){
+                                //Do something
+                            }
+                        </textarea>
+                        <br>
+                        來確認變數是否還沒設定過資料。<br>
+                        <br>
+                        不過，想將變數設為沒有資料或物件的話，請不要設定為 undefined，而是設為 <var>null</var>，因為 undefined 應該由系統產生，而不是自己指定。<br>
+                        <br>
+                        換句話說，undefined 和 null 意思也不一樣，undefined 表示還沒有資料，null 表示清空資料。undefined 本身就是名叫 undefined 的資料型態，unll 的資料型態是 object。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>常數</h2>
+                <p>
+                    設立的資料不允許在程式執行期間被更動，就叫做「常數」，只能讀取它的資料。<ins>[1]</ins>
+                </p>
+                <hr>
+                <section>
+                    <h3>宣告常數</h3>
+                    <p>
+                        <code>
+                            const 變數名稱 = 初始值;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    只能在建立常數的同時，透過初始值設定它的資料，此後便無法再存入資料。<br>
+                    <br>
+                    除了無法存入資料外，使用上跟「變數」是一樣的。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>型別</h2>
+                <p>
+                    資料是有分「種類」的，例如「數值」和「文字」就是兩種不同的資料。<br>
+                    <br>
+                    將不同種類的資料放在一起「運算」，雖然不見得會導致程式故障，但產生出來的結果往往不是我們想要的。例如拿數值 123 用 + 符號來加上文字 abc，就是不對盤的事情，避免這種程式是良好的習慣<ins>[2]</ins>。<br>
+                    <br>
+                    因此，認識資料有哪些種類、判斷資料的種類、甚至轉換資料的種類，是 JavaScript 程式設計非常重要的議題。
+                </p>
+                <hr>
+                <section>
+                    <h3>資料的種類</h3>
+                    <p>
+                        <code>
+                            boolean<br>
+                            number<br>
+                            object<br>
+                            string<br>
+                            undefined
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    boolean 這種資料類似開關，只能存入 true 和 false 兩種值，想像成 on 和 off 就容易理解了。它通常用來處理「邏輯運算」的資料，當運算結果成立，就傳回 true，不成立就傳回 false。<br>
+                    <br>
+                    number 的資料可以做為數值來使用。<br>
+                    <br>
+                    object 表示這資料是網頁元素，這種資料你必須研究它有哪些操作的方式，才能正確使用。<br>
+                    <br>
+                    string 的資料可以做為文字來使用。<br>
+                    <br>
+                    undefined 原本表示這筆資料還沒定義，但到了 ECMAScript 6 不允許取出未宣告的變數，因此變成還沒賦值的意思。<br>
+                    <br>
+                    一般程式設計，資料的種類必須被固定住，例如某項資料的種類是數值的話，就只能存放述職的資料，如果存放文字資料會發生錯誤。但 JavaScript 的資料是可以任意放入的，這點必須格外注意，你必須花時間思索這種做法會帶來哪些影響。<br>
+                    <br>
+                    或者換個角度來講，JavaScript 其實沒有資料型態的觀念，資料的種類只根據變數的值來分別。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>型別的檢查</h2>
+                <p>
+                    由於 JavaScript 沒有固定資料型態的觀念，因此當我們需要嚴格限制資料的種類時，如何檢查成為重要的議題。
+                </p>
+                <hr>
+                <section>
+                    <h3>判斷型別</h3>
+                    <p>
+                        <code>
+                            typeof(資料)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>核對物件</h3>
+                    <p>
+                        <code>
+                            資料 instanceof 物件
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    typeof() 會傳回以下的值供我們判斷：<br>
+                    <br>
+                    <samp>
+                        'boolean'<br>
+                        'function'<br>
+                        'number'<br>
+                        'object'<br>
+                        'string'<br>
+                        'undefined'<br>
+                    </samp>
+                    <br>
+                    舉例如下，宣告名為 name 的變數，但是不給予值，然後用 if 檢查 name 是不是 undefined，是的話跳出對話視窗：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var name;
+                        if(typeof(name)=='undefined'){
+                            document.write('你變數忘了存入');
+                        }
+                    </textarea>
+                    <br>
+                    使用 typeof 是最標準的做法，為了程式碼保持一致性，也是最推薦的做法！<br>
+                    <br>
+                    但 typeof 檢查出資料存放的是「物件」時，只會傳回 'object'，如果要進一步檢查是哪一種物件，必須使用 instanceof。舉例如下：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var array = new Array();
+                        if(array instanceof Array){
+                            document.write('這資料是 Array 沒錯');
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>型別的轉換</h2>
+                <p>
+                    通常我們比較需要的，是讓資料從文字轉為數值，因為像下面的程式會顯示 111222：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var a = '111', b = '222';
+                        document.write(a+b);
+                    </textarea>
+                    <br>
+                    如果希望 a + b 是 333 的話，就必須轉換資料。<ins>[3]</ins>
+                </p>
+                <hr>
+                <section>
+                    <h3>轉換資料種類</h3>
+                    <p>
+                        <code>
+                            Number(資料)<br>
+                            String(資料)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    Number() 用來將文字資料轉為數值，目的是能夠進行數學運算。<br>
+                    <br>
+                    例如下面的範例，可以讓 a 和 b 兩筆文字資料進行加法的四則運算：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var a = '111', b = '222';
+                        document.write(Number(a)+Number(b));
+                    </textarea>
+                    <br>
+                    String() 用來將數值資料轉為文字，通常要列出好幾個變數的數值時使用，避免被當成加法運算，導致變成一個經過累加的值。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 在直接存取「屬性」的 JavaScript 程式撰寫風格裡，可善用「常數」建立「唯讀屬性」。<br>
+                    [2] 寫出來的程式符合好的習慣，就能夠輕鬆看得懂在寫甚麼，這樣往後不管要除錯還是改進程式的功能，都能在更快的時間內上手。如果難以檢視的話，一來不知從何改起，二來改了以後不確定是否妥當，程式設計的工作會變得很痛苦。<br>
+                    [3] 當你用 &lt;input type='text'&gt; 之類的方式，要求使用者輸入數值，以便進行數學統計，就會遇到需要轉換的情況了！因為取得的資料是「數字」而不是「數值」。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

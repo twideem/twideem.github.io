@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>override</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Override</h2>
+                <p>
+                    override（覆寫）可以讓 sub class（支類別）改寫 super class（超類別）的 method（操作方式），你只要在 sub class 宣告出與 super class 一模一樣的函式：「識別名稱與參數型態都相同。」就可以蓋過原先的功能，改用新的設計來執行同樣動作。
+                </p>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class A{
+
+                                public void f(){
+                                    System.out.print("AAA");
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class B extends A{
+
+                                public void f(){
+                                    System.out.print("BBB");
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>main</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            A a = new B();
+                            a.f();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    B 繼承 A 後，重新設計 f()，於是範例的執行結果是 BBB。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>@Override</h2>
+                <p>
+                    Java 的 override 有個缺陷，以上節範例來講，如果 B 覆寫 f() 時，A 並沒有這個函式，編譯器並不會提示錯誤，因為會視為 B 自行新增了一個 f()，順利通過編譯。因此我們需要有個語法來告訴編譯器：「我正在 override，如果我白忙一場請告訴我一聲好嗎？別讓我像傻子一樣。」<br>
+                    <br>
+                    Java SE 5 利用 Annotation 的機制，讓我們得以表示 override 的語意。
+                </p>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class A{
+
+                                public void f(){
+                                    System.out.print("AAA");
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class B extends A{
+
+                                @Override public void f(){
+                                    System.out.print("BBB");
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    B 使用 @Override 標註 f() 後，如果被繼承的 A 找不到這個 method，編譯器會告知開發人員並沒有如願完成 override 的設計。<br>
+                    <br>
+                    你不妨修改這個範例的 A，將 f() 改為其它名稱，編譯時便會出現錯誤。然後再移除 B 的 @Override 標註，又會通過編譯。
+                </p>
+            </section>
+
+            <!--hr>
+
+            <footer>
+                <p>[*] @Override 這個機制除了實現 Override 的語意，也同時展現 Annotation 的威力！難怪 Calvin Austin 完成 Java SE 5 後，心滿意足地離開公司與團隊，認為這是最完美的版本。Java 未來的版本需要擴展功能時，可用 Annotation 架構為基礎來作延伸，因此 Java SE 5 可視為相容性的標準，是下一代 Java 的里程碑。（不過 Java SE 7 推出的新語法功能，並不是照著這種相容性的架構來延伸，因此 Java SE 5 並沒有真的成為未來 Java 語言的標準。）</p>
+            </footer-->
+
+        </article>
+
+    </body>
+
+</html>

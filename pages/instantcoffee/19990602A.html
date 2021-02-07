@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../scripts/toolkit.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>JSP 語法入門</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>使用 JSP 的理由</h2>
+                <p>
+                    雖然 Java 已經有 Servlet 可以實現動態網頁的程式設計，但因為以輸出字串的方式來呈現 HTML 標籤，並不好判讀網頁本身的結構…<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.*;
+                        import javax.servlet.*;
+                        import javax.servlet.http.*;
+                        import java.util.ArrayList;
+
+                        public class Main extends HttpServlet{
+
+                            @Override public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+                                ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+                                array_list.add("大家好");
+                                response.setContentType("text/html;charset=UTF-8");
+                                PrintWriter out=response.getWriter();
+                                out.println("&lt;!DOCTYPE html&gt;");
+                                out.println("&lt;html lang=\"zh-TW\"&gt;");
+                                out.println("    &lt;head&gt;");
+                                out.println("        &lt;meta charset=\"utf-8\"/&gt;");
+                                out.println("    &lt;/head&gt;");
+                                out.println("    &lt;body&gt;");
+                                out.println("        &lt;p&gt;"+array_list.get(0)+"&lt;/p&gt;");
+                                out.println("    &lt;/body&gt;");
+                                out.println("&lt;/html&gt;");
+                                out.close();
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    如果用 JSP 的話，則是以 HTML 語法為主，再把 Java 語法也當作標籤混夾在一起…<br>
+                    <br>
+                    <textarea class='brush:html'>
+                        &lt;%@ page contentType="text/html;charset=utf-8" %&gt;
+                        &lt;%@ page import="java.util.ArrayList" %&gt;
+                        &lt;%
+                            ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+                            array_list.add("大家好");
+                        %&gt;
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html lang="zh-TW"&gt;
+                            &lt;head&gt;
+                                &lt;meta charset="utf-8"/&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;p&gt;&lt;%=array_list.get(0)%&gt;&lt;/p&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </textarea>
+                    <br>
+                    開發動態網頁的話，直接以網頁本身來設計與修改，是比較直覺的。顯然將 Java 程式碼插入 HTML 語法的 JSP，要比將 HTML 語法混在 Java 程式碼裡的 Servlet，更能提高開發效率！<ins>[1]</ins>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>基本語法結構</h2>
+                <hr>
+                <section>
+                    <h3>以 JSP 設計 Dynamic HTML 的基本結構</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;%@ page contentType="text/html;charset=utf-8" %&gt;
+                            &lt;%@ page import="在這裡載入 JDK 套件" %&gt;
+                            &lt;%!
+                                在這裡宣告 Java 函式
+                            %&gt;
+                            &lt;%
+                                在這裡撰寫 Java 程式碼
+                            %&gt;
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang="zh-TW"&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="utf-8"/&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;p&gt;&lt;%=在這裡輸出 Java 變數或函式%&gt;&lt;/p&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>把 JSP 當 Servlet 寫的基本範例</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;%@ page import="java.util.*" %&gt;
+                            &lt;%
+                                out.println("&lt;!DOCTYPE html&gt;");
+                                out.println("&lt;html lang=\"zh-TW\"&gt;");
+                                out.println("    &lt;head&gt;");
+                                out.println("        &lt;meta charset=\"utf-8\"/&gt;");
+                                out.println("    &lt;/head&gt;");
+                                out.println("    &lt;body&gt;");
+                                out.println("        &lt;p&gt;Hello, world!&lt;/p&gt;");
+                                out.println("    &lt;/body&gt;");
+                                out.println("&lt;/html&gt;");
+                            %&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>註解掉某塊 JSP 程式碼</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;%-- 註解 --%&gt;
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>內建預設物件</h2>
+                <p>
+                    JSP 預先宣告了幾個物件，可以讓我們直接在 <code>&lt;%  %&gt;</code> 裡使用：
+                </p>
+                <table>
+                    <tr><td>application</td><td>在 Servlet 常用的 <span title='javax.servlet.*'>ServletContext</span> 物件。</td></tr>
+                    <tr><td>config</td><td>在 Servlet 常用的 <span title='javax.servlet.*'>ServletConfig</span> 物件。</td></tr>
+                    <tr><td>out</td><td>JSP 自帶的 <span title='javax.servlet.jsp.*'>JspWriter</span> 物件。</td></tr>
+                    <tr><td>page</td><td>基本上是個 <span title='java.lang.*'>Object</span> 的物件。</td></tr>
+                    <tr><td>pageContext</td><td>JSP 自帶的 <span title='javax.servlet.jsp.*'>PageContext</span> 物件。</td></tr>
+                    <tr><td>request</td><td>在 Servlet 常用的 <span title='javax.servlet.http.*'>HttpServletRequest</span> 物件。</td></tr>
+                    <tr><td>response</td><td>在 Servlet 常用的 <span title='javax.servlet.http.*'>HttpServletResponse</span> 物件。</td></tr>
+                    <tr><td>session</td><td>在 Servlet 常用的 <span title='javax.servlet.http.*'>HttpSession</span> 物件。</td></tr>
+                    <tr><td>exception</td><td>基本上是個 <span title='java.lang.*'>Throwable</span> 的物件。</td></tr>
+                </table>
+                <hr>
+                <section>
+                    <h3>application</h3>
+                    <p>
+                        用來保存所有瀏覽這個站點（web-app）的使用者共用的訊息，像是聊天室就能以這個機制簡單架設，只要使用 <code>setAttribute("屬性名稱","屬性內容")</code> 紀錄訊息，然後用 <code>getAttribute("屬性名稱")</code> 取得「屬性內容」即可，也可用 <code>removeAttribute("屬性名稱")</code> 刪除。<a href='javascript:Display.show(0)'>更多</a>…
+                    </p>
+                    <p class='private'>
+                        其它還有一些有趣、但不常用的功能，像是可將初始化設定值寫在 web.xml 裡面當作參數，然後透過 application 的 <code>getInitParameter()</code> 取出來使用：<br>
+                        <br>
+                        [ WEB-INF\web.xml ]<br>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                            &lt;web-app&gt;
+                                &lt;context-param hello="world"/&gt;
+                            &lt;/web-app&gt;
+                        </textarea>
+                        <br>
+                        [ helloworld.jsp ]<br>
+                        <textarea class='brush:html;highlight:[6,7,8,9]'>
+                            &lt;%=application.getInitParameter("hello")%&gt;
+                        </textarea>
+                        <br>
+                        [ browser ]<br>
+                        <output>
+                            world
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>config</h3>
+                    <p>
+                        可以取得在 web.xml 為 Servlet 設定的初始化參數，基本上用不到，因此略過；不想略過的話，<a href='javascript:Display.show(1)'>請按我</a>。
+                    </p>
+                    <p class='private'>
+                        使用 <code>getInitParameter("屬性名稱")</code>，取得 web.xml 中以 <var>&lt;init-param&gt;&lt;param-name&gt;屬性名稱&lt;/param-name&gt;&lt;param-value&gt;屬性內容&lt;/param-value&gt;&lt;/init-param&gt;</var> 設定的「屬性內容」，例如：<br>
+                        <br>
+                        [ WEB-INF\web.xml ]<br>
+                        <textarea class='brush:xml;highlight:[6,7,8,9]'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                            &lt;web-app&gt;
+                                &lt;servlet&gt;
+                                    &lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+                                    &lt;jsp-file&gt;/helloworld.jsp&lt;/jsp-file&gt;
+                                    &lt;init-param&gt;
+                                        &lt;param-name&gt;hello&lt;/param-name&gt;
+                                        &lt;param-value&gt;world&lt;/param-value&gt;
+                                    &lt;/init-param&gt;
+                                &lt;/servlet&gt;
+                                &lt;servlet-mapping&gt;
+                                    &lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+                                    &lt;url-pattern&gt;/helloworld.jsp&lt;/url-pattern&gt;
+                                &lt;/servlet-mapping&gt;
+                            &lt;/web-app&gt;
+                        </textarea>
+                        <br>
+                        [ helloworld.jsp ]<br>
+                        <textarea class='brush:html;highlight:[6,7,8,9]'>
+                            &lt;%=config.getInitParameter("hello")%&gt;
+                        </textarea>
+                        <br>
+                        [ browser ]<br>
+                        <output>
+                            world<br>
+                        </output>
+                        <br>
+                        可以使用 <code>getInitParameterNames()</code> 取得所有參數名稱。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>out</h3>
+                    <p>
+                        用 <code>print()</code> 或 <code>println()</code> 輸出字串資料給 HTML 網頁。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>page（基本上用不到）</h3>
+                    <p>
+                        既然是個 Object，也就表示沒什麼功能可以操作，純粹用來表示 JSP 網頁本身的物件。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>pageContext（原則上別用到）</h3>
+                    <p>
+                        可以使用 <code>setAttribute("鍵", "值")</code> 將資料紀錄在網頁中保存，再用 <code>getAttribute("鍵")</code> 把「值」取出來。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>request</h3>
+                    <p>
+                        負責接收 HTTP 通訊的物件，通常用來取得經由 HTTP 通訊所夾帶的訊息，例如前一張網頁遞交的 form 填表資料，通常使用 <code>getParameter("元件名稱")</code> 取得填表資料，或者在那之前使用 <code>SetCharacterEncoding("字元編碼")</code> 設定以哪一種編碼來取得資料，避免亂碼。<a href='javascript:Display.show(2)'>更多</a>…
+                    </p>
+                    <p class='private'>
+                        除此之外，還可用 <code>getRemoteAddr()</code> 取得 IP、<code>getRemoteHost()</code> 取得主機名稱、<code>getHeader("屬性名稱")</code> 取得使用者操作環境與 HTML 中 HEADER 的訊息，像是以 <code>request.getHeader("user-agent")</code> 來判斷使用者的作業系統與瀏覽器。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>response</h3>
+                    <p>
+                        負責發送 HTTP 通訊的物件，主要透過其 <code>sendRedirect("網址")</code> 重新導向網頁。<br>
+                        <br>
+                        雖然在 Servlet 這是非常實用的物件，不過在基本上是 HTML 的 JSP 有直接做法，變得很少用到。通常需要進階描述發送出去的訊息時才會使用，像是遞交 File 物件時以 <code>setContextType()</code> 描述 MIME、或者希望能確認遞交動作是否完成而使用 <code>isCommitted()</code>、甚至最佳化 HTTP 發送的緩衝大小而使用 <code>setBufferSize()</code>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>session</h3>
+                    <p>
+                        用來保存使用者瀏覽期間的訊息，裡面的資料會在關閉瀏覽器後才清除，資料存在期間，使用者在網站開啟的每張 JSP 網頁，都能共用 session 物件的資料。適合跨網頁保存資料的場合，例如是否已登錄帳戶的訊息。<br>
+                        <br>
+                        你可以在 A.jsp 中使用 <code>session.setAttribute("屬性名稱","屬性內容")</code> 將訊息保存在 session，然後在 B.jsp 使用 <code>session.getAttribute("屬性名稱")</code> 取得「屬性內容」。<br>
+                        <br>
+                        與 application 物件的差別是，session 只有使用者能存取資料，其他瀏覽同一個網站的使用者並沒有共用這些資料。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>exception</h3>
+                    <p>
+                        可用 <code>getMessage()</code> 取得前一張網頁所 throw 出的 Exception 訊息，必須搭配 <code>&lt;%@ page isErrorPage="ture" %&gt;</code> 將用到 exception 物件的 JSP 網頁，設為錯誤處理專用的頁面。<br>
+                        <br>
+                        通常會在前一張網頁使用 <code>&lt;%@ page errorPage="" %&gt;</code> 指令，指向含有 exception.getMessage() 的 JSP 網頁，再用 <code>&lt;% throw new Exception("") %&gt;</code> 丟出錯誤訊息，好讓 exception.getMessage() 的 JSP 網頁接收～
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>指令</h2>
+                <p>
+                    JSP 使用 <code>&lt;%@ 指令 %&gt;</code> 格式的「指令」，來設定 Servlet 容器或 JSP 物件的屬性：
+                </p>
+                <table>
+                    <tr><td>&lt;%@ page contentType="" %&gt;</td><td>指定文件格式與編碼。</td></tr>
+                    <tr><td>&lt;%@ page import="" %&gt;</td><td>載入套件。</td></tr>
+                    <tr><td>&lt;%@ page extends="" %&gt;</td><td>指定該 JSP 繼承自哪個類別。</td></tr>
+                    <tr><td>&lt;%@ page errorPage="" %&gt;</td><td>指定處理錯誤訊息的頁面。</td></tr>
+                    <tr><td>&lt;%@ page isErrorPage="true" %&gt;</td><td>設定該 JSP 為錯誤處理頁面。</td></tr>
+                    <tr><td>&lt;%@ page buffer="" %&gt;</td><td>設定緩衝資料大小，請使用 8kb 的倍數。</td></tr>
+                    <tr><td>&lt;%@ include file="" %&gt;</td><td>載入檔案。</td></tr>
+                </table>
+                <p>
+                    其它特殊情況才會使用的指令設定：<br>
+                    <br>
+                    <code>&lt;%@ page buffer="none" %&gt;</code> 關閉緩衝區。<br>
+                    <code>&lt;%@ page autoFlush="false" %&gt;</code> 禁止自動送出緩衝資料。<br>
+                    <code>&lt;%@ page isThreadSafe="false" %&gt;</code> 不以執行緒方式啟動，而是以獨立的程序執行。<br>
+                    <code>&lt;%@ page session="false" %&gt;</code> 不使用 session 物件。<br>
+                    <code>&lt;%@ taglib uri="" prefix="" %&gt;</code> 載入標籤庫，可使用像是 &lt;jsp:forward page=""/&gt; 之類的標籤，來取代 response.sendRedirect() 這樣的 Java 程式設計。<br>
+                    <br>
+                    如果懂得善用各家標籤庫，來解決各種開發動態網頁的工作，達到不用撰寫 Java 程式碼的地步，那整張 JSP 等於全部由「標籤（Tag）」組成，這會更像 HTML 網頁！因此一般認為「標籤庫」是使用 JSP 的最理想方式<ins>[2][3]</ins>，所以也是目前各家開放原始碼團隊最有興趣貢獻的領域<ins>[4]</ins>。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 前提是「開發動態網頁的話」。有些人純粹只是透過 Servlet 的 HTTP 通訊能力，來設計伺服端的 Java 程式功能，這時將 HTML 語法混在 Java 程式碼裡面，反而比較直覺，因為重點變成 Java 程式設計做了什麼事，而不是 HTML 有哪些表現。這時甚至不會乖乖照著 &lt;html&gt;、&lt;head&gt;、&lt;body&gt; 的結構寫，直接輸出 &lt;p&gt; 或 &lt;img&gt; 之類的標籤，讓網頁瀏覽器自己決定該怎樣顯示這組的標籤，於是也就沒有 HTML 好不好讀的問題了～<br>
+                    [2] 甚至把 Java 程式設計的部份通通先「自訂成標籤」，再拿到 JSP 使用。<br>
+                    [3] 但大量使用「標籤庫」會讓 HTML 變成像 XML 一樣密密麻麻的，並沒有比較容易閱讀，例如想修改設定值時，反而 Java 程式碼比較容易找到目標。所以還是有少數人不樂見大量引進「標籤庫」的 JSP 設計風格。<br>
+                    [4] 使用 Tomcat 的人，當然不能錯過 <a href='http://tomcat.apache.org/taglibs/' target='_blank'>Apache Taglibs</a>～
+                </p>
+            </footer>
+
+        </article>
+
+        <script>
+            Display.hide()
+        </script>
+
+    </body>
+
+</html>

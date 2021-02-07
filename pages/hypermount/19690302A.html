@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>事件</h1>
+                <p>捕捉使用者的操控動作、或者作業系統的反應動作，以此做為執行程式的時機，來撰寫對應的功能！</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>事件</h2>
+                <p>
+                    例如使用者按下滑鼠鍵時、或者瀏覽器載入完網頁時，都是執行程式的時機，你可以針對這些時機點來撰寫程式。這種機制叫做「事件」，它讓我們除了「函式」以外，多了一種模組化的方式，讓整體程式更清楚易懂。
+                </p>
+                <hr>
+                <section>
+                    <h3>HTML 的事件基本結構</h3>
+                    <p>
+                        <code>
+                            &lt;標籤 事件='程式敘述或函式'&gt;&lt;/標籤'&gt;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>JavaScript 的事件結構</h3>
+                    <p>
+                        <code>
+                            1)　元素.事件 = function(){ 程式敘述 }<br>
+                            2)　元素.事件 = 函式名稱;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    第一種「HTML 的事件基本結構」我想不用說明，它是 HTML 語法的標準寫法，為人所熟悉。如下範例建立一個 href 為空的 A 標籤，然後捕捉 Double Click 事件，指示它執行 document.write() 函式，這樣當使用者在這超鏈結文字上「雙擊滑鼠鍵」就會顯示 Hello 的訊息內容：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        &lt;a href='' ondblclick='document.write('Hello')'&gt;Click me&lt;/a&gt;
+                    </textarea>
+                    <br>
+                    同樣的程式，以第二種「JavaScript 的事件結構」來寫，則是：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _anchor = document.createElement('a');
+                        document.body.appendChild(_anchor);
+                        _anchor.href = '';
+                        _anchor.innerHTML = 'Click me';
+                        _anchor.ondblclick = function(){
+                            document.write('Hello');
+                        };
+                    </textarea>
+                    <br>
+                    如果要呼叫函式名稱，請不要加入 () 符號，先看底下正確的範例：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        function hello(){
+                            document.write('Hello');
+                        }
+                        var _anchor = document.createElement('a');
+                        document.body.appendChild(_anchor);
+                        _anchor.href = '';
+                        _anchor.innerHTML = 'Click me';
+                        _anchor.ondblclick = hello;
+                    </textarea>
+                    <br>
+                    最後一行如果寫成這樣是不對的：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _anchor.ondblclick = hello();
+                    </textarea>
+                    <br>
+                    即使能正常執行，也是歪打正著，並非如你所想的執行過程。<ins>[1]</ins>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>事件的參數</h2>
+                <p>
+                    其實事件觸發時，會產生 Event 物件，然後當成參數傳入事件裡面。這讓我們可以針對 Event 參數的屬性，來進一步掌控事件的使用細節。<br>
+                    <br>
+                    以下面的範例來說，我們使用 _event 做為 Event 物件的參數名稱，然後利用它來判斷是否按下 Shift 鍵：<br>
+                    <br>
+                    <code>
+                        var _anchor = document.createElement('a');<br>
+                        document.body.appendChild(_anchor);<br>
+                        _anchor.href = '';<br>
+                        _anchor.innerHTML = 'Click me';<br>
+                        _anchor.onclick = function(<em>_event</em>){<br>
+                        　if(<em>_event.shiftKey</em>) document.write('Hello');<br>
+                        };<br>
+                    </code>
+                    <br>
+                    這樣一來，必須在超鏈結文字上同時按鍵盤的 Shift 和滑鼠鍵時，才會執行程式。<br>
+                    <br>
+                    Event 物件可以使用的屬性，存在瀏覽器不同調的狀況，因此這裡介紹經 W3C 標準化的 DOM Event 屬性：
+                </p>
+                <table>
+                    <tr><td>altKey</td><td>按下 Alt 鍵的話傳回 true。</td></tr>
+                    <tr><td>button</td><td>0 為滑鼠左鍵，1 為滑鼠中鍵，2 為滑鼠左鍵。但不同瀏覽器數據不一。</td></tr>
+                    <tr><td>clientX</td><td>滑鼠游標在瀏覽器頁面的水平位置。</td></tr>
+                    <tr><td>clientY</td><td>滑鼠游標在瀏覽器頁面的垂直位置。</td></tr>
+                    <tr><td>ctrlKey</td><td>按下 Ctrl 鍵的話傳回 true。</td></tr>
+                    <tr><td>relatedTarget.tagName</td><td>觸發事件時的節點名稱。</td></tr>
+                    <tr><td>screenX</td><td>滑鼠游標在桌面螢幕的水平位置。</td></tr>
+                    <tr><td>screenY</td><td>滑鼠游標在桌面螢幕的垂直位置。</td></tr>
+                    <tr><td>shiftKey</td><td>按下 Shift 鍵的話傳回 true。</td></tr>
+                </table>
+                <p>
+                    要判斷鍵盤被按下的是哪一個鍵，除了 IE 使用 keyCode 屬性<ins>[2]</ins>，其它瀏覽器都是用 which 屬性。<br>
+                    <br>
+                    但每個瀏覽器的鍵盤對應值並不一樣，例如 Num 1 鍵的話，Chrome 是 49，Opera 是 97。因此目前要在網頁平台設計以鍵盤控制的應用程式，必須多花費心力在各家瀏覽器中測試，找出不相容的地方做修正。例如底下範例就是相容兩種瀏覽器的寫法：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        window.onkeydown = function(_event){
+                            if(_event.which==49||_event.which==97) document.write('Hello');
+                        };
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>常用事件</h2>
+                <p>
+                    底下列出常用的事件。需要了解更多事件的話，請參考 <a href='http://www.w3schools.com' target='_blank'>W3cSchools</a> 網站的資料。
+                </p>
+                <hr>
+                <section>
+                    <h3>滑鼠事件</h3>
+                    <table>
+                        <tr><td>onclick</td><td>單擊滑鼠時觸發</td></tr>
+                        <tr><td>ondblclick</td><td>雙擊滑鼠時觸發</td></tr>
+                        <tr><td>onmousedown</td><td>按下滑鼠鍵時觸發</td></tr>
+                        <tr><td>onmousemove</td><td>滑鼠游標移過時觸發</td></tr>
+                        <tr><td>onmouseover</td><td>滑鼠游標在上面時觸發</td></tr>
+                        <tr><td>onmouseout</td><td>滑鼠游標移出去時觸發</td></tr>
+                        <tr><td>onmouseup</td><td>放開滑鼠鍵時觸發</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>鍵盤事件</h3>
+                    <table>
+                        <tr><td>onkeydown</td><td>按下鍵盤時觸發</td></tr>
+                        <tr><td>onkeypress</td><td>按下字母與數字鍵時觸發</td></tr>
+                        <tr><td>onkeyup</td><td>放開鍵盤時觸發</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>瀏覽器事件</h3>
+                    <table>
+                        <tr><td>onabort</td><td>系統執行中斷時觸發</td></tr>
+                        <tr><td>onerror</td><td>系統執行錯誤時觸發</td></tr>
+                        <tr><td>onload</td><td>系統載入完畢時觸發</td></tr>
+                        <tr><td>onresize</td><td>尺寸調整時觸發</td></tr>
+                        <tr><td>onscroll</td><td>捲軸滾動時觸發</td></tr>
+                        <tr><td>onunload</td><td>退出載入完畢的對象時觸發</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>表單事件（僅適用於 Form 相關標籤）</h3>
+                    <table>
+                        <tr><td>onblur</td><td>失去駐點時觸發</td></tr>
+                        <tr><td>onchange</td><td>資料改變時觸發</td></tr>
+                        <tr><td>onfocus</td><td>獲得駐點時觸發</td></tr>
+                        <tr><td>onreset</td><td>資料重置時觸發</td></tr>
+                        <tr><td>onselect</td><td>資料選擇時時觸發</td></tr>
+                        <tr><td>onsubmit</td><td>資料送出時觸發</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <p>
+                    注意，事件在 JavaScript 有大小寫之分，因此像是 onclick 請勿寫成 onClick。當然，用 HTML 寫法的話，因為不分大小寫，所以無所謂；想統一寫法的人就一律大寫，注重可讀性的人就區分開來寫。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 明明呼叫函式，卻不該加 () 符號，所以說 JavaScript 真是亂七八糟的語言 XDDD<br>
+                    [2] 所以我寫的網頁平台程式通常跳過 IE 沒打算在上面執行。畢竟 IE 稱不上是網頁平台，使用者如果沒有購買最新版 Windows 作業系統，就無法使用最新的 IE，所以完全沒有跨平台的特性，甚至只有等著被淘汰的特性；針對這種瀏覽器寫程式是多餘的。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

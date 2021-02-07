@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>超文件模型程式介面 (DOM)</h1>
+                <p>
+                    為了用 JavaScript 控制 HTML 裡面的標籤，讓標籤做更多可程式化的功能<ins>[1]</ins>，W3C 制定了 DOM (Document Object Model) 做為統一存取 XML 文件結構的標準規範；當然，也因此適用於狹義來講算是一種 XML 的 HTML。<br>
+                    <br>
+                    DOM 的原理，就是先將 HTML 這類標記文件的結構，用程式設計常見的「樹狀結構」來展現，並制定一套函式介面來存取樹裡面的每個枝節，來達成一致寫法的規範標準。<br>
+                    <br>
+                    因此學習 DOM，首先要知道標記文件變成樹狀結構後長怎樣，然後熟練相關的函式來控制這結構當中你想要的節點，這樣就能用程式來操作它。<br>
+                    <br>
+                    換句話說，藉由 DOM 讓 JavaScript 得以完全掌控住 HTML 網頁的每個組成，這樣就能透過程式設計的寫法來修改整張 HTML 網頁的內容，完全達成「動態網頁設計」的目的；網頁不再寫死的，而是可以通過程式語言靈活變動的。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>取得元素節點</h2>
+                <p>
+                    HTML 的標籤 (Tag) 在 DOM 改稱為元素 (Element)，DOM 建立結構樹時，會將每個元素設定為一個節點 (Node)，因此我們要在 HTML 動態存取標籤元素，做法就是來回穿梭於這些節點。<br>
+                    <br>
+                    首先來看如何取得標籤元素的節點。
+                </p>
+                <hr>
+                <section>
+                    <h3>依標籤名稱取得節點</h3>
+                    <p>
+                        <code>
+                            document.getElementsByTagName('標籤名稱')[索引值]
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>依 ID 名稱取得節點</h3>
+                    <p>
+                        <code>
+                            document.getElementById('ID 屬性')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>依 CLASS 類型取得節點</h3>
+                    <p>
+                        <code>
+                            document.getElementsByClassName('CLASS 屬性')[索引值]
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>使用 CSS 選擇符號取得節點</h3>
+                    <p>
+                        <code>
+                            1) document.querySelector('元素')<br>
+                            2) document.querySelector('元素 元素')<br>
+                            3) document.querySelector('元素 &gt; 元素')<br>
+                            1) document.querySelectorAll('元素')[索引值]<br>
+                            2) document.querySelectorAll('元素 元素')[索引值]<br>
+                            3) document.querySelectorAll('元素 &gt; 元素')[索引值]
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>直接取得節點</h3>
+                    <table>
+                        <tr><td>document.documentElement</td><td>根元素節點（即 HTML 元素）</td></tr>
+                        <tr><td>document.body</td><td>BODY 元素節點</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>更多、但不建議使用的直接取得節點</h3>
+                    <table>
+                        <tr><td>document.images[索引值]</td><td>IMG 元素節點</td></tr>
+                        <tr><td>document.links[索引值]</td><td>A 與 AREA 元素節點</td></tr>
+                        <tr><td>document.forms[索引值]</td><td>FORM 元素節點</td></tr>
+                        <tr><td>document.embeds[索引值]</td><td>EMBED 元素節點</td></tr>
+                        <tr><td>document.plugins[索引值]</td><td>PLUGIN 元素節點</td></tr>
+                        <tr><td>document.head</td><td>HEAD 元素節點</td></tr>
+                        <tr><td>document.scripts[索引值]</td><td>SCRIPT 元素節點</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <p>
+                    顯然「依 ID 名稱取得節點」以及「直接取得節點」是最直覺的！建議應用程式都採取這種做法來存取元素，有助於保障開發時效。<br>
+                    <br>
+                    至於其它做法，通常是為了「剖析資料」用的，例如 Ajax 的通訊、或者像是 docx 附檔名的 Microsoft Office Word XML Format 文件。由於不知道節點的元素名稱與排列架構，只好用巡迴的方式逐筆處理資料，但如果不是這種場合，大可跳過這些做法。<br>
+                    <br>
+                    需要注意的是！空白也算一個節點，比如下面這個 HTML 文件：<br>
+                    <br>
+                    <textarea class='brush:html'>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html lang='zh-TW'&gt;
+                            &lt;head&gt;
+                                &lt;meta charset='utf-8'&gt;
+                                &lt;title&gt;範例網頁&lt;/title&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;p&gt;HELLO&lt;/p&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </textarea>
+                    <br>
+                    照道理來講，如果我要取得 BODY 裡面的 P 元素節點，應該這麼寫：<br>
+                    <br>
+                    <code>
+                        document.body.childNodes[0];<br>
+                    </code>
+                    <br>
+                    遺憾的是這樣存取到的是並不是 P，正確的結果其實是……<br>
+                    <br>
+                    <code>
+                        document.body.childNodes[1];<br>
+                    </code>
+                    <br>
+                    這是因為 BODY 元素換行後有一堆空白，結果空白才是第一個節點，而 P 變成第二個節點了！<br>
+                    <br>
+                    所以，除非 HTML 是這樣的情況，P 才會變成第一個節點：<br>
+                    <br>
+                    <textarea class='brush:html'>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html lang='zh-TW'&gt;
+                            &lt;head&gt;
+                                &lt;meta charset='utf-8'&gt;
+                                &lt;title&gt;範例網頁&lt;/title&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;&lt;p&gt;HELLO&lt;/p&gt;&lt;/body&gt;
+                        &lt;/html&gt;
+                    </textarea>
+                    <br>
+                    這次 P 與 BODY 之間沒有空白，所以 P 才被視為第一個子節點。但沒必要為了規避空白節點，而把 HTML 寫得這麼蠢，關於空白節點的問題，往後會另闢章節介紹如何處理。在那之前，希望你嫌麻煩的話，可以體會為何這裡建議使用「依 ID 名稱取得節點」和「直接取得節點」就好了　－－
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>新增與刪除節點</h2>
+                <p>
+                    接著來看如何新增與刪除子節點。
+                </p>
+                <hr>
+                <section>
+                    <h3>產生新元素</h3>
+                    <p>
+                        <code>
+                            document.createElement('標籤名稱')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>將元素加入子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.appendChild(元素)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>將元素插入某節點前</h3>
+                    <p>
+                        <code>
+                            元素節點.insertBefore(元素, 位置)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取代子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.replaceChild(新節點, 舊節點)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>複製節點</h3>
+                    <p>
+                        <code>
+                            元素節點.cloneNode(是否複製子節點)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>刪除子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.removeChild(子節點)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    來個簡單的範例，底下的 JavaScript 程式在 BODY 標籤中加入一個 IMG 標籤：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _img = document.createElement('IMG');
+                        document.body.append(_img);
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>移動所在節點位置</h2>
+                <p>
+                    來回穿梭於節點之間，指定想要的元素。
+                </p>
+                <hr>
+                <section>
+                    <h3>指向父節點</h3>
+                    <p>
+                        <code>
+                            元素節點.parentNode
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>指向子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.childNodes[索引值]
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>指向第一個子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.firstChild
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>指向最後一個子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.lastChild
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>往前一個節點</h3>
+                    <p>
+                        <code>
+                            元素節點.previousSibling
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>往後一個節點</h3>
+                    <p>
+                        <code>
+                            元素節點.nextSibling
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>判斷是否包含子節點</h3>
+                    <p>
+                        <code>
+                            元素節點.hasChildNodes()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    其實這些也是剖析資料時用的。<br>
+                    <br>
+                    通常寫「應用程式」時，我們的元素都是從頭開始創起，同時會給予變數名稱，往後直接透過變數就能使用這些節點：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _paragraph = document.createElement('p');
+                        document.body.appendChild(_paragraph);
+                        _paragraph.innerHTML = 'HELLO';
+                    </textarea>
+                    <br>
+                    我們也很清楚自己的應用程式有哪些節點，並沒有面對未知的樹狀結構、被迫採巡迴方式逐筆處理資料的問題。<br>
+                    <br>
+                    因此你可以暫時跳過這部分，改天有興趣時再熟練它。<br>
+                    <br>
+                    最後，在前後移動節點時，注意：「元素與元素之間的空白，也算一個節點。」因此你可能要使用兩次 previousSibling 或 nextSibling 才能看到你想要的效果。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>節點的內容</h2>
+                <p>
+                    取得節點後，重點在於如何讓它動作。
+                </p>
+                <hr>
+                <section>
+                    <h3>存取標籤所括住的文字內容（非標準）</h3>
+                    <p>
+                        <code>
+                            元素節點.textContent
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>以 HTML 格式存取標籤所括住的內容</h3>
+                    <p>
+                        <code>
+                            元素節點.innerHTML
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>照抄 HTML 標籤的屬性來設定元素</h3>
+                    <p>
+                        <code>
+                            元素節點.標籤屬性
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>設定 CSS 樣式</h3>
+                    <p>
+                        <code>
+                            元素節點.style.樣式名稱 = '設定值'
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>變更 CSS 類型</h3>
+                    <p>
+                        <code>
+                            元素節點.className = '樣式類型'
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>設定事件</h3>
+                    <p>
+                        <code>
+                            1) 元素節點.事件 = 函式;<br>
+                            2) 元素節點.addEventListener('DOM 事件', 函式, false);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>節點值</h3>
+                    <p>
+                        <code>
+                            元素節點.nodeValue
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取得節點的元素名稱</h3>
+                    <p>
+                        <code>
+                            元素節點.tagName
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    首先來看 textContent，它可以讓你存取元素的文字內容。底下範例在 BODY 裡面新增一個 DIV 元素，然後又在 DIV 裡面新增一個 B 元素，最後在 B 元素使用 textContent 輸入 HELLO 做為文字內容：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _division = document.createElement('DIV');
+                        document.body.appendChild(_division);
+
+                        var _bold = document.createElement('B');
+                        _division.appendChild(_bold);
+                        _bold.textContent = 'HELLO';
+                    </textarea>
+                    <br>
+                    不過這不是 DOM 的標準，純粹是剛好每個瀏覽器都支援<ins>[2]</ins>。<br>
+                    <br>
+                    接著來看 innerHTML，它可以直接在元素節點裡面輸入 HTML 語法，上面的範例可以因此簡化為……<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _division = document.createElement('DIV');
+                        document.body.appendChild(_division);
+                        _division.innerHTML = '&lt;b&gt;HELLO&lt;/b&gt;';
+                    </textarea>
+                    <br>
+                    然後是看起來似乎最實用的「照抄 HTML 標籤的屬性」！例如 IMG 標籤有個 SRC 屬性，那 JavaScript 建立一個 IMG 元素時，就可以這樣來設定：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _img = document.createElement('IMG');
+                        document.body.append(_img);
+                        _img.src = 'image.png';
+                    </textarea>
+                    <br>
+                    但 HTML5 大幅減少標籤的屬性，改用 CSS 來替代，因此真正實用的恐怕是設定 CSS 樣式！下面的範例將先前程式的 _bold 用 CSS 設定為紅色，且字型設定為「微軟正黑體」：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _bold.style.color = 'red';
+                        _bold.style.fontFamily = '微軟正黑體';
+                    </textarea>
+                    <br>
+                    上面程式相當於如下 CSS 描述：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        b { color:red; font-family:微軟正黑體 }
+                    </textarea>
+                    <br>
+                    請注意 CSS 的 font-family 橫線，到了 JavaScript 改成 fontFamily 字母大寫。<br>
+                    <br>
+                    但有些樣式名稱並不規則，例如 CSS 的 float 在 JavaScript 是 cssFolat。<br>
+                    <br>
+                    最後來看事件，底下的範例又進一步將上面程式的 _bold 加入「在上面按滑鼠左鍵會跳出『別亂按』訊息」的功能：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _bold.onclick = function(){
+                            document.write('別亂按～');
+                        };
+                    </textarea>
+                    <br>
+                    addEventListener() 是新的 DOM 標準寫法，提供更彈性的自訂化機制，例如可以設定執行優先級數、或者可用 removeEventListener() 移除。但可讀性較低，沒必要的話不建議使用，因此接下來的說明可以略過。
+                </p>
+                <hr>
+                <p>
+                    上面「別亂按」的範例，可以改寫成這樣：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _bold.addEventListener('click', function(){alert('別亂按～')}, false);
+                    </textarea>
+                    <br>
+                    第三個參數稱為 useCapture，通常設為 false，表示以 Bubbling 的方式送出事件：「先執行子元素的事件，再執行父元素的事件。」設為 true 的話則使用 Capture 的方式：「先執行父元素的事件，再執行子元素的事件。」如果你不曉得為何要有這種設計，想像一下：「子元素通常包在父元素裡面，對吧？」「如果兩個元素都登記了 click 事件，當滑鼠在子元素上面按下去的時候，請問到底該判定是在父元素上按的？還是在子元素上按的？」顯然這個參數很有用，能夠解決這方面的問題。<br>
+                    <br>
+                    上面的範例很適合拿來參考，因為 B 元素就是被包在 DIV 元素裡面，現在我們寫如下程式來試驗看看：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _division.addEventListener('click', function(){alert('DIV')}, false);
+                        _bold.addEventListener('click', function(){alert('B')}, false);
+                    </textarea>
+                    <br>
+                    結果會先跳出 B，然後才跳出 DIV。<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _division.addEventListener('click', function(){alert('DIV')}, true);
+                        _bold.addEventListener('click', function(){alert('B')}, true);
+                    </textarea>
+                    <br>
+                    現在會先跳出 DIV，然後才跳出 B。<br>
+                    <br>
+                    然而 useCapture 預設為 false，因此可以不用寫。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>屬性</h2>
+                <p>
+                    這裡所指的屬性，是標籤內部的選項：<br>
+                    <br>
+                    <samp>
+                        &lt;標籤 屬性=屬性值&gt;標籤內容&lt;/標籤&gt;<br>
+                    </samp>
+                    <br>
+                    雖然就平常在 HTML5 使用 DOM 的情況來講，直接把元素節點內建好的屬性拿來用即可，很少需要進一步建立新的屬性。例如 IMG 標籤，通常使用內建的 SRC 屬性來指定圖片，或者通用的 TITLE 屬性指定滑鼠移到上面時暫時顯示的文字，「有實際效果」的屬性都已內建，直接以 . 符號接上屬性名稱，即可存取屬性。額外產生非內建的屬性，對 HTML5 來說根本沒有實際效果，甚至破壞它的規範。<br>
+                    <br>
+                    但基於「節點」的觀念，因為屬性也是一種節點，所以這裡還是介紹「屬性節點」的操作方式，不管用不用得到，能穿梭於屬性節點之間才符合 DOM 的精神。
+                </p>
+                <hr>
+                <section>
+                    <h3>產生屬性節點</h3>
+                    <p>
+                        <code>
+                            document.createAttribute('屬性名稱')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>存取屬性節點的值</h3>
+                    <p>
+                        <code>
+                            屬性節點.value
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>將屬性節點加入元素節點</h3>
+                    <p>
+                        <code>
+                            元素節點.setAttributeNode(屬性節點)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>依屬性名稱取得節點</h3>
+                    <p>
+                        <code>
+                            元素節點.getAttributeNode('屬性名稱')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>快速建立屬性到元素節點</h3>
+                    <p>
+                        <code>
+                            元素節點.setAttribute('屬性名稱', '屬性值')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>依屬性名稱取得其值</h3>
+                    <p>
+                        <code>
+                            元素節點.getAttribute('屬性名稱')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>依順序取得屬性值</h3>
+                    <p>
+                        <code>
+                            元素節點.attributes[索引值]
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取得屬性名稱</h3>
+                    <p>
+                        <code>
+                            元素節點.attributes[索引值].name
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>刪除屬性</h3>
+                    <p>
+                        <code>
+                            元素節點.removeAttribute(屬性節點)
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    來看個範例，以建立屬性節點的方式，再將該節點設定給元素節點：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var _image = document.createElement('img');
+                        document.body.appendChild(_image);
+
+                        var _src = document.createAttribute('src');
+                        _src.value = 'image.png';
+
+                        _image.setAttributeNode(_src);
+                    </textarea>
+                    <br>
+                    事實上這個範例根本不算建立新的屬性：「SRC 屬性早已於內建於 IMG 標籤的元素。」但之所以展示這樣的範例，可以了解到如果屬性已經存在，新的屬性節點會取代舊的：「並不會真的多產生一個節點出來。」了解這點的話，在 DOM 巡訪節點時才不會遇到解不開的瓶頸。所以像下面的程式：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _image.setAttribute('src', 'image.png');
+                    </textarea>
+                    <br>
+                    字面上來看往往認為是設定 src 屬性為 image.png，但其實是建立一個新的 SRC 屬性，屬性值為 'image.png'，然後取代舊的 SRC 屬性。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>處理節點的類型</h2>
+                <p>
+                    (草稿中)
+                </p>
+                <hr>
+                <section>
+                    <h3>取得節點的類型</h3>
+                    <p>
+                        <code>
+                            節點.nodeType
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>節點類型</h3>
+                    <table>
+                        <tr><td>ELEMENT_NODE</td><td>元素</td></tr>
+                        <tr><td>ATTRIBUTE_NODE</td><td>屬性</td></tr>
+                        <tr><td>TEXT_NODE</td><td>文字</td></tr>
+                        <tr><td>CDATA_SECTION_NODE</td><td>CDATA</td></tr>
+                        <tr><td>ENTITY_REFERENCE_NODE</td><td>實體參考</td></tr>
+                        <tr><td>ENTITY_NODE</td><td>實體</td></tr>
+                        <tr><td>PROCESSING_INSTRUCTION_NODE</td><td>處理指令</td></tr>
+                        <tr><td>COMMENT_NODE</td><td>註解</td></tr>
+                        <tr><td>DOCUMENT_NODE</td><td>檔案</td></tr>
+                        <tr><td>DOCUMENT_TYPE_NODE</td><td>檔案類型</td></tr>
+                        <tr><td>DOCUMENT_FRAGMENT_NODE</td><td>檔案片段</td></tr>
+                        <tr><td>NOTATION_NODE</td><td>符號</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <p>
+                    (草稿中)
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 早期 Internet Explorer 與 Netscape Navagator 兩大瀏覽器最主要的競爭方式，就是搶先實現出更多可程式化標籤的能力，搶先的結果演變成各自用不同的寫法來實作，導致互不相容。<br>
+                    [2] 因為 innerText 也不是 DOM 標準，所以 Firefox 不支援，繼續用自己的 textContent 屬性；反而 IE、Chrome、Opera 為了通用性，相容了 textContent。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

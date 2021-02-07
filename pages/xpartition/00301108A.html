@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>16x Brave Missions: 勇於完成使命的你</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>風格</h2>
+                <p>
+                    <canvas width='425' height='425' style='border-style:solid;border-width:2px;border-color:#333'></canvas>
+                </p>
+                <script>
+
+                    var context=document.getElementsByTagName('canvas')[0].getContext('2d');
+
+                    context.fillStyle='#ccc';
+                    context.fillRect(0,0,425,525);
+
+                    context.lineWidth=2;
+                    context.strokeStyle='#333';
+                    context.fillStyle='#fff';
+
+                    context.size=25;
+                    context.draw=function(x,y){
+                        this.strokeRect((this.size)*x,this.size*y,this.size,this.size);
+                        this.fillRect((this.size*x)+1,(this.size*y)+1,this.size-2,this.size-2);
+                    }
+
+                    var map=[[0,0,0,0,0,0,1,1,1,1,1,1,1,0,0],
+                             [0,0,0,0,0,0,1,0,0,1,0,0,1,1,1],
+                             [0,0,0,0,0,1,1,0,0,1,1,0,0,0,0],
+                             [0,0,0,0,0,1,0,0,0,0,1,0,0,0,0],
+                             [1,1,1,1,1,1,0,0,0,0,1,1,0,0,0],
+                             [1,0,0,0,0,1,1,0,0,0,0,1,1,1,0],
+                             [1,0,0,0,0,0,1,1,1,0,0,0,0,1,1],
+                             [0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
+                             [0,0,0,0,0,0,0,0,1,1,0,0,0,0,1],
+                             [0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+                             [0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+                             [0,0,0,0,0,0,0,0,0,1,0,0,1,1,1],
+                             [0,0,0,0,0,0,0,0,0,1,1,1,1,0,0],
+                             [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+                             [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+                             ];
+
+                    for(var m=1; m<=map[0].length; m++){
+                        for(var n=1; n<=map.length; n++){
+                            if(map[n-1][m-1]) context.draw(m,n);
+                        }
+                    }
+
+                </script>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>劇情與攻略</h2>
+                <p>
+                    一、接受國王的任務，蒐集討伐魔王的四件裝備：<br>
+                    　　前往「火之山」尋找「火之劍」。<br>
+                    　　前往「風之塔」尋找「風之冠」。<br>
+                    　　前往「水之宮」尋找「水之盾」。<br>
+                    　　前往「地之穴」尋找「地之鎧」。<br>
+                    二、回報任務，挑選一款飾品：魂之鍊、心之印、體之戒。<br>
+                    三、勇闖魔宮討伐魔王，世界得以維持和平與繁榮。<br>
+                    <br>
+                    劇情越老掉牙越好，例如海克力士的故事。
+                </p>
+            </section>
+
+
+            <hr>
+
+            <section>
+                <h2>其它</h2>
+                <p>
+                    讓 fillRect() 填色時留白，可產生立體效果，適合做為山、海、壁…之類的障礙物元件：<br>
+                    <br>
+                    <canvas width='225' height='175' style='border-style:solid;border-width:2px;border-color:#333'></canvas>
+                </p>
+                <script>
+
+                    var a=document.getElementsByTagName('canvas')[1].getContext('2d');
+                    a.lineWidth=2;
+                    a.strokeStyle='#333';
+                    a.g=25;
+                    a.f=function(x,y){
+                        this.strokeRect((this.g)*x,this.g*y,this.g,this.g);
+                        this.fillRect((this.g*x)+3,(this.g*y)+3,this.g-4,this.g-4);
+                    };
+
+                    a.fillStyle='tomato';
+                    a.f(1,1);
+                    a.f(2,1);
+                    a.f(3,1);
+
+                    a.fillStyle='orange'
+                    a.f(1,3);
+                    a.f(2,3);
+                    a.f(3,3);
+
+                    a.fillStyle='lime'
+                    a.f(1,5);
+                    a.f(2,5);
+                    a.f(3,5);
+
+                    a.fillStyle='cyan'
+                    a.f(5,1);
+                    a.f(6,1);
+                    a.f(7,1);
+
+                    a.fillStyle='plum'
+                    a.f(5,3);
+                    a.f(6,3);
+                    a.f(7,3);
+
+                    a.fillStyle='gray'
+                    a.f(5,5);
+                    a.f(6,5);
+                    a.f(7,5);
+
+                </script>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

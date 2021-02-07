@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>磁碟容量與檔案大小的換算</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>單位換算</h2>
+                <p>
+                    先了解二進制數值的單位制：<br>
+                    <br>
+                    <var>
+                        1 bit = 一個開關狀態 (位元)<br>
+                        1 Byte = 8 bit (位元組)<br>
+                        1 KB = 1024 Bytes (Kilo Byte)<br>
+                        1 MB = 1024 KB (Mega Byte)<br>
+                        1 GB = 1024 MB (Giga Byte)<br>
+                        1 TB = 1024 GB (Tera Byte)<br>
+                        1 PB = 1024 TB (Peta Byte)<br>
+                        1 EB = 1024 PB (Exa Byte)<br>
+                        1 ZB = 1024 EB (Zetta Byte)<br>
+                        1 YB = 1024 ZB (Yotta Byte)<br>
+                    </var>
+                    <br>
+                    因此，想知道 Java.io.File 傳回的磁碟容量是幾 GB：<br>
+                    <br>
+                    <var>磁碟容量/1024/1024/1024</var><br>
+                    <br>
+                    想知道檔案大小是幾 MB：<br>
+                    <br>
+                    <var>檔案大小/1024/1024</var><br>
+                    <br>
+                    於是程式碼寫法如下：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        double a = new File("C:").getTotalSpace()/Math.pow(1024, 3);
+                        double b = new File("新文字文件.txt").length()/Math.pow(1024, 2);
+                    </textarea>
+                    <br>
+                    而通常只取到小數第二位，因此再搭配程式碼如下：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.text.NumberFormat;
+
+                        NumberFormat number_format = NumberFormat.getInstance();
+                        number_format.setMaximumFractionDigits(2);
+                        System.out.println(number_format.format(a));
+                        System.out.println(number_format.format(b));
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>關於「幾位元」</h2>
+                <table style='margin-bottom:6px'>
+                    <tr><td>0～1</td><td>一位元</td></tr>
+                    <tr><td>00～11</td><td>二位元</td></tr>
+                    <tr><td>000～111</td><td>三位元</td></tr>
+                    <tr><td>00000000～11111111</td><td>八位元</td></tr>
+                </table>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

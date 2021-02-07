@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>String==String？</h1>
+                <p>由於 Java 的文字資料都是 String 物件，因此當你用 == 來比較文字資料是否相等時，你比對的其實是兩個 String 物件所指向的記憶體位址是否相同，而不是兩筆資料是否相等：「雖然執行結果其實是你想要的，看起來很正常。」</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>原理試探</h2>
+                <p>
+                    首先來看用 == 來比較兩筆文字資料的範例：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        String a = "HELLO";
+                        String b = "HELLO";
+
+                        if(a==b){
+                            System.out.println("YES");
+                        }
+                       </textarea>
+                    <br>
+                    輸出結果為 YES，這讓人誤以為 a 和 b 的資料一樣是 HELLO 沒錯！<br>
+                    <br>
+                    但其實這是因為 Java 在遇到以 "" 產生的字串資料時，會另外以專屬的記憶體空間來配置資料，當這個空間裡面已經存在重複的資料時，就傳回已經存在資料的記憶體位址。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>為何 a==b</h2>
+                <p>
+                    為了方便理解，我們可將上面的程式，解讀成 Java 像是以如下程式碼的做法在處理 "" 的文字資料：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        LinkedList&lt;String&gt; pool = new LinkedList&lt;String&gt;();
+
+                        String f(String x){
+                            //如果 pool 裡面已經有相同的資料就傳回既有的那份
+                            for(String n:pool){
+                                if(n.intern()==x){
+                                    return n;
+                                }
+                            }
+                            //否則的話產生新的一份資料然後傳回
+                            pool.add(new String(x));
+                            return pool.getLast();
+                        }
+
+                        String a = f("HELLO");
+                        String b = f("HELLO");
+                        if(a==b){
+                            System.out.print("YES");
+                        }
+                       </textarea>
+                    <br>
+                    假設 Java 所有 "xxx" 的寫法，一律改成如上程式 f("xxx") 的寫法來產生文字資料，就可以知道為何用 == 來比較 a 和 b 時是相同的，因為 a 與 b 都是 pool.get(0)。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>何時 a!=b</h2>
+                <p>
+                    但這樣的比較卻是有風險的，比如：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        String a = f("HELLO");
+                        String b = new String("HELLO");
+                       </textarea>
+                    <br>
+                    這樣一來 a 就不等於 b 了，因為 a 是 pool.get(0)，但 b 並不是；雖然兩者資料明明都是 HELLO。<br>
+                    <br>
+                    所以，用 == 來比較兩個 String 變數，有可能明明資料相同，比對結果卻是 false，如下：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        String a = "HELLO";
+                        String b = new String("HELLO");
+                        System.out.println(a);
+                        System.out.println(b);
+                        if(a!=b){
+                            System.out.println("NO");
+                        }
+                    </textarea>
+                    <br>
+                    這次檢查的，是 a 不等於 b 的話，就輸出 NO。<br>
+                    <br>
+                    結果輸出時，雖然 a 與 b 都一樣輸出 HELLO，看起來 a==b，但程式在執行 a!=b 時卻成立，而輸出了 NO。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

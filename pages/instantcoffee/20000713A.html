@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Ant 範例選</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Console</h2>
+                <p>
+                    <textarea class='brush:xml'>
+                        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                        &lt;project default="start"&gt;
+
+                            &lt;target name="prepare"&gt;
+                                &lt;delete dir="binaries/application" /&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="compile"&gt;
+                                &lt;javac destdir="binaries" encoding="UTF-8" includeantruntime="false" srcdir="sources"&gt;
+                                    &lt;compilerarg value="-Xlint" /&gt;
+                                &lt;/javac&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="run"&gt;
+                                &lt;java classname="application.Main" classpath="binaries" fork="on" /&gt;
+                            &lt;/target&gt;
+
+                            &lt;target depends="prepare, compile, run" name="start" /&gt;
+
+                        &lt;/project&gt;
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Application</h2>
+                <p>
+                    <textarea class='brush:xml'>
+                        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                        &lt;project default="start"&gt;
+
+                            &lt;target name="prepare"&gt;
+                                &lt;delete dir="binaries/application" /&gt;
+                                &lt;delete file="execute.jar" /&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="compile"&gt;
+                                &lt;javac destdir="binaries" encoding="UTF-8" includeantruntime="false" srcdir="sources"&gt;
+                                    &lt;compilerarg value="-Xlint" /&gt;
+                                &lt;/javac&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="build"&gt;
+                                &lt;jar destfile="execute.jar" manifest="binaries/META-INF/MANIFEST.MF"&gt;
+                                    &lt;fileset dir="binaries" /&gt;
+                                &lt;/jar&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="run"&gt;
+                                &lt;java fork="on" jar="execute.jar"&gt;
+                                    &lt;classpath&gt;
+                                        &lt;pathelement location="execute.jar" /&gt;
+                                        &lt;pathelement path="application.Main" /&gt;
+                                    &lt;/classpath&gt;
+                                &lt;/java&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="start" depends="prepare, compile, build, run" /&gt;
+
+                        &lt;/project&gt;
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Sample</h2>
+                <p>
+                    <textarea class='brush:xml'>
+                        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                        &lt;project default="start"&gt;
+
+                            &lt;target name="prepare"&gt;
+                                &lt;delete dir="binaries/samples" /&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="compile"&gt;
+                                &lt;javac destdir="binaries" encoding="UTF-8" includeantruntime="false" srcdir="sources" /&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="run"&gt;
+                                &lt;java classname="samples.Main" classpath="binaries" fork="on" /&gt;
+                            &lt;/target&gt;
+
+                            &lt;target name="start" depends="prepare, compile, run" /&gt;
+
+                        &lt;/project&gt;
+                    </textarea>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

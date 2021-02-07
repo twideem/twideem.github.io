@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Socket 主從式架構程式設計</h1>
+                <p>
+                    簡單實作 Server and Client 主從架構程式設計。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Server</h2>
+                <p>
+                    製作埠號 5678 的伺服端，功能為發送「Hello!!」訊息。<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.PrintWriter;
+                        import java.net.ServerSocket;
+                        import java.net.Socket;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    ServerSocket server_socket = new ServerSocket(5678);
+                                    Socket socket = server_socket.accept();
+                                    PrintWriter print_writer = new PrintWriter(socket.getOutputStream(),true);
+                                    print_writer.println("Hello!!");
+                                    socket.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Client</h2>
+                <p>
+                    製作連接埠號 5678 的客戶端，功能為接收與顯示伺服端的訊息。<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.InputStream;
+                        import java.net.Socket;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    Socket socket = new Socket("127.0.0.1", 5678);
+                                    InputStream input_stream = socket.getInputStream();
+                                    byte bytes[] = new byte[1024];
+                                    int n=input_stream.read(bytes);
+                                    System.out.write(bytes,0,n);
+                                    socket.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>操作方式</h2>
+                <p>
+                    先執行 Server 的 Main.class，這時會發現程式的執行緒處於等待狀態，因此請勿關閉該程式的命令提示字元視窗。<br>
+                    <br>
+                    再執行 Client 的 Main.class，會接收 Server 的訊息並顯示於 Client 命令提示字元的視窗，同時 Server 的 Main.class 也完成工作，可以關閉視窗。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

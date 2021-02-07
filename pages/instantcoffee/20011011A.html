@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>調用作業系統的命令</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                有時候會想呼叫做業系統的指令或資源來執行。<br>
+                <br>
+                底下示範在 Windows 先使用 taskkill 指令結束 firefox.exe 程序，然後才執行 firefox.exe，避免總是發生「Firefox 已在執行中，但無回應…」：<br>
+                <br>
+                <textarea class='brush:java'>
+                    public class Main{
+
+                        public static void main(String[] args){
+                            try{
+                                Process process = Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
+                                process.waitFor();
+                                Runtime.getRuntime().exec("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
+                            }
+                            catch(Exception exception){
+                                exception.printStackTrace();
+                            }
+                        }
+
+                    }
+                    </textarea>
+                <br>
+                如果沒使用 waitFor()，會發生還沒執行完 taskkill，卻已經在跑下面那行呼叫 firefox.exe 程序的程式，結果 taskkill 真正跑完，刪的居然是 "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"。所以每個指令之間，都應該使用 waitFor() 等待程序完畢，才執行下一行程式。
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

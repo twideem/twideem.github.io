@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>陣列</h1>
+                <p>如果建立的是一連串同類型的資料，不妨使用「陣列」來完成。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>產生陣列</h2>
+                <p>
+                    陣列的宣告方式有多種，底下依推薦的順序列出，挑你自己習慣的寫法即可，不見得要混著用。
+                </p>
+                <hr>
+                <section>
+                    <h3>標準的陣列宣告方式</h3>
+                    <p>
+                        <code>
+                            var 陣列名稱 = new Array(資料一, 資料二,…);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>簡便的陣列宣告方式</h3>
+                    <p>
+                        <code>
+                            var 陣列名稱 = [資料一, 資料二,…];
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>宣告不含資料與筆數的空陣列</h3>
+                    <p>
+                        <code>
+                            var 陣列名稱 = new Array();
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>初始化資料筆數的陣列（並不是限制資料筆數）</h3>
+                    <p>
+                        <code>
+                            var 陣列名稱 = new Array(初始化陣列筆數);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>二維陣列</h3>
+                    <p>
+                        <code>
+                            var 陣列名稱 = new Array();<br>
+                            陣列名稱[索引值] = new Array();
+                        </code>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用陣列</h2>
+                <p>
+                    底下是存取陣列的做法。
+                </p>
+                <hr>
+                <section>
+                    <h3>存入資料</h3>
+                    <p>
+                        <code>
+                            陣列名稱[索引值] = 資料;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取出資料</h3>
+                    <p>
+                        <code>
+                            陣列名稱[索引值];
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    索引值由 0 開始，而不是 1。<br>
+                    <br>
+                    換句話說，陣列的第一筆資料是 [0]，不是 [1]。<br>
+                    <br>
+                    想當然，最後一筆資料就是 [資料筆數-1]，通常我們會用陣列的 length 屬性來取得資料的筆數。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>陣列實例</h2>
+                <p>
+                    來看個範例，陣列 toy 裡面放了小新的玩具，然後使用 for 迴圈逐一寫出陣列裡面的資料：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var toy = new Array();
+                        toy[0] = '動感超人';
+                        toy[1] = '康達姆機器人';
+                        toy[2] = '肥嘟嘟佐衛門';
+                        for(n=0; n&lt;toy.length; n++){
+                            document.write(toy[n]);
+                        }
+                    </textarea>
+                    <br>
+                    如果你是程式設計新手，請務必思考這組 for 迴圈做的事！首先，n 初始化為 0，因此適合做為 toy 陣列第一筆資料的索引值，接著判斷 n 是否小於 toy 陣列的資料筆數，是的話就執行 document.write(toy[n]) 這段程式然後將 n 遞增 1，不是的話就結束迴圈，所以不會有溢位的問題。<br>
+                    <br>
+                    如此下來，這組迴圈相當於執行如下程式：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        document.write(toy[0]);
+                        document.write(toy[1]);
+                        document.write(toy[2]);
+                    </textarea>
+                    <br>
+                    這是最基本的程式設計，不熟悉的話務必多在心底反覆默想它的執行情況。<br>
+                    <br>
+                    另外，也可用陣列專屬的迴圈來改寫最上面的範例，會讓程式更簡潔。如果再輔以簡便的陣列宣告方式，整個陣列就會變得像下面這樣清爽：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var toy = [ '動感超人', '康達姆機器人', '肥嘟嘟佐衛門' ];
+                        for(n in toy){
+                            document.write(toy[n]);
+                        }
+                    </textarea>
+                    <br>
+                    陣列是最基本的資料結構，或者說絕大多數資料結構都以陣列為基礎來作延伸，許多演算法也是依賴陣列來作排序與搜尋，因此陣列對於程式設計來說是最重要的應用技術，如果不熟悉的話，請花個兩三天的時間全心全力去嘗試陣列的練習。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>陣列的進階應用</h2>
+                <p>
+                    由於 JavaScript 的陣列是 Array 物件，因此陣列可以呼叫許多物件功能，來完成很多進階的應用。
+                </p>
+                <hr>
+                <section>
+                    <h3>於首端加入資料</h3>
+                    <p>
+                        <code>
+                            1) 陣列名稱.unshift(資料);<br>
+                            2) 陣列名稱.unshift(資料1, 資料2,…);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>於尾端加入資料</h3>
+                    <p>
+                        <code>
+                            1) 陣列名稱.push(資料);<br>
+                            2) 陣列名稱.push(資料1, 資料2,…);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>插入資料</h3>
+                    <p>
+                        <code>
+                            1) 陣列名稱.splice(第幾筆資料開始, 0, 插入的資料);<br>
+                            2) 陣列名稱.splice(第幾筆資料開始, 0, 插入的資料1, 插入的資料2,…);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取代資料</h3>
+                    <p>
+                        <code>
+                            1) 陣列名稱.splice(第幾筆資料開始, 1, 插入的資料);<br>
+                            2) 陣列名稱.splice(第幾筆資料開始, 被取代的資料筆數, 插入的資料1, 插入的資料2,…);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>擷取資料（節取出來會產生新的陣列）</h3>
+                    <p>
+                        <code>
+                            陣列名稱.slice(第幾筆資料開始, 第幾筆資料結束);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>結合進其它陣列</h3>
+                    <p>
+                        <code>
+                            陣列名稱.concat(另一個陣列名稱);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>移除第一筆資料</h3>
+                    <p>
+                        <code>
+                            陣列名稱.shift();
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>移除最後筆資料</h3>
+                    <p>
+                        <code>
+                            陣列名稱.pop();
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>移除指定範圍的資料</h3>
+                    <p>
+                        <code>
+                            陣列名稱.splice(從第幾筆資料開始, 需要移除的資料筆數);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>排序資料</h3>
+                    <p>
+                        <code>
+                            陣列名稱.sort();
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>反轉資料（將資料順序顛倒過來排列，並不是逆向排序。）</h3>
+                    <p>
+                        <code>
+                            陣列名稱.reverse();
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>搜尋資料</h3>
+                    <p>
+                        <code>
+                            1) 陣列名稱.indexOf(資料);<br>
+                            2) 陣列名稱.indexOf(資料, 從第幾筆開始搜尋);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>以分隔符號將陣列資料輸出為字串</h3>
+                    <p>
+                        <code>
+                            陣列名稱.join(分隔符號);
+                        </code>
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>相容模式的檔案儲存位置可能另外放</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                我們常常會像在 Windows 7 以 Windows XP 相容模式執行程式。但有沒有覺得，有些程式保存資料好像是舊的？例如明明把某記錄檔刪除了，下次執行時居然出現那個記錄檔的訊息。或者明明把遊戲存檔覆蓋成別人的完美進度，進入時卻是自己仍在卡關的進度。<br>
+                <br>
+                這是因為相容模式執行的程式，有自己讀寫檔案的路徑：<br>
+                <br>
+                <var>C:\Users\[使用者名稱]\AppData\Local\VirtualStore</var><br>
+                <br>
+                資料不同步的問題，就是出在這個地方。因為不是不同步，而是我們不知道相容模式把資料檔案另外搞個地方來保存，讓我們搞錯檔案了～
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

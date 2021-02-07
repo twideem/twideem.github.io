@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>壓縮檔案</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>壓縮成 ZIP 格式檔案</h2>
+                <p>
+                    底下範例示範如何將 text.txt 轉為 ZIP 格式的檔案：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.BufferedInputStream;
+                        import java.io.FileInputStream;
+                        import java.io.FileOutputStream;
+                        import java.util.zip.ZipEntry;
+                        import java.util.zip.ZipOutputStream;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                try{
+
+                                    ZipOutputStream zip_output_stream = new ZipOutputStream(new FileOutputStream("archive.zip"));
+
+                                    zip_output_stream.putNextEntry(new ZipEntry("text.txt"));
+                                    byte[] buffer = new byte[1024];
+                                    BufferedInputStream buffered_input_stream = new BufferedInputStream(new FileInputStream("text.txt"), buffer.length);
+                                    int n;
+                                    while((n=buffered_input_stream.read(buffer, 0, buffer.length))!=-1){
+                                        zip_output_stream.write(buffer, 0, n);
+                                    }
+                                    buffered_input_stream.close();
+
+                                    zip_output_stream.close();
+
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    如果要壓縮多個檔案，就重複 zip_output_stream.putNextEntry() 到 buffered_input_stream.close() 的動作，建議寫成函式來使用。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>從 ZIP 格式檔案解壓</h2>
+                <hr>
+                <section>
+                    <h3>Example 2-1</h3>
+                    <p>
+                        這個範例不實用，只能解開上一個範例 archive.zip 壓縮檔裡面的單一個檔案 text.txt，但是比較能看懂 java.util.zip.ZipInputStream 是如何運作的：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.BufferedOutputStream;
+                            import java.io.FileInputStream;
+                            import java.io.FileOutputStream;
+                            import java.util.zip.ZipEntry;
+                            import java.util.zip.ZipInputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    try{
+
+                                        ZipInputStream zip_input_stream = new ZipInputStream(new FileInputStream("archive.zip"));
+
+                                        ZipEntry zip_entry = zip_input_stream.getNextEntry();
+                                        byte[] buffer = new byte[1024];
+                                        BufferedOutputStream buffered_output_stream = new BufferedOutputStream(new FileOutputStream(zip_entry.getName()), buffer.length);
+                                        int n;
+                                        while((n=zip_input_stream.read(buffer, 0, buffer.length))!=-1){
+                                            buffered_output_stream.write(buffer, 0, n);
+                                        }
+                                        buffered_output_stream.flush();
+                                        buffered_output_stream.close();
+
+                                        zip_input_stream.close();
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        可以發現，Java 提供的套件只能讀出 ZIP 裡面檔案的資料，必須自行將取得的資料用 BufferedOutputStream 輸出成檔案。看似不方便，但如果你只想讀取 ZIP 裡面檔案的內容來用，而不想先解壓文件再讀取裡面的資料時，反而覺得這樣才是對的～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2-2</h3>
+                    <p>
+                        這個範例將逐一解壓 archive.zip 裡面的所有檔案，但依然有它不實用的地方，因為無法解壓資料夾：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.BufferedOutputStream;
+                            import java.io.FileInputStream;
+                            import java.io.FileOutputStream;
+                            import java.util.zip.ZipEntry;
+                            import java.util.zip.ZipInputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    try{
+
+                                        ZipInputStream zip_input_stream = new ZipInputStream(new FileInputStream("archive.zip"));
+
+                                        ZipEntry zip_entry;
+                                        while((zip_entry=zip_input_stream.getNextEntry())!=null){
+                                            byte[] buffer = new byte[1024];
+                                            BufferedOutputStream buffered_output_stream = new BufferedOutputStream(new FileOutputStream(zip_entry.getName()), buffer.length);
+                                            int n;
+                                            while((n=zip_input_stream.read(buffer, 0, buffer.length))!=-1){
+                                                buffered_output_stream.write(buffer, 0, n);
+                                            }
+                                            buffered_output_stream.flush();
+                                            buffered_output_stream.close();
+                                        }
+
+                                        zip_input_stream.close();
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        資料夾的問題，可透過 <code>zip_entry.isDirectory()</code> 判斷是否為資料夾，是的話用 <code>java.io.File</code> 建立資料夾即可；不是的話就如範例所示，用 BufferedOutputStream 輸出檔案。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2-3</h3>
+                    <p>
+                        大多數人喜歡改用 java.util.zip.ZipFile 來解開 ZIP 檔案：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.FileOutputStream;
+                            import java.io.InputStream;
+                            import java.util.Enumeration;
+                            import java.util.zip.ZipEntry;
+                            import java.util.zip.ZipFile;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    try{
+
+                                        ZipFile zip_file = new ZipFile("archive.zip");
+
+                                        Enumeration&lt;? extends ZipEntry&gt; enumeration = zip_file.entries();
+                                        while(enumeration.hasMoreElements()){
+                                            ZipEntry zip_entry = enumeration.nextElement();
+                                            InputStream input_stream = zip_file.getInputStream(zip_entry);
+                                            FileOutputStream out_stream = new FileOutputStream(zip_entry.getName());
+                                            byte[] bytes = new byte[1024];
+                                            int n;
+                                            while((n=input_stream.read(bytes))!=-1){
+                                                out_stream.write(bytes, 0, n);
+                                            }
+                                        }
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

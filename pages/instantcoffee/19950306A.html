@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>不值得探討的議題</h1>
+                <p>弔詭的是，探討有哪些「不值得探討的議題」，也是一種很值得的議題～</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>物件導向的濫觴</h2>
+                <p>
+                    <code>
+                        setA(x){ this.a=x; //直接設定屬性 }<br>
+                        getA(){ return this.a; //直接取得屬性 }<br>
+                        isA(){ return f(a)?true:false; //判斷屬性 }<br>
+                        putA(x){ this.a=f(x); //加工設定屬性 }<br>
+                        layA(){ return f(this.a); //加工取得屬性 }<br>
+                        runA(){ f(this.a); //預設條件執行 }<br>
+                        letA(x){ f(this.a=x); //帶條件執行 }<br>
+                        doA(x){ f(x); //無條件執行 }<br>
+                        toA(x){ return (A)x; }<br>
+                    </code>
+                    <br>
+                    以為這樣能讓表達更精細，其實只是作繭自縛的行為～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>什麼叫純正的物件導向程式語言？</h2>
+                <p>
+                    如果有個程式設計語言，必須懂物件導向才有辦法使用，不懂的話絕對寫不出可以通過編譯的程式碼，那就叫純正的物件導向程式語言。<br>
+                    <br>
+                    很顯然「純正的物件導向程式語言」並不是想像中那麼高雅的發明～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Java 語言物件導向功能不夠先進？</h2>
+                <p>
+                    你真覺得用 Java SE 8 寫出來的程式碼，看起來比 J2SE 1.4 優雅嗎？<br>
+                    <br>
+                    越新版的 Java 語言，程式碼寫起來越爽快！但讀起來是不是比較優雅，有時候是兩回事～<br>
+                    <br>
+                    如果新增的語法，能把一層又一層的程式結構，減少到只剩一層，這是很棒的事！對可讀性絕對有幫助。但如果只是把一層的程式碼，從十數行減少到兩三行，這樣只是提升編寫的便利性，卻不見得能提升可讀性，甚至有可能因為更難表達前後文的關係，降低了可讀性。<br>
+                    <br>
+                    當我們問某個物件導向程式語言夠不夠先進時，通常問的是夠不夠便利。然而物件導向程式設計真正聚焦的問題，其實是可讀性。<ins>[1]</ins><br>
+                    <br>
+                    現在回頭用 J2SE 1.4 寫程式碼的話，確實會感覺到痛苦，一個簡單的工作往往要繞個圈子、或者重複類似的程式碼來完成。但有沒有發現，回頭讀 J2SE 1.4 的程式碼，雖然字數變多，但「情節卻陳鋪得很好」，反而比前後文不連貫的 Java SE 8 容易理解？<br>
+                    <br>
+                    如果你也這麼覺得的話，在使用所謂先進的語法時，先確認自己只是為了便利性？還是為了可讀性？如果你是為了更能描述前後文連貫起來的情節，而使用新的語法功能，這樣保證會寫得更出色，也才叫「先進的物件導向功能」！否則只是「便利的程式設計寫法」而已，很有可能反而破壞物件導向程式設計的原則。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>程式語言嚴謹好還是便利好？</h2>
+                <p>
+                    看場合，是寫論文的場合？還是散文的場合？與程式語言無關。<br>
+                    <br>
+                    而且，對不會看場合只管出張嘴批評的人，你怎麼寫都不對，情況會像這樣…<br>
+                    <br>
+                    <samp>
+                        把教學文章寫成論文，會被批評說太鋪陳、冗於引據，要你寫得像散文一點才好。<br>
+                        把教學文章寫成散文，會被批評說太跳調、浮於主觀，要你寫得跟論文一樣才對。<br>
+                    </samp>
+                    <br>
+                    這時記得，不要太在意<ins>[2]</ins>～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Java 語言出現哪些問題？</h2>
+                <p>
+                    Java 程式語言的問題，就是發展到後來，變成一棵會長咖啡豆的橡樹。<br>
+                    <br>
+                    這種惡搞的議題，我們不需要特別認真討論，因為它對程式設計或軟體開發並不會有什麼幫助。<br>
+                    <br>
+                    拿來閒聊的話倒是不錯，可以促進彼此的情感交流～，就像同事之間抱怨完老闆，往往可以凝聚隊友間的戰力一樣。<br>
+                    <br>
+                    真正有幫助的議題，是不斷累積解決問題的經驗，否則你只會整天在想該不該換程式語言而已。遇到困難就質疑是程式語言的問題，而不是接受它進一步解決的話，你不管換哪個程式語言，都只會重複同樣的舉動。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我程式設計功力總是輸人家</h2>
+                <p>
+                    照自己的腳步成長就好，不要計較誰強誰弱影響自己。<br>
+                    <br>
+                    程式設計是團隊協同作戰的領域，而不是拿來競爭的項目。對方功力比你強，那就大方的仰賴他；比你弱，有機會便可以幫助他。共同目標是協同完成開發專案，不是爭強鬥勝。<br>
+                    <br>
+                    有時候反而是功力較弱的人，更巧妙地解決問題！因為功力較強的人可能傾向自己用刁鑽手法解決問題，無意之間把事情複雜化。結果想法簡單的人，反過來留意手邊既有的東西能不能簡單湊在一起，做為解決方案～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>聰明才智（天分）</h2>
+                <p>
+                    我也沒有過人的聰明才智，例如，雖然有很多書籍與文章指導我如何使用「多執行緒（multithreading）」來「並行處理（parallel processing）」提升程式執行效率，但我就是不曾成功過，每次用了只會搞砸設計而已。那種感覺就像寫傳統結構化程式設計，到後來程式纏在一起，難以追蹤一樣糟糕。多執行緒並行運算技術已經超出我能力所及，不是以我這種程度的聰明才智能做好的議題！<br>
+                    <br>
+                    我能做的，就是承認自己不夠聰明，然後避免為了提升執行效率使用多執行緒。<br>
+                    <br>
+                    我盡力完成自己能力所及的事，例如建立這個網站，將物件導向的心得分享給大家。<br>
+                    <br>
+                    聰明才智當然重要，能讓你高人一等。但沒有的話，努力做自己，也是能在程式設計這條路走下去的。跟在天才的腳步後面走，並不是什麼壞事，至少你朝著他的方向正確往前進，比調頭回去強多了！
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>正確的編排方式</h2>
+                <p>
+                    要求使用某套絕對性的編排風格，才是好程式碼，也是不值得探討的議題。<br>
+                    <br>
+                    只要編排程式碼的方式是有規矩可循、而不是變來變去，讓閱讀的人能夠適應，就是好的編排風格。其實團隊達成協議該怎樣做即可，而不是要求非得使用程式語言官方推薦的風格才行。<br>
+                    <br>
+                    但大多數人認為，非得怎樣怎樣，才是正確的編排方式，否則就批評程式碼寫得很糟糕，這點我不苟同～<br>
+                    <br>
+                    能不能適應別人的程式碼編排風格，也是程式碼編排風格的議題之一！如果對編排的觀念，只是「要求看到自己想看到的程式碼編排方式」，卻不願「要求自己適應看不習慣的編排風格」，那也不是很好的行事風格！
+                </p>
+                <hr>
+                <section>
+                    <h3>標準編排風格</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.util.Arrays;
+                            import java.util.LinkedList;
+                            import java.util.Random;
+
+                            public class Lottery {
+
+                                private int[] numbers = new int[5];
+                                private Integer[] tickets = {  1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
+                                                              11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                                              21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                                                              31, 32, 33, 34, 35, 36, 37, 38, 39 };
+
+                                public void random() {
+
+                                    LinkedList&lt;Integer&gt; linked_list =
+                                        new LinkedList&lt;Integer&gt;(Arrays.asList(tickets));
+
+                                    Random random = new Random();
+
+                                    for (int n = 0; n &lt; numbers.length; n++) {
+
+                                        int x = random.nextInt(linked_list.size());
+                                        numbers[n] = linked_list.get(x);
+                                        linked_list.remove(x);
+
+                                    }
+
+                                }
+
+                                public void sort() {
+
+                                    Arrays.sort(numbers);
+
+                                }
+
+                                public void print() {
+
+                                    for (int number : numbers) {
+
+                                        System.out.println(number);
+
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        這是很棒的編排風格，只要遇到運算子，左右都用空白，可以凸顯識別名稱，大為提升辨識效率。上下行也使用空白，整體程式碼都在一個對稱的空間裡，看起來非常舒適，是每個人都採用的編排風格。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>壓縮編排風格</h3>
+                    <p>
+                        然後來看為人詬病的編排風格。<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.util.Arrays;
+                            import java.util.LinkedList;
+                            import java.util.Random;
+
+                            public class Lottery{
+
+                                private int[] numbers = new int[5];
+                                private Integer[] tickets = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39 };
+
+                                public void random(){
+
+                                    LinkedList&lt;Integer&gt; linked_list = new LinkedList&lt;Integer&gt;(Arrays.asList(tickets));
+
+                                    Random random = new Random();
+
+                                    for(int n=0; n&lt;numbers.length; n++){
+                                        int x = random.nextInt(linked_list.size());
+                                        numbers[n] = linked_list.get(x);
+                                        linked_list.remove(x);
+                                    }
+
+                                }
+
+                                public void sort(){
+                                    Arrays.sort(numbers);
+                                }
+
+                                public void print(){
+                                    for(int number:numbers) System.out.println(number);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        很少人有機會能在 80 欄 24 列顯示器的電腦修改程式，甚至大多數人覺得自己這輩子只會在至少 1024*768 螢幕解析度的環境寫視窗應用程式，所以並不是每個人都介意每行超過 79 個字元。甚至也有少數人的案例是不喜歡多行閱讀，反而覺得一行讀完一段程式碼還比較有效率。不過這個範例更極端，它刻意壓縮行數，凸顯集中在一起的程式碼區塊。<br>
+                        <br>
+                        值得一提的是，第 29 行其實每個人都這樣寫：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            for(int number:numbers)
+                                System.out.println(number);
+                        </textarea>
+                        <br>
+                        然後批評寫成一行是不好的習慣。<br>
+                        <br>
+                        但這卻是很容易出錯的編排習慣！因為想在迴圈內追加程式碼時，常常直接在下一行就加入程式碼，然後沒意識到應該加入大括號，寫成：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            for(int number:numbers)
+                                System.out.println(number);
+                                System.out.println("Press ant key to exit.");
+                        </textarea>
+                        <br>
+                        還不如即使迴圈裡面只有一行程式，也加入大括號。<br>
+                        <br>
+                        而將迴圈與程式與寫成一行的話，想追加程式碼時，你會先換行，這時反而會意識到應該加入大括號。<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            for(int number:numbers) System.out.println(number);
+                        </textarea>
+                        <br>
+                        ↓<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            for(int number:numbers){
+                                System.out.println(number);
+                                System.out.println("Press ant key to exit.");
+                            }
+                        </textarea>
+                        <br>
+                        另外，第 16 行的 for 迴圈，並未讓運算子左右使用兩個空白，來凸顯變數名稱。我想這是因為 for 裡面變數名稱通常是 i，沒什麼好辨識的，所以乾脆壓縮空間來凸顯 initialization、condition、increment 三個區間吧？<br>
+                        <br>
+                        我本來也不喜歡這種風格，第一眼覺得東西堆在一起很雜亂，但試著去適應後，發現其實有它的優點存在。後來為了節省網頁空間，將網站的範例改成這種可以減少檔案大小的風格…看久以後反而覺得標準的編排風格很散亂～
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 甚至物件導向程式設計的精神，說不定就是故意多敲好幾行程式碼，比傳統程式設計更像在寫一篇文章，來提高可讀性。（註：物件導向程式設計的精神，與物件導向軟體工程的精神，是不一樣的事。）<br>
+                    [2] 網路有句俗話說：「跟嘴砲認真，你就輸了！」
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

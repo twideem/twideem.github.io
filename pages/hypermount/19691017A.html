@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>&lt;META&gt;</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>作用</h2>
+                <p>
+                    附加資訊在網頁裡面，而不視為內容的一部分。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>用法</h2>
+                <p>
+                    <textarea class='brush:html'>
+                        &lt;html&gt;
+                            &lt;head&gt;
+                                &lt;meta name="名稱" content="附加訊息"&gt;
+                            &lt;/head&gt;
+                        &lt;/html&gt;
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>常用名稱</h2>
+                <table>
+                    <tr><td>AUTHOR</td><td>作者。</td></tr>
+                    <tr><td>COPYRIGHT</td><td>版權宣告。</td></tr>
+                    <tr><td>DESCRIPTION</td><td>簡介、摘要。</td></tr>
+                    <tr><td>DISTRIBUTION</td><td>發布區域、限定地區。</td></tr>
+                    <tr><td>GENERATOR</td><td>產生網頁的工具。<ins>[1]</ins></td></tr>
+                    <tr><td>KEYWORDS</td><td>提供搜尋的關鍵字。</td></tr>
+                    <tr><td>ROBOTS</td><td>給搜尋引擎的權限，可設定為：all（允許搜尋全部）、follow（允許搜尋超鏈結）、index（允許搜尋內容）、nofollow（禁止搜尋超鏈結）、none（禁止搜尋全部）、noindex（禁止搜尋內容）。</td></tr>
+                    <tr><td>VIEWPORT</td><td>頁面尺寸，可用鍵值對的語法設定 width（通常設為 device-width）、initial-scale（初始縮放倍率）、maximum-scale（最大縮放倍率）、user-scalabl（使用者能否自訂縮放倍率，以 0 和 1 表示）。</td></tr>
+                </table>
+                <p>
+                    META 的 NAME 值有標準、非標準之分，像上面的 ROBOTS 就不是標準，COPYRIGHT 則是已汰除。<br>
+                    <br>
+                    但夾帶的附加訊息有必要規範與標準嗎？這部分我的態度是沒必要，有人需要夾帶這條訊息，那就夾帶給他，並不影響不需要的人，所以也不會有相容性的問題。<br>
+                    <br>
+                    夾帶訊息的相容性和影響層面，是由需要的人定義與承擔，需求者自己就是規範與標準。<br>
+                    <br>
+                    所以，想要滿足某方需求，就放手去用，不用管標準與規範。夾帶訊息本來就是滿足不同需求者用的，用於這種無法統一標準化規範的場合。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>HTTP-EQUIV 屬性</h2>
+                <p>
+                    META 除了藉由 NAME 屬性提供附加訊息，還有另外一個功能，就是用 HTTP-EQUIV 屬性提供參數給瀏覽器，以執行軟體本身的功能。<br>
+                    <br>
+                    <textarea class='brush:html'>
+                        &lt;html&gt;
+                            &lt;head&gt;
+                                &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;
+                                &lt;meta http-equiv="default-style" content="text/css"&gt;
+                                &lt;meta http-equiv="refresh" content="10"&gt;
+                            &lt;/head&gt;
+                        &lt;/html
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 JavaScript 取得 META 訊息</h2>
+                <p>
+                    <textarea class='brush:html'>
+                        &lt;!DOCTYPE&gt;
+                        &lt;html&gt;
+                            &lt;head&gt;
+                                &lt;meta name="options" content="hello"&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;script&gt;
+                                    var elements = document.getElementsByName("options");
+                                    document.write(elements[0].content);
+                                &lt;/script&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 早期 FrontPage 和 Dreamweaver 產生的 HTML 格式並不相容！FrontPage 產生的 HTML 是 IE 能正常顯示就好的不標準格式，Dreamweaver 是遵循 W3C 規範，在 Netscape Navigator 和 IE 都能正常顯示。因此在 2000 年代初期，有時候很需要藉由 generator 的資訊，判斷這會是怎樣規範的 HTML。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

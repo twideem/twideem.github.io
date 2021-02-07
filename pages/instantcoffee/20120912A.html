@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Java 練習帳</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                <textarea class='brush:java'>
+                    import java.nio.file.*;
+                    import java.util.*;
+                    import java.io.*;
+
+                    public class Main{
+
+                        public static void main(String[] args){
+
+                            // 亂數
+                            System.out.println(Math.floor(Math.random()*10));
+                            System.out.println(Math.ceil(Math.random()*10));
+                            System.out.println(Math.round(Math.random()*10));
+
+                            // 泡沫排序
+                            int[] array = {8,5,3,9};
+
+                            for(int m=0; m&lt;array.length-1; m++){
+                                for(int n=0; n&lt;array.length-1-m; n++){
+                                    if(array[n]&gt;array[n+1]){
+                                        int e = array[n];
+                                        array[n] = array[n+1];
+                                        array[n+1] = e;
+                                    }
+                                }
+                            }
+
+                            for(int n : array) System.out.print(n);
+
+                            // 純文字讀寫
+                            try{
+                                FileWriter fw = new FileWriter("text.txt");
+                                fw.write("ABC");
+                                fw.close();
+                                BufferedReader fr = new BufferedReader(new FileReader("text.txt"));
+                                System.out.print(fr.readLine());
+                            }
+                            catch(Exception exception){
+                                exception.printStackTrace();
+                            }
+
+                            // NIO2 純文字讀寫
+                            try{
+                                Files.write(Paths.get("text.txt"), Arrays.asList("AAA","BBB","CCC"));
+                                List&lt;String&gt; lines = Files.readAllLines(Paths.get("text.txt"));
+                                for(String line:lines) System.out.print(line);
+                            }
+                            catch(Exception exception){
+                                exception.printStackTrace();
+                            }
+
+                        }
+
+                    }
+                 </textarea>
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

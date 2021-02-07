@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>.fix{margin-bottom:20px}</style>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>CSS 釋疑</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>font-family:通用字型</h2>
+                <table>
+                    <tr><td>Serif</td><td>襯線體，例如 Times New Roman、細明體。</td></tr>
+                    <tr><td>Sans-serif</td><td>無襯線體，例如 Arial、正黑體。<ins>[1]</ins></td></tr>
+                    <tr><td>Monospace</td><td>等寬體，例如 Courier。</td></tr>
+                    <tr><td>Cursive</td><td>手寫體，例如 Comic Sans。</td></tr>
+                    <tr><td>Fantasy</td><td>藝術體，例如 Impact。</td></tr>
+                </table>
+                <hr>
+                <section>
+                    <h3>範例</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;span style='font-family:Cursive'&gt;Hello, world!&lt;/span&gt;
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>position</h2>
+                <p>
+                    position 樣式有四種設定值：static、relative、absolute、fixed。
+                </p>
+                <hr>
+                <section>
+                    <h3>static（預設值）</h3>
+                    <p>
+                        自動將元素排列在前一個元素之後，通常，前一個元素的 display 是 block，就排在下方，是 inline 的話，就擺在後面。<br>
+                        <br>
+                        也因為自動排列的關係，所以 position 為 static 的狀況下，設定 left 與 top 是沒有作用的。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>relative</h3>
+                    <p class='fix'>
+                        可用 left 與 top 設定位置。以父元素的原點為起點，不過讓人很難理解的是，它先照 static 的規則，將元素排在前一個元素後面，才來就定位置：
+                    </p>
+                    <div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+                        <div style='background-color:pink;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:relative;width:150px'>
+                            position:relative;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                        <div style='background-color:wheat;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:relative;width:150px'>
+                            position:relative;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                    </div>
+                    <div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+                        <div style='background-color:pink;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:relative;width:150px'>
+                            position:relative;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                        <div style='background-color:wheat;font-family:Courier;font-size:8pt;height:60px;left:30px;padding:10px;top:30px;position:relative;width:150px'>
+                            position:relative;<br>
+                            left:30px;<br>
+                            top:30px;<br>
+                        </div>
+                    </div>
+                    <p>
+                        第一個線框中，紅、黃兩者都是 (15,15)，但後面的黃色區塊前面的紅色區塊給擠了下來。<br>
+                        <br>
+                        第二個線框，黃色區塊改為 (30,30)，如果扣除紅色區塊的話，黃色區塊確實是 (30,30) 沒錯，只是被紅色區塊給卡了下來。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>absolute</h3>
+                    <p class='fix'>
+                        可用 left 與 top 設定位置，起點為父元素的原點，而且這次沒有後一個元素要被前一個元素卡下來的問題。<br>
+                        <br>
+                        例如，紅色區塊是 (15,15)，黃色區塊是 (30,30) 的話，顯示結果如下：
+                    </p>
+                    <div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+                        <div style='background-color:pink;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                        <div style='opacity:0.75;background-color:wheat;font-family:Courier;font-size:8pt;height:60px;left:30px;padding:10px;top:30px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:30px;<br>
+                            top:30px;<br>
+                        </div>
+                    </div>
+                    <p class='fix'>
+                        兩者都是 (15,15) 的話，表示位置相同，因此疊在一起：
+                    </p>
+                    <div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+                        <div style='background-color:pink;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                        <div style='opacity:0.75;background-color:wheat;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                    </div>
+                    <p class='fix'>
+                        由於 absolute 好理解多了，所以請再跟 relative 比較看看，absolute 要與 relative 結果一致的話，left 與 top 分別是：
+                    </p>
+                    <div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+                        <div style='background-color:pink;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                        <div style='background-color:wheat;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:95px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:15px;<br>
+                            top:95px;<br>
+                        </div>
+                    </div>
+                    <div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+                        <div style='background-color:pink;font-family:Courier;font-size:8pt;height:60px;left:15px;padding:10px;top:15px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:15px;<br>
+                            top:15px;<br>
+                        </div>
+                        <div style='background-color:wheat;font-family:Courier;font-size:8pt;height:60px;left:30px;padding:10px;top:110px;position:absolute;width:150px'>
+                            position:absolute;<br>
+                            left:30px;<br>
+                            top:110px;<br>
+                        </div>
+                    </div>
+                    <p>
+                        藉由 absolute 這直覺的 (left, top) 位置設定，了解到 relative 那詭異的位置排列模式，原來只是被前一個元素給卡了下來而已；如果扣除前一個元素的話，確實是照所指定的 (left, top) 距離就定位置。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>fixed</h3>
+                    <p>
+                        可用 left 與 top 設定位置，起點以視野所見的頁面最左上角為原點，而且拉動捲軸會自動調整位置，永遠固定在所見頁面的那個位置。<br>
+                        <br>
+                        如果你無法體會什麼是固定位置的話，<a href='javascript:f()'>請按我一下</a>，然後上下移動捲動看看。
+                    </p>
+                    <div style='background-color:wheat;display:none;font-family:Courier;font-size:8pt;height:60px;left:480px;padding:10px;top:430px;position:fixed;width:150px' id='fixedposition'>
+                        position:fixed;<br>
+                        left:480px;<br>
+                        top:430px;<br>
+                    </div>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[1] sans 源自法語，無的意思。</p>
+            </footer>
+
+        </article>
+
+        <script>
+            function f(){
+                document.getElementById('fixedposition').style.display='block'
+            }
+        </script>
+
+    </body>
+
+</html>

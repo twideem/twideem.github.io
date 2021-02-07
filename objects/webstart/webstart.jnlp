@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp>
+	<resources>
+		<jar href="https://twideem.github.io/objects/webstart/application.jar"/>
+	</resources>
+	<application-desc main-class="Main"/>
+</jnlp>

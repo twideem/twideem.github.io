@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>javac</h1>
+                <p>基本格式：<code>javac -參數 參數值 [-參數2 參數值2...] 原始碼</code></p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>常用參數</h2>
+                <table>
+                    <tr><td>-d</td><td>指定編譯出來的類別，要存放在哪個資料夾。</td></tr>
+                    <tr><td>-cp 或 -classpath</td><td>指定類別或掛載第三方套件到 CLASSPATH 環境變數。</td></tr>
+                    <tr><td>-encoding</td><td>指定原始碼的字元編碼系統。</td></tr>
+                </table>
+                <hr>
+                <p>
+                    使用 -d 指定資料夾時，必須已經存在，否則會找不到。<br>
+                    <br>
+                    使用 -cp 設置 CLASSPATH 環境變數時，Windows 可用 <code>;</code> 分隔多個，Linux 則是 <code>:</code>。<br>
+                    <br>
+                    另外還有一個雖然常用、但不建議使用的 <code>-sourcepath</code> 參數。它會在編譯器從掛載的 CLASSPATH 套件裡面尋找已經編譯好的 *.class 之前，先從指定的資料夾找看看有沒有這個套件的 *.java 可用。之所以不建議使用，是應該改變你規劃資料夾的方式才對，否則會增加除錯時的複雜度。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>進階參數</h2>
+                <table>
+                    <tr><td>-source</td><td>以哪一版的 Java 語法來編譯原始碼。</td></tr>
+                    <tr><td>-target</td><td>以哪一版的 Java 架構來產生位元檔。</td></tr>
+                </table>
+                <hr>
+                <p>
+                    我在 Windows 8 用 Java SE 8 以 -source 1.3 -target 1.3 編譯的 Applet 程式，是可以在安裝 JRE 1.3 的 Windows 98 用 IE5 順利執行的。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其它參數</h2>
+                <table>
+                    <tr><td>-version</td><td>查閱 JDK 的版本。</td></tr>
+                    <tr><td>-verbose</td><td>顯示更詳細的編譯錯誤訊息。</td></tr>
+                    <tr><td>-Xlint</td><td>顯示新版編譯器建議的新做法。</td></tr>
+                    <tr><td>-nowarm</td><td>停用警告訊息。</td></tr>
+                    <tr><td>-g</td><td>編譯出來的類別含完整除錯用資訊。</td></tr>
+                    <tr><td>-g:none</td><td>編譯出來的類別只含位元碼，連反組譯用的資訊都沒。</td></tr>
+                    <tr><td>-O</td><td>優化編譯，提昇類別的執行效率。</td></tr>
+                    <tr><td>-help</td><td>顯示並說明更多其它的參數。</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>範例</h2>
+                <hr>
+                <section>
+                    <h3>javac HelloWorld.java</h3>
+                    <p>
+                        直接編譯當前所在路徑的 HelloWorld.java 原始碼檔案，編譯出來的類別也放在當前路徑。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>javac -d bin src/*.java</h3>
+                    <p>
+                        編譯 src 資料夾裡面的所有 *.java 原始碼檔案，編譯出來的類別放在 bin 資料夾裡面。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>javac -cp lib -d bin src/*.java</h3>
+                    <p>
+                        掛載 lib 資料夾為 CLASSPATH，然後編譯 src 資料夾裡面的 *.java 原始碼檔案，編譯出來的類別放在 bin 資料夾裡面。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>javac -cp lib/* -d bin src/*.java</h3>
+                    <p>
+                        掛載 lib 資料夾為 CLASSPATH，且包含任何丟在 lib 資料夾裡的 *.jar 檔第三方 API。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其他編譯與執行問題</h2>
+                <p>
+                    我用 64 位元 Java SE 8 編譯的 *.class，是可以在 32 位元 JRE8 執行的，可見 Java 編譯出來的程式是相容的，*.class 沒有 32 位元和 64 位元之分～<br>
+                    <br>
+                    有執行問題的，是 Windows 只有 32 位元的 Firefox 瀏覽器可以安裝，它無法使用 64 位元的 JRE，所以想在 Firefox 跑 Applet 的人，只能裝 32 位元的 JRE。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

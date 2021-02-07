@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>abstract</h1>
+                <p>
+                    abstract 可將 method 定義為：「現在我只打算宣告 method，但不打算實作出內容，留給繼承者去實作。」<br>
+                    <br>
+                    這功能讓 Java 能夠在程式設計上，更清晰描述對於「多型」的概念，在 interface 出現之前，abstract 是實現物件導向開發手法非常重要的語法。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>宣告 abstract class</h2>
+                <p>
+                    首先，在 method 前面使用 abstract 做為 modifier（修飾子），就不用實作出內容。<br>
+                    <br>
+                    此外 Java 規定 class 裡面出現 abstract method 的話，class 也要宣告為 abstract。<br>
+                    <br>
+                    於是一個含有 abstract method 的 class 大概長這樣：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public abstract class A{
+                            public abstract void f();
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>實作 abstract class</h2>
+                <p>
+                    abstract class 必須用「繼承」的方式來實作，程式如下：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class B extends A{
+                            public void f(){
+                                System.out.print("Hello");
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    B 繼承 A 後，必須實作出 f()，才能通過編譯。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 abstract class</h2>
+                <p>
+                    有了這種開發手法，如果讓多個 class 繼承 abstract class，強迫它們實作出共通的 method，做為一致性的操作介面，就能讓「多型」的概念更清晰。<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        abstract class A{
+                            abstract String f1();
+                        }
+
+                        public class B extends A{
+                            public String f1(){
+                                return "BBB";
+                            }
+                        }
+
+                        public class C extends A{
+                            public String f1(){
+                                return "CCC";
+                            }
+                        }
+
+                        public class D{
+                            public void f2(A a){
+                                System.out.println(a.f1());
+                            }
+                        }
+
+                        public class Main{
+                            public static void main(String[] args){
+                                B b = new B();
+                                C c = new C();
+                                D d = new D();
+                                d.f2(b);
+                                d.f2(c);
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    程式會輸出 BBB 和 CCC 兩行訊息。<br>
+                    <br>
+                    重點在於，B 和 C 繼承自 A 後，被強迫必須出實作 f1()。接著 D 裡面的 f2() 以 A 做為參數，如此一來 B 和 C 因為等同 A，所以可以被當作參數來代入。<br>
+                    <br>
+                    abstract 讓「抽象」→「繼承」→「多型」的概念，在程式設計的表達上顯得更強烈，提高「多型」的可讀性。<br>
+                    <br>
+                    abstract 的出現，更可以在觀念上，把一般 class 簡單定義為「封裝」即可，讓「物件導向」的觀念更容易建立。因為，「封裝」在物件導向的觀念上，其實無關乎「多型」，「封裝」訴求的是「將資料與操作集合成單一結構」，也就是「提供比傳統程式設計更先進的程式結構」而已。「繼承」才是實現「多型」的手法，而「繼承」需要「抽像」的觀念（將具體的事物概念化）才能規劃得宜<ins>[1]</ins>。因此 abstract 的出現，讓「多型」的概念顯得更清晰。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>abstract class</h2>
+                <p>
+                    abstract class 只是說能夠將裡面的 method 定義為不需實作，並不是說全部 method 都不需實作。<br>
+                    <br>
+                    所以 abstract class 也設計成如下混雜的形式：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public abstract class A{
+
+                            public abstract void f1();
+
+                            public void f2(){
+                                System.out.print("Hello!");
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    確定功能該如何實作出來的 method，就不需使用 abstract，覺得交由繼承的類別來實作比較妥當，就使用 abstract。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 另有一說，將「封裝」加上「繼承」後，才是一種「抽象」的行為，所以「封裝、繼承、多型」這個過程，應該簡化為「抽象、多型」才對。但「學術派物件導向程式設計」不接受這種說法，認為「封裝」與「抽象、繼承、多型」是兩種不同的應用模式。<br>
+                    [*] 與 abstract class（抽象類別）相反的，就叫 concrete class（具象類別）。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

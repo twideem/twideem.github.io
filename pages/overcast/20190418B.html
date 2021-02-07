@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('dotNET')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>用 C# 堆砌程式：範例集</h1>
+            </header>
+
+            <hr id='file'>
+
+            <section>
+                <h2>讀寫檔案資料</h2>
+                <hr>
+                <section>
+                    <h3>使用 File 簡易讀寫</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.IO;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    //寫入資料
+                                    string[] strings = {"AAA", "BBB", "CCC"};
+                                    File.WriteAllLines("Sample.txt", strings);
+                                    File.AppendAllText("Sample.txt", "DDD");
+                                    //讀出資料
+                                    string[] lines = File.ReadAllLines("Sample.txt");
+                                    foreach(string line in lines){
+                                        Console.WriteLine(line);
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output class='editor'>
+                            AAA<br>
+                            BBB<br>
+                            CCC<br>
+                            DDD<br>
+                        </output>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC<br>
+                            DDD
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>使用 StreamWriter 和 StreamReader 分批讀寫</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.IO;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    //寫入資料
+                                    StreamWriter writer = new StreamWriter("Sample.txt");
+                                    writer.WriteLine("AAA");
+                                    writer.WriteLine("BBB");
+                                    writer.WriteLine("CCC");
+                                    writer.Close();
+                                    //讀出資料
+                                    StreamReader reader = new StreamReader("Sample.txt");
+                                    while(!reader.EndOfStream){
+                                        Console.WriteLine(reader.ReadLine());
+                                    }
+                                    reader.Close();
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output class='editor'>
+                            AAA<br>
+                            BBB<br>
+                            CCC<br>
+                        </output>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>使用 FileStream 隨機存取</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.IO;
+                            using System.Text;
+
+                            class MainProgram{
+
+                                static void Main(){
+
+                                    //寫入資料
+                                    FileStream stream1 = File.Create("Sample.txt");
+
+                                    stream1.Seek(0, SeekOrigin.Begin);
+                                    stream1.Write(Encoding.UTF8.GetBytes("猜猜\n"), 0, 7); //中文字佔 3 bytes 大小，其他字元 1 byte，所以填 7，也就是 3+3+1。
+
+                                    stream1.Seek(7, SeekOrigin.Begin);
+                                    stream1.Write(Encoding.UTF8.GetBytes("我是誰"), 0, 9);
+
+                                    stream1.Close();
+
+                                    //從位置 10 讀出 6 bytes 資料
+                                    FileStream stream2 = new FileStream("Sample.txt", FileMode.Open);
+
+                                    stream2.Seek(10, SeekOrigin.Begin);
+                                    byte[] bytes = new byte[6];
+                                    stream2.Read(bytes, 0, 6);
+
+                                    Console.Write(Encoding.UTF8.GetChars(bytes));
+
+                                    stream2.Close();
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output class='editor'>
+                            猜猜<br>
+                            我是誰<br>
+                        </output>
+                        <br>
+                        <output>
+                            是誰
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>使用 BinaryWriter 和 BinaryReader 讀寫數值資料</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.IO;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    //寫入資料
+                                    BinaryWriter writer = new BinaryWriter(File.Open("Sample.dat", FileMode.Create));
+                                    writer.Write(1);
+                                    writer.Write(22);
+                                    writer.Write(333);
+                                    writer.Close();
+                                    //讀出資料
+                                    BinaryReader reader = new BinaryReader(File.Open("Sample.dat", FileMode.Open));
+                                    int a = reader.ReadInt32();
+                                    int b = reader.ReadInt32();
+                                    int c = reader.ReadInt32();
+                                    reader.Close();
+                                    Console.Write(a+b+c);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            356
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='xml'>
+
+            <section>
+                <h2>XML</h2>
+                <hr>
+                <section>
+                    <h3>新建 XML 文件</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System.Xml;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    //建立新 XML 結構
+                                    XmlDocument document = new XmlDocument();
+                                    document.LoadXml("&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;html&gt;&lt;/html&gt;");
+                                    //新增元素
+                                    XmlElement element = document.CreateElement("body");
+                                    element.SetAttribute("style", "color:blue");
+                                    document.DocumentElement.AppendChild(element);
+                                    //新增節點
+                                    XmlNode node = document.CreateNode(XmlNodeType.Element, "p", ""); //Attribute CDATA Comment Document DocumentFragment DocumentType Element EndElement EndEntity Entity EntityReference None Notation ProcessingInstruction SignificantWhitespace Text Whitespace XmlDeclaration
+                                    node.InnerText = "Hello";
+                                    XmlAttribute attribute = document.CreateAttribute("style");
+                                    attribute.Value = "color:red";
+                                    node.Attributes.SetNamedItem(attribute);
+                                    element.AppendChild(node);
+                                    //儲存
+                                    document.Save("Save.xml");
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output class='editor'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+                            &lt;html&gt;<br>
+                            &nbsp; &lt;body style="color:blue"&gt;<br>
+                            &nbsp; &nbsp; &lt;p style="color:red"&gt;Hello&lt;/p&gt;<br>
+                            &nbsp; &lt;/body&gt;<br>
+                            &lt;/html&gt;
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>讀取 XML 文件</h3>
+                    <section>
+                        <h4>Sample.xml</h4>
+                        <p>
+                            <textarea class='brush:xml'>
+                                &lt;?xml version='1.0' encoding='UTF-8'?&gt;
+                                &lt;html&gt;
+                                &nbsp; &nbsp; &lt;body style='color:blue'&gt;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &lt;h1&gt;Homepage&lt;/h1&gt;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Paragraph 1&lt;/p&gt;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Paragraph 2&lt;/p&gt;
+                                &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Paragraph 3&lt;/p&gt;
+                                &nbsp; &nbsp; &lt;/body&gt;
+                                &lt;/html&gt;
+                            </textarea>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>MainProgram.cs</h4>
+                        <p>
+                            <textarea class='brush:cs'>
+                                using System;
+                                using System.Xml;
+
+                                class MainProgram{
+
+                                    static void Main(){
+                                        //載入 XML
+                                        XmlDocument document = new XmlDocument();
+                                        document.Load("Sample.xml");
+                                        //取得元素和內容
+                                        XmlNodeList nodes = document.SelectNodes("html/body/p");
+                                        foreach(XmlNode n in nodes){
+                                            Console.WriteLine(n.InnerText);
+                                        }
+                                        //取得屬性
+                                        XmlNode node = document.SelectSingleNode("html/body");
+                                        Console.Write(node.Attributes["style"].Value);
+                                        //修改內容
+                                        nodes[0].InnerText = "NULL";
+                                        //修改屬性
+                                        node.Attributes["style"].Value = "color:red";
+                                        //儲存
+                                        document.Save("Save.xml");
+                                        //以 Tab 縮排儲存
+                                        //XmlWriterSettings settings = new XmlWriterSettings();
+                                        //settings.Indent = true;
+                                        //settings.IndentChars = ("\t");
+                                        //XmlWriter writer = XmlWriter.Create("Save.xml", settings);
+                                        //document.Save(writer);
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                Paragraph 1<br>
+                                Paragraph 2<br>
+                                Paragraph 3<br>
+                                color:blue<br>
+                            </output>
+                            <br>
+                            <output class='editor'>
+                                &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+                                &lt;html&gt;<br>
+                                &nbsp; &lt;body style="color:red"&gt;<br>
+                                &nbsp; &nbsp; &lt;h1&gt;Homepage&lt;/h1&gt;<br>
+                                &nbsp; &nbsp; &lt;p&gt;NULL&lt;/p&gt;<br>
+                                &nbsp; &nbsp; &lt;p&gt;Paragraph 2&lt;/p&gt;<br>
+                                &nbsp; &nbsp; &lt;p&gt;Paragraph 3&lt;/p&gt;<br>
+                                &nbsp; &lt;/body&gt;<br>
+                                &lt;/html&gt;
+                            </output>
+                        </p>
+                    </section>
+                </section>
+            </section>
+
+            <hr id='xpath'>
+
+            <section>
+                <h2>XPath（<a href='http://msdn.microsoft.com/zh-tw/library/bb399445(v=vs.120)' target='_blank'>本文轉貼自 MSDN</a>）</h2>
+                <p>
+                    <code>./author</code><br>
+                    目前內容中的所有 &lt;author&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
+                    <br>
+                    <code>author</code><br>
+                    目前內容中的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>first.name</code><br>
+                    目前內容中的所有 &lt;first.name&gt; 項目。<br>
+                    <br>
+                    <code>/bookstore</code><br>
+                    這份文件的文件項目 (&lt;bookstore&gt;)。<br>
+                    <br>
+                    <code>//author</code><br>
+                    文件中的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>book[/bookstore/@specialty=@style]</code><br>
+                    所有 &lt;book&gt; 項目，其 style 屬性值等於文件根上之 &lt;bookstore&gt; 項目的 specialty 屬性值。<br>
+                    <br>
+                    <code>author/first-name</code><br>
+                    當做 &lt;author&gt; 項目子系的所有 &lt;first-name&gt; 項目。<br>
+                    <br>
+                    <code>bookstore//title</code><br>
+                    位於 &lt;bookstore&gt; 項目一或多層深的所有 &lt;title&gt; 項目 (任意子代)。請注意，其不同於下一資料列的運算式。<br>
+                    <br>
+                    <code>bookstore/*/title</code><br>
+                    當做 &lt;bookstore&gt; 項目子系的所有 &lt;title&gt; 項目。<br>
+                    <br>
+                    <code>bookstore//book/excerpt//emph</code><br>
+                    所有 &lt;emph&gt; 項目，其位於 &lt;book&gt; 項目的 &lt;excerpt&gt; 子系之任何位置，以及 &lt;bookstore&gt; 項目的任何位置。<br>
+                    <br>
+                    <code>.//title</code><br>
+                    位於目前內容中一或多層深的所有 &lt;title&gt; 項目。請注意，唯有在此情況下，才需要使用句點標記法。<br>
+                    <br>
+                    <code>author/*</code><br>
+                    當做 &lt;author&gt; 項目子系的所有項目。<br>
+                    <br>
+                    <code>book/*/last-name</code><br>
+                    當做 &lt;book&gt; 項目子系的所有 &lt;last-name&gt; 項目。<br>
+                    <br>
+                    <code>*/*</code><br>
+                    目前內容的所有孫代項目。<br>
+                    <br>
+                    <code>*[@specialty]</code><br>
+                    含 specialty 屬性的所有項目。<br>
+                    <br>
+                    <code>@style</code><br>
+                    目前內容的 style 屬性。<br>
+                    <br>
+                    <code>price/@exchange</code><br>
+                    目前內容中所有 &lt;price&gt; 項目的 exchange 屬性。<br>
+                    <br>
+                    <code>price/@exchange/total</code><br>
+                    傳回空節點集，因為屬性不含項目子系。XML 路徑語言 (XPath) 文法允許這個運算式，但其效果不大。<br>
+                    <br>
+                    <code>book[@style]</code><br>
+                    內含目前內容之 style 屬性的所有 &lt;book&gt; 項目。<br>
+                    <br>
+                    <code>book/@style</code><br>
+                    目前內容之所有 &lt;book&gt; 項目的 style 屬性。<br>
+                    <br>
+                    <code>@*</code><br>
+                    目前項目內容的所有屬性。<br>
+                    <br>
+                    <code>./first-name</code><br>
+                    目前內容節點中的所有 &lt;first-name&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
+                    <br>
+                    <code>first-name</code><br>
+                    目前內容節點中的所有 &lt;first-name&gt; 項目。<br>
+                    <br>
+                    <code>author[1]</code><br>
+                    目前內容節點中的第一個 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[first-name][3]</code><br>
+                    具有 &lt;first-name&gt; 子系的第三個 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>my:book</code><br>
+                    my 命名空間的 &lt;book&gt; 項目。<br>
+                    <br>
+                    <code>my:*</code><br>
+                    my 命名空間的所有項目。<br>
+                    <br>
+                    <code>@my:*</code><br>
+                    my 命名空間的所有屬性 (不含 my 命名空間項目上不合格的屬性)。<br>
+                    請注意，索引與父代是相對的。請參考下列資料：<br>
+                    &lt;x&gt;<br>
+                    &nbsp; &lt;y/&gt;<br>
+                    &nbsp; &lt;y/&gt;<br>
+                    &lt;/x&gt;<br>
+                    &lt;x&gt;<br>
+                    &nbsp; &lt;y/&gt;<br>
+                    &nbsp; &lt;y/&gt;<br>
+                    &lt;/x&gt;<br>
+                    <br>
+                    <code>x/y[1]</code><br>
+                    每一個 &lt;x&gt; 的第一個 &lt;y&gt; 子系。其等同於下一列的運算式。<br>
+                    <br>
+                    <code>x/y[position() = 1]</code><br>
+                    每一個 &lt;x&gt; 的第一個 &lt;y&gt; 子系。<br>
+                    <br>
+                    <code>(x/y)[1]</code><br>
+                    來自 &lt;x&gt; 項目整組 &lt;y&gt; 子系的第一個 &lt;y&gt;。<br>
+                    <br>
+                    <code>x[1]/y[2]</code><br>
+                    第一個 &lt;x&gt; 的第二個 &lt;y&gt; 子系。<br>
+                    如需其他範例，請參考＜XPath 的 XML 檔範例＞。<br>
+                    <br>
+                    <code>book[last()]</code><br>
+                    目前內容節點的最後一個 &lt;book&gt; 項目。<br>
+                    <br>
+                    <code>book/author[last()]</code><br>
+                    目前內容節點中每一個 &lt;book&gt; 項目的最後一個 &lt;author&gt; 子系。<br>
+                    <br>
+                    <code>(book/author)[last()]</code><br>
+                    最後一個 &lt;author&gt; 項目，其來自目前內容節點之 &lt;book&gt; 項目的整組 &lt;author&gt; 子系。<br>
+                    <br>
+                    <code>book[excerpt]</code><br>
+                    至少包含一個 &lt;excerpt&gt; 項目子系的所有 &lt;book&gt; 項目。<br>
+                    <br>
+                    <code>book[excerpt]/title</code><br>
+                    當做 &lt;book&gt; 項目子系，且至少包含一個 &lt;excerpt&gt; 項目子系的所有 &lt;title&gt; 項目。<br>
+                    <br>
+                    <code>book[excerpt]/author[degree]</code><br>
+                    至少包含一個 &lt;degree&gt; 項目子系，且當做至少包含一個 &lt;excerpt&gt; 項目之 &lt;book&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>book[author/degree]</code><br>
+                    包含 &lt;author&gt; 子系 (至少包含一個 &lt;degree&gt; 子系) 的所有 &lt;book&gt; 項目。<br>
+                    <br>
+                    <code>author[degree][award]</code><br>
+                    至少包含一個 &lt;degree&gt; 項目子系和至少一個 &lt;award&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[degree and award]</code><br>
+                    至少包含一個 &lt;degree&gt; 項目子系和至少一個 &lt;award&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[(degree or award) and publication]</code><br>
+                    至少包含一個 &lt;degree&gt; 或 &lt;award&gt; 和至少一個 &lt;publication&gt; 當做子系的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[degree and not(publication)]</code><br>
+                    至少包含一個 &lt;degree&gt; 項目子系，且不包含 &lt;publication&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[not(degree or award) and publication]</code><br>
+                    至少包含一個 &lt;publication&gt; 項目子系，且不包含 &lt;degree&gt; 也不包含 &lt;award&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[last-name = "Bob"]</code><br>
+                    至少包含一個 &lt;last-name&gt; 項目子系 (包含值 Bob) 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[last-name[1] = "Bob"]</code><br>
+                    其中第一個 &lt;last-name&gt; 子項目之值為 Bob 的所有 &lt;author&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
+                    <br>
+                    <code>author[last-name [position()=1]= "Bob"]</code><br>
+                    其中第一個 &lt;last-name&gt; 子項目之值為 Bob 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>degree[@from != "Harvard"]</code><br>
+                    其中 from 屬性不等於 "Harvard" 的所有 &lt;degree&gt; 項目。<br>
+                    <br>
+                    <code>author[. = "Matthew Bob"]</code><br>
+                    其值為 Matthew Bob 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[last-name = "Bob" and ../price &gt; 50]</code><br>
+                    內含 &lt;last-name&gt; 子項目 (其值為 Bob) 和 &lt;price&gt; 同層級項目 (其值大於 50) 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>book[position() &lt;= 3]</code><br>
+                    前三本書 (1、2、3)。<br>
+                    <br>
+                    <code>author[not(last-name = "Bob")]</code><br>
+                    不包含 &lt;last-name&gt; 子項目 (包含值 Bob) 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[first-name = "Bob"]</code><br>
+                    至少包含一個 &lt;first-name&gt; 子系 (包含值 Bob) 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>author[* = "Bob"]</code><br>
+                    所有包含值為 Bob 之任何子項目的所有 author 項目。<br>
+                    <br>
+                    <code>author[last-name = "Bob" and first-name = "Joe"]</code><br>
+                    內含 &lt;last-name&gt; 子項目 (含值 Bob) 和 &lt;first-name&gt; 子項目 (其值為 Joe) 的所有 &lt;author&gt; 項目。<br>
+                    <br>
+                    <code>price[@intl = "Canada"]</code><br>
+                    內容節點中 intl 屬性等於 "Canada" 的所有 &lt;price&gt; 項目。<br>
+                    <br>
+                    <code>degree[position() &lt; 3]</code><br>
+                    內容節點子系的前兩個 &lt;degree&gt; 項目。<br>
+                    <br>
+                    <code>p/text()[2]</code><br>
+                    內容節點中每個 &lt;p&gt; 項目的第二個文字節點。<br>
+                    <br>
+                    <code>ancestor::book[1]</code><br>
+                    內容節點中最接近的 &lt;book&gt; 上階。<br>
+                    <br>
+                    <code>ancestor::book[author][1]</code><br>
+                    內容節點的最接近 &lt;book&gt; 上階，且這個 &lt;book&gt; 項目將 &lt;author&gt; 項目當做子系。<br>
+                    <br>
+                    <code>ancestor::author[parent::book][1]</code><br>
+                    目前內容中最接近的 &lt;author&gt; 上階，並且這個 &lt;author&gt; 項目是 &lt;book&gt; 項目的子系。<br>
+                    <br>
+                    <code>x | y/x</code><br>
+                    聯集運算式。在下列 XML 檔中，選取值為 green 或 blue 的所有 &lt;x&gt; 元素：
+                </p>
+                <section>
+                    <h4>XML 檔 (data1.xml)</h4>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version='1.0'?&gt;
+                            &lt;?xml-stylesheet type="text/xsl" href="union.xsl"?&gt;
+                            &lt;root&gt;
+                              &lt;x&gt;green&lt;/x&gt;
+                              &lt;y&gt;
+                                &lt;x&gt;blue&lt;/x&gt;
+                                &lt;x&gt;blue&lt;/x&gt;
+                              &lt;/y&gt;
+                              &lt;z&gt;
+                                &lt;x&gt;red&lt;/x&gt;
+                                &lt;x&gt;red&lt;/x&gt;
+                              &lt;/z&gt;
+                              &lt;x&gt;green&lt;/x&gt;
+                            &lt;/root&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <section>
+                    <h4>XSLT 檔 (union.xsl)</h4>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version='1.0'?&gt;
+                            &lt;xsl:stylesheet version="1.0"
+                              xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+                            &lt;xsl:template match="root"&gt;
+                              &lt;xsl:for-each select="x | y/x"&gt;
+                                &lt;xsl:value-of select="."/&gt;,
+                                &lt;xsl:if test="not(position()=last())"&gt;,&lt;/xsl:if&gt;
+                              &lt;/xsl:for-each&gt;
+                            &lt;/xsl:template&gt;
+
+                            &lt;/xsl:stylesheet&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <section>
+                    <h4>Formatted Output</h4>
+                    <p>
+                        <output>
+                            green,blue,blue,green<br>
+                        </output>
+                    </p>
+                </section>
+                <section>
+                    <h4>Processor Output</h4>
+                    <p>
+                        <output>
+                            &lt;?xml version="1.0" encoding="UTF-16"?&gt;green,blue,blue,green
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='sqlite'>
+
+            <section>
+                <h2>SQLite</h2>
+                <hr>
+                <section>
+                    <h3>準備</h3>
+                    <p>
+                        .NET Framework 並未內建 SQLite 功能，請至 <a href='http://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki' target='_blank'>System.Data.SQLite: Home</a> 下載。<br>
+                        <br>
+                        你可以下載 Setups for 64-bit Windows (.NET Framework 4.6)，用安裝的方式讓 .NET Framework 內建 SQLite！<br>
+                        <br>
+                        也可以下載 Precompiled Binaries for 64-bit Windows (.NET Framework 4.6)，再把裡面的 System.Data.SQLite.dll 跟自己原始碼放在一起，編譯時下 -reference 參數載進來，就能使用 SQLite 資料庫。<br>
+                        <br>
+                        System.Data.SQLite.dll 就等於是一款資料庫系統了！跟先安裝 PostgreSQL 再下載 ODBC 驅動程式不一樣。這也是為何 SQLite 受歡迎的原因，檔案很小，不到 2MB，而且不用安裝，只要夾帶在應用程式裡，拿到哪都能使用。<br>
+                        <br>
+                        由於下 SQL 處理資料的效率往往會有驚人的表現，當傳統的資料結構與演算法都解決不了問題時，不妨掛上 System.Data.SQLite.dll 改用 SQL 解決看看<ins>[1]</ins>！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>建立資料庫</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System.Data.SQLite;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    //建立空白檔案
+                                    SQLiteConnection.CreateFile("sqlite.db");
+                                    //載入檔案
+                                    SQLiteConnection sqlite = new SQLiteConnection("DataSource=sqlite.db");
+                                    //啟動資料庫
+                                    sqlite.Open();
+                                    //建立資料表並寫入資料
+                                    SQLiteCommand sql = sqlite.CreateCommand();
+                                    sql.CommandText = "CREATE TABLE MyTable(MyColumn TEXT)";
+                                    sql.ExecuteNonQuery();
+                                    sql.CommandText = "INSERT INTO MyTable(MyColumn) VALUES('Hello, SQLite!')";
+                                    sql.ExecuteNonQuery();
+                                    //結束資料庫
+                                    sqlite.Close();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>操作資料庫</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.Data.SQLite;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    //載入上一個範例建立的資料庫檔案
+                                    SQLiteConnection sqlite = new SQLiteConnection("DataSource=sqlite.db");
+                                    //啟動資料庫
+                                    sqlite.Open();
+                                    //操作資料庫並輸出資料
+                                    SQLiteCommand sql = sqlite.CreateCommand();
+                                    sql.CommandText = "SELECT MyColumn FROM MyTable";
+                                    SQLiteDataReader reader = sql.ExecuteReader();
+                                    reader.Read();
+                                    Console.Write(reader["MyColumn"].ToString());
+                                    //結束資料庫
+                                    sqlite.Close();
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello, SQLite!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>補充</h3>
+                    <p>
+                        也可以考慮安裝 Microsoft.Data.Sqlite 模組：
+                    </p>
+                    <section>
+                        <h4>.NET Framework</h4>
+                        <p>
+                            <code>
+                                Install-Package Microsoft.Data.SQLite -Version 3.1.2
+                            </code>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>.NET Core</h4>
+                        <p>
+                            <code>
+                                dotnet add package Microsoft.Data.SQLite --version 3.1.2
+                            </code>
+                        </p>
+                    </section>
+                </section>
+            </section>
+
+            <hr id='zipfile'>
+
+            <section>
+                <h2>Zip 壓縮檔案</h2>
+                <p>
+                    <textarea class='brush:cs'>
+                        using System.IO.Compression;
+
+                        class MainProgram{
+
+                            static void Main(){
+                                //壓縮
+                                ZipFile.CreateFromDirectory("我的資料夾", "我的壓縮檔.zip");
+                                //解壓縮
+                                ZipFile.ExtractToDirectory("我的壓縮檔.zip", "新的資料夾");
+                            }
+
+                        }
+
+                        //使用 ZipFile 需要參考 System.IO.Compression.FileSystem.dll 檔
+                    </textarea>
+                    <br>
+                    <output>
+                        csc /reference:C:\Windows\Microsoft.NET\Framework64\v4.0.30319\<br>
+                        System.IO.Compression.FileSystem.dll /out:main.exe *.cs<br>
+                        main
+                    </output>
+                </p>
+            </section>
+
+            <hr id='sound'>
+
+            <section>
+                <h2>播放音效</h2>
+                <p>
+                    .NET Framework 內建的程式庫，只能播放 WAVE 格式：<br>
+                    <br>
+                    <textarea class='brush:cs'>
+                        using System.Media;
+
+                        class MainProgram{
+
+                            static void Main(){
+                                SoundPlayer soundplayer = new SoundPlayer();
+                                soundplayer.SoundLocation = "sound.wav";
+                                soundplayer.Load();
+                                soundplayer.PlaySync();
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    想播放其它格式，通常使用 Windows Media Player，編譯時下參數 <var>/r:WMPLib.dll</var>，就能在程式碼使用：<br>
+                    <br>
+                    <textarea class='brush:cs'>
+                        using WMPLib;
+
+                        class MainProgram{
+
+                            static void Main(){
+                                WindowsMediaPlayer wmp = new WindowsMediaPlayer();
+                                wmp.URL = "music.mp3";
+                                wmp.controls.play();
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    不過新版 Windows 10 已經沒有 Windows Media Player，改由通用視窗平台（UWP）的 Groove 音樂取代，所以不妨調用外部程式，找個命令列的工具來播放音樂。例如可以下載 <a href='https://lawlessguy.wordpress.com/2015/06/27/update-to-a-command-line-mp3-player-for-windows/' target='_blank'>cmdmp3new.zip</a>，解壓後將 <var>cmdmp3win.exe</var> 放在程式碼專案中，就能像這樣播放 MP3 音樂：<br>
+                    <br>
+                    <textarea class='brush:cs'>
+                        using System.Diagnostics;
+
+                        class MainProgram{
+
+                            static void Main(){
+                                Process.Start("cmdmp3win.exe", "music.mp3");
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    當然也可以用自己電腦所安裝的媒體播放程式，像我有裝 MPC-HC，程式碼就可以改為：<br>
+                    <br>
+                    <code>
+                        Process.Start("mpc-hc64.exe","music.mp3 /new /minimized /close");<br>
+                    </code>
+                    <br>
+                    缺點是工作列依然會看到有個程式在跑，只是縮到最小而已。
+                </p>
+            </section>
+
+            <hr id='wpf'>
+
+            <section>
+                <h2>Windows Presentation Foundation</h2>
+                <p>
+                    WPF 是 .NET Framewrok 3.0 新增的 UI 框架，基於 XML 和向量繪圖技術，能將使用者介面另外寫成 XAML，與程式碼分離。<br>
+                    <br>
+                    設計 WPF 程式，真正標準的做法，是把建立視窗的前置性作業寫在 *.csproj 專案檔，程式碼只要一行 InitializeComponent() 就好。不過這適合用 msbuild.exe 編譯，且 *.csproj 不適合手寫，通常由 Visual Studio .NET 代勞。<br>
+                    <br>
+                    本文示範的做法是用 csc.exe 編譯，所以載入 *.xaml 建立視窗的工作是寫在程式碼裡面。<br>
+                    <br>
+                    雖然很少人這樣寫 WPF 程式，但不失為一種做法，方便只用 Windows 10 內建的 .NET Framework 4.8 就能編譯出來～
+                </p>
+                <hr>
+                <section>
+                    <h3>Window.xaml</h3>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Title="Main" Width="320" Height="240"&gt;
+                                &lt;Canvas&gt;
+                                    &lt;Button Name="Button1" Width="300" Height="30" Margin="2,70"&gt;哈囉&lt;/Button&gt;
+                                    &lt;Button Name="Button2" Width="300" Height="30" Margin="2,103"&gt;再見&lt;/Button&gt;
+                                &lt;/Canvas&gt;
+                            &lt;/Window>
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>MainProgram.cs</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.IO;
+                            using System.Windows;
+                            using System.Windows.Controls;
+                            using System.Windows.Markup;
+
+                            partial class MainProgram{
+
+                                Window window;
+                                Button button1, button2;
+
+                                MainProgram(){
+
+                                    window = (Window)XamlReader.Load(new FileStream("Window.xaml", FileMode.Open));
+
+                                    button1 = (Button)window.FindName("Button1");
+                                    button1.Click += new RoutedEventHandler(button1_click);
+
+                                    button2 = (Button)window.FindName("Button2");
+                                    button2.Click += new RoutedEventHandler(button2_click);
+
+                                    new Application().Run(window);
+
+                                }
+
+                                void button1_click(object sender, RoutedEventArgs e){
+                                    window.Title = "Hello!";
+                                }
+
+                                void button2_click(object sender, RoutedEventArgs e){
+                                    window.Title = "Bye~";
+                                }
+
+                                [STAThread]
+                                static void Main(){
+                                    new MainProgram();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>編譯</h3>
+                    <p>
+                        WPF 的編譯要手動載入多個組件，以 Windows 10 內建 .NET Framework 4.8 為例，這些組件是：<br>
+                        <br>
+                        C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll<br>
+                        C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\PresentationCore.dll<br>
+                        C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\PresentationFramework.dll<br>
+                        C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\WindowsBase.dll<br>
+                        <br>
+                        如果已將 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ 寫入環境變數 PATH 的話，可以這樣下指令：<br>
+                        <br>
+                        <output>
+                            csc /r:System.Xaml.dll /r:WPF\PresentationCore.dll /r:WPF\PresentationFramework.dll /r:WPF\WindowsBase.dll /t:winexe *.cs
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>執行</h3>
+                    <figure>
+                        <img src='../../figures/overcast/20190418B.png' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>說明</h3>
+                    <p>
+                        通常 XAML 檔只用來配置外觀，不負責功能。<br>
+                        <br>
+                        如果想改變視窗介面的外觀與配置，只要修改 Window.xaml 即可，不用重新編譯 MainProgram.cs。<br>
+                        <br>
+                        需要更改功能時，才修改原始程式碼，重新編譯。<br>
+                        <br>
+                        真要在 XAML 寫功能的話，可使用 &lt;CODE&gt; 標籤寫功能程式，然後指定給控制項標籤的事件屬性。（不適用先前的範例，要重新修改程式才支援。）
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>建議</h3>
+                    <p>
+                        如果沒有使用者介面與程式分離的需求，其實繼續用 Windows Forms 就好，不用轉換到 WPF。兩者需求不同，WPF 雖然是新的技術，但沒有新舊交替、取代 Windows Forms 的意思。<br>
+                        <br>
+                        如果一開始學的就是 WPF，某天想跟 Windows Forms 一樣，把使用者介面寫死在主程式裡面，其實也不用轉換技術，System.Windows.Controls 的元件可以直接寫進 Window 裡面，並不是非得 XAML 不可，像這樣：<br>
+                        <br>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.Windows;
+                            using System.Windows.Controls;
+
+                            public class MainProgram{
+
+                                Window window;
+                                Button button;
+
+                                public MainProgram(){
+
+                                    window = new Window();
+                                    window.Width = 320;
+                                    window.Height = 240;
+
+                                    button = new Button();
+                                    button.Content = "Eyes on me";
+                                    button.Width = 304;
+                                    button.Height = 30;
+                                    button.Click += new RoutedEventHandler(button_click);
+
+                                    Canvas canvas = new Canvas();
+                                    canvas.Children.Add(button);
+
+                                    window.Content = canvas;
+
+                                    new Application().Run(window);
+
+                                }
+
+                                void button_click(object sender, RoutedEventArgs e){
+                                    window.Title = "0.0";
+                                }
+
+                                [STAThread]
+                                static void Main(){
+                                    new MainProgram();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='webclient'>
+
+            <section>
+                <h2>用 WebClient 取得網頁內容</h2>
+                <p>
+                    <textarea class='brush:cs'>
+                        using System;
+                        using System.Net;
+                        using System.Text;
+
+                        public class MainProgram{
+
+                            static void Main (string[] args){
+
+                                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                                WebClient webclient = new WebClient ();
+
+                                byte[] data = webclient.DownloadData("https://twideem.github.io/readme.md");
+                                string encoding = Encoding.UTF8.GetString(data);
+                                Console.Write(encoding);
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        # twideem.github.io<br>
+                        <br>
+                        從部落格到社群即時訊息，免費個人網頁已經退流行，很少有網站繼續提供這項服務，所以用 GitHub Pages 讓我的個人網站繼續下去；雖然這項服務的本意是用來宣傳專案，不是架個人網站用～<br>
+                        <br>
+                        感謝 *GitHub*，也感謝一路走來，有*奇摩*、*PC home Online*、*8d8d*、*Graffiti.net*、*Freewebs*、*Pancake*、*Google* 提供免費又無廣告的網頁空間服務，讓我過足寫網頁文章的癮。
+                    </output>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

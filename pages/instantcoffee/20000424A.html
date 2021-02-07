@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>C++ 到 Java 的物件導向程式設計</h1>
+                <p>
+                    在 90 年代，C++ 是物件導向程式設計的首選，它的 class 語法簡單又直覺，軟體開發人員很容易就能用物件的概念組織程式。但 C++ 相容 C 語言，因此很多人在使用物件導向程式設計的同時，摻雜了程序導向的程式設計，久而久之破壞了物件導向程式設計的穩固性。<br>
+                    <br>
+                    如果程式碼不能穩固地使用，就失去物件導向的核心利益了！這樣還不如繼續用 C 語言以程序導向寫好結構化程式設計，何必浪費將程式碼拆成一個個類別的時間？<br>
+                    <br>
+                    隨著網際網路興起，能在不同作業系統執行的 Applet 成了程式設計的熱門話題，人們開始學習 Java 語言，並注意到它參考的是 C++ 語法，它將物件導向的部分發揚光大，然後剔除程序導向的部分，讓人們可以享受用 C++ 語法寫出優雅物件導向程式的樂趣，於是用 Java 語言學習物件導向程式設計成了第二個熱門話題！<br>
+                    <br>
+                    事實上，在當時用 Java 寫應用程式並不是好主意，執行速度太慢。但學習 Java 程式設計卻是件很有意義的事，寫不好 C++ 物件導向程式設計的人，可以在 Java 學會如何正確使用物件導向語法。結果，網路上最流行的不是教你寫 Applet，而是教你學 Java 語言，展開了 Java 成為 2000 年代最受歡迎程式語言的序章～
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>類別（Class）</h2>
+                <p>
+                    Java 規定所有程式都必須以類別來撰寫，所以即使只想宣告一個整數型態的變數，也必須這麼寫：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        class A{
+                            int i;
+                        }
+                    </textarea>
+                    <br>
+                    將類別建立成物件，並存取變數的方式如下：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        class Main{
+                            public static void main(String[] args){
+                                A a = new A();
+                                a.i = 5;
+                                System.out.print(a.i);
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        5<br>
+                    </output>
+                    <br>
+                    main() 是 Java 內定的函式，Java 虛擬機器只要看到這個名稱的函式，就會自動執行裡面的程式碼。static 表示不用建立物件也能使用，也就是說不用 new 一個 Main 物件就能呼叫 main()。main() 一定要宣告為 public 表示公開使用，否則 Java 虛擬主機會找不到它。<br>
+                    <br>
+                    Java 跟 C++ 一樣，將類別變數和函式稱為成員（member），但 C++ 將類別裡面的變數和函式稱為成員變數和成員函式，Java 改稱欄位（field）和方法（method）。<br>
+                    <br>
+                    物件導向將呼叫物件的函式，稱為傳遞訊息（message passing）。程式只透過物件之間的訊息傳遞，來組織軟體，就叫物件導向程式設計。<ins>[1]</ins><br>
+                    <br>
+                    Java 的類別也引進了 C++ 的建構子、封裝、繼承、多型、覆載、多載、抽象…等物件導向基本功能，下面將逐一介紹。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>建構子（Constructor）</h2>
+                <p>
+                    跟 C++ 一樣，名稱與類別一樣，且沒有傳回值，就是建構子：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        class A{
+                            int i;
+                            A(){
+                                i = 1;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    如果有傳回值，像是 int、String、void，則是函式，而不是建構子。<br>
+                    <br>
+                    建構子可以有參數，藉由參數的不同，來為類別設計多個建構子。<br>
+                    <br>
+                    沒有建構子的話，Java 會自動建立一個呼叫 super() 函式的建構子。已經有建構子的話，就沒有自動呼叫 super() 的建構子，所以需要執行父類別的建構子時要記得要自己呼叫。<br>
+                    <br>
+                    Java 虛擬機器有一套垃圾收集系統，會自動將浪費記憶體資源的物件釋放掉，所以不需要解構子（destructor）。雖然 Java 有 finalize() 函式，但這並不是解構子，而是垃圾收集決定回收該物件時自動執行的函式。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>封裝（Encapsulation）</h2>
+                <p>
+                    Java 引進了 C++ 的 public、private、protected，用來規劃類別的成員是公開存取還是限制存取：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class A{
+                            private int i;
+                            public void inc(){
+                                i++;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    變數 i 使用 private 表示只有自己能存取，函式 add 使用 public 表示別的物件也能使用。<br>
+                    <br>
+                    比較特別的是，Java 規定類別使用 public 的話，存放該類別的檔案，檔名必須與類別名稱一樣。<br>
+                    <br>
+                    protected 表示開放給子類別存取。<br>
+                    <br>
+                    不使用存取權限的話，表示同套件的類別彼此間都能存取。雖然 Java 預設使用這種存取權限，但建議物件導向新手明確宣告 public 和 private，否則你會覺得整個設計一團亂、在組織程式元件的規劃上失去控制權。只有物件導向專家，才懂得用預設的存取權限，將物件用群組化的方式來設計，平常人會一團糟。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>繼承（Inheritance）</h2>
+                <p>
+                    Java 使用 extends 指令來繼承類別：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        class A{
+                            int i;
+                            void inc(){
+                                i++;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <textarea class='brush:java'>
+                        class B extends A{
+                            int get(){
+                                return i;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    沒有使用 extends 時，Java 會自動繼承 java.lang.Object 物件。<br>
+                    <br>
+                    在 C++ 使用多重繼承時，常常產生成員歸屬問題，所以 Java 只能繼承一個類別。Java 使用多重實作介面（interface）的方式，來表達多重繼承的關係。介面只宣告函式名稱，不實作函式功能，所以沒有責任歸屬的問題，一律由實作的類別負責。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>多型（Polymorphism）</h2>
+                <p>
+                    Java 跟 C++ 一樣，透過繼承讓不同子類別有共同的行為能力，再藉由子類別覆寫（override）父類別的函式，來實現多型的程式設計：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        class A{
+                            void f(){
+                                System.out.println("AAA");
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <textarea class='brush:java'>
+                        class B extends A{
+                            void f(){
+                                System.out.println("BBB");
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <textarea class='brush:java'>
+                        class C extends A{
+                            void f(){
+                                System.out.println("CCC");
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <textarea class='brush:java'>
+                        class Main{
+                            static void test(A a){
+                                a.f();
+                            }
+                            public static void main(String[] args){
+                                B b = new B();
+                                C c = new C();
+                                test(b);
+                                test(c);
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        BBB<br>
+                        CCC<br>
+                    </output>
+                    <br>
+                    事實上，不是每個用過 C++ 的人都了解多型的意義，所以這裡還是補充一下觀念。<br>
+                    <br>
+                    多型就是以同樣的訊息來表達不同的內容，或者以同樣的行為來進行不同的動作。舉個例子，你可以反覆用「你叫什麼名字」這行為向不同人發問，然後每個人會反應自己的狀況。<br>
+                    <br>
+                    這項語法特性是物件導向程式設計與程序導向程式設計差異最大的地方，以往只能事先寫死程式碼來執行各種動作，有了多型會將程式碼設計成可擴充的元件，事後想要什麼再新增一個元件去用，靈活很多。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>多載（Overload）</h2>
+                <p>
+                    在 C++，類別的成員函式有個很棒的功能，就是函式名稱可以重複，只要參數不同，就可以視為不同函式。Java 也支援這項功能，讓物件導向程式設計更能表達語意：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        class A{
+                            void f(){
+                                System.out.println("AAA");
+                            }
+                            void f(String x){
+                                System.out.println(x);
+                            }
+                            void f(String x, String y){
+                                System.out.println(x + ", " + y + "!");
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <textarea class='brush:java'>
+                        class Main{
+                            public static void main(String[] args){
+                                A a = new A();
+                                a.f();
+                                a.f("Hello");
+                                a.f("Hello", "world");
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA<br>
+                        Hello<br>
+                        Hello, world!
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其它特性</h2>
+                <p>
+                    上述對於 C++ 語法的改進，再加上廢除指標的運算能力，使得 Java 有更簡易使用的特性。<br>
+                    <br>
+                    除此之外，Java 還有更多有利於物件導向程式設計的特性，像是介面與實作分離的 abstract 和 interface、例外處理機制（exception handling）、包山包海的程式庫（Java API）、沙盒般的安全性<ins>[2]</ins>。<br>
+                    <br>
+                    但 Java 也有失策的地方，像是沒有 C++ 的 template 和重載運算子。Java 過於仰賴「所有類別都繼承自 java.lang.Object」的特性，讓物件導向程式的語法盡可能簡化。但後來拖到 Java SE 5 和 Java SE 7 又陸續追加 C++ 的語法功能，加與不加都造成災情。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 不過柯達控告 Java 抄襲他所收購王安實驗室的「某一應用向另一應用請求協助」專利勝訴，Sun Microsystems 以 9200 萬美元和解後，就很少人這麼解釋物件導向程式設計了。<br>
+                    [2] Java SE 7 連環爆出漏洞前，安全性真的是 Java 訴求的特性之一。常常拿 Java 應用程式比 Windows 原生程式安全來說嘴的我，當年被打臉打得很腫。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

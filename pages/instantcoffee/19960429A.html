@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>完整安裝完 JDK，總共有三套 java.exe！</h1>
+                <p>
+                    在 Windows 完整安裝好 JDK，你會發現總共有三個 java.exe，例如：<br>
+                    <br>
+                    <samp>
+                        C:\Program Files\Java\jdk1.6.0_45\bin\java.exe<br>
+                        C:\Program Files\Java\jre6\bin\java.exe<br>
+                        C:\Program Files\Java\jdk1.6.0_45\jre\bin\java.exe
+                    </samp>
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>C:\Program Files\Java\<i>jdk1.6.0_45</i>\bin\java.exe</h2>
+                <p>
+                    雖然這個 java.exe 跟 javac.exe、jar.exe、appletviewer.exe…等各式開發工具混在一起，但這才是 JDK 真正內建來執行 Java 應用程式的環境。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>C:\Program Files\Java\jdk1.6.0_45\<i>jre</i>\bin\java.exe</h2>
+                <p>
+                    JDK 有些東西是用 Java 寫成的，為了避免使用者沒有安裝 JRE 而無法執行，因此內建一套 JRE，確保 JDK 的工具能執行。<br>
+                    <br>
+                    換句話說，這並不是用來讓開發者當作測試 Java 程式用的環境，而是 JDK 給自己用的。但很容易誤會這才是 Java SDK 內建的 JRE 執行環境，以為我們應該用它來測試 Java 程式。<br>
+                    <br>
+                    當然，JDK 裡面的 jre 和安裝 JDK 時接著安裝的 JRE，內容並沒有差別，是一樣的東西。所以往往會讓人覺得不需安裝 JRE，以為 JDK 裡面本來就有 jre，再裝 JRE 只是多了重複的東西。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>C:\Program Files\Java\<i>jre6</i>\bin\java.exe</h2>
+                <p>
+                    為何 JDK 的 bin 與 jre\bin 都具備執行 Java 應用程式的條件了，卻還要安裝 JRE？<br>
+                    <br>
+                    只安裝 JDK 的話，Windows 並不會自動以 <var>C:\Program Files\Java\jdk1.6.0_45\bin\java.exe</var> 或 <var>C:\Program Files\Java\jdk1.6.0_45\bin\java.exe</var> 來執行 Java 應用程式，畢竟很少人會希望 SDK 同時也是執行環境<ins>[1]</ins>。<br>
+                    <br>
+                    而安裝 JRE 時，會幫你配置好 Java 檔案的關聯性，讓 Windows 能自動透過 <var>C:\Program Files\Java\jre6\bin\java.exe</var> 執行 *.jar 檔、在瀏覽器跑 Applet、在命令提示字元呼叫 java.exe、用 Java Web Start 跑應用程式…<br>
+                    <br>
+                    所以另外裝一個 Java 執行環境，對使用者與開發者雙方都是最省事、有保障的做法<ins>[2]</ins>，絕對不是裝了多餘的東西<ins>[3]</ins>！
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 因為 SDK 裡面通常會另外放入許多第三方套件，以滿足開發者的需求。如果這種 SDK 拿來當 Runtime 環境，測試程式時你覺得很正常，發佈出去別人常常無法執行，因為他的 Runtime 跟你不一樣。<br>
+                    [2] 前提是你要注意是否以 JRE 測試你的應用軟體，其實開發者幾乎都是以 JDK 的 java.exe 在測試程式！<br>
+                    [3] 當然，如果你安裝多個版本的 JDK，那只留最新或最舊的 JRE 就好，可以 Cancel 掉 JDK 要求安裝 JRE 的請求，其它 JRE 這時確實是多餘的～
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

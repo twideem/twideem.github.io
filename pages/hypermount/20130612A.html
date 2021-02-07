@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>用 NetBeans IDE 7.3 搭建 HTML5 整合開發環境</h1>
+                <p>
+                    NetBeans IDE 是款使用簡便的視覺化 Java 開發環境，直接下載主程式安裝完，就已經具備媲美 Visual Basic 的 RAD 介面<ins>[1]</ins>，卻又有威力強悍的專案管理功能。<ins>[2]</ins><br>
+                    <br>
+                    在 2013 年二月底發展到 7.3 版後，主要特性訴求，是支援 HTML5 的開發<ins>[3]</ins>，企圖成為 RIA (Rich Internet Application) 的開發環境。<br>
+                    <br>
+                    使用 NetBeans IDE 來編輯 HTML 有個好處，就是它具備即時檢查文法的功能，能讓我們第一時間就發現錯誤，並且寫出格式良好的文件。此外，類似版本控制的 History，能讓我們追蹤每張網頁的修改歷程，也是不錯的功能。<br>
+                    <br>
+                    本單元將介紹如何使用 NetBeans IDE 7.3 搭建 HTML5 的開發環境，將原本手邊既有的 HTML 網站資料夾，設置為 NetBeans 的專案。<br>
+                    <br>
+                    <img src='../../figures/hypermount/20130612A_01.png' alt='插圖'>
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>建立網站專案</h2>
+                <p>
+                    將既有網站的資料夾，設置為 NetBeans 的 HTML5 Application 專案：<br>
+                    <br>
+                    <kbd>「功能表」→「File」→「New Project」→「HTML5 Application with Existing Sources」→「在 Site Root 指定既有網頁的資料夾」→不希望 NetBeans 的專案設定檔破壞既有網頁資料夾結構的話，在「Project Directory」指定另外用來存放專案的資料夾。</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>制定專屬範本</h2>
+                <p>
+                    自行設置的網站，專案架構與 NetBeans 預期的做法不同，於是導致 IDE 文字編輯器的文法檢查功能，無法正常辨識像是 CSS 的 class 名稱。<br>
+                    <br>
+                    在 NetBeans IDE 左上角的 Projects 窗框，於 HTML5 專案圖示上，按出滑鼠右鍵選單，然後執行「Save as Template」，並完成設置，就能讓文字編輯器找到 *.html 檔裡面所用 *.css 與 *.js 檔的路徑，正確剖析語法之間的關係。
+                </p>
+                <figure>
+                    <img src='../../figures/hypermount/20130612A_02.png' alt='插圖'>
+                    <figcaption>Projects 窗框。</figcaption>
+                </figure>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>修改字元編碼</h2>
+                <p>
+                    NetBeans IDE 專案設置的字元編碼不符時，例如專案設置為 Big5，卻載入 UTF-8 的網頁，文字編輯器裡面的中文會顯示成亂碼。設置字元編碼的做法如下：<br>
+                    <br>
+                    <kbd>「在 Projects 窗框裡在專案圖示按出滑鼠右鍵選單」→「Properties」→「Sources」→「將 Encoding 設置為你想要的字元編碼」</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>修改執行網頁用的瀏覽器</h2>
+                <p>
+                    NetBeans IDE 7.3 預設使用 Chrome 瀏覽器來顯示網頁，想修改的話：<br>
+                    <br>
+                    <kbd>「在 Projects 窗框裡在專案圖示按出滑鼠右鍵選單」→「Properties」→「Browser」→「Firefox」</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>修改文法規則</h2>
+                <p>
+                    文字編輯器在即時檢查文法時，如果覺得有些規則你不打算遵循，希望別再提示，可以自行關閉：<br>
+                    <br>
+                    <kbd>「功能表」→「Tools」→「Options」→「Editor」→「Hints」→「Language」→「HTML」→「自行針對各項規則取消勾選」</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>樣板</h2>
+                <p>
+                    你可以把整塊常用的語言結構，設置為可用簡短識別名稱叫用的樣板：<br>
+                    <br>
+                    <kbd>「功能表」→「Tools」→「Options」→「Editor」→「Code Templates」→「Language」→「HTML」→「New」→「輸入 Abbreviation 名稱」→「在 Expanded Text 輸入語言內容」→「不希望引用樣板時自動重新縮排的話，將 Reformat Text 設置為 Do Nothing」</kbd><br>
+                    <br>
+                    製作好樣板，要使用的話，在文字編輯器中，先輸入 Abbreviation 名稱，然後按 Tab 鍵，即可轉換為 Expanded Text 的內容。
+                </p>
+                <figure>
+                    <img src='../../figures/hypermount/20130612A_03.png' alt='插圖'>
+                    <figcaption>能提高語法編寫效率的樣板。</figcaption>
+                </figure>
+                <p>
+                    你還可以在輸入的語言內容中，使用 <kbd>${cursor}</kbd> 表示游標位置，例如：<br>
+                    <br>
+                    <samp>&lt;p&gt;${cursor}&lt;/p&gt;</samp><br>
+                    <br>
+                    這樣 Abbreviation 名稱轉換為 Expanded Text 後，游標位置會像 &lt;p&gt;|&lt;/p&gt; 這樣，移至兩個標籤之間，方便直接輸入。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取消 Tab 字元改用空白字元替代的功能</h2>
+                <p>
+                    有時候因為使用的網頁空間有限，所以對網頁的檔案大小會想斤斤計較，連「四個空白佔用四個位元組，改成一個 Tab 的話只佔用一個位元組」都要計較，這時就會想關閉自動將 Tab 改成空白字元的功能。做法是：<br>
+                    <br>
+                    <kbd>「功能表」→「Tools」→「Options」→「Editor」→「Formatting 」→「將 Expand Tabs to Spaces 勾選給取消」→「將 Tab Size 設為 4」</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>儲存檔案時移除每行結尾的空白</h2>
+                <p>
+                    儲存時，讓軟體自動刪除每一行多餘的空白：<br>
+                    <br>
+                    <kbd>「功能表」→「Tools」→「Options」→「Editor」→「On Save」→「將 Remove Trailing Whitespace From 設為 All lines」</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取消 URL 底線</h2>
+                <p>
+                    文字編輯器通常會將 URL 顯示為底線，對大多數人來說，這是很方便就能辨識出超鏈結的文字樣式，但總有少數人覺得礙眼……<br>
+                    <br>
+                    <kbd>「功能表」→「Tools」→「Options」→「Fonts &amp; Colors」→「URL」→「將 Effecis 從 Underlined 改為 None」</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>多行編輯</h2>
+                <p>
+                    按 <kbd>Ctrl + Shift + R</kbd> 或者工具列上的 Toggle Rectangular Selection 圖示，即可在文字編輯器用 Shift 鍵框選多個行與列，然後以一整個群組的方式來編輯這些行列。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>程式碼版本控管 (Revision control)</h2>
+                <p>
+                    從「Source」可以切換到「History」模式。<br>
+                    <br>
+                    然後在「Date」欄位比對各個修改時間的原始碼內容後，再從確定要回復的欄位上按「滑鼠右鍵」，於選單執行「Revert from History」，即可回復到過去修改的內容。
+                </p>
+                <figure>
+                    <img src='../../figures/hypermount/20130612A_04.png' alt='插圖'>
+                    <figcaption>History 模式。</figcaption>
+                </figure>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] Rapid Application Development，一種程式開發手法，先將會用到的功能整合起來，然後按照既有規範的做法，快速建構出想要的產品。<br>
+                    [2] 不像 Eclipse 安裝主程式後，基本上只有因結合 SDK 特性而強悍到媲美 Emacs 的文字編輯器功能。必須自行從一堆顯得七零八落的第三方增益套件中，來組裝出真正讓人得心應手的 RAD 介面。麻煩就算了，那些第三方套件，通常都設計得很兩光，根本就不好用。這點來講，NetBeans 早已將實用的功能整合起來，而且這些預設的套件都設計得很專業，穩定、好用。但是以編寫、測試、管理程式碼而言，NetBeans 完全無法與能夠客製化成 SDK 的 Eclipse 相比，所以就開發大型程式碼專案而言，本身就近乎是一種軟體專案系統框架的 Eclipse，才是業界最有價值的選項；純粹只是軟體的 NetBeans 顯得像玩具。（不過…我喜歡玩具。）<br>
+                    [3] 7.3 版新特性之一，是可以建立支援 JavaScript 測試功能的 HTML5 Application 專案，這種專案提供以下功能：大幅改良的 JavaScript 編輯器、JavaScript 除錯器、視覺化 CSS 編輯器、頁面檢視器、內建的 WebKit 瀏覽器，可與 Chrome 緊密整合。7.4 版進一步針對 HTML5 新增以下支援：行動裝置應用程式 Phonegap 框架的開發環境、Android 與 iOS 瀏覽器、編輯器支援 SASS 和 LESS 等樣式表語言、可取得並記錄 Chrome 瀏覽器「開發者工具」所檢測出來的訊息、網路監視器。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

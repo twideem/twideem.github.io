@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>將 Java 物件轉為檔案形式</h1>
+                <p>
+                    Java 能夠將程式執行中的「物件」，以檔案的形式儲存起來；這樣的過程術語叫「序列化」。當然，我們可將序列化的檔案還原為物件，善用序列化，可以讓我們寫出更優雅的物件導向程式設計，例如遊戲進度的存檔會更直覺、物件深層複製也能用這招來解決。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>基本範例</h2>
+                <hr>
+                <section>
+                    <h3>Test.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import  java.io.Serializable;
+
+                            public class Test implements Serializable{
+                                public String g = "Hello";
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.FileInputStream;
+                            import java.io.FileOutputStream;
+                            import java.io.ObjectInputStream;
+                            import java.io.ObjectOutputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立物件 test1
+                                        Test test1 = new Test();
+                                        //將物件 test1 儲存為檔案 test.ser
+                                        ObjectOutputStream object_output_stream = new ObjectOutputStream(new FileOutputStream("test.ser"));
+                                        object_output_stream.writeObject(test1);
+                                        object_output_stream.close();
+                                        //將檔案還原到物件 test2
+                                        ObjectInputStream object_input_stream = new ObjectInputStream(new FileInputStream("test.ser"));
+                                        Test test2 = (Test)object_input_stream.readObject();
+                                        object_input_stream.close();
+                                        //輸出還原物件的資料
+                                        System.out.print(test2.g);
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    <output>
+                        Hello
+                    </output>
+                </p>
+            </section>
+
+
+            <hr>
+
+            <section>
+                <h2>進階項目</h2>
+                <p>
+                    如果物件某些狀態不想被序列化的話，可以加上 <code>transient</code> 指令：
+                </p>
+                <hr>
+                <section>
+                    <h3>Test.java</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[4]'>
+                            import  java.io.Serializable;
+
+                            public class Test implements Serializable{
+                                public transient String g = "Hello";
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.FileInputStream;
+                            import java.io.FileOutputStream;
+                            import java.io.ObjectInputStream;
+                            import java.io.ObjectOutputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+
+                                        Test test1 = new Test();
+
+                                        ObjectOutputStream object_output_stream = new ObjectOutputStream(new FileOutputStream("test.ser"));
+                                        object_output_stream.writeObject(test1);
+                                        object_output_stream.close();
+
+                                        ObjectInputStream object_input_stream = new ObjectInputStream(new FileInputStream("test.ser"));
+                                        Test test2 = (Test)object_input_stream.readObject();
+                                        object_input_stream.close();
+
+                                        System.out.print(test2.g);
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    <output>
+                        Null
+                    </output>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Java Web Start</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>使用 Java Web Start 執行 Java Application</h2>
+                <hr>
+                <section>
+                    <h3>步驟一：準備好 Java Application 並包裝為 JAR 格式</h3>
+                    <p>
+                        假設我已經設計好一個 Java Application，包裝為 <var>application.jar</var> 後上傳到本站，網址為：<var>https://twideem.github.io/objects/webstart/application.jar</var>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟二：撰寫 JNLP 檔</h3>
+                    <p>
+                        想在網頁瀏覽器透過 Java Web Start 執行上面的 application.jar，必須撰寫 JNLP 檔案，格式如下：
+                    </p>
+                    <section>
+                        <h4>webstart.jnlp</h4>
+                        <p>
+                            <textarea class='brush:xml'>
+                                &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                                &lt;jnlp&gt;
+                                    &lt;resources&gt;
+                                        &lt;jar href="https://twideem.github.io/objects/webstart/application.jar"/&gt;
+                                    &lt;/resources&gt;
+                                    &lt;application-desc main-class="Main"/&gt;
+                                &lt;/jnlp&gt;
+                            </textarea>
+                            <br>
+                            由於 HTTP 被公認為不安全的傳輸技術，因此 JDK 8 不曉得從哪一版 Update 開始，規定只能使用 HTTPS，否則 JVM 拒絕存取 JAR 裡面的檔案。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟三：執行 JNLP</h3>
+                    <p>
+                        最後在網頁使用超鏈結文字連結 webstart.jnlp，即可透過 Java Web Start 執行 application.jar：<br>
+                        <br>
+                        <a href='http://twideem.github.io/objects/webstart/webstart.jnlp' target='_blank'>&lt;a href='webstart.jnlp"&gt;Application&lt;/a&gt;</a><br>
+                        <br>
+                        前提是將加入 application.jar 加入安全名單，否則 Java 會拒絕執行。<br>
+
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 Java Web Start 執行 Java Applet</h2>
+                <p>
+                    Java SE 9 開始，不再為瀏覽器提供可執行 Applet 的 Java Platform SE 外掛，想執行 Applet 程式必須改用 Java Web Start。做法和 Application 差不多，只是 JNLP 檔中改用 <code>applet-desc</code> 來指定 Applet：<br>
+                    <br>
+                    <textarea class='brush:xml;highlight:[6,7,8]'>
+                        &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                        &lt;jnlp&gt;
+                            &lt;resources&gt;
+                                &lt;jar href="applet.jar" main="true"/&gt;
+                            &lt;/resources&gt;
+                            &lt;applet-desc name="Hello, Applet!"
+                                         documentBase="." main-class="Applet"
+                                         width="320" height="240"/&gt;
+                        &lt;/jnlp&gt;
+                    </textarea>
+                    <br>
+                    然而，除非是為了跑「舊有」的 Applet，才使用 JNLP 來寫啟動程式，否則不建議繼續開發「新」的 Java Applet。<br>
+                    <br>
+                    因為，原本要在瀏覽器透過 Java Platform SE 8 執行 Java Applet，條件就已經很嚴苛了，想在 Java Web Start 執行 Java Applet，條件又更為嚴苛，會浪費很多心力解決「充滿限制、這也不行那也不行」的問題。<br>
+                    <br>
+                    官方建議改用 Java Web Start 取代 Java Applet，意思是將 Java Applet 改寫成 Java Application，然後用 Java Web Start 來執行，並不是建議你繼續寫新的 Java Applet！<br>
+                    <br>
+                    就讓 Applet 走入歷史吧！
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>判斷</h1>
+                <p>依據條件，判斷程式應該執行哪一段流程。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>if else</h2>
+                <p>
+                    判斷條件式是否成立，然後執行程式。
+                </p>
+                <hr>
+                <section>
+                    <h3>單一條件式</h3>
+                    <p>
+                        <code>
+                            if(條件式) 程式敘述
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>多重條件式</h3>
+                    <p>
+                        <code>
+                            if(條件式) 程式敘述一<br>
+                            else 程式敘述二
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    如果條件式經由布林運算結果為 true，則執行程式敘述一，否則執行程式敘述二。<br>
+                    <br>
+                    程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
+                    <br>
+                    <code>
+                        if(條件式){<br>
+                        　程式敘述１;<br>
+                        　程式敘述２;<br>
+                        　程式敘述３;<br>
+                        }
+                    </code>
+                    <br>
+                    此外，else 後面的程式敘述二，可以是另一個 if 條件式，形成更多重的條件判斷式：<br>
+                    <br>
+                    <code>
+                        if(條件式一) 程式敘述一<br>
+                        else if(條件式二) 程式敘述二<br>
+                        else if(條件式三) 程式敘述三<br>
+                        else 程式敘述四
+                    </code>
+                    <br>
+                    接著舉個範例如下，假設有個保存輸入密碼字數的變數 length，我們希望判斷它不得少於 3 個字，但不得超過 8 個字，都符合的話才設定這組密碼：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        if(length&gt;8){
+                            document.write('輸入密碼的長度不得超過 8 個字元。');
+                        }
+                        else if(length&lt;3){
+                            document.write('輸入密碼的長度不得少於 3 個字元。');
+                        }
+                        else {
+                            document.write('密碼設定中，請稍候。');
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>switch case</h2>
+                <p>
+                    根據條件的計算結果，執行對應的程式。
+                </p>
+                <hr>
+                <section>
+                    <h3>決策判斷式</h3>
+                    <p>
+                        <code>
+                            switch(條件){<br>
+                            　case 運算結果一:<br>
+                            　　程式敘述一;<br>
+                            　　break;<br>
+                            　case 運算結果二:<br>
+                            　　程式敘述二;<br>
+                            　　break;<br>
+                            　default:<br>
+                            　　程式敘述三;<br>
+                            }
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    當「條件」為「運算結果一」，就執行「程式敘述一」，為「運算結果二」，就執行「程式敘述二」，都不符合的話，就執行「程式敘述三」。<br>
+                    <br>
+                    其中 default 不需要的話可以省略，而每個 case 會用 break 指令來結束整個 switch 程式，否則會繼續執行下一個 case。不過如果 switch 最後一個是 case，就沒有這個問題，可以省略。<br>
+                    <br>
+                    接著舉個範例如下，假設有個保存所通關密語的 password 變數，如果是 GOLD 就開放黃金會員權限，如果是 SILVER 就開放白銀會員權限，如果是 IRON 則開放普通會員權限……<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        switch(password){
+                            case 'GOLD':
+                                document.write('您現在可以使用黃金會員權限。');
+                                break;
+                            case 'SILVER':
+                                document.write('您現在可以使用白銀會員權限。');
+                                break;
+                            case 'IRON':
+                                document.write('您現在可用一般會員的身分使用本站服務。');
+                                break;
+                            default:
+                                document.write('請輸入授予權限的密碼。');
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

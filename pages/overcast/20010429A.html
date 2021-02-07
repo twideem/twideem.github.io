@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>我愛小企鵝輸入法</h1>
+                <p>
+                    Fctix 是 Free Chinese Input Toy for X 的意思。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>特色</h2>
+                <p>
+                    我偏好使用 Fctix 的新酷音，它可以按 R-Shift 切換輸入法，跟我在中文輸入法難用到爆的 Windows 8 最後折衷做法是固定開啟新注音輸入法只靠 R-Shift 中英切換一樣～<br>
+                    <br>
+                    除此之外，Fctix 與 Lubuntu 的軟體相容性很好，不會有其它輸入法候選字欄位置跑掉、或者功能異常導致當機的問題。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>安裝</h2>
+                <p>
+                    <kbd>apt-get install fcitx fcitx-chewing</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>心得</h2>
+                <hr>
+                <section>
+                    <h3>全形符號切換</h3>
+                    <p>
+                        預設是「<kbd>Ctrl + ,</kbd>」，雖然我想自訂為「<kbd>Shift + Space</kbd>」，但沒有效果，不曉得這組合鍵被哪個程序給佔用了 Orz
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>虛擬鍵盤</h3>
+                    <p>
+                        預設是「<kbd>Ctrl + Shift + B</kbd>」，我另外自訂為「<kbd>Ctrl + .</kbd>」，但微軟新注音是「<kbd>Ctrl + Alt + ,</kbd>」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>如何輸出全形英文和數字？</h3>
+                    <p>
+                        先切換到全形符號，再叫出虛擬鍵盤敲英文和數字。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>只按 R-Shift 鍵切換中英輸入方案</h3>
+                    <p>
+                        進入設定輸入法的介面，在「輸入法」頁籤中，清單要有如下兩項，且照順序排列：<br>
+                        <br>
+                        <var>
+                            新酷音<br>
+                            鍵盤 - 英語 (美式)<br>
+                        </var>
+                        <br>
+                        在「全域設定」頁籤中，勾選「顯示進階選項」，然後在「快捷鍵」頁籤設定：<br>
+                        <br>
+                        <var>
+                            額外的啟用輸入法快捷鍵 = 右Shift<br>
+                            切換虛擬鍵盤 = Ctrl+.<br>
+                            切換全形字元模式 = Ctrl+,<br>
+                        </var>
+                        <br>
+                        在「程式」頁籤設定：<br>
+                        <br>
+                        <var>
+                            預設輸入法狀態 = 作用<br>
+                        </var>
+                        <br>
+                        在「輸出」頁籤設定：<br>
+                        <br>
+                        <var>
+                            候選字數 = 8<br>
+                            未聚焦視窗時，不要提交預編輯文字 = 勾選<br>
+                            （其它取消勾選）<br>
+                        </var>
+                        <br>
+                        在「外觀」頁籤設定：<br>
+                        <br>
+                        <var>
+                            只有預編輯字串時不顯示輸入視窗 = 勾選<br>
+                            （其它取消勾選）<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>關閉用不到的項目</h3>
+                    <p>
+                        進入「附加元件」→「進階」，然後取消勾選如下項目：<br>
+                                    <br>
+                        <samp>
+                            快速輸入<br>
+                            Freedesktop.org 桌面提示支援<br>
+                            正簡轉換<br>
+                            自動英文模式<br>
+                            標點支援
+                        </samp>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>外觀</h3>
+                    <p>
+                        字型：AR PL UMing TW Bold (12)<br>
+                        選單字型：FreeMono (16)<br>
+                        要顯示的字形語系：zhTW_.UTF-8<br>
+                        狀態面板隱藏模式：自動  
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

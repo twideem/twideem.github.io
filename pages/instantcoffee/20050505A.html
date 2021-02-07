@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>private、protected、public</h1>
+                <p>
+                    Java 語言有四種存取權限，用來決定符合哪些條件的 class 可以存取 field（資料欄位）和 method（操作方式）：<br>
+                    <br>
+                    <samp>
+                        1、只有 class 本身能存取。<br>
+                        2、只有同 package 的 class 能存取。<br>
+                        3、使用 extends 而來的 class 就能存取。（即使不同 package）<br>
+                        4、任何 class 都能存取。<br>
+                    </samp>
+                    <br>
+                    攸關存取權限的 modifier（修飾子）有三種：private、protected、public。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>private</h2>
+                <p>
+                    將 field 與 method 設定為 private 的話，只有自己能存取，其它 class 存取的話，編譯器會警示錯誤。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>default</h2>
+                <p>
+                    未使用 modifier 的話，Java 會預設使用有別於 public、proteted、private 的存取權限，因此稱為 default。<br>
+                    <br>
+                    default 只有同 package 的 class 能存取，底下示範無法執行的例子。
+                </p>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            package s;
+
+                            public class A{
+
+                                void f1(){
+                                    System.out.print("HELLO");
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            package t;
+
+                            public class B extends s.A{
+
+                                public void f2(){
+                                    f1();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>main</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            t.B b = new t.B();
+                            b.f2();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    因為 A 的 f1() 是 default，只限同 package 的類別存取，因此 t.B 無法存取 s.A 的 f1()。<br>
+                    <br>
+                    你把 B 的 package 改成 s 看看，就可以通過編譯了。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>protected</h2>
+                <p>
+                    protected 可將 field 與 method 設定為第三種存取權限。
+                </p>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            package s;
+
+                            public class A{
+
+                                protected void f1(){
+                                    System.out.print("HELLO");
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            package t;
+
+                            public class B extends s.A{
+
+                                public void f2(){
+                                    f1();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>main</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            t.B b = new t.B();
+                            b.f2();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    雖然 t.B 與 s.A 是不同 package，但因為 B 繼承 A，因此 B 可以存取 A 的 f1()。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>public</h2>
+                <p>
+                    將 field 與 method 設定為 public 的話，任何外部 class 都能存取。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

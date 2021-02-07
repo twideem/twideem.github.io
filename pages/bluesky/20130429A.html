@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>安裝編碼包後影片出現綠影</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>問題</h2>
+                <p>
+                    無論安裝 K-Lite Codec Pack 或 STANDARD/ADVANCED Codecs 之類的編碼包，看影片有時會出現綠影：
+                </p>
+                <figure>
+                    <img src='../../figures/bluesky/20130429A_01.png' alt='插圖'>
+                    <img src='../../figures/bluesky/20130429A_02.png' alt='插圖'>
+                </figure>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>解法</h2>
+                <hr>
+                <section>
+                    <h3>Step 1:</h3>
+                    <p>
+                        執行編碼包隨附的 Codec Tweak Tool 程式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 2:</h3>
+                    <p>
+                        按 DirectShow Filters 鈕。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 3:</h3>
+                    <p>
+                        按 LAV Video decoder。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 4:</h3>
+                    <p>
+                        按 Hardware Decoder to use 底下的下拉式清單，改成 DXVA2 (native) 或 None 或 NVIDIA CUVID<ins>[1]</ins>，即可解決問題。
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20130429A_03.png' alt='插圖'>
+                    </figure>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] NVIDIA CUVID 會用 GPU 執行，播個影片風扇也會狂轉，不是很建議。<br>
+                    [*] Windows 內建的編碼器，一來支援的格式不足，二來執行效率差（例如前進後退時會 LAG，時間影格不準確），因此還是會想安裝第三方整理好的編碼包。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

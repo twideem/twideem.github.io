@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>自己製作 sleep() 函式</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>做法一</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        function sleep(ms){
+                            var start = new Date().getTime();
+                            while(true){
+                                if((new Date().getTime()-start)>ms){
+                                    break;
+                                }
+                            }
+                        }
+
+                        console.log('AAA');
+                        sleep(1000);
+                        console.log('BBB');
+                        sleep(1000);
+                        console.log('CCC');
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>做法二</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        async function sleep(seconds){
+                            return new Promise(function(x){
+                                setTimeout(x,seconds*1000);
+                            })
+                        }
+
+                        async function main(){
+                            console.log('AAA');
+                            await sleep(1);
+                            console.log('BBB');
+                            await sleep(1);
+                            console.log('CCC');
+                        }
+
+                        main();
+                    </textarea>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>sub class 的 field 與 method 取用情況</h1>
+                <p>當 class（類別）是繼承而來的，那 sub class（支類別）與 super class（超類別）各自存取 field（資料欄位）以及使用 method（操作方式）時，情況可能和你所想的不太一樣。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>事前準備</h2>
+                <p>
+                    首先準備好兩個原始碼檔案，讓 SubClass 繼承 SuperClass。
+                </p>
+                <hr>
+                <section>
+                    <h3>SuperClass.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class SuperClass{
+
+                                public final String field = "I AM SUPER CLASS";
+
+                                public void method(){
+                                    System.out.println("SUPER CLASS: " + field);
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>SubClass.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class SubClass extends SuperClass{
+
+                                public final String field = "I AM SUB CLASS";
+
+                                public void method(){
+                                    System.out.println("SUB CLASS: " + field);
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>呼叫 method</h2>
+                <p>
+                    接著建立一個指向 SubClass 的 reference（參照；存放 instance 所在位址的指標），名為 sub_class。<br>
+                    <br>
+                    但再來建立一個名為 super_class 的 SuperClass 時，讓它指向 sub_class 的 reference。<br>
+                    <br>
+                    最後讓兩者呼叫 mehtod()。
+                </p>
+                <hr>
+                <section>
+                    <h3>呼叫 sub_class 與 super_class 的 method()</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            SubClass sub_class = new SubClass();
+                            SuperClass super_class = sub_class;
+
+                            super_class.method();
+                            sub_class.method();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    輸出結果是：<br>
+                    <br>
+                    <output>
+                        SUB CLASS: I AM SUB CLASS<br>
+                        SUB CLASS: I AM SUB CLASS<br>
+                    </output>
+                    <br>
+                    由於 super_class 指向 sub_class 的 instance（實際建立出來的物件；術語實例），因此在 method 的部分，兩者是一樣的。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>存取 field</h2>
+                <p>
+                    接下來改成存取兩者的 field：
+                </p>
+                <hr>
+                <section>
+                    <h3>存取 sub_class 與 super_class 的 field</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            SubClass sub_class = new SubClass();
+                            SuperClass super_class = sub_class;
+
+                            System.out.println(super_class.field);
+                            System.out.println(sub_class.field);
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    輸出結果卻是：<br>
+                    <br>
+                    <output>
+                        I AM SUPER CLASS<br>
+                        I AM SUB CLASS
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>結論</h2>
+                <p>
+                    method 是看 reference 所指向的 instance 而定，但 field 卻是看 reference 被宣告時的 type 而定。<br>
+                    <br>
+                    這點在有繼承關係的 class 間交換使用時，是可能導致混亂的部分，值得注意。<br>
+                    <br>
+                    在 Java 使用 class 時，不能只有「物件」的觀念（萬事萬物皆指標），還要有「型別」的認知（離不開資料型態的本質）。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

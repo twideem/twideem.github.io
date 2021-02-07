@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>StringBuilder、StringBuffer</h1>
+                <p>
+                    由於 Java 的 String 有「內容不可變」的性質，當內容變更時，採取重新 new 一個物件做為新內容的做法，因此為了避免 new 太多 String，而提供 StringBuilder 來彌補。<br>
+                    <br>
+                    既然 StringBuilder 是特別用來變更內容用的，因此有更豐富的文字修改能力，可以方便開發者編輯字串內容。但不支援 Regular Expression，因此不是用來取代 String 的，而是輔助用的，適合用在插入與刪除的場合。<br>
+                    <br>
+                    最後，StringBuffer 其實與 StringBuilder 一樣，只差在支援多執行緒；如果設計上沒用到多執行緒，那使用 StringBuilder 有更佳的執行效能。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>加入字串</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder();
+                                string_builder.append("ABCDEFG");
+
+                                System.out.print(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABCDEFG
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>插入字串</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.insert(3,"XYZ");
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABCXYZDEFG
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>輸出字串</h2>
+                <p>
+                    StringBuilder 並非 String，因此不能將它代入 String 的參數，必須使用 toString() 將內容以 String 輸出：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[9]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder();
+                                string_builder.append("ABCDEFG");
+
+                                List&lt;String&gt; list = new ArrayList&gt;String&gt;();
+                                list.add(string_builder.toString()); //沒 toString() 將編譯失敗
+
+                                System.out.print(list.get(0));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABCDEFG
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取得字元</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[7]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+
+                                System.out.print(string_builder.charAt(3));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        D
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>擷取字串</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[7]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+
+                                System.out.println(string_builder.substring(2,4));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        CD
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>更改字元</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.setCharAt(3,"-");
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABC-EFG<br>
+                    </output>
+                    <br>
+                    注意！既然是字元，第二參數用的是單引號，而不是雙引號，否則將編譯錯誤。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>更改字串</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.replace(1,6,"-");
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        A-G<br>
+                    </output>
+                    <br>
+                    注意，與 String 的 replace() 參數用法不一樣。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>將字串順序反過來</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.reverse();
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        GFEDCBA
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>刪除單一字元</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.deleteCharAt(2);
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABDEFG
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>刪除連續字串</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.delete(1,6);
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        AG<br>
+                    </output>
+                    <br>
+                    注意！跟 String 的 substring() 一樣，參數看起來並不直覺，第二個參數是終點（到哪裡為止），所以 (1,6) 而不是從第二個字元刪到第七個字元。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>清空字串</h2>
+                <p>
+                    StringBuilder 並沒有 clear() 這類操作方式，只好用 setLength(0) 將字串長度設為 0，以資料歸零的做法來折衷：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+                                string_builder.setLength(0);
+                                string_builder.append("HIJKLMNOP");
+
+                                System.out.print(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        HIJKLMNOP
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>削掉頭尾空白</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[6]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder(" ABCDEFG ");
+                                string_builder.trimToSize();
+
+                                System.out.println(string_builder.toString());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        ABCDEFG
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>從字串中尋找文字所在位置</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[7]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+
+                                System.out.println(string_builder.indexOf("D"));
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        3
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取得字串長度</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[7]'>
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                StringBuilder string_builder = new StringBuilder("ABCDEFG");
+
+                                System.out.println(string_builder.length());
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        7
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 另外補充一篇《<a href='appendix.html#20030113A'>為何使用 StringBuilder</a>》。
+                </p>
+            </footer>
+
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Collections 速成</h1>
+                <p>
+                    如果你懂得根據資料的處理方式，善用合適的 Collection，可以簡化程式碼的結構，提升可讀性。例如既要過濾重複資料、又要排序資料，那直接用 TreeSet 一次搞定，要比先用 HashSet 過濾，再轉存到 ArrayList 好讓 java.util.Collections.sort() 排序來得乾淨俐落！<br>
+                    <br>
+                    反過來，明明 Java 已經提供這些高效能演算法的資料結構，卻還自己土法煉鋼去處理，變成要敲二三十行的程式碼，錯失只需兩三行程式就能搞定的快感，而且處理時間可能要多兩三倍。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>使用時機</h2>
+                <p>
+                    陣列用途：
+                </p>
+                <table>
+                    <tr><td>ArrayList</td><td>允許重複資料、照先後順序排列、適合讀取資料。</td></tr>
+                    <tr><td>LinkedList</td><td>允許重複資料、照先後順序排列、適合更動資料。</td></tr>
+                    <tr><td>HashSet</td><td>濾除重複資料、特殊演算順序。</td></tr>
+                    <tr><td>LinkedHashSet</td><td>濾除重複資料、照先後順序排列。</td></tr>
+                    <tr><td>TreeSet</td><td>濾除重複資料、自動排序。</td></tr>
+                </table>
+                <p>
+                    關聯表用途：<br>
+                <p>
+                <table>
+                    <tr><td>HashMap</td><td>鍵/值對資料、特殊演算順序。</td></tr>
+                    <tr><td>LinkedHashMap</td><td>鍵/值對資料、照先後順序排列。</td></tr>
+                    <tr><td>TreeMap</td><td>鍵/值對資料、自動排序。</td></tr>
+                </table>
+                <p>
+                    巡訪資料：<br>
+                <p>
+                <table>
+                    <tr><td>Iterator</td><td>使用 hasNext() 和 next() 巡訪資料。</td></tr>
+                </table>
+                <p>
+                    舊版做法：<br>
+                <p>
+                <table>
+                    <tr><td>Vector</td><td>建議用 ArrayList 替代。</td></tr>
+                    <tr><td>Stack</td><td>建議用 LinkedList 替代。</td></tr>
+                    <tr><td>Hashtable</td><td>建議用 HashMap 替代。</td></tr>
+                    <tr><td>Enumeration</td><td>建議用 Iterator 替代。</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>範例</h2>
+                <p>
+                    先以 ArrayList 為例：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.ArrayList;
+                        import java.util.Iterator;
+                        import java.util.List;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+
+                                list.add("AAA");
+                                list.add("BBB");
+                                list.add("CCC");
+
+                                Iterator&lt;String&gt; iterator = list.iterator();
+
+                                while(iterator.hasNext()){
+                                    System.out.println(iterator.next().toLowerCase());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        aaa<br>
+                        bbb<br>
+                        ccc<br>
+                    </output>
+                    <br>
+                    再以 TreeSet 為例：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Iterator;
+                        import java.util.Set;
+                        import java.util.TreeSet;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                Set&lt;Integer&gt; set = new TreeSet&lt;Integer&gt;();
+
+                                set.add(8);
+                                set.add(4); //雖然是第二筆，但會被自動排序在 8 的前面。
+                                set.add(8); //重複的資料，因此不會真的被加進去。
+
+                                Iterator&lt;Integer&gt; iterator = set.iterator();
+
+                                while(iterator.hasNext()){
+                                    System.out.println(iterator.next());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        4<br>
+                        8
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>補充</h2>
+                <p>
+                    為什麼使用 List list=new ArrayList() 或 Set set=new HashSet() 的方式來宣告參照？這是為了往後隨時可以抽換成其它類別。當我們發現所選的群集在處理資料並不適任時，就可以由 ArrayList 抽換成 LinkedList、或由 HashSet 抽換成 LinkedHashSet，而不影響程式其它部分。<br>
+                    <br>
+                    當然，還可以更進一步！如果希望將來可以在 List 與 Set 中替換，那可以改用 Collection 介面，因為它是 List 與 Set 的共通介面：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[9]'>
+                        import java.util.Collection;
+                        import java.util.HashSet;
+                        import java.util.Iterator;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                Collection&lt;String&gt; collection = new HashSet&lt;String&gt;();
+
+                                collection.add("AAA");
+                                collection.add("BBB");
+                                collection.add("CCC");
+
+                                Iterator&lt;String&gt; iterator = collection.iterator();
+
+                                while(iterator.hasNext()){
+                                    System.out.println(iterator.next());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    上例是用 HashSet 實作，現在直接換成 ArrayList，但其它地方都不需要修改：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[9]'>
+                        import java.util.ArrayList;
+                        import java.util.Collection;
+                        import java.util.Iterator;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                Collection&lt;String&gt; collection = new ArrayList&lt;String&gt;();
+
+                                collection.add("AAA");
+                                collection.add("BBB");
+                                collection.add("CCC");
+
+                                Iterator&lt;String&gt; iterator = collection.iterator();
+
+                                while(iterator.hasNext()){
+                                    System.out.println(iterator.next());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    然而，這樣做是需要犧牲的！例如 Collection 介面並沒有 List 介面的 get(int)，因此雖然可以從 Set 介面替換為 List 介面，但既然使用 Collection 介面，就不認得 get(int)，因此只能用 iterator() 來巡訪資料<ins>[1]</ins>。<br>
+                    <br>
+                    這是理所當然的，既然要能隨時互相替換，那就應該用彼此都有的方式來操作。<br>
+                    <br>
+                    如何在「初寫的方便性」與「修改的靈活性」之間做抉擇，端看我們對需求的掌握程度。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>進階</h2>
+                <p>
+                    java.util.Collections 提供許多 static 的 method，方便我們處理 Collection 的資料：
+                </p>
+                <table>
+                    <tr><td>binarySearch(List, Object)</td><td>搜尋 List 內容的 Object 元素。</td></tr>
+                    <tr><td>copy(List dest, List src)</td><td>複製 src 的元素給 dest。</td></tr>
+                    <tr><td>enumerarion(Collection)</td><td>傳回舊式的 Enumerarion 迭代器。</td></tr>
+                    <tr><td>fill(List, Object)</td><td>將 List 內容填滿為 Object。</td></tr>
+                    <tr><td>max(Collection)</td><td>傳回 Collection 中最大的元素。</td></tr>
+                    <tr><td>min(Collection)</td><td>傳回 Collection 中最小的元素。</td></tr>
+                    <tr><td>reverse(List)</td><td>顛倒 List 內容的排列順序。</td></tr>
+                    <tr><td>shuffle(List)</td><td>亂排 List 的內容。</td></tr>
+                    <tr><td>sort(List)</td><td>排序 List 的內容。</td></tr>
+                    <tr><td>swap(List, int i, int j)</td><td>交換 List 中 i 與 j 位置兩筆元素。</td></tr>
+                </table>
+                <p>
+                    簡單示範其中的 shuffle，設計用電腦抽籤來決定聯盟球隊選秀順位的程式：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.ArrayList;
+                        import java.util.Collections;
+                        import java.util.Iterator;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+
+                                array_list.add("兄弟象");
+                                array_list.add("味全龍");
+                                array_list.add("統一獅");
+                                array_list.add("三商虎");
+                                array_list.add("時報鷹");
+                                array_list.add("俊國熊");
+
+                                Collections.shuffle(array_list);
+
+                                Iterator&lt;String&gt; iterator = array_list.iterator();
+
+                                while(iterator.hasNext()){
+                                    System.out.println(iterator.next());
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    每次執行結果都不一樣：<br>
+                    <br>
+                    <output>
+                        三商虎<br>
+                        味全龍<br>
+                        俊國熊<br>
+                        兄弟象<br>
+                        時報鷹<br>
+                        統一獅
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>補充</h2>
+                <p>
+                    用來處理陣列的 java.util.Arrays，對 Collections 也有幫助，底下是利用 Arrays 產生 List 的範例，程式相當簡潔：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.List;
+                        import java.util.Arrays;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                List&lt;String&gt; list = Arrays.asList("AAA","BBB","CCC");
+
+                                for(String n:list){
+                                    System.out.print(n);
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA<br>
+                        BBB<br>
+                        CCC<br>
+                    </output>
+                    <br>
+                    如果可以再寫成 <code>List&lt;String&gt; list = {"AAA","BBB","CCC"} </code> 就好了，可惜 Java 不支援。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 頂多用 toArray() 轉成陣列再處理。<br>
+                    [*] 雖然不建議使用，但如果對舊版群集有興趣的話，還是可以看一下《<a href='20030203B.html'>Collection 1.1</a>》。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

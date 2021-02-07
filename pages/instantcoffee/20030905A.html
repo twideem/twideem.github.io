@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>列印</h1>
+                <p>列印的原理有點怪，但講起來也很簡單：「用畫的。」<br></p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>事前準備</h2>
+                <p>
+                    除非你嫌墨匣太多，否則建議安裝 <a href='http://sourceforge.net/projects/pdfcreator/' target='_blank'>PDFCreator</a> 充當印表機，在練習列印的功能時，將列印結果以 PDF 文件來儲存。或者 Windows Vista 開始內建的 Microsoft XPS Document Writer 也有同樣功能。<br>
+                    <br>
+                    這樣在執行列印功能時，就可以不用拿真的印表機來測試，列印的結果改用 PDF 文件或 XPS 文件來輸出與顯示：
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20030905A_01.png' alt='插圖'>
+                    <figcaption>拿 Canon 印表機來測試列印結果太浪費墨水了，改用 XPS 檔輸出。</figcaption>
+                </figure>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>將資料列印出來</h2>
+                <p>
+                    最標準的列印功能，是將程式設計過程中設置的資料，給列印出來。
+                </p>
+                <hr>
+                <section>
+                    <h3>基本列印的語法架構</h3>
+                    <p>
+                        底下範例是最簡單的列印<ins>[1]</ins>，會在紙張上印出 Hello 字串：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.awt.Graphics;
+                            import java.awt.print.PageFormat;
+                            import java.awt.print.Printable;
+                            import java.awt.print.PrinterException;
+                            import java.awt.print.PrinterJob;
+
+                            public class Main implements Printable{
+
+                                //實作 Printable 介面的 print() 功能
+                                @Override public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+                                    if(page_index>0){
+                                        return Printable.NO_SUCH_PAGE;
+                                    }
+                                    else{
+                                        //在 (100, 150) 的位置，繪出 Hello 字串。
+                                        graphics.drawString("Hello", 100, 150);
+                                        return Printable.PAGE_EXISTS;
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立列印工作。
+                                        PrinterJob printer_job = PrinterJob.getPrinterJob();
+                                        //指定系統預設的紙張格式（A4），排入 Main() 實作的列印行程。
+                                        printer_job.setPrintable(new Main(), printer_job.defaultPage());
+                                        //呼叫列印對話視窗，確定後正式列印文件。
+                                        if(printer_job.printDialog()){
+                                            printer_job.print();
+                                        }
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>改變文字樣式、取得紙張大小與可列印範圍</h3>
+                    <p>
+                        你可以透過 Graphics 改變文字的字型、大小、顏色，或其它樣式。而透過 PageFormat 的 getWidth()、getHeight()、getImageableWidth()、getImageableHeight()，可以取得紙張範圍的大小，避免資料列印到外界去了，例如：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[17,19,21]'>
+                            import java.awt.Color;
+                            import java.awt.Font;
+                            import java.awt.Graphics;
+                            import java.awt.print.PageFormat;
+                            import java.awt.print.Printable;
+                            import java.awt.print.PrinterException;
+                            import java.awt.print.PrinterJob;
+
+                            public class Main implements Printable{
+
+                                @Override public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+                                    if(page_index>0){
+                                        return Printable.NO_SUCH_PAGE;
+                                    }
+                                    else{
+                                        //Dialog 字體、粗體、32 大小。
+                                        graphics.setFont(new Font("Dialog", Font.BOLD, 32));
+                                        //藍色。
+                                        graphics.setColor(Color.BLUE);
+                                        //在可列印範圍皆除以二的位置，繪出 Hello 字串。
+                                        graphics.drawString("Hello", (int)page_format.getImageableWidth()/2, (int)page_format.getImageableHeight()/2);
+                                        return Printable.PAGE_EXISTS;
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    try{
+                                        PrinterJob printer_job = PrinterJob.getPrinterJob();
+                                        printer_job.setPrintable(new Main(), printer_job.defaultPage());
+                                        if(printer_job.printDialog()) printer_job.print();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>自訂紙張格式</h3>
+                    <p>
+                        或者使用 PageFormat 透過 Paper 自訂紙張尺寸，如下範例，它加大了 A4 紙張的可列印範圍，否則雖然紙張夠大，但允許的可列印範圍不夠，列印時超出範圍的部分會被切割掉：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[24,25,26,27,28,30]'>
+                            import java.awt.Graphics;
+                            import java.awt.print.PageFormat;
+                            import java.awt.print.Paper;
+                            import java.awt.print.Printable;
+                            import java.awt.print.PrinterException;
+                            import java.awt.print.PrinterJob;
+
+                            public class Main implements Printable{
+
+                                @Override public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+                                    if(page_index>0){
+                                        return Printable.NO_SUCH_PAGE;
+                                    }
+                                    else{
+                                        graphics.drawString("Hello", 100, 150);
+                                        return Printable.PAGE_EXISTS;
+                                    }
+                                }
+
+                                public static void main(String[] args){
+                                    try{
+                                        PrinterJob printer_job = PrinterJob.getPrinterJob();
+                                        //自訂紙張範圍
+                                        PageFormat page_format = new PageFormat();
+                                        Paper paper = new Paper();
+                                        paper.setSize(590, 840);
+                                        paper.setImageableArea(10, 10, 580, 830);
+                                        page_format.setPaper(paper);
+                                        //以自訂的紙張紙張格式，排入 Main() 實作的列印行程。
+                                        printer_job.setPrintable(new Main(), page_format);
+                                        if(printer_job.printDialog()){
+                                            printer_job.print();
+                                        }
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>其它</h3>
+                    <p>
+                        其它像是透過 PrinterJob 預設份數與頁次範圍等不常用的細節，需要用到時，可查閱 Java API Specification。<br>
+                        <br>
+                        本節第二個範例列印出來的結果如下：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20030905A_02.png' alt='插圖'>
+                    </figure>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>將外部檔案當資料來列印</h2>
+                <p>
+                    （覺得可有可無，因此無限期草稿中。）
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>將 Swing 元件當資料來列印</h2>
+                <p>
+                    （覺得可有可無，因此無限期草稿中。）
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 為了讓初學者也能方便研究範例，因此將 Printable 的實作寫在 Main，降低程式碼結構的階層性；因為在我接觸初學者的經驗中，他們很容易被階層性結構的關係給搞混，重點因此失焦。雖然會動沒錯，但練習歸練習，正式場合設計列印功能時，建議將 Printable 實做為獨立的類別，例如 NewPrintable.java，然後列印時以「printer_job.setPrintable(new NewPrintable(), printer_job.defaultPage());」來啟動。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

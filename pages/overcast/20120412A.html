@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>字母用途</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>程式設計</h2>
+                <p>
+                    a、b、c、d：可知的序數。（做為可擴增的類別名稱或變數識別名稱。）<br>
+                    e：底數。（做為常數或倍率用基準值。）<br>
+                    f：功能。（做為物件的功能。）<br>
+                    g、h：重、長。（做為物件的特性。）<br>
+                    i、j：虛數。（做為條件設定狀態等需經運算的布林值。）<br>
+                    k：總和。（做為傳回值。）<br>
+                    l：小寫 l 長得像數字 1，不建議使用。<br>
+                    m、n：已知的任意數。（做為迴圈的參數。）<br>
+                    o、p、q、r、s、t、u、v、w：式子、階層結構。（做為物件、結構、套件名稱。）<br>
+                    x、y、z：未知數。（做為參數使用；使用之參數不應該超過三個。）<br>
+                    以 $ 開頭表示 global，以 _ 開頭表示 private。<ins>[1]</ins><br>
+                    <br>
+                    不敷使用時：a1 a2 a3、f1 f2 f3、n1 n2 n3。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>數字編碼</h2>
+                <p>
+                    I Z E A S G T B P O<br>
+                    1 2 3 4 5 6 7 8 9 0
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>範例</h2>
+                <hr>
+                <section>
+                    <h3>範例一</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            var S = function(){
+                                var g = 'HELLO';
+                                this.f = function(){
+                                    window.alert(g);
+                                }
+                            };
+                            var a = new S();
+                            a.f();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>範例二</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            var o = new Object();
+                            o.p.q.r.s.t.u.v.w();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>範例三</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            var i = false, j = false;
+                            if(window.prompt('請輸入帳號。')=='twideem') i = true;
+                            if(window.prompt('請輸入密碼。')=='abc123') j = true;
+                            if(i&amp;&amp;j) window.alert('帳戶登入中。');
+                            else window.alert('帳戶驗證錯誤。');
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>範例四</h3>
+                    <p>
+                        假設使用「姓名開頭小寫＋網站開頭大寫＋出生年份＋生日編碼」的格式，來設定每個網站的密碼…<br>
+                        <br>
+                        <samp>
+                            姓名：Kevin Maurice Garnett<br>
+                            網站：Facebook<br>
+                            生日：1976/5/19<br>
+                        </samp>
+                        <br>
+                        就可以寫成：<br>
+                        <br>
+                        <var>kmgF1976osip</var><br>
+                        <br>
+                        這樣一來，英文字母沒有「字典規則」可循，且密碼長度至少 12 個字元起跳，同時包含大小寫！<br>
+                        <br>
+                        但是！這只是個範例，千萬不要在臉書用這個格式設定密碼！因為臉書通常透露你的名字與出生年月日 XDDD　如果覺得這樣格式值得參考，不妨改用其他紀念日，甚至改變順序。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[1] 兩者並非 global 與 local 的關係、或 public 與 private 的關係。亦即 $ 和 _ 沒有相對應的關係，兩者應用的場合並不同。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

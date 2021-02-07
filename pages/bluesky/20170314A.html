@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/fixure.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>讓 Modern UI 預設使用英數模式</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                雖然將微軟注音的預設輸入模式改為「英數模式」後，就能讓傳統桌面的應用軟體以英打開始，但開始畫面和工作列這些屬於 Modern UI 的部份，卻以 Windows 10 設定的語言區域決定預設輸入模式。<br>
+                <br>
+                這時可用登錄檔修改：<br>
+                <br>
+                <code>
+                    [HKEY_CURRENT_USER\Keyboard Layout\Preload]<br>
+                    "1"="d0010404"<br>
+                    "2"="00000404"<br>
+                    [HKEY_CURRENT_USER\Keyboard Layout\Substitutes]<br>
+                    "d0010404"="00000409"
+                </code>
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

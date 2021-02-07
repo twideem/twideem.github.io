@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>variable、field、property、attribute、character</h1>
+                <p>
+                    variable：變數。<br>
+                    field：資料欄位。<br>
+                    property：屬性。<br>
+                    attribute：性質。<br>
+                    character（characteristics）：特徵。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>variable</h2>
+                <p>
+                    傳統程式設計中，設置一個隨時可以改變資料內容，然後透過識別名稱將資料讀取出來，這樣的功能就是 variable。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>field</h2>
+                <p>
+                    寫在 class 裡面的 variable 就是 field，好處是可以透過指令來限制讀寫 field 的對象。<br>
+                    <br>
+                    傳統程式設計中，variable 只有兩種讀寫權限：global（全域）和 local（區域）。local 是比如在 function（函式）裡面宣告出來的 variable，function 執行完，這個 variable 就不見了，因此無法有效保存整個軟體或系統想要的資料。想要將運算結果保存起來，讓軟體或系統可以使用，只能放在 global。但這樣一來，整個軟體或系統都能逕自修改 global variable，當程式過於龐大到 function 有上百個、甚至數千個時，一來誰知道有哪些 function 執行後會修改這筆 variable？二來誰知道程式會照怎樣的順序去跑這些 function？於是 global variable 所保存的資料，往往是無法預估的，當你讀取這樣一筆 global variable 時，它可能已經被改得面目全非，不是你真正想要拿來用的資料，導致程式運算出來的結果跟你所預期的完全不一樣。通常這樣的程式，function 彼此之間環環相扣，我呼叫你、你呼叫我，所以很難追蹤說到底在甚麼地方被修改。但更要命的是很難除錯，通常每個 function 的執行對這個軟體或系統來說都很重要，你根本一個都不能動。<br>
+                    <br>
+                    class 的 field 提供新的讀寫權限，它隨 object 的執行一直保存下去。並且 class 的精神，是將相關的 variable 與 function 放在一塊，不相關的就隔開避免誤改，因此物件導向程式設計有效解決了傳統程式設計 global variable 環環相扣、牽一髮動全身的問題。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>property</h2>
+                <p>
+                    會被 method（操作方式）使用到的 field 就叫 property。但必須注意！其實反過來說，有用到 field 的 method，也是 property；甚至嚴格來說，這個充分與 class 的 field 結合在一起的 method，才是 object 真正所謂的 property。<br>
+                    <br>
+                    例如「煞車的特性」就是一種 property，它指的其實是煞車這個行為動作，通常設計為 method。<br>
+                    <br>
+                    在 Java 程式設計中，專門用來讀寫 private field 的 setXXX()、getXXX()、isXXX() 就是最常見的 property，甚至在高階的 Java 程式設計領域裡，遵循某些 property 的規範，就能自動化處理某些系統機制。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>attribute</h2>
+                <p>
+                    僅做為 class 本身保存狀態資料用的 field，就是 attribute。<br>
+                    <br>
+                    例如「車手的特質」就是一種 attribute，它指的是車手這個身分，通常設計為 class。<br>
+                    <br>
+                    attribute 是因為 UML 這樣的專案管理語言被提出來使用，其實對單純編寫程式設計的人來說是多餘的。因為你的專業是如何實現程式設計的功能，而不是如何拆掉程式設計的功能，所以不大可能吃飽沒事把 class 裡面的 variable 改叫 field 不夠，還改稱 attribute。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>character</h2>
+                <p>
+                    正式術語應該用 characteristics 才對。<br>
+                    <br>
+                    這是站在把系統當作一個生態的角度，審視某特定物件的內在素質，研究它就是基於怎樣的特質，才會有怎樣的行為。<br>
+                    <br>
+                    就像在研究歷史人物基於怎樣的人格特質，然後成功或失敗一樣。<br>
+                    <br>
+                    站在這樣的視野剖析 characteristics 時，通常不會把物件當作對象本身，因為 characteristics 就等於物件本身，所以我個人習慣改用較不適切的 character 一詞，表示這是活生生的對象。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

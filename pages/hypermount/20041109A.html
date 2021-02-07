@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Firefox 設定集</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>使用者設定檔</h2>
+                <hr>
+                <section>
+                    <h3>Windows 8</h3>
+                    <p>
+                        「螢幕右角」→「搜尋」→「%APPDATA%\Mozilla\Firefox\Profiles\」→備份或覆蓋「xxxxxxxx.default」這個資料夾。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>關閉九宮式新分頁</h2>
+                <hr>
+                <section>
+                    <h3>Firefox 40 為止的做法</h3>
+                    <p>
+                        1)「擴充套件」→「Firefox 首頁」→「移除或停用」→「立刻重新啟動」<br>
+                        2)「網址列」→輸入「about:config」<br>
+                        3)「browser.newtab.url」→「網址或 about:robots（空白頁）」<br>
+                        4)「browser.newtabpage.enabled」→「false」
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Firefox 41 以後的做法</h3>
+                    <p>
+                        因為 Mozilla 無法解決駭客綁架首頁的問題，所以從 Firefox 41 開始，取消了 browser.newtab.url，只好下載擴充套件 New Tab Override：<br>
+                        <br>
+                        <a href='http://addons.mozilla.org/zh-TW/firefox/addon/new-tab-override/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/new-tab-override/</a><br>
+                        <br>
+                        或只能開啟為首頁的 New Tab Homepage：<br>
+                        <br>
+                        <a href='http://addons.mozilla.org/zh-TW/firefox/addon/new-tab-homepage/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/new-tab-homepage/</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Firefox 57 以後的規則</h3>
+                    <p>
+                        因為 WebExtensions 的規範，附加元件無法將新分頁導向本機網頁，只能讓新分頁設定為特定網站了～
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取消意外關閉 Firefox 時自動恢復瀏覽頁的功能</h2>
+                <p>
+                    在「網址列」輸入 about:config，將 <var>browser.sessionstore.resume_from_crash</var> 設為 false。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>關閉下載掃毒</h2>
+                <p>
+                    在「網址列」輸入 about:config，將 <var>browser.download.manager.scanWhenDone</var> 設為 false。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>不要再詢問通知</h2>
+                <p>
+                    在「網址列」輸入 about:config，將以下項目設為 false：<br>
+                    <br>
+                    <var>
+                        dom.push.connection.enabled<br>
+                        dom.push.enabled<br>
+                        dom.webnotifications.enabled<br>
+                        dom.webnotifications.serviceworker.enabled<br>
+                    </var>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>不要再詢問透露地理位置</h2>
+                <p>
+                    在「網址列」輸入 about:config，將 <var>geo.enabled</var> 設為 false。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>滑鼠手勢</h2>
+                <hr>
+                <section>
+                    <h3>Firefox 56 前</h3>
+                    <p>
+                        下載擴充套件 FireGesture：<br>
+                        <br>
+                        <a href='http://addons.mozilla.org/zh-TW/firefox/addon/firegestures/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/firegestures/</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Firefox 57 後</h3>
+                    <p>
+                        下載擴充套件 Gesturefy：<br>
+                        <br>
+                        <a href='http://addons.mozilla.org/zh-TW/firefox/addon/gesturefy/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/gesturefy/</a>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>uBlock Origin</h2>
+                <hr>
+                <section>
+                    <h3>下載</h3>
+                    <p>
+                        <a href='http://addons.mozilla.org/zh-TW/firefox/addon/ublock-origin/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/ublock-origin/</a>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>BlockTube</h2>
+                <p>
+                    <a href='http://addons.mozilla.org/zh-TW/firefox/addon/blocktube/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/blocktube/</a><br>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Block Ccontent Farm</h2>
+                <p>
+                    <a href='http://addons.mozilla.org/zh-TW/firefox/addon/block-content-farm/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/block-content-farm/</a>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>YouTube Video and Audio Downloader</h2>
+                <p>
+                    <a href='http://addons.mozilla.org/zh-TW/firefox/addon/youtube_downloader_webx/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/youtube_downloader_webx/</a>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>以 FXChrome 和 Stylist 變裝為 Chrome 介面</h2>
+                <p>
+                    Firefox 29 開始，已經取消左上角 Firefox 橘色按鈕，變得跟 Chrome 一樣簡潔，應該不需要再變裝了～
+                </p>
+                <hr>
+                <section>
+                    <h3>FXChrome</h3>
+                    <p>
+                        <a href='http://addons.mozilla.org/zh-TW/firefox/addon/fxchrome/' target='_blank'>http://addons.mozilla.org/zh-TW/firefox/addon/fxchrome/</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Stylist</h3>
+                    <p>
+                        <a href='http://addons.mozilla.org/en-US/firefox/addon/stylish/' target='_blank'>http://addons.mozilla.org/en-US/firefox/addon/stylish/</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Button icons</h3>
+                    <p>
+                        <a href='http://userstyles.org/styles/51118/fxchrome-firefox-button-icons/' target='_blank'>http://userstyles.org/styles/51118/fxchrome-firefox-button-icons/</a>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Firefox 已在執行中，但無回應。</h2>
+                <p>
+                    如果設定「選項」→「個人隱私」→「歷史紀錄」→「使用自訂的設定」的話，關閉 Firefox 後想再執行時，經常會出現：「Firefox 已在執行中，但無回應。請先結束現有的 Firefox 或重新開機再開啟新視窗。」每次都要叫出「工作管理員」結束 Firefox 才能如願執行，相當惱人！<br>
+                    <br>
+                    改回「保留所有歷史紀錄」可以解決問題，或者自己寫個「先砍 firefox.exe 程序，再執行 firefox.exe 的批次檔」做為啟動 Firefox 的程式：<br>
+                    <br>
+                    <code>
+                        taskkill /F /IM firefox.exe<br>
+                        'C:\\Program Files (x86)\Mozilla Firefox\firefox.exe'
+                    </code>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

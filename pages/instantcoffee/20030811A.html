@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>SAX 基本範例：快速剖析 XML 文件裡的資料</h1>
+                <p>SAX 是 Simple API for XML 的縮寫，適合單純用來讀取 XML 檔案，快速剖析裡面的資料。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>範例</h2>
+                <p>
+                    先準備一個 XML 檔案 configure.xml，再以 ExtendsDefaultHandler.java 繼承 org.xml.sax.helpers.DefaultHandler 決定如何處理 XML 結構的資料，然後 Main.java 示範如何操作 SAX。
+                </p>
+                <hr>
+                <section>
+                    <h3>configure.xml</h3>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                            &lt;configure&gt;
+                                &lt;name&gt;我的應用程式&lt;/name&gt;
+                                &lt;version&gt;1.0.0.0&lt;/version&gt;
+                                &lt;note encode="中文"&gt;這是我的第一個應用程式，請多指教。&lt;/note&gt;
+                            &lt;/configure&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>ExtendsDefaultHandler.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import org.xml.sax.Attributes ;
+                            import org.xml.sax.helpers.DefaultHandler;
+                            import org.xml.sax.SAXException;
+
+                            public class ExtendsDefaultHandler extends DefaultHandler{
+
+                                @Override public void startElement(String uri, String local_name, String qualified_name, Attributes attributes) throws SAXException{
+                                    System.out.println("元素名稱：" + qualified_name);
+                                    for(int n=0; n&lt;attributes.getLength(); n++){
+                                        System.out.println("屬性名稱：" + attributes.getLocalName(n));
+                                        System.out.println("屬性內容：" + attributes.getValue(n));
+                                    }
+                                }
+
+                                @Override public void characters(char[] chars, int start, int length) throws SAXException{
+                                    String text = new String(chars, start, length);
+                                    if(!text.trim().equals("")){
+                                        System.out.println("元素內容：" + text);
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.FileInputStream;
+                            import javax.xml.parsers.SAXParser;
+                            import javax.xml.parsers.SAXParserFactory;
+                            import org.xml.sax.InputSource;
+                            import org.xml.sax.XMLReader;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        SAXParserFactory sax_parser_factory = SAXParserFactory.newInstance();
+                                        SAXParser sax_parser = sax_parser_factory.newSAXParser();
+                                        XMLReader xml_reader = sax_parser.getXMLReader();
+                                        xml_reader.setContentHandler(new ExtendsDefaultHandler());
+                                        xml_reader.parse(new InputSource(new FileInputStream("configure.xml")));
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    <output>
+                        元素名稱：configure<br>
+                        元素名稱：name<br>
+                        元素內容：我的應用程式<br>
+                        元素名稱：version<br>
+                        元素內容：1.0.0.0<br>
+                        元素名稱：note<br>
+                        屬性名稱：encode<br>
+                        屬性內容：中文<br>
+                        元素內容：這是我的第一個應用程式，請多指教。
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>說明</h2>
+                <p>
+                    由於 SAX 剖析 XML 的方式，對多數人來說有點詭異，因此稍微概述一下其原理。<br>
+                    <br>
+                    不像 DOM 是將整個 XML 檔案讀入，SAX 比較類似逐行<ins>[1]</ins> 讀取 XML 檔案中的資料，每讀一行文字，就判斷其種類，然後觸發不同程序。我們再根據 SAX 觸發的程序，從中擷取想要的資料。<br>
+                    <br>
+                    而 SAX 在讀取資料並判斷其種類時，所觸發的程序中，我們最主要關心的，有下列五項：<br>
+                    <br>
+                    <samp>
+                        startDocument()<br>
+                        startElement()<br>
+                        characters()<br>
+                        endElement()<br>
+                        endDocument()<br>
+                    </samp>
+                    <br>
+                    我們通常使用 org.xml.sax.helpers.DefaultHandler 來擷取 SAX 觸發的程序，因為它能讓我們只覆寫需要的特定幾個程序即可。<br>
+                    <br>
+                    例如捕捉到元素時，可以覆寫 startElement() 來擷取屬性，捕捉到元素刮起來的內容時，就覆寫 characters() 擷取出來使用。<br>
+                    <br>
+                    也因此 SAX 被稱為事件驅動的 API！<br>
+                    <br>
+                    由於 SAX 的執行方式是不斷往下進行，所以不能回頭處理所謂前一筆的資料；你只能重頭開始。這樣的處理方式，自然不適合修改想要的資料，所以 SAX 只能讀取 XML 裡面的資料，無法寫入。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 應該說「逐段」才對。因為 XML 文件不見得非得一行一行，有時候會看到全部標籤擠成一行的案例，所以逐行剖析資料是不可能的！但是想像 SAX 如同 java.io.BufferedReader 的 readLine() 是「一行一行讀取資料」比較直覺，只是實際上 SAX 像 java.io.InputStream 逐塊 read() 資料。<br>
+                    [*] 另外補充個人對於 SAX 的看法：《<a href='appendix.html#20030811A'>re:SAX 基本範例：快速剖析 XML 文件裡的資料</a>》。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

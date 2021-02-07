@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>命令列介面的程式設計</h1>
+                <p>
+                    應用程式（Application）一般分為「視窗軟體（Window）」的「圖型化使用者介面（GUI; Graphical User Interface）」，以及「主控台指令（Console）」的「命令列介面（CLI; Command Line Interface）」。本文將介紹如何用 Java 設計指令模式的程式～
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>輸入</h2>
+                <p>
+                    底下示範 Java 如何取得使用者用鍵盤輸入的資料～
+                </p>
+                <hr>
+                <section>
+                    <h3>Example 1-1</h3>
+                    <p>
+                        第一個範例雖然不常用，但比較簡單，它用來取得使用者按下的是哪個鍵：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.InputStreamReader;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        InputStreamReader input_stream_reader = new InputStreamReader(System.in);
+                                        System.out.print(input_stream_reader.read());
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            a 　（假設使用者輸入時敲的是 a 鍵）<br>
+                            97　（結果輸出 a 的 ASCII 十進位碼）
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 1-2</h3>
+                    <p>
+                        第二個範例來看如何取得使用者輸入的文字，雖然它可用第三個範例的寫法來取代…<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.BufferedReader;
+                            import java.io.InputStreamReader;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(System.in));
+                                        System.out.print(buffered_reader.readLine());
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            aaa　（假設使用者輸入時敲了 aaa）<br>
+                            aaa　（輸出結果為 aaa）
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 1-3</h3>
+                    <p>
+                        第三個範例，將使用者輸入的資料分解成字串和整數等資料型態來使用，方便我們處理輸入的資料，避免寫一堆落落長的程式來擷取與轉換：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.util.Scanner;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    System.out.println("請輸入參數與設定值：");
+
+                                    Scanner scanner = new Scanner(System.in);
+
+                                    if(scanner.next().equals("double")){
+                                        System.out.print(scanner.nextInt()*2);
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            請輸入參數與設定值：<br>
+                            double 200　（這是使用者的輸入情況）<br>
+                            400<br>
+                        </output>
+                        <br>
+                        Scanner 還有更多轉換或取出資料的功能，請參考 Java API Specification。<br>
+                        <br>
+                        Scanner 是 Java SE 5.0 開始支援的物件，它比過去的 java.io.StreamTokenizer 操作簡單、功能更強，而且不只可以引入 System.in，其實也可以引入 String 和 File。自從有了 Scanner，就很少人再用 StreamTokenizer 和 StringTokenizer 了～<br>
+                        <br>
+                        不只如此，你可以發現這個範例比上一個範例簡潔多了！確實，自從有了 Scanner，也很少人再用 InputStreamReader 和 BufferedReader 來設計命令列介面程式的輸入功能了！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 1-4</h3>
+                    <p>
+                        第四個範例，給好奇想知道 StreamTokenizer 用起來長怎樣的人看：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.InputStreamReader;
+                            import java.io.StreamTokenizer;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+
+                                        StreamTokenizer stream_tokenizer = new StreamTokenizer(new InputStreamReader(System.in));
+
+                                        stream_tokenizer.nextToken();
+                                        System.out.print(stream_tokenizer.sval);
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            aaa　（假設使用者輸入時敲了 aaa）<br>
+                            aaa　（輸出結果為 aaa）<br>
+                        </output>
+                        <br>
+                        再來一個範例：<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.InputStreamReader;
+                            import java.io.StreamTokenizer;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+
+                                        StreamTokenizer stream_tokenizer = new StreamTokenizer(new InputStreamReader(System.in));
+
+                                        stream_tokenizer.nextToken();
+                                        double a = stream_tokenizer.nval;
+
+                                        stream_tokenizer.nextToken();
+                                        double b = stream_tokenizer.nval;
+
+                                        System.out.print(a+b);
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            111　　　（假設第一次輸入 111）<br>
+                            222　　　（假設第二次輸入 222）<br>
+                            333.0　　（輸出結果為 333.0）<br>
+                        </output>
+                        <br>
+                        <output>
+                            111 222　（假設第一次就輸入 111 222）<br>
+                            333.0　　（輸出結果為 333.0）<br>
+                        </output>
+                        <br>
+                        難用死了，幸好有 java.util.Scanner～
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>輸出</h2>
+                <p>
+                    命令列模式的輸出很簡單，使用 <code>System.out.print()</code> 能直接將資料以字串輸出，<code>System.out.println()</code> 一樣，但會自動換行。<code>System.out.format()</code> 提供了格式化輸出的功能，但因為這是仿效 C 語言的 printf() 而來，所以又提供 <code>System.out.printf()</code> 來呼叫它：
+                </p>
+                <hr>
+                <section>
+                    <h3>Example 2-1</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.print("AAA");
+                                    System.out.println("BBB");
+                                    System.out.printf("%s", "CCC");
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            AAABBB<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2-2</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.printf("Hello, %s", "world!");
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello, world!<br>
+                        </output>
+                        <br>
+                        更多 printf() 格式化參數：
+                    </p>
+                    <table>
+                        <tr><td>%d</td><td>輸出十進位整數</td></tr>
+                        <tr><td>%o</td><td>輸出八進位整數</td></tr>
+                        <tr><td>%x</td><td>輸出十六進位整數</td></tr>
+                        <tr><td>%f</td><td>輸出十進位小數</td></tr>
+                        <tr><td>%g</td><td>輸出科學標記法</td></tr>
+                        <tr><td>%a</td><td>輸出十六進位指數</td></tr>
+                        <tr><td>%c</td><td>輸出字元</td></tr>
+                        <tr><td>%s</td><td>輸出字串</td></tr>
+                        <tr><td>%b</td><td>輸出布林值</td></tr>
+                        <tr><td>%n</td><td>換行</td></tr>
+                        <tr><td>%數字$</td><td>第幾個參數</td></tr>
+                        <tr><td>%數字</td><td>固定佔用寬度</td></tr>
+                        <tr><td>%.數字</td><td>設定小數點位數</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2-3</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.printf("%2$d", 111, 222, 333);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            222
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2-4</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.printf("%3s %3s %3s %n", "A", "BB", "CCC");
+                                    System.out.printf("%3s %3s %3s", "AAA", "BBB", "C");
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            &nbsp; A &nbsp;BB CCC<br>
+                            AAA BBB &nbsp; C
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2-5</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.printf("%.2f", 123.456789);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            123.46
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>參數</h2>
+                <p>
+                    在命令列下達程式指令時，經常都能尾隨一些參數，底下示範做法：
+                </p>
+                <hr>
+                <section>
+                    <h3>Example 3-1</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.println(args[0]);
+                                    System.out.println(args[1]);
+                                    System.out.println(args[2]);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            java Main aaa bbb ccc<br>
+                            aaa<br>
+                            bbb<br>
+                            ccc
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 3-2</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    if(args[0].equals("hello")){
+                                        System.out.print("哈囉");
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            java Main hello<br>
+                            哈囉
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 3-3</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    switch(args[0]){
+                                        case "/create":
+                                            System.out.printf("已建立 %s 檔案", args[1]);
+                                            break;
+                                        case "/rename":
+                                            System.out.printf("已將 %s 檔案改名為 %s", args[1], args[2]);
+                                            break;
+                                        default:
+                                            System.out.println("命令語法不正確");
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            java Main<br>
+                            命令語法不正確<br>
+                        </output>
+                        <br>
+                        <output>
+                            java Main /create text.txt<br>
+                            已建立 text.txt 檔案<br>
+                        </output>
+                        <br>
+                        <output>
+                            java Main /rename text.txt image.img<br>
+                            已將 text.txt 檔案改名為 image.img
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

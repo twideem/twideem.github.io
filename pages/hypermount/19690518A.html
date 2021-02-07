@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Sprite</h1>
+                <p>
+                    Sprite 是一種連續圖像的電腦圖學技術，它把畫面中需要以動畫來展現的物體，另外裁切一小張的圖像來繪製，完成後再貼到畫面上，這樣就不用對整張畫面做繪圖的動作，降低電腦的計算負擔，是一種高速繪圖的技巧。<br>
+                    <br>
+                    本章節將介紹在 HTML5 的 Canvas 實作 Sprite 的方式，我們準備兩張圖，一張是背景：background.png，一張是動畫用的人物：sprite.png，以連續圖像的原理製作動畫。<br>
+                    <br>
+                    <img src='../../figures/hypermount/19690518A_01.png' alt='插圖' width='420'> <img src='../../figures/hypermount/19690518A_02.png' alt='插圖' width='140'><br>
+                    <br>
+                    準備好了的話，請按一下「<a href='#anchor' onclick='run()'>開始展示範例</a>」，檢視本章節所要示範的案例……<br id='anchor'>
+                    <script>
+                        //configuration
+                        var ran=true
+                        var count=0, position=0
+                        //background
+                        var background=new Image()
+                        background.src='../../figures/hypermount/19690518A_01.png'
+                        //sprite
+                        var sprite=new Image()
+                        sprite.src='../../figures/hypermount/19690518A_02.png'
+                        //breakline
+                        var breakline=document.createElement('br')
+                        document.getElementsByTagName('p')[0].appendChild(breakline)
+                        breakline.style.display='none'
+                        //canvas
+                        var canvas=document.createElement('canvas')
+                        document.getElementsByTagName('p')[0].appendChild(canvas)
+                        canvas.width=595
+                        canvas.height=297
+                        canvas.style.display='none'
+                        //run()
+                        function run(){
+                            if(ran) setInterval(function(){
+                                if(position>=300) position=300
+                                breakline.style.display='inline'
+                                canvas.style.display='inline'
+                                var context=canvas.getContext('2d')
+                                context.drawImage(background, 0, 0)
+                                switch(count){
+                                    case 0:
+                                        context.drawImage(sprite, 0, 0, 96, 141, 255, position, 96, 141)
+                                        count++
+                                        break
+                                    case 1:
+                                        context.drawImage(sprite, 96, 0, 96, 141, 255, position+=9, 96, 141)
+                                        count++
+                                        break
+                                    case 2:
+                                        context.drawImage(sprite, 0, 0, 96, 141, 255, position, 96, 141)
+                                        count++
+                                        break
+                                    case 3:
+                                        count=0
+                                        context.drawImage(sprite, 288, 0, 96, 141, 255, position+=9, 96, 141)
+                                }
+                            }, 250)
+                            ran=false
+                        }
+                    </script>
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>原始碼</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        //全域變數
+                        var _count = 0, _position = 0;
+
+                        //載入背景圖片
+                        var _background = new Image();
+                        _background.src = 'background.png';
+
+                        //載入前景圖片
+                        var _sprite = new Image();
+                        _sprite.src = 'sprite.png';
+
+                        //建立畫布
+                        var _canvas = document.createElement('canvas');
+                        document.body.appendChild(_canvas);
+
+                        //調整畫布大小
+                        _canvas.width = 600;
+                        _canvas.height = 300;
+
+                        //先後將背景圖片與前景圖片描繪到畫布
+                        function draw(){
+                            var _context = _canvas.getContext('2d');
+                            _context.drawImage(_background, 0, 0);
+                            switch(_count){
+                                case 0:
+                                    _context.drawImage(_sprite, 0, 0, 96, 141, 272, _position, 96, 141);
+                                    _count++;
+                                    break;
+                                case 1:
+                                    _context.drawImage(_sprite, 96, 0, 96, 141, 272, _position+=9, 96, 141);
+                                    _count++;
+                                    break;
+                                case 2:
+                                    _context.drawImage(_sprite, 0, 0, 96, 141, 272, _position, 96, 141);
+                                    _count++;
+                                    break;
+                                case 3:
+                                    _count = 0;
+                                    _context.drawImage(_sprite, 288, 0, 96, 141, 272, _position+=9, 96, 141);
+                            }
+                        }
+
+                        //網頁載入後執行 draw()
+                        window.onload = setInterval(draw, 250);
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>範例下載</h2>
+                <p>
+                    <a href='../../objects/downloads/19690518A.7z' target='_blank'>19690518A.7z</a>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[*] 本圖像使用下列網站所提供的免費遊戲素材：<a href='http://etolier.webcrow.jp' target='_blank'>エトリエ素材</a>、<a href='http://fayforest.sakura.ne.jp' target='_blank'>森の奥の隠れ里</a>。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

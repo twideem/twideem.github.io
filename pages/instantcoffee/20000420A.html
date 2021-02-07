@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Tomcat 設定</h1>
+                <p>Tomcat 是一種 JSP 容器，它不僅是最熱門的 JSP 伺服器，而且無須安裝與設定，下載解開就能隨點隨用。即使不當作 JSP 伺服端系統來用，純粹只是要架個 HTTP 伺服器，Tomcat 也是非常輕巧的選擇～</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>下載、安裝、執行</h2>
+                <hr>
+                <section>
+                    <h3>下載</h3>
+                    <p>
+                        請至 <a href='http://tomcat.apache.org' target='_blank'>http://tomcat.apache.org</a> 下載 Apache Tomcat，建議使用免安裝的版本。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>安裝</h3>
+                    <p>
+                        解壓後無須安裝即可執行，但你必須注意是否安裝 JDK，並且設定 JAVA_HOME 環境變數指向你 JDK 所安裝的路徑，否則無法啟動 Tomcat。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>啟動</h3>
+                    <p>
+                        直接點擊 Tomcat 裡面 bin 資料夾的 <var>startup.bat</var> 即可啟動，要關閉的話則是 <var>shutdown.bat</var>。<br>
+                        <br>
+                        或者使用命令提示字元，切換路徑到 Tomcat 的 bin 資料夾，輸入 <kbd>catalina start</kbd> 來啟動，然後用 <kbd>catalina stop</kbd> 關閉。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>修改網站的預設網頁路徑</h2>
+                <p>
+                    修改 conf 目錄裡面的 server.xml，在 &lt;Host&gt;&lt;/Host&gt; 裡面插入：<br>
+                    <br>
+                    <code>&lt;Context path="" docBase="存放網頁的目錄路徑" reloadable="false" /&gt;</code><br>
+                    <br>
+                    存檔後重新啟動 Tomcat。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>新增網頁路徑</h2>
+                <p>
+                    修改 conf 目錄裡面的 server.xml，在 &lt;Host&gt;&lt;/Host&gt; 裡面插入：<br>
+                    <br>
+                    <code>&lt;Context path="/名稱" docBase="存放網頁的目錄路徑" reloadable="true" /&gt;</code><br>
+                    <br>
+                    存檔後重新啟動 Tomcat，在網頁瀏覽器輸入 127.0.0.1:8080/名稱。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>取消 8080 埠號</h2>
+                <p>
+                    不希望每次輸入網址要打埠號的話，請修改 conf 目錄中 server.xml 裡面 &lt;Connector /&gt; 的 <var>port</var> 為 "80"，存檔後重新啟動 Tomcat 即可。<br>
+                    <br>
+                    因為 80 是預設的埠號，不輸入埠號的話會自動填入 80，所以達到不用輸入埠號的效果！<br>
+                    <br>
+                    需要注意的是，如果其它程序已經佔用 80 埠號，將無法連線到 Tomcat 伺服器。<br>
+                    <br>
+                    Linux 的話，必須以 root 權限啟動 Tomcat 伺服器，否則無法連接小於 1024 埠號的傳輸服務。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>設定管理者帳號密碼</h2>
+                <p>
+                    修改 conf 目錄裡面的 tomcat-users.xml 檔案，然後加入如下敘述：<br>
+                    <br>
+                    <kbd>&lt;user name="帳號" password="密碼" roles="standard, manager" /&gt;</kbd>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

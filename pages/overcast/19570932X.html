@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>用潛意識廣告背單字</h1>
+                <p>
+                    1957 年九月，市場調查業者 James Vicary 在電影院做了實驗，在放送電影的過程中，每隔 5 秒鐘以 1/3000 秒的速度，讓人在察覺不到的狀態下，插入「喝可口可樂」或「吃爆米花」的字樣。六個星期下來，發現可口可樂銷售量成長 18.1%、爆米花則是 57.5%。<br>
+                    <br>
+                    這項實驗稱為 Subliminal stimuli（潛意識廣告），它表示人類除了在有意識的情況下表現出行為以外，其實也受無感知狀態下的刺激影響行為。<br>
+                    <br>
+                    這張網頁的程式，就是試看看這招能不能增強背單字的記憶能力　－－
+                </p>
+            </header>
+
+            <hr>
+
+            <section style='height:115px'>
+                <h2>顯示區</h2>
+                <p>
+                    <span style='color:#0099FF;font-family:courier;font-size:24pt;font-weight:bold;line-height:110%'>
+                        　<br>
+                        　
+                    </span>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>設定欄</h2>
+                <p>
+                    <input placeholder='請輸入英文單字與翻譯'>
+                    <select>
+                        <option value='1000'>每秒顯示一次</option>
+                        <option value='3000' selected>每三秒顯示一次</option>
+                        <option value='5000'>每五秒顯示一次</option>
+                    </select>
+                    <select>
+                        <option value='35'>每次 35 毫秒</option>
+                        <option value='100'>每次 0.1 秒</option>
+                        <option value='300' selected>每次 0.3 秒</option>
+                        <option value='500'>每次 0.5 秒</option>
+                        <option value='750'>每次 0.75 秒</option>
+                    </select>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>操作說明</h2>
+                <p>
+                    1、所有操作項目都是隨改隨用。<br>
+                    2、在輸入欄中，輸入兩個半形空白，會有「換行」效果，適合用來分隔英文單字與中文。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[*] 接近實驗的設定是每五秒快閃 35 毫秒，但背單字是有感知的，所以預設為每三秒快閃 300 毫秒。</p>
+            </footer>
+
+        </article>
+
+        <script>
+            var a=[document.getElementsByTagName('select')[0],document.getElementsByTagName('input')[0],document.querySelector('p span'),document.getElementsByTagName('select')[1]]
+            var b=null
+            var c='Taiwan  台灣'
+            ;(a[0].onchange=function(){
+                clearInterval(b)
+                b=setInterval(function(){
+                    if(a[1].value) c=a[1].value
+                    a[2].innerHTML=c.replace(/[\s]{2}/g,'　<br>')
+                    setTimeout(function(){
+                        a[2].innerHTML='　<br>　'
+                    },a[3].options[a[3].selectedIndex].value)
+                },a[0].options[a[0].selectedIndex].value)
+            })()
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>移除檔案總管在本機時的 3D 物件資料夾</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                Windows 10 秋季創意者更新開始，檔案總管的本機，在資料夾分類多了「3D 物件」，用不到的人感覺很多餘。<br>
+                <br>
+                寫登錄檔：<br>
+                <br>
+                <code>
+                    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\<br>FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag]<br>
+                    "ThisPCPolicy"="Hide"<br>
+                </code>
+                <br>
+                重新登入或下次開機時，就不會看見 3D 物件資料夾了。
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

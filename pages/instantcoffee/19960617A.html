@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>同一目錄內可以直接使用其它檔案的類別</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                利用這點，可以方便擴充程式的功能。<br>
+                <br>
+                以執行程式的資料夾做為根目錄，然後把第三方的 Java 程式解壓出來，直接丟進去根目錄，就可以 import。<br>
+                <br>
+                這樣就不用下參數 (-classpath) 指定第三方程式的路徑，不失為「萬用」的做法。<br>
+                <br>
+                缺點是以這樣做法架構出來的軟體，部署到其他電腦時，可能要耗費相當大的時間，因為搬動的檔案往往有數千個之多，甚至數十萬個。
+            </p>
+
+            <hr>
+
+            <footer>
+                <p>[*] 但 C/C++ 的 make 數小時都在等了，搬動數十萬個檔案也才十幾分鐘吧？</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

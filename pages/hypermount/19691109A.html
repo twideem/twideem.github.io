@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>鍵盤訊號偵測器</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                請按任意鍵盤，畫面會顯示按鍵的編號。
+            </p>
+
+        </article>
+
+        <script>
+            addEventListener('keydown',function(event){
+                document.querySelector('article p').innerHTML=event.which
+            })
+        </script>
+
+    </body>
+
+</html>

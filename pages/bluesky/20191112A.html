@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>關閉版本 1909 開始選單的自動展開</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>抱怨</h2>
+                <p>
+                    Windows 10 1909 有個惱人的新設計，就是開始選單左側的圖示，具備滑鼠移過去一段時間後，會自動展開（auto expand）一大片欄位，以圖示加文字來呈現這些按鈕的功能。<br>
+                    <br>
+                    如果是瞬間展開就算了，偏偏好像延遲 400 毫秒才會展開，這個時間經常就是你把滑鼠移到想要的圖示後按下左鍵的時間，如果正好這時觸發自動展開的功能，抱歉，你剛剛按下左鍵的動作被吃掉了，得再按一次滑鼠左鍵。<br>
+                    <br>
+                    展開出來的這一大片欄位，就只是文字提示而已，並不是什麼更加方便操作的選單功能，完全沒必要，反而給操作上帶來障礙。為了這個設計，我已經多按近百次滑鼠左鍵，重新去點圖示按鈕了～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>解法</h2>
+                <p>
+                    我找不到從登錄編輯程式解決問題的方法，只有找到下載 Mach2 程式，可以關閉不要的 Windows 10 行為設計：<a href='https://github.com/riverar/mach2/releases' target='_blank'>https://github.com/riverar/mach2/releases</a>。<br>
+                    <br>
+                    <strong>本解法僅適用 1904 和 1909 版 Windows 10，20H1 開始無效。</strong>
+                </p>
+                <hr>
+                <section>
+                    <h3>步驟一</h3>
+                    <p>
+                        以系統管理員身份，執行命令提示字元，切換到 Mach2 資料夾，輸入：<br>
+                        <br>
+                        <kbd>mach2 display</kbd><br>
+                        <br>
+                        然後看一下 Enabled、Disabled、Defaulted 下，有沒有 18715789？<br>
+                        <br>
+                        有的話，看有幾個 18715789，就輸入幾次如下指令：<br>
+                        <br>
+                        <kbd>mach2 revert 18715789</kbd><br>
+                        <br>
+                        直到 mach2 display 看不到任何一個 18715789 為止。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟二</h3>
+                    <p>
+                        輸入：<br>
+                        <br>
+                        <kbd>mach2 disable 18715789</kbd><br>
+                        <br>
+                        重新登入使用者或重新開機，就不會再自動展開了！
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>恢復</h2>
+                <p>
+                    想恢復自動展開的話，輸入：<br>
+                    <br>
+                    <kbd>
+                        mach2 revert 18715789<br>
+                        mach2 enable 18715789<br>
+                    </kbd>
+                    <br>
+                    然後重新登入使用者或重新開機。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>疑難</h2>
+                <p>
+                    上述操作在重新登入後沒有效果的話，可能得把所有看到的編碼通通 revert 掉，直到 display 時看不到 Enabled、Disabled、Defaulted 底下有任何東西，再 mach2 disable 18715789。<strong>但這麼做有什麼後遺症不知道，請自行承擔風險。</strong>我只知道我寧可有什麼後遺症，也不想看到 auto expand 這惱人的設計。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>問題</h2>
+                <p>
+                    這設定只有在「快速開機」作用下才會保留，按「重新開機」的話就會回到啟動自動展開的狀態<ins>[1]</ins>，所以得不時使用 mach2 關閉。<br>
+                    <br>
+                    因此 mach2 並不能徹底解決問題！只能期待 Windows 10 在「設定」就讓使用者能關閉這個功能了。<br>
+                    <br>
+                    目前來講，安裝第三方開始功能選單，反而是最好的解決問題方式～<br>
+                    <br>
+                    願意每次被還原後都重新用 mach2 設定一次，建議將指令寫成批次檔，用滑鼠右鍵選單的「以系統管理員身分執行」來操作，其實還蠻快的，並不麻煩。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 還有像是按「Shift＋關機」後的開機，以及每月更新和安裝驅動程式後的重新開機。<br>
+                    [*] 想看圖示按鈕的文字訊息，原本的工具提示（Tooltips）就夠用了！
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

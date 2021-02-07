@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>CSS 速用表</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>A</h2>
+                <table>
+                    <tr><td>animation</td><td>-name -duration -timing -delay -iteration -direction</td></tr>
+                    <tr><td>animation-delay</td><td>[time]</td></tr>
+                    <tr><td>animation-direction</td><td>normal｜alternate</td></tr>
+                    <tr><td>animation-duration</td><td>[time]</td></tr>
+                    <tr><td>animation-iteration-count</td><td>[n]｜infinite</td></tr>
+                    <tr><td>animation-name</td><td>[text]｜none</td></tr>
+                    <tr><td>animation-play-state</td><td>paused｜running</td></tr>
+                    <tr><td>animation-timing-function</td><td>linear｜ease｜ease-in｜ease-out｜ease-in-out｜cubic-bezier(n,n,n,n)</td></tr>
+                    <tr><td>appearance</td><td>normal｜icon｜window｜button｜menu｜field</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>B</h2>
+                <table>
+                    <tr><td>backface-visibility</td><td>visible｜hidden</td></tr>
+                    <tr><td>background</td><td>-color -position -size -repeat -origin -clip -attachment -image</td></tr>
+                    <tr><td>background-attachment</td><td>scroll｜fixed｜inherit</td></tr>
+                    <tr><td>background-clip</td><td>border-box｜padding-box｜content-box</td></tr>
+                    <tr><td>background-color</td><td>[color]｜transparent｜inherit</td></tr>
+                    <tr><td>background-image</td><td>url()｜none｜inherit</td></tr>
+                    <tr><td>background-origin</td><td>padding-box｜border-box｜content-box</td></tr>
+                    <tr><td>background-position</td><td>x y｜inherit</td></tr>
+                    <tr><td>background-repeat</td><td>repeat｜repeat-x｜repeat-y｜no-repeat｜inherit</td></tr>
+                    <tr><td>background-size</td><td>length｜percentage｜cover｜contain</td></tr>
+                    <tr><td>border</td><td>-width -style -color｜inherit</td></tr>
+                    <tr><td>border-bottom</td><td>-width -style -color｜inherit</td></tr>
+                    <tr><td>border-bottom-color</td><td>[color]｜transparent｜inherit</td></tr>
+                    <tr><td>border-bottom-left-radius</td><td>[n]｜%</td></tr>
+                    <tr><td>border-bottom-right-radius</td><td>[n]｜%</td></tr>
+                    <tr><td>border-bottom-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove ｜ridge｜inset｜outset｜inherit</td></tr>
+                    <tr><td>border-bottom-width</td><td>thin｜medium｜thick｜[length]｜inherit</td></tr>
+                    <tr><td>border-collapse</td><td>collapse｜separate｜inherit</td></tr>
+                    <tr><td>border-color</td><td>[color]｜transparent｜inherit</td></tr>
+                    <tr><td>border-image</td><td>source slice width outset repeat</td></tr>
+                    <tr><td>border-image-outset</td><td>[n]</td></tr>
+                    <tr><td>border-image-repeat</td><td>stretch｜repeat｜round</td></tr>
+                    <tr><td>border-image-slice</td><td>[n]｜%｜fill</td></tr>
+                    <tr><td>border-image-source</td><td>url()｜none</td></tr>
+                    <tr><td>border-image-width</td><td>[n]｜%｜auto</td></tr>
+                    <tr><td>border-left</td><td>-width -style -color｜inherit</td></tr>
+                    <tr><td>border-left-color</td><td>[color]｜transparent｜inherit</td></tr>
+                    <tr><td>border-left-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove ｜ridge｜inset｜outset｜inherit</td></tr>
+                    <tr><td>border-left-width</td><td>thin｜medium｜thick｜[length]｜inherit</td></tr>
+                    <tr><td>border-radius</td><td>top-left top-right bottom-right bottom-left</td></tr>
+                    <tr><td>border-right</td><td>-width -style -color｜inherit</td></tr>
+                    <tr><td>border-right-color</td><td>[color]｜transparent｜inherit</td></tr>
+                    <tr><td>border-right-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove ｜ridge｜inset｜outset｜inherit</td></tr>
+                    <tr><td>border-right-width</td><td>thin｜medium｜thick｜[length]｜inherit</td></tr>
+                    <tr><td>border-spacing</td><td>[n]｜inherit</td></tr>
+                    <tr><td>border-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove ｜ridge｜inset｜outset｜inherit</td></tr>
+                    <tr><td>border-top</td><td>-width -style -color｜inherit</td></tr>
+                    <tr><td>border-top-color</td><td>[color]｜transparent｜inherit</td></tr>
+                    <tr><td>border-top-left-radius</td><td>[n]｜%</td></tr>
+                    <tr><td>border-top-right-radius</td><td>[n]｜%</td></tr>
+                    <tr><td>border-top-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove ｜ridge｜inset｜outset｜inherit</td></tr>
+                    <tr><td>border-top-width</td><td>thin｜medium｜thick｜[length]｜inherit</td></tr>
+                    <tr><td>border-width</td><td>thin｜medium｜thick｜[length]｜inherit</td></tr>
+                    <tr><td>bottom</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>box-align</td><td>start｜end｜center｜baseline｜stretch</td></tr>
+                    <tr><td>box-direction</td><td>normal｜reverse｜inherit</td></tr>
+                    <tr><td>box-flex</td><td>[n]</td></tr>
+                    <tr><td>box-flex-group</td><td>[n]</td></tr>
+                    <tr><td>box-lines</td><td>single｜multiple</td></tr>
+                    <tr><td>box-ordinal-group</td><td>[n]</td></tr>
+                    <tr><td>box-orient</td><td>horizontal｜vertical｜inline-axis｜block-axis｜inherit</td></tr>
+                    <tr><td>box-pack</td><td>start｜end｜center｜justify</td></tr>
+                    <tr><td>box-sizing</td><td>content-box｜border-box｜inherit</td></tr>
+                    <tr><td>box-shadow</td><td>[h-shadow] [v-shadow] [spread] [color]</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>C</h2>
+                <table>
+                    <tr><td>caption-side</td><td>top｜bottom｜inherit</td></tr>
+                    <tr><td>clear</td><td>left｜right｜both｜none｜inherit</td></tr>
+                    <tr><td>clip</td><td>rect(top, right, bottom, left)｜auto｜inherit</td></tr>
+                    <tr><td>color</td><td>[color]｜inherit</td></tr>
+                    <tr><td>column-count</td><td>[n]｜auto</td></tr>
+                    <tr><td>column-fill</td><td>balance｜auto</td></tr>
+                    <tr><td>column-gap</td><td>[n]｜normal</td></tr>
+                    <tr><td>column-rule</td><td>-width -style -color</td></tr>
+                    <tr><td>column-rule-color</td><td>[color]</td></tr>
+                    <tr><td>column-rule-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove ｜ridge｜inset｜outset</td></tr>
+                    <tr><td>column-rule-width</td><td>thin｜medium｜thick｜[n]</td></tr>
+                    <tr><td>column-span</td><td>1｜all</td></tr>
+                    <tr><td>column-width</td><td>auto｜[n]</td></tr>
+                    <tr><td>columns</td><td>-width -count</td></tr>
+                    <tr><td>content</td><td>none｜normal｜counter｜attr(attribute)｜[string] ｜open-quote｜close-quote｜no-open-quote ｜no-close-quote｜url()｜inherit</td></tr>
+                    <tr><td>counter-increment</td><td>none｜[id]｜[n]｜inherit</td></tr>
+                    <tr><td>counter-reset</td><td>none｜[id]｜[n]｜inherit</td></tr>
+                    <tr><td>cursor</td><td>url()｜auto｜crosshair｜default｜e-resize｜help ｜move｜n-resize｜ne-resize｜nw-resize｜pointer ｜progress｜s-resize｜se-resize｜sw-resize｜text ｜w-resize｜wait｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>D</h2>
+                <table>
+                    <tr><td>direction</td><td>ltr｜rtl｜inherit</td></tr>
+                    <tr><td>display</td><td>none｜box｜flex-box｜block｜flex｜inline ｜inline-block｜inline-flex｜inline-table｜list-item ｜table｜table-caption｜table-cell｜table-column ｜table-column-group｜table-footer-group｜inherit ｜table-header-group｜table-row｜table-row-group</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>E</h2>
+                <table>
+                    <tr><td>empty-cells</td><td>hide｜show｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>F</h2>
+                <table>
+                    <tr><td>float</td><td>left｜right｜none｜inherit</td></tr>
+                    <tr><td>font</td><td>-style -variant -weight -size -family｜caption ｜menu｜message-box｜small-caption｜status-bar</td></tr>
+                    <tr><td>font-family</td><td>｜inherit｜[font]｜Serif｜Sans-serif｜Monospace ｜Cursive｜Fantasy</td></tr>
+                    <tr><td>font-size</td><td>xx-small｜x-small｜small｜medium｜large｜x-large ｜xx-large｜smaller｜larger｜[n]｜%｜inherit</td></tr>
+                    <tr><td>font-size-adjust</td><td></td></tr>
+                    <tr><td>font-style</td><td>normal｜italic｜oblique｜inherit</td></tr>
+                    <tr><td>font-variant</td><td>normal｜small-caps｜inherit</td></tr>
+                    <tr><td>font-weight</td><td>normal｜bold｜bolder｜lighter｜100-900｜inherit</td></tr>
+                    <tr>
+                        <td>
+                            @font-face {<br>
+                            　font-family: 字型名稱;<br>
+                            　src: url('字型檔案.ttf'),<br>
+                            　url('字型檔案.eot');<br>
+                            }<br>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr><td>font-stretch</td><td>wider｜narrower｜ultra-condensed｜extra-condensed ｜condensed｜semi-condensed｜normal｜semi-expanded ｜expanded｜extra-expanded｜ultra-expanded｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>G</h2>
+                <table>
+                    <tr><td>grid-columns</td><td>length｜%｜none｜inherit</td></tr>
+                    <tr><td>grid-rows</td><td>length｜%｜none｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>H</h2>
+                <table>
+                    <tr><td>hanging-punctuation</td><td>none｜first｜last｜allow-end｜force-end</td></tr>
+                    <tr><td>height</td><td>auto｜[n]｜%｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>I</h2>
+                <table>
+                    <tr><td>icon</td><td>auto｜url()｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>K</h2>
+                <p>
+                    <code>
+                        @keyframes 自訂樣式名稱 {<br>
+                        　樣式值 { css:value }<br>
+                        　樣式值 { css:value }<br>
+                        }
+                    </code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>L</h2>
+                <table>
+                    <tr><td>left</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>letter-spacing</td><td>normal｜[n]｜inherit</td></tr>
+                    <tr><td>line-height</td><td>normal｜[n]｜%｜inherit</td></tr>
+                    <tr><td>list-style</td><td>-type -position -image｜inherit</td></tr>
+                    <tr><td>list-style-image</td><td>url()｜none｜inherit</td></tr>
+                    <tr><td>list-style-position</td><td>inside｜outside｜inherit</td></tr>
+                    <tr><td>list-style-type</td><td>armenian｜circle｜cjk-ideographic｜decimal ｜decimal-leading-zero｜disc｜georgian｜hebrew ｜hiragana｜hiragana-iroha｜inherit｜katakana ｜katakana-iroha｜lower-alpha｜lower-greek ｜lower-latin｜lower-roman｜none｜square｜upper-alpha ｜upper-latin｜upper-roman</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>M</h2>
+                <table>
+                    <tr><td>margin</td><td>-top -right -bottom -left</td></tr>
+                    <tr><td>margin-bottom</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>margin-left</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>margin-right</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>margin-top</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>max-height</td><td>none｜[n]｜%｜inherit</td></tr>
+                    <tr><td>max-width</td><td>none｜[n]｜%｜inherit</td></tr>
+                    <tr><td>min-height</td><td>[n]｜%｜inherit</td></tr>
+                    <tr><td>min-width</td><td>[n]｜%｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>N</h2>
+                <table>
+                    <tr><td>nav-down</td><td>auto｜[id]｜[target]｜inherit</td></tr>
+                    <tr><td>nav-index</td><td>auto｜[n]｜inherit</td></tr>
+                    <tr><td>nav-left</td><td>auto｜[id]｜[target]｜inherit</td></tr>
+                    <tr><td>nav-right</td><td>auto｜[id]｜[target]｜inherit</td></tr>
+                    <tr><td>nav-up</td><td>auto｜[id]｜[target]｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>O</h2>
+                <table>
+                    <tr><td>opacity</td><td>[n]｜inherit</td></tr>
+                    <tr><td>outline</td><td>-color -style -width｜inherit</td></tr>
+                    <tr><td>outline-color</td><td>color｜invert｜inherit</td></tr>
+                    <tr><td>outline-offset</td><td>[n]｜inherit</td></tr>
+                    <tr><td>outline-style</td><td>none｜dotted｜dashed｜solid｜double｜groove｜ridge ｜inset｜outset｜inherit</td></tr>
+                    <tr><td>outline-width</td><td>thin｜medium｜thick｜length｜inherit</td></tr>
+                    <tr><td>overflow</td><td>visible｜hidden｜scroll｜auto｜inherit</td></tr>
+                    <tr><td>overflow-x</td><td>visible｜hidden｜scroll｜auto｜no-display｜no-content</td></tr>
+                    <tr><td>overflow-y</td><td>visible｜hidden｜scroll｜auto｜no-display｜no-content</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>P</h2>
+                <table>
+                    <tr><td>padding</td><td>-top -right -bottom -left</td></tr>
+                    <tr><td>padding-bottom</td><td>[n]｜%｜inherit</td></tr>
+                    <tr><td>padding-left</td><td>[n]｜%｜inherit</td></tr>
+                    <tr><td>padding-right</td><td>[n]｜%｜inherit</td></tr>
+                    <tr><td>padding-top</td><td>[n]｜%｜inherit</td></tr>
+                    <tr><td>page-break-after</td><td>auto｜always｜avoid｜left｜right｜inherit</td></tr>
+                    <tr><td>page-break-before</td><td>auto｜always｜avoid｜left｜right｜inherit</td></tr>
+                    <tr><td>page-break-inside</td><td>auto｜avoid｜inherit</td></tr>
+                    <tr><td>perspective</td><td>[n]｜none</td></tr>
+                    <tr><td>perspective-origin</td><td>x y</td></tr>
+                    <tr><td>position</td><td>static｜absolute｜fixed｜relative｜inherit</td></tr>
+                    <tr><td>punctuation-trim</td><td>none｜start｜end｜allow-end｜adjacent</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Q</h2>
+                <table>
+                    <tr><td>quotes</td><td>none｜[string] [string] [string] [string]｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>R</h2>
+                <table>
+                    <tr><td>resize</td><td>none｜both｜horizontal｜vertical</td></tr>
+                    <tr><td>right</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>rotation</td><td>angle</td></tr>
+                    <tr><td>rotation-point</td><td>x% y%</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>T</h2>
+                <table>
+                    <tr><td>table-layout</td><td>auto｜fixed｜inherit</td></tr>
+                    <tr><td>target</td><td>-name -new -position</td></tr>
+                    <tr><td>target-name</td><td>current｜root｜parent｜new｜modal｜name</td></tr>
+                    <tr><td>target-new</td><td>window｜tab｜none</td></tr>
+                    <tr><td>target-position</td><td>above｜behind｜front｜back</td></tr>
+                    <tr><td>text-align</td><td>left｜right｜center｜justify｜inherit</td></tr>
+                    <tr><td>text-decoration</td><td>none｜underline｜overline｜line-through｜blink ｜inherit</td></tr>
+                    <tr><td>text-indent</td><td>[n]｜%｜inherit</td></tr>
+                    <tr><td>text-justify</td><td>auto｜inter-word｜inter-ideograph｜inter-cluster ｜distribute｜kashida｜trim</td></tr>
+                    <tr><td>text-outline</td><td>[thickness] [blur] [color]</td></tr>
+                    <tr><td>text-overflow</td><td>clip｜ellipsis｜[string]</td></tr>
+                    <tr><td>text-shadow</td><td>[h-shadow] [v-shadow] [blur] [color]</td></tr>
+                    <tr><td>text-transform</td><td>none｜capitalize｜uppercase｜lowercase｜inherit</td></tr>
+                    <tr><td>text-wrap</td><td>normal｜none｜unrestricted｜suppress</td></tr>
+                    <tr><td>top</td><td>auto｜length｜%｜inherit</td></tr>
+                    <tr><td>transform</td><td>none｜matrix(n,n,n,n,n,n) ｜matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n) ｜translate(x,y)｜translate3d(x,y,z)｜translateX(x) ｜translateY(y)｜translateZ(z)｜scale(x,y) ｜scale3d(x,y,z)｜scaleX(x)｜scaleY(y)｜scaleZ(z) ｜rotate(angle)｜rotate3d(x,y,z,angle) ｜rotateX(angle)｜rotateY(angle)｜rotateZ(angle) ｜skew(x-angle,y-angle)｜skewX(angle) ｜skewY(angle)｜perspective(n)</td></tr>
+                    <tr><td>transform-origin</td><td>left｜center｜right｜[n]｜% top｜center ｜bottom｜[n]｜% [n]</td></tr>
+                    <tr><td>transform-style</td><td>flat｜preserve-3d</td></tr>
+                    <tr><td>transition</td><td>-property -duration -timing -delay</td></tr>
+                    <tr><td>transition-property</td><td>none｜all｜[property]</td></tr>
+                    <tr><td>transition-duration</td><td>[time]</td></tr>
+                    <tr><td>transition-timing-function</td><td>linear｜ease｜ease-in｜ease-out｜ease-in-out ｜cubic-bezier(n,n,n,n)</td></tr>
+                    <tr><td>transition-delay</td><td>[time]</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>V</h2>
+                <table>
+                    <tr><td>vertical-align</td><td>[n]｜%｜baseline｜sub｜super｜top｜text-top ｜middle｜bottom｜text-bottom｜inherit</td></tr>
+                    <tr><td>visibility</td><td>visible｜hidden｜collapse｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>W</h2>
+                <table>
+                    <tr><td>width</td><td>auto｜[n]｜%｜inherit</td></tr>
+                    <tr><td>white-space</td><td>normal｜nowrap｜pre｜pre-line｜pre-wrap｜inherit</td></tr>
+                    <tr><td>word-spacing</td><td>normal[n]｜inherit</td></tr>
+                    <tr><td>word-break</td><td>normal｜break-all｜hyphenate</td></tr>
+                    <tr><td>word-wrap</td><td>normal｜break-word</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Z</h2>
+                <table>
+                    <tr><td>z-index</td><td>auto｜[n]｜inherit</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Selectors</h2>
+                <hr>
+                <section>
+                    <h3>Element</h3>
+                    <p>
+                        <var>
+                            *<br>
+                            <i>element</i><br>
+                            <i>element</i>&nbsp;<i>element</i><br>
+                            <i>element</i> &gt; <i>element</i><br>
+                            <i>element</i> , <i>element</i><br>
+                            <i>element</i> + <i>element</i><br>
+                            <i>element</i> ~ <i>element</i><br>
+                            :root<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Child</h3>
+                    <p>
+                        <var>
+                            :empty<br>
+                            :first-of-type<br>
+                            :last-of-type<br>
+                            :nth-of-type(<i>value</i>)<br>
+                            :nth-last-of-type(<i>value</i>)<br>
+                            :only-of-type<br>
+                            :first-child<br>
+                            :last-child<br>
+                            :nth-child(<i>value</i>)<br>
+                            :nth-last-child(<i>value</i>)<br>
+                            :only-child<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Content</h3>
+                    <p>
+                        <var>
+                            ::after<br>
+                            ::before<br>
+                            ::first-letter<br>
+                            ::first-line<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Attribute</h3>
+                    <p>
+                        <var>
+                            .<i>class</i><br>
+                            #<i>id</i><br>
+                            :lang(<i>language</i>)<br>
+                            [<i>attribute</i>]<br>
+                            [<i>attribute</i>=<i>value</i>]<br>
+                            [<i>attribute</i>|=<i>value</i>]<br>
+                            [<i>attribute</i>~=<i>value</i>]<br>
+                            [<i>attribute</i>^=<i>value</i>]<br>
+                            [<i>attribute</i>$=<i>value</i>]<br>
+                            [<i>attribute</i>*=<i>value</i>]<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Link</h3>
+                    <p>
+                        <var>
+                            :link<br>
+                            :visited<br>
+                            :active<br>
+                            :hover<br>
+                            :target<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Input</h3>
+                    <p>
+                        <var>
+                            :checked<br>
+                            :disabled<br>
+                            :enabled<br>
+                            :focus<br>
+                            :in-range<br>
+                            :invalid<br>
+                            :optional<br>
+                            :out-of-range<br>
+                            :read-only<br>
+                            :read-write<br>
+                            :required<br>
+                            :valid<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Other</h3>
+                    <p>
+                        <var>
+                            :not(<i>selector</i>)<br>
+                            ::selection<br>
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    以斜體字標示者，表示並非關鍵字，而是識別名稱或任意條件。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Values</h2>
+                <p>
+                    <var>
+                        %<br>
+                        in<br>
+                        cm<br>
+                        mm<br>
+                        em<br>
+                        ex<br>
+                        pt<br>
+                        pc<br>
+                        px<br>
+                        rgb(0~255, 0~255, 0~255)<br>
+                        rgba(0~255, 0~255, 0~255, 0.0~1.0)<br>
+                        hsl(0~360, 0~100%, 0~100%)<br>
+                        hsla(0~360, 0~100%, 0~100%, 0.0~1.0)<br>
+                        #000000~#FFFFFF<br>
+                    </var>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>
+            /*黎紫*/
+            .style1,.style1 article{background-color:#885588;border-color:#FF99CC;color:#FF99CC}
+            .style1 a:link,.style1 a:visited,.style1 a:active,.style1 hr,.style1 table a:link,.style1 table a:visited,.style1 table a:active,.style1 p,.style1 span{color:#FF99CC}
+            .style1 a:hover,.style1 table a:hover{color:#FFCCCC}
+            /*晨芒*/
+            .style2,.style2 article{background-color:#FFEE99;border-color:#CC9966;color:#CC9966}
+            .style2 a:link,.style2 a:visited,.style2 a:active,.style2 hr,.style2 table a:link,.style2 table a:visited,.style2 table a:active,.style2 p,.style2 span{color:#CC9966}
+            .style2 a:hover,.style2 table a:hover{color:#CCCC66}
+            /*午白*/
+            .style3,.style3 article{background-color:#FFFFDD;border-color:#6699FF;color:#6699FF}
+            .style3 a:link,.style3 a:visited,.style3 a:active,.style3 hr,.style3 table a:link,.style3 table a:visited,.style3 table a:active,.style3 p,.style3 span{color:#6699FF}
+            .style3 a:hover,.style3 table a:hover{color:#66CCFF}
+            /*昏黃*/
+            .style4,.style4 article{background-color:#FFCC99;border-color:#FF6666;color:#FF6666}
+            .style4 a:link,.style4 a:visited,.style4 a:active,.style4 hr,.style4 table a:link,.style4 table a:visited,.style4 table a:active,.style4 p,.style4 span{color:#FF6666}
+            .style4 a:hover,.style4 table a:hover{color:#FF9966}
+            /*晚灰*/
+            .style5,.style5 article{background-color:#225555;border-color:#999999;color:#999999}
+            .style5 a:link,.style5 a:visited,.style5 a:active,.style5 hr,.style5 table a:link,.style5 table a:visited,.style5 table a:active,.style5 p,.style5 span{color:#999999}
+            .style5 a:hover,.style5 table a:hover{color:#99CC99}
+            /*夜黑*/
+            .style6,.style6 article{background-color:#333366;border-color:#330033;color:#330033}
+            .style6 a:link,.style6 a:visited,.style6 a:active,.style6 hr,.style6 table a:link,.style6 table a:visited,.style6 table a:active,.style6 p,.style6 span{color:#330033}
+            .style6 a:hover,.style6 table a:hover{color:#330066}
+            /*夜燈*/
+            .style61,.style61 article{background-color:#333366;border-color:#FF6666;color:#FF6666}
+            .style61 a:link,.style61 a:visited,.style61 a:active,.style61 hr,.style61 table a:link,.style61 table a:visited,.style61 table a:active,.style61 p,.style61 span{color:#FF6666}
+            .style61 a:hover,.style61 table a:hover{color:#FF9966}
+            /*晴朗*/
+            .style31,.style31 article{background-color:#6699FF;border-color:#F5F5F5;color:#F5F5F5}
+            .style31 a:link,.style31 a:visited,.style31 a:active,.style31 hr,.style31 table a:link,.style31 table a:visited,.style31 table a:active,.style31 p,.style31 span{color:#F5F5F5}
+            .style31 a:hover,.style31 table a:hover{color:#FFFF55}
+            /*陰雨*/
+            .style32,.style32 article{background-color:#666666;border-color:#669999;color:#669999}
+            .style32 a:link,.style32 a:visited,.style32 a:active,.style32 hr,.style32 table a:link,.style32 table a:visited,.style32 table a:active,.style32 p,.style32 span{color:#669999}
+            .style32 a:hover,.style32 table a:hover{color:#669966}
+        </style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>晝夜系統</h1>
+                <p>進一步實作情況，請檢視原始碼。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>操作介面</h2>
+                <p>
+                    【<a href='javascript:自訂功能.時鐘();晝夜.更迭()'>啟動</a>】【<a href='javascript:晝夜.靜止()'>暫停</a>】
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>操作說明</h2>
+                <p>
+                    4 點：黎明　→　6 點：晨曦　→　8 點：白天　→　10 點：氣候系統（晴朗或陰雨）<br>
+                    →　16 點：黃昏　→　18 點：傍晚　→　20 點：深夜
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] <a href='20110202C.html'>晝夜系統：配色</a>。
+                </p>
+            </footer>
+
+        </article>
+
+        <script>
+            var 晝夜={
+                _cycles:3450, // 5950
+                _element:document.body,
+                _enabled:null,
+                _state:'黎明',
+                _weather:0,
+                黎明:function(){
+                    this._element.className='style1'
+                    this._state='黎明'
+                },
+                晨曦:function(){
+                    this._element.className='style2'
+                    this._state='晨曦'
+                },
+                白天:function(){
+                    this._element.className='style3'
+                    this._state='白天'
+                },
+                黃昏:function(){
+                    this._element.className='style4'
+                    this._state='黃昏'
+                },
+                傍晚:function(){
+                    this._element.className='style5'
+                    this._state='傍晚'
+                },
+                深夜:function(){
+                    this._element.className='style6'
+                    this._state='深夜'
+                },
+                晴朗:function(){
+                    this._element.className='style31'
+                    this._state='晴朗'
+                },
+                陰雨:function(){
+                    this._element.className='style32'
+                    this._state='陰雨'
+                },
+                夜燈:function(){
+                    this._element.className='style61'
+                },
+                更迭:function(){
+                    this._enabled=window.setInterval(function(){
+                        晝夜._cycles+=1
+                        if(晝夜._cycles>=14400){
+                            晝夜._cycles=0
+                            晝夜._weather=0
+                        }
+                        if(晝夜._cycles>=0&&晝夜._cycles<2400) 晝夜.深夜()
+                        else if(晝夜._cycles>=2400&&晝夜._cycles<3600) 晝夜.黎明()
+                        else if(晝夜._cycles>=3600&&晝夜._cycles<4800) 晝夜.晨曦()
+                        else if(晝夜._cycles>=4800&&晝夜._cycles<6000) 晝夜.白天()
+                        else if(晝夜._cycles>=6000&&晝夜._cycles<9600){
+                            if(晝夜._weather==0){
+                                if((Math.round(Math.random()*(100-1))+1)<=33) 晝夜._weather=1
+                                else if((Math.round(Math.random()*(100-1))+1)<=25) 晝夜._weather=2
+                                else 晝夜._weather=3
+                            }
+                            switch(晝夜._weather){
+                                case 1:
+                                    晝夜.晴朗()
+                                    break
+                                case 2:
+                                    晝夜.陰雨()
+                                    break
+                                case 3:
+                                    晝夜.白天()
+                            }
+                        }
+                        else if(晝夜._cycles>=9600&&晝夜._cycles<10800) (晝夜._weather!==2)?晝夜.黃昏():晝夜.陰雨()
+                        else if(晝夜._cycles>=10800&&晝夜._cycles<12000) 晝夜.傍晚()
+                        else if(晝夜._cycles>=12000&&晝夜._cycles<14400) 晝夜.深夜()
+
+                    },100)
+                },
+                時:function(){
+                    return Math.floor(this._cycles/600)
+                },
+                分:function(){
+                    return Math.floor((this._cycles%600)/10)
+                },
+                秒:function(){
+                    return Math.floor((this._cycles%600)/(10/60))%60
+                },
+                狀態:function(x){
+                    if(x!==undefined) return this._state
+                    else if(this._state==x) return true
+                },
+                靜止:function(){
+                    window.clearInterval(this._enabled)
+                }
+            }
+            var 自訂功能={
+                時鐘:function(){
+                    window.setInterval(function(){
+                        document.getElementsByTagName('h2')[0].innerHTML='遊戲世界時間：'+晝夜.時()+' 點 '+晝夜.分()+' 分 '+晝夜.秒()+' 秒，程式內部循環值：'+晝夜._cycles+'。'
+                    },100)
+                },
+                火把:function(){
+                    if(晝夜.狀態()=='深夜') 晝夜.夜燈()
+                }
+            }
+        </script>
+
+    </body>
+
+</html>

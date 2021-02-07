@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>防止 Google Chrome 自動更新</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Windows 7</h2>
+                <p>
+                    在「工作列」按滑鼠右鍵→「工作管理員」→「GoogleUpdate.exe」→「結束處理程序」<br>
+                    <br>
+                    進入 C 槽 → 搜尋「googleupdate.exe」→ 凡搜尋到的檔案全數刪除<br>
+                    <br>
+                    「開始」→「控制台」→「系統及安全性」→「排程工作」→「GoogleUpdateTask」→「刪除」<br>
+                    <br>
+                    「開始」→「控制台」→「系統及安全性」→「系統管理工具」→「服務」→ 將「gupdate」和「pgpdatem」設為「停用」<br>
+                    <br>
+                    「開始」→「搜尋」→「msconfig」→「啟動」→「GoogleUpdate」→「停用」<br>
+                    <br>
+                    「開始」→「搜尋」→「regedit」→「HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run\」→「GoogleuUpdate」→「刪除」
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Windows 8</h2>
+                <p>
+                    在「工作列」按滑鼠右鍵→「工作管理員」→「啟動」→「GoogleUpdate.exe」→「結束處理程序」<br>
+                    <br>
+                    進入 C 槽 → 搜尋「googleupdate.exe」→ 凡搜尋到的檔案全數刪除<br>
+                    <br>
+                    「螢幕右角」→「設定」→「控制台」→「系統及安全性」→「排程工作」→「GoogleUpdateTask」→「刪除」<br>
+                    <br>
+                    「螢幕右角」→「設定」→「控制台」→「系統及安全性」→「系統管理工具」→ 服務」→ 將「gupdate」和「pgpdatem」設為「停用」<br>
+                    <br>
+                    「螢幕右角」→「搜尋」→「msconfig」→「啟動」→「GoogleUpdate」→「停用」<br>
+                    <br>
+                    「螢幕右角」→「搜尋」→「regedit」→「HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run\」→「GoogleuUpdate」→「刪除」
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[*] 其實隨著版本的演進，還是有可能被 Google 以新的手法自動更新。真的不希望發生的話，建議使用第三方改寫的免安裝版，例如阿榮福利味的版本。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

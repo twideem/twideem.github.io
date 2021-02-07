@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>從野球拳看設計遊戲的迷思</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                設計遊戲程式，有時候和你想的不一樣。<br>
+                <br>
+                例如要設計一個電腦單機的野球拳遊戲，為了方便程式計算輸贏，我們做法可能是：「設剪刀為 1，石頭為 2，布為 3。」然後男女雙方數字作相減，做為判斷輸贏的依據：<br>
+                <br>
+                <textarea class='brush:es'>
+                    男方 = 1 或 2 或 3
+                    function 猜拳(){
+                        女方 = Math.ceil(Math.random()*3)
+                        switch(男方-女方){
+                        case 0:
+                            平手()
+                            break
+                        case 1:
+                        case -2:
+                            贏了()
+                            break
+                        case -1:
+                        case 2:
+                            輸了()
+                        }
+                    }
+                    </textarea>
+                <br>
+                但真正的野球拳，在設計上其實像這樣才對……<br>
+                <br>
+                <textarea class='brush:es'>
+                    男方 = 1 或 2 或 3
+                    function 猜拳(){
+                        女方 = Math.floor(Math.random()*100)
+                        if(女方>50)
+                            平手()
+                        else if(女方>40)
+                            贏了()
+                        else
+                            輸了()
+                    }
+                    </textarea>
+                <br>
+                根本不需要費心處理男女兩方各猜什麼時，如何判斷誰輸誰贏。直接 50% 機率平手，有 10% 機率會猜贏，剩下 40% 你會輸。然後根據輸贏，看你出什麼，女方就出什麼。比所想的簡單、狡猾多了！尤其當你希望後面關卡的女郎會有不同強度時，更會發現第一個程式根本是多餘的。（與真人互猜時才用得到，但與電腦對打時是多餘的。）<br>
+                <br>
+                所以在設計遊戲，總想不出程式該怎麼動作才對時，表示你不該再站在「玩家」的立場思考，而應該站在設下這場賭局的「莊家」立場，來釐清究竟是怎麼回事～
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,103 @@
+/*書脊 */
+*{font-family:思源黑體 HW,思源黑體 HW TW,Noto Sans Mono CJK TC,微軟正黑體,Monospace;font-size:10.5pt}
+body{background-color:#f5f5f5;color:#666;letter-spacing:0.01em;line-height:170%;margin:8px}
+/*封面 */
+.cover{margin-top:48px;text-align:center}
+/*頁面*/
+article{border-radius:32px 0;background-color:#fff;border-color:#666;border-style:solid;border-width:2px;margin:auto;padding:20px 40px 17px 40px;width:600px}
+/*目錄；頁次；書籤*/
+a{text-decoration:none}
+a:link,a:visited{color:#39f}
+a:hover,a:active{color:#f93}
+a.detail:link,a.detail:visited{color:#9c6}
+a.detail:hover,a.detail:active{color:#f39}
+/*章*/
+h1{font-size:16pt;font-weight:bold;letter-spacing:0.1em;margin:21px 0 28px 1px}
+/*序*/
+header p{font-size:10.5pt;font-weight:normal;letter-spacing:0.05em;margin:-3px 0 15px 1px}
+header p img{margin:4px 0 -3px 0}
+/*節*/
+h2{font-size:12pt;font-weight:bold;letter-spacing:0.1em;margin:28px 0 22px 0}
+/*段*/
+p{margin:0 0 9px 30px}
+p.private,p.paragraph{margin-top:21px}
+ol{list-style-position:outside;list-style-type:disc;margin:15px 0 15px 44px}
+li p{margin-left:0}
+/*落*/
+hr{border-style:dashed;border-width:1px;margin:26px 1px}
+/*欄*/
+h3{font-size:10.5pt;font-weight:bold;letter-spacing:0.1em;margin:0 0 20px 30px}
+h3 a{font-weight:normal}
+section section p{margin:0 0 8px 30px}
+section section p output{width:553px}
+section hr{border-style:dotted;border-width:1px;margin-left:30px}
+/*位*/
+h4{color:#888;font-size:10.5pt;letter-spacing:0.1em;margin:20px 0 20px 29px}
+h4::before, h4::after{content:"＝"}
+section section section p{margin:0 0 20px 44px}
+section section section p output{width:539px}
+/*項目*/
+h5{font-weight:normal;margin:20px 0 20px 44px}
+h5::before{content:"[ "}
+h5::after{content:" ]"}
+section section section section p{margin:0 0 20px 58px}
+section section section section p output{width:525px}
+/*要點*/
+strong{color:#f69;font-weight:normal}
+/*範例*/
+samp{color:#c69}
+output{background-color:#222;color:#ccc;display:block;font-family:Consolas,monospace;;margin-bottom:4px;padding:8px;width:553px}
+/*語法、關鍵字、指令、設定值、小記、詩文*/
+code{color:#396;white-space:nowrap}
+em{color:#f96;font-weight:bold}
+kbd,var{color:#396;font-style:normal}
+small{color:#f96}
+cite{font-family:標楷體,Serif;font-size:16pt;font-style:normal}
+/*引用*/
+q{color:#69c;content:'';content:none;quotes:none;text-shadow:0 0 16px #69c}
+/*術語*/
+dfn{border-style:dotted;border-width:2px;color:#36c;padding:2px}
+/*裝飾斜體*/
+i{font-family:Georgia,Cursive;font-style:italic}
+/*圖像*/
+figure{display:block;margin:25px 0 19px 30px}
+section section section figure{display:block;margin:25px 0 19px 45px}
+section section section section figure{display:block;margin:25px 0 19px 58px}
+figcaption{color:#f96;margin-top:-8px}
+figcaption::before{content:'【'}
+figcaption::after{content:'】'}
+a img{border:none}
+/*表格*/
+table{border-collapse:collapse;border-spacing:0;margin:20px 0 20px 29px;width:95%}
+section td{vertical-align:top}
+td:nth-child(1){color:#396;width:40%}
+td:nth-child(2){color:#999;font-size:10pt}
+td:nth-child(3){font-size:10pt}
+section section section table{margin-left:43px}
+section section section section table{margin-left:58px}
+/*註脚*/
+ins{text-decoration:none}
+ins,footer p,footer p a{color:#36c;margin:26px 0 12px 0}
+section footer{margin-left:30px}
+section section footer{margin-left:0}
+footer figure{margin:15px 0}
+/*標記*/
+sub{font-size:8pt;vertical-align:-20%}
+sup{font-size:8pt;vertical-align:20%}
+/*導覽、側欄*/
+nav{margin:auto;width:683px}
+nav span,nav span a{color:#666;font-size:10pt}
+nav span a:link,nav span a:visited{color:#390}
+nav span a:hover,nav span a:active{color:#f36}
+nav table{left:0;margin:0;width:100%}
+/*文字*/
+.blue{color:#69c}
+.gray{color:#999}
+.green{color:#396}
+.red{color:#f69}
+.yellow{color:#f96}
+/*手機*/
+.mobile,.mobile *,.mobile h1,.mobile h2{font-size:xx-large}
+.mobile article{width:auto;margin:0}
+.mobile output{width:98%}
+.mobile nav{display:none}

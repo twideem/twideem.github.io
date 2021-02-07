@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>BAT 批次檔</h1>
+                <p>MS-DOS 與 Windows 作業系統，可以使用副檔名為 *.bat 的純文字文件格式，來編寫命令，讓系統執行工作。內容除了可以執行 DOS 命令外，還提供些許存取系統資料與邏輯控制等功能。在不方便使用 Java 或 C 語言來執行程式功能的場合，改用 BAT 批次檔來完成工作，不失為有效的解決方案。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>輸出訊息</h2>
+                <p>
+                    <code>ECHO 訊息</code><br>
+                    <br>
+                    用來輸出自己想要顯示出來的訊息。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>輸出空行</h2>
+                <p>
+                    <code>ECHO=</code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>隱藏指令執行時輸出的訊息</h2>
+                <p>
+                    <code>@</code><br>
+                    <br>
+                    DOS 命令在執行時，會顯示過程中產生的訊息。如果不想看到這樣的訊息，可用 @ 表示這行程式不顯示過程訊息。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>關閉指令執行時輸出的訊息</h2>
+                <p>
+                    <code>ECHO OFF</code><br>
+                    <br>
+                    所有程式都不顯示過程訊息。<br>
+                    <br>
+                    通常連 ECHO OFF 這行程式也不希望顯示過程訊息，因此會在前面加上 @，變成 @ECHO OFF。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>暫停</h2>
+                <p>
+                    <code>PAUSE</code><br>
+                    <br>
+                    程式停止執行，等待使用者按任意鍵再繼續。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>尋訪</h2>
+                <p>
+                    <code>FOR %%變數 IN (篩選) DO 指令 [參數]</code><br>
+                    <br>
+                    FOR 指令與其說是迴圈，不如說是用來尋訪檔案。變數保存的是尋訪的檔案名稱。<br>
+                    <br>
+                    篩選的寫法像是 (*.mp4 *.mkv)，沒有篩選條件的話用萬用字元 (*)。<br>
+                    <br>
+                    底下範例會開啟批次檔所在資料夾下所有 *.txt 檔案：<br>
+                    <br>
+                    <samp>
+                        FOR %%n IN (*.txt) DO %%n
+                    </samp>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>跳躍</h2>
+                <p>
+                    跳到特定位置，執行其後的程式。
+                </p>
+                <hr>
+                <section>
+                    <h3>設定跳躍點</h3>
+                    <p>
+                        <code>:標題</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>跳躍</h3>
+                    <p>
+                        <code>GOTO 標題</code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    最常見的用法是設定 :end 做為批次檔的結尾，然後在批次檔已經完成任務時，就可以跳過接下來的程式，直接結束工作。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>條件</h2>
+                <hr>
+                <section>
+                    <h3>檢查資料</h3>
+                    <p>
+                        <code>IF 變數==資料</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>檢查路徑或檔名</h3>
+                    <p>
+                        <code>IF EXIST 資料夾名稱</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>檢查批次檔接受到的數值資料</h3>
+                    <p>
+                        <code>IF ERRORLEVEL 數值</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>反向條件</h3>
+                    <p>
+                        IF 後面可用 <code>NOT</code> 作相反條件的判斷。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>分歧條件</h3>
+                    <p>
+                        <code>IF 判斷式 (執行功能) ELSE (執行功能)</code><br>
+                        <br>
+                        注意！ELSE 與前面的 ) 符號不能斷行！<br>
+                        <br>
+                        也因此，為了讓批次檔的分歧條件式，能夠更像結構化程式語言的 if else，可以採用如下的編寫風格：<br>
+                        <br>
+                        <code>
+                            IF 判斷式 (<br>
+                            　執行功能<br>
+                            ) ELSE (<br>
+                            　執行功能<br>
+                            )<br>
+                        </code>
+                        <br>
+                        甚至多數人覺得，在批次檔使用 GOTO，反而 IF ELSE 容易閱讀。（不過 GOTO 比較不好寫，因為用「下一行」取代 ELSE 的情況下，要更花費心力，才能安排好執行流程。）
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>詢問</h2>
+                <p>
+                    <code>CHOICE</code><br>
+                    <br>
+                    會詢問 Y/N。<br>
+                    <br>
+                    其後應搭配 <code>IF %ERRORLEVEL%==1</code> 判斷使用者選的是 Y，或者 <code>IF %ERRORLEVEL%==2</code> 選的是 N。<br>
+                    <br>
+                    CHOICE 還允許自定更多選項，例如：<br>
+                    <br>
+                    <code>
+                        CHOICE /C NESW /M "N=北 E=東 S=南 W=西"<br>
+                        IF %ERRORLEVEL%==1 ECHO 往北走了<br>
+                        IF %ERRORLEVEL%==2 ECHO 往東走了<br>
+                        IF %ERRORLEVEL%==3 ECHO 往南走了<br>
+                        IF %ERRORLEVEL%==4 ECHO 往西走了
+                    </code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>輸入</h2>
+                <p>
+                    <code>SET /P 變數名稱=說明文字</code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>參數</h2>
+                <p>
+                    接在批次檔後面的參數，可用 <var>%1</var> 到 <var>%10</var> 來取得。<br>
+                    <br>
+                    %1 是帶入的檔案的話：<br>
+                    <br>
+                    <var>
+                        %~d1　磁碟機代號。<br>
+                        %~p1　路徑。<br>
+                        %~n1　檔名。<br>
+                        %~x1　副檔名。<br>
+                        %~nx1　檔名與副檔名。<br>
+                    </var>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>變數</h2>
+                <p>
+                    取一個識別名稱，保存程式中所要用到的資料，以便讀取。
+                </p>
+                <hr>
+                <section>
+                    <h3>設定變數</h3>
+                    <p>
+                        <code>SET 變數名稱=資料</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>讀取變數</h3>
+                    <p>
+                        <code>%變數名稱%</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>系統環境變數</h3>
+                    <p>
+                        Windows 作業系統已經內定許多環境變數，可以方便我們設計批次檔時，更簡單、明確進行想要的操作目標：
+                    </p>
+                    <table>
+                        <tr><td>%APPDATA%</td><td>使用者家目錄的 AppData 資料夾。</td></tr>
+                        <tr><td>%CD%</td><td>當前路徑。</td></tr>
+                        <tr><td>%DATE%</td><td>日期。</td></tr>
+                        <tr><td>%HOMEDRIVE%</td><td>使用者家目錄所在磁碟機的代號。</td></tr>
+                        <tr><td>%HOMEPATH%</td><td>使用者家目錄的資料夾路徑，不含磁碟機代號。</td></tr>
+                        <tr><td>%PROGRAMFILES%</td><td>系統 Program Files 資料夾的路徑。</td></tr>
+                        <tr><td>%PROGRAMFILES(X86)%</td><td>系統 Program Files (x86)資料夾的路徑。</td></tr>
+                        <tr><td>%RANDOM%</td><td>隨機取得 0 到 32767 之間的整數。</td></tr>
+                        <tr><td>%SYSTEMDRIVE%</td><td>安裝作業系統的磁碟機代號。</td></tr>
+                        <tr><td>%SYSTEMROOT%</td><td>安裝作業系統的資料夾。</td></tr>
+                        <tr><td>%TEMP%</td><td>暫存檔 temp 資料夾的路徑。</td></tr>
+                        <tr><td>%TIME%</td><td>時間。</td></tr>
+                        <tr><td>%USERNAME%</td><td>使用者帳號名稱。</td></tr>
+                        <tr><td>%USERPROFILE%</td><td>使用者家目錄完整路徑。</td></tr>
+                    </table>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>呼叫外部批次檔</h2>
+                <p>
+                    <code>CALL 批次檔</code><br>
+                    <br>
+                    執行另一個批次檔，然後繼續往下一個流程執行。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>結束批次檔</h2>
+                <p>
+                    <code>EXIT</code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>結束正在執行的程式</h2>
+                <p>
+                    <code>
+                        TASKKILL /IM 程序名稱<br>
+                        TASKKILL /PID 處理程序識別碼
+                    </code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>一行內執行多道指令</h2>
+                <p>
+                    使用 <code>&amp;</code> 符號。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>多行指令寫成一道指令</h2>
+                <p>
+                    用 <code>()</code> 符號括住。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>註解</h2>
+                <p>
+                    <code>REM 註解文字</code><br>
+                    <br>
+                    不會被批次檔執行，適合用來說明程式意圖，方便往後閱讀程式碼。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>配色</h2>
+                <p>
+                    <code>COLOR 背景顏色 前景顏色</code><br>
+                    <br>
+                    0 黑色<br>
+                    1 藍色<br>
+                    2 綠色<br>
+                    3 藍綠色<br>
+                    4 紅色<br>
+                    5 紫色<br>
+                    6 黃色<br>
+                    7 白色<br>
+                    8 灰色<br>
+                    9 淡藍色<br>
+                    A 淡綠色<br>
+                    B 淡藍綠色<br>
+                    C 淡紅色<br>
+                    D 淡紫色<br>
+                    E 淡黃色<br>
+                    F 亮白色
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>說明</h2>
+                <p>
+                    各指令的更完整功能，請用 <code>HELP 指令</code> 查閱。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 路徑、檔名、或者資料，建議用雙引號 " 包起來，比較不會出錯。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

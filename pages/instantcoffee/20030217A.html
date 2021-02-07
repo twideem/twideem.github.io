@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>亂數</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>速成亂數做法</h2>
+                <p>
+                    如果沒有特殊需求的話，建議直接用 Java API 的 java.util.Random 來產生亂數。
+                </p>
+                <hr>
+                <section>
+                    <h3>0 到範圍內</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[6]'>
+                            import java.util.Random;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    System.out.print(new Random().nextInt(3));
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            從 0 到 2 之間，隨機產生一個數值。<br>
+                        </output>
+                        <br>
+                        你可能會感到疑惑說，預設的計算結果並不直覺，為何設定 3，並不是 0 到 3 或 1 到 3，偏偏是 0 到 2？<br>
+                        <br>
+                        是不直覺沒錯，但這樣有個好處是，能直接處理「陣列」或「群集」的資料，因為這些結構在資料長度為 3 的時候，卻是從 0 到 2 去存取。可能設計 API 的人認為這種情況居多，所以預設這樣的值吧？<br>
+                        <br>
+                        自己變通一下，把得到數值加 1，即為 1 到 3 之間的亂數了。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>最小值到最大值</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.util.Random;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int min = 8;  //最小值
+                                    int max = 16; //最大值
+
+                                    System.out.print(new Random().nextInt(max-min)+min);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            從 8 到 16 之間，隨機產生一個數值。
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>true 或 false</h3>
+                    <p>
+                        java.util.Random 的 nextBoolean() 可以隨機產生 true 或 false。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>傳統亂數做法</h2>
+                <p>
+                    因為通常程式語言都會提供 Math 函式庫，讓我們使用 round() 與 random() 來產生亂數，所以很多人還是習慣用 java.lang.Math 來設計程式。
+                </p>
+                <hr>
+                <section>
+                    <h3>0 到最大值</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[5]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int x = (int)Math.round(Math.random()*10);
+
+                                    System.out.print(x);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            從 0 到 10 之間，隨機產生一個數值。<br>
+                        </output>
+                        <br>
+                        使用 random() 產生帶有小數的亂數，再用四捨五入的 round() 搭配 (int) 轉為整數。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1 到最大值</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[5]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int x = (int)Math.ceil(Math.random()*10);
+
+                                    System.out.print(x);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            從 1 到 10 之間，隨機產生一個數值。<br>
+                        </output>
+                        <br>
+                        使用 random() 產生帶有小數的亂數，再用無條件進位的 ceil() 搭配 (int)  轉為整數。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>0 到最大值-1</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[5]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int x = (int)Math.floor(Math.random()*10);
+
+                                    System.out.print(x);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            從 0 到 9 之間，隨機產生一個數值。<br>
+                        </output>
+                        <br>
+                        使用 random() 產生帶有小數的亂數，再用無條件捨去的 floor() 搭配 (int)  轉為整數。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>最小值到最大值</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[8]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int min = 8;  //最小值
+                                    int max = 16; //最大值
+
+                                    int x = (int)Math.round(Math.random()*(max-min))+min;
+
+                                    System.out.print(x);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            從 8 到 16 之間，隨機產生一個數值。
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>button{font-size:8pt}</style>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>
+            ;(function(){
+                typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null
+                function Brush(){
+                    this.regexList=[
+                        {regex:new RegExp(this.getKeywords('plain'),'gm'),css:'plain'},
+                        {regex:new RegExp(this.getKeywords('comments'),'gm'),css:'comments'},
+                        {regex:new RegExp(this.getKeywords('preprocessor'),'gm'),css:'preprocessor'},
+                        {regex:new RegExp(this.getKeywords('keyword'),'gm'),css:'keyword'},
+                        {regex:new RegExp(this.getKeywords('value'),'gm'),css:'value'},
+                        {regex:new RegExp(this.getKeywords('string'),'gm'),css:'string'},
+                        {regex:new RegExp(this.getKeywords('variable'),'gm'),css:'variable'},
+                        {regex:new RegExp(this.getKeywords('constants'),'gm'),css:'constants'},
+                        {regex:new RegExp(this.getKeywords('functions'),'gm'),css:'functions'},
+                        {regex:new RegExp(this.getKeywords('script'),'gm'),css:'script'},
+                        {regex:new RegExp(this.getKeywords('color1'),'gm'),css:'color1'},
+                        {regex:new RegExp(this.getKeywords('color2'),'gm'),css:'color2'},
+                        {regex:new RegExp(this.getKeywords('color3'),'gm'),css:'color3'},
+                        {regex:new RegExp(this.getKeywords('symbol'),'gm'),css:'symbol'}
+                    ]
+                }
+                Brush.prototype=new SyntaxHighlighter.Highlighter()
+                Brush.aliases=['syntax']
+                SyntaxHighlighter.brushes.Syntax=Brush
+                typeof(exports)!='undefined'?exports.Brush=Brush:null
+            })()
+            sh.lang('Java')
+        </script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>線上切換 SyntaxHighlighter 樣式</h1>
+                <p>
+                    這是設計用來直接觀看 SyntaxHighlighter 提供八種主題長怎樣的程式。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>主題切換按鈕</h2>
+                <p>
+                    <!--Mozilla Firefox 30 不允許跨站連結，無法載入 http://alexgorbatchev.com/pub/sh/current/styles/ 的檔案，因此改將 shThemeXXX.css 放在個人網站。--><button onclick='sh.theme("../../objects/plugins/sh/shThemeDefault.css")'>Default</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeDjango.css")'>Diango</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeEclipse.css")'>Eclipse</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeEmacs.css")'>Emacs</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeFadeToGrey.css")'>FadeToGrey</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeMDUltra.css")'>MDUltra</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeMidnight.css")'>Midnight</button><button onclick='sh.theme("../../objects/plugins/sh/shThemeRDark.css")'>RDark</button>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>以 XML 做範例</h2>
+                <p>
+                    <textarea class='brush:xml;highlight:[5,6,7,8,9];toolbar:true'>
+                        &lt;?xml version='1.0' encoding='UTF-8'?&gt;
+                        &lt;!-- Cleveland Cavaliers --&gt;
+                        &lt;team city='Cleveland' name='Cavaliers' season='2010'&gt;
+                            &lt;coach win='61' lose='21'&gt;Mike Brown&lt;/coach&gt;
+                            &lt;player number='33' position='C'&gt;Shaquille O'Neal&lt;/player&gt;
+                            &lt;player number='4' position='PF'&gt;Antawn Jamison&lt;/player&gt;
+                            &lt;player number='23' position='SF'&gt;LeBron James&lt;/player&gt;
+                            &lt;player number='18' position='SG'&gt;Anthony Parker&lt;/player&gt;
+                            &lt;player number='2' position='PG'&gt;Mo Williams&lt;/player&gt;
+                            &lt;player number='11' position='C'&gt;Zydrunas Ilgauskas&lt;/player&gt;
+                            &lt;player number='17' position='PF'&gt;Anderson Varejao&lt;/player&gt;
+                            &lt;player number='15' position='SF'&gt;Jamario Moon&lt;/player&gt;
+                            &lt;player number='13' position='SG'&gt;Delonte West&lt;/player&gt;
+                            &lt;player number='1' position='PG'&gt;Daniel Gibson&lt;/player&gt;
+                            &lt;player number='21' position='PF'&gt;J.J. Hickson&lt;/player&gt;
+                        &lt;/cavaliers&gt;
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>以 Java 做範例</h2>
+                <p>
+                    <textarea class='brush:java;highlight:15;toolbar:true'>
+                        package com.webs.twideem.application;
+                        import java.lang.String;
+                        import java.lang.StringBuilder;
+                        public class Birthday extends java.lang.Object {
+                            int day = 10;
+                            String month = 'November';
+                            //Say Happy Birthday
+                            @Override public String toString(){
+                                return new StringBuilder('Happy Birthday').append(this.month)
+                                                                          .append(this.day)
+                                                                          .toString();
+                            }
+                            //Main
+                            public static void main(String[] args){
+                                System.out.print(new Birthday());
+                            }
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>所有識別文字項目</h2>
+                <p>
+                    <textarea class='brush:syntax'>
+                        plain
+                        comments
+                        preprocessor
+                        keyword
+                        value
+                        string
+                        variable
+                        constants
+                        functions
+                        script
+                        color1
+                        color2
+                        color3
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 進網頁看到的主題，是本站另行設計的 <a href='20130206A.html'>Colorful Candy</a>，它修改自 SyntaxHighlighter 內建的 Eclipse。因為不是官方預設的主題，所以沒有切換按鈕。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

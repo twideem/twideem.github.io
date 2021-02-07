@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>函式</h1>
+                <p>將整個區塊的程式包起來並取個名字，往後就能透過呼叫的方式使用這塊程式。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>function</h2>
+                <p>
+                    有了函式，便適合將「可以獨立存在的功能」用這方式來產生，看程式哪個地方需要用到再拿出來執行，相當方便。這種做法，更可以讓整體程式變成由好幾塊模組來構成，這就叫模組化。
+                </p>
+                <hr>
+                <section>
+                    <h3>函式的基本架構</h3>
+                    <p>
+                        <code>
+                            function 函式名稱(參數){<br>
+                            　程式敘述;<br>
+                            　return 傳回值;<br>
+                            }
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    來看一個範例，底下是一個計算三角形面積的函式：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        function getTriangleArea(l, w){
+                            return (l*w)/2;
+                        }
+                    </textarea>
+                    <br>
+                    有了這個函式，就能在程式需要的地方使用它：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var a = getTriangleArea(32, 24);
+                    </textarea>
+                    <br>
+                    此外，參數和傳回值並不是必要的，所以有時候函式設計得很簡單：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        function println(string){
+                            document.write(string + '&lt;br&gt;');
+                        }
+                    </textarea>
+                    <br>
+                    這個函式純粹在網頁輸出文字，然後換行。如果在程式中如下使用三次這個函式，網頁就會用三行文字分別顯示 AAA、BBB 和 CCC：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        println('AAA');
+                        println('BBB');
+                        println('CCC');
+                    </textarea>
+                    <br>
+                    函式的這兩種應用情況，務必留下深刻印象，對程式設計有莫大的影響。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>區域變數與全域變數</h2>
+                <p>
+                    有了函式，就會遇到變數有存取範圍的情形，也就是說，在函式裡面宣告的變數，只能在函式裡面被存取，函式以外的地方是存取不到的！<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        function add(p1, p2){
+                            var a = p1 + p2;
+                            document.write('兩數相加是：' + a);
+                        }
+                    </textarea>
+                    <br>
+                    像這個函式裡面的變數 a，是無法在函式以外的地方使用，我們稱之為「區域變數」。<br>
+                    <br>
+                    如果你希望函式計算出來的結果，可以保存在任何位置都能取出來用的變數，就必須放在函式外部的位置：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var a;
+                        function add(p1, p2){
+                            a = p1 + p2;
+                            document.write('兩數相加是：' + a);
+                        }
+                    </textarea>
+                    <br>
+                    這樣就能隨時取出變數 a 的資料。<br>
+                    <br>
+                    但這是充滿弊端的寫法！程式如果大肆用這種方式存取資料，你很難確認每次呼叫變數 a 時它究竟有沒有被 add 函式加工過？或者會不會被其它程式修改過資料而不是我們想要的值了？<br>
+                    <br>
+                    除非你夠高竿，明白清楚這就是自己想要的，所以懂得事後如何規避風險，否則初學程式語言的人，設計程式時首先必須思考的，就是區域變數與全域變數的問題：「盡量降低對全域變數的依賴，然後設法想出<ins>[1]</ins> 更方便管理的區域變數使用機制。」
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>已內建的函式</h2>
+                <p>
+                    JavaScript 事先設計好一些函式：<br>
+                    <br>
+                    <samp>
+                        decodeURI()、dncodeURIComponent()、encodeURI()、encodeURIComponent()、eval()、inFinite()、inNaN()、Number()、parseFloat()、parseInt()、String()。<br>
+                    </samp>
+                    <br>
+                    詳細使用說明請參考《<a href='19690413A.html'>共通函式庫</a>》，在那之前，你只需要知道自訂函式時名稱不能與這些重複。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[1] 使用區域變數來存取資料，會讓我們顯得綁手綁腳，有種要多繞個圈子才能使用一筆資料的感覺。所以要設法想出既妥善又方便的模組化手法，而這也是初學程式設計者邁向成長的主要環節。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

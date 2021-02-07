@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Swing 快速入門</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>建立視窗</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import javax.swing.JFrame;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                //建立視窗物件。
+                                JFrame frame = new JFrame();
+                                //設定視窗大小、標題文字、然後顯示出來。
+                                frame.setSize(400, 300);
+                                frame.setTitle("Hello, world!");
+                                frame.setVisible(true);
+                                //按下關閉圖示鈕時結束應用程式，否則只是視窗不見，程序其實殘留著。
+                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    顯示結果：
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20001009A_01.png' alt='插圖'>
+                </figure>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>加入按鈕</h2>
+                <p>
+                    <textarea class='brush:java;highlight:[9,18,19,20,22,23,25,26,27,28,29]'>
+                        import java.awt.event.ActionEvent;
+                        import java.awt.event.ActionListener;
+                        import javax.swing.JButton;
+                        import javax.swing.JFrame;
+
+                        public class Main{
+
+                            private JFrame frame = new JFrame();
+                            private JButton button = new JButton();
+
+                            public Main(){
+                                //建立視窗。
+                                frame.setSize(400, 300);
+                                frame.setTitle("Hello, world!");
+                                frame.setVisible(true);
+                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                //設定按鈕的位置、大小、標題文字。
+                                button.setLocation(40, 100);
+                                button.setSize(300, 30);
+                                button.setText("別亂按");
+                                //加入按鈕到視窗裡面。
+                                frame.setLayout(null);
+                                frame.add(button);
+                                //觸發按下按鈕事件時，改變視窗的文字標題。
+                                button.addActionListener(new ActionListener(){
+                                    public void actionPerformed(ActionEvent action_event){
+                                        button.setText("不是叫你別亂按嗎");
+                                    }
+                                });
+                            }
+
+                            public static void main(String[] args){
+                                new Main();
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    顯示結果：
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20001009A_02.png' alt='插圖'>
+                    <img src='../../figures/instantcoffee/20001009A_03.png' alt='插圖'>
+                </figure>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>你已經快速入門了～</h2>
+                <p>
+                    依樣畫葫蘆，陸續加入像是：文字標籤的 JLabel、文字區域的 JTextArea、單行輸入欄的 JTextField、密碼輸入欄位 JPasswordField…等等各式組件，就能打造出視窗了！<br>
+                    <br>
+                    接著再查 API 看看各個元件有哪些功能可用，然後深入研究 java.awt.event 的其它事件處理，就能熟悉 Java 的視窗應用程式設計！
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 可進一步參考《<a href='20001016A.html'>Swing 速用表</a>》與《<a href='20001023A.html'>事件速成範例集</a>》。<br>
+                    [*] 補充一篇個人的看法：《<a href='appendix.html#20001009A'>Java Swing <i>v.</i> JavaFX</a>》。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

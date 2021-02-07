@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <link href='../../styles/editor.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>純文字文件的寫入與讀取</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>直接套用作業系統預設格式來讀寫文字的 FileWriter 與 FileReader</h2>
+                <p>
+                    為了方便程式設計師在不同作業系統，都能以相同的程式寫法，來存取純文字檔案的資料，Java 提供 FileWriter 與 FileReader，它會直接用作業系統預設的字元編碼與換行格式，來寫入與讀取純文字資料！
+                </p>
+                <hr>
+                <section>
+                    <h3>寫入純文字文件</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.FileWriter;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立輸出用文字檔案
+                                        FileWriter file_writer = new FileWriter("sample.txt");
+                                        //輸出文字
+                                        file_writer.write("猜\n");
+                                        file_writer.write("猜\n");
+                                        file_writer.write("我\n");
+                                        file_writer.write("是\n");
+                                        file_writer.write("誰\n");
+                                        //關閉檔案
+                                        file_writer.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output class='editor'>
+                            猜<br>
+                            猜<br>
+                            我<br>
+                            是<br>
+                            誰<br>
+                        </output>
+                        <br>
+                        注意！這個範例沒有建立空白新檔的動作，所以你必須事先準備好檔名為 sample.txt 的純文字文件，否則無法執行程式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>讀取純文字文件</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.FileReader;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立讀取用文字檔案
+                                        FileReader file_reader = new FileReader("sample.txt");
+                                        //逐行讀取資料
+                                        char[] chars=new char[1024];
+                                        while(file_reader.ready()){
+                                            System.out.println(new String(chars, 0, file_reader.read(chars)));
+                                        }
+                                        //關閉檔案
+                                        file_reader.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        如果讀取的 sample.txt 是前一個範例所產生，程式執行結果為：<br>
+                        <br>
+                        <output>
+                            猜<br>
+                            猜<br>
+                            我<br>
+                            是<br>
+                            誰
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>提昇檔案讀寫效率的 BufferedWriter 與 BufferedReader</h2>
+                <p>
+                    使用 FileWriter 與 FileReader 是直接對硬碟的檔案進行讀寫，如果讀寫頻繁的話，因為硬碟往往是電腦中速度最慢的裝置，應用程式的效率可能會被拖慢。因此 Java 又另外提供了 BufferedWriter 與 BufferedReader，可以先將硬碟檔案的資料緩存在速度較快記憶體來讀寫，提高應用程式的執行效率！<br>
+                    <br>
+                    不只如此，BufferedWriter 與 BufferedReader 提供了更容易使用的方式來讀寫文字，所以很少人直接用 FileWriter 和 FileReader，寧願多一道程序捆入 BufferedWriter 和 BufferedReader。
+                </p>
+                <hr>
+                <section>
+                    <h3>寫入純文字文件</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.BufferedWriter;
+                            import java.io.FileWriter;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立輸出用文字檔案
+                                        BufferedWriter buffered_writer = new BufferedWriter(new FileWriter("sample.txt"));
+                                        //輸出文字
+                                        buffered_writer.write("猜猜我是誰");
+                                        //關閉檔案
+                                        buffered_writer.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output class='editor'>
+                            猜猜我是誰<br>
+                        </output>
+                        <br>
+                        注意！這個範例沒有建立空白新檔的動作，所以你必須事先準備好檔名為 sample.txt 的純文字文件，否則無法執行程式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>讀取純文字文件</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.BufferedReader;
+                            import java.io.FileReader;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立讀取用文字檔案
+                                        BufferedReader buffered_reader = new BufferedReader(new FileReader("sample.txt"));
+                                        //讀取一行資料
+                                        System.out.println(buffered_reader.readLine());
+                                        //關閉檔案
+                                        buffered_reader.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        如果讀取的 sample.txt 是前一個範例所產生，程式執行結果為：<br>
+                        <br>
+                        <output>
+                            猜猜我是誰
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 FileOutputStream 與 FileInputStream 指定字元編碼</h2>
+                <p>
+                    常常聽到 FileWriter 和 FileReader 跨平台的說法！其實是「檔案讀寫」這個程式動作跨平台，而不是文字檔案本身跨平台。例如在預設使用 Big5 編碼的 Windows 寫入純文字文件，拿到預設使用 UTF-8 編碼的 Linux 碼讀取，還是會有亂碼的情況發生。所以我們應該掌握如何指定以某字元編碼來讀寫純文字文件的做法：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.BufferedReader;
+                        import java.io.BufferedWriter;
+                        import java.io.FileInputStream;
+                        import java.io.FileOutputStream;
+                        import java.io.InputStreamReader;
+                        import java.io.OutputStreamWriter;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    //以 UTF-8 儲存文字檔案
+                                    BufferedWriter buffered_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("sample.txt"), "UTF-8"));
+                                    buffered_writer.write("猜猜我是誰");
+                                    buffered_writer.close();
+                                    //以 UTF-8 讀取文字檔案
+                                    BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(new FileInputStream("sample.txt"), "UTF-8"));
+                                    System.out.print(buffered_reader.readLine());
+                                    buffered_reader.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        猜猜我是誰
+                    </output>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

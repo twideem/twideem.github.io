@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>分類</h1>
+                <p>如果只是希望「變數」能夠有個「名稱空間」，不要在公開區域宣告一堆變數，那本文介紹的模組化手法相當不錯。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>分類式模組化手法</h2>
+                <p>
+                    底下模組化手法，相當於把「變數」與「函式」括在「名稱空間」裡面。
+                </p>
+                <hr>
+                <section>
+                    <h3>分類的基本結構</h3>
+                    <p>
+                        <code>
+                            var 名稱空間 = {<br>
+                            　變數: 初始值,<br>
+                            　函式: function(參數){<br>
+                            　　名稱空間.變數 = 參數;<br>
+                            　}<br>
+                            }
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>分類的使用方式</h3>
+                    <p>
+                        <code>
+                            名稱空間.變數 = 設定值;<br>
+                            名稱空間.函式(參數);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    這種模組化不需要經過物件的生成，就可以操作函式。<br>
+                    <br>
+                    使用時注意每個變數與每個函式下面要再加入新的成員時，必須使用 , 做為區隔。<br>
+                    <br>
+                    要存取變數時，即使看似就在類別內部，也必須打上名稱空間，否則無法存取到正確的變數。<br>
+                    <br>
+                    另外，這種模組化手法的變數是 public，也就是無法禁止外部更動這一模組的內部狀態，如果想依賴這樣模組做精確的運作，隨時要擔負變數遭到修改的風險。<br>
+                    <br>
+                    這種模組化手法的缺點，就是內部只能用來宣告變數與函式，不能包含此外的程式敘述。例如下面程式意圖在模組內部跑 document.write() 是錯誤的：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var StringBuffer = {
+                            buffer: '',
+                            window.document.write(StringBuffer.buffer),
+                            append: function(string){
+                                StringBuffer.buffer += string;
+                            },
+                            toString: function(){
+                                return StringBuffer.buffer;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    底下以 StringBuffer 作範例<ins>[1]</ins>，示範分類的模組化手法。其實只是建立 StringBuffer 名稱空間的 buffer 變數與 append 等函式而已：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var StringBuffer = {
+                            buffer: '',
+                            append: function(string){
+                                StringBuffer.buffer += string;
+                            },
+                            toString: function(){
+                                return StringBuffer.buffer;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    StringBuffer 的使用方式：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        StringBuffer.append('AAA');
+                        StringBuffer.append('BBB');
+                        StringBuffer.append('CCC');
+                        document.write(StringBuffer.toString());
+                    </textarea>
+                    <br>
+                    網頁會顯示 AAABBBCCC。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>巢狀名稱空間</h2>
+                <p>
+                    層層分類下去的模組化結構，有時候不失為一種方便的程式操作管理方式。
+                </p>
+                <hr>
+                <section>
+                    <h3>基本結構</h3>
+                    <p>
+                        <code>
+                            var 名稱空間 = {<br>
+                            　巢狀名稱: {<br>
+                            　　變數: 初始值,<br>
+                            　　函式: function(參數){<br>
+                            　　　名稱空間.巢狀名稱.變數 = 參數;<br>
+                            　　}<br>
+                            　}<br>
+                            }
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>使用方式</h3>
+                    <p>
+                        <code>
+                            名稱空間.巢狀名稱.變數 = 設定值;<br>
+                            名稱空間.巢狀名稱.函式(參數);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    當然，你還可以繼續層層分類下去！只是太多層的話，反而會讓整個模組化結構變得「很難爬」，不容易檢視。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>this</h2>
+                <p>
+                    使用分類的手法時，分類自己內部可以使用 this 來取代名稱空間，例如 StringBuffer 這個範例其實可以這麼寫：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var StringBuffer = {
+                            buffer: '',
+                            append: function(string){
+                                this.buffer += string;
+                            },
+                            toString: function(){
+                                return this.buffer;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    但使用時需要注意一件事！其實「分類」本身屬於一種「函式」，因此 this 只在其「函式區域範圍」內有效。如果函式裡面再建立一個獨立的函式區域範圍，這個獨立的函式區域範圍有自己的 this，因此「分類」的 this 傳不進去。<br>
+                    <br>
+                    來看個範例，它執行時會產生錯誤：<br>
+                    <br>
+                    <textarea class='brush:es;highlight:6'>
+                        var StringBuffer = {
+                            buffer: '',
+                            append: function(string){
+                                this.buffer += string;
+                                var test = function(){
+                                    alert(this.buffer);
+                                };
+                                test();
+                            },
+                            toString: function(){
+                                return this.buffer;
+                            }
+                        }
+                        StringBuffer.append('Hello');
+                    </textarea>
+                    <br>
+                    StringBuffer.append() 裡面建立了新的函式 test()，然後試圖用 this.buffer 存取 StringBuffer 的變數值。但瀏覽器找的將是「test.buffer」這筆資料，而不是「StringBuffer.buffer」，因此產生讀取不到資料的錯誤。<br>
+                    <br>
+                    所以何時使用 this？何時使用完整的名稱空間？答案就很清楚了……<br>
+                    <br>
+                    <textarea class='brush:es;highlight:6'>
+                        var StringBuffer = {
+                            buffer: '',
+                            append: function(string){
+                                this.buffer += string;
+                                var test = function(){
+                                    alert(StringBuffer.buffer);
+                                };
+                                test();
+                            },
+                            toString: function(){
+                                return this.buffer;
+                            }
+                        }
+                        StringBuffer.append('Hello');
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 ; 關閉分類</h2>
+                <p>
+                    為防止與其它分類所造成的執行錯誤，習慣上會在分類 {} 的最尾端，加上 ; 做為完整的結束：<br>
+                    <br>
+                    <code>
+                        var StringBuffer = {<br>
+                        　buffer: '',<br>
+                        　append: function(string){<br>
+                        　　this.buffer += string;<br>
+                        　},<br>
+                        　toString: function(){<br>
+                        　　return this.buffer;<br>
+                        　}<br>
+                        }<strong>;</strong>
+                    </code>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[1] StringBuffer 在 Java 程式語言是可用來緩存字串資料的物件。通常使用它的 append() 來加入字串資料、toString() 來送出字串資料、clear() 清空資料。由於本文只是示範程式的結構，因此省略 clear() 好讓結構看起來更清晰。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

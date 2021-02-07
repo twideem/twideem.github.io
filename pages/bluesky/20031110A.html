@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>用 AutoHotkey 多媒體鍵</h1>
+                <p>
+                    多媒體鍵盤和筆電的鍵盤，可以調音量、控制多媒體播放程式、叫出小算盤…，普通鍵盤也想這麼做怎麼辦？雖然多媒體鍵盤不貴，但東西用好好的又沒壞，專程為此買個新的還是有點浪費。<br>
+                    <br>
+                    幸好有 AutoHotkey！這腳本語言可以很簡單的！<br>
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>下載、安裝</h2>
+                <p>
+                    請至 <a href='http://www.autohotkey.com' target='_blank'>http://www.autohotkey.com</a> 下載並安裝 AutoHotkey。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>製作多媒體鍵</h2>
+                <hr>
+                <section>
+                    <h3>Step 1: 寫程式</h3>
+                    <p>
+                        用純文字文件寫如下程式：<br>
+                        <br>
+                        <code>
+                            !Left::SoundSet, -2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;按 Alt + ← 降低音量<br>
+                            !Right::SoundSet, +2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ;按 Alt + → 提高音量<br>
+                            !Down::SoundSet, +1, , mute &nbsp; &nbsp;;按 Alt + ↓ 靜音<br>
+                            !Up::Run calc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;按 Alt + ↑ 小算盤<br>
+                        </code>
+                        <br>
+                        然後存檔時用 *.ahk 副檔名。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 2: 編譯成可執行檔</h3>
+                    <p>
+                        在上一節寫好的 *.ahk 檔案按滑鼠右鍵，選擇 Compile Script，會編譯成 *.exe 的可執行檔。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 3: 開機時啟動</h3>
+                    <p>
+                        將編譯出來的 *.exe 檔案建立捷徑，放在 <var>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\</var> 裡面，開機時就會自動執行我們自己寫的多媒體腳本程式。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>進階</h2>
+                <hr>
+                <section>
+                    <h3>改用 Ctrl 鍵</h3>
+                    <p>
+                        將程式的 ! 改為 ^ 即可。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>改用 Shift 鍵</h3>
+                    <p>
+                        將程式的 ! 改為 + 即可。<br>
+                        <br>
+                        但因為「Shift + 方向鍵」已內定為選取文字，所以程式碼建議改成：<br>
+                        <br>
+                        <code>
+                            +F9::SoundSet, -2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ;按 Shift + F9 降低音量<br>
+                            +F10::SoundSet, +2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;按 Shift + F10 提高音量<br>
+                            +F11::SoundSet, +1, , mute &nbsp; &nbsp;;按 Shift + F11 靜音<br>
+                            +F12::Run calc  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;按 Shift + F12 小算盤<br>
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>筆電外接鍵盤的場合</h3>
+                    <p>
+                        SoundSet 雖能調整音量，但如果像是筆電有安裝原廠的音效軟體，它不會觸發音量指示計。這時可以改為：<br>
+                        <br>
+                        <code>
+                            !Left::Send {Volume_Left} &nbsp; &nbsp;;按 Alt + ← 降低音量<br>
+                            !Right::Send {Volume_Up} &nbsp; &nbsp; ;按 Alt + → 提高音量<br>
+                            !Down::Send {Volume_Down} &nbsp; &nbsp;;按 Alt + ↓ 靜音<br>
+                        </code>
+                        <br>
+                        這只適用於筆電的鍵盤支援這些多媒體鍵，然後外接鍵盤的場合。<br>
+                        <br>
+                        如果外接鍵盤沒有多媒體鍵功能，筆電也不支援這些功能鍵，這程式無法正常執行。<br>
+                        <br>
+                        同理，筆電鍵盤的功能鍵組合，支援多媒體鍵的話，也可以這樣綁定到外接鍵盤：<br>
+                        <br>
+                        <code>
+                            !F9::Send {Media_Play_Pause} &nbsp; &nbsp;;按 Alt + F9 暫停播放<br>
+                            !F10::Send {Media_Stop} &nbsp; &nbsp; &nbsp; &nbsp; ;按 Alt + F10 停止播放<br>
+                            !F11::Send {Media_Prev} &nbsp; &nbsp; &nbsp; &nbsp; ;按 Alt + F11 播放上一首<br>
+                            !F12::Send {Media_Next} &nbsp; &nbsp; &nbsp; &nbsp; ;按 Alt + F12 播放下一首<br>
+                        </code>
+                        <br>
+                        所有多媒體鍵如下：<br>
+                        <br>
+                        <var>
+                            {Browser_Back}<br>
+                            {Browser_Forward}<br>
+                            {Browser_Refresh}<br>
+                            {Browser_Stop}<br>
+                            {Browser_Search}<br>
+                            {Browser_Favorites}<br>
+                            {Browser_Home}<br>
+                            {Volume_Mute}<br>
+                            {Volume_Down}<br>
+                            {Volume_Up}<br>
+                            {Media_Next}<br>
+                            {Media_Prev}<br>
+                            {Media_Stop}<br>
+                            {Media_Play_Pause}<br>
+                            {Launch_Mail}<br>
+                            {Launch_Media}<br>
+                            {Launch_App1}<br>
+                            {Launch_App2}<br>
+                        </var>
+                        <br>
+                        其中 Launch_App1 是我的電腦，Launch_App2 是小算盤。<br>
+                        <br>
+                        再提醒一次，如果你的鍵盤本來就不支援這些功能，那麼 Send 上述訊號是不會有動作的。
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

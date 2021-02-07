@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Executable JAR 無法雙擊滑鼠執行</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                用 regedit.exe 修改：<br>
+                <br>
+                <var>
+                    HKEY_CLASSES_ROOT\.jar_auto_file\shell\open\command<br>
+                    <br>
+                    HKEY_CLASSES_ROOT\Applications\javaw.exe\shell\open\command<br>
+                    <br>
+                    HKEY_LOCAL_MACHINE\SOFTWARE\Classes\jarfile\Shell\Open\Command<br>
+                </var>
+                <br>
+                將這三筆設定為：<br>
+                <br>
+                <var>"C:\Program Files\Java\jre6\bin\javaw.exe" -jar "%1" %*</var><br>
+                <br>
+                請視你安裝 Java 的資料夾路徑調整設定值。<br>
+                <br>
+                就能執行 *.jar 的檔案。
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

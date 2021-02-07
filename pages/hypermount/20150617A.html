@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>ECMAScript 6 新特性</h1>
+                <p>
+                    2015 年 6 月 17 日，ECMAScript 6 正式發布！<br>
+                    <br>
+                    然而，超過半年的時間，Firefox、Chrome、Edge、Opera、Safari 各大瀏覽器依然停留在 ECMAScript 5，只能執行部分 ECMAScript 6 的新語法，且有的只能在 strict mode 執行，有的要明確宣告 version=1.7 才能執行。<br>
+                    <br>
+                    完整支援 ECMAScript 6 語法的瀏覽器，版本為：Chrome 49、Firefox 45、Opera 36、Edge 38、Safari 10。前三者在 2016 年 3 月<ins>[1]</ins> 正式發布，並正式以 ECMAScript 6 為預設版本。Edge 38 在 8 月正式發布，終於支援 default parameter，Safari 10 是 9 月。<br>
+                    <br>
+                    只有在使用者能隨時更新瀏覽器版本的情況下，才使用 ECMAScript 6 設計程式，否則使用 ECMAScript 5 就夠了。舊版瀏覽器對於 ECMAScript 6 的支援都是實驗階段，每家支援情況都不一樣，相當混亂，根本不可能為舊版瀏覽器做好 ECMAScript 6 的相容性設計。所以，要嘛強制規定使用最新版瀏覽器執行你的 ECMAScript 6 程式，要嘛完全使用 ECMAScript 5 獲得最高的相容性，千萬不要徒費心力讓舊版瀏覽器跑 ECMAScript 6。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>流程控制</h2>
+                <hr>
+                <section>
+                    <h3>for of 迴圈</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let a = ['A','AA','AAA'];
+
+                            for(let n of a){
+                                document.write(n);
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            A<br>
+                            AA<br>
+                            AAA<br>
+                        </output>
+                        <br>
+                        過去用 for in 迴圈的話，取得的是索引值 0、1、2，for of 迴圈可以取得鍵值。<br>
+                        <br>
+                        需要說明的是，鍵值不全然等於資料。以上面範例取得的 AAA 資料來說明，其實取得的資料是 <var>AAA:'AAA'</var> 這種「鍵值對（key-vluae pair）」型式，而且取得的是前面的 key 值（AAA），並不是後面的 value 資料（'AAA'）。只是若由 JavaScript 自動產生鍵值對格式的資料時，key 的名稱和 value 一樣而已。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>資料型態</h2>
+                <hr>
+                <section>
+                    <h3>Iterator 介面</h3>
+                    <p>
+                        ECMAScript 6 引進 object iteral express 機制，讓物件可以使用 for..of 列舉屬性。為此增加了新的資料型態，叫做 Iterator 介面，以辨識那些物件可以列舉（iterable）。<br>
+                        <br>
+                        通常我們不會自己實作 Iterator 介面，而是使用 JavaScript 為我們準備好的 API 來享受迭代物件的好處，像是 Set 和 Map。所以你只要知道，現在多了 Iterator 資料型態，遇到需要傳入 Iterator 介面的物件為參數時會用到。<br>
+                        <br>
+                        可以做為 Iterator 的物件，呼叫 toString() 會顯示 [object xxx Iterator]。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Generator</h3>
+                    <p>
+                        傳統函式只能傳回一次資料，而 Generator 可以不斷送出資料。ECMAScript 6 使用 <code>function*</code> 語法來表示 Generator，並使用 <code>yield</code> 送出資料，而不是 <code>return</code>。<br>
+                        <br>
+                        除此之外，傳統函式傳回值的型態就是 return 傳回資料的型態，而以 yield 送出的資料，則會放在一種串列資料結構裡面，這種資料結構稱為 generator，可以使用 for.. of.. 迭代。<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            function* f(){
+                                yield 'A';
+                                yield 'AA';
+                                yield 'AAA';
+                            }
+
+                            for(let n of f()){
+                                document.write(n);
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            A<br>
+                            AA<br>
+                            AAA
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>變數</h2>
+                <hr>
+                <section>
+                    <h3>區域變數</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            {
+                                let a = 'AAA';
+                            }
+
+                            document.write(a);
+                        </textarea>
+                        <br>
+                        <output>
+                            ReferenceError: a is not defined<br>
+                        </output>
+                        <br>
+                        用 <code>var</code> 宣告的變數，是沒有區域性的，明明把變數宣告在 <code>{}</code> 裡面，卻能在 <code>{}</code> 外面存取到資料。想要宣告區域變數，只能建立一個函式，把變數宣告在裡面。<br>
+                        <br>
+                        現在有了 <code>let</code>，JavaScript 會檢查變數的生存範疇，而且不像 var 有容錯機制，let 會像靜態程式語言發出錯誤訊息。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>常數</h3>
+                    <p>
+                        ECMAScript 6 正式將 <code>const</code> 列為標準語法。<br>
+                        <br>
+                        const 只適用於單純的變數，無法用在 object literal 裡面的變數，因為這屬於物件的屬性（object attribute），JavaScript 的態度是不需保護（not protected）。
+                    </p>
+                </section>
+                <!--hr>
+                <section>
+                    <h3>字串</h3>
+                    <p>
+                        使用 <code>""</code> 符號的字串，會像 Java 的 String 物件那樣，建立後不再變動。<br>
+                        <br>
+                        使用 <code>''</code> 符號的字串，會像 Java 的 SringBuild 物件那樣，隨時準備好修改資料。
+                    </p>
+                </section-->
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>函式</h2>
+                <hr>
+                <section>
+                    <h3>預設參數</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f(x='hello'){
+                                document.write(x);
+                            }
+
+                            f();
+                            f('world');
+                        </textarea>
+                        <br>
+                        <output>
+                            hello<br>
+                            world
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>不定參數</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f(...rest){
+                                let a=0;
+                                for(let n of rest){
+                                    a+=n;
+                                }
+                                return a;
+                            }
+
+                            document.write(f(1,2,3));
+                            document.write(f(4,5));
+                        </textarea>
+                        <br>
+                        <output>
+                            6<br>
+                            9
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>匿名函式</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            ((x,y)=>{
+                                document.write(x+y);
+                            })(111,222);
+                        </textarea>
+                        <br>
+                        <output>
+                            333<br>
+                        </output>
+                        <br>
+                        相當於：<br>
+                        <br>
+                        <code>
+                            (function(x,y){<br>
+                            　　document.write(x+y);<br>
+                            })(111,222);<br>
+                        </code>
+                        <br>
+                        引進 => 是為了匿名函式，而不是當作 function() 的新寫法！兩者有許多不一樣的地方，像是 ()=> 的 this 繫結自己這個匿名函式物件，而 function() 的 this 繫結自己做為 method 所歸屬的物件。所以，雖然 let R.f=()=>{}; 的寫法可以代替 let R.f=function(){};，但執行過程略有差異，不建議將舊程式的 funciton() 改成 ()=>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>立即函式</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            (()=>{
+                                document.write('hello');
+                            })();
+                        </textarea>
+                        <br>
+                        <output>
+                            hello<br>
+                        </output>
+                        <br>
+                        套用匿名函式的語法，做為簡化立即函式的寫法。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>物件</h2>
+                <hr>
+                <section>
+                    <h3>更簡潔的 method 寫法</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let A={
+                                f(){
+                                    document.write('hello');
+                                }
+                            };
+
+                            A.f();
+                        </textarea>
+                        <br>
+                        <output>
+                            hello
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>類別</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            class A{
+
+                                constructor(x, y){
+                                    this.h = x;
+                                    this.w = y;
+                                }
+
+                                f(){
+                                    document.write(this.h*this.w);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        相當於：<br>
+                        <br>
+                        <code>
+                            function A(x, y){<br>
+                            　this.h = x;<br>
+                            　this.w = y;<br>
+                            　A.prototype.f = function(){<br>
+                            　　document.write(this.h*this.w);<br>
+                            　};<br>
+                            }<br>
+                        </code>
+                        <br>
+                        使用 <code>class</code> 描述的類別，如果沒有使用 <code>new</code> 來產生物件，會發出錯誤，解決過去直接覆寫函式的瑕疵。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>繼承</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            class B extends A{
+
+                                //程式碼寫在這裡
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>靜態方法</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            class A{
+
+                                static f(){
+                                    document.write('AAA');
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        不用 new 也能呼叫 A.f()。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>用次級結構指定資料（Destructuring assignment）</h2>
+                <hr>
+                <section>
+                    <h3>基本用法</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let [a,b,c] = ['AAA','BBB','CCC'];
+
+                            document.write(a);
+                            document.write(b);
+                            document.write(c);
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC<br>
+                        </output>
+                        <br>
+                        相當於：<br>
+                        <br>
+                        <code>
+                            let a, b, c;<br>
+                            a = 'AAA';<br>
+                            b = 'BBB';<br>
+                            c = 'CCC';
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>帶預設值</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let [a,b='BBB'] = ['AAA'];
+
+                            document.write(a);
+                            document.write(b);
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                        </output>
+                        <br>
+                        相當於：<br>
+                        <br>
+                        <code>
+                            let a, b='BBB';<br>
+                            a='AAA';
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>跳過幾個值</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let [a,,c] = ['AAA','BBB','CCC'];
+
+                            document.write(a);
+                            document.write(c);
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>整個放入迭代器</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let [...a] = ['AAA','BBB','CCC','DDD','EEE'];
+
+                            for(let n of a){
+                                document.write(n);
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC<br>
+                            DDD<br>
+                            EEE
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>用於字串</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let [a,b,c] = 'def';
+
+                            document.write(a);
+                            document.write(b);
+                            document.write(c);
+                        </textarea>
+                        <br>
+                        <output>
+                            d<br>
+                            e<br>
+                            f
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>用於鍵值對</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let{a,b,c} = {a:'AAA', b:'BBB', c:'CCC'};
+
+                            document.write(a);
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                        </output>
+                        <br>
+                        <code>[]</code> 符號是照索引順序指定資料，<code>{}</code> 符號是根據鍵值指定資料。<br>
+                        <br>
+                        因此上面的範例，其實可以寫成這樣：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            let{a,b,c} = {b:'BBB', c:'CCC', a:'AAA'};
+
+                            document.write(a);
+                        </textarea>
+                        <br>
+                        只要找得到 key 就能將 value 填進去，順序怎麼排不重要，這提供了我們更全面的資料結構賦值方案！<br>
+                        <br>
+                        由於 JavaScript 的物件其實就是一種鍵值對的集合，因此也可將這個語法應用在物件身上，哪天藉此發明出更精妙的物件寫法也說不定。（目前則是以這種手法寫出來的物件像鬼畫符一樣根本看不懂是什麼）
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>應用一：從函式返回多筆資料</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f(){
+                                let a = 'AAA', b = 'BBB', c = 'CCC';
+                                return [a,b,c];
+                            }
+
+                            let [a,b,c] = f();
+
+                            document.write(a);
+                            document.write(b);
+                            document.write(c);
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>應用二：交換資料</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let a=111, b=222;
+
+                            [a,b] = [b,a]
+
+                            document.write(a);
+                            document.write(b);
+                        </textarea>
+                        <br>
+                        <output>
+                            222<br>
+                            111
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>模塊</h2>
+                <p>
+                    （草稿中）
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>API</h2>
+                <p>
+                    過去我們總是用 JavaScript 對 Array（有序數列）和 Object（鍵值對）內建的 object literal 機制（如 [] 和{}），來靈活地寫出讓 Java 程式設計羨慕不已的簡潔程式碼。<br>
+                    <br>
+                    現在 ECMAScript 6 內建了 Iterator 機制的 Set（不重複集合）和 Map（映射集合），進一步善用代入匿名函式為參數的特性，從資料結構的領域衝擊程式設計的世界。
+                </p>
+                <hr>
+                <section>
+                    <h3>Set</h3>
+                    <p>
+                        常用的操作方式如下：
+                    </p>
+                    <table>
+                        <tr><td>add(value)</td><td>加入資料</td></tr>
+                        <tr><td>clear()</td><td>清除所有資料</td></tr>
+                        <tr><td>delete(value)</td><td>刪除一筆資料</td></tr>
+                        <tr><td>forEach(callback)</td><td>隨資料的列舉過程執行程式功能</td></tr>
+                        <tr><td>has(value)</td><td>檢查是否有某筆資料</td></tr>
+                        <tr><td>values()</td><td>以 Iterator 傳回所有資料</td></tr>
+                    </table>
+                    <section>
+                        <h4>範例一：加入與取出資料</h4>
+                        <p>
+                            <textarea class='brush:es'>
+                                let set = new Set();
+
+                                set.add(2);
+                                set.add(0);
+                                set.add(1);
+                                set.add(2);
+                                set.add(1);
+                                set.add(2);
+                                set.add(2);
+                                set.add(1);
+
+                                for(let n of set.values()){
+                                    document.write(n);
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                201
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>範例二：列舉資料</h4>
+                        <p>
+                            <textarea class='brush:es;highlight:[5,6,7]'>
+                                let set = new Set();
+
+                                set.add(2).add(0).add(1).add(2).add(1).add(2).add(2).add(1);
+
+                                set.forEach(function(x){
+                                    document.write(x);
+                                });
+                            </textarea>
+                            <br>
+                            <output>
+                                201
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>範例三：陣列轉集合</h4>
+                        <p>
+                            <textarea class='brush:es;highlight:[2]'>
+                                let array = [2,0,1,2,1,2,2,1];
+                                let set = new Set(array);
+
+                                for(let n of set.values()){
+                                    document.write(n);
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                201
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>範例四：集合轉陣列</h4>
+                        <p>
+                            <textarea class='brush:es;highlight:[5]'>
+                                let set = new Set();
+
+                                set.add(2).add(0).add(1).add(2).add(1).add(2).add(2).add(1);
+
+                                let array = [...set];
+
+                                document.write(array[0]);
+                            </textarea>
+                            <br>
+                            <output>
+                                2
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>範例五：快速過濾重複資料並排序</h4>
+                        <p>
+                            <textarea class='brush:es'>
+                                document.write([...new Set(['h','e','l','l','o'])].sort() );
+                            </textarea>
+                            <br>
+                            <output>
+                                e,h,l,o<br>
+                            </output>
+                            <br>
+                            或：<br>
+                            <br>
+                            <textarea class='brush:es'>
+                                new Set(['h','e','l','l','o'].sort()).forEach((x)=>{
+                                    document.write(x);
+                                });
+                            </textarea>
+                            <br>
+                            <output>
+                                ehlo
+                            </output>
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>Map</h3>
+                    <p>
+                        Map 的操作方式如下：
+                    </p>
+                    <table>
+                        <tr><td>clear()</td><td>清除所有資料</td></tr>
+                        <tr><td>delete(key)</td><td>刪除一筆資料</td></tr>
+                        <tr><td>entries()</td><td>以 Iterator 傳回所有名稱與資料</td></tr>
+                        <tr><td>forEach(callback)</td><td>隨資料的列舉過程執行程式功能</td></tr>
+                        <tr><td>has(key)</td><td>檢查是否有某筆資料</td></tr>
+                        <tr><td>keys()</td><td>以 Iterator 傳回所有名稱</td></tr>
+                        <tr><td>set(key, value)</td><td>加入資料</td></tr>
+                        <tr><td>values()</td><td>以 Iterator 傳回所有資料</td></tr>
+                    </table>
+                    <p>
+                        範例：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            let map = new Map();
+
+                            map.set('name','Twideem Civs');
+                            map.set('email','twideem@outlook.com');
+                            map.set('id','twideem');
+                            map.set('password','***');
+
+                            for(let n of map.entries()){
+                                document.write(n);
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            name,Twideem Civs<br>
+                            email,twideem@outlook.com<br>
+                            id,twideem<br>
+                            password,***
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>這門程式的種類（Programming paradigm）</h2>
+                <p>
+                    ECMAScript 5 時代，大家鼓吹 prototype、object literal、first class function 的好處，使用 new 並摻雜物件導向觀念把程式寫得像 Java 的人，會被認為不懂 JavaScript，甚至被鄙視為不成熟的 JavaScript 程式設計師。<br>
+                    <br>
+                    但 JavaScript 做為 HTML 的腳本語言，哲學思想並不是成為一門函數式語言，也不是一門物件導向程式語言，而是每位程式設計師都能上手的語言<ins>[2]</ins>。<br>
+                    <br>
+                    於是我們看到，ECMAScript 6 讓 JavaScript 長得很像 Python，更適合函數式程式設計的同時，也長得更像 Java，能夠安全地使用 new 建立物件來操作。現在，每位程式設計師，都可以放手用自己喜歡的手法寫 JavaScript 程式，不需要再為自己的寫法感到羞恥。<br>
+                    <br>
+                    <samp>
+                        ．你可用 C 語言把功能設計成一套函式庫的手法，然後在 HTML 標籤的 onXXX 呼叫。<br>
+                        ．你可用 Python 快寫程式的手法，更盡興享受 JavaScript 匿名函數的方便。<br>
+                        ．你可用 Java 把程式規劃成不同類別的手法，重複使用原始碼。<br>
+                    </samp>
+                    <br>
+                    在 ECMAScript 6 的時代，new 不再邪惡，匿名更加恣意，這是多麼美好的雙贏結局！希望從此每個人都能快樂寫程式，彼此尊重慣用的程式設計手法。我們應該以 JavaScript 能讓 C、Java、Python 的人以自己手法寫程式為傲，而不是樂見將來只能用函數式設計來寫 JavaScript。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] Chrome 49 (2016-03-02)、Firefox 45 (2016-03-08)、Opera 36 (2016-03-14)、Edge 38 (2016-08-02)、Safari 10 (2016-09-20)。<br>
+                    [2] 早期精神是只會 HTML 所以不懂程式設計也能上手的語言。但 Brendan Eich 只用十天時間就做出 JavaScript，所以設計成可塑性高的程式語言，讓程式設計師能將 JavaScript 改造成自己慣用的語言。演變到後來，哲學思想變成每位程式設計師都能上手的語言。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,10 @@
+/*框線式表格*/
+table.grid{border-color:#666;border-style:solid;border-width:1px;margin:27px 0 27px 29px}
+table.grid th,table.grid td{border-color:#666;border-style:dotted;border-width:1px;font-size:9pt;padding:4px;width:80px}
+table.grid td:nth-child(1){color:#999}
+table.grid td:nth-child(2){color:#666}
+section section table.grid{margin-left:30px;width:569px}
+section section section table.grid{margin-left:45px;width:554px}
+section section section section table.grid{margin-left:58px;width:541px}
+/*排版用表格*/
+table.pane td{color:inherit;font-family:inherit;font-size:inherit;vertical-align:top;width:auto}

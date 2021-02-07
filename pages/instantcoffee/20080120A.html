@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>美化 jEdit 操作環境</h1>
+                <p>
+                    儘管 jEdit 的文字編輯能力非常強，但剛開始的外觀實在太醜了：<br>
+                    <br>
+                    <img src='../../figures/instantcoffee/20080120A_01.gif' alt='插圖'><br>
+                    <br>
+                    不過，只要經過細心打扮，還是可以變成這樣：<br>
+                    <br>
+                    <img src='../../figures/instantcoffee/20080120A_46.gif' alt='插圖'><br>
+                    <br>
+                    感覺清新脫俗許多。<br>
+                    <br>
+                    本單元將一步步改造 jEdit 外觀，讓 jEdit 成為又強又討喜的文字編輯器！
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>第一節：增益模組的管理設定</h2>
+                <p>要美化 jEdit 的操作環境，很多要靠下載由第三方所幫忙設計的增益模組 (Plug-in) 來完成，因此當你第一次使用 jEdit，建議首先第一件要做的事情是設定增益模組。</p>
+                <hr>
+                <section>
+                    <h3>步驟 1</h3>
+                    <p>
+                        在功能表選擇 Utilities → Global Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_05.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 2</h3>
+                    <p>
+                        在彈出的 Options 視窗中，於左邊樹狀列表點選 Plugin Manager，好讓右邊切換至可以設定增益模組的操作介面：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_06.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 3</h3>
+                    <p>
+                        接著請先確認 jEdit settings directory 是否圈選，這可以讓所有對於 jEdit 的設定通通存放在使用者資料夾裡面，而不是存放在 jEdit 應用程式所在的資料夾裡面。這樣的好處是以後下載更新版本時，可以繼續共用同一設定狀態，不用每次更新就得重新設定一次。包括你所下載的增益模組也一樣會存放在使用者資料夾。<ins>[1]</ins><br>
+                        <br>
+                        然後按下 Update mirror list 鈕，jEdit 會開始尋找全球網路可供下載增益模組的站點。<br>
+                        <br>
+                        最後挑一個離你國家最近的站點試試，我這裡選擇 Asia: JAIST (Ishikawa, Japan)。當你以後下載增益模組總是斷線或找不到檔案時，可以回到這個地方另外挑選一個站點再試試。
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_07.gif' alt='插圖'>
+                    </figure>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>第二節：使用頁籤式的分頁管理器 BufferTabs</h2>
+                <p>
+                    jEdit 預設的分頁管理器是用下拉式清單來設計，想切換不同樣文件時要點開清單才能挑選，並不是很方便。
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20080120A_47.gif' alt='插圖'>
+                </figure>
+                <p>
+                    分頁管理最好還是用頁籤的設計比較方便！看要切換哪個文件，把滑鼠移到該頁籤上面，然後按下去就 OK 了。底下將介紹如何取得並掛載頁籤模組。
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20080120A_48.gif' alt='插圖'>
+                </figure>
+                <hr>
+                <section>
+                    <h3>步驟 1</h3>
+                    <p>
+                        選擇功能表的 Utilities → Global Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_08.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 2</h3>
+                    <p>
+                        出現 Plugin Manager 視窗：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_09.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 3</h3>
+                    <p>
+                        點選 Install 分頁，畫面會切換到可供挑選數十種增益模組的清單：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_10.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 4</h3>
+                    <p>
+                        勾選 BufferTabs，然後按 Install 鈕：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_11.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 5</h3>
+                    <p>
+                        下載進度會同步顯示於進度視窗，請稍待：<br>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_12.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        下載完成後，按 Close 鈕離開：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_13.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 6</h3>
+                    <p>
+                        下載回來的增益模組要開啟才會顯示出來，不過在開啟 BufferTabs 之前，建議先關掉 jEdit 預設的分頁管理器 <ins>[2]</ins>。請選擇功能表的 Utilities → Global Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_05.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 7</h3>
+                    <p>
+                        在彈出的 Options 視窗中，點選左邊樹狀列表的 View，然後取消右邊 Show buffer switcher 的勾選：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_14.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        完成後按 OK 儲存設定並且離開。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 8</h3>
+                    <p>
+                        仔細看可以發現 jEdit 上方原來的下拉式清單消失了，這表示已成功關閉預設的分頁管理器：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_15.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 9</h3>
+                    <p>
+                        接著要開啟 BufferTabs 分頁管理器。請選擇功能表的 Plugins，再選擇 BufferTabs 來勾選它：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_16.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 10</h3>
+                    <p>
+                        頁籤式的分頁出現在畫面左上角，表示順利啟用 BufferTabs 增益模組：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_17.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        但是這種啟動 BufferTabs 的方法，每次重新開啟 jEdit 時都得再重複一次勾選的動作，所以不是很理想。因此請繼續以下的步驟。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 11</h3>
+                    <p>
+                        選擇功能表 Plugins → Plugin Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_18.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 12</h3>
+                    <p>
+                        在出現的 Options 視窗，勾選 Enable BufferTabs by default。這個選項會在每次重新進入 jEdit 時同步啟用 BufferTabs 頁籤：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_19.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        完成後按 OK 儲存設定並且離開。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>第三節：使用 Java Swing 視窗外觀</h2>
+                <p>jEdit 是使用 Java 寫出來的應用軟體，透過設定可以讓 jEdit 使用 Java 特有的視窗樣式，一舉提升 jEdit 的氣質。</p>
+                <hr>
+                <section>
+                    <h3>步驟 1</h3>
+                    <p>
+                        選擇功能表的 Utilities → Global Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_20.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 2</h3>
+                    <p>
+                        於左邊樹狀列表點選 Apperance，然後將 Swing look &amp; fell 設定為 Metal，接著勾選 Draw window borders using Swing look &amp; feel 與 Draw dialog box borders using Swing look &amp; feel 兩個選項：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_21.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        完成後按 OK 儲存設定並且離開。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 3</h3>
+                    <p>這項設定必須重新啟動 jEdit 才能載入效果，因此請關閉 jEdit 然後再執行一次。</p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 4</h3>
+                    <p>
+                        視窗外觀變得如下，感覺氣質許多：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_22.gif' alt='插圖'>
+                    </figure>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>第四節：下載更美觀一點的工具列圖示</h2>
+                <p>jEdit 預設的工具列圖示看起來有點死氣沉沉，所幸 jEdit 社群提供幾款工具列圖示，建議挑選幾個下載回來試試有沒有符合你胃口的款式。</p>
+                <hr>
+                <section>
+                    <h3>步驟 1</h3>
+                    <p>
+                        請至 jEdit 社群網站下載工具列圖示，網址是：<br>
+                        <br>
+                        <a href='http://community.jedit.org/?q=filestore/browse/23' target='_blank'>http://community.jedit.org/?q=filestore/browse/23</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 2</h3>
+                    <p>
+                        我這裡選擇 jEdit GTK Icons，下載的檔案如下：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_23.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        然後將下載回來的檔案存放到 Java Runtime Environment (JRE) 安裝路徑的 lib → ext 資料夾裡面。如果你不清楚 JRE 的安裝路徑，請參考類似如下的預設安裝路徑 C:\Program Files\Java\jre1.6.0_01\lib\ext 是否存在。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 3</h3>
+                    <p>
+                        重新啟動 jEdit 才能載入效果，請關閉 jEdit 然後再執行一次。<br>
+                        <br>
+                        選用 jEdit GTK Icons 的話，會連開頭畫面都翻新哦：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_24.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 4</h3>
+                    <p>
+                        進入 jEdit 後，可以看到工具列圖示比原來的有生氣多了：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_25.gif' alt='插圖'>
+                    </figure>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>第五節：開啟檔案瀏覽器</h2>
+                <p>
+                    jEdit 提供了幾個側邊欄位的工具可供使用，不過預設上都沒有開啟。其中一個叫做 File Browser 檔案瀏覽器，可以讓你直接在 jEdit 環境開啟資料夾裡面的文件來編輯，相當好用。<br>
+                    <br>
+                    底下為你介紹如何開啟側邊欄位工具 File Browser。
+                </p>
+                <hr>
+                <section>
+                    <h3>步驟 1</h3>
+                    <p>
+                        選擇功能表的 Utilities → Global Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_26.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 2</h3>
+                    <p>
+                        於左邊樹狀列表點選 Docking，然後找一下 File Bowser 這個欄位，將它的 Docking position 調整為 left：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_27.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        完成動作按 OK 儲存設定並離開。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 3</h3>
+                    <p>
+                        左邊出現側邊工具欄，裡面有 File Browser 可以使用：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_28.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 4</h3>
+                    <p>
+                        你可用點擊按鈕的方式展開列於側邊工具欄裡面的項目，底下是 File Browser 展開的模樣，可以讓你切換硬碟、選擇資料夾、開啟文件、以及更多控制功能輔助你開啟文件：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_29.gif' alt='插圖'>
+                    </figure>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>第六節：行數與尺規</h2>
+                <p>
+                    最後一個美化外觀的設定項目是行數與尺規。<br>
+                    <br>
+                    文字編輯器畢竟不像整合式開發軟體提供編譯與除錯的機能，因此使用 jEdit 撰寫程式在除錯時最常用到的線索就是行號。像底下就是編譯 Java 程式時發出的錯誤訊息，它通知我 JapanessBirthplace.java 原始碼文件的第 124 行出現 cannot find symbol 的錯誤：
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20080120A_49.gif' alt='插圖'>
+                </figure>
+                <p>
+                    這時只要回到 jEdit 找開啟的 JapanessBirthplace.java 文件，尋找第 124 行數檢查問題出在哪即可。<br>
+                    <br>
+                    某些編譯器甚至會提供某行數的第幾個字元出現問題的訊息，因此尺規也是建議掛載使用的。
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20080120A_50.gif' alt='插圖'>
+                    <figcaption>行數與尺規是文字編輯器除錯時最主要的工具。</figcaption>
+                </figure>
+                <hr>
+                <section>
+                    <h3>步驟 1</h3>
+                    <p>
+                        選擇功能表的 Utilities → Global Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_30.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 2</h3>
+                    <p>
+                        於左邊樹狀列表點選 Gutter，然後勾選 Line numbering：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_31.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        圖中以藍色另外標記的 3 號部份，是用來設定行數的字體與大小。我在 Windows XP 作業系統使用 jEdit 時偏好 Tahoma 字體，使用 12 大小和粗體樣式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 3</h3>
+                    <p>
+                        行數就這麼簡單顯示出來了：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_32.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 4</h3>
+                    <p>
+                        接著是尺規。必須下載第三方開發的增益模組，請選擇功能表的 Plugins → Plugin Manager：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_33.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 5</h3>
+                    <p>
+                        在出現的 Plugin Manager 視窗中切換到 Install 分頁，然後挑選 ColumnRuler 並安裝它：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_34.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        下載完畢後按 Close 鈕離開。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 6</h3>
+                    <p>
+                        選擇功能表的 Plugins，然後按 Column Ruler 即可勾選它：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_35.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 7</h3>
+                    <p>
+                        勾選了 Column Ruler 就能在 jEdit 上方部份看見尺規：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_36.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        但是這種啟動 Column Ruler 的方法，在每次重新開啟 jEdit 時，得還要重複一次勾選的動作，所以不是很理想。因此請繼續以下的步驟。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 8</h3>
+                    <p>
+                        選擇功能表 Plugins → Plugin Options：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_37.gif' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟 9</h3>
+                    <p>
+                        在出現的 Options 視窗，於左邊的樹狀清單展開 Column Ruler 選擇底下的 Ruler，然後勾選 Active by default：
+                    </p>
+                    <figure>
+                        <img src='../../figures/instantcoffee/20080120A_38.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                        完成後按 OK 儲存設定並且離開，以後每次執行 jEdit 會自動掛載 Column Ruler。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 圈選 jEdit settings directory 後，jEdit 會在使用者資料夾裡面建立名為 .jedit 的資料夾，用來存放所有設定資料與下載的增益模組。若你打算在其它電腦使用 jEdit ，可以把 .jedit 資料夾複製起來帶過去，就能套用一樣的設定。<br>
+                    [2] 主要理由是太醜，次要理由是功能上性質重複。所以如果你覺得下拉式與頁籤式兩種分頁管理都留著更好用也可以不關掉，如此請跳到步驟 9 來閱讀。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

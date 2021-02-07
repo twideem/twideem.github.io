@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>讓 Windows 7 開機時自動連線 ADSL</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>請先嘗試這些方便有效的做法</h2>
+                <p>
+                    最好的做法，是參考微軟網站的《如何在 Windows 7 中設定開機後 ADSL 寬頻自動連線？》，將設定好的網路連線，建立一個「捷徑」，然後放到「開始 → 啟動」裡面：<br>
+                    <br>
+                    <a href='http://support.microsoft.com/kb/977868/zh-tw/' target='_blank'>http://support.microsoft.com/kb/977868/zh-tw/</a><br>
+                    <br>
+                    或者下載「電癮院」設計的「自動撥號連線程式」：<br>
+                    <br>
+                    <a href='http://changyang319.pixnet.net/blog/post/26752488' target='_blank'>http://changyang319.pixnet.net/blog/post/26752488</a>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>已過時做法</h2>
+                <hr>
+                <section>
+                    <h3>步驟一</h3>
+                    <p>
+                    依序操作「開始 → 控制台 → 系統及安全性 → 排程工作」，這時會出現「工作排程器」視窗。
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20091115A_01.png' alt='插圖'>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟二</h3>
+                    <p>
+                        點擊「建立基本工作」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟三</h3>
+                    <p>
+                        「名稱」隨便取，例如我取「自動連線到 ADSL」。<br>
+                        <br>
+                        完成後按「下一步」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟四</h3>
+                    <p>
+                        <br>
+                        接著圈選「在您登入時執行」或「在電腦啟動時執行」，兩者皆可。<br>
+                        <br>
+                        完成後按「下一步」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟五</h3>
+                    <p>
+                        圈選「啟動程式」。<br>
+                        <br>
+                        完成後按「下一步」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟六</h3>
+                    <p>
+                        在「程式或指令碼」輸入「C:\Windows\System32\RasPhone.exe」。<br>
+                        <br>
+                        在「新增引數」輸入「-d '你的 ADSL 撥號連線名稱'」。<br>
+                        <br>
+                        完成後按「下一步」。<br>
+                        <br>
+                        A. 注意「新增引數」的寫法是「負號 + d + 空白 + 雙引號 + 你的 ADSL 連線名稱 + 雙引號」！正常來講，在 Windows 7 建立網路連線時，如果只顧按下一步的話，這個名稱預設為「寬頻連線」；這時輸入的引數就是「-d '寬頻連線'」。<br>
+                        <br>
+                        B. 如果你不知道自己的連線名稱是什麼，請先確認你已經連線 ADSL，然後點選「開始 → 控制台 → 網路和網際網路 → 檢視網路狀態及工作」，就可以在「檢視作用中的網路」裡面看到你的連線名稱。假如你發現你取的連線名稱是「趴趴熊的ADSL」，那麼輸入的引數寫法就是「-d '趴趴熊的ADSL'」。
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20091115A_02.png' alt='插圖'>
+                        <figcaption>如圖所標示的位置即為連線名稱</figcaption>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>步驟七</h3>
+                    <p>
+                        重新開機，設定無誤的話，一開機就會自動連線 ADSL。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>補充</h3>
+                    <p>
+                        如果你開機時發現，雖然會自動連線 ADSL，卻看得到連線的進度視窗、甚至跳出視窗會要你輸入連線密碼，這時可將你的「ADSL 連線」設定為把「連線時顯示進度」和「提示名稱、密碼、憑證等」兩個項目取消，如圖：
+                    </p>
+                    <figure>
+                        <img src='../../figures/bluesky/20091115A_03.png' alt='插圖'>
+                    </figure>
+                    <p>
+                        這樣就可以無聲無息地在開機時自動連線。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 我從 Windows XP 開始，放捷徑到啟動都無效，所以才用複雜的做法連線。看了微軟網站的文章，我想問題可能出在要以「開啟所有使用者」打開「啟動」資料夾再放捷徑進去。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

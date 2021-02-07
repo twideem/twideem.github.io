@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Indexed Database API</h1>
+                <p>
+                    基本上不是人在用的 API，因為非常低階，完全就是站在機器設備的立場所制定。例如並沒有資料庫與資料表的概念，而是系統設備與結構規格的描述。<br>
+                    <br>
+                    因為低階，所以可以製做為其它高階 API 來用，例如：<a href='http://nparashuram.com/jquery-indexeddb/' target='_blank'>JQuery IndexedDB Plugin</a> 或 <a href='http://dexie.org' target='_blank'>Dexie.js</a>，建議下載來用，因為直接透過 Indexed Database API 操作資料庫很折騰人～
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>基本範例</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        //建立或開啟名為 mydatabase 的資料庫。
+                        var database = indexedDB.open('mydatabase');
+
+                        //初始化資料表
+                        database.onupgradeneeded = function(){
+                            //建立名為 mytable 的資料表，並含有一個 id 鍵值。
+                            var table = database.result.createObjectStore('mytable', {keyPath:'id',autoIncrement:true});
+                            //新增 user 與 email 兩個欄位。
+                            table.createIndex('user', 'user');
+                            table.createIndex('email', 'email');
+                        };
+
+                        //讀寫資料
+                        database.onsuccess = function(){
+                            //開啟資料表。
+                            var table = database.result.transaction('mytable', 'readwrite').objectStore('mytable');
+                            //加入一筆資料。
+                            table.add({user:'Twideem Civs', email:'twideem@gmail.com'});
+                            //修改第一筆資料。
+                            table.put({id:1, user:'Twideem Civs', email:'twideem@outlook.com'});
+                            //取得第一筆資料。
+                            var record = table.get(1);
+                            record.onsuccess = function(){
+                                document.write(record.result.user);
+                                document.write(record.result.email);
+                            };
+                        };
+                    </textarea>
+                    <br>
+                    <output>
+                        Twideem Civs<br>
+                        twideem@outlook.com<br>
+                    </output>
+                    <br>
+                    使用 add() 加入資料時，會自動加入 id 鍵值。由於是第一次執行這個範例，所以 id 為 1。如果還有第二次、第三次執行，則會有 id 為 2 和 3 的資料被寫入資料庫。<br>
+                    <br>
+                    修改第一筆資料的方式，便是藉由 id 鍵值為 1 來 put()。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其它</h2>
+                <p>
+                    更多像是 delete() 刪除資料、index() 搜尋欄位、xxxCursor() 循訪集合…等功能，可瀏覽 MDN 的《<a href='http://developer.mozilla.org/zh-TW/docs/IndexedDB/Using_IndexedDB' target='_blank'>使用 IndexedDB </a>》文章。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 坦白說我非常不滿拋棄 Web SQL Database 改用 Indexed Database 的決定！對網頁程式設計師來說，能有個標準直接下 SQL 指令來處理資料，對開發時程有很大的效率幫助；幾乎沒有網頁程式設計師不熟 SQL 的。結果搞這什麼 Indexed DB 從資料系統到資料結構都要重新學習才有辦法使用的鬼玩意，根本是在浪費設計師的心力！學的時候不停摸索、用的時候不斷除錯，能想出這種東西來整人，真他Ｘ的天才～
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

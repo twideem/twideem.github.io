@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Drag and Drop</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>在兩個 DIV 元素之間拖曳 P 元素</h2>
+                <p>
+                    <textarea class='brush:html'>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html lang='zh-TW'&gt;
+                            &lt;head&gt;
+                                &lt;meta charset='utf-8'/&gt;
+                                &lt;script&gt;
+                                    function dragstart(event) {
+                                        event.dataTransfer.setData('id', event.target.id);
+                                    }
+                                    function dragover(event) {
+                                        event.preventDefault();
+                                    }
+                                    function drop(event) {
+                                        event.preventDefault();
+                                        event.target.appendChild(document.getElementById(event.dataTransfer.getData('id')));
+                                    }
+                                &lt;/script&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                                &lt;div id='division1' ondrop='drop(event)' ondragover='dragover(event)' style='width:150px;height:150px;border:1px solid black'&gt;
+                                    &lt;p id='paragraph' draggable='true' ondragstart='dragstart(event)'&gt;
+                                        朝辭白帝彩雲間&lt;br/&gt;
+                                        千里江陵一日還&lt;br/&gt;
+                                        兩岸猿聲啼不住&lt;br/&gt;
+                                        輕舟已過萬重山&lt;br/&gt;
+                                    &lt;/p&gt;
+                                &lt;/div&gt;
+                                &lt;div id='division2' ondrop='drop(event)' ondragover='dragover(event)' style='width:150px;height:150px;border:1px solid black'&gt;&lt;/div&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </textarea>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

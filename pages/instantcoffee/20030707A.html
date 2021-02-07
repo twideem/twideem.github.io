@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>以二進制格式讀寫資料</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>DataInputStream、DataOutputStream</h2>
+                <p>
+                    與「純文字文件」不同的是，「二進制檔案」無法用「記事本」或「文書軟體」開啟來閱讀，會看到一堆亂碼。有些人不希望保存資料的檔案能夠直接被閱讀與修改，或者希望提高檔案的資料處理效率而使用它，屬於進階應用的檔案保存手法。
+                </p>
+                <hr>
+                <section>
+                    <h3>寫入</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.DataOutputStream;
+                            import java.io.FileInputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        DataOutputStream data_output_stream = new DataOutputStream(new FileOutputStream("data.dat"));
+                                        data_output_stream.writeUTF("AAA");
+                                        data_output_stream.writeUTF("BBB");
+                                        data_output_stream.writeUTF("CCC");
+                                        data_output_stream.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        將產生名為 data.dat、內容為二進制格式的檔案。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>讀取</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.DataInputStream;
+                            import java.io.FileInputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        DataInputStream data_input_stream = new DataInputStream(new FileInputStream("data.dat"));
+                                        System.out.println(data_input_stream.readUTF());
+                                        System.out.println(data_input_stream.readUTF());
+                                        System.out.println(data_input_stream.readUTF());
+                                        data_input_stream.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        輸出結果：<br>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>補充</h3>
+                    <p>
+                        除了 writeUTF() 和 readUTF()，還有更多像是 writeInt() 和 readInt() 之類的功能可操作。<br>
+                        <br>
+                        FileInputStream 和 FileOutputStream 通常會用 java.io.BufferedInputStream() 和 java.io.BufferedOutputStream() 包起來，以提昇執行效率。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>RandomAccessFile</h2>
+                <p>
+                    RandomAccessFile 能進行 DataInputStream 與 DataOutputStream 一樣的工作效果，但只需要建立一個物件～
+                </p>
+                <hr>
+                <section>
+                    <h3>Example 1</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.RandomAccessFile;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立隨機存取檔案
+                                        RandomAccessFile random_access_file = new RandomAccessFile("data.dat", "rw");
+                                        //按順序寫入各種型態的資料
+                                        random_access_file.seek(0);
+                                        random_access_file.writeInt(123);
+                                        random_access_file.writeUTF("ABC");
+                                        random_access_file.writeBoolean(true);
+                                        //按順序讀取資料
+                                        random_access_file.seek(0);
+                                        System.out.println(random_access_file.readInt());
+                                        System.out.println(random_access_file.readUTF());
+                                        System.out.println(random_access_file.readBoolean());
+                                        //關閉檔案。
+                                        random_access_file.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        將產生名為 data.dat、內容為二進制格式的檔案，並輸出如下結果：<br>
+                        <br>
+                        <output>
+                            123<br>
+                            ABC<br>
+                            true
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 2</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.RandomAccessFile;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //建立隨機存取檔案
+                                        RandomAccessFile random_access_file = new RandomAccessFile("data.dat", "rw");
+                                        //跳著寫入資料
+                                        random_access_file.seek(0);
+                                        random_access_file.writeInt(123);
+                                        random_access_file.seek(4);
+                                        random_access_file.writeUTF("ABC");
+                                        random_access_file.seek(9);
+                                        random_access_file.writeBoolean(true);
+                                        //跳著讀取資料
+                                        random_access_file.seek(9);
+                                        System.out.println(random_access_file.readBoolean());
+                                        random_access_file.seek(0);
+                                        System.out.println(random_access_file.readInt());
+                                        random_access_file.seek(4);
+                                        System.out.println(random_access_file.readUTF());
+                                        //關閉檔案。
+                                        random_access_file.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        將產生名為 data.dat、內容為二進制格式的檔案，並輸出如下結果：<br>
+                        <br>
+                        <output>
+                            true<br>
+                            123<br>
+                            ABC<br>
+                        </output>
+                        <br>
+                        使用 seek() 必須注意資料長度的問題，例如在 seek(0) 使用了 writeInt() 的話，因為整數是 byte[4] 長度，所以必須至少從 seek(4) 開始才行，否則等於從原先資料的中間插入新資料，把原先資料給破壞掉。<br>
+                        <br>
+                        特別是 writeUTF()，長度不固定，文字越多就越長，這時 seek() 要保持足夠間距來應付才行！至於長度的計算，公式是「目前 seek() + 字數 + 2」，所以要取得本範例的 boolean 資料時 seek 為 4+3+2。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>FileInputStream、FileOutputStream</h2>
+                <p>
+                    前面範例是透過 Java 將資料以二進制格式寫入資料，往後再用 Java 讀出來用。但如果要讀取的，是像可執行檔、圖片、音樂、或其它程式產生的二進制檔案內容，那使用 FileInputStream 和 FileOutputStream 比較適合。
+                </p>
+                <hr>
+                <section>
+                    <h3>讀取</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.File;
+                            import java.io.FileInputStream;
+                            import java.io.InputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        File file = new File("in.jpg");
+                                        byte[] bytes = new byte[(int)file.length()];
+                                        InputStream input_stream = new FileInputStream(file);
+                                        input_stream.read(bytes);
+                                        input_stream.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        如此 bytes 即為讀取到的二進制資料。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>寫入</h3>
+                    <p>
+                        以二進制格式讀取檔案內容，再轉存為另一個檔案，這招等於複製檔案！<br>
+                        <br>
+                        <textarea class='brush:java'>
+                            import java.io.File;
+                            import java.io.FileInputStream;
+                            import java.io.FileOutputStream;
+                            import java.io.InputStream;
+                            import java.io.OutputStream;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        //讀取檔案
+                                        byte[] bytes = new byte[(int)new File("in.jpg").length()];
+                                        InputStream input_stream = new FileInputStream("in.jpg");
+                                        int length = input_stream.read(bytes);
+                                        //儲存檔案
+                                        OutputStream output_stream = new FileOutputStream("out.jpg");
+                                        output_stream.write(bytes, 0, length);
+                                        //關閉檔案
+                                        input_stream.close();
+                                        output_stream.close();
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

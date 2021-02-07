@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>java.util.Formatter</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                <textarea class='brush:java'>
+                    import java.util.Formatter;
+
+                    public class Main{
+
+                        public static void main(String[] args){
+
+                            StringBuilder string_builder = new StringBuilder();
+
+                            Formatter formatter = new Formatter(string_builder);
+                            formatter.format("Hello, %s!", "Twideem Civs");
+
+                            System.out.print(string_builder);
+
+                        }
+
+                    }
+                    </textarea>
+                <br>
+                <output>
+                    Hello, Twideem Civs!<br>
+                </output>
+                <br>
+                System.out.format() 或 System.out.printf() 跑的其實就是 java.util.Formatter，所以對 printf() 是如何運作感興趣的人，會想了解 Formatter 的用法～
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

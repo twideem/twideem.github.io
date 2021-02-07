@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>o-_-)=O)&gt;O&lt;)</h1>
+                <p>
+                    一些不合時宜，應該丟入垃圾桶的資料，或者尚未完稿，不具實用性、淪為個人主觀想法的內容，集中存放在這裡面。<br>
+                    <br>
+                    整頁太長很難檢索？當然！放在這裡的內容「僅供參考」，不適合公開，所以不方便你閱讀、漏看多少算多少，我覺得算好事一樁 XDDD
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>格式化數字</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.text.DecimalFormat;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                DecimalFormat decimal_format = new DecimalFormat("#,###.00");
+                                System.out.print(decimal_format.format(12345.6789));
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        1,234.56
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>抽籤</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.util.Arrays;
+                        import java.util.LinkedList;
+                        import java.util.Random;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                String[] teams = {"兄弟象","味全龍","統一獅","三商虎","時報鷹","俊國熊"};
+
+                                LinkedList&lt;String&gt; linked_list = new LinkedList&lt;String&gt;(Arrays.asList(teams));
+
+                                Random random = new Random();
+
+                                while(!linked_list.isEmpty()){
+                                    System.out.println(linked_list.remove(random.nextInt(linked_list.size())));
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        三商虎<br>
+                        味全龍<br>
+                        俊國熊<br>
+                        兄弟象<br>
+                        時報鷹<br>
+                        統一獅
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>簡易 NIO 寫入資料</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.io.RandomAccessFile;
+                        import java.nio.ByteBuffer;
+                        import java.nio.channels.FileChannel;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                try{
+                                    FileChannel file_channel = new RandomAccessFile("text.txt", "rw").getChannel();
+                                    file_channel.write(ByteBuffer.wrap("猜猜我是誰".getBytes()));
+                                    file_channel.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+
+                            }
+
+                        }
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>換算 Comparable.compareTo()</h2>
+                <p>
+                    <code>d.compareTo(a[e-b])&lt;0</code><br>
+                    <br>
+                    相當於…<br>
+                    <br>
+                    <code>d&lt;a[e-b]</code><br>
+                    <br>
+                    也因此，<br>
+                    <br>
+                    <code>c.compareTo(a[d-1])&lt;0</code><br>
+                    <br>
+                    相當於…<br>
+                    <br>
+                    <code>c&lt;a[d-1]</code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Aggregation (聚合)</h2>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class A{
+
+                                private String g;
+
+                                public A(){
+                                    System.out.println("建立了 A 的物件！");
+                                }
+
+                                public void setG(String x){
+                                    this.g = x;
+                                }
+
+                                public void getG(){
+                                    System.out.println("輸出 A 的資料為：" + this.g);
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class B{
+
+                                private A a;
+
+                                public B(A a){
+                                    this.setA(a);
+                                }
+
+                                public void setA(A a){
+                                    this.a = a;
+                                }
+
+                                public A getA(){
+                                    return this.a;
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    A a = new A();
+                                    a.setG("HELLO");
+                                    B b = new B(a);
+                                    b.getA().getG();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>輸出結果</h3>
+                    <p>
+                        <output>
+                            建立了 A 的物件！<br>
+                            輸出 A 的資料為：HELLO
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Composition (合成)</h2>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class A{
+
+                                private String g;
+
+                                public A(){
+                                    System.out.println("建立了 A 的物件！");
+                                }
+
+                                public void setG(String x){
+                                    this.g = x;
+                                }
+
+                                public void getG(){
+                                    System.out.println("輸出 A 的資料為：" + this.g);
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class B{
+
+                                private A a;
+
+                                public B(){
+                                    this.setA();
+                                }
+
+                                private void setA(){
+                                    this.a = new A();
+                                }
+
+                                public A getA(){
+                                    return this.a;
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    B b = new B();
+                                    b.getA().setG("HELLO");
+                                    b.getA().getG();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>輸出結果</h3>
+                    <p>
+                        <output>
+                            建立了 A 的物件！<br>
+                            輸出 A 的資料為：HELLO
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>激進版 State 設計模式</h2>
+                <hr>
+                <section>
+                    <h3>State.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            interface State{
+                                State operate();
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>A.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class A implements State{
+
+                                public State operate(){
+                                    System.out.println("AAA");
+                                    return new B();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>B.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class B implements State{
+
+                                public State operate(){
+                                    System.out.println("BBB");
+                                    return new C();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>C.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class C implements State{
+
+                                public State operate(){
+                                    System.out.println("BBB");
+                                    return null;
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Context.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Context{
+
+                                private State state = new A();
+
+                                public void request(){
+                                    this.state = this.state.operate();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    Context context = new Context();
+                                    context.request();
+                                    context.request();
+                                    context.request();
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>輸出結果</h3>
+                    <p>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>程序導向思維與物件導向思維</h2>
+                <p>
+                    下面程式會輸出 1 和 0：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public void f(int x){
+                                x += 1;
+                                System.out.println(x);
+                            }
+
+                            public static void main(String[] args){
+                                int a = 0;
+                                new Main().f(a);
+                                System.out.println(a);
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    然後有人想說如何取得 a 的 reference 傳入 f()，好輸出 1 和 1。<br>
+                    <br>
+                    答案是不行，Java 沒辦法這樣做。但問題不是出在 Java 不能這麼做，而是這根本不符合物件導向的設計精神，所以不希望你這麼做。<br>
+                    <br>
+                    物件導向至少應該這麼寫：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            private static int a = 0;
+
+                            public void f(int x){
+                                Main.a = x + 1;
+                                System.out.println(Main.a);
+                            }
+
+                            public static void main(String[] args){
+                                new Main().f(Main.a);
+                                System.out.println(Main.a);
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>變數名稱的重要性</h2>
+                <p>
+                    藉由變數名稱，來說明之所以使用物件的意圖：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        Set&lt;String&gt; 濾除重複資料並自動排序 = new TreeSet&lt;String&gt;();
+                    </textarea>
+                    <br>
+                    雖然 Set 本身就是「濾除重複資料」的資料集合介面，TreeSet 本身就是「自動排序」的資料集合實作，但藉由把變數名稱取為「濾除重複資料並自動排序」，來說明使用 Set 與 TreeSet 的目的正是如此沒錯，可以加強程式碼的傳達力，讓閱讀者更直接了解你的想法。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>row 與 column</h2>
+                <p>
+                    如果以方位來講，row 是「橫」，column 是「直」，這部分中英文是一致的。<br>
+                    <br>
+                    如果以文章來講，row 是「行」，column 是「列」，但中文書寫習慣是直的為一行，英文是橫的為一行，所以這部分中英文並不一致，我們常常搞不懂 row 應該稱行才好？還是列？<br>
+                    <br>
+                    要命的是，在定義數學術語時，台灣稱 row 為「列」，column 為「行」，因為「直行、橫列」，中國相反，稱 row 為「行」，column 為「列」，因為拿隊伍來講「橫排成一行、縱排是一列」，這讓中文該稱 row 是行還是列更混亂了～<br>
+                    <br>
+                    在程式設計的場合，因為讀取純文字檔案裡一行資料時是橫的，而針對這筆資料剖析出好幾個欄位時，這些欄位是以直的來看，所以我習慣用中國的稱呼，row 為「行」，column 為「列」。在數學的場合，台灣人的我，就自動轉過來，稱 row 為「列」，column 為「列」。<br>
+                    <br>
+                    這問題無解，寫程式要連接資料庫時 row 是行，但使用試算表時正體中文版說 row 是列～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>nil、null、undefined</h2>
+                <p>
+                    nil，nothing，沒有東西。<br>
+                    <br>
+                    null，having a value of zero，有值，但等於零，是空的。<br>
+                    <br>
+                    undefined，not having been given a definition，沒有賦值。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>類別基本功</h2>
+                <p>
+                    在進行傳統結構化程式設計時，主要手法是利用函式建立程式庫，然後在開發專案中套用。<br>
+                    <br>
+                    如果開發的只是一些指令工具，這手法便已足夠。但隨著作業系統從命令列模式走向圖型介面，開發的是視窗應用程式時，我們要做的事變成將不同子系統整合在操作介面裡，就開始發現程式庫出現用法不一致的問題：這個子系統的函式用起來是這樣這樣、那個子系統用到的函式要那樣那樣，明明是同一個程式庫裡的函式，卻有不同的套用模式。甚至互相擾亂起來，例如在閱讀程式碼時，看到呼叫了 open_audio_file() 函式，往後又看到 play_mp3() 函式時，自然以為有關聯，但在傳統結構化程式設計，發現兩者扯不上關係時，你不用覺得驚訝。<br>
+                    <br>
+                    當程式庫需要規範不同的套用模式時，你就不能再用傳統結構化程式語言，必須用物件導向程式語言。因為類別可以做為一個子系統，規範底下函式的套用模式。或者說，你可將一個類別當作一個子系統的程式庫來設計！<br>
+                    <br>
+                    雖然，我們主張一個類別是一個獨立的邏輯結構，一個系統是靠傳遞不同物件的方式來進行，而不是靠操作一個物件來實現。但當你對物件導向程式設計感到迷惘時，還是值得這麼做，因為你並不是在設計一個神類別，而是在設計一個子系統功能來用。設計出好幾個子系統功能，然後整合到圖型化界面，便完成一個視窗應用程式。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>類別化函式群</h2>
+                <p>
+                    初學物件導向程式設計的人，尤其已經有程式設計經驗的人，總會站在程序導向的思維，來使用物件導向的機制。結果不僅沒能建立起物件導向的開發手法，甚至自己原先的開發手法都因此迷失，開始懷疑自己的「手藝」。<br>
+                    <br>
+                    「類別化函式群」就是針對站在程序導向思維的人，幫助建立起物件導向開發手法的方法。<br>
+                    <br>
+                    其實原則很簡單，把「函式」全部改用「類別」來撰寫，你就能體驗到「應用軟體」經由「組裝」方式來完成的那種奇妙觸感。<br>
+                    <br>
+                    但這種程式設計手法也顯得很瑣碎，你要準備好幾個類別或者說是物件，然後在程式單獨使用它，結果常常發現即使很簡單的軟體也會封裝出數十個甚至近百個類別。恭喜你，當你開始想法子去管理好這群數不清的類別時，你不自覺地已經掌握物件導向的開發手法了！<br>
+                    <br>
+                    在《是抽象還是想像？》談到「能夠結合成抽象的具體事物是相對性的」，亦即你在進行抽象的思維時，抽象化的目標是可以往下發展的。<br>
+                    <br>
+                    雖然這樣的特性搭配 Java 的 interface 語法，能夠進一步實現「抽象」的「細節」，但就「類別化函式群」這種程序導向的開發手法來講，抽象化的目標往下擴展會讓你的程式設計變得複雜，事實上我們可以、也應該跳開這樣的設計，但如果你真的非得這麼做，只好採用可以階層化的方式來抽象：套件（package）。<br>
+                    <br>
+                    例如 car 這本身不具體存在的概念性稱呼，拿來取為套件名稱，所有函式都以類別來設計，並且放置在 car 套件裡面，這可以見識到「類別化函式群」暴力硬幹的美學。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>多用合成、少用繼承的時機</h2>
+                <p>
+                    如果只想用某物件的幾個功能，就用合成，以免繼承了其它用不到的功能。這些用不到的功能，會成為日後搞壞設計的潛在因素，這就是繼承惡名昭彰的地方。<br>
+                    <br>
+                    如果你想用某個類別，但是它缺少某些功能，就用繼承的方式追加上去，然後用新的類別取代舊的類別。這種用法是安全的，濫用繼承雖然有缺點，但有它妙用的地方。<br>
+                    <br>
+                    不經思考、凡事都用繼承的話，之後經常要另外寫程式防堵用不到的功能。例如你想藉由 ArrayList 的 add() 做為增加資料的功能，用繼承的話，日後很可能要防堵有人用 remove() 和 clear() 刪除資料。所以「多用合成、少用繼承」是物件導向程式設計的共同經驗法則。<br>
+                    <br>
+                    最後補充一下，當你要防堵繼承而來的功能時，請馬上改用合成，而不是去防堵。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>程式設計最大難處</h2>
+                <p>
+                    程式設計最大難處，就是程式運作出來不是預期所想結果，得從先前設計好的程式追查問題出在哪個環節，這時發現有太多環節彼此糾纏在一起，導致我們無法研判某個環節是否正常。<br>
+                    <br>
+                    這是因為所要研判的環節受到其它環節影響，而這個其它環節又受到不明環節的影響，最後這個不明環節竟然受所要研判環節的影響。環環相扣，牽一髮即動全身，造成我們在觀察特定環節的運作情況時，依然無法斷定問題就是出在這個環節，而繼續抽絲剝繭追查下去，最後又繞回來搞得自己一頭霧水。<br>
+                    <br>
+                    物件導向程式設計主要目的就是透過更進一步的模組化來解決這樣的問題！將已經成功的案例封裝起來，然後在程式裡視為另一個「個體」來使用它，使用的過程保持「我們倆是不同個體」的距離，忌諱糾纏不清。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>進而軟體開發，退而程式設計，享受樂趣～</h2>
+                <p>
+                    程式設計並非只是用來開發軟體；進而軟體工程，退而程式工藝。<br>
+                    <br>
+                    開放原始碼貢獻者，設計的往往都是程式功能，而且很享受這樣程式設計最初衷的樂趣。所以不見得要完整地開發一套軟體，才叫程式設計。發現自己設計不出完整的應用軟體時，不要對程式設計心灰意冷或打退堂鼓，試著寫一些工具指令，簡單跑跑程式，會發現寫程式真的很快樂。<br>
+                    <br>
+                    甚至，說不定在搭配使用自己所寫過的這些工具指令時，發現如果整合起來的話，可以做為一套應用軟體，你靈感就來了。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>GNU GPL 與 BSD license</h2>
+                <p>
+                    原本「電腦」的販售模式是在「硬體」這部分，東西買來，由使用者自行寫程式來操作電腦。自從「軟體」開始成為一種商品，且通過「著作權（Copyright）」的保護範疇，而廠商只提供可執行檔，將原始碼視為商業機密封閉起來，剝奪傳統電腦使用者互相分享程式碼的權益，便開始有人想捍衛原本既有的權益。<br>
+                    <!--
+                    <br>
+                    麻省理工學院聘用的電腦技術人員 Richard Stallman 為對抗 Symbolic 公司以版權保護來封閉程式碼的行為，提出 Copyleft 反版權觀念的 GNU 宣言。<br>
+                    <br>
+                    柏克萊大學為了避開 AT&amp;T 公司免費授權給學術機構做研究之用的 UNIX 原始碼所增進的程式版權後，開始組織人力避開版權重寫。<br>
+                    <br>
+                    到此為止，所有的BSD版本混合了專屬的AT&T UNIX代碼，這樣繼續使用就需要從AT&T獲得許可證。源碼許可證當時非常地昂貴，幾個其他組織對單獨的網路代碼版感興趣，完全獨立於AT&T，這樣就可不受許可證的支配。1989年6月，Networking Release 1（Net/1）誕生了，沒有AT&T授權也能使用，可遵照BSD許可證進行自由再發布。<br>
+                    -->
+                </p>
+                <hr>
+                <section>
+                    <h3>GNU GPL</h3>
+                    <p>
+                        GNU: GNU's Not Unix.（革奴計劃）<br>
+                        GPL: General Public License.（通用公共授權條款）<br>
+                        <br>
+                        必須免費提供修正過的原始碼，且不得更換授權條款。<br>
+                        <br>
+                        優點：強制分享經過改進的程式。<br>
+                        缺點：無法藉由軟體本身來營利。（通常都賺周邊商品或技術服務）<br>
+                        特點：Copyleft
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>BSD license</h3>
+                    <p>
+                        BSD: Berkeley Software Distribution.（柏克萊軟體套件）<br>
+                        <br>
+                        允許封閉修改過的原始碼，並從事商業行為，改變授權條款，條件是聲明貢獻者。<br>
+                        <br>
+                        優點：可以藉由軟體本身來營利。<br>
+                        缺點：可能分享不到別人改進的程式。<br>
+                        特點：Copycenter
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>趣談 open 與 free</h2>
+                <p>
+                    Richard Stallman 不喜歡人家稱 GNU 屬於 open 精神，他認為這是 free。<br>
+                    <br>
+                    這很好理解，因為毫無保留的 Richard Stallman 本來就沒有東西需要 open 出去，他成立基金會的目的，是要廠商把東西 free 出來。<br>
+                    <br>
+                    但不管怎麼看，使用 GPL 一點也不自由，使用 BSD license 才是自由。<br>
+                    <br>
+                    我想這是立場的問題，可能 Richard Stallman 認為程式軟體的權益遭到迫害，所以要獲得 free（釋放），怎麼會是 open（開放你來迫害我）？<br>
+                    <br>
+                    用的人相反，你禁止我將修改自 GNU 軟體的原始碼以商業手法私自營用，但 BSD 可以，怎麼會是 free？明明就是 open～<br>
+                    <br>
+                    我就是屬於後者「用 GNU 的人」，所以我認為 GNU 是 open，BSD 才是 free。<br>
+                    <br>
+                    但我認為 open 才是真正能保障 Richard Stallman 理念的精神，坦白說我覺得 BSD 的 free 特性，其實會侵蝕 Richard Stallman 所構築的版圖，它等於吳三桂開山海關引商家入開放原始碼，讓商家在收割開放原始碼社群貢獻的結果並加以改進後，改以自己的授權條例保護起來，卻又寡不恬恥地高舉開放原始碼的大旗推廣自己的「商品」。<br>
+                    <br>
+                    只有被迫 open 沒得選擇，要嘛各家廠商繼續暗自搞專利，要嘛加入開放原始碼社群貢獻，讓兩造陣營各自集中火力發展，我認為會讓開始原始碼的更健全；free 等於給了廠商「掛羊頭賣狗肉」抵銷開放原始碼訴求的可能性～
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [*] BSD 的想法則是：「為何要貢獻才能使用？」不貢獻只是對既有原始碼沒有加分的效益而已，但也不扣分：「他用了並不會貢獻原始碼、不用也不會貢獻原始碼，那用不用對開放原始碼有影響嗎？」對 BSD 來說，開放原始碼仰賴志願的力量，而不是強迫的力量：「強迫只是讓不願意開放自己原始碼的人，不使用別人開放的原始碼而已。還不如開放給他用，反而有宣傳與推廣該原始碼的加分效果。」所以在這部分我觀點其實是錯的…但立場是對的，因為我是 GNU 陣營的人 XDDD
+                    </p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>趣談開放原始碼的未來</h2>
+                <p>
+                    過去個人電腦當道的時代，「應用程式」絕對是以「原始碼」設計出來的！大型成套的應用程式，則叫做「應用軟體」，雖然可能會用自己某套函式庫來設計，切割原始碼，但還是離不開使用程式語言來編譯的範疇。<br>
+                    <br>
+                    但正準備進入網路平台的時代，我們發現 App 越來越像一種「客製化元件」，它只是添加網路平台所提供的互動式功能而來，不見得是用程式語言寫原始碼所產生。<br>
+                    <br>
+                    未來 App 可能跟批次檔沒兩樣，只是把進階使用作業系統的一系列動作裝起來而已。即使作業系統決定要編譯才能成為 App，但我看那只是把既有 *.class 檔打包成 Executable JAR 而已，並沒有 compile 出任何東西～<br>
+                    <br>
+                    往好的方面想，由於「客製化元件」的內部動作，是由前端的「網路平台（作業系統）」所提供，且目前還未聽說過有廠商能夠把「怎樣使用作業系統來做某某事」申請為專利<ins>[1]</ins>，因此「客製化元件」繼續成熟發展到完全不用程式語言來設計的話，說不定會擺脫「應用軟體」內部設計是種專利的問題，任何人都能反組譯檢視其內部結構。<br>
+                    <br>
+                    往壞的方面想，提供作業平台的廠商，片面就能決定「客製化元件」的使用授權，結果 GPL 或 BSD license 再也管不到未來網路平台的元件。
+                </p>
+                <hr>
+                <footer>
+                    <p>[1] 目前聽過最扯的，是 Amazon 的 1-Click Ordering 專利。如果我們用 JavaScript 的 Cookie 紀錄使用者在網站上設定過的資訊，方便他下次直接點擊網站功能就好，居然就觸犯這個專利了：「那 Cookie 還能拿來幹嘛？」而 Amazon 還真的四處告設計了這樣功能的網站。幸好歐美各國後來將這專利的相關要件註銷得差不多了，雖然還是有這個專利存在，但很難拿來告人。（除非你真的從硬體到軟體的設計都照抄 1-Click Ordering 這個功能，否則只用 Cookie 保存瀏覽者資料，好讓 form 能暫時記錄他所填寫的資料這種過去便存在網頁瀏覽器的行為，已經告不起來。但除了 Amazon，其他廠商也有許多不可思議的專利，是關於 Cookie 和 Cache 的使用～）</p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>高科技電子產品賣的是其他訴求，不意識到這點，開發不出下一代產品！</h2>
+                <p>
+                    <samp>
+                        廠商以為 xPad 賣的是平板電腦，其實消費者買單的是觸控手勢。<br>
+                        廠商以為 xWatch 賣的是智慧手錶，其實消費者買單的是聲控智能。<br>
+                        同樣的，未來廠商以為 xRing 賣的是魔戒，其實消費者買單的是體感操作。<br>
+                    </samp>
+                    <br>
+                    如果台灣廠商持續把重點放在開發出「更好的電腦、手機、手錶、戒指」等裝置，而不是「更好的觸控、聲控、體感」等體驗，永遠也無法領先業界推出下一代產品！<br>
+                    <br>
+                    雖然消費者也覺得自己買的是平板電腦或智慧型手機，但他們為何不屑買傳統個人電腦與九宮鍵手機？存錢買平板與智慧型手機慰勞自己？因為觸控手勢帶給他們更好的體驗！所以，誰能設計出更好的觸控手勢體驗，消費者就會覺得那是比別家更棒的產品。<br>
+                    <br>
+                    既然觸控手勢已經有平板電腦或智慧型手機，下一代產品就是聲控加手錶進一步簡化或輔助觸控手勢的工作，再下一代則是透過體感戒指凌空比劃幾下手勢的動作，進一步優化觸控與聲控的工作～<br>
+                    <br>
+                    誰能領先業界讓聲控與體感成為高科技電子產品的絕妙操作介面，誰就暫時主宰一切，成為業界熱門焦點。
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [*] 目前個人將 xGlass 歸類為觸控手勢的變種。但其實它是整合視覺觸控、聲控、體感的裝置，所以使用者反而無法有效獲得聲控與體感來簡化操作的好處，而感覺不到它是真正下一代必備的產品。也就是 xGlass 依然屬於「加法」而來的裝置，而不是「減法」而來的裝置；但每款轟動世界的下一代電子產品，都是減法而來的新裝置，並符合日後慢慢加法東西進去的條件。
+                    </p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>下一代裝置</h2>
+                <p>
+                    兩個、三個、多個裝置接在一起，就會「演變」成另一種新進化的裝置，而且演變或進化結果，不見得是事先能夠預期的，因此吸引更多人把不同裝置接在一起嘗試，分享哪些裝置合體後適合做哪些事。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其他</h2>
+                <hr>
+                <section>
+                    <h3>Java Language</h3>
+                    <p>
+                        ．Beginning Java 2<br>
+                        ．<a href='20020226A.html'>Enhancements in J2SE 1.4</a><br>
+                        ．<a href='20040930A.html'>Enhancements in Java SE 5.0</a><br>
+                        ．Enhancements in Java SE 6: No language changes were introduced in Java SE 6.<br>
+                        ．<a href='20110728A.html'>Enhancements in Java SE 7</a><br>
+                        ．<a href='20140318A.html'>Enhancements in Java SE 8</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>已過時文章</h3>
+                    <p>
+                        ．<a href='20041207A.html'>J2SE Development Kit 安裝指南</a><br>
+                        ．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
+                        ．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
+                        ．<a href='20120828A.html'>再見了，Java Applet～</a><br>
+                        ．<a href='20071117A.html'>JSP 舊文</a><br>
+                        ．<a href='20080120A.html'>美化 jEdit 操作環境</a><br>
+                        ．<a href='20080127A.html'>強化 jEdit 操作功能</a><br>
+                        ．<a href='20040622A.html'>在 PChome 個人新聞台發表過的舊文</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>垃圾桶</h3>
+                    <p>
+                        ．其實沒有永遠的跨平台：包括 Java 與 HTML5。（軟平台是脆弱的）<br>
+                        ．傳統程式以函式存取變數，物件導向以變數綑綁函式。<br>
+                        ．Frame 與 Form 的區別：前者可以做為後者的元件。<br>
+                        ．繼承與複合，就像改裝與組裝。<br>
+                        ．JTextField、JTextArea、JTextPane：單行輸入欄、多行文字欄、圖文容器。<br>
+                        ．Ruby &gt; (Smalltalk + Perl) / 2，意思是：「養成做好垃圾分類習慣的程式語言。」<br>
+                        ．Sony PlayStation Vita 使用 C# 開發遊戲。<br>
+                        ．Visual Studio.NET 不再支援 J#。<br>
+                        ．XML 不只是資料結構，還可以是操作介面。
+                    </p>
+                    <section>
+                        <h4>1</h4>
+                        <p>
+                            物件導向的許多議題，常常得花一整季時間，才能隨著專案的進展過程，印證當初設計的想法對不對。等你修正到覺得對了，拖下來已經快一年～
+                        </p>
+                    </section>
+                    <section>
+                        <h4>2</h4>
+                        <p>
+                            至於抽象類別 (abstract)，在想要「強調」兼顧共通的特性與一致的行為時才使用，否則盡量不要用。建議把 abstract 當作是 interface 這個語法還沒出來時的過渡期產物；雖然前者是用傳統「繼承」(Inheritance) 的方式來表現多型，後者是追加「結合」(Composition) 的方式來實現多型，並非真的是過度期的產物。
+                        </p>
+                    </section>
+                    <!--section id=20040307A>
+                        <h4>Java 程式設計之路</h4>
+                        <p>
+                            1. 不一定要成為程式設計師<br>
+                            2. Java 的學習項目<br>
+                            3. 打造 Java 開發環境<br>
+                            4. Java 程式架構 (套件、類別檔、路徑)<br>
+                            5. 資料的配置與運用<br>
+                            6. 流程控制<br>
+                            7. 用分類的方式解決物件導向<br>
+                            8. API 查詢<br>
+                            9. Java 的進階功能 (執行緒、序列化……)<br>
+                            10. 程式設計者的心理建設 (對編譯結果不要情緒化、習慣錯誤比累積成功重要……)<br>
+                            11. 外掛別人的程式套件
+                        </p>
+                    </section>
+                    <section id='20081012A'>
+                        <h4>Java instant coffee</h4>
+                        <p>
+                            一部 Java 程式教學的著作，內容講究簡明與實用，既有應用範例集的簡易描述性，又兼具教科書的紮實內容。<br>
+                            <br>
+                            Chapter 1. 電算原理 (CPU+RAM+HD、計算機概論。)<br>
+                            Chapter 2. Java 簡介 (故事背景、優勢、缺點。)<br>
+                            Chapter 3. Java 環境的部署 (JDK、JRE、Plug-in。)<br>
+                            Chapter 4. 我的第一個 Java 程式 (快速上手型、完整架構型。)<br>
+                            Chapter 5. Java 語法 (快速掌握、避免拘泥語法導致的冗長學習時間。)<br>
+                            Chapter 6. 物件導向程式設計 (模組式、功能式、元件群、訊號。)<br>
+                            Chapter 7. APIs (介紹常用的程式庫。)<br>
+                            Chapter 8. 各種程式相關技術 (例如設計模式。)<br>
+                            Chapter 9. 程式設計師的心理建設 (除錯經驗的累積。)<br>
+                            Chapter 10. Twideem 專欄 (摘錄個人風格的程式觀點。)<br>
+                            附錄 (一些備記，例如 Manual 和 Guide 的差異、RC 版是什麼…之類。)
+                        </p>
+                    </section>
+                    <section id='20080323A'>
+                        <h4>Java 將淪為技術而不是程式</h4>
+                        <p>
+                            「Java 語言在下一時代將淹沒與殆盡，淪為技術而不是程式。」<br>
+                            <br>
+                            Java，一個語法架構雖然高階，但整套程式庫操作起來卻很低階的程式語言。不管你要從其程式庫中引用哪一項功能，幾乎從語意上所直覺到的操作想法，實際操作起來發現通通都是錯誤的。<br>
+                            <br>
+                            而因為語意與想法不符，必須摸索出正確的邏輯所在，結果常常導致甚為冗長的嘗試時間，導致一天下來開發成效相當難看。哪怕你只是想實現一個小小的想法需求，例如從 JAR 讀取一個圖檔這樣一個小小的需求，都必須從程式庫裡東翻西找個半天，再歷經無數次的搭配失敗，然後才做得出來。 (然後事後想想為何要這樣做？不知道，只能認為 Java 規定這種做法，就照著做。)<br>
+                            <br>
+                            Java 再發展下去，將成為專業開發人員用的經驗累積佔優勢的領域技術，而變成不適合正常程式開發人員用的程式語言。<br>
+                            <br>
+                            Java 的設計太不人性化，往往一個應該很簡單讓人操作的東西，也設計得必須摸索大半天還摸不著頭緒，誇張的是不只 Java 語言本身如此，與 Java 相關的事物也都如此：例如 jar 工具，我沒看過這麼難操作的壓縮指令。如果說，方便的工具應該 One touch，那 Java 就很喜歡把東西搞成得用一堆操作過程來完成。<br>
+                            <br>
+                            結果，Ruby 這款用法精簡、也比較能迎合語意想法的程式語言，被諭為推動下一時代的程式技術。加上為其建立程式庫 (雖然是網頁應用程式開發框架) 的 Ruby on Rails 講求快速使用，開發效果更是一絕。是故，Java UE (Java User Edition) 的概念再不受重視，Java 將淪為高級人士專用的技術，然後在下一時代裡淹沒、殆盡；一個原本被覺得容易使用而熱門的語言，將淪為技術、而不再是程式。
+                        </p>
+                        <hr>
+                        <footer>
+                            <p>
+                                [*] 後來推出可以快速解決問題的新程式架構：JavaFX，請參考《Java UE 與 JavaFX》這篇網誌。
+                            </p>
+                        </footer>
+                    </section-->
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

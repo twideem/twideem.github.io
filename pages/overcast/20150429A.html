@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Visual Studio Code 設定集</h1>
+                <p>
+                    雖然我寫 HTML 和 Python 都是用 RJ TextEd，但做為手敲程式碼的人，總喜歡把玩各家文字編輯器。從早期的 ConTEXT、RJ TextEd、PSPad，然後 jEdit、MadEdit、Notepad++、Geany，到新進的 Sublime Text、Atom、以及集各家之長的 Visual Studio Code！啟動速度、內建功能、擴充套件、配色主題、客製能力，每樣都讓人滿意。<br>
+                    <br>
+                    雖然跟速度更快、檔案更小、操作更順、整合更巧的 Sublime Text 比的話，Visual Studio Code 還是輸一大截：「畢竟這是廿一世紀最強文字編輯器，不管誰跟它比都輸一大截。」但輸入中文時，選字欄固定在螢幕最左上角，且無註冊會跳訊息視窗提醒付費，而且不是免費使用，只是免費試用<ins>[1]</ins>，所以我寧可用開源、免費的 Visual Studio Code 就好。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>擴充功能</h2>
+                <hr>
+                <section>
+                    <h3>Atom One Dark Theme (Mahmoud Ali)</h3>
+                    <p>
+                        我最喜歡的配色。之前用 One Dark Pro，但做得不完美。<br>
+                        <br>
+                        不過我喜歡亮一點的註解顏色，因此編輯：<br>
+                        <br>
+                        <var>[USER]\.vscode\extensions\akamud.vscode-theme-onedark-2.1.0\themes\OneDark.json</var><br>
+                        <br>
+                        將 5C6370 改為 EEDC82，且隨後 fontStyle 的 italic 改為 normal 或乾脆刪除：<br>
+                        <br>
+                        <code>
+                            {<br>
+                            &nbsp; &nbsp; "name":"Comment",<br>
+                            &nbsp; &nbsp; "scope":["comment"],<br>
+                            &nbsp; &nbsp; "settings":{<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp; "foreground":"#EEDC82",<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp; "fontStyle":"normal"<br>
+                            &nbsp; &nbsp; }<br>
+                            },<br>
+                            <br>
+                            {<br>
+                            &nbsp; &nbsp; "name":"Comment Markup Link",<br>
+                            &nbsp; &nbsp; "scope":["comment markup.link"],<br>
+                            &nbsp; &nbsp; "settings":{"foreground":"#EEDC82"}<br>
+                            },<br>
+                            <br>
+                            {<br>
+                            &nbsp; &nbsp; "name":"Punctuation Definition Comment",<br>
+                            &nbsp; &nbsp; "scope":["punctuation.definition.comment"],<br>
+                            &nbsp; &nbsp; "settings":{"foreground":"#EEDC82"}<br>
+                            },<br>
+                            <br>
+                            {<br>
+                            &nbsp; &nbsp; "name":"[VSCODE-CUSTOM] Markdown Quote",<br>
+                            &nbsp; &nbsp; "scope":"markup.quote.markdown",<br>
+                            &nbsp; &nbsp; "settings":{<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp; "foreground":"#EEDC82",<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp; "fontStyle":"normal"<br>
+                            &nbsp; &nbsp; }<br>
+                            },
+                        </code>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我的使用者設定</h2>
+                <p>
+                    編輯 <var>[USER]\AppData\Roaming\Code\User\settings.json</var>，內容為：<br>
+                    <br>
+                    <code>
+                        {<br>
+                            &nbsp; &nbsp; //視窗樣式<br>
+                            &nbsp; &nbsp; "window.titleBarStyle": "custom",<br>
+                            &nbsp; &nbsp; "window.title": "${dirty}${activeEditorLong}",<br>
+                            &nbsp; &nbsp; "editor.minimap.enabled": false,<br>
+                            &nbsp; &nbsp; "workbench.statusBar.feedback.visible": false,<br>
+                            &nbsp; &nbsp; "workbench.activityBar.visible": false,<br>
+                            &nbsp; &nbsp; //編輯器樣式<br>
+                            &nbsp; &nbsp; "workbench.colorTheme": "Atom One Dark",<br>
+                            &nbsp; &nbsp; "editor.fontFamily": "DejaVu Sans Mono, 思源黑體 HW",<br>
+                            &nbsp; &nbsp; "editor.fontSize": 15,<br>
+                            &nbsp; &nbsp; "editor.links": false,<br>
+                            &nbsp; &nbsp; "editor.renderIndentGuides": false,<br>
+                            &nbsp; &nbsp; //編輯器行為<br>
+                            &nbsp; &nbsp; "editor.autoClosingBrackets": "never",<br>
+                            &nbsp; &nbsp; "html.autoClosingTags": false,<br>
+                            &nbsp; &nbsp; "editor.matchBrackets": false,<br>
+                            &nbsp; &nbsp; "editor.autoIndent": false,<br>
+                            &nbsp; &nbsp; "editor.detectIndentation": false,<br>
+                            &nbsp; &nbsp; "editor.insertSpaces": false,<br>
+                            &nbsp; &nbsp; "editor.renderWhitespace": "all",<br>
+                            &nbsp; &nbsp; "editor.trimAutoWhitespace": false,<br>
+                            &nbsp; &nbsp; "files.eol": "\n",<br>
+                            &nbsp; &nbsp; "editor.scrollBeyondLastLine": false,<br>
+                            &nbsp; &nbsp; "editor.largeFileOptimizations": false,<br>
+                            &nbsp; &nbsp; "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",<br>
+                            &nbsp; &nbsp; //自動提示、建議、通知<br>
+                            &nbsp; &nbsp; "editor.quickSuggestions": {<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp;"other": false,<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp;"comments": false,<br>
+                            &nbsp; &nbsp; &nbsp; &nbsp;"strings": false<br>
+                            &nbsp; &nbsp; },<br>
+                            &nbsp; &nbsp; "editor.tabCompletion": true,<br>
+                            &nbsp; &nbsp; "extensions.ignoreRecommendations": true,<br>
+                            &nbsp; &nbsp; "workbench.tips.enabled": false,<br>
+                            &nbsp; &nbsp; //檔案<br>
+                            &nbsp; &nbsp; "files.hotExit": "off",<br>
+                            &nbsp; &nbsp; "window.restoreWindows": "all",<br>
+                            &nbsp; &nbsp; "files.trimTrailingWhitespace": true,<br>
+                            &nbsp; &nbsp; "workbench.quickOpen.closeOnFocusLost": false,<br>
+                            &nbsp; &nbsp; "files.associations": {"*.es": "javascript"},<br>
+                            &nbsp; &nbsp; //雜項<br>
+                            &nbsp; &nbsp; "workbench.startupEditor": "newUntitledFile",<br>
+                            &nbsp; &nbsp; "git.enabled": false,<br>
+                            &nbsp; &nbsp; "telemetry.enableCrashReporter": false,<br>
+                            &nbsp; &nbsp; "telemetry.enableTelemetry": false,<br>
+                            &nbsp; &nbsp; //關閉更新<br>
+                            &nbsp; &nbsp; "update.channel": "none",<br>
+                            &nbsp; &nbsp; "update.enableWindowsBackgroundUpdates": false,<br>
+                            &nbsp; &nbsp; "update.showReleaseNotes": false<br>
+                        }
+                    </code>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我的 HTML 使用者程式碼片段</h2>
+                <p>
+                    新增 <var>[USER]\AppData\Roaming\Code\User\snippets\html.json</var>，複製貼上如下內容：<br>
+                    <br>
+                    <code>
+                        {<br>
+                        &nbsp; &nbsp; "chapter": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "chapter",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;!DOCTYPE html&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;html lang='zh-TW'&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;head&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;meta charset='UTF-8'&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;title&gt;TWIDEEM CIVS&lt;/title&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;link href='../../favicon.png' rel='icon'&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;link href='../../styles/layout.css' rel='stylesheet'&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;script src='../../scripts/template.js'&gt;&lt;/script&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/head&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;body&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;article&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;header&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h1&gt;$1&lt;/h1&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/header&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;/article&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/body&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/html&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "chapter"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "abstract": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "abstract",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;p&gt;$1&lt;/p&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "abstract"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "section": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "section",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;hr&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;section&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;h2&gt;$1&lt;/h2&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/section&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "section"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "sub": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "sub",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;hr&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;section&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;h3&gt;$1&lt;/h3&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/section&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "subsection"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "field": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "field",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;section&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;h4&gt;$1&lt;/h4&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/section&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "field"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "item": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "item",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;section&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;h5&gt;$1&lt;/h5&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/section&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "item"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "paragraph": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "paragraph",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; $1&lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/p&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "paragraph"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "figure": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "figure",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;figure&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;img src='../../figures/$1' alt='插圖'&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;figcaption&gt;&lt;/figcaption&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/figure&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "figure"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "table": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "table",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;table&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;tr&gt;&lt;td&gt;$1&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/table&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "table"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "rule": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "rule",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;hr&gt;$1"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "horizontal rule"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "break": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "break",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;br&gt;$1"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "break"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "index": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "index",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "．&lt;a href='$1.html'&gt;&lt;/a&gt;&lt;br&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "index"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "note": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "note",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "．&lt;span title='$1'&gt;&lt;/span&gt;&lt;br&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "note"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "label": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "label",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "．$1&lt;br&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "label"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "reference": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "reference",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;a href='$1' target='_blank'&gt;&lt;/a&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "reference"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "textarea": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "textarea",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;textarea class='brush:'&gt;$1",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/textarea&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "textarea"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "output": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "output",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;output&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; $1&lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/output&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "output"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "citation": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "citation",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;q&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; $1&lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/q&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "citation"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "annotation": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "annotation",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;ins&gt;[$1]&lt;/ins&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "annotation"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "footnote": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "footnote",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;hr&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;footer&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; [$1]&lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/footer&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "footnote"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "tabular": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "tabular",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;style&gt;table td:nth-child(1){width:20%}&lt;/style&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "tabular"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "plugin": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "plugin",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;script src='../../objects/plugins/$1.js'&gt;&lt;/script&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "plugin"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "script": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "script",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;script&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; $1",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/script&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "script"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "php": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "php",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;?php",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; $1",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "?&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "php"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "diary": {<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "diary",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;hr id='$1'&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;section&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;h2&gt;&lt;/h2&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &nbsp; &nbsp; &lt;br&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&nbsp; &nbsp; &lt;/p&gt;",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&lt;/section&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "section"<br>
+                        &nbsp; &nbsp; },<br>
+                        &nbsp; &nbsp; "versus":{<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "prefix": "versus",<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "body": [<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "$1 &lt;i&gt;v.&lt;/i&gt;"<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; ],<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; "description": "versus"<br>
+                        &nbsp; &nbsp; }<br>
+                        }<br>
+                    </code>
+                    <br>
+                    複製一份 html.json 為 <var>plaintext.json</var> 的話，新增檔案也能使用。或者 1.20 版的話，副檔名改為 <var>html.code-snippets</var>，以 Global snippets 的方式共享。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其他修改</h2>
+                <hr>
+                <section>
+                    <h3>切換英文介面</h3>
+                    <p>
+                        Visual Studio Code 在早期版本會自動根據作業系統的語系切換語言介面，看不慣中文想切換英文的人，必須自己寫設定檔。<br>
+                        <br>
+                        新增 <var>[USER]\AppData\Roaming\Code\User\locale.json</var> 檔案，在裡面寫上 <code>{"locale":"en"}</code>，然後重新啟動軟體。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>修正預設主題</h3>
+                    <p>
+                        使用 Visual Studio Code 預設色彩佈景主題的話，實體字元顏色與標籤顏色一樣，顯得不突出，所以到：<br>
+                        <br>
+                        <var>C:\Program Files\Microsoft VS Code\resources\app\extensions\html\syntaxes\html.tmLanguage.json</var><br>
+                        <br>
+                        將 <var>constant.character.entity.html</var> 改為 <var>constant.character.escape.entity.html</var>。<br>
+                        <br>
+                        id 屬性會是藍色，所以把 <var>entity.other.attribute-name.id.html</var> 改為 <var>entity.other.attribute-name.html</var>。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>美化中英文字</h3>
+                    <p>
+                        設定編輯器的字型時，可以用逗號隔開英文字型和中文字型：<br>
+                        <br>
+                        <code>"editor.fontFamily": "Cascadia Code, 思源黑體 HW"</code><br>
+                        <br>
+                        這樣就能以指定的英文字型顯示英文字母，中文字的部分再以隨後指定的中文字型來處理，就不會看到與英文字體格格不入的細明體了：
+                    </p>
+                    <figure>
+                        <img src='../../figures/overcast/20150429A.png' alt='插圖'>
+                        <figcaption>Microsoft 專為程式設計開發的 Cascadia Code，搭配 Adobe 的思源黑體。</figcaption>
+                    </figure>
+                </section>
+                <hr>
+                <section>
+                    <h3>以瀏覽器開啟所編輯網頁</h3>
+                    <p>
+                        由於網頁有設定預設瀏覽器的話，點兩下網頁就會自動以瀏覽器開啟，所以這功能不用下載擴充功能，只要點擊 File → Preferences → Keyboard Shortcuts，搜尋 Run Active File In Active Terminal，將 Keybinding 設為 Ctrl + L，往後就能按此組合鍵開啟網頁或執行程式。
+                    </p>
+                </section>
+                <!--hr>
+                <section>
+                    <h3>為 ECMAScript 增加 *.es 副檔名</h3>
+                    <p>
+                        編輯 C:\Program Files\Microsoft VS Code\resources\app\extensions\javascript\package.json，在 ".es6" 上面增加 ".es"。
+                    </p>
+                </section-->
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>操作技巧</h2>
+                <p>
+                    Ctrl + Alt + 滑鼠左鍵 = 多行編輯<br>
+                    Shift + Alt + 滑鼠左鍵 = 多行選取
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>版本選擇</h2>
+                <p>
+                    我只想要一個既靈巧又實用的文字編輯器，而不是既方便又強大的整合開發環境，因此 Visual Studio Code 主打的一些智慧功能都不在我考量範圍，所以我用的版本停留在 1.27.2，但 html.tmLanguage.json 是用 1.25.1 版。<br>
+                    <br>
+                    其實我原本是用 1.25.1，但使用者介面有 BUG，在 "window.titleBarStyle": "custom" 下經常無法正常點擊標題列和分頁。1.26.1 同樣也有這問題，到了 1.27 才解決。
+                </p>
+                <hr>
+                <section>
+                    <h3>1.17.2</h3>
+                    <p>
+                        支援 Python 的 F String 語法。<br>
+                        <br>
+                        咖啡色 ICON 的最後一版。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.19.3</h3>
+                    <p>
+                        提升啟動速度與程式執行效率。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.20.1</h3>
+                    <p>
+                        支援 Global snippets。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.22.2</h3>
+                    <p>
+                        加快大檔案的著色速度。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.25.1</h3>
+                    <p>
+                        可設定 window.titleBarStyle": "custom" 讓視窗標題列跟著 Dark themes 變暗。（到 1.28.2 變預設）<br>
+                        <br>
+                        目前跑最快的版本。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.26.1</h3>
+                    <p>
+                        新增 Breadcrumbs 功能介面。<br>
+                        <br>
+                        HTML 的 ID 屬性不再顯示藍色。但這版開始，HTML 著色速度變慢，應該跟 html.tmLanguage.json 從 15.7KB 暴肥到 83KB 有關，因為我調換後就變快了～<br>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.27.2</h3>
+                    <p>
+                        重新設計 Settings 操作介面。<br>
+                        <br>
+                        往後版本的使用者介面都跟這版大同小異，沒什麼變化。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.31.1</h3>
+                    <p>
+                        先從看到的範圍為文字標色，再慢慢從頭開始標色，這樣的上色情況較理想。<br>
+                        <br>
+                        但也不是沒有缺點，過去會等幾秒，看上色完畢就表示功能就緒，可以開始動手敲程式碼！現在看上去準備好了，其實很多功能還沒就緒，結果打了一堆看起來很虛的東西出來～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>1.35.1</h3>
+                    <p>
+                        新的 ICON。<br>
+                        <br>
+                        這版開始，速度變慢很多，尤其 Snipptes，打太快不會轉為語法結構，要等框跳出才能按 Tab。這點在 1.36.1 有改善一些，但必須等 Visual Studio Code 完全載入完畢才可以快敲 Snipptes，剛進程式時問題依然存在。到 1.37.1 才真正解決問題。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 官網的說明：Sublime Text may be downloaded and evaluated for free, however a license must be purchased for continued use.（Sublime Text 允許免費下載和評估，然而事後需要購買許可來繼續使用。）
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

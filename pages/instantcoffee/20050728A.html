@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Exceptions</h1>
+                <p>
+                    C 語言時，是用 if 檢查函式傳回值的方式，判斷程式執行期間發生的問題。一層又一層的 if 都在檢查函式傳回值時，真正想表達的程式功能經常被淹沒掉。<br>
+                    <br>
+                    Java 提供專門用來處理執行期程式錯誤的機制，讓除錯用的程式與主要表達的程式隔開撰寫，而且一層搞定，很少需要用到巢狀的寫法<ins>[1]</ins>。<br>
+                    <br>
+                    跟 C 語言的函式傳回值可以不檢查不一樣，Exceptions 是 Java 程式語言的核心之一，需要捕捉 Exception 時，你非得處理才能無法通過編譯。<br>
+                    <br>
+                    一些很想在編譯期間就檢查出來，卻只能在執行期間再檢測的程式錯誤，Java 才會設計為 Exception 要求你妥善處理。所以遇到會拋出 Exception 的物件功能時，要像解決編譯期間的語法錯誤一樣，積極處理執行期間的程式錯誤，好好符合 Java 的規範，寫出穩固的程式，盡量不要規避 Exceptions 的機制。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>try.. catch..</h2>
+                <p>
+                    以 java.io.FileWriter 來說，它的 write() 會拋出 java.io.IOException，因此使用時必須放在 try..catch.. 結構裡面：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.FileWriter;
+                        import java.io.IOException;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                FileWriter file_writer;
+                                try{
+                                    file_writer = new FileWriter("text.txt");
+                                    file_writer.write("Hello");
+                                    file_writer.close();
+                                }
+                                catch(IOException io_exception){
+                                    io_exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    你可用多個 catch 來捕捉其它 Exception 的類別！但有個規則，支類別（sub class）必須放在上面，否則把超類別（super class）放在上面的話，通通會被超類別給 catch，等於白寫了多個 catch。<br>
+                    <br>
+                    尤其要注意有些 Exception 的類別繼承體系可說是三代同堂，這時要由上往下排好「孫類別、子類別、父類別」，而且偶爾要翻 Java API Specification 查一下繼承體系來確認，這點是 Java 的 Exceptions 機制惱人之處：「很像用 switch 進行篩選一樣。」
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>throws</h2>
+                <p>
+                    事實上，要正確地為捕捉到的意外狀況撰寫處理工作，往往需要有些專業知識。不知道怎樣處理，卻又敷衍了事帶過，反而誤導別人以為你設計的程式已處理妥當。<br>
+                    <br>
+                    但 Java 規定遇到會拋出意外狀況的物件功能一定要處理，不會處理的我們，不是寫個空白的 {}  不做事，就是直接將意外狀況輸出到主控台。<br>
+                    <br>
+                    這時可用 throws 把意外狀況轉丟出去，等於把捕捉意外狀況轉嫁給下一個使用的人：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.io.FileWriter;
+                        import java.io.IOException;
+
+                        public class Main{
+
+                            public static void main(String[] args) throws IOException{
+                                FileWriter file_writer = new FileWriter("text.txt");
+                                file_writer.write("Hello");
+                                file_writer.close();
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    有些嫌 try.. catch.. 醜的人，也會讓函式 throws 意外狀況，但不建議因為這種理由就丟來丟去的！只有在你不知道怎樣處理時，才用 throws 拋出。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>try with resources</h2>
+                <p>
+                    Java SE 7 的新功能，會自動關閉 try() 裡面的東西：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[6]'>
+                        import java.io.FileWriter;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try(FileWriter file_writer = new FileWriter("text.txt")){
+                                    file_writer.write("Hello");
+                                }
+                                catch(IOException io_exception){
+                                    io_exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    這樣就不用再寫 file_writer.close() 了。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>multi catch</h2>
+                <p>
+                    Java SE 7 的新功能，一次捕捉多個意外：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[14]'>
+                        import java.io.File;
+                        import java.io.FileWriter;
+                        import java.io.IOException;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    File file = new File("text.txt");
+                                    FileWriter file_writer = new FileWriter(file);
+                                    file_writer.write("Hello");
+                                    file_writer.close();
+                                }
+                                catch(IOException|NullPointerException exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>自訂意外錯誤訊息</h2>
+                <p>
+                    （草稿中）
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 少數例外像操作 File I/O 時，建議用巢狀 try.. catch.. 將關閉檔案放在外層、讀寫資料放在內層，避免有些 catch 寫法不當，造成 final 沒有執行，無法順利關閉檔案。但 Java SE 7 提供自動關閉檔案的 try() 後解決這問題了，又回到一層搞定。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

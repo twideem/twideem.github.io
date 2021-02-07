@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <link href='../../styles/editor.css' rel='stylesheet'>
+        <style>table td:nth-child(1){width:60%}</style>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../scripts/toolkit.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('dotNET')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>用 C# 堆砌程式</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>準備</h2>
+                <hr>
+                <section>
+                    <h3>不為什麼</h3>
+                    <p>
+                        因為 Windows 內建 .NET Framework，既然都裝了，為什麼不用看看 🙂
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>取得 C# 編譯器</h3>
+                    <p>
+                        Windows Vista 起內建 .NET Framework，在 C:\Windows\Microsoft.NET\Framework\ 和 C:\Windows\Microsoft.NET\Framework64\ 裡有各種版本的 <var>csc.exe</var> 可編譯 C# 程式碼。<br>
+                        <br>
+                        除了翻找資料夾一個一個找看看哪裡有 csc.exe，也可按「開始 → Windows 系統 → 命令提示字元」，輸入：<br>
+                        <br>
+                        <output>
+                            DIR %WINDIR%\csc.exe /S<br>
+                        </output>
+                        <br>
+                        即可找出所有 csc.exe 的路徑。<br>
+                        <br>
+                        以 Windows 10 內建 .NET Framework 4 為例，會是在：<br>
+                        <br>
+                        <var>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\</var><br>
+                        <br>
+                        如果沒有，可到「開始 → Windows 系統 → 控制台 → 程式集 → 開啟或關閉 Windows 功能」勾選 .NET Framework…不過下載比較快：<br>
+                        <br>
+                        <a href='http://dotnet.microsoft.com/download/dotnet-framework/' target='_blank'>Download .NET Framework</a><br>
+                        <br>
+                        建議將 csc.exe 所在路徑加入 PATH，以便隨時能呼叫 csc.exe 編譯 C# 原始碼。做法是：「控制台 → 系統及安全性 → 系統 → 進階系統設定 → 環境變數 → PATH → 編輯 → 新增 → C:\Windows\Microsoft.NET\Framework64\v4.0.30319 → 確定 → 確定」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Hello, world!</h3>
+                    <p>
+                        用記事本寫入如下程式，並儲存檔案為 MainProgram.cs：<br>
+                        <br>
+                        <textarea class='brush:cs'>
+                            class MainProgram{
+
+                                static void Main(){
+                                    System.Console.Write("Hello, world!");
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        進入命令提示字元，切換到 MainProgram.cs 位置，然後用 csc.exe 來編譯程式：<br>
+                        <br>
+                        <output>
+                            csc MainProgram.cs<br>
+                        </output>
+                        <br>
+                        正常的話會編譯出 MainProgram.exe 檔案，執行它會顯示：<br>
+                        <br>
+                        <output>
+                            Hello, world!
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>目錄</h2>
+                <hr>
+                <section>
+                    <h3>教學</h3>
+                    <p>
+                        ．<a href='#microsoftdocs'>Microsoft Docs</a><span class='private'> …｛<a href='../../../localhost/pages/forward/themes.html#microsoftdocs' class='detail'>轉載</a>｝<br>．<a href='../../../localhost/pages/forward/themes.html#csharp'>C# 教程</a></span><br>
+                        ．<a href='#notes'>語法筆記</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>應用</h3>
+                    <p>
+                        ．<a href='#objectoriented'>物件導向</a>（類別、抽象、介面、方法、屬性、索引器、運算子重載、泛型、命名空間…）<br>
+                        ．<a href='#delegate'>委派</a>（函數物件、函數傳參、匿名函式、λ 運算式、多播、事件）<br>
+                        ．<a href='#exceptionhandling'>例外處理</a><br>
+                        ．<a href='#linq'>LINQ</a><br>
+                        ．<a href='#collections'>集合</a><br>
+                        ．<a href='#iterator'>迭代器</a><br>
+                        ．<a href='#process'>調用外部程式</a><br>
+                        ．<a href='#dll'>編譯成 DLL 並載入執行</a><br>
+                        ．<a href='20190418B.html#file'>讀寫檔案資料</a><br>
+                        ．<a href='20190418B.html#xml'>XML</a>、<a href='20190418B.html#xpath'>XPath</a><br>
+                        ．<a href='20190418B.html#sqlite'>SQLite</a><br>
+                        ．<a href='20190418B.html#zipfile'>Zip 壓縮檔案</a><br>
+                        ．<a href='20190418B.html#sound'>播放音效</a><br>
+                        ．<a href='20190418C.html'>Windows Forms</a><br>
+                        ．<a href='20190418B.html#wpf'>Windows Presentation Foundation (WPF)</a><br>
+                        ．<a href='20190418D.html'>CGI</a><br>
+                        ．<a href='20190418B.html#webclient'>用 WebClient 取得網頁內容</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>附錄</h3>
+                    <p>
+                        ．<a href='20190418E.html#version'>C# 的未來發展</a><br>
+                        ．<a href='20190418E.html#dotnet'>在 .NET Core 用 csc.dll 直接編譯 *.cs 原始碼</a><br>
+                        ．<a href='20190418E.html#jscript'>改用 JScript 設計 .NET Framework 程式</a><br>
+                        ．<a href='20190418E.html#aspnet'>如何執行 ASP.NET 程式</a><span class='private'> …｛<a href='../../../localhost/pages/themes/others.html#webforms' class='detail'>ASP.NET Web Forms 教程</a>｝</span><br>
+                        ．<a href='20190418E.html#apireference'>離線查閱 .NET API</a><br>
+                        ．<a href='20190418E.html#effective'>Effective C#</a>、<a href='20190418E.html#moreeffective'>More Effective C#</a>
+                        <!--．<a href='#nginx'>與其寫個自帶的 HTTP Server，不如內附現成的 Nginx！</a><br-->
+                    </p>
+                </section>
+            </section>
+
+            <hr id='microsoftdocs'>
+
+            <section>
+                <h2>Microsoft Docs</h2>
+                <p>
+                    畢竟長期經營 MSDN，Microsfot 官網文件面面俱到，既適合初學，又不乏深入的內容可供探究。加上八成以上都「機器翻譯」成中文，雖然翻譯品質不是很理想，但學 C# 語言寫 .NET 程式可以省不少書錢 😏
+                </p>
+                <hr>
+                <section>
+                    <h3>C# 語言程式設計</h3>
+                    <p>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/tour-of-csharp/' target='_blank'>A tour of the C# language</a>：C# 導覽，快速了解 C# 語言。<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/programming-guide/' target='_blank'>C# programming guide</a>：程式設計手冊，完整掌握 C# 語言。<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/' target='_blank'>C# reference</a>：語法辭典，快速查閱想要的語法功能。<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/linq/' target='_blank'>Language Integrated Query (LINQ)</a>：直接像資料庫般寫程式調閱資料。<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/' target='_blank'>.NET API browser</a>：程式庫文件。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>常用類別結構</h3>
+                    <p>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.console' target='_blank' class='api'>Console</a>：主控台輸出入<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.object' target='_blank' class='api'>Object</a>：所有類別的共通行為<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.string' target='_blank' class='api'>String</a>：資料固定字串<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.text.stringbuilder' target='_blank' class='api'>StringBuilder</a>：資料變動字串<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.array' target='_blank' class='api'>Array</a>：陣列<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.list-1' target='_blank' class='api'>List</a>：串列資料結構（適合讀資料）<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.linkedlist-1' target='_blank' class='api'>LinkedList</a>：雙向鏈結串列資料結構（適合寫資料）<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.queue-1' target='_blank' class='api'>Queue</a>：先進先出資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.stack-1' target='_blank' class='api'>Stack</a>：後進先出資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.hashset-1' target='_blank' class='api'>HashSet</a>：無序集合（資料不重複）<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.linkedlist-1' target='_blank' class='api'>SortedSet</a>：有序集合（資料不重複）<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.dictionary-2' target='_blank' class='api'>Dictionary</a>：無序鍵值對資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.sorteddictionary-2' target='_blank' class='api'>SortedDictionary</a>：有序鍵值對資料結構（無索引值）<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.sorteddictionary-2' target='_blank' class='api'>SortedList</a>：有序鍵值對資料結構（有索引值）<br>
+                        <!--
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.generic.sortedlist-2' target='_blank' class='api'>SortedList</a>：自動排序鍵值對資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.arraylist' target='_blank' class='api'>ArrayList</a>：串列資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.hashtable' target='_blank' class='api'>Hashtable</a>：鍵值對資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.sortedlist' target='_blank' class='api'>SortedList</a>：自動排序鍵值對資料結構<br>
+                        -->
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.linq.enumerable' target='_blank' class='api'>Enumerable</a>：用於查詢實作 IEnumerable 的物件<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.convert' target='_blank' class='api'>Convert</a>：轉換資料類型<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.math' target='_blank' class='api'>Math</a>：算數<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.random' target='_blank' class='api'>Random</a>：亂數<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.directory' target='_blank' class='api'>Directory</a>、<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.directoryinfo' target='_blank' class='api'>DirectoryInfo</a>：操作資料夾<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.file' target='_blank' class='api'>File</a>、<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.fileinfo' target='_blank' class='api'>FileInfo</a>：操作檔案、讀寫資料<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.path' target='_blank' class='api'>Path</a>：操作路徑<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.datetime' target='_blank' class='api'>DateTime</a>：日期與時間<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.environment' target='_blank' class='api'>Environment</a>：環境和平台資訊<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.diagnostics.process' target='_blank' class='api'>Process</a>：執行外部程式與管理程式行程<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.threading.thread' target='_blank' class='api'>Thread</a>：建立和控制執行緒例如暫停一段時間
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>選用類別結構</h3>
+                    <p>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.byte' target='_blank' class='api'>Byte</a>：位元資料<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.collections.bitarray' target='_blank' class='api'>BitArray</a>：布林值資料結構<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.data.datatable' target='_blank' class='api'>DataTable</a>：用資料表處理資料（二維串列）<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.binaryreader' target='_blank' class='api'>BinaryReader</a>：以二進位資料讀取檔案<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.binarywriter' target='_blank' class='api'>BinaryWriter</a>：以二進位資料寫入檔案<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.compression.gzipstream' target='_blank' class='api'>GZipStream</a>：GZip 壓縮檔<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.compression.zipfile' target='_blank' class='api'>ZipFile</a>：Zip 壓縮檔<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.filestream' target='_blank' class='api'>FileStream</a>：隨機存取檔案<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.streamreader' target='_blank' class='api'>StreamReader</a>：從檔案讀取資料<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.io.streamwriter' target='_blank' class='api'>StreamWriter</a>：將資料寫入檔案<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.media.soundplayer' target='_blank' class='api'>SoundPlayer</a>：播放 .wav 聲音<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.threading.timer' target='_blank' class='api'>Timer</a>：可於指定間隔在執行緒集區執行緒上執行方法<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.type' target='_blank' class='api'>Type</a>：取得類別的定義和內容
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>主題類別結構</h3>
+                    <p>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.windows.forms' target='_blank' class='api'>System.Windows.Forms</a> …｛<a href='http://docs.microsoft.com/zh-tw/dotnet/framework/winforms/' target='_blank' class='detail'>Windows Forms</a>｝<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.net' target='_blank' class='api'>System.Net</a> …｛<a href='http://docs.microsoft.com/zh-tw/dotnet/framework/network-programming/' target='_blank' class='detail'>Network Programming in the .NET Framework</a>｝<br>
+                        ．<a href='http://docs.microsoft.com/zh-tw/dotnet/api/system.xml' target='_blank' class='api'>System.Xml</a>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='notes'>
+
+            <section>
+                <h2>語法筆記</h2>
+                <hr>
+                <section>
+                    <h3>與 C++ 的關係</h3>
+                    <p>
+                        只要 C++ 已經有現成的語法，C# 就會照抄過來。所以像 if、switch、while、for 是一樣的，用 class 設計類別和使用 : 繼承也一樣，命名空間用 namespace{} 和運算子重載用 operator 也一樣，甚至連指標的 * 和 &amp; 都保留下來。<br>
+                        <br>
+                        C# 在照抄 C++ 各語法的同時，也簡化其複雜的功能。像 private 和 public 並不是 C++ 影響整塊區域的範疇，而是像 Java 個別宣告在屬性和方法的開頭；不允許多重繼承，改用 interface；一律使用 . 符號存取成員，不用再分 -&gt; 和 :: 的場合。<br>
+                        <br>
+                        若想要的功能和語法 C++ 沒有，C# 才會自行擴充上去，例如 C++ 沒有委派，因此 C# 新增了 delegate 指令。C++ 沒有 foreach，因此 C# 也自行新增上去。<br>
+                        <br>
+                        C# 2 時，會 C++ 的人基本上都看得懂 C# 程式碼。然而，C# 3 開始，有逐漸往動態腳本語言學習的趨勢，發展到 C# 6 已經越來越不像 C++，到了 C# 8.0 更是完全看不懂在寫什麼（雖然能把新語法全用上的人不多），不能再說 C# 是照搬 C++ 語法進來的程式語言了～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>與 Java 的異同</h3>
+                    <p>
+                        檔案名稱不用與類別名稱相同。<br>
+                        <br>
+                        無論有多少個類別，都只會編譯有 Main() 的類別為 *.exe 執行檔，所用到的類別都會編譯在裡面，而不是每個類別都編譯出一個 *.class 檔。<br>
+                        <br>
+                        也因此，雖然 Java 主張把各個類別寫在不同檔案，但對 C# 來說，所有類別都寫在一個檔案並放在 namespace 裡是不錯的方式。也沒有 package 綁資料夾的規定，只有用巢狀 namespace 在語法上建立關係。<br>
+                        <br>
+                        變數和方法預設 private，但類別預設為 internal。<br>
+                        <br>
+                        公開的一律大寫開頭，私有的小寫開頭。因此類別名稱開頭大寫，屬性小寫，方法大寫。<br>
+                        <br>
+                        Java 鼓勵寫一堆 setXXX()、getXXX() 來改變狀態，避免使用 = 改變物件的狀態。但 C# 引進 set 和 get 語法發明了 property 的概念，可以控制使用 = 改變物件狀態時的行為。結果，查 API 時，Java 只要看有哪些 method 就好，C# 還得看有哪些 property。C# 操作一個物件有時候用 () 呼叫函式、有時用 = 設定狀態，不像 Java 一律都是用呼叫函式的。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>C# 的特點</h3>
+                    <section>
+                        <h4>資料型態</h4>
+                        <p>
+                            int、long、short 都有 u 開頭的無號版！而 byte 本身就是無號的，要用 s 開頭表示有號。<br>
+                            <br>
+                            <code>var</code> 編譯時期決定型別，適合靜態型別程式設計。<code>dynamic</code> 執行時期判定型別，適合動態型別程式設計。<br>
+                            <br>
+                            bool 就是 false 和 true，無法用 int 的 0 和 1 替換。<br>
+                            <br>
+                            宣告資料型態時後面加上 <code>?</code> 符號，表示變數可指定為 null，等同於用 System.Nullable&lt;T&gt; 宣告一個結構。這種資料賦值給其他標準資料型態的變數，自然會有不相容的情況發生，因此 C# 提供 <code>變數 = 可空類型資料 ?? 預設值</code> 的語法解決問題。<br>
+                            <br>
+                            <code>readonly</code> 類似於 const，但只能用在類別的成員變數，不能用在函式之類的區塊變數，而且宣告同時即使給了值，也可以在建構式修改。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>陣列</h4>
+                        <p>
+                            [,] 是名符其實的多維陣列，並不是 [][] 陣列的陣列。<br>
+                            <br>
+                            [,] 陣列每組維度大小是相同的，且迭代時會一次跑所有維度的資料。<br>
+                            <br>
+                            [][] 陣列可以混合不同大小的維度，且迭代只會跑一個維度的資料。<br>
+                            <br>
+                            這兩種可以混搭在一起，例如 array[1,2][3]。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>指標</h4>
+                        <p>
+                            將類別或函式宣告為 <code>unsafe</code>，編譯時下 <var>/unsafe</var> 參數，就能在裡面使用 C 語言的指標！<br>
+                            <br>
+                            <code>stackalloc 型態[大小]</code> 可用來配置記憶體空間。<br>
+                            <br>
+                            <var>sizeof(資料型態)</var> 取得資料的位元組大小。<br>
+                            <br>
+                            對指標使用 <code>fixed</code> 可防止垃圾回收機制清理指標，對陣列使用可建立 C 語言風格的陣列，好讓指標與陣列的對等關係跟 C 語言一致。<br>
+                            <br>
+                            在 C/C++，<samp>int* A, B;</samp> 只有 A 是指標，B 是 int 變數，C# 不一樣，兩個都宣告為指標，這也造成 C/C++ 真正慣用的 <samp>int *A, *B;</samp> 寫法，在 C# 會無法辨識而報錯。<br>
+                            <br>
+                            所謂「不安全（Unsafe）」並非指這樣的程式碼有危害，而是指跳脫 CLR（Common Language Runtim）對記憶體驗證的安全機制。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>函式</h4>
+                        <p>
+                            可將其它程式語言編譯出來的函式引用到 C# 裡面，語法為：<br>
+                            <br>
+                            <code>
+                                [DllImport("程式庫檔")]<br>
+                                extern 傳回值 函式名稱(參數);<br>
+                            </code>
+                            <br>
+                            程式庫除了 DLL 檔，也支援 Linux 常用的 shared object 檔（*.so），但 DllImport 要下更多參數解決差異性問題，請參考 System.Runtime.InteropServices.DllImport 的 API。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>流程控制</h4>
+                        <p>
+                            <code>switch</code> 為避免 fall through 的弊端，規定 <code>case</code> 區塊一定要用 <code>break</code> 結束，連 <code>default</code> 也不例外。但 case 沒有寫區塊程式的話，允許 fall through。有了這項規定，default 可以放在任意位置，不用放在最後。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>物件導向</h4>
+                        <p>
+                            宣告為 <code>internal</code> 權限，表示同屬一整個程式底下的組件（Assemblies）都能存取，也就是同屬於一個 *.exe 或 *.dll 底下的，都能存取。換句話說，如果 library.dll 有個 internal 的類別、屬性、方法，那就無法在 run.exe 中存取使用，只有同屬 library.dll 裡面的可以。<br>
+                            <br>
+                            類別和方法可宣告為 <code>partial</code>，拆分成好幾個部分，放在不同檔案。<br>
+                            <br>
+                            不想被繼承的類別，可宣告為 <code>sealed</code>。不想「再」被覆寫的方法或屬性，可宣告為 <code>sealed override</code>；由於必須搭配 override 使用，因此這功能其實是：「先覆寫前人的，再禁止後人覆寫。」
+                        </p>
+                    </section>
+                    <section>
+                        <h4>其它</h4>
+                        <p>
+                            使用 <code>using(物件) {}</code> 語法，系統會自動進行 System.IDisposable 的作業。通常需要關閉檔案的物件都用這語法，省事又清楚。<br>
+                            <br>
+                            載入多個組件時，若名稱空間和類別名稱重複，可先在編譯器下參數 <kbd>/r:別名一=組件一.dll</kbd>，然後在程式碼開頭使用 <code>extern alias 別名一;</code> 載入別名，就能用 <code>別名一::命名空間.類別</code> 解決衝突問題。別名二依此類推。<br>
+                            <br>
+                            並行相關指令有：<code>lock</code>、<code>volatile</code>、<code>async</code>、<code>await</code>。
+                        </p>
+                    </section>
+                </section>
+            </section>
+
+            <hr id='objectoriented'>
+
+            <section>
+                <h2>物件導向</h2>
+                <p>
+                    C# 的物件導向語法非常豐富，可以很精準地表達說我想設計的就是什麼，比較沒有模糊空間。<br>
+                    <br>
+                    因此，C# 能夠寫出比 C++ 和 Java 更明確的類別，無論是物件操作上的規範、還是類別修改時的原則，都很容易掌控與遵循。<br>
+                    <br>
+                    所以，雖然 C# 要學的東西一大堆，但這應該是令人開心的事，而不是感到麻煩。
+                </p>
+                <hr>
+                <section>
+                    <h3>類別（Class）、抽象（Abstract）、介面（Interface）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            abstract class Super{
+
+                                protected string hiden = "";
+
+                                public void f_hiden(){
+                                    ;
+                                }
+
+                                public virtual void f_virtual(){
+                                    Console.WriteLine("virtual");
+                                }
+
+                                public abstract void f_abstract();
+
+                            }
+
+                            class Sub : Super{
+
+                                new string hiden = "hiden";
+
+                                new public void f_hiden(){
+                                    Console.WriteLine(hiden);
+                                }
+
+                                public override void f_virtual(){
+                                    Console.WriteLine("override");
+                                }
+
+                                public override void f_abstract(){
+                                    Console.WriteLine("abstract");
+                                }
+
+                            }
+
+                            interface Interface{
+
+                                void f_interface();
+
+                            }
+
+                            class Implement : Interface{
+
+                                public void f_interface(){
+                                    Console.WriteLine("interface");
+                                }
+
+                            }
+
+                            class MainProgram{
+
+                                static void Main(){
+
+                                    //hiden, virtual, override
+                                    Sub s = new Sub();
+                                    s.f_hiden();
+                                    s.f_virtual();
+                                    s.f_abstract();
+
+                                    //interface
+                                    Interface i = new Implement();
+                                    i.f_interface();
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            override<br>
+                            hiden<br>
+                            abstract<br>
+                            interface
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>方法（Method）、參數和引數（Parameter and Argument）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class Class{
+
+                                public void f_ref(ref string x){
+                                    x = "ref";
+                                }
+
+                                public void f_out(out string x){
+                                    x = "out";
+                                }
+
+                                public void f_in(in string x){
+                                    //x += x;
+                                    Console.WriteLine(x);
+                                }
+
+                                public void f_params(params string[] x){
+                                    foreach(string n in x) Console.Write("{0} ", n);
+                                    Console.WriteLine();
+                                }
+
+                                public void f_optional(string x="optional"){
+                                    Console.WriteLine(x);
+                                }
+
+                                public void f_named(string x, string y, string z){
+                                    Console.WriteLine(x + y + z);
+                                }
+
+                            }
+
+                            class MainProgram{
+                                static void Main(){
+
+                                    string a = "";
+
+                                    Class c = new Class();
+
+                                    //ref
+                                    c.f_ref(ref a);
+                                    Console.WriteLine(a);
+
+                                    //out
+                                    c.f_out(out a);
+                                    Console.WriteLine(a);
+
+                                    //in
+                                    a = "in";
+                                    c.f_in(a);
+
+                                    //params
+                                    c.f_params("param1", "param2", "param3");
+
+                                    //optional argument
+                                    c.f_optional();
+
+                                    //named argument
+                                    c.f_named(y:"named2", z:"named3", x:"named1");
+
+                                }
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            ref<br>
+                            out<br>
+                            in<br>
+                            param1 param2 param3<br>
+                            optional<br>
+                            named1 named2 named3
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>擴充方法（Extension method）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            public static class ExtensionMethod{
+
+                                public static string Triple(this string x){
+                                    return x + x + x;
+                                }
+
+                                public static int Triple(this int x){
+                                    return x * 3;
+                                }
+
+                                //重點在方法的參數使用了 this，且必須宣告為 static。
+
+                            }
+
+                            class MainProgram{
+
+                                static void Main(){
+
+                                    string a = "ABC";
+                                    Console.WriteLine(a.Triple());
+
+                                    int b = 123;
+                                    Console.WriteLine(b.Triple());
+
+                                }
+
+                            }
+
+                            //有這語法，就不用為了擴充方法另外繼承一個新的類別，而是直接追加進去！
+                        </textarea>
+                        <br>
+                        <output>
+                            ABCABCABC<br>
+                            369
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>屬性（Property）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class Property{
+
+                                string text;
+
+                                public int Number{
+                                    get;
+                                    set;
+                                }
+
+                                public string Text{
+                                    get{
+                                        return string.Format("Hello, {0}!", text);
+                                    }
+                                    set{
+                                        text = value + value;
+                                    }
+                                }
+
+                            }
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    Property p = new Property();
+                                    p.Number = 123;
+                                    p.Text = "ABC";
+                                    Console.WriteLine("{0} {1}", p.Number, p.Text);
+                                }
+
+                            }
+
+                            // get 和 set 這樣的語法功能，在 C# 叫做存取器（Accessor）。
+                        </textarea>
+                        <br>
+                        <output>
+                            123 Hello, ABCABC!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>索引器（Indexer）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class Indexer&lt;T&gt;{
+
+                                T[] index = new T[100];
+
+                                public T this[int n]{
+                                    get{
+                                        return index[n];
+                                    }
+                                    set{
+                                        index[n] = value;
+                                    }
+                                }
+
+                            }
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    Indexer&lt;string&gt; n = new Indexer&lt;string&gt;();
+                                    n[0] = "indexer";
+                                    Console.WriteLine(n[0]);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            indexer
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>運算子重載（Operator overloading）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class OperatorOverloading{
+
+                                string star;
+
+                                public OperatorOverloading(){
+                                    star = "*";
+                                }
+
+                                public OperatorOverloading(string x){
+                                    star = x;
+                                }
+
+                                public override string ToString(){
+                                    return star;
+                                }
+
+                                public static OperatorOverloading operator ++(
+                                OperatorOverloading x){
+                                    OperatorOverloading o = new OperatorOverloading(x.star);
+                                    o.star = x.star + "*";
+                                    return o;
+                                }
+
+                                public static OperatorOverloading operator +(
+                                OperatorOverloading x, OperatorOverloading y){
+                                    OperatorOverloading o = new OperatorOverloading(x.star);
+                                    o.star = x.star + y.star;
+                                    return o;
+                                }
+
+                                public static explicit operator int(OperatorOverloading x){
+                                    return x.star.Length;
+                                }
+
+                            }
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    OperatorOverloading o = new OperatorOverloading();
+                                    Console.WriteLine(++o);
+                                    Console.WriteLine(o+o);
+                                    Console.WriteLine((int)o);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            **<br>
+                            ****<br>
+                            2
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>泛型（Generic）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class Class<TYPE>{
+
+                                TYPE variable;
+
+                                public Class(TYPE x){
+                                    variable = x;
+                                }
+
+                                public TYPE Get(){
+                                    return variable;
+                                }
+
+                            }
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    Class<int> c1 = new Class<int>(123);
+                                    Console.WriteLine(c1.Get());
+                                    Class<string> c2 = new Class<string>("ABC");
+                                    Console.WriteLine(c2.Get());
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>命名空間（Namespace）</h3>
+                    <section>
+                        <h4>namespace</h4>
+                        <p>
+                            <textarea class='brush:cs'>
+                                //用命名空間可避免類別名稱與別人重複起衝突
+                                namespace Project{
+                                    class Class1{
+
+                                        public Class1(){
+                                            System.Console.WriteLine("Class 1");
+                                        }
+
+                                    }
+                                }
+
+                                //命名空間可以再包含一個命名空間
+                                namespace Project{
+                                    namespace Test{
+                                        class Class2{
+
+                                            public Class2(){
+                                                System.Console.WriteLine("Class 2");
+                                            }
+
+                                        }
+                                    }
+                                }
+
+                                //嵌套命名空間的另外一種寫法
+                                namespace Project.Test{
+                                    class Class3{
+
+                                        public Class3(){
+                                            System.Console.WriteLine("Class 3");
+                                        }
+
+                                    }
+                                }
+
+                                //透過命名空間使用類別
+                                class MainProgram{
+
+                                    static void Main(){
+                                        new Project.Class1();
+                                        new Project.Test.Class2();
+                                        new Project.Test.Class3();
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                Class 1<br>
+                                Class 2<br>
+                                Class 3
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>using</h4>
+                        <section>
+                            <h5>Class1.cs</h5>
+                            <p>
+                                <textarea class='brush:cs'>
+                                    namespace Project{
+                                        class Class1{
+
+                                            public Class1(){
+                                                System.Console.WriteLine("Class 1");
+                                            }
+
+                                        }
+                                    }
+                                </textarea>
+                            </p>
+                        </section>
+                        <section>
+                            <h5>Class2.cs</h5>
+                            <p>
+                                <textarea class='brush:cs'>
+                                    namespace Project{
+                                        class Class2{
+
+                                            public Class2(){
+                                                System.Console.WriteLine("Class 2");
+                                            }
+
+                                        }
+                                    }
+                                </textarea>
+                            </p>
+                        </section>
+                        <section>
+                            <h5>Class3.cs</h5>
+                            <p>
+                                <textarea class='brush:cs'>
+                                    namespace Project.Test{
+                                        class Class3{
+
+                                            public Class3(){
+                                                System.Console.WriteLine("Class 3");
+                                            }
+
+                                        }
+                                    }
+                                </textarea>
+                            </p>
+                        </section>
+                        <section>
+                            <h5>MainProgram.cs</h5>
+                            <p>
+                                <textarea class='brush:cs'>
+                                    using Project;                  //進入（Accessing）命名空間
+                                    using test = Project.Test;      //對命名空間使用別名
+                                    using c3 = Project.Test.Class3; //對類別使用別名
+
+                                    class MainProgram{
+
+                                        static void Main(){
+                                            new Class1();
+                                            new Class2();
+                                            new test::Class3();
+                                            new c3();
+                                        }
+
+                                    }
+                                </textarea>
+                                <br>
+                                <output>
+                                    Class 1<br>
+                                    Class 2<br>
+                                    Class 3<br>
+                                    Class 3
+                                </output>
+                            </p>
+                        </section>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>特性（Attribute）</h3>
+                    <p>
+                        特性可夾帶數據（Metadata）給類別，語法為：<br>
+                        <br>
+                        <code>
+                            [特性]<br>
+                            class 類別名稱{<br>
+                            　…<br>
+                            }<br>
+                        </code>
+                        <br>
+                        除了 C# 已提供的特性，我們也可以透過繼承 System.Attribute 產生新的特性來用。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>反射（Reflection）</h3>
+                    <p>
+                        反射可以讓我們在執行期檢視物件內部結構，當我們不知道執行期會遇到哪個物件、也不知道會有哪些功能，就可以透過反射來使用未知的物件…雖然這通常不會是很好的設計，往往都在破壞物件導向設計原則。<br>
+                        <br>
+                        .NET 提供了 System.Type 類別，用來分析類別和物件的內部結構。只要使用 <code>typeof(類別)</code> 或呼叫物件的 <code>GetType()</code>，就可以傳回 Type 物件。<br>
+                        <br>
+                        要調用內部功能的話，可對 Type 物件呼叫 <var>GetMethods()</var> 取得 MethodInfo 物件，再執行 MethodInfo 的 <var>Invoke(object obj, object[] parameters)</var> 即可。其它內部成員依此類推，取得對應的 XxxInfo 物件，再看怎樣去使用它。<br>
+                        <br>
+                        反射是深入研究的話會很龐大的主題，在 System.Reflection 命名空間提供完整的支援。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='delegate'>
+
+            <section>
+                <h2>委派</h2>
+                <p>
+                    委派的相關功能，是隨著 C# 版本不斷追加進去的，所以不同寫法做的卻是同一件事時，盡量用新的寫法取代舊的，除非編譯器版本老舊不支援。
+                </p>
+                <hr>
+                <section>
+                    <h3>用委派設計函數物件</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class MainProgram{
+
+                                //制定委派的格式
+                                delegate void Function(int x);
+
+                                //符合委派格式的函式
+                                static void f1(int x){
+                                    Console.WriteLine(x);
+                                }
+                                static void f2(int x){
+                                    Console.WriteLine(x*2);
+                                }
+                                static void f3(int x){
+                                    Console.WriteLine(x*3);
+                                }
+
+                                //切換函數物件
+                                static void Main(){
+                                    Function f;
+                                    f = new Function(f1);
+                                    f(123);
+                                    f = new Function(f2);
+                                    f(123);
+                                    f = new Function(f3);
+                                    f(123);
+                                }
+
+                            }
+
+                            //f = new Function(f1) 的寫法，可以寫成 f = f1。
+                        </textarea>
+                        <br>
+                        <output>
+                            123<br>
+                            246<br>
+                            369
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>傳遞函數物件為參數</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class MainProgram{
+
+                                //制定委派的格式
+                                delegate string Function();
+
+                                //符合委派格式的函式
+                                static string GetString(){
+                                    return "Hello!";
+                                }
+
+                                //參數宣告為委派格式的函式
+                                static void Print(Function f){
+                                    Console.Write(f());
+                                }
+
+                                //將符合委派的函式傳入參數
+                                static void Main(){
+                                    Print(GetString);
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>藉由函數物件參數實現匿名函式（Anonymous function）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class MainProgram{
+
+                                //制定委派的格式
+                                delegate void Function(string x);
+
+                                //參數宣告為委派格式的函式
+                                static void World(Function f){
+                                    f("world");
+                                }
+                                static void MyFriend(Function f){
+                                    f("my friend");
+                                }
+
+                                //利用委派產生匿名函式
+                                static void Main(){
+                                    World(delegate(string x){
+                                        Console.WriteLine("Hello, {0}!", x);
+                                    });
+                                    MyFriend(delegate(string x){
+                                        Console.WriteLine("Hello, {0}!", x);
+                                    });
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello, world!<br>
+                            Hello, my friend!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>匿名函式可改寫為 λ 運算式（Lambda expression）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class MainProgram{
+
+                                //制定委派的格式
+                                delegate void Function(string x);
+
+                                //參數宣告為委派格式的函式
+                                static void World(Function f){
+                                    f("world");
+                                }
+                                static void MyFriend(Function f){
+                                    f("my friend");
+                                }
+
+                                //使用 Lambda 運算式
+                                static void Main(){
+                                    World((x)=>Console.WriteLine("Hello, {0}!", x));
+                                    MyFriend((x)=>Console.WriteLine("Hello, {0}!", x));
+                                }
+
+                            }
+
+                            //只有一個參數時，可以省略 ()。
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello, world!<br>
+                            Hello, my friend!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>多播（Multicast）</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class MainProgram{
+
+                                //制定委派的格式
+                                delegate void Function();
+
+                                //符合委派格式的函式
+                                static void f1(){
+                                    Console.WriteLine(111);
+                                }
+                                static void f2(){
+                                    Console.WriteLine(222);
+                                }
+                                static void f3(){
+                                    Console.WriteLine(333);
+                                }
+
+                                //多播
+                                static void Main(){
+                                    Function f;
+                                    f = f1;
+                                    f += f2;
+                                    f += f3;
+                                    f();
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            111<br>
+                            222<br>
+                            333
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>事件（Event）</h3>
+                    <p>
+                        .NET 提供的事件，就是以委派為架構，搭配 event 關鍵字自動化多播，所設計出來的！雖然平常不太需要自己設計事件來用，但了解一下是怎麼設計的，滿足一下求知欲也不錯：<br>
+                        <br>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            delegate void Handler();
+
+                            class Event{
+
+                                public event Handler handler;
+
+                                public void OnEvent(){
+                                    handler();
+                                }
+
+                            }
+
+                            class MainProgram{
+
+                                static void Handler(){
+                                    Console.WriteLine("ON EVENT 1");
+                                }
+
+                                static void Main(){
+                                    Event e = new Event();
+                                    e.handler += Handler;
+                                    e.handler += () => Console.WriteLine("ON EVENT 2");;
+                                    e.OnEvent();
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            ON EVENT 1<br>
+                            ON EVENT 2
+                        </output>
+                        <br>
+                        event 的多播可以用 <code>add</code> 存取器和 <code>remove</code> 存取器覆寫 += 和 -= 的功能。<br>
+                        <br>
+                        為相容 .NET 的事件，通常委派時設計成 void Handler(object sender, EventArgs e) 的形式，即使這些參數沒有要用也沒關係，系統會自動略過。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>協變與逆變（Covariant and Contravariant）</h3>
+                    <p>
+                        協變：返回值的型別是父類別時可以自動轉換。<br>
+                        逆變：參數的型別是子類別時可以自動轉換。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='exceptionhandling'>
+
+            <section>
+                <h2>例外處理（Exception handling）</h2>
+                <p>
+                    過去透過函式傳回值來判斷錯誤訊息，經常因為除錯的程式碼和執行的程式碼混在一起，苦不堪言。例外為除錯提供專屬區塊，要執行的程式碼放在 try，要捕捉的錯誤放在 catch，結構化變得更清晰，大幅提升可讀性。語法如下：<br>
+                    <br>
+                    <code>
+                        try{<br>
+                        　可能會發生狀況的程式<br>
+                        　checked{<br>
+                        　　整數發生不會導致錯誤的溢位時仍拋出例外<br>
+                        　}<br>
+                        　unchecked{<br>
+                        　　整數發生會導致錯誤的溢位時也不拋出例外<br>
+                        　}<br>
+                        }<br>
+                        catch(XxxException){<br>
+                        　捕捉到特定狀況的訊息<br>
+                        }<br>
+                        catch(XxxException e){<br>
+                        　透過物件進一步獲取狀況的內容<br>
+                        }<br>
+                        catch{<br>
+                        　捕捉到其他狀況的訊息<br>
+                        }<br>
+                        finally{<br>
+                        　一定會執行的程式<br>
+                        }<br>
+                    </code>
+                    <br>
+                    可以繼承 System.Exception 新增自己的例外，然後用 <code>throw</code> 拋出，拋出例外時記得 new 成物件。
+                </p>
+            </section>
+
+            <hr id='linq'>
+
+            <section>
+                <h2>LINQ</h2>
+                <p>
+                    LINQ 全文是 Language Integrated Query，意思是把查詢功能整合到語言裡面，直接就能下語法操作資料。<br>
+                    <br>
+                    重點是有了這套語言，無論要操作的資料來源是陣列、集合、資料庫、XML，都可以用一樣的語法，而不是各自用不同的 API，是程式語言史上劃時代的發明！<br>
+                    <br>
+                    由於 LINQ 的語法很接近 SQL，已經會的人學習門檻低，而且用起來方便有效率，可以突破不少傳統程式設計處理資料的瓶頸與限制，讓大家對它愛不釋手。<br>
+                    <br>
+                    其他程式語言沒有類似的東西，因此 LINQ 被視為 C# 的殺手鐧，很多人在 C# 用過 LINQ 後就回不去了～
+                </p>
+                <hr>
+                <section>
+                    <h3>語法概述</h3>
+                    <p>
+                        LINQ 一律以 <code>from.. in..</code> 開頭，以 <code>select</code> 或 <code>group.. by..</code> 結束，中間可加入各種子句，像是 <code>where</code>、<code>orderby</code>、<code>join.. in.. on.. equals..</code>、<code>let</code>…<br>
+                        <br>
+                        開頭和中間子句能重複一樣的指令，一層層或一批批處理資料。巧妙應用的話，經常能把幾十行程式碼才能搞定的事，縮短成三四行。<br>
+                        <br>
+                        若要重複結束的子句，那就是重複整個 LINQ 語句的意思，這要追加 <code>into</code> 構成分句，將這一次 LINQ 的結果保存在識別名稱，做為下一個 LINQ 語句的資料來源。<br>
+                        <br>
+                        另外，在 LINQ 結束語句用 <code>new</code> 將資料結構化成物件傳回也是很常見的用法。<br>
+                        <br>
+                        LINQ 語句結束後，會傳回 <code>IEnumerable&lt;T&gt;</code> 物件，查閱這介面的 API 可以了解更多操作資料的方式。由於 LINQ 並未提供該介面的所有功能，因此 LINQ 經常會用 <code>(LINQ 語句).API 方法()</code> 的形式，呼叫 API 的方法操作資料。所以並不是只會 LINQ 語句就算完整，還得了解 Enumerable 物件有哪些方法可以操作，這部分會在「方法語法」一節介紹。<br>
+                        <br>
+                        LINQ 是用起來很精妙的語法！我們除了把自己日常處理資料的語句建立起來外，日後還要再多看別人寫的 LINQ 語句，把好的句子抄下來，找機會用上。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>基本綜合練習</h3>
+                    <p>
+                        首先，一定要會的是 from、where、select 這三個子句：<br>
+                        <br>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.Collections.Generic;
+                            using System.Linq;
+
+                            class MainProgram{
+
+                                static void Main(){
+
+                                    //建立一組資料
+                                    int[] numbers = { 1, 3, 5, 7, 9, 2, 4, 6, 8, 10 };
+
+                                    //使用 LINQ 語法處理資料然後用 foreach 輸出
+                                    IEnumerable&lt;int&gt; enumerator = from n in numbers where n &gt; 5 select n;
+                                    foreach(var n in enumerator) Console.Write(n);
+
+                                    //使用 API 做等同上面程式的事
+                                    numbers.Where(x =&gt; x&gt;5)
+                                           .Select(x =&gt; x)
+                                           .ToList()
+                                           .ForEach(x =&gt; Console.Write(x));
+
+                                    //也可以一行搞定所有工作並且寫得短一些
+                                    new[]{1,3,5,7,9,2,4,6,8,10}.Where(x =&gt; x&gt;5).ToList().ForEach(Console.Write);
+
+                                    //說到一行搞定還有這個
+                                    Enumerable.Range(1,9).Where(x =&gt; x&gt;5).ToList().ForEach(Console.Write);
+
+                                    //九九乘法表
+                                    var table = from a in Enumerable.Range(2, 8)
+                                                from b in Enumerable.Range(1, 9)
+                                                select new { A=a, B=b, Product=a*b };
+                                    foreach(var n in table){
+                                        Console.WriteLine("{0} * {1} = {2}", n.A, n.B, n.Product);
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            796810<br>
+                            796810<br>
+                            796810<br>
+                            6789<br>
+                            2 * 1 = 2<br>
+                            2 * 2 = 4<br>
+                            2 * 3 = 6<br>
+                            2 * 4 = 8<br>
+                            2 * 5 = 10<br>
+                            2 * 6 = 12<br>
+                            2 * 7 = 14<br>
+                            2 * 8 = 16<br>
+                            2 * 9 = 18<br>
+                            3 * 1 = 3<br>
+                            3 * 2 = 6<br>
+                            3 * 3 = 9<br>
+                            3 * 4 = 12<br>
+                            3 * 5 = 15<br>
+                            3 * 6 = 18<br>
+                            3 * 7 = 21<br>
+                            3 * 8 = 24<br>
+                            3 * 9 = 27<br>
+                            4 * 1 = 4<br>
+                            4 * 2 = 8<br>
+                            4 * 3 = 12<br>
+                            4 * 4 = 16<br>
+                            4 * 5 = 20<br>
+                            4 * 6 = 24<br>
+                            4 * 7 = 28<br>
+                            4 * 8 = 32<br>
+                            4 * 9 = 36<br>
+                            5 * 1 = 5<br>
+                            5 * 2 = 10<br>
+                            5 * 3 = 15<br>
+                            5 * 4 = 20<br>
+                            5 * 5 = 25<br>
+                            5 * 6 = 30<br>
+                            5 * 7 = 35<br>
+                            5 * 8 = 40<br>
+                            5 * 9 = 45<br>
+                            6 * 1 = 6<br>
+                            6 * 2 = 12<br>
+                            6 * 3 = 18<br>
+                            6 * 4 = 24<br>
+                            6 * 5 = 30<br>
+                            6 * 6 = 36<br>
+                            6 * 7 = 42<br>
+                            6 * 8 = 48<br>
+                            6 * 9 = 54<br>
+                            7 * 1 = 7<br>
+                            7 * 2 = 14<br>
+                            7 * 3 = 21<br>
+                            7 * 4 = 28<br>
+                            7 * 5 = 35<br>
+                            7 * 6 = 42<br>
+                            7 * 7 = 49<br>
+                            7 * 8 = 56<br>
+                            7 * 9 = 63<br>
+                            8 * 1 = 8<br>
+                            8 * 2 = 16<br>
+                            8 * 3 = 24<br>
+                            8 * 4 = 32<br>
+                            8 * 5 = 40<br>
+                            8 * 6 = 48<br>
+                            8 * 7 = 56<br>
+                            8 * 8 = 64<br>
+                            8 * 9 = 72<br>
+                            9 * 1 = 9<br>
+                            9 * 2 = 18<br>
+                            9 * 3 = 27<br>
+                            9 * 4 = 36<br>
+                            9 * 5 = 45<br>
+                            9 * 6 = 54<br>
+                            9 * 7 = 63<br>
+                            9 * 8 = 72<br>
+                            9 * 9 = 81
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>其它常用子句</h3>
+                    <section>
+                        <h4>group</h4>
+                        <p>
+                            句法：<code>group 變數 by 鍵值</code><br>
+                            <br>
+                            依鍵值產生鍵值對資料到變數名稱。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>orderby</h4>
+                        <p>
+                            句法：<code>orderby 資料 [ascending 或 descending]</code><br>
+                            <br>
+                            排序資料。ascending 是遞增排序，由於是預設值，可以省略。descending 是遞減排序。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>join</h4>
+                        <p>
+                            句法：<code>join 變數 in 資料 on ＦＲＯＭ變數 equals ＪＯＩＮ變數</code><br>
+                            <br>
+                            依相同的部分，將資料跟 from.. in.. 合併。<br>
+                            <br>
+                            由於只合併 equals 比對後相等的資料，因此對一維的串列資料來說，這句子似乎沒什麼價值。但如果是二維的鍵值對資料，就可以把比對的資料當鍵值，將兩串資料分類後合併在一起。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>let</h4>
+                        <p>
+                            句法：<code>let 變數 = 算式</code><br>
+                            <br>
+                            建立一個變數保存資料，好讓其它子句使用。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>into</h4>
+                        <p>
+                            句法：<code>into 變數 新的語句</code><br>
+                            <br>
+                            將結果保存到變數名稱，好串接另一個 LINQ 語句時使用，就像展開新的「from 變數 in 資料」一樣。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>List.ForEach() 的委派和匿名函式</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.Linq;
+
+                            class MainProgram{
+
+                                static void f(int x){
+                                    Console.Write(x);
+                                }
+
+                                static void Main(){
+
+                                    //委派
+                                    new[]{1,3,5,7,9}.ToList().ForEach(f);
+
+                                    //匿名函式
+                                    new[]{1,3,5,7,9}.ToList().ForEach(delegate(int x){
+                                        Console.Write(x);
+                                    });
+
+                                    //λ 運算式
+                                    new[]{1,3,5,7,9}.ToList().ForEach(x=>Console.Write(x));
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            13579<br>
+                            13579<br>
+                            13579
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>ParallelEnumerable.ForAll() 多執行緒查詢</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.Collections.Generic;
+                            using System.Linq;
+
+                            class MainProgram{
+
+                                static void Main(){
+
+                                    int[] array = {1,3,5,7,9};
+
+                                    (from n in array select n-1).AsParallel().ForAll(Console.Write);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            04628　每次執行結果，順序不一定。適合用來求值，例如總和。
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>LINQ 轉 Array</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+                            using System.Collections.Generic;
+                            using System.Linq;
+
+                            class MainProgram{
+
+                                static void Main(){
+
+                                    int[] array = (from n in Enumerable.Range(1, 9) where n%2==0 select n).ToArray();
+
+                                    foreach(var n in array) Console.Write(n);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            2468
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>方法語法</h3>
+                    <p>
+                        <var>
+                            IEnumerable.GetEnumerator()<br>
+                            <br>
+                            IEnumerator.Current<br>
+                            IEnumerator.MoveNext()<br>
+                            IEnumerator.Rest()<br>
+                        </var>
+                    </p>
+                    <table>
+                        <tr><td>Enumerable.Aggregate()</td><td></td></tr>
+                        <tr><td>Enumerable.All(條件)</td><td>資料是否全符合條件</td></tr>
+                        <tr><td>Enumerable.Any(條件)</td><td>是否有資料符合條件</td></tr>
+                        <tr><td>Enumerable.Append(資料)</td><td>添加資料到尾端</td></tr>
+                        <tr><td>Enumerable.AsEnumerable()</td><td></td></tr>
+                        <tr><td>Enumerable.Average()</td><td>平均值</td></tr>
+                        <tr><td>Enumerable.Cast&lt;型別&gt;()</td><td>轉換資料的型別</td></tr>
+                        <tr><td>Enumerable.Concat(串列)</td><td>串連另一串資料</td></tr>
+                        <tr><td>Enumerable.Contains(資料)</td><td>是否包含資料</td></tr>
+                        <tr><td>Enumerable.Count()</td><td>資料筆數</td></tr>
+                        <tr><td>Enumerable.DefaultIfEmpty()</td><td></td></tr>
+                        <tr><td>Enumerable.Distinct()</td><td></td></tr>
+                        <tr><td>Enumerable.ElementAt(索引值)</td><td>取得某一筆資料</td></tr>
+                        <tr><td>Enumerable.ElementAtOrDefault(索引值)</td><td>取得某一筆資料或傳回索引值</td></tr>
+                        <tr><td>Enumerable.Empty()</td><td></td></tr>
+                        <tr><td>Enumerable.Except(串列)</td><td>取得兩串資料差異的部分</td></tr>
+                        <tr><td>Enumerable.First()</td><td>第一筆資料</td></tr>
+                        <tr><td>Enumerable.FirstOrDefault()</td><td>第一筆資料或傳回預設值</td></tr>
+                        <tr><td>Enumerable.GroupBy()</td><td></td></tr>
+                        <tr><td>Enumerable.GroupJoin()</td><td></td></tr>
+                        <tr><td>Enumerable.Intersect()</td><td></td></tr>
+                        <tr><td>Enumerable.Join()</td><td></td></tr>
+                        <tr><td>Enumerable.Last()</td><td>最後一筆資料</td></tr>
+                        <tr><td>Enumerable.LastOrDefault()</td><td>最後一筆資料或傳回預設值</td></tr>
+                        <tr><td>Enumerable.LongCount()</td><td></td></tr>
+                        <tr><td>Enumerable.Max()</td><td>最大值</td></tr>
+                        <tr><td>Enumerable.Min()</td><td>最小值</td></tr>
+                        <tr><td>Enumerable.OfType()</td><td></td></tr>
+                        <tr><td>Enumerable.OrderBy()</td><td></td></tr>
+                        <tr><td>Enumerable.OrderByDescending()</td><td></td></tr>
+                        <tr><td>Enumerable.Prepend(資料)</td><td>添加資料到前端</td></tr>
+                        <tr><td>Enumerable.Range()</td><td></td></tr>
+                        <tr><td>Enumerable.Repeat(資料, 筆數)</td><td>填入資料</td></tr>
+                        <tr><td>Enumerable.Reverse()</td><td>反轉資料順序</td></tr>
+                        <tr><td>Enumerable.Select()</td><td></td></tr>
+                        <tr><td>Enumerable.SelectMany()</td><td></td></tr>
+                        <tr><td>Enumerable.SequenceEqual()</td><td></td></tr>
+                        <tr><td>Enumerable.Single()</td><td></td></tr>
+                        <tr><td>Enumerable.SingleOrDefault()</td><td></td></tr>
+                        <tr><td>Enumerable.Skip(筆數)</td><td>跳過前幾筆資料</td></tr>
+                        <tr><td>Enumerable.SkipWhile(條件)</td><td>取得符合條件之後的資料</td></tr>
+                        <tr><td>Enumerable.Sum()</td><td>資料總和</td></tr>
+                        <tr><td>Enumerable.Take(筆數)</td><td>取得前幾筆資料</td></tr>
+                        <tr><td>Enumerable.TakeWhile(條件)</td><td>取得符合條件之前的資料</td></tr>
+                        <tr><td>Enumerable.ThenBy()</td><td></td></tr>
+                        <tr><td>Enumerable.ThenByDescending()</td><td></td></tr>
+                        <tr><td>Enumerable.ToArray()</td><td></td></tr>
+                        <tr><td>Enumerable.ToDictionary()</td><td></td></tr>
+                        <tr><td>Enumerable.ToHashSet()</td><td></td></tr>
+                        <tr><td>Enumerable.ToList()</td><td></td></tr>
+                        <tr><td>Enumerable.ToLookup()</td><td></td></tr>
+                        <tr><td>Enumerable.Union()</td><td></td></tr>
+                        <tr><td>Enumerable.Where()</td><td></td></tr>
+                        <tr><td>Enumerable.Zip()</td><td></td></tr>
+                    </table>
+                    <section>
+                        <h4>範例</h4>
+                        <p>
+                            <textarea class='brush:cs'>
+                                using System;
+                                using System.Collections.Generic;
+                                using System.Linq;
+
+                                class MainProgram{
+
+                                    static void Main(){
+
+                                        //建立一串資料
+                                        int[] array = { 1, 3, 5, 7, 9, 2, 4, 6, 8, 10 };
+
+                                        //用 Take() 取得前五筆資料
+                                        array.Take(5).ToList().ForEach(Console.Write);
+
+                                        //用 Skip() 跳過前五筆資料
+                                        array.Skip(5).ToList().ForEach(Console.Write);
+
+                                        //用 TakeWhile() 取得小於 7 以前的資料
+                                        array.TakeWhile(x =&gt; x&lt;7).ToList().ForEach(Console.Write);
+
+                                        //用 SkipWhile() 取得小於 7 以後的資料
+                                        array.SkipWhile(x =&gt; x&lt;7).ToList().ForEach(Console.Write);
+
+                                        //用 Any() 判斷是否有資料大於 7
+                                        Console.Write(array.Any(x =&gt; x&gt;7));
+
+                                        //用 All() 判斷是否所有資料大於 0
+                                        Console.Write(array.All(x =&gt; x&gt;0));
+
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                13579<br>
+                                246810<br>
+                                135<br>
+                                79246810<br>
+                                True<br>
+                                True
+                            </output>
+                        </p>
+                    </section>
+                </section>
+            </section>
+
+            <hr id='collections'>
+
+            <section>
+                <h2>集合</h2>
+                <p>
+                    自從 C# 新增 LINQ 語法，集合有一部分的用途可以被取代。<br>
+                    <br>
+                    但兩者應用場合不同，集合本質上不是資料的操作，而是資料的來源，如果要對同一批資料進行反覆的操作，使用集合物件比較有可讀性，或者要對某個資料體進行增刪的動作，使用集合物件比較有效率。<br>
+                    <br>
+                    LINQ 其實就像進一步操作集合物件的語法工具，所以我們應該隨上下文的語意切換 LINQ 和集合，而不是只認定其中一種、否定另外一種。
+                </p>
+                <hr>
+                <section>
+                    <h3>ArrayList 和 Hashtable</h3>
+                    <p>
+                        在 C# 還不支援泛型時，.NET Framework 最主要的資料結構類別是 system.collections 的 ArrayList 和 Hashtable。<br>
+                        <br>
+                        最常用的就這兩個，其它還會用到的大概就 Queue 和 Stack 吧？<br>
+                        <br>
+                        後來引進 LINQ 時，這些類別並未實作其功能，只在新的 system.collections.generic 類別實作，因此漸漸用 List 和 Dictionary 取而代之，ArrayList 和 Hashtable 有種走入歷史的感覺～<br>
+                        <br>
+                        寫 C# 程式很難抗拒 LINQ 蜜糖般的誘惑，空有 ArrayList 和 Hashtable 資料結構，沒有 LINQ 接手各式演算法，就不像在寫 C# 程式了。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>List</h3>
+                    <p>
+                        <var>
+                            Capacity<br>
+                            Count<br>
+                            Add()<br>
+                            AddRange()<br>
+                            AsReadOnly()<br>
+                            BinarySearch()<br>
+                            Clear()<br>
+                            Contains()<br>
+                            ConvertAll()<br>
+                            CopyTo()<br>
+                            Exists()<br>
+                            Find()<br>
+                            FindAll()<br>
+                            FindIndex()<br>
+                            FindLast()<br>
+                            FindLastIndex()<br>
+                            ForEach()<br>
+                            GetEnumerator()<br>
+                            GetRange()<br>
+                            IndexOf()<br>
+                            Insert()<br>
+                            InsertRange()<br>
+                            IsFixedSize()<br>
+                            IsReadOnly()<br>
+                            IsSynchronized()<br>
+                            LastIndexOf()<br>
+                            Remove()<br>
+                            RemoveAll()<br>
+                            RemoveAt()<br>
+                            RemoveRange()<br>
+                            Reverse()<br>
+                            Sort()<br>
+                            SyncRoot()<br>
+                            ToArray()<br>
+                            TrimExcess()<br>
+                            TrueForAll()
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>LinkedList</h3>
+                    <p>
+                        <var>
+                            Count<br>
+                            First<br>
+                            Last<br>
+                            AddAfter()<br>
+                            AddBefore()<br>
+                            AddFirst()<br>
+                            AddLast()<br>
+                            Clear()<br>
+                            Contains()<br>
+                            CopyTo()<br>
+                            Find()<br>
+                            FindLast()<br>
+                            GetEnumerator()<br>
+                            GetObjectData()<br>
+                            OnDeserialization()<br>
+                            Remove()<br>
+                            RemoveFirst()<br>
+                            RemoveLast()
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Queue</h3>
+                    <p>
+                        <var>
+                            Count<br>
+                            Clear()<br>
+                            Contains()<br>
+                            CopyTo()<br>
+                            Dequeue()<br>
+                            Enqueue()<br>
+                            GetEnumerator()<br>
+                            Peek()<br>
+                            IsSynchronized()<br>
+                            SyncRoot()<br>
+                            ToArray()<br>
+                            TrimExcess()<br>
+                            TryDequeue()<br>
+                            TryPeek()
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Stack</h3>
+                    <p>
+                        <var>
+                            Count<br>
+                            Clear()<br>
+                            Contains()<br>
+                            CopyTo()<br>
+                            GetEnumerator()<br>
+                            IsSynchronized()<br>
+                            Peek()<br>
+                            Pop()<br>
+                            Push()<br>
+                            SyncRoot()<br>
+                            ToArray()<br>
+                            TrimExcess()<br>
+                            TryPeek()<br>
+                            TryPop()
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>HashSet</h3>
+                    <p>
+                        <var>
+                            Comparer<br>
+                            Count<br>
+                            Add()<br>
+                            Clear()<br>
+                            Contains()<br>
+                            CopyTo()<br>
+                            CreateSetComparer()<br>
+                            EnsureCapacity()<br>
+                            ExceptWith()<br>
+                            GetEnumerator()<br>
+                            GetObjectData()<br>
+                            IntersectWith()<br>
+                            IsProperSubsetOf()<br>
+                            IsProperSupersetOf()<br>
+                            IsSubsetOf()<br>
+                            IsSupersetOf()<br>
+                            OnDeserialization()<br>
+                            Overlaps()<br>
+                            Remove()<br>
+                            RemoveWhere()<br>
+                            SetEquals()<br>
+                            SymmetricExceptWith()<br>
+                            TrimExcess()<br>
+                            TryGetValue()<br>
+                            UnionWith()
+                        </var>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Dictionary</h3>
+                    <p>
+                        <var>
+                            Comparer<br>
+                            Count<br>
+                            Keys<br>
+                            Values<br>
+                            Add()<br>
+                            Clear()<br>
+                            ContainsKey()<br>
+                            Contains()<br>
+                            ContainsValue()<br>
+                            CopyTo()<br>
+                            EnsureCapacity()<br>
+                            GetEnumerator()<br>
+                            GetObjectData()<br>
+                            IsFixedSize()<br>
+                            IsReadOnly()<br>
+                            IsSynchronized()<br>
+                            OnDeserialization()<br>
+                            Remove()<br>
+                            SyncRoot()<br>
+                            TrimExcess()<br>
+                            TryAdd()<br>
+                            TryGetValue()
+                        </var>
+                    </p>
+                    <section>
+                        <h4>基本用法</h4>
+                        <p>
+                            <textarea class='brush:cs'>
+                                using System;
+                                using System.Collections.Generic;
+
+                                class MainProgram{
+
+                                    static void Main(){
+
+                                        var dictionary = new Dictionary&lt;int, string&gt;();
+                                        dictionary.Add(1, "AAA");
+                                        dictionary.Add(2, "BBB");
+                                        dictionary.Add(3, "CCC");
+
+                                        var enumerator = dictionary.GetEnumerator();
+                                        while(enumerator.MoveNext()){
+                                            Console.WriteLine("{0}:{1}", enumerator.Current.Key, enumerator.Current.Value);
+                                        }
+
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                1:AAA<br>
+                                2:BBB<br>
+                                3:CCC
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>依值排序</h4>
+                        <p>
+                            這要用 LINQ 來完成：<br>
+                            <br>
+                            <textarea class='brush:cs'>
+                                using System;
+                                using System.Collections.Generic;
+                                using System.Linq;
+
+                                class MainProgram{
+
+                                    static void Main(){
+
+                                        var dictionary1 = new Dictionary&lt;int, string&gt;(){
+                                            {1, "Hero"},
+                                            {2, "Fighter"},
+                                            {3, "Cleric"},
+                                            {4, "Mage"}
+                                        };
+
+                                        var dictionary2 = dictionary1.OrderBy(x => x.Value).ToDictionary(x=>x.Key, x=>x.Value);
+
+                                        foreach(var n in dictionary2) Console.Write(n);
+
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                [3, Cleric][2, Fighter][1, Hero][4, Mage]
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>ForEach()</h4>
+                        <p>
+                            這可以用 C# 的「擴充」來實現：<br>
+                            <br>
+                            <textarea class='brush:cs'>
+                                using System;
+                                using System.Collections.Generic;
+
+                                static class LinqExtensions{
+
+                                    public static void ForEach&lt;TKey, TValue&gt;(this Dictionary&lt;TKey, TValue&gt; dictionary, Action&lt;TKey, TValue&gt; action){
+                                        foreach(KeyValuePair&lt;TKey, TValue&gt; keyvaluepair in dictionary){
+                                            action(keyvaluepair.Key, keyvaluepair.Value);
+                                        }
+                                    }
+
+                                }
+
+                                class MainProgram{
+
+                                    static void Main(){
+
+                                        var dictionary = new Dictionary&lt;int, string&gt;(){
+                                            {1, "AAA"},
+                                            {2, "BBB"},
+                                            {3, "CCC"}
+                                        };
+
+                                        dictionary.ForEach((x, y) =&gt; {
+                                            Console.WriteLine(y);
+                                        });
+
+                                    }
+
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                AAA<br>
+                                BBB<br>
+                                CCC<br>
+                            </output>
+                            <br>
+                            別忘了 LinqExtensions 可以單獨寫在一個 *.cs 檔案，C# 原本就能將類別分開寫的關係，MainProgram 無須 using 就能載入使用。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>SortedSet、SortedDictionary、SortedList</h3>
+                    <p>
+                        這三個都是有序集合，SortedSet 和 SortedDictionary 分別對應以雜湊決定順序的 HashSet 和 SortedDictionary。<br>
+                        <br>
+                        但 SortedList 對應的並不是 List！SortedList 是二元搜尋樹的鍵值對資料結構，對應的是 SortedDictionary，多了 IndexOfKey()、IndexOfValue()、RemoveAt()，可依索引值存取資料。
+                    </p>
+                    <section>
+                        <h4>SortedSet</h4>
+                        <p>
+                            <var>
+                                Comparer<br>
+                                Count<br>
+                                Max<br>
+                                Min<br>
+                                Add()<br>
+                                Clear()<br>
+                                Contains()<br>
+                                CopyTo()<br>
+                                CreateSetComparer()<br>
+                                ExceptWith()<br>
+                                GetEnumerator()<br>
+                                GetObjectData()<br>
+                                GetViewBetween()<br>
+                                IntersectWith()<br>
+                                IsProperSubsetOf()<br>
+                                IsProperSupersetOf()<br>
+                                IsSubsetOf()<br>
+                                IsSupersetOf()<br>
+                                OnDeserialization()<br>
+                                Overlaps()<br>
+                                Remove()<br>
+                                RemoveWhere()<br>
+                                Reverse()<br>
+                                SetEquals()<br>
+                                SymmetricExceptWith()<br>
+                                TryGetValue()<br>
+                                UnionWith()
+                            </var>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>SortedDictionary</h4>
+                        <p>
+                            <var>
+                                Comparer<br>
+                                Count<br>
+                                Item[]<br>
+                                Keys<br>
+                                Values<br>
+                                Add()<br>
+                                Clear()<br>
+                                ContainsKey()<br>
+                                ContainsValue()<br>
+                                CopyTo()<br>
+                                GetEnumerator()<br>
+                                Remove()<br>
+                                TryGetValue()
+                            </var4>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>SortedList</h4>
+                        <p>
+                            <var>
+                                Capacity<br>
+                                Comparer<br>
+                                Count<br>
+                                Item[]<br>
+                                Keys<br>
+                                Values<br>
+                                Add()<br>
+                                Clear()<br>
+                                ContainsKey()<br>
+                                ContainsValue()<br>
+                                GetEnumerator()<br>
+                                IndexOfKey()<br>
+                                IndexOfValue()<br>
+                                Remove()<br>
+                                RemoveAt()<br>
+                                TrimExcess()<br>
+                                TryGetValue()
+                            </var>
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>陣列與集合</h3>
+                    <p>
+                        若資料大小固定、資料型態不變，用陣列最好，因為效率最高。<br>
+                        <br>
+                        資料大小不固定時才用集合。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='iterator'>
+
+            <section>
+                <h2>迭代器</h2>
+                <p>
+                    <textarea class='brush:cs'>
+                        using System;
+                        using System.Collections;
+
+                        class MainProgram{
+
+                            static IEnumerable f(){
+                                yield return "AAA";
+                                yield return "BBB";
+                                yield return "CCC";
+                            }
+
+                            static void Main(){
+                                foreach(string a in f()){
+                                    Console.WriteLine(a);
+                                }
+                            }
+
+                        }
+
+                        //也可以用泛型的 System.Collections.Generic.IEnumerable&lt;T&gt;
+                        //在迴圈中可以使用 yield break 完成迭代
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA<br>
+                        BBB<br>
+                        CCC
+                    </output>
+                </p>
+            </section>
+
+            <hr id='process'>
+
+            <section>
+                <h2>調用外部程式功能</h2>
+                <p>
+                    <textarea class='brush:cs'>
+                        using System.Diagnostics;
+
+                        class MainProgram{
+
+                            static void Main(){
+
+                                //調用 7-Zip 壓縮檔案
+                                Process.Start("C:/Program Files/7-Zip/7z.exe", "a 我的壓縮檔.7z 我的資料夾");
+
+                                //調用 7-Zip 解壓檔案
+                                Process.Start("C:/Program Files/7-Zip/7z.exe", "x 我的壓縮檔.7z");
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr id='dll'>
+
+            <section>
+                <h2>編譯成 DLL 並載入執行</h2>
+                <hr>
+                <section>
+                    <h3>Program.cs</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            public class Program{
+
+                                public static void Print(){
+                                    Console.Write("Hello!");
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            csc /target:library Program.cs
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>MainProgram.cs</h3>
+                    <p>
+                        <textarea class='brush:cs'>
+                            using System;
+
+                            class MainProgram{
+
+                                static void Main(){
+                                    Program.Print();
+                                }
+
+                            }
+
+                            //善用動態連結程式庫在執行期載入的特性，是很有幫助的程式設計手法 💪
+                        </textarea>
+                        <br>
+                        <output>
+                            csc /reference:Program.dll /out:main.exe MainProgram.cs<br>
+                            main<br>
+                            Hello!
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 有時我會覺得自己寫的應用軟體只是幫 SQLite 寫 GUI 而已，因為大部分工作都是在操作這款資料庫。<br>
+                    [*] <a href='http://docs.go-mono.com' target='_blank'>Mono Documentation</a>
+                </p>
+                <!--
+                    到 <a href='http://github.com/mono/msbuild' target='_blank'>http://github.com/mono/msbuild</a> 下載 msbuild，裡面的 Roslyn 資料夾就有可用的編譯器。但還少了 System.Text.Encoding.CodePages.dll 檔案，可至 <a href='http://github.com/mono/roslyn-binaries/tree/master/Microsoft.Net.Compilers' target='_blank'>http://github.com/mono/roslyn-binaries/tree/master/Microsoft.Net.Compilers</a> 找到並下載。
+                -->
+            </footer>
+
+        </article>
+
+        <script>
+            if(Web.hosting()) Display.hide()
+        </script>
+
+    </body>
+
+</html>

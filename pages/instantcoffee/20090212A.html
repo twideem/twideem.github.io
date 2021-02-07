@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>JavaFX Application 圖形化介面程式設計入門</h1>
+                <p>
+                    Java SE 8 開始，JavaFX 正式成為 Java 主要的圖形化介面開發套件，Swing 將不再更新，只會維持相容性工作。未來設計視窗應用程式，應該使用 JavaFX 才對！<br>
+                    <br>
+                    JavaFX 可用來設計網路應用程式的操作介面，而不只是視窗應用程式。不但提供更多種類的控制項，操作方式也更直覺、便利，連附加特效都簡簡單單，不用再什麼 MVC 然後介面與實作分離。在程式碼部分，直接以控制項狀態變化來驅動事件的設計，更容易將圖形化介面的程式與其它程式碼規劃在一起。還可將圖形化應用程式分開成 FXML + CSS + Java，建立平面設計師與程式設計師各司其職的工作環境。<br>
+                    <br>
+                    Swing 雖然還是很好用，但只能設計 2000 年代水準的圖形化介面。邁向 2010 年代，還是改用 JavaFX 來設計圖形化應用介面的程式吧<ins>[1]</ins>！
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>建立基本視窗</h2>
+                <p>
+                    用 JavaFX API 建立視窗應用程式，語法比 AWT 或 Swing 簡潔許多，因為直接就有個 Application 類別可用，設計起來像 Applet 短小精幹：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import javafx.application.Application;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20090212A_01.png' alt='插圖'>
+                </figure>
+                <p>
+                    不需要 main()，Application 的 start() 就可以當程式入口，啟動 JavaFX 應用程式。<br>
+                    <br>
+                    但混用新舊版本的 API 功能時，沒有 main() 可能會發生相容性問題，這時再寫上去，然後在裡面呼叫 Application 的 launch()：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[16,17,18]'>
+                        import javafx.application.Application;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                stage.show();
+
+                            }
+
+                            public static void main(String[] args){
+                                launch(args);
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr id='anchor1'>
+
+            <section>
+                <h2>加入控制項</h2>
+                <p>
+                    底下示範如何在 Application 中加入「按鈕」，依樣畫葫蘆就能加入其它控制項：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[15,16,17,18,19,21,22,24]'>
+                        import javafx.application.Application;
+                        import javafx.scene.control.Button;
+                        import javafx.scene.layout.Pane;
+                        import javafx.scene.Scene;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                Button button = new Button();    //建立按鈕
+                                button.setText("別亂按");        //按鈕標題文字
+                                button.setPrefSize(200,20);      //按鈕大小
+                                button.setLayoutX(100);          //按鈕位置
+                                button.setLayoutY(100);          //按鈕位置
+
+                                Pane pane = new Pane();          //可用絕對座標的面板
+                                pane.getChildren().add(button);  //將按鈕交給面板管理
+
+                                stage.setScene(new Scene(pane)); //再將面板指定給應用程式
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20090212A_02.png' alt='插圖'>
+                </figure>
+                <p>
+                    如果不使用 Pane，直接 <code>stage.setScene(new Scene(button))</code> 的話，會使用 Application 預設的面板管理器，以相對位置配置按鈕的大小與座標，按鈕會被放大到填滿整個視窗畫面，白寫 setPrefSize()、setLayoutX()、setLayoutY()。
+                </p>
+            </section>
+
+            <hr id='anchor2'>
+
+            <section>
+                <h2>加入事件</h2>
+                <p>
+                    底下示範為按鈕（Button）加入觸發動作（onAction）的事件：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[23,24,25,26,27]'>
+                        import javafx.application.Application;
+                        import javafx.event.ActionEvent;
+                        import javafx.event.EventHandler;
+                        import javafx.scene.control.Button;
+                        import javafx.scene.layout.Pane;
+                        import javafx.scene.Scene;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                Button button = new Button();
+                                button.setText("別亂按");
+                                button.setPrefSize(200,20);
+                                button.setLayoutX(100);
+                                button.setLayoutY(100);
+
+                                button.setOnAction(new EventHandler&lt;ActionEvent&gt;(){
+                                    @Override public void handle(ActionEvent action_event){
+                                        button.setText("不是叫你別亂按嗎");
+                                    }
+                                });
+
+                                Pane pane = new Pane();
+                                pane.getChildren().add(button);
+
+                                stage.setScene(new Scene(pane));
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20090212A_03.png' alt='插圖'>
+                </figure>
+                <p>
+                    On 系列的事件，結構固定是 Handeler 裡面僅一個 handle() 等著覆寫，也就是符合 functional interface 的規則，因此可改用 Lambda 語法：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[21]'>
+                        import javafx.application.Application;
+                        import javafx.scene.control.Button;
+                        import javafx.scene.layout.Pane;
+                        import javafx.scene.Scene;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                Button button = new Button();
+                                button.setText("別亂按");
+                                button.setPrefSize(200,20);
+                                button.setLayoutX(100);
+                                button.setLayoutY(100);
+
+                                button.setOnAction(e->button.setText("不是叫你別亂按嗎"));
+
+                                Pane pane = new Pane();
+                                pane.getChildren().add(button);
+
+                                stage.setScene(new Scene(pane));
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>聆聽屬性</h2>
+                <p>
+                    JavaFX 的控制項，屬性通常可用 <var>控制項.xxxProperty().addListener()</var> 的格式加入事件，表示監聽該屬性的狀態。只要這個屬性發生狀況，就會觸發事件。<br>
+                    <br>
+                    這個功能有兩種實作，一種是 ObservableValue.addListener(ChangeListener)，它需要三個參數，可以表示屬性變化前的值與變化後的值。底下範例將監聽 Slide 的 value 屬性，並將變化後的值顯示在視窗標題上：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[16,17,18]'>
+                        import javafx.application.Application;
+                        import javafx.scene.control.Slider;
+                        import javafx.scene.layout.StackPane;
+                        import javafx.scene.Scene;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                Slider slide = new Slider();
+                                slide.valueProperty().addListener(
+                                    (observable, old_value, new_value)->stage.setTitle(new_value.toString())
+                                );
+
+                                StackPane stackPane = new StackPane();
+                                stackPane.getChildren().add(slide);
+                                stage.setScene(new Scene(stackPane));
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20090212A_04.png' alt='插圖'>
+                </figure>
+                <p>
+                    一種是 Observable.addListener(InvalidationListener)，只需一個參數，適用於值不會變化的屬性、或者對屬性值變化沒興趣的場合。底下範例一樣監聽 Slide 的 value 屬性，一有反應就在視窗標題顯示文字：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[16,17,18]'>
+                        import javafx.application.Application;
+                        import javafx.scene.control.Slider;
+                        import javafx.scene.layout.StackPane;
+                        import javafx.scene.Scene;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                Slider slide = new Slider();
+                                slide.valueProperty().addListener(
+                                    observable->stage.setTitle("哦哦哦～！動了動了，滑桿動了！")
+                                );
+
+                                StackPane stack_pane = new StackPane();
+                                stack_pane.getChildren().add(slide);
+                                stage.setScene(new Scene(stack_pane));
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20090212A_05.png' alt='插圖'>
+                </figure>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>綁定屬性</h2>
+                <p>
+                    有時候希望控制項的屬性內容，會隨著另一個控制項的屬性內容而變化。JavaFX 為屬性提供了 bind() 功能，簡單就能做到這件事！<br>
+                    <br>
+                    底下示範視窗的 minWidth 和 maxWidth 兩個屬性，與滑桿的 value 屬性綁在一起，這樣滑動滑桿的同時會調整視窗大小：<br>
+                    <br>
+                    <textarea class='brush:java;highlight:[16,17]'>
+                        import javafx.application.Application;
+                        import javafx.scene.control.Slider;
+                        import javafx.scene.layout.Pane;
+                        import javafx.scene.Scene;
+                        import javafx.stage.Stage;
+
+                        public class Main extends Application{
+
+                            @Override public void start(Stage stage){
+
+                                stage.setTitle("Hello, world!");
+                                stage.setWidth(400);
+                                stage.setHeight(300);
+
+                                Slider slide = new Slider(200, 800, 400);
+                                stage.minWidthProperty().bind(slide.valueProperty());
+                                stage.maxWidthProperty().bind(slide.valueProperty());
+
+                                Pane pane = new Pane();
+                                pane.getChildren().add(slide);
+                                stage.setScene(new Scene(pane));
+
+                                stage.show();
+
+                            }
+
+                        }
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20090212A_06.png' alt='插圖'>
+                </figure>
+                <p>
+                    希望互相綁定的話，改用 <code>bindBidirectional()</code>。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>更多</h2>
+                <p>
+                    更多 JavaFX 控制項的設計，請參考 Oracle 官方部落客 Alla Redko 寫的《<a href='http://docs.oracle.com/javafx/2/ui_controls/jfxpub-ui_controls.htm' target='_blank'>Using JavaFX UI Controls</a>》，雖然是英文網站，但範例寫得很簡單明瞭，光看範例就能學會各個控制項的用法。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 必須澄清的是：「JavaFX 並不只是用來取代 Java Swing 的圖形化介面而已！」JavaFX 其實是一套 RIA 開發工具，圖形化介面只是 RIA 其中一部分而已，能讓 RIA 做更多事的影音播放、2D 動畫、3D 繪圖…能力，也是 JavaFX 的重頭戲！
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

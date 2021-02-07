@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>FXML 圖形化介面程式設計進階</h1>
+                <p>
+                    本文將介紹以 XML 格式的檔案，來描述 JavaFX 圖形化介面的配置，以純文字文件將圖形化介面與原始碼分開來設計；這項技術叫做 FXML。<br>
+                    <br>
+                    為方便研究，可下載本單元範例：<a href='../../objects/downloads/20111010A.7z' target='_blank'>20111010A.7z</a>。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>在 JavaFX Application 中加入 FXML 配置的控制項</h2>
+                <p>
+                    下面範例相當於《JavaFX Application 圖形化介面程式設計入門》的「<a href='20120814A.html#anchor1'>加入控制項</a>」一節，只是把 Button 和 Pane 的 Java 程式碼，改用 FXML 來設計，相互對照看看就能了解 FXML 的基本語法可以簡單轉換～
+                </p>
+                <hr>
+                <section>
+                    <h3>Pane.fxml</h3>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                            &lt;?import java.lang.*?&gt;
+                            &lt;?import javafx.scene.control.*?&gt;
+                            &lt;?import javafx.scene.layout.*?&gt;
+
+                            &lt;Pane&gt;
+                                &lt;children&gt;
+                                    &lt;Button prefWidth="200" prefHeight="20" layoutX="100" layoutY="100" text="別亂按"/&gt;
+                                &lt;/children&gt;
+                            &lt;/Pane&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[16,17]'>
+                            import javafx.application.Application;
+                            import javafx.fxml.FXMLLoader;
+                            import javafx.scene.Parent;
+                            import javafx.scene.Scene;
+                            import javafx.stage.Stage;
+
+                            public class Main extends Application{
+
+                                @Override public void start(Stage stage){
+
+                                    stage.setTitle("Hello, world!");
+                                    stage.setWidth(400);
+                                    stage.setHeight(300);
+
+                                    try{
+                                        Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
+                                        stage.setScene(new Scene(parent));
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                    stage.show();
+
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    因為以 getClass() 載入檔案，所以執行時 Main.fxml 必須與 Main.class 放在一起，不是放在呼叫 main() 與 start() 的位置。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>視窗尺寸</h2>
+                <p>
+                    可將視窗尺寸寫在 FXML 中的 Pane，然後要求視窗依據 Pane 大小調整尺寸，不然想調整視窗尺寸時卻得修改 Java 原始碼，就失去 FXML 的意義了。
+                </p>
+                <hr>
+                <section>
+                    <h3>Pane.fxml</h3>
+                    <p>
+                        <textarea class='brush:xml;highlight:[7]'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                            &lt;?import java.lang.*?&gt;
+                            &lt;?import javafx.scene.control.*?&gt;
+                            &lt;?import javafx.scene.layout.*?&gt;
+
+                            &lt;Pane prefWidth="400" prefHeight="300"&gt;
+                                &lt;children&gt;
+                                    &lt;Button prefWidth="200" prefHeight="20" layoutX="100" layoutY="100" text="別亂按"/&gt;
+                                &lt;/children&gt;
+                            &lt;/Pane&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[20]'>
+                            import javafx.application.Application;
+                            import javafx.fxml.FXMLLoader;
+                            import javafx.scene.Parent;
+                            import javafx.scene.Scene;
+                            import javafx.stage.Stage;
+
+                            public class Main extends Application{
+
+                                @Override public void start(Stage stage){
+
+                                    try{
+                                        Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
+                                        stage.setScene(new Scene(parent));
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                    stage.setTitle("Hello, world!");
+                                    stage.sizeToScene();
+                                    stage.show();
+
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 Java 程式碼取得 FXML 的控制項</h2>
+                <p>
+                    下面範例相當於《JavaFX Application 圖形化介面程式設計入門》的「<a href='20120814A.html#anchor2'>加入事件</a>」一節，我們將為 FXML 的 Button 控制項設定變數名稱，好讓 Java 原始碼能夠使用它。<br>
+                    <br>
+                    做法是使用 <code>fx:id</code> 屬性，為了使用這個屬性，必須在 FXML 的根元素宣告 <code>xmlns</code> 和 <code>xmlns:fx</code> 名稱空間。
+                </p>
+                <hr>
+                <section>
+                    <h3>Pane.fxml</h3>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                            &lt;?import java.lang.*?&gt;
+                            &lt;?import javafx.scene.control.*?&gt;
+                            &lt;?import javafx.scene.layout.*?&gt;
+
+                            &lt;Pane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" prefWidth="400" prefHeight="300"&gt;
+                                &lt;children&gt;
+                                    &lt;Button fx:id='button" prefWidth="200" prefHeight="20" layoutX="100" layoutY="100" text="別亂按"/&gt;
+                                &lt;/children&gt;
+                            &lt;/Pane&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[16]'>
+                            import javafx.application.Application;
+                            import javafx.fxml.FXMLLoader;
+                            import javafx.scene.control.Button;
+                            import javafx.scene.Parent;
+                            import javafx.scene.Scene;
+                            import javafx.stage.Stage;
+
+                            public class Main extends Application{
+
+                                @Override public void start(Stage stage){
+
+                                    try{
+
+                                        Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
+
+                                        Button button = (Button)parent.lookup("#button");
+                                        button.setOnAction(e->button.setText("不是叫你別亂按嗎"));
+
+                                        stage.setScene(new Scene(parent));
+
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                    stage.setTitle("Hello, world!");
+                                    stage.sizeToScene();
+                                    stage.show();
+
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 FXML 加入 Java 寫好的事件</h2>
+                <p>
+                    既然使用 FXML 是為了讓圖形化介面的設計與 Java 主程式隔開，那麼像上面範例那樣，把事件寫在 Java 主程式不又牽扯在一起了？<br>
+                    <br>
+                    然而 FXML 只能描述圖形化介面的配置，沒辦法描述 Java 程式動作，於是另外再用一個 Java 副程式專門寫 FXML 事件與主程式隔開…
+                </p>
+                <hr>
+                <section>
+                    <h3>Controller.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.net.URL;
+                            import java.util.ResourceBundle;
+                            import javafx.event.ActionEvent;
+                            import javafx.fxml.FXML;
+                            import javafx.fxml.Initializable;
+                            import javafx.scene.control.Button;
+
+                            public class Controller implements Initializable{
+
+                                @FXML private Button button;
+
+                                @FXML private void action(ActionEvent action_event){
+                                    button.setText("不是叫你別亂按嗎");
+                                }
+
+                                @Override public void initialize(URL url, ResourceBundle resource_bundle){}
+
+                            }
+                        </textarea>
+                        <br>
+                        這就是專門寫給 FXML 事件的 Java 程式，其中 Button 的變數名稱要與 FXML 的 fx:id 名稱相符，不然 @FXML 會找不到。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Pane.fxml</h3>
+                    <p>
+                        <textarea class='brush:xml'>
+                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+                            &lt;?import java.lang.*?&gt;
+                            &lt;?import javafx.scene.control.*?&gt;
+                            &lt;?import javafx.scene.layout.*?&gt;
+
+                            &lt;Pane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controller" prefWidth="400" prefHeight="300"&gt;
+                                &lt;children&gt;
+                                    &lt;Button fx:id='button" onAction="#action" prefWidth="200" prefHeight="20" layoutX="100" layoutY="100" text="別亂按"/&gt;
+                                &lt;/children&gt;
+                            &lt;/Pane&gt;
+                        </textarea>
+                        <br>
+                        首先在根元素加入 <code>fx:controller="Controller"</code> 屬性設定，表示使用 Java 寫好的事件處理程式 Controller 類別，再為 Button 元素加入 <code>onAction="#action"</code> 屬性設定，表示使用 Controller 類別的 <code>action()</code> 函式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import javafx.application.Application;
+                            import javafx.fxml.FXMLLoader;
+                            import javafx.scene.Parent;
+                            import javafx.scene.Scene;
+                            import javafx.stage.Stage;
+
+                            public class Main extends Application{
+
+                                @Override public void start(Stage stage){
+
+                                    try{
+                                        Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
+                                        stage.setScene(new Scene(parent));
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                    stage.setTitle("Hello, world!");
+                                    stage.sizeToScene();
+                                    stage.show();
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        從此主程式與圖形化介面的配置與動作無關，不再需要為了修改圖形化介面程式的而重新編譯主程式。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 JavaFX Scene Builder 設計 FXML</h2>
+                <p>
+                    有些人寧願手寫 Java Swing，也不用 NetBeans IDE，因為用 NetBeans IDE 設計的視窗應用程式，原始碼會加入許多冗雜的成分、結構也顯得凌亂，想依自己程式碼風格整理乾淨的話，又可能造成 NetBeans IDE 無法正常辨識。<br>
+                    <br>
+                    FXML 可以解決這個問題！改用 JavaFX API，把視窗布局這些亂七八糟的設計寫在 FXML，再從自己整理得乾乾淨淨的 Java 原始碼中載入，就不用擔心圖形化介面的程式破壞整體程式碼的結構了。<br>
+                    <br>
+                    Oracle 釋出的 JavaFX Scene Builder 是一款能將視窗配置結果輸出為 FXML 的視覺化開發工具，既能享受視覺化整合開發環境的簡便，又能主導自己的程式碼結構。下載網址：<br>
+                    <br>
+                    <a href='http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html' target='_blank'>http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html</a><br>
+                    <br>
+                    截至目前為止的 NetBeans IDE 8.1，依然沒有 JavaFX 的視覺化開發環境，所以在 Project 建立 JavaFX Main Class 或 Empty FXML 只能手敲程式碼，不像 JFrame Form 有簡單順手的視覺化環境。不過 NetBeans IDE 可以呼叫 JavaFX Scene Builder 來編輯，點兩下左側窗的 FXML 檔案即可。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>結語</h2>
+                <p>
+                    因為有 JavaFX Scene Builder 可以視覺化開發環境產生 FXML 的關係，個人不建議手寫 FXML 檔案。<br>
+                    <br>
+                    就像 Java 主流的 Framework 一樣，雖然大量使用 XML 檔案，但都是由專用工具自動化產生，很少手寫，否則十之八九都寫錯，非常浪費時間，FXML 也不適合手寫。<br>
+                    <br>
+                    FXML 就交給視覺化開發工具產生，即使自動產生的 FXML 內容亂七八糟，不像手寫那樣乾淨，但 FXML 是給 Java 載入用的，Java 原始碼乾淨就好，連 FXML 都要乾乾淨淨未免太潔癖了。<br>
+                    <br>
+                    因此本文並不詳加介紹更多的 FXML 語法，我們只要了解如何在 Java 原始碼與 JavaFX Scene Builder 產生的 FXML 互動就夠了，本文內容正好能做這些事。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

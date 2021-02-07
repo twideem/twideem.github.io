@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>button{font-family:Courier;font-size:9pt}</style>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../scripts/toolkit.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>亂數系統</h1>
+                <p>進一步實作情況，請檢視原始碼。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>操作介面</h2>
+                <p>
+                    <button onclick='document.getElementsByTagName("p")[0].innerHTML=Random.next(5,10)'>Random.next(5,10)</button>
+                    <button onclick='document.getElementsByTagName("p")[0].innerHTML=Random.next(10)'>Random.next(10)</button>
+                    <button onclick='document.getElementsByTagName("p")[0].innerHTML=Random.next()'>Random.next()</button>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

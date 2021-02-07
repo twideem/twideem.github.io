@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>DOSBox</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>熱鍵</h2>
+                <table>
+                    <tr><td>Ctrl + F11</td><td>增加 CPU speed cycles。</td></tr>
+                    <tr><td>Ctrl + F12</td><td>增加 CPU speed cycles。</td></tr>
+                    <tr><td>Ctrl + F7</td><td>增加 Frameskip。</td></tr>
+                    <tr><td>Ctrl + F8</td><td>減少 Frameskip。</td></tr>
+                    <tr><td>Ctrl + F10</td><td>解除 DOSBox 對滑鼠游標的鎖定。</td></tr>
+                    <tr><td>Ctrl + F5</td><td>抓取畫面。</td></tr>
+                    <tr><td>Ctrl + Alt + F5</td><td>錄製畫面。</td></tr>
+                    <tr><td>Ctrl + F6</td><td>以 WAVE 格式錄音。</td></tr>
+                    <tr><td>Ctrl + ALT-F8</td><td>以 MIDI 格式錄音。</td></tr>
+                    <tr><td>Ctrl + F9</td><td>關閉 DOSBox。</td></tr>
+                    <tr><td>Alt + Enter</td><td>切換視窗或全螢幕。</td></tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>以百分比控制 CPU 速度</h2>
+                <p>
+                    <kbd>
+                        cycles=max<br>
+                    </kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>驅動光碟機</h2>
+                <p>
+                    <kbd>
+                        mount D 'D:\'<br>
+                    </kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>驅動含音軌光碟機</h2>
+                <p>
+                    <kbd>
+                        mount D 'D:\' -usecd 0 -ioctl<br>
+                    </kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>把遊戲掛載成光碟機來執行</h2>
+                <p>
+                    <kbd>
+                        mount D 'C:\GAME' -t cdrom<br>
+                    </kbd>
+                    <br>
+                    不要驅動實體光碟機，兩者不能同時存在。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>掛載映像檔</h2>
+                <p>
+                    <kbd>imgmount E 'IMAGE.ISO' -t iso</kbd><br>
+                    <br>
+                    可將多個映像檔掛在一起，例如：<br>
+                    <br>
+                    <samp>imgmount E 'DISC_1.ISO' 'DISC_2.ISO' -t iso</samp><br>
+                    <br>
+                    遊戲提示要換片時，按 <kbd>Ctrl + F4</kbd> 切換 DISC_1.ISO 和 DISC_2.ISO。
+                </p>
+                <hr>
+                <section>
+                    <h3>CD 音軌</h3>
+                    <p>
+                        關於映像檔，ISO 是早期的格式，優點是蔚為標準，缺點是無法包含光碟音軌。有些以 Alcohol 120% 轉為 MDF/MDS 格式的遊戲光碟會含音軌，轉為 ISO 的話就沒有 CD 音源。但 DOSBox 不支援 MDF/MDS 格式，這時我們可以找一些程式工具，轉為 DOSBox 有支援的 BIN/CUE 掛載使用。<br>
+                        <br>
+                        掛載 CUE 檔的話，BIN 檔名不要亂改，因為 CUE 裡面有 BIN 檔名資訊，會辨識不到。<br>
+                        <br>
+                        進入 2014 年後，幾乎所有熟知的虛擬光碟軟體，都變相成為綁架軟體了！尤其 DAEMON Tools Lite，英文授權條款明白寫道，想用免費版，就必須接受被植入廣告做為條件（例如強制修改瀏覽器首頁），你沒得選要不要被植入，不願意被植入就不要免費用我們 DAEMON Tools Lite 這產品。裝了以後問題來了，沒辦法後悔，你找不到移除廣告的管道，只能拜谷歌大神看有沒有善心人士提供程式幫你移除，例如 AdwCleaner…但這種「以毒攻毒」的方式划算嗎 XDDD
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>畫面大小</h2>
+                <hr>
+                <section>
+                    <h3>視窗尺寸</h3>
+                    <p>
+                        <kbd>
+                            fullscreen=false<br>
+                            windowresolution=800x600<br>
+                            output=overlay<br>
+                        </kbd>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>全螢幕</h3>
+                    <p>
+                        <kbd>
+                            fullscreen=true<br>
+                            windowresolution=original<br>
+                            output=surface<br>
+                        </kbd>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>簡化啟動程式介面</h2>
+                <p>
+                    在捷徑後面加入 <kbd> -noconsole</kbd>，例如：<br>
+                    <br>
+                    <samp>'C:\Program Files (x86)\DOSBox-0.74\DOSBox.exe' -noconsole</samp>
+                </p>
+            </section>
+
+            <!--hr>
+
+            <section>
+                <h2>關於將遊戲與 DOSBox 綑綁在一起的建議</h2>
+                <p>
+                    如果是因為有些遊戲需要特殊的設定組態，所以把 DOSBox 整個與遊戲放在一起，好各自獨立執行，我個人比較建議把組態寫在 PLAY.BAT 裡面即可。<br>
+                    <br>
+                    比如說，我的 dosbox-0.74.conf 裡面通常設定 cycles=max 與 joysticktype=none，如此能應付大多數的遊戲。但如果遇到遊戲需要降速才能正常玩，我會直接把 cylces=8000 寫在遊戲的 PLAY.BAT 裡面，或者遊戲支援手把，我就把 joysticktype=auto 寫在遊戲的的 PLAY.BAT 裡面。<br>
+                    <br>
+                    當然，這是因為我不可能用 MS-DOS 跑這些遊戲了，我手上這些遊戲只會用 DOSBox，所以不用擔心把組態寫在遊戲的 PLAY.BAT 裡面，會造成只相容 DOSBox 卻不相容 MS-DOS 的麻煩。<br>
+                    <br>
+                    但即使我需要顧慮這點，我也會每個遊戲來一個 EMULATE.BAT，作用跟 PLAY.BAT 一樣，然後用 DOSBox 玩時執行 EMULATE.BAT，用 MS-DOS 玩時輸入 PLAY.BAT 或遊戲名稱。
+                </p>
+            </article-->
+
+        </article>
+
+    </body>
+
+</html>

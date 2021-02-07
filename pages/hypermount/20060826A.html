@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='http://code.jquery.com/jquery.min.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>
+            function f1(){
+                $('span.example:odd').css('background-color','skyblue')
+            }
+            function f2(){
+                $('span.example').css('background-color','Snow')
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>jQuery 速成指南</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>安裝</h2>
+                <p>
+                    只要用 &lt;script&gt;&lt;/script&gt; 載入 jQuery.js 檔案，就可以編寫 jQuery 程式。
+                </p>
+                <hr>
+                <section>
+                    <h3>直接載入網路的 jQuery 檔案</h3>
+                    <p>
+                        <code>
+                            &lt;script src='http://code.jquery.com/jquery.min.js'&gt;&lt;/script&gt;
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>至官方下載 jQuery 檔案</h3>
+                    <p>
+                        <code>
+                            <a href='http://jquery.com' target='_blank'>http://jquery.com</a>
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    如果程式執行於保持連線的使用環境，建議直接載入官網的 jQuery.js，而且隨時都是最新版本。<br>
+                    <br>
+                    如果程式執行於離線環境，可以下載 jquery.js，然後與你的專案放在一起使用。<br>
+                    <br>
+                    下載時有分兩種版本：壓縮精簡過的 jquery.min.js，以及未經壓縮的 jquery.js。前者檔案小，如果你的程式放在網路上來使用，建議載入這個版本。後者檔案大，但可讀性高，講究程式碼要清清楚楚、方便閱讀以調查問題所在的人，可以考慮使用。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>選擇器基本用法</h2>
+                <p>
+                    要說 jQuery 的重頭戲，就是可以快速、方便地，指定網頁裡面你想要的元素來使用，這稱為「選擇器」(Selector)。
+                </p>
+                <hr>
+                <section>
+                    <h3>選擇標籤元素</h3>
+                    <p>
+                        <code>
+                            jQuery('標籤')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>用標籤的 ID 名稱選擇元素</h3>
+                    <p>
+                        <code>
+                            jQuery('#識別名稱')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>用標籤的 CLASS 類型選擇元素</h3>
+                    <p>
+                        <code>
+                            jQuery('.類型')
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    這會選擇出網頁中符合條件的所有元素，可以一次修改大量同類型元素。<br>
+                    <br>
+                    舉個例子，下面的程式，會將網頁中所有 span 標籤的 CSS 設定為紅色：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        jQuery('span').css('color', 'red');
+                    </textarea>
+                    <br>
+                    下面的程式，會選擇網頁中 ID 為 head 的標籤，將內容改為 HELLO：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        jQuery('#head').text('HELLO');
+                    </textarea>
+                    <br>
+                    附帶一提，其實這些寫法可以混搭：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        jQuery('span.notice').css('color', 'red');
+                    </textarea>
+                    <br>
+                    這會選擇所有 class 屬性為 notice 的 span 元素，將其顏色設為紅色。<br>
+                    <br>
+                    如果能進一步限定條件，可以更精細選擇出想要的元素，這部分請參考下一節的內容。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>選擇器進階條件</h2>
+                <p>
+                    jQuery 可以針對選擇出來的結果進行條件匹配，進一步篩選出更精確的元素。
+                </p>
+                <hr>
+                <section>
+                    <h3>依順序限定條件</h3>
+                    <table>
+                        <tr><td>:eq(索引值)</td><td>依陣列索引值指定第幾個元素</td></tr>
+                        <tr><td>:first</td><td>第一個元素</td></tr>
+                        <tr><td>:last</td><td>最後一個元素</td></tr>
+                        <tr><td>:lt(個數)</td><td>最前幾個元素</td></tr>
+                        <tr><td>:gt(個數)</td><td>最後幾個元素</td></tr>
+                        <tr><td>:odd</td><td>選出奇數順序的元素</td></tr>
+                        <tr><td>:even</td><td>選出偶數順序的元素</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>依內容限定條件</h3>
+                    <table>
+                        <tr><td>:has(子標籤)</td><td>擁有子標籤的元素</td></tr>
+                        <tr><td>:contains(文字)</td><td>含有文字的元素</td></tr>
+                        <tr><td>:empty</td><td>內容為空的元素</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>依狀態限定條件</h3>
+                    <table>
+                        <tr><td>:enabled</td><td>enabled（啟用）狀態的元素</td></tr>
+                        <tr><td>:disabled</td><td>disabled（禁用）狀態的元素</td></tr>
+                        <tr><td>:selected</td><td>selected（選取）狀態的元素</td></tr>
+                        <tr><td>:checked</td><td>checked（核取）狀態的元素</td></tr>
+                        <tr><td>:visible</td><td>visible（顯現）狀態的元素</td></tr>
+                        <tr><td>:hidden</td><td>hidden（隱藏）狀態的元素</td></tr>
+                        <tr><td>:animated</td><td>正在執行動畫狀態的元素</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>依元素限定條件</h3>
+                    <table>
+                        <tr><td>:header</td><td>H1 到 H6 等元素</td></tr>
+                        <tr><td>:input</td><td>INPUT 元素</td></tr>
+                        <tr><td>:text</td><td>TEXT 元素</td></tr>
+                        <tr><td>:password</td><td>PASSWORD 元素</td></tr>
+                        <tr><td>:radio</td><td>RADIO 元素</td></tr>
+                        <tr><td>:checkbox</td><td>COECKBOX 元素</td></tr>
+                        <tr><td>:submit</td><td>SUBMIT 元素</td></tr>
+                        <tr><td>:reset</td><td>RESET BUTTON 元素</td></tr>
+                        <tr><td>:button</td><td>BUTTON 元素</td></tr>
+                        <tr><td>:image</td><td>IMG 元素</td></tr>
+                        <tr><td>:file</td><td>FILE 元素</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>其它限定運算式</h3>
+                    <table>
+                        <tr><td>jQuery(this)</td><td>當前的元素</td></tr>
+                        <tr><td>jQuery('標籤>子標籤')</td><td>含有子標籤的標籤</td></tr>
+                        <tr><td>jQuery(條件一, 條件二,…)</td><td>建立多個條件</td></tr>
+                        <tr><td>:not(條件)</td><td>不符合選擇器條件的元素</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <p>
+                    項目繁多，所以稍微舉幾個例子做為示範，其它功能請依照樣式自行嘗試：
+                </p>
+                <table>
+                    <tr><td>jQuery('span:first')</td><td>選擇網頁中的第一個 span 元素。</td></tr>
+                    <tr><td>jQuery('span:eq(1)')</td><td>選擇網頁中的第二個 span 元素。</td></tr>
+                    <tr><td>jQuery('not(span:eq(0))')</td><td>選擇網頁中第一個 span 元素以外的其它元素。</td></tr>
+                    <tr><td>jQuery(:radio)</td><td>選擇網頁中所有 RADIO 元素。</td></tr>
+                    <tr><td>jQuery(:radio, :checkbox)</td><td>選擇網頁中所有 RADIO 元素與 CHECKBOX 元素。</td></tr>
+                    <tr><td>jQuery('header>h2')</td><td>選擇含有 H2 的的 HEADER 元素。</td></tr>
+                </table>
+                <p>
+                    偶數順序其實很好用，當項目排列過多，為了提高辨識度，可以利用它來設計雙色排列。你可以操作「<a href='javascript:f1()'>雙色排列</a>」「<a href='javascript:f2()'>還原</a>」來看下列文字的變化……<br>
+                    <br>
+                    <span class='example'>Hello</span><br>
+                    <span class='example'>Hello</span><br>
+                    <span class='example'>Hello</span><br>
+                    <span class='example'>Hello</span><br>
+                    <span class='example'>Hello</span><br>
+                    <span class='example'>Hello</span><br>
+                    <span class='example'>Hello</span><br>
+                    <br>
+                    這樣的效果，jQuery 只需要短短一行：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        jQuery('span:odd').css('background', 'blue');
+                    </textarea>
+                    <br>
+                    不過使用時要注意的是，由於元素順序是由 0 開始，所以偶數和奇數要相反過來使用，因為第二個是 1。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>選擇器的簡化型式</h2>
+                <p>
+                    選擇器 jQuery() 因為是最常使用的部分，因此提供 <code>$()</code> 這樣的簡化型式做為替代：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        $('div').css('background', 'red');
+                    </textarea>
+                    <br>
+                    其實這才是官方建議的寫法！除非混用某些同樣用到 $ 的 JavaScript 框架時，發生衝突的現象，才建議改回 jQuery() 的寫法。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>選擇器內建功能</h2>
+                <p>
+                    選擇器匹配出元素後，接下來就是呼叫各式功能，讓這些元素工作。<br>
+                    <br>
+                    本文僅列出有哪些內建功能可用，更詳細的使用方式，建議閱讀 W3Schools 的《<a href='http://www.w3schools.com/jquery/jquery_ref_selectors.asp' target='_blank'>jQuery Reference</a>》，往後也會另闢章節來介紹。
+                </p>
+                <hr>
+                <section>
+                    <h3>文件模型</h3>
+                    <p>
+                        <code>
+                            addClass()<br>
+                            after()<br>
+                            append()<br>
+                            appendTo()<br>
+                            attr()<br>
+                            before()<br>
+                            clone()<br>
+                            detach()<br>
+                            empty()<br>
+                            hasClass()<br>
+                            html()<br>
+                            insertAfter()<br>
+                            insertBefore()<br>
+                            prepend()<br>
+                            prependTo()<br>
+                            remove()<br>
+                            removeAttr()<br>
+                            removeClass()<br>
+                            replaceAll()<br>
+                            replaceWith()<br>
+                            text()<br>
+                            toggleClass()<br>
+                            unwrap()<br>
+                            val()<br>
+                            wrap()<br>
+                            wrapAll()<br>
+                            wrapInner()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>樣式</h3>
+                    <p>
+                        <code>
+                            addClass()<br>
+                            css()<br>
+                            hasClass()<br>
+                            height()<br>
+                            offset()<br>
+                            offsetParent()<br>
+                            position()<br>
+                            removeClass()<br>
+                            scrollLeft()<br>
+                            scrollTop()<br>
+                            toggleClass()<br>
+                            width()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>效果</h3>
+                    <p>
+                        <code>
+                            animate()<br>
+                            clearQueue()<br>
+                            delay()<br>
+                            dequeue()<br>
+                            fadeIn()<br>
+                            fadeOut()<br>
+                            fadeTo()<br>
+                            fadeToggle()<br>
+                            hide()<br>
+                            queue()<br>
+                            show()<br>
+                            slideDown()<br>
+                            slideToggle()<br>
+                            slideUp()<br>
+                            stop()<br>
+                            toggle()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>事件</h3>
+                    <p>
+                        <code>
+                            bind()<br>
+                            blur()<br>
+                            change()<br>
+                            click()<br>
+                            dblclick()<br>
+                            delegate()<br>
+                            die()<br>
+                            error()<br>
+                            focus()<br>
+                            focusin()<br>
+                            focusout()<br>
+                            hover()<br>
+                            keydown()<br>
+                            keypress()<br>
+                            keyup()<br>
+                            live()<br>
+                            load()<br>
+                            mousedown()<br>
+                            mouseenter()<br>
+                            mouseleave()<br>
+                            mousemove()<br>
+                            mouseout()<br>
+                            mouseover()<br>
+                            mouseup()<br>
+                            one()<br>
+                            ready()<br>
+                            resize()<br>
+                            scroll()<br>
+                            select()<br>
+                            submit()<br>
+                            toggle()<br>
+                            trigger()<br>
+                            triggerHandler()<br>
+                            unbind()<br>
+                            undelegate()<br>
+                            unload()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>AJAX</h3>
+                    <p>
+                        <code>
+                            $.ajax()<br>
+                            ajaxComplete()<br>
+                            ajaxError()<br>
+                            ajaxSend()<br>
+                            $.ajaxSetup()<br>
+                            ajaxStart()<br>
+                            ajaxStop()<br>
+                            ajaxSuccess()<br>
+                            $.get()<br>
+                            $.getJSON()<br>
+                            $.getScript()<br>
+                            load()<br>
+                            $.param()<br>
+                            $.post()<br>
+                            serialize()<br>
+                            serializeArray()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>其它</h3>
+                    <p>
+                        <code>
+                            data()<br>
+                            each()<br>
+                            get()<br>
+                            index()<br>
+                            $.noConflict()<br>
+                            $.param()<br>
+                            removeData()<br>
+                            size()<br>
+                            toArray()
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    不得不提的是，jQuery 之所以吸引人，除了方便快速的「選擇器」，另一個特點就是「串接式操作」(Chaining)：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        $('div').css('color:red').fadeOut('slow');
+                    </textarea>
+                    <br>
+                    匹配出來的元素，可以讓它一口氣操作多個功能。<br>
+                    <br>
+                    這兩大特性，再加上全球各地撰寫出來數量難以估計的外部擴充功能，以及跨平台的訴求，現在的 jQuery 幾乎可說是用來取代 JavaScript 語法陋習的新規範。大多 Web 開發工具，都內建 jQuery 並強調對它的支援程度。用 jQuery 做為設計 JavaScript 程式的語言規範，已經是趨勢了！<br>
+                    <br>
+                    最後，基於 Chaining 的特性，還可以延伸出 Callback（回呼）的寫法。例如原本分成兩塊來寫的程式：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        $('p').hide(1000);
+                        document.write('The paragraph is now hidden');
+                    </textarea>
+                    <br>
+                    可以這麼寫：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        $('p').hide(1000, function(){
+                            document.write('The paragraph is now hidden');
+                        });
+                    </textarea>
+                    <br>
+                    這種技巧在程式設計叫做 Callback。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>執行時機</h2>
+                <p>
+                    通常 JavaScript 程式會選擇寫在 window 的 onload 事件裡面開始執行：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        window.onload = function(){
+                            //開始執行 JavaScript 程式
+                        }
+                    </textarea>
+                    <br>
+                    這會在網頁完全載入完畢後：包括圖片、影片、CSS 之類的這些外部檔案，才開始執行 JavaScript 程式。<br>
+                    <br>
+                    jQuery 認為網頁架構好 HTML 程式碼後，就可以執行 JavaScript 程式，等候外部檔案載入完畢才執行根本是浪費時間，因此提供新的寫法：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        $(window).ready(function(){
+                            //開始執行 JavaScript 程式
+                        });
+                    </textarea>
+                    <br>
+                    這種寫法的另一個優點，就是可以多次使用。原本的 window.onload 如果多次使用，只有最後一次會被執行，所以程式放在不同檔案的話，就會遇到「只有其中一個檔案的 onload 會執行」的瓶頸，這點 jQuery 的 ready 解決了問題。<br>
+                    <br>
+                    由於這是建議的執行方式，所以 jQuery 提供更簡單的寫法：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        $(function(){
+                            //開始執行 JavaScript 程式
+                        });
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[*] 開發出 jQuery 的 John Resig 目前任職於 Khan Academy 這家非營利的教育影片服務網站，負責改寫其應用平台，使網路執行效率優化。雖然他是蘋果迷讓我印象扣分不少，不過他對 JavaScript 程式設計的貢獻是非常受人愛戴。先前他在 Mozilla 擔任 Chief Evangelist 的職務，類似從技術上來推廣自家產品的要職。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

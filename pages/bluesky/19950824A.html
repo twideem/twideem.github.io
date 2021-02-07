@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>修改註冊的使用者</h1>
+                <p>
+                    這是在安裝 Windows 時填寫的使用者資訊，有「姓名」和「公司」兩筆。<br>
+                    <br>
+                    Windows 並未直接提供修改這兩筆資料的程式，必須使用「登錄編輯程式」修改。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>Windows 95/98/ME</h2>
+                <p>
+                    按「開始」→「執行」→「regedit」，開啟「登錄編輯程式」。<br>
+                    <br>
+                    切換到 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion。<br>
+                    <br>
+                    在 RegisteredOrganization 可修改公司，在 RegisteredOwner 可修改姓名。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Windows XP/Vista/7/8/10</h2>
+                <p>
+                    跟 Windows 9x 一樣，只是切換機碼時 Windows 改成 Windows NT 而已：<br>
+                    <br>
+                    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

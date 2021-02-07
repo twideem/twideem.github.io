@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>FileInput + FileReader</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>範例</h2>
+                <hr>
+                <section>
+                    <h3>file.txt</h3>
+                    <p>
+                    <textarea class='brush:txt'>
+                        hello
+                    </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>sample.html</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang='zh-TW'&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset='utf-8'/&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;input type='file'/&gt;
+                                    &lt;p&gt;&lt;/p&gt;
+                                    &lt;script&gt;
+                                        document.querySelector('input').onchange=function(){
+                                            var file_reader = new FileReader();
+                                            file_reader.onload = function(event){
+                                                document.querySelector('p').innerHTML=event.target.result;
+                                            };
+                                            file_reader.readAsText(document.querySelector('input').files[0]);
+                                        };
+                                    &lt;/script&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>操作方式</h3>
+                    <p>
+                        用支援 HTML5 的瀏覽器開啟 sample.html，然後用網頁的按鈕點選 file.txt 檔案，就會讀取檔案內容「hello」到網頁的 p 標籤裡面。<br>
+                        <br>
+                        練習過程有問題的話，可下載本章節範例：<a href='19691102A.7z'>19691102A.7z</a>。
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

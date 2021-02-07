@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Casting（強制轉型）</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                Java 可以使用「<code>(型別) 類別</code>」的格式，強制切換型別：<br>
+                <br>
+                <textarea class='brush:java'>
+                    public class Main{
+
+                        public static void main(String[] args){
+                            Object object = new Object();
+                            String string = (String)object;
+                        }
+
+                    }
+                    </textarea>
+                <br>
+                <output>
+                    明明編譯器知道這樣執行時會 ClassCastException，但因為使用 (String) 明確表示我要這麼做，所以允許我通過編譯。<br>
+                </output>
+                <br>
+                需要注意的是，雖然這是「強制轉型」的動作沒錯，但其實目的是要告訴編譯器：「通過編譯吧！別再跟我說型別檢查錯誤，我確實要這樣幹。」它的存在並不是為了「物件 A 轉成物件 B」而來。<br>
+                <br>
+                使用時想作「切換型別」，而不是「轉換型別」，否則你很容易誤用這個功能。<br>
+                <br>
+                將「物件 A 轉成物件 B」應該由 class 設計 method 來完成，例如 <code>String.valueOf()</code> 或 <code>Integer.parseInt()</code> 就是很好的例子！<ins>[1]</ins><br>
+                <br>
+                而 <code>(String)</code> 或 <code>(int)</code> 是在編譯器所認定的物件繼承體系與你的認知不同時，用來切換物件的上下層繼承關係，嚴格來講並不是將「物件 A 轉成物件 B」的動作。
+            </p>
+
+            <hr>
+
+            <footer>
+                <p>[1] 雖然這是將物件的內部結構作個轉換，感覺上轉換的不是外部型別。但外部型別應該是「切換」才對，內部結構才能「轉換」，也才是實際上的「轉型」。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>陣列、java.util.Arrays</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>陣列</h2>
+                <p>
+                    陣列是程式設計語言都有的語法功能，用來連續建立同樣型態的資料。
+                </p>
+                <hr>
+                <section>
+                    <h3>建立陣列</h3>
+                    <p>
+                        空白陣列：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[4]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    String[] a = new String[3];
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        含初始值的陣列：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[4]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    String[] a = {"AAA","BBB","CCC"};
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        匿名陣列：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[7]'>
+                            import java.util.*;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    System.out.print(new int[]{1,3,5,7}[2]);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            5
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>存取陣列</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[7,9]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = {"AAA","BBB","CCC"};
+
+                                    a[2] = "DDD";
+
+                                    System.out.print(a[2]);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            DDD
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>陣列長度</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[7]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = {"AAA","BBB","CCC"};
+
+                                    System.out.print(a.length);
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            3
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>巡訪陣列</h3>
+                    <p>
+                        傳統做法：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[7,8,9]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = {"AAA","BBB","CCC"};
+
+                                    for(int n=0; n&lt;a.length; n++){
+                                        System.out.println(a[n].toLowerCase());
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            aaa<br>
+                            bbb<br>
+                            ccc<br>
+                        </output>
+                        <br>
+                        Java SE 5 新增的語法 For-each loop：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[7,8,9]'>
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = {"AAA","BBB","CCC"};
+
+                                    for(String n:a){
+                                        System.out.println(n.toLowerCase());
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            aaa<br>
+                            bbb<br>
+                            ccc
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>java.util.Arrays</h2>
+                <p>
+                    陣列本身不是物件，因此沒有足夠的功能可以操作。為了更進一步靈活使用陣列，Java 提供了 Arrays。<br>
+                    <br>
+                    它更讓人驚豔的是採用高效率的演算法來執行工作，提升解決問題的能力！
+                </p>
+                <hr>
+                <section>
+                    <h3>代入陣列到資料群集</h3>
+                    <p>
+                        想要將陣列依序放入群集時，通常會寫如下的程式：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:[10,11,12]'>
+                            import java.util.ArrayList;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+                                    String[] strings = {"AAA","BBB","CCC"};
+
+                                    for(int n=0; n&lt;strings.length; n++){
+                                        array_list.add(strings[n]);
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        對於這樣的動作，Arrays 設計更高效率的演算法，寫法如下：<br>
+                        <br>
+                        <textarea class='brush:java;highlight:11'>
+                            import java.util.ArrayList;
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+                                    String[] strings = {"AAA","BBB","CCC"};
+
+                                    array_list.addAll(Arrays.asList(strings));
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        注意！使用 Arrays.asList() 取出的資料，必須改用 List.addAll() 一次存入。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>擷取陣列、複製陣列</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[9]'>
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = {"AAA","BBB","CCC"};
+
+                                    String[] b = Arrays.copyOf(a, a.length);
+
+                                    for(String n:b){
+                                        System.out.println(n);
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC<br>
+                        </output>
+                        <br>
+                        擷取完整長度的陣列，就變成複製陣列了。<br>
+                        <br>
+                        擷取資料還有 <var>copyOfRange(陣列, 起點, 終點)</var> 可用。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>比對陣列</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[10]'>
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = {"AAA","BBB","CCC"};
+                                    String[] b = Arrays.copyOf(a, a.length);
+
+                                    if(Arrays.equals(a, b)){
+                                        System.out.print("兩陣列所含資料相同");
+                                    }
+
+                                }
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            兩陣列所含資料相同
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>填滿陣列</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[9]'>
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    String[] a = new String[3];
+
+                                    Arrays.fill(a, "XXX");
+
+                                    for(String n:a){
+                                        System.out.println(n);
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            XXX<br>
+                            XXX<br>
+                            XXX
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>排序資料</h3>
+                    <p>
+                        <textarea class='brush:java;highlight:[9]'>
+                            import java.util.Arrays;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    int[] a = {9,2,1};
+
+                                    Arrays.sort(a);
+
+                                    for(int n:a){
+                                        System.out.println(n);
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            1<br>
+                            2<br>
+                            9
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>搜尋資料</h3>
+                    <p>
+                        排序過的陣列，可以使用 <var>binarySearch(陣列, 資料)</var> 和 <var>binarySearch(陣列, 起點, 終點, 資料)</var> 搜尋資料，找到的話會傳回索引值。
+                    </p>
+                </section>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>(::()::)</h1>
+                <p>
+                    一些不合時宜，應該丟入垃圾桶的資料，或者尚未完稿，不具實用性、淪為個人主觀想法的內容，集中存放在這裡面。<br>
+                    <br>
+                    整頁太長很難檢索？當然！放在這裡的內容「僅供參考」，不適合公開，所以不方便你閱讀、漏看多少算多少，我覺得算好事一樁 XDDD
+                </p>
+            </header>
+
+            <hr id='19960530'>
+
+            <section>
+                <h2>一場美麗的錯誤</h2>
+                <p>
+                    草草趕工出來的程式語言，反而造就美麗的錯誤。
+                </p>
+                <hr>
+                <section>
+                    <h3>趕工出來的程式語言</h3>
+                    <p>
+                        本單元（指超鏈結界）是站在「物件導向程式設計」角度整理出來的語言用法。<br>
+                        <br>
+                        隨著 HTML5 需求的加溫，大家在應用 JavaScript 的過程，開始感受到它 literal notation 寫法的方便，以及函式是一級物件的魅力。因此漸漸地本單元所介紹的語法，到後來可能會被嫌棄，認為既然用 JavaScript 就該展現自己特有的卓越語法特性，不該用 Java 的習慣來使用它；事實上，連 Java 都開始引進某些一旦上手後就難以割愛的 JavaScript 語言特性。<br>
+                        <br>
+                        有趣的是，在 JavaScript 對軟體工程來講，因為原始碼在團隊場合不容易管理，所以很難被接受說將它導入到大型開發案的時代，這些語法是每個軟體工程師看了都詬病不已的爛寫法。不得不硬著頭皮導入 JavaScript 寫了一陣子程式後，反而迷上了它的寫法，甚至悄悄地在改變傳統物件導向程式語言的習慣。<br>
+                        <br>
+                        期待快點看到時機成熟，在大家都接受與習慣 JavaScript 特有的寫法時，本單元能夠改寫 JavaScript 語法，見識這是多麼有趣的程式語言…雖然那也是災難的開始，團隊的原始碼管理其實至關重要，寫得的時候很有趣，維護的時候卻很痛苦，對產業來說是相當嚴峻的考驗。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>誕生</h3>
+                    <p>
+                        網際網路剛迅速崛起的時代，最惱人的使用者體驗，就是提交資料給某個全球資訊網後，等了好幾秒終於看到下一頁時，竟然是回報說送出的資料錯誤。為了提高瀏覽者與全球資訊網的互動效率，Netscape Communications 研擬 Mocha 計畫，希望瀏覽器本身就能跑一些簡單的程式，來分擔伺服器的工作，與其浪費連線時間獲得錯誤回報，不如事先確認好再連線遞交。<br>
+                        <br>
+                        Netscape Communications 委派 Brendan Eich 開發一款新的程式語言，它能夠將原始碼直接寫在網頁裡面，而且沒寫過程式的人也能使用。<br>
+                        <br>
+                        沒多久 Netscape Communications 對 Applet 的表現感到迷戀，與 Sun Microsystems 合作，除了讓自己的瀏覽器支援 Applet 外，還要讓開發中的程式語言長得像 Java。<br>
+                        <br>
+                        Brendan Eich 參考 Self 程式語言的原型機制，以及 Scheme 程式語言的一級函數，只花約十天的時間，完成了一款弱型別的直譯式程式語言順利交差。<br>
+                        <br>
+                        1995 年 9 月先以 LiveScript 的名稱，搭載於 Netscape Navigator 2.0 測試版，12 月正式版時改名為 JavaScript。（至於 Mocha 是程式庫，即後來的 SpiderMonkey 引擎。）
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>風靡</h3>
+                    <p>
+                        基本上這是一款可以操作些瀏覽器軟體本身的指令語言，簡簡單單一兩行程式，無須專業程式設計師背景，就能動態變化瀏覽器內容，顯著可見的效果讓 JavaScript 大受好評！大家都搶著在網頁寫個 JavaScript 來露一下身手。<br>
+                        <br>
+                        於是 1996 年 8 月 Microsoft 趕緊也抄了一個 JScript 來應戰，推出 Internet Explorer 3.0。<br>
+                        <br>
+                        但 Netscape Communications 並不介意對手的抄襲，反而基於更有效推廣這款程式語言，來帶動全球資訊網的進化，同年 11 月將 JavaScript 提交給歐洲電腦公會，制定統一規範，於是產生了 ECMAScript。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>興衰</h3>
+                    <p>
+                        不過挾帶 Windows 作業系統市占率破九成優勢，覺得自己就是標準的 Microsoft 並沒有這麼先進文明的觀念，往後照樣以自己高興就好的態度破壞規則，甚至故意用不相容的做法來綁定 Windows，企圖邊緣化無法與之公平競爭的對手，完全不鳥 ECMAScirpt 和日後的 W3C HTML。<br>
+                        <br>
+                        原本與 Netscape Navigator 瀏覽器競爭時，進步速度很快的 Internet Explorer 瀏覽器，在 4.0 版幹掉對手，進入 5.0 版發現沒人需要競爭後，就不再進步了！2003 年超過九成的民眾，都是用 Internet Explorer 瀏覽器，但像最基本的分頁瀏覽，都過幾年了，還懶得設計出來給你用，於是越來越多內行的人選擇 Mozilla Firefox 來獲得更高的瀏覽體驗，並形成一股還在用 IE 表示他電腦很外行的觀感。<br>
+                        <br>
+                        加上 IE9 推出時沒有 Windows XP 版：「其實 IE7 推出時，也沒有 Windows 2000 版。」大家終於意識到該換其他瀏覽器才能確保自身權益，Internet Explorer 的市佔率終於被 Mozilla Firefox 明顯侵蝕掉。<br>
+                        <br>
+                        正當 Internet Explorer 市佔率節節下滑之際，隨即又被不為惡、但很偽善的 Google 官方瀏覽器，以簡單清爽的介面，及世界第一的 JavaScript 飆速，確實提升 Web 2.0 體驗，更快吃掉 IE 市佔率。<br>
+                        <br>
+                        反 IE 成為顯學的時代，才在 IE9 宣稱自己遵守 HTML5 規範，企圖挽回聲譽。而 Windows 8 的 IE10 更是注重在網頁整體的載入效率<ins>[1]</ins>，就瀏覽全球資訊網來講，其實比只顧飆 JavaScript 速度的 Google Chrome 更快處理好整張網頁。但這時已進入平板電腦行動上網的時代，Safari 和 Chrome 這以 WebKit 核心的瀏覽器正在醞釀成為網際網路主流的趨勢，已經沒人想去關注 IE10 是否真的超越了誰。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>主流</h3>
+                    <p>
+                        經過幾番風雨，JavaScript 現在是進階存取 HTML5 文件結構的根本技術，不再只是特效集玩玩而已，它成為擔負起 HTML5 的…（無限期草稿中）
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 不確定 Windows 7 的 IE10 是否跟 Windows 8 的一樣快，它某種程度來講像另外客製化的版本。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='19910806' title='Tim Berners-Lee 宣揚 World Wide Web 專案成為日後 Internet 最主要的服務'>
+
+            <section>
+                <h2>《網頁平台的沿革》Internet</h2>
+                <p>
+                    interconnection network。Internet 是一種硬體通信設備系統，將全球電腦連接起來，形成一種通信網路；台灣通稱「網際網路」。
+                </p>
+                <hr>
+                <section>
+                    <h3>「通信」與「通訊」</h3>
+                    <p>
+                        這裡「通信」與「通訊」是有差異的<ins>[1]</ins>，通信傳遞的是「信息」，通訊傳遞的是「訊息」。<br>
+                        <br>
+                        Internet 主要傳遞的是機器之間交換資料的信號，而不是提供內容的訊號。<br>
+                        <br>
+                        當然，Internet 傳遞信號時，依然包含了內容，但如何表現內容並不是 Internet 的主要工作。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>服務</h3>
+                    <p>
+                        藉由 Internet 通信的機制，提供更明確內容之傳遞服務的，最有名者像是 HTTP 與 FTP，更進一步以表現內容為服務的，則像「全球資訊網」和「即時通」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>全球資訊網</h3>
+                    <p>
+                        全球資訊網，英文 World Wide Web，簡稱 WWW，是最熱門的「網際網路」服務，甚至時常被誤以為「網際網路」的代名詞！
+
+                        全球資訊網使用 HTTP 與 URI 做為網路的系統架構，然後以 HTML 做為資料內容的結構。這種資料即「網頁」，以圖文並茂的資料內容發布於網際網路，由於以文件的形式表現內容，易懂易用，廣為全球民眾接受，成為現代電腦最重要的一環。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] Internet 傳遞的信號像是 Singal，WWW 傳遞的訊號像是 Information。<br>
+                        [2] 通常認為 Internet 涵蓋 Open Systems Interconnection 的 7 個 Layer，顯然本文並不這麼認為，因此本文描述的內容有待商榷。也就是說請不要以本文的說法向他人解釋 Internet。至於為何我還這樣寫，是因為我有我堅持的專業視野，我不想為了迎合普世的觀點扭曲自己認定的分野。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='19901223' title='第一款網頁瀏覽器 WorldWideWeb 釋出初始版本'>
+
+            <section>
+                <h2>《網頁平台的沿革》Browser</h2>
+                <p>
+                    網際網路的各項服務，都有對應的工具程式，其中專門用來瀏覽全球資訊網的，就叫「瀏覽器」，英文 Browser。
+                </p>
+                <hr>
+                <section>
+                    <h3>網頁瀏覽器</h3>
+                    <p>
+                        由於全球資訊網的目的是呈現網頁以供瀏覽，因此瀏覽器也可以說是專門用來呈現網頁的應用軟體。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>網頁</h3>
+                    <p>
+                        網頁的本體，使用 HTML 語法來製作，並且可以使用 CSS 來重新定義 HTML 的表現樣式，還可以透過 JavaScript 以程式設計的手法來操作網頁。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>網頁平台</h3>
+                    <p>
+                        換個角度想，網頁瀏覽器可視為用來執行 JavaScript 的程式平台，以 HTML 和 CSS 做為這種程式平台的操作介面。<br>
+                        <br>
+                        在不同裝置安裝網頁瀏覽器是相當容易的，因此使用瀏覽器的平台來發展 HTML 為基礎的應用程式，不失為解決裝置差異問題的方案。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='19930123' title='第一款圖文 HTML 的瀏覽器 Mosaic 釋出初始版本'>
+
+            <section>
+                <h2>《網頁平台的沿革》HTML</h2>
+                <p>
+                    Hyper Text Markup Language，超文件標記語言。<br>
+                    <br>
+                    最早以前，要在網際網路發表學術文章，都會寫成 HTML 格式的文件，然後透過全球資訊網來散佈。<ins>[1]</ins>
+                </p>
+                <hr>
+                <section>
+                    <h3>超文件</h3>
+                    <p>
+                        超文件是提供「超鏈結」的文件，可讓使用者在網際網路中連結其它全球資訊網的內容。<br>
+                        <br>
+                        搭配各式顯示文字、製作表格、載入圖片的標記，可以製作圖文並茂的文件。<br>
+                        <br>
+                        往後持續加強輸入表單、排版容器、載入影音的標記，現在超文件除了適合做為平面設計的宣傳平台，也適合做為多媒體設計的傳播頻道。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 然而隨著網路時代蓬勃的發展，延伸出許多種語法，HTML 已經成為一種概念性名詞，泛指整體的網頁技術。<br>
+                        [*] 超文件真正通俗的稱呼是「網頁」，英文：Webpage。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='19960531' title='第一款支援 JavaScript 的 Netscape 2.0 發布'>
+
+            <section>
+                <h2>《網頁平台的沿革》JavaScript</h2>
+                <p>
+                    網頁載入以後就無法再變動內容，想要變動內容除非重新載入，所以是靜態的。<br>
+                    <br>
+                    為了能夠變化載入後的網頁內容，而推出類似程式設計寫法的 JavaScript 語言，並開啟動態網頁的時代。
+                </p>
+                <hr>
+                <section>
+                    <h3>DOM</h3>
+                    <p>
+                        Document Object Model，文件模型。<br>
+                        <br>
+                        在還沒有 DOM 時，使用 JavaScript 寫出來的功能，往往無法在不同瀏覽器執行<ins>[1]</ins>，只能選邊站，可說實用性不高。直到負責維護 HTML 標準規範的 W3C 制定 DOM，才總算解決 JavaScript 寫法的實用性<ins>[2]</ins>。<br>
+                        <br>
+                        此外，DOM 還規範出以樹狀節點來處理網頁裡所有元素的做法，讓 JavaScript 可以動態增加、刪除、更改網頁的標記，更是讓 JavaScript 對網頁內容的控制能力全盤提升。<br>
+                        <br>
+                        DOM 的出現，讓 JavaScript 可以完全控制網頁內容的 HTML 與 CSS，奠定網頁程式平台的里程碑。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 尤其當時 Microsoft 一副 Windows 就是一種標準規格的姿態，旗下 Internet Explorer 瀏覽器狂推一堆只有自家環境能用的功能，無視標準規格追求的相容性議題，可說是禍害。<br>
+                        [2] 改以文件內容為動態改變的對象，比從瀏覽器這個對象來改變內容，要合理多了！因此，雖然 DOM 與 JavaScript 語法無關，但能有這麼一個讓我們將設計對象聚焦在文件內容本身的 API，對 JavaScript 標準寫法有很大的幫助！這也是一種實用性的表現～
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='19961217' title='Håkon Wium Lie 完成 CSS 釋出初始版本'>
+
+            <section>
+                <h2>《網頁平台的沿革》CSS</h2>
+                <p>
+                    Cascading Style Sheets，階層樣式表。<br>
+                    <br>
+                    用來重新定義 HTML 標籤的表現方式。
+                </p>
+                <hr>
+                <section>
+                    <h3>樣板</h3>
+                    <p>
+                        CSS 可以寫在另一份文件，然後讓不同網頁載入的特性，適合做為制定樣板的工具，而大量被使用。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>從延伸到必備</h3>
+                    <p>
+                        到了 HTML5，幾乎取消 HTML 標記原先具備的屬性，改由 CSS 來呈現這些效果，使得原本像是延伸出來、可用可不用的 CSS 變成 HTML 必備的項目。<ins>[1]</ins>
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 然而這卻增加初學 HTML 的複雜性，因此建議初學者先從 HTML 4.01 著手，認識標記與屬性的功效，然後慢慢導入 CSS。深刻體會到 CSS 的實用性與方便性的確是不可或缺的，再轉換到 HTML5。瀏覽器可以正常顯示 HTML 4.01 和 HTML5 混雜在一起的寫法，所以這點不用擔心。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='19950323' title='第一款支援 Java Applet 的 HotJava 瀏覽器公開'>
+
+            <section>
+                <h2>《網頁平台的沿革》Java Applet</h2>
+                <p>
+                    字尾 -let 有「小的」意思，因此 Applet 意思是迷你的 Application（應用程式）。<br>
+                    <br>
+                    Java 藉由跨平台的能力，將 Applet 嵌入網頁來執行，為靜態網頁的時代，提供諸如播放連續圖片、檔案操作等豐富的應用。
+                </p>
+                <hr>
+                <section>
+                    <h3>跨平台</h3>
+                    <p>
+                        Java Applet 雖然有跨平台的優勢，但其實不是每個作業系統都能順利在瀏覽器執行 JRE，要解決瀏覽器無法執行 JRE 的問題往往一種折騰人的難題，甚至無法解決。<br>
+                        <br>
+                        因此 Java Applet 並不是很好的跨平台解決方案，使用 Applet 做為跨平台的操作介面，存在相當大無法執行的風險。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>實用性</h3>
+                    <p>
+                        Java Applet 為保護網路安全性，可以使用的程式開發功能沒有 Java Application 來得靈活，或者應該說是限制一堆而綁手綁腳才對。<br>
+                        <br>
+                        後來出現了更靈活且方便使用的 Macromedia Flash，相形之下難搞的 Java Applet 顯得不具實用性，甚至是拖累開發進展的選擇。<br>
+                        <br>
+                        由於 Java Applet 必須執行於網頁，因此應用上就是為網頁提供更多功能。但限制過多的話，開發時效不高，反而用更適合為網頁打造功能的 CGI 或 ASP 要比 Java Applet 來得有效而實用。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>相容性</h3>
+                    <p>
+                        不同版本 JRE 有相容性的問題，新版 JDK 做好的 Java Applet 無法在舊版 JRE 執行情有可原，但舊版 JDK 做好的 Java Applet 可能無法在新版的 JRE 執行就很嚴重了。<br>
+                        <br>
+                        另外，瀏覽器對 Java 的實作方式，也會產生相容性問題，舊版瀏覽器原本可以正常執行的 Java Applet，在新版的瀏覽器可能無法正常執行。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>建議</h3>
+                    <p>
+                        Java Applet 是種不確定因素過高的解決方案，在 HTML5 的時代已經沒有使用的必要。<br>
+                        <br>
+                        要讓 Java Applet 確定能正常執行，只能設計些簡單的東西，但簡單的東西 HTML5 就能做得很好。新穎的功能又存在版本相容性的風險、以及開發效益低落的問題，使用其它解決方案反而是更有保障的選擇。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='19960410' title='Flash 的前身 FutureSplash Animator 誕生'>
+
+            <section>
+                <h2>《網頁平台的沿革》Flash</h2>
+                <p>
+                    Flash 是能夠在網頁播放流暢動畫的軟體，而且還能設計出與觀看者互動的程式功能，讓網頁提供更多樣化的操作方式，使網際網路有了更充實的應用價值。
+                </p>
+                <hr>
+                <section>
+                    <h3>Macromedia Flash 與 Flash Player</h3>
+                    <p>
+                        在作業系統安裝 Flash Player 這款程式，瀏覽器就能執行 Macromedia Flash<ins>[1]</ins> 製作出來的影片。<br>
+                        <br>
+                        Flash Player 是開放在網際網路免費下載的，但 Macromedia Flash 則是市售商品。也就是說，雖然每個人都可以播放 Flash 檔案，但只有購買 Macromedia Flash 的人才能製作 Flash 檔案。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>RIA 與 HTML5</h3>
+                    <p>
+                        Flash 能夠設計出與使用者互動的動畫，徹底改變靜態網頁呆板的操作，迅速成為網頁設計最喜歡應用的技術，網頁也因此進入 RIA 的時代。<br>
+                        <br>
+                        RIA 是 Rich Internet Application 的縮寫，意思是「為網際網路提供更多樣性的應用模式」。<br>
+                        <br>
+                        雖然 Flash 是設計 RIA 的主流做法，但必須購買 Macromedia Flash 才能設計 RIA，因此在網際網路進入 RIA 的時代，能夠實現 RIA 的 HTML5 將滿足網頁設計的需求，並成為推動網際網路進入下一個蓬勃發展時代的新興技術。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>迥異的設計模式</h3>
+                    <p>
+                        對程式設計師來說，Macromedia Flash 的 ActionScript 是種做法特別迥異的程式設計，往往摸不著頭緒，搞不清楚 Macromedia Flash 的程式應該怎麼寫？<br>
+                        <br>
+                        這是因為 Macromedia Flash 的使用概念，主要是「一個影格」保存「一張圖畫」，做好的東西執行時，其實是在跑連續個影格，就像製作「卡通」一樣。ActionScript 只是進階控制這些卡通圖畫的指令，例如要跳躍到哪一個影格？圖畫上哪個元件要反應使用者的互動？<br>
+                        <br>
+                        因此，只要知道 ActionScript 其實是用來控制 Macromedia Flash「整套軟體」的「指令」，而不是拿來設計「應用程式」的「程式語言」，於是把重點放在這套軟體提供了那些製作卡通的操作介面，一切就會好多了！
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>[1] Macromedia 已被 Adobe 收購，因此現已改稱 Adobe Flash。</p>
+                </footer>
+            </section>
+
+            <hr id='19970430' title='訴求 Dynamic HTML 的 IE4 釋出'>
+
+            <section>
+                <h2>《網頁平台的沿革》Dynamic HTML</h2>
+                <p>
+                    引進 Document Object Model 的概念，使腳本語言如 JavaScript 能夠從客戶端存取 HTML 元素與 CSS 樣式的狀態，以動態存取網頁內部資料的技術。通常簡稱 DHTML。
+                </p>
+                <hr>
+                <section>
+                    <h3>客戶端與伺服端</h3>
+                    <p>
+                        Dynamic HTML 的優點在於強化客戶端的程式控制能力，能將伺服端的工作分擔給客戶端執行。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20050218' title='Jesse James Garrett 提出 Ajax 概念'>
+
+            <section>
+                <h2>《網頁平台的沿革》Ajax</h2>
+                <p>
+                    Asynchronous JavaScript And XML 的簡寫，意思是「非同步的 JavaScript 與 XML」，能在不重新整理頁面的情況下存取伺服端的資料，使網頁具備即時顯示網站資料的特性。
+                </p>
+                <hr>
+                <section>
+                    <h3>XMLHttpRequest 與 XML</h3>
+                    <p>
+                        Ajax 主要運用 XMLHttpRequest 為核心技術，並且使用 XML 做為資料交換的格式。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>破壞瀏覽器的操作慣例</h3>
+                    <p>
+                        Ajax 以類似背景執行的程式方式即時更動頁面的內容，這對全球資訊網以上一頁和下一頁來紀錄前後內容的慣例有很大出入，因此設計 Ajax 需要注意瀏覽網頁時，被按上一頁後要如何維持資料，避免出現與期待不符的操作慣例造成使用者困擾。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20041005' title="Tim O'Reilly 與 John Battelle 主持第一屆 Web 2.0 大會">
+
+            <section>
+                <h2>《網頁平台的沿革》Web 2.0</h2>
+                <p>
+                    第二世代網站應用模式。<br>
+                    <br>
+                    網際網路的發展，從單方面提供資訊讓人閱讀，逐漸演變為互動的交易平台。一開始只是注意到網路走向這個趨勢，並無法明確指出這會是怎樣的情況，因此提出 Web 2.0 的概念，希望促進網站技術的整合，早日看到第二世代的網站應用模式。<br>
+                    <br>
+                    目前這個趨勢已經發展成熟，清楚看到 Web 2.0 其實就是網站 (Web) 應該是一種提供服務 (Service) 的平台。
+                </p>
+                <hr>
+                <section>
+                    <h3>Blog</h3>
+                    <p>
+                        最早的 Web 2.0 案例，將討論區的回文功能，整合到每張網頁裡面，讓每個人都能回應編寫網頁者的內容，促進網路間人們的互動性。<br>
+                        <br>
+                        後來 Twitter 更加精簡化這個案例的應用方式，限制文章的字數必須很簡短，好讓它成為訊息，廣播到整個 Web 平台上，與網路使用者一起分享訊息化的人文世界。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>RSS</h3>
+                    <p>
+                        Web 2.0 最經典的案例！將文章的內容從頁面分離出來，重新以更單純的格式輸出，好同步化到第三方的網頁。<br>
+                        <br>
+                        或者簡單的講，這是一種「訂閱」的行為，簡單方便又實用，是最棒的 Web 2.0 實例。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Wiki</h3>
+                    <p>
+                        由網路的群眾，共同編輯同一主題的 Web 2.0 案例。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Google TV</h3>
+                    <p>
+                        本身就是一台結合寬頻網路的硬體，提供網路視訊頻道服務，也可以同時瀏覽全球資訊網，這種案例具有精簡化、實用化網際網路的影響性。<br>
+                        <br>
+                        但這不該說是 Web 2.0 的案例，由於將整合起來的服務表現成一種硬體裝置，可能需要重新界定為 Web 3.0 了！進入可以客製化網際網路的新世代。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='19971231' title='腦力激盪遊戲 Trivia Blitz 是第一個 Web Widget'>
+
+            <section>
+                <h2>《網頁平台的沿革》Widget</h2>
+                <p>
+                    全名 Web Widget，讓第三方網站提供的服務，設計成像是小型插件一樣，可以讓使用者在自己網頁中掛載，提供該項服務。<br>
+                    <br>
+                    然而 Widget 其實是用 HTML 寫成，而 HTML 很容易互相結合起來執行，因此與其說 Widget 是一種網頁元件的規格，不如說是表現「用 HTML 設計功能很容易結合」這個概念的名詞；因為很少人設計的這種網站服務，是以 Widget 的名義開放使用，那感覺像是一種多餘的說法。
+                </p>
+                <hr>
+                <section>
+                    <h3>記數器</h3>
+                    <p>
+                        網站使用第三方設計的計數器來瀏覽人次的功能，其實也是 Web Widget 的表現，但使用時不見得會有「插件」的概念，畢竟理所當然，所以 Widget 是蠻冷門的用詞。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20020301' title='Macromedia 提出 Rich Internet Application 的概念'>
+
+            <section>
+                <h2>《網頁平台的沿革》RIA</h2>
+                <p>
+                    （草稿中）
+                </p>
+            </section>
+
+            <hr id='19960825' title='Jon Bosak 建議 W3C 制定 XML 草案'>
+
+            <section>
+                <h2>《網頁平台的沿革》XML</h2>
+                <p>
+                    （草稿中）
+                </p>
+            </section>
+
+            <hr id='20000126' title='W3C 制定 XHML 1.0 標準'>
+
+            <section>
+                <h2>《網頁平台的沿革》XHTML</h2>
+                <p>
+                    （草稿中）
+                </p>
+            </section>
+
+            <hr id='20130531'>
+
+            <section>
+                <h2>時代的載體</h2>
+                <p>
+                    篆書之於簡帛，印刷之於紙張，平板之於網路。<br>
+                    <br>
+                    早已有簡帛，但易於書寫的文字出現了，兩者相輔相成，才使知識的傳播更有效率。同樣的，雖然早已有紙張，也是因為印刷術的出現，才使得著作的流通更有效率。現在，同樣早已有網際網路，且將因平板電腦的出現，令消息更有效率地傳播開來～<br>
+                    <br>
+                    然而，差異的是，從知識、著作、到消息，人類並沒有更加智慧，反而追逐的是越來越沒有價值的內容，同時迷失在文字形式的思維習慣裡，越來越疏忽探究人性自我生命意義的本能。<br>
+                    <br>
+                    只認知這花花世界發生多少事情，其實就跟整天光聊八卦一樣。不認識自性在千變萬轉時形諸多少生命意義，讀再多文字內容，也只是白走一遭人生～<br>
+                    <br>
+                    時時審思自我、甚於文字，深習與自我溝通的語言，這叫「讀聖賢書」的再興；或者說是兩岸四地應共同啟動的中華版文藝復興，以領先歐美國家進入下一階段的文明。
+                </p>
+            </section>
+
+            <hr id='20060809' title='Google 執行長埃 Eric Schmidt 在 SES San Jose 2006 提出「雲端計算」的概念'>
+
+            <section>
+                <h2>雲端</h2>
+                <p>
+                    設計圖中，網路的部分會畫作雲狀來表示，因此透過網路來運算的程式架構，被稱為「雲端」。
+                </p>
+                <hr>
+                <section>
+                    <h3>消極的雲端解釋</h3>
+                    <p>
+                        表面上來看，所謂雲端是把資料儲存在網路伺服器，這樣即使轉換任何裝置、以及在任何地方使用電腦，都能使用個人化的資料，繼續完成想要的工作。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>積極的雲端定義</h3>
+                    <p>
+                        從細節來探討，雲端是串連多台大型主機來執行商業級運算，再透過網路把運算好的結果傳給使用者。讓即使沒有工作站等級的電腦使用者，也能享受高檔規格的應用環境。<br>
+                        <br>
+                        然而網路有延遲的瓶頸，尚有待突破性技術來解決，目前還是鮮少透過雲端執行大量運算的服務。現在雲端服務都以簡單的動做為主，甚至沒在串連電腦來執行運算的網站，也自稱雲端服務，導致使用者對這個名詞的混淆。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>理想的雲端應用程式</h3>
+                    <p>
+                        一個理想的雲端應用程式，就是應用程式本身像是個空殼子，本身沒什麼運算的功能，只提供操作介面，讓使用者操作伺服端的運算服務。<br>
+                        <br>
+                        目前平板電腦流行的 App，很多只是把 WWW 網站的功能，重新包裝成應用程式的樣子來存取，這就是一個很好的雲端應用程式實作範例！
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [*] 2014 年 7 月看到一則新聞，掌上型的勇者鬥惡龍線上遊戲，會先在官方伺服器進行 3D 繪圖處理，再把等同於 Wii U 或 PC 版本的畫面擷取，像下載圖片一樣傳回 N3DS 給玩家看。這就是我認為理想的雲端運算！一般設備無法負荷的高級運算交給超級伺服器，然後客端的低階設備以自己能負荷的最理想方式接收運算結果，這樣低階設備也能享受高檔設備的結果。與其寄望大家都購買高檔設備才能執行最新軟體技術，這是更能夠推動資訊力量的做法。
+                    </p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>apply(), call(), bind()</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        var A = {
+                            g : 'AAA',
+                            f : function(x,y){
+                                document.write(this.g+x+y);
+                            }
+                        };
+
+                        var B = {
+                            g : 'BBB',
+                            f : function(x,y){
+                                A.f.call(this,x,y);
+                            }
+                        };
+
+                        var C = {
+                            g : 'CCC',
+                            f : function(x,y){
+                                A.f.apply(this,[x,y]);
+                            }
+                        };
+
+                        var D = {
+                            g : 'DDD'
+                        };
+
+                        var E = {
+                            f : A.f.bind(D,7,8)
+                        };
+
+                        A.f(1,2);
+                        B.f(3,4);
+                        C.f(5,6);
+                        E.f();
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA12<br>
+                        BBB34<br>
+                        CCC56<br>
+                        DDD78
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Object.create()</h2>
+                <hr>
+                <section>
+                    <h3>public</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var A = {
+                                g : 'umm',
+                                f1 : function(x){
+                                    this.g = x;
+                                },
+                                f2 : function(){
+                                    document.write(this.g);
+                                }
+                            };
+
+                            var B = Object.create(A);
+                            B.f1('hello');
+
+                            var C = Object.create(A);
+                            C.f1('bye');
+
+                            B.f2();
+                            C.f2();
+                            A.f2();
+                        </textarea>
+                        <br>
+                        <output>
+                            hello<br>
+                            bye<br>
+                            umm
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>private</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var A = (function(){
+                                var g = 'umm';
+                                return {
+                                    f1 : function(x){
+                                        g = x;
+                                    },
+                                    f2 : function(){
+                                        document.write(g);
+                                    }
+                                };
+                            })();
+
+                            A.f1('hello');
+                            A.g = 'bye';
+                            A.f2();
+
+                            var B = Object.create(A);
+                            B.f1('bye');
+
+                            A.f2();
+                        </textarea>
+                        <br>
+                        <output>
+                            hello　　（A 的 g 屬性並未被覆寫，很符合 private 的用途。）<br>
+                            bye　　　（A 的 g 屬性被覆寫了，居然是 static 的 private。）<br>
+                        </output>
+                        <br>
+                        這是因為 Object.creat() 屬於淺層複製，所以 B 複製的是 f 所指向的 g 位址，而不是 B 有自己的一份 g 屬性。<br>
+                        <br>
+                        結論：private 的寫法非常醜就算了，而且不實用，不建議在 JavaScript 模擬 Java 的 private 機制！還不如順著 JavaScript 的精神全部 public，然後在識別字開頭加上 _ 表示這是 private，要用 _ 變數或函式的人自行承擔責任，且頗有 protected 的意味。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20060826'>
+
+            <section>
+                <h2>document.onready</h2>
+                <p>
+                    <code>document.addEventListener('DOMContentLoaded', 函式, false);</code><br>
+                    <br>
+                    這相當於 jQuery 廣受好評的 .ready() 事件。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Hoist of function</h2>
+                <hr>
+                <section>
+                    <h3>Hoisting of function expression</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f1(){
+                                document.write('AAA');
+                            }
+
+                            function f2(){
+                                f1();
+                                function f1(){
+                                    document.write('BBB');
+                                }
+                            }
+
+                            f2();
+                        </textarea>
+                        <br>
+                        <output>
+                            BBB<br>
+                        </output>
+                        <br>
+                        從輸出結果來看，f1 確實被覆寫了！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Hoisting of function declaration</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f1(){
+                                document.write('AAA');
+                            }
+
+                            function f2(){
+                                f1();
+                                var f1 = function(){
+                                    document.write('BBB');
+                                };
+                            }
+
+                            f2();
+                        </textarea>
+                        <br>
+                        <output>
+                            TypeError: f1 is not a function<br>
+                        </output>
+                        <br>
+                        出現錯誤訊息，表示 f1 被覆寫了；因為沒覆寫的話，應該會顯示 AAA 才對！<br>
+                        <br>
+                        但定義好的內容，卻是無效的。<br>
+                        <br>
+                        這表示以第一級物件所定義的函式，被提吊起來的只有 f1 這個「變數名稱（參照）」，實作的內容卻沒有。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>想在 object literal 加入 constant variable 的話</h2>
+                <p>
+                    想在物件加入一筆不可改變的資料來使用，可以設計成函式來傳回資料。<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        let Circle={
+                            pi(){ return 3.14 },  //const pi = 3.14 的替代方案
+                            area(radius){
+                                document.write(radius * radius * this.pi());
+                            }
+                        };
+
+                        Circle.pi = 1.618;  //故意竄改資料
+                        Circle.area(5);
+                    </textarea>
+                    <br>
+                    <output>
+                        TypeError: this.pi is not a function<br>
+                    </output>
+                    <br>
+                    不小心竄改變數時，會回報錯誤，以免程式順利計算出結果，資料卻是錯的，且毫不知情。<br>
+                    <br>
+                    至於被寫 Circle.pi = function(){ return 1.618 }，那就是故意竄改的，並非不小心竄改，只好認了～
+                </p>
+            </section>
+
+            <hr id='20130331'>
+
+            <section>
+                <h2>JavaScript 分類導向設計模式</h2>
+                <hr>
+                <section>
+                    <h3>唯讀模式</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var A = {
+                                a: function(){ return 'AAA' }
+                            };
+
+                            document.write(A.a());
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>組態模式</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var A = {
+                                $a: null,
+                                f: function(){
+                                    if(A.$a) document.write(A.$a);
+                                    else document.write('請先設定組態');
+                                    A.$a = null;
+                                }
+                            };
+
+                            A.$a = 'AAA';
+                            A.f();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>型別模式</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var A = {
+                                type: function(){ return 'TYPE_A' }
+                            };
+
+                            var B = {
+                                f: function(x){
+                                    if(x.type()=='TYPE_A') document.write('HELLO');
+                                }
+                            };
+
+                            B.f(A);
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>別名模式</h3>
+                    <p>
+                        用完即丟的區域變數，改用全域陣列精省記憶體。<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var Global = {
+                                variables: new Array()
+                            };
+
+                            var A = {
+                                alias_name_1: function(x){
+                                    if(x) Global.variables[0] = x;
+                                    else return Global.variables[0];
+                                },
+                                alias_name_2: function(x){
+                                    if(x) Global.variables[1] = x;
+                                    else return Global.variables[1];
+                                }
+                            };
+
+                            A.alias_name_1(111);
+                            A.alias_name_2(222);
+                            document.write(A.alias_name_1() + A.alias_name_2());
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>君子模式<ins>[1]</ins></h3>
+                    <p>
+                        由於分類導向程式沒有 private 的設計，只能靠「肉眼」觀察程式是否「跨區域存取變數」，因此稱為 pretend privacy，意思是「當作私有」。<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var A = {
+                                _a: 0,
+                                f: function(){
+                                    this._a;
+                                }
+                            };
+                        </textarea>
+                        <br>
+                        只能使用 this._a 的寫法來存取 A 的 _a 變數，如果肉眼看到 A._a 這樣的寫法，就必須加以警覺。<br>
+                        <br>
+                        使用 A 來存取的，只能是「非 _ 底線」的成分，例如 A.f() 看起來就是「有照規矩來」的用法。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>隱私模式</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var A = {
+                                //Attributes
+                                _attributes: new Array(),
+                                //Operations
+                                setHP: function(x){
+                                    this._attributes[0] = x;
+                                },
+                                getHP: function(){
+                                    return this._attributes[0];
+                                },
+                                setMP: function(x){
+                                    this._attributes[1] = x;
+                                },
+                                getMP: function(){
+                                    return this._attributes[1];
+                                }
+                            };
+                        </textarea>
+                        <br>
+                        如果從外部存取不希望公開的屬性，索引型隱私模式要比君子模式來得更醜：<br>
+                        <br>
+                        A._attributes[0] = 16;<br>
+                        document.write(A._attributes[0]);<br>
+                        <br>
+                        這讓人更沒有意願直接存取屬性，而提升使用 setter 與 getter 的意願：<br>
+                        <br>
+                        A.setHP(16);<br>
+                        document.write(A.getHP());<br>
+                        <br>
+                        希望提高可讀性時，可以這麼變通：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var A = {
+                                //Attributes
+                                _attributes: new Array(),
+                                //Flags
+                                HIT_POINTS: 0,
+                                MAGIC_POINTS: 1,
+                                //Operations
+                                setHP: function(x){
+                                    this._attributes[this.HIT_POINTS] = x;
+                                },
+                                getHP: function(){
+                                    return this._attributes[this.HIT_POINTS];
+                                },
+                                setMP: function(x){
+                                    this._attributes[this.MAGIC_POINTS] = x;
+                                },
+                                getMP: function(){
+                                    return this._attributes[this.MAGIC_POINTS];
+                                }
+                            };
+                        </textarea>
+                        <br>
+                        但不建議使用，應該讓 setters 與 getters 制定出具可讀性的公開介面，而不是為索引值取個名稱。這個變通方案的使用時機，應該是必須在區塊中存取好幾個屬性的索引值時，想提高可讀性才使用，例如：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var A = {
+                                //Attributes
+                                _attributes: new Array(),
+                                //Flags
+                                HIT_POINTS: 0,
+                                MAGIC_POINTS: 1,
+                                //如果魔法值夠的話，恢復生命值。
+                                heal: function(){
+                                    if(this._attributes[this.MAGIC_POINTS]&gt;=8){
+                                        this._attributes[this.HIT_POINTS] += 24;
+                                        this._attributes[this.MAGIC_POINTS] -= 8;
+                                    }
+                                }
+                            };
+                        </textarea>
+                    </p>
+                    <hr>
+                    <p>
+                        <ins>
+                            [1] 君子乃偽裝本性的行為舉止，所以 pretend privacy pattern 的中文，我翻為「君子模式」，但其實是指「偽君子」的意思。既然有「偽君子模式」，那「乾脆公開變數，做為使用者存取物件的操作介面之一」的設計手法，就是也不失為建議選項的「真小人模式」了 XDDD<br>
+                        </ins>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我偏好的 JavaScript 程式設計習慣</h2>
+                <p>
+                    由於 JavaScript 的識別名稱很容易就能覆寫掉其性質與功能，因此雖然在識別名稱上進行裝飾是讓人唾棄的事，我還是偏好這樣寫 JavaScript 程式：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var S = {
+                            _a: 'hello',
+                            $b: false,
+                            f: function(){
+                                if(this.$b) return this._a;
+                            }
+                        };
+
+                        S.$b = true;
+                        S.f();
+                    </textarea>
+                    <br>
+                    在這程式碼裡，還可以發現到更讓人不齒的是，我不只裝飾了變數名稱，連「變數一律 private 的原則」都放棄了！
+                </p>
+                <hr>
+                <section>
+                    <h3>對裝飾名稱的唾棄</h3>
+                    <p>
+                        這是大多數人都很唾棄的編碼風格！別說標上裝飾符號，連 Java 類別裡存取自己的區域變數時，都不該標上 this，因為類別裡的變數就在視野所及的區域內，稍微往上一看就知道某個識別名稱存在這類別裡，特地標上 this 反而讓人覺得礙眼。<br>
+                        <br>
+                        但事實上我寫 Java 時還真的得標上 this 才覺得順眼，甚至我常常標上的是 self，因為我希望連存取不到 this 的區塊也能標上，所以我 <code>private Classname self = this;</code> 來用～<br>
+                        <br>
+                        理由是我覺得在 Java 存取識別名稱時是不是 this 很重要，雖然沒有人覺得這是重要的事，但我手上有些案例的癥結點，就是發生在沒用 this 時沒能封裝好自己的細節。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>對公開變數的不齒</h3>
+                    <p>
+                        我在寫 JavaScript 時，會將「變數」也視為「公開介面」的一種，然後在設計整個結構時就處理該如何公開這個變數的問題，再標上 $，告知使用這程式結構的人：<br>
+                        <br>
+                        <samp>
+                            如果你要呼叫函式，請使用識別名稱搭配 () 符號。<br>
+                            如果你要設定組態，請使用識別名稱搭配 $ 符號。<br>
+                            如果你要存取搭配 _ 符號的識別名稱，表示你明白正從外部修改內部的細節。<br>
+                        </samp>
+                        <br>
+                        因為在 JavaScript 這「弱型別、鍵值對」的程式結構中，與其說那是變數，不如說是物件還比較貼切，於是我偏好將變數 aggregate 或 composite 到結構裡面當物件。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Don't create your own 'decorated' private field names.</h3>
+                    <p>
+                        This is usually seen in the form of prepended underscores and characters. Hungarian notation is the worst example of this, where you attach extra characters that indicate data type, use, location, etc., as if you were writing assembly language and the compiler provided no extra assistance at all. These notations are confusing, difficult to read, and unpleasant to enforce and maintain. Let classes and packages do the name scoping for you. If you feel that you must decorate your names to prevent confusion, your code is probably too confusing anyway and should be simplified.<br>
+                        <br>
+                        出自 Bruce Eckel 所著《<a href='http://www.mindviewinc.com/Books/downloads.html' target='_blank'>Thinking in Java, 3rd Edition</a>》的「Appendix B: Java Programming Guidelines」，可見大家有多麼討厭刻意在變數名稱加上有的沒的，讓程式碼讀起來很不順暢。<br>
+                        <br>
+                        雖然我也在 Java 省略 this 過，也在 JavaScript 改用可以拿封閉參數當作 private field 的「建構函式」來取代只能公開鍵值對的「原型物件」，但不知不覺我發現後來自己還是會偏好這麼做……
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我的 JavaScript 程式寫作手法</h2>
+                <hr>
+                <section>
+                    <h3>傳統結構化程式設計</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var a=[111,222,333];
+                            function f(){
+                                document.write(a[0]);
+                            }
+                            f();
+                        </textarea>
+                        <br>
+                        JavaScript 是可塑性高的程式語言，你可用自己喜歡的方式去寫程式，甚至自己打造嶄新的方式，所以用傳統結構化程式設計的寫法，原本就是 JavaScript 應允的一種，沒什麼落不落伍的。<br>
+                        <br>
+                        所以我後來偏好用這種傳統程式設計手法寫 JavaScript，因為可以避開很多 JavaScript 可塑性高而不倫不類的問題。<br>
+                        <br>
+                        只寫一小段程式碼時，我會選擇這樣寫 JavaScript 程式，既簡單、又直覺。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>物件符文</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var s={
+                                a:[111,222,333],
+                                f:function(){
+                                    document.write(this.a[0]);
+                                }
+                            };
+                            s.f();
+                        </textarea>
+                        <br>
+                        程式碼的變數和函式變多，就會用 object literal 當名稱空間，將程式碼依職責劃分開來。<br>
+                        <br>
+                        但依然站在傳統結構化程式設計的手法寫作，而不是物件導向。因為 JavaScript 只是有自己 Prototype 模式的物件機制，所以有物件的存在，但並不是物件導向程式語言。硬要把 Java 的寫作習慣搬到 JavaScript，只是折騰而已。<br>
+                        <br>
+                        JavaScript 有自己的物件程式設計觀念，不過它直接表現在語意上，讓它自然發生就好。刻意把所有東西都物件化，反而有違 JavaScript 物件的精神，因為物件是很自然存在的東西，而不是刻意產生出來的物件。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>陣列物件</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var a=[111];
+                            a.f=function(){
+                                document.write(this[0]);
+                            };
+                            a.f();
+                        </textarea>
+                        <br>
+                        真要物件導向程式設計的好處時，我會直接把資料當物件來用，尤其是將匿名函式當資料丟進陣列裡迭代。<br>
+                        <br>
+                        這種寫法看起來很畸形，感覺很能展現我個人風格。而且全賴索引值存取內部資料，可讀性低，每次都要用記憶力存取資料，很能訓練我的腦袋。所以 2017 年起變成我慣用的 JavaScript 寫作風格 XDDD
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20130330'>
+
+            <section>
+                <h2>分類導向與物件導向的差異</h2>
+                <hr>
+                <section>
+                    <h3>物件導向</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var HP = function(){
+                                var points = 0;
+                                this.isDead = function(){
+                                    if(points&lt;=0) document.write('GAME OVER');
+                                }
+                            }
+
+                            var Character = {
+                                hp: new HP();
+                            }
+
+                            Character.hp.isDead();
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>分類導向</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var Character = {
+                                hp: 0,
+                                isDead: function(){
+                                    if(this.hp&lt;=0) return true;
+                                }
+                            }
+
+                            if(Character.isDead()) document.write('GAME OVER');
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>惱人的禁止選取文字</h2>
+                <p>
+                    我真不曉得 CSS3 新增這惱人的樣式有什麼用處：<br>
+                    <br>
+                    -moz-user-select:none;<br>
+                    -ms-user-select:none;<br>
+                    -ktml-user-select:none;<br>
+                    -webkit-user-select:none;<br>
+                    -webkit-touch-callout:none;<br>
+                    user-select:none;<br>
+                    <br>
+                    逛網頁看到有興趣的關鍵字想搜尋更多，卻被禁止選取文字的權利，這真是幹你娘的爛設計！<br>
+                    <br>
+                    偏偏 Xuite 和 PIXNET 都預設使用這個設計，台灣人已經不會寫網頁，只會在部落格發表文章，結果逛個網際網路，幾乎三分之二情況下，都被剝奪了選取文字的權利。<br>
+                    <br>
+                    Firefox 可以按 F12，在檢測器中找出 -moz-user-select: none; 關掉。如果不是 CSS 的話，按工具箱選項的圖示，然後停用 JavaScript。
+                </p>
+            </section>
+
+            <hr id='20091232'>
+
+            <section>
+                <h2>ECMAScript 5 其實是過度時期的版本</h2>
+                <p>
+                    ECMAScript 5 新增了 strict mode 的機制，可以讓解譯器警告一些積習已久、即將被淘汰的程式寫法。只要在程式碼最前端標上 <code>'strict mode'</code> 這個字串即可！這樣執行 JavaScript 時，如果程式碼的寫法觸犯長久以來的陋習，會直接當作語法錯誤無法執行。<br>
+                    <br>
+                    甚至可以這麼說，ECMAScript 5 增加的功能，像是原型物件的映射、標準支援 JSON 的格式、一級函式物件的銳化…是為了讓我們解決 strict mode 時的語法錯誤，才放上來的。嗯，這說法真是太穿鑿附會了～！但確實還有很多語法沒在 ECMAScript 5 和 ECMAScript 5.1 用上，目前看到的，都是試圖指導我們原型物件有那些好處的功能。<br>
+                    <br>
+                    這告訴我們，真正值得期待的，是目前代號 Harmony 的 ECMAScript 6！<br>
+                    <br>
+                    然而，我期待 ECMAScript 6 不怎麼相容過去的版本，寧可改寫程式碼符合 ECMAScript 6 的規範，也比持續 ECMAScript 累積下來的陋習所造成弊端來得有效率；越不相容，越能一次解決 JavaScript 的問題。<br>
+                    <br>
+                    修改 JavaScript 程式碼通過 ECMAScript 6 警示的語法錯誤並不難，反正你發出幾條錯誤，我就逐行修改過來，程式設計師本來就是在幹這些工作，感覺就跟消除一行又一行的俄羅斯方塊一樣在玩益智遊戲而已。但改完之後，卻能讓我的網頁應用程式日後變得更容易維護。<br>
+                    <br>
+                    當然，這是不可能的事，如果這樣就不會是 ECMAScript 5 到 ECMAScript 6 的規範了，通常這叫另一個規範。
+                </p>
+            </section>
+
+
+            <hr id='20080122'>
+
+            <section>
+                <h2>HTML5 = 頁面 + 樣式 + 編劇 &amp; 語意</h2>
+                <p>
+                    HTML5 = HTML + CSS + JavaScript &amp; Search engine optimization
+                </p>
+                <hr>
+                <section>
+                    <h3>撰寫網頁的時代</h3>
+                    <p>
+                        原本 HTML 是一種易學易用的網頁標記語言，需要記的東西不多，通常花一天就可以速成：<br>
+                        <br>
+                        <textarea class='brush:html'>
+                            &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;title&gt;我的網站&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;h1&gt;個人檔案&lt;/h1&gt;
+                                    &lt;p&gt;1980年11月10日出生，男性，AB型。&lt;/p&gt;
+                                    &lt;img src='肖像.jpg'&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                        <br>
+                        花三天可以產生更多花樣：<br>
+                        <br>
+                        <textarea class='brush:html'>
+                            &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;title&gt;我的網站&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;h1&gt;個人檔案&lt;/h1&gt;
+                                    &lt;table border='2'&gt;
+                                        &lt;tr&gt;&lt;td&gt;生日&lt;/td&gt;&lt;td&gt;性別&lt;/td&gt;&lt;td&gt;血型&lt;/td&gt;&lt;/tr&gt;
+                                        &lt;tr&gt;&lt;td&gt;1980/11/10&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;td&gt;AB&lt;/td&gt;&lt;/tr&gt;
+                                    &lt;/table&gt;
+                                    &lt;img src='肖像.jpg'&gt;
+                                    &lt;a href='page2.html'&gt;下一頁&lt;/a&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                        <br>
+                        這時候的 HTML 只需要記住用得到的文字效果標記，搭配 IMG 貼個圖上去就好了，純粹就是「撰寫網頁」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>設計網頁的時代</h3>
+                    <p>
+                        後來時代演進到「設計網頁」的時代，也就是網頁適合做為平面宣傳，於是 CSS 這個可用來修改標籤表現樣式的語言，因為方便為網頁制定一個通用的樣板，而變得熱門：
+                    </p>
+                    <section>
+                        <h4>style.css</h4>
+                        <p>
+                            <textarea class='brush:css'>
+                                table { border:1px }
+                                td { font-weight:bold }
+                                a { text-decoration:none }
+                                a:link { color:#1e90ff }
+                                a:active { color:#ffa500 }
+                                a:visited { color:#1e90ff }
+                                a:hover { color:#ffa500 }
+                            </textarea>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>index.html</h4>
+                        <p>
+                            <textarea class='brush:html'>
+                                &lt;html&gt;
+                                    &lt;head&gt;
+                                        &lt;title&gt;我的網站&lt;/title&gt;
+                                        &lt;link href='layout.css' rel='stylesheet' type='text/css'&gt;
+                                    &lt;/head&gt;
+                                    &lt;body&gt;
+                                        &lt;h1&gt;個人檔案&lt;/h1&gt;
+                                        &lt;table&gt;
+                                            &lt;tr&gt;&lt;td&gt;生日&lt;/td&gt;&lt;td&gt;性別&lt;/td&gt;&lt;td&gt;血型&lt;/td&gt;&lt;/tr&gt;
+                                            &lt;tr&gt;&lt;td&gt;1980/11/10&lt;/td&gt;&lt;td&gt;男&lt;/td&gt;&lt;td&gt;AB&lt;/td&gt;&lt;/tr&gt;
+                                        &lt;/table&gt;
+                                        &lt;img src='肖像.jpg'&gt;
+                                        &lt;a href='page2.html'&gt;下一頁&lt;/a&gt;
+                                    &lt;/body&gt;
+                                &lt;/html&gt;
+                            </textarea>
+                        </p>
+                    </section>
+                    <p>
+                        可以發現 HTML 的功能交由 CSS 統一制定。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>應用網頁的時代</h3>
+                    <p>
+                        為了讓網頁順利成為網路應用程式的操作介面，制定了 HTML5。<br>
+                        <br>
+                        但 HTML5 大量取消掉 HTML 的功能，改用 CSS 來取代，這對新一輩正想學習 HTML 的人來講，變成不只要學 HTML 有哪些標記可用，還要學 CSS 才能變換花樣，而這兩樣語法相當迥異，無疑是種負擔。<br>
+                        <br>
+                        加上 HTML5 的多媒體功能，像是 CANVAS、AUDIO、VIDEO，光靠 HTML 和 CSS 是無法充分發揮效用的，必須使用 JavaScript 才能控制這些功能，這又讓所謂的 HTML5 更加困難了。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>網頁設計師何去何從？</h3>
+                    <p>
+                        當然，HTML5 的推出只是為了讓網頁可以變成應用程式，但不代表網頁真的只能這樣寫，你要繼續用 HTML 4 或者更早的規範去寫網頁，照樣可以動作；瀏覽器會相容各種規範的 HTML。<br>
+                        <br>
+                        只能說，如果你要當一名網頁設計師，只能寫 HTML 4 的網頁，依然可以好好當個平面設計師，學會 HTML5 是為了能夠扮演多媒體設計師的角色。<br>
+                        <br>
+                        就這點來看，無論 HTML5 或 HTML 4，需求上依然是相容的，網頁適合做為平面宣傳的功能，不會因為走向多媒體的展現而被取代。但確實會有此消彼長的情形，如果多媒體的互動可以產生更多宣傳效果，平面設計式的網頁就會沒落。<br>
+                        <br>
+                        然而無論是平面設計或者多媒體設計，都是不同的專業領域，就算未來網頁走向多媒體互動為主流模式的時代，只要你平面設計的專業有口碑，你的網頁依然有很高的商業價值。所以你應該正視的問題並不是 HTML 本身，而是你真正的專業領域是否夠權威。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>配合搜尋環境最佳化網頁內容的語意</h3>
+                    <p>
+                        技術上 HTML5 等於 HTML + CSS + JavaScript，但應用上有更大的意義：語意。<br>
+                        <br>
+                        為了讓各大搜尋引擎能夠更明確解析你網頁的資料，提高資料搜尋的實用性，使用 HTML5 明確劃分自己的網頁內容有哪些成分，有助於未來網際網路的搜尋效益。<br>
+                        <br>
+                        事實上這才是 HTML5 的重點！HTML5 很努力定義網頁有哪些成分，除了新增 SECTION（第幾單元）、ARTICLE（第幾章節）、NAV（導覽頁籤）、ASIDE（邊角專欄）、HEADER（標題列）、FOOTER（頁腳）…等標籤，甚至原本只是用來呈現水平線的 HR 標籤，HTML5 都進一步定義為段落的變化，規範網頁成分的用心非常強烈。<br>
+                        <br>
+                        底下是配合 HTML5 語意所寫出來的網頁文件範例：<br>
+                        <br>
+                        <textarea class='brush:html'>
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang='zh-TW'&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset='utf-8'&gt;
+                                    &lt;title&gt;書名&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;section&gt;
+                                        &lt;header&gt;
+                                            &lt;h1&gt;第一單元&lt;/h1&gt;
+                                            &lt;h2&gt;前言。&lt;/h2&gt;
+                                        &lt;/header&gt;
+                                        &lt;article&gt;
+                                            &lt;header&gt;&lt;h4&gt;第一章&lt;/h4&gt;&lt;/header&gt;
+                                            &lt;p&gt;１-１內容。&lt;/p&gt;
+                                            &lt;hr&gt;
+                                            &lt;p&gt;１-２內容。&lt;/p&gt;
+                                        &lt;/article&gt;
+                                        &lt;article&gt;
+                                            &lt;header&gt;&lt;h4&gt;第二章&lt;/h4&gt;&lt;/header&gt;
+                                            &lt;p&gt;２-１內容。&lt;/p&gt;
+                                            &lt;hr&gt;
+                                            &lt;p&gt;２-２內容。&lt;/p&gt;
+                                        &lt;/article&gt;
+                                    &lt;/section&gt;
+                                    &lt;section&gt;
+                                        &lt;header&gt;
+                                            &lt;h1&gt;第二單元&lt;/h4&gt;&lt;/h1&gt;
+                                            &lt;h2&gt;前言。&lt;/h2&gt;
+                                        &lt;/header&gt;
+                                        &lt;article&gt;
+                                            &lt;header&gt;&lt;h4&gt;第三章&lt;/h4&gt;&lt;/header&gt;
+                                            &lt;p&gt;３-１內容前段。&lt;/p&gt;
+                                            &lt;figure&gt;
+                                                &lt;img src='圖片１.png'&gt;
+                                                &lt;img src='圖片２.png'&gt;
+                                                &lt;img src='圖片３.png'&gt;
+                                                &lt;figcaption&gt;這三張圖片的說明文字&lt;/figcaption&gt;
+                                            &lt;/figure&gt;
+                                            &lt;p&gt;３-１內容後段。&lt;/p&gt;
+                                        &lt;/article&gt;
+                                    &lt;/section&gt;
+                                    &lt;footer&gt;
+                                        &lt;time&gt;2012-12-21&lt;/time&gt;
+                                        &lt;address&gt;twideem@outlook.com&lt;/address&gt;
+                                    &lt;/footer&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='19780122'>
+
+            <section>
+                <h2>HTML + CSS + JavaScript, Model–view–controller.</h2>
+                <p>
+                    HTML + CSS + JavaScript 這三種不同實作方式的整合，本身就隱含 MVC 模式的特性；這個議題是值得投注的。<br>
+                    <br>
+                    甚至如果這樣整合的實作方案，哪天被驗證說是更巧妙的 MVC 架構，不失為業界莫大改革的助益。（但恐怕很難，我只能確定 HTML + CSS + JS 可以是一種 MVC 模式的表現方式，但這樣一種方式實不實際？不是經驗粗淺的我能夠奠定的。）
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>HTML5 無法興起的原因</h2>
+                <p>
+                    以智慧型手機為例，雖然 HTML5 有語法的標準化，可以達到跨硬體裝置、跨軟體平台的優勢，但各家廠商還是喜歡使用原生程式寫 App。<br>
+                    <br>
+                    因為 HTML5 很難優化，而廠商怕的是程式跑不順，不是程式寫得快，所以寧願在不同裝置、不同平台，以不同的原生程式開發 App，也比為 HTML5 寫 App 時，遇到效能瓶頸很難解決要好。<br>
+                    <br>
+                    有多難？寫 HTML5 平台的應用程式，在 A 裝置好不容易偷吃步解決效能瓶頸時，通常到了 B 裝置並不適用，必須重新找偷吃步的方法。沒辦法，誰叫你偷吃步解決效能瓶頸，這樣就不夠 HTML5 了！但遺憾的是，不偷吃步解決不了效能瓶頸的問題～<br>
+                    <br>
+                    而各裝置提供的原生程式，總是能基於自己裝置的硬體特性，提供豐富的 API 幫忙解決問題，因此還不如 A 裝置就用 A 的原生程式、B 裝置就用 B 的原生程式要來得省事。<br>
+                    <br>
+                    這問題只能期待 Mozilla、Google、或其他第三方廠商，開發出更多 HTML5 的 Web XXX Library 幫助我們解決問題，目前無解。<br>
+                    <br>
+                    畢竟 HTML5 訴諸的是 RIA，因此停留在「前端應用」，不像原生程式不只適用於前端，還能兼顧低階特性的功能。或許這是下一代 HTML 所要解決的問題吧！但…這樣還能是 HTML 嗎？超鏈結文件變成類雲端文件？
+                </p>
+            </section>
+
+            <hr id='20020529A'>
+
+            <section>
+                <h2>Macromedia Studio MX</h2>
+                <p>
+                    2002 年 5 月 29 日，發布 Macromedia Studio MX，裡面包含：Dreamweaver、Flash、FreeHand、Fireworks、ColdFusion。
+                </p>
+                <hr>
+                <section>
+                    <h3>Dreamweaver</h3>
+                    <p>
+                        網頁設計軟體。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Flash</h3>
+                    <p>
+                        動畫設計軟體。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>FreeHand</h3>
+                    <p>
+                        向量繪圖軟體。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Fireworks</h3>
+                    <p>
+                        網頁圖形處理軟體。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>ColdFusion</h3>
+                    <p>
+                        提供應用程式平台的伺服器，使用 ColdFusion Markup Language (CFML) 程式語言來設計動態網頁，可大幅簡化工作。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20051130A'>
+
+            <section>
+                <h2>vi：一款執行於指令模式的文字編輯器</h2>
+                <p>
+                    網管人員往往需要在指令模式下操控系統，這時如果要檢視或修改設定檔，就需要能執行於指令模式的文字編輯器。<br>
+                    <br>
+                    vi 就是一款指令模式下的文字編輯器，你可以透過它載入文字檔來檢視內容，並且對內容進行修改。<br>
+                    <br>
+                    vi 最大的優點就是很多伺服主機的作業系統底下都有內建這款文字編輯器，算是一款通用的工具，可做為網管人員必備的標準事項。<br>
+                    <br>
+                    缺點就是沒學過很難上手，例如要複製一個單字是以輸入 yw 的方式來進行，與平常的「Shift + 方向鍵」然後按「Ctrl + C」做法不同。<br>
+                    <br>
+                    本篇內容將告訴你，如何使用 vi 載入設定檔，然後檢視其內容、修改文字、最後儲存起來。
+                </p>
+                <hr>
+                <section>
+                    <h3>vi 快速攻略</h3>
+                    <p>本章節提供快速上手的功能指引。</p>
+                    <section>
+                        <h4>執行 vi 文字編輯器</h4>
+                        <p>
+                            由於每個 Linux 發行版都會內建 vi 文字編輯器，因此你只要在指令模式的輸入欄位鍵入 vi 然後按 Enter，就可以執行 vi 文字編輯器。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>認識 vi 文字編輯器的畫面</h4>
+                        <p>
+                            執行 vi 之後，你會看到一個純粹由文字與字元符號所構成的畫面。<br>
+                            <br>
+                            這畫面看起來雖然很簡陋，但其實分為三個控制區域可以切換，分別執行不一樣的任務，簡介如下：<br>
+                            <br>
+                            1. normal mode - 標準模式；可檢視內容，且透過按鍵的組合方式，可以執行 vi 在軟體部份的功能。<br>
+                            2. insert mode - 插入模式；可編修文字。<br>
+                            3. command-line mode - 命令列模式；用來開啟、儲存檔案，並可執行搜尋、替換的工作。<br>
+                            <br>
+                            執行 vi 程式後，控制區域會先位於 normal mode。這時你可以按 i 鍵進入 insert mode，或者按 : 鍵進入 command-line mode。<br>
+                            <br>
+                            在 insert mode 要返回 normal mode，請按 Esc。如果是 command-line mode，只要執行命令就會自己回到 normal mode。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>開啟舊檔</h4>
+                        <p>
+                            請進入 command-line mode，首先鍵入 n，然後隔個空白後，再輸入檔案名稱，即可開啟該檔案。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>檢視內容</h4>
+                        <p>
+                            在 normal mode 即可檢視檔案內容。<br>
+                            <br>
+                            你可以使用方向鍵移動游標。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>編修內容</h4>
+                        <p>
+                            在 normal mode 檢視內容的過程中，你可以隨時切換到 insert mode，這時游標會保持在你檢視內容的位置，讓你直接從該處修改內容。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>儲存檔案</h4>
+                        <p>
+                            當你編修好內容想要儲存起來，請切換到 command-line mode，鍵入 w，然後按 Enter，即可將檔案儲存起來。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>結束 vi 文字編輯器</h4>
+                        <p>
+                            當你修改過檔案內容，並且已經儲存的話，那只要在 command-line mode 鍵入 q，然後按 Enter，就可以結束 vi 文字編輯器。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>更多關於 vi 的功能介紹</h3>
+                    <p>進階功能的介紹。</p>
+                    <section>
+                        <h4>normal mode 下可用的按鍵</h4>
+                        <p>
+                            方向鍵 - 移動游標。<br>
+                            Page Uspan - 往上跳一頁畫面。<br>
+                            Page Down - 往下跳一頁畫面。<br>
+                            <br>
+                            h - 向左移動游標。<br>
+                            j - 向下移動游標。<br>
+                            k - 向上移動游標。<br>
+                            l - 向右移動游標。<br>
+                            w - 游標移到下一個字元。<br>
+                            0 - 將游標移到該行最前。<br>
+                            $ - 將游標移到該行最後。<br>
+                            G - 將游標移到最後一行的開頭。<br>
+                            e - 將游標移到所在單字的結尾。<br>
+                            b - 將游標移到所在單字的開頭。<br>
+                            <br>
+                            Ctrl + b - 往前跳一頁畫面。相當於 Page Up。<br>
+                            Ctrl + f - 往後跳一頁畫面。相當於 Page Down。<br>
+                            Ctrl + u - 往前跳半頁畫面。<br>
+                            Ctrl + d - 往後跳半頁畫面。<br>
+                            Ctrl + e - 往前跳一行畫面。<br>
+                            Ctrl + y - 往後跳一行畫面。<br>
+                            連按兩次 { - 將游標移到程式函式的 { 處。<br>
+                            連按兩次 } - 將游標移到程式函式的 } 處。<br>
+                            % - 將游標移往括號處。<br>
+                            <br>
+                            yy - 複製游標所在的整行資料。<br>
+                            yw - 複製游標所在的整個單字。<br>
+                            數字 + yy - 從游標開始往後複製多行資料。<br>
+                            數字 + yw - 從游標開始往後複製多個單字。<br>
+                            span - 將複製的文字貼上。<br>
+                            <br>
+                            d + 方向鍵 - 刪除所指方向的字元或整行資料。<br>
+                            dd - 刪除整行資料。<br>
+                            dw - 刪除一個單字。<br>
+                            數字 + d - 刪除所指方向的多個字元或多行資料。<br>
+                            數字 + dd - 刪除多行資料。<br>
+                            D - 刪除游標後面的整行資料。<br>
+                            x - 刪除一個字元。<br>
+                            X - 刪除游標前面的字元。<br>
+                            數字 + x - 刪除多個字元。<br>
+                            數字 + X - 刪除游標前面的多個字元。<br>
+                            <br>
+                            u - 復原前一次的修改動作。<br>
+                            r - 直接修改字元。<br>
+                            <br>
+                            a - 進入 insert mode，游標會在所在位置的下一個字元。<br>
+                            i - 進入 insert mode，游標會在所在位置的字元。<br>
+                            o - 以新增一行的動作進入 insert mode。<br>
+                            <br>
+                            ZZ - 儲存檔案，並結束 vi。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>insert mode 下可用的操作</h4>
+                        <p>
+                                單純用來輸入文字。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>command-line mode 下可用的命令</h4>
+                        <p>
+                            e - 建立新的純文字檔案。你可以在 e 的後面隔個空白，然後輸入檔案名稱，做為新檔的檔名。<br>
+                            n - 載入檔案。後面必須隔個空白，然後輸入檔案名稱。<br>
+                            q - 結束 vi。但是當你有修改過檔案但是沒有儲存的話，將不會結束程式，以免遺失修改過的資料。<br>
+                            q! - 強制結束 vi。也就是不儲存任何修改過的檔案，直接結束程式。<br>
+                            w - 儲存檔案。你可以在 w 的後面隔個空白，然後輸入檔案名稱，達到另存新檔的目的。<br>
+                            wq - 儲存檔案，並且結束 vi。<br>
+                            <br>
+                            set nohls - 取消反白的標註。<br>
+                            set nonu - 取消行號的顯示。<br>
+                            set nu - 顯示行號。<br>
+                            <br>
+                            /資料 - 搜尋資料。例如要尋找 hello，則輸入 /hello。<br>
+                            範圍s/要被取代的資料/新的資料/g - 替代資料。<br>
+                            <br>
+                            有關取代資料的範圍格式如下：<br>
+                            <br>
+                            起始行數,結束行數 - 表示從起始行數到結束行數。<br>
+                            起始行數,$ - 表示從起始行數到最後一行。<br>
+                            g - 表示每一行。<br>
+                            /g - 表示從頭進行到尾。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>範例</h3>
+                    <p>
+                        command-line mode 中取代資料的功能看起來蠻複雜的，在此示範幾個例子。例如要把 hello 取代為 holla，則輸入的命令為：<br>
+                        <br>
+                        <code>s/hello/holla</code><br>
+                        <br>
+                        而事實上這只會取代游標所在的那一行的第一個 hello。如果你要將整個檔案的內容全部資料取代的話，必須搭配「範圍」的設定，輸入方式為：<br>
+                        <br>
+                        <code>1,$s/hello/holla/g</code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>個人看法</h3>
+                    <p>
+                        雖然 vi 的功能完整，可做為開發用的文字編輯器，但操作方式過於複雜，就算全部功能都學起來，也不見得會想用來撰寫程式碼或系統設定。<br>
+                        <br>
+                        因此我個人的看法是，vi 只要學到能修改設定檔就夠了，其它的功能倒不如進入圖形介面，使用如 KWrite 之類的文字編輯器進行。<br>
+                        <br>
+                        21 世紀 10 年代的今天，已經不需要用 vi 來編輯原始碼。明明使用桌面版的 Ubuntu 作業系統，卻放著其它更方便的文字編輯器不用，刻意拿 vim 來寫程式，這或許可以證明你比別人內行，但也是一種愚蠢的行為。<br>
+                        <br>
+                        vi 的價值，在於它是 UNIX-like 平台用來設定系統組態的網管利器，這是所有圖形化介面的文字編輯器無法取代的！但已經不適合用在開發軟體場合做為編寫程式碼的工具<ins>[1]</ins>。
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 這麼說其實不夠客觀，因為其實有圖形化介面的 vim，用習慣的人，覺得它是能力最強大的文字編輯器。所以就當這一節的內容純粹只是我個人看法，不需要對我太過認真。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20060204A'>
+
+            <section>
+                <h2>為什麼使用 Firefox 瀏覽器？</h2>
+                <p>
+                    <strong>「更新快速，所以安全性較有保障。」</strong><br>
+                    <br>
+                    Mozilla Firefox 是近年吵得最火熱的網頁瀏覽器。事實上，這是一款顯示大量圖片會「累格」的瀏覽器<ins>[1][2]</ins>，每次不小心拿來參訪成人網站就會很掃興<ins>[3]</ins>，有什麼好吸引人的呢？<br>
+                    <br>
+                    Mozilla Firefox 瀏覽器最大的優點就是它更新快速！首先，我們要有一個認知，其實 Mozilla Firefox 瀏覽器它跟 Microsoft 公司內建於 Windows 作業系統的 Internet Expolrer 瀏覽器一樣，都常常被找出漏洞，可能遭致惡意攻擊。但是 Firefox 瀏覽器不同於 IE 瀏覽器的地方在於，當 Firefox 瀏覽器經報告提出說有嚴重漏洞時，會快速修補漏洞，近期之內就能釋出新版本給使用者更新。其更新速度很有機會比惡意攻擊大舉發動來得快，因此對安全性較有保障。相反的，IE 瀏覽器的漏洞就有得等了。<ins>[4]</ins><br>
+                    <br>
+                    另外一個使用 Mozilla Firefox 瀏覽器的理由，是它會出現於多款作業系統，例如目前最主要的三大作業系統：Windows、Linux、MacOS X。這表示不管使用哪一種電腦機型或者桌面環境，都可以使用 Firefox 瀏覽器來閱讀網頁，所以網頁在設計時針對 Firefox 瀏覽器做最佳化是很有意義的，因為雙方都可確保網頁能正常顯示。相反的，IE 是 Windows 作業系統才有的瀏覽器。<ins>[5]</ins><br>
+                    <br>
+                    網頁文件可說是目前最通俗性的資料展現格式<ins>[6]</ins>，如果能有一個瀏覽器做為標準，可在各種作業環境正常顯示網頁文件，對資訊的傳遞就相當有助益！很顯然 Mozilla Firefox 瀏覽器比 IE 瀏覽器更適合擔任這項工作。
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                    [1] 累格是我對英文 lag 的中文擬音。<br>
+                    [2] Firefox 推出更新版 1.5.0.4 之後，已經改善瀏覽圖片的速度了。發文時我使用的版本是 1.5.0。<br>
+                    [3] 糟糕，不小心洩漏我的本性。<br>
+                    [4] Microsoft 公司的說法是，隨機更新反而會讓網管難以掌握狀況，因此堅持週期性有規律的釋出更新。<br>
+                    [5] 本來蘋果電腦的作業系統也有 IE 瀏覽器，不過後來 Microsoft 公司不再更新，而且還建議蘋果電腦的用戶改用其他瀏覽器。<br>
+                    [6] 通俗性表示可普及化於坊間的特性。舉個相反的例子，將資料以 Microsoft 公司的 Word 2000 格式保存，由於不是每個人都能正常閱讀，也不是每個人都有合法的軟體可以產生與修改，因此我認為它不具通俗性。<br>
+                    [*] 題外話，若將資料以 PDF 的格式保存，雖然每個人都可以免費下載合法的 PDF 文件閱讀軟體來獲取資料，但由於不是每個人都有辦法將資料以 PDF 格式保存，因此似乎不具有完整的通俗性。不過也未聽說 Adobe 公司將 PDF 格式這項專利僅限在自有產品使用，我們看到很多第三方軟體都能產生這個文件格式，所以也算得上有通俗性才對。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20060205A'>
+
+            <section>
+                <h2>需要安裝 Mozilla Thunderbird 嗎？</h2>
+                <p>
+                    <strong>「不需要，台灣的免費電子信箱很少支援 POP3 和 SMTP 服務。」</strong><br>
+                    <br>
+                    我認為並沒有必要安裝 Mozilla Thunderbird 電子郵件收發軟體，最主要的理由就是，我們台灣最多人使用的免費電子郵件信箱「Yahoo!奇摩」和「MSN Hotmail」，並不提供 POP3 和 SMTP 的服務，所以裝電子郵件收發軟體實在沒什麼用處<ins>[1]</ins>。而且就經驗來講，透過瀏覽器來收發電子郵件比較快速，因為不用下載，而且也比較安全，不用擔心夾帶程式會直接被開啟。<br>
+                    <br>
+                    另外，我覺得台灣的 Mozilla Thunderbird 也不吸引人使用，因為更新太慢了。像我寫這篇文章時已經 2006 年二月了，各國語系的 Mozilla Thunderbird 幾乎都已經跟進到 1.5 版，而台灣 Mozilla 網站才更新到 1.0.6 版；更遺憾的是，其實這段期間 Mozilla Thunderbird 推出過 1.0.7 版。<br>
+                    <br>
+                    其實我是有安裝 Mozilla Thunderbird 電子郵件收發軟體，不過我的的理由很好笑：「因為開始功能表選單比較好看。」就像下圖，我是為了 Windows XP 開始功能表選單左上角的網際網際和電子郵件圖示看起來像一套，才去安裝 Mozilla Thunderbird 的：
+                    </p>
+                    <figure>
+                    <img src='../../figures/hypermount/20060205A.gif' alt='插圖'>
+                    </figure>
+                    <p>
+                    或許 Mozilla Thunderbird 的用處只剩下通訊錄而已了……
+                </p>
+                <hr>
+                <footer>
+                    <p>[1] 免費提供 POP3 與 SMTP 服務的 GMail，已於 2007 年 2 月開放大眾申請。很高興這篇舊文的說法已經打破。</p>
+                </footer>
+            </section>
+
+            <hr id='20110621'>
+
+            <section>
+                <h2>Mozilla Firefox 5 的 localStorage 問題</h2>
+                <p>
+                    <strong>【聲明】新版本已修訂這個問題，本文僅保留為追蹤研究用，藉以了解瀏覽器的運作。</strong><br>
+                    <br>
+                    用 Firefox 5 直接從磁碟開啟內含 localStorage 來儲存資料的網頁，會發現重新載入網頁後，資料就消失了，並未保存起來。
+                </p>
+                <hr>
+                <section>
+                    <h3>原因</h3>
+                    <p>
+                        直接從磁碟開啟網頁，屬於使用 file 通訊協定的行為，這不具備 domain 的特性，因此 Mozilla Firefox 5 認為 localStorage 不應該生效。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>解決辦法</h3>
+                    <p>
+                        1. 本地端的網頁無法使用 localStorage 保存資料，必須放在伺服端。例如網頁改放在 http://127.0.0.1 來鏈結就能保存資料，直接在桌面或資料夾開啟網頁無法保存資料。<br>
+                        <br>
+                        <samp>
+                            這樣無法保存資料：file:///D:/mywebpage.html<br>
+                            這樣可以保存資料：http://127.0.0.1/mywebpage.html<br>
+                        </samp>
+                        <br>
+                        但這樣就不叫本地端應用程式了！網頁只能放在架設的伺服器裡面，而不是隨便放都能點來用。<br>
+                        <br>
+                        2. 改用 Cookie 保存本地端的資料，但這次換 Google Chrome 不允許儲存本地端的 Cookie　－－<br>
+                        <br>
+                        3. 設計本地端應用網頁的話，建議使用者改用非 Firefox 的其它瀏覽器。因為這問題已經不是第一次發生，可見 Mozilla 堅持這樣才是最正確的做法，所以只好改用其它更友善、懂得從善如流的瀏覽器。事實上只有 Firefox 的 localStorage 無法保存本地端網頁的資料。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>探討</h3>
+                    <p>
+                        可見即使進入 HTML5 時代，網頁應用程式的設計，依然無法達到完全的相容性，很有可能設計上遇到瓶頸，最終結果依然是選邊站，變成只能用特定瀏覽器才能執行你的設計。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20130625'>
+
+            <section>
+                <h2>Mozilla Firefox 22 按 Ctrl+C 有時無效</h2>
+                <p>
+                    Mozilla Firefox 22 時常發生 Ctrl+C 按下去結果得到空資料（empty）的問題，導致 Ctrl+V 時沒東西；其實 Ctrl+X 也一樣，明明看到東西被剪下來了，但不知為何 Ctrl+V 時內容不見了！<br>
+                    <br>
+                    暫時用 Ditto 撐看看，它並沒有沿用 Windows 的 Ctrl+C 機制，而是自行設計一套機制然後覆寫 Ctrl+C，所以沒有問題。用 ArsClip 的話照樣會丟失內容，因為它沿用的是 Windows 的 Ctrl+C 機制，這時請用 ArsClip 的其它熱鍵來複製資料。<br>
+                    <br>
+                    再不行，只能用滑鼠右鍵選單來複製了～<br>
+                    <br>
+                    Ditto 用久會變慢的問題，在於它無限度把資料寫進 SQLite 的 Ditto.db 資料庫裡面，越來越大，即使設定看似限制筆數的選項也沒用：「這軟體一堆似是而非的選項，常常設定後表現出來的功能，和你所想的不一樣。」只能定期在 Options 的 Stats 按 Remove All 來清空資料庫。
+                </p>
+                <hr>
+                <footer>
+                    <p>[*] Mozilla Firefox 23 已沒有這個問題。</p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>不用過度吹捧、歌頌 Mozilla 這個組織</h2>
+                <p>
+                    innerText 與 textContent 都不是 DOM 的標準，但 IE 願意為了通用，除了自家的 innerText，還相容 textContent，且 Chrome、Safari、Opera 也這麼做，但 Mozilla 就是不願意加入 innerText，寧願開發者自己多一道程式去處理也不在乎，只在乎自己的身段。<br>
+                    <br>
+                    再加上反對當年一度大受歡迎的 Web SQL Database，堅持 Indexed Database API 才能納入標準，事後還真的以 W3C 標準為由，死不相容 Chrome、Safari、Opera 都已經支援的 Web SQL Database 好讓開發者有所選擇，更足以看出 Mozilla 根本無視於通用性的價值。<br>
+                    <br>
+                    如果說 Microsoft 和 Apple 為了自家 MP4 編碼專利，反對 W3C 將開放格式的 OGG 納入 HTML5 標準，是種「貪官」的行為，那 Mozilla 雖然絕對不是貪官，而且是唯一與這股勢力抗爭，以保障規範的開放精神，但卻是個「酷吏」！<br>
+                    <br>
+                    <strong>貪官與酷吏，往往同樣都是阻礙進步的角色。</strong><br>
+                    <br>
+                    只是，既然標準那麼重要，Mozilla 自家 Firefox 不符合 W3C 標準的東西怎麼就死留著不放？應該寧可不相容、不通用，也要移除才對嘛～<br>
+                    <br>
+                    與其吹捧、歌頌 Mozilla 這個「組織」，我反而覺得 Opera 這家積極兌現 HTML5 功能的「公司」，還比較值得吹捧與歌頌～
+                </p>
+            </section>
+
+            <hr id='20071020'>
+
+            <section>
+                <h2>Mozilla 憑什麼寫 JavaScript Guide？</h2>
+                <p>
+                    MDN（Mozilla Developer Nerwork）網站的《JavaScript Guide》，一直是我們公認的 JavaScript 經典之作。<br>
+                    <br>
+                    90 年代出生的 JavaScript 程式設計師，有人會納悶為什麼往 Mozilla 朝聖？甚至質疑 Mozilla 憑什麼寫 JavaScript Guide？<br>
+                    <br>
+                    很簡單，JavaScript 是 Netscape 發明的，而 Mozilla 是負責管理 Netscape 所開放之產品原始碼的基金會。在 Netscape 結束網頁瀏覽器業務以後，可以說 JavaScript 等於 Mozilla 的發明。另外，JavaScript 之父 Brendan Eich 在離開 Netscape 後，就是直接到 Mozilla 服務。<br>
+                    <br>
+                    Mozilla 沒資格寫 JavaScript Guide，誰有資格？<br>
+                    <br>
+                    而且 Mozilla 寫的《JavaScript Guide》，內容確實是經典中的經典，Mozilla 憑什麼寫 JavaScript Guide，憑的可是本事！
+                </p>
+            </section>
+
+            <hr id='20140324'>
+
+            <section>
+                <h2>Brendan Eich 就任 Mozilla 執行長，不到十天就下台。</h2>
+                <p>
+                    2014 年 3 月 24 日，JavaScript 之父 Brendan Eich 接任 Mozilla 執行長。不過，因為他過去曾在 2008 年捐助一千美元支持 Proposition 8 這項反同性結婚的法案，也曾公開發表歧視同性戀者的言論，所以從員工、使用者、到協力廠商，都有人現身杯葛他下台。<br>
+                    <br>
+                    雖然 Brendan Eich 坦承確實有這件事，但表示不會因為自己的立場藉執行長職位來貶抑同性婚姻，並且會致力於 Mozilla 非營利組織對多元文化的包容立場，不過輿論壓力絲毫未減，只好於 4 月 3 日請辭下台，而且還選擇離開 Mozilla。<br>
+                    <br>
+                    畢竟 Mozilla 是非營利組織，除了仰賴贊助者的支持，還要背負社群的高道德標準的期待吧？<br>
+                    <br>
+                    Brendan Eich 於 1995 年 4 月 4 日任職於 Netscape，後來在 Netscape Navigator 發明了用直譯方式來執行程式語言的 JavaScript，成為目前流傳最廣的程式語言！<br>
+                    <br>
+                    在任職 Netscape 期間，Brendan Eich 協助創辦 Mozilla 專案。日後在 Netscape 結束營運時，也擔任 Mozilla 非營利機構的 Chief Architect（首席技師、技術長），可說是 Mozilla 圈貢獻卓越的長者。因此，原本我很高興 Brendan Eich 擔任 Mozilla 的執行長，期待未來 Mozilla 能有更好的展望，所以這件事讓我感到相當的意外。<br>
+                    <br>
+                    希望 Brendan Eich 繼續為網頁瀏覽器的平台貢獻心力，不會因為這次的風波感到挫敗～
+                </p>
+            </section>
+
+            <hr id='20130702'>
+
+            <section>
+                <h2>正式版 Opera 15 登場</h2>
+                <p>
+                    Opera 15 採用 Chromium 改良自 WebKit 的 Blink 網頁排版引擎，終於推出正式版了！<br>
+                    <br>
+                    或許是全新設計，所以並未與 Opera 12 共用組態檔。安裝 Opera 15 後，Opera 12 依然能夠單獨執行，兩者各保存不同的使用者設定。但是 Opera 15 第一次執行會借用 Opera 12 的設定。<br>
+                    <br>
+                    然而，Opera 15 的功能並沒有 Opera 12 來得強悍，應該說相當陽春，可以客製化的選項超級少，幾乎看到的東西都不能照自己意思修改：滑鼠手勢不能改、快速撥號自動排列不能改、視窗介面樣貌不能改、書籤列沒了、about:config 也不給進…純粹只是頂著系出 WebKit 的噱頭而已，其實比 Opera 12 還爛。<br>
+                    <br>
+                    但在進入平板電腦的時代，為了能在行動上網的市場更快推出新版本來搶攻市佔率，能夠放棄自家 Presto 引擎，改用在 iOS 與 Android 兩邊都吃香的 WebKit，依然是企業積極的做法。雖然這會造成行動上網的未來淪為 WebKit 格式獨大到壟斷的局面，不利於標準規範的推行，但對企業求競爭力來說，依然是可以理解與認同的決策！<br>
+                    <br>
+                    辦公用電腦的桌面環境使用者，建議等 Opera 15 陸續將 Opera12 的功能轉移過去得差不多後，再考慮使用也不晚。<br>
+                    <br>
+                    目前我安裝 Opera 15 的原因，是不想安裝活像綁架軟體、又懶又肥的 Chrome，所以改用輕盈且俐落許多的 Opera 15 替代 Chrome，來測試自己寫的網頁應用程式是否有嚴重異常！
+                </p>
+                <hr>
+                <footer>
+                    <p>[評] 以前 Opera 是功能最先進的瀏覽器，現在 Opera 15 是功能最陽春的瀏覽器 Orz</p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>網際網路探險家組團狩獵鉻黃色火狐的歌劇</h2>
+                <p>
+                    Internet Explorer、Safari、Chrome、Firefox、Opera 五種都用的話，叫做：<br>
+                    <br>
+                    <strong>網際網路探險家　（組團）狩獵　鉻黃色　火狐　（的一場）歌劇</strong><br>
+                    <br>
+                    對更深奧一點的文字遊戲有興趣的話……或許你會把焦點放在各個名詞或動詞上面，但「的一場」才是最重要的關鍵字！<br>
+                    <br>
+                    explorer safari chrome firefox opera 或許是實質的可對價要素，但其實重點應該放在它們如何有效構成以「一場」為單位的網際網路體驗，而不是它們各自擁有怎樣的特性。它們的特性反而是不重要的，一場網路體驗其實才是我們心理所飢渴的，只是被形式上的那些「特性」所蒙蔽。<br>
+                    <br>
+                    因此，放下對自己所用瀏覽器的傲慢，以及對它牌瀏覽器的偏見，而從 (的一場) 的角度與觀點，思考網際網路為人類帶來的感受，我們便能攜手迎向下一世代的網路科技；否則，網路演進而來的文明，將拘限於既有與既定的視野，不敢打破慣例，而被隨時出現的某一樣新傳媒給取代而覆滅，例如心靈交流。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Dragon Browser Z</h2>
+                <p>
+                    Chrome：孫悟空<br>
+                    Firefox：達爾（ベジータ）<br>
+                    Opera：孫悟飯<br>
+                    IE5：撒旦先生（ミスター．サタン）<br>
+                    IE6：飲茶（ヤムチャ）<br>
+                    IE7：天津飯<br>
+                    IE8：克林（クリリン）<br>
+                    IE9：烏普（ウーブ）<br>
+                    Safari：比克大魔王（ピッコロ）、弗利沙（フリーザ）、賽魯（セル）、普烏（ブウ）<br>
+                    Netscape：武天老師<br>
+                    Sleipnir：悟天克斯（ゴテンクス）<br>
+                    Lunascape：達爾特（ベジット）<br>
+                    Avant Browser：人造人間 16 号<br>
+                    GreenBrowser：人造人間 17 号<br>
+                    Maxthon：人造人間 18 号<br>
+                    TheWorld Browser：則卷阿拉蕾（アラレ）
+                </p>
+                <hr>
+                <section>
+                    <h3>Chrome</h3>
+                    <p>
+                        Chrome 不斷領先對手進化成下一階段的超級賽亞人，就像「孫悟空」一樣。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Firefox</h3>
+                    <p>
+                        比起剛從蛇道飛奔回來的孫悟空，Firefox 經驗老道、承襲 Netscape 血統，就像上級賽亞人戰士、王子血統的「達爾」。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Opera</h3>
+                    <p>
+                        Opera 潛藏能力最出眾，但光環總被周遭人搶去，就像「孫悟飯」一樣。<br>
+                        <br>
+                        其實悟飯打倒賽魯後，一度扛下悟空的主角地位。可是接下來的賽亞超人劇情過於和平主義，感覺這樣的主角沒東西擔當，比天真但不失武鬥家好鬥性格的孫悟空人格魅力差很多！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>…IE5、IE6、IE7、IE8、IE9</h3>
+                    <p>
+                        IE6、IE7 瀏覽器就像「飲茶」和「天津飯」，隨著劇情發展，戰況越演越烈越力不從心，而邊緣化的角色。<br>
+                        <br>
+                        IE8 是經歷過納美克星之旅，一度成為最強地球人的「克林」。<br>
+                        <br>
+                        直到 IE9 遵循 W3C 的 HTML5 標準，地球人種才出現魔人轉世的「烏普」這強力角色！<br>
+                        <br>
+                        你可能忘了有 IE5 這個咖，這位「撒旦先生」忘了無所謂。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Safari</h3>
+                    <p>
+                        因為我反蘋果，Safari 自然是我心目中的魔頭，所以不為什麼，他是「比克大魔王」「弗利沙」「賽魯」「魔人普烏」！<br>
+                        <br>
+                        如果你是蘋果迷，請自己安排一份演員名單　－－
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Netscape</h3>
+                    <p>
+                        早期肩負起全球資訊網重責大任的 Netscape Navigator 是「武天老師」，現在住「龜仙屋」過著夏威夷度假般的退休生活。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Sleipnir、Lunascape</h3>
+                    <p>
+                        Sleipnir 是日本製的優質瀏覽器，可以在 Internet Explorer 的 Trident 排版引擎和 Mozilla 的 Gecko 排版引擎之間切換，這種合體就像「悟天克斯」。<br>
+                        <br>
+                        後來又更猛了！Lunascape 更支援 Safari 的 Webkit 排版引擎，這樣的合體因為扯上魔頭，所以就是有點壞壞的「達爾特」。<br>
+                        <br>
+                        達爾特是使用耳環合體的孫悟空和達爾，也就是沒有融合時間的限制，隱喻 Sleipnir 的原始碼曾經家中遭竊，新版其實是重新打造的。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Avant Browser、Maxthon、GreenBrowser、TheWorld Browser</h3>
+                    <p>
+                        IE 公開原始碼後，出現一堆改裝的網頁瀏覽器，而且相當熱門！<br>
+                        <br>
+                        外觀最華麗的 Maxthon 是生化人 18 號，GreenBrowser 是生化人 17 號，Avant Browser 早先並非 IE 改裝，因此是性能構造不同的生化人 16 號。<br>
+                        <br>
+                        TheWorld Browser 是相當節省系統資源的改裝瀏覽器，不因為貪求太多功能而笨重，因此是輕鬆詼諧、亂入七龍珠的機器娃娃「阿拉蕾」。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我的網頁瀏覽器歷程</h2>
+                <p>
+                    我時常在不同時期改用自己認為最卓越的網頁瀏覽器…
+                </p>
+                <hr>
+                <section>
+                    <h3>2000 年：Internet Explorer</h3>
+                    <p>
+                        最早我用的網頁瀏覽器是 IE5…為何不是 IE4？因為我到 2000 年才有錢上網，在那之前沒機會用到網頁瀏覽器。<br>
+                        <br>
+                        IE3 和 IE4 是有在 Windows 95 和 Windows 98 分別打開過，畢竟內建的，多少會好奇點來看看。但當時對 HTML 文件沒興趣，那是文件都習慣用 Word 來保存的時代～<br>
+                        <br>
+                        在我用 IE5 上網時，就對如何透過網頁寫遊戲很感興趣！而 IE 可以透過 VBScript 搭配 Nik Lever 設計的 ActiveX 控制項：SpriteX.ocx，讓我以 Visual Basic 的手法寫遊戲，於是我認為 IE 更具技術性，選用它做為網頁瀏覽器。<br>
+                        <br>
+                        即使後來改用 JavaScript 寫遊戲，我的首選也是 IE6。因為 IE6 的市場占有率最高曾達 95%，也就是每個人的電腦都有 IE，如果為了叫別人玩我的爛遊戲，得專程下載其它網頁瀏覽器來安裝，那根本是找碴的行為。<ins>[1]</ins>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2002 年：Mozilla Suit 與 Netscape 7</h3>
+                    <p>
+                        因為玩 Linux 的關係，我決定使用跨平台的 Mozilla Suit！但是幾乎都在 Windows 底下操作電腦，不知不覺用的是操作介面美觀許多的 Netscape 7。<br>
+                        <br>
+                        漸漸改用非 IE 瀏覽器的關係，開始唾棄仗著市佔率就認為自己才是標準、完全不鳥 W3C、故意破壞 HTML 4.01 規範的 IE。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2004 年：Mozilla Firefox</h3>
+                    <p>
+                        Firefox 擺脫 Mozilla 捆包整套工具的概念，專注於網頁瀏覽器，小巧又輕快～<br>
+                        <br>
+                        檔案小巧輕快這點很重要！由於容易下載、安裝、使用，所以大家都很有意願改用 Firefox 來取代過時的 IE6、以及拋棄 Windows 2000 不給安裝的 IE7<ins>[2]</ins>，漸漸剝奪 IE 的市場占有率。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2009 年：Google Chrome</h3>
+                    <p>
+                        因為不滿意跟風的 Firefox 4，所以乾脆用它所效仿的 Chrome。<br>
+                        <br>
+                        Chrome 以 JavaScript 飆速排行榜連續數年第一名，讓人覺得它是速度最快的網頁瀏覽器。但耗用系統資源時管理得並不好，或許軟體本身很快，但容易卡死整個作業系統，如果考量其它像是引擎排版效率、與硬體交接的流暢度、軟體操作起來的穩定性…整體來講並不快～<br>
+                        <br>
+                        但改用 Chrome 有種「我很懂電腦」「我站在技術尖端」的尊榮感，所以我還是用得很高興 XDDD
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2011 年：Firefox</h3>
+                    <p>
+                        越來越覺得 Chrome 活像 Google 的綁架軟體，三不五時就硬塞自己品牌旗下的服務到自己瀏覽器裡面。他不想要的功能，不管使用者還要不要，直接砍掉；但他想要的功能，也不管使用者要不要，硬放上去不給關。<br>
+                        <br>
+                        於是又回到客製化程度最高、且變得精省耗用系統資源的 Firefox 懷抱～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2014 年：回顧</h3>
+                    <p>
+                        坦白說，不排除哪天認為誰更好，就又改用其它瀏覽器～<br>
+                        <br>
+                        但十幾年來，我幾乎每年都認為 Mozilla Firefox 是最棒的瀏覽器！<br>
+                        <br>
+                        Firefox 客製化程度最高、系統性能比最優，目前 Firefox 29，我依然認為它是比 IE11、Chrome<ins>[3]</ins>、Opera 22 還要出色的瀏覽器！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2019 年：Vivaldi</h3>
+                    <section>
+                        <h4>明明 Firefox 是更好的網頁瀏覽器</h4>
+                        <p>
+                            Firefox 對本地端網頁的限制越來越嚴苛，開新分頁不能連結自己電腦的網頁，附加元件不能連結自己電腦的網頁…已到了自己電腦的網頁不適合用 Firefox 來開啟的地步。<br>
+                            <br>
+                            於是從 2018 年開始，試用仍有不少 BUG 的 Vivaldi 1.14，到 2019 年功能終於穩定下來後，正式改用 Vivaldi 2.4。<br>
+                            <br>
+                            但我依然認為 Firefox 是更好的網頁瀏覽器，Vivaldi 只是在需求上滿足我而已。Firefox 啟動快速、運行順暢、排版優美、重點是上網瀏覽時，從來不會遇到什麼 BUG。反觀 Vivaldi 不但笨重，還老是出現一堆 Chromium 專為 Google 旗下產品客製化所引發的大大小小 BUG。<br>
+                            <br>
+                            現在我很享受 Vivaldi 帶來的功能豐富性、操作自由度，但總是遺憾著若能基於 Firefox 的 Gecko、或自家 Opera 曾經用過的 Presto，總之不要是 Chromium 的 Blink，那該多好～
+                        </p>
+                    </section>
+                    <section>
+                        <h4>架構糟透的 Chromium 終將拖垮網頁平台，而不是大一統後帶來好處～</h4>
+                        <p>
+                            Chromium 看似史上最大開放原始碼專案，但也因此低級 BUG 一堆卻沒在整理，而主控權不在 Vivaldi 手上，即使知道引擎有 BUG 也管不著，只能做好自己使用者介面份內的工作。（最低級的 BUG，就是官方不認為這是 BUG，他就是執意要加入這使用者覺明明是 BUG 的東西進來。）<br>
+                            <br>
+                            連 Microsoft Edge 都基於 Chromium 這糟糕透頂的爛東西，網頁瀏覽器的未來沒救了，我已經開始萌生放棄 RIA 的念頭，想重新找個程式平台發展了～<br>
+                            <br>
+                            好多年前我就說過，沒有永遠的跨平台，Java 也好、HTML5 也罷，網頁平台是脆弱的！但網頁平台實在太過方便，容易部署又方便寫程式，一直捨不得放手這塊田地。<br>
+                            <br>
+                            不過這幾年，我發現網頁平台不是普通的脆弱，不是舊機器無法安裝新版網頁瀏覽器，就是新版網頁瀏覽器禁用舊程式功能。繼續下去，手上程式沒辦法正常跑的災難總會來臨，若不及早撤離這堅守已久的家園，另尋新天地，遲了恐怕得遭逢人間煉獄般的處境。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 為何不兩邊相容？那個時代寫 JavaScript 想兩邊相容是高難度的事！分開寫還比較快～比較容易相容的是 HTML，而且當時雖然幾乎大家都用 IE 逛網站，根本沒人用其它網頁瀏覽器，但我還是吃飽撐著沒事，安裝 Netscape 來修正網頁，讓我在 PChome 和 KIMO 的個人網站能 IE 和 NS 兩邊正常顯示。所以很慶幸的，我過去三四個版本的個人網站，現在隨便拿任何網頁瀏覽器跑都能正常顯示。<br>
+                        [2] 這事件讓我開始不關心自己的網頁能否在 IE 百分百正常顯示，我只百分百相容任何人都能下載使用的網頁瀏覽器。<br>
+                        [3] 怎麼 Chrome 沒有版本號碼？因為我拒絕安裝這種綁架軟體，所以根本不知道它出到第幾版了，也沒興趣知道～
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20140408'>
+
+            <section>
+                <h2>從 OpenSSL 的 Heartbleed 漏洞，看開放原始碼的安全性問題。</h2>
+                <p>
+                    2014 年 4 月 8 日，OpenSSL 正式通報名為 Heartbleed 的資安漏洞，這個臭蟲一旦被攻擊會造成記憶體資料的洩漏，讓駭客取得長達 64K 的資訊，這足以獲得任何他想要的加密內容。原本加密傳輸過程應該保護的資料，像是應該僅限主從兩端傳遞的網頁內容、帳號密碼、甚至連金鑰都能取得，信用卡裡面機密也難逃一劫。<br>
+                    <br>
+                    含有該漏洞的 OpenSSL 1.0.1 是在 2012 年三月發布，已經長達兩年之久，加上不是惡意攻擊，比較像大剌剌取得金鑰的使用者來獲取資訊，因此無從判斷行動以及追蹤來源，被稱為史上最嚴重的漏洞！<br>
+                    <br>
+                    幸好一個星期多來，各界都搶在最短時間內應變，像是緊急關閉伺服器，直到確認哪些細節有用到 OpenSSL 加已更新後才開機，還未傳出毀滅性資安災難，只有零星的攻擊事件。<br>
+                    <br>
+                    我一直認為，開放原始碼受全世界使用者的檢視，只要有問題就會被立刻挑出來，因此是最安全的！但今天看到，連 OpenSSL 這全球超過 60% 使用率、幾乎是架 Linux 和 Apache 網站就一定採用的網路加密技術，都能潛藏兩年之久的系統漏洞沒被察覺：「換句話說全世界使用者其實沒人會去檢查原始碼，一切還是靠專案管理團隊效勞。」所以開放原始碼真的安全嗎？甚至開放出來誰都能改的關係，專案團隊管控不嚴密的話，開放原始碼說不定反而是不安全的選擇。例如美國國家安全局為了監視全球網路，故意派人假裝修正原始碼，其實偷偷故意放一些後門進去的話，其實一點也不安全～<br>
+                    <br>
+                    Heartbleed 臭蟲是德國研究生 Robin Seggelmann 在遞交改善過的 OpenSSL 程式碼時，疏忽檢查特定資料的長度，留下可能導致造成記憶體溢位的問題。審查者 Stephen Henson 也沒有發現到這樣的疏失，就這樣包含在 OpenSSL 1.0.1 函式庫裡長達兩年之久，後來才由 Neel Mehta 發現。<br>
+                    <br>
+                    而 OpenSSL 這項專案的組織，每年只能獲得 2000 美元的捐助金可以運用，人力物力其實是不足的。<br>
+                    <br>
+                    在這平板電腦即將取代桌上型電腦與行動電話的網際網路通訊時代，盼望各國政府能更重視網路通訊的資安問題，提供這些安全性攸關的開放原始碼組織更有力的資助，做為邁入網際網路時代的重要基礎建設～
+                </p>
+                <hr>
+                <section>
+                    <h3>針對 HeartBleed 成立了 CII 計畫</h3>
+                    <p>
+                        Heartbleed 幾乎動搖了 IT 產業，Amazon、Cisco、Dell、Facebook、富士通、Google、IBM、Intel、Microsft、NetApp、Qualcomm、RackSpace、VMware 共 13 家廠商，聯合成立「核心基礎架構計畫（Core Infrastructure Initiative）」，每年資助開放原始碼數百萬美元的資金給人力、物力、財力不足的開放源碼軟體專案，甚至提供這些專案組織的主要開發人員全職工作環境，使能全心全力投入運算測試，以期對開放原始碼的安全稽核提供有力的援助。
+                    </p>
+                </section>
+            </section>
+
+            <hr id='20040204'>
+
+            <section>
+                <h2>Facebook</h2>
+                <p>
+                    原本應該是把資料放在網頁讓人搜尋、瀏覽，但 Facebook 並沒有網頁內容這回事，它的主體是任你包裝的訊息，你可以包裝成網頁，但也可以抽出來做更多的利用。差別在於，網頁內容只是拿來瀏覽而已，你看完後頂多複製貼上，即時訊息則可以直接在網路上挪為他用。
+                </p>
+            </section>
+
+            <hr id='20101122'>
+
+            <section>
+                <h2>很爛的網路平台：Yahoo</h2>
+                <p>
+                    要我用 Yahoo 平台，就像要我用 IE6 或 IE8 上網一樣 Low。<br>
+                    <br>
+                    首先是人力的問題，如果跟 PChome 平台相比，就可以明顯感受出 Yahoo 的客服效率有多差。Yahoo 有種不把客戶申請（或申訴）的事項放在心上，給人事不關己的感覺，多拖幾天甚至數月都是你家的事，與他們 Yahoo 公司無關。而 PChome 已經將客戶的迫切需求，表現在他的客服流程上，或許不能說 PChome 把客戶的需求放在心上，但至少他能體會客戶在申訴時會有急迫的心理，所以制定較嚴謹的流程讓客戶有所依靠，讓我們知道至少這個平台有些機制，在主動幫助客戶處理問題。<br>
+                    <br>
+                    Yahoo 平台的話，他的人力感覺像一天只為你處理一件事，而且每天都問一個蠢問題確認你的身份與動機。別家平台已經解決問題了，Yahoo 平台的人力可能還在那邊跳針，還沒進入正題。<br>
+                    <br>
+                    再來是功能問題，Yahoo 平台的網頁技術完全落後給 Google、Facebook、Microsoft，用這種技術落後的品牌，能獲得多少優質的服務？<br>
+                    <br>
+                    所以，我是不用 Yahoo 平台的。
+                </p>
+            </section>
+
+            <hr id='20130905'>
+
+            <section>
+                <h2>Yahoo 新 Logo</h2>
+                <p>
+                    新 logo（2013 年）充分傳達了我對 Yahoo 品牌內容的厭惡，它道出了為何我不想用 Yahoo 平台的意向！<br>
+                    <br>
+                    只顧表現自己平台的機能，不知也要在客服人力上來滿足使用者的申訴需求，於是用了以後有什麼雜症與糾紛，一概事不關己：是你自己愛用，不干公司的事。<br>
+                    <br>
+                    就像這招牌菱菱角角的，隨時會刺傷人一樣，讓人不想靠近。<br>
+                    <br>
+                    能設計出這麼傳神的 logo，真要佩服設計師，你是最了解 Yahoo 的人！
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我的廠牌喜好</h2>
+                <hr>
+                <section>
+                    <h3>喜愛的品牌（我喜歡的後來都被併購了 Orz）</h3>
+                    <p>
+                        Macromedia（發明 Dreamweaver 與 Flash 讓我在 2000 年代初期對網路懷抱夢想。）<br>
+                        Sun Microsystems（免費提供 JDK 讓沒錢買 RAD 的我仍有機會投入程式設計領域。）
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>仇視的品牌（只要我知道誰用這些東西，通常會拒絕往來；親兄弟也一樣！）</h3>
+                    <p>
+                        Kodak（控告 Java 的物件導向侵犯了他手上某一應用向另一應用要求協助的專利。）<br>
+                        Apple（封閉規格，且不允許第三方分著賺周邊，迫使消費者高價買其獨佔規格的周邊。）<br>
+                        Samsung（仗著政府撐腰，聯手幹盡無良競爭手段壓垮對手的無恥企業。<ins>[1]</ins>）<br>
+                        Yahoo（技術落後，總設計一些爛服務，搭配官僚的客訴流程，很完整地爛到爆。<ins>[2]</ins>）
+                    </p>
+                </section>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 無奈的是 Samsung 確實比台灣品牌（例如 S3 事件的 HTC）懂消費者，也比日本品牌更把台灣市場消費者當人看（而不是當賊看）。雖然「廠商對廠商」對戰起來殘暴不仁，但「廠商對消費者」時卻「勤政愛民」，因此 Samsung 的無恥行徑可以諒解，要說服台眾民眾愛用國貨卻很難；台灣品牌自己不爭氣，拿什麼臉叫人別用 Samsung？<br>
+                        [2] 基本上我很看不起用雅虎的人，感覺就跟 2010 年了還用 IE6、IE8 上網一樣低俗。雖然大家認為楊致遠不懂經營所以走人理所當然，但我覺得自從楊致遠走人以後，Yahoo! 就更像負責應付業界期待的網站，而不是滿足使用者需求的網站。
+                    </p>
+                </footer>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我推薦別人使用的，有時候自己並不使用～</h2>
+                <p>
+                    想架個人網站自我行銷嗎？我會推薦使用 Facebook 這樣的「網頁設計模式」充當網站入口。它雖然不是網站，卻比架網站更能滿足 Web 2.0 時代的網路需求。但我自己根本沒在用 Facebook，甚至還把帳號給刪了～<br>
+                    <br>
+                    寫 JavaScript 嗎？我會推薦使用 jQuery 來提高語法階層，以更高階的語法規避掉 JavaScript 許多低階性的技術問題。但我自己寫 JavaScript 時是絕對不用 jQuery 的，因為我覺得 John Resig 是 Apple 迷，而我反蘋果～<br>
+                    <br>
+                    也就是說，雖然我基於業界的時代潮流，推薦用哪些方案來解決問題，但不見得自己就採用那些解決方案，因為我有個人喜好與意識形態的問題。<br>
+                    <br>
+                    但換句話說，我不會因為自己的喜好與意識形態而灌輸使用者錯誤的觀念，我通常都根據業界說法來推薦解決方案。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>我的網路程式設計之路走得很封閉</h2>
+                <p>
+                    在我學架設伺服器設計動態網頁程式時，第一件體悟的事，不是這身技術有多棒，而是想遏阻駭客的網路攻擊是不可能的事！<br>
+                    <br>
+                    所以早在 2003 年接案設計網路應用程式時，我就決定放棄網際網路的電子商務應用，改做區域網路的電腦化管理，例如工廠或辦公大樓的業務資料庫系統，把網路封閉在公司自己內部運作。否則不是增加客戶的管理成本（無論自己架站的成本或託管的每月租金），就是讓客戶因為我薄弱的技術，承擔網站無法隨時順利運作的風險與損失。<br>
+                    <br>
+                    我的專業是程式設計，但網路系統管理一點也不專業，所以接案時我做了這樣的決定。<br>
+                    <br>
+                    雖然如此，這樣接案有個好處。因為是自己內部的區域網路，所以不需要花錢申請網路也能跑，公司規模很小時甚至買一台分享器然後網路線拉一拉不到 2000 塊就可用一輩子（分享器不會壞的話），向工廠推銷時，特別有說服力 XDDD<br>
+                    <br>
+                    網際網路的案子我只接了一個，一家披薩外送公司想要這樣的系統：「顧客在網站下訂單買披薩，然後公司的伺服器一接到訂單，會發出鈴聲通知店員，趕快做好披薩外送。」那家公司主管說好幾個月了還找不到人做出來，所以我幫忙寫程式將整套流程設計給他看。不過我沒收錢，因為我說不做網際網路的電子商務應用；想在網際網路做好電子商務生意，是要撥出成本的！沒有心專注於網路生意，純粹只是想當作額外的營運管道，甚至會變成一個坑。如果沒有心花比付給我更多的錢，給能夠管理網站讓我這套程式能順利運作下去的人，早晚會出問題要我負責或賠償，那還不如不收錢。但這案子我做得很開心，錢不是問題，能寫出程式幫助人實現想法，比拿到錢更有意義，這是錢買不到的快樂～<br>
+                    <br>
+                    這也是開放原始碼讓我覺得快樂的地方<ins>[1]</ins>。
+                </p>
+                <hr>
+                <footer>
+                    <p>
+                        [1] 不過當時我接案的每家公司都急著付錢，好像這樣程式碼才會是專屬於他們的一樣，畢竟 2003 年代台灣企業並沒有開放原始碼的風氣～<br>
+                        [*] 至於為何我那麼好運，別人是接案收不到錢，我卻是對方急著付錢，我也不知道。
+                    </p>
+                </footer>
+            </section>
+
+            <hr id='20060103A'>
+
+            <section>
+                <h2>讓巴哈的古典音樂平衡心靈</h2>
+                <p>
+                    曾經在網路廣告看到說，音樂之父巴哈的古典音樂，能夠激發左腦與右腦、均衡 EQ 與 IQ，然後幫助心靈滋長……因為這樣，我在逛書店看到有在賣巴哈的古典音樂，馬上就買回家；那時候我想像著以後聽了巴哈音樂，讓我腦波趨於穩定，工作效率就會提高，然後我網站的資料就可以源源不絕，哈哈哈哈哈。<br>
+                    <br>
+                    確實聽了以後心情會寧靜下來，也覺得心情好像得到休息，這時在「絞盡腦汁」打資料的時候感覺果然舒服多了。<br>
+                    <br>
+                    不過我有一個怪癖，如果一開始就播古典音樂來聽，常常聽不下去，會覺得很枯燥。還要先聽一下現代音樂例如宇多田光的 First Love 樂曲版，才能接著轉到古典音樂。<br>
+                    <br>
+                    另外我對 D 調的樂曲比較有感覺，會有種醒著睡覺的效果。啥？真有這麼神奇？其實重點不在於神不神奇啦，我只是想說，沉澱心靈對寫程式或寫資料是有幫助的，做事會比較專心、能集中精神於工作項目上，而古典音樂在這方面有近乎神奇的效果，各位不妨嘗試看看。<br>
+                    <br>
+                    那為什麼特別要選擇巴哈呢？例如蕭邦的音樂不是能「更快就聽得下去嗎」？個人感覺啦，巴哈的音樂聽起來比較舒服，因為他幾乎不牽動情緒地，去律動你的心靈趨於和緩，而其他古典音樂總是會有一些些些牽動情欲的感覺，讓心靈在隨著旋律沉澱的過程中稍微五味雜陳了點，沒有巴哈那麼舒暢。<br>
+                    <br>
+                    不過話說回來，我手上有片現代人創作的古典音樂 CD，他則是牽動幼童般的情緒去律動心靈，其實感覺還蠻不錯的。<br>
+                    <br>
+                    至於網站資料是否真的源源不絕？ㄝ………………(以為多打幾個點點點就能瞞混過去)
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

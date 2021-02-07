@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>用 ECMAScript 塑造程式</h1>
+                <p>
+                    大多數程式語言，學會用越多功能越好，ECMAScript 當然也不例外！但做為可塑高、開放客製化的程式語言，其實也不排斥「用越少功能越好」。畢竟，你想用 C 或 Java 還是 Python 風格寫 ECMAScript 都無所謂，所以只挑幾種自認為最實用、簡單的語法，重新組合自己的 ECMAScript 語言來寫程式，並沒什麼不一樣～
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>JavaScript</h2>
+                <p>
+                    網際網路剛迅速崛起的時代，最惱人的使用者體驗，就是提交資料給某個全球資訊網後，網速慢等了快十秒才總算看到下一頁時，竟然是回報說填寫的資料不對：「請重填後按確定。」為了提高瀏覽者與全球資訊網的互動效率，Netscape Communications 研擬 Mocha 計畫，希望瀏覽器本身就能跑一些簡單的程式，來分擔伺服器的工作，在把資料遞交給伺服器前，瀏覽器自己就能先檢查資料。<br>
+                    <br>
+                    Netscape Communications 委派 Brendan Eich 開發一款新的程式語言，目標是能將原始碼直接寫在網頁裡面，而且沒寫過程式的人也能使用。<br>
+                    <br>
+                    沒幾天，Netscape Communications 對 HotJava 瀏覽器的 Applet 驚喜不已，決定與 Sun Microsystems 洽談，想讓自己的瀏覽器也能支援 Applet。雙方協議合作後，這時又給 Brendan Eich 一個要求：「讓開發中的程式語言長得像 Java 吧！」<br>
+                    <br>
+                    Brendan Eich 參考 Self 程式語言的原型機制，以及 Scheme 程式語言的一級函數，只花約十天的時間，完成了一款弱型別的直譯式程式語言順利交差。<br>
+                    <br>
+                    1995 年 9 月先以 LiveScript 的名稱，搭載於 Netscape Navigator 2.0 測試版，12 月正式版時改名為 JavaScript。（至於 Mocha 即後來的 SpiderMonkey 引擎。）
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript</h2>
+                <p>
+                    JavaScript 發明之初，只是一款可以操作些瀏覽器軟體本身的指令語言，簡簡單單一兩行程式，無須專業程式設計師背景，就能動態變化瀏覽器內容，顯著可見的效果讓 JavaScript 大受好評！大家都搶著在網頁寫個 JavaScript 來露一下身手：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        window.status = '歡迎光臨';
+                    </textarea>
+                    <br>
+                    於是 1996 年 8 月 Microsoft 趕緊也抄了一個 JScript 來應戰，推出 Internet Explorer 3.0。<br>
+                    <br>
+                    1996 年 11 月，Netscape Communications 將 JavaScript 提交給 Ecma International<ins>[1]</ins>，制定統一規範，專案代號為 ECMA-262。由於 JavaScript 有 Java 字樣，Sun Microsystems 為保護 Java 版權，在一起合作的 Netscape Communications 同意下，將 JavaScript 註冊商標，因此 Ecma International 另外取名為 ECMAScript。<br>
+                    <br>
+                    1997 年 6 月，ECMAScript 1.0 標準化正式定案。1998 年 6 月，修正規格書，以適用 ISO/IEC16262 標準化，發表 ECMAScript 2.0。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 3</h2>
+                <p>
+                    於 1999 年 12 月發布。<br>
+                    <br>
+                    語言方面，更改了字串的內部設計、新增資料的格式化輸出、流程控制、例外處理等功能。<br>
+                    <br>
+                    API 方面內建 Regular expressions，並為該算式設計專屬字串符號。
+                </p>
+                <hr>
+                <section>
+                    <h3>Structured programming</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var a = 0;
+                            var b = 0;
+
+                            function f1(x, y){
+                                a = x;
+                                b = y;
+                            }
+
+                            function f2(){
+                                document.write(a + b);
+                            }
+
+                            f1(123, 456);
+                            f2();
+                        </textarea>
+                        <br>
+                        <output>
+                            579
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Object oriented programming</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var F = function(x){
+                                var g = x || 0;
+                                this.set = function(x){
+                                    g = x;
+                                }
+                                this.get = function(){
+                                    return ++g;
+                                }
+                            };
+
+                            var a = new F(111);
+                            document.write(a.get());
+
+                            var b = new F();
+                            b.set(222);
+                            document.write(b.get());
+                        </textarea>
+                        <br>
+                        <output>
+                            112<br>
+                            223
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Prototype programming</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var S = function(){};
+                            S.prototype.a = 'Hello';
+                            S.prototype.f = function(){
+                                document.write(this.a + ', world!');
+                            }
+
+                            var T = function(){};
+                            T.prototype = new S();
+
+                            var t = new T();
+                            document.write(t.a);
+                            t.f();
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello<br>
+                            Hello, world!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Closure with first class function</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var F = function(){
+                                var h = 123, w = 456;
+                                return{
+                                    f1: function(){
+                                        document.write(h + w);
+                                    },
+                                    f2: function(x, y){
+                                        h = x;
+                                        w = y;
+                                    }
+                                }
+                            };
+
+                            var a = new F();
+                            var b = new F();
+
+                            a.f1();
+                            b.f1();
+
+                            a.f2(111, 111);
+                            b.f2(222, 222);
+
+                            a.f1();
+                            b.f1();
+                        </textarea>
+                        <br>
+                        <output>
+                            579<br>
+                            579<br>
+                            222<br>
+                            444
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 4</h2>
+                <p>
+                    2007 年 10 月發布草案，因為語法躍進幅度太大，與其說更新標準，不如說在汰舊標準，因此意見分歧，已到無法達成共識的地步，因此於 2008 年 8 月放棄，直接跳到 ECMAScript 5。<br>
+                    <br>
+                    不過 Flash 的 ActionScript 卻實作了 ECMAScript 4 的規格，且後來的 ECMAScript 2015 差不多就是 ECMAScript 4。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 5</h2>
+                <p>
+                    於 2009 年 12 月正式發布，離上一次版本有十年之久，但主要特性不是更新語言，而是在相容 ECMAScript 3 和銜接 ECMAScript 6。<br>
+                    <br>
+                    ECMAScript 5 基本上只在 API 引進 ECMAScript 4 的新觀念（原型物件、擁抱函數式程式設計、遠離物件導向的類別），然後透過 strict mode（嚴格模式）使用 ECMAScript 4 的新語法。<br>
+                    <br>
+                    因此 ECMAScript 5 最大的意義，就是 ECMAScript 3 的最終版本。ECMAScript 6 最大的意義，則是 ECMAScript 4 的復活。<br>
+                    <br>
+                    像我的 Asus EeePad TF101 作業系統只到 Android 4.0.3，沒辦法安裝最新的網頁瀏覽器，所以用 ES5 寫 ES3 風格的 ES4 程式還是很受用～
+                </p>
+                <hr>
+                <section>
+                    <h3>Object literal</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var S = {
+                                g: 123,
+                                f: function(){
+                                    document.write(this.g);
+                                }
+                            };
+
+                            var T = Object.create(S);
+
+                            T.f();
+
+                            T.g = 456;
+
+                            T.f();
+                            S.f();
+                        </textarea>
+                        <br>
+                        <output>
+                            123<br>
+                            456<br>
+                            123
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Array structure object</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var U = [789];
+
+                            U.f = function(){
+                                document.write(this[0]);
+                            };
+
+                            var V = Object.create(U);
+
+                            V.f();
+
+                            V[0] = 987;
+
+                            V.f();
+                            U.f();
+                        </textarea>
+                        <br>
+                        <output>
+                            789<br>
+                            987<br>
+                            789
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 2015 (ECMA-262 6th Edition)</h2>
+                <p>
+                    2015 年 6 月正式發布…或許這活像 ECMAScript 4 的死而復生，因此不稱 ECMAScript 6，改用年份做為版號～<br>
+                    <br>
+                    ECMAScript 2015 可以把程式寫得完全不像過去 ECMAScript 3 的程式，活像新的語言一樣，難怪當初 ECMAScript 4 時反應這麼激烈。但 ECMAScript 2015 只是新增語法特性，好讓它可塑性更高，能用類似 Python 的寫法設計程式，並不是為了汰舊換新，因此還是可以寫出過去 Java 和 C 風格的程式…甚至很像 Java 在模仿 Python 的方式，感覺還是很 Java。<br>
+                    <br>
+                    詳細功能範例，請參考：<a href='http://es6-features.org' target='_blank'>http://es6-features.org</a>。
+                </p>
+                <hr>
+                <section>
+                    <h3>New keywords</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let
+                            const
+                            class
+                            extends
+                            of
+                            yield
+                            export
+                            import
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>New API</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            // Set, Map, Promise, Fetch
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Backslash</h3>
+                    <section>
+                        <h4>Multi line string</h4>
+                        <p>
+                            <textarea class='brush:es'>
+                                let a = `
+                                    abc
+                                    123
+                                `
+
+                                document.write(a)
+                            </textarea>
+                            <br>
+                            <output>
+                                abc 123
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Template literal</h4>
+                        <p>
+                            <textarea class='brush:es'>
+                                let a = 'AAA', b = 'BBB', c= 'CCC'
+                                let d = `${a} ${b} ${c}`
+
+                                document.write(d)
+                            </textarea>
+                            <br>
+                            <output>
+                                AAA BBB CCC
+                            </output>
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>Destructuring assignment</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let a, b, c
+                            [a, b, c] = ['AAA', 'BBB', 'CCC']
+
+                            document.write(a)
+                            document.write(b)
+                            document.write(c)
+                        </textarea>
+                        <br>
+                        <output>
+                            AAA<br>
+                            BBB<br>
+                            CCC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Default parameter</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f(x, y=789){
+                                document.write(x + y)
+                            }
+
+                            f(123)
+                            f(123, 456)
+                        </textarea>
+                        <br>
+                        <output>
+                            912<br>
+                            579
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Rest parameter</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function f(x, ...y){
+                                document.write(x + y)
+                            }
+
+                            f(123, 456)
+                            f(123, 456, 789)
+                        </textarea>
+                        <br>
+                        <output>
+                            123 456<br>
+                            123 456,789
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Arrow function</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            // 可當立即函式
+                            ((x) => {
+                                x += x
+                                document.write(x)
+                            })('AAA')
+
+                            // 只一行敘述時不用大括號
+                            ((x) => document.write(x))('BBB')
+
+                            // 不用 return 即可傳回值
+                            let f = () => 'CCC'
+                            document.write(f())
+
+                            // 只有一個參數時可以省略括號（多個的話不行）
+                            let f = x => document.write(x)
+                            f('DDD')
+                        </textarea>
+                        <br>
+                        <output>
+                            AAAAAA<br>
+                            BBB<br>
+                            CCC<br>
+                            DDD
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Method definitition</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            let S = {
+                                f(){
+                                    document.write('ABC')
+                                }
+                            }
+
+                            S.f()
+                        </textarea>
+                        <br>
+                        <output>
+                            ABC
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Generators</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function* f(x){
+                                while(x &lt; 100){
+                                    yield x
+                                    x += x
+                                }
+                            }
+
+                            for(let n of f(9)){
+                                document.write(n)
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            9<br>
+                            18<br>
+                            36<br>
+                            72
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Semicolon</h3>
+                    <p>
+                        過去 ECMAScript 3 的程式寫法長得像 Java 和 C 語言，因此使用 <code>;</code> 做為程式結尾<ins>[2]</ins>。到了 ECMAScript 2015 開始長得像 Python，因此不再鼓勵使用 <code>;</code> 表示敘述結束。<br>
+                        <br>
+                        但純粹只是寫法風格的改變，ECMAScript 2015 對於段落的規範還是跟以前一樣：「每一行程式就是一個敘述，可以不用加分號。」所以 () 和 [] 為開頭的程式依然存在沒有分行的問題，這時再把分號加在前面。<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            ;(function(){
+                                //
+                            })()
+                        </textarea>
+                        <br>
+                        寫 JavaScript 該不該用分號結尾，一直是這語言爭論最兇的話題。對此 Brendan Eich 曾在 2012 年發文《<a href='http://brendaneich.com/2012/04/the-infernal-semicolon/' target='_blank'>The infernal semicolon</a>》說：<br>
+                        <br>
+                        <q>ASI is (formally speaking) a syntactic error correction procedure. If you start to code as if it were a universal significant-newline rule, you will get into trouble.</q><br>
+                        <br>
+                        當初不加分號的設計，只是一種容錯機制，並不是語法規則。因此要加分號才對，不加的話要「容錯」啊！<br>
+                        <br>
+                        <q>...be careful not to use ASI as if it gave JS significant newlines.</q><br>
+                        <br>
+                        更明確表示不要使用自動分號插入！<br>
+                        <br>
+                        雖然三年後 ECMAScript 2015 規範不加分號，但如果看到有人加，還是要尊重別人的技術觀點和風格喜好，不要藉以干涉別人寫法的自由。儘管 Brendan Eich 認為要加分號，卻還是設計並保留自動分號插入，就是為了自由度！ECMAScript 是可塑性高的程式語言，各種程式語言的使用者，都能用自己習慣的寫法設計 JavaScript 程式，這才是這門語言的基本精神。不要把 Python 規範怎麼寫法才對的精神帶進 ECMAScript，他是他，我是我，我是一款做我自己的程式語言，而不是為別人而活的程式語言。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>var, let</h3>
+                    <p>
+                        在 ECMAScript 2015，<code>var</code> 有向物件增加變數屬性的含意，因此建議全面改用 <code>let</code> 宣告區域變數。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 2016 (ECMA-262 7th Edition)</h2>
+                <hr>
+                <section>
+                    <h3>Exponentiation operator</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            document.write(2**3)
+                        </textarea>
+                        <br>
+                        <output>
+                            8
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>New prototype method in Array</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            a = [123, 456, 789];
+                            document.write(a.includes(456))
+                            document.write(a.includes(567))
+                        </textarea>
+                        <br>
+                        <output>
+                            true<br>
+                            false
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 2017 (ECMA-262 8th Edition)</h2>
+                <hr>
+                <section>
+                    <h3>New keyword</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            async
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>New API</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            // Atomics
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>New prototype method in String</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            print('abc'.padStart(5,'-'))
+                            print('abc'.padEnd(5,'-'))
+                        </textarea>
+                        <br>
+                        <output>
+                            **abc<br>
+                            abc**
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>New prototype method in Object</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var S = { a:'AAA', b:'BBB', c:'CCC'}
+                            print(Object.entries(S))
+                            print(Object.values(S))
+                        </textarea>
+                        <br>
+                        <output>
+                            a,AAA,b,BBB,c,CCC<br>
+                            AAA,BBB,CCC
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>ECMAScript 2018 (ECMA-262 9th Edition)</h2>
+                <hr>
+                <section>
+                    <h3>New keyword and operator</h3>
+                    <p>
+                        新增 <code>await</code> 關鍵字，停止 async 函式的執行。<br>
+                        <br>
+                        物件屬性可用 <code>...</code> 符號表示多個，這樣才能在函式參數直接傳入不定屬性的物件。<br>
+                        <br>
+                        RegExp 支援 <code>?&lt;&gt;</code>（named capture groups），<code>s</code> 匹配參數（dotALL flag），以及 、<code>\D</code>（lookbehind assertions） 和 <code>\P</code>（Unicode property escapes）。<br>
+                        <br>
+                        在 Template literals 使用 <code>\u</code> 和 <code>\x</code> 能正常執行功能，而不是產生執行期錯誤。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>New prototype method in Promise</h3>
+                    <p>
+                        <var>finally()</var>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>未來</h2>
+                <p>
+                    從 ECMAScript 2017 和 ECMAScript 2018 可以看出，這門程式語言，在語法上不再以瀏覽器腳本語言發展，而是朝更通用的腳本語言邁進！例如為 Node.js 量身打造一些語法。<br>
+                    <br>
+                    於是，一堆寫 RIA 時用不到的功能將如雨後春筍不停冒出，沒辦法吃筍子的我<ins>[2]</ins> 就不再繼續關注未來的發展了 XD<br>
+                    <br>
+                    我覺得用最簡單的語法，寫傳統瀏覽器腳本程式，更能感受到跑 RIA 的樂趣。<br>
+                    <br>
+                    從先進的 ECMAScript 引擎充分發揮其潛在性能固然刺激，但為老舊的瀏覽器寫 ECMAScript 應用程式也很美滿。我不會因此認為用傳統老舊的 ECMAScript 語法寫程式是什麼壞事，我只想享受在瀏覽器寫應用程式、讓新舊裝置都能跑的樂趣。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>現在</h2>
+                <p>
+                    我用的 Asus Eee Pad Transformer TF101 平板電腦，作業系統只到 Android 4.0.3，可安裝的最新網頁瀏覽器為 Firefox 55，但執行時顯示我這 armeabi-v7a 裝置用的 API 版本才 15，不足以執行 Firefox 55，因此能正常執行的只到 Firefox 49。API 版本要 23 才能執行 Firefox 50 以上的網頁瀏覽器。<br>
+                    <br>
+                    慶幸的是，Firefox 49 正好完全支援 ECMAScript 6！所以我這台平板裝置還是是可以跑 ECMAScript 6 的 RIA！<br>
+                    <br>
+                    頁面呈現得更好的 Opera<ins>[3]</ins>，版號至少要 36 才完全支援 ECMAScript 6，但 Android 4.0.3 最多只能更新到 Opera 29.0.1809.93516 而已。為避免將來還是想在 Opera 29 跑程式，得擬定一套舊寫法：以 ECMAScript 5 為主，適度引進部分 ECMAScript 6 語法。<br>
+                    <br>
+                    既然不打算採用新寫法，那就走 C 語言風格，盡量只用變數、函式、陣列三種要素來開發程式。這樣的程式，即使要移植到其它語言，也比較容易。
+                </p>
+                <hr>
+                <section>
+                    <h3>新舊寫法的取捨</h3>
+                    <p>
+                        ()=&gt; 的寫法不見得比 function() 好看：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            //在指定運算子的場合 ()=&gt; 其實很醜，辨識度變差，解讀起來有障礙。
+                            onload=function(){
+                                document.write('AAA')
+                            }
+                            onload=()=&gt;{
+                                document.write('BBB')
+                            }
+
+                            //當參數傳遞時 ()=&gt; 才會好看，但 function() 也不醜，很容易辨識與解讀。
+                            addEventListener('load',function(){
+                                document.write('CCC')
+                            },false)
+                            addEventListener('load',()=&gt;{
+                                document.write('DDD')
+                            },false)
+                        </textarea>
+                        <br>
+                        所以我不打算用它。<br>
+                        <br>
+                        最多只引進 let、of、default parameter、destructuring assignment 就好。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Hello, world! 和 print()、clear()</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            &lt;!DOCTYPE&gt;
+                            &lt;html&gt;
+                                &lt;head&gt;
+                                    &lt;style&gt;
+                                        a{color:blue;cursor:pointer}
+                                        a:hover{color:orange}
+                                    &lt;/style&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;script&gt;
+                                        var p=document.createElement('p')
+                                        document.body.appendChild(p)
+                                        function print(x){
+                                            p.innerHTML+=x+'&lt;br&gt;'
+                                        }
+                                        function clear(){
+                                            p.innerHTML=''
+                                        }
+                                        document.clear=clear
+                                        print('&lt;a onclick="clear()"&gt;Hello, world!&lt;/a&gt;')
+                                    &lt;/script&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                        <br>
+                        一律使用 A 標籤當 BUTTON 元件，但避開會在狀態烈顯示網址的 href 屬性，改用 onclick，因此事先透過 CSS 設定 A 標籤在沒有超鏈結時也有樣式。<br>
+                        <br>
+                        若從 DOM 建立的 A 元素之 onclick 事件呼叫函式，作用域會從 document 物件出發，而 document 已經有 clear() 了，因此我們這其實是 window.clear() 的函式並不會被呼叫。為了仿 C 語言，不打算改函式名稱，而 document.clear() 已被 deprecated，因此大可用取代的方式規避問題。<br>
+                        <br>
+                        我也曾考慮用 MS-DOS 的 echo 和 cls 來命名。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>sleep()</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function sleep(seconds){
+                                var start=new Date().getTime()
+                                while(true){
+                                    if((new Date().getTime()-start)>seconds*1000){
+                                        break
+                                    }
+                                }
+                            }
+
+                            //測試看看
+                            document.write('AAA')
+                            sleep(1)
+                            document.write('BBB')
+                            sleep(1)
+                            document.write('CCC')
+                        </textarea>
+                        <br>
+                        setTimeout() 其實不適合當 sleep() 用，它語意上並不是暫停幾秒的意思，而是倒數計時執行程式的意思，也就是有牽動性。為了配合這牽動性，就等於把下一步要執行的程式寫在這一步裡面，整個程式的架構經常會搞亂掉。<br>
+                        <br>
+                        setTimeout() 和 setInterval() 是很函數式風格的，它很適合用來運算出結果，但不適合表達程式的流程。而我們用 sleep() 時意思是暫停流程的執行，setTimeout() 意思卻是延後程式的運算，所以在不提供 sleep() 的 ECMAScript 拿 setTimeout() 來充當，經常讓我們寫出整個敗壞掉難以維護下去的程式。<br>
+                        <br>
+                        雖然現在大家鼓吹函數式程式設計有多美好，但它只是在運算結果上提供了優化的手法，其實無關於結構化程式設計的流程管理。所以函數式和結構化程式設計是並存的，而不是誰取代誰。你應該在結構化程式設計的流程中運用函數式程式設計來優化運算，而不是以為函數式程式設計是種取代結構化程式設計的新手法。<br>
+                        <br>
+                        除非你下載完全函數式風格的框架來寫程式，也就是幫你把所有結構化程式設計的流程都事件驅動化，你只要不斷寫函式進去跑就好，否則正常寫 ECMAScript 程式不要過度美化函式數程式設計的手法，畢竟這是一門物件導向的結構化程式設計語言<ins>[4]</ins>。
+                    </p>
+                    <!--
+                        有了 Promeise 後也可以：
+
+                        function delay(interval){
+                            return new Promise(function(resolve){
+                                setTimeout(resolve, interval)
+                            })
+                        }
+
+                        async function main(){
+                            await delay(1000)
+                            document.write('hello')
+                        }
+
+                        main()
+
+                        但要交代同步的細節，我不喜歡。
+                    -->
+                </section>
+                <hr>
+                <section>
+                    <h3>rand()</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            function rand(min,max){
+                                if(!min&amp;&amp;!max){
+                                    min=0
+                                    max=1
+                                }
+                                else if(!max){
+                                    max=min
+                                    min=1
+                                }
+                                return Math.round(Math.random()*(max-min))+min
+                            }
+
+                            //測試看看
+                            document.write(rand(3,7))
+                            document.write(rand(10))
+                            if(rand()) document.write('BINGO')
+                        </textarea>
+                        <br>
+                        若網頁瀏覽器不支援預設參數，就自己檢查參數來賦值！<br>
+                        <br>
+                        穩固的寫法，是檢查 undefined 才對，而不是直接用布林狀態去判斷！加上我這寫法是用上下文的篩選技巧去實現功能，既危險又不妥。<br>
+                        <br>
+                        但因為看上去比檢查 undefined 順眼，所以……還是決定埋下炸彈。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>bgm()、se()</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var audio=[document.createElement('audio'),document.createElement('audio')]
+                            document.body.appendChild(audio[0])
+                            document.body.appendChild(audio[1])
+
+                            function bgm(file){
+                                audio[0].src=file
+                                audio[0].loop='loop'
+                                audio[0].currentTime=0
+                                audio[0].play()
+                            }
+
+                            function pause(){
+                                audio[0].pause()
+                            }
+
+                            function play(){
+                                audio[0].play()
+                            }
+
+                            function se(file,polyphony){
+                                if(polyphony){
+                                    var a=document.createElement('audio')
+                                    document.body.appendChild(a)
+                                    a.src=file
+                                    a.play()
+                                }
+                                else{
+                                    audio[1].src=file
+                                    audio[1].currentTime=0
+                                    audio[1].play()
+                                }
+                            }
+
+                            //測試看看
+                            bgm('music.mp3')
+                            se('voice.mp3',1)
+                            se('sword.mp3')
+                        </textarea>
+                        <br>
+                        Background music 與 Sound effect。<br>
+                        <br>
+                        背景音樂會自動重播，可暫停播放。<br>
+                        <br>
+                        音效設計成多聲混音播放與單聲重新播放兩種，一來可選擇是要同時發出多個音效？還是新的音效中斷前一個音效？二來可避免建立太多 AUDIO 元素浪費記憶體。放音效不一定需要多聲混音播放，還比較耗系統資源，所以預設單聲重新播放。需要時再隨便填個 1 給第二個參數就好。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>資料處理注意事項</h3>
+                    <p>
+                        仰賴自動轉型時，計算資料，建議用 Number() 將資料轉換為數值，用 String() 將資料轉換為字串。<br>
+                        <br>
+                        轉十進位：parseInt(數值, 進制)<br>
+                        轉二、八、十六進位：toString(進制)<br>
+                        <br>
+                        整數超過 999,999,999,999,999 會失去準確度，例如 9,999,999,999,999,991 會變成 9,999,999,999,999,992，9,999,999,999,999,999 會變成 10,000,000,000,000,000。（因為 JavaScript 的數值其實都是以 double 型態保存，並沒有 long int。）<br>
+                        <br>
+                        true + true + true 會得到 3。（因為 true 是 1，false 是 0。）<br>
+                        <br>
+                        '7' + 3 會得到 73，但 '7' - 3 會得到 4。（因為字串覆寫 + 做為串接運算子，所以相加的資料有字串時，優先使用串接運算子。但字串沒有覆寫 - 運算子，所以相加的資料有字串時，繼續使用減法運算子，同時啟動自動拆箱機制，將字串轉為數值。）
+                    </p>
+                </section>
+                <!--hr>
+                <section>
+                    <h3>資料結構</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var player=['冒險者',10,3,5,2,0,200]
+
+                            const name=0,health=1,mana=2,attack=3,defense=4,exp=5,gold=6
+
+                            var equipments=['檜木棒','旅人服']
+
+                            function weapon(){
+                                switch(equipments[0]){
+                                    case '檜木棒':
+                                        return 2
+                                    case '棍棒':
+                                        return 7
+                                    case '銅劍':
+                                        return 12
+                                }
+                            }
+
+                            function armor(){
+                                switch(equipments[1]){
+                                    case '布衣':
+                                        return 4
+                                    case '旅人服':
+                                        return 8
+                                }
+                            }
+
+                            //測試看看
+                            document.write('名字'+player[name])
+                            document.write('體力'+player[health])
+                            document.write('魔力'+player[mana])
+                            document.write('攻擊'+(player[attack]+weapon()))
+                            document.write('防禦'+(player[defense]+armor()))
+                            document.write('經驗'+player[exp])
+                            document.write('金錢'+player[gold])
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>save()、load()</h3>
+                    <p>
+                        <textarea class='brush:es'>
+                            var player=['冒險者',10,3,5,2,0,200]
+                            var equipments=['檜木棒','旅人服']
+
+                            function save(){
+                                localStorage.setItem('player',JSON.stringify(player))
+                                localStorage.setItem('equipments',JSON.stringify(equipments))
+                            }
+
+                            function load(){
+                                var item
+
+                                item=localStorage.getItem('player')
+                                if(item) player=JSON.parse(item)
+
+                                item=localStorage.getItem('equipments')
+                                if(item) equipments=JSON.parse(item)
+                            }
+
+                            //測試看看
+                            save()
+
+                            player[0]='無名'
+                            equipments[0]='銅劍'
+
+                            load()
+
+                            document.write(player[0])
+                            document.write(equipments[0])
+
+                            localStorage.clear()
+                        </textarea>
+                        <br>
+                        存檔與讀檔的動作跟資料結構寫死在一起，不該朝通用函式去設計！<br>
+                        <br>
+                        因為進度本來就是一種客製化的格式，往後要修改函式，就必須連帶負責關注資料結構的內容，要修改資料結構，就必須連帶負責函式的工作。<br>
+                        <br>
+                        想將客製化格式的資料結構與函式分開來處理，彼此獨立運作不牽連在一起，反而是很危險的事。修改資料結構後測試函式、修改函式後檢查資料結構，這本來就該牽連在一起的事，獨立開來總有可能發生修改過後資料與動作不同步的情形。<br>
+                        <br>
+                        這裡我學到一課！並不是所有程式設計原則都要照盤遵行，宣揚的人總是把話說滿，其實有些情況真的就是該用既麻煩又棘手的方式去做，反而才叫細心不會出錯。完全不想把麻煩棘手的事留一丁點下來，只是偷懶而已，給自己留下粗心大意的弊端。
+                    </p>
+                </section-->
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 原名 European Computer Manufacturers Association（歐洲電腦製造協會），簡稱 ECMA。但制定標準的請求並不限於歐洲，而是國際性的，因此 1994 年改名 Ecma International。Ecma 不再全部大寫，意味著不再有 European Computer Manufacturers Association 首字母的含意，Ecma 就是一個名詞。<br>
+                    [2] 因為我的平板電腦太舊了，無法安裝最新的網頁瀏覽器，去跑最新的 ECMAScript 程式，所以戲稱沒辦法吃筍子，會過敏…我不能去寫出自己平板電腦無法跑的程式來吧 XD<br>
+                    [3] Opera 會自動把版面縮放得跟電腦版一模一樣，這樣一張 HTML 或一種 CSS 就能在兩裝置間通用。其它瀏覽器則針對平板尺寸縮放，往往要調整成專屬於平板的網頁或樣式來用。<br>
+                    [4] 注意！物件導向和程序導向都是結構化程式語言！很多人看到結構化程式語言，就以為那是指程序導向程式語言 XD　所以別跟我反駁說物件導向程式語言不是結構化程式語言，我知道你想說的是：「物件導向程式語言不是程序導向程式語言。」但我並沒說錯 :)<br>
+                    [*] <a href='http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf' target='_blank'>ECMAScript Language Specification</a><br>
+                    [*] <a href='http://www.ecma-international.org/publications/standards/Ecma-262-arch.htm' target='_blank'>Standard ECMA-262 Archive</a>
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

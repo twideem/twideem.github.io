@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Timer</h1>
+            </header>
+
+            <hr>
+
+            <p>
+                <textarea class='brush:java;highlight:[18,19,20,21,22]'>
+                    import java.awt.event.ActionEvent;
+                    import java.awt.event.ActionListener;
+                    import javax.swing.JFrame;
+                    import javax.swing.Timer;
+
+                    public class Main{
+
+                        private int n;
+                        private JFrame frame = new JFrame();
+
+                        public Main(){
+
+                            frame.setSize(320, 240);
+                            frame.setTitle("視窗標題");
+                            frame.setVisible(true);
+                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                            new Timer(1000, new ActionListener(){
+                                public void actionPerformed(ActionEvent action_event){
+                                    frame.setTitle(String.valueOf(n++));
+                                }
+                            }).start();
+
+                        }
+
+                        public static void main(String[] args){
+                            new Main();
+                        }
+
+                    }
+                    </textarea>
+            </p>
+
+        </article>
+
+    </body>
+
+</html>

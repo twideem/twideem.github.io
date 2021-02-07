@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>以 SQL 檔案輸出入資料</h1>
+                <p>
+                    有一種檔案型的資料庫系統：SQLite，讓你不需要安裝資料庫伺服器，也可用 SQL 存取資料。這讓我們除了用「純文字檔案」「二進位檔案」「XML 檔案」以外，又多了一種震撼性的選擇方案！<br>
+                    <br>
+                    比起需要資料庫伺服器主程式的 MariaDB 或 PostgreSQL，不需要安裝的 SQLite 是相當值得推薦的選項，它讓你的程式可以隨著檔案帶著走，而且處理資料的速度更快！
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>主程式與 JDBC</h2>
+                <p>
+                    只需下載 JDBC 即可，不需要主程式，本章節使用 xerial 的 sqlite-jdbc，網址是：<br>
+                    <br>
+                    <a href='http://github.com/xerial/sqlite-jdbc/' target='_blank'>http://github.com/xerial/sqlite-jdbc/</a>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Hello, world!</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.sql.Connection;
+                        import java.sql.DriverManager;
+                        import java.sql.ResultSet;
+                        import java.sql.Statement;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    //驅動 SQLite 並建立名為 test.db 的資料庫
+                                    Class.forName("org.sqlite.JDBC");
+                                    Connection connection = DriverManager.getConnection("jdbc:sqlite:test.db");
+                                    //連接指令
+                                    Statement statement = connection.createStatement();
+                                    //建立含 mycolumn 欄位的資料表 mytable
+                                    statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
+                                    //將 Hello, SQLite! 這筆資料寫入 mycolumn 欄位
+                                    statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES('Hello, SQLite!')");
+                                    //從 mytable 資料表提取所有資料
+                                    ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
+                                    //取出資料
+                                    while(result_set.next()){
+                                        System.out.println(result_set.getString("mycolumn"));
+                                    }
+                                    //關閉
+                                    result_set.close();
+                                    statement.close();
+                                    connection.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    程式執行時，會在執行處產生 test.db 檔案，並輸出如下結果：<br>
+                    <br>
+                    <output>
+                        Hello, SQLite!<br>
+                    </output>
+                    <br>
+                    這個範例只能執行一次<ins>[1]</ins>，如果要執行第二次，請將原始碼第 16 行註解掉。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] 因為第一次已經建立了表單，第二次執行時，表單已經存在而無法建立，導致發生例外。為了讓範例能簡單明瞭表達語法功能，決定還是這樣寫就好，而不多寫防呆機制的偵錯程式了。<br>
+                    [*] SQLite 官網是 <a href='http://www.sqlite.org' target='_blank'>http://www.sqlite.org</a>。本章節使用的 sqlite-jdbc 已經內嵌官網的 SQLite，所以我們不需要到官網下載資源，但有興趣關心資訊的人，還是會想進去逛逛。<br>
+                    [*] Java SE 6 內建 Java DB，亦可做為內嵌式資料庫使用，有興趣可以參考《<a href='appendix.html#20030728A'>使用 Java DB 設計內嵌式資料庫</a>》。<br>
+                    [!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20030728A.7z' target='_blank'>20030728A.7z</a>，內含 SQLite JDBC Driver 3.7.2，能直接編譯，節省你摸索的時間。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

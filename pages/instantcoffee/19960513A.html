@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>為 Applet 簽署數位憑證</h1>
+                <p>
+                    使用 JDK 提供的 <var>keytool</var> 與 <var>jarsigner</var> 兩個工具，即可輕鬆為 Java Applet 簽證！<br>
+                    <br>
+                    簽署數位憑證的 Applet，會詢問使用者是否允許程式在他的電腦存取檔案，獲得授權的話，Applet 就能提高讀寫檔案的權限，進行更靈活的設計。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>做法</h2>
+                <p>
+                    假設我有個 Java Applet 為 Applet.jar～
+                </p>
+                <hr>
+                <section>
+                    <h3>Step 1: 建立金鑰</h3>
+                    <p>
+                        進入主控台，路徑切換到 Applet.jar 所在位置，然後輸入：<br>
+                        <br>
+                        <code>keytool -genkeypair -keystore key.store -alias KeyStore</code><br>
+                        <br>
+                        接著依指示設定密碼，以及姓名、公司名稱，但不需要提供這些資訊的話，可以按 Enter 略過。<br>
+                        <br>
+                        如此會產生 key.store 金鑰檔。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 2: 輸出憑證</h3>
+                    <p>
+                        接著輸入：<br>
+                        <br>
+                        <code>keytool -exportcert -keystore key.store -alias KeyStore -file Applet.cer</code><br>
+                        <br>
+                        如此會產生 Applet.cer 憑證檔。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Step 3: 完成簽證</h3>
+                    <p>
+                        最後輸入：<br>
+                        <br>
+                        <code>jarsigner -keystore key.store Applet.jar KeyStore</code><br>
+                        <br>
+                        完成！<br>
+                        <br>
+                        不放心的話，你可以檢視 Applet.jar 裡面的檔案結構，META-INF 資料夾裡面，會被匯入 *.dsa 與 *.sf 檔案。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 本文屬於「自行簽署的應用程式」，目的在取得使用者的授權來提高存取權限，與通過官方規範的安全認證機制無關，因此並無法通過 JRE 7 的安全設定，依然要請使用者將網頁加入「白名單」來執行。更詳細做法，可請參考：<a href='http://docs.oracle.com/javase/7/docs/technotes/tools/windows/keytool.html' target='_blank'>http://docs.oracle.com/javase/7/docs/technotes/tools/windows/keytool.html</a> 的說明。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>網際網路讀取純文件資料</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>java.net.URL</h2>
+                <hr>
+                <section>
+                    <h3>http://twideem.github.io/readme.md</h3>
+                    <p>
+                        # twideem.github.io
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.BufferedReader;
+                            import java.io.InputStreamReader;
+                            import java.net.URL;
+                            import java.net.URLConnection;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    try {
+                                        URLConnection url_connection = new URL("http://twideem.github.io/readme.md").openConnection();
+                                        url_connection.connect();
+                                        BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(url_connection.getInputStream()));
+                                        System.out.println(buffered_reader.readLine());
+                                    }
+                                    catch(Exception exception) {
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>輸出結果</h3>
+                    <p>
+                        <output>
+                            # twideem.github.io
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 每次開啟應用軟體，希望能自動檢查是否有更新版本時，就可以透過這種方式來檢查版號。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

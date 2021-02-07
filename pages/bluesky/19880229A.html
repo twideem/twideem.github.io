@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <style>body{background-color:#e8f4ff}</style>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>在 Windows 用 QEMU 安裝 UNIX-like</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>下載</h2>
+                <p>
+                    視作業系統發行的年份，到 QEMU 網站下載日期最接近、較早一些的安裝程式：<br>
+                    <br>
+                    <a href='http://qemu.weilnetz.de/w64/' target='_blank'>http://qemu.weilnetz.de/w64/</a>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>操作</h2>
+                <p>
+                    建立名為 hd.img 的磁碟：<br>
+                    <br>
+                    <code>qemu-img create -f raw hd.img 8G</code><br>
+                    <br>
+                    啟動名為 cdrom.iso 的安裝光碟：<br>
+                    <br>
+                    <code>qemu-system-x86_64 -cdrom cdrom.iso -hda hd.img -m 1024M</code><br>
+                    <br>
+                    然後照安裝畫面指示，就能把作業系統安裝到 hd.img 了。<br>
+                    <br>
+                    如果安裝的作業系統直接有桌面環境、又整合得好，直接就可打開網頁瀏覽器上網。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>UNIX-like 的選擇</h2>
+                <p>
+                    Linux 發行版種類繁多，最容易安裝與使用。缺點是系統經多方整合後變得混亂，沒博士頭腦的人很難搞清大大小小環節，不容易自己掌控系統要什麼、不要什麼，只能用亂上加亂、整合更多東西進來的方式，打造更適合自己的 Linux。<br>
+                    <br>
+                    FreeBSD 專注於 PC，因此安裝容易。雖然安裝過程是文字介面，而且都英文，但全程自動化設置做得很好，無腦狂按 Enter 也能安裝完畢。安裝 DVD 版的話，會整合更多工具程式與應用軟體，所以使用上也相當容易。不過易裝易用的特性，跟 Linux 比還是差很多，唯一優點是版本控制嚴謹，較能掌控系統有哪些東西要與不要，適合當作基板，拿來打造出屬於自己的 UNIX-like 桌面環境。Mac OS X 就是以 FreeBSD 為系統核心打造出來的。<br>
+                    <br>
+                    NetBSD 專注於能在更多機器上安裝。驅動程式整合得不錯，不過提供的工具程式與應用軟體不多。適合想驅動各種電腦，然後將它打造成不同用途的工業機器。<br>
+                    <br>
+                    OpenBSD 專注於修補系統漏洞，是最安全的作業系統。但提供的驅動程式、工具程式、應用軟體最少，僅適合經驗豐富的人安裝與使用。通常用在架設商業伺服器上，因為漏洞少非常安全，很少看到用它來打造辦公桌面環境，因為麻煩，什麼都要自己來，很少人能弄到好。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

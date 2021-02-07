@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>音效系統</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>音樂</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        var Music = {
+                            _audio: document.createElement('audio'),
+                            _track: '',
+                            play: function(x){
+                                if(this._track!=x){
+                                    this._audio.loop = true
+                                    this._track = x
+                                    this._audio.src = x
+                                    this._audio.play()
+                                }
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    原本欲檢查 x 是否與 Music._audio.src 一樣，是的話就不重新播放，以保持聽覺流暢。但 Music._audio.src 是以完整路徑的 URL 保存，不可能與 x 字串一樣，因此使用 Music._track 來識別。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>聲效</h2>
+                <p>
+                    <textarea class='brush:es'>
+                    var Sound = {
+                        _audio: document.createElement('audio'),
+                        play: function(x){
+                            this._audio.src = x
+                            this._audio.currentTime = 0
+                            this._audio.play()
+                        }
+                    }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>聲音</h2>
+                <p>
+                    <textarea class='brush:es'>
+                        var Noise = {
+                            _audio: document.createElement('audio'),
+                            play: function(x){
+                                this._audio.src = x
+                                this._audio.currentTime = 0
+                                this._audio.play()
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    與 Sound 的差異，在 Noise 供系統使用，避免系統執行動作時，覆蓋使用者操作的動作。或者說當第二聲道使用；第一聲道只播放玩家動作所產生的音效，第二聲道播放系統動作所產生的音效。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>疑難</h2>
+                <hr>
+                <section>
+                    <h3>Promese</h3>
+                    <p>
+                        ES6 引進 Promise 後，Audio 的 play() 會丟 Promise，因此當播放發生不同步的狀況，可以捕捉問題：<br>
+                        <br>
+                        <textarea class='brush:es'>
+                            var audio = document.createElement('audio')
+                            audio.play().catch(function(){
+                                //處理錯誤
+                            })
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>降低不同步的狀況發生</h3>
+                    <p>
+                        由於 Aduio 並沒有合用的事件可以在完全準備就緒時再執行 play() 動作<ins>[1]</ins>，因此想完全防止狀況發生是不可能的！尤其是在線下單機執行 RIA 時，只要重新整理網頁就非常容易失常。<br>
+                        <br>
+                        我們只能降低不同步的狀況發生。<br>
+                        <br>
+                        首先就是盡量在 HTML 用 AUDIO 預先準備好音效，往後再用 Script 去播放。<br>
+                        <br>
+                        其次就是避免在網頁一載入時就播放，巧妙的延遲幾秒再播放、或拖到某個時機才播放。
+                    </p>
+                    <section>
+                        <h4>HTML</h4>
+                        <p>
+                            <textarea class='brush:html'>
+                                &lt;audio src='music.mp3' preload='auto' loop&gt;&lt;/audio&gt;
+                                &lt;audio src='sound.mp3' preload='auto'&gt;&lt;/audio&gt;
+                                &lt;button&gt;Click me&lt;/button&gt;
+                            </textarea>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Script</h4>
+                        <p>
+                            <textarea class='brush:es'>
+                                //改用陣列取得預先在 HTML 準備好的音效
+                                var audio = document.getElementsByTagName('audio')
+                                function play(index){
+                                    audio[index].currentTime = 0
+                                    audio[index].play()
+                                }
+
+                                //網頁載入時延遲個幾秒再開始播放背景音樂
+                                setTimeout(function(){
+                                    play(0)
+                                }, 3000)
+
+                                //總在某個時機才播放音效
+                                var button = document.getElementsByTagName('button')[0]
+                                button.onclick = function(){
+                                    play(1)
+                                }
+                            </textarea>
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>如果真的要載入音樂檔案來播放</h3>
+                    <p>
+                        如果設計上就是不想建立一堆 AUDIO，只想載入音樂檔案來播放，比較穩定的做法是不要用 Script 執行 play()，改交由 autoplay 屬性自動播放：
+                    </p>
+                    <section>
+                        <h4>HTML</h4>
+                        <p>
+                            <textarea class='brush:html'>
+                                &lt;audio autoplay loop&gt;&lt;/audio&gt;
+                            </textarea>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Script</h4>
+                        <p>
+                            <textarea class='brush:es'>
+                                var audio = document.getElementsByTagName('audio')[0]
+                                function play(file){
+                                    audio.src = file
+                                }
+                            </textarea>
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>結語</h3>
+                    <p>
+                        無論怎麼做，都無法百分之百保證音樂能播放，因為這是現代網頁瀏覽器為了防止自動播放音樂，所導致設計不良的問題。反而早期網頁瀏覽器剛支援 HTML5 時，用 AUDIO 播放音樂是很穩定的！<br>
+                        <br>
+                        特別是只顧快速發展、沒在回頭講究品質的 Chromium 更為嚴重，一步一腳印踏實把功能做好才整合進來的 Firefox 其實沒什麼問題。偏偏 Chrome 市占率破錶，大家一窩蜂改用 Chromium 做網頁瀏覽器，網頁程式平台的體驗反而因此變得很糟糕。<br>
+                        <br>
+                        Chromium 是開放原始碼，而且有破紀錄的人數參與修改，但結果就是什麼都想做，做出來就放著不管，品質奇差無比。<br>
+                        <br>
+                        現在 Microsoft 也用 Chromium 了，如果連 Mozilla 也放棄 Firefox，將帶來比 IE 時代更慘的災難：「Chromium 根本不是什麼好東西！」
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] onload 是指 AUDIO 標籤是否建立完畢，跟 SRC 的檔案是否載入完畢無關。剩下的 onloadeddata、onloadedmetadata、onloadstart 也沒一個是指整個檔案已經讀完，而是片段的。oncanplay 和 canplaythrough 是指瀏覽器可不可播放，而不是音樂可不可以播放。<br>
+                    [*] 由於免費網頁空間有限，不適合上傳 OGG 檔，因此本章節直接檢視程式碼，不需要操作。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

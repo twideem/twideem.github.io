@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Hello, MariaDB!</h1>
+                <p>
+                    Oralce 收購 Sun Microsystem 後，不只以漠視 MySQL 社群版的方式阻礙其開放，更藉由把重心放在 MySQL 商業版的策略令其封閉，Michael Widenius 決定分支 MySQL 開放原始碼，取名為 MariaDB，讓每個人繼續享有積極開放的資料庫管理系統。<br>
+                    <br>
+                    經過這幾年來的發展，MariaDB 比 MySQL 部署更靈巧、性能更優越、系統更安全、管理更簡易，儼然成為比 MySQL 更優異的資料庫系統。<br>
+                    <br>
+                    從 Fedora Linux 決定不提供 MySQL 改由 MariaDB 取代，到 Wikipedia 這樣的大型網站和 Google 這樣的線上服務也從 MySQL 轉移到 MariaDB，過去 LAMP 的組合已不再是 Linux + Apache + MySQL + PHP，而是 MariaDB 了！<br>
+                    <br>
+                    同樣情況也發生在 OpenOffice.org，現在已由分支的 LibreOffice 取代，可見 Oracle 是怎樣一家公司了～
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>主程式下載</h2>
+                <p>
+                    在官方網站：<a href='http://mariadb.org' target='_blank'>http://mariadb.org</a>，下載 MariaDB 5.5 Series。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Java 虛擬機器驅動程式下載 (JDBC)</h2>
+                <p>
+                    在上述網址，下載 MariaDB Client Library for Java Applications 1.1 Series，此即 MariaDB 的 JDBC。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Hello, world!</h2>
+                <p>
+                    下面範例，將存取安裝 MariaDB 時，就已經內建的 test 空白資料庫。並假設安裝 MariaDB 時，帳號設定為 root，密碼為 abc123。記得！必須讓該範例認得 JDBC 的檔案路徑所在，否則無法在 Java 虛擬機器驅動 MariaDB。<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.sql.Connection;
+                        import java.sql.DriverManager;
+                        import java.sql.ResultSet;
+                        import java.sql.Statement;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    //驅動 MariaDB
+                                    Class.forName("org.mariadb.jdbc.Driver");
+                                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "abc123");
+                                    //連接指令
+                                    Statement statement = connection.createStatement();
+                                    //建立含 mycolumn 欄位的資料表 mytable
+                                    statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
+                                    //將 Hello, MariaDB! 這筆資料寫入 mycolumn 欄位
+                                    statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES("Hello, MariaDB!")");
+                                    //從 mytable 資料表提取所有資料
+                                    ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
+                                    //取出資料
+                                    while(result_set.next()){
+                                        System.out.println(result_set.getString("mycolumn"));
+                                    }
+                                    //關閉
+                                    result_set.close();
+                                    statement.close();
+                                    connection.close();
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    程式執行結果：<br>
+                    <br>
+                    <output>
+                        Hello, MariaDB!
+                    </output>
+                    <br>
+                    這個範例只能執行一次，如果要執行第二次，請將原始碼第 16 行註解掉。
+                </p>
+            </section>
+
+            <!--
+            <hr>
+            <footer>
+                <p>
+                    [新聞] <a href='http://www.ithome.com.tw/itadm/article.php?c=55234' target='_blank'>MySQL 再易主，創始人擔憂前景另創瑪莉亞資料庫。</a><br>
+                    [新聞] <a href='http://www.ithome.com.tw/itadm/article.php?c=57636' target='_blank'>MySQL 作者建議甲骨文：賣 MySQL 解放昇陽。</a><br>
+                    [引用] <a href='http://www.ithome.com.tw/itadm/article.php?c=78733' target='_blank'>openSUSE 與 Fedora 都決定把系統資料庫由 MySQL 改為其衍生版本 MariaDB。</a><br>
+                    [新聞] <a href='http://www.ithome.com.tw/itadm/article.php?c=79928' target='_blank'>MariaDB 併入SkySQL，MySQL 老班底團圓大反撲！</a><br>
+                    [新聞] <a href='http://www.ithome.com.tw/itadm/article.php?c=80121' target='_blank'>維基百科宣布放棄 MySQL，轉投同為開放源碼，並以 MySQL 為基礎的 MariaDB 懷抱。</a><br>
+                    [新聞] <a href='http://www.ithome.com.tw/itadm/article.php?c=81315' target='_blank'>Fedora 釋出 19 版，改用 MariaDB 做為預設資料庫，來取代 MySQL。</a><br>
+                    [新聞] <a href='http://www.ithome.com.tw/itadm/article.php?c=82854' target='_blank'>Google 棄甲骨文 MySQL，將大規模導入 MariaDB。</a>
+                </p>
+            </footer>
+            -->
+
+        </article>
+
+    </body>
+
+</html>

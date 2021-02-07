@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>單色螢幕 RGB 值</h1>
+                <div id='division_1' style='color:#cccccc; background-color:#000000; font-family:Courier; font-size:10pt; height:378px; padding:10px; width:578px'>
+                    Starting MS-DOS...<br>
+                    <br>
+                    <br>
+                    HIMEM is testing extended memory...done<br>
+                    <br>
+                    C:\>c:\tc\helloworld.exe<br>
+                    <br>
+                    <div id='division_2' style='color:#cccccc; border:2px; border-color:#cccccc; border-style:solid; font-size:16pt; padding:20px; width:320px'>
+                        Hello, world!<br>
+                    </div>
+                    <br>
+                    C:\><span id='content_1'>_</span><br>
+                    <br>
+                </div>
+            </header>
+
+            <hr>
+
+            <p>
+                檸檬：<a href='javascript:f1("#80FF00")'>80FF00</a>、<a href='javascript:f1("#009B00")'>009B00</a>、<a href='javascript:f1("#66CC33")'>66CC33</a>。<br>
+                琥珀：<a href='javascript:f1("#FF8000")'>FF8000</a>、<a href='javascript:f1("#D38200")'>D38200</a>、<a href='javascript:f1("#CC9933")'>CC9933</a>。<br>
+                銀白：<a href='javascript:f1("#CCCCCC")'>CCCCCC</a>
+            </p>
+
+            <hr>
+
+            <footer>
+                <p>[*] 檸檬和琥珀有三種顏色，第一項是最有可能的色值，第二項是 DOSBOX 提供的色值，第三項是個人目測的色值。</p>
+            </footer>
+
+        </article>
+
+        <script>
+            var a=''
+            var b=false
+            function f1(x){
+                document.getElementById('division_1').style.color=x
+                document.getElementById('division_2').style.borderColor=x
+                document.getElementById('division_2').style.color=x
+            }
+            function f2(){
+                if(b) document.getElementById('content_1').style.visibility='visible'
+                else document.getElementById('content_1').style.visibility='hidden'
+                b=!b
+            }
+            setInterval('f2()',500)
+        </script>
+
+    </body>
+
+</html>

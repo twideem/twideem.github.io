@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>封裝</h1>
+                <p>「封裝」的定義是可以決定變數與函式要 private 或 public，並且可以一個模組 new 出好幾個副本。不過 JavaScript 沒有這些的語法可用，必須透過其它寫法來完成，本文就是要探討這部分的議題。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>封裝</h2>
+                <p>
+                    底下的模組化結構，可以讓「屬性」無法從外部直接存取，只能使用透過「方法」來操作資料。
+                </p>
+                <hr>
+                <section>
+                    <h3>封裝的基本結構</h3>
+                    <p>
+                        <code>
+                            function 類別(){<br>
+                            　var 屬性 = 初始值;<br>
+                            　this.方法 = function(參數){<br>
+                            　　屬性與參數的操作;<br>
+                            　}<br>
+                            }
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>封裝的使用方式</h3>
+                    <p>
+                        <code>
+                            var 識別名稱 = new 類別();<br>
+                            識別名稱.方法(參數);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    以 var 宣告的相當於 private，以 this 加入的相當於 public。<br>
+                    <br>
+                    使用這種模組手法必須使用 new 生成物件才能使用，好處是每個物件有自己獨立的內部的狀態，而不像歸類手法的模組整個程式共用同一個內部狀態。<br>
+                    <br>
+                    你可以嘗試寫 string_buffer.buffer 這行程式來存取模組內部的變數，會發現找不到這筆資料，確實無法從外部更動內部的資料。<br>
+                    <br>
+                    來看個範例，底下以 StringBuffer 為例<ins>[1]</ins>，示範分類的模組化手法：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        function StringBuffer(){
+                            var buffer = '';
+                            this.append = function(string){
+                                buffer += string;
+                            }
+                            this.toString = function(){
+                                return buffer;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    StringBuffer 的使用：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var string_buffer_1 = new StringBuffer();
+                        string_buffer_1.append('AAA');
+                        string_buffer_1.append('BBB');
+                        string_buffer_1.append('CCC');
+                        var string_buffer_2 = new StringBuffer();
+                        string_buffer_2.append('DDD');
+                        string_buffer_2.append(string_buffer_1.toString());
+                        document.write(string_buffer_2.toString());
+                    </textarea>
+                    <br>
+                    網頁會顯示 DDDAAABBBCCC，值得注意的是，string_buffer_1 與 string_buffer_2 兩者內部的資料各自獨立，這對程式設計相當有幫助！善用 new 就能分開保存結構相同的好幾筆資料，是封裝最實用的地方。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>建構式的參數</h2>
+                <p>
+                    看到封裝手法的模組可用 new 生成物件，就會想能不能設計建構式，在 new 的階段就帶入參數來初始化物件的內部狀態。接下來示範如何實現這樣的設計。
+                </p>
+                <hr>
+                <section>
+                    <h3>建構式參數</h3>
+                    <p>
+                        <code>
+                            function 類別(建構參數){<br>
+                            　var 屬性 = 建構參數 || '';<br>
+                            　this.方法 = function(參數){<br>
+                            　　屬性與參數的操作;<br>
+                            　}<br>
+                            }
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>傳入做為建構式的參數</h3>
+                    <p>
+                        <code>
+                            var 識別名稱 = new 類別(做為建構式的參數);
+                        </code>
+                    </p>
+                </section>
+                <hr>
+                <p>
+                    用 function 建立 StringBuffer() 時，只要給予參數就可以實現建構式的設計。<br>
+                    <br>
+                    其中 var buffer = _buffer || '' 表示：如果 new 一個 StringBuffer() 時有輸入參數，就把參數的值指定給 buffer 變數，否則就讓 buffer 變數的值為 ''。這是因為沒有輸入參數的話，參數的值會是 undefined，而這個值在布林式判斷下會傳回 false。<br>
+                    <br>
+                    最後看個範例：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        function StringBuffer(_buffer){
+                            var buffer = _buffer || '';
+                            this.append = function(string){
+                                buffer += string;
+                            }
+                            this.toString = function(){
+                                return buffer;
+                            }
+                        }
+                    </textarea>
+                    <br>
+                    使用情況：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var string_buffer = new StringBuffer('AAA');
+                        string_buffer.append('BBB');
+                        string_buffer.append('CCC');
+                        document.write(string_buffer.toString());
+                    </textarea>
+                    <br>
+                    網頁會顯示 AAABBBCCC。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[1] StringBuffer 在 Java 程式語言是可用來緩存字串資料的物件。通常使用它的 append() 來加入字串資料、toString() 來送出字串資料、clear() 清空資料。由於本文只是示範程式的結構，因此省略 clear() 好讓結構看起來更清晰。</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

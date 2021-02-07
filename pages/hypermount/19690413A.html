@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>共通函式庫</h1>
+                <p>JavaScript 事先準備了幾個函式供設計師使用。獨立於類別而存在的這些函式，代表最直接的實用性吧？</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>共通函式</h2>
+                <hr>
+                <section>
+                    <h3>資料轉換</h3>
+                    <table>
+                        <tr><td>Number('字串')</td><td>將文字轉換為數值</td></tr>
+                        <tr><td>parseFloat(資料)</td><td>將資料轉換為浮點數</td></tr>
+                        <tr><td>parseInt(資料)</td><td>將資料轉換為整數</td></tr>
+                        <tr><td>String(數值)</td><td>將數值轉換換文字</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>將資料視為陳述式來執行</h3>
+                    <table>
+                        <tr><td>eval('字串')</td><td>將字串視為程式來執行</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>檢查資料的有效性</h3>
+                    <table>
+                        <tr><td>isFinite(資料)</td><td>檢查資料是否為有效範圍內的值</td></tr>
+                        <tr><td>isNaN(資料)</td><td>檢查資料是否非數值</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>網址格式的轉換</h3>
+                    <table>
+                        <tr><td>decodeURI('網址')</td><td>解碼 encodeURI() 的格式為 URI 網址</td></tr>
+                        <tr><td>dncodeURIComponent('網址')</td><td>解碼 encodeURIComponent() 的格式為 URI 網址</td></tr>
+                        <tr><td>encodeURI('網址')</td><td>將 URI 網址編碼為 UTF-8 格式</td></tr>
+                        <tr><td>encodeURIComponent('網址')</td><td>將 URI 網址更嚴格地編碼為 UTF-8 格式</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <p>
+                    最常用的應該是 Number() 函式，當我們取得使用者輸入的資料時，如果要進行數學運算，就必須將資料轉換為數值。底下範例將兩個使用者輸入資料進行加法運算，由於函式本身很簡單，因此範例加入與主題無關的細節，當作展示 HTML5 RIA 的程式風格，但不至於混淆：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        //建立兩個 INPUT 輸入欄
+                        var _input1 = document.createElement('INPUT');
+                        var _input2 = document.createElement('INPUT');
+                        document.body.appendChild(_input1);
+                        document.body.appendChild(_input2);
+
+                        //建立標題為「請按我」的 BOTTON 按鈕。
+                        var _button = document.createElement('BUTTON');
+                        _button.innerHTML = '請按我';
+                        document.body.appendChild(_button);
+
+                        //按下 BOTTON 按鈕後，對兩個輸入欄的資料進行加法運算，然後輸出到網頁。
+                        _button.onclick = function(){
+                            document.write(Number(_input1.value) + Number(_input2.value));
+                        }
+                    </textarea>
+                    <br>
+                    這樣的範例有個缺失，那就是如果使用者輸入的不是數字，而是英文字母怎麼辦？因此 inNaN() 也是很常用的函式。我們把按下 BUTTON 按鈕的程式進一步改寫如下：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        _button.onclick = function(){
+                            var _a = isNaN(_input1.value)?0:Number(_input1.value);
+                            var _b = isNaN(_input2.value)?0:Number(_input2.value);
+                            document.write(_a + _b);
+                        }
+                    </textarea>
+                    <br>
+                    如果 _input1 與 _input2 的資料非數值，就預設為 0，以免加法錯誤。當然，這只是為了展示範例，正常情況應該通知使用者資料錯誤才對。<br>
+                    <br>
+                    最後！這是一定不能錯過的神奇函式：eval()！它可以把字串當作 JavaScript 程式來執行！很多巧妙的設計都可以嘗試靠它來解決！像是讓 JavaScript 的物件動作寫成字串，然後透過 eval() 來執行，產生更接近物件導向之多型的設計<ins>[1]</ins>。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[1] 提物件導向只是舉個例子，非物件導向的 JavaScript，還是不要為了物件導向而物件導向比較好！</p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

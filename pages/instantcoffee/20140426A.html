@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>java.util.Optional 入門</h1>
+                <p>為了解決 null 語意不清的問題，Java SE 8 引進 java.util.Optional，可讓工程師設計出更容易追蹤程式碼的系統。</p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>見仁見智的 null</h2>
+                <p>
+                    <var>null</var> 通常用來表示「沒有值」，但它卻常常被當作「一種值」來使用，結果變成「其實有值」。<br>
+                    <br>
+                    舉個例子：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        public class Main{
+
+                            public static void main(String[] args){
+                                String a = null;
+                                System.out.print(a);
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        null<br>
+                    </output>
+                    <br>
+                    看到顯示 null，你有什麼感覺？好像 null 是筆很合理的資料一樣。但我們為了表示 a 是還沒建立的 String 物件，所以讓它等於 null，那應該沒有資料可以顯示才對～<br>
+                    <br>
+                    這就是 null 容易讓我們的設計有所瑕疵之處！我們需要更詳細的描述方式，來表達我們要的是「還沒有這個東西」或「有這個東西但內容是空的」。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>有、沒有</h2>
+                <p>
+                    當你想用 null 表示「沒有物件」時，可以改用 Optional.empty() 更明確表示意圖：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Optional;
+
+                        public class Main{
+
+                            private static Optional&lt;String&gt; f(String x){
+                                return (x==null) ? Optional.empty() : Optional.of(x);
+                            }
+
+                            public static void main(String[] args){
+                                System.out.print(f(null));
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Optional.empty<br>
+                    </output>
+                    <br>
+                    注意，既然使用 Optional 讓 null 表示「沒有」，那「有物件」時回傳的也將會是「有」，而不是「資料」或「物件」：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Optional;
+
+                        public class Main{
+
+                            private static Optional&lt;String&gt; f(String x){
+                                return (x==null) ? Optional.empty() : Optional.of(x);
+                            }
+
+                            public static void main(String[] args){
+                                System.out.print(f("Hello"));
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Optional[Hello]
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 Optional 的物件</h2>
+                <p>
+                    可以 get() 從 Optional 取得物件來使用：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Optional;
+
+                        public class Main{
+
+                            private static Optional&lt;String&gt; f(String x){
+                                return (x==null) ? Optional.empty() : Optional.of(x);
+                            }
+
+                            public static void main(String[] args){
+                                System.out.print(f("Hello").get());
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Hello<br>
+                    </output>
+                    <br>
+                    而 null 會拋出例外：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Optional;
+
+                        public class Main{
+
+                            private static Optional&lt;String&gt; f(String x){
+                                return (x==null) ? Optional.empty() : Optional.of(x);
+                            }
+
+                            public static void main(String[] args){
+                                System.out.println(f(null).get());
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Exception in thread "main" java.util.NoSuchElementException: No value present<br>
+                    </output>
+                    <br>
+                    別看到錯誤訊息就皺眉頭，這可是「善意通知」我們的程式設計上有瑕疵，別忘了我們是在表示「有沒有物件」，對 null 拋出 Exception：「而不是輸出 null」，是我們樂見的！<br>
+                    <br>
+                    可以先用 <code>isPresent()</code> 判斷 Optional 有沒有物件再 <code>get()</code>。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用 Optional 的資料</h2>
+                <p>
+                    Optional 主要目的，是用來表示有或沒有，並不適合做為資料使用。<br>
+                    <br>
+                    想使用 Optional 的資料，適合以傳統結構化程式設計的風格來表現：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Optional;
+
+                        public class Main{
+
+                            private static Optional&lt;String&gt; creatString(String x){
+                                return (x==null) ? Optional.empty() : Optional.of(x);
+                            }
+
+                            private static String getString(Optional&lt;String&gt; x){
+                                return x.orElse("沒有資料");
+                            }
+
+                            public static void main(String[] args){
+                                System.out.println(getString(creatString("Hello")));
+                                System.out.println(getString(creatString(null)));
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Hello<br>
+                        沒有資料<br>
+                    </output>
+                    <br>
+                    或者用 ifPresent() 表現函數式風格程式設計：<br>
+                    <br>
+                    <textarea class='brush:java'>
+                        import java.util.Optional;
+
+                        public class Main{
+
+                            private static Optional&lt;String&gt; creatString(String x){
+                                return (x==null) ? Optional.empty() : Optional.of(x);
+                            }
+
+                            public static void main(String[] args){
+                                creatString("Hello").ifPresent(System.out::print);
+                                creatString(null).ifPresent(System.out::print);
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Hello<br>
+                    </output>
+                    <br>
+                    在物件導向程式設計的場合，Optional 只適合表示有沒有物件，不適合直接當作資料使用。如果錯把 Optional 當作類似 ArrayList 的物件來存取資料，通常會搞爛整個設計。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [*] 物件也是值，因為物件都是 reference 值，所以就不需要「沒有物件」的說法了。<br>
+                    [*] 另外補充個人對於 null 的看法，多有錯謬之處，因此另外放在《<a href='appendix.html#20140426A'>萬惡的 null</a>》。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

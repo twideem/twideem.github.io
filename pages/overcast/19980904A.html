@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>別再塗鴉式 Google 搜尋</h1>
+                <p>
+                    <input style='font-size:11pt;height:20px;width:510px'><button style='background-color:#4486f7;border-style:none;color:#fff;font-size:11pt;font-weight:bold;height:26px;width:80px'>Google</button>
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>簡介：越來越厭煩 Google Doodles 的頻繁出現</h2>
+                <p>
+                    以前偶爾一次 Doodle 是很新鮮、有趣啦，現在三不五時就來一次。而且早先只是在 Google 字樣上加以變化，現在花樣越來越誇張，已經到了覺得礙眼的程度。
+                </p>
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>[*] Enter：搜尋，<del>Shift+N：新聞，Shift+T：翻譯，Shift+V：影片，Shift+P：圖片</del>。</p>
+            </footer>
+
+        </article>
+
+        <script>
+            var button=document.getElementsByTagName('button')[0]
+            var input=document.getElementsByTagName('input')[0]
+            button.addEventListener('click',function(x){
+                location.href='http://www.google.com/search?q='+input.value+'&lr=lang_zh-TW'
+            })
+            input.addEventListener('keydown',function(x){
+                if(x.which==13) button.click()
+            })
+            addEventListener('load',function(x){
+                input.value=''
+                input.focus()
+            })
+        </script>
+
+    </body>
+
+</html>

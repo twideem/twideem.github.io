@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>善用「事件可以覆寫」的特性</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>事件裡面的程式隨時隨地都能被改寫</h2>
+                <p>
+                    事件是會被覆寫的：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        window.onkeydown = function(){     //按下鍵盤事件
+
+                            document.write('AAA');         //首先顯示 AAA
+
+                            window.onkeydown = function(){ //才顯示完就改寫 onkeydown 的內容
+                                document.write('BBB');     //以後改成顯示 BBB
+                            };
+
+                        };
+                    </textarea>
+                    <br>
+                    <output>
+                        第一次在網頁按下鍵盤時，會顯示 AAA，以後則顯示 BBB。<br>
+                    </output>
+                    <br>
+                    因此寫 JavaScript 程式，你精心佈局的事件驅動模式，很容易就可以被重寫掉。例如某人從外部載入你的 *.js 程式庫，卻不知道你裡面用了 window.onload 為網頁處理一些特殊工作，而他自己也在網頁內部用了 window.onload，這很可能會導致你所提供的程式庫無法正常執行，因為被改寫了。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>善用事件隨時可以覆寫的特性</h2>
+                <p>
+                    但另一方面來說，這也是讓程式結構變得簡潔的語法特性。<br>
+                    <br>
+                    比如說，你希望設計一個用鍵盤方向鍵來操控的遊戲，如果事件無法覆寫，那一個網頁只能限制用一次 window.onkeydown，你只好把所有動作通通塞在 window.onkeydown 裡面，程式會非常地亂…<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        //紀錄使用者操控狀態
+                        var ui_state = '地圖';
+                        //為鍵盤碼的取個識別名稱
+                        const KEY_UP = 38;
+                        const KEY_DOWN = 40;
+                        const KEY_LEFT = 37;
+                        const KEY_RIGHT = 39;
+                        //按下鍵盤事件
+                        window.onkeydown = function(_event){
+                            switch(_event.which){
+                                case KEY_UP:
+                                    if(ui_state=='地圖'){
+                                        人物往上方格子移動();
+                                    }
+                                    else if(ui_state=='選單'){
+                                        游標往上個指令移動();
+                                    }
+                                    else if(ui_state=='戰場'){
+                                        游標往上個技能移動();
+                                    }
+                                    else if(ui_state=='道具'){
+                                        游標往上個物品移動();
+                                    }
+                                    break;
+                                case KEY_DOWN:
+                                    if(ui_state=='地圖'){
+                                        人物往下方格子移動();
+                                    }
+                                    else if(ui_state=='選單'){
+                                        游標往下個指令移動();
+                                    }
+                                    else if(ui_state=='戰場'){
+                                        游標往下個技能移動();
+                                    }
+                                    else if(ui_state=='道具'){
+                                        游標往下個物品移動();
+                                    }
+                                    break;
+                                case KEY_LEFT:
+                                    if(ui_state=='地圖'){
+                                        人物往左方格子移動();
+                                    }
+                                    else if(ui_state=='選單'){
+                                        游標往左邊指令移動();
+                                    }
+                                    else if(ui_state=='戰場'){
+                                        游標往左邊技能移動();
+                                    }
+                                    else if(ui_state=='道具'){
+                                        游標往左邊物品移動();
+                                    }
+                                    break;
+                                case KEY_RIGHT:
+                                    if(ui_state=='地圖'){
+                                        人物往右方格子移動();
+                                    }
+                                    else if(ui_state=='選單'){
+                                        游標往右邊指令移動();
+                                    }
+                                    else if(ui_state=='戰場'){
+                                        游標往右邊技能移動();
+                                    }
+                                    else if(ui_state=='道具'){
+                                        游標往右邊物品移動();
+                                    }
+                            };
+                        };
+                    </textarea>
+                    <br>
+                    更別說每個 if 裡面還需要補充其它特殊處理狀況的程式時，會有多雜亂了～<br>
+                    <br>
+                    這時還不如利用事件可以覆寫的特性，改寫為：<br>
+                    <br>
+                    <textarea class='brush:es'>
+                        var 地圖 = function(){
+                            window.onkeydown = function(_event){
+                                switch(_event.which){
+                                    case KEY_UP:
+                                        人物往上方格子移動();
+                                        break;
+                                    case KEY_DOWN:
+                                        人物往下方格子移動();
+                                        break;
+                                    case KEY_LEFT:
+                                        人物往左方格子移動();
+                                        break;
+                                    case KEY_RIGHT:
+                                        人物往右方格子移動();
+                                }
+                            };
+                        };
+
+                        var 選單 = function(){
+                            window.onkeydown = function(_event){
+                                switch(_event.which){
+                                    case KEY_UP:
+                                        游標往上個指令移動();
+                                        break;
+                                    case KEY_DOWN:
+                                        游標往下個指令移動();
+                                        break;
+                                    case KEY_LEFT:
+                                        游標往左邊指令移動();
+                                        break;
+                                    case KEY_RIGHT:
+                                        游標往右邊指令移動();
+                                }
+                            };
+                        };
+
+                        var 戰場 = function(){
+                            window.onkeydown = function(_event){
+                                switch(_event.which){
+                                    case KEY_UP:
+                                        游標往上個技能移動();
+                                        break;
+                                    case KEY_DOWN:
+                                        游標往下個技能移動();
+                                        break;
+                                    case KEY_LEFT:
+                                        游標往左邊技能移動();
+                                        break;
+                                    case KEY_RIGHT:
+                                        游標往右邊技能移動();
+                                }
+                            };
+                        };
+
+                        var 道具 = function(){
+                            window.onkeydown = function(_event){
+                                switch(_event.which){
+                                    case KEY_UP:
+                                        游標往上個物品移動();
+                                        break;
+                                    case KEY_DOWN:
+                                        游標往下個物品移動();
+                                        break;
+                                    case KEY_LEFT:
+                                        游標往左邊物品移動();
+                                        break;
+                                    case KEY_RIGHT:
+                                        游標往右邊物品移動();
+                                }
+                            };
+                        };
+                    </textarea>
+                    <br>
+                    根據變換的遊戲操作介面狀況，切換不同的事件處理函式，例如進入地圖模式時，就呼叫「地圖()」改寫 window.onload 的內容，進入選單畫面時，就呼叫「選單()」改寫 window.onload 的內容…程式顯得更有組織多了！而且每次改寫，只執行分屬不同遊戲操作介面的程式，不用全部混雜在一起，擔心誤判的話執行錯誤的遊戲指令，程式執行起來更穩定。而在地圖模式想按 ESC 鍵切換到選單模式，追加程式時相當直覺：<br>
+                    <br>
+                    <textarea class='brush:es;highlight:[18,19]'>
+                        const KEY_ESC = 27;
+
+                        var 地圖 = function(){
+                            window.onkeydown = function(_event){
+                                switch(_event.which){
+                                    case KEY_UP:
+                                        人物往上方格子移動();
+                                        break;
+                                    case KEY_DOWN:
+                                        人物往下方格子移動();
+                                        break;
+                                    case KEY_LEFT:
+                                        人物往左方格子移動();
+                                        break;
+                                    case KEY_RIGHT:
+                                        人物往右方格子移動();
+                                        break;
+                                    case KEY_ESC:  //在地圖模式按 ESC 鍵切換到選單模式
+                                        選單();
+                                }
+                            };
+                        };
+                    </textarea>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

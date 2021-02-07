@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>sh.lang('Java')</script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>資料夾與檔案的管理</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>基本範例</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import java.io.File;
+                        import java.util.Date;
+                        import java.text.DateFormat;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+                                try{
+                                    //建立資料夾。
+                                    new File(".\\新增資料夾").mkdir();
+                                    //建立檔案。
+                                    new File(".\\新文字文件.txt").createNewFile();
+                                    //移動檔案。
+                                    new File(".\\新文字文件.txt").renameTo(new File(".\\新增資料夾\\新文字文件.txt"));
+                                    //更改檔名。
+                                    new File(".\\新增資料夾\\新文字文件.txt").renameTo(new File(".\\新增資料夾\\舊文字文件.txt"));
+                                    //取得檔案最後修改日期。
+                                    Date date = new Date(new File(".\\新增資料夾\\舊文字文件.txt").lastModified());
+                                    DateFormat date_rormat = DateFormat.getDateInstance();
+                                    System.out.println(date_rormat.format(date));
+                                    //檢查檔案是否存在，然後刪除檔案。（亦適用於檢查資料夾是否存在）
+                                    File file = new File(".\\新增資料夾\\舊文字文件.txt");
+                                    if(file.exists()){
+                                        file.delete();
+                                    }
+                                    //取得資料夾檔案清單。
+                                    String[] list = new File("C:").list();
+                                    for(int n=0; n&lt;list.length; n++){
+                                        System.out.print(list[n] + ", ");
+                                    }
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+                            }
+
+                        }
+                    </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其它常見功能</h2>
+                <table>
+                    <tr><td>canExecute()</td><td>是否為可執行檔。</td></tr>
+                    <tr><td>canRead()</td><td>是否可讀取。</td></tr>
+                    <tr><td>canWrite()</td><td>是否可寫入。</td></tr>
+                    <tr><td>compareTo(File)</td><td>合併檔案。</td></tr>
+                    <tr><td>getFreeSpace()</td><td>取得所在磁碟的剩餘容量，單位是 byte。</td></tr>
+                    <tr><td>getName()</td><td>取得檔案名稱。</td></tr>
+                    <tr><td>getParent()</td><td>取得當前資料夾。</td></tr>
+                    <tr><td>getPath()</td><td>取得完整路徑。</td></tr>
+                    <tr><td>getTotalSpace()</td><td>取得所在磁碟的容量，單位是 byte。</td></tr>
+                    <tr><td>getUsableSpace()</td><td>取得所在磁碟的可用容量，單位 byte。</td></tr>
+                    <tr><td>isDirectory()</td><td>是否為資料夾。</td></tr>
+                    <tr><td>isFile()</td><td>是否為檔案。</td></tr>
+                    <tr><td>isHidden()</td><td>是否為隱藏檔。</td></tr>
+                    <tr><td>length()</td><td>取得檔案大小，單位是 byte。</td></tr>
+                    <tr><td>listFiles()</td><td>以 File 陣列傳回檔案。</td></tr>
+                    <tr><td>setExecutable(boolean)</td><td>設定執行權限。</td></tr>
+                    <tr><td>setLastModified(long)</td><td>設定檔案修改日期。</td></tr>
+                    <tr><td>setReadable(boolean)</td><td>設定讀取權限。</td></tr>
+                    <tr><td>setReadOnly()</td><td>設定唯讀。</td></tr>
+                    <tr><td>setWritable(boolean)</td><td>設定寫入權限。</td></tr>
+                    <tr><td>toURL()</td><td>以 java.net.URL 輸出。</td></tr>
+                </table>
+                <hr>
+                <section>
+                    <h3>應用一：修改資料夾內所有檔案的最後日期</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.File;
+                            import java.text.SimpleDateFormat;
+                            import java.util.Date;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+                                    try{
+                                        SimpleDateFormat simple_date_format = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
+                                        Date date = simple_date_format.parse("2002/02/06-12:34:56");
+                                        File files[] = new File("C:\\Users\\Twideem\\Documents").listFiles();
+                                        for(File file : files){
+                                            if(file.isFile()){
+                                                file.setLastModified(date.getTime());
+                                            }
+                                        }
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>新版本 Java 功能</h2>
+                <p>
+                    在 Windows 9x 時代，<var>java.io.File</var> 的功能還算足夠，但到了 Windows Vista 時代，就顯得不足了！因此 Java SE 7 新增了 <var>java.nio.file.Files</var> 和 <var>java.nio.file.Paths</var>，檔案處理更為簡便，請參考《<a href='20111209A.html'>使用 NIO2 處理檔案</a>》。
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

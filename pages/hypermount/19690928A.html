@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>XMLHttpRequest</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>範例</h2>
+                <hr>
+                <section>
+                    <h3>1.html</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html&gt;
+                                &lt;body&gt;
+                                    &lt;p&gt;Hello, XMLHttpRequest!&lt;/p&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>2.html</h3>
+                    <p>
+                        <textarea class='brush:html'>
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html&gt;
+                                &lt;body&gt;
+                                    &lt;article&gt;&lt;/article&gt;
+                                    &lt;script&gt;
+                                        var request = new XMLHttpRequest();
+                                        request.open("GET", "1.html", false);
+                                        request.send();
+                                        document.querySelector("article").innerHTML = request.responseXML.querySelector("h3").innerHTML;
+                                    &lt;/script&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>注意事項</h2>
+                <p>
+                    現在的網頁瀏覽器，會封鎖本地檔案的來源請求，所以這範例只能在 HTTP 正常運作，沒辦法用在 file:// 下跨頁載入資料。<br>
+                    <br>
+                    本地端網頁的 JavaScript 想跨語言分享資料，請用 JSON 吧！
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>

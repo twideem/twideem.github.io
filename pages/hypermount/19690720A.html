@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>HTML5 釋疑</h1>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>何時使用 hgroup？</h2>
+                <p>
+                    如果只是用了好幾個 H1 到 H6 等標籤，其實並不用包括在 HGROUP 裡面：<br>
+                    <br>
+                    <textarea class='brush:html'>
+                        &lt;header&gt;
+                            &lt;h1&gt;主標題&lt;/h1&gt;
+                            &lt;h2&gt;副標題&lt;/h2&gt;
+                        &lt;/header&gt;
+                    </textarea>
+                    <br>
+                    但如果多個 H1 到 H6 等標籤外，還有其它種類的標籤，就適合放在 HGROUP 裡面來區隔：<br>
+                    <br>
+                    <textarea class='brush:html'>
+                        &lt;header&gt;
+                            &lt;hgroup&gt;
+                                &lt;h1&gt;主標題&lt;/h1&gt;
+                                &lt;h2&gt;副標題&lt;/h2&gt;
+                            &lt;/hgroup&gt;
+                            &lt;nav&gt;
+                                &lt;ul&gt;
+                                    &lt;li&gt;選項&lt;/li&gt;
+                                    &lt;li&gt;選項&lt;/li&gt;
+                                    &lt;li&gt;選項&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;/nav&gt;
+                        &lt;/header&gt;
+                    </textarea>
+                </p>
+            </section>
+
+        </article>
+
+    </body>
+
+</html>
