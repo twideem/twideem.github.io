@@ -171,16 +171,6 @@
                         import java.net.*;
                         import java.util.*;
 
-                        public class Main{
-
-                            public static void main(String[] args) throws IOException{
-                                HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
-                                httpserver.createContext("/", new StaticHttpHandler());
-                                httpserver.start();
-                            }
-
-                        }
-
                         class StaticHttpHandler implements HttpHandler{
 
                             private Map<String, byte[]> map = new HashMap<String, byte[]>();
@@ -231,9 +221,19 @@
                             }
 
                         }
+
+                        public class Main{
+
+                            public static void main(String[] args) throws IOException{
+                                HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
+                                httpserver.createContext("/", new StaticHttpHandler());
+                                httpserver.start();
+                            }
+
+                        }
                     </textarea>
                     <br>
-                    只要在 Java 程式所在路徑，建立名為 htdocs 的資料夾，裡面放網頁，就能透過網頁瀏覽器以 127.0.0.1 的網址開啟。
+                    只要在 Java 程式所在路徑，建立名為 htdocs 的資料夾，裡面放網頁，就能透過網頁瀏覽器以 127.0.0.1 或路由器分配的 IP 位址開啟。
                 </p>
             </section>
 
