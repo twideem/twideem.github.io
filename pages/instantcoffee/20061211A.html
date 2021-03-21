@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+    <head>
+        <meta charset='UTF-8'>
+        <title>TWIDEEM CIVS</title>
+        <link href='../../favicon.png' rel='icon'>
+        <link href='../../styles/layout.css' rel='stylesheet'>
+        <script src='../../scripts/template.js'></script>
+        <script src='../../objects/plugins/sh.js'></script>
+        <script>
+            sh.lang('java')
+        </script>
+    </head>
+
+    <body>
+
+        <article>
+
+            <header>
+                <h1>Java 自帶 JavaScript 引擎：Rhino 篇</h1>
+                <p>
+                    Java SE 6 開始，不但可以讓其他程式語言跑 JVM，像是 PHP、Ruby、Python，並且內建 JavaScript 引擎：Rhino！這是由 Mozilla 以 Java 寫出來的，長年維護下來，功能穩定。<br>
+                    <br>
+                    到了 Java SE 8，Oracle 重寫了新的 JavaScript 引擎：Nashorn，有更好的性能，且更符合 ECMAScript 標準，於是改用這引擎取代 Rhino。<br>
+                    <br>
+                    差不多這時間，很多程式語言為了求新求變，開始每年發布一次新版，Java 自己也是，ECMAScript 也不例外！結果維護 Nashorn 變成棘手的工作，Oracle 不打算繼續這項專案。於是 Java SE 11<ins>[1]</ins> 將 Nashorn 引擎列為 deprecated，在 Java SE 15 正式汰除～<br>
+                    <br>
+                    這件事讓我們反思，程式語言究竟每年更新一次，不斷把不曉得好不好用的新功能，推出給大家試用一下好？還是隨著時代確定有這需要了才頒定好？我覺得後者好，更新頻率太高，只會讓下游疲於奔命，跟不上腳步，導致放棄。
+                </p>
+            </header>
+
+            <hr>
+
+            <section>
+                <h2>在 Java 寫 JavaScript 程式</h2>
+                <p>
+                    <textarea class='brush:java'>
+                        import javax.script.ScriptEngine;
+                        import javax.script.ScriptEngineManager;
+
+                        public class Main{
+
+                            public static void main(String[] args){
+
+                                ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+                                try{
+                                    js.eval("print('Hello, Rhino!')");
+                                }
+                                catch(Exception exception){
+                                    exception.printStackTrace();
+                                }
+
+                            }
+
+                        }
+                    </textarea>
+                    <br>
+                    <output>
+                        Hello, Rhino!
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>從 Java 傳資料給 JavaScript 程式</h2>
+                <hr>
+                <section>
+                    <h3>寫在全域範疇</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import javax.script.ScriptEngine;
+                            import javax.script.ScriptEngineManager;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+                                    js.put("var1", 123);
+
+                                    try{
+                                        js.eval("print(var1)");
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            123
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>寫在區域範疇（避免汙染根物件）</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import javax.script.ScriptEngine;
+                            import javax.script.ScriptEngineManager;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+                                    Bindings binding = js.createBindings();
+                                    binding.put("var2", 456);
+
+                                    try{
+                                        js.eval("print(var2)", binding);
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            456
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 Java 載入 *.js 檔案</h2>
+                <hr>
+                <section>
+                    <h3>script.js</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            print('Hello, Rhino!')
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Main.java</h3>
+                    <p>
+                        <textarea class='brush:java'>
+                            import java.io.FileReader;
+                            import javax.script.ScriptEngine;
+                            import javax.script.ScriptEngineManager;
+
+                            public class Main{
+
+                                public static void main(String[] args){
+
+                                    ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+                                    try{
+                                        js.eval(new FileReader("script.js"));
+                                    }
+                                    catch(Exception exception){
+                                        exception.printStackTrace();
+                                    }
+
+                                }
+
+                            }
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello, Rhino!
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>直接用 JDK 執行 *.js 檔</h2>
+                <p>
+                    Java SE 6 提供 jrunscript.exe 程式，有 JavaScript 直譯器的功能！
+                </p>
+                <hr>
+                <section>
+                    <h3>script.js</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            print('Hello, Rhino!')
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>命令提示字元</h3>
+                    <p>
+                        <output>
+                            jrunscript Script.js<br>
+                            Hello, Rhino!
+                        </output>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Interactive mode</h2>
+                <p>
+                    執行 jrunscript.exe 時不加參數，會進入 interactive mode，一個能用 JavaScript 語言操作系統的環境：<br>
+                    <br>
+                    <output>
+                        C:\Users\User&gt;jrunscript<br>
+                        js> _
+                    </output>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>CGI</h2>
+                <p>
+                    jrunscript 跟 Perl 和 Python 一樣，又有 interactive mode、又可以直譯程式碼，那拿來當 CGI 的程式引擎當然沒問題。<br>
+                    <br>
+                    不過 Rhino 的執行效率不高，建議用 Java SE 8 的 Nashorn，程式是 jjs.exe。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 JavaScript 使用 Java API</h2>
+                <p>
+                    <textarea class='brush:js'>
+                        importPackage(java.util)
+
+                        var a = new ArrayList()
+                        a.add('AAA')
+                        a.add('BBB')
+                        a.add('CCC')
+
+                        for(var n=0; n&lt;a.size(); n++) println(a.get(n))
+                    </textarea>
+                    <br>
+                    <output>
+                        AAA<br>
+                        BBB<br>
+                        CCC<br>
+                    </output>
+                    <br>
+                    用 <var>importPackage()</var> 可以載入套件，就像 import java.util.* 一樣。要注意的是，JavaScript 並未預設載入任何套件，所以就算是 java.lang.* 的類別也要自己載入。<br>
+                    <br>
+                    只想載入某個類別的話，用 <var>importClass()</var>。<br>
+                    <br>
+                    不過，透過引擎寫 JavaScript 程式，調用類別通常是直接寫完整名稱，例如：<code>var a = new java.util.ArrayList()</code>，比較符合 ECMAScript 標準，而不是呼叫 Rhino 獨有的 importPackage()。這樣的 JavaScript 比較容易移植，像是從 Java 的 Rhino 轉到 .NET 的 JScript .NET 會比較好修改～<br>
+                    <br>
+                    另外，不像 JScript .NET 沒辦法使用 C# 中設計為泛型的類別，Java 的泛型只是語法糖，不像 C# 是真的有一套泛型機制，所以不支援泛型的 JavaScript 在調用 Java API 中用到泛型的類別，反而沒有相容性問題，就像視為 Object 的泛型一樣。<br>
+                    <br>
+                    遇到 setXXX() 和 getXXX() 之類的方法，在 Rhino 可以寫成 .xxx，例如 frame.setTitle("Hello!") 可以寫成 frame.title = 'Hello'。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>Swing 程式設計</h2>
+                <p>
+                    <textarea class='brush:js'>
+                        importPackage(javax.swing);
+
+                        var frame = new JFrame();
+                        var button = new JButton();
+
+                        frame.setSize(400, 300);
+                        frame.setTitle("Hello, world!");
+                        frame.setVisible(true);
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                        button.setLocation(40, 100);
+                        button.setSize(300, 30);
+                        button.setText("別亂按");
+
+                        frame.setLayout(null);
+                        frame.add(button);
+
+                        button.addActionListener(function(){
+                            button.setText("不是叫你別亂按嗎");
+                        });
+                    </textarea>
+                </p>
+                <figure>
+                    <img src='../../figures/instantcoffee/20001009A_02.png' alt='插圖'>
+                    <img src='../../figures/instantcoffee/20001009A_03.png' alt='插圖'>
+                </figure>
+                <!--
+                    importPackage(javax.swing);
+                    importPackage(java.awt.event);
+
+                    var frame = new JFrame();
+
+                    frame.setSize(400, 300);
+                    frame.setTitle("Hello, world!");
+                    frame.setVisible(true);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                    frame.addWindowListener(function(event, name) {
+                        if(name=="windowClosed")
+                            ;
+                        if(e==WindowEvent.WINDOW_CLOSED)
+                            ;
+                    });
+
+                    java.lang.Thread.sleep(1000);
+                -->
+
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>在 *.js 中載入其它 *.js</h2>
+                <p>
+                    <var>load()</var>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其它內建函式</h2>
+                <p>
+                    內建函式實作在 org.mozilla.javascript.tools.shell.Global 類別，查一下 API 文件即可。<br>
+                    <br>
+                    比較實用的有：<br>
+                    <br>
+                    <var>
+                        spawn()<br>
+                        sync()<br>
+                    </var>
+                    <br>
+                    其它的會有 Java 新舊版本支援不一的問題，功能也不穩定。所以像是 readFile() 或 write() 之類，雖然能用的話確實方便，但只要 Java API 能做到的，還是盡量用 API 去完成。Rhino 在內建函式方面處理得很糟糕～
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其它功能</h2>
+                <hr>
+                <section>
+                    <h3>JavaScript 的場合</h3>
+                    <p>
+                        類別不是屬於 java.xxx.* 或 javax.xxx.* 這類全域套件時，會找不到套件名稱對應的類別，這時可以嘗試在 Package 物件裡面找，例如 var a = new Package.xxx.yyy.Zzz()。
+                    </p>
+                    <!--
+                        Nashorn 可以用 <code>Java.type("套件.物件")</code> 建立物件，速度較快，例如 var url = Java.type("java.net.url")。
+                    -->
+                </section>
+                <hr>
+                <section>
+                    <h3>Java 語言的場合</h3>
+                    <p>
+                        <a href='http://mozilla.github.io/rhino/javadoc/org/mozilla/javascript/package-summary.html' target='_blank'>org.mozilla.javascript</a> 套件底下，有各式類別可以組成 JavaScript，進行更細部的控制。
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>使用新版 Rhino</h2>
+                <p>
+                    雖然 Java 不再內建 JavaScript 引擎，但 Mozilla 一直都在維護 Rhino 專案，有需要的人自行下載即可。<br>
+                    <br>
+                    前往 <a href='http://github.com/mozilla/rhino/releases' target='_blank'>http://github.com/mozilla/rhino/releases</a> 下載最新版的 JAR 檔案，然後以執行 *.js 程式檔為例，輸入：<br>
+                    <br>
+                    <output>
+                        java -jar rhino-1.7.7.2.jar *.js<br>
+                    </output>
+                    <br>
+                    即可執行程式。<br>
+                    <br>
+                    這樣的執行方式，會比 jrunscript.exe 少很多問題。<br>
+                    <br>
+                    但原始碼使用不含 BOM 的 UTF-8 的編碼，在 Windows 會遇到亂碼的問題，這時改成：<br>
+                    <br>
+                    <output>
+                        java -Dfile.encoding=UTF-8 -jar rhino-1.7.7.2.jar *.js<br>
+                    </output>
+                    <br>
+                    1.7.8 版開始，必須 Java SE 8 以上才能使用，所以 Java SE 6 最多只能下載 1.7.7.2 版來用。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>如何取得 Java 內建 Rhino 的版本</h2>
+                <p>
+                    <kbd>jrunscript -q</kbd>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>最後補充</h2>
+                <p>
+                    在 Java 用 Rhino 跑 JavaScript 的方式有好幾種：<br>
+                    <br>
+                    <samp>
+                        1、在 Java 程式碼撰寫 javax.script.* 跑 JavaScript 程式<br>
+                        2、用 jrunscript 載入 *.js 跑 JavaScript 程式<br>
+                        3、用 java -jar 掛載 Rhino 跑 JavaScript 程式<br>
+                        4、進入 Interactive mode 跑 JavaScript 程式<br>
+                    </samp>
+                    <br>
+                    要注意的是，每一種會遇到的狀況並不一樣！越前面的受限越多、問題越多，越後面的越能發揮 Rhino 全部功能。例如第一種寫法會遇到無法使用內建函式 load() 的問題，第二種寫法會遇到 Swing 視窗閃退的問題，只有最後一種 Interactive mode 功能是齊全的！
+                </p>
+                <!--
+                    由於有先天不足的地方，所以不適合拿 Rhino 全面取代 Java 語言。比較適合的是，把一些允許客戶端任意修改的程式碼動作或功能，透過 Rhino 抽離出來自成一塊，總之依然是 Java 語言為主，Rhino 從旁協助，把原本繁重的工作簡化為兩三件小事來處理～
+                -->
+            </section>
+
+            <hr>
+
+            <footer>
+                <p>
+                    [1] Java SE 11 時，大家應該都改用 OpenJDK 了！而 OpenJDK 本來就沒內建 JavaScript 引擎，只是有支援 Java Scripting API（javax.javascript.*）而已。
+                </p>
+            </footer>
+
+        </article>
+
+    </body>
+
+</html>

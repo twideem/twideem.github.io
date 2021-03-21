@@ -44,7 +44,7 @@
 
                             @WebServlet(name="Main", urlPatterns={"/Main"}, loadOnStartup=1)
                             public class Main extends HttpServlet{
-                                @Override public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+                                public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
                                     PrintWriter out = response.getWriter();
                                     out.println("Hello, world!");
                                     out.close();

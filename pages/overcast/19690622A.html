@@ -198,6 +198,17 @@
                         </textarea>
                     </p>
                 </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>很 Pythonic 的寫法</h2>
+                <p>
+                    還有一些能將複雜程式寫法，用 Python 內建函式加以簡化的範例，會讓你的程式更 Pythonic，讓人覺得你寫 Python 經驗老到。<br>
+                    <br>
+                    但不這麼寫就不 Pythonic 嗎？看起來不是，好像是「可以這樣寫 Python 程式」，而不是「務必這樣寫 Python 程式」，因此這些範例另外放～
+                </p>
                 <hr>
                 <section>
                     <h3>Example 11</h3>
@@ -217,76 +228,9 @@
                         </textarea>
                     </p>
                 </section>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>很 Pythonic 的寫法</h2>
-                <p>
-                    還有一些能將複雜程式寫法，用 Python 內建函式加以簡化的範例，會讓你的程式更 Pythonic，讓人覺得你寫 Python 經驗老到。<br>
-                    <br>
-                    但不這麼寫就不 Pythonic 嗎？看起來不是，好像是「可以這樣寫 Python 程式」，而不是「務必這樣寫 Python 程式」，因此這些範例另外放～
-                </p>
                 <hr>
                 <section>
                     <h3>Example 12</h3>
-                    <p>
-                        <textarea class='brush:py'>
-                            # Programming
-                            a = {'aaa':111}
-                            b = 0
-                            if 'aaa' in a:
-                                b = a['aaa']
-                            else:
-                                b = 222
-
-                            # Pythonic
-                            a = {'aaa':111}
-                            b = a.get('aaa', 222)
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Example 13</h3>
-                    <p>
-                        <textarea class='brush:py'>
-                            # Programming
-                            a = ['a', 'aa', 'aaa']
-                            b = ''
-                            for n in a:
-                                b += n + ':'
-                            b = b[:-1]
-
-                            # Pythonic
-                            a = ['a', 'aa', 'aaa']
-                            b = ':'.join(a)
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Example 14</h3>
-                    <p>
-                        <textarea class='brush:py'>
-                            # Programming
-                            a = 'abc'
-                            if a[:2] == 'ab':
-                                pass
-
-                            # Pythonic
-                            a = 'abc'
-                            if a.startswith('ab'):
-                                pass
-
-                            # 別忘了還有 endswith()
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Example 15</h3>
                     <p>
                         <textarea class='brush:py'>
                             # Programming
@@ -303,7 +247,7 @@
                 </section>
                 <hr>
                 <section>
-                    <h3>Example 16</h3>
+                    <h3>Example 13</h3>
                     <p>
                         <textarea class='brush:py'>
                             # Programming
@@ -322,22 +266,69 @@
                 </section>
                 <hr>
                 <section>
-                    <h3>Example 17</h3>
+                    <h3>Example 14</h3>
                     <p>
                         <textarea class='brush:py'>
                             # Programming
-                            # 沒想過函式傳回多值
+                            a = {'aaa':111}
+                            b = 0
+                            if 'aaa' in a:
+                                b = a['aaa']
+                            else:
+                                b = 222
 
                             # Pythonic
-                            def f():
-                                return ('aaa', 'bbb')
-                            (a, b) = f()
+                            a = {'aaa':111}
+                            b = a.get('aaa', 222)
                         </textarea>
                     </p>
                 </section>
                 <hr>
                 <section>
-                    <h3>Example 18</h3>
+                    <h3>Example 15</h3>
+                    <p>
+                        <textarea class='brush:py'>
+                            # Programming
+                            a = ['a', 'aa', 'aaa']
+                            b = ''
+                            for n in a:
+                                b += n + ':'
+                            b = b[:-1]
+
+                            # Pythonic
+                            a = ['a', 'aa', 'aaa']
+                            b = ':'.join(a)
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 16</h3>
+                    <p>
+                        <textarea class='brush:py'>
+                            # Programming
+                            a = 'abc'
+                            if a[:2] == 'ab':
+                                pass
+
+                            # Pythonic
+                            a = 'abc'
+                            if a.startswith('ab'):
+                                pass
+
+                            # 別忘了還有 endswith()
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>其他建議事項</h2>
+                <hr>
+                <section>
+                    <h3>Example 17</h3>
                     <p>
                         <textarea class='brush:py'>
                             # Programming
@@ -350,6 +341,21 @@
                             f(1, 2)
 
                             # lambda 不是用來產生具名函式，而是用來表現匿名函數。既然要具名，用 def 才對味。
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>Example 18</h3>
+                    <p>
+                        <textarea class='brush:py'>
+                            # Programming
+                            # 沒想過函式傳回多值
+
+                            # Pythonic
+                            def f():
+                                return ('aaa', 'bbb')
+                            (a, b) = f()
                         </textarea>
                     </p>
                 </section>

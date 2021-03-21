@@ -230,7 +230,7 @@
                                     super(data, columnNames);
                                 }
 
-                                @Override public Class getColumnClass(int index){
+                                public Class getColumnClass(int index){
                                     return getValueAt(0, index).getClass();
                                 }
 

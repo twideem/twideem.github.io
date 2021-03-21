@@ -59,7 +59,7 @@
                             public class Main implements Printable{
 
                                 //實作 Printable 介面的 print() 功能
-                                @Override public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+                                public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
                                     if(page_index>0){
                                         return Printable.NO_SUCH_PAGE;
                                     }
@@ -107,7 +107,7 @@
 
                             public class Main implements Printable{
 
-                                @Override public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+                                public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
                                     if(page_index>0){
                                         return Printable.NO_SUCH_PAGE;
                                     }
@@ -153,7 +153,7 @@
 
                             public class Main implements Printable{
 
-                                @Override public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+                                public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
                                     if(page_index>0){
                                         return Printable.NO_SUCH_PAGE;
                                     }

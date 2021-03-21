@@ -433,7 +433,7 @@
 
                                     private String string = new String();
 
-                                    @Override public boolean accept(File file){
+                                    public boolean accept(File file){
                                         if(file.getPath().lastIndexOf(".")&gt;0){
                                             this.string = file.getPath().substring(file.getPath().lastIndexOf(".")+1).toLowerCase();
                                         }
@@ -445,7 +445,7 @@
                                         }
                                     }
 
-                                    @Override public String getDescription(){
+                                    public String getDescription(){
                                         return "XML Files (*.xml)";
                                     }
 
