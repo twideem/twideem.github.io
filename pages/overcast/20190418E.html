@@ -35,7 +35,7 @@
                         <br>
                         除了跨平台這項優勢外，.NET Core 有更先進的技術與架構，像是自帶 HTTP 伺服器，不用安裝 IIS 就能受用 ASP.NET Core。<br>
                         <br>
-                        如果你現在就要用 .NET Core 寫程式，請至 Microsoft 官網下載：<a href='http://dotnet.microsoft.com/download/' target='_blank'>Download .NET</a>。
+                        如果你現在就要用 .NET Core 寫程式，請至 Microsoft 官網下載：<a href='https://dotnet.microsoft.com/download/' target='_blank'>Download .NET</a>。
                     </p>
                 </section>
                 <hr>
@@ -44,11 +44,11 @@
                     <p>
                         都知道有 C# 8 了，但 Windows 10 內建的 csc.exe 只到 C# 5 而已，版本老舊到連 $"{變數名稱}" 語法都不支援 XD<br>
                         <br>
-                        安裝 .NET Framework 4.8 Developer Pack 也沒用，因為自從有 .NET Core 後，就成立 Roslyn 專案，將編譯器獨立出來另行開發，也就是現在的 <a href='http://github.com/dotnet/roslyn' target='_blank'>Microsoft .NET Compiler Platform</a>。這使得 .NET Framework 像 Runtime + API 而已，難怪不叫 SDK，而是 Developer Pack。對照 .NET Core SDK，從字面上便能看出來為何人家能編譯新的 C# 8 語法了 XDD<br>
+                        安裝 .NET Framework 4.8 Developer Pack 也沒用，因為自從有 .NET Core 後，就成立 Roslyn 專案，將編譯器獨立出來另行開發，也就是現在的 <a href='https://github.com/dotnet/roslyn' target='_blank'>Microsoft .NET Compiler Platform</a>。這使得 .NET Framework 像 Runtime + API 而已，難怪不叫 SDK，而是 Developer Pack。對照 .NET Core SDK，從字面上便能看出來為何人家能編譯新的 C# 8 語法了 XDD<br>
                         <br>
-                        不想用 dotnet.exe 照範本來編譯程式，想使用最新版本 csc.exe 自由自在編譯，可安裝 <a href='http://visualstudio.microsoft.com/zh-hant/downloads/' target='_blank'>Build Tools for Visual Studio</a>！請點進網頁，往下找「Visual Studio 2019 的工具」，展開後下載「Build Tools for Visual Studio 2019」。這工具其實不用安裝 Visual Studio 2019 就能使用，所以可以只安裝 Build Tools 就好，檔案大小不到 100MB。這樣就能用 csc.exe 編譯 C# 8 程式碼了！<br>
+                        不想用 dotnet.exe 照範本來編譯程式，想使用最新版本 csc.exe 自由自在編譯，可安裝 <a href='https://visualstudio.microsoft.com/zh-hant/downloads/' target='_blank'>Build Tools for Visual Studio</a>！請點進網頁，往下找「Visual Studio 2019 的工具」，展開後下載「Build Tools for Visual Studio 2019」。這工具其實不用安裝 Visual Studio 2019 就能使用，所以可以只安裝 Build Tools 就好，檔案大小不到 100MB。這樣就能用 csc.exe 編譯 C# 8 程式碼了！<br>
                         <br>
-                        如果嫌安裝進來的 Visual Studio Installer 很多餘，只想要編譯器就好，可以在 NuGet Gallery 的 <a href='http://www.nuget.org/packages/Microsoft.Net.Compilers/' target='_blank'>Microsoft.Net.Compilers</a> 按 Download package 下載 *.nupkg 檔，然後以 ZIP 格式解壓開來，裡面的 tools 資料夾就有 csc.exe。事實上這裡才能下載到最新的正式版，Build Tools for Visual Studio 2019 給的往往是測試版或預覽版而已。
+                        如果嫌安裝進來的 Visual Studio Installer 很多餘，只想要編譯器就好，可以在 NuGet Gallery 的 <a href='https://www.nuget.org/packages/Microsoft.Net.Compilers/' target='_blank'>Microsoft.Net.Compilers</a> 按 Download package 下載 *.nupkg 檔，然後以 ZIP 格式解壓開來，裡面的 tools 資料夾就有 csc.exe。事實上這裡才能下載到最新的正式版，Build Tools for Visual Studio 2019 給的往往是測試版或預覽版而已。
                     </p>
                 </section>
                 <hr>
@@ -57,7 +57,7 @@
                     <p>
                         Mono 是最早跨到 Linux 作業系統的 .NET 開發環境，現已能跨 BSD、Solaris、macOS、Windows。禁不禁得起企業界的考驗我不知道，但對個人寫程式而言，Mono 就跟用整套 GCC 寫程式一樣滿足：<br>
                         <br>
-                        <a href='http://www.mono-project.com' target='_blank'>http://www.mono-project.com</a><br>
+                        <a href='https://www.mono-project.com' target='_blank'>https://www.mono-project.com</a><br>
                         <br>
                         雖然已有跨平台的 .NET Core，但 Mono 仍持續更新，可放手寫最新的 C# 語言功能。其實兩者都是開放原始碼專案，現在已是合作關係，相互為 .NET 貢獻成果、共創未來。<br>
                         <br>
@@ -408,7 +408,7 @@
                 <p>
                     ASP.NET 算是另外一種程式設計，只是腳本語言方面，可以用 C# 或 VB.NET 而已：<br>
                     <br>
-                    <a href='http://docs.microsoft.com/zh-tw/aspnet/overview/' target='_blank'>ASP.NET overview</a><br>
+                    <a href='https://docs.microsoft.com/zh-tw/aspnet/overview/' target='_blank'>ASP.NET overview</a><br>
                     <br>
                     ASP.NET 的程式設計手法有幾次進化，目前有三種寫法：類似傳統 ASP 的 Web Forms（新舊不完全相容）、ASP.NET 主打的 Web Pages（最新的 Razor 標記語言其實也歸類於此）、.NET Framework 特性的 MVC（除了職責分離，已編譯的關係執行效率更好）。<br>
                     <br>
@@ -447,7 +447,7 @@
                         <p>
                             其它不提供 IIS 的家用版 Windows，可下載 IIS Express：<br>
                             <br>
-                            <a href='http://www.microsoft.com/zh-TW/download/details.aspx?id=48264' target='_blank'>http://www.microsoft.com/zh-TW/download/details.aspx?id=48264</a><br>
+                            <a href='https://www.microsoft.com/zh-TW/download/details.aspx?id=48264' target='_blank'>https://www.microsoft.com/zh-TW/download/details.aspx?id=48264</a><br>
                             <br>
                             安裝後，即可在 C:\Program Files\IIS Express\ 執行 iisexpress.exe 啟動支援 ASP.NET 的網頁伺服器。<br>
                             <br>
@@ -472,9 +472,9 @@
                             想修改位置甚至對外連線的話，編輯 config 資料夾的 apolicationhost.config 檔案，找 WebSite1 修改。但會遇到不少安全性的問題導致無法順利外連，請上網搜尋資料解決吧～
                         </p>
                         <!--
-                            netsh http add urlacl url=http://*:8080/ user="NT AUTHORITY\INTERACTIVE"
+                            netsh http add urlacl url=https://*:8080/ user="NT AUTHORITY\INTERACTIVE"
                             <binding protocol="http" bindingInformation="*:8080:*" />
-                            netsh http delete urlacl url=http://*:8080/
+                            netsh http delete urlacl url=https://*:8080/
                         -->
                     </section>
                     <section>
@@ -482,7 +482,7 @@
                         <p>
                             不喜歡 IIS 的話，可以考慮免費的 Abyss Web Server X1：<br>
                             <br>
-                            <a href='http://aprelium.com' target='_blank'>http://aprelium.com</a><br>
+                            <a href='https://aprelium.com' target='_blank'>https://aprelium.com</a><br>
                             <br>
                             這款網頁伺服器雖然知名度不高，但也有十幾年經營歷史了，至今仍在更新。<br>
                             <br>
@@ -522,7 +522,7 @@
                         <br>
                         Visual Studio Community 對學生、開放原始碼及個人開發人員是免費的！如果電腦跑得動的話，不妨使用這套威力強大無比的 IDE 寫 C# 開發 .NET 程式：<br>
                         <br>
-                        <a href='http://visualstudio.microsoft.com/zh-hant/vs/community/' target='_blank'>http://visualstudio.microsoft.com/zh-hant/vs/community/</a>
+                        <a href='https://visualstudio.microsoft.com/zh-hant/vs/community/' target='_blank'>https://visualstudio.microsoft.com/zh-hant/vs/community/</a>
                     </p>
                 </section>
                 <hr>
@@ -531,14 +531,14 @@
                     <p>
                         如果你檢視線上 .NET API 網頁的原始碼，會發現資料是引據自：<br>
                         <br>
-                        <a href='http://github.com/dotnet/dotnet-api-docs/'>http://github.com/dotnet/dotnet-api-docs/</a><br>
-                        <a href='http://github.com/dotnet/dotnet-api-docs.zh-tw/'>http://github.com/dotnet/dotnet-api-docs.zh-tw/</a><br>
+                        <a href='https://github.com/dotnet/dotnet-api-docs/'>https://github.com/dotnet/dotnet-api-docs/</a><br>
+                        <a href='https://github.com/dotnet/dotnet-api-docs.zh-tw/'>https://github.com/dotnet/dotnet-api-docs.zh-tw/</a><br>
                         <br>
                         因此可以到 GitHub 把整個專案按 Download ZIP 下載回來，再從 XML 中剖析出資料。<br>
                         <br>
                         然而自己剖析 XML 太費力氣，不妨下載 <var>mdoc</var> 轉為 HTML：<br>
                         <br>
-                        <a href='http://github.com/mono/api-doc-tools/' target='_blank'>http://github.com/mono/api-doc-tools/</a><br>
+                        <a href='https://github.com/mono/api-doc-tools/' target='_blank'>https://github.com/mono/api-doc-tools/</a><br>
                         <br>
                         <output>
                             mdoc fx-bootstrap dotnet-api-docs\xml<br>
@@ -547,7 +547,7 @@
                         <br>
                         或 Microsoft 官方採用的 <var>DocFX</var>：<br>
                         <br>
-                        <a href='http://github.com/dotnet/docfx/' target='_blank'>http://github.com/dotnet/docfx/</a><br>
+                        <a href='https://github.com/dotnet/docfx/' target='_blank'>https://github.com/dotnet/docfx/</a><br>
                         <br>
                         <output>
                             docfx build dotnet-api-docs\docfx.json<br>
@@ -562,7 +562,7 @@
                     <p>
                         不介意看英文 API 文件的話，可下載蒐集各種程式語言說明文件的離線閱讀軟體 Zeal：<br>
                         <br>
-                        <a href='http://zealdocs.org' target='_blank'>http://zealdocs.org</a><br>
+                        <a href='https://zealdocs.org' target='_blank'>https://zealdocs.org</a><br>
                         <br>
                         啟動軟體，按 Docsets → Available → NET Framework → Download，即可開始下載。
                     </p>
@@ -801,7 +801,7 @@
                     [3] 其實很多人鼓勵這麼做！純粹只想寫 ASP.NET 程式，但不想讓自己的電腦變成網際網路的伺服器，那就安裝 IIS Express，不要開啟 Windows 的 IIS 功能。寫好 ASP.NET 程式碼，再上傳或複製到正式的機器。
                 </p>
                 <!--
-                    到 <a href='http://github.com/mono/msbuild' target='_blank'>http://github.com/mono/msbuild</a> 下載 msbuild，裡面的 Roslyn 資料夾就有可用的編譯器。但還少了 System.Text.Encoding.CodePages.dll 檔案，可至 <a href='http://github.com/mono/roslyn-binaries/tree/master/Microsoft.Net.Compilers' target='_blank'>http://github.com/mono/roslyn-binaries/tree/master/Microsoft.Net.Compilers</a> 找到並下載。
+                    到 <a href='https://github.com/mono/msbuild' target='_blank'>https://github.com/mono/msbuild</a> 下載 msbuild，裡面的 Roslyn 資料夾就有可用的編譯器。但還少了 System.Text.Encoding.CodePages.dll 檔案，可至 <a href='https://github.com/mono/roslyn-binaries/tree/master/Microsoft.Net.Compilers' target='_blank'>https://github.com/mono/roslyn-binaries/tree/master/Microsoft.Net.Compilers</a> 找到並下載。
                 -->
             </footer>
 

@@ -95,7 +95,7 @@
                         <br>
                         If you are familiar with C++'s template mechanism, you might think that generics are similar, but the similarity is superficial. Generics do not generate a new class for each specialization, nor do they permit "template metaprogramming."<br>
                         <br>
-                        There is much more to learn about generics. See the <a href='http://docs.oracle.com/javase/tutorial/java/generics/index.html' target='_blank'>Generics</a> lesson in the Java Tutorials.
+                        There is much more to learn about generics. See the <a href='https://docs.oracle.com/javase/tutorial/java/generics/index.html' target='_blank'>Generics</a> lesson in the Java Tutorials.
                     </p>
                 </section>
             </section>
@@ -175,7 +175,7 @@
                             }
                         </textarea>
                         <br>
-                        So when should you use the for-each loop? Any time you can. It really beautifies your code. Unfortunately, you cannot use it everywhere. Consider, for example, the <a href='http://docs.oracle.com/javase/7/docs/technotes/guides/language/generics.html#expurgate' target='_blank'>expurgate</a> method. The program needs access to the iterator in order to remove the current element. The for-each loop hides the iterator, so you cannot call remove. Therefore, the for-each loop is not usable for filtering. Similarly it is not usable for loops where you need to replace elements in a list or array as you traverse it. Finally, it is not usable for loops that must iterate over multiple collections in parallel. These shortcomings were known by the designers, who made a conscious decision to go with a clean, simple construct that would cover the great majority of cases.
+                        So when should you use the for-each loop? Any time you can. It really beautifies your code. Unfortunately, you cannot use it everywhere. Consider, for example, the <a href='https://docs.oracle.com/javase/7/docs/technotes/guides/language/generics.html#expurgate' target='_blank'>expurgate</a> method. The program needs access to the iterator in order to remove the current element. The for-each loop hides the iterator, so you cannot call remove. Therefore, the for-each loop is not usable for filtering. Similarly it is not usable for loops where you need to replace elements in a list or array as you traverse it. Finally, it is not usable for loops that must iterate over multiple collections in parallel. These shortcomings were known by the designers, who made a conscious decision to go with a clean, simple construct that would cover the great majority of cases.
                     </p>
                 </section>
             </section>
@@ -191,7 +191,7 @@
                 <section>
                     <h3>Autoboxing</h3>
                     <p>
-                        As any Java programmer knows, you can't put an int (or other primitive value) into a collection. Collections can only hold object references, so you have to box primitive values into the appropriate wrapper class (which is <a href='http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html' target='_blank'>Integer</a> in the case of int). When you take the object out of the collection, you get the Integer that you put in; if you need an int, you must unbox the Integer using the intValue method. All of this boxing and unboxing is a pain, and clutters up your code. The autoboxing and unboxing feature automates the process, eliminating the pain and the clutter.<br>
+                        As any Java programmer knows, you can't put an int (or other primitive value) into a collection. Collections can only hold object references, so you have to box primitive values into the appropriate wrapper class (which is <a href='https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html' target='_blank'>Integer</a> in the case of int). When you take the object out of the collection, you get the Integer that you put in; if you need an int, you must unbox the Integer using the intValue method. All of this boxing and unboxing is a pain, and clutters up your code. The autoboxing and unboxing feature automates the process, eliminating the pain and the clutter.<br>
                         <br>
                         The following example illustrates autoboxing and unboxing, along with generics and the for-each loop. In a mere ten lines of code, it computes and prints an alphabetized frequency table of the words appearing on the command line.<br>
                         <br>
@@ -546,7 +546,7 @@
                 <section>
                     <h3>Varargs</h3>
                     <p>
-                        In past releases, a method that took an arbitrary number of values required you to create an array and put the values into the array prior to invoking the method. For example, here is how one used the <a href='http://docs.oracle.com/javase/7/docs/api/java/text/MessageFormat.html' target='_blank'>MessageFormat</a> class to format a message:<br>
+                        In past releases, a method that took an arbitrary number of values required you to create an array and put the values into the array prior to invoking the method. For example, here is how one used the <a href='https://docs.oracle.com/javase/7/docs/api/java/text/MessageFormat.html' target='_blank'>MessageFormat</a> class to format a message:<br>
                         <br>
                         <textarea class='brush:java'>
                             Object[] arguments ={
@@ -576,7 +576,7 @@
                                 7, new Date(), "a disturbance in the Force");
                         </textarea>
                         <br>
-                        There is a strong synergy between <a href='http://docs.oracle.com/javase/7/docs/technotes/guides/language/autoboxing.html' target='_blank'>autoboxing</a> and varargs, which is illustrated in the following program using reflection:<br>
+                        There is a strong synergy between <a href='https://docs.oracle.com/javase/7/docs/technotes/guides/language/autoboxing.html' target='_blank'>autoboxing</a> and varargs, which is illustrated in the following program using reflection:<br>
                         <br>
                         <textarea class='brush:java'>
                             //Simple test framework
@@ -599,7 +599,7 @@
                             }
                         </textarea>
                         <br>
-                        This little program is a complete, if minimal, test framework. It takes a list of class names on the command line. For each class name, it instantiates the class using its parameterless constructor and invokes a parameterless method called test. If the instantiation or invocation throws an exception, the test is deemed to have failed. The program prints each failure, followed by a summary of the test results. The reflective instantiation and invocation no longer require explicit array creation, because the getMethod and invoke methods accept a variable argument list. The program also uses the new <a href='http://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#printf(java.lang.String,%20java.lang.Object...)' target='_blank'>printf</a> facility, which relies on varargs. The program reads much more naturally than it would without varargs.<br>
+                        This little program is a complete, if minimal, test framework. It takes a list of class names on the command line. For each class name, it instantiates the class using its parameterless constructor and invokes a parameterless method called test. If the instantiation or invocation throws an exception, the test is deemed to have failed. The program prints each failure, followed by a summary of the test results. The reflective instantiation and invocation no longer require explicit array creation, because the getMethod and invoke methods accept a variable argument list. The program also uses the new <a href='https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#printf(java.lang.String,%20java.lang.Object...)' target='_blank'>printf</a> facility, which relies on varargs. The program reads much more naturally than it would without varargs.<br>
                         <br>
                         So when should you use varargs? As a client, you should take advantage of them whenever the API offers them. Important uses in core APIs include reflection, message formatting, and the new printf facility. As an API designer, you should use them sparingly, only when the benefit is truly compelling. Generally speaking, you should not overload a varargs method, or it will be difficult for programmers to figure out which overloading gets called.
                     </p>
@@ -807,7 +807,7 @@
             <hr>
 
             <footer>
-                <p>[*] 資料轉貼自 Oracle 的《<a href='http://docs.oracle.com/javase/7/docs/technotes/guides/language/enhancements.html' target='_blank'>Java Programming Language Enhancements</a>》文件。</p>
+                <p>[*] 資料轉貼自 Oracle 的《<a href='https://docs.oracle.com/javase/7/docs/technotes/guides/language/enhancements.html' target='_blank'>Java Programming Language Enhancements</a>》文件。</p>
             </footer>
 
         </article>

@@ -58,7 +58,7 @@
             function f(x){
                 document.querySelector('article section h2').innerHTML=a[x][0]
                 document.querySelector('audio').src=a[x][1]
-                document.querySelector('article section p').innerHTML='<br>'+a[x][2]+'<br><br>曲目：'+a[x][3]+'<br>曲名：'+a[x][4]+'<br>編曲：'+'<a href=\'http://www.audiodraft.com/user/profile.php?id='+a[x][6]+'\' target=\'blank\'>'+a[x][5]+'</a>'
+                document.querySelector('article section p').innerHTML='<br>'+a[x][2]+'<br><br>曲目：'+a[x][3]+'<br>曲名：'+a[x][4]+'<br>編曲：'+'<a href=\'https://www.audiodraft.com/user/profile.php?id='+a[x][6]+'\' target=\'blank\'>'+a[x][5]+'</a>'
             }
             addEventListener('load', f([new Date().getDay()]))
         </script>
