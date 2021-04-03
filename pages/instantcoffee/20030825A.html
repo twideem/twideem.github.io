@@ -26,7 +26,7 @@
                 <h2>java.net.URL</h2>
                 <hr>
                 <section>
-                    <h3>https://twideem.github.io/readme.md</h3>
+                    <h3>http://twideem.github.io/readme.md</h3>
                     <p>
                         # twideem.github.io
                     </p>
@@ -46,7 +46,7 @@
                                 public static void main(String[] args){
 
                                     try {
-                                        URLConnection url_connection = new URL("https://twideem.github.io/readme.md").openConnection();
+                                        URLConnection url_connection = new URL("http://twideem.github.io/readme.md").openConnection();
                                         url_connection.connect();
                                         BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(url_connection.getInputStream()));
                                         System.out.println(buffered_reader.readLine());

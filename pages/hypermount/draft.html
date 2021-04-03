@@ -1019,7 +1019,7 @@
                     <p>
                         This is usually seen in the form of prepended underscores and characters. Hungarian notation is the worst example of this, where you attach extra characters that indicate data type, use, location, etc., as if you were writing assembly language and the compiler provided no extra assistance at all. These notations are confusing, difficult to read, and unpleasant to enforce and maintain. Let classes and packages do the name scoping for you. If you feel that you must decorate your names to prevent confusion, your code is probably too confusing anyway and should be simplified.<br>
                         <br>
-                        出自 Bruce Eckel 所著《<a href='https://www.mindviewinc.com/Books/downloads.html' target='_blank'>Thinking in Java, 3rd Edition</a>》的「Appendix B: Java Programming Guidelines」，可見大家有多麼討厭刻意在變數名稱加上有的沒的，讓程式碼讀起來很不順暢。<br>
+                        出自 Bruce Eckel 所著《<a href='http://www.mindviewinc.com/Books/downloads.html' target='_blank'>Thinking in Java, 3rd Edition</a>》的「Appendix B: Java Programming Guidelines」，可見大家有多麼討厭刻意在變數名稱加上有的沒的，讓程式碼讀起來很不順暢。<br>
                         <br>
                         雖然我也在 Java 省略 this 過，也在 JavaScript 改用可以拿封閉參數當作 private field 的「建構函式」來取代只能公開鍵值對的「原型物件」，但不知不覺我發現後來自己還是會偏好這麼做……
                     </p>
@@ -1704,11 +1704,11 @@
                 <section>
                     <h3>解決辦法</h3>
                     <p>
-                        1. 本地端的網頁無法使用 localStorage 保存資料，必須放在伺服端。例如網頁改放在 https://127.0.0.1 來鏈結就能保存資料，直接在桌面或資料夾開啟網頁無法保存資料。<br>
+                        1. 本地端的網頁無法使用 localStorage 保存資料，必須放在伺服端。例如網頁改放在 http://127.0.0.1 來鏈結就能保存資料，直接在桌面或資料夾開啟網頁無法保存資料。<br>
                         <br>
                         <samp>
                             這樣無法保存資料：file:///D:/mywebpage.html<br>
-                            這樣可以保存資料：https://127.0.0.1/mywebpage.html<br>
+                            這樣可以保存資料：http://127.0.0.1/mywebpage.html<br>
                         </samp>
                         <br>
                         但這樣就不叫本地端應用程式了！網頁只能放在架設的伺服器裡面，而不是隨便放都能點來用。<br>

@@ -83,7 +83,7 @@
                                 C:\Users\User&gt;CD Desktop<br>
                                 <br>
                                 C:\Users\User\Desktop&gt;python -m http.server --bind 0.0.0.0 80 --cgi<br>
-                                Serving HTTP on 0.0.0.0 port 80 (https://0.0.0.0:80/) ...
+                                Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
                             </output>
                         </p>
                     </section>
@@ -169,7 +169,7 @@
                         <textarea class='brush:py'>
                             from urllib.parse import urlparse
 
-                            parser = urlparse('https://serv.loc/chap/sect.htm?p=123#article')
+                            parser = urlparse('http://serv.loc/chap/sect.htm?p=123#article')
 
                             print(parser)
                             print(parser.query)
@@ -326,7 +326,7 @@
                     <p>
                         根據服務供應商對資料傳輸安全的規定，各有不同做法，但大致上有 SMTP、TLS、SSL 三種。<br>
                         <br>
-                        底下示範的是 Gmail，必須在「<a href='https://myaccount.google.com/security#connectedapps' target='_blank'>具有帳戶存取權的應用程式</a>」開啟「允許安全性較低的應用程式」，才能透過 Python 用 Gmail 寄發電子郵件。
+                        底下示範的是 Gmail，必須在「<a href='http://myaccount.google.com/security#connectedapps' target='_blank'>具有帳戶存取權的應用程式</a>」開啟「允許安全性較低的應用程式」，才能透過 Python 用 Gmail 寄發電子郵件。
                     </p>
                     <section>
                         <h4>SMTP</h4>
@@ -465,7 +465,7 @@
                         import webbrowser
 
                         # 呼叫網頁瀏覽器開啟網站
-                        webbrowser.open('https://www.python.org')
+                        webbrowser.open('http://www.python.org')
                     </textarea>
                 </p>
                 <figure>
@@ -484,7 +484,7 @@
                         Python 程式可以直接透過網址請求資料，讓你不用透過網頁瀏覽器，也能取得網頁內容。
                     </p>
                     <section>
-                        <h4>https://127.0.0.1/homepage.html</h4>
+                        <h4>http://127.0.0.1/homepage.html</h4>
                         <p>
                             <textarea class='brush:html'>
                                 &lt;html&gt;
@@ -504,7 +504,7 @@
                             <textarea class='brush:py'>
                                 from urllib import request
 
-                                response = request.urlopen('https://127.0.0.1/homepage.html')
+                                response = request.urlopen('http://127.0.0.1/homepage.html')
 
                                 print(response.getheaders()) # 取得 HTTP 的 header 資訊
                                 print(response.read())       # 取得 HTTP 的 content 內容
@@ -526,7 +526,7 @@
                             <textarea class='brush:py'>
                                 from urllib import request
 
-                                response = request.urlopen('https://127.0.0.1/homepage.html')
+                                response = request.urlopen('http://127.0.0.1/homepage.html')
 
                                 print(response.getheader('Content-type')) # 只取出指定 header 訊息
                                 print(response.read().decode('utf-8'))    # 將 content 轉為 UTF-8 字串
@@ -558,7 +558,7 @@
 
                             # 向 localhost 請求執行 getString('ABC', 123)
                             soap = '''&lt;?xml version="1.0" encoding="utf-8"?&gt;
-                            &lt;soap:Envelope xmlns:soap="https://www.w3.org/2003/05/soap-envelope"&gt;
+                            &lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"&gt;
                                 &lt;soap:Body&gt;
                                     &lt;getString&gt;
                                         &lt;x&gt;ABC&lt;/x&gt;
@@ -567,23 +567,23 @@
                                 &lt;/soap:Body&gt;
                             &lt;/soap:Envelope&gt;
                             '''
-                            result = request.Request('https://localhost', data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
+                            result = request.Request('http://localhost', data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
                             response = request.urlopen(result)
                             print(response.read().decode('utf-8'))
                         </textarea>
                         <br>
                         得到的資料當然也是 SOAP，也就是一份 XML，可以自己再用 ElementTree 剖析出資料，在沒能安裝第三方模組時應急一下。<br>
                         <br>
-                        再看一個例子，這次向 https://fhy.wra.gov.tw 線上請求調出「氣象局雨量站基本資料」，然後剖析出所有雨量站的縣市：<br>
+                        再看一個例子，這次向 http://fhy.wra.gov.tw 線上請求調出「氣象局雨量站基本資料」，然後剖析出所有雨量站的縣市：<br>
                         <br>
                         <textarea class='brush:py'>
                             # 請求調出氣象局雨量站基本資料
                             from urllib import request
-                            url = 'https://fhy.wra.gov.tw/dmchy/wra/webciacomponent/webservice/wraformalws.asmx?op=wsCwbRainStations'
+                            url = 'http://fhy.wra.gov.tw/dmchy/wra/webciacomponent/webservice/wraformalws.asmx?op=wsCwbRainStations'
                             soap = '''&lt;?xml version="1.0" encoding="utf-8"?&gt;
-                            &lt;soap12:Envelope xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="https://www.w3.org/2001/XMLSchema" xmlns:soap12="https://www.w3.org/2003/05/soap-envelope"&gt;
+                            &lt;soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"&gt;
                                 &lt;soap12:Body&gt;
-                                    &lt;wsCwbRainStations xmlns="https://tempuri.org/" /&gt;
+                                    &lt;wsCwbRainStations xmlns="http://tempuri.org/" /&gt;
                                 &lt;/soap12:Body&gt;
                             &lt;/soap12:Envelope&gt;
                             '''
@@ -612,7 +612,7 @@
                             from urllib import request
 
                             soap = '&lt;?xml version="1.0"?&gt;&lt;methodCall&gt;&lt;methodName&gt;hello&lt;/methodName&gt;&lt;params&gt;&lt;param&gt;&lt;value&gt;&lt;string&gt;twideem&lt;/string&gt;&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;&lt;/methodCall&gt;'
-                            service = request.Request('https://localhost', data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
+                            service = request.Request('http://localhost', data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
                             response = request.urlopen(service)
                             print(response.read().decode('utf-8'))
                         </textarea>
@@ -650,7 +650,7 @@
                         <textarea class='brush:py'>
                             import xmlrpc.client
 
-                            server = xmlrpc.client.ServerProxy('https://localhost')
+                            server = xmlrpc.client.ServerProxy('http://localhost')
                             print(server.procedure(123, 456))
                         </textarea>
                         <br>

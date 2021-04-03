@@ -319,7 +319,7 @@
             <hr id='xpath'>
 
             <section>
-                <h2>XPath（<a href='https://msdn.microsoft.com/zh-tw/library/bb399445(v=vs.120)' target='_blank'>本文轉貼自 MSDN</a>）</h2>
+                <h2>XPath（<a href='http://msdn.microsoft.com/zh-tw/library/bb399445(v=vs.120)' target='_blank'>本文轉貼自 MSDN</a>）</h2>
                 <p>
                     <code>./author</code><br>
                     目前內容中的所有 &lt;author&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
@@ -544,7 +544,7 @@
                         <textarea class='brush:xml'>
                             &lt;?xml version='1.0'?&gt;
                             &lt;xsl:stylesheet version="1.0"
-                              xmlns:xsl="https://www.w3.org/1999/XSL/Transform"&gt;
+                              xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
 
                             &lt;xsl:template match="root"&gt;
                               &lt;xsl:for-each select="x | y/x"&gt;
@@ -583,7 +583,7 @@
                 <section>
                     <h3>準備</h3>
                     <p>
-                        .NET Framework 並未內建 SQLite 功能，請至 <a href='https://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki' target='_blank'>System.Data.SQLite: Home</a> 下載。<br>
+                        .NET Framework 並未內建 SQLite 功能，請至 <a href='http://system.data.sqlite.org/index.html/doc/trunk/www/index.wiki' target='_blank'>System.Data.SQLite: Home</a> 下載。<br>
                         <br>
                         你可以下載 Setups for 64-bit Windows (.NET Framework 4.6)，用安裝的方式讓 .NET Framework 內建 SQLite！<br>
                         <br>
@@ -750,7 +750,7 @@
                         }
                     </textarea>
                     <br>
-                    不過新版 Windows 10 已經沒有 Windows Media Player，改由通用視窗平台（UWP）的 Groove 音樂取代，所以不妨調用外部程式，找個命令列的工具來播放音樂。例如可以下載 <a href='https://lawlessguy.wordpress.com/2015/06/27/update-to-a-command-line-mp3-player-for-windows/' target='_blank'>cmdmp3new.zip</a>，解壓後將 <var>cmdmp3win.exe</var> 放在程式碼專案中，就能像這樣播放 MP3 音樂：<br>
+                    不過新版 Windows 10 已經沒有 Windows Media Player，改由通用視窗平台（UWP）的 Groove 音樂取代，所以不妨調用外部程式，找個命令列的工具來播放音樂。例如可以下載 <a href='http://lawlessguy.wordpress.com/2015/06/27/update-to-a-command-line-mp3-player-for-windows/' target='_blank'>cmdmp3new.zip</a>，解壓後將 <var>cmdmp3win.exe</var> 放在程式碼專案中，就能像這樣播放 MP3 音樂：<br>
                     <br>
                     <textarea class='brush:cs'>
                         using System.Diagnostics;
@@ -792,7 +792,7 @@
                     <h3>Window.xaml</h3>
                     <p>
                         <textarea class='brush:xml'>
-                            &lt;Window xmlns="https://schemas.microsoft.com/winfx/2006/xaml/presentation" Title="Main" Width="320" Height="240"&gt;
+                            &lt;Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Title="Main" Width="320" Height="240"&gt;
                                 &lt;Canvas&gt;
                                     &lt;Button Name="Button1" Width="300" Height="30" Margin="2,70"&gt;哈囉&lt;/Button&gt;
                                     &lt;Button Name="Button2" Width="300" Height="30" Margin="2,103"&gt;再見&lt;/Button&gt;
@@ -958,7 +958,7 @@
 
                                 WebClient webclient = new WebClient ();
 
-                                byte[] data = webclient.DownloadData("https://twideem.github.io/readme.md");
+                                byte[] data = webclient.DownloadData("http://twideem.github.io/readme.md");
                                 string encoding = Encoding.UTF8.GetString(data);
                                 Console.Write(encoding);
 

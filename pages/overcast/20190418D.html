@@ -34,7 +34,7 @@
             <section>
                 <h2>準備</h2>
                 <p>
-                    到 <a href='https://www.apachelounge.com' target='_blank'>Apache Lounge</a> 下載支援原生 CGI 的 Apache HTTP Server。<br>
+                    到 <a href='http://www.apachelounge.com' target='_blank'>Apache Lounge</a> 下載支援原生 CGI 的 Apache HTTP Server。<br>
                     <br>
                     修改 conf 資料夾裡面的 httpd.conf。將 Define SRVROOT 的 "c:/Apache24" 改為你存放 Apache 的位置。在 Options Indexes FollowSymLinks 後面隔個空白輸入 ExecCGI。將 #AddHandler cgi-script .cgi 前面的 # 刪掉。將 #ServerName www.example.com:80 改為 ServerName localhost:80。<br>
                     <br>
@@ -42,7 +42,7 @@
                     <br>
                     執行 bin 資料夾裡面的 httpd.exe。<br>
                     <br>
-                    開啟網頁瀏覽器，輸入網址 https://127.0.0.1/cgi-bin/test.cgi，即可跑 C# 編譯出來的可執行檔。
+                    開啟網頁瀏覽器，輸入網址 http://127.0.0.1/cgi-bin/test.cgi，即可跑 C# 編譯出來的可執行檔。
                 </p>
             </section>
 
@@ -158,7 +158,7 @@
 
                             static void Main(){
 
-                                //https://127.0.0.1/cgi-bin/test.cgi?name=twideem&amp;number=58
+                                //http://127.0.0.1/cgi-bin/test.cgi?name=twideem&amp;number=58
 
                                 QueryString querystring = new QueryString();
                                 Console.WriteLine();
@@ -275,7 +275,7 @@
 
                             static void Main(){
 
-                                Console.WriteLine("Location: https://127.0.0.1/redirect.html");
+                                Console.WriteLine("Location: http://127.0.0.1/redirect.html");
                                 Console.WriteLine();
 
                             }
@@ -295,7 +295,7 @@
                                 Console.WriteLine();
                                 Console.WriteLine("&lt;html&gt;");
                                 Console.WriteLine(" &nbsp;&lt;head&gt;");
-                                Console.WriteLine(" &nbsp; &nbsp;&lt;meta http-equiv='refresh' content='3;url=https://127.0.0.1/index.html'&gt;");
+                                Console.WriteLine(" &nbsp; &nbsp;&lt;meta http-equiv='refresh' content='3;url=http://127.0.0.1/index.html'&gt;");
                                 Console.WriteLine(" &nbsp;&lt;/head&gt;");
                                 Console.WriteLine(" &nbsp;&lt;body&gt;");
                                 Console.WriteLine(" &nbsp; &nbsp;&lt;p&gt;三秒後回到首頁…&lt;/p&gt;");

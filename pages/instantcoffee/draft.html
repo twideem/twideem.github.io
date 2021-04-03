@@ -742,14 +742,125 @@
                     <h3>已過時文章</h3>
                     <p>
                         ．<a href='20041207A.html'>J2SE Development Kit 安裝指南</a><br>
-                        ．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
-                        ．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
+                        ．<a href='19960429A.html'>完整安裝完 JDK，總共有三套 java.exe！</a><br>
                         ．<a href='20120828A.html'>再見了，Java Applet～</a><br>
+                        ．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
+                        ．用 <kbd>netbeans.exe --jdkhome "%JAVA_HOME%"</kbd> 解決 6.8 版找不到 Java 的問題<br>
+                        ．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
                         ．<a href='20071117A.html'>JSP 舊文</a><br>
+                        ．<a href='20090212A.html'>JavaFX Application 圖形化介面程式設計入門</a><br>
+                        ．<a href='20111010A.html'>FXML 圖形化介面程式設計進階</a><br>
+                        ．<a href='20090602A.html'>JavaFX CSS 圖形化介面樣式管理</a><br>
+                        ．<a id='20100422A.html'>JavaFX Text 文字、JavaFX Image 圖像、JavaFX Control 控制項</a><br>
+                        ．<a href='20100821A.html'>JavaFX Paint 塗色、JavaFX Effect 靜態特效、JavaFX Animation 動態效果</a><br>
+                        ．<a href='20120427A.html'>JavaFX Media 影音播放</a><br>
+                        ．<a id='20120814A.html'>JavaFX Canvas</a><br>
+                        ．<a id='20140318A.html'>JavaFX 3D</a><br>
                         ．<a href='20080120A.html'>美化 jEdit 操作環境</a><br>
                         ．<a href='20080127A.html'>強化 jEdit 操作功能</a><br>
                         ．<a href='20040622A.html'>在 PChome 個人新聞台發表過的舊文</a>
                     </p>
+                    <section>
+                        <h4>jdk-6u45-windows-x64.exe 免安裝法</h4>
+                        <p>
+                            開啟壓縮檔→.rsrc→1033→JAVA_CAB10→111→tools.zip<br>
+                            <br>
+                            然後用 uppack200 拆 jre 資料夾裡面的 rt.pack，以及 lib 資料夾裡面的 tools.pack。<br>
+                            <br>
+                            bin\unpack200.exe -r -v -l "" lib\tools.pack lib\tools.jar<br>
+                            bin\unpack200.exe -r -v -l "" jre\lib\rt.pack jre\lib\rt.jar<br>
+                            <br>
+                            基本上這樣就能編譯，有問題再拆其它 *.pack。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>JDK 無法重新安裝</h4>
+                        <p>
+                            不正常移除 JDK 後，想重新安裝時，安裝程式表示已安裝過，詢問使用者是否重新安裝，確定後卻無法順利完成移除已安裝程式的動作，導致無法重新安裝。<br>
+                            <br>
+                            解決辦法：<br>
+                            <br>
+                            執行 regedit，依序進入……<br>
+                            <br>
+                            <var>HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Installer\Products</var><br>
+                            <br>
+                            底下有許多機碼，一個個點看看，找出 Product Name 為 Java SE Development Kit 開頭的資料，然後將整個機碼刪除。<br>
+                            <br>
+                            如此就能重新安裝 JDK，而且不用重新開機。<br>
+                            <br>
+                            不行的話，只好一個一個搜尋 Java 來刪除。注意！不要刪到 Microsoft 的 Java VM。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>完整安裝完 JDK，總共有三套 java.exe！</h4>
+                        <p>
+                            在 Windows 完整安裝好 JDK，你會發現總共有三個 java.exe，例如：<br>
+                            <br>
+                            <samp>
+                                C:\Program Files\Java\jdk1.6.0_45\bin\java.exe<br>
+                                C:\Program Files\Java\jre6\bin\java.exe<br>
+                                C:\Program Files\Java\jdk1.6.0_45\jre\bin\java.exe
+                            </samp>
+                        </p>
+                        <section>
+                            <h5>C:\Program Files\Java\<i>jdk1.6.0_45</i>\bin\java.exe</h5>
+                            <p>
+                                雖然這個 java.exe 跟 javac.exe、jar.exe、appletviewer.exe…等各式開發工具混在一起，但這才是 JDK 真正內建來執行 Java 應用程式的環境。
+                            </p>
+                        </section>
+                        <section>
+                            <h5>C:\Program Files\Java\jdk1.6.0_45\<i>jre</i>\bin\java.exe</h5>
+                            <p>
+                                JDK 有些東西是用 Java 寫成的，為了避免使用者沒有安裝 JRE 而無法執行，因此內建一套 JRE，確保 JDK 的工具能執行。<br>
+                                <br>
+                                換句話說，這並不是用來讓開發者當作測試 Java 程式用的環境，而是 JDK 給自己用的。但很容易誤會這才是 Java SDK 內建的 JRE 執行環境，以為我們應該用它來測試 Java 程式。<br>
+                                <br>
+                                當然，JDK 裡面的 jre 和安裝 JDK 時接著安裝的 JRE，內容並沒有差別，是一樣的東西。所以往往會讓人覺得不需安裝 JRE，以為 JDK 裡面本來就有 jre，再裝 JRE 只是多了重複的東西。
+                            </p>
+                        </section>
+                        <section>
+                            <h5>C:\Program Files\Java\<i>jre6</i>\bin\java.exe</h5>
+                            <p>
+                                為何 JDK 的 bin 與 jre\bin 都具備執行 Java 應用程式的條件了，卻還要安裝 JRE？<br>
+                                <br>
+                                只安裝 JDK 的話，Windows 並不會自動以 <var>C:\Program Files\Java\jdk1.6.0_45\bin\java.exe</var> 或 <var>C:\Program Files\Java\jdk1.6.0_45\bin\java.exe</var> 來執行 Java 應用程式，畢竟很少人會希望 SDK 同時也是執行環境<ins>[1]</ins>。<br>
+                                <br>
+                                而安裝 JRE 時，會幫你配置好 Java 檔案的關聯性，讓 Windows 能自動透過 <var>C:\Program Files\Java\jre6\bin\java.exe</var> 執行 *.jar 檔、在瀏覽器跑 Applet、在命令提示字元呼叫 java.exe、用 Java Web Start 跑應用程式…<br>
+                                <br>
+                                所以另外裝一個 Java 執行環境，對使用者與開發者雙方都是最省事、有保障的做法<ins>[2]</ins>，絕對不是裝了多餘的東西<ins>[3]</ins>！
+                            </p>
+                        </section>
+                        <footer>
+                            <p>
+                                [1] 因為 SDK 裡面通常會另外放入許多第三方套件，以滿足開發者的需求。如果這種 SDK 拿來當 Runtime 環境，測試程式時你覺得很正常，發佈出去別人常常無法執行，因為他的 Runtime 跟你不一樣。<br>
+                                [2] 前提是你要注意是否以 JRE 測試你的應用軟體，其實開發者幾乎都是以 JDK 的 java.exe 在測試程式！<br>
+                                [3] 當然，如果你安裝多個版本的 JDK，那只留最新或最舊的 JRE 就好，可以 Cancel 掉 JDK 要求安裝 JRE 的請求，其它 JRE 這時確實是多餘的～
+                            </p>
+                        </footer>
+                    </section>
+                    <section>
+                        <h4>關於 OpenJDK</h4>
+                        <p>
+                            <strong>本文內容已過時，僅供參考。OpenJDK 的生態不再受 Oracle 主宰後，提供的服務、以及開放的情況，都越來越好了！</strong><br>
+                            <br>
+                            OpenJDK 是 Sun Microsystems 將 Java 原始碼「部分開放」的專案，以 GPL 釋出。然而 Sun Microsystems 保留些許涉及專利的項目，並未完全開放 Java。<br>
+                            <br>
+                            OpenJDK 的心態是「原始碼開放出來給專業人士得以研究 Java」，而不是「讓支持開放原始碼的人有開放的 Java 用」，因此並不積極針對不同作業系統編譯好執行檔。<br>
+                            <br>
+                            到 2015 年為止，只 Linux<ins>[1]</ins> 隨時編譯好執行檔讓使用者安裝 OpenJDK，再搭配 IcedTea 做為 JRE，獲得真正開放的 Java 環境。2016 年起，Android 將改用 OpenJDK 取代 Oracle 的 Java，雖然目的是規避「Oracle 告 Google 侵犯 Java API 版權」的官司，但有望進一步活化 OpenJDK 的開放生態。<br>
+                            <br>
+                            官網沒有準備可安裝於 Windows 的 OpenJDK<ins>[2]</ins>，即使找到第三方編譯好的 OpenJDK，也只是個 JDK，沒有 JRE。所以要在 Windows 推廣使用 OpenJDK 貫徹 Open 精神、打造開放的 Java 環境很困難；OpenJDK 官網甚至建議 Windows 使用者乖乖到 Oracle 下載 JRE 或 JDK，某種程度來看 OpenJDK 像是 Oracle Java 的活廣告。<br>
+                            <br>
+                            版本方面，除了 OpenJDK 6 使用 JDK 7 的原始碼，然後精簡成符合 Java SE 6 的規格外<ins>[3]</ins>，其它版本皆使用相同的原始碼。例如 OpenJDK 7 使用與 JDK 7 相同的原始碼、OpenJDK 8 使用與 JDK 8 相同的原始碼、OpenJDK 9 使用與 JDK 9 相同的原始碼…
+                        </p>
+                        <footer>
+                            <p>
+                                [1] 雖然泛稱 Linux，但其實只提供 dpkg 和 rpm 的安裝包，因為大多數人使用的 Linux 發行版，都是 Debian 和 Fedora 的分支。<br>
+                                [2] OpenJDK 官網現在有提供 Windows 的可執行檔了！<br>
+                                [3] 所以 OpenJDK 6 其實是 OpenJDK 7 的一個分支，而不是 JDK 6 的 Open 版。
+                            </p>
+                        </footer>
+                    </section>
                 </section>
                 <hr>
                 <section>
@@ -765,6 +876,82 @@
                         ．Visual Studio.NET 不再支援 J#。<br>
                         ．XML 不只是資料結構，還可以是操作介面。
                     </p>
+                    <section>
+                        <h4>Java 練習帳</h4>
+                        <p>
+                            <textarea class='brush:java'>
+                                import java.nio.file.*;
+                                import java.util.*;
+                                import java.io.*;
+
+                                public class Main{
+
+                                    public static void main(String[] args){
+
+                                        // 亂數
+                                        System.out.println(Math.floor(Math.random()*10));
+                                        System.out.println(Math.ceil(Math.random()*10));
+                                        System.out.println(Math.round(Math.random()*10));
+
+                                        // 泡沫排序
+                                        int[] array = {8,5,3,9};
+
+                                        for(int m=0; m&lt;array.length-1; m++){
+                                            for(int n=0; n&lt;array.length-1-m; n++){
+                                                if(array[n]&gt;array[n+1]){
+                                                    int e = array[n];
+                                                    array[n] = array[n+1];
+                                                    array[n+1] = e;
+                                                }
+                                            }
+                                        }
+
+                                        for(int n : array) System.out.print(n);
+
+                                        // 純文字讀寫
+                                        try{
+                                            FileWriter fw = new FileWriter("text.txt");
+                                            fw.write("ABC");
+                                            fw.close();
+                                            BufferedReader fr = new BufferedReader(new FileReader("text.txt"));
+                                            System.out.print(fr.readLine());
+                                        }
+                                        catch(Exception exception){
+                                            exception.printStackTrace();
+                                        }
+
+                                        // NIO2 純文字讀寫
+                                        try{
+                                            Files.write(Paths.get("text.txt"), Arrays.asList("AAA","BBB","CCC"));
+                                            List&lt;String&gt; lines = Files.readAllLines(Paths.get("text.txt"));
+                                            for(String line:lines) System.out.print(line);
+                                        }
+                                        catch(Exception exception){
+                                            exception.printStackTrace();
+                                        }
+
+                                    }
+
+                                }
+                             </textarea>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>暫且不要導入模塊化</h4>
+                        <p>
+                            Java 9 最大的亮點，就是新的模組化方案！<br>
+                            <br>
+                            舊的模組化有許多弊端，像是以類別路徑為基礎的封裝做法，新舊模組只會彼此覆蓋，互不相容，新的模組化方案有更多細節的微調，能解決長久以來的積弊。<br>
+                            <br>
+                            然而，Java 9 的模塊化功能，是屬於平台上的特性，而不是語法上的特性，它對程式設計沒有多大幫助，不要想說這是新的特性就急著導入它，應該順著未來趨勢的發展，被動地慢慢導入它。<br>
+                            <br>
+                            Java 9 雖然導入新的模組化方案，但連 Java 平台本身都還未通盤地以模塊化架構規範套件，可說是在準備階段而已。因此目前還不需要去關注模塊化的議題，等到 Java 平台自己也理出頭緒規範好模塊後，我們再「被迫」照規矩導入即可。這感覺就像你不見得非要把 Java 程式封裝成 JAR 來用，但等大家都用 JAR 釋出套件時，我們就必須了解怎麼將 JAR 套件導入到程式裡面。<br>
+                            <br>
+                            我建議在 Java 9 的階段，暫且不要去管模塊化這功能，搶鮮導入模塊化不會帶來助益，反而會有徒增困擾的風險。等 Java 平台的模塊化架構好了，我們再來了解怎樣切割，讓程式依賴更小的環境便能執行。目前 Java 9 可以切割的，就 Java SE、JDK、JavaFX 這幾塊，雖然對客戶端應用程式的發布還是很有用，但還是不小塊，吸引力不大。<br>
+                            <br>
+                            至於為何 Java 9 給了鋸子，自己卻沒鋸好東西來，只是示範這鋸子真的能鋸東西而已？我想，或許是為了在 Java 10 或 Java 11 有新的資料型態架構後，再全新模塊化 Java 平台吧？純屬臆測就是了～
+                        </p>
+                    </section>
                     <section>
                         <h4>1</h4>
                         <p>

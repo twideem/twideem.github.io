@@ -25,13 +25,59 @@
                     <br>
                     不過，到了 Java SE 8，Oracle 重寫了新的 JavaScript 引擎：Nashorn，有更好的性能，且更符合 ECMAScript 5 標準，於是取代了 Rhino。<br>
                     <br>
-                    可是，Nashorn 的 ECMAScript 6 標準化步調比 Rhino 緩慢，功能也比較不穩定，例如寫 Swing 要重繪 JFrame 否則元件不會顯示出來，視窗關閉鈕按了沒反應，setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) 形同虛設。而所謂性能好，坦白說其實一樣差，拿這個來比只是在比爛而已<ins>[1]</ins>！<br>
+                    可是，Nashorn 的 ECMAScript 6 標準化步調比 Rhino 緩慢，功能也比較不穩定，例如寫 Swing 要重繪 JFrame 否則元件不會顯示出來，視窗關閉鈕按了沒反應，setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) 形同虛設。而所謂性能好，坦白說其實一樣差，拿這個來比只是在比爛而已！<br>
                     <br>
                     最後，ECMAScript 釋出新版的步調太快，Oracle 覺得維護 Nashorn 是 <del>虧本</del> 的工作，不打算繼續這項專案。於是 Java 11 將 Nashorn 引擎列為 deprecated，在 Java 15 正式汰除，我們還是得回頭下載新版的 Rhino 來用…幸好這才是原本真正該走的路～
                 </p>
             </header>
 
             <hr>
+
+            <section>
+                <h2>目錄</h2>
+                <hr>
+                <section>
+                    <h3>執行</h3>
+                    <p>
+                        ．<a href='#anchor1'>在 Java 寫 JavaScript 程式</a><br>
+                        ．<a href='#anchor2'>從 Java 傳資料給 JavaScript 程式</a><br>
+                        ．<a href='#anchor3'>在 Java 載入 *.js 檔案</a><br>
+                        ．<a href='#anchor4'>直接用 JDK 執行 *.js 檔</a><br>
+                        ．<a href='#anchor5'>Interactive mode</a><br>
+                        ．<a href='#anchor6'>使用新版 Rhino</a>（推薦！功能更穩定，而且不只直譯，還能編譯成 *.class。）<br>
+                        ．<a href='#anchor7'>如何取得 Java 內建 JavaScript 引擎的版本</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>應用</h3>
+                    <p>
+                        ．<a href='#anchor8'>在 JavaScript 使用 Java API</a><br>
+                        ．<a href='#anchor9'>調用 JNI 的外部 API</a><br>
+                        ．<a href='#anchor10'>Swing 程式設計</a><br>
+                        ．<a href='#anchor11'>在 JavaScript 引用 Java 的資料型態</a><br>
+                        ．<a href='#anchor12'>覆載物件方法與實作介面功能</a><br>
+                        ．<a href='#anchor13'>多執行緒</a><br>
+                        ．<a href='#anchor14'>在 *.js 中載入其它 *.js</a><br>
+                        ．<a href='#anchor15'>最頂層物件</a><br>
+                        ．<a href='#anchor16'>列出 JavaScript 物件的屬性和方法</a><br>
+                        ．<a href='#anchor17'>Rhino 內建屬性和函式</a><br>
+                        ．<a href='#anchor18'>其它 Rhino 支援的非標準語法</a>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>其他</h3>
+                    <p>
+                        ．<a href='#anchor19'>附錄</a><br>
+                        ．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/' target='_blank'>JavaScript reference</a><br>
+                        ．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/' target='_blank'>Standard built-in objects</a><br>
+                        ．<a href='http://ringojs.org' target='_blank'>RingoJS</a>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='anchor1'>
 
             <section>
                 <h2>在 Java 寫 JavaScript 程式</h2>
@@ -59,12 +105,14 @@
                     </textarea>
                     <br>
                     <output>
-                        Hello, JavaScript!
+                        Hello, JavaScript!<br>
                     </output>
+                    <br>
+                    在 <a href='http://mozilla.github.io/rhino/javadoc/org/mozilla/javascript/package-summary.html' target='_blank'>org.mozilla.javascript</a> 套件底下，有各式類別可以組成 JavaScript，進行更細部的設計。
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor2'>
 
             <section>
                 <h2>從 Java 傳資料給 JavaScript 程式</h2>
@@ -137,7 +185,7 @@
                 </section>
             </section>
 
-            <hr>
+            <hr id='anchor3'>
 
             <section>
                 <h2>在 Java 載入 *.js 檔案</h2>
@@ -184,7 +232,7 @@
                 </section>
             </section>
 
-            <hr>
+            <hr id='anchor4'>
 
             <section>
                 <h2>直接用 JDK 執行 *.js 檔</h2>
@@ -212,18 +260,7 @@
                 </section>
             </section>
 
-            <!--hr>
-
-            <section>
-                <h2>將 *.js 編譯成 *.class</h2>
-                <p>
-                    <output>
-                        java org.mozilla.javascript.tools.jsc.Main *.js
-                    </output>
-                </p>
-            </section-->
-
-            <hr>
+            <hr id='anchor5'>
 
             <section>
                 <h2>Interactive mode</h2>
@@ -237,26 +274,26 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor6'>
 
             <section>
-                <h2>使用新版 Rhino 直譯 *.js 檔</h2>
+                <h2>使用新版 Rhino</h2>
                 <p>
                     雖然 Java 不再內建 JavaScript 引擎，但 Mozilla 一直都在維護 Rhino 專案，放在 GitHub 開放下載：<br>
                     <br>
-                    <a href='https://github.com/mozilla/rhino/releases' target='_blank'>https://github.com/mozilla/rhino/releases</a><br>
+                    <a href='http://github.com/mozilla/rhino/releases' target='_blank'>http://github.com/mozilla/rhino/releases</a><br>
                     <br>
                     1.7.8 版開始，必須 Java SE 8 以上才能使用，所以 Java SE 6 最多只能下載 1.7.7.2 版來用。
                 </p>
                 <hr>
                 <section>
-                    <h3>使用新版 Rhino 直譯 *.js 檔</h3>
+                    <h3>直譯 *.js 檔</h3>
                     <p>
                         <output>
                             java -jar rhino-1.7.7.2.jar *.js<br>
                         </output>
                         <br>
-                        用 java.exe 來執行的方式，會比 jrunscript.exe 少很多問題，要 JavaScript 直譯器建議。<br>
+                        用 java.exe 來執行，會比 jrunscript.exe 少很多問題，建議使用！<br>
                         <br>
                         不過，用 -jar 的話，CLASSPATH 就只限於 JAR 檔案包內，這樣 Rhino 的 Packages 物件無法找到其它位置的類別。若需要在 JavaScript 搭配 *.class 跑 Java 程式，應該用 -cp 參數來使用 Rhino 的 JAR，像這樣：<br>
                         <br>
@@ -264,9 +301,34 @@
                             java -cp .;rhino-1.7.7.2.jar org.mozilla.javascript.tools.shell.Main *.js<br>
                         </output>
                         <br>
-                        另外，*.js 原始碼檔案使用不含 BOM 的 UTF-8 編碼的話，在 Windows 會遇到亂碼的問題。這時要下 <var>-encoding UTF-8</var> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino-1.7.7.2.jar，也可以下 <var>-Dfile.encoding=UTF-8</var> 參數下給 java.exe。<br>
+                        另外，*.js 原始碼檔案使用不含 BOM 的 UTF-8 字元編碼的話，在 Windows 會遇到亂碼的問題。這時要下 <var>-encoding UTF-8</var> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino-1.7.7.2.jar，也可以下 <var>-Dfile.encoding=UTF-8</var> 參數下給 java.exe。<br>
                         <br>
-                        由於只需 java.exe 就能直譯 JavaScript 程式，不需用到 javac.exe，因此 JRE + Rhino 的組合可以取代笨重的 JDK！不想用 Java 語言寫程式、也不想用 Kotlin，不妨試試 Rhino！
+                        其他常用的參數如下：
+                    </p>
+                    <table>
+                        <tr><td>-e 檔案</td><td>執行 *.js 檔案。</td></tr>
+                        <tr><td>-f 檔案</td><td>讀取純文字文件，並嘗試執行裡面的內容，類似 eval(String)。</td></tr>
+                        <tr><td>-opt -1 到 9</td><td>設定編譯的最佳化程度，0 表示關閉最佳化，編譯速度最快，程式品質最差。依次從 1 到 9 提升最佳化程度。還可設定為 -1 表示直譯就好，不用編譯。</td></tr>
+                        <tr><td>-strict</td><td>開啟 ECMAScript 5 的嚴格模式。</td></tr>
+                        <tr><td>-version 版號</td><td>指定 SpiderMonkey 版號，有 100、110、120、130、140、150、160、170、180、200 可設定。<br>130 對應 ECMAScript 2，150 對應 ECMAScript 3，180 對應 ECMAScript 5，200 對應 ECMAScript 6。<br>由於 Rhino 的 ECMAScript 6 實作進度未達標，所以預設值並非最高的 200。以撰稿時最新的 Rhino 1.7.13 來講，還不支援預設參數、不定參數、字串插值。但像是 for.. of..、function*、yield、Set、Map 有在實作了，只是還沒完工，要使用再設為 200。</td></tr>
+                        <tr><td>-help</td><td>查閱更多參數。</td></tr>
+                    </table>
+                </section>
+                <hr>
+                <section>
+                    <h3>編譯 *.js 為 *.class</h3>
+                    <p>
+                        <output>
+                            java -jar rhino-1.7.7.2.jar org.mozilla.javascript.tools.jsc.Main *.js<br>
+                        </output>
+                        <br>
+                        雖然 Java SE 6 內建 Rhino 引擎，但並未提供所有功能，只內建 org.mozilla.javascript.internal 而已。所以，要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools 可用。<br>
+                        <br>
+                        編譯出來的 *.class 將是 Rhino 的 NativeFunction 物件，需符合 Scriptable 的條件才能執行，所以只用 java.exe 無法執行，得搭配 Rhino 的 JAR：<br>
+                        <br>
+                        <output>
+                            java -cp .;rhino-1.7.7.2.jar main
+                        </output>
                     </p>
                 </section>
                 <hr>
@@ -284,10 +346,10 @@
                 </section>
             </section>
 
-            <hr>
+            <hr id='anchor7'>
 
             <section>
-                <h2>如何取得 Java 內建 Rhino 的版本</h2>
+                <h2>如何取得 Java 內建 JavaScript 引擎的版本</h2>
                 <p>
                     <output>
                         jrunscript -q
@@ -295,7 +357,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor8'>
 
             <section>
                 <h2>在 JavaScript 使用 Java API</h2>
@@ -323,15 +385,40 @@
                     <br>
                     只想載入某個類別的話，用 <var>importClass()</var>。<br>
                     <br>
-                    不過，透過引擎寫 JavaScript 程式，調用類別通常是直接寫完整名稱，例如：<code>var a = new java.util.ArrayList()</code>，比較符合 ECMAScript 標準，而不是呼叫 Rhino 獨有的 importPackage()。這樣的 JavaScript 比較容易移植，像是從 Java 的 Rhino 轉到 .NET 的 JScript .NET 會比較好修改～<br>
+                    不過，透過引擎寫 JavaScript 程式，調用類別通常是直接寫完整名稱，例如：<code>var a = new java.util.ArrayList()</code>，比較符合 ECMAScript 標準，而不是呼叫 Rhino 獨有的 importPackage()。符合標準的好處是，往後要移植到其它地方執行會比較容易，例如從 Rhino 移植到 JScript .NET。<br>
                     <br>
-                    另外，不像 JScript .NET 沒辦法使用 C# 中設計為泛型的類別，Java 的泛型只是語法糖，不像 C# 是真的有一套泛型機制，所以不支援泛型的 JavaScript 在調用 Java API 中用到泛型的類別，反而沒有相容性問題，就像本來就是 Object 一樣。<br>
+                    另外，不像 JScript .NET 沒辦法使用 C# 中設計為泛型的類別，Java 的泛型只是語法糖，所以不支援泛型的 JavaScript 在調用 Java API 中用到泛型的類別，反而沒有相容性問題，就像本來就是 Object 一樣。<br>
                     <br>
-                    遇到 setXXX() 和 getXXX() 之類的方法，在 Rhino 可以寫成 .xxx，例如 frame.setTitle("Hello!") 可以寫成 frame.title = 'Hello'。
+                    還有，遇到 setXXX() 和 getXXX() 之類的方法，在 Rhino 可以寫成 .xxx，例如 frame.setTitle("Hello!") 可以寫成 frame.title = "Hello"。
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor9'>
+
+            <section>
+                <h2>調用 JNI 的外部 API</h2>
+                <p>
+                    以「<a href='https://www.logitechg.com/zh-tw/innovation/developer-lab.html' target='_blank'>羅技 G 系列開發者實驗室</a>」開放下載的「LED 照明 SDK」為例：<br>
+                    <br>
+                    <textarea class='brush:js'>
+                        importPackage(java.lang)
+                        importPackage(com.logitech.gaming)
+
+                        LogiLED.LogiLedInit()
+                        LogiLED.LogiLedSetLighting(0,0,0)
+                        Thread.sleep(3000)
+                        LogiLED.LogiLedShutdown()
+
+                        //要安裝 Logitech G HUB 且軟體執行中，關閉的話不會有反應。
+                    </textarea>
+                    <br>
+                    <output>
+                        java -cp .;logiled.jar;"%JAVA_HOME%\lib\rhino-1.7.7.2.jar" org.mozilla.javascript.tools.shell.Main -version 200 -encoding UTF-8 main.js
+                    </output>
+                </p>
+            </section>
+
+            <hr id='anchor10'>
 
             <section>
                 <h2>Swing 程式設計</h2>
@@ -375,31 +462,6 @@
                     <figure>
                         <img src='../../figures/instantcoffee/20061211A_01.png' alt='插圖'>
                     </figure>
-                    <!--
-                        frame.addWindowListener(new WindowListener({
-                            windowActivated: function(){
-                                print('windowActivated')
-                            },
-                            windowClosing: function(){
-                                print('windowClosing')
-                            },
-                            windowClosed: function(){
-                                print('windowClosed')
-                            },
-                            windowDeactivated: function(){
-                                print('windowDeactivated')
-                            },
-                            windowDeiconified: function(){
-                                print('windowDeiconified')
-                            },
-                            windowIconified: function(){
-                                print('windowIconified')
-                            },
-                            windowOpened: function(){
-                                print('windowOpened')
-                            }
-                        }))
-                    -->
                 </section>
                 <hr>
                 <section>
@@ -446,33 +508,12 @@
                         <img src='../../figures/instantcoffee/20061211A_03.png' alt='插圖'>
                     </figure>
                 </section>
-                <hr>
-                <section>
-                    <h3>Launcher</h3>
-                    <p>
-                        如果用直譯器執行 *.js 程式檔，那寫出來的 Swing 視窗程式，必然會伴隨一個命令提示字元的視窗，相當礙眼。<br>
-                        <br>
-                        有沒有辦法點兩下可執行檔，只跳出 Swing 視窗？<br>
-                        <br>
-                        我們可以自己寫一個 Launcher 的 Java 程式，把執行 *.js 程式的指令寫在裡面，再製作成 Executable JAR，這樣就可以只跑 Swing 視窗，不需動到命令提示字元了。<br>
-                        <br>
-                        詳細情況請下載：<a href='../../objects/downloads/20061211A.7z'>20061211A.7z</a>。<br>
-                        <br>
-                        解開後，用滑鼠點兩下 launcher.jar，會執行 main.js 裡面寫的 Swing 視窗程式，而不會跳出命令提示字元視窗。前提是你作業系統有 Executable JAR 的能力，安裝 JRE 的話會自動設定好這功能。<br>
-                        <br>
-                        在 launcher.bat 可以修改程式啟動的指令。<br>
-                        <br>
-                        想修改或了解 launcher.jar，請自行研究 src 資料夾裡的 Launcher.java。<br>
-                        <br>
-                        仰賴 Java 的 Executable JAR 不見得是理想的解決方案，不妨用 C 語言或 C# 語言，自己比照下載的範例，做一個 launcher.exe 來執行。
-                    </p>
-                </section>
             </section>
 
-            <hr>
+            <hr id='anchor11'>
 
             <section>
-                <h2>在 JavaScript 宣告 Java 的資料型態</h2>
+                <h2>在 JavaScript 引用 Java 的資料型態</h2>
                 <p>
                     <textarea class='brush:js'>
                         // boolean
@@ -495,47 +536,165 @@
                         AZ<br>
                     </output>
                     <br>
-                    非得強制轉型（Narrow cast）時，可以用 java.lang.reflect.Array.newInstance(型別, 1) 代替。明明只用到一個物件，沒有人會想開陣列來用吧？但 JavaScript 真的沒有強制轉型的功能，Java API 的反射機制也只有這強綁型別的做法比較接近。所以在 Rhino 無法精準轉型時，在等新版看會不會更精準時，也只能把型別綁在陣列，以 物件名稱[0] 這種彆扭的方式來用～
+                    非得強制轉型（Narrow cast）時，可以用 java.lang.reflect.Array.newInstance(型別, 1) 代替。明明只用到一個物件，沒有人會想開陣列來用吧？但 JavaScript 真的沒有強制轉型的功能，Java API 的反射機制也只有這強綁型別的做法比較接近。所以在 Rhino 無法精準轉型時，在等新版看會不會更精準前，也只能把型別綁在陣列，以 物件名稱[0] 這種彆扭的方式試看看吧～
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor12'>
 
             <section>
-                <h2>實作介面</h2>
-                <p>
-                    <textarea class='brush:js'>
-                        importPackage(java.lang)
+                <h2>覆載物件方法與實作介面功能</h2>
+                <hr>
+                <section>
+                    <h3>以覆載 Thread 物件的 run() 方法為例</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            importPackage(java.lang)
 
-                        var program = {
-                            run: function(){
-                                print('Hello!')
-                            }
-                        }
+                            var thread = new Thread({
+                                run:function(){
+                                    print('Hello!')
+                                }
+                            })
 
-                        new Thread(new Runnable(program)).start()
-                    </textarea>
-                    <br>
-                    <output>
-                        Hello!<br>
-                    </output>
-                    <br>
-                    等同於 Java 的：<br>
-                    <br>
-                    <code>
-                        class Program implements Runnable{<br>
-                        　public void run(){<br>
-                        　　System.out.println("Hello!");<br>
-                        　}<br>
-                        }<br>
+                            thread.start()
+                        </textarea>
                         <br>
-                        Program program = new Program();<br>
-                        new Thread(new Runnable(program)).start();<br>
-                    </code>
-                </p>
+                        <output>
+                            Hello!
+                        </output>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>以實作 Runnable 介面的 run() 功能為例</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            importPackage(java.lang)
+
+                            var program = new Runnable({
+                                run: function(){
+                                    print('Hello!')
+                                }
+                            })
+
+                            new Thread(program).start()
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello!<br>
+                        </output>
+                        <br>
+                        基於 Lambda 的特性，介面只有一個功能需要實作的話，可以省略介面名稱：<br>
+                        <br>
+                        <textarea class='brush:js;highlight:3'>
+                            importPackage(java.lang)
+
+                            var program = {
+                                run: function(){
+                                    print('Hello!')
+                                }
+                            }
+
+                            new Thread(program).start()
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello!
+                        </output>
+                    </p>
+                </section>
             </section>
 
-            <hr>
+            <hr id='anchor13'>
+
+            <section>
+                <h2>多執行緒</h2>
+                <p>
+                    假設有個播放音樂的函式，我們不想等音樂播完再執行後面的程式，而是一邊播放一邊執行其它的程式，這時就要寫多執行緒！
+                </p>
+                <hr>
+                <section>
+                    <h3>用 Java API 的 Thread 物件</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            importPackage(java.lang)
+
+                            function playMusic(file){
+                                runCommand('wmplayer.exe', file)
+                            }
+
+                            new Thread({
+                                run: function(){
+                                    playMusic('music.mp3')
+                                }
+                            }).start()
+
+                            print('音樂播放中')
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>用 Rhino 內建函式 spawn()</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            function playMusic(file){
+                                runCommand('wmplayer.exe', file)
+                            }
+
+                            spawn(function(){
+                                playMusic('music.mp3')
+                            })
+
+                            print('音樂播放中')
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>補充</h3>
+                    <p>
+                        像 playMusic 這樣用來撥放背景音樂的函式，當初就該設計成獨立的執行緒，比較方便使用：
+                    </p>
+                    <section>
+                        <h4>Thread.run()</h4>
+                        <p>
+                            <textarea class='brush:js'>
+                                importPackage(java.lang)
+
+                                function playMusic(file){
+                                    new Thread({
+                                        run: function(){
+                                            runCommand('wmplayer.exe', file)
+                                        }
+                                    }).start()
+                                }
+
+                                playMusic('music.mp3')
+                                print('音樂播放中')
+                            </textarea>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>spawn()</h4>
+                        <p>
+                            <textarea class='brush:js'>
+                                function palyMusic(file){
+                                    spawn(function(){
+                                        runCommand('wmplayer.exe', file)
+                                    })
+                                }
+
+                                playMusic('music.mp3')
+                                print('音樂播放中')
+                            </textarea>
+                        </p>
+                    </section>
+                </section>
+            </section>
+
+            <hr id='anchor14'>
 
             <section>
                 <h2>在 *.js 中載入其它 *.js</h2>
@@ -544,14 +703,14 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor15'>
 
             <section>
                 <h2>最頂層物件</h2>
                 <p>
                     網頁瀏覽器的最頂層物件是 window，而 Rhino 則是 <var>global</var>。<br>
                     <br>
-                    既然最頂層物件不同，那能呼叫的內建函式<ins>[2]</ins> 也不盡相同，例如不會有 setTimeout() 可用。<br>
+                    既然最頂層物件不同，那能呼叫的內建函式<ins>[1]</ins> 也不盡相同，例如不會有 setTimeout() 可用。<br>
                     <br>
                     內建函式能否執行，要看執行的環境。在 interactive mode 所有功能都用，而用直譯器執行 *.js 的做法，有些功能無法作用，例如 readline()。<br>
                     <br>
@@ -559,7 +718,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor16'>
 
             <section>
                 <h2>列出 JavaScript 物件的屬性和方法</h2>
@@ -575,10 +734,10 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor17'>
 
             <section>
-                <h2>其它內建物件和函式</h2>
+                <h2>Rhino 內建屬性和函式</h2>
                 <p>
                     <var>
                         arguments<br>
@@ -596,7 +755,7 @@
                         runCommand(commandName, [arg, ...] [options])<br>
                         seal(object)<br>
                         serialize(object, filename)<br>
-                        spawn(functionOrScript)<br>
+                        spawn(function or script)<br>
                         sync(function)<br>
                         quit()<br>
                         version([number])<br>
@@ -614,86 +773,78 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='anchor18'>
 
             <section>
-                <h2>其它功能</h2>
-                <hr>
-                <section>
-                    <h3>JavaScript 的場合</h3>
-                    <p>
-                        類別不是屬於 java.xxx.* 或 javax.xxx.* …這類全域套件時，會找不到套件名稱對應的類別，這時可以嘗試在 Packages 物件裡面找，例如 var a = new Packages.xxx.yyy.Zzz()。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Java 語言的場合</h3>
-                    <p>
-                        <a href='https://mozilla.github.io/rhino/javadoc/org/mozilla/javascript/package-summary.html' target='_blank'>org.mozilla.javascript</a> 套件底下，有各式類別可以組成 JavaScript，進行更細部的控制。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>直譯與編譯的場合</h3>
-                    <p>
-                        可下的參數：<br>
-                        <br>
-                        <var>-e 檔案</var><br>
-                        執行 *.js 檔案。<br>
-                        <br>
-                        <var>-f 檔案</var><br>
-                        讀取純文字文件，並嘗試執行裡面的內容，類似 eval(String)。<br>
-                        <br>
-                        <var>-opt -1 到 9</var><br>
-                        設定編譯的最佳化程度，0 表示關閉最佳化，編譯速度最快，程式品質最差。依次從 1 到 9 提升最佳化程度。還可設定為 -1 表示直譯就好，不用編譯。<br>
-                        <br>
-                        <var>-strict</var><br>
-                        開啟 ECMAScript 5 的嚴格模式。<br>
-                        <br>
-                        <var>-version 版本</var><br>
-                        指定 ECMASCript 語法版本，有 100、110、120、130、140、150、160、170、180、200 可設定。<br>
-                        <br>
-                        還有更多參數，請下 <var>-help</var> 查閱。<br>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>CGI 的場合</h3>
-                    <p>
-                        jrunscript 跟 Perl 和 Python 一樣，又有 interactive mode、又可以直譯程式碼，那拿來當 CGI 的程式引擎當然沒問題。
-                    </p>
-                </section>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>補充</h2>
+                <h2>其它 Rhino 支援的非標準語法</h2>
                 <p>
-                    在 Java 用 Rhino 跑 JavaScript 的方式有好幾種：<br>
+                    function 物件裡面只有一行敘述的話，可以省略 {} 括號，例如：<br>
                     <br>
-                    <samp>
-                        1、在 Java 程式碼撰寫 javax.script.* 跑 JavaScript 程式<br>
-                        2、用 jrunscript 載入 *.js 跑 JavaScript 程式<br>
-                        3、用 java -jar 掛載 Rhino 跑 JavaScript 程式<br>
-                        4、進入 Interactive mode 跑 JavaScript 程式<br>
-                    </samp>
-                    <br>
-                    要注意的是，每一種會遇到的狀況並不一樣！越前面的受限越多、問題越多，越後面的越能發揮 Rhino 全部功能。例如第一種寫法會遇到無法使用內建函式 load() 的問題，第二種寫法會遇到 Swing 視窗閃退的問題，只有最後一種 Interactive mode 功能是齊全的！
+                    <code>
+                        var sayHello = function() print('Hello!')<br>
+                        sayHello()
+                    </code>
                 </p>
-                <!--
-                    由於有先天不足的地方，所以不適合拿 Rhino 全面取代 Java 語言。比較適合的是，把一些允許客戶端任意修改的程式碼動作或功能，透過 Rhino 抽離出來自成一塊，總之依然是 Java 語言為主，Rhino 從旁協助，把原本繁重的工作簡化為兩三件小事來處理～
-                -->
             </section>
 
-            <!--hr>
+            <hr id='anchor19'>
 
             <section>
                 <h2>附錄</h2>
                 <hr>
                 <section>
-                    <h3>Nashorn</h3>
+                    <h3>用 Rhino 搭建輕量級 Java 程式環境</h3>
                     <p>
+                        由於只需 java.exe 就能直譯和編譯 JavaScript 程式，不需用到 javac.exe，因此 JRE + Rhino 的組合可以取代笨重的 JDK！<br>
+                        <br>
+                        不想用 Java 語言寫程式、也不想用 Kotlin，不妨試試 Rhino！
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>關於 GUI</h3>
+                    <p>
+                        用直譯器執行 *.js 程式檔，必然會伴隨一個命令提示字元的視窗，對視窗應用程式來說相當礙眼。
+                    </p>
+                    <section>
+                        <h4>Executable JAR</h4>
+                        <p>
+                            不妨將 *.js 編譯成 *.class，再打包成 Executable JAR，就能解決問題！<br>
+                            <br>
+                            前提是你作業系統有 Executable JAR 的能力，安裝 JRE 的話會自動設定好這功能。<br>
+                            <br>
+                            不過 MANIFEST.MF 無法指定 encoding 為 UTF-8，所以在預設為 ASCII 字元編碼的 Windows 會亂碼。<br>
+                            <br>
+                            解決辦法是原始碼的字元編碼改用 Big5 或 Unicode！尤其 Unicode 是 Java 預設使用的字元編碼，不需要 -Dfile.encoding 就能混用多國文字，是想避開字元編碼問題最佳的選擇！
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Launcher</h4>
+                        <p>
+                            如果不想編譯成 *.class，可以自己寫個 Launcher.jar 來跑 *.js：<br>
+                            <br>
+                            <a href='../../objects/downloads/20061211A.7z'>20061211A.7z</a><br>
+                            <br>
+                            解開後，用滑鼠點兩下 launcher.jar，會執行 main.js 裡面寫的 Swing 視窗程式，而不會跳出命令提示字元視窗。<br>
+                            <br>
+                            在 launcher.bat 可以修改程式啟動的指令。<br>
+                            <br>
+                            想修改或了解 launcher.jar，請自行研究 src 資料夾裡的 Launcher.java。<br>
+                            <br>
+                            仰賴 Java 的 Executable JAR 不見得是理想的解決方案，不妨用 C 語言或 C# 語言，自己比照下載的範例，做一個 launcher.exe 來執行。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>關於 Nashorn</h3>
+                    <p>
+                        Nashorn 在 JavaScript 語法上，支援字串插值，這是 Rhino 沒有的。<br>
+                        <br>
+                        由於 Java 通用的直譯器 jrunscript.exe 問題很多、不實用，所以 Nashorn 準備自己專屬的直譯器：jjs.exe，雖然還是有點問題，但性能高很多。<br>
+                        <br>
+                        要改用 Nashorn 的話，調用 Java API 的做法和 Rhino 很不一樣：<br>
+                        <br>
                         <textarea class='brush:js'>
                             var JFrame=Java.type('javax.swing.JFrame')
                             var JButton=Java.type('javax.swing.JButton')
@@ -720,15 +871,13 @@
                         </output>
                     </p>
                 </section>
-            </section-->
+            </section>
 
             <hr>
 
             <footer>
                 <p>
-                    [1] 其實這兩個真的像在比爛！Rhino 已經不是很積極在實現 ECMAScript 標準了，但 Nashorn 步調更慢，且實作出來的功能不穩定，跑起來和所想要的不一樣。我甚至懷疑並不是 ECMAScript 步調太快難以跟進而放棄 Nashorn，而是發現 Nashorn 本身在設計上爛掉沒救了。<br>
-                    [2] 正確說法是「那能操作的功能也不盡相同」，但通常操作最頂層物件時會省略名稱，例如 window.setTimeout() 會寫 setTimeout()，用起來活像內建函式（built-in functions）。<br>
-                    [*] <a href='https://ringojs.org' target='_blank'>https://ringojs.org</a>
+                    [1] 正確說法是「那能操作的功能也不盡相同」，但通常操作最頂層物件時會省略名稱，例如 window.setTimeout() 會寫 setTimeout()，用起來活像內建函式（built-in functions）。
                 </p>
             </footer>
 
