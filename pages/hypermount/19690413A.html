@@ -63,7 +63,7 @@
                 <p>
                     最常用的應該是 Number() 函式，當我們取得使用者輸入的資料時，如果要進行數學運算，就必須將資料轉換為數值。底下範例將兩個使用者輸入資料進行加法運算，由於函式本身很簡單，因此範例加入與主題無關的細節，當作展示 HTML5 RIA 的程式風格，但不至於混淆：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         //建立兩個 INPUT 輸入欄
                         var _input1 = document.createElement('INPUT');
                         var _input2 = document.createElement('INPUT');
@@ -83,7 +83,7 @@
                     <br>
                     這樣的範例有個缺失，那就是如果使用者輸入的不是數字，而是英文字母怎麼辦？因此 inNaN() 也是很常用的函式。我們把按下 BUTTON 按鈕的程式進一步改寫如下：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _button.onclick = function(){
                             var _a = isNaN(_input1.value)?0:Number(_input1.value);
                             var _b = isNaN(_input2.value)?0:Number(_input2.value);

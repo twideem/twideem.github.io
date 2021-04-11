@@ -36,7 +36,7 @@
                 <section>
                     <h3>for of 迴圈</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let a = ['A','AA','AAA'];
 
                             for(let n of a){
@@ -80,7 +80,7 @@
                         <br>
                         除此之外，傳統函式傳回值的型態就是 return 傳回資料的型態，而以 yield 送出的資料，則會放在一種串列資料結構裡面，這種資料結構稱為 generator，可以使用 for.. of.. 迭代。<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function* f(){
                                 yield 'A';
                                 yield 'AA';
@@ -109,7 +109,7 @@
                 <section>
                     <h3>區域變數</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             {
                                 let a = 'AAA';
                             }
@@ -154,7 +154,7 @@
                 <section>
                     <h3>預設參數</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f(x='hello'){
                                 document.write(x);
                             }
@@ -173,7 +173,7 @@
                 <section>
                     <h3>不定參數</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f(...rest){
                                 let a=0;
                                 for(let n of rest){
@@ -196,7 +196,7 @@
                 <section>
                     <h3>匿名函式</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             ((x,y)=>{
                                 document.write(x+y);
                             })(111,222);
@@ -221,7 +221,7 @@
                 <section>
                     <h3>立即函式</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             (()=>{
                                 document.write('hello');
                             })();
@@ -244,7 +244,7 @@
                 <section>
                     <h3>更簡潔的 method 寫法</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let A={
                                 f(){
                                     document.write('hello');
@@ -263,7 +263,7 @@
                 <section>
                     <h3>類別</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             class A{
 
                                 constructor(x, y){
@@ -297,7 +297,7 @@
                 <section>
                     <h3>繼承</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             class B extends A{
 
                                 //程式碼寫在這裡
@@ -310,7 +310,7 @@
                 <section>
                     <h3>靜態方法</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             class A{
 
                                 static f(){
@@ -333,7 +333,7 @@
                 <section>
                     <h3>基本用法</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let [a,b,c] = ['AAA','BBB','CCC'];
 
                             document.write(a);
@@ -361,7 +361,7 @@
                 <section>
                     <h3>帶預設值</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let [a,b='BBB'] = ['AAA'];
 
                             document.write(a);
@@ -385,7 +385,7 @@
                 <section>
                     <h3>跳過幾個值</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let [a,,c] = ['AAA','BBB','CCC'];
 
                             document.write(a);
@@ -402,7 +402,7 @@
                 <section>
                     <h3>整個放入迭代器</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let [...a] = ['AAA','BBB','CCC','DDD','EEE'];
 
                             for(let n of a){
@@ -423,7 +423,7 @@
                 <section>
                     <h3>用於字串</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let [a,b,c] = 'def';
 
                             document.write(a);
@@ -442,7 +442,7 @@
                 <section>
                     <h3>用於鍵值對</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let{a,b,c} = {a:'AAA', b:'BBB', c:'CCC'};
 
                             document.write(a);
@@ -456,7 +456,7 @@
                         <br>
                         因此上面的範例，其實可以寫成這樣：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let{a,b,c} = {b:'BBB', c:'CCC', a:'AAA'};
 
                             document.write(a);
@@ -471,7 +471,7 @@
                 <section>
                     <h3>應用一：從函式返回多筆資料</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f(){
                                 let a = 'AAA', b = 'BBB', c = 'CCC';
                                 return [a,b,c];
@@ -495,7 +495,7 @@
                 <section>
                     <h3>應用二：交換資料</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let a=111, b=222;
 
                             [a,b] = [b,a]
@@ -547,7 +547,7 @@
                     <section>
                         <h4>範例一：加入與取出資料</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 let set = new Set();
 
                                 set.add(2);
@@ -625,7 +625,7 @@
                     <section>
                         <h4>範例五：快速過濾重複資料並排序</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 document.write([...new Set(['h','e','l','l','o'])].sort() );
                             </textarea>
                             <br>
@@ -635,7 +635,7 @@
                             <br>
                             或：<br>
                             <br>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 new Set(['h','e','l','l','o'].sort()).forEach((x)=>{
                                     document.write(x);
                                 });
@@ -666,7 +666,7 @@
                     <p>
                         範例：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let map = new Map();
 
                             map.set('name','Twideem Civs');

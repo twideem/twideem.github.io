@@ -46,7 +46,7 @@
                 <p>
                     JavaScript 發明之初，只是一款可以操作些瀏覽器軟體本身的指令語言，簡簡單單一兩行程式，無須專業程式設計師背景，就能動態變化瀏覽器內容，顯著可見的效果讓 JavaScript 大受好評！大家都搶著在網頁寫個 JavaScript 來露一下身手：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         window.status = '歡迎光臨';
                     </textarea>
                     <br>
@@ -73,7 +73,7 @@
                 <section>
                     <h3>Structured programming</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a = 0;
                             var b = 0;
 
@@ -99,7 +99,7 @@
                 <section>
                     <h3>Object oriented programming</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function F(x){
                                 var g = x || 0;
                                 this.set = function(x){
@@ -108,7 +108,7 @@
                                 this.get = function(){
                                     return ++g;
                                 }
-                            };
+                            }
 
                             var a = new F(111);
                             document.write(a.get());
@@ -128,14 +128,14 @@
                 <section>
                     <h3>Prototype programming</h3>
                     <p>
-                        <textarea class='brush:es'>
-                            var S = function(){};
+                        <textarea class='brush:js'>
+                            var S = function(){}
                             S.prototype.a = 'Hello';
                             S.prototype.f = function(){
                                 document.write(this.a + ', world!');
                             }
 
-                            var T = function(){};
+                            var T = function(){}
                             T.prototype = new S();
 
                             var t = new T();
@@ -153,7 +153,7 @@
                 <section>
                     <h3>Closure with first class function</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function F(){
                                 var h = 123, w = 456;
                                 return{
@@ -165,7 +165,7 @@
                                         w = y;
                                     }
                                 }
-                            };
+                            }
 
                             var a = new F();
                             var b = new F();
@@ -218,13 +218,13 @@
                 <section>
                     <h3>Object literal</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var S = {
                                 g: 123,
                                 f: function(){
                                     document.write(this.g);
                                 }
-                            };
+                            }
 
                             var T = Object.create(S);
 
@@ -247,12 +247,12 @@
                 <section>
                     <h3>Array structure object</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var U = [789];
 
                             U.f = function(){
                                 document.write(this[0]);
-                            };
+                            }
 
                             var V = Object.create(U);
 
@@ -288,7 +288,7 @@
                 <section>
                     <h3>New keywords</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let
                             const
                             class
@@ -304,7 +304,7 @@
                 <section>
                     <h3>New API</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             // Set, Map, Promise, Fetch
                         </textarea>
                     </p>
@@ -315,7 +315,7 @@
                     <section>
                         <h4>Multi line string</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 let a = `
                                     abc
                                     123
@@ -332,7 +332,7 @@
                     <section>
                         <h4>Template literal</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 let a = 'AAA', b = 'BBB', c= 'CCC'
                                 let d = `${a} ${b} ${c}`
 
@@ -349,7 +349,7 @@
                 <section>
                     <h3>Destructuring assignment</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let a, b, c
                             [a, b, c] = ['AAA', 'BBB', 'CCC']
 
@@ -369,7 +369,7 @@
                 <section>
                     <h3>Default parameter</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f(x, y=789){
                                 document.write(x + y)
                             }
@@ -388,7 +388,7 @@
                 <section>
                     <h3>Rest parameter</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f(x, ...y){
                                 document.write(x + y)
                             }
@@ -407,7 +407,7 @@
                 <section>
                     <h3>Arrow function</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             // 可當立即函式
                             ((x) => {
                                 x += x
@@ -438,7 +438,7 @@
                 <section>
                     <h3>Method definitition</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             let S = {
                                 f(){
                                     document.write('ABC')
@@ -457,7 +457,7 @@
                 <section>
                     <h3>Generators</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function* f(x){
                                 while(x &lt; 100){
                                     yield x
@@ -486,7 +486,7 @@
                         <br>
                         但純粹只是寫法風格的改變，ECMAScript 2015 對於段落的規範還是跟以前一樣：「每一行程式就是一個敘述，可以不用加分號。」所以 () 和 [] 為開頭的程式依然存在沒有分行的問題，這時再把分號加在前面。<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             ;(function(){
                                 //
                             })()
@@ -522,7 +522,7 @@
                 <section>
                     <h3>Exponentiation operator</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             document.write(2**3)
                         </textarea>
                         <br>
@@ -535,7 +535,7 @@
                 <section>
                     <h3>New prototype method in Array</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             a = [123, 456, 789];
                             document.write(a.includes(456))
                             document.write(a.includes(567))
@@ -557,7 +557,7 @@
                 <section>
                     <h3>New keyword</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             async
                         </textarea>
                     </p>
@@ -566,7 +566,7 @@
                 <section>
                     <h3>New API</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             // Atomics
                         </textarea>
                     </p>
@@ -575,7 +575,7 @@
                 <section>
                     <h3>New prototype method in String</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             print('abc'.padStart(5,'-'))
                             print('abc'.padEnd(5,'-'))
                         </textarea>
@@ -590,7 +590,7 @@
                 <section>
                     <h3>New prototype method in Object</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var S = { a:'AAA', b:'BBB', c:'CCC'}
                             print(Object.entries(S))
                             print(Object.values(S))
@@ -664,7 +664,7 @@
                     <p>
                         ()=&gt; 的寫法不見得比 function() 好看：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             //在指定運算子的場合 ()=&gt; 其實很醜，辨識度變差，解讀起來有障礙。
                             onload=function(){
                                 document.write('AAA')
@@ -691,7 +691,7 @@
                 <section>
                     <h3>Hello, world! 和 print()、clear()</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:txt'>
                             &lt;!DOCTYPE&gt;
                             &lt;html&gt;
                                 &lt;head&gt;
@@ -728,7 +728,7 @@
                 <section>
                     <h3>sleep()</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function sleep(seconds){
                                 var start=new Date().getTime()
                                 while(true){
@@ -777,7 +777,7 @@
                 <section>
                     <h3>rand()</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function rand(min,max){
                                 if(!min&amp;&amp;!max){
                                     min=0
@@ -807,7 +807,7 @@
                 <section>
                     <h3>bgm()、se()</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var audio=[document.createElement('audio'),document.createElement('audio')]
                             document.body.appendChild(audio[0])
                             document.body.appendChild(audio[1])
@@ -874,7 +874,7 @@
                 <section>
                     <h3>資料結構</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var player=['冒險者',10,3,5,2,0,200]
 
                             const name=0,health=1,mana=2,attack=3,defense=4,exp=5,gold=6
@@ -916,7 +916,7 @@
                 <section>
                     <h3>save()、load()</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var player=['冒險者',10,3,5,2,0,200]
                             var equipments=['檜木棒','旅人服']
 

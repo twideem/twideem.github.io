@@ -43,7 +43,7 @@
                 <p>
                     來看一個範例，底下是一個計算三角形面積的函式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function getTriangleArea(l, w){
                             return (l*w)/2;
                         }
@@ -51,13 +51,13 @@
                     <br>
                     有了這個函式，就能在程式需要的地方使用它：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = getTriangleArea(32, 24);
                     </textarea>
                     <br>
                     此外，參數和傳回值並不是必要的，所以有時候函式設計得很簡單：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function println(string){
                             document.write(string + '&lt;br&gt;');
                         }
@@ -65,7 +65,7 @@
                     <br>
                     這個函式純粹在網頁輸出文字，然後換行。如果在程式中如下使用三次這個函式，網頁就會用三行文字分別顯示 AAA、BBB 和 CCC：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         println('AAA');
                         println('BBB');
                         println('CCC');
@@ -82,7 +82,7 @@
                 <p>
                     有了函式，就會遇到變數有存取範圍的情形，也就是說，在函式裡面宣告的變數，只能在函式裡面被存取，函式以外的地方是存取不到的！<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function add(p1, p2){
                             var a = p1 + p2;
                             document.write('兩數相加是：' + a);
@@ -93,7 +93,7 @@
                     <br>
                     如果你希望函式計算出來的結果，可以保存在任何位置都能取出來用的變數，就必須放在函式外部的位置：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a;
                         function add(p1, p2){
                             a = p1 + p2;

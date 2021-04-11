@@ -71,7 +71,7 @@
                     <br>
                     其中最經典的是「變數可以先使用再宣告」這見鬼的容錯設計：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         a = 123;
                         a++;
                         var a;
@@ -91,7 +91,7 @@
                 <p>
                     可以先使用變數再宣告，是因為 JavaScript 對於識別名稱採 hoist 的做法，也就是自動把散落的識別名稱，統一提放到最上頭。所以像下面程式的 n 與 a 變數：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function f(){
                             for(var n=0; n&lt;10; n++){
                                 var a=n;
@@ -101,7 +101,7 @@
                     <br>
                     其實對 JavaScript 來講是：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function f(){
                             var n, a;
                             for(n=0; n&lt;10; n++){
@@ -123,7 +123,7 @@
                 <p>
                     習慣上，我們認為 { } 裡面的程式是個獨立的區塊，因此裡面的變數與大括號外面的變數是隔開的。但 JavaScript 並不是這麼回事……<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         {
                             var a = 123;
                         }
@@ -146,14 +146,14 @@
                     <br>
                     來看幾個範例，下面的程式因為自動轉型的關係，結果顯示 3：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = ['1', '2' ,'3'];
                         document.write(a['2']);
                     </textarea>
                     <br>
                     所以看到下面「線路比較複雜一點」的程式，居然也能顯示 3，不用覺得奇怪：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = ['1', '2' ,'3'];
                         document.write(a[a['1']]);
                     </textarea>
@@ -173,7 +173,7 @@
                 <p>
                     JavaScript 的「自動轉換資料型態」誇張到連「比對兩資料是否相等」時照樣發生！<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = '1';
                         var b = 1;
                         if(a==b) document.write('HELLO');
@@ -183,7 +183,7 @@
                     <br>
                     如果你不希望這樣的結果，請改用 === 或 !== 來比對資料，例如下面程式就不會跟你說 HELLO：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = '1';
                         var b = 1;
                         if(a===b) document.write('HELLO');
@@ -211,7 +211,7 @@
                     <br>
                     所以我們常常設計出如下函式，代入並不覺得有什麼不妥的參數，卻發生摸不著頭緒的錯誤：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function f(x){
                             if(x) document.write(x);
                             else document.write('請輸入參數。');
@@ -223,7 +223,7 @@
                     <br>
                     如果這不是你想要的結果，上述的程式寫得詳細一點就好：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function f(x){
                             if(x!==undefined) document.write(x);
                         }
@@ -244,7 +244,7 @@
                     <br>
                     但 NaN 這個值，卻不能拿來做比較運算……<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         if(NaN==NaN) document.write('等於')
                         else document.write('不等於')
                     </textarea>
@@ -277,7 +277,7 @@
                     <br>
                     首先建立如下程式結構：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var S = {
                             f: function(){
                                 document.write(this.a);
@@ -289,7 +289,7 @@
                     <br>
                     不過這不是重點，讓我們接著看：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         S.a = 999;
                         S.f();
                     </textarea>
@@ -298,7 +298,7 @@
                     <br>
                     雖然這很方便，例如 HTML5 用來保存使用者資料的 localStorage，就能用這樣的方式，讓存取資料的程式碼變得簡潔、易懂：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         localStorage.HP = 100;
                         localStorage.MP = 50;
 
@@ -309,7 +309,7 @@
                     <br>
                     否則你原本應該寫得這麼冗雜：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         localStorage.setItem('HP', 100);
                         localStorage.setItem('MP', 50);
 
@@ -352,7 +352,7 @@
                     <br>
                     因此，常常會看到有人把 JavaScript 程式寫在匿名函式裡面來執行：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         (function(){
                             // JavaScript 程式
                         })();
@@ -372,7 +372,7 @@
                         <br>
                         如下範例，在 S 物件裡，函式 closure() 延續了外部變數 a 的生命週期：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function S(){
                                 var a = 100;
                                 function closure(){
@@ -400,7 +400,7 @@
                     <p>
                         總之，有了 closure 這語言特性，我們便能設計出這樣的程式結構：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function S(){
                                 var a;
                                 return{
@@ -456,7 +456,7 @@
                     <p>
                         上一節範例單純示範函式物件的 closure 程式結構，宣告 f 物件時沒有使用 new 建立一個新的 S 物件。如果你需要建立多個資料獨立分開保存的 S 物件，就要用 new：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function S(){
                                 var a;
                                 return{
@@ -500,7 +500,7 @@
                 <p>
                     承「Closure（閉包）」的範例，像這種傳回的函式只有一個時，可以進一步使用「匿名函式」的技巧：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function S(){
                             var a = 100;
                             return function(){
@@ -529,7 +529,7 @@
                 <p>
                     之所以會有 Closure 與 Anonymous Function 這樣的語法，出自於 JavaScript 將函式做為 first class object（第一級物件）。下面的範例，以函式物件的表現手法，來模仿 Java 物件導向程式的 private field 與 public method：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var S = function(){
                             var a = 100;
                             return{
@@ -620,7 +620,7 @@
                     <br>
                     底下是針對該語法結構的範例：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         (function(){
                             document.write('Hello');
                         })();
@@ -636,7 +636,7 @@
                     <p>
                         底下範例，為 immediate function 設置了 x 參數，並且宣告一個 a 變數，然後代入 10 來執行 for 迴圈：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             (function(x){
                                 var a;
                                 for(var n=0; n&lt;x; n++) a++;
@@ -669,7 +669,7 @@
                 <p>
                     原本我們會像這樣設計具有傳回值的函式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var f = function(x){
                             return x+x;
                         };
@@ -677,13 +677,13 @@
                     <br>
                     現在可用 Lambda 算式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var f = function(x) x+x;
                     </textarea>
                     <br>
                     基本上，這只是可以省略 return 的語法。但比第一級函式物件可將函式當作參數，有了這新的語法，可以讓我們更一進步表現得更像 Lambda 算式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         document.write((function(x) x+x)(3));
                     </textarea>
                     <br>
@@ -702,7 +702,7 @@
                 <p>
                     要讓函式串接起來呼叫，每個函式最後寫上 return this; 即可。<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var S = {
                             g: 0,
                             f1: function(){
@@ -737,7 +737,7 @@
                     <br>
                     我們讓 JavaScript 內建的 Array 物件，新增一個 f() 函式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         Array.prototype.f = function(){
                             document.write('HELLO');
                         }
@@ -745,7 +745,7 @@
                     <br>
                     接著實際建立幾個 Array 物件並呼叫 f() 看看：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = new Array();
                         var b = [];
                         a.f();
@@ -780,7 +780,7 @@
                     <section>
                         <h4>類似 new 的用法</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 //製作類別
                                 var Class = {
                                     field: 'umm',
@@ -816,7 +816,7 @@
                             <br>
                             但不適用以閉包做為私有變數的物件：<br>
                             <br>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 var A = (function(){
                                     var a = 123;
                                     return{
@@ -845,7 +845,7 @@
                     <section>
                         <h4>類似 extends 的用法</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 //父類別
                                 var Parent = {
                                     field: 'umm',
@@ -909,7 +909,7 @@
                     <p>
                         bind() 會傳回一個函式物件，好讓你將東西繫結到物件上，效果接近 new 一個物件，但比 new 厲害的是可以選擇作用域，而非只能用 this 做為函式物件的作用域：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var S = function(x){
                                 var k = x;
                                 return x;
@@ -944,7 +944,7 @@
                     <p>
                         過去我們很常使用 for 迴圈來巡查陣列的內容：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             //假設有個陣列。
                             var a = ['t','w','i','d','e','e','m'];
 
@@ -960,7 +960,7 @@
                         <br>
                         現在這整個邏輯結構，直接裝在 forEach() 裡面來完成，不用再敲那重複的動作：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a = ['t','w','i','d','e','e','m'];
 
                             a.forEach(function(n){
@@ -981,7 +981,7 @@
                     <p>
                         我們也很常拿另一個陣列來保存某個需要經過加工的陣列：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             //假設有個陣列。
                             var a = ['t','w','i','d','e','e','m'];
 
@@ -999,7 +999,7 @@
                         <br>
                          現在可以這樣寫：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a = ['t','w','i','d','e','e','m'];
 
                             var b = [];
@@ -1022,7 +1022,7 @@
                     <p>
                         過濾某個陣列的資料，擷取到另一個陣列，也是相當常做的事：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             //假設有個陣列
                             var a = [3,1,4,1,5,9,2,6,5,3];
 
@@ -1040,7 +1040,7 @@
                         <br>
                         現在可以這樣寫：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a = [3,1,4,1,5,9,2,6,5,3];
 
                             var b = [];
@@ -1063,7 +1063,7 @@
                     <p>
                         如果你想用條件式檢查陣列中是否有符合的資料，有的話傳回 true 而不用再繼續下去，可用 some() 省略親手用 if 來判斷的工作：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             //假設有個陣列。
                             var a = [3,1,4,1,5,9,2,6,5,3];
 
@@ -1082,7 +1082,7 @@
                         <br>
                         相反的，可用是否全部符合的 every()，來達到改傳回 false 的工作：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a = [3,1,4,1,5,9,2,6,5,3];
 
                             var i = a.every(function(n){
@@ -1120,7 +1120,7 @@
                         <br>
                         有了這些語法概念，實際運作的情況，讓我們用範例來了解：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             //製作一個準備用在 reduce() 的回呼函式
                             var callback = function(previousValue, currentValue, index, array){
                                 currentValue = previousValue + array[index];  //當前值 = 上次結果 + 第索引值的陣列
@@ -1144,7 +1144,7 @@
                         <br>
                         透過上面範例了解 reduce()，以後看到類似下面的程式，就知道其實只是拿陣列的資料進行回呼函式來做數學計算而已：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var sum = [1,2,3].reduce(function(previousValue, currentValue, index, array){
                                 return currentValue = previousValue + array[index];
                             }, 5);
@@ -1209,7 +1209,7 @@
                 <p>
                     由於 JavaScript 鼓勵使用 literal syntax，因此有時候連這樣的程式結構：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = true;
 
                         var f = function(){
@@ -1227,7 +1227,7 @@
                     <br>
                     也會被這樣來寫：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = true;
 
                         var f = function(){
@@ -1252,7 +1252,7 @@
                 <p>
                     兩個值為 NaN 的 reference（變數名稱）或 instance（實體）無論怎麼比較，結果都是 false，甚至拿自己跟自己相比也是 false，因此要判斷是否為 NaN 時，通常建議用 isNaN()：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = NaN;
                         var b = NaN;
 
@@ -1269,7 +1269,7 @@
                     <br>
                     但這個世間就是會出天才，乾脆利用 NaN 時，自己跟自己比居然是 false 的情況，改用 != 來判斷一個變數是否為 NaN：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = NaN;
 
                         document.write(a!=a);
@@ -1294,7 +1294,7 @@
                 <p>
                     for..in.. 其實是「for 迴圈」＋「in 迭代器」，跟 Java 的「強化迴圈（Enhanced for loop）」並不全然是一樣的設計！<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var array = [1,9,8,0];
 
                         for(var n in array){
@@ -1308,7 +1308,7 @@
                     <br>
                     從上面的例子可以看到，<code>in araay</code> 傳給 <code>var n</code> 的是索引值。因此要逐元素存取陣列的值時：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var array = [1,9,8,0];
 
                         for(var n in array){
@@ -1328,7 +1328,7 @@
                     <p>
                         有些人不知道 in 其實是語法指令（operator），可以單獨拿來用：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var array = [1,9,8,0];
 
                             document.write(0 in array);
@@ -1344,7 +1344,7 @@
                         <br>
                         除了陣列，原型物件也可用 in 迭代器：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var object = {
                                 user: 'Twideem Civs',
                                 email: 'twideem@outlook.com'

@@ -71,7 +71,7 @@
                 <section>
                     <h3>選項</h3>
                     <p>
-                        在 <var>/正規式/</var> 後面，可以設定如下參數：
+                        在 <kbd>/正規式/</kbd> 後面，可以設定如下參數：
                     </p>
                     <table>
                         <tr><td>g</td><td>匹配所有資料（不因匹配到資料就停止匹配其它資料）</td></tr>
@@ -132,7 +132,7 @@
                     <p>
                         底下 JavaScript 程式只會顯示符合條件的 image.jpg 和 image.gif，其它不會顯示：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f(x){
                                 var a = /[a-z]{4}\.(gif|jpg|png)/
                                 if(x.match(a)) document.write(x)
@@ -164,21 +164,34 @@
                         </output>
                     </p>
                 </section>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>筆記</h2>
+                <hr>
+                <section>
+                    <h3>為英文加入空格</h3>
+                    <p>
+                        搜尋如下式子：<br>
+                        <br>
+                        <kbd>[一-鶴]{1}[\w]{1}|[\w]{1}[一-鶴]{1}</kbd><br>
+                        <br>
+                        搭配巨集功能，將 F3 鍵、← 鍵、空白鍵錄下來，就能連按巨集鍵，不斷為英文字前後插入空格。<br>
+                        <br>
+                        可視需要，添加日文、注音、標點符號進去：<br>
+                        <br>
+                        <kbd>[ぁ-鶴]{1}[\w\(\[\+]{1}|[\w\)\]\+\%]{1}[ぁ-鶴]{1}</kbd><br>
+                        <br>
+                        缺點是・符號也被視為文字，與其將日文和注音獨立寫出來，不妨事後搜尋前後有空格的・，取代為沒有空格的。<br>
+                        <br>
+                        一些符號與中文字連結在一起是正常的，例如網址的 _ - .，如果不是很頻繁出現的話，這些符號另外搜尋比較好。
+                    </p>
+                </section>
                 <hr>
                 <section>
                     <h3>統一文言文佛經標點符號</h3>
                     <p>
-                        <var>[！，、：；？]</var>　　取代為「&lt;b&gt;ｏ&lt;/b&gt;」<br>
-                        <var>[《》「」『』]</var>　　取代為空<br>
-                        <var>[\w\[\]]{9}&nbsp;</var>　　　取代為空（注意後面跟著半形空格）<br>
-                        <var>（</var>　　　　　　　　〔<br>
-                        <var>）</var>　　　　　　　　　〕
+                        <kbd>[！，、：；？]</kbd>　　取代為「&lt;b&gt;ｏ&lt;/b&gt;」<br>
+                        <kbd>[《》「」『』]</kbd>　　取代為空<br>
+                        <kbd>[\w\[\]]{9}&nbsp;</kbd>　　　取代為空（注意後面跟著半形空格）<br>
+                        <kbd>（</kbd>　　　　　　　　〔<br>
+                        <kbd>）</kbd>　　　　　　　　　〕
                     </p>
                 </section>
             </section>

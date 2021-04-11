@@ -26,7 +26,7 @@
                 <p>
                     事件是會被覆寫的：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         window.onkeydown = function(){     //按下鍵盤事件
 
                             document.write('AAA');         //首先顯示 AAA
@@ -55,7 +55,7 @@
                     <br>
                     比如說，你希望設計一個用鍵盤方向鍵來操控的遊戲，如果事件無法覆寫，那一個網頁只能限制用一次 window.onkeydown，你只好把所有動作通通塞在 window.onkeydown 裡面，程式會非常地亂…<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         //紀錄使用者操控狀態
                         var ui_state = '地圖';
                         //為鍵盤碼的取個識別名稱
@@ -129,7 +129,7 @@
                     <br>
                     這時還不如利用事件可以覆寫的特性，改寫為：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var 地圖 = function(){
                             window.onkeydown = function(_event){
                                 switch(_event.which){

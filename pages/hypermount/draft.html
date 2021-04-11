@@ -552,7 +552,7 @@
             <section>
                 <h2>apply(), call(), bind()</h2>
                 <p>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var A = {
                             g : 'AAA',
                             f : function(x,y){
@@ -605,7 +605,7 @@
                 <section>
                     <h3>public</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 g : 'umm',
                                 f1 : function(x){
@@ -638,7 +638,7 @@
                 <section>
                     <h3>private</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = (function(){
                                 var g = 'umm';
                                 return {
@@ -692,7 +692,7 @@
                 <section>
                     <h3>Hoisting of function expression</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f1(){
                                 document.write('AAA');
                             }
@@ -718,7 +718,7 @@
                 <section>
                     <h3>Hoisting of function declaration</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             function f1(){
                                 document.write('AAA');
                             }
@@ -753,7 +753,7 @@
                 <p>
                     想在物件加入一筆不可改變的資料來使用，可以設計成函式來傳回資料。<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         let Circle={
                             pi(){ return 3.14 },  //const pi = 3.14 的替代方案
                             area(radius){
@@ -783,7 +783,7 @@
                 <section>
                     <h3>唯讀模式</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 a: function(){ return 'AAA' }
                             };
@@ -796,7 +796,7 @@
                 <section>
                     <h3>組態模式</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 $a: null,
                                 f: function(){
@@ -815,7 +815,7 @@
                 <section>
                     <h3>型別模式</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 type: function(){ return 'TYPE_A' }
                             };
@@ -836,7 +836,7 @@
                     <p>
                         用完即丟的區域變數，改用全域陣列精省記憶體。<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var Global = {
                                 variables: new Array()
                             };
@@ -864,7 +864,7 @@
                     <p>
                         由於分類導向程式沒有 private 的設計，只能靠「肉眼」觀察程式是否「跨區域存取變數」，因此稱為 pretend privacy，意思是「當作私有」。<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 _a: 0,
                                 f: function(){
@@ -882,7 +882,7 @@
                 <section>
                     <h3>隱私模式</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 //Attributes
                                 _attributes: new Array(),
@@ -914,7 +914,7 @@
                         <br>
                         希望提高可讀性時，可以這麼變通：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 //Attributes
                                 _attributes: new Array(),
@@ -939,7 +939,7 @@
                         <br>
                         但不建議使用，應該讓 setters 與 getters 制定出具可讀性的公開介面，而不是為索引值取個名稱。這個變通方案的使用時機，應該是必須在區塊中存取好幾個屬性的索引值時，想提高可讀性才使用，例如：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var A = {
                                 //Attributes
                                 _attributes: new Array(),
@@ -972,7 +972,7 @@
                 <p>
                     由於 JavaScript 的識別名稱很容易就能覆寫掉其性質與功能，因此雖然在識別名稱上進行裝飾是讓人唾棄的事，我還是偏好這樣寫 JavaScript 程式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var S = {
                             _a: 'hello',
                             $b: false,
@@ -1034,7 +1034,7 @@
                 <section>
                     <h3>傳統結構化程式設計</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a=[111,222,333];
                             function f(){
                                 document.write(a[0]);
@@ -1053,7 +1053,7 @@
                 <section>
                     <h3>物件符文</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var s={
                                 a:[111,222,333],
                                 f:function(){
@@ -1074,7 +1074,7 @@
                 <section>
                     <h3>陣列物件</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a=[111];
                             a.f=function(){
                                 document.write(this[0]);
@@ -1097,7 +1097,7 @@
                 <section>
                     <h3>物件導向</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var HP = function(){
                                 var points = 0;
                                 this.isDead = function(){
@@ -1117,7 +1117,7 @@
                 <section>
                     <h3>分類導向</h3>
                     <p>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var Character = {
                                 hp: 0,
                                 isDead: function(){

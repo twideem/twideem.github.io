@@ -216,7 +216,7 @@
                 <p>
                     來個簡單的範例，底下的 JavaScript 程式在 BODY 標籤中加入一個 IMG 標籤：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _img = document.createElement('IMG');
                         document.body.append(_img);
                     </textarea>
@@ -299,7 +299,7 @@
                     <br>
                     通常寫「應用程式」時，我們的元素都是從頭開始創起，同時會給予變數名稱，往後直接透過變數就能使用這些節點：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _paragraph = document.createElement('p');
                         document.body.appendChild(_paragraph);
                         _paragraph.innerHTML = 'HELLO';
@@ -397,7 +397,7 @@
                 <p>
                     首先來看 textContent，它可以讓你存取元素的文字內容。底下範例在 BODY 裡面新增一個 DIV 元素，然後又在 DIV 裡面新增一個 B 元素，最後在 B 元素使用 textContent 輸入 HELLO 做為文字內容：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _division = document.createElement('DIV');
                         document.body.appendChild(_division);
 
@@ -410,7 +410,7 @@
                     <br>
                     接著來看 innerHTML，它可以直接在元素節點裡面輸入 HTML 語法，上面的範例可以因此簡化為……<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _division = document.createElement('DIV');
                         document.body.appendChild(_division);
                         _division.innerHTML = '&lt;b&gt;HELLO&lt;/b&gt;';
@@ -418,7 +418,7 @@
                     <br>
                     然後是看起來似乎最實用的「照抄 HTML 標籤的屬性」！例如 IMG 標籤有個 SRC 屬性，那 JavaScript 建立一個 IMG 元素時，就可以這樣來設定：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _img = document.createElement('IMG');
                         document.body.append(_img);
                         _img.src = 'image.png';
@@ -426,14 +426,14 @@
                     <br>
                     但 HTML5 大幅減少標籤的屬性，改用 CSS 來替代，因此真正實用的恐怕是設定 CSS 樣式！下面的範例將先前程式的 _bold 用 CSS 設定為紅色，且字型設定為「微軟正黑體」：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _bold.style.color = 'red';
                         _bold.style.fontFamily = '微軟正黑體';
                     </textarea>
                     <br>
                     上面程式相當於如下 CSS 描述：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         b { color:red; font-family:微軟正黑體 }
                     </textarea>
                     <br>
@@ -443,7 +443,7 @@
                     <br>
                     最後來看事件，底下的範例又進一步將上面程式的 _bold 加入「在上面按滑鼠左鍵會跳出『別亂按』訊息」的功能：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _bold.onclick = function(){
                             document.write('別亂按～');
                         };
@@ -455,7 +455,7 @@
                 <p>
                     上面「別亂按」的範例，可以改寫成這樣：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _bold.addEventListener('click', function(){alert('別亂按～')}, false);
                     </textarea>
                     <br>
@@ -463,14 +463,14 @@
                     <br>
                     上面的範例很適合拿來參考，因為 B 元素就是被包在 DIV 元素裡面，現在我們寫如下程式來試驗看看：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _division.addEventListener('click', function(){alert('DIV')}, false);
                         _bold.addEventListener('click', function(){alert('B')}, false);
                     </textarea>
                     <br>
                     結果會先跳出 B，然後才跳出 DIV。<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _division.addEventListener('click', function(){alert('DIV')}, true);
                         _bold.addEventListener('click', function(){alert('B')}, true);
                     </textarea>
@@ -581,7 +581,7 @@
                 <p>
                     來看個範例，以建立屬性節點的方式，再將該節點設定給元素節點：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _image = document.createElement('img');
                         document.body.appendChild(_image);
 
@@ -593,7 +593,7 @@
                     <br>
                     事實上這個範例根本不算建立新的屬性：「SRC 屬性早已於內建於 IMG 標籤的元素。」但之所以展示這樣的範例，可以了解到如果屬性已經存在，新的屬性節點會取代舊的：「並不會真的多產生一個節點出來。」了解這點的話，在 DOM 巡訪節點時才不會遇到解不開的瓶頸。所以像下面的程式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _image.setAttribute('src', 'image.png');
                     </textarea>
                     <br>

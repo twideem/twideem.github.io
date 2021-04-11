@@ -50,13 +50,13 @@
                 <p>
                     第一種「HTML 的事件基本結構」我想不用說明，它是 HTML 語法的標準寫法，為人所熟悉。如下範例建立一個 href 為空的 A 標籤，然後捕捉 Double Click 事件，指示它執行 document.write() 函式，這樣當使用者在這超鏈結文字上「雙擊滑鼠鍵」就會顯示 Hello 的訊息內容：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         &lt;a href='' ondblclick='document.write('Hello')'&gt;Click me&lt;/a&gt;
                     </textarea>
                     <br>
                     同樣的程式，以第二種「JavaScript 的事件結構」來寫，則是：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var _anchor = document.createElement('a');
                         document.body.appendChild(_anchor);
                         _anchor.href = '';
@@ -68,7 +68,7 @@
                     <br>
                     如果要呼叫函式名稱，請不要加入 () 符號，先看底下正確的範例：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function hello(){
                             document.write('Hello');
                         }
@@ -81,7 +81,7 @@
                     <br>
                     最後一行如果寫成這樣是不對的：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         _anchor.ondblclick = hello();
                     </textarea>
                     <br>
@@ -128,7 +128,7 @@
                     <br>
                     但每個瀏覽器的鍵盤對應值並不一樣，例如 Num 1 鍵的話，Chrome 是 49，Opera 是 97。因此目前要在網頁平台設計以鍵盤控制的應用程式，必須多花費心力在各家瀏覽器中測試，找出不相容的地方做修正。例如底下範例就是相容兩種瀏覽器的寫法：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         window.onkeydown = function(_event){
                             if(_event.which==49||_event.which==97) document.write('Hello');
                         };

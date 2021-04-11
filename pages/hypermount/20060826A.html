@@ -103,19 +103,19 @@
                     <br>
                     舉個例子，下面的程式，會將網頁中所有 span 標籤的 CSS 設定為紅色：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         jQuery('span').css('color', 'red');
                     </textarea>
                     <br>
                     下面的程式，會選擇網頁中 ID 為 head 的標籤，將內容改為 HELLO：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         jQuery('#head').text('HELLO');
                     </textarea>
                     <br>
                     附帶一提，其實這些寫法可以混搭：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         jQuery('span.notice').css('color', 'red');
                     </textarea>
                     <br>
@@ -219,7 +219,7 @@
                     <br>
                     這樣的效果，jQuery 只需要短短一行：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         jQuery('span:odd').css('background', 'blue');
                     </textarea>
                     <br>
@@ -234,7 +234,7 @@
                 <p>
                     選擇器 jQuery() 因為是最常使用的部分，因此提供 <code>$()</code> 這樣的簡化型式做為替代：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         $('div').css('background', 'red');
                     </textarea>
                     <br>
@@ -419,7 +419,7 @@
                 <p>
                     不得不提的是，jQuery 之所以吸引人，除了方便快速的「選擇器」，另一個特點就是「串接式操作」(Chaining)：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         $('div').css('color:red').fadeOut('slow');
                     </textarea>
                     <br>
@@ -429,14 +429,14 @@
                     <br>
                     最後，基於 Chaining 的特性，還可以延伸出 Callback（回呼）的寫法。例如原本分成兩塊來寫的程式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         $('p').hide(1000);
                         document.write('The paragraph is now hidden');
                     </textarea>
                     <br>
                     可以這麼寫：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         $('p').hide(1000, function(){
                             document.write('The paragraph is now hidden');
                         });
@@ -453,7 +453,7 @@
                 <p>
                     通常 JavaScript 程式會選擇寫在 window 的 onload 事件裡面開始執行：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         window.onload = function(){
                             //開始執行 JavaScript 程式
                         }
@@ -463,7 +463,7 @@
                     <br>
                     jQuery 認為網頁架構好 HTML 程式碼後，就可以執行 JavaScript 程式，等候外部檔案載入完畢才執行根本是浪費時間，因此提供新的寫法：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         $(window).ready(function(){
                             //開始執行 JavaScript 程式
                         });
@@ -473,7 +473,7 @@
                     <br>
                     由於這是建議的執行方式，所以 jQuery 提供更簡單的寫法：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         $(function(){
                             //開始執行 JavaScript 程式
                         });

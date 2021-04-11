@@ -63,7 +63,7 @@
                     <br>
                     這種模組化手法的缺點，就是內部只能用來宣告變數與函式，不能包含此外的程式敘述。例如下面程式意圖在模組內部跑 document.write() 是錯誤的：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var StringBuffer = {
                             buffer: '',
                             window.document.write(StringBuffer.buffer),
@@ -78,7 +78,7 @@
                     <br>
                     底下以 StringBuffer 作範例<ins>[1]</ins>，示範分類的模組化手法。其實只是建立 StringBuffer 名稱空間的 buffer 變數與 append 等函式而已：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var StringBuffer = {
                             buffer: '',
                             append: function(string){
@@ -92,7 +92,7 @@
                     <br>
                     StringBuffer 的使用方式：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         StringBuffer.append('AAA');
                         StringBuffer.append('BBB');
                         StringBuffer.append('CCC');
@@ -149,7 +149,7 @@
                 <p>
                     使用分類的手法時，分類自己內部可以使用 this 來取代名稱空間，例如 StringBuffer 這個範例其實可以這麼寫：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var StringBuffer = {
                             buffer: '',
                             append: function(string){

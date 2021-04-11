@@ -281,7 +281,7 @@
                 <p>
                     來幾個範例，底下程式在你按下「Shift + 空白鍵」時，會顯示文字內容：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         window.onkeydown = function(e){
                             if(e.shiftKey&amp;&amp;e.which==32) document.write('你按下了 Shift + 空白鍵！');
                         }
@@ -291,7 +291,7 @@
                     <br>
                     再來一個範例，底下程式在你按下滑鼠時，網頁會顯示滑鼠游標的座標位置：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         window.onmousedown = function(e){
                             document.write(e.screenX + &lt;/td&gt;&lt;td&gt; + e.screenY);
                         }
@@ -485,13 +485,13 @@
                     <br>
                     第一種是傳入函式物件的參照，需要代入參數時，寫在第三個參數以後。例如五秒後執行 alert('hello')，可以這麼寫：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         setTimeout(alert, 5000, 'hello');
                     </textarea>
                     <br>
                     注意！setTimeout() 或 setInterval() 第一個參數傳入的是「參照」，也就是函式物件的變數名稱，所以下面這個寫法是錯的：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         setTimeout(alert(), 5000, 'hello');  // 加上 () 會失效
                     </textarea>
                     <br>
@@ -501,13 +501,13 @@
                     <br>
                     第二種是將函式連參數寫成字串來執行，行為類似 eval()，所以不推薦：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         setTimeout('alert("hello")', 5000);
                     </textarea>
                     <br>
                     第三種是使用匿名函式來呼叫 alert('hello')，避免如上範例寫成字串：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         setTimeout(function(){
                             alert('hello');
                         }, 5000);

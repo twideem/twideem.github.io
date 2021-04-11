@@ -155,7 +155,7 @@
                         <br>
                         變數的使用範例如下：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var name;
                             name = '趴趴熊';
                             document.write(name);
@@ -172,7 +172,7 @@
                         <br>
                         你可以用：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var a;
                             if(a==undefined){
                                 //Do something
@@ -294,7 +294,7 @@
                     <br>
                     舉例如下，宣告名為 name 的變數，但是不給予值，然後用 if 檢查 name 是不是 undefined，是的話跳出對話視窗：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var name;
                         if(typeof(name)=='undefined'){
                             document.write('你變數忘了存入');
@@ -305,7 +305,7 @@
                     <br>
                     但 typeof 檢查出資料存放的是「物件」時，只會傳回 'object'，如果要進一步檢查是哪一種物件，必須使用 instanceof。舉例如下：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var array = new Array();
                         if(array instanceof Array){
                             document.write('這資料是 Array 沒錯');
@@ -321,7 +321,7 @@
                 <p>
                     通常我們比較需要的，是讓資料從文字轉為數值，因為像下面的程式會顯示 111222：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = '111', b = '222';
                         document.write(a+b);
                     </textarea>
@@ -344,7 +344,7 @@
                     <br>
                     例如下面的範例，可以讓 a 和 b 兩筆文字資料進行加法的四則運算：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = '111', b = '222';
                         document.write(Number(a)+Number(b));
                     </textarea>

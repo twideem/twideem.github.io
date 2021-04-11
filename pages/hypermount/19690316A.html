@@ -61,7 +61,7 @@
                     <br>
                     來看個範例，底下以 StringBuffer 為例<ins>[1]</ins>，示範分類的模組化手法：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function StringBuffer(){
                             var buffer = '';
                             this.append = function(string){
@@ -75,7 +75,7 @@
                     <br>
                     StringBuffer 的使用：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var string_buffer_1 = new StringBuffer();
                         string_buffer_1.append('AAA');
                         string_buffer_1.append('BBB');
@@ -128,7 +128,7 @@
                     <br>
                     最後看個範例：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function StringBuffer(_buffer){
                             var buffer = _buffer || '';
                             this.append = function(string){
@@ -142,7 +142,7 @@
                     <br>
                     使用情況：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var string_buffer = new StringBuffer('AAA');
                         string_buffer.append('BBB');
                         string_buffer.append('CCC');

@@ -24,7 +24,7 @@
             <section>
                 <h2>音樂</h2>
                 <p>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var Music = {
                             _audio: document.createElement('audio'),
                             _track: '',
@@ -48,7 +48,7 @@
             <section>
                 <h2>聲效</h2>
                 <p>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                     var Sound = {
                         _audio: document.createElement('audio'),
                         play: function(x){
@@ -66,7 +66,7 @@
             <section>
                 <h2>聲音</h2>
                 <p>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var Noise = {
                             _audio: document.createElement('audio'),
                             play: function(x){
@@ -91,7 +91,7 @@
                     <p>
                         ES6 引進 Promise 後，Audio 的 play() 會丟 Promise，因此當播放發生不同步的狀況，可以捕捉問題：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var audio = document.createElement('audio')
                             audio.play().catch(function(){
                                 //處理錯誤
@@ -124,7 +124,7 @@
                     <section>
                         <h4>Script</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 //改用陣列取得預先在 HTML 準備好的音效
                                 var audio = document.getElementsByTagName('audio')
                                 function play(index){
@@ -163,7 +163,7 @@
                     <section>
                         <h4>Script</h4>
                         <p>
-                            <textarea class='brush:es'>
+                            <textarea class='brush:js'>
                                 var audio = document.getElementsByTagName('audio')[0]
                                 function play(file){
                                     audio.src = file

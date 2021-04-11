@@ -24,7 +24,7 @@
             <section>
                 <h2>範例</h2>
                 <p>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = document.createElement('button');
                         document.body.appendChild(a);
                         a.innerHTML = '別亂按';
@@ -42,7 +42,7 @@
                 <p>
                     addEventListener() 可用的事件，通常只要將原本事件的 on 去掉即可。例如原本移開滑鼠的事件可能這樣寫：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = document.createElement('button');
                         document.body.appendChild(a);
                         a.innerText = '別走';
@@ -53,7 +53,7 @@
                     <br>
                     addEventListener() 改成這樣…<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = document.createElement('button');
                         document.body.appendChild(a);
                         a.innerText = '別走';
@@ -71,7 +71,7 @@
                 <p>
                     onXXX 系列的事件會被覆寫，addEventListener() 不會。<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = document.createElement('button');
                         document.body.appendChild(a);
                         a.innerText = 'Click';
@@ -96,7 +96,7 @@
                 <p>
                     如果要跑另外寫好的具名函式，請傳入「函式的參照」，而不是「呼叫函式」的觀念。所以要這樣寫才對…<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         function f1(){
                             document.write('AAA');
                         }
@@ -114,14 +114,14 @@
                     <br>
                     這樣是錯的：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         a.addEventListener('click', f1());
                         a.addEventListener('click', f2());
                     </textarea>
                     <br>
                     如果你是剛從其它程式語言跨入 JavaScript 的人，所以不懂為何會有這樣莫名其妙的情景，不妨想像 f1 其實是…<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var f1 = function(){
                             document.write('AAA');
                         };

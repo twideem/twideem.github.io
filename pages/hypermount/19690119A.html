@@ -47,7 +47,7 @@
                 <p>
                     四則運算的部分沒什麼問題，情況就跟你想的一樣：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=5, b=8;
                         document.write(a*b);
                     </textarea>
@@ -56,7 +56,7 @@
                     <br>
                     比較有疑問是遞增與遞減：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=58;
                         a--;
                         document.write(a);
@@ -66,7 +66,7 @@
                     <br>
                     看似簡單沒錯，但關於遞增與遞減，有個情況務必記起來，那就是……<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=58;
                         document.write(a--);
                     </textarea>
@@ -75,14 +75,14 @@
                     <br>
                     這是因為遞增遞減運算子，有分「前置」與「後置」兩種，也就是說可以這樣寫：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         --a
                         a--
                     </textarea>
                     <br>
                     前者表示先遞增再輸出 a，後者表示先輸出 a 再遞減。關於這點，你不妨執行看看這個範例：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=58;
                         document.write(a--);
                         document.write(a);
@@ -92,7 +92,7 @@
                     <br>
                     這個情況告訴我們，如果我們直接就要套用資料的遞增遞減值，必須把運算符號放在資料前面：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=58;
                         document.write(--a);
                     </textarea>
@@ -131,7 +131,7 @@
                     <br>
                     上面的解釋過於簡單，看了還不懂很正常，所以直接看範例來體會比較妥當：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=true, b=false;
                         if(a&amp;&amp;b){
                             document.write('OK');
@@ -142,7 +142,7 @@
                     <br>
                     如果是下面的程式就會執行了！<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         if(a||b){
                             document.write('OK');
                         }
@@ -150,7 +150,7 @@
                     <br>
                     最後來看 NOT 運算，下面這段程式因為把 b 相反過來，false 變成 true，因此也會執行：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         if(!b){
                             document.write('OK');
                         }
@@ -186,7 +186,7 @@
                 <p>
                     直接用範例來說明：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=5, b=8;
                         document.write(a&amp;b);
                     </textarea>
@@ -199,7 +199,7 @@
                     <br>
                     如果把 b 改為 7，則會顯示 5，範例如下：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=5, b=7;
                         document.write(a&amp;b);
                     </textarea>
@@ -270,7 +270,7 @@
                 <p>
                     直接用範例來說明：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a=5, b=8;
                         a+=b;
                         document.write(a);
@@ -287,7 +287,7 @@
                 <p>
                     如果資料是 String 型態的話，+ 運算子計算的，並不是四則運算的加法，而是把兩筆文字資料相接起來！例如：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var a = 'How are you!';
                         var b = 'Fine, thank you.';
                         document.write(a+b);

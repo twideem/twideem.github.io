@@ -48,7 +48,7 @@
                         <br>
                         但這個結構可以依據需要來修正！尤其 for 迴圈的「變數」可以代入「程式敘述」來使用，因此常常會針對變數的使用需求，修正得像是：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             for(var count=0; count&lt;=100; count+=10){
                                 document.write('&lt;img src=' + count + '.jpg&gt;');
                             }
@@ -60,7 +60,7 @@
                         <br>
                         for 迴圈有更複雜一點的應用方式，可用 , 符號，在迴圈結構裡面，設立更多變數條件，例如這樣一個範例…<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             for(var a=0, b=8; a&lt;b; a++, b--){
                                 document.write(a + ':' + b + '&lt;br&gt;');
                             }
@@ -100,7 +100,7 @@
                         <br>
                         來看個例子：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var array = new Array('AAA', 'BBB', 'CCC');
                             for(var x in array){
                                 document.write(array[x]);
@@ -115,7 +115,7 @@
                         <br>
                         上面程式相當於如下程式，可以看出來更簡潔的地方：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var array = new Array('AAA', 'BBB', 'CCC');
                             for(x=0; x&lt;array.length; x++){
                                 document.write(array[x]);
@@ -147,7 +147,7 @@
                         <br>
                         來看個例子：<br>
                         <br>
-                        <textarea class='brush:es'>
+                        <textarea class='brush:js'>
                             var collections = ['AAA','BBB','CCC'];
                             for(var n of collections){
                                 document.write(n);
@@ -195,7 +195,7 @@
                     <br>
                     舉個範例如下：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         var password = prompt('請設定一組密碼');
                         while(password.length&lt;4){
                             window.alert('輸入的密碼長度過短，請使用至少 4 個字做為密碼。');
@@ -242,7 +242,7 @@
                     <br>
                     舉個範例如下：<br>
                     <br>
-                    <textarea class='brush:es'>
+                    <textarea class='brush:js'>
                         do {
                             var password = prompt('請設定一組密碼');
                         }

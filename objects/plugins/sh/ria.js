@@ -81,6 +81,7 @@
             {regex:r.multiLineDoubleQuotedString,css:'string'},
             {regex:r.multiLineSingleQuotedString,css:'string'},
             {regex:/(`)([^\1])*?\1/gm,css:'string'},
+            {regex:/(\/)([^\1])*?\1/gm,css:'string'},
             {regex:/\b\d+\.?\w*/g,css:'value'},
             {regex:/\s*#.*/gm,css:'preprocessor'},
             {regex:new RegExp(this.getKeywords('async break case catch class const continue default delete do else export extends false for function if import in instanceof let new null of return static super switch this throw true try typeof undefined var while with yield'),'gm'),css:'keyword'},

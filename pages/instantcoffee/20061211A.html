@@ -27,7 +27,7 @@
                     <br>
                     可是，Nashorn 的 ECMAScript 6 標準化步調比 Rhino 緩慢，功能也比較不穩定，例如寫 Swing 要重繪 JFrame 否則元件不會顯示出來，視窗關閉鈕按了沒反應，setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) 形同虛設。而所謂性能好，坦白說其實一樣差，拿這個來比只是在比爛而已！<br>
                     <br>
-                    最後，ECMAScript 釋出新版的步調太快，Oracle 覺得維護 Nashorn 是 <del>虧本</del> 的工作，不打算繼續這項專案。於是 Java 11 將 Nashorn 引擎列為 deprecated，在 Java 15 正式汰除，我們還是得回頭下載新版的 Rhino 來用…幸好這才是原本真正該走的路～
+                    最後，ECMAScript 釋出新版的步調太快，Oracle 覺得繼續維護 Nashorn 太困難，決定放棄這項專案。於是 Java 11 將 Nashorn 引擎列為 deprecated，在 Java 15 正式汰除。現在我們得回頭下載新版的 Rhino 來用，幸好這才是原本真正該走的路～
                 </p>
             </header>
 
@@ -409,11 +409,11 @@
                         Thread.sleep(3000)
                         LogiLED.LogiLedShutdown()
 
-                        //要安裝 Logitech G HUB 且軟體執行中，關閉的話不會有反應。
+                        // 要安裝 Logitech G HUB 且軟體執行中，關閉的話不會有反應。
                     </textarea>
                     <br>
                     <output>
-                        java -cp .;logiled.jar;"%JAVA_HOME%\lib\rhino-1.7.7.2.jar" org.mozilla.javascript.tools.shell.Main -version 200 -encoding UTF-8 main.js
+                        java -cp .;logiled.jar;"%JAVA_HOME%\lib\rhino-1.7.7.2.jar" org.mozilla.javascript.tools.shell.Main main.js
                     </output>
                 </p>
             </section>
@@ -815,7 +815,7 @@
                             <br>
                             不過 MANIFEST.MF 無法指定 encoding 為 UTF-8，所以在預設為 ASCII 字元編碼的 Windows 會亂碼。<br>
                             <br>
-                            解決辦法是原始碼的字元編碼改用 Big5 或 Unicode！尤其 Unicode 是 Java 預設使用的字元編碼，不需要 -Dfile.encoding 就能混用多國文字，是想避開字元編碼問題最佳的選擇！
+                            解決辦法是原始碼的字元編碼改用 Big5 或 UTF-16！尤其 UTF-16 是 Java 和 JavaScript 預設使用的字元編碼，不需要 -Dfile.encoding 就能混用多國文字，是想避開字元編碼問題最佳的選擇！
                         </p>
                     </section>
                     <section>
@@ -870,6 +870,101 @@
                             jjs -Dnashorn.args=--language=es6 main.js
                         </output>
                     </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>JavaScript 程式設計錦囊</h3>
+                    <section>
+                        <h4>Value object</h4>
+                        <p>
+                            <textarea class='brush:js'>
+                                print('abc'.toUpperCase())
+                                print((123).toString(2))
+                                print((false).toString().toUpperCase())
+                                print([111,222,333].reverse())
+                                if(/^[A-z]\w{6,}\d$/.test('abcd1234')) print('密碼有效')
+                            </textarea>
+                            <br>
+                            <output>
+                                ABC<br>
+                                1111011<br>
+                                FALSE<br>
+                                333,222,111<br>
+                                密碼有效
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Higher-order function</h4>
+                        <p>
+                            <textarea class='brush:js'>
+                                // Method references 1
+                                [111,222,333].forEach(print)
+
+                                // Method references 2
+                                function f(x){
+                                    print(x*2)
+                                }
+                                [111,222,333].forEach(f)
+
+                                // Anonymous function
+                                [111,222,333].forEach(x=>print(++x))
+                            </textarea>
+                            <br>
+                            <output>
+                                111 0 111,222,333<br>
+                                222 1 111,222,333<br>
+                                333 2 111,222,333<br>
+                                <br>
+                                222<br>
+                                444<br>
+                                666<br>
+                                <br>
+                                112<br>
+                                223<br>
+                                334
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Destructuring assignment</h4>
+                        <p>
+                            <textarea class='brush:js'>
+                                var a,b,c
+
+                                [a,b,c] = [123,456,789]
+
+                                print(a)
+                                print(b)
+                                print(c)
+                            </textarea>
+                            <br>
+                            <output>
+                                123<br>
+                                456<br>
+                                789
+                            </output>
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Top-level functions</h4>
+                        <p>
+                            善用以下函式：<br>
+                            <br>
+                            eval(string)<br>
+                            parseInt(string [,radix])<br>
+                            parseFloat(string)<br>
+                            isFinite(value)<br>
+                            encodeURI(string)<br>
+                            decodeURI(string)<br>
+                            encodeURIComponent(string)<br>
+                            dncodeURIComponent(string)<br>
+                            <br>
+                            建議用 Number.isNaN() 取代 isNaN()。<br>
+                            建議用 String.charOcdeAt() 取代 escape()。<br>
+                            建議用 String.fromCharCode() 取代 unescape()。
+                        </p>
+                    </section>
                 </section>
             </section>
 
