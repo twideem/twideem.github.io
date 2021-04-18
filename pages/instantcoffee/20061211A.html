@@ -44,7 +44,7 @@
                         ．<a href='#anchor3'>在 Java 載入 *.js 檔案</a><br>
                         ．<a href='#anchor4'>直接用 JDK 執行 *.js 檔</a><br>
                         ．<a href='#anchor5'>Interactive mode</a><br>
-                        ．<a href='#anchor6'>掛載新版 Rhino 引擎</a><strong>（推薦使用）</strong><br>
+                        ．<a href='#anchor6'>掛載新版 Rhino 引擎</a><strong>（推薦）</strong><br>
                         ．<a href='#anchor7'>如何取得 Java 內建 JavaScript 引擎的版本</a>
                     </p>
                 </section>
@@ -291,14 +291,14 @@
                     <br>
                     <a href='http://github.com/mozilla/rhino/releases' target='_blank'>http://github.com/mozilla/rhino/releases</a><br>
                     <br>
-                    1.7.8 版開始，必須 Java SE 8 以上才能使用，所以 Java SE 6 最多只能下載 1.7.7.2 版來用。
+                    1.7.8 版開始，必須 Java SE 8 以上才能使用，所以 Java SE 7 最多只能下載 1.7.7.2 版來用。
                 </p>
                 <hr>
                 <section>
                     <h3>直譯 *.js 檔</h3>
                     <p>
                         <output>
-                            java -jar rhino-1.7.7.2.jar main.js<br>
+                            java -jar rhino.jar *.js<br>
                         </output>
                         <br>
                         用 java.exe 來執行，會比 jrunscript.exe 少很多問題，建議使用！<br>
@@ -306,10 +306,10 @@
                         不過，用 -jar 的話，CLASSPATH 就只限於 JAR 檔案包內，這樣 Rhino 的 Packages 物件無法找到其它位置的類別。若需要在 JavaScript 搭配 *.class 跑 Java 程式，應該用 -cp 參數來使用 Rhino 的 JAR，像這樣：<br>
                         <br>
                         <output>
-                            java -cp .;rhino-1.7.7.2.jar org.mozilla.javascript.tools.shell.Main main.js<br>
+                            java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js<br>
                         </output>
                         <br>
-                        另外，*.js 原始碼檔案使用不含 BOM 的 UTF-8 字元編碼的話，在 Windows 會遇到亂碼的問題。這時要下 <var>-encoding UTF-8</var> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino-1.7.7.2.jar，也可以下 <var>-Dfile.encoding=UTF-8</var> 參數給 java.exe。<br>
+                        另外，*.js 原始碼檔案使用不含 BOM 的 UTF-8 字元編碼的話，在 Windows 會遇到亂碼的問題。這時要下 <var>-encoding UTF-8</var> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino.jar，也可以下 <var>-Dfile.encoding=UTF-8</var> 參數給 java.exe。<br>
                         <br>
                         其他常用的參數如下：
                     </p>
@@ -327,7 +327,7 @@
                     <h3>編譯 *.js 為 *.class</h3>
                     <p>
                         <output>
-                            java -cp rhino-1.7.7.2.jar org.mozilla.javascript.tools.jsc.Main *.js<br>
+                            java -cp rhino.jar org.mozilla.javascript.tools.jsc.Main script.js<br>
                         </output>
                         <br>
                         雖然 Java SE 6 內建 Rhino 引擎，但並未提供所有功能，只內建 org.mozilla.javascript.internal 而已。所以，要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools 可用。<br>
@@ -335,14 +335,7 @@
                         編譯出來的 *.class 將是 Rhino 的 NativeFunction 物件，需符合 Scriptable 的條件才能執行，所以只用 java.exe 無法執行，得搭配 Rhino 的 JAR：<br>
                         <br>
                         <output>
-                            java -cp .;rhino-1.7.7.2.jar [類別名稱]<br>
-                        </output>
-                        <br>
-                        或許編譯後執行的效率會比直譯好？所以你決定這樣寫程式的話，建議把 JAR 丟進 JRE 的 lib\ext 資料夾，編譯和執行的指令就能簡化成下面這樣：<br>
-                        <br>
-                        <output>
-                            java org.mozilla.javascript.tools.jsc.Main main.js<br>
-                            java -cp . main<br>
+                            java -cp .;rhino.jar script
                         </output>
                     </p>
                 </section>
@@ -351,7 +344,7 @@
                     <h3>使用新版 Rhino 在 Java 內嵌 JavaScript 程式</h3>
                     <p>
                         <output>
-                            javac -cp rhino-1.7.7.2.jar *.java<br>
+                            javac -cp rhino.jar *.java<br>
                         </output>
                         <br>
                         因為 Java SE 6 和 Java SE 7 已經內建 Rhino，所以這比較適合內建 Nashorn 的 Java SE 8 使用，甚至兩種都沒內建的 Java SE 15 使用。<br>
@@ -427,8 +420,8 @@
                         // 要安裝 Logitech G HUB 且軟體執行中，關閉的話不會有反應。
                     </textarea>
                     <br>
-                    <output>
-                        java -cp .;logiled.jar;"%JAVA_HOME%\lib\rhino-1.7.7.2.jar" org.mozilla.javascript.tools.shell.Main main.js
+                    <output style='font-size:9pt'>
+                        java -cp .;logiled.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
                     </output>
                 </p>
             </section>
@@ -697,6 +690,32 @@
                 </p>
                 <hr>
                 <section>
+                    <h3>arguments</h3>
+                    <p>
+                        這不是函式物件的 arguments，在 global 物件用來取得命令列下的參數。<br>
+                        <br>
+                        範例：<br>
+                        <br>
+                        <textarea class='brush:js'>
+                            print(arguments[0])
+                        </textarea>
+                        <br>
+                        <output>
+                            java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js 123<br>
+                            123<br>
+                        </output>
+                        <br>
+                        如果想拖曳檔案給 JavaScript 程式使用，可以在執行 *.js 的批次檔用 %1 到 %9 當作參數：<br>
+                        <br>
+                        <output>
+                            java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js %1<br>
+                        </output>
+                        <br>
+                        再把檔案拖曳到批次檔即可。
+                    </p>
+                </section>
+                <hr>
+                <section>
                     <h3>history</h3>
                     <p>
                         紀錄 Shell 輸入過的指令。
@@ -960,7 +979,7 @@
                     下載 jl1.0.1.jar、mp3spi1.9.5.jar、tritonus_share-0.3.6.jar 三個套件，用 -classpath 參數掛載進去：<br>
                     <br>
                     <output>
-                        java -cp .;jl1.0.1.jar;mp3spi1.9.5.jar;tritonus_share-0.3.6.jar;rhino-1.7.7.2.jar org.mozilla.javascript.tools.shell.Main main.js<br>
+                        java -cp .;jl1.0.1.jar;mp3spi1.9.5.jar;tritonus_share-0.3.6.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js<br>
                     </output>
                     <br>
                     就具備播放 MP3 格式的能力了！不用修改程式碼。
@@ -1002,23 +1021,6 @@
                 </section>
                 <hr>
                 <section>
-                    <h3>拖曳檔案到批次檔圖示的命令列參數之取得</h3>
-                    <p>
-                        首先批次檔用 %1 到 %9 表示接受參數：<br>
-                        <br>
-                        <output>
-                            java -cp . org.mozilla.javascript.tools.shell.Main main.js %1<br>
-                        </output>
-                        <br>
-                        然後透過 Rhino 內建屬性 arguments 就能取得：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            print(arguments[0])
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
                     <h3>關於 GUI</h3>
                     <p>
                         用直譯器執行 *.js 程式檔，必然會伴隨一個命令提示字元的視窗，對視窗應用程式來說相當礙眼。
@@ -1051,40 +1053,6 @@
                             仰賴 Java 的 Executable JAR 不見得是理想的解決方案，不妨用 C 語言或 C# 語言，自己比照下載的範例，做一個 launcher.exe 來執行。
                         </p>
                     </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>關於 Nashorn</h3>
-                    <p>
-                        由於 Java 通用的直譯器 jrunscript.exe 問題很多、不實用，所以 Nashorn 準備自己專屬的直譯器：jjs.exe，雖然還是有點問題，但性能高很多。<br>
-                        <br>
-                        要改用 Nashorn 的話，調用 Java API 的做法和 Rhino 很不一樣：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            let JFrame=Java.type('javax.swing.JFrame')
-                            let JButton=Java.type('javax.swing.JButton')
-
-                            let frame = new JFrame()
-                            let button = new JButton()
-                            frame.setTitle('Frame 1')
-                            frame.setSize(400, 300)
-                            frame.setLocationRelativeTo(null)
-                            frame.setVisible(true)
-                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-                            button.setLocation(40, 100)
-                            button.setSize(300, 30)
-                            button.setText('開啟另一視窗')
-                            frame.setLayout(null)
-                            frame.add(button)
-                            button.addActionListener(()=>{
-                                button.text='其實只有這個視窗而已'
-                            })
-                        </textarea>
-                        <br>
-                        <output>
-                            jjs -Dnashorn.args=--language=es6 main.js
-                        </output>
-                    </p>
                 </section>
                 <hr>
                 <section>
