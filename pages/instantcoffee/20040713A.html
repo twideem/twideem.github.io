@@ -52,16 +52,28 @@
                                 try{
                                     AudioInputStream audio_input_stream = AudioSystem.getAudioInputStream(new File(filename));
                                     AudioFormat audio_format = audio_input_stream.getFormat();
+                                    if(audio_format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
+                                        audio_format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audio_format.getSampleRate(), 16, audio_format.getChannels(), audio_format.getChannels() * 2, audio_format.getSampleRate(), false);
+                                        audio_input_stream = AudioSystem.getAudioInputStream(audio_format, audio_input_stream);
+                                    }
                                     DataLine.Info info = new DataLine.Info(SourceDataLine.class, audio_format);
                                     SourceDataLine source_data_line = (SourceDataLine)AudioSystem.getLine(info);
                                     source_data_line.open(audio_format);
                                     source_data_line.start();
-                                    byte[] b = new byte[256];
-                                    for(int i=0; (i=audio_input_stream.read(b,0,b.length))>0;){
-                                        source_data_line.write(b,0,i);
+                                    byte[] bytes = new byte[256];
+                                    if(source_data_line != null){
+                                        int read = 0;
+                                        while(read != -1){
+                                            read = audio_input_stream.read(bytes, 0, bytes.length);
+                                            if(read != -1){
+                                                source_data_line.write(bytes, 0, read);
+                                            }
+                                        }
+                                        source_data_line.drain();
+                                        source_data_line.stop();
+                                        source_data_line.close();
                                     }
-                                    source_data_line.drain();
-                                    source_data_line.close();
+                                    audio_input_stream.close();
                                 }
                                 catch(Exception exception){
                                     exception.printStackTrace();
@@ -70,6 +82,28 @@
 
                         }
                     </textarea>
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>MP3</h2>
+                <p>
+                    請至 <a href='http://www.javazoom.net' target='_blank'>http://www.javazoom.net</a> 下載 MP3SPI，裡面內含 jl1.0.1.jar、mp3spi1.9.5.jar、tritonus_share.jar 三個套件，可用來播放 MP3 格式的檔案。<br>
+                    <br>
+                    程式碼跟 WAVE 一樣，只要掛載第三方套件，同樣的程式碼就能解碼 MPEG Audio Layer III 音訊。
+                </p>
+            </section>
+
+            <hr>
+
+            <section>
+                <h2>OGG</h2>
+                <p>
+                    請至 <a href='http://www.javazoom.net' target='_blank'>http://www.javazoom.net</a> 下載 VorbisSPI，裡面內含 jogg-0.0.7.jar、jorbis-0.0.15.jar.jar、tritonus_share.jar、vorbisspi1.0.3.jar 四個套件，可用來播放 OGG 格式的檔案。<br>
+                    <br>
+                    程式碼跟 WAVE 一樣，只要掛載第三方套件，同樣的程式碼就能解碼 Vorbis 音訊。
                 </p>
             </section>
 
@@ -97,126 +131,10 @@
                                     sequencer.open();
                                     sequencer.setSequence(MidiSystem.getSequence(new File(filename)));
                                     sequencer.start();
-                                    Thread.sleep(sequencer.getMicrosecondLength()/1000);
+                                    Thread.sleep(sequencer.getMicrosecondLength() / 1000);
                                     sequencer.close();
                                 }
                                 catch (Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
-
-                        }
-                    </textarea>
-                </p>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>OGG</h2>
-                <p>
-                    必須使用第三方套件來解碼 Vorbis 音訊，請至 <a href='http://www.javazoom.net' target='_blank'>http://www.javazoom.net</a> 下載 VorbisSPI，裡面內含 jogg-0.0.7.jar、jorbis-0.0.15.jar.jar、tritonus_share.jar、vorbisspi1.0.3.jar 四個套件，可用來播放 OGG 格式的檔案。<br>
-                    <br>
-                    程式碼如下：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.io.File;
-                        import javax.sound.sampled.AudioFormat;
-                        import javax.sound.sampled.AudioInputStream;
-                        import javax.sound.sampled.AudioSystem;
-                        import javax.sound.sampled.DataLine;
-                        import javax.sound.sampled.SourceDataLine;
-
-                        public class Main{
-
-                            public static void main(String[] args){
-                                play("music.ogg");
-                            }
-
-                            public static void play(String filename){
-                                try{
-                                    AudioInputStream audio_input_stream = AudioSystem.getAudioInputStream(new File(filename));
-                                    AudioFormat audio_format = audio_input_stream.getFormat();
-                                    if(audio_format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
-                                        audio_format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audio_format.getSampleRate(), 16, audio_format.getChannels(), audio_format.getChannels() * 2, audio_format.getSampleRate(), false);
-                                        audio_input_stream = AudioSystem.getAudioInputStream(audio_format, audio_input_stream);
-                                    }
-                                    DataLine.Info info = new DataLine.Info(SourceDataLine.class, audio_format);
-                                    SourceDataLine source_data_line = (SourceDataLine)AudioSystem.getLine(info);
-                                    source_data_line.open(audio_format);
-                                    source_data_line.start();
-                                    byte[] b = new byte[256];
-                                    if(source_data_line != null){
-                                        int i = 0, j = 0;
-                                        while (i != -1){
-                                            i = audio_input_stream.read(b, 0, b.length);
-                                            if(i != -1) j = source_data_line.write(b, 0, i);
-                                        }
-                                        source_data_line.drain();
-                                        source_data_line.stop();
-                                        source_data_line.close();
-                                    }
-                                    audio_input_stream.close();
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
-
-                        }
-                    </textarea>
-                </p>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>MP3</h2>
-                <p>
-                    必須使用第三方套件來解碼 MPEG Audio Layer III 音訊，請至 <a href='http://www.javazoom.net' target='_blank'>http://www.javazoom.net</a> 下載 MP3SPI，裡面內含 jl1.0.1.jar、mp3spi1.9.5.jar、tritonus_share.jar 三個套件，可用來播放 MP3 格式的檔案。<br>
-                    <br>
-                    程式碼跟 OGG 一樣，只是掛載的解碼器與播放的檔名不一樣而已：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.io.File;
-                        import javax.sound.sampled.AudioFormat;
-                        import javax.sound.sampled.AudioInputStream;
-                        import javax.sound.sampled.AudioSystem;
-                        import javax.sound.sampled.DataLine;
-                        import javax.sound.sampled.SourceDataLine;
-
-                        public class Main{
-
-                            public static void main(String[] args){
-                                play("music.mp3");
-                            }
-
-                            public static void play(String filename){
-                                try{
-                                    AudioInputStream audio_input_stream = AudioSystem.getAudioInputStream(new File(filename));
-                                    AudioFormat audio_format = audio_input_stream.getFormat();
-                                    if(audio_format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
-                                        audio_format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audio_format.getSampleRate(), 16, audio_format.getChannels(), audio_format.getChannels() * 2, audio_format.getSampleRate(), false);
-                                        audio_input_stream = AudioSystem.getAudioInputStream(audio_format, audio_input_stream);
-                                    }
-                                    DataLine.Info info = new DataLine.Info(SourceDataLine.class, audio_format);
-                                    SourceDataLine source_data_line = (SourceDataLine)AudioSystem.getLine(info);
-                                    source_data_line.open(audio_format);
-                                    source_data_line.start();
-                                    byte[] b = new byte[256];
-                                    if(source_data_line != null){
-                                        int i = 0, j = 0;
-                                        while (i != -1){
-                                            i = audio_input_stream.read(b, 0, b.length);
-                                            if(i != -1) j = source_data_line.write(b, 0, i);
-                                        }
-                                        source_data_line.drain();
-                                        source_data_line.stop();
-                                        source_data_line.close();
-                                    }
-                                    audio_input_stream.close();
-                                }
-                                catch(Exception exception){
                                     exception.printStackTrace();
                                 }
                             }

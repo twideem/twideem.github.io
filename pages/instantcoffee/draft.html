@@ -311,112 +311,16 @@
             <hr>
 
             <section>
-                <h2>State 設計模式</h2>
-                <hr>
-                <section>
-                    <h3>State.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface State{
-                                State operate();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements State{
-
-                                public State operate(){
-                                    System.out.println("AAA");
-                                    return new B();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements State{
-
-                                public State operate(){
-                                    System.out.println("BBB");
-                                    return new C();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>C.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class C implements State{
-
-                                public State operate(){
-                                    System.out.println("BBB");
-                                    return null;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Context.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Context{
-
-                                private State state = new A();
-
-                                public void request(){
-                                    this.state = this.state.operate();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    Context context = new Context();
-                                    context.request();
-                                    context.request();
-                                    context.request();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出結果</h3>
-                    <p>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC
-                        </output>
-                    </p>
-                </section>
+                <h2>多用合成、少用繼承的時機</h2>
+                <p>
+                    如果只想用某物件的幾個功能，就用合成，以免繼承了其它用不到的功能。這些用不到的功能，會成為日後搞壞設計的潛在因素，這就是繼承惡名昭彰的地方。<br>
+                    <br>
+                    如果你想用某個類別，但是它缺少某些功能，就用繼承的方式追加上去，然後用新的類別取代舊的類別。這種用法是安全的，濫用繼承雖然有缺點，但有它妙用的地方。<br>
+                    <br>
+                    不經思考、凡事都用繼承的話，之後經常要另外寫程式防堵用不到的功能。例如你想藉由 ArrayList 的 add() 做為增加資料的功能，用繼承的話，日後很可能要防堵有人用 remove() 和 clear() 刪除資料。所以「多用合成、少用繼承」是物件導向程式設計的共同經驗法則。<br>
+                    <br>
+                    最後補充一下，當你要防堵繼承而來的功能時，請馬上改用合成，而不是去防堵。
+                </p>
             </section>
 
             <hr>
@@ -443,9 +347,7 @@
                         }
                     </textarea>
                     <br>
-                    然後有人想說如何取得 a 的 reference 傳入 f()，好輸出 1 和 1。<br>
-                    <br>
-                    答案是不行，Java 沒辦法這樣做。但問題不是出在 Java 不能這麼做，而是這根本不符合物件導向的設計精神，所以不希望你這麼做。<br>
+                    然後有人想說如何取得 a 的 reference 傳入 f()？答案是不行，Java 沒辦法這樣做。但問題不是出在 Java 不能這麼做，而是這根本不符合物件導向的設計精神，所以不希望你這麼做。<br>
                     <br>
                     物件導向至少應該這麼寫：<br>
                     <br>
@@ -481,34 +383,6 @@
                     </textarea>
                     <br>
                     雖然 Set 本身就是「濾除重複資料」的資料集合介面，TreeSet 本身就是「自動排序」的資料集合實作，但藉由把變數名稱取為「濾除重複資料並自動排序」，來說明使用 Set 與 TreeSet 的目的正是如此沒錯，可以加強程式碼的傳達力，讓閱讀者更直接了解你的想法。
-                </p>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>多用合成、少用繼承的時機</h2>
-                <p>
-                    如果只想用某物件的幾個功能，就用合成，以免繼承了其它用不到的功能。這些用不到的功能，會成為日後搞壞設計的潛在因素，這就是繼承惡名昭彰的地方。<br>
-                    <br>
-                    如果你想用某個類別，但是它缺少某些功能，就用繼承的方式追加上去，然後用新的類別取代舊的類別。這種用法是安全的，濫用繼承雖然有缺點，但有它妙用的地方。<br>
-                    <br>
-                    不經思考、凡事都用繼承的話，之後經常要另外寫程式防堵用不到的功能。例如你想藉由 ArrayList 的 add() 做為增加資料的功能，用繼承的話，日後很可能要防堵有人用 remove() 和 clear() 刪除資料。所以「多用合成、少用繼承」是物件導向程式設計的共同經驗法則。<br>
-                    <br>
-                    最後補充一下，當你要防堵繼承而來的功能時，請馬上改用合成，而不是去防堵。
-                </p>
-            </section>
-
-            <hr>
-
-            <section>
-                <h2>nil、null、undefined</h2>
-                <p>
-                    nil，nothing，沒有東西。<br>
-                    <br>
-                    null，having a value of zero，有值，但等於零，是空的。<br>
-                    <br>
-                    undefined，not having been given a definition，沒有賦值。
                 </p>
             </section>
 

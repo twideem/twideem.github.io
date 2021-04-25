@@ -23,12 +23,15 @@
                 <p>
                     Java SE 6 開始，不但可以讓其他程式語言跑 JVM，像是 PHP、Ruby、Python，並且內建 JavaScript 引擎：Rhino！這是由 Mozilla 以 Java 寫出來的，長年維護下來，功能穩定。<br>
                     <br>
-                    不過，到了 Java SE 8，Oracle 重寫了新的 JavaScript 引擎：Nashorn，有更好的性能，且更符合 ECMAScript 5 標準，於是取代了 Rhino。<br>
+                    可惜的是，Java SE 8 開始改用 Nashorn 取代，雖然號稱性能更好，但功能不穩定，加上 ECMAScript 6 標準化步調比 Rhino 緩慢，其實沒有比較好用～<br>
                     <br>
-                    可是，Nashorn 的 ECMAScript 6 標準化步調比 Rhino 緩慢，功能也比較不穩定，例如寫 Swing 要重繪 JFrame 否則元件不會顯示出來，視窗關閉鈕按了沒反應，setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) 形同虛設。而所謂性能好，坦白說其實一樣差，拿這個來比只是在比爛而已！<br>
+                    Java 11 時宣布放棄 Nashorn，然後在 Java 15 正式汰除 Nashorn，並且不再內建 JavaScript 引擎…於是我們只得回頭下載新版的 Rhino 來用。<br>
                     <br>
-                    最後，ECMAScript 釋出新版的步調太快，Oracle 覺得繼續維護 Nashorn 太困難，決定放棄這項專案。於是 Java 11 將 Nashorn 引擎列為 deprecated，在 Java 15 正式汰除。現在我們得回頭下載新版的 Rhino 來用，幸好這才是原本真正該走的路～
+                    幸好這才是原本真正該走的路，與 Java 整合得更好的 Rhino，一向是最適合 Java 的 JavaScript 引擎！
                 </p>
+                <!--
+                    所謂 Nashorn 性能較佳，坦白說其實一樣差，比性能只是在比爛而已。但 Rhino 與 Java 高度整合的功能穩定性，能讓你毫無障礙、隨心所欲地用 JavaScript 語言存取 Java API，這才是 JavaScript 的重點！如果是為了性能，那應該繼續用 Java 語言寫程式才對，之所以用 JavaScript 語言，是為了比 Java 語言寫得更快不是嗎？因此當然是功能穩定沒什麼問題的 Rhino，要比性能較好但問題較多的 Nashorn，更適合做為 Java 的 JavaScript 引擎！用 Rhino 寫程式，就是比容易鬼打牆的 Nashorn 快～
+                -->
             </header>
 
             <hr>
@@ -50,10 +53,10 @@
                 </section>
                 <hr>
                 <section>
-                    <h3>語法的相容</h3>
+                    <h3>語言的相容</h3>
                     <p>
                         ．<a href='#anchor8'>在 JavaScript 使用 Java API</a><br>
-                        ．<a href='#anchor9'>調用 JNI 的外部 API</a><br>
+                        ．<a href='#anchor9'>調用 JNI 的外部 SDK</a><br>
                         ．<a href='#anchor10'>在 JavaScript 引用 Java 的資料型態</a><br>
                         ．<a href='#anchor11'>覆載物件方法與實作介面功能</a><br>
                         ．<a href='#anchor12'>多執行緒</a><br>
@@ -61,23 +64,26 @@
                         ．<a href='#anchor14'>最頂層物件</a><br>
                         ．<a href='#anchor15'>列出 JavaScript 物件的屬性和方法</a><br>
                         ．<a href='#anchor16'>Rhino 內建屬性和函式</a><br>
-                        ．<a href='#anchor17'>其它 Rhino 支援的非標準語法</a>
+                        ．<a href='#anchor17'>其它 Rhino 的不標準語法</a>
                     </p>
                 </section>
                 <hr>
                 <section>
                     <h3>功能的應用</h3>
                     <p>
-                        ．<a href='#anchor18'>Swing 程式設計</a><br>
+                        ．<a href='#anchor18'>Swing 視窗程式設計</a><br>
                         ．<a href='#anchor19'>播放 WAVE 和 MP3 音樂</a><br>
                         ．<a href='#anchor20'>播放 MIDI 音樂</a><br>
+                        ．<a href='#anchor21'>壓縮與解壓縮 ZIP 檔案</a><br>
+                        ．<a href='#anchor22'>使用 SQLite 資料庫</a><br>
+                        ．<a href='#anchor23'>簡易 HTTP 伺服器</a><br>
                     </p>
                 </section>
                 <hr>
                 <section>
                     <h3>其他</h3>
                     <p>
-                        ．<a href='#anchor21'>附錄</a><br>
+                        ．<a href='#appendix'>附錄</a><br>
                         ．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/' target='_blank'>JavaScript reference</a><br>
                         ．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/' target='_blank'>Standard built-in objects</a><br>
                         ．<a href='http://ringojs.org' target='_blank'>RingoJS</a>
@@ -262,6 +268,9 @@
                     <p>
                         <output>
                             jrunscript script.js<br>
+                        </output>
+                        <br>
+                        <output>
                             Hello, JavaScript!
                         </output>
                     </p>
@@ -326,13 +335,13 @@
                 <section>
                     <h3>編譯 *.js 為 *.class</h3>
                     <p>
+                        雖然 Java SE 6 內建 Rhino 引擎，但只打包部分功能，並未提供所有功能。所以，要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools.jsc 可用：<br>
+                        <br>
                         <output>
                             java -cp rhino.jar org.mozilla.javascript.tools.jsc.Main script.js<br>
                         </output>
                         <br>
-                        雖然 Java SE 6 內建 Rhino 引擎，但並未提供所有功能，只內建 org.mozilla.javascript.internal 而已。所以，要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools 可用。<br>
-                        <br>
-                        編譯出來的 *.class 將是 Rhino 的 NativeFunction 物件，需符合 Scriptable 的條件才能執行，所以只用 java.exe 無法執行，得搭配 Rhino 的 JAR：<br>
+                        編譯出來的 *.class 是 Rhino 的 NativeFunction 物件，需符合 Scriptable 才能動，所以只用 java.exe 無法執行，得搭配 Rhino 的 JAR：<br>
                         <br>
                         <output>
                             java -cp .;rhino.jar script
@@ -378,7 +387,7 @@
                         a.add('BBB')
                         a.add('CCC')
 
-                        for(let n=0; n&lt;a.size(); n++){
+                        for(let n = 0; n &lt; a.size(); n++){
                             print(a.get(n))
                         }
                     </textarea>
@@ -404,7 +413,7 @@
             <hr id='anchor9'>
 
             <section>
-                <h2>調用 JNI 的外部 API</h2>
+                <h2>調用 JNI 的外部 SDK</h2>
                 <p>
                     以「<a href='https://www.logitechg.com/zh-tw/innovation/developer-lab.html' target='_blank'>羅技 G 系列開發者實驗室</a>」開放下載的「LED 照明 SDK」為例：<br>
                     <br>
@@ -448,7 +457,7 @@
 
                         // char[]
                         let chars = java.lang.reflect.Array.newInstance(java.lang.Character.TYPE, 26)
-                        for(let n=0; n<chars.length; n++){
+                        for(let n = 0; n &lt; chars.length; n++){
                             chars[n] = 65 + n
                         }
                         print(chars[25])
@@ -692,7 +701,7 @@
                 <section>
                     <h3>arguments</h3>
                     <p>
-                        這不是函式物件的 arguments，在 global 物件用來取得命令列下的參數。<br>
+                        這不是函式物件的 arguments，而是 global 物件的，用來取得傳給命令列的參數。<br>
                         <br>
                         範例：<br>
                         <br>
@@ -702,6 +711,9 @@
                         <br>
                         <output>
                             java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js 123<br>
+                        </output>
+                        <br>
+                        <output>
                             123<br>
                         </output>
                         <br>
@@ -836,21 +848,66 @@
             <hr id='anchor17'>
 
             <section>
-                <h2>其它 Rhino 支援的非標準語法</h2>
-                <p>
-                    function 物件裡面只有一行敘述的話，可以省略 {} 括號，例如：<br>
-                    <br>
-                    <code>
-                        let sayHello = function() print('Hello!')<br>
-                        sayHello()
-                    </code>
-                </p>
+                <h2>其它 Rhino 的不標準語法</h2>
+                <hr>
+                <section>
+                    <h3>var 在全域範疇的影響</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            // 在全域範疇宣告變數 a。
+                            var a = 123
+                            // 看全域物件是不是有了 a 屬性，得到的是 undefined。
+                            print(global.a)
+                            // 確認全域物件是什麼，是 global 沒錯。
+                            print(this)
+                            // 透過 this 取出變數 a 看看，確實是有 123 這筆資料。
+                            print(this.a)
+                            // 這下知道怎麼對 global 取出變數 a 了，一定在 prototype 裡。
+                            print(global.prototype.a)
+                        </textarea>
+                        <br>
+                        <output>
+                            undefined<br>
+                            [object global]<br>
+                            123<br>
+                            123<br>
+                        </output>
+                        <br>
+                        Rhino 將變數放在全域物件的 prototype，這設計或多或少降低 var 對全域的汙染。但別忘了！var 的其它容錯特性還是會帶來副作用，正確的使用 let 還是很重要。
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>let 和 const 的實作並不標準</h3>
+                    <p>
+                        Rhino 的 <kbd>let</kbd> 和 <kbd>const</kbd> 並未完全實作 ECMAScript 6 規範的功能，所以全面改用 let 和 const 取代 var 的話，要注意與其它 JavaScript 引擎表現起來不盡相同的問題！<br>
+                        <br>
+                        可以把 let 用在 for() 的計數器和流程控制的 {} 裡面就好，用在其它場合的話，不要指望它能和網頁瀏覽器的 let 一樣，完全解決 var 的弊端：「因為 Rhino 的 let 像是拿 var 改出來湊用的，在全域範疇使用，依然會將變數放入 global 物件。」而 const 也有問題，資料修改了並不會報錯，只是改了也沒用而已：「var 出來的變數重複宣告不會報錯就得被嘴，const 出來的常數重複賦值不會報錯卻好棒棒？」<br>
+                        <br>
+                        由於 Rhino 將 var 對全域的汙染限縮在 global.prototype 裡，因此不見得要全面用 let 和 const 取代 var，可以在 var 會出問題的地方使用就好。<br>
+                        <br>
+                        當然，在 Rhino 全面改用 let 取代 var 並不會有問題，反而是最理想的做法！問題只在 Rhino 的 let 跟 ECMAScript 規範的 let 不太一樣，所以你在網頁瀏覽器全面改用 let 所解決的問題，可能在 Rhino 不會發生效用，導致未如預期的情況發生而已。把網頁瀏覽器的 JavaScript 程式碼拿到 Rhino 用時，記得資料都測試一下，就沒問題了～
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>function 物件裡面只有一行敘述的話，可以省略 {} 括號</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            (function() print('Hello!'))()
+                        </textarea>
+                        <br>
+                        <output>
+                            Hello!
+                        </output>
+                    </p>
+                </section>
             </section>
 
             <hr id='anchor18'>
 
             <section>
-                <h2>Swing 程式設計</h2>
+                <h2>Swing 視窗程式設計</h2>
                 <hr>
                 <section>
                     <h3>視窗、按鈕、事件</h3>
@@ -959,11 +1016,12 @@
                         source_data_line.start()
                         let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 256)
                         if(source_data_line != null){
-                            let m = 0
-                            let n = 0
-                            while(m != -1){
-                                m = audio_input_stream.read(bytes, 0, bytes.length)
-                                if(m != -1) n = source_data_line.write(bytes, 0, m)
+                            let read = 0
+                            while(read != -1){
+                                read = audio_input_stream.read(bytes, 0, bytes.length)
+                                if(read != -1){
+                                    source_data_line.write(bytes, 0, read)
+                                }
                             }
                             source_data_line.drain()
                             source_data_line.stop()
@@ -976,7 +1034,7 @@
                     <br>
                     <a href='http://sourceforge.net/projects/mp3pl/files/lib/' target='_blank'>http://sourceforge.net/projects/mp3pl/files/lib/</a><br>
                     <br>
-                    下載 jl1.0.1.jar、mp3spi1.9.5.jar、tritonus_share-0.3.6.jar 三個套件，用 -classpath 參數掛載進去：<br>
+                    下載 jl1.0.1.jar、mp3spi1.9.5.jar、tritonus_share-0.3.6.jar 三個套件，用 -cp 參數掛載進去：<br>
                     <br>
                     <output>
                         java -cp .;jl1.0.1.jar;mp3spi1.9.5.jar;tritonus_share-0.3.6.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js<br>
@@ -1000,13 +1058,194 @@
                         sequencer.open()
                         sequencer.setSequence(MidiSystem.getSequence(new File('music.midi')))
                         sequencer.start()
-                        Thread.sleep(sequencer.getMicrosecondLength()/1000)
+                        Thread.sleep(sequencer.getMicrosecondLength() / 1000)
                         sequencer.close()
                     </textarea>
                 </p>
             </section>
 
             <hr id='anchor21'>
+
+            <section>
+                <h2>壓縮與解壓縮 ZIP 檔案</h2>
+                <hr>
+                <section>
+                    <h3>壓縮</h3>
+                    <p>
+                        底下程式示範將 archive 資料夾壓縮為 archive.zip：<br>
+                        <br>
+                        <textarea class='brush:js'>
+                            importPackage(java.io)
+                            importPackage(java.util.zip)
+
+                            let zip_output_stream = new ZipOutputStream(new FileOutputStream('archive.zip'))
+
+                            function zip(files){
+                                for(let file of files){
+                                    if(file.isDirectory()){
+                                        zip_output_stream.putNextEntry(new ZipEntry(file.toString() + '/'))
+                                        zip_output_stream.closeEntry()
+                                        zip(new File(file).listFiles())
+                                    }
+                                    else{
+                                        let file_name = file.toString()
+                                        zip_output_stream.putNextEntry(new ZipEntry(file_name))
+                                        let buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024)
+                                        let buffered_input_stream = new BufferedInputStream(new FileInputStream(file_name), buffer.length)
+                                        let n
+                                        while((n = buffered_input_stream.read(buffer, 0, buffer.length)) != -1){
+                                            zip_output_stream.write(buffer, 0, n)
+                                        }
+                                        buffered_input_stream.close()
+                                        zip_output_stream.closeEntry()
+                                    }
+                                }
+                            }
+
+                            zip(new File('archive').listFiles())
+
+                            zip_output_stream.close()
+                        </textarea>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>解壓縮</h3>
+                    <p>
+                        <textarea class='brush:js'>
+                            importPackage(java.io)
+                            importPackage(java.util)
+                            importPackage(java.util.zip)
+
+                            let zip_file = new ZipFile("archive.zip")
+
+                            let enumeration = zip_file.entries()
+
+                            while(enumeration.hasMoreElements()){
+                                let zip_entry = enumeration.nextElement()
+                                if(zip_entry.isDirectory()){
+                                    new File(zip_entry).mkdirs()
+                                }
+                                else{
+                                    let input_stream = zip_file.getInputStream(zip_entry)
+                                    let out_stream = new FileOutputStream(zip_entry.getName())
+                                    let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024)
+                                    let n
+                                    while((n = input_stream.read(bytes)) != -1){
+                                        out_stream.write(bytes, 0, n)
+                                    }
+                                }
+                            }
+                        </textarea>
+                    </p>
+                </section>
+            </section>
+
+            <hr id='anchor22'>
+
+            <section>
+                <h2>使用 SQLite 資料庫</h2>
+                <p>
+                    請到 <a href='http://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/' target='_blank'>http://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/</a> 下載 SQLite JDBC，然後用 -cp 參數掛載，就能像如下程式使用 SQL 存取資料：<br>
+                    <br>
+                    <textarea class='brush:js'>
+                        importPackage(java.lang)
+                        importPackage(java.sql)
+
+                        Class.forName('org.sqlite.JDBC')
+                        let connection = DriverManager.getConnection('jdbc:sqlite:test.db')
+                        let statement = connection.createStatement()
+                        statement.execute('CREATE TABLE mytable(mycolumn CHAR(32))')
+                        statement.executeUpdate('INSERT INTO mytable(mycolumn) VALUES("哈囉")')
+                        let result_set = statement.executeQuery('SELECT * FROM mytable')
+                        while(result_set.next()){
+                            print(result_set.getString('mycolumn'))
+                        }
+                        result_set.close()
+                        statement.close()
+                        connection.close()
+                    </textarea>
+                    <br>
+                    <output>
+                        java -cp .;sqlite-jdbc-3.34.0.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js<br>
+                    </output>
+                    <br>
+                    <output>
+                        哈囉
+                    </output>
+                </p>
+            </section>
+
+            <hr id='anchor23'>
+
+            <section>
+                <h2>簡易 HTTP 伺服器</h2>
+                <p>
+                    <textarea class='brush:js'>
+                        importPackage(com.sun.net.httpserver)
+                        importPackage(java.io)
+                        importPackage(java.net)
+                        importPackage(java.util)
+
+                        let data = new Hashtable()
+
+                        function loadFile(path, file){
+                            if(file.isDirectory()){
+                                let list_files = file.listFiles()
+                                for(let n = 0; n &lt; list_files.length; n++){
+                                    loadFile(path + list_files[n].getName() + "/", f)
+                                }
+                            }
+                            else{
+                                let file_input_stream = new FileInputStream(file)
+                                let byte_array_output_stream = new ByteArrayOutputStream()
+                                let data_output_stream = new DataOutputStream(byte_array_output_stream)
+                                let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 4096)
+                                let length
+                                while((length = file_input_stream.read(bytes)) &gt;= 0){
+                                    data_output_stream.write(bytes, 0, length)
+                                }
+                                data_output_stream.flush()
+                                data_output_stream.close()
+                                file_input_stream.close()
+                                data.put(path + file.getName(), byte_array_output_stream.toByteArray())
+                            }
+                        }
+
+                        let files = new File("htdocs/").listFiles()
+
+                        for(let n = 0; n &lt; files.length; n++){
+                            loadFile("", files[n])
+                        }
+
+                        let http_server = HttpServer.create(new InetSocketAddress(80), 0)
+
+                        http_server.createContext("/", {
+                            handle: function(http_exchange){
+                                let path = http_exchange.getRequestURI().getPath().substring(1)
+                                if(path.length() == 0){
+                                    path = "index.html"
+                                }
+                                let bytes = data.get(path)
+                                if(http_exchange.getRequestMethod().equals("HEAD")){
+                                    http_exchange.getResponseHeaders().set("Content-Length", "" + bytes.length)
+                                    http_exchange.sendResponseHeaders(200, -1)
+                                    return
+                                }
+                                http_exchange.sendResponseHeaders(200, bytes.length)
+                                http_exchange.getResponseBody().write(bytes)
+                                http_exchange.getResponseBody().close()
+                            }
+                        })
+
+                        http_server.start()
+
+                        // 請在原始碼位置建立 htdocs 資料夾存放網頁，然後執行本程式。
+                    </textarea>
+                </p>
+            </section>
+
+            <hr id='appendix'>
 
             <section>
                 <h2>附錄</h2>
@@ -1018,41 +1257,6 @@
                         <br>
                         不想用 Java 語言寫程式、也不想用 Kotlin，不妨試試 Rhino！
                     </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>關於 GUI</h3>
-                    <p>
-                        用直譯器執行 *.js 程式檔，必然會伴隨一個命令提示字元的視窗，對視窗應用程式來說相當礙眼。
-                    </p>
-                    <section>
-                        <h4>Executable JAR</h4>
-                        <p>
-                            不妨將 *.js 編譯成 *.class，再打包成 Executable JAR，就能解決問題！<br>
-                            <br>
-                            前提是你作業系統有 Executable JAR 的能力，安裝 JRE 的話會自動設定好這功能。<br>
-                            <br>
-                            不過 MANIFEST.MF 無法指定 encoding 為 UTF-8，所以在預設為 ASCII 字元編碼的 Windows 會亂碼。<br>
-                            <br>
-                            解決辦法是原始碼的字元編碼改用 Big5 或 UTF-16！尤其 UTF-16 是 Java 和 JavaScript 預設使用的字元編碼，不需要 -Dfile.encoding 就能混用多國文字，是想避開字元編碼問題最佳的選擇！
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Launcher</h4>
-                        <p>
-                            如果不想編譯成 *.class，可以自己寫個 Launcher.jar 來跑 *.js：<br>
-                            <br>
-                            <a href='../../objects/downloads/20061211A.7z'>20061211A.7z</a><br>
-                            <br>
-                            解開後，用滑鼠點兩下 launcher.jar，會執行 main.js 裡面寫的 Swing 視窗程式，而不會跳出命令提示字元視窗。<br>
-                            <br>
-                            在 launcher.bat 可以修改程式啟動的指令。<br>
-                            <br>
-                            想修改或了解 launcher.jar，請自行研究 src 資料夾裡的 Launcher.java。<br>
-                            <br>
-                            仰賴 Java 的 Executable JAR 不見得是理想的解決方案，不妨用 C 語言或 C# 語言，自己比照下載的範例，做一個 launcher.exe 來執行。
-                        </p>
-                    </section>
                 </section>
                 <hr>
                 <section>
@@ -1115,7 +1319,7 @@
                             <textarea class='brush:js'>
                                 let a,b,c
 
-                                [a,b,c] = [123,456,789]
+                                [a,b,c]=[123,456,789]
 
                                 print(a)
                                 print(b)
@@ -1150,6 +1354,171 @@
                             建議用 <var>String.fromCharCode()</var> 取代 unescape()。
                         </p>
                     </section>
+                    <section>
+                        <h4>自製格式化字串</h4>
+                        <section>
+                            <h5>寫成函式</h5>
+                            <p>
+                                <textarea class='brush:js'>
+                                    function format(){
+                                        return arguments[0].replace(/{(\d+)}/g, (match,index) => arguments[++index] || match)
+                                    }
+
+                                    print(format('{0} {1} {2}','AAA','BBB','CCC'))
+                                    print(format('{0} {1} {2}','AAA'))
+                                </textarea>
+                                <br>
+                                <output>
+                                    AAA BBB CCC<br>
+                                    AAA {1} {2}<br>
+                                </output>
+                                <br>
+                                如上範例結果所示，沒有對應的參數時顯示 {1} 和 {2}。若不喜歡這樣的設計，可以刪掉 <code>|| match</code>，這樣沒有對應的參數時，會顯示 undefined。
+                            </p>
+                        </section>
+                        <section>
+                            <h5>寫在 String 物件</h5>
+                            <p>
+                                <textarea class='brush:js'>
+                                    String.prototype.format=function(){
+                                        return this.replace(/{(\d+)}/g, (match,index) => arguments[index] || match)
+                                    }
+
+                                    print('{0} {1} {2}'.format('AAA','BBB','CCC'))
+                                </textarea>
+                                <br>
+                                <output>
+                                    AAA BBB CCC
+                                </output>
+                            </p>
+                        </section>
+                    </section>
+                </section>
+                <hr>
+                <section>
+                    <h3>執行 GUI 程式時的命令提示字元視窗</h3>
+                    <p>
+                        用直譯器執行 *.js 程式檔，必然會伴隨一個命令提示字元的視窗，對視窗應用程式來說相當礙眼。
+                    </p>
+                    <section>
+                        <h4>Launcher</h4>
+                        <p>
+                            可以自己寫個 launcher.jar 來跑 *.js：<br>
+                            <br>
+                            <a href='../../objects/downloads/20061211A_01.7z'>20061211A_01.7z</a><br>
+                            <br>
+                            解開後，用滑鼠點兩下 launcher.jar，會執行 main.js 裡面寫的 Swing 視窗程式，而不會跳出命令提示字元視窗。<br>
+                            <br>
+                            在 launcher.bat 可以修改程式啟動的指令。<br>
+                            <br>
+                            想修改或了解 launcher.jar，請自行研究 src 資料夾裡的 Launcher.java。<br>
+                            <br>
+                            仰賴 Java 的 Executable JAR 不見得是理想的解決方案，不妨用 C 語言或 C# 語言，自己比照下載的範例，做一個 launcher.exe 來執行。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Executable JAR</h4>
+                        <p>
+                            將 *.js 編譯成 *.class，再打包成 Executable JAR，也是一種解決的辦法！
+                        </p>
+                        <section>
+                            <h5>做法與範例</h5>
+                            <p>
+                                詳情請下載範例：<a href='../../objects/downloads/20061211A_02.7z'>20061211A_02.7z</a>，看看 build.bat 是怎麼編譯和打包的。<br>
+                                <br>
+                                為了減少錯誤，本範例內含 rhino-1.7.13.jar，只要能呼叫 java.exe，build.bat 就能正確執行才對！<br>
+                                <br>
+                                另外，JRE 沒有 jar.exe 可以打包 JAR 檔，JDK 才有，所以這範例另外用 Java API 的 java.util.jar 套件，寫了一個打包的程式：jar.js，好讓 JRE + Rhino 的輕量開發環境更可行！<br>
+                                <br>
+                                但 jar.js 不是這一節的重點，不需要去研究！建議另外改用 7z.exe、jar.exe、zip4j、甚至 Windows 內建的「傳送到 → 壓縮的 (zipped) 資料夾」就好～
+                            </p>
+                        </section>
+                        <section>
+                            <h5>不支援 Executable JAR 怎麼辦</h5>
+                            <p>
+                                如果你的作業系統不支援 Executable JAR 的能力，可以用 *.msi 檔來安裝 Java，會自動設定好這功能。<br>
+                                <br>
+                                只想用 *.zip 版，以免被寫入一堆垃圾參數的話，就自己寫個 setup.reg 吧：<br>
+                                <br>
+                                <textarea class='brush:txt'>
+                                    Windows Registry Editor Version 5.00
+
+                                    [HKEY_CLASSES_ROOT\.jar_auto_file\shell\open\command]
+                                    @="\"C:\\Program Files\\Java\\bin\\javaw.exe\" -jar \"%1\" %*"
+
+                                    [HKEY_CLASSES_ROOT\Applications\javaw.exe\shell\open\command]
+                                    @="\"C:\\Program Files\\Java\\bin\\javaw.exe\" -jar \"%1\" %*"
+
+                                    [HKEY_LOCAL_MACHINE\SOFTWARE\Classes\jarfile\Shell\Open\Command]
+                                    @=hex(2):22,00,43,00,3a,00,5c,00,50,00,72,00,6f,00,67,00,72,00,61,00,6d,00,20,\
+                                      00,46,00,69,00,6c,00,65,00,73,00,5c,00,4a,00,61,00,76,00,61,00,5c,00,62,00,\
+                                      69,00,6e,00,5c,00,6a,00,61,00,76,00,61,00,77,00,2e,00,65,00,78,00,65,00,22,\
+                                      00,20,00,2d,00,6a,00,61,00,72,00,20,00,22,00,25,00,31,00,22,00,20,00,25,00,\
+                                      2a,00,00,00
+                                </textarea>
+                                <br>
+                                請視你 Java 安裝的位置修改內容…最後落落長那個，不妨另外執行 regedit.exe 再修改。
+                            </p>
+                        </section>
+                        <section>
+                            <h5>字元編碼問題</h5>
+                            <p>
+                                使用 Executable JAR 有個問題，就是無法在 MANIFEST.MF 設定 encoding 參數，所以在預設為 ASCII 字元編碼的 Windows，使用 UTF-8 的檔案會亂碼。<br>
+                                <br>
+                                解決辦法：<br>
+                                <br>
+                                1) 原始碼的字元編碼改用 Big5 或 UTF-16！尤其 UTF-16 是 Java 和 JavaScript 預設使用的字元編碼，不需要 -Dfile.encoding 就能混用多國文字，是想避開字元編碼問題最佳的選擇！<br>
+                                <br>
+                                2) 就是想用 UTF-8 字元編碼的話，可在程式碼寫：<br>
+                                <br>
+                                <var>java.lang.System.setProperty('file.encoding','UTF-8')</var><br>
+                                <br>
+                                再把視窗程式寫在其它的 *.js 用 load() 載入。<br>
+                                <br>
+                                必須在 load() 之前就執行這程式，否則載進來的程式還是亂碼。
+                            </p>
+                        </section>
+                        <section>
+                            <h5>在批次檔用 ECHO 產生 MANIFEST.MF</h5>
+                            <p>
+                                通常要打包 JAR 的專案，會事先備好 META-INF 資料夾和 MANIFEST.MF 檔案，再跟 *.class 一起壓縮進去。<br>
+                                <br>
+                                如果不想事先備好的話，可以用 ECHO 產生 MANIFEST.MF：<br>
+                                <br>
+                                <output>
+                                    MD META-INF<br>
+                                    <br>
+                                    (ECHO Main-Class: main & ECHO Class-Path: \C:\Program%%20Files\Java\lib\rhino.jar) > META-INF\MANIFEST.MF
+                                </output>
+                            </p>
+                        </section>
+                        <section>
+                            <h5>用 7z.exe 打包 JAR</h5>
+                            <p>
+                                安裝 7-Zip 的人蠻多的<ins>[2]</ins>，所以這裡示範一下用 7z.exe 打包 JAR 的方式：<br>
+                                <br>
+                                <output>
+                                    "C:\Program Files\7-Zip\7z.exe" a -tzip run.jar *.class META-INF
+                                </output>
+                            </p>
+                        </section>
+                        <section>
+                            <h5>不建議用 PowerShell 打包 JAR</h5>
+                            <p>
+                                其實 Windows 10 的 PowerShell 就可以壓縮 ZIP 格式的檔案，但無法成為有效的 Executable JAR：<br>
+                                <br>
+                                <output>
+                                    powershell Compress-Archive -Path *.class,META-INF -DestinationPath archive.zip<br>
+                                    <br>
+                                    REN archive.zip run.jar<br>
+                                </output>
+                                <br>
+                                在 Windows 作業系統壓出來的 ZIP 檔案，資料夾路徑經常用的符號是 \，而 Executable JAR 必須是 / 符號。<br>
+                                <br>
+                                用 PowerShell 壓的 ZIP 檔案，就是以 META-INF\MANIFEST.MF 紀錄檔案路徑，只要改成 META-INF/MANIFEST.MF 就能執行了…不過沒人吃飽太閒，專程用十六進位編輯器進去改吧？<ins>[3]</ins>
+                            </p>
+                        </section>
+                    </section>
                 </section>
             </section>
 
@@ -1157,12 +1526,29 @@
 
             <footer>
                 <p>
-                    [1] 正確說法是「那能操作的功能也不盡相同」，但通常操作最頂層物件時會省略名稱，例如 window.setTimeout() 會寫 setTimeout()，用起來活像內建函式（built-in functions）。
+                    [1] 正確說法是「那能操作的功能也不盡相同」，但通常操作最頂層物件時會省略名稱，例如 window.setTimeout() 會寫 setTimeout()，用起來活像內建函式（built-in functions）。<br>
+                    [2] 雖然我想推薦免安裝的 <a href='http://www.7-zip.org/download.html' target='_blank'>7-Zip 命令列版</a>，但下載回來的檔案，是跟傳說中 WinRAR.rar 一樣的 7z1900-extra.7z。<br>
+                    [3] 還不如用壓縮軟體打開 *.jar 再儲存檔案，就等於修復錯誤了！但既然都有壓縮軟體了，又何必用 PowerShell～
                 </p>
             </footer>
 
         </article>
 
     </body>
+
+    <!--
+        只在展現自我風格、講究寫程式效率的《JavaScript 程式設計錦囊》採封閉風格。
+
+        其他寫給人看的程式碼，一律採敞開風格：
+        1) + - * / = 前後加上空白，即使後面接的是 {}。
+        2) , 後面加上空白。
+        3) 單行 if、for、while 使用 {}。
+        4) 只有 () 和 [] 裡面不需要用空白敞開，{} 因為會換行，所以無關封閉或敞開。
+        5) 變數名稱在大寫轉小寫前使用 _。
+
+        我不喜歡一次宣告多個變數的風格！
+        a) 每次都用 let 的話，一看前頭就知道是宣告變數。
+        b) 結尾用 , 的話，我得往後看才知道是宣告變數，不然看上去很像賦值。
+    -->
 
 </html>
