@@ -1734,8 +1734,8 @@
                                 <textarea class='brush:php'>
                                     &lt;?php
                                     $xml = simplexml_load_file('sample.xml');
-                                    echo $xml->user, PHP_EOL,
-                                         $xml->email;
+                                    echo $xml-&gt;user, PHP_EOL,
+                                         $xml-&gt;email;
                                     ?&gt;
                                 </textarea>
                                 <br>
@@ -1756,9 +1756,9 @@
                                     &lt;user&gt;User&lt;/user&gt;
                                     &lt;email&gt;user@e.mail&lt;/email&gt;
                                 &lt;/sample&gt;');
-                                $xml->user = 'Twideem Civs';
-                                $xml->email = 'twideem@outlook.com';
-                                $xml->saveXML('sample.xml');
+                                $xml-&gt;user = 'Twideem Civs';
+                                $xml-&gt;email = 'twideem@outlook.com';
+                                $xml-&gt;saveXML('sample.xml');
                                 ?&gt;
                             </textarea>
                             <br>
@@ -1793,10 +1793,10 @@
                                 <textarea class='brush:php'>
                                     &lt;?php
                                     $xml = simplexml_load_file('sample.xml');
-                                    echo $xml->users->user[0], PHP_EOL,
-                                         $xml->users->user[0]['email'], PHP_EOL,
-                                         $xml->users->user[1], PHP_EOL,
-                                         $xml->users->user[1]['email'];
+                                    echo $xml-&gt;users-&gt;user[0], PHP_EOL,
+                                         $xml-&gt;users-&gt;user[0]['email'], PHP_EOL,
+                                         $xml-&gt;users-&gt;user[1], PHP_EOL,
+                                         $xml-&gt;users-&gt;user[1]['email'];
                                     ?&gt;
                                 </textarea>
                                 <br>
@@ -1855,21 +1855,21 @@
                                     &lt;?php
                                     # Load XML document
                                     $dom = new DOMDocument();
-                                    $dom->load('document.xml');
+                                    $dom-&gt;load('document.xml');
                                     # Get a element content by name
-                                    echo $dom->getElementsByTagName('h1')[0]->textContent, PHP_EOL;
+                                    echo $dom-&gt;getElementsByTagName('h1')[0]-&gt;textContent, PHP_EOL;
                                     # Get a attribute value by name
-                                    echo $dom->getElementsByTagName('img')[0]->getAttribute('src'), PHP_EOL,
-                                         $dom->getElementsByTagName('img')[0]->getAttribute('width'), PHP_EOL,
-                                         $dom->getElementsByTagName('img')[0]->getAttribute('alt'), PHP_EOL;
+                                    echo $dom-&gt;getElementsByTagName('img')[0]-&gt;getAttribute('src'), PHP_EOL,
+                                         $dom-&gt;getElementsByTagName('img')[0]-&gt;getAttribute('width'), PHP_EOL,
+                                         $dom-&gt;getElementsByTagName('img')[0]-&gt;getAttribute('alt'), PHP_EOL;
                                     # Get all elements name and value
-                                    $nodes = $dom->childNodes;
+                                    $nodes = $dom-&gt;childNodes;
                                     foreach($nodes as $node)
-                                        echo $node->nodeName, '=', $node->nodeValue, PHP_EOL;
+                                        echo $node-&gt;nodeName, '=', $node-&gt;nodeValue, PHP_EOL;
                                     # Get all attributes name and value
-                                    $attributes = $dom->getElementsByTagName('img')[0]->attributes;
+                                    $attributes = $dom-&gt;getElementsByTagName('img')[0]-&gt;attributes;
                                     foreach($attributes as $attribute)
-                                        echo $attribute->name, '=', $attribute->value, PHP_EOL;
+                                        echo $attribute-&gt;name, '=', $attribute-&gt;value, PHP_EOL;
                                     ?&gt;
                                 </textarea>
                                 <br>
@@ -1909,18 +1909,18 @@
                                     &lt;?php
                                     # Load XML document
                                     $dom = new DOMDocument();
-                                    $dom->load('document.xml');
+                                    $dom-&gt;load('document.xml');
                                     # Set element content
-                                    $elements = $dom->getElementsByTagName('p');
-                                    $elements[0]->textContent = 'AAA';
-                                    $elements[1]->textContent = 'BBB';
-                                    $elements[2]->textContent = 'CCC';
+                                    $elements = $dom-&gt;getElementsByTagName('p');
+                                    $elements[0]-&gt;textContent = 'AAA';
+                                    $elements[1]-&gt;textContent = 'BBB';
+                                    $elements[2]-&gt;textContent = 'CCC';
                                     # Set attribute value
-                                    $dom->getElementsByTagName('img')[0]->setAttribute('src', 'picture.jpg');
-                                    $dom->getElementsByTagName('img')[0]->setAttribute('width', '320');
-                                    $dom->getElementsByTagName('img')[0]->setAttribute('alt', '相片');
+                                    $dom-&gt;getElementsByTagName('img')[0]-&gt;setAttribute('src', 'picture.jpg');
+                                    $dom-&gt;getElementsByTagName('img')[0]-&gt;setAttribute('width', '320');
+                                    $dom-&gt;getElementsByTagName('img')[0]-&gt;setAttribute('alt', '相片');
                                     # Save XML document
-                                    $dom->save('backup.xml');
+                                    $dom-&gt;save('backup.xml');
                                     ?&gt;
                                 </textarea>
                                 <br>
@@ -1947,16 +1947,16 @@
                                 # Create XML document
                                 $dom = new DOMDocument('1.0', 'UTF-8');
                                 # Create root element
-                                $root = $dom->createElement('root');
-                                $dom->appendChild($root);
+                                $root = $dom-&gt;createElement('root');
+                                $dom-&gt;appendChild($root);
                                 # Create element and attribute
-                                $element = $dom->createElement('element');
-                                $element->nodeValue = 'content';
-                                $element->setAttribute('attribute', 'value');
-                                $root->appendChild($element);
+                                $element = $dom-&gt;createElement('element');
+                                $element-&gt;nodeValue = 'content';
+                                $element-&gt;setAttribute('attribute', 'value');
+                                $root-&gt;appendChild($element);
                                 # Save XML document
-                                $dom->formatOutput = true;
-                                $dom->save('new.xml');
+                                $dom-&gt;formatOutput = true;
+                                $dom-&gt;save('new.xml');
                                 ?&gt;
                             </textarea>
                             <br>
@@ -1986,18 +1986,18 @@
                                     &lt;?php
                                     # Load XML document
                                     $dom = new DOMDocument();
-                                    $dom->load('document.xml');
+                                    $dom-&gt;load('document.xml');
                                     # Remove element
-                                    $element = $dom->getElementsByTagName('p')[0];
-                                    $element->parentNode->removeChild($element);
+                                    $element = $dom-&gt;getElementsByTagName('p')[0];
+                                    $element-&gt;parentNode-&gt;removeChild($element);
                                     # Remove content
-                                    $element = $dom->getElementsByTagName('p')[1];
-                                    $element->removeChild($element->childNodes[0]);
+                                    $element = $dom-&gt;getElementsByTagName('p')[1];
+                                    $element-&gt;removeChild($element-&gt;childNodes[0]);
                                     # Remove attribute
-                                    $element = $dom->getElementsByTagName('img')[0];
-                                    $element->removeAttribute('width');
+                                    $element = $dom-&gt;getElementsByTagName('img')[0];
+                                    $element-&gt;removeAttribute('width');
                                     # Save XML document
-                                    $dom->save('other.xml');
+                                    $dom-&gt;save('other.xml');
                                     ?&gt;
                                 </textarea>
                                 <br>
@@ -2053,18 +2053,18 @@
                                 &lt;?php
                                 # 載入 XML
                                 $dom = new DOMDocument();
-                                $dom->load('湘北高等学校.xml');
+                                $dom-&gt;load('湘北高等学校.xml');
                                 # 產生 XPath
                                 $xpath = new DOMXPath($dom);
                                 # 尋找 NodeList
-                                $elements = $xpath->query('//player[@name="三井寿"]');
+                                $elements = $xpath-&gt;query('//player[@name="三井寿"]');
                                 # 取出 Attribute
-                                $value = (int)$elements[0]->getAttribute('points');
+                                $value = (int)$elements[0]-&gt;getAttribute('points');
                                 $value += 3;
                                 # 修改 Attribute
-                                $elements[0]->setAttribute('points', $value);
+                                $elements[0]-&gt;setAttribute('points', $value);
                                 # 輸出 Attribute
-                                echo $elements[0]->getAttribute('points');
+                                echo $elements[0]-&gt;getAttribute('points');
                                 ?&gt;
                             </textarea>
                             <br>
@@ -2086,7 +2086,7 @@
                         <textarea class='brush:php'>
                             &lt;?php
                             # Array to JSON
-                            $array1 = array('name'=>'Twideem Civs', 'email'=>'twideem@outlook.com');
+                            $array1 = array('name'=&gt;'Twideem Civs', 'email'=&gt;'twideem@outlook.com');
                             echo json_encode($array1, JSON_UNESCAPED_UNICODE), PHP_EOL;
                             # JSON to Array
                             $json2 = '{"name":"Twideem Civs","email":"twideem@outlook.com"}';
@@ -2102,7 +2102,7 @@
                             # JSON to Object
                             $json4 = '{"password":"abc123"}';
                             $object4 = json_decode($json4);
-                            echo $object4->password;
+                            echo $object4-&gt;password;
                             ?&gt;
                         </textarea>
                         <br>
@@ -2337,8 +2337,8 @@
                         <textarea class='brush:php'>
                             &lt;?php
                             $array = ini_get_all();
-                            foreach($array as $key1=>$value1)
-                                foreach($value1 as $key2=>$value2)
+                            foreach($array as $key1=&gt;$value1)
+                                foreach($value1 as $key2=&gt;$value2)
                                     if($key2=='access'&amp;&amp;($value2==1||$value2==7))
                                         echo $key1, PHP_EOL;
                             ?&gt;

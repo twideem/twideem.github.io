@@ -17,11 +17,6 @@
 
             <header>
                 <h1>Java 與 JavaScript 不再免費？</h1>
-                <p>
-                    多核心處理器時代來臨時，一台電腦抵多台用，沒想到 Oracle 藉此修改軟體授權的計價方案，改成照核心數計價，而不是照幾台電腦計價。這樣就算只有一台電腦，八核心的話也收好幾台的錢，何樂不為？<br>
-                    <br>
-                    腦筋動得這麼快的公司，當然不會放過手上 Java 和 JavaScript 的籌碼，在這兩個使用率最高的程式語言上撈一筆。
-                </p>
             </header>
 
             <hr>
@@ -30,13 +25,13 @@
                 <h2>Java</h2>
                 <hr>
                 <section>
-                    <h3>Java 8（<a href='javascript:Display.show()'>內容已過時，沒有看的必要，想看另外按～</a>）</h3>
+                    <h3>Java 6、Java 7、Java 8 的免費（<a href='javascript:Display.show()'>內容已過時，沒有看的必要，想看另外按～</a>）</h3>
                     <p class='private'>
                         如果你執行 Java 時，下 -XX:+UnlockCommercialFeature 參數啟用 Oracle Java SE Advanced &amp; Suite Products 和 Java SE Advanced Desktop 功能，或者 Oracle 認為你不是在一般用途的電腦運算（General Purpose）使用 Java SE，是要向 Oracle 支付費用的。<br>
                         <br>
                         Oracle Java SE Advanced 系列產品功能算是個陷阱，它隨附在免費下載的 Java SE 裡面，只要用到就該付費。<!--這就像免費下載了繪圖軟體，但官方說只有繪圖是免費的，如果你按儲存則是商業版功能，必須付費。但我沒限制你沒付費不能按，而是大辣辣放在那給你按，只要你按了我就可以要你付費。-->通常你不會下那落落長的參數啟用付費功能，但開發應用軟體的人如果下這參數給你用，Oracle 的規定是使用者付費？還是開發商付費？照常理當然是找開發商付費，是他要用到商業功能來設計軟體的。但 Oracle 並不是照常理收費的公司，而是一家認為真正在用商業功能的人是使用者，所以是找使用者付費。<br>
                         <br>
-                        而一般用途運算，<!--由 Oracle 說了算，因為授權書上沒詳細載明。但-->大致上原則是在桌上型電腦、筆記型電腦、平板電腦、伺服器開發 Java 程式來執行是免費的，如果要將 JVM 當嵌入式系統拿到其它設備使用，就必須向 Oracle 洽談費用事宜。這不難理解，因為 Oracle 只有為個人電腦提供 Java SE，如果想在沒 Java SE 的裝置使用 Java，本來就只能找官方洽談技術支援。如果有監視器、錄放影機、收銀機、自動提款機、行動電話是跑 Java 程式的，想也知道要授權才能合法使用，Oracle 根本沒有提供這些裝置的 Java SE。<ins>[1]</ins><br>
+                        而一般用途運算，<!--由 Oracle 說了算，因為授權書上沒詳細載明。但-->大致上原則是在桌上型電腦、筆記型電腦、平板電腦、伺服器開發 Java 程式來執行是免費的，如果要將 JVM 當嵌入式系統拿到其它設備使用，才必須向 Oracle 洽談費用事宜。這不難理解，因為 Oracle 只有為個人電腦提供 Java SE，如果想在沒 Java SE 的裝置使用 Java，本來就只能找官方洽談技術支援。如果有監視器、錄放影機、收銀機、自動提款機、行動電話是跑 Java 程式的，想也知道要授權才能合法使用，Oracle 根本沒有提供這些裝置的 Java SE。<ins>[1]</ins><br>
                         <br>
                         舉些實例來看吧：<br>
                         <br>
@@ -53,15 +48,15 @@
                 </section>
                 <hr>
                 <section>
-                    <h3>Java 11</h3>
+                    <h3>Java 11、Java 8u211 的不再免費</h3>
                     <p>
-                        Java 11 和 Java 8 Update 211 開始，全面使用 OTN 協議（Oracle Technology Network License Agreement），取代舊的 BCL 協議（Oracle Binary Code License Agreement），Oracle JDK 確定不再免費，屬於向官方取得授權然後商業使用的軟體，Oracle 要求一般免費使用者選擇 OpenJDK。這裡有個陷阱，Oracle JDK 依然是免費下載的，但只能評估和測試用，正式用在企業營運得向官方洽談授權費用。<br>
+                        Java SE 11 和 Java SE 8 Update 211 開始，全面使用 OTN 協議（Oracle Technology Network License Agreement），取代舊的 BCL 協議（Oracle Binary Code License Agreement），Oracle JDK 確定不再免費，屬於向官方取得授權然後商業使用的軟體，Oracle 要求一般免費使用者選擇 OpenJDK。這裡有個陷阱，Oracle JDK 依然是免費下載的，但只能評估和測試用，正式用在企業營運得向官方洽談授權費用。<br>
                         <br>
                         換句話說，現在連「一般用途的電腦運算（General Purpose）」都不成立<ins>[3]</ins>，只要是企業用、有營收，就不可能免費使用 Oracle JDK！若只在自己電腦使用，Oracle 會視為評估和測試用途，不會向你收錢。但不要公開散佈或在網路運轉你用 Oracle JDK 產生的 Java 應用程式或系統，否則 Oracle 片面認定你販售或營利該 Java 程式的話，就準備催收了！因為你已經不是在評估和測試 Oracle JDK，你有在用 Oracle JDK 營利了～<br>
                         <br>
                         寫的 Java 程式不能散佈和公開，那不就跟沒寫一樣？所以以後想寫 Java 程式，請用 OpenJDK，不要用 Oracle JDK。可以說 Oracle JDK 並不是過去的 Java SE Development Kit，而是 Oracle 的 JDK 產品，是給企業用的，而不是給大家下載使用的免費軟體資源。<br>
                         <br>
-                        也因此，你可以發現到，Java SE 11 開始，Oracle 官網不再提供 JRE 了，只有 JDK，明確告訴大家他們的 Java 產品就是授權用，不再提供 JRE 這種免費開放給大眾使用的軟體了！但 Oracle 會全力為 OpenJDK 提供技術，讓各家的 OpenJDK 都能和 Oracle JDK 一致，方便 OpenJDK 填補 JRE 的缺。<br>
+                        也因此，你可以發現到，Java SE 11 開始，Oracle 官網不再提供 JRE 了，只有 JDK，明確告訴大家他們的 Java 產品就是授權用，不再提供 JRE 這種免費開放給大眾使用的軟體了！Oracle 會繼續為 OpenJDK 提供技術研發，且承諾研發上會讓各家的 OpenJDK 都能和 Oracle JDK 一致，等於讓 OpenJDK 填補 JRE 的缺。<br>
                         <br>
                         還是一頭霧水的話：<br>
                         <br>
@@ -70,10 +65,21 @@
                             <br>
                             Oracle 官網不再提供免費的 Java 讓大家使用，Oracle 只提供商業用途的 JDK，至於過去免費的 Java，Oracle 轉移到 OpenJDK 了！<br>
                             <br>
-                            而且是 Oracle 自己建議非 Oracle JDK 客戶的一般使用者改用 OpenJDK！為了讓 OpenJDK 能銜接過去免費開放使用的 JRE 應用，Oracle 還釋出一些 JRE 的專利給 OpenJDK，讓一般使用者仍有免費散佈和公開 Java 程式的方案，又不至於在相容性上產生問題。<br>
+                            而且是 Oracle 自己建議非 Oracle JDK 客戶的一般使用者改用 OpenJDK！為了讓 OpenJDK 能銜接過去免費開放使用的 JRE 應用，Oracle 還釋出一些 JRE 的專利給 OpenJDK，讓一般使用者仍有免費散佈和公開 Java 程式的方案，又不至於在相容性上產生問題。
                         </samp>
+                    </p>
+                </section>
+                <hr>
+                <section>
+                    <h3>結論</h3>
+                    <p>
+                        其實還是跟以前一樣，Java 有免費使用和商業使用兩種！<br>
                         <br>
-                        Oracle 確實要在 Java 上賺錢了，但也幫免費使用 Java 寫程式的一般使用者鋪好 OpenJDK 這條路。Oracle 只是不做沒搞頭的生意，但不至於做出讓 Java 程式設計師斷頭的事，沒你想的那麼邪惡…只是那張嘴臉看了很醜陋而已。
+                        只是 Oracle 不再提供免費使用的版本，把免費使用的版本移交到 OpenJDK 而已。<br>
+                        <br>
+                        所以嚴格來說，變的只有 Oracle 的業務，Java 程式語言可以免費使用的情況並沒有變！你依然可以像過去那樣免費使用 Java，只是要改用 OpenJDK，而不是 Oracle JDK。<br>
+                        <br>
+                        其實這樣的改變，反而更能保障免費使用 Java 的開發者和企業！過去 Oracle 提供付費和免費兩種 Java 時，想免費使用卻會誤入商業使用的陷阱。現在 Oracle 只提供付費的 Java，免費使用的 Java 由 OpenJDK 提供，付費版和免費版界線分明，使用者不用再擔心有哪些陷阱。
                     </p>
                 </section>
             </section>

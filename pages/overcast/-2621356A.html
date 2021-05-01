@@ -409,20 +409,20 @@
                     <p>
                         <textarea class='brush:js'>
                             // 可當立即函式
-                            ((x) => {
+                            ((x) =&gt; {
                                 x += x
                                 document.write(x)
                             })('AAA')
 
                             // 只一行敘述時不用大括號
-                            ((x) => document.write(x))('BBB')
+                            ((x) =&gt; document.write(x))('BBB')
 
                             // 不用 return 即可傳回值
-                            let f = () => 'CCC'
+                            let f = () =&gt; 'CCC'
                             document.write(f())
 
                             // 只有一個參數時可以省略括號（多個的話不行）
-                            let f = x => document.write(x)
+                            let f = x =&gt; document.write(x)
                             f('DDD')
                         </textarea>
                         <br>

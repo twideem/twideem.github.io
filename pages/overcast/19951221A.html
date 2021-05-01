@@ -533,7 +533,7 @@
                          以 : 開頭的識別字會成為 Symbol 物件，目的是把名稱變成符號來使用。像是用在 Hash 物件當作 Key，比用 String 當作 Key 效能更好。<br>
                          <br>
                          <textarea class='brush:rb'>
-                            a = {:name=>"Twideem Civs",:email=>"twideem@outlook.com"}
+                            a = {:name=&gt;"Twideem Civs",:email=&gt;"twideem@outlook.com"}
                             puts a[:name]
                             puts a[:email]
                          </textarea>
@@ -632,7 +632,7 @@
                         <p>
                             <textarea class='brush:rb'>
                                 # 傳統 Ruby 寫法
-                                a = {"name"=>"Twideem Civs","email"=>"twideem@outlook.com"}
+                                a = {"name"=&gt;"Twideem Civs","email"=&gt;"twideem@outlook.com"}
                                 puts a["name"]
                                 puts a["email"]
 

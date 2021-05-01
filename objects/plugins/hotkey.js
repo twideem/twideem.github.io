@@ -37,7 +37,7 @@ addEventListener('keydown',function(x){
             location.href='pages/overcast/18850901A.html'
             break
         case 'Xfile'.charCodeAt(0):
-            if(!localStorage.Xfile) localStorage.Xfile=prompt('請設定網址，日後可按 C 鍵清除資料：','pages/overcast/19691005A.html#index')
+            if(!localStorage.Xfile) localStorage.Xfile=prompt('請設定網址，日後可按 C 鍵清除資料：','pages/instantcoffee/20061211A.html')
             location.href=localStorage.Xfile
     }
 })

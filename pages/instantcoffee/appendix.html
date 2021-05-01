@@ -578,10 +578,10 @@
                             <br>
                             <textarea class='brush:java'>
                                 //匿名函式不能像這樣跑程式
-                                (Consumer&lt;String&gt; consumer = x -> System.out.println(x)).accept("Hello");
+                                (Consumer&lt;String&gt; consumer = x -&gt; System.out.println(x)).accept("Hello");
 
                                 //更別說像這樣跑程式
-                                ((Consumer&lt;String&gt;) x -> System.out.println(x)).accept("Hello");
+                                ((Consumer&lt;String&gt;) x -&gt; System.out.println(x)).accept("Hello");
 
                                 //必須用匿名類別
                                 new Consumer&lt;String&gt;(){

@@ -202,7 +202,7 @@
                                         Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
 
                                         Button button = (Button)parent.lookup("#button");
-                                        button.setOnAction(e->button.setText("不是叫你別亂按嗎"));
+                                        button.setOnAction(e-&gt;button.setText("不是叫你別亂按嗎"));
 
                                         stage.setScene(new Scene(parent));
 

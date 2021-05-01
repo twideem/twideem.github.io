@@ -211,7 +211,7 @@
                                 button.setLayoutX(100);
                                 button.setLayoutY(100);
 
-                                button.setOnAction(e->button.setText("不是叫你別亂按嗎"));
+                                button.setOnAction(e-&gt;button.setText("不是叫你別亂按嗎"));
 
                                 Pane pane = new Pane();
                                 pane.getChildren().add(button);
@@ -253,7 +253,7 @@
 
                                 Slider slide = new Slider();
                                 slide.valueProperty().addListener(
-                                    (observable, old_value, new_value)->stage.setTitle(new_value.toString())
+                                    (observable, old_value, new_value)-&gt;stage.setTitle(new_value.toString())
                                 );
 
                                 StackPane stackPane = new StackPane();
@@ -290,7 +290,7 @@
 
                                 Slider slide = new Slider();
                                 slide.valueProperty().addListener(
-                                    observable->stage.setTitle("哦哦哦～！動了動了，滑桿動了！")
+                                    observable-&gt;stage.setTitle("哦哦哦～！動了動了，滑桿動了！")
                                 );
 
                                 StackPane stack_pane = new StackPane();

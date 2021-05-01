@@ -32,12 +32,12 @@ section section p{margin:0 0 8px 30px}
 section section p output{width:553px}
 section hr{border-style:dotted;border-width:1px;margin-left:30px}
 /*位*/
-h4{color:#888;font-size:10.5pt;letter-spacing:0.1em;margin:20px 0 20px 29px}
+h4{font-size:10.5pt;letter-spacing:0.1em;margin:20px 0 20px 29px}
 h4::before, h4::after{content:"＝"}
 section section section p{margin:0 0 20px 44px}
 section section section p output{width:539px}
 /*項目*/
-h5{color:#888;margin:20px 0 20px 44px}
+h5{margin:20px 0 20px 44px}
 h5::before{content:"[ "}
 h5::after{content:" ]"}
 section section section section p{margin:0 0 20px 58px}

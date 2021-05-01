@@ -155,7 +155,7 @@
 
                                     public static void main(String[] args){
 
-                                        Stream&lt;String&gt; stream = Stream.generate(() -> "HELLO").limit(3);
+                                        Stream&lt;String&gt; stream = Stream.generate(() -&gt; "HELLO").limit(3);
                                         stream.forEach(System.out::println);
 
                                     }
@@ -271,7 +271,7 @@
 
                                     public static void main(String[] args){
 
-                                        IntStream int_stream = Stream.of(1,2,3,4,5).mapToInt(x->x);
+                                        IntStream int_stream = Stream.of(1,2,3,4,5).mapToInt(x-&gt;x);
                                         int_stream.forEach(System.out::print);
 
                                     }
@@ -779,7 +779,7 @@
                                 public static void main(String[] args){
 
                                     Stream.of("H","E","L","L","O")
-                                          .filter(x -> x=="L")
+                                          .filter(x -&gt; x=="L")
                                           .forEach(System.out::print);
 
                                 }
@@ -804,7 +804,7 @@
                                 public static void main(String[] args){
 
                                     Stream.of("H","E","L","L","O")
-                                          .peek(x->System.out.print(x.toLowerCase()))
+                                          .peek(x-&gt;System.out.print(x.toLowerCase()))
                                           .forEach(System.out::println);
 
                                 }
@@ -998,8 +998,8 @@
 
                                 public static void main(String[] args){
 
-                                    System.out.println(IntStream.of(2,3,4).anyMatch(x -> x==2));
-                                    System.out.println(IntStream.of(2,3,4).allMatch(x -> x>1));
+                                    System.out.println(IntStream.of(2,3,4).anyMatch(x -&gt; x==2));
+                                    System.out.println(IntStream.of(2,3,4).allMatch(x -&gt; x>1));
 
                                 }
 
@@ -1094,7 +1094,7 @@
 
                                 public static void main(String[] args){
 
-                                    System.out.println(IntStream.of(1,2,3,4,5).reduce((x,y)->x+y));
+                                    System.out.println(IntStream.of(1,2,3,4,5).reduce((x,y)-&gt;x+y));
 
                                 }
 
@@ -1155,7 +1155,7 @@
                                 public static void main(String[] args){
 
                                     List&lt;Integer&gt; list = Arrays.asList(1,2,3,4,5);
-                                    int a = list.parallelStream().mapToInt(x->x).sum();
+                                    int a = list.parallelStream().mapToInt(x-&gt;x).sum();
                                     System.out.print(a);
 
                                 }
@@ -1189,7 +1189,7 @@
                                 Stream.of("A","B","C","D","E")
                                       .skip(1)
                                       .limit(3)
-                                      .map(x->x+x+x)
+                                      .map(x-&gt;x+x+x)
                                       .forEach(System.out::println);
                             }
 

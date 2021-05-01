@@ -197,7 +197,7 @@
                     <h3>匿名函式</h3>
                     <p>
                         <textarea class='brush:js'>
-                            ((x,y)=>{
+                            ((x,y)=&gt;{
                                 document.write(x+y);
                             })(111,222);
                         </textarea>
@@ -214,7 +214,7 @@
                             })(111,222);<br>
                         </code>
                         <br>
-                        引進 => 是為了匿名函式，而不是當作 function() 的新寫法！兩者有許多不一樣的地方，像是 ()=> 的 this 繫結自己這個匿名函式物件，而 function() 的 this 繫結自己做為 method 所歸屬的物件。所以，雖然 let R.f=()=>{}; 的寫法可以代替 let R.f=function(){};，但執行過程略有差異，不建議將舊程式的 funciton() 改成 ()=>。
+                        引進 =&gt; 是為了匿名函式，而不是當作 function() 的新寫法！兩者有許多不一樣的地方，像是 ()=&gt; 的 this 繫結自己這個匿名函式物件，而 function() 的 this 繫結自己做為 method 所歸屬的物件。所以，雖然 let R.f=()=&gt;{}; 的寫法可以代替 let R.f=function(){};，但執行過程略有差異，不建議將舊程式的 funciton() 改成 ()=&gt;。
                     </p>
                 </section>
                 <hr>
@@ -222,7 +222,7 @@
                     <h3>立即函式</h3>
                     <p>
                         <textarea class='brush:js'>
-                            (()=>{
+                            (()=&gt;{
                                 document.write('hello');
                             })();
                         </textarea>
@@ -636,7 +636,7 @@
                             或：<br>
                             <br>
                             <textarea class='brush:js'>
-                                new Set(['h','e','l','l','o'].sort()).forEach((x)=>{
+                                new Set(['h','e','l','l','o'].sort()).forEach((x)=&gt;{
                                     document.write(x);
                                 });
                             </textarea>

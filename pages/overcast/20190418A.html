@@ -715,7 +715,7 @@
                         <textarea class='brush:cs'>
                             using System;
 
-                            class Class<TYPE>{
+                            class Class&lt;TYPE&gt;{
 
                                 TYPE variable;
 
@@ -732,9 +732,9 @@
                             class MainProgram{
 
                                 static void Main(){
-                                    Class<int> c1 = new Class<int>(123);
+                                    Class&lt;int&gt; c1 = new Class&lt;int&gt;(123);
                                     Console.WriteLine(c1.Get());
-                                    Class<string> c2 = new Class<string>("ABC");
+                                    Class&lt;string&gt; c2 = new Class&lt;string&gt;("ABC");
                                     Console.WriteLine(c2.Get());
                                 }
 
@@ -1063,8 +1063,8 @@
 
                                 //使用 Lambda 運算式
                                 static void Main(){
-                                    World((x)=>Console.WriteLine("Hello, {0}!", x));
-                                    MyFriend((x)=>Console.WriteLine("Hello, {0}!", x));
+                                    World((x)=&gt;Console.WriteLine("Hello, {0}!", x));
+                                    MyFriend((x)=&gt;Console.WriteLine("Hello, {0}!", x));
                                 }
 
                             }
@@ -1150,7 +1150,7 @@
                                 static void Main(){
                                     Event e = new Event();
                                     e.handler += Handler;
-                                    e.handler += () => Console.WriteLine("ON EVENT 2");;
+                                    e.handler += () =&gt; Console.WriteLine("ON EVENT 2");;
                                     e.OnEvent();
                                 }
 
@@ -1440,7 +1440,7 @@
                                     });
 
                                     //λ 運算式
-                                    new[]{1,3,5,7,9}.ToList().ForEach(x=>Console.Write(x));
+                                    new[]{1,3,5,7,9}.ToList().ForEach(x=&gt;Console.Write(x));
 
                                 }
 
@@ -1881,7 +1881,7 @@
                                             {4, "Mage"}
                                         };
 
-                                        var dictionary2 = dictionary1.OrderBy(x => x.Value).ToDictionary(x=>x.Key, x=>x.Value);
+                                        var dictionary2 = dictionary1.OrderBy(x =&gt; x.Value).ToDictionary(x=&gt;x.Key, x=&gt;x.Value);
 
                                         foreach(var n in dictionary2) Console.Write(n);
 

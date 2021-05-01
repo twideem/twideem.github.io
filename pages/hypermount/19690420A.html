@@ -17,10 +17,12 @@
 
             <header>
                 <h1>共通類別庫</h1>
-                <p>JavaScript 提供幾個類別，做為我們平日開發程式時的核心組件。雖然現在來看，反而 BOM 的類別用得比較多，但這也值得我們思考：「是不是目前慣用的 JavaScript 開發手法不夠健全？是否該多用共通類別來組織程式？」<ins>[1]</ins></p>
+                <p>
+                    [<a href='#array'>Array</a>|<a href='#boolean'>Booelan</a>|<a href='#date'>Date</a>|<a href='#function'>Function</a>|<a href='#math'>Math</a>|<a href='#number'>Number</a>|<a href='#object'>Object</a>|<a href='#regexp'>RegExp</a>|<a href='#string'>String</a>]
+                </p>
             </header>
 
-            <hr>
+            <hr id='array'>
 
             <section>
                 <h2>Array</h2>
@@ -80,7 +82,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='boolean'>
 
             <section>
                 <h2>Boolean</h2>
@@ -139,7 +141,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='date'>
 
             <section>
                 <h2>Date</h2>
@@ -218,7 +220,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='function'>
 
             <section>
                 <h2>Function</h2>
@@ -328,7 +330,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='math'>
 
             <section>
                 <h2>Math</h2>
@@ -386,15 +388,15 @@
                     如果你需要傳回 3 到 9 之間的亂數，就是：<br>
                     <br>
                     <textarea class='brush:js'>
-                        Math.round(Math.random() * (9 - 3)) + 3
+                        Math.round(Math.random() * (9 - 3)) + 3;
                     </textarea>
                     <br>
                     除了使用四捨五入的 round()，有時候會想使用無條件進位的 ceil() 或無條件捨去的 floor()，差異如下：<br>
                     <br>
                     <textarea class='brush:js'>
-                        Math.round(Math.random()*10) //四捨五入：傳回 0 到 10。
-                        Math.ceil(Math.random()*10)  //無條件進位：傳回 1 到 10。
-                        Math.floor(Math.random()*10) //無條件捨去：傳回 0 到 9。
+                        Math.round(Math.random()*10); //四捨五入：傳回 0 到 10。
+                        Math.ceil(Math.random()*10);  //無條件進位：傳回 1 到 10。
+                        Math.floor(Math.random()*10); //無條件捨去：傳回 0 到 9。
                     </textarea>
                     <br>
                     別以為這三種進位方式用不到，例如，當你希望產生的亂數直接對照陣列索引值，就適合直接用 floor()：<br>
@@ -413,7 +415,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='number'>
 
             <section>
                 <h2>Number</h2>
@@ -464,7 +466,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='object'>
 
             <section>
                 <h2>Object</h2>
@@ -488,7 +490,7 @@
                 </section>
             </section>
 
-            <hr>
+            <hr id='regexp'>
 
             <section>
                 <h2>RegExp</h2>
@@ -667,7 +669,7 @@
                 </p>
             </section>
 
-            <hr>
+            <hr id='string'>
 
             <section>
                 <h2>String</h2>
@@ -749,8 +751,7 @@
             <footer>
                 <p>
                     [*] 本資料不含 ECMAScript 5 新增的功能。個人覺得那屬於透過語意層次來實現語法的機制，所以另外寫在《<a href='19690406A.html'>其它語言特性</a>》。<br>
-                    [*] 雖然標題寫共通類別庫，但其實 JavaScript 稱為「物件」而不是「類別」；可見非物件導向的 JavaScript 程式語言並沒有類別的概念。<br>
-                    [1] 這只是個「有趣」的議題，想想就好，不見得真的要改變。就當是開場白用的楔子吧～
+                    [*] 雖然標題寫共通類別庫，但其實 JavaScript 稱為「物件」而不是「類別」；可見非物件導向的 JavaScript 程式語言並沒有類別的概念。
                 </p>
             </footer>
 

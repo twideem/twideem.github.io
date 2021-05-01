@@ -9,9 +9,7 @@
         <link href='../../styles/layout.css' rel='stylesheet'>
         <script src='../../scripts/template.js'></script>
         <script src='../../objects/plugins/sh.js'></script>
-        <script>
-            sh.lang('java')
-        </script>
+        <script>sh.lang('java')</script>
     </head>
 
     <body>
@@ -25,13 +23,10 @@
                     <br>
                     可惜的是，Java SE 8 開始改用 Nashorn 取代，雖然號稱性能更好，但功能不穩定，加上 ECMAScript 6 標準化步調比 Rhino 緩慢，其實沒有比較好用～<br>
                     <br>
-                    Java 11 時宣布放棄 Nashorn，然後在 Java 15 正式汰除 Nashorn，並且不再內建 JavaScript 引擎…於是我們只得回頭下載新版的 Rhino 來用。<br>
+                    Java 11 時宣布放棄 Nashorn，然後在 Java 15 正式汰除 Nashorn，並且不再內建 JavaScript 引擎，於是我們只得回頭下載新版的 Rhino 來用。幸好這才是原本真正該走的路，與 Java 整合得更好的 Rhino，一向是最適合 Java 的 JavaScript 引擎！<br>
                     <br>
-                    幸好這才是原本真正該走的路，與 Java 整合得更好的 Rhino，一向是最適合 Java 的 JavaScript 引擎！
+                    所謂 Nashorn 性能較佳，坦白說其實一樣差，比性能只是在比爛而已。但 Rhino 與 Java 高度整合的功能穩定性，能讓你毫無障礙、隨心所欲地用 JavaScript 語言存取 Java API，這才是 JavaScript 的重點！如果是為了性能，那應該繼續用 Java 語言寫程式才對，之所以用 JavaScript 語言，是為了比 Java 語言寫得更快不是嗎？因此當然是功能穩定沒什麼問題的 Rhino，要比性能較好但問題較多的 Nashorn，更適合做為 Java 的 JavaScript 引擎！
                 </p>
-                <!--
-                    所謂 Nashorn 性能較佳，坦白說其實一樣差，比性能只是在比爛而已。但 Rhino 與 Java 高度整合的功能穩定性，能讓你毫無障礙、隨心所欲地用 JavaScript 語言存取 Java API，這才是 JavaScript 的重點！如果是為了性能，那應該繼續用 Java 語言寫程式才對，之所以用 JavaScript 語言，是為了比 Java 語言寫得更快不是嗎？因此當然是功能穩定沒什麼問題的 Rhino，要比性能較好但問題較多的 Nashorn，更適合做為 Java 的 JavaScript 引擎！用 Rhino 寫程式，就是比容易鬼打牆的 Nashorn 快～
-                -->
             </header>
 
             <hr>
@@ -57,7 +52,7 @@
                     <p>
                         ．<a href='#anchor8'>在 JavaScript 使用 Java API</a><br>
                         ．<a href='#anchor9'>調用 JNI 的外部 SDK</a><br>
-                        ．<a href='#anchor10'>在 JavaScript 引用 Java 的資料型態</a><br>
+                        ．<a href='#anchor10'>在 JavaScript 使用 Java 的資料型態</a><br>
                         ．<a href='#anchor11'>覆載物件方法與實作介面功能</a><br>
                         ．<a href='#anchor12'>多執行緒</a><br>
                         ．<a href='#anchor13'>在 *.js 中載入其它 *.js</a><br>
@@ -208,7 +203,7 @@
                     <h3>script.js</h3>
                     <p>
                         <textarea class='brush:js'>
-                            print('Hello, JavaScript!')
+                            print('Hello, JavaScript!');
                         </textarea>
                     </p>
                 </section>
@@ -258,7 +253,7 @@
                     <h3>script.js</h3>
                     <p>
                         <textarea class='brush:js'>
-                            print('Hello, JavaScript!')
+                            print('Hello, JavaScript!');
                         </textarea>
                     </p>
                 </section>
@@ -380,15 +375,15 @@
                 <h2>在 JavaScript 使用 Java API</h2>
                 <p>
                     <textarea class='brush:js'>
-                        importPackage(java.util)
+                        importPackage(java.util);
 
-                        let a = new ArrayList()
-                        a.add('AAA')
-                        a.add('BBB')
-                        a.add('CCC')
+                        let a = new ArrayList();
+                        a.add('AAA');
+                        a.add('BBB');
+                        a.add('CCC');
 
                         for(let n = 0; n &lt; a.size(); n++){
-                            print(a.get(n))
+                            print(a.get(n));
                         }
                     </textarea>
                     <br>
@@ -406,7 +401,7 @@
                     <br>
                     另外，不像 JScript .NET 沒辦法使用 C# 中設計為泛型的類別，Java 的泛型只是語法糖，所以不支援泛型的 JavaScript 在調用 Java API 中用到泛型的類別，反而沒有相容性問題，就像本來就是 Object 一樣。<br>
                     <br>
-                    還有，遇到 setXXX() 和 getXXX() 之類的方法，在 Rhino 可以寫成 .xxx，例如 frame.setTitle("Hello!") 可以寫成 frame.title = "Hello"。
+                    還有，遇到 setXXX() 和 getXXX() 之類的方法，在 Rhino 可以寫成 .xxx，例如 frame.setTitle('Hello!') 可以寫成 frame.title = 'Hello'。
                 </p>
             </section>
 
@@ -418,13 +413,13 @@
                     以「<a href='https://www.logitechg.com/zh-tw/innovation/developer-lab.html' target='_blank'>羅技 G 系列開發者實驗室</a>」開放下載的「LED 照明 SDK」為例：<br>
                     <br>
                     <textarea class='brush:js'>
-                        importPackage(java.lang)
-                        importPackage(com.logitech.gaming)
+                        importPackage(java.lang);
+                        importPackage(com.logitech.gaming);
 
-                        LogiLED.LogiLedInit()
-                        LogiLED.LogiLedSetLighting(0, 0, 0)
-                        Thread.sleep(3000)
-                        LogiLED.LogiLedShutdown()
+                        LogiLED.LogiLedInit();
+                        LogiLED.LogiLedSetLighting(0, 0, 0);
+                        Thread.sleep(3000);
+                        LogiLED.LogiLedShutdown();
 
                         // 要安裝 Logitech G HUB 且軟體執行中，關閉的話不會有反應。
                     </textarea>
@@ -438,30 +433,30 @@
             <hr id='anchor10'>
 
             <section>
-                <h2>在 JavaScript 引用 Java 的資料型態</h2>
+                <h2>在 JavaScript 使用 Java 的資料型態</h2>
                 <p>
                     <textarea class='brush:js'>
                         // boolean
-                        let boolean = new java.lang.Boolean(true)
-                        print(boolean)
+                        let boolean = new java.lang.Boolean(true);
+                        print(boolean);
 
                         // byte
-                        let byte = new java.lang.Byte(0)
-                        print(byte.MAX_VALUE)
+                        let byte = new java.lang.Byte(0);
+                        print(byte.MAX_VALUE);
 
                         // byte[]
-                        let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 8)
-                        bytes[0] = 16
-                        bytes[7] = 24
-                        print(bytes[0] + bytes[7])
+                        let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 8);
+                        bytes[0] = 16;
+                        bytes[7] = 24;
+                        print(bytes[0] + bytes[7]);
 
                         // char[]
-                        let chars = java.lang.reflect.Array.newInstance(java.lang.Character.TYPE, 26)
+                        let chars = java.lang.reflect.Array.newInstance(java.lang.Character.TYPE, 26);
                         for(let n = 0; n &lt; chars.length; n++){
-                            chars[n] = 65 + n
+                            chars[n] = 65 + n;
                         }
-                        print(chars[25])
-                        print(java.lang.String(chars))
+                        print(chars[25]);
+                        print(java.lang.String(chars));
                     </textarea>
                     <br>
                     <output>
@@ -472,7 +467,13 @@
                         ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
                     </output>
                     <br>
-                    非得強制轉型（Narrow cast）時，可以用 java.lang.reflect.Array.newInstance(型別.TYPE, 1) 代替。明明只用到一個物件，沒有人會想開陣列來用吧？但 JavaScript 真的沒有強制轉型的功能，Java API 的反射機制也只有這強綁型別的做法比較接近。所以遇到 Rhino 無法精準轉型時，在等新版看會不會更精準前，也只能把型別綁在陣列，以 物件名稱[0] 這種彆扭的方式試看看吧～
+                    除了 Java 的基本資料型態，在調用 Java API 需要傳入的參數是類別時，盡量把傳入的變數宣告為 Java 的物件，而不是宣告 JavaScript 的物件傳入。例如需要傳入一個 ArrayList，就 <code>let a = new ArrayList()</code> 來用，既簡單、又省事，不要宣告 <code>let a = []</code> 再想方設法丟進去，不但經常要浪費時間處理自動轉型的問題，程式跑起來性能也不理想。<br>
+                    <br>
+                    其實，就像東西買回來要用之前先好好看一下說明書一樣，建議寫 Rhino 程式調用 Java API 裡面的東西時，養成先查閱 Java API Specification 的習慣，看有沒有傳回值？需要傳入哪些物件？掌握好一切，好好去張羅，這樣去使用會更順利！<br>
+                    <br>
+                    查閱 Java API Specification、了解總共需要用到哪些物件、一個個宣告出來用…這雖然需要花費時間，但往往比直接寫 JavaScript 程式碼去碰運氣還要快。碰運氣看 JavaScript 的 Array、String、Number、Objuet 能不能丟進去用，不能時就轉型來轉型去，以我過來人的經驗，這樣反而更花時間，更別說這樣的程式性能會很糟糕。<br>
+                    <br>
+                    對於 JavaScript 和 Java 兩邊自動轉型的原則是：「盡量讓 Java 物件轉為 JavaScript 物件，這點 Rhino 做得很出色。但盡量不要讓 JavaScript 物件轉 Java 物件，這部分 Rhino 跑得很慢，而且很多意想不到的狀況。」
                 </p>
             </section>
 
@@ -485,15 +486,15 @@
                     <h3>以覆載 Thread 物件的 run() 方法為例</h3>
                     <p>
                         <textarea class='brush:js'>
-                            importPackage(java.lang)
+                            importPackage(java.lang);
 
                             let thread = new Thread({
                                 run: function(){
-                                    print('Hello!')
+                                    print('Hello!');
                                 }
                             })
 
-                            thread.start()
+                            thread.start();
                         </textarea>
                         <br>
                         <output>
@@ -506,15 +507,15 @@
                     <h3>以實作 Runnable 介面的 run() 功能為例</h3>
                     <p>
                         <textarea class='brush:js'>
-                            importPackage(java.lang)
+                            importPackage(java.lang);
 
                             let program = new Runnable({
                                 run: function(){
-                                    print('Hello!')
+                                    print('Hello!');
                                 }
                             })
 
-                            new Thread(program).start()
+                            new Thread(program).start();
                         </textarea>
                         <br>
                         <output>
@@ -524,15 +525,15 @@
                         基於 Lambda 的特性，介面只有一個功能需要實作的話，可以省略介面名稱：<br>
                         <br>
                         <textarea class='brush:js;highlight:3'>
-                            importPackage(java.lang)
+                            importPackage(java.lang);
 
                             let program = {
                                 run: function(){
-                                    print('Hello!')
+                                    print('Hello!');
                                 }
                             }
 
-                            new Thread(program).start()
+                            new Thread(program).start();
                         </textarea>
                         <br>
                         <output>
@@ -554,19 +555,19 @@
                     <h3>用 Java API 的 Thread 物件</h3>
                     <p>
                         <textarea class='brush:js'>
-                            importPackage(java.lang)
+                            importPackage(java.lang);
 
                             function playMusic(file){
-                                runCommand('wmplayer.exe', file)
+                                runCommand('wmplayer.exe', file);
                             }
 
                             new Thread({
                                 run: function(){
-                                    playMusic('music.mp3')
+                                    playMusic('music.mp3');
                                 }
-                            }).start()
+                            }).start();
 
-                            print('音樂播放中')
+                            print('音樂播放中');
                         </textarea>
                     </p>
                 </section>
@@ -576,14 +577,14 @@
                     <p>
                         <textarea class='brush:js'>
                             function playMusic(file){
-                                runCommand('wmplayer.exe', file)
+                                runCommand('wmplayer.exe', file);
                             }
 
                             spawn(function(){
-                                playMusic('music.mp3')
+                                playMusic('music.mp3');
                             })
 
-                            print('音樂播放中')
+                            print('音樂播放中');
                         </textarea>
                     </p>
                 </section>
@@ -597,18 +598,18 @@
                         <h4>Thread.run()</h4>
                         <p>
                             <textarea class='brush:js'>
-                                importPackage(java.lang)
+                                importPackage(java.lang);
 
                                 function playMusic(file){
                                     new Thread({
                                         run: function(){
-                                            runCommand('wmplayer.exe', file)
+                                            runCommand('wmplayer.exe', file);
                                         }
-                                    }).start()
+                                    }).start();
                                 }
 
-                                playMusic('music.mp3')
-                                print('音樂播放中')
+                                playMusic('music.mp3');
+                                print('音樂播放中');
                             </textarea>
                         </p>
                     </section>
@@ -618,12 +619,12 @@
                             <textarea class='brush:js'>
                                 function palyMusic(file){
                                     spawn(function(){
-                                        runCommand('wmplayer.exe', file)
+                                        runCommand('wmplayer.exe', file);
                                     })
                                 }
 
-                                playMusic('music.mp3')
-                                print('音樂播放中')
+                                playMusic('music.mp3');
+                                print('音樂播放中');
                             </textarea>
                         </p>
                     </section>
@@ -660,8 +661,8 @@
                 <h2>列出 JavaScript 物件的屬性和方法</h2>
                 <p>
                     <textarea class='brush:js'>
-                        print(Object.getOwnPropertyNames(global.prototype))
-                        print(Object.getOwnPropertyNames(global))
+                        print(Object.getOwnPropertyNames(global.prototype));
+                        print(Object.getOwnPropertyNames(global));
                     </textarea>
                     <br>
                     Rhino 所有內建函式都在 global 裡，因此可用這個程式列出來看。<br>
@@ -706,7 +707,7 @@
                         範例：<br>
                         <br>
                         <textarea class='brush:js'>
-                            print(arguments[0])
+                            print(arguments[0]);
                         </textarea>
                         <br>
                         <output>
@@ -785,13 +786,13 @@
                         <h4>main.js</h4>
                         <p>
                             <textarea class='brush:js'>
-                                defineClass(Packages.Sample)
+                                defineClass(Packages.Sample);
 
-                                let sample = new Sample('Hello!')
-                                sample.print()
+                                let sample = new Sample('Hello!');
+                                sample.print();
 
-                                sample.field = 'Bye~'
-                                print(sample.field)
+                                sample.field = 'Bye~';
+                                print(sample.field);
                             </textarea>
                             <br>
                             <output>
@@ -834,7 +835,7 @@
                         <h4>main.js</h4>
                         <p>
                             <textarea class='brush:js'>
-                                loadClass(Packages.Sample)
+                                loadClass(Packages.Sample);
                             </textarea>
                             <br>
                             <output>
@@ -855,15 +856,15 @@
                     <p>
                         <textarea class='brush:js'>
                             // 在全域範疇宣告變數 a。
-                            var a = 123
+                            var a = 123;
                             // 看全域物件是不是有了 a 屬性，得到的是 undefined。
-                            print(global.a)
+                            print(global.a);
                             // 確認全域物件是什麼，是 global 沒錯。
-                            print(this)
+                            print(this);
                             // 透過 this 取出變數 a 看看，確實是有 123 這筆資料。
-                            print(this.a)
+                            print(this.a);
                             // 這下知道怎麼對 global 取出變數 a 了，一定在 prototype 裡。
-                            print(global.prototype.a)
+                            print(global.prototype.a);
                         </textarea>
                         <br>
                         <output>
@@ -882,7 +883,7 @@
                     <p>
                         Rhino 的 <kbd>let</kbd> 和 <kbd>const</kbd> 並未完全實作 ECMAScript 6 規範的功能，所以全面改用 let 和 const 取代 var 的話，要注意與其它 JavaScript 引擎表現起來不盡相同的問題！<br>
                         <br>
-                        可以把 let 用在 for() 的計數器和流程控制的 {} 裡面就好，用在其它場合的話，不要指望它能和網頁瀏覽器的 let 一樣，完全解決 var 的弊端：「因為 Rhino 的 let 像是拿 var 改出來湊用的，在全域範疇使用，依然會將變數放入 global 物件。」而 const 也有問題，資料修改了並不會報錯，只是改了也沒用而已：「var 出來的變數重複宣告不會報錯就得被嘴，const 出來的常數重複賦值不會報錯卻好棒棒？」<br>
+                        可以把 let 用在 for() 的計數器和流程控制的 {} 裡面就好，用在其它場合的話，不要指望它能和網頁瀏覽器的 let 一樣，完全解決 var 的弊端：「因為 Rhino 的 let 像是拿 var 改出來湊用的，在全域範疇使用，依然會將變數放入 global 物件。」而 const 也有問題，資料修改了並不會報錯，只是改了也沒用而已：「var 出來的變數重複宣告不會報錯就得被嘴，const 出來的常數重複賦值不會報錯不是一樣嗎？」<br>
                         <br>
                         由於 Rhino 將 var 對全域的汙染限縮在 global.prototype 裡，因此不見得要全面用 let 和 const 取代 var，可以在 var 會出問題的地方使用就好。<br>
                         <br>
@@ -894,7 +895,7 @@
                     <h3>function 物件裡面只有一行敘述的話，可以省略 {} 括號</h3>
                     <p>
                         <textarea class='brush:js'>
-                            (function() print('Hello!'))()
+                            (function() print('Hello!'))();
                         </textarea>
                         <br>
                         <output>
@@ -913,35 +914,35 @@
                     <h3>視窗、按鈕、事件</h3>
                     <p>
                         <textarea class='brush:js'>
-                            importPackage(javax.swing)
-                            importPackage(java.awt.event)
+                            importPackage(javax.swing);
+                            importPackage(java.awt.event);
 
-                            let frame = new JFrame()
-                            let button = new JButton()
+                            let frame = new JFrame();
+                            let button = new JButton();
 
-                            frame.setSize(400, 300)
-                            frame.setTitle('Hello, Swing!')
-                            frame.setVisible(true)
-                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+                            frame.setSize(400, 300);
+                            frame.setTitle('Hello, Swing!');
+                            frame.setVisible(true);
+                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                            button.setLocation(40, 100)
-                            button.setSize(300, 30)
-                            button.setText('別亂按')
+                            button.setLocation(40, 100);
+                            button.setSize(300, 30);
+                            button.setText('別亂按');
 
-                            frame.setLayout(null)
-                            frame.add(button)
+                            frame.setLayout(null);
+                            frame.add(button);
 
                             frame.addWindowListener(new WindowAdapter({
                                 windowDeactivated: function(){
-                                    print('視窗縮小了')
+                                    print('視窗縮小了');
                                 },
                                 windowDeiconified: function(){
-                                    print('視窗還原了')
+                                    print('視窗還原了');
                                 }
                             }))
 
                             button.addActionListener(function(){
-                                button.setText('不是叫你別亂按嗎')
+                                button.setText('不是叫你別亂按嗎');
                             })
                         </textarea>
                     </p>
@@ -954,38 +955,38 @@
                     <h3>呼叫另一個視窗</h3>
                     <p>
                         <textarea class='brush:js'>
-                            importPackage(javax.swing)
+                            importPackage(javax.swing);
 
                             function Frame1(){
-                                var frame = new JFrame()
-                                var button = new JButton()
-                                frame.setSize(400, 300)
-                                frame.setLocationRelativeTo(null)
-                                frame.setTitle('Frame 1')
-                                frame.setVisible(true)
-                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-                                button.setLocation(40, 100)
-                                button.setSize(300, 30)
-                                button.setText('開啟另一視窗')
-                                frame.setLayout(null)
-                                frame.add(button)
+                                var frame = new JFrame();
+                                var button = new JButton();
+                                frame.setSize(400, 300);
+                                frame.setLocationRelativeTo(null);
+                                frame.setTitle('Frame 1');
+                                frame.setVisible(true);
+                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                button.setLocation(40, 100);
+                                button.setSize(300, 30);
+                                button.setText('開啟另一視窗');
+                                frame.setLayout(null);
+                                frame.add(button);
                                 button.addActionListener(function(){
-                                    frame2.show()
+                                    frame2.show();
                                 })
                             }
 
                             function Frame2(){
-                                var frame = new JFrame()
-                                frame.setSize(400, 300)
-                                frame.setTitle('Frame 2')
-                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+                                var frame = new JFrame();
+                                frame.setSize(400, 300);
+                                frame.setTitle('Frame 2');
+                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 this.show = function(){
-                                    frame.show()
+                                    frame.show();
                                 }
                             }
 
-                            let frame1 = new Frame1()
-                            let frame2 = new Frame2()
+                            let frame1 = new Frame1();
+                            let frame2 = new Frame2();
 
                         </textarea>
                     </p>
@@ -1002,32 +1003,32 @@
                 <h2>播放 WAVE 和 MP3 音樂</h2>
                 <p>
                     <textarea class='brush:js'>
-                        importPackage(java.io)
-                        importPackage(javax.sound.sampled)
+                        importPackage(java.io);
+                        importPackage(javax.sound.sampled);
 
-                        let audio_input_stream = AudioSystem.getAudioInputStream(new File('audio.wav'))
-                        let audio_format = audio_input_stream.getFormat()
+                        let audio_input_stream = AudioSystem.getAudioInputStream(new File('audio.wav'));
+                        let audio_format = audio_input_stream.getFormat();
                         if(audio_format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
-                            audio_format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audio_format.getSampleRate(), 16, audio_format.getChannels(), audio_format.getChannels() * 2, audio_format.getSampleRate(), false)
-                            audio_input_stream = AudioSystem.getAudioInputStream(audio_format, audio_input_stream)
+                            audio_format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audio_format.getSampleRate(), 16, audio_format.getChannels(), audio_format.getChannels() * 2, audio_format.getSampleRate(), false);
+                            audio_input_stream = AudioSystem.getAudioInputStream(audio_format, audio_input_stream);
                         }
-                        let source_data_line = AudioSystem.getLine(new DataLine.Info(SourceDataLine, audio_format))
-                        source_data_line.open(audio_format)
-                        source_data_line.start()
-                        let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 256)
+                        let source_data_line = AudioSystem.getLine(new DataLine.Info(SourceDataLine, audio_format));
+                        source_data_line.open(audio_format);
+                        source_data_line.start();
+                        let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 256);
                         if(source_data_line != null){
-                            let read = 0
+                            let read = 0;
                             while(read != -1){
-                                read = audio_input_stream.read(bytes, 0, bytes.length)
+                                read = audio_input_stream.read(bytes, 0, bytes.length);
                                 if(read != -1){
-                                    source_data_line.write(bytes, 0, read)
+                                    source_data_line.write(bytes, 0, read);
                                 }
                             }
-                            source_data_line.drain()
-                            source_data_line.stop()
-                            source_data_line.close()
+                            source_data_line.drain();
+                            source_data_line.stop();
+                            source_data_line.close();
                         }
-                        audio_input_stream.close()
+                        audio_input_stream.close();
                     </textarea>
                     <br>
                     這個程式可以播放 WAVE 格式音樂，同樣的程式只要到：<br>
@@ -1050,16 +1051,16 @@
                 <h2>播放 MIDI 音樂</h2>
                 <p>
                     <textarea class='brush:js'>
-                        importPackage(java.io)
-                        importPackage(java.lang)
-                        importPackage(javax.sound.midi)
+                        importPackage(java.io);
+                        importPackage(java.lang);
+                        importPackage(javax.sound.midi);
 
-                        let sequencer = MidiSystem.getSequencer()
-                        sequencer.open()
-                        sequencer.setSequence(MidiSystem.getSequence(new File('music.midi')))
-                        sequencer.start()
-                        Thread.sleep(sequencer.getMicrosecondLength() / 1000)
-                        sequencer.close()
+                        let sequencer = MidiSystem.getSequencer();
+                        sequencer.open();
+                        sequencer.setSequence(MidiSystem.getSequence(new File('music.midi')));
+                        sequencer.start();
+                        Thread.sleep(sequencer.getMicrosecondLength() / 1000);
+                        sequencer.close();
                     </textarea>
                 </p>
             </section>
@@ -1075,36 +1076,36 @@
                         底下程式示範將 archive 資料夾壓縮為 archive.zip：<br>
                         <br>
                         <textarea class='brush:js'>
-                            importPackage(java.io)
-                            importPackage(java.util.zip)
+                            importPackage(java.io);
+                            importPackage(java.util.zip);
 
-                            let zip_output_stream = new ZipOutputStream(new FileOutputStream('archive.zip'))
+                            let zip_output_stream = new ZipOutputStream(new FileOutputStream('archive.zip'));
 
                             function zip(files){
                                 for(let file of files){
                                     if(file.isDirectory()){
-                                        zip_output_stream.putNextEntry(new ZipEntry(file.toString() + '/'))
-                                        zip_output_stream.closeEntry()
-                                        zip(new File(file).listFiles())
+                                        zip_output_stream.putNextEntry(new ZipEntry(file.toString() + '/'));
+                                        zip_output_stream.closeEntry();
+                                        zip(new File(file).listFiles());
                                     }
                                     else{
-                                        let file_name = file.toString()
-                                        zip_output_stream.putNextEntry(new ZipEntry(file_name))
-                                        let buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024)
-                                        let buffered_input_stream = new BufferedInputStream(new FileInputStream(file_name), buffer.length)
-                                        let n
+                                        let file_name = file.toString();
+                                        zip_output_stream.putNextEntry(new ZipEntry(file_name));
+                                        let buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+                                        let buffered_input_stream = new BufferedInputStream(new FileInputStream(file_name), buffer.length);
+                                        let n;
                                         while((n = buffered_input_stream.read(buffer, 0, buffer.length)) != -1){
-                                            zip_output_stream.write(buffer, 0, n)
+                                            zip_output_stream.write(buffer, 0, n);
                                         }
-                                        buffered_input_stream.close()
-                                        zip_output_stream.closeEntry()
+                                        buffered_input_stream.close();
+                                        zip_output_stream.closeEntry();
                                     }
                                 }
                             }
 
-                            zip(new File('archive').listFiles())
+                            zip(new File('archive').listFiles());
 
-                            zip_output_stream.close()
+                            zip_output_stream.close();
                         </textarea>
                     </p>
                 </section>
@@ -1113,26 +1114,26 @@
                     <h3>解壓縮</h3>
                     <p>
                         <textarea class='brush:js'>
-                            importPackage(java.io)
-                            importPackage(java.util)
-                            importPackage(java.util.zip)
+                            importPackage(java.io);
+                            importPackage(java.util);
+                            importPackage(java.util.zip);
 
-                            let zip_file = new ZipFile("archive.zip")
+                            let zip_file = new ZipFile('archive.zip');
 
-                            let enumeration = zip_file.entries()
+                            let enumeration = zip_file.entries();
 
                             while(enumeration.hasMoreElements()){
-                                let zip_entry = enumeration.nextElement()
+                                let zip_entry = enumeration.nextElement();
                                 if(zip_entry.isDirectory()){
-                                    new File(zip_entry).mkdirs()
+                                    new File(zip_entry).mkdirs();
                                 }
                                 else{
-                                    let input_stream = zip_file.getInputStream(zip_entry)
-                                    let out_stream = new FileOutputStream(zip_entry.getName())
-                                    let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024)
-                                    let n
+                                    let input_stream = zip_file.getInputStream(zip_entry);
+                                    let out_stream = new FileOutputStream(zip_entry.getName());
+                                    let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+                                    let n;
                                     while((n = input_stream.read(bytes)) != -1){
-                                        out_stream.write(bytes, 0, n)
+                                        out_stream.write(bytes, 0, n);
                                     }
                                 }
                             }
@@ -1149,21 +1150,21 @@
                     請到 <a href='http://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/' target='_blank'>http://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/</a> 下載 SQLite JDBC，然後用 -cp 參數掛載，就能像如下程式使用 SQL 存取資料：<br>
                     <br>
                     <textarea class='brush:js'>
-                        importPackage(java.lang)
-                        importPackage(java.sql)
+                        importPackage(java.lang);
+                        importPackage(java.sql);
 
-                        Class.forName('org.sqlite.JDBC')
-                        let connection = DriverManager.getConnection('jdbc:sqlite:test.db')
-                        let statement = connection.createStatement()
-                        statement.execute('CREATE TABLE mytable(mycolumn CHAR(32))')
-                        statement.executeUpdate('INSERT INTO mytable(mycolumn) VALUES("哈囉")')
-                        let result_set = statement.executeQuery('SELECT * FROM mytable')
+                        Class.forName('org.sqlite.JDBC');
+                        let connection = DriverManager.getConnection('jdbc:sqlite:test.db');
+                        let statement = connection.createStatement();
+                        statement.execute('CREATE TABLE mytable(mycolumn CHAR(32))');
+                        statement.executeUpdate('INSERT INTO mytable(mycolumn) VALUES("哈囉")');
+                        let result_set = statement.executeQuery('SELECT * FROM mytable');
                         while(result_set.next()){
-                            print(result_set.getString('mycolumn'))
+                            print(result_set.getString('mycolumn'));
                         }
-                        result_set.close()
-                        statement.close()
-                        connection.close()
+                        result_set.close();
+                        statement.close();
+                        connection.close();
                     </textarea>
                     <br>
                     <output>
@@ -1182,63 +1183,63 @@
                 <h2>簡易 HTTP 伺服器</h2>
                 <p>
                     <textarea class='brush:js'>
-                        importPackage(com.sun.net.httpserver)
-                        importPackage(java.io)
-                        importPackage(java.net)
-                        importPackage(java.util)
+                        importPackage(com.sun.net.httpserver);
+                        importPackage(java.io);
+                        importPackage(java.net);
+                        importPackage(java.util);
 
-                        let data = new Hashtable()
+                        let data = new Hashtable();
 
                         function loadFile(path, file){
                             if(file.isDirectory()){
-                                let list_files = file.listFiles()
+                                let list_files = file.listFiles();
                                 for(let n = 0; n &lt; list_files.length; n++){
-                                    loadFile(path + list_files[n].getName() + "/", f)
+                                    loadFile(path + list_files[n].getName() + '/', f);
                                 }
                             }
                             else{
-                                let file_input_stream = new FileInputStream(file)
-                                let byte_array_output_stream = new ByteArrayOutputStream()
-                                let data_output_stream = new DataOutputStream(byte_array_output_stream)
-                                let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 4096)
-                                let length
+                                let file_input_stream = new FileInputStream(file);
+                                let byte_array_output_stream = new ByteArrayOutputStream();
+                                let data_output_stream = new DataOutputStream(byte_array_output_stream);
+                                let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 4096);
+                                let length;
                                 while((length = file_input_stream.read(bytes)) &gt;= 0){
-                                    data_output_stream.write(bytes, 0, length)
+                                    data_output_stream.write(bytes, 0, length);
                                 }
-                                data_output_stream.flush()
-                                data_output_stream.close()
-                                file_input_stream.close()
-                                data.put(path + file.getName(), byte_array_output_stream.toByteArray())
+                                data_output_stream.flush();
+                                data_output_stream.close();
+                                file_input_stream.close();
+                                data.put(path + file.getName(), byte_array_output_stream.toByteArray());
                             }
                         }
 
-                        let files = new File("htdocs/").listFiles()
+                        let files = new File('htdocs/').listFiles();
 
                         for(let n = 0; n &lt; files.length; n++){
-                            loadFile("", files[n])
+                            loadFile('', files[n]);
                         }
 
-                        let http_server = HttpServer.create(new InetSocketAddress(80), 0)
+                        let http_server = HttpServer.create(new InetSocketAddress(80), 0);
 
-                        http_server.createContext("/", {
+                        http_server.createContext('/', {
                             handle: function(http_exchange){
-                                let path = http_exchange.getRequestURI().getPath().substring(1)
+                                let path = http_exchange.getRequestURI().getPath().substring(1);
                                 if(path.length() == 0){
-                                    path = "index.html"
+                                    path = 'index.html';
                                 }
-                                let bytes = data.get(path)
-                                if(http_exchange.getRequestMethod().equals("HEAD")){
-                                    http_exchange.getResponseHeaders().set("Content-Length", "" + bytes.length)
-                                    http_exchange.sendResponseHeaders(200, -1)
-                                    return
+                                let bytes = data.get(path);
+                                if(http_exchange.getRequestMethod().equals('HEAD')){
+                                    http_exchange.getResponseHeaders().set('Content-Length', '' + bytes.length);
+                                    http_exchange.sendResponseHeaders(200, -1);
+                                    return;
                                 }
-                                http_exchange.sendResponseHeaders(200, bytes.length)
-                                http_exchange.getResponseBody().write(bytes)
-                                http_exchange.getResponseBody().close()
+                                http_exchange.sendResponseHeaders(200, bytes.length);
+                                http_exchange.getResponseBody().write(bytes);
+                                http_exchange.getResponseBody().close();
                             }
                         })
 
-                        http_server.start()
+                        http_server.start();
 
                         // 請在原始碼位置建立 htdocs 資料夾存放網頁，然後執行本程式。
                     </textarea>
@@ -1265,11 +1266,13 @@
                         <h4>Value object</h4>
                         <p>
                             <textarea class='brush:js'>
-                                print('abc'.toUpperCase())
-                                print((123).toString(2))
-                                print((false).toString().toUpperCase())
-                                print([111,222,333].reverse())
-                                if(/^[A-z]\w{6,}\d$/.test('abcd1234')) print('密碼有效')
+                                print('abc'.toUpperCase());
+                                print((123).toString(2));
+                                print((false).toString().toUpperCase());
+                                print([111, 222, 333].reverse());
+                                if(/^[A-z]\w{6,}\d$/.test('abcd1234')){
+                                    print('密碼有效');
+                                }
                             </textarea>
                             <br>
                             <output>
@@ -1286,16 +1289,16 @@
                         <p>
                             <textarea class='brush:js'>
                                 // Method references 1
-                                [111,222,333].forEach(print)
+                                [111, 222, 333].forEach(print);
 
                                 // Method references 2
                                 function f(x){
-                                    print(x*2)
+                                    print(x * 2);
                                 }
-                                [111,222,333].forEach(f)
+                                [111, 222, 333].forEach(f);
 
                                 // Anonymous function
-                                [111,222,333].forEach(x=>print(++x))
+                                [111, 222, 333].forEach(x =&gt; print(++x));
                             </textarea>
                             <br>
                             <output>
@@ -1317,13 +1320,13 @@
                         <h4>Destructuring assignment</h4>
                         <p>
                             <textarea class='brush:js'>
-                                let a,b,c
+                                let a, b, c;
 
-                                [a,b,c]=[123,456,789]
+                                [a, b, c] = [123, 456, 789];
 
-                                print(a)
-                                print(b)
-                                print(c)
+                                print(a);
+                                print(b);
+                                print(c);
                             </textarea>
                             <br>
                             <output>
@@ -1355,17 +1358,42 @@
                         </p>
                     </section>
                     <section>
+                        <h4>Array.prototype.join() 和 String.prototype.split() 的妙用</h4>
+                        <p>
+                            <textarea class='brush:js'>
+                                // 陣列轉字串
+                                let string = [1, 2, 3, 4, 5, 6, 7, 8, 9].join(' ');
+                                print(string);
+
+                                // 字串轉陣列
+                                let array = 'a,b,c,d,e'.split(',');
+                                for(let n of array){
+                                    print(n);
+                                }
+                            </textarea>
+                            <br>
+                            <output>
+                                1 2 3 4 5 6 7 8 9<br>
+                                a<br>
+                                b<br>
+                                c<br>
+                                d<br>
+                                e
+                            </output>
+                        </p>
+                    </section>
+                    <section>
                         <h4>自製格式化字串</h4>
                         <section>
                             <h5>寫成函式</h5>
                             <p>
                                 <textarea class='brush:js'>
                                     function format(){
-                                        return arguments[0].replace(/{(\d+)}/g, (match,index) => arguments[++index] || match)
+                                        return arguments[0].replace(/{(\d+)}/g, (match, index) =&gt; arguments[++index] || match);
                                     }
 
-                                    print(format('{0} {1} {2}','AAA','BBB','CCC'))
-                                    print(format('{0} {1} {2}','AAA'))
+                                    print(format('{0} {1} {2}', 'AAA', 'BBB', 'CCC'));
+                                    print(format('{0} {1} {2}', 'AAA'));
                                 </textarea>
                                 <br>
                                 <output>
@@ -1380,11 +1408,11 @@
                             <h5>寫在 String 物件</h5>
                             <p>
                                 <textarea class='brush:js'>
-                                    String.prototype.format=function(){
-                                        return this.replace(/{(\d+)}/g, (match,index) => arguments[index] || match)
+                                    String.prototype.format = function(){
+                                        return this.replace(/{(\d+)}/g, (match,index) =&gt; arguments[index] || match);
                                     }
 
-                                    print('{0} {1} {2}'.format('AAA','BBB','CCC'))
+                                    print('{0} {1} {2}'.format('AAA', 'BBB', 'CCC'));
                                 </textarea>
                                 <br>
                                 <output>
@@ -1471,7 +1499,7 @@
                                 <br>
                                 2) 就是想用 UTF-8 字元編碼的話，可在程式碼寫：<br>
                                 <br>
-                                <var>java.lang.System.setProperty('file.encoding','UTF-8')</var><br>
+                                <code>java.lang.System.setProperty('file.encoding','UTF-8');</code><br>
                                 <br>
                                 再把視窗程式寫在其它的 *.js 用 load() 載入。<br>
                                 <br>

@@ -119,7 +119,7 @@
                                     }
                                     //Lambda 新做法
                                     list = Arrays.asList("l","a","m","b","d");
-                                    Collections.sort(list, (String x, String y)->
+                                    Collections.sort(list, (String x, String y)-&gt;
                                         x.compareTo(y)
                                     );
                                     for(String n:list){
@@ -269,7 +269,7 @@
                         <br>
                         第 12 行可以寫成：<br>
                         <br>
-                        <code>f((x)->System.out.println(x),"HELLO");</code><br>
+                        <code>f((x)-&gt;System.out.println(x),"HELLO");</code><br>
                         <br>
                         也就是省略匿名函式裡面參數的型別<ins>[2]</ins>。<br>
                         <br>
@@ -277,7 +277,7 @@
                         <br>
                         不只如此，像 (x) 這樣只有一個參數的情況，還更可以進一步簡化寫成：<br>
                         <br>
-                        <code>f(x->System.out.println(x),"HELLO");</code><br>
+                        <code>f(x-&gt;System.out.println(x),"HELLO");</code><br>
                         <br>
                         但多個參數不行，因此為了一致性，通常不建議用這種省略括號的寫法。但對只在「一個參數」情況下才使用 Lambda expressions 的人來說，卻很喜歡用 x 表示標準匿名函式、() 表示空參數的匿名函式。
                     </p>
