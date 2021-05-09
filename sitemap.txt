@@ -3,7 +3,6 @@ https://twideem.github.io/home.html
 https://twideem.github.io/index.html
 https://twideem.github.io/pages/bluesky/19760001X.html
 https://twideem.github.io/pages/bluesky/19810721A.html
-https://twideem.github.io/pages/bluesky/19810812A.html
 https://twideem.github.io/pages/bluesky/19851120A.html
 https://twideem.github.io/pages/bluesky/19880229A.html
 https://twideem.github.io/pages/bluesky/19940131A.html
@@ -232,7 +231,6 @@ https://twideem.github.io/pages/instantcoffee/20030901A.html
 https://twideem.github.io/pages/instantcoffee/20030905A.html
 https://twideem.github.io/pages/instantcoffee/20030908A.html
 https://twideem.github.io/pages/instantcoffee/20030915A.html
-https://twideem.github.io/pages/instantcoffee/20040622A.html
 https://twideem.github.io/pages/instantcoffee/20040713A.html
 https://twideem.github.io/pages/instantcoffee/20040714A.html
 https://twideem.github.io/pages/instantcoffee/20040909A.html
@@ -254,7 +252,6 @@ https://twideem.github.io/pages/instantcoffee/20050609A.html
 https://twideem.github.io/pages/instantcoffee/20050614A.html
 https://twideem.github.io/pages/instantcoffee/20050616A.html
 https://twideem.github.io/pages/instantcoffee/20050623A.html
-https://twideem.github.io/pages/instantcoffee/20050714A.html
 https://twideem.github.io/pages/instantcoffee/20050728A.html
 https://twideem.github.io/pages/instantcoffee/20050903A.html
 https://twideem.github.io/pages/instantcoffee/20060328A.html
@@ -263,7 +260,6 @@ https://twideem.github.io/pages/instantcoffee/20061211A.html
 https://twideem.github.io/pages/instantcoffee/20070113A.html
 https://twideem.github.io/pages/instantcoffee/20070214A.html
 https://twideem.github.io/pages/instantcoffee/20070819A.html
-https://twideem.github.io/pages/instantcoffee/20071117A.html
 https://twideem.github.io/pages/instantcoffee/20071123A.html
 https://twideem.github.io/pages/instantcoffee/20080120A.html
 https://twideem.github.io/pages/instantcoffee/20080127A.html
@@ -338,7 +334,6 @@ https://twideem.github.io/pages/overcast/19940214A.html
 https://twideem.github.io/pages/overcast/19940309A.html
 https://twideem.github.io/pages/overcast/19951221A.html
 https://twideem.github.io/pages/overcast/19961116A.html
-https://twideem.github.io/pages/overcast/19980904A.html
 https://twideem.github.io/pages/overcast/20000317A.html
 https://twideem.github.io/pages/overcast/20000704A.html
 https://twideem.github.io/pages/overcast/20001103A.html
@@ -348,7 +343,6 @@ https://twideem.github.io/pages/overcast/20020310A.html
 https://twideem.github.io/pages/overcast/20020310B.html
 https://twideem.github.io/pages/overcast/20040724A.html
 https://twideem.github.io/pages/overcast/20041012A.html
-https://twideem.github.io/pages/overcast/20041020A.html
 https://twideem.github.io/pages/overcast/20070501A.html
 https://twideem.github.io/pages/overcast/20070708A.html
 https://twideem.github.io/pages/overcast/20071124A.html

@@ -14,32 +14,23 @@
 
         <article>
 
-            <header>
+            <header id='top'>
                 <h1>單色螢幕 RGB 值</h1>
-                <div id='division_1' style='color:#cccccc; background-color:#000000; font-family:Courier; font-size:10pt; height:378px; padding:10px; width:578px'>
+                <p>
+                    檸檬：<a href='javascript:f1("#80FF00")'>80FF00</a>、<a href='javascript:f1("#009B00")'>009B00</a>、<a href='javascript:f1("#66CC33")'>66CC33</a>。<br>
+                    琥珀：<a href='javascript:f1("#FF8000")'>FF8000</a>、<a href='javascript:f1("#D38200")'>D38200</a>、<a href='javascript:f1("#CC9933")'>CC9933</a>。<br>
+                    銀白：<a href='javascript:f1("#CCCCCC")'>CCCCCC</a>。
+                </p>
+                <div id='division' style='color:#cccccc;background-color:#000000;font-family:Courier;font-size:10pt;height:378px;padding:10px;width:578px'>
                     Starting MS-DOS...<br>
                     <br>
                     <br>
-                    HIMEM is testing extended memory...done<br>
+                    HIMEM is testing extended memory...done.<br>
                     <br>
-                    C:\>c:\tc\helloworld.exe<br>
-                    <br>
-                    <div id='division_2' style='color:#cccccc; border:2px; border-color:#cccccc; border-style:solid; font-size:16pt; padding:20px; width:320px'>
-                        Hello, world!<br>
-                    </div>
-                    <br>
-                    C:\><span id='content_1'>_</span><br>
-                    <br>
+                    C:\&gt;C:\DOS\SMARTDEV.EXE /X<br>
+                    C:\><span id='content1' style='font-family:Courier'></span><span id='content2'>_</span>
                 </div>
             </header>
-
-            <hr>
-
-            <p>
-                檸檬：<a href='javascript:f1("#80FF00")'>80FF00</a>、<a href='javascript:f1("#009B00")'>009B00</a>、<a href='javascript:f1("#66CC33")'>66CC33</a>。<br>
-                琥珀：<a href='javascript:f1("#FF8000")'>FF8000</a>、<a href='javascript:f1("#D38200")'>D38200</a>、<a href='javascript:f1("#CC9933")'>CC9933</a>。<br>
-                銀白：<a href='javascript:f1("#CCCCCC")'>CCCCCC</a>
-            </p>
 
             <hr>
 
@@ -50,19 +41,25 @@
         </article>
 
         <script>
-            var a=''
-            var b=false
+            var visibility=''
+            var content1=document.getElementById('content1')
+            var content2=document.getElementById('content2')
+            var echo=[' []~(￣ー￣ )>　等我這杯喝完再幫你執行。',' ...(~￣０￣)ノ　我先出去一下，回來再幫你執行哦。',' ＺZz(￣.￣)　呼嚕～',' (〜￣▽￣)〜~(￣▽￣)~〜(￣▽￣〜)']
             function f1(x){
-                document.getElementById('division_1').style.color=x
-                document.getElementById('division_2').style.borderColor=x
-                document.getElementById('division_2').style.color=x
+                document.getElementById('division').style.color=x
             }
             function f2(){
-                if(b) document.getElementById('content_1').style.visibility='visible'
-                else document.getElementById('content_1').style.visibility='hidden'
-                b=!b
+                if(visibility) content2.style.visibility='visible'
+                else content2.style.visibility='hidden'
+                visibility=!visibility
             }
             setInterval('f2()',500)
+            addEventListener('keydown',function(x){
+                if(x.key=='Enter') content1.innerHTML=echo[Math.floor(Math.random()*echo.length)]
+                if(x.key.length==1){
+                    content1.innerHTML+=x.key
+                }
+            })
         </script>
 
     </body>

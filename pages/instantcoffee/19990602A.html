@@ -284,7 +284,7 @@
                     <p>
                         可用 <code>getMessage()</code> 取得前一張網頁所 throw 出的 Exception 訊息，必須搭配 <code>&lt;%@ page isErrorPage="ture" %&gt;</code> 將用到 exception 物件的 JSP 網頁，設為錯誤處理專用的頁面。<br>
                         <br>
-                        通常會在前一張網頁使用 <code>&lt;%@ page errorPage="" %&gt;</code> 指令，指向含有 exception.getMessage() 的 JSP 網頁，再用 <code>&lt;% throw new Exception("") %&gt;</code> 丟出錯誤訊息，好讓 exception.getMessage() 的 JSP 網頁接收～
+                        通常會在前一張網頁使用 <code>&lt;%@ page errorPage="" %&gt;</code> 指令，指向含有 exception.getMessage() 的 JSP 網頁，再用 <code>&lt;% throw new Exception("") %&gt;</code> 丟出錯誤訊息，讓 exception.getMessage() 的 JSP 網頁接收～
                     </p>
                 </section>
             </section>

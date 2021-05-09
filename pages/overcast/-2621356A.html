@@ -18,7 +18,7 @@
             <header>
                 <h1>用 ECMAScript 塑造程式</h1>
                 <p>
-                    大多數程式語言，學會用越多功能越好，ECMAScript 當然也不例外！但做為可塑高、開放客製化的程式語言，其實也不排斥「用越少功能越好」。畢竟，你想用 C 或 Java 還是 Python 風格寫 ECMAScript 都無所謂，所以只挑幾種自認為最實用、簡單的語法，重新組合自己的 ECMAScript 語言來寫程式，並沒什麼不一樣～
+                    大多數程式語言，學會用越多功能越好，ECMAScript 當然也不例外！但做為可塑高、開放客製化的程式語言，其實也不排斥「用越少功能越好」。畢竟，你想用 C 或 Java 還是 Python 風格寫 ECMAScript 都無所謂，只挑幾種自認為最實用、簡單的語法，重新組合自己的 ECMAScript 語言來寫程式，並沒什麼不好～
                 </p>
             </header>
 
@@ -27,13 +27,13 @@
             <section>
                 <h2>JavaScript</h2>
                 <p>
-                    網際網路剛迅速崛起的時代，最惱人的使用者體驗，就是提交資料給某個全球資訊網後，網速慢等了快十秒才總算看到下一頁時，竟然是回報說填寫的資料不對：「請重填後按確定。」為了提高瀏覽者與全球資訊網的互動效率，Netscape Communications 研擬 Mocha 計畫，希望瀏覽器本身就能跑一些簡單的程式，來分擔伺服器的工作，在把資料遞交給伺服器前，瀏覽器自己就能先檢查資料。<br>
+                    網際網路迅速崛起的時代，最惱人的使用者體驗，就是提交資料給某個全球資訊網後，網速慢等了快十秒，總算看到下一頁時，竟然是回報填寫資料不正確的網頁。於是 Netscape Communications 研擬 Mocha 計畫，希望瀏覽器本身就能跑簡單的程式，分擔伺服器的工作，在遞交資料給伺服器前，瀏覽器自己就能先檢查資料。<br>
                     <br>
                     Netscape Communications 委派 Brendan Eich 開發一款新的程式語言，目標是能將原始碼直接寫在網頁裡面，而且沒寫過程式的人也能使用。<br>
                     <br>
-                    沒幾天，Netscape Communications 對 HotJava 瀏覽器的 Applet 驚喜不已，決定與 Sun Microsystems 洽談，想讓自己的瀏覽器也能支援 Applet。雙方協議合作後，這時又給 Brendan Eich 一個要求：「讓開發中的程式語言長得像 Java 吧！」<br>
+                    沒幾天，Netscape Communications 對 HotJava 瀏覽器的 Applet 驚喜不已，決定與 Sun Microsystems 洽談，想讓自己的瀏覽器也能支援 Applet。雙方協議合作後，給 Brendan Eich 加入一個要求：「讓開發中的程式語言長得像 Java 吧！」<br>
                     <br>
-                    Brendan Eich 參考 Self 程式語言的原型機制，以及 Scheme 程式語言的一級函數，只花約十天的時間，完成了一款弱型別的直譯式程式語言順利交差。<br>
+                    Brendan Eich 參考 Self 程式語言的原型機制，以及 Scheme 程式語言的一級函數，只花約十天的時間，完成了一款弱型別的直譯式程式語言交差了事。<br>
                     <br>
                     1995 年 9 月先以 LiveScript 的名稱，搭載於 Netscape Navigator 2.0 測試版，12 月正式版時改名為 JavaScript。（至於 Mocha 即後來的 SpiderMonkey 引擎。）
                 </p>
@@ -206,7 +206,7 @@
             <section>
                 <h2>ECMAScript 5</h2>
                 <p>
-                    於 2009 年 12 月正式發布，離上一次版本有十年之久，但主要特性不是更新語言，而是在相容 ECMAScript 3 和銜接 ECMAScript 6。<br>
+                    於 2009 年 12 月正式發布，離上一次版本有十年之久，主要特性不是更新語言，而是在相容 ECMAScript 3 和銜接 ECMAScript 6。<br>
                     <br>
                     ECMAScript 5 基本上只在 API 引進 ECMAScript 4 的新觀念（原型物件、擁抱函數式程式設計、遠離物件導向的類別），然後透過 strict mode（嚴格模式）使用 ECMAScript 4 的新語法。<br>
                     <br>
@@ -278,9 +278,9 @@
             <section>
                 <h2>ECMAScript 2015 (ECMA-262 6th Edition)</h2>
                 <p>
-                    2015 年 6 月正式發布…或許這活像 ECMAScript 4 的死而復生，因此不稱 ECMAScript 6，改用年份做為版號～<br>
+                    2015 年 6 月正式發布…或許活像 ECMAScript 4 的死而復生，因此不稱 ECMAScript 6，改用年份做為版號～<br>
                     <br>
-                    ECMAScript 2015 可以把程式寫得完全不像過去 ECMAScript 3 的程式，活像新的語言一樣，難怪當初 ECMAScript 4 時反應這麼激烈。但 ECMAScript 2015 只是新增語法特性，好讓它可塑性更高，能用類似 Python 的寫法設計程式，並不是為了汰舊換新，因此還是可以寫出過去 Java 和 C 風格的程式…甚至很像 Java 在模仿 Python 的方式，感覺還是很 Java。<br>
+                    ECMAScript 2015 可以把程式寫得完全不像過去 ECMAScript 3 的程式，像新的語言一樣，難怪當初 ECMAScript 4 時反應這麼激烈。但 ECMAScript 2015 只是新增語法特性，讓它可塑性更高，能用類似 Python 的寫法設計程式，並不是為了汰舊換新，因此還是可以寫出過去 Java 和 C 風格的程式…甚至很像 Java 在模仿 Python 的方式，感覺還是很 Java。<br>
                     <br>
                     詳細功能範例，請參考：<a href='http://es6-features.org' target='_blank'>http://es6-features.org</a>。
                 </p>
@@ -484,7 +484,7 @@
                     <p>
                         過去 ECMAScript 3 的程式寫法長得像 Java 和 C 語言，因此使用 <code>;</code> 做為程式結尾<ins>[2]</ins>。到了 ECMAScript 2015 開始長得像 Python，因此不再鼓勵使用 <code>;</code> 表示敘述結束。<br>
                         <br>
-                        但純粹只是寫法風格的改變，ECMAScript 2015 對於段落的規範還是跟以前一樣：「每一行程式就是一個敘述，可以不用加分號。」所以 () 和 [] 為開頭的程式依然存在沒有分行的問題，這時再把分號加在前面。<br>
+                        純粹只是寫法風格的改變，ECMAScript 2015 對於段落的規範還是跟以前一樣：「每一行程式就是一個敘述，可以不用加分號。」所以 () 和 [] 為開頭的程式依然存在沒有分行的問題，這時再把分號加在前面。<br>
                         <br>
                         <textarea class='brush:js'>
                             ;(function(){
@@ -502,7 +502,7 @@
                         <br>
                         更明確表示不要使用自動分號插入！<br>
                         <br>
-                        雖然三年後 ECMAScript 2015 規範不加分號，但如果看到有人加，還是要尊重別人的技術觀點和風格喜好，不要藉以干涉別人寫法的自由。儘管 Brendan Eich 認為要加分號，卻還是設計並保留自動分號插入，就是為了自由度！ECMAScript 是可塑性高的程式語言，各種程式語言的使用者，都能用自己習慣的寫法設計 JavaScript 程式，這才是這門語言的基本精神。不要把 Python 規範怎麼寫法才對的精神帶進 ECMAScript，他是他，我是我，我是一款做我自己的程式語言，而不是為別人而活的程式語言。
+                        雖然三年後 ECMAScript 2015 規範不加分號，但如果看到有人加，還是要尊重別人的技術觀點和風格喜好，不要拿規範干涉別人寫法的自由。ECMAScript 是可塑性高的程式語言，各種程式語言的使用者，都能用自己習慣的寫法設計 JavaScript 程式，才是這門語言的基本精神。
                     </p>
                 </section>
                 <hr>
@@ -614,9 +614,9 @@
                     <p>
                         新增 <code>await</code> 關鍵字，停止 async 函式的執行。<br>
                         <br>
-                        物件屬性可用 <code>...</code> 符號表示多個，這樣才能在函式參數直接傳入不定屬性的物件。<br>
+                        物件屬性可用 <code>...</code> 符號表示多個，能在函式參數傳入不定屬性的物件。<br>
                         <br>
-                        RegExp 支援 <code>?&lt;&gt;</code>（named capture groups），<code>s</code> 匹配參數（dotALL flag），以及 、<code>\D</code>（lookbehind assertions） 和 <code>\P</code>（Unicode property escapes）。<br>
+                        RegExp 支援 <code>?&lt;&gt;</code>（named capture groups），<code>s</code> 匹配參數（dotALL flag），以及 <code>\D</code>（lookbehind assertions） 和 <code>\P</code>（Unicode property escapes）。<br>
                         <br>
                         在 Template literals 使用 <code>\u</code> 和 <code>\x</code> 能正常執行功能，而不是產生執行期錯誤。
                     </p>
@@ -637,11 +637,11 @@
                 <p>
                     從 ECMAScript 2017 和 ECMAScript 2018 可以看出，這門程式語言，在語法上不再以瀏覽器腳本語言發展，而是朝更通用的腳本語言邁進！例如為 Node.js 量身打造一些語法。<br>
                     <br>
-                    於是，一堆寫 RIA 時用不到的功能將如雨後春筍不停冒出，沒辦法吃筍子的我<ins>[2]</ins> 就不再繼續關注未來的發展了 XD<br>
+                    於是，一堆寫 RIA 時用不到的功能將如雨後春筍不停冒出，沒辦法吃筍子的我<ins>[2]</ins> 就不再繼續關注未來發展了 XD<br>
                     <br>
                     我覺得用最簡單的語法，寫傳統瀏覽器腳本程式，更能感受到跑 RIA 的樂趣。<br>
                     <br>
-                    從先進的 ECMAScript 引擎充分發揮其潛在性能固然刺激，但為老舊的瀏覽器寫 ECMAScript 應用程式也很美滿。我不會因此認為用傳統老舊的 ECMAScript 語法寫程式是什麼壞事，我只想享受在瀏覽器寫應用程式、讓新舊裝置都能跑的樂趣。
+                    從先進的 ECMAScript 引擎發揮其潛在性能固然刺激，但為老舊的瀏覽器寫 ECMAScript 應用程式也很美滿。我不會因此認為用傳統老舊的 ECMAScript 語法寫程式是什麼壞事，我只想享受在瀏覽器寫應用程式、讓新舊裝置都能跑的樂趣。
                 </p>
             </section>
 
@@ -965,7 +965,7 @@
             <footer>
                 <p>
                     [1] 原名 European Computer Manufacturers Association（歐洲電腦製造協會），簡稱 ECMA。但制定標準的請求並不限於歐洲，而是國際性的，因此 1994 年改名 Ecma International。Ecma 不再全部大寫，意味著不再有 European Computer Manufacturers Association 首字母的含意，Ecma 就是一個名詞。<br>
-                    [2] 因為我的平板電腦太舊了，無法安裝最新的網頁瀏覽器，去跑最新的 ECMAScript 程式，所以戲稱沒辦法吃筍子，會過敏…我不能去寫出自己平板電腦無法跑的程式來吧 XD<br>
+                    [2] 因為我的平板電腦太舊了，無法安裝最新的網頁瀏覽器，去跑最新的 ECMAScript 程式，所以戲稱沒辦法吃筍子，會過敏…我不能去寫自己平板電腦無法跑的程式吧 XD<br>
                     [3] Opera 會自動把版面縮放得跟電腦版一模一樣，這樣一張 HTML 或一種 CSS 就能在兩裝置間通用。其它瀏覽器則針對平板尺寸縮放，往往要調整成專屬於平板的網頁或樣式來用。<br>
                     [4] 注意！物件導向和程序導向都是結構化程式語言！很多人看到結構化程式語言，就以為那是指程序導向程式語言 XD　所以別跟我反駁說物件導向程式語言不是結構化程式語言，我知道你想說的是：「物件導向程式語言不是程序導向程式語言。」但我並沒說錯 :)<br>
                     [*] <a href='http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf' target='_blank'>ECMAScript Language Specification</a><br>
