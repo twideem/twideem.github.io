@@ -120,9 +120,10 @@
         </article>
 
         <script>
+            var a=document.getElementsByTagName('a')
             if(Web.hosting()){
-                document.getElementsByTagName('a')[4].href='http://www.msn.com'
-                document.getElementsByTagName('a')[9].href='http://java.com/zh-TW/'
+                a[4].href='http://www.msn.com'
+                a[9].href='http://java.com/zh-TW/'
                 document.body.style.backgroundImage='url(figures/root/backgroundimage.png)'
                 document.body.style.backgroundAttachment='fixed'
             }

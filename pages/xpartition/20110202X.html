@@ -65,6 +65,7 @@
             //Global variables
             var level=0
             var amount=0
+            var inputs=document.getElementsByTagName('input')
             //防爆符
             function f1(){
                 if(level<10){
@@ -97,13 +98,14 @@
             //星數
             function f3(){
                 var a=''
-                for(var n=0; n<level; n++) a+='☆'
+                for(var n=0;n<level;n++) a+='☆'
                 if(n<10) return a
                 else return '<span style="color:orange">'+a+'</span>'
             }
             //快速設置機率組合
+
             function f4(x){
-                for(var n=0; n<document.getElementsByTagName('input').length; n++) document.getElementsByTagName('input')[n].value=x[n]
+                for(var n=inputs.length;n--;) inputs[n].value=x[n]
             }
         </script>
 

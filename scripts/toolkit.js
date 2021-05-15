@@ -1,7 +1,7 @@
 var Display={
     hide:function(){
         var elements=document.querySelectorAll('.private')
-        for(var n=0;n<elements.length;n++){
+        for(var n=elements.length;n--;){
             elements[n].style.display='none'
             this._fixParagraphMarginTop(elements[n])
             this._hidePreviousHRElement(elements[n])
@@ -15,7 +15,7 @@ var Display={
         }
         else{
             var elements=document.querySelectorAll('.private')
-            for(var n=0;n<elements.length;n++){
+            for(var n=elements.length;n--;){
                 elements[n].style.display='block'
                 this._showPreviousHRElement(elements[n])
             }
