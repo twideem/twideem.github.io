@@ -17,15 +17,9 @@
         <article>
 
             <header>
-                <h1>最適合 Java 的 JavaScript 引擎：Rhino</h1>
+                <h1>JavaScript 引擎：Rhino</h1>
                 <p>
-                    Java SE 6 開始，不但其他程式語言能跑 JVM，並且內建 JavaScript 引擎：Rhino！<br>
-                    <br>
-                    這是由 Mozilla 以 Java 寫出來的，長年維護下來，功能穩定。可惜的是，Java SE 8 改用 Nashorn 取代，號稱性能更好，但功能不穩定，加上 ECMAScript 6 標準化步調比 Rhino 緩慢，沒有比較好用～<br>
-                    <br>
-                    Java 11 不再更新 Nashorn，Java 15 正式汰除，也不再內建 JavaScript 引擎，只得回頭下載新版的 Rhino 來用。幸好這才是原本該走的路，與 Java 整合得更好的 Rhino，一向是最適合 Java 的 JavaScript 引擎！<br>
-                    <br>
-                    所謂 Nashorn 性能較佳，其實一樣差，比性能只是在比爛而已。但 Rhino 與 Java 在功能上高度整合的穩定性，能毫無障礙、隨心所欲地用 JavaScript 語言存取 Java API，這才是 JavaScript 的重點！如果要性能，應該繼續用 Java 語言，之所以用 JavaScript 語言，是為了比 Java 語言寫得更快不是嗎？因此功能穩定沒什麼問題的 Rhino，要比性能好但問題多的 Nashorn，更適合做為 Java 的 JavaScript 引擎！
+                    Rhino 是 Mozilla 以 Java 寫出來的 JavaScript 引擎，長年維護下來，功能穩定。
                 </p>
             </header>
 
@@ -1256,6 +1250,51 @@
                 </section>
                 <hr>
                 <section>
+                    <h3>Nashorn 二三事</h3>
+                    <p>
+                        Java SE 6 曾內建 Rhino 引擎，不過 Java SE 8 改用 Oracle 重新打造、性能更好的 Nashorn 引擎取而代之。<br>
+                        <br>
+                        Java 11 時，Oracle 宣布不再更新 Nashorn 的功能，並且列為 deprecated 不建議使用。到了 Java 15，Oracle 不再維護 Nashorn 的錯誤，正式從 Java 移除，亦即 Java 15 起不再內建 JavaScript 引擎<ins>[2]</ins>。<br>
+                        <br>
+                        雖然 OpenJDK 仍在維護 Nashorn，但僅在 Java 11 例行性更新時調適相容性，也就是 Nashorn 會造成 Java 11 錯誤才修正，並不是 Nashorn 有錯誤就修正。OpenJDK 也不建議 Java 15 使用看似仍在維護的 Nashorn。<br>
+                        <br>
+                        總之，Nashorn 已死，回頭用 Rhino 吧～
+                    </p>
+                    <section>
+                        <h4>jjs 或 jrunscript</h4>
+                        <p>
+                            建議使用 jjs，程式碼有錯誤時，會剖析語法，指出錯誤原因與程式碼位置。<br>
+                            <br>
+                            jrunscript 只會拋出例外，不方便除錯。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>使用 ECMAScript 6 語法</h4>
+                        <p>
+                            <output>
+                                jjs main.js --language=es6<br>
+                            </output>
+                            <br>
+                            Nashorn 支援 `` 符號的字串，能表示多行字串，以及用 <code>${變數名稱或運算式}</code> 將程式崁在字串裡。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>如何 import 套件</h4>
+                        <p>
+                            <code>load('nashorn:mozilla_compat.js')</code>，就能使用 Rhino 的 importPackage()。
+                        </p>
+                    </section>
+                    <section>
+                        <h4>關於 JFrame</h4>
+                        <p>
+                            不需要 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)，關閉視窗圖示就能結束視窗。<br>
+                            <br>
+                            需要用 frame.repaint() 重繪視窗元件，才能在載入視窗時顯示 JFrame.add() 的元件。
+                        </p>
+                    </section>
+                </section>
+                <hr>
+                <section>
                     <h3>JavaScript 程式設計錦囊</h3>
                     <section>
                         <h4>Value object</h4>
@@ -1540,7 +1579,7 @@
                         <section>
                             <h5>用 7z.exe 打包 JAR</h5>
                             <p>
-                                安裝 7-Zip 的人蠻多的<ins>[2]</ins>，所以這裡示範用 7z.exe 打包 JAR 的方式：<br>
+                                安裝 7-Zip 的人蠻多的<ins>[3]</ins>，所以這裡示範用 7z.exe 打包 JAR 的方式：<br>
                                 <br>
                                 <output>
                                     "C:\Program Files\7-Zip\7z.exe" a -tzip run.jar *.class META-INF
@@ -1560,7 +1599,7 @@
                                 <br>
                                 在 Windows 作業系統壓出來的 ZIP 檔案，資料夾路徑經常用的符號是 \，而 Executable JAR 必須是 / 符號。<br>
                                 <br>
-                                用 PowerShell 壓的 ZIP 檔案，就是以 META-INF\MANIFEST.MF 紀錄檔案路徑，只要改成 META-INF/MANIFEST.MF 就能執行了…不過沒人吃飽太閒，專程用十六進位編輯器進去改吧？<ins>[3]</ins>
+                                用 PowerShell 壓的 ZIP 檔案，就是以 META-INF\MANIFEST.MF 紀錄檔案路徑，只要改成 META-INF/MANIFEST.MF 就能執行了…不過沒人吃飽太閒，專程用十六進位編輯器進去改吧？<ins>[4]</ins>
                             </p>
                         </section>
                         <section>
@@ -1580,8 +1619,9 @@
             <footer>
                 <p>
                     [1] 正確說法是「那能操作的功能也不盡相同」，但通常操作最頂層物件時會省略名稱，例如 window.setTimeout() 會寫 setTimeout()，用起來活像內建函式（built-in functions）。<br>
-                    [2] 雖然我想推薦免安裝的 <a href='http://www.7-zip.org/download.html' target='_blank'>7-Zip 命令列版</a>，但下載回來的檔案，是跟傳說中 WinRAR.rar 一樣的 7z1900-extra.7z。<br>
-                    [3] 還不如用壓縮軟體打開 *.jar 再儲存檔案，就等於修復錯誤了！但既然都有壓縮軟體了，又何必用 PowerShell～
+                    [2] 其實 Java SE 6 時，就有人反對 Java 內建 JavaScript 引擎，所以這問題不大。Java 只該提供能開發各個腳本語言引擎的 API，不該內建一個成品。
+                    [3] 雖然我想推薦免安裝的 <a href='http://www.7-zip.org/download.html' target='_blank'>7-Zip 命令列版</a>，但下載回來的檔案，是跟傳說中 WinRAR.rar 一樣的 7z1900-extra.7z。<br>
+                    [4] 還不如用壓縮軟體打開 *.jar 再儲存檔案，就等於修復錯誤了！但既然都有壓縮軟體了，又何必用 PowerShell～
                 </p>
             </footer>
 
