@@ -30,13 +30,12 @@
                     <br>
                     不像 Diablo III 任務過程要照關卡順序一個一個解開，Torchlight II 的任務是在大地圖中隨機坐落，你可以照自己的喜好決定任務順序。甚至開放編輯器，可以自己修改世界的生態。被當作線上遊戲經營的 Diablo III，深怕你變強破壞公平性，所以玩家只能扮演平民，就跟現實生活一樣鳥。做為單機遊戲的 Torchlight II，反過來怕你練不強，千方百計要讓玩家過足當英雄的癮，而這才是遊戲最基本的樂趣！<br>
                     <br>
-                    2013 年 4 月 3 日，在台灣取得《火炬之光２》代理的「<a href='http://torchlight2.iwplay.com.tw' target='_blank'>艾玩天地</a>」推出官方繁體中文版，只要至官網免費下載主程式安裝，就能在遊戲中切換語系；而且還能單機試玩第一章的內容，覺得不錯玩的話，可以線上購買正式版序號，只要 599 元。Steam 的話更便宜，但必須用 MOD 模式才能玩中文，因為中文由艾玩獨家～<br>
-                    <br>
                     ．<a href='#anchor1'>職業與練法</a><br>
                     ．<a href='#anchor2'>攻略</a><br>
                     ．<a href='#anchor3'>倉庫包</a><br>
                     ．<a href='#anchor4'>MODs</a><br>
-                    ．<a href='#anchor5'>密技</a>
+                    ．<a href='#anchor5'>密技</a><br>
+                    ．<a href='#anchor6'>疑難雜症</a>
                 </p>
             </header>
 
@@ -847,6 +846,36 @@
                     tl2_voidember_rank7         秒回 2.8、吸 11 兰
                     tl2_willieseye              3% 物理护甲、持续 5 秒 15 物理伤害
                 -->
+            </section>
+
+            <hr id='anchor6'>
+
+            <section>
+                <h2>疑難雜症</h2>
+                <hr>
+                <section>
+                    <h3>設定「視窗最大化 (Windowed Fullscreen)」後無法進入遊戲</h3>
+                    <p>
+                        請編輯：<br>
+                        <br>
+                        <var>[使用者]\Documents\My Games\Runic Games\Torchlight 2\local_settings.txt</var><br>
+                        <br>
+                        修改：<br>
+                        <br>
+                        <code>
+                            WINDOWED_FULLSCREEN :1<br>
+                            FULLSCREEN :1<br>
+                            WINDOW_WIDTH :你的螢幕解析度寬度，例如 1366。<br>
+                            WINDOW_HEIGHT :你的螢幕解析度高度，例如 768。<br>
+                        </code>
+                        <br>
+                        就能以視窗全螢幕進入遊戲了！<br>
+                        <br>
+                        雖然遊戲設定顯示的是「全螢幕模式 (Fullscreen)」，但進入遊戲後並沒有顯示「在全螢幕模式下無法使用 IME，若需使用 IME 請設定視窗最大化模式。」由此證明是視窗最大化沒錯。<br>
+                        <br>
+                        也可將 WINDOWED_FULLSCREEN 和 FULLSCREEN 都設為 0，表示視窗模式，保證能進入遊戲。
+                    </p>
+                </section>
             </section>
 
             <hr>
