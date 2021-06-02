@@ -442,54 +442,48 @@
             <hr>
 
             <section>
+                <h2>jdk-6u45-windows-x64.exe 免安裝法</h2>
+                <p>
+                    開啟壓縮檔→.rsrc→1033→JAVA_CAB10→111→tools.zip<br>
+                    <br>
+                    然後用 uppack200 拆 jre 資料夾裡面的 rt.pack，以及 lib 資料夾裡面的 tools.pack。<br>
+                    <br>
+                    bin\unpack200.exe -r -v -l "" lib\tools.pack lib\tools.jar<br>
+                    bin\unpack200.exe -r -v -l "" jre\lib\rt.pack jre\lib\rt.jar<br>
+                    <br>
+                    基本上這樣就能編譯，有問題再拆其它 *.pack。
+                </p>
+            </section>
+            <hr>
+
+            <section>
                 <h2>其他</h2>
-                <hr>
-                <section>
-                    <h3>已過時文章</h3>
-                    <p>
-                        ．<a href='20041207A.html'>J2SE Development Kit 安裝指南</a><br>
-                        ．<a href='20120828A.html'>再見了，Java Applet～</a><br>
-                        ．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
-                        ．用 <kbd>netbeans.exe --jdkhome "%JAVA_HOME%"</kbd> 解決 6.8 版找不到 Java 的問題<br>
-                        ．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
-                        ．<a href='20090212A.html'>JavaFX Application 圖形化介面程式設計入門</a><br>
-                        ．<a href='20111010A.html'>FXML 圖形化介面程式設計進階</a><br>
-                        ．<a href='20090602A.html'>JavaFX CSS 圖形化介面樣式管理</a><br>
-                        ．<a id='20100422A.html'>JavaFX Text 文字、JavaFX Image 圖像、JavaFX Control 控制項</a><br>
-                        ．<a href='20100821A.html'>JavaFX Paint 塗色、JavaFX Effect 靜態特效、JavaFX Animation 動態效果</a><br>
-                        ．<a href='20120427A.html'>JavaFX Media 影音播放</a><br>
-                        ．<a id='20120814A.html'>JavaFX Canvas</a><br>
-                        ．<a id='20140318A.html'>JavaFX 3D</a><br>
-                        ．<a href='20080120A.html'>美化 jEdit 操作環境</a><br>
-                        ．<a href='20080127A.html'>強化 jEdit 操作功能</a><br>
-                    </p>
-                    <section>
-                        <h4>jdk-6u45-windows-x64.exe 免安裝法</h4>
-                        <p>
-                            開啟壓縮檔→.rsrc→1033→JAVA_CAB10→111→tools.zip<br>
-                            <br>
-                            然後用 uppack200 拆 jre 資料夾裡面的 rt.pack，以及 lib 資料夾裡面的 tools.pack。<br>
-                            <br>
-                            bin\unpack200.exe -r -v -l "" lib\tools.pack lib\tools.jar<br>
-                            bin\unpack200.exe -r -v -l "" jre\lib\rt.pack jre\lib\rt.jar<br>
-                            <br>
-                            基本上這樣就能編譯，有問題再拆其它 *.pack。
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>垃圾桶</h3>
-                    <p>
-                        ．其實沒有永遠的跨平台：包括 Java 與 HTML5。（軟平台是脆弱的）<br>
-                        ．傳統程式以函式存取變數，物件導向以變數綑綁函式。<br>
-                        ．Frame 與 Form 的區別：前者可以做為後者的元件。<br>
-                        ．繼承與複合，就像改裝與組裝。<br>
-                        ．JTextField、JTextArea、JTextPane：單行輸入欄、多行文字欄、圖文容器。<br>
-                        ．Ruby &gt; (Smalltalk + Perl) / 2，意思是：「養成做好垃圾分類習慣的程式語言。」<br>
-                        ．XML 不只是資料結構，還可以是操作介面。
-                    </p>
-                </section>
+                <p>
+                    ．<a href='20041207A.html'>J2SE Development Kit 安裝指南</a><br>
+                    ．<a href='20120828A.html'>再見了，Java Applet～</a><br>
+                    ．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
+                    ．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
+                    ．用 <kbd>netbeans.exe --jdkhome "%JAVA_HOME%"</kbd> 解決 6.8 版找不到 Java 的問題<br>
+                    ．<a href='20080120A.html'>美化 jEdit 操作環境</a><br>
+                    ．<a href='20080127A.html'>強化 jEdit 操作功能</a><br>
+                    <br>
+                    ．<a href='20090212A.html'>JavaFX Application 圖形化介面程式設計入門</a><br>
+                    ．<a href='20111010A.html'>FXML 圖形化介面程式設計進階</a><br>
+                    ．<a href='20090602A.html'>JavaFX CSS 圖形化介面樣式管理</a><br>
+                    ．<a id='20100422A.html'>JavaFX Text 文字、JavaFX Image 圖像、JavaFX Control 控制項</a><br>
+                    ．<a href='20100821A.html'>JavaFX Paint 塗色、JavaFX Effect 靜態特效、JavaFX Animation 動態效果</a><br>
+                    ．<a href='20120427A.html'>JavaFX Media 影音播放</a><br>
+                    ．<a id='20120814A.html'>JavaFX Canvas</a><br>
+                    ．<a id='20140318A.html'>JavaFX 3D</a><br>
+                    <br>
+                    ．其實沒有永遠的跨平台：包括 Java 與 HTML5。（軟平台是脆弱的）<br>
+                    ．傳統程式以函式存取變數，物件導向以變數綑綁函式。<br>
+                    ．Frame 與 Form 的區別：前者可以做為後者的元件。<br>
+                    ．繼承與複合，就像改裝與組裝。<br>
+                    ．JTextField、JTextArea、JTextPane：單行輸入欄、多行文字欄、圖文容器。<br>
+                    ．Ruby &gt; (Smalltalk + Perl) / 2，意思是：「養成做好垃圾分類習慣的程式語言。」<br>
+                    ．XML 不只是資料結構，還可以是操作介面。
+                </p>
             </section>
 
         </article>

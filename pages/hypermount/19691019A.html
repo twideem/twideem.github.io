@@ -22,7 +22,7 @@
                     <br>
                     W3C 認同反對的理由，改支持與資料庫系統無關、且不直接綁定 SQL 語法的 Indexed Database API 為標準。<br>
                     <br>
-                    在失去做為 HTML5 標準的資格後，目前只有 Google Chrome、Android Browser、Opera、Safari 等瀏覽器，繼續支援 Web SQL Database；未來 Indexed Database API 才會是所有瀏覽器共通的設計標準。<br>
+                    在失去做為 HTML5 標準的資格後，目前只有 Chromium 和 Safari 繼續支援 Web SQL Database；未來 Indexed Database API 才會是所有瀏覽器共通的設計標準。<br>
                     <br>
                     但 Indexed Database API 較為低階，沒有 Web SQL Database 來得簡單易用，因此還是有些人一方面推薦說：「請使用 Chrome 瀏覽器執行本程式」，一方面繼續使用 Web SQL Database，無形中在搞 WebKit only 的設計～
                 </p>
@@ -33,7 +33,7 @@
             <section>
                 <h2>基本範例</h2>
                 <p>
-                    用起來跟 XXX Server Pages 幾乎一樣，但卻是在客端執行，爽度一百：<br>
+                    用起來跟 XXX Server Pages 幾乎一樣，卻是在客端執行，爽度一百：<br>
                     <br>
                     <textarea class='brush:js'>
                         //建立或連接名為 mydatabase 的資料庫。
@@ -44,7 +44,7 @@
                         });
                         //寫入資料到表格的欄位。
                         websql.transaction(function(callback){
-                            callback.executeSql('INSERT INTO mytable VALUES('Twideem Civs', 'twideem@outlook.com')');
+                            callback.executeSql('INSERT INTO mytable VALUES("Twideem Civs", "twideem@outlook.com")');
                         });
                         //透過 ResultSet 物件處理 SQL 查詢出來的資料。
                         websql.transaction(function(callback){
@@ -60,7 +60,7 @@
                         twideem@outlook.com<br>
                     </output>
                     <br>
-                    這個範例建議用 Chrome 或 Opera 來執行，因為反對 Web SQL Database 成為 HTML5 標準的 Mozilla 與 Microsoft 沒有實作的意願，無法在 Firefox 與 IE 執行。<br>
+                    這個範例建議用 Chromium 來執行，因為反對 Web SQL Database 成為 HTML5 標準的 Mozilla 與 Microsoft 沒有實作的意願，無法在 Firefox 與 IE 執行。<br>
                     <br>
                     由於這只是 Hello, world! 性質的範例，所以省略掉 ResultSet 的許多功能，請自行搜尋它的更多用法，可以進行更靈活的設計。
                 </p>
