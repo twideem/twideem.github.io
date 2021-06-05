@@ -2,68 +2,68 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>資料結構</h1>
-                <p>進一步實作情況，請檢視原始碼。</p>
-            </header>
+			<header>
+				<h1>資料結構</h1>
+				<p>進一步實作情況，請檢視原始碼。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>操作介面</h2>
-                <p>
-                    名稱：<input style='height:10pt' value='逍遙'><br>
-                    性別：<input style='height:10pt' value='男'><br>
-                    職業：<input style='height:10pt' value='劍俠'><br>
-                    <br>
-                    <button onclick='f()'>送出</button>
-                </p>
-            </section>
+			<section>
+				<h2>操作介面</h2>
+				<p>
+					名稱：<input style='height:10pt' value='逍遙'><br>
+					性別：<input style='height:10pt' value='男'><br>
+					職業：<input style='height:10pt' value='劍俠'><br>
+					<br>
+					<button onclick='f()'>送出</button>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 使用 Array 建立可變訊號式的角色資料結構。</p>
-            </footer>
+			<footer>
+				<p>[*] 使用 Array 建立可變訊號式的角色資料結構。</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
-            var Player={
-                property:[],
-                name:function(x){
-                    if(x==undefined) return this.property[0]
-                    this.property[0]=x
-                },
-                gender:function(x){
-                    if(x==undefined) return this.property[1]
-                    this.property[1]=x
-                },
-                clazz:function(x){
-                    if(x==undefined) return this.property[2]
-                    this.property[2]=x
-                }
-            }
-            function f(){
-                Player.name(document.getElementsByTagName('input')[0].value)
-                Player.gender(document.getElementsByTagName('input')[1].value)
-                Player.clazz(document.getElementsByTagName('input')[2].value)
-                document.getElementsByTagName('p')[0].innerHTML=Player.name()+Player.gender()+Player.clazz()
-            }
-        </script>
+		<script>
+			var Player={
+				property:[],
+				name:function(x){
+					if(x==undefined) return this.property[0]
+					this.property[0]=x
+				},
+				gender:function(x){
+					if(x==undefined) return this.property[1]
+					this.property[1]=x
+				},
+				clazz:function(x){
+					if(x==undefined) return this.property[2]
+					this.property[2]=x
+				}
+			}
+			function f(){
+				Player.name(document.getElementsByTagName('input')[0].value)
+				Player.gender(document.getElementsByTagName('input')[1].value)
+				Player.clazz(document.getElementsByTagName('input')[2].value)
+				document.getElementsByTagName('p')[0].innerHTML=Player.name()+Player.gender()+Player.clazz()
+			}
+		</script>
 
-    </body>
+	</body>
 
 </html>

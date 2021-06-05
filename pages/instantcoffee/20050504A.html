@@ -2,176 +2,176 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>java.util.Observer</h1>
-                <p>Java 內建設計模式中的 Observer，它用來監視物件狀態，當物件狀態改變時，它會通知監視該物件的對象，讓監視者可以做出反應；本範例中 View 物件將監視 Model 物件。</p>
-            </header>
+			<header>
+				<h1>java.util.Observer</h1>
+				<p>Java 內建設計模式中的 Observer，它用來監視物件狀態，當物件狀態改變時，它會通知監視該物件的對象，讓監視者可以做出反應；本範例中 View 物件將監視 Model 物件。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例一：被監視者在狀態改變時發出通知，讓監視者做出反應。</h2>
-                <hr>
-                <section>
-                    <h3>Model.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.Observable;
+			<section>
+				<h2>範例一：被監視者在狀態改變時發出通知，讓監視者做出反應。</h2>
+				<hr>
+				<section>
+					<h3>Model.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.Observable;
 
-                            public class Model extends Observable{
+							public class Model extends Observable{
 
-                                private String attribute;
+								private String attribute;
 
-                                public void change(String x){
-                                    this.attribute = x;
-                                    setChanged();
-                                    notifyObservers();
-                                }
+								public void change(String x){
+									this.attribute = x;
+									setChanged();
+									notifyObservers();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>View.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.Observable;
-                            import java.util.Observer;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>View.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.Observable;
+							import java.util.Observer;
 
-                            public class View implements Observer{
+							public class View implements Observer{
 
-                                public void update(Observable o, Object arg){
-                                    System.out.print("所監視物件更新了狀態！");
-                                }
+								public void update(Observable o, Object arg){
+									System.out.print("所監視物件更新了狀態！");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    View view = new View();
-                                    Model model = new Model();
-                                    model.addObserver(view);
-                                    model.change("hello");
-                                }
+								public static void main(String[] args){
+									View view = new View();
+									Model model = new Model();
+									model.addObserver(view);
+									model.change("hello");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出結果</h3>
-                    <p>
-                        <output>
-                            所監視物件更新了狀態！
-                        </output>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出結果</h3>
+					<p>
+						<output>
+							所監視物件更新了狀態！
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例二：取得被監視物件的狀態</h2>
-                <hr>
-                <section>
-                    <h3>Model.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.Observable;
+			<section>
+				<h2>範例二：取得被監視物件的狀態</h2>
+				<hr>
+				<section>
+					<h3>Model.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.Observable;
 
-                            public class Model extends Observable{
+							public class Model extends Observable{
 
-                                private String attribute;
+								private String attribute;
 
-                                public void change(String x){
-                                    this.attribute = x;
-                                    setChanged();
-                                    notifyObservers();
-                                }
+								public void change(String x){
+									this.attribute = x;
+									setChanged();
+									notifyObservers();
+								}
 
-                                public String getAttribute(){
-                                    return this.attribute;
-                                }
+								public String getAttribute(){
+									return this.attribute;
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>View.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.Observable;
-                            import java.util.Observer;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>View.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.Observable;
+							import java.util.Observer;
 
-                            public class View implements Observer{
+							public class View implements Observer{
 
-                                public void update(Observable o, Object arg){
-                                    System.out.print("所監視物件更新狀態為：");
-                                    System.out.print(((Model)o).getAttribute());
-                                }
+								public void update(Observable o, Object arg){
+									System.out.print("所監視物件更新狀態為：");
+									System.out.print(((Model)o).getAttribute());
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    View view = new View();
-                                    Model model = new Model();
-                                    model.addObserver(view);
-                                    model.change("hello");
-                                }
+								public static void main(String[] args){
+									View view = new View();
+									Model model = new Model();
+									model.addObserver(view);
+									model.change("hello");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出結果</h3>
-                    <p>
-                        <output>
-                            所監視物件更新狀態為：hello
-                        </output>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出結果</h3>
+					<p>
+						<output>
+							所監視物件更新狀態為：hello
+						</output>
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

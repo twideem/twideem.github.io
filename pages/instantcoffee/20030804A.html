@@ -2,433 +2,433 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/table.css' rel='stylesheet'>
-        <link href='../../styles/editor.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/table.css' rel='stylesheet'>
+		<link href='../../styles/editor.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>DOM 教學範例</h1>
-                <p>
-                    本章節介紹如何以 Java 所內建 JAXP (Java API for XML Processing) 套件中的 DOM (Document Object Model) 來讀寫 XML 資料！這樣的好處是不用掛載第三方套件，而能更方便部署 Java 應用程式，缺點則是執行效率可能低落、以及操作方式較為複雜。<br>
-                    <br>
-                    然而，JAXP 的 DOM 執行效率，在 XML 檔案很簡單短小的情況下，通常感覺不出來。真遇到瓶頸的話，可嘗試同為 JAXP 成員的 SAX (Simple API for XML) 最佳化。雖然 DOM + SAX 會讓整個處理 XML 的程式結構更複雜，但如果你的訴求是盡量使用 Java 內建的功能來處理大小事，這依然是可行的解決方案。<br>
-                    <br>
-                    至於操作方式沒有 JDOM 或 dom4j 來得簡便，因為 DOM 是基於 W3C 標準所開發的 API，所以雖然寫的時候不方便，不等於沒有可讀性！例如已經熟悉 JavaScript 的 DOM 時，看到 Java 的 DOM 也會感到熟悉<ins>[1]</ins>～
-                </p>
-            </header>
+			<header>
+				<h1>DOM 教學範例</h1>
+				<p>
+					本章節介紹如何以 Java 所內建 JAXP (Java API for XML Processing) 套件中的 DOM (Document Object Model) 來讀寫 XML 資料！這樣的好處是不用掛載第三方套件，而能更方便部署 Java 應用程式，缺點則是執行效率可能低落、以及操作方式較為複雜。<br>
+					<br>
+					然而，JAXP 的 DOM 執行效率，在 XML 檔案很簡單短小的情況下，通常感覺不出來。真遇到瓶頸的話，可嘗試同為 JAXP 成員的 SAX (Simple API for XML) 最佳化。雖然 DOM + SAX 會讓整個處理 XML 的程式結構更複雜，但如果你的訴求是盡量使用 Java 內建的功能來處理大小事，這依然是可行的解決方案。<br>
+					<br>
+					至於操作方式沒有 JDOM 或 dom4j 來得簡便，因為 DOM 是基於 W3C 標準所開發的 API，所以雖然寫的時候不方便，不等於沒有可讀性！例如已經熟悉 JavaScript 的 DOM 時，看到 Java 的 DOM 也會感到熟悉<ins>[1]</ins>～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例一：最單純取得元素內文與屬性的做法</h2>
-                <p>
-                    載入如下的 cavs.xml 檔案，但只取出 coach 標籤的資料。
-                </p>
-                <hr>
-                <section>
-                    <h3>cavs.xml</h3>
-                    <p>
-                        <textarea class='brush:xml'>
-                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-                            &lt;team city="Cleveland" name="Cavaliers" arena="Quicken Loans Arena" season="2010"&gt;
-                                &lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;
-                                &lt;player number="33" position="C"&gt;Shaquille O'Neal&lt;/player&gt;
-                                &lt;player number="21" position="PF"&gt;J.J. Hickson&lt;/player&gt;
-                                &lt;player number="23" position="SF"&gt;LeBron James&lt;/player&gt;
-                                &lt;player number="18" position="SG"&gt;Anthony Parker&lt;/player&gt;
-                                &lt;player number="2" position="PG"&gt;Mo Williams&lt;/player&gt;
-                            &lt;/team&gt;
+			<section>
+				<h2>範例一：最單純取得元素內文與屬性的做法</h2>
+				<p>
+					載入如下的 cavs.xml 檔案，但只取出 coach 標籤的資料。
+				</p>
+				<hr>
+				<section>
+					<h3>cavs.xml</h3>
+					<p>
+						<textarea class='brush:xml'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+							&lt;team city="Cleveland" name="Cavaliers" arena="Quicken Loans Arena" season="2010"&gt;
+								&lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;
+								&lt;player number="33" position="C"&gt;Shaquille O'Neal&lt;/player&gt;
+								&lt;player number="21" position="PF"&gt;J.J. Hickson&lt;/player&gt;
+								&lt;player number="23" position="SF"&gt;LeBron James&lt;/player&gt;
+								&lt;player number="18" position="SG"&gt;Anthony Parker&lt;/player&gt;
+								&lt;player number="2" position="PG"&gt;Mo Williams&lt;/player&gt;
+							&lt;/team&gt;
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import javax.xml.parsers.DocumentBuilder;
-                            import javax.xml.parsers.DocumentBuilderFactory;
-                            import org.w3c.dom.Document;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import javax.xml.parsers.DocumentBuilder;
+							import javax.xml.parsers.DocumentBuilderFactory;
+							import org.w3c.dom.Document;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 XML 檔案
-                                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                                        DocumentBuilder builder = factory.newDocumentBuilder();
-                                        Document document = builder.parse(new File("cavs.xml"));
-                                        //以 getElementsByTagName() 取出 coach 的內容與屬性
-                                        System.out.println(document.getElementsByTagName("coach").item(0).getFirstChild().getNodeValue());
-                                        System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(0).getNodeName());
-                                        System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(0).getNodeValue());
-                                        System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(1).getNodeName());
-                                        System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(1).getNodeValue());
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 XML 檔案
+										DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+										DocumentBuilder builder = factory.newDocumentBuilder();
+										Document document = builder.parse(new File("cavs.xml"));
+										//以 getElementsByTagName() 取出 coach 的內容與屬性
+										System.out.println(document.getElementsByTagName("coach").item(0).getFirstChild().getNodeValue());
+										System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(0).getNodeName());
+										System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(0).getNodeValue());
+										System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(1).getNodeName());
+										System.out.println(document.getElementsByTagName("coach").item(0).getAttributes().item(1).getNodeValue());
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            Mike Brown<br>
-                            lose<br>
-                            21<br>
-                            win<br>
-                            61
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    基本上這是不怎麼推薦的讀取方法，純粹做為第一個範例，示範如何最簡單地取出 XML 檔案裏面的資料。<br>
-                    <br>
-                    範例一主要透過 getElementsByTagName("coach") 從 XML 結構中取得所有 coach 元素，然後以 item() 表示第幾個 coach 元素，再以 getFirstChild() 與 getAttributes() 分別取得標籤的內文和屬性，最後以 getNodeValue() 取出內文和屬性的值，或者以 getNodeName() 取出屬性或元素的名稱<ins>[2]</ins>。<br>
-                    <br>
-                    但我們從輸出的結果發現，屬性的順序被排序過了，明明…<br>
-                    <br>
-                    <code>
-                        &lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;<br>
-                    </code>
-                    <br>
-                    但 lose="21" 居然是 item(0)，win="61" 變成 item(1)。<br>
-                    <br>
-                    因此，將來真的用這種寫法來取得特定屬性的值，得用 for 迴圈跑 if 算式，從 item(0) 開始判斷屬性名稱是不是某個字串，所以並不是推薦的做法。<br>
-                    <br>
-                    下一個範例將用 org.w3c.dom.Element 介面，它提供了更多存取資料的方式，例如直接給予屬性名稱就能取得屬性值，避免手工判斷屬性是不是符合某個名稱。
-                </p>
-            </section>
+						<br>
+						<output>
+							Mike Brown<br>
+							lose<br>
+							21<br>
+							win<br>
+							61
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					基本上這是不怎麼推薦的讀取方法，純粹做為第一個範例，示範如何最簡單地取出 XML 檔案裏面的資料。<br>
+					<br>
+					範例一主要透過 getElementsByTagName("coach") 從 XML 結構中取得所有 coach 元素，然後以 item() 表示第幾個 coach 元素，再以 getFirstChild() 與 getAttributes() 分別取得標籤的內文和屬性，最後以 getNodeValue() 取出內文和屬性的值，或者以 getNodeName() 取出屬性或元素的名稱<ins>[2]</ins>。<br>
+					<br>
+					但我們從輸出的結果發現，屬性的順序被排序過了，明明…<br>
+					<br>
+					<code>
+						&lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;<br>
+					</code>
+					<br>
+					但 lose="21" 居然是 item(0)，win="61" 變成 item(1)。<br>
+					<br>
+					因此，將來真的用這種寫法來取得特定屬性的值，得用 for 迴圈跑 if 算式，從 item(0) 開始判斷屬性名稱是不是某個字串，所以並不是推薦的做法。<br>
+					<br>
+					下一個範例將用 org.w3c.dom.Element 介面，它提供了更多存取資料的方式，例如直接給予屬性名稱就能取得屬性值，避免手工判斷屬性是不是符合某個名稱。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例二：Element 介面</h2>
-                <p>
-                    範例二同樣載入 cavs.xml 檔案，但這次取出的是 player 元素，並且改用 Element 介面裝起來，好更便利地取得想要的資料：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.io.File;
-                        import javax.xml.parsers.DocumentBuilder;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import org.w3c.dom.Document;
-                        import org.w3c.dom.Element;
-                        import org.w3c.dom.NodeList;
+			<section>
+				<h2>範例二：Element 介面</h2>
+				<p>
+					範例二同樣載入 cavs.xml 檔案，但這次取出的是 player 元素，並且改用 Element 介面裝起來，好更便利地取得想要的資料：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.File;
+						import javax.xml.parsers.DocumentBuilder;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import org.w3c.dom.Document;
+						import org.w3c.dom.Element;
+						import org.w3c.dom.NodeList;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    //載入 XML 檔案
-                                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                                    DocumentBuilder builder = factory.newDocumentBuilder();
-                                    Document document = builder.parse(new File("cavs.xml"));
-                                    //使用 Element 包裝元素，取出內容與屬性。
-                                    NodeList node_list = document.getElementsByTagName("player");
-                                    for(int n=0; n&lt;node_list.getLength(); n++){
-                                        Element element = (Element)node_list.item(n);
-                                        System.out.printf("%s\t%s\n", element.getAttribute("position"), element.getTextContent());
-                                    }
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									//載入 XML 檔案
+									DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+									DocumentBuilder builder = factory.newDocumentBuilder();
+									Document document = builder.parse(new File("cavs.xml"));
+									//使用 Element 包裝元素，取出內容與屬性。
+									NodeList node_list = document.getElementsByTagName("player");
+									for(int n=0; n&lt;node_list.getLength(); n++){
+										Element element = (Element)node_list.item(n);
+										System.out.printf("%s\t%s\n", element.getAttribute("position"), element.getTextContent());
+									}
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        C&nbsp; &nbsp;Shaquille O'Neal<br>
-                        PF&nbsp; J.J. Hickson<br>
-                        SF&nbsp; LeBron James<br>
-                        SG&nbsp; Anthony Parker<br>
-                        PG&nbsp; Mo Williams<br>
-                    </output>
-                    <br>
-                    更多 Element 提供的操作方式，請查閱 Java API 的文件，可以幫助你解決更多問題：
-                </p>
-                <table class='grid'>
-                    <tr><td>String</td><td><code>getAttribute(String)</code></td></tr>
-                    <tr><td title='org . w3c . dom . Attr'>Attr</td><td><code>getAttributeNode(String)</code></td></tr>
-                    <tr><td title='org . w3c . dom . NodeList'>NodeList</td><td><code>getElementsByTagName(String)</code></td></tr>
-                    <tr><td>String</td><td><code>getTagName()</code></td></tr>
-                    <tr><td>boolean</td><td><code>hasAttribute(String)</code></td></tr>
-                    <tr><td>void</td><td><code>removeAttribute(String)</code></td></tr>
-                    <tr><td title='org . w3c . dom . Attr'>Attr</td><td><code>removeAttributeNode(Attr)</code></td></tr>
-                    <tr><td>void</td><td><code>setAttribute(String name, String value)</code></td></tr>
-                    <tr><td title='org . w3c . dom . Attr'>Attr</td><td><code>setAttributeNode(Attr)</code></td></tr>
-                    <tr><td>void</td><td><code>setIdAttribute(String, boolean)</code></td></tr>
-                    <tr><td>void</td><td><code>setIdAttributeNode(Attr, boolean)</code></td></tr>
-                </table>
-                <p>
-                    此外，Element 介面繼承自 Node 介面，因此也提供如下操作方式：
-                </p>
-                <table class='grid'>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>appendChild(Node)</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>cloneNode(boolean)</code></td></tr>
-                    <tr><td title='org . w3c . dom . NamedNodeMap'>NamedNodeMap</td><td><code>getAttributes()</code></td></tr>
-                    <tr><td title='org . w3c . dom . NodeList'>NodeList</td><td><code>getChildNodes()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>getFirstChild()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>getLastChild()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>getNextSibling()</code></td></tr>
-                    <tr><td>String</td><td><code>getNodeName()</code></td></tr>
-                    <tr><td>short</td><td><code>getNodeType()</code></td></tr>
-                    <tr><td>String</td><td><code>getNodeValue()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Document'>Document</td><td><code>getOwnerDocument()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>getParentNode()</code></td></tr>
-                    <tr><td>String</td><td><code>getPrefix()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>getPreviousSibling()</code></td></tr>
-                    <tr><td>String</td><td><code>getTextContent()</code></td></tr>
-                    <tr><td>Object</td><td><code>getUserData(String)</code></td></tr>
-                    <tr><td>boolean</td><td><code>hasAttributes()</code></td></tr>
-                    <tr><td>boolean</td><td><code>hasChildNodes()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>insertBefore(Node newChild, Node refChild)</code></td></tr>
-                    <tr><td>boolean</td><td><code>isDefaultNamespace(String)</code></td></tr>
-                    <tr><td>boolean</td><td><code>isEqualNode(Node)</code></td></tr>
-                    <tr><td>boolean</td><td><code>isSameNode(Node)</code></td></tr>
-                    <tr><td>String</td><td><code>lookupNamespaceURI(String)</code></td></tr>
-                    <tr><td>String</td><td><code>lookupPrefix(String)</code></td></tr>
-                    <tr><td>void</td><td><code>normalize()</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>removeChild(Node)</code></td></tr>
-                    <tr><td title='org . w3c . dom . Node'>Node</td><td><code>replaceChild(Node newChild, Node oldChild)</code></td></tr>
-                    <tr><td>void</td><td><code>setNodeValue(String)</code></td></tr>
-                    <tr><td>void</td><td><code>setPrefix(String)</code></td></tr>
-                    <tr><td>void</td><td><code>setTextContent(String)</code></td></tr>
-                    <tr><td>Object</td><td><code>setUserData(String, Object, <span title='org . w3c . dom . UserDataHandler'>UserDataHandler</span>)</code></td></tr>
-                </table>
-            </section>
+					<br>
+					<output>
+						C&nbsp; &nbsp;Shaquille O'Neal<br>
+						PF&nbsp; J.J. Hickson<br>
+						SF&nbsp; LeBron James<br>
+						SG&nbsp; Anthony Parker<br>
+						PG&nbsp; Mo Williams<br>
+					</output>
+					<br>
+					更多 Element 提供的操作方式，請查閱 Java API 的文件，可以幫助你解決更多問題：
+				</p>
+				<table class='grid'>
+					<tr><td>String</td><td><code>getAttribute(String)</code></td></tr>
+					<tr><td title='org . w3c . dom . Attr'>Attr</td><td><code>getAttributeNode(String)</code></td></tr>
+					<tr><td title='org . w3c . dom . NodeList'>NodeList</td><td><code>getElementsByTagName(String)</code></td></tr>
+					<tr><td>String</td><td><code>getTagName()</code></td></tr>
+					<tr><td>boolean</td><td><code>hasAttribute(String)</code></td></tr>
+					<tr><td>void</td><td><code>removeAttribute(String)</code></td></tr>
+					<tr><td title='org . w3c . dom . Attr'>Attr</td><td><code>removeAttributeNode(Attr)</code></td></tr>
+					<tr><td>void</td><td><code>setAttribute(String name, String value)</code></td></tr>
+					<tr><td title='org . w3c . dom . Attr'>Attr</td><td><code>setAttributeNode(Attr)</code></td></tr>
+					<tr><td>void</td><td><code>setIdAttribute(String, boolean)</code></td></tr>
+					<tr><td>void</td><td><code>setIdAttributeNode(Attr, boolean)</code></td></tr>
+				</table>
+				<p>
+					此外，Element 介面繼承自 Node 介面，因此也提供如下操作方式：
+				</p>
+				<table class='grid'>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>appendChild(Node)</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>cloneNode(boolean)</code></td></tr>
+					<tr><td title='org . w3c . dom . NamedNodeMap'>NamedNodeMap</td><td><code>getAttributes()</code></td></tr>
+					<tr><td title='org . w3c . dom . NodeList'>NodeList</td><td><code>getChildNodes()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>getFirstChild()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>getLastChild()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>getNextSibling()</code></td></tr>
+					<tr><td>String</td><td><code>getNodeName()</code></td></tr>
+					<tr><td>short</td><td><code>getNodeType()</code></td></tr>
+					<tr><td>String</td><td><code>getNodeValue()</code></td></tr>
+					<tr><td title='org . w3c . dom . Document'>Document</td><td><code>getOwnerDocument()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>getParentNode()</code></td></tr>
+					<tr><td>String</td><td><code>getPrefix()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>getPreviousSibling()</code></td></tr>
+					<tr><td>String</td><td><code>getTextContent()</code></td></tr>
+					<tr><td>Object</td><td><code>getUserData(String)</code></td></tr>
+					<tr><td>boolean</td><td><code>hasAttributes()</code></td></tr>
+					<tr><td>boolean</td><td><code>hasChildNodes()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>insertBefore(Node newChild, Node refChild)</code></td></tr>
+					<tr><td>boolean</td><td><code>isDefaultNamespace(String)</code></td></tr>
+					<tr><td>boolean</td><td><code>isEqualNode(Node)</code></td></tr>
+					<tr><td>boolean</td><td><code>isSameNode(Node)</code></td></tr>
+					<tr><td>String</td><td><code>lookupNamespaceURI(String)</code></td></tr>
+					<tr><td>String</td><td><code>lookupPrefix(String)</code></td></tr>
+					<tr><td>void</td><td><code>normalize()</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>removeChild(Node)</code></td></tr>
+					<tr><td title='org . w3c . dom . Node'>Node</td><td><code>replaceChild(Node newChild, Node oldChild)</code></td></tr>
+					<tr><td>void</td><td><code>setNodeValue(String)</code></td></tr>
+					<tr><td>void</td><td><code>setPrefix(String)</code></td></tr>
+					<tr><td>void</td><td><code>setTextContent(String)</code></td></tr>
+					<tr><td>Object</td><td><code>setUserData(String, Object, <span title='org . w3c . dom . UserDataHandler'>UserDataHandler</span>)</code></td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例三：取得根元素</h2>
-                <p>
-                    每個 XML 一定都會有最根本的元素<ins>[3]</ins>，不像子元素還要考慮是否存在的問題，因此 DOM 提供直接取得「根元素」的功能。<br>
-                    <br>
-                    有「根元素」做為基準，可以讓我們更方便穿梭於 DOM 的樹狀結構中。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.io.File;
-                        import javax.xml.parsers.DocumentBuilder;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import org.w3c.dom.Document;
-                        import org.w3c.dom.Element;
+			<section>
+				<h2>範例三：取得根元素</h2>
+				<p>
+					每個 XML 一定都會有最根本的元素<ins>[3]</ins>，不像子元素還要考慮是否存在的問題，因此 DOM 提供直接取得「根元素」的功能。<br>
+					<br>
+					有「根元素」做為基準，可以讓我們更方便穿梭於 DOM 的樹狀結構中。<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.File;
+						import javax.xml.parsers.DocumentBuilder;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import org.w3c.dom.Document;
+						import org.w3c.dom.Element;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    //載入 XML 檔案
-                                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                                    DocumentBuilder builder = factory.newDocumentBuilder();
-                                    Document document = builder.parse(new File("cavs.xml"));
-                                    //根元素
-                                    Element root = document.getDocumentElement();
-                                    System.out.println(root.getAttribute("arena"));
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									//載入 XML 檔案
+									DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+									DocumentBuilder builder = factory.newDocumentBuilder();
+									Document document = builder.parse(new File("cavs.xml"));
+									//根元素
+									Element root = document.getDocumentElement();
+									System.out.println(root.getAttribute("arena"));
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        Quicken Loans Arena
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						Quicken Loans Arena
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例四：新增元素與屬性</h2>
-                <p>
-                    NBA 在 2009-2010 賽季快結束時，擅長進攻的明星大前鋒 Antawn Jamison 加入克里夫蘭騎士隊；當時可企盼他為有傷在身的 LeBron James 分擔得分重任啊<ins>[4]</ins>！<br>
-                    <br>
-                    本範例藉此示範如何新增元素與屬性，將 Antawn Jamison 加入到陣中。<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[17,18,19,20,22]'>
-                        import java.io.File;
-                        import javax.xml.parsers.DocumentBuilder;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import org.w3c.dom.Document;
-                        import org.w3c.dom.Element;
-                        import org.w3c.dom.NodeList;
+			<section>
+				<h2>範例四：新增元素與屬性</h2>
+				<p>
+					NBA 在 2009-2010 賽季快結束時，擅長進攻的明星大前鋒 Antawn Jamison 加入克里夫蘭騎士隊；當時可企盼他為有傷在身的 LeBron James 分擔得分重任啊<ins>[4]</ins>！<br>
+					<br>
+					本範例藉此示範如何新增元素與屬性，將 Antawn Jamison 加入到陣中。<br>
+					<br>
+					<textarea class='brush:java;highlight:[17,18,19,20,22]'>
+						import java.io.File;
+						import javax.xml.parsers.DocumentBuilder;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import org.w3c.dom.Document;
+						import org.w3c.dom.Element;
+						import org.w3c.dom.NodeList;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    //載入 XML 檔案
-                                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                                    DocumentBuilder builder = factory.newDocumentBuilder();
-                                    Document document = builder.parse(new File("cavs.xml"));
-                                    //新增 player 元素
-                                    Element player = document.createElement("player");
-                                    player.setTextContent("Antawn Jamison");
-                                    player.setAttribute("number", "4");
-                                    player.setAttribute("position", "PF");
-                                    //將 player 元素加入根元素
-                                    document.getDocumentElement().appendChild(player);
-                                    //使用 Element 包裝元素，取出內容與屬性。
-                                    NodeList node_list = document.getElementsByTagName("player");
-                                    for(int n=0; n&lt;node_list.getLength(); n++){
-                                        Element element = (Element)node_list.item(n);
-                                        System.out.printf("%s\t%s\n", element.getAttribute("position"), element.getTextContent());
-                                    }
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									//載入 XML 檔案
+									DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+									DocumentBuilder builder = factory.newDocumentBuilder();
+									Document document = builder.parse(new File("cavs.xml"));
+									//新增 player 元素
+									Element player = document.createElement("player");
+									player.setTextContent("Antawn Jamison");
+									player.setAttribute("number", "4");
+									player.setAttribute("position", "PF");
+									//將 player 元素加入根元素
+									document.getDocumentElement().appendChild(player);
+									//使用 Element 包裝元素，取出內容與屬性。
+									NodeList node_list = document.getElementsByTagName("player");
+									for(int n=0; n&lt;node_list.getLength(); n++){
+										Element element = (Element)node_list.item(n);
+										System.out.printf("%s\t%s\n", element.getAttribute("position"), element.getTextContent());
+									}
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        C&nbsp; &nbsp;Shaquille O'Neal<br>
-                        PF&nbsp; J.J. Hickson<br>
-                        SF&nbsp; LeBron James<br>
-                        SG&nbsp; Anthony Parker<br>
-                        PG&nbsp; Mo Williams<br>
-                        PF&nbsp; Antawn Jamison
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						C&nbsp; &nbsp;Shaquille O'Neal<br>
+						PF&nbsp; J.J. Hickson<br>
+						SF&nbsp; LeBron James<br>
+						SG&nbsp; Anthony Parker<br>
+						PG&nbsp; Mo Williams<br>
+						PF&nbsp; Antawn Jamison
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例五：建立新的空白 XML 模型，以及儲存成檔案。</h2>
-                <p>
-                    在 LeBron James 離隊後，戰績墊底的克里夫蘭騎士隊，在 2011-2012 年選秀會第一順位指定了明星控球後衛 Kyrie Irving，從此扛起重建球隊的使命。<br>
-                    <br>
-                    本節示範如何建立一個空白的 XML 模型，重新打造以 Kyrie Irving 為核心的先發陣容。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        package samples;
+			<section>
+				<h2>範例五：建立新的空白 XML 模型，以及儲存成檔案。</h2>
+				<p>
+					在 LeBron James 離隊後，戰績墊底的克里夫蘭騎士隊，在 2011-2012 年選秀會第一順位指定了明星控球後衛 Kyrie Irving，從此扛起重建球隊的使命。<br>
+					<br>
+					本節示範如何建立一個空白的 XML 模型，重新打造以 Kyrie Irving 為核心的先發陣容。<br>
+					<br>
+					<textarea class='brush:java'>
+						package samples;
 
-                        import java.io.FileOutputStream;
-                        import javax.xml.parsers.DocumentBuilder;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import javax.xml.transform.Transformer;
-                        import javax.xml.transform.TransformerFactory;
-                        import javax.xml.transform.dom.DOMSource;
-                        import javax.xml.transform.stream.StreamResult;
-                        import org.w3c.dom.Document;
-                        import org.w3c.dom.Element;
+						import java.io.FileOutputStream;
+						import javax.xml.parsers.DocumentBuilder;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import javax.xml.transform.Transformer;
+						import javax.xml.transform.TransformerFactory;
+						import javax.xml.transform.dom.DOMSource;
+						import javax.xml.transform.stream.StreamResult;
+						import org.w3c.dom.Document;
+						import org.w3c.dom.Element;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    //建立 XML 模型
-                                    DocumentBuilderFactory document_builder_factory = DocumentBuilderFactory.newInstance();
-                                    DocumentBuilder document_builder = document_builder_factory.newDocumentBuilder();
-                                    Document document = document_builder.newDocument();
-                                    //建立根元素 team
-                                    Element root = document.createElement("team");
-                                    root.setAttribute("city", "Cleveland");
-                                    root.setAttribute("name", "Cavaliers");
-                                    document.appendChild(root);
-                                    //新增 player 元素：中鋒
-                                    Element center = document.createElement("player");
-                                    center.setTextContent("Anderson Varejao");
-                                    center.setAttribute("number", "17");
-                                    center.setAttribute("position", "C");
-                                    document.getDocumentElement().appendChild(center);
-                                    //新增 player 元素：大前鋒
-                                    Element power_forward = document.createElement("player");
-                                    power_forward.setTextContent("Antawn Jamison");
-                                    power_forward.setAttribute("number", "4");
-                                    power_forward.setAttribute("position", "PF");
-                                    document.getDocumentElement().appendChild(power_forward);
-                                    //新增 player 元素：小前鋒
-                                    Element small_forward = document.createElement("player");
-                                    small_forward.setTextContent("Anthony Parker");
-                                    small_forward.setAttribute("number", "18");
-                                    small_forward.setAttribute("position", "SF");
-                                    document.getDocumentElement().appendChild(small_forward);
-                                    //新增 player 元素：得分後衛
-                                    Element shooting_guard = document.createElement("player");
-                                    shooting_guard.setTextContent("Alonzo Gee");
-                                    shooting_guard.setAttribute("number", "33");
-                                    shooting_guard.setAttribute("position", "SG");
-                                    document.getDocumentElement().appendChild(shooting_guard);
-                                    //新增 player 元素：控球後衛
-                                    Element point_guard = document.createElement("player");
-                                    point_guard.setTextContent("Kyrie Irving");
-                                    point_guard.setAttribute("number", "2");
-                                    point_guard.setAttribute("position", "PG");
-                                    document.getDocumentElement().appendChild(point_guard);
-                                    //儲存
-                                    TransformerFactory transformer_factory = TransformerFactory.newInstance();
-                                    Transformer transformer = transformer_factory.newTransformer();
-                                    DOMSource dom_source = new DOMSource(document);
-                                    StreamResult stream_result = new StreamResult(new FileOutputStream("cavs.xml"));
-                                    transformer.transform(dom_source, stream_result);
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									//建立 XML 模型
+									DocumentBuilderFactory document_builder_factory = DocumentBuilderFactory.newInstance();
+									DocumentBuilder document_builder = document_builder_factory.newDocumentBuilder();
+									Document document = document_builder.newDocument();
+									//建立根元素 team
+									Element root = document.createElement("team");
+									root.setAttribute("city", "Cleveland");
+									root.setAttribute("name", "Cavaliers");
+									document.appendChild(root);
+									//新增 player 元素：中鋒
+									Element center = document.createElement("player");
+									center.setTextContent("Anderson Varejao");
+									center.setAttribute("number", "17");
+									center.setAttribute("position", "C");
+									document.getDocumentElement().appendChild(center);
+									//新增 player 元素：大前鋒
+									Element power_forward = document.createElement("player");
+									power_forward.setTextContent("Antawn Jamison");
+									power_forward.setAttribute("number", "4");
+									power_forward.setAttribute("position", "PF");
+									document.getDocumentElement().appendChild(power_forward);
+									//新增 player 元素：小前鋒
+									Element small_forward = document.createElement("player");
+									small_forward.setTextContent("Anthony Parker");
+									small_forward.setAttribute("number", "18");
+									small_forward.setAttribute("position", "SF");
+									document.getDocumentElement().appendChild(small_forward);
+									//新增 player 元素：得分後衛
+									Element shooting_guard = document.createElement("player");
+									shooting_guard.setTextContent("Alonzo Gee");
+									shooting_guard.setAttribute("number", "33");
+									shooting_guard.setAttribute("position", "SG");
+									document.getDocumentElement().appendChild(shooting_guard);
+									//新增 player 元素：控球後衛
+									Element point_guard = document.createElement("player");
+									point_guard.setTextContent("Kyrie Irving");
+									point_guard.setAttribute("number", "2");
+									point_guard.setAttribute("position", "PG");
+									document.getDocumentElement().appendChild(point_guard);
+									//儲存
+									TransformerFactory transformer_factory = TransformerFactory.newInstance();
+									Transformer transformer = transformer_factory.newTransformer();
+									DOMSource dom_source = new DOMSource(document);
+									StreamResult stream_result = new StreamResult(new FileOutputStream("cavs.xml"));
+									transformer.transform(dom_source, stream_result);
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output class='editor'>
-                        &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;<br>
-                        &lt;team city="Cleveland" name="Cavaliers"&gt;<br>
-                        　　&lt;player number="17" position="C"&gt;Anderson Varejao&lt;/player&gt;<br>
-                        　　&lt;player number="4" position="PF"&gt;Antawn Jamison&lt;/player&gt;<br>
-                        　　&lt;player number="18" position="SF"&gt;Anthony Parker&lt;/player&gt;<br>
-                        　　&lt;player number="33" position="SG"&gt;Alonzo Gee&lt;/player&gt;<br>
-                        　　&lt;player number="2" position="PG"&gt;Kyrie Irving&lt;/player&gt;<br>
-                        &lt;/team&gt;
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output class='editor'>
+						&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;<br>
+						&lt;team city="Cleveland" name="Cavaliers"&gt;<br>
+						　　&lt;player number="17" position="C"&gt;Anderson Varejao&lt;/player&gt;<br>
+						　　&lt;player number="4" position="PF"&gt;Antawn Jamison&lt;/player&gt;<br>
+						　　&lt;player number="18" position="SF"&gt;Anthony Parker&lt;/player&gt;<br>
+						　　&lt;player number="33" position="SG"&gt;Alonzo Gee&lt;/player&gt;<br>
+						　　&lt;player number="2" position="PG"&gt;Kyrie Irving&lt;/player&gt;<br>
+						&lt;/team&gt;
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例六：DOM 轉 SAX</h2>
-                <p>
-                    （草稿中）
-                </p>
-            </section>
+			<section>
+				<h2>範例六：DOM 轉 SAX</h2>
+				<p>
+					（草稿中）
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 熟悉而已。其實 W3C 的 DOM 是針對程序導向程式語言制定的 API，因此在物件導向程式語言的 Java 實作起來，還是長得怪怪的；所以才有 JDOM，企圖做為物件導向的 DOM 標準。<br>
-                    [2] 這個範例本來就以 coach 元素名稱取得節點了，因此並未多此一舉再示範讓 coach 元素輸出自己的名稱為 coach，僅輸出第 n 個屬性是什麼名稱。<br>
-                    [3] 應該說 XML 格式規定要有一個最根本的元素。<br>
-                    [4] Antawn Jamison 是我最喜歡的球員之一，以前在玩 NBA Live 2003 時，他是我手上可以平均每場得 50 分的愛將！不過加入克里夫蘭騎士隊時，並沒能扛起得分的責任，甚至關鍵時刻失手連連，可說是季後賽輸掉的原因之一 Orz
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 熟悉而已。其實 W3C 的 DOM 是針對程序導向程式語言制定的 API，因此在物件導向程式語言的 Java 實作起來，還是長得怪怪的；所以才有 JDOM，企圖做為物件導向的 DOM 標準。<br>
+					[2] 這個範例本來就以 coach 元素名稱取得節點了，因此並未多此一舉再示範讓 coach 元素輸出自己的名稱為 coach，僅輸出第 n 個屬性是什麼名稱。<br>
+					[3] 應該說 XML 格式規定要有一個最根本的元素。<br>
+					[4] Antawn Jamison 是我最喜歡的球員之一，以前在玩 NBA Live 2003 時，他是我手上可以平均每場得 50 分的愛將！不過加入克里夫蘭騎士隊時，並沒能扛起得分的責任，甚至關鍵時刻失手連連，可說是季後賽輸掉的原因之一 Orz
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

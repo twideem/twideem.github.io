@@ -2,240 +2,240 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('C')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('C')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>用 MinGW 在 Windows 設置 C 語言編譯環境</h1>
-                <p>當你不喜歡用笨重的 IDE 來編譯 C/C++ 程式，那麼，在純文字文件寫個程式，然後在 DOS 模式下編譯的 MinGW，會是個理想的選擇方案～</p>
-            </header>
+			<header>
+				<h1>用 MinGW 在 Windows 設置 C 語言編譯環境</h1>
+				<p>當你不喜歡用笨重的 IDE 來編譯 C/C++ 程式，那麼，在純文字文件寫個程式，然後在 DOS 模式下編譯的 MinGW，會是個理想的選擇方案～</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>the GNU Compiler Collection</h2>
-                <p>
-                    GCC 是最知名的免費 C 程式語言編譯器<ins>[1]</ins>！原本只在 Unix-like 環境執行，但可以下載有 Windows 版 GNU 編譯器之稱的 MinGW，Minimalist GNU for Windows 的意思。
-                </p>
-                <hr>
-                <section>
-                    <h3>下載</h3>
-                    <p>
-                        請至官方網站免費取得 MinGW：<br>
-                        <br>
-                        <a href='http://www.mingw.org' target='_blank'>http://www.mingw.org</a><br>
-                        <br>
-                        有兩種方式來下載 MinGW，一種是「自動安裝 (Automated Installer)」，一種是「手動安裝 (Manual Installation)」。<br>
-                        <br>
-                        由於手動安裝所要下載的套件分散在不同專案項目裡面，不熟悉的人不知道該下載哪些套件才能搭建出完備的 GCC 編譯環境，因此建議使用自動安裝的方式<ins>[2]</ins>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>安裝</h3>
-                    <p>
-                        要使用自動安裝程式，請下載 mingw-get。<br>
-                        <br>
-                        它奇怪的是分兩段式安裝，第一段是由網路下載 MinGW Installation Manager 這個圖形化安裝程式，然後透過圖形化介面勾選你想要的套件，再展開第二段，正式從網路下載所要安裝的項目。<br>
-                        <br>
-                        請勾選「mingw32-base」和「mingw32-gcc-g++」，前者是 C 語言編譯環境，後者是 C++ 語言編譯環境。<br>
-                        <br>
-                        安裝完後，將「C:\MinGW\bin」設置到 PATH 系統環境變數，這樣才能隨時使用 gcc.exe 或 g++ 來編譯原始碼。<br>
-                        <br>
-                        另外，日後可以透過 MinGW Installation Manager 更新套件。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>測試</h3>
-                    <p>
-                        來個 Hello, world! 吧！用 Windows 的「記事本」輸入如下程式，並儲存為 main.c：<br>
-                        <br>
-                        <textarea class='brush:c'>
-                            #include &lt;stdio.h&gt;
+			<section>
+				<h2>the GNU Compiler Collection</h2>
+				<p>
+					GCC 是最知名的免費 C 程式語言編譯器<ins>[1]</ins>！原本只在 Unix-like 環境執行，但可以下載有 Windows 版 GNU 編譯器之稱的 MinGW，Minimalist GNU for Windows 的意思。
+				</p>
+				<hr>
+				<section>
+					<h3>下載</h3>
+					<p>
+						請至官方網站免費取得 MinGW：<br>
+						<br>
+						<a href='http://www.mingw.org' target='_blank'>http://www.mingw.org</a><br>
+						<br>
+						有兩種方式來下載 MinGW，一種是「自動安裝 (Automated Installer)」，一種是「手動安裝 (Manual Installation)」。<br>
+						<br>
+						由於手動安裝所要下載的套件分散在不同專案項目裡面，不熟悉的人不知道該下載哪些套件才能搭建出完備的 GCC 編譯環境，因此建議使用自動安裝的方式<ins>[2]</ins>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>安裝</h3>
+					<p>
+						要使用自動安裝程式，請下載 mingw-get。<br>
+						<br>
+						它奇怪的是分兩段式安裝，第一段是由網路下載 MinGW Installation Manager 這個圖形化安裝程式，然後透過圖形化介面勾選你想要的套件，再展開第二段，正式從網路下載所要安裝的項目。<br>
+						<br>
+						請勾選「mingw32-base」和「mingw32-gcc-g++」，前者是 C 語言編譯環境，後者是 C++ 語言編譯環境。<br>
+						<br>
+						安裝完後，將「C:\MinGW\bin」設置到 PATH 系統環境變數，這樣才能隨時使用 gcc.exe 或 g++ 來編譯原始碼。<br>
+						<br>
+						另外，日後可以透過 MinGW Installation Manager 更新套件。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>測試</h3>
+					<p>
+						來個 Hello, world! 吧！用 Windows 的「記事本」輸入如下程式，並儲存為 main.c：<br>
+						<br>
+						<textarea class='brush:c'>
+							#include &lt;stdio.h&gt;
 
-                            main(){
-                                printf('Hello, world');
-                            }
+							main(){
+								printf('Hello, world');
+							}
                         </textarea>
-                        <br>
-                        然後用 Windows 的「命令提示字元」輸入如下指令，將 main.c 原始碼編譯為 main.exe 執行檔：<br>
-                        <br>
-                        <kbd>
-                            gcc main.c -o main.exe<br>
-                        </kbd>
-                        <br>
-                        最後輸入如下指令即可執行程式：<br>
-                        <br>
-                        <kbd>
-                            main<br>
-                        </kbd>
-                    </p>
-                </section>
-            </section>
+						<br>
+						然後用 Windows 的「命令提示字元」輸入如下指令，將 main.c 原始碼編譯為 main.exe 執行檔：<br>
+						<br>
+						<kbd>
+							gcc main.c -o main.exe<br>
+						</kbd>
+						<br>
+						最後輸入如下指令即可執行程式：<br>
+						<br>
+						<kbd>
+							main<br>
+						</kbd>
+					</p>
+				</section>
+			</section>
 
-            <!--hr>
+			<!--hr>
 
-            <section>
-                <h2>GUI 開發環境</h2>
-                <p>
-                    C/C++ 基本上只適合開發主控台應用程式，要開發視窗程式的話，必須選一套第三方開發的程式庫來用。<br>
-                    <br>
-                    wxWidgets 是訴求跨平台的圖形使用者界面開發框架，而且寫法大致上和 Windows 最經典的 MFC 一致，建議使用。<br>
-                    <br>
-                    請至 <a href='http://www.wxwidgets.org' target='_blank'>http://www.wxwidgets.org</a> 下載。<br>
-                    <br>
-                    安裝完後，先新增 WXWIN 環境變數為「C:\wxWidgets」，然後用 Windows 的「命令提示字元」進入「C:\wxWidgets\build\msw」，輸入如下指令：<br>
-                    <br>
-                    <kbd>
-                        mingw32-make -f makefile.gcc MONOLITHIC=1 SHARED=1 UNICODE=1 BUILD=release clean<br>
-                        mingw32-make -f makefile.gcc MONOLITHIC=1 SHARED=1 UNICODE=1 BUILD=release<br>
-                    </kbd>
-                    <br>
-                    或是：<br>
-                    <br>
-                    <kbd>
-                        make -f makefile.gcc<br>
-                    </kbd>
-                    <br>
-                    接著要等很久，在我那台 Acer Aspire 4736ZG 等超過一小時　～'～
-                </p>
-                <hr>
-                <section>
-                    <h3>附錄：搭配 wxDev-C++ 的建議</h3>
-                    <p>
-                        由於 MinGW 搭配 wxWidgets 安裝的時間過久，所以可以改用其實就是將這兩者包裝起來的 wxDev-C++，然後將「C:\Program Files\Dev-Cpp\MinGW32\bin」設置到 PATH 環境變數，照樣可以手工編譯。<br>
-                        <br>
-                        有時不了解 wxWidgets 時，還可以透過 wxDev-C++ 的視覺化環境參考一下，一舉兩得！<br>
-                        <br>
-                        ……坦白說，C++ 的 GUI，要處理細節相當繁雜，交由視覺化開發工具處理，我認為不失為王道，把時間專注在「設計軟體」上，而不是花在「編寫程式」上。<br>
-                        <br>
-                        但我是指 GUI 的部分交由輔助工具，如果是邏輯結構的部分，其實可以跳脫 GUI 來設計，繼續手工打造程式。因為其實我能體會那種「程式工藝」的感覺，很想從頭到尾純手工打造一個程式出來。不過還是可以看場合，要設計視窗操作介面時，因為太浪費時間，所以用輔助工具，但各式資料結構與演算法，照樣在主控台進行，一樣很玩味～
-                    </p>
-                </section>
-            </article-->
+			<section>
+				<h2>GUI 開發環境</h2>
+				<p>
+					C/C++ 基本上只適合開發主控台應用程式，要開發視窗程式的話，必須選一套第三方開發的程式庫來用。<br>
+					<br>
+					wxWidgets 是訴求跨平台的圖形使用者界面開發框架，而且寫法大致上和 Windows 最經典的 MFC 一致，建議使用。<br>
+					<br>
+					請至 <a href='http://www.wxwidgets.org' target='_blank'>http://www.wxwidgets.org</a> 下載。<br>
+					<br>
+					安裝完後，先新增 WXWIN 環境變數為「C:\wxWidgets」，然後用 Windows 的「命令提示字元」進入「C:\wxWidgets\build\msw」，輸入如下指令：<br>
+					<br>
+					<kbd>
+						mingw32-make -f makefile.gcc MONOLITHIC=1 SHARED=1 UNICODE=1 BUILD=release clean<br>
+						mingw32-make -f makefile.gcc MONOLITHIC=1 SHARED=1 UNICODE=1 BUILD=release<br>
+					</kbd>
+					<br>
+					或是：<br>
+					<br>
+					<kbd>
+						make -f makefile.gcc<br>
+					</kbd>
+					<br>
+					接著要等很久，在我那台 Acer Aspire 4736ZG 等超過一小時　～'～
+				</p>
+				<hr>
+				<section>
+					<h3>附錄：搭配 wxDev-C++ 的建議</h3>
+					<p>
+						由於 MinGW 搭配 wxWidgets 安裝的時間過久，所以可以改用其實就是將這兩者包裝起來的 wxDev-C++，然後將「C:\Program Files\Dev-Cpp\MinGW32\bin」設置到 PATH 環境變數，照樣可以手工編譯。<br>
+						<br>
+						有時不了解 wxWidgets 時，還可以透過 wxDev-C++ 的視覺化環境參考一下，一舉兩得！<br>
+						<br>
+						……坦白說，C++ 的 GUI，要處理細節相當繁雜，交由視覺化開發工具處理，我認為不失為王道，把時間專注在「設計軟體」上，而不是花在「編寫程式」上。<br>
+						<br>
+						但我是指 GUI 的部分交由輔助工具，如果是邏輯結構的部分，其實可以跳脫 GUI 來設計，繼續手工打造程式。因為其實我能體會那種「程式工藝」的感覺，很想從頭到尾純手工打造一個程式出來。不過還是可以看場合，要設計視窗操作介面時，因為太浪費時間，所以用輔助工具，但各式資料結構與演算法，照樣在主控台進行，一樣很玩味～
+					</p>
+				</section>
+			</article-->
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>在 Windows 建置 Linux 的 GCC 編譯環境</h2>
-                <p>
-                    有了 MinGW，就能在 Windows 以 GCC 編譯器，用 C/C++ 語言設計各式各樣的程式功能來執行。<br>
-                    <br>
-                    如果你想在 Windows 以 GCC 編譯原本寫給 Linux 的 C++ 原始碼，可以為 MinGW 掛上 MSYS 這個系統。<br>
-                    <br>
-                    你可以在 MinGW Installer 這個圖形化安裝介面，勾選 MYSYS 來下載安裝。<br>
-                    <br>
-                    MSYS 可以讓你使用 Linux 的 Shell 與 GNU 的 Utilities 來編譯程式，詳細情形請參考官網頁面：<br>
-                    <br>
-                    <a href='http://www.mingw.org/wiki/MSYS' target='_blank'>http://www.mingw.org/wiki/MSYS</a><br>
-                    <br>
-                    MinGW + MSYS 是很酷的跨平台方案，例如一些原本寫給 Linux 的影音編碼器，可因此編譯為 Windows 也能使用的版本來。
-                </p>
-            </section>
+			<section>
+				<h2>在 Windows 建置 Linux 的 GCC 編譯環境</h2>
+				<p>
+					有了 MinGW，就能在 Windows 以 GCC 編譯器，用 C/C++ 語言設計各式各樣的程式功能來執行。<br>
+					<br>
+					如果你想在 Windows 以 GCC 編譯原本寫給 Linux 的 C++ 原始碼，可以為 MinGW 掛上 MSYS 這個系統。<br>
+					<br>
+					你可以在 MinGW Installer 這個圖形化安裝介面，勾選 MYSYS 來下載安裝。<br>
+					<br>
+					MSYS 可以讓你使用 Linux 的 Shell 與 GNU 的 Utilities 來編譯程式，詳細情形請參考官網頁面：<br>
+					<br>
+					<a href='http://www.mingw.org/wiki/MSYS' target='_blank'>http://www.mingw.org/wiki/MSYS</a><br>
+					<br>
+					MinGW + MSYS 是很酷的跨平台方案，例如一些原本寫給 Linux 的影音編碼器，可因此編譯為 Windows 也能使用的版本來。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>編譯器常用參數</h2>
-                <p>
-                    要在命令提示字元使用 gcc.exe（C 語言編譯器） 或 g++.exe（C++ 編譯器）時，個人建議的基本格式是：<br>
-                    <br>
-                    <code>gcc 來源檔名 參數</code><br>
-                    <br>
-                    gcc 可以下的參數非常非常多，這裡僅列出個人覺得常用的幾個。注意！參數有區分大小寫！
-                </p>
-                <hr>
-                <section>
-                    <h3>-o 輸出檔名</h3>
-                    <p>
-                        指定輸出的檔名。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>-ansi</h3>
-                    <p>
-                        要求遵循 ANSI C 標準來編譯程式。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>-Wall</h3>
-                    <p>
-                        提示警告訊息，以幫助設計師寫出更堅固的程式結構。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>-O1、-O2、-O3</h3>
-                    <p>
-                        最佳化編譯品質，數值越高品質越高。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>-s</h3>
-                    <p>
-                        精簡所編譯程式的大小。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>-c</h3>
-                    <p>
-                        只編譯（原始碼轉為機械碼），不連結（機械碼匯成執行檔）。<br>
-                        <br>
-                        如果只想編譯特定幾個檔案，而不是每次都全部編譯，那麼先一一編譯，以後再全部連結起來成為執行檔，是不錯的做法。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>--help</h3>
-                    <p>
-                        顯示更多「常用」參數…括號的言下之意，就是還有更多「進階」參數可用，而且分為五大類：<br>
-                        <br>
-                        <kbd>
-                            --help=common<br>
-                            --help=optimizers<br>
-                            --help=params<br>
-                            --help=target<br>
-                            --help=warnings<br>
-                        </kbd>
-                        <br>
-                        這些參數多到命令提示字元的視窗裝不下，因此你可能會需要用到如下的方式：<br>
-                        <br>
-                        <kbd>gcc --help=common &gt;&gt; help.txt</kbd><br>
-                        <br>
-                        將結果保存在 help.txt 來查閱。（還有，別忘了直接在命令提示字元輸入 help.txt，就能開啟文件。）
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>編譯器常用參數</h2>
+				<p>
+					要在命令提示字元使用 gcc.exe（C 語言編譯器） 或 g++.exe（C++ 編譯器）時，個人建議的基本格式是：<br>
+					<br>
+					<code>gcc 來源檔名 參數</code><br>
+					<br>
+					gcc 可以下的參數非常非常多，這裡僅列出個人覺得常用的幾個。注意！參數有區分大小寫！
+				</p>
+				<hr>
+				<section>
+					<h3>-o 輸出檔名</h3>
+					<p>
+						指定輸出的檔名。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>-ansi</h3>
+					<p>
+						要求遵循 ANSI C 標準來編譯程式。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>-Wall</h3>
+					<p>
+						提示警告訊息，以幫助設計師寫出更堅固的程式結構。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>-O1、-O2、-O3</h3>
+					<p>
+						最佳化編譯品質，數值越高品質越高。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>-s</h3>
+					<p>
+						精簡所編譯程式的大小。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>-c</h3>
+					<p>
+						只編譯（原始碼轉為機械碼），不連結（機械碼匯成執行檔）。<br>
+						<br>
+						如果只想編譯特定幾個檔案，而不是每次都全部編譯，那麼先一一編譯，以後再全部連結起來成為執行檔，是不錯的做法。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>--help</h3>
+					<p>
+						顯示更多「常用」參數…括號的言下之意，就是還有更多「進階」參數可用，而且分為五大類：<br>
+						<br>
+						<kbd>
+							--help=common<br>
+							--help=optimizers<br>
+							--help=params<br>
+							--help=target<br>
+							--help=warnings<br>
+						</kbd>
+						<br>
+						這些參數多到命令提示字元的視窗裝不下，因此你可能會需要用到如下的方式：<br>
+						<br>
+						<kbd>gcc --help=common &gt;&gt; help.txt</kbd><br>
+						<br>
+						將結果保存在 help.txt 來查閱。（還有，別忘了直接在命令提示字元輸入 help.txt，就能開啟文件。）
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 回到剛創辦 Free Software Foundation 所以還沒有 Linux 的時代，當時 Richard Stallman 希望打造出自由版權的 Unix 作業環境，並且將想像中的作業系統稱為 GNU，意思是 GNU's Not Unix。而 GCC 程式編譯器與 Emacs 文字編輯器就是用來打造 GNU 作業環境的兩大神器！由於 GCC 可以編譯出比商業編譯器更高品質的程式檔，加上 GNU 計畫追隨者（這些人都是最高竿的駭客高手）經驗累積的拓展，讓 GCC 有自己的標準程式庫可以更有效處理軟硬體之間的設計問題，基本上稱 GCC 是世上最棒的 C 編譯器並不為過。<br>
-                    [2] 或者下載舊版的 gcc-full-4.4.0-mingw32-bin-2.tar.lzma，這是可以單機離線使用，不用連線安裝的最後一版。<br>
-                    [*] 其實改安裝 wxDev-C++，然後將裡面的 MinGW32 設置到 PATH 環境變數，就是一個 MinGW 了！而且還裝好 wxWidgets 這其實不方便自己手動安裝的 GUI 套件，省事又方便！特別是需要寫視窗應用程式時，改開 wxDev-C++ 還比較直覺、有效率。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 回到剛創辦 Free Software Foundation 所以還沒有 Linux 的時代，當時 Richard Stallman 希望打造出自由版權的 Unix 作業環境，並且將想像中的作業系統稱為 GNU，意思是 GNU's Not Unix。而 GCC 程式編譯器與 Emacs 文字編輯器就是用來打造 GNU 作業環境的兩大神器！由於 GCC 可以編譯出比商業編譯器更高品質的程式檔，加上 GNU 計畫追隨者（這些人都是最高竿的駭客高手）經驗累積的拓展，讓 GCC 有自己的標準程式庫可以更有效處理軟硬體之間的設計問題，基本上稱 GCC 是世上最棒的 C 編譯器並不為過。<br>
+					[2] 或者下載舊版的 gcc-full-4.4.0-mingw32-bin-2.tar.lzma，這是可以單機離線使用，不用連線安裝的最後一版。<br>
+					[*] 其實改安裝 wxDev-C++，然後將裡面的 MinGW32 設置到 PATH 環境變數，就是一個 MinGW 了！而且還裝好 wxWidgets 這其實不方便自己手動安裝的 GUI 套件，省事又方便！特別是需要寫視窗應用程式時，改開 wxDev-C++ 還比較直覺、有效率。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

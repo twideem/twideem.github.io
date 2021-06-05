@@ -2,101 +2,101 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Linux 發行版與 Windows 8 作業系統裝在一起的問題</h1>
-            </header>
+			<header>
+				<h1>Linux 發行版與 Windows 8 作業系統裝在一起的問題</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>問題描述</h2>
-                <p>
-                    Windows 8 作業系統為了提升開機速度，關機時會在硬碟保存一些資料，類似「休眠」一樣。<br>
-                    <br>
-                    而 Linux 發行版對 NTFS 格式的磁碟有個保護措施，發現有 Windows 作業系統保存的紀錄，就只允許用「唯讀」的方式掛載，以免破壞系統資料造成錯誤。<br>
-                    <br>
-                    問題來了，如果 Linux 發行版與 Windows 8 作業系統共用一個 NTFS 格式的磁碟，那麼每當 Windows 8 作業系統關過機，要再進入 Linux 發行版時就會因為無法自動掛載這個磁碟，而卡很久還進不了桌面。<br>
-                    <br>
-                    甚至有些 Linux 發行版根本進不了桌面，就像系統損毀一樣～
-                </p>
-            </section>
+			<section>
+				<h2>問題描述</h2>
+				<p>
+					Windows 8 作業系統為了提升開機速度，關機時會在硬碟保存一些資料，類似「休眠」一樣。<br>
+					<br>
+					而 Linux 發行版對 NTFS 格式的磁碟有個保護措施，發現有 Windows 作業系統保存的紀錄，就只允許用「唯讀」的方式掛載，以免破壞系統資料造成錯誤。<br>
+					<br>
+					問題來了，如果 Linux 發行版與 Windows 8 作業系統共用一個 NTFS 格式的磁碟，那麼每當 Windows 8 作業系統關過機，要再進入 Linux 發行版時就會因為無法自動掛載這個磁碟，而卡很久還進不了桌面。<br>
+					<br>
+					甚至有些 Linux 發行版根本進不了桌面，就像系統損毀一樣～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>解決辦法</h2>
-                <p>
-                    進入 Windows 8 作業系統，然後「重新開機」，就不會用「休眠」的技術在硬碟寫入資料，這樣 Linux 發行版就可以正常掛載磁碟，順利進入桌面環境了～
-                </p>
-            </section>
+			<section>
+				<h2>解決辦法</h2>
+				<p>
+					進入 Windows 8 作業系統，然後「重新開機」，就不會用「休眠」的技術在硬碟寫入資料，這樣 Linux 發行版就可以正常掛載磁碟，順利進入桌面環境了～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>如何並存</h2>
-                <p>
-                    這要看每個人不同需求而定～
-                </p>
-                <hr>
-                <section>
-                    <h3>需求一</h3>
-                    <p>
-                        以 Windows 8 作業系統為主，偶爾進入 Linux 發行版，乾脆每次都從 Windows 8 作業系統重新開機。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>需求二</h3>
-                    <p>
-                        以 Linux 發行版為主，偶爾進入 Windows 8 作業系統，那就關掉 Windows 8 的「開啟快速啟動開啟」功能，或者養成按「Shift + 關機」的習慣，不要使用快速開機的技術在磁碟寫下資料。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>需求三</h3>
-                    <p>
-                        每天照三餐兩邊跑的話，建議 Linux 和 Windows 不要共用同一個磁碟，各自用自己的。<br>
-                        <br>
-                        Linux 真要使用 Windows 那邊的檔案時，輸入類似如下的指令：<br>
-                        <br>
-                        <kbd>mount -t ntsf -o ro /dev/sda1 /mnt/c</kbd><br>
-                        <br>
-                        將灌了 Windows 作業系統的第一個磁碟分割槽，以唯讀方式掛載到 /mnt/c 當作 C 槽使用。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>需求四</h3>
-                    <p>
-                        又要照三餐兩邊跑，又要共用同一個磁碟，只好改成 FAT32 格式。<br>
-                        <br>
-                        Windows 8 作業系統可以在不影響檔案的情況下，將 NTFS 轉為 FAT32：<br>
-                        <br>
-                        <kbd>convert d: /ntsf:fs</kbd>
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>如何並存</h2>
+				<p>
+					這要看每個人不同需求而定～
+				</p>
+				<hr>
+				<section>
+					<h3>需求一</h3>
+					<p>
+						以 Windows 8 作業系統為主，偶爾進入 Linux 發行版，乾脆每次都從 Windows 8 作業系統重新開機。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>需求二</h3>
+					<p>
+						以 Linux 發行版為主，偶爾進入 Windows 8 作業系統，那就關掉 Windows 8 的「開啟快速啟動開啟」功能，或者養成按「Shift + 關機」的習慣，不要使用快速開機的技術在磁碟寫下資料。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>需求三</h3>
+					<p>
+						每天照三餐兩邊跑的話，建議 Linux 和 Windows 不要共用同一個磁碟，各自用自己的。<br>
+						<br>
+						Linux 真要使用 Windows 那邊的檔案時，輸入類似如下的指令：<br>
+						<br>
+						<kbd>mount -t ntsf -o ro /dev/sda1 /mnt/c</kbd><br>
+						<br>
+						將灌了 Windows 作業系統的第一個磁碟分割槽，以唯讀方式掛載到 /mnt/c 當作 C 槽使用。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>需求四</h3>
+					<p>
+						又要照三餐兩邊跑，又要共用同一個磁碟，只好改成 FAT32 格式。<br>
+						<br>
+						Windows 8 作業系統可以在不影響檔案的情況下，將 NTFS 轉為 FAT32：<br>
+						<br>
+						<kbd>convert d: /ntsf:fs</kbd>
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
-    <!--
-        /etc/default/grub
-            GRUB_DEFAULT=4
-                update-grub
-    -->
+	<!--
+		/etc/default/grub
+			GRUB_DEFAULT=4
+				update-grub
+	-->
 
 </html>

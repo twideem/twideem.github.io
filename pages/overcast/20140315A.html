@@ -2,157 +2,157 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Numerickeypadless Calculator Update</h1>
-            </header>
+			<header>
+				<h1>Numerickeypadless Calculator Update</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Numerickeypadless</h2>
-                <p>
-                    14' 螢幕的筆記型電腦沒有九宮鍵區，每次使用附屬應用程式的「計算機」就覺得不方便，於是設計這個改用英文字母做為運算符號的計算機。
-                </p>
-            </section>
+			<section>
+				<h2>Numerickeypadless</h2>
+				<p>
+					14' 螢幕的筆記型電腦沒有九宮鍵區，每次使用附屬應用程式的「計算機」就覺得不方便，於是設計這個改用英文字母做為運算符號的計算機。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Calculator</h2>
-                <p title='其他進階功能…　(H)ex　(R)emainder'></p>
-            </section>
+			<section>
+				<h2>Calculator</h2>
+				<p title='其他進階功能…　(H)ex　(R)emainder'></p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Update</h2>
-                <p>
-                    實在難用到爆，所以追加設計，將「加、減、乘、除、等於、清除」對照為英打鍵區的「+」「-」「Space」「\」「Enter」「Esc」，再將「餘數、退回」對照為英打鍵區的「Shift+%」「←」。<br>
-                    <br>
-                    16 進位轉 10 進位請以 0x?? 格式輸入再按 Enter 或 E，輸出或計算 16 進位請按 H，A 到 F 請按 Shift+A 到 Shift+F。
-                </p>
-            </section>
+			<section>
+				<h2>Update</h2>
+				<p>
+					實在難用到爆，所以追加設計，將「加、減、乘、除、等於、清除」對照為英打鍵區的「+」「-」「Space」「\」「Enter」「Esc」，再將「餘數、退回」對照為英打鍵區的「Shift+%」「←」。<br>
+					<br>
+					16 進位轉 10 進位請以 0x?? 格式輸入再按 Enter 或 E，輸出或計算 16 進位請按 H，A 到 F 請按 Shift+A 到 Shift+F。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-        <script>
-            var KEY_0=48,KEY_A=65,KEY_PLUS=61,KEY_PLUSIE=187,KEY_S=83,KEY_MINUS=173,KEY_MINUSIE=189,KEY_M=77,KEY_SPACEBAR=32,KEY_ASTERISK=56,KEY_D=68,KEY_SLASH=191,KEY_BACKSLASH=220,KEY_R=82,KEY_PERCENT=53,KEY_CARET=54,KEY_E=69,KEY_ENTER=13,KEY_H=72,KEY_C=67,KEY_ESC=27,KEY_B=66,KEY_BACKSPACE=8,KEY_LEFT=37,KEY_PARENLEFT=57,KEY_PARENRIGHT=48,KEY_X=88,KEY_DOT=190,KEY_COMMA=188
-            var element=document.querySelectorAll('article section p')[1]
-            var string='(0-9)umber　(A)dd　(S)ubtract　(M)ultiply　(D)ivide　(E)auals　(C)lear　(B)ack'
-            var switching=false
-            function append(x){
-                if(element.innerHTML==string||switching){
-                    element.innerHTML=''
-                    switching=false
-                }
-                element.innerHTML+=x
-            }
-            function clear(){
-                element.innerHTML=string
-            }
-            function error(){
-                element.innerHTML='0.0a'
-            }
-            function calc(x){
-                try{
-                    if(x==16) append('=0x'+Number(eval(element.innerHTML)).toString(16))
-                    else append('='+eval(element.innerHTML))
-                }
-                catch(y){
-                    append('=無解')
-                }
-                switching=true
-                if(element.innerHTML=='=NaN') error()
-            }
-            function back(){
-                if(element.innerHTML!==string&&!switching){
-                    element.innerHTML=element.innerHTML.substr(0,element.innerHTML.length-1)
-                    if(element.innerHTML.length<=0) element.innerHTML=string
-                }
-            }
-            addEventListener('keydown',function(x){
-                //使用 switch 逐條過濾一向不是很理想的做法，會有後面條件被前面條件吃掉的情形，因此要更動條件時須注意前後順序。雖然是容易出錯的做法，但易讀、易改，出錯了也很容易反應過來，沒必要非得不易判讀的 if 不可。
-                switch(x.which){
-                    case KEY_X:
-                        append('x');break
-                    case x.shiftKey&&KEY_A:
-                    case x.shiftKey&&KEY_A+1:
-                    case x.shiftKey&&KEY_A+2:
-                    case x.shiftKey&&KEY_A+3:
-                    case x.shiftKey&&KEY_A+4:
-                    case x.shiftKey&&KEY_A+5:
-                        append(String.fromCharCode(x.which).toLowerCase());break
-                    case KEY_A:
-                    case KEY_PLUS:
-                    case KEY_PLUSIE:
-                        append('+');break
-                    case KEY_S:
-                    case KEY_MINUS:
-                    case KEY_MINUSIE:
-                        append('-');break
-                    case KEY_M:
-                    case KEY_SPACEBAR:
-                    case x.shiftKey&&KEY_ASTERISK:
-                        append('*');break
-                    case KEY_D:
-                    case KEY_SLASH:
-                    case KEY_BACKSLASH:
-                        append('/');break
-                    case KEY_R:
-                    case x.shiftKey&&KEY_PERCENT:
-                        append('%');break
-                    case x.shiftKey&&KEY_CARET:
-                        append('Math.pow(');break
-                    case KEY_COMMA:
-                        append(',');break
-                    case x.shiftKey&&KEY_PARENLEFT:
-                        append('(');break
-                    case x.shiftKey&&KEY_PARENRIGHT:
-                        append(')');break
-                    case KEY_0:
-                    case KEY_0+1:
-                    case KEY_0+2:
-                    case KEY_0+3:
-                    case KEY_0+4:
-                    case KEY_0+5:
-                    case KEY_0+6:
-                    case KEY_0+7:
-                    case KEY_0+8:
-                    case KEY_0+9:
-                        append(x.which-48);break
-                    case KEY_DOT:
-                        append('.');break
-                    case KEY_E:
-                    case KEY_ENTER:
-                        calc();break
-                    case KEY_H:
-                        calc(16);break
-                    case KEY_C:
-                    case KEY_ESC:
-                        clear();break
-                    case KEY_B:
-                    case KEY_BACKSPACE:
-                    case KEY_LEFT:
-                        back()
-                }
-            })
-            addEventListener('load',function(){
-                element.innerHTML=string
-            })
-        </script>
+		<script>
+			var KEY_0=48,KEY_A=65,KEY_PLUS=61,KEY_PLUSIE=187,KEY_S=83,KEY_MINUS=173,KEY_MINUSIE=189,KEY_M=77,KEY_SPACEBAR=32,KEY_ASTERISK=56,KEY_D=68,KEY_SLASH=191,KEY_BACKSLASH=220,KEY_R=82,KEY_PERCENT=53,KEY_CARET=54,KEY_E=69,KEY_ENTER=13,KEY_H=72,KEY_C=67,KEY_ESC=27,KEY_B=66,KEY_BACKSPACE=8,KEY_LEFT=37,KEY_PARENLEFT=57,KEY_PARENRIGHT=48,KEY_X=88,KEY_DOT=190,KEY_COMMA=188
+			var element=document.querySelectorAll('article section p')[1]
+			var string='(0-9)umber　(A)dd　(S)ubtract　(M)ultiply　(D)ivide　(E)auals　(C)lear　(B)ack'
+			var switching=false
+			function append(x){
+				if(element.innerHTML==string||switching){
+					element.innerHTML=''
+					switching=false
+				}
+				element.innerHTML+=x
+			}
+			function clear(){
+				element.innerHTML=string
+			}
+			function error(){
+				element.innerHTML='0.0a'
+			}
+			function calc(x){
+				try{
+					if(x==16) append('=0x'+Number(eval(element.innerHTML)).toString(16))
+					else append('='+eval(element.innerHTML))
+				}
+				catch(y){
+					append('=無解')
+				}
+				switching=true
+				if(element.innerHTML=='=NaN') error()
+			}
+			function back(){
+				if(element.innerHTML!==string&&!switching){
+					element.innerHTML=element.innerHTML.substr(0,element.innerHTML.length-1)
+					if(element.innerHTML.length<=0) element.innerHTML=string
+				}
+			}
+			addEventListener('keydown',function(x){
+				//使用 switch 逐條過濾一向不是很理想的做法，會有後面條件被前面條件吃掉的情形，因此要更動條件時須注意前後順序。雖然是容易出錯的做法，但易讀、易改，出錯了也很容易反應過來，沒必要非得不易判讀的 if 不可。
+				switch(x.which){
+					case KEY_X:
+						append('x');break
+					case x.shiftKey&&KEY_A:
+					case x.shiftKey&&KEY_A+1:
+					case x.shiftKey&&KEY_A+2:
+					case x.shiftKey&&KEY_A+3:
+					case x.shiftKey&&KEY_A+4:
+					case x.shiftKey&&KEY_A+5:
+						append(String.fromCharCode(x.which).toLowerCase());break
+					case KEY_A:
+					case KEY_PLUS:
+					case KEY_PLUSIE:
+						append('+');break
+					case KEY_S:
+					case KEY_MINUS:
+					case KEY_MINUSIE:
+						append('-');break
+					case KEY_M:
+					case KEY_SPACEBAR:
+					case x.shiftKey&&KEY_ASTERISK:
+						append('*');break
+					case KEY_D:
+					case KEY_SLASH:
+					case KEY_BACKSLASH:
+						append('/');break
+					case KEY_R:
+					case x.shiftKey&&KEY_PERCENT:
+						append('%');break
+					case x.shiftKey&&KEY_CARET:
+						append('Math.pow(');break
+					case KEY_COMMA:
+						append(',');break
+					case x.shiftKey&&KEY_PARENLEFT:
+						append('(');break
+					case x.shiftKey&&KEY_PARENRIGHT:
+						append(')');break
+					case KEY_0:
+					case KEY_0+1:
+					case KEY_0+2:
+					case KEY_0+3:
+					case KEY_0+4:
+					case KEY_0+5:
+					case KEY_0+6:
+					case KEY_0+7:
+					case KEY_0+8:
+					case KEY_0+9:
+						append(x.which-48);break
+					case KEY_DOT:
+						append('.');break
+					case KEY_E:
+					case KEY_ENTER:
+						calc();break
+					case KEY_H:
+						calc(16);break
+					case KEY_C:
+					case KEY_ESC:
+						clear();break
+					case KEY_B:
+					case KEY_BACKSPACE:
+					case KEY_LEFT:
+						back()
+				}
+			})
+			addEventListener('load',function(){
+				element.innerHTML=string
+			})
+		</script>
 
-    </body>
+	</body>
 
 </html>

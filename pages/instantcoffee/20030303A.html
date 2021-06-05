@@ -2,468 +2,468 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>table td:nth-child(1){width:20%}</style>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>table td:nth-child(1){width:20%}</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>疑難雜症範例集</h1>
-                <p>
-                    這些範例是從《Java Puzzlers》和《Java Pitfalls》而來～
-                </p>
-            </header>
+			<header>
+				<h1>疑難雜症範例集</h1>
+				<p>
+					這些範例是從《Java Puzzlers》和《Java Pitfalls》而來～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>打出數值時，其實它是預設為 int 型態的值。</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>打出數值時，其實它是預設為 int 型態的值。</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                long a = 24*60*60*1000*1000; //86400000000
-                                System.out.print(a);
-                            }
+							public static void main(String[] args){
+								long a = 24*60*60*1000*1000; //86400000000
+								System.out.print(a);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        500654080<br>
-                    </output>
-                    <br>
-                    養成習慣，使用 <code>long a = 24L*60L*60L*1000L*1000L</code> 明確打出 long 型態的數值，否則會一路以 int 型態計算出超過 int 範圍的「溢值（overflow）」，再轉型給 long 型態的 a 變數。另外，float 是 F，double 是 D，都沒有的話 Java 預設為 int。<br>
-                    <br>
-                    雖然數值後面加的 D、F、L 可以小寫，但 L 千萬別小寫，例如 432 寫作 432l 的話，容易看成「四三二一」。<br>
-                    <br>
-                    而 long a = 24*60*60*1000*1000L 的話其實也能計算出正確結果，但這其實還是 int 和 long 兩種型態放在一起運算，有可能因自動轉型而產生預期外的結果，所以依然不建議這麼做。
-                </p>
-            </section>
+					<br>
+					<output>
+						500654080<br>
+					</output>
+					<br>
+					養成習慣，使用 <code>long a = 24L*60L*60L*1000L*1000L</code> 明確打出 long 型態的數值，否則會一路以 int 型態計算出超過 int 範圍的「溢值（overflow）」，再轉型給 long 型態的 a 變數。另外，float 是 F，double 是 D，都沒有的話 Java 預設為 int。<br>
+					<br>
+					雖然數值後面加的 D、F、L 可以小寫，但 L 千萬別小寫，例如 432 寫作 432l 的話，容易看成「四三二一」。<br>
+					<br>
+					而 long a = 24*60*60*1000*1000L 的話其實也能計算出正確結果，但這其實還是 int 和 long 兩種型態放在一起運算，有可能因自動轉型而產生預期外的結果，所以依然不建議這麼做。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>注意 char 最小是 0，也就是它沒有負號～</h2>
-                <p>
-                    char 與其它數值型態互相轉換時，要注意負數的問題！務必多加測試這樣的程式，因為可能產生預期外的結果。
-                </p>
-            </section>
+			<section>
+				<h2>注意 char 最小是 0，也就是它沒有負號～</h2>
+				<p>
+					char 與其它數值型態互相轉換時，要注意負數的問題！務必多加測試這樣的程式，因為可能產生預期外的結果。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>小數不是精確的數值！</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>小數不是精確的數值！</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                System.out.print(2.0-1.1); //0.9
-                            }
+							public static void main(String[] args){
+								System.out.print(2.0-1.1); //0.9
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        0.899999999999999<br>
-                    </output>
-                    <br>
-                    float 和 double 的數值不夠精確，用浮點數型態來計算數值時，務必多用點力測試結果，否則容易產生預期外的結果。
-                </p>
-            </section>
+					<br>
+					<output>
+						0.899999999999999<br>
+					</output>
+					<br>
+					float 和 double 的數值不夠精確，用浮點數型態來計算數值時，務必多用點力測試結果，否則容易產生預期外的結果。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>使用餘數，要注意負數的問題。</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>使用餘數，要注意負數的問題。</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                if(-1%2==1){
-                                    System.out.print("奇數"); //輸出的是應該這個
-                                }
-                                else{
-                                    System.out.print("偶數");
-                                }
-                            }
+							public static void main(String[] args){
+								if(-1%2==1){
+									System.out.print("奇數"); //輸出的是應該這個
+								}
+								else{
+									System.out.print("偶數");
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        偶數<br>
-                    </output>
-                    <br>
-                    因為 -1%2 是 -1，不是 1。想判斷奇數或偶數時，改用是否等於 0 比較好。
-                </p>
-            </section>
+					<br>
+					<output>
+						偶數<br>
+					</output>
+					<br>
+					因為 -1%2 是 -1，不是 1。想判斷奇數或偶數時，改用是否等於 0 比較好。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>魔術數字般的計算式，容易被我們忽略了運算優先順序。</h2>
-                <p>
-                    底下程式想要計算一小時的分鐘數：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>魔術數字般的計算式，容易被我們忽略了運算優先順序。</h2>
+				<p>
+					底下程式想要計算一小時的分鐘數：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                int a=0;
+								int a=0;
 
-                                for(int n=0; n&lt;60*60*1000; n++){
-                                    if(n % 60*1000 == 0){
-                                        a++; //60
-                                    }
-                                }
+								for(int n=0; n&lt;60*60*1000; n++){
+									if(n % 60*1000 == 0){
+										a++; //60
+									}
+								}
 
-                                System.out.print(a);
+								System.out.print(a);
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        60000<br>
-                    </output>
-                    <br>
-                    運算順序的關係，其實程式跑的是 (n%60)*1000，並不是 n%(60*1000)。<br>
-                    <br>
-                    像這種需要計算出某組魔術數字的情況，建議宣告成常數來使用：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+					<br>
+					<output>
+						60000<br>
+					</output>
+					<br>
+					運算順序的關係，其實程式跑的是 (n%60)*1000，並不是 n%(60*1000)。<br>
+					<br>
+					像這種需要計算出某組魔術數字的情況，建議宣告成常數來使用：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                final int MINUTE = 60*1000;
-                                final int HOUR = 60*MINUTE;
+								final int MINUTE = 60*1000;
+								final int HOUR = 60*MINUTE;
 
-                                int a=0;
+								int a=0;
 
-                                for(int n=0; n&lt;HOUR; n++){
-                                    if(n % MINUTE == 0){
-                                        a++; //60
-                                    }
-                                }
+								for(int n=0; n&lt;HOUR; n++){
+									if(n % MINUTE == 0){
+										a++; //60
+									}
+								}
 
-                                System.out.print(a);
+								System.out.print(a);
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        60
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						60
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>+= 運算子有可能轉型漏失資料</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>+= 運算子有可能轉型漏失資料</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                short a = 1;
-                                int b = 59999;
-                                System.out.print(a+=b); //60000
-                            }
+							public static void main(String[] args){
+								short a = 1;
+								int b = 59999;
+								System.out.print(a+=b); //60000
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        -5536<br>
-                    </output>
-                    <br>
-                    原因是 short 型態的 a 裝不下 int 型態的 b，前面位元的資料只好刪除而漏失了。所以使用 +=、-=、*= …之類的運算子計算數值時，應避免混用兩種不同型態的資料，以免產生預期外的結果。
-                </p>
-            </section>
+					<br>
+					<output>
+						-5536<br>
+					</output>
+					<br>
+					原因是 short 型態的 a 裝不下 int 型態的 b，前面位元的資料只好刪除而漏失了。所以使用 +=、-=、*= …之類的運算子計算數值時，應避免混用兩種不同型態的資料，以免產生預期外的結果。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>?: 運算子有可能自動轉型</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>?: 運算子有可能自動轉型</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                char a = "A";
-                                int b = 0;
-                                System.out.println(true?a:0); //A
-                                System.out.println(true?a:b); //A？
-                            }
+							public static void main(String[] args){
+								char a = "A";
+								int b = 0;
+								System.out.println(true?a:0); //A
+								System.out.println(true?a:b); //A？
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        A<br>
-                        65<br>
-                    </output>
-                    <br>
-                    原因是混用兩種不同型態時，?: 運算子會向上轉型。所以使用該運算子傳回結果時，建議當自己是在設計「函式」，只傳回同一種資料型態，以免產生預期外的結果。
-                </p>
-            </section>
+					<br>
+					<output>
+						A<br>
+						65<br>
+					</output>
+					<br>
+					原因是混用兩種不同型態時，?: 運算子會向上轉型。所以使用該運算子傳回結果時，建議當自己是在設計「函式」，只傳回同一種資料型態，以免產生預期外的結果。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>char[] 與 String</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>char[] 與 String</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                String a = "AAA";
-                                char[] b = {"B","B","B"};
-                                System.out.println(a);   //AAA
-                                System.out.println(b);   //BBB
-                                System.out.println(a+b); //AAABBB？
-                            }
+							public static void main(String[] args){
+								String a = "AAA";
+								char[] b = {"B","B","B"};
+								System.out.println(a);   //AAA
+								System.out.println(b);   //BBB
+								System.out.println(a+b); //AAABBB？
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        AAA<br>
-                        BBB<br>
-                        AAA[C@35ce36<br>
-                    </output>
-                    <br>
-                    雖然 Java API 裡的 method 通常能夠直接引入 char[] 當參數，表現得跟引入 String 參數一樣，但那是因為這些 method 提供了 f(String) 與 f(char[]) 的多載，而不是 char[] 和 String 之間可以替換。<br>
-                    <br>
-                    將 String 與 char[] 兩種不同型態的資料混在一起時會自動轉型，但我們通常不熟悉 Java 究竟有哪幾套自動轉型的規則，出來結果往往不是我們所預期的。<br>
-                    <br>
-                    遇到混搭不同型態的資料，應該養成習慣自己轉型，而不是靠 Java 自動轉型。例如這個例子可以使用 String.valueOf() 將 char[] 轉型為 String。
-                </p>
-            </section>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						AAA[C@35ce36<br>
+					</output>
+					<br>
+					雖然 Java API 裡的 method 通常能夠直接引入 char[] 當參數，表現得跟引入 String 參數一樣，但那是因為這些 method 提供了 f(String) 與 f(char[]) 的多載，而不是 char[] 和 String 之間可以替換。<br>
+					<br>
+					將 String 與 char[] 兩種不同型態的資料混在一起時會自動轉型，但我們通常不熟悉 Java 究竟有哪幾套自動轉型的規則，出來結果往往不是我們所預期的。<br>
+					<br>
+					遇到混搭不同型態的資料，應該養成習慣自己轉型，而不是靠 Java 自動轉型。例如這個例子可以使用 String.valueOf() 將 char[] 轉型為 String。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>記住 String 的 + 運算子優先順序</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>記住 String 的 + 運算子優先順序</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                String a = "AAA";
-                                String b = "AAA";
-                                System.out.println(a==b);           //true
-                                System.out.println("OUTPUT:"+a==b); //OUTPUT:true？
-                            }
+							public static void main(String[] args){
+								String a = "AAA";
+								String b = "AAA";
+								System.out.println(a==b);		   //true
+								System.out.println("OUTPUT:"+a==b); //OUTPUT:true？
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        true<br>
-                        false<br>
-                    </output>
-                    <br>
-                    因為變成 "OUTPUT:AAA"=="AAA" 了，所以 false。<br>
-                    <br>
-                    <code>System.out.println("OUTPUT:"+(a==b))</code> 才會是想要的結果。
-                </p>
-            </section>
+					<br>
+					<output>
+						true<br>
+						false<br>
+					</output>
+					<br>
+					因為變成 "OUTPUT:AAA"=="AAA" 了，所以 false。<br>
+					<br>
+					<code>System.out.println("OUTPUT:"+(a==b))</code> 才會是想要的結果。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Unicode 同義字元</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public \u0063\u006c\u0061\u0073\u0073 Main{
+			<section>
+				<h2>Unicode 同義字元</h2>
+				<p>
+					<textarea class='brush:java'>
+						public \u0063\u006c\u0061\u0073\u0073 Main{
 
-                            public static void main(String[] args){
-                                System.out.print("Hello");
-                            }
+							public static void main(String[] args){
+								System.out.print("Hello");
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        Hello<br>
-                    </output>
-                    <br>
-                    \u0063\u006c\u0061\u0073\u0073 是 class 的 Unicode 同義字元（escape character），在 Java 原始碼裡使用它，就等於實際打出 class 這個關鍵字一樣。於是這個看起來像鬼畫符的程式碼是可以編譯的～<br>
-                    <br>
-                    也因此，要謹慎注意 \u 開頭的輸入，例如 \u000a 是換行的 Unicode 同義字元，結果…<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+					<br>
+					<output>
+						Hello<br>
+					</output>
+					<br>
+					\u0063\u006c\u0061\u0073\u0073 是 class 的 Unicode 同義字元（escape character），在 Java 原始碼裡使用它，就等於實際打出 class 這個關鍵字一樣。於是這個看起來像鬼畫符的程式碼是可以編譯的～<br>
+					<br>
+					也因此，要謹慎注意 \u 開頭的輸入，例如 \u000a 是換行的 Unicode 同義字元，結果…<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                System.out.print("\u000a 是換行的意思！");
-                            }
+							public static void main(String[] args){
+								System.out.print("\u000a 是換行的意思！");
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        unclosed string literral<br>
-                    </output>
-                    <br>
-                    無法通過編譯，因為 \u000a 真的換行了，導致上面的程式其實是：<br>
-                    <br>
-                    <samp>
-                        System.out.print("<br>
-                        &nbsp;是換行的意思！");
-                    </samp>
-                </p>
-            </section>
+					<br>
+					<output>
+						unclosed string literral<br>
+					</output>
+					<br>
+					無法通過編譯，因為 \u000a 真的換行了，導致上面的程式其實是：<br>
+					<br>
+					<samp>
+						System.out.print("<br>
+						&nbsp;是換行的意思！");
+					</samp>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>使用 /* */ 註解時，記住它不支援巢狀結構～</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>使用 /* */ 註解時，記住它不支援巢狀結構～</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                /*
-                                    System.out.print("+-*/ 四則運算。");
-                                */
-                            }
+							public static void main(String[] args){
+								/*
+									System.out.print("+-*/ 四則運算。");
+								*/
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        illegal character<br>
-                    </output>
-                    <br>
-                    其實在 <code>"+-*/</code> 時，就已經出現 <code>*/</code> 符號，將這個註解給結束了。
-                </p>
-            </section>
+					<br>
+					<output>
+						illegal character<br>
+					</output>
+					<br>
+					其實在 <code>"+-*/</code> 時，就已經出現 <code>*/</code> 符號，將這個註解給結束了。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>覆寫與隱蔽</h2>
-                <p>
-                    繼承類別之後，函式可以覆寫，但變數不是覆寫，而是隱蔽。底下示範覆寫與隱蔽的差異～
-                </p>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
+			<section>
+				<h2>覆寫與隱蔽</h2>
+				<p>
+					繼承類別之後，函式可以覆寫，但變數不是覆寫，而是隱蔽。底下示範覆寫與隱蔽的差異～
+				</p>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
 
-                                public String g = "AAA";
+								public String g = "AAA";
 
-                                public void f(){
-                                    System.out.println("a" + g + "a"); //會輸出 aAAAa。
-                                }
+								public void f(){
+									System.out.println("a" + g + "a"); //會輸出 aAAAa。
+								}
 
-                            }
+							}
 
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B extends A{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B extends A{
 
-                                public String g = "BBB";
+								public String g = "BBB";
 
-                                public void f(){
-                                    System.out.println("b" + g + "b"); //會輸出 bBBBb。
-                                }
+								public void f(){
+									System.out.println("b" + g + "b"); //會輸出 bBBBb。
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    A aa = new A();                //以 A 型態產生 A 物件。
-                                    B bb = new B();                //以 B 型態產生 B 物件。
-                                    A ab = new B();                //以 A 型態產生 B 物件。
+									A aa = new A();				//以 A 型態產生 A 物件。
+									B bb = new B();				//以 B 型態產生 B 物件。
+									A ab = new B();				//以 A 型態產生 B 物件。
 
-                                    System.out.println(aa.g);      //會輸出 AAA。
-                                    System.out.println(bb.g);      //會輸出 BBB。
-                                    System.out.println(((A)bb).g); //會輸出 AAA，變數隨型別切換。
-                                    System.out.println(ab.g);      //會輸出 AAA，畢竟是宣告為 A 型別。
-                                    System.out.println(((B)ab).g); //會輸出 BBB，變數隨型別切換。
+									System.out.println(aa.g);	  //會輸出 AAA。
+									System.out.println(bb.g);	  //會輸出 BBB。
+									System.out.println(((A)bb).g); //會輸出 AAA，變數隨型別切換。
+									System.out.println(ab.g);	  //會輸出 AAA，畢竟是宣告為 A 型別。
+									System.out.println(((B)ab).g); //會輸出 BBB，變數隨型別切換。
 
-                                    aa.f();                        //輸出 aAAAa。
-                                    bb.f();                        //輸出 bBBBb。
-                                    ((A)bb).f();                   //輸出 bBBBb，函式不隨型別切換。
-                                    ab.f();                        //輸出 bBBBb。
-                                    ((B)ab).f();                   //輸出 bBBBb。
+									aa.f();						//輸出 aAAAa。
+									bb.f();						//輸出 bBBBb。
+									((A)bb).f();				   //輸出 bBBBb，函式不隨型別切換。
+									ab.f();						//輸出 bBBBb。
+									((B)ab).f();				   //輸出 bBBBb。
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出</h3>
-                    <p>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            AAA<br>
-                            AAA<br>
-                            BBB<br>
-                            aAAAa<br>
-                            bBBBb<br>
-                            bBBBb<br>
-                            bBBBb<br>
-                            bBBBb
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    函式被覆寫後，new 出來的物件只能呼叫這被覆寫的函式。但變數不一樣，可以經由切換型別，分別存取超類別與支類別的變數。所以另外稱為隱蔽，而不是覆寫，且變數不能覆寫，只能隱蔽。<br>
-                    <br>
-                    另外，函式只會存取 new 出來物件的變數，不會隨著型別的切換跳來跳去，所以覆寫的規則就很單純，不是 aAAAa 就是 bBBBb。幸好如此，否則函式會出現 aBBBa 或 bAAAb 的話，設計這種難以捉摸的程式，會讓人想砸了電腦吧？<br>
-                    <br>
-                    這個範例錯綜複雜，正常人無法看完一次就釐清它，必須花一段時間來熟悉它，所以多看個幾次吧～
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出</h3>
+					<p>
+						<output>
+							AAA<br>
+							BBB<br>
+							AAA<br>
+							AAA<br>
+							BBB<br>
+							aAAAa<br>
+							bBBBb<br>
+							bBBBb<br>
+							bBBBb<br>
+							bBBBb
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					函式被覆寫後，new 出來的物件只能呼叫這被覆寫的函式。但變數不一樣，可以經由切換型別，分別存取超類別與支類別的變數。所以另外稱為隱蔽，而不是覆寫，且變數不能覆寫，只能隱蔽。<br>
+					<br>
+					另外，函式只會存取 new 出來物件的變數，不會隨著型別的切換跳來跳去，所以覆寫的規則就很單純，不是 aAAAa 就是 bBBBb。幸好如此，否則函式會出現 aBBBa 或 bAAAb 的話，設計這種難以捉摸的程式，會讓人想砸了電腦吧？<br>
+					<br>
+					這個範例錯綜複雜，正常人無法看完一次就釐清它，必須花一段時間來熟悉它，所以多看個幾次吧～
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

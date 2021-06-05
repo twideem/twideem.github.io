@@ -2,217 +2,217 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>java.util.regex.Pattern</h1>
-                <p>
-                    雖然 Java 的 String 可以進行 Regular Expression（正規表示式），但正式的做法是使用 java.util.regex.Pattern，它需要混搭物件，所以稍嫌麻煩，但也因此賦予許多靈巧的機制，可以設計出較有彈性的程式結構。
-                </p>
-            </header>
+			<header>
+				<h1>java.util.regex.Pattern</h1>
+				<p>
+					雖然 Java 的 String 可以進行 Regular Expression（正規表示式），但正式的做法是使用 java.util.regex.Pattern，它需要混搭物件，所以稍嫌麻煩，但也因此賦予許多靈巧的機制，可以設計出較有彈性的程式結構。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>基本用法</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.regex.Pattern;
-                        import java.util.regex.Matcher;
+			<section>
+				<h2>基本用法</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.regex.Pattern;
+						import java.util.regex.Matcher;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                //設定規則為三個數字。
-                                Pattern pattern = Pattern.compile("[\\d]{3}");
-                                //輸入 ABC123 資料進行匹配，並且將結果傳至 Matcher 物件。
-                                Matcher matcher = pattern.matcher("ABC123");
-                                //如果資料匹配結果出現符合規則的字串，輸出符合匹配的結果。
-                                if(matcher.find()){
-                                    System.out.print(matcher.group());
-                                }
-                            }
+							public static void main(String[] args){
+								//設定規則為三個數字。
+								Pattern pattern = Pattern.compile("[\\d]{3}");
+								//輸入 ABC123 資料進行匹配，並且將結果傳至 Matcher 物件。
+								Matcher matcher = pattern.matcher("ABC123");
+								//如果資料匹配結果出現符合規則的字串，輸出符合匹配的結果。
+								if(matcher.find()){
+									System.out.print(matcher.group());
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        123
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						123
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取得成功匹配結果的開頭位置與終點</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.regex.Pattern;
-                        import java.util.regex.Matcher;
+			<section>
+				<h2>取得成功匹配結果的開頭位置與終點</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.regex.Pattern;
+						import java.util.regex.Matcher;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                Pattern pattern = Pattern.compile("[\\d]{3}");
+								Pattern pattern = Pattern.compile("[\\d]{3}");
 
-                                Matcher matcher = pattern.matcher("ABC123");
+								Matcher matcher = pattern.matcher("ABC123");
 
-                                if(matcher.find()){
-                                    System.out.println(matcher.start());
-                                    System.out.println(matcher.end());
-                                }
+								if(matcher.find()){
+									System.out.println(matcher.start());
+									System.out.println(matcher.end());
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        3<br>
-                        6<br>
-                    </output>
-                    <br>
-                    注意開頭位置是「第幾個字元開始」，但終點卻不是「第幾個字元結束」，而是「到哪裡為止」。
-                </p>
-            </section>
+					<br>
+					<output>
+						3<br>
+						6<br>
+					</output>
+					<br>
+					注意開頭位置是「第幾個字元開始」，但終點卻不是「第幾個字元結束」，而是「到哪裡為止」。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取代字串</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.regex.Pattern;
-                        import java.util.regex.Matcher;
+			<section>
+				<h2>取代字串</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.regex.Pattern;
+						import java.util.regex.Matcher;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                Pattern pattern = Pattern.compile("[\\d]");
+								Pattern pattern = Pattern.compile("[\\d]");
 
-                                Matcher matcher = pattern.matcher("ABC123");
+								Matcher matcher = pattern.matcher("ABC123");
 
-                                if(matcher.find()){
-                                    System.out.print(matcher.replaceAll("-"));
-                                }
+								if(matcher.find()){
+									System.out.print(matcher.replaceAll("-"));
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        ABC---
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						ABC---
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>完整匹配</h2>
-                <p>
-                    有時候希望更簡單就能以嚴密的方式，比對整個字串是否能通過驗證。如下範例，Pattern 所 matcher() 的字串，必須從頭到尾都符合 compile() 設定的條件，才會傳回 true：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.util.regex.Pattern;
-                        import java.util.regex.Matcher;
+			<section>
+				<h2>完整匹配</h2>
+				<p>
+					有時候希望更簡單就能以嚴密的方式，比對整個字串是否能通過驗證。如下範例，Pattern 所 matcher() 的字串，必須從頭到尾都符合 compile() 設定的條件，才會傳回 true：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.regex.Pattern;
+						import java.util.regex.Matcher;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                //設定規則為三個數字
-                                Pattern pattern = Pattern.compile("[\\d]{3}");
-                                //傳入 123 三個數字
-                                Matcher matcher = pattern.matcher("123");
-                                //輸出結果
-                                System.out.println(matcher.matches());
-                            }
+							public static void main(String[] args){
+								//設定規則為三個數字
+								Pattern pattern = Pattern.compile("[\\d]{3}");
+								//傳入 123 三個數字
+								Matcher matcher = pattern.matcher("123");
+								//輸出結果
+								System.out.println(matcher.matches());
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        true<br>
-                    </output>
-                    <br>
-                    底下示範無法通過規範：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.util.regex.Pattern;
-                        import java.util.regex.Matcher;
+					<br>
+					<output>
+						true<br>
+					</output>
+					<br>
+					底下示範無法通過規範：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.regex.Pattern;
+						import java.util.regex.Matcher;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                //設定規則為三個數字
-                                Pattern pattern = Pattern.compile("[\\d]{3}");
-                                //傳入 1234 四個數字
-                                Matcher matcher = pattern.matcher("1234");
-                                //輸出結果
-                                System.out.println(matcher.matches());
-                            }
+							public static void main(String[] args){
+								//設定規則為三個數字
+								Pattern pattern = Pattern.compile("[\\d]{3}");
+								//傳入 1234 四個數字
+								Matcher matcher = pattern.matcher("1234");
+								//輸出結果
+								System.out.println(matcher.matches());
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        false
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						false
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>切割字串</h2>
-                <p>
-                    使用 Pattern 的 split() 可將字串依照 compile() 所建立的規則，切割為好幾段的字串，而切割出來字串，以 String 陣列傳回：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.util.regex.Pattern;
+			<section>
+				<h2>切割字串</h2>
+				<p>
+					使用 Pattern 的 split() 可將字串依照 compile() 所建立的規則，切割為好幾段的字串，而切割出來字串，以 String 陣列傳回：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.regex.Pattern;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                //以 , 做為切割的依據
-                                Pattern pattern = Pattern.compile(",");
-                                //開始分割字串
-                                String[] strings = pattern.split("ABC,123,:)");
-                                //將陣列輸出
-                                for(int n=0; n&lt;strings.length; n++){
-                                    System.out.println(strings[n]);
-                                }
-                            }
+							public static void main(String[] args){
+								//以 , 做為切割的依據
+								Pattern pattern = Pattern.compile(",");
+								//開始分割字串
+								String[] strings = pattern.split("ABC,123,:)");
+								//將陣列輸出
+								for(int n=0; n&lt;strings.length; n++){
+									System.out.println(strings[n]);
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        ABC<br>
-                        123<br>
-                        :)
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						ABC<br>
+						123<br>
+						:)
+					</output>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

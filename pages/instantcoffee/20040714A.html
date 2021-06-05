@@ -2,74 +2,74 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>製作 MIDI 音樂檔</h1>
-            </header>
+			<header>
+				<h1>製作 MIDI 音樂檔</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                本章節示範如何手工輸入音譜來產生 MIDI 檔：<br>
-                <br>
-                <textarea class='brush:java;highlight:[21]'>
-                    import java.io.File;
-                    import javax.sound.midi.MetaMessage;
-                    import javax.sound.midi.MidiEvent;
-                    import javax.sound.midi.MidiSystem;
-                    import javax.sound.midi.Sequence;
-                    import javax.sound.midi.ShortMessage;
-                    import javax.sound.midi.Track;
+			<p>
+				本章節示範如何手工輸入音譜來產生 MIDI 檔：<br>
+				<br>
+				<textarea class='brush:java;highlight:[21]'>
+					import java.io.File;
+					import javax.sound.midi.MetaMessage;
+					import javax.sound.midi.MidiEvent;
+					import javax.sound.midi.MidiSystem;
+					import javax.sound.midi.Sequence;
+					import javax.sound.midi.ShortMessage;
+					import javax.sound.midi.Track;
 
-                    public class Main{
+					public class Main{
 
-                        public static void main(String[] args){
-                            try{
-                                Sequence sequence = new Sequence(Sequence.PPQ, 24);
-                                Track track = sequence.createTrack();
-                                MetaMessage meta_message = new MetaMessage();
-                                meta_message.setMessage(0x51, new byte[]{(byte)(((60*1000000)/30)/65535), (byte)(((60*1000000)/30)%65535/256), (byte)(((60*1000000)/30)%256)}, 3);
-                                track.add(new MidiEvent(meta_message, 0));
-                                ShortMessage short_message = new ShortMessage();
-                                short_message.setMessage(ShortMessage.PROGRAM_CHANGE, 0, 6, 0);
-                                track.add(new MidiEvent(short_message, 0));
-                                int[] pitches ={ 40,41,42,43,44,45,46,47,48,49,50 };
-                                for(int i=0; i&lt;pitches.length; i++){
-                                    short_message = new ShortMessage();
-                                    short_message.setMessage(ShortMessage.NOTE_ON, 0, pitches[i], 127);
-                                    track.add(new MidiEvent(short_message, i));
-                                    short_message = new ShortMessage();
-                                    short_message.setMessage(ShortMessage.NOTE_OFF, 0, pitches[i], 127);
-                                    track.add(new MidiEvent(short_message, (i+1)));
-                                }
-                                int _int = MidiSystem.write(sequence, 0, new File("music.mid"));
-                            }
-                            catch(Exception exception){
-                                exception.printStackTrace();
-                            }
-                        }
+						public static void main(String[] args){
+							try{
+								Sequence sequence = new Sequence(Sequence.PPQ, 24);
+								Track track = sequence.createTrack();
+								MetaMessage meta_message = new MetaMessage();
+								meta_message.setMessage(0x51, new byte[]{(byte)(((60*1000000)/30)/65535), (byte)(((60*1000000)/30)%65535/256), (byte)(((60*1000000)/30)%256)}, 3);
+								track.add(new MidiEvent(meta_message, 0));
+								ShortMessage short_message = new ShortMessage();
+								short_message.setMessage(ShortMessage.PROGRAM_CHANGE, 0, 6, 0);
+								track.add(new MidiEvent(short_message, 0));
+								int[] pitches ={ 40,41,42,43,44,45,46,47,48,49,50 };
+								for(int i=0; i&lt;pitches.length; i++){
+									short_message = new ShortMessage();
+									short_message.setMessage(ShortMessage.NOTE_ON, 0, pitches[i], 127);
+									track.add(new MidiEvent(short_message, i));
+									short_message = new ShortMessage();
+									short_message.setMessage(ShortMessage.NOTE_OFF, 0, pitches[i], 127);
+									track.add(new MidiEvent(short_message, (i+1)));
+								}
+								int _int = MidiSystem.write(sequence, 0, new File("music.mid"));
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
 
-                    }
+					}
                     </textarea>
-                <br>
-                非常低階的 API，實作細節可以不用管它，把重點放在第 21 行，透過 int[] pitches 編輯旋律即可。
-            </p>
+				<br>
+				非常低階的 API，實作細節可以不用管它，把重點放在第 21 行，透過 int[] pitches 編輯旋律即可。
+			</p>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

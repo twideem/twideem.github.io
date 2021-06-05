@@ -2,498 +2,498 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Lambda expressions</h1>
-                <p>
-                    二十世紀 30 年代，美國數學家 Alonzo Church 應用「匿名函數 (Anonymous function)」的計算方法 (calculus) 來解決問題，其公式以λ表示匿名函式，例如 f(x)=x+2 寫為：<br>
-                    <br>
-                    <samp>
-                        λx.x+2<br>
-                    </samp>
-                    <br>
-                    往後，程式設計領域需要定義匿名函式時，就將這樣語法功能就取名為λexpressions。<br>
-                    <br>
-                    但早期電算機主要使用 ASCII 字元集，不方便打出λ，所以就其發音寫為 Lambda expressions。
-                </p>
-            </header>
+			<header>
+				<h1>Lambda expressions</h1>
+				<p>
+					二十世紀 30 年代，美國數學家 Alonzo Church 應用「匿名函數 (Anonymous function)」的計算方法 (calculus) 來解決問題，其公式以λ表示匿名函式，例如 f(x)=x+2 寫為：<br>
+					<br>
+					<samp>
+						λx.x+2<br>
+					</samp>
+					<br>
+					往後，程式設計領域需要定義匿名函式時，就將這樣語法功能就取名為λexpressions。<br>
+					<br>
+					但早期電算機主要使用 ASCII 字元集，不方便打出λ，所以就其發音寫為 Lambda expressions。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Java SE 8 引進的 Lambda 算式</h2>
-                <p>
-                    Java SE 8 最主要的功能訴求，就是引進了 Anonymous function，並且取名為 Lambda expressions。<br>
-                    <br>
-                    Java SE 8 以 <code>-&gt;</code> 符號做為 Lambda expressions 的語法，巧妙的是，其實匿名函數早期使用的符號是…<br>
-                    <br>
-                    <span style='font-size:32pt;line-height:-20pt'>↦</span><br>
-                    <br>
-                    例如：
-                </p>
-                <table>
-                    <tr><td>(x↦x+2)(7)</td><td>相當於 7+2，計算為 9。</td></tr>
-                    <tr><td>(x,y↦x+y-1)(3,6)</td><td>相當於 3+6-1，計算為 8。</td></tr>
-                </table>
-                <p>
-                    對於從數學上慣用過匿名函數的程式設計師而言，Java SE 8 的 Lambda 在視覺上很有效果！<br>
-                    <br>
-                    Java 的 Lambda 語法，大致上為如下結構：<br>
-                    <br>
-                    <code>(型別 參數, …) -&gt; { 程式敘述; }</code><br>
-                    <br>
-                    例如：<br>
-                    <br>
-                    <code>
-                        () -&gt; {System.out.print("Hello, Lambda!");}<br>
-                        (String x) -&gt; {System.out.print(x);}<br>
-                    </code>
-                    <br>
-                    但 Java SE 8 在設計 Lambda expressions 時，為了相容物件導向程式設計的架構，並沒有將函式提升為物件，而是用 interface 來設計，所以無法像函數式程式設計隨時隨地跑匿名函式，必須在符合 functional interface 的條件下才能使用，結果這個語法並不是想用就用，而是大多數場合都無法使用～<br>
-                    <br>
-                    所謂 functional interface，通常是由只有一個 abstract method 介面所形成的「型別」來建立<ins>[1]</ins>，像是 Runnable、Comparator、ActionListener，實際能動的範例如下：
-                </p>
-                <hr>
-                <section>
-                    <h3>Runnable</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+			<section>
+				<h2>Java SE 8 引進的 Lambda 算式</h2>
+				<p>
+					Java SE 8 最主要的功能訴求，就是引進了 Anonymous function，並且取名為 Lambda expressions。<br>
+					<br>
+					Java SE 8 以 <code>-&gt;</code> 符號做為 Lambda expressions 的語法，巧妙的是，其實匿名函數早期使用的符號是…<br>
+					<br>
+					<span style='font-size:32pt;line-height:-20pt'>↦</span><br>
+					<br>
+					例如：
+				</p>
+				<table>
+					<tr><td>(x↦x+2)(7)</td><td>相當於 7+2，計算為 9。</td></tr>
+					<tr><td>(x,y↦x+y-1)(3,6)</td><td>相當於 3+6-1，計算為 8。</td></tr>
+				</table>
+				<p>
+					對於從數學上慣用過匿名函數的程式設計師而言，Java SE 8 的 Lambda 在視覺上很有效果！<br>
+					<br>
+					Java 的 Lambda 語法，大致上為如下結構：<br>
+					<br>
+					<code>(型別 參數, …) -&gt; { 程式敘述; }</code><br>
+					<br>
+					例如：<br>
+					<br>
+					<code>
+						() -&gt; {System.out.print("Hello, Lambda!");}<br>
+						(String x) -&gt; {System.out.print(x);}<br>
+					</code>
+					<br>
+					但 Java SE 8 在設計 Lambda expressions 時，為了相容物件導向程式設計的架構，並沒有將函式提升為物件，而是用 interface 來設計，所以無法像函數式程式設計隨時隨地跑匿名函式，必須在符合 functional interface 的條件下才能使用，結果這個語法並不是想用就用，而是大多數場合都無法使用～<br>
+					<br>
+					所謂 functional interface，通常是由只有一個 abstract method 介面所形成的「型別」來建立<ins>[1]</ins>，像是 Runnable、Comparator、ActionListener，實際能動的範例如下：
+				</p>
+				<hr>
+				<section>
+					<h3>Runnable</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //傳統做法
-                                    Runnable a = new Runnable(){
-                                        @Override public void run(){
-                                            System.out.println("AAA");
-                                        }
-                                    };
-                                    a.run();
-                                    //Lambda 新做法
-                                    Runnable b = ()-&gt;{
-                                        System.out.println("BBB");
-                                    };
-                                    b.run();
-                                }
+								public static void main(String[] args){
+									//傳統做法
+									Runnable a = new Runnable(){
+										@Override public void run(){
+											System.out.println("AAA");
+										}
+									};
+									a.run();
+									//Lambda 新做法
+									Runnable b = ()-&gt;{
+										System.out.println("BBB");
+									};
+									b.run();
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Comparator</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.*;
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Comparator</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.*;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //傳統做法
-                                    List&lt;String&gt; list = Arrays.asList("L","A","M","B","D");
-                                    Collections.sort(list, new Comparator&lt;String&gt;(){
-                                        @Override public int compare(String x, String y){
-                                            return x.compareTo(y);
-                                        }
-                                    });
-                                    for(String n:list){
-                                        System.out.print(n);
-                                    }
-                                    //Lambda 新做法
-                                    list = Arrays.asList("l","a","m","b","d");
-                                    Collections.sort(list, (String x, String y)-&gt;
-                                        x.compareTo(y)
-                                    );
-                                    for(String n:list){
-                                        System.out.print(n);
-                                    }
-                                }
+								public static void main(String[] args){
+									//傳統做法
+									List&lt;String&gt; list = Arrays.asList("L","A","M","B","D");
+									Collections.sort(list, new Comparator&lt;String&gt;(){
+										@Override public int compare(String x, String y){
+											return x.compareTo(y);
+										}
+									});
+									for(String n:list){
+										System.out.print(n);
+									}
+									//Lambda 新做法
+									list = Arrays.asList("l","a","m","b","d");
+									Collections.sort(list, (String x, String y)-&gt;
+										x.compareTo(y)
+									);
+									for(String n:list){
+										System.out.print(n);
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            ABDLMabdlm
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ActionListener</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.awt.*;
-                            import java.awt.event.*;
-                            import javax.swing.*;
+						<br>
+						<output>
+							ABDLMabdlm
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ActionListener</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.awt.*;
+							import java.awt.event.*;
+							import javax.swing.*;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //先建立視窗
-                                    JFrame frame = new JFrame();
-                                    frame.setBounds(100,100,320,240);
-                                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                    frame.setLayout(null);
-                                    frame.setVisible(true);
-                                    //傳統做法
-                                    JButton a = new JButton();
-                                    a.setBounds(0,0,100,30);
-                                    a.addActionListener(new ActionListener(){
-                                        public void actionPerformed(ActionEvent e){
-                                            frame.setTitle("AAA");
-                                        }
-                                    });
-                                    //Lambda 做法
-                                    JButton b = new JButton();
-                                    b.setBounds(0,30,100,30);
-                                    b.addActionListener(e-&gt;{
-                                         frame.setTitle("BBB");
-                                    });
-                                    //將兩種做法的按鈕加入表單
-                                    frame.add(a);
-                                    frame.add(b);
-                                }
+								public static void main(String[] args){
+									//先建立視窗
+									JFrame frame = new JFrame();
+									frame.setBounds(100,100,320,240);
+									frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+									frame.setLayout(null);
+									frame.setVisible(true);
+									//傳統做法
+									JButton a = new JButton();
+									a.setBounds(0,0,100,30);
+									a.addActionListener(new ActionListener(){
+										public void actionPerformed(ActionEvent e){
+											frame.setTitle("AAA");
+										}
+									});
+									//Lambda 做法
+									JButton b = new JButton();
+									b.setBounds(0,30,100,30);
+									b.addActionListener(e-&gt;{
+										 frame.setTitle("BBB");
+									});
+									//將兩種做法的按鈕加入表單
+									frame.add(a);
+									frame.add(b);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    雖然 Java 終於有 Lambda expressions 了，但沒有一級函式物件，其實不能滿足函數式程式設計的需求。<br>
-                    <br>
-                    Java 用 functional interface 取代 first class function，擺明就是不想成為函數式程式語言，堅持要做為「依介面設計」的物件導向程式語言。<br>
-                    <br>
-                    所以不要妄想在 Java 用函數式風格寫程式。<br>
-                    <br>
-                    Java 引進 Lambda expressions，純粹是為了提升平行化程式設計的效率，而不是為了函數式程式設計。
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<p>
+					雖然 Java 終於有 Lambda expressions 了，但沒有一級函式物件，其實不能滿足函數式程式設計的需求。<br>
+					<br>
+					Java 用 functional interface 取代 first class function，擺明就是不想成為函數式程式語言，堅持要做為「依介面設計」的物件導向程式語言。<br>
+					<br>
+					所以不要妄想在 Java 用函數式風格寫程式。<br>
+					<br>
+					Java 引進 Lambda expressions，純粹是為了提升平行化程式設計的效率，而不是為了函數式程式設計。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Functional interface</h2>
-                <hr>
-                <section>
-                    <h3>示範無參數的函數式介面</h3>
-                    <p>
-                        我們也可以自行產生這樣的 functional interface 來跑 Lambda 算式，由 Java 自行默認後轉換。底下範例同樣示範新舊兩種匿名函式的做法…<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            public class Main{
+			<section>
+				<h2>Functional interface</h2>
+				<hr>
+				<section>
+					<h3>示範無參數的函數式介面</h3>
+					<p>
+						我們也可以自行產生這樣的 functional interface 來跑 Lambda 算式，由 Java 自行默認後轉換。底下範例同樣示範新舊兩種匿名函式的做法…<br>
+						<br>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                interface Anonymous{
-                                    void function();
-                                }
+								interface Anonymous{
+									void function();
+								}
 
-                                public static void f(Anonymous anonymous){
-                                    anonymous.function();
-                                }
+								public static void f(Anonymous anonymous){
+									anonymous.function();
+								}
 
-                                public static void main(String[] args){
-                                    //過去 Java 透過 interface 來實現匿名函式的做法。
-                                    f(new Anonymous(){
-                                        @Override public void function(){
-                                            System.out.println("AAA");
-                                        }
-                                    });
-                                    //有了 Lambda 語法，可以改為如下結構：
-                                    f(()-&gt;{
-                                        System.out.println("BBB");
-                                    });
-                                }
+								public static void main(String[] args){
+									//過去 Java 透過 interface 來實現匿名函式的做法。
+									f(new Anonymous(){
+										@Override public void function(){
+											System.out.println("AAA");
+										}
+									});
+									//有了 Lambda 語法，可以改為如下結構：
+									f(()-&gt;{
+										System.out.println("BBB");
+									});
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                        </output>
-                        <br>
-                        上面的 Lambda 結構是為了方便比對才寫成多行，正式場合會寫成一行：<br>
-                        <br>
-                        <code>f(()-&gt;{System.out.println("BBB");});</code><br>
-                        <br>
-                        然後再將上面那一行多餘的 <code>{;}</code> 去除，就是最美的 Lambda 用法：<br>
-                        <br>
-                        <code>f(()-&gt;System.out.println("BBB"));</code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>示範帶參數的函數式介面</h3>
-                    <p>
-                        前面示範比較簡單易懂的空參數 Lambda 算式，那帶參數的 Lambda 算式呢？<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            public class Main{
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+						</output>
+						<br>
+						上面的 Lambda 結構是為了方便比對才寫成多行，正式場合會寫成一行：<br>
+						<br>
+						<code>f(()-&gt;{System.out.println("BBB");});</code><br>
+						<br>
+						然後再將上面那一行多餘的 <code>{;}</code> 去除，就是最美的 Lambda 用法：<br>
+						<br>
+						<code>f(()-&gt;System.out.println("BBB"));</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>示範帶參數的函數式介面</h3>
+					<p>
+						前面示範比較簡單易懂的空參數 Lambda 算式，那帶參數的 Lambda 算式呢？<br>
+						<br>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                interface Anonymous{
-                                    void function(String x);
-                                }
+								interface Anonymous{
+									void function(String x);
+								}
 
-                                public static void f(Anonymous anonymous, String x){
-                                    anonymous.function(x);
-                                }
+								public static void f(Anonymous anonymous, String x){
+									anonymous.function(x);
+								}
 
-                                public static void main(String[] args){
-                                    f((String x)-&gt;System.out.println(x),"HELLO");
-                                }
+								public static void main(String[] args){
+									f((String x)-&gt;System.out.println(x),"HELLO");
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            HELLO<br>
-                        </output>
-                        <br>
-                        第 12 行可以寫成：<br>
-                        <br>
-                        <code>f((x)-&gt;System.out.println(x),"HELLO");</code><br>
-                        <br>
-                        也就是省略匿名函式裡面參數的型別<ins>[2]</ins>。<br>
-                        <br>
-                        實際應用 Lambda 時我們都會省略，但本章節範例為了方便比對新舊做法，所以還是加了上去。<br>
-                        <br>
-                        不只如此，像 (x) 這樣只有一個參數的情況，還更可以進一步簡化寫成：<br>
-                        <br>
-                        <code>f(x-&gt;System.out.println(x),"HELLO");</code><br>
-                        <br>
-                        但多個參數不行，因此為了一致性，通常不建議用這種省略括號的寫法。但對只在「一個參數」情況下才使用 Lambda expressions 的人來說，卻很喜歡用 x 表示標準匿名函式、() 表示空參數的匿名函式。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>強制宣告為函數式介面</h3>
-                    <p>
-                        如果介面不只一個方法，可用 <code>@FunctionalInterface</code> 標註為函數式介面。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>預先實作函式</h3>
-                    <p>
-                        因為類別必須實作介面功能，所以 interface 導入 default 語法，讓介面可以預先實作功能，避免類別受 functional interface 牽連甚廣的問題。<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            public class Main{
+						<br>
+						<output>
+							HELLO<br>
+						</output>
+						<br>
+						第 12 行可以寫成：<br>
+						<br>
+						<code>f((x)-&gt;System.out.println(x),"HELLO");</code><br>
+						<br>
+						也就是省略匿名函式裡面參數的型別<ins>[2]</ins>。<br>
+						<br>
+						實際應用 Lambda 時我們都會省略，但本章節範例為了方便比對新舊做法，所以還是加了上去。<br>
+						<br>
+						不只如此，像 (x) 這樣只有一個參數的情況，還更可以進一步簡化寫成：<br>
+						<br>
+						<code>f(x-&gt;System.out.println(x),"HELLO");</code><br>
+						<br>
+						但多個參數不行，因此為了一致性，通常不建議用這種省略括號的寫法。但對只在「一個參數」情況下才使用 Lambda expressions 的人來說，卻很喜歡用 x 表示標準匿名函式、() 表示空參數的匿名函式。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>強制宣告為函數式介面</h3>
+					<p>
+						如果介面不只一個方法，可用 <code>@FunctionalInterface</code> 標註為函數式介面。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>預先實作函式</h3>
+					<p>
+						因為類別必須實作介面功能，所以 interface 導入 default 語法，讓介面可以預先實作功能，避免類別受 functional interface 牽連甚廣的問題。<br>
+						<br>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                interface Anonymous{
-                                    void function(int x);
-                                    default void f1(int x){
-                                        System.out.println(++x);
-                                    }
-                                    default void f2(int x){
-                                        System.out.println(--x);
-                                    }
-                                }
+								interface Anonymous{
+									void function(int x);
+									default void f1(int x){
+										System.out.println(++x);
+									}
+									default void f2(int x){
+										System.out.println(--x);
+									}
+								}
 
-                                public static void f1(Anonymous anonymous, int x){
-                                    anonymous.f1(x);
-                                }
+								public static void f1(Anonymous anonymous, int x){
+									anonymous.f1(x);
+								}
 
-                                public static void f2(Anonymous anonymous, int x){
-                                    anonymous.f2(x);
-                                }
+								public static void f2(Anonymous anonymous, int x){
+									anonymous.f2(x);
+								}
 
-                                public static void main(String[] args){
-                                    f1((int x)-&gt;{},111);
-                                    f2((int x)-&gt;{},222);
-                                }
+								public static void main(String[] args){
+									f1((int x)-&gt;{},111);
+									f2((int x)-&gt;{},222);
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            112<br>
-                            221<br>
-                        </output>
-                        <br>
-                        讓 interface 有 default 可以實作功能，是有爭議性的話題。建議在設計 functional interface 需要預先實作功能的場合才使用 default，不要當作另一種 abstract class 使用。<br>
-                        <br>
-                        或許經過數年使用經驗，業界會建議 interface 的 defalut 比 abstract class 好，但這之前還是遵守介面只提供抽象化功能，類別負責具象化的原則吧！<br>
-                        <br>
-                        畢竟 default 是為了解決 functional interface 對類別造成的牽連性問題，而不得不導入的語法功能，並不是為了讓 interface 能當作 abstract class 用的語法，現在就打破 interfact 只提供抽象介面的原則，恐怕會破壞 Java 物件導向的設計精神。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>使用 Java 預先準備好的函數式介面</h3>
-                    <p>
-                        其實 Java SE 8 已經針對各種參數與傳回值的使用情況，一一準備對應的函數式介面，就放在 java.util.function 套件。詳細情形請自行查閱 <a href='http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html' target='_blank'>Java API Specification</a>，底下挑幾個較基本的函數式介面，示範其使用方法：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.util.function.Consumer;
-                            import java.util.function.Function;
-                            import java.util.function.Predicate;
-                            import java.util.function.Supplier;
-                            import java.util.function.UnaryOperator;
+						<br>
+						<output>
+							112<br>
+							221<br>
+						</output>
+						<br>
+						讓 interface 有 default 可以實作功能，是有爭議性的話題。建議在設計 functional interface 需要預先實作功能的場合才使用 default，不要當作另一種 abstract class 使用。<br>
+						<br>
+						或許經過數年使用經驗，業界會建議 interface 的 defalut 比 abstract class 好，但這之前還是遵守介面只提供抽象化功能，類別負責具象化的原則吧！<br>
+						<br>
+						畢竟 default 是為了解決 functional interface 對類別造成的牽連性問題，而不得不導入的語法功能，並不是為了讓 interface 能當作 abstract class 用的語法，現在就打破 interfact 只提供抽象介面的原則，恐怕會破壞 Java 物件導向的設計精神。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>使用 Java 預先準備好的函數式介面</h3>
+					<p>
+						其實 Java SE 8 已經針對各種參數與傳回值的使用情況，一一準備對應的函數式介面，就放在 java.util.function 套件。詳細情形請自行查閱 <a href='http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html' target='_blank'>Java API Specification</a>，底下挑幾個較基本的函數式介面，示範其使用方法：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.util.function.Consumer;
+							import java.util.function.Function;
+							import java.util.function.Predicate;
+							import java.util.function.Supplier;
+							import java.util.function.UnaryOperator;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    //沒有參數、有回傳值時用 Supplier
-                                    Supplier&lt;String&gt; supplier = () -&gt; "HELLO";
-                                    System.out.println(supplier.get());
+									//沒有參數、有回傳值時用 Supplier
+									Supplier&lt;String&gt; supplier = () -&gt; "HELLO";
+									System.out.println(supplier.get());
 
-                                    //有參數、沒有回傳值時用 Consumer
-                                    Consumer&lt;String&gt; consumer = x -&gt; System.out.println(x.toLowerCase());
-                                    consumer.accept("HELLO");
+									//有參數、沒有回傳值時用 Consumer
+									Consumer&lt;String&gt; consumer = x -&gt; System.out.println(x.toLowerCase());
+									consumer.accept("HELLO");
 
-                                    //有參數和回傳值時用 Function
-                                    Function&lt;String, Integer&gt; function  = x -&gt; x.length();
-                                    System.out.println(function.apply("HELLO"));
+									//有參數和回傳值時用 Function
+									Function&lt;String, Integer&gt; function  = x -&gt; x.length();
+									System.out.println(function.apply("HELLO"));
 
-                                    //有參數，回傳值是 Boolean 時可用 Predicate
-                                    Predicate&lt;String&gt; predicate = x -&gt; x.length() &gt; 1;
-                                    System.out.println(predicate.test("HELLO"));
+									//有參數，回傳值是 Boolean 時可用 Predicate
+									Predicate&lt;String&gt; predicate = x -&gt; x.length() &gt; 1;
+									System.out.println(predicate.test("HELLO"));
 
-                                    //參數與回傳值相同型態時可用 UnaryOperator
-                                    UnaryOperator&lt;String&gt; unary_operator  = x -&gt; x.toLowerCase();
-                                    System.out.println(unary_operator.apply("HELLO"));
+									//參數與回傳值相同型態時可用 UnaryOperator
+									UnaryOperator&lt;String&gt; unary_operator  = x -&gt; x.toLowerCase();
+									System.out.println(unary_operator.apply("HELLO"));
 
-                                    //附帶一提，沒有參數和回傳值，單純執行程式時，可用 Runnable。
+									//附帶一提，沒有參數和回傳值，單純執行程式時，可用 Runnable。
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            HELLO<br>
-                            hello<br>
-                            5<br>
-                            hello<br>
-                            true<br>
-                        </output>
-                        <br>
-                        知道使用方法後，正式引進到你的函式設計中：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.util.function.Consumer;
-                            import java.util.function.Function;
-                            import java.util.function.Supplier;
+						<br>
+						<output>
+							HELLO<br>
+							hello<br>
+							5<br>
+							hello<br>
+							true<br>
+						</output>
+						<br>
+						知道使用方法後，正式引進到你的函式設計中：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.util.function.Consumer;
+							import java.util.function.Function;
+							import java.util.function.Supplier;
 
-                            public class Main{
+							public class Main{
 
-                                public static void f1(Runnable runnable){
-                                    runnable.run();
-                                }
+								public static void f1(Runnable runnable){
+									runnable.run();
+								}
 
-                                public static String f2(Supplier&lt;String&gt; supplier){
-                                    return supplier.get();
-                                }
+								public static String f2(Supplier&lt;String&gt; supplier){
+									return supplier.get();
+								}
 
-                                public static void f3(Consumer&lt;String&gt; consumer, String string){
-                                    consumer.accept(string);
-                                }
+								public static void f3(Consumer&lt;String&gt; consumer, String string){
+									consumer.accept(string);
+								}
 
-                                public static int f4(Function&lt;String, Integer&gt; function, String string){
-                                    return function.apply(string);
-                                }
+								public static int f4(Function&lt;String, Integer&gt; function, String string){
+									return function.apply(string);
+								}
 
-                                public static void main(String[] args){
-                                    //Runnable
-                                    f1(() -&gt; System.out.println("HELLO"));
-                                    //Supplier
-                                    System.out.println(f2(() -&gt; "HELLO"));
-                                    //Consumer
-                                    f3(x -&gt; System.out.println(x.toLowerCase()), "HELLO");
-                                    //Function
-                                    System.out.println(f4(x -&gt; x.length(), "HELLO"));
-                                }
+								public static void main(String[] args){
+									//Runnable
+									f1(() -&gt; System.out.println("HELLO"));
+									//Supplier
+									System.out.println(f2(() -&gt; "HELLO"));
+									//Consumer
+									f3(x -&gt; System.out.println(x.toLowerCase()), "HELLO");
+									//Function
+									System.out.println(f4(x -&gt; x.length(), "HELLO"));
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            HELLO<br>
-                            HELLO<br>
-                            hello<br>
-                            5
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							HELLO<br>
+							HELLO<br>
+							hello<br>
+							5
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Method references</h2>
-                <p>
-                    有時候想來個不寫 expressions（算式）的 Lambda（匿名函式），覺得只是要套用現成的 method 來執行而已，這時可以使用 <code>::</code> 符號：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.util.Arrays;
+			<section>
+				<h2>Method references</h2>
+				<p>
+					有時候想來個不寫 expressions（算式）的 Lambda（匿名函式），覺得只是要套用現成的 method 來執行而已，這時可以使用 <code>::</code> 符號：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                Arrays.asList("AAA","BBB","CCC").forEach(System.out::println);
-                            }
+							public static void main(String[] args){
+								Arrays.asList("AAA","BBB","CCC").forEach(System.out::println);
+							}
 
-                        }
+						}
 
                     </textarea>
-                    <br>
-                    <output>
-                        AAA<br>
-                        BBB<br>
-                        CCC<br>
-                    </output>
-                    <br>
-                    這樣就不用寫成 <code>x-&gt;System.out.println(x)</code> 的算式結構了！可用的時機是前後有著一致的參數列，由 Java SE 8 推斷。<br>
-                    <br>
-                    Method references 可以使用 this 和 super，要呼叫建構式的話，使用 new，例如：<code>this::new</code>。
-                </p>
-            </section>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						CCC<br>
+					</output>
+					<br>
+					這樣就不用寫成 <code>x-&gt;System.out.println(x)</code> 的算式結構了！可用的時機是前後有著一致的參數列，由 Java SE 8 推斷。<br>
+					<br>
+					Method references 可以使用 this 和 super，要呼叫建構式的話，使用 new，例如：<code>this::new</code>。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>推薦</h2>
-                <p>
-                    Magic Len 發表的《<a href='http://magiclen.org/java-8-lambda/' target='_blank'>Java 8 Lambda 新語法，簡化程式，增強效能</a>》比本文更清楚易懂，被本文搞得霧煞煞的人（雖然我的出發點並非如此 Orz），請趕緊服用。<br>
-                    <br>
-                    在 PChome 24h 書店上架的《<a href='http://24h.pchome.com.tw/books/prod/DJAA2V-A90058LR0' target='_blank'>Java SE 8 技術手冊</a>》有 14 頁試讀，就是 Lambda 章節 :)<br>
-                    <br>
-                    看得懂英文的話，java2s.com 的《<a href='http://www.java2s.com/Tutorials/Java/Java_Lambda/' target='_blank'>Java Lambda Introduction</a>》有豐富範例，練習 Lambda expressions 時幫助很大。
-                </p>
-            </section>
+			<section>
+				<h2>推薦</h2>
+				<p>
+					Magic Len 發表的《<a href='http://magiclen.org/java-8-lambda/' target='_blank'>Java 8 Lambda 新語法，簡化程式，增強效能</a>》比本文更清楚易懂，被本文搞得霧煞煞的人（雖然我的出發點並非如此 Orz），請趕緊服用。<br>
+					<br>
+					在 PChome 24h 書店上架的《<a href='http://24h.pchome.com.tw/books/prod/DJAA2V-A90058LR0' target='_blank'>Java SE 8 技術手冊</a>》有 14 頁試讀，就是 Lambda 章節 :)<br>
+					<br>
+					看得懂英文的話，java2s.com 的《<a href='http://www.java2s.com/Tutorials/Java/Java_Lambda/' target='_blank'>Java Lambda Introduction</a>》有豐富範例，練習 Lambda expressions 時幫助很大。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 或許這樣的型別可以稱為 SAM Type，Single Abstract Method 的意思。<br>
-                    [2] Java 都能推斷出 interface 是否能做為匿名函式了，更別說它裡面的 method 應該用什麼型別 XDDD<br>
-                    [*] 另外補充關於 Lambda expressions 實用性的觀點，但純屬個人看法，多有錯謬之處，因此另外放在《<a href='appendix.html#20120428A'>re:Lambda expressions</a>》。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 或許這樣的型別可以稱為 SAM Type，Single Abstract Method 的意思。<br>
+					[2] Java 都能推斷出 interface 是否能做為匿名函式了，更別說它裡面的 method 應該用什麼型別 XDDD<br>
+					[*] 另外補充關於 Lambda expressions 實用性的觀點，但純屬個人看法，多有錯謬之處，因此另外放在《<a href='appendix.html#20120428A'>re:Lambda expressions</a>》。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

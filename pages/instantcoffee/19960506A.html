@@ -2,52 +2,52 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>你呼叫所想的 java.exe 嗎？</h1>
-            </header>
+			<header>
+				<h1>你呼叫所想的 java.exe 嗎？</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>通常呼叫了 JDK 的 java.exe</h2>
-                <p>
-                    通常，我們將 JDK 所在資料夾，設為 JAVA_HOME，並且在環境變數的 Path 設置 %JAVA_HOME%\bin，好隨時都能叫用 javac 來編譯原始碼。<br>
-                    <br>
-                    但 JDK 的 bin 裡面，不只有 javac.exe，其實還有 java.exe，所以在命令提示字元執行 java 指令時，其實不是用 JRE 來執行程式，而是 JDK。<br>
-                    <br>
-                    如果安裝的 JDK 與 JRE 版本不一樣，就有可能帶來麻煩～
-                </p>
-            </section>
+			<section>
+				<h2>通常呼叫了 JDK 的 java.exe</h2>
+				<p>
+					通常，我們將 JDK 所在資料夾，設為 JAVA_HOME，並且在環境變數的 Path 設置 %JAVA_HOME%\bin，好隨時都能叫用 javac 來編譯原始碼。<br>
+					<br>
+					但 JDK 的 bin 裡面，不只有 javac.exe，其實還有 java.exe，所以在命令提示字元執行 java 指令時，其實不是用 JRE 來執行程式，而是 JDK。<br>
+					<br>
+					如果安裝的 JDK 與 JRE 版本不一樣，就有可能帶來麻煩～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>舉個例子</h2>
-                <p>
-                    例如為了練習新語法，所以從 OpenJDK 下載仍在研發階段的 JDK 8，但由於這些未正式上路的版本，都有相容性的問題，所以 JRE 部分則安裝 Oracle 官網正式版的 Java SE 7。<br>
-                    <br>
-                    這時在命令提示字元輸入 java -version 後，會看到 1.8.0，而不是 1.7.0。<br>
-                    <br>
-                    但執行封裝在 JAR 的 Application、或瀏覽器的 Applet、甚至 Java Web Start 時，則是用 JRE 來執行的！因為 JDK 並沒有為作業系統部署自動執行 Java 程式的環境，純粹只有在命令提示字元的模式下，才會用了 JDK 的 java.exe 來跑程式：「因為 Path 了 JDK 的 bin。」<br>
-                    <br>
-                    所以當編譯出程式，馬上跑 java.exe 來測試時，若發現執行結果有問題，有可能不是寫錯或編譯器的關係，而是用了測試版的 java.exe 在跑程式。
-                </p>
-            </section>
+			<section>
+				<h2>舉個例子</h2>
+				<p>
+					例如為了練習新語法，所以從 OpenJDK 下載仍在研發階段的 JDK 8，但由於這些未正式上路的版本，都有相容性的問題，所以 JRE 部分則安裝 Oracle 官網正式版的 Java SE 7。<br>
+					<br>
+					這時在命令提示字元輸入 java -version 後，會看到 1.8.0，而不是 1.7.0。<br>
+					<br>
+					但執行封裝在 JAR 的 Application、或瀏覽器的 Applet、甚至 Java Web Start 時，則是用 JRE 來執行的！因為 JDK 並沒有為作業系統部署自動執行 Java 程式的環境，純粹只有在命令提示字元的模式下，才會用了 JDK 的 java.exe 來跑程式：「因為 Path 了 JDK 的 bin。」<br>
+					<br>
+					所以當編譯出程式，馬上跑 java.exe 來測試時，若發現執行結果有問題，有可能不是寫錯或編譯器的關係，而是用了測試版的 java.exe 在跑程式。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

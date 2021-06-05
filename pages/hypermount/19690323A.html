@@ -2,193 +2,193 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>抽象、繼承、多型</h1>
-                <p>本文以《<a href='19690316A.html'>封裝</a>》的範例做為基礎，進一步探討 JavaScript 的繼承與多型。</p>
-            </header>
+			<header>
+				<h1>抽象、繼承、多型</h1>
+				<p>本文以《<a href='19690316A.html'>封裝</a>》的範例做為基礎，進一步探討 JavaScript 的繼承與多型。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>抽象</h2>
-                <p>
-                    由於「封裝」產生的類別無法從外部存取變數，而「繼承」與「繼承」應該要能父類別的變數，因此將 StringBuffer 類別改寫為：<br>
-                    <br>
-                    <code>
-                        function StringBuffer(_buffer){<br>
-                        　this.buffer = _buffer || '';<br>
-                        　this.append = function(string){<br>
-                        　　this.buffer += string;<br>
-                        　}<br>
-                        　this.toString = function(){<br>
-                        　　return this.buffer;<br>
-                        　}<br>
-                        }<br>
-                    </code>
-                    <br>
-                    雖然這樣變成可以存取 buffer 變數，失去了封裝的意義：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var string_buffer = StringBuffer();
-                        string_buffer.buffer = 'HELLO';
+			<section>
+				<h2>抽象</h2>
+				<p>
+					由於「封裝」產生的類別無法從外部存取變數，而「繼承」與「繼承」應該要能父類別的變數，因此將 StringBuffer 類別改寫為：<br>
+					<br>
+					<code>
+						function StringBuffer(_buffer){<br>
+						　this.buffer = _buffer || '';<br>
+						　this.append = function(string){<br>
+						　　this.buffer += string;<br>
+						　}<br>
+						　this.toString = function(){<br>
+						　　return this.buffer;<br>
+						　}<br>
+						}<br>
+					</code>
+					<br>
+					雖然這樣變成可以存取 buffer 變數，失去了封裝的意義：<br>
+					<br>
+					<textarea class='brush:js'>
+						var string_buffer = StringBuffer();
+						string_buffer.buffer = 'HELLO';
                     </textarea>
-                    <br>
-                    但其實「封裝」跟「多型」是兩種不同的議題，「多型」是站在「抽象」的角度來「繼承」類別，讓不同類別進行一樣的行為時，卻以自己的方式來進行，與資料隱藏的議題無關<ins>[1]</ins>，所以既然只能這麼也無所謂。
-                </p>
-            </section>
+					<br>
+					但其實「封裝」跟「多型」是兩種不同的議題，「多型」是站在「抽象」的角度來「繼承」類別，讓不同類別進行一樣的行為時，卻以自己的方式來進行，與資料隱藏的議題無關<ins>[1]</ins>，所以既然只能這麼也無所謂。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>繼承</h2>
-                <p>
-                    在 JavaScript 雖然可以繼承類別，但做法並不直覺，需要動用其它管道來完成。
-                </p>
-                <hr>
-                <section>
-                    <h3>步驟一：建立繼承 StringBuffer 的 ExtendClass 類別</h3>
-                    <p>
-                        <code>
-                            function ExtendClass(_buffer){<br>
-                            　this.base = StringBuffer;<br>
-                            　this.base(_buffer);<br>
-                            }<br>
-                            ExtendClass.prototype = new StringBuffer();
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>步驟二：使用方式</h3>
-                    <p>
-                        <code>
-                        　var extend_class = new ExtendClass('HELLO');<br>
-                        　document.write(extend_class.toString());
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    其實透過 prototype 就能讓 ExtendClass 繼承 StringBuffer，之所以在 ExtendClass 內部使用 base 屬性，是為了處理建構式參數。
-                </p>
-            </section>
+			<section>
+				<h2>繼承</h2>
+				<p>
+					在 JavaScript 雖然可以繼承類別，但做法並不直覺，需要動用其它管道來完成。
+				</p>
+				<hr>
+				<section>
+					<h3>步驟一：建立繼承 StringBuffer 的 ExtendClass 類別</h3>
+					<p>
+						<code>
+							function ExtendClass(_buffer){<br>
+							　this.base = StringBuffer;<br>
+							　this.base(_buffer);<br>
+							}<br>
+							ExtendClass.prototype = new StringBuffer();
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>步驟二：使用方式</h3>
+					<p>
+						<code>
+						　var extend_class = new ExtendClass('HELLO');<br>
+						　document.write(extend_class.toString());
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					其實透過 prototype 就能讓 ExtendClass 繼承 StringBuffer，之所以在 ExtendClass 內部使用 base 屬性，是為了處理建構式參數。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>多型</h2>
-                <p>
-                    所謂多型，就是子類別繼承父類別後，可以呼叫與父類別一樣名稱的函式動作，但每個子類別實際做出來的行為卻是分開設計的。<br>
-                    <br>
-                    然而 JavaScript 沒有嚴格的資料型別機制，所以使用上頂多需要用「覆載 (Override)」來設計多型。
-                </p>
-                <hr>
-                <section>
-                    <h3>步驟一：在 ExtendClass 覆載 toString() 函式</h3>
-                    <p>
-                        <code>
-                            function ExtendClass(_buffer){<br>
-                            　this.base = StringBuffer;<br>
-                            　this.base(_buffer);<br>
-                            　this.toString = function(){<br>
-                            　　return '[' + this.buffer + ']';<br>
-                            　}<br>
-                            }<br>
-                            ExtendClass.prototype = new StringBuffer();
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>步驟二：使用方式</h3>
-                    <p>
-                        <code>
-                            var extend_class = new ExtendClass('HELLO');<br>
-                            document.write(extend_class.toString());
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    程式覆載了 toString() 函式，讓輸出的資料前後加上括號。<br>
-                    <br>
-                    值得注意的是，ExtendClass 本身並沒有 buffer 這個屬性，存取的確實是所繼承的 BufferString 資料。
-                </p>
-            </section>
+			<section>
+				<h2>多型</h2>
+				<p>
+					所謂多型，就是子類別繼承父類別後，可以呼叫與父類別一樣名稱的函式動作，但每個子類別實際做出來的行為卻是分開設計的。<br>
+					<br>
+					然而 JavaScript 沒有嚴格的資料型別機制，所以使用上頂多需要用「覆載 (Override)」來設計多型。
+				</p>
+				<hr>
+				<section>
+					<h3>步驟一：在 ExtendClass 覆載 toString() 函式</h3>
+					<p>
+						<code>
+							function ExtendClass(_buffer){<br>
+							　this.base = StringBuffer;<br>
+							　this.base(_buffer);<br>
+							　this.toString = function(){<br>
+							　　return '[' + this.buffer + ']';<br>
+							　}<br>
+							}<br>
+							ExtendClass.prototype = new StringBuffer();
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>步驟二：使用方式</h3>
+					<p>
+						<code>
+							var extend_class = new ExtendClass('HELLO');<br>
+							document.write(extend_class.toString());
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					程式覆載了 toString() 函式，讓輸出的資料前後加上括號。<br>
+					<br>
+					值得注意的是，ExtendClass 本身並沒有 buffer 這個屬性，存取的確實是所繼承的 BufferString 資料。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>附錄：本文用到的程式基本架構</h2>
-                <p>
-                    本文的議題，比較需要觀念的釐清，而不是照公式抄寫，因此直接以「範例」來介紹「抽象、繼承、多型」的議題。但還是針對需要程式基本架構比較容易了解的人，整理出來當作附錄。
-                </p>
-                <hr>
-                <section>
-                    <h3>抽象的基本架構</h3>
-                    <p>
-                        <code>
-                            function 父類別(建構參數){<br>
-                            　this.屬性 = 建構參數 || '';<br>
-                            　this.方法 = function(){<br>
-                            　　this.屬性;<br>
-                            　}<br>
-                            }
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>繼承的基本架構</h3>
-                    <p>
-                        <code>
-                            function 子類別(建構參數){<br>
-                            　this.base = 父類別;<br>
-                            　this.base(建構參數);<br>
-                            }<br>
-                            子類別.prototype = new 父類別();
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>多型的基本架構：</h3>
-                    <p>
-                        <code>
-                            function 子類別(建構參數){<br>
-                            　this.base = 父類別;<br>
-                            　this.base(建構參數);<br>
-                            　this.方法 = function(){<br>
-                            　　在這裡改寫父類別的方法，通常在這裡用「this.屬性」存取父類別的內部資料;<br>
-                            　}<br>
-                            }<br>
-                            子類別.prototype = new 父類別();
-                        </code>
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>附錄：本文用到的程式基本架構</h2>
+				<p>
+					本文的議題，比較需要觀念的釐清，而不是照公式抄寫，因此直接以「範例」來介紹「抽象、繼承、多型」的議題。但還是針對需要程式基本架構比較容易了解的人，整理出來當作附錄。
+				</p>
+				<hr>
+				<section>
+					<h3>抽象的基本架構</h3>
+					<p>
+						<code>
+							function 父類別(建構參數){<br>
+							　this.屬性 = 建構參數 || '';<br>
+							　this.方法 = function(){<br>
+							　　this.屬性;<br>
+							　}<br>
+							}
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>繼承的基本架構</h3>
+					<p>
+						<code>
+							function 子類別(建構參數){<br>
+							　this.base = 父類別;<br>
+							　this.base(建構參數);<br>
+							}<br>
+							子類別.prototype = new 父類別();
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>多型的基本架構：</h3>
+					<p>
+						<code>
+							function 子類別(建構參數){<br>
+							　this.base = 父類別;<br>
+							　this.base(建構參數);<br>
+							　this.方法 = function(){<br>
+							　　在這裡改寫父類別的方法，通常在這裡用「this.屬性」存取父類別的內部資料;<br>
+							　}<br>
+							}<br>
+							子類別.prototype = new 父類別();
+						</code>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[1] 其實 JavaScript 內建的物件，都是直接存取變數來設定物件，特殊的運算工作才交由函式，並沒有 set() 與 get() 的精神。因此寫 JavaScript 程式承襲這樣的慣例，也是不錯的建議，設計時就思考直接修改變數的風險。</p>
-            </footer>
+			<footer>
+				<p>[1] 其實 JavaScript 內建的物件，都是直接存取變數來設定物件，特殊的運算工作才交由函式，並沒有 set() 與 get() 的精神。因此寫 JavaScript 程式承襲這樣的慣例，也是不錯的建議，設計時就思考直接修改變數的風險。</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

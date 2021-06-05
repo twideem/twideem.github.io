@@ -2,243 +2,243 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>
-            sh.lang('Java')
-        </script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>
+			sh.lang('Java')
+		</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Java 自帶 HttpServer 能力</h1>
-                <p>
-                    JRE 內建 com.sun.net.httpserver.* 套件，無須另外下載 Apache 之類的網站伺服器系統，也能設計 HTTP 伺服端的程式！
-                </p>
-            </header>
+			<header>
+				<h1>Java 自帶 HttpServer 能力</h1>
+				<p>
+					JRE 內建 com.sun.net.httpserver.* 套件，無須另外下載 Apache 之類的網站伺服器系統，也能設計 HTTP 伺服端的程式！
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Hello, HttpServer!</h2>
-                <p>
-                    首先來段用 com.sun.net.httpserver 說 Hello 的程式，大致勾勒這套件的基本架構：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import com.sun.net.httpserver.HttpExchange;
-                        import com.sun.net.httpserver.HttpHandler;
-                        import com.sun.net.httpserver.HttpServer;
-                        import java.io.OutputStream;
-                        import java.io.IOException;
-                        import java.net.InetSocketAddress;
+			<section>
+				<h2>Hello, HttpServer!</h2>
+				<p>
+					首先來段用 com.sun.net.httpserver 說 Hello 的程式，大致勾勒這套件的基本架構：<br>
+					<br>
+					<textarea class='brush:java'>
+						import com.sun.net.httpserver.HttpExchange;
+						import com.sun.net.httpserver.HttpHandler;
+						import com.sun.net.httpserver.HttpServer;
+						import java.io.OutputStream;
+						import java.io.IOException;
+						import java.net.InetSocketAddress;
 
-                        class HttpRequestHandler implements HttpHandler{
+						class HttpRequestHandler implements HttpHandler{
 
-                            public void handle(HttpExchange httpexchange) throws IOException{
-                                String response = "Hello, HttpServer!";
-                                httpexchange.sendResponseHeaders(200, response.getBytes().length);
-                                OutputStream outputstream = httpexchange.getResponseBody();
-                                outputstream.write(response.getBytes());
-                                outputstream.close();
-                            }
+							public void handle(HttpExchange httpexchange) throws IOException{
+								String response = "Hello, HttpServer!";
+								httpexchange.sendResponseHeaders(200, response.getBytes().length);
+								OutputStream outputstream = httpexchange.getResponseBody();
+								outputstream.write(response.getBytes());
+								outputstream.close();
+							}
 
-                        }
+						}
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
-                                    httpserver.createContext("/", new HttpRequestHandler());
-                                    httpserver.setExecutor(null);
-                                    httpserver.start();
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
+									httpserver.createContext("/", new HttpRequestHandler());
+									httpserver.setExecutor(null);
+									httpserver.start();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    開啟網頁瀏覽器，輸入網址 127.0.0.1，網頁會顯示 Hello, HttpServer!。
-                </p>
-            </section>
+					<br>
+					開啟網頁瀏覽器，輸入網址 127.0.0.1，網頁會顯示 Hello, HttpServer!。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Get requests</h2>
-                <p>
-                    接著來看怎樣從網頁瀏覽器和網址獲取使用者資訊：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import com.sun.net.httpserver.HttpExchange;
-                        import com.sun.net.httpserver.HttpHandler;
-                        import com.sun.net.httpserver.HttpServer;
-                        import java.io.OutputStream;
-                        import java.io.IOException;
-                        import java.net.InetSocketAddress;
+			<section>
+				<h2>Get requests</h2>
+				<p>
+					接著來看怎樣從網頁瀏覽器和網址獲取使用者資訊：<br>
+					<br>
+					<textarea class='brush:java'>
+						import com.sun.net.httpserver.HttpExchange;
+						import com.sun.net.httpserver.HttpHandler;
+						import com.sun.net.httpserver.HttpServer;
+						import java.io.OutputStream;
+						import java.io.IOException;
+						import java.net.InetSocketAddress;
 
-                        class HttpRequestHandler implements HttpHandler{
+						class HttpRequestHandler implements HttpHandler{
 
-                            public void handle(HttpExchange httpexchange) throws IOException{
-                                String response = "getRequestHeaders()\n";
-                                for(Object header : httpexchange.getRequestHeaders().entrySet()){
-                                    response += "\t" + header + "\n";
-                                }
-                                response += "\n";
-                                response += "getLocalAddress:\n\t" + httpexchange.getLocalAddress() + "\n\n";
-                                response += "getRequestURI()\n\t" + httpexchange.getRequestURI() + "\n\n";
-                                response += "getRequestMethod()\n\t" + httpexchange.getRequestMethod() + "\n\n";
-                                httpexchange.sendResponseHeaders(200, response.getBytes().length);
-                                OutputStream outputstream = httpexchange.getResponseBody();
-                                outputstream.write(response.getBytes());
-                                outputstream.close();
-                            }
+							public void handle(HttpExchange httpexchange) throws IOException{
+								String response = "getRequestHeaders()\n";
+								for(Object header : httpexchange.getRequestHeaders().entrySet()){
+									response += "\t" + header + "\n";
+								}
+								response += "\n";
+								response += "getLocalAddress:\n\t" + httpexchange.getLocalAddress() + "\n\n";
+								response += "getRequestURI()\n\t" + httpexchange.getRequestURI() + "\n\n";
+								response += "getRequestMethod()\n\t" + httpexchange.getRequestMethod() + "\n\n";
+								httpexchange.sendResponseHeaders(200, response.getBytes().length);
+								OutputStream outputstream = httpexchange.getResponseBody();
+								outputstream.write(response.getBytes());
+								outputstream.close();
+							}
 
-                        }
+						}
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
-                                    httpserver.createContext("/", new HttpRequestHandler());
-                                    httpserver.setExecutor(null);
-                                    httpserver.start();
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
+									httpserver.createContext("/", new HttpRequestHandler());
+									httpserver.setExecutor(null);
+									httpserver.start();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    開啟網頁瀏覽器，輸入網址 127.0.0.1，以我用的 Vivaldi 為例，網頁顯示：<br>
-                    <br>
-                    <samp>
-                        getRequestHeaders()<br>
-                        　　Host=[127.0.0.1]<br>
-                        　　Accept-encoding=[gzip, deflate, br]<br>
-                        　　Upgrade-insecure-requests=[1]<br>
-                        　　Connection=[keep-alive]<br>
-                        　　Dnt=[1]<br>
-                        　　Sec-fetch-dest=[document]<br>
-                        　　Accept-language=[zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7]<br>
-                        　　Sec-fetch-site=[none]<br>
-                        　　User-agent=[Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.99 Safari/537.36]<br>
-                        　　Accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,<br>image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9]<br>
-                        　　Sec-fetch-mode=[navigate]<br>
-                        <br>
-                        getLocalAddress:<br>
-                        　　/127.0.0.1:80<br>
-                        <br>
-                        getRequestURI()<br>
-                        　　/test?x=123&amp;y=456<br>
-                        <br>
-                        getRequestMethod()<br>
-                        　　GET<br>
-                    </samp>
-                    <br>
-                    這些資訊能當輸入的資料用，提供給程式處理。例如用 getRequestURI() 獲得 x=123 和 y=456，相加後將結果寫進 response 字串輸出到頁面之類～<br>
-                    <br>
-                    由於要架 HTML 網頁伺服器的話，下載個 Apache 或 Nginx 就好，因此像這種沒有 *.html 檔案的伺服端程式，反而是使用 com.sun.net.httpserver 的大宗！當你純粹只是想透過網頁瀏覽器用 HTTP 協定跑 Java 程式，並不想為此建立 HTML 或 JSP 語法的檔案，就會了解這種 HTTP Server 也是一種優點。
-                </p>
-            </section>
+					<br>
+					開啟網頁瀏覽器，輸入網址 127.0.0.1，以我用的 Vivaldi 為例，網頁顯示：<br>
+					<br>
+					<samp>
+						getRequestHeaders()<br>
+						　　Host=[127.0.0.1]<br>
+						　　Accept-encoding=[gzip, deflate, br]<br>
+						　　Upgrade-insecure-requests=[1]<br>
+						　　Connection=[keep-alive]<br>
+						　　Dnt=[1]<br>
+						　　Sec-fetch-dest=[document]<br>
+						　　Accept-language=[zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7]<br>
+						　　Sec-fetch-site=[none]<br>
+						　　User-agent=[Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.99 Safari/537.36]<br>
+						　　Accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,<br>image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9]<br>
+						　　Sec-fetch-mode=[navigate]<br>
+						<br>
+						getLocalAddress:<br>
+						　　/127.0.0.1:80<br>
+						<br>
+						getRequestURI()<br>
+						　　/test?x=123&amp;y=456<br>
+						<br>
+						getRequestMethod()<br>
+						　　GET<br>
+					</samp>
+					<br>
+					這些資訊能當輸入的資料用，提供給程式處理。例如用 getRequestURI() 獲得 x=123 和 y=456，相加後將結果寫進 response 字串輸出到頁面之類～<br>
+					<br>
+					由於要架 HTML 網頁伺服器的話，下載個 Apache 或 Nginx 就好，因此像這種沒有 *.html 檔案的伺服端程式，反而是使用 com.sun.net.httpserver 的大宗！當你純粹只是想透過網頁瀏覽器用 HTTP 協定跑 Java 程式，並不想為此建立 HTML 或 JSP 語法的檔案，就會了解這種 HTTP Server 也是一種優點。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Static HTTP handler</h2>
-                <p>
-                    最後來寫個像 Apache 或 Nginx 一樣的 HTTP Server，將指定資料夾架設為網頁伺服器，讓網頁瀏覽器能載入裡面的 *.html、*.css、*.js。<br>
-                    <br>
-                    做法很多，這裡隨手找到 <a href='http://github.com/ianopolous/simple-http-server/blob/master/src/http/' target='_blank'>http://github.com/ianopolous/simple-http-server/blob/master/src/http/</a> 這份程式碼，修改於下：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import com.sun.net.httpserver.*;
-                        import java.io.*;
-                        import java.net.*;
-                        import java.util.*;
+			<section>
+				<h2>Static HTTP handler</h2>
+				<p>
+					最後來寫個像 Apache 或 Nginx 一樣的 HTTP Server，將指定資料夾架設為網頁伺服器，讓網頁瀏覽器能載入裡面的 *.html、*.css、*.js。<br>
+					<br>
+					做法很多，這裡隨手找到 <a href='http://github.com/ianopolous/simple-http-server/blob/master/src/http/' target='_blank'>http://github.com/ianopolous/simple-http-server/blob/master/src/http/</a> 這份程式碼，修改於下：<br>
+					<br>
+					<textarea class='brush:java'>
+						import com.sun.net.httpserver.*;
+						import java.io.*;
+						import java.net.*;
+						import java.util.*;
 
-                        class StaticHttpHandler implements HttpHandler{
+						class StaticHttpHandler implements HttpHandler{
 
-                            private Map<String, byte[]> map = new HashMap<String, byte[]>();
+							private Map<String, byte[]> map = new HashMap<String, byte[]>();
 
-                            public StaticHttpHandler() throws IOException{
-                                File[] files = new File("htdocs/").listFiles();
-                                for(File f : files){
-                                    loadFile("", f);
-                                }
-                            }
+							public StaticHttpHandler() throws IOException{
+								File[] files = new File("htdocs/").listFiles();
+								for(File f : files){
+									loadFile("", f);
+								}
+							}
 
-                            public void handle(HttpExchange httpexchange) throws IOException{
-                                String path = httpexchange.getRequestURI().getPath().substring(1);
-                                if(path.length() == 0){
-                                    path = "index.html";
-                                }
-                                byte[] bytes = map.get(path);
-                                if(httpexchange.getRequestMethod().equals("HEAD")){
-                                    httpexchange.getResponseHeaders().set("Content-Length", "" + bytes.length);
-                                    httpexchange.sendResponseHeaders(200, -1);
-                                    return;
-                                }
-                                httpexchange.sendResponseHeaders(200, bytes.length);
-                                httpexchange.getResponseBody().write(bytes);
-                                httpexchange.getResponseBody().close();
-                            }
+							public void handle(HttpExchange httpexchange) throws IOException{
+								String path = httpexchange.getRequestURI().getPath().substring(1);
+								if(path.length() == 0){
+									path = "index.html";
+								}
+								byte[] bytes = map.get(path);
+								if(httpexchange.getRequestMethod().equals("HEAD")){
+									httpexchange.getResponseHeaders().set("Content-Length", "" + bytes.length);
+									httpexchange.sendResponseHeaders(200, -1);
+									return;
+								}
+								httpexchange.sendResponseHeaders(200, bytes.length);
+								httpexchange.getResponseBody().write(bytes);
+								httpexchange.getResponseBody().close();
+							}
 
-                            private void loadFile(String path, File file) throws IOException{
-                                if(file.isDirectory()){
-                                    for(File f : file.listFiles()){
-                                        loadFile(path + file.getName() + "/", f);
-                                    }
-                                }
-                                else{
-                                    InputStream inputstream = new FileInputStream(file);
-                                    ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
-                                    OutputStream outputstream = new DataOutputStream(bytearrayoutputstream);
-                                    byte[] bytes = new byte[4096];
-                                    int length;
-                                    while((length=inputstream.read(bytes)) >= 0){
-                                        outputstream.write(bytes, 0, length);
-                                    }
-                                    outputstream.flush();
-                                    outputstream.close();
-                                    inputstream.close();
-                                    map.put(path + file.getName(), bytearrayoutputstream.toByteArray());
-                                }
-                            }
+							private void loadFile(String path, File file) throws IOException{
+								if(file.isDirectory()){
+									for(File f : file.listFiles()){
+										loadFile(path + file.getName() + "/", f);
+									}
+								}
+								else{
+									InputStream inputstream = new FileInputStream(file);
+									ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream();
+									OutputStream outputstream = new DataOutputStream(bytearrayoutputstream);
+									byte[] bytes = new byte[4096];
+									int length;
+									while((length=inputstream.read(bytes)) >= 0){
+										outputstream.write(bytes, 0, length);
+									}
+									outputstream.flush();
+									outputstream.close();
+									inputstream.close();
+									map.put(path + file.getName(), bytearrayoutputstream.toByteArray());
+								}
+							}
 
-                        }
+						}
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args) throws IOException{
-                                HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
-                                httpserver.createContext("/", new StaticHttpHandler());
-                                httpserver.start();
-                            }
+							public static void main(String[] args) throws IOException{
+								HttpServer httpserver = HttpServer.create(new InetSocketAddress(80), 0);
+								httpserver.createContext("/", new StaticHttpHandler());
+								httpserver.start();
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    只要在 Java 程式所在路徑，建立名為 htdocs 的資料夾，裡面放網頁，就能透過網頁瀏覽器以 127.0.0.1 或路由器分配的 IP 位址開啟。
-                </p>
-            </section>
+					<br>
+					只要在 Java 程式所在路徑，建立名為 htdocs 的資料夾，裡面放網頁，就能透過網頁瀏覽器以 127.0.0.1 或路由器分配的 IP 位址開啟。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

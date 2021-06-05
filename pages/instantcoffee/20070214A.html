@@ -2,289 +2,289 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/editor.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/editor.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>使用 Properties 屬性檔存取設定值</h1>
-                <p>
-                    Java 有個 Properties 類別，用來處理類似 *.ini 組態檔的工作，用法非常簡單，可說是 Java 最受歡迎的功能！
-                </p>
-            </header>
+			<header>
+				<h1>使用 Properties 屬性檔存取設定值</h1>
+				<p>
+					Java 有個 Properties 類別，用來處理類似 *.ini 組態檔的工作，用法非常簡單，可說是 Java 最受歡迎的功能！
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取得屬性檔的設定值</h2>
-                <p>
-                    底下範例先用純文字文件手寫簡單的「鍵＝值」格式組態檔，再從 Java 程式載入使用。
-                </p>
-                <hr>
-                <section>
-                    <h3>properties.ini</h3>
-                    <p>
-                        <textarea class='brush:txt'>
-                            name=Twideem Civs
-                            email=twideem@outlook.com
+			<section>
+				<h2>取得屬性檔的設定值</h2>
+				<p>
+					底下範例先用純文字文件手寫簡單的「鍵＝值」格式組態檔，再從 Java 程式載入使用。
+				</p>
+				<hr>
+				<section>
+					<h3>properties.ini</h3>
+					<p>
+						<textarea class='brush:txt'>
+							name=Twideem Civs
+							email=twideem@outlook.com
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.FileInputStream;
-                            import java.util.Properties;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.FileInputStream;
+							import java.util.Properties;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
+									try{
 
-                                        Properties properties = new Properties();
+										Properties properties = new Properties();
 
-                                        properties.load(new FileInputStream("properties.ini"));
+										properties.load(new FileInputStream("properties.ini"));
 
-                                        System.out.println(properties.getProperty("name"));
-                                        System.out.println(properties.getProperty("email"));
+										System.out.println(properties.getProperty("name"));
+										System.out.println(properties.getProperty("email"));
 
-                                    }
-                                    catch(Exception exception) {
-                                        exception.printStackTrace();
-                                    }
+									}
+									catch(Exception exception) {
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            Twideem Civs<br>
-                            twideem@outlook.com
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    不用自己逐行取得字串來剖析，就能根據關鍵字取得設定值，properties.ini 檔格式又簡單，在設計程式工具時能簡化不少工作。<br>
-                    <br>
-                    要注意的是，Properties 傳回的值都是 String（字串）。<br>
-                    <br>
-                    檔名不拘，但通常使用 <var>*.properties</var> 做為副檔名。
-                </p>
-            </section>
+						<br>
+						<output>
+							Twideem Civs<br>
+							twideem@outlook.com
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					不用自己逐行取得字串來剖析，就能根據關鍵字取得設定值，properties.ini 檔格式又簡單，在設計程式工具時能簡化不少工作。<br>
+					<br>
+					要注意的是，Properties 傳回的值都是 String（字串）。<br>
+					<br>
+					檔名不拘，但通常使用 <var>*.properties</var> 做為副檔名。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>修改設定值並儲存屬性檔</h2>
-                <p>
-                    除了取得屬性檔的設定值，還能修改設定值，並且儲存檔案：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.io.FileOutputStream;
-                        import java.util.Properties;
+			<section>
+				<h2>修改設定值並儲存屬性檔</h2>
+				<p>
+					除了取得屬性檔的設定值，還能修改設定值，並且儲存檔案：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.FileOutputStream;
+						import java.util.Properties;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                try{
+								try{
 
-                                    Properties properties = new Properties();
+									Properties properties = new Properties();
 
-                                    properties.setProperty("name","Twideem Civs");
-                                    properties.setProperty("email","twideem@outlook.com");
+									properties.setProperty("name","Twideem Civs");
+									properties.setProperty("email","twideem@outlook.com");
 
-                                    properties.store(new FileOutputStream("properties.ini"),"PROPERTIES");
+									properties.store(new FileOutputStream("properties.ini"),"PROPERTIES");
 
-                                }
-                                catch(Exception exception) {
-                                    exception.printStackTrace();
-                                }
+								}
+								catch(Exception exception) {
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output class='editor'>
-                        #PROPERTIES<br>
-                        #Wed Feb 14 20:31:42 CST 2007<br>
-                        name=Twideem Civs<br>
-                        email=twideem@outlook.com<br>
-                    </output>
-                    <br>
-                    文件預設以 UTF-8 編碼保存，使用作業系統的換行方式。<br>
-                    <br>
-                    由程式產生的屬性檔，開頭會標上 # 註解，即使先載入自己手寫沒註解的屬性檔，儲存後也是如此，因為這才是 Java 屬性檔的標準寫法。<br>
-                    <br>
-                    說到屬性檔的標準寫法，手寫屬性檔時，必須將 <var>\</var> 改成 <var>\\</var>，且建議將 <var>:</var> 改成 <var>\:</var>，否則讀檔會漏失符號、或者讀檔失敗拋出例外。<br>
-                    <br>
-                    此外，雖然屬性檔預設使用 UTF-8 編碼，但儲存中文字時會轉成 \uXXXX 的格式，想直接儲存中文字，請改用 FileOutputStream：<br>
-                    <br>
-                    <code>
-                        properties.store(new OutputStreamWriter(<br>
-                        　new FileOutputStream("properties.ini"), "UTF-8"), "PROPERTIES");<br>
-                    </code>
-                    <br>
-                    載入也可以改用 FileInputStream：<br>
-                    <br>
-                    <code>
-                        properties.load(new InputStreamReader(<br>
-                        　new FileInputStream("properties.ini"), "UTF-8"));
-                    </code>
-                </p>
-            </section>
+					<br>
+					<output class='editor'>
+						#PROPERTIES<br>
+						#Wed Feb 14 20:31:42 CST 2007<br>
+						name=Twideem Civs<br>
+						email=twideem@outlook.com<br>
+					</output>
+					<br>
+					文件預設以 UTF-8 編碼保存，使用作業系統的換行方式。<br>
+					<br>
+					由程式產生的屬性檔，開頭會標上 # 註解，即使先載入自己手寫沒註解的屬性檔，儲存後也是如此，因為這才是 Java 屬性檔的標準寫法。<br>
+					<br>
+					說到屬性檔的標準寫法，手寫屬性檔時，必須將 <var>\</var> 改成 <var>\\</var>，且建議將 <var>:</var> 改成 <var>\:</var>，否則讀檔會漏失符號、或者讀檔失敗拋出例外。<br>
+					<br>
+					此外，雖然屬性檔預設使用 UTF-8 編碼，但儲存中文字時會轉成 \uXXXX 的格式，想直接儲存中文字，請改用 FileOutputStream：<br>
+					<br>
+					<code>
+						properties.store(new OutputStreamWriter(<br>
+						　new FileOutputStream("properties.ini"), "UTF-8"), "PROPERTIES");<br>
+					</code>
+					<br>
+					載入也可以改用 FileInputStream：<br>
+					<br>
+					<code>
+						properties.load(new InputStreamReader(<br>
+						　new FileInputStream("properties.ini"), "UTF-8"));
+					</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>XML 格式的屬性檔</h2>
-                <p>
-                    也能用 XML 格式來儲存 Properties，例如：<br>
-                    <br>
-                    <code style='font-size:9pt'>properties.storeToXML(new FileOutputStream("properties.xml"),"PROPERTIES");</code><br>
-                    <br>
-                    輸出的屬性檔長這樣：<br>
-                    <br>
-                    <textarea class='brush:xml'>
-                        &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
-                        &lt;!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"&gt;
-                        &lt;properties&gt;
-                        &lt;comment&gt;PROPERTIES&lt;/comment&gt;
-                        &lt;entry key="email"&gt;twideem@outlook.com&lt;/entry&gt;
-                        &lt;entry key="name"&gt;Twideem Civs&lt;/entry&gt;
-                        &lt;/properties&gt;
+			<section>
+				<h2>XML 格式的屬性檔</h2>
+				<p>
+					也能用 XML 格式來儲存 Properties，例如：<br>
+					<br>
+					<code style='font-size:9pt'>properties.storeToXML(new FileOutputStream("properties.xml"),"PROPERTIES");</code><br>
+					<br>
+					輸出的屬性檔長這樣：<br>
+					<br>
+					<textarea class='brush:xml'>
+						&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+						&lt;!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"&gt;
+						&lt;properties&gt;
+						&lt;comment&gt;PROPERTIES&lt;/comment&gt;
+						&lt;entry key="email"&gt;twideem@outlook.com&lt;/entry&gt;
+						&lt;entry key="name"&gt;Twideem Civs&lt;/entry&gt;
+						&lt;/properties&gt;
                     </textarea>
-                    <br>
-                    這種格式的屬性檔，要另外以 XML 的格式載入使用：<br>
-                    <br>
-                    <code>properties.loadFromXML(new FileInputStream("properties.xml"));</code><br>
-                    <br>
-                    XML 屬性檔格式繁雜，不像「鍵＝值」格式，隨手就能建立新的屬性檔來用，適合由程式產生，而不是自己寫屬性檔。
-                </p>
-            </section>
+					<br>
+					這種格式的屬性檔，要另外以 XML 的格式載入使用：<br>
+					<br>
+					<code>properties.loadFromXML(new FileInputStream("properties.xml"));</code><br>
+					<br>
+					XML 屬性檔格式繁雜，不像「鍵＝值」格式，隨手就能建立新的屬性檔來用，適合由程式產生，而不是自己寫屬性檔。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>自己剖析屬性檔</h2>
-                <p>
-                    用鍵值對格式的屬性檔，遇到 Windows 路徑有個問題，例如：<br>
-                    <br>
-                    <code>
-                        【屬性檔】path=C:\Users\User\Desktop\text.txt<br>
-                        【程式碼】System.out.print(properties.getProperty("path"));<br>
-                    </code>
-                    <br>
-                    結果…<br>
-                    <br>
-                    <code>C:UsersUserDesktop &nbsp; &nbsp; &nbsp;ext.txt</code><br>
-                    <br>
-                    顯然 <var>\</var> 變成跳脫字元符號了。<br>
-                    <br>
-                    解決辦法是將屬性檔中的 <var>\</var> 改成 <var>\\</var>，不方便改的話，用 XML 格式的屬性檔就不會有這個問題。<br>
-                    <br>
-                    既不想改成 <var>\\</var>、也不想改用 XML 格式的話，只好自己剖析資料寫個新的 Properties 了！
-                </p>
-                <hr>
-                <section>
-                    <h3>Properties.ini</h3>
-                    <p>
-                        <textarea class='brush:txt'>
-                            path=C:\Users\User\Desktop\text.txt
+			<section>
+				<h2>自己剖析屬性檔</h2>
+				<p>
+					用鍵值對格式的屬性檔，遇到 Windows 路徑有個問題，例如：<br>
+					<br>
+					<code>
+						【屬性檔】path=C:\Users\User\Desktop\text.txt<br>
+						【程式碼】System.out.print(properties.getProperty("path"));<br>
+					</code>
+					<br>
+					結果…<br>
+					<br>
+					<code>C:UsersUserDesktop &nbsp; &nbsp; &nbsp;ext.txt</code><br>
+					<br>
+					顯然 <var>\</var> 變成跳脫字元符號了。<br>
+					<br>
+					解決辦法是將屬性檔中的 <var>\</var> 改成 <var>\\</var>，不方便改的話，用 XML 格式的屬性檔就不會有這個問題。<br>
+					<br>
+					既不想改成 <var>\\</var>、也不想改用 XML 格式的話，只好自己剖析資料寫個新的 Properties 了！
+				</p>
+				<hr>
+				<section>
+					<h3>Properties.ini</h3>
+					<p>
+						<textarea class='brush:txt'>
+							path=C:\Users\User\Desktop\text.txt
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Properties.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.nio.file.Files;
-                            import java.nio.file.Paths;
-                            import java.util.Iterator;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Properties.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.nio.file.Files;
+							import java.nio.file.Paths;
+							import java.util.Iterator;
 
-                            public class Properties extends java.util.HashMap&lt;String, String&gt;{
+							public class Properties extends java.util.HashMap&lt;String, String&gt;{
 
-                                public void load(String path){
+								public void load(String path){
 
-                                    Iterator&lt;String&gt; iterator = null;
+									Iterator&lt;String&gt; iterator = null;
 
-                                    try{
-                                        iterator = Files.readAllLines(Paths.get(path)).iterator();
-                                    }
-                                    catch(Exception exception) {
-                                        exception.printStackTrace();
-                                    }
+									try{
+										iterator = Files.readAllLines(Paths.get(path)).iterator();
+									}
+									catch(Exception exception) {
+										exception.printStackTrace();
+									}
 
-                                    while(iterator.hasNext()){
-                                        String[] strings = iterator.next().split("=");
-                                        put(strings[0], strings[1]);
-                                    }
+									while(iterator.hasNext()){
+										String[] strings = iterator.next().split("=");
+										put(strings[0], strings[1]);
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Properties properties = new Properties();
+									Properties properties = new Properties();
 
-                                    properties.load("properties.ini");
+									properties.load("properties.ini");
 
-                                    System.out.print(properties.get("path"));
+									System.out.print(properties.get("path"));
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            C:\Users\User\Desktop\text.txt
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    想同時能設定組態檔，可以繼承自 java.util.Properties，就有現成的 store() 可用，然後覆寫 load() 就好。
-                </p>
-            </section>
+						<br>
+						<output>
+							C:\Users\User\Desktop\text.txt
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					想同時能設定組態檔，可以繼承自 java.util.Properties，就有現成的 store() 可用，然後覆寫 load() 就好。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] <a href='appendix.html#20070214A'>自己剖析組態檔多載版</a>
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] <a href='appendix.html#20070214A'>自己剖析組態檔多載版</a>
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

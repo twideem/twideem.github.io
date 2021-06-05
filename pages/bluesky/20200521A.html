@@ -2,74 +2,74 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>被迫安裝 Chromium 版 Microsoft Edge 的應變</h1>
-                <p>
-                    2020 年五月更新開始，Microsoft 正式以 KB4559309 將 Microsoft Edge 升級為 Chromium 版！新版 Microsoft Edge 啟動速度快，運行過程也很順，是我用過最好的 Chromium 瀏覽器！別說遠勝 Vivaldi，連 Chrome 都相形遜色～<br>
-                    <br>
-                    不過，Chrome 線上應用程式商店的第三方滑鼠手勢，無論 smartUp 也好、crxMouse 也好，都有受限於 Google 準則的問題，例如瀏覽器啟動時的第一張網頁沒辦法使用滑鼠手勢、無法從 HTTP 協定的網頁跳轉到 FILE 的網頁…之類，嚴重影響我的滑鼠操作體驗。<br>
-                    <br>
-                    此外，Windows 10 更新系統時，一向會嚴重拖累系統效能，而 Chrome 是很常更新的軟體，大版號出來，往往每三四天就得修臭蟲一次，至少得修個兩次才穩定下來，這表示我得三不五時就被 Edge 拖累系統效能。<br>
-                    <br>
-                    於是我用啟動慢，執行過程有點卡的 Vivaldi。它內建滑鼠手勢，沒有擴充套件受限問題。可以關閉自動更新，電腦沒在用時再抽空自己手動更新。但我還是得想辦法解決新版 Microsoft Edge 被迫安裝、自動更新的問題～
-                </p>
-            </header>
+			<header>
+				<h1>被迫安裝 Chromium 版 Microsoft Edge 的應變</h1>
+				<p>
+					2020 年五月更新開始，Microsoft 正式以 KB4559309 將 Microsoft Edge 升級為 Chromium 版！新版 Microsoft Edge 啟動速度快，運行過程也很順，是我用過最好的 Chromium 瀏覽器！別說遠勝 Vivaldi，連 Chrome 都相形遜色～<br>
+					<br>
+					不過，Chrome 線上應用程式商店的第三方滑鼠手勢，無論 smartUp 也好、crxMouse 也好，都有受限於 Google 準則的問題，例如瀏覽器啟動時的第一張網頁沒辦法使用滑鼠手勢、無法從 HTTP 協定的網頁跳轉到 FILE 的網頁…之類，嚴重影響我的滑鼠操作體驗。<br>
+					<br>
+					此外，Windows 10 更新系統時，一向會嚴重拖累系統效能，而 Chrome 是很常更新的軟體，大版號出來，往往每三四天就得修臭蟲一次，至少得修個兩次才穩定下來，這表示我得三不五時就被 Edge 拖累系統效能。<br>
+					<br>
+					於是我用啟動慢，執行過程有點卡的 Vivaldi。它內建滑鼠手勢，沒有擴充套件受限問題。可以關閉自動更新，電腦沒在用時再抽空自己手動更新。但我還是得想辦法解決新版 Microsoft Edge 被迫安裝、自動更新的問題～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>辦法一：關閉 Chromium 版 Microsoft Edge 的自動更新</h2>
-                <p>
-                    在「工作排程器」將 MicrosoftEdgeUpdateTaskMachineCore 和 MicrosoftEdgeUpdateTaskMachineUA 刪除。<br>
-                    <br>
-                    在「服務」將 Microsoft Edge Elevation Service 設為已停用。注意！這項目可能會有兩個，我猜一個是自行安裝時留下的，一個是被迫更新時又多一個上去。<br>
-                    <br>
-                    在「工作管理員」看有沒有 Microsoft Edge Update，有的話將它結束工作。<br>
-                    <br>
-                    到 C:\Program Files (x86)\Microsoft 將 EdgeUpdate 資料夾隨便改個名稱，讓系統找不到更新程式。改名就好，不建議刪除！
-                </p>
-            </section>
+			<section>
+				<h2>辦法一：關閉 Chromium 版 Microsoft Edge 的自動更新</h2>
+				<p>
+					在「工作排程器」將 MicrosoftEdgeUpdateTaskMachineCore 和 MicrosoftEdgeUpdateTaskMachineUA 刪除。<br>
+					<br>
+					在「服務」將 Microsoft Edge Elevation Service 設為已停用。注意！這項目可能會有兩個，我猜一個是自行安裝時留下的，一個是被迫更新時又多一個上去。<br>
+					<br>
+					在「工作管理員」看有沒有 Microsoft Edge Update，有的話將它結束工作。<br>
+					<br>
+					到 C:\Program Files (x86)\Microsoft 將 EdgeUpdate 資料夾隨便改個名稱，讓系統找不到更新程式。改名就好，不建議刪除！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>辦法二：移除 Microsoft Edge</h2>
-                <p>
-                    <strong>從版本 2004 開始不建議用這個辦法！因為 Windows 10 系統內部更加仰賴 Microsoft Edge 而採取強綁的設計，移除的話，或許會跟移除 Windows Defender 一樣，每月安全性更新時被視為系統內部已經破壞，無法正常更新。</strong><br>
-                    <br>
-                    以系統管理員進入 C：\Program Files (x86)\Microsoft\Edge\Application\xx.x.xxx.xx\Installer，執行：<br>
-                    <br>
-                    <kbd>setup.exe --uninstall --system-level --verbose-logging --force-uninstall</kbd><br>
-                    <br>
-                    即可將 Chormium 版 Microsoft Edge 移除。<br>
-                    <br>
-                    <strong>目前 20H2 版，移除 Microsoft Edge 了，也還能下載安裝程式救回來！本來 Windows Defender 也是這樣，但後來設計成既然內建就無需另外安裝，變成一移除就無法救回來。所以，難保將來 Windows 10 的 Microsfot Edge 也會這樣設計，屆時更不要移除 Microsfot Edge！</strong>
-                </p>
-            </section>
+			<section>
+				<h2>辦法二：移除 Microsoft Edge</h2>
+				<p>
+					<strong>從版本 2004 開始不建議用這個辦法！因為 Windows 10 系統內部更加仰賴 Microsoft Edge 而採取強綁的設計，移除的話，或許會跟移除 Windows Defender 一樣，每月安全性更新時被視為系統內部已經破壞，無法正常更新。</strong><br>
+					<br>
+					以系統管理員進入 C：\Program Files (x86)\Microsoft\Edge\Application\xx.x.xxx.xx\Installer，執行：<br>
+					<br>
+					<kbd>setup.exe --uninstall --system-level --verbose-logging --force-uninstall</kbd><br>
+					<br>
+					即可將 Chormium 版 Microsoft Edge 移除。<br>
+					<br>
+					<strong>目前 20H2 版，移除 Microsoft Edge 了，也還能下載安裝程式救回來！本來 Windows Defender 也是這樣，但後來設計成既然內建就無需另外安裝，變成一移除就無法救回來。所以，難保將來 Windows 10 的 Microsfot Edge 也會這樣設計，屆時更不要移除 Microsfot Edge！</strong>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 只要 Microsoft Edge 內建滑鼠手勢，用起來沒有擴充套件受限的問題，我應該會用它。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 只要 Microsoft Edge 內建滑鼠手勢，用起來沒有擴充套件受限的問題，我應該會用它。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

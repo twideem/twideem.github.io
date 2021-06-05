@@ -2,58 +2,58 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>乒乓兵</h1>
-                <div id='division_1' style='color:#cccccc; background-color:#000000; font-family:Courier; font-size:10pt; height:240px; padding:10px; width:320px'>
-                    <span id='content_1' style='font-family:微軟正黑體;font-size:24pt'>兵</span><br>
-                </div>
-            </header>
+			<header>
+				<h1>乒乓兵</h1>
+				<div id='division_1' style='color:#cccccc; background-color:#000000; font-family:Courier; font-size:10pt; height:240px; padding:10px; width:320px'>
+					<span id='content_1' style='font-family:微軟正黑體;font-size:24pt'>兵</span><br>
+				</div>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>說明</h2>
-                <p>
-                    請按鍵盤測試執行結果。
-                </p>
-            </section>
+			<section>
+				<h2>說明</h2>
+				<p>
+					請按鍵盤測試執行結果。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-        <script>
-            var a=false
-            var b=null
-            var c=true
-            function f(){
-                if(a) document.getElementById('content_1').innerHTML='乒'
-                else document.getElementById('content_1').innerHTML='乓'
-                a=!a
-            }
-            addEventListener('keydown',function(){
-                if(c){
-                    c=false
-                    b=setInterval('f()',500)
-                }
-            })
-            addEventListener('keyup',function(){
-                document.getElementById('content_1').innerHTML='兵'
-                clearInterval(b)
-                c=true
-            })
-        </script>
+		<script>
+			var a=false
+			var b=null
+			var c=true
+			function f(){
+				if(a) document.getElementById('content_1').innerHTML='乒'
+				else document.getElementById('content_1').innerHTML='乓'
+				a=!a
+			}
+			addEventListener('keydown',function(){
+				if(c){
+					c=false
+					b=setInterval('f()',500)
+				}
+			})
+			addEventListener('keyup',function(){
+				document.getElementById('content_1').innerHTML='兵'
+				clearInterval(b)
+				c=true
+			})
+		</script>
 
-    </body>
+	</body>
 
 </html>

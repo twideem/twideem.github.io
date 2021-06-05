@@ -2,164 +2,164 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Colorful Candy Theme</h1>
-                <p>修改 Alex Gorbatchev 的 SyntaxHighlighter 程式碼，所重新發佈的主題，以沿用 GPL 範圍。</p>
-            </header>
+			<header>
+				<h1>Colorful Candy Theme</h1>
+				<p>修改 Alex Gorbatchev 的 SyntaxHighlighter 程式碼，所重新發佈的主題，以沿用 GPL 範圍。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>修改部分</h2>
-                <p>
-                    基本上朝向減少操作步驟的方向來修改，並以離線瀏覽的需求來包裝。
-                </p>
-                <hr>
-                <section>
-                    <h3>１、sh.js</h3>
-                    <p>
-                        把 SyntaxHighlighter.all() 寫在 shCore.js 裡面，並改檔名為 sh.js，這樣只需載入 JavaScript 檔案即可使用，不需每張網頁都寫呼叫程式。<br>
-                        <br>
-                        並新增 sh.lang() 來追加語言，以及 sh.theme() 來切換主題。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>２、theme/candy.css</h3>
-                    <p>
-                        新增 Candy 主題，並做為預設。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>３、lang/*.js</h3>
-                    <p>
-                        將 shBrushCss.js、shBrushJScript.js、shBrushXml.js 三個檔案，集中為一個 ria.js，並新增 Plain Text 用的 lang。<br>
-                        <br>
-                        附帶 c++.js、java.js、python.js 三個程式語言，請使用 sh.lang('lang/c++.js')、sh.lang('lang/java.js')、sh.lang('lang/python.js') 載入使用。<br>
-                        <br>
-                        追加識別文字，例如將 Java 的 java.lang.* 類別，以及 JavaScript 的 BOM 物件，以 constants 樣式的高亮度文字來顯示。因此以 Colorful Candy 主題為例，你會看到 Java 的 String 以及 JavaScript 的 document 以斜體表示。<br>
-                        <br>
-                        新增 class='brush:xxx' 叫用的名字為副檔名，例如 brush:javascript 可以改用 brush:js。
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>修改部分</h2>
+				<p>
+					基本上朝向減少操作步驟的方向來修改，並以離線瀏覽的需求來包裝。
+				</p>
+				<hr>
+				<section>
+					<h3>１、sh.js</h3>
+					<p>
+						把 SyntaxHighlighter.all() 寫在 shCore.js 裡面，並改檔名為 sh.js，這樣只需載入 JavaScript 檔案即可使用，不需每張網頁都寫呼叫程式。<br>
+						<br>
+						並新增 sh.lang() 來追加語言，以及 sh.theme() 來切換主題。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>２、theme/candy.css</h3>
+					<p>
+						新增 Candy 主題，並做為預設。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>３、lang/*.js</h3>
+					<p>
+						將 shBrushCss.js、shBrushJScript.js、shBrushXml.js 三個檔案，集中為一個 ria.js，並新增 Plain Text 用的 lang。<br>
+						<br>
+						附帶 c++.js、java.js、python.js 三個程式語言，請使用 sh.lang('lang/c++.js')、sh.lang('lang/java.js')、sh.lang('lang/python.js') 載入使用。<br>
+						<br>
+						追加識別文字，例如將 Java 的 java.lang.* 類別，以及 JavaScript 的 BOM 物件，以 constants 樣式的高亮度文字來顯示。因此以 Colorful Candy 主題為例，你會看到 Java 的 String 以及 JavaScript 的 document 以斜體表示。<br>
+						<br>
+						新增 class='brush:xxx' 叫用的名字為副檔名，例如 brush:javascript 可以改用 brush:js。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>下載</h2>
-                <p>
-                    <a href='../../objects/downloads/20130206A.7z' target='_blank'>20130206A.7z</a>
-                </p>
-            </section>
+			<section>
+				<h2>下載</h2>
+				<p>
+					<a href='../../objects/downloads/20130206A.7z' target='_blank'>20130206A.7z</a>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>如何使用</h2>
-                <hr>
-                <section>
-                    <h3>基本用法</h3>
-                    <p>
-                        在網頁的 HEAD 標籤，依你檔案路徑位置，載入 sh.js 即可，例如：<br>
-                        <br>
-                        <code>&lt;scirpt src='sh.js'&gt;&lt;/scirpt&gt;</code><br>
-                        <br>
-                        然後用 pre 標籤來書寫程式碼，並指定 class 為對應的語言，就會以高亮度文字來顯示，格式如下：<br>
-                        <br>
-                        <code>
-                            &lt;pre class='brush:js'&gt;<br>
-                            　…<br>
-                            &lt;/pre&gt;
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>追加語言</h3>
-                    <p>
-                        在 script 標籤內，以如下語法追加原 SyntaxHighlighter 官方提供的語言。<br>
-                        <br>
-                        <code style='font-size:8pt'>sh.lang('http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCpp.js');</code><br>
-                        <br>
-                        官方提供的語言有：<br>
-                        <br>
-                        <samp>
-                            shBrushAS3.js<br>
-                            shBrushAppleScript.js<br>
-                            shBrushBash.js<br>
-                            shBrushCSharp.js<br>
-                            shBrushColdFusion.js<br>
-                            shBrushCpp.js<br>
-                            shBrushCss.js<br>
-                            shBrushDelphi.js<br>
-                            shBrushDiff.js<br>
-                            shBrushErlang.js<br>
-                            shBrushGroovy.js<br>
-                            shBrushJScript.js<br>
-                            shBrushJava.js<br>
-                            shBrushJavaFX.js<br>
-                            shBrushPerl.js<br>
-                            shBrushPhp.js<br>
-                            shBrushPlain.js<br>
-                            shBrushPowerShell.js<br>
-                            shBrushPython.js<br>
-                            shBrushRuby.js<br>
-                            shBrushSass.js<br>
-                            shBrushScala.js<br>
-                            shBrushSql.js<br>
-                            shBrushVb.js<br>
-                            shBrushXml.js
-                        </samp>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>切換到官方的主題</h3>
-                    <p>
-                        在 script 標籤內，以如下語法追加原 SyntaxHighlighter 官方提供的主題。<br>
-                        <br>
-                        <code style='font-size:8pt'>sh.theme('http://alexgorbatchev.com/pub/sh/current/themes/shCoreEmacs.js');</code><br>
-                        <br>
-                        官方提供的主題有：<br>
-                        <br>
-                        <samp>
-                            shCoreDjango.css<br>
-                            shCoreEclipse.css<br>
-                            shCoreEmacs.css<br>
-                            shCoreFadeToGrey.css<br>
-                            shCoreMDUltra.css<br>
-                            shCoreMidnight.css<br>
-                            shCoreRDark.css<br>
-                        </samp>
-                        <br>
-                        要復原 Colorful Candy 主題的話，依你檔案路徑指向 candy.css 即可。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>其它</h3>
-                    <p>
-                        除了以上功能，其它設定方式與 SyntaxHighlighter 相容，請參考官方的《<a href='http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/' target='_blank'>Configuration</a>》文件，或者本站的《<a href='20090203A.html'>如何使用 SyntaxHighlighter 顯示程式範例</a>》介紹。
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>如何使用</h2>
+				<hr>
+				<section>
+					<h3>基本用法</h3>
+					<p>
+						在網頁的 HEAD 標籤，依你檔案路徑位置，載入 sh.js 即可，例如：<br>
+						<br>
+						<code>&lt;scirpt src='sh.js'&gt;&lt;/scirpt&gt;</code><br>
+						<br>
+						然後用 pre 標籤來書寫程式碼，並指定 class 為對應的語言，就會以高亮度文字來顯示，格式如下：<br>
+						<br>
+						<code>
+							&lt;pre class='brush:js'&gt;<br>
+							　…<br>
+							&lt;/pre&gt;
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>追加語言</h3>
+					<p>
+						在 script 標籤內，以如下語法追加原 SyntaxHighlighter 官方提供的語言。<br>
+						<br>
+						<code style='font-size:8pt'>sh.lang('http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCpp.js');</code><br>
+						<br>
+						官方提供的語言有：<br>
+						<br>
+						<samp>
+							shBrushAS3.js<br>
+							shBrushAppleScript.js<br>
+							shBrushBash.js<br>
+							shBrushCSharp.js<br>
+							shBrushColdFusion.js<br>
+							shBrushCpp.js<br>
+							shBrushCss.js<br>
+							shBrushDelphi.js<br>
+							shBrushDiff.js<br>
+							shBrushErlang.js<br>
+							shBrushGroovy.js<br>
+							shBrushJScript.js<br>
+							shBrushJava.js<br>
+							shBrushJavaFX.js<br>
+							shBrushPerl.js<br>
+							shBrushPhp.js<br>
+							shBrushPlain.js<br>
+							shBrushPowerShell.js<br>
+							shBrushPython.js<br>
+							shBrushRuby.js<br>
+							shBrushSass.js<br>
+							shBrushScala.js<br>
+							shBrushSql.js<br>
+							shBrushVb.js<br>
+							shBrushXml.js
+						</samp>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>切換到官方的主題</h3>
+					<p>
+						在 script 標籤內，以如下語法追加原 SyntaxHighlighter 官方提供的主題。<br>
+						<br>
+						<code style='font-size:8pt'>sh.theme('http://alexgorbatchev.com/pub/sh/current/themes/shCoreEmacs.js');</code><br>
+						<br>
+						官方提供的主題有：<br>
+						<br>
+						<samp>
+							shCoreDjango.css<br>
+							shCoreEclipse.css<br>
+							shCoreEmacs.css<br>
+							shCoreFadeToGrey.css<br>
+							shCoreMDUltra.css<br>
+							shCoreMidnight.css<br>
+							shCoreRDark.css<br>
+						</samp>
+						<br>
+						要復原 Colorful Candy 主題的話，依你檔案路徑指向 candy.css 即可。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>其它</h3>
+					<p>
+						除了以上功能，其它設定方式與 SyntaxHighlighter 相容，請參考官方的《<a href='http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/' target='_blank'>Configuration</a>》文件，或者本站的《<a href='20090203A.html'>如何使用 SyntaxHighlighter 顯示程式範例</a>》介紹。
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

@@ -2,89 +2,89 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>在 Windows 8 設定 Wi-Fi 熱點</h1>
-                <p>
-                    只要電腦可用 Wi-Fi 上網，且未連線，連線的是網路線，就可以將這台電腦設為 Wi-Fi Hotspot（熱點），讓電腦化身為網路分享器。
-                </p>
-            </header>
+			<header>
+				<h1>在 Windows 8 設定 Wi-Fi 熱點</h1>
+				<p>
+					只要電腦可用 Wi-Fi 上網，且未連線，連線的是網路線，就可以將這台電腦設為 Wi-Fi Hotspot（熱點），讓電腦化身為網路分享器。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>啟動 Wi-Fi 熱點</h2>
-                <hr>
-                <section>
-                    <h3>Step 1: 設定密碼</h3>
-                    <p>
-                        以系統管理員身分，啟動命令提示字元，輸入：<br>
-                        <br>
-                        <kbd>netsh wlan set hostednetwork mode=allow ssid=熱點名稱 key=熱點密碼</kbd>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 2: 啟動熱點</h3>
-                    <p>
-                        繼續輸入：<br>
-                        <br>
-                        <kbd>netsh wlan start hostednetwork</kbd>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 3: 設定熱點</h3>
-                    <p>
-                        「控制台」→「網路和網際網路」→「網路連線」→「區域連線」→ 勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」 → 在「家用網路連線」選擇「區域連線* 12」
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>啟動 Wi-Fi 熱點</h2>
+				<hr>
+				<section>
+					<h3>Step 1: 設定密碼</h3>
+					<p>
+						以系統管理員身分，啟動命令提示字元，輸入：<br>
+						<br>
+						<kbd>netsh wlan set hostednetwork mode=allow ssid=熱點名稱 key=熱點密碼</kbd>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 2: 啟動熱點</h3>
+					<p>
+						繼續輸入：<br>
+						<br>
+						<kbd>netsh wlan start hostednetwork</kbd>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 3: 設定熱點</h3>
+					<p>
+						「控制台」→「網路和網際網路」→「網路連線」→「區域連線」→ 勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」 → 在「家用網路連線」選擇「區域連線* 12」
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>其它操作</h2>
-                <hr>
-                <section>
-                    <h3>停止熱點</h3>
-                    <p>
-                        <kbd>netsh wlan stop hostednetwork</kbd>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>檢視熱點</h3>
-                    <p>
-                        <kbd>netsh wlan show hostednetwork</kbd>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>重設密碼</h3>
-                    <p>
-                        <kbd>
-                            netsh wlan set hostednetwork key=密碼<br>
-                            netsh wlan refresh hostednetwork key
-                        </kbd>
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>其它操作</h2>
+				<hr>
+				<section>
+					<h3>停止熱點</h3>
+					<p>
+						<kbd>netsh wlan stop hostednetwork</kbd>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>檢視熱點</h3>
+					<p>
+						<kbd>netsh wlan show hostednetwork</kbd>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>重設密碼</h3>
+					<p>
+						<kbd>
+							netsh wlan set hostednetwork key=密碼<br>
+							netsh wlan refresh hostednetwork key
+						</kbd>
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

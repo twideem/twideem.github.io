@@ -2,354 +2,354 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>如何建立物件導向開發手法</h1>
-                <p>在點出《<a href='20000829A.html'>物件導向開發的癥結點</a>》後，試著建立自己的物件導向開發手法吧！</p>
-            </header>
+			<header>
+				<h1>如何建立物件導向開發手法</h1>
+				<p>在點出《<a href='20000829A.html'>物件導向開發的癥結點</a>》後，試著建立自己的物件導向開發手法吧！</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第一步、了解物件導向程式語言解決了傳統程式設計哪些問題</h2>
-                <p>
-                    物件導向程式語言並不是為了解決程序導向程式語言的問題而發明出來，早在還沒發生問題前就已經發明了！只是等到出現問題後，發現物件導向程式語言可以解決這些問題，才浮上檯面。因此要正確使用物件導向程式語言，應該先知道它改善了哪些環節？<br>
-                    <br>
-                    <samp>
-                        封裝：原本變數的生命週期只有全域與區域兩種，現在既能長保資料，又可避免公開存取。<br>
-                        繼承：原本函式可將重複的功能獨立出來執行，現在只要行為一致都能抽出來通用。<br>
-                        多型：原本呼叫副程式來執行既定功能，現在不同功能可以藉由同一類型來執行。<br>
-                    </samp>
-                    <br>
-                    用這三個做法，把傳統開發手法寫出來的程式結構，改用物件導向的語法來組織，以獲得更高的維護性與擴充性，就是物件導向開發手法的第一步。千萬不要想太多以為「封裝、繼承、多型」必須基植於「物件導向思維」才能應用得宜。<br>
-                    <br>
-                    此外，使用物件導向程式設計的過程，會有兩個觀點不易釐清……<br>
-                    <br>
-                    <samp>
-                        類別：共通的特性，使用類別來封裝，然後透過繼承來套用。<br>
-                        介面：一致的行為，使用介面作規格，然後透過多型來操作。
-                    </samp>
-                </p>
-            </section>
+			<section>
+				<h2>第一步、了解物件導向程式語言解決了傳統程式設計哪些問題</h2>
+				<p>
+					物件導向程式語言並不是為了解決程序導向程式語言的問題而發明出來，早在還沒發生問題前就已經發明了！只是等到出現問題後，發現物件導向程式語言可以解決這些問題，才浮上檯面。因此要正確使用物件導向程式語言，應該先知道它改善了哪些環節？<br>
+					<br>
+					<samp>
+						封裝：原本變數的生命週期只有全域與區域兩種，現在既能長保資料，又可避免公開存取。<br>
+						繼承：原本函式可將重複的功能獨立出來執行，現在只要行為一致都能抽出來通用。<br>
+						多型：原本呼叫副程式來執行既定功能，現在不同功能可以藉由同一類型來執行。<br>
+					</samp>
+					<br>
+					用這三個做法，把傳統開發手法寫出來的程式結構，改用物件導向的語法來組織，以獲得更高的維護性與擴充性，就是物件導向開發手法的第一步。千萬不要想太多以為「封裝、繼承、多型」必須基植於「物件導向思維」才能應用得宜。<br>
+					<br>
+					此外，使用物件導向程式設計的過程，會有兩個觀點不易釐清……<br>
+					<br>
+					<samp>
+						類別：共通的特性，使用類別來封裝，然後透過繼承來套用。<br>
+						介面：一致的行為，使用介面作規格，然後透過多型來操作。
+					</samp>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第二步、回歸物件導向程式語言本質的精神</h2>
-                <p>
-                    既然：「物件導向程式語言並不是為了解決程序導向程式語言的問題而發明出來，早在還沒發生問題前就已經發明了！」那它本質的優點在哪？<br>
-                    <br>
-                    <samp>
-                        封裝：可以把重複的結構整理起來，集中管理。<br>
-                        繼承：可以把重複的類別整理起來，統一管理。<br>
-                        多型：可以把重複的實例整理起來，簡化管理。<br>
-                    </samp>
-                    <br>
-                    物件導向程式設計的本質，就是把重複的程式碼：從變數、函式、類別、物件，通通整理出來方便管理，避免程式碼要修改的環節太多，難以維護……是的，就這樣，所以還是同樣一句，千萬不要想太多以為「封裝、繼承、多型」必須基植於「物件導向思維」才能應用得宜。
-                </p>
-            </section>
+			<section>
+				<h2>第二步、回歸物件導向程式語言本質的精神</h2>
+				<p>
+					既然：「物件導向程式語言並不是為了解決程序導向程式語言的問題而發明出來，早在還沒發生問題前就已經發明了！」那它本質的優點在哪？<br>
+					<br>
+					<samp>
+						封裝：可以把重複的結構整理起來，集中管理。<br>
+						繼承：可以把重複的類別整理起來，統一管理。<br>
+						多型：可以把重複的實例整理起來，簡化管理。<br>
+					</samp>
+					<br>
+					物件導向程式設計的本質，就是把重複的程式碼：從變數、函式、類別、物件，通通整理出來方便管理，避免程式碼要修改的環節太多，難以維護……是的，就這樣，所以還是同樣一句，千萬不要想太多以為「封裝、繼承、多型」必須基植於「物件導向思維」才能應用得宜。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第三步、表現自己的設計感</h2>
-                <p>
-                    <samp>問自己：「想以怎樣方式來組成應用程式？」然後實現它。</samp><br>
-                    <br>
-                    傳統程式設計開發手法，是先定義「應用軟體」的雛型，然後且戰且走似的，一步步看應用軟體缺那些功能，逐步兌現後，便完成一個應用軟體。<br>
-                    <br>
-                    要建立物件導向開發手法的話，則是進一步反問自己的意見：「我希望這個應用軟體怎樣寫才爽？」然後實現你想要的寫法。<br>
-                    <br>
-                    要進入這個層次，可能要把「封裝、繼承、多型」這基於「管理程式碼」的觀點，轉換成如下基於「設計應用軟體」的思維……<br>
-                    <br>
-                    <samp>
-                        抽象：將構成某一實體的組成要素抽取出來。<br>
-                        繼承：修改抽象出來的組件，再加以組裝成想要的實體。<br>
-                        多型：這是一種彈性擴充的機制，需要改裝實體在結構上的設計時使用。<br>
-                    </samp>
-                    <br>
-                    由於物件導向就是從這裡開始變質，從原本明明已經切實可用的技術，被天花亂墜成尚未成功仍須努力的理想，因此這部分我稱之為：「學術派物件導向程式設計」。
-                </p>
-            </section>
+			<section>
+				<h2>第三步、表現自己的設計感</h2>
+				<p>
+					<samp>問自己：「想以怎樣方式來組成應用程式？」然後實現它。</samp><br>
+					<br>
+					傳統程式設計開發手法，是先定義「應用軟體」的雛型，然後且戰且走似的，一步步看應用軟體缺那些功能，逐步兌現後，便完成一個應用軟體。<br>
+					<br>
+					要建立物件導向開發手法的話，則是進一步反問自己的意見：「我希望這個應用軟體怎樣寫才爽？」然後實現你想要的寫法。<br>
+					<br>
+					要進入這個層次，可能要把「封裝、繼承、多型」這基於「管理程式碼」的觀點，轉換成如下基於「設計應用軟體」的思維……<br>
+					<br>
+					<samp>
+						抽象：將構成某一實體的組成要素抽取出來。<br>
+						繼承：修改抽象出來的組件，再加以組裝成想要的實體。<br>
+						多型：這是一種彈性擴充的機制，需要改裝實體在結構上的設計時使用。<br>
+					</samp>
+					<br>
+					由於物件導向就是從這裡開始變質，從原本明明已經切實可用的技術，被天花亂墜成尚未成功仍須努力的理想，因此這部分我稱之為：「學術派物件導向程式設計」。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第四步、製作半成品</h2>
-                <p>
-                    <samp>
-                        超越「程式」的可再用性，進一步思考「系統」的可再用性。<br>
-                    </samp>
-                    <br>
-                    程式的可再用性，其實沒什麼看頭，那不過就是讓我們省下對原始碼「複製、貼上」的工作而已。物件導向程式設計應該思考的是，已經在執行的系統資源，該如何重複拿來利用；類別透過「動態載入」成為物件的特性，就是實現這想法的基礎。<br>
-                    <br>
-                    這會讓你變得像是在開發「框架」(Framework)，但物件導向程式設計真正的理念，原本就是將「系統」規劃為「框架」來操作！物件導向淪為專案管理的手法，反而是非預期的情況，物件導向根本不該這麼走。<br>
-                    <br>
-                    然而，既然這是趨勢，你無可避免這樣走下去～
-                </p>
-            </section>
+			<section>
+				<h2>第四步、製作半成品</h2>
+				<p>
+					<samp>
+						超越「程式」的可再用性，進一步思考「系統」的可再用性。<br>
+					</samp>
+					<br>
+					程式的可再用性，其實沒什麼看頭，那不過就是讓我們省下對原始碼「複製、貼上」的工作而已。物件導向程式設計應該思考的是，已經在執行的系統資源，該如何重複拿來利用；類別透過「動態載入」成為物件的特性，就是實現這想法的基礎。<br>
+					<br>
+					這會讓你變得像是在開發「框架」(Framework)，但物件導向程式設計真正的理念，原本就是將「系統」規劃為「框架」來操作！物件導向淪為專案管理的手法，反而是非預期的情況，物件導向根本不該這麼走。<br>
+					<br>
+					然而，既然這是趨勢，你無可避免這樣走下去～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第五步、導入軟體工程</h2>
-                <p>
-                    <samp>
-                        要將「物件導向」導入「軟體工程」時，記得：人歸人、程式歸程式、設備歸設備，不要企圖讓「程式」去涵蓋「操作人員」與「實體裝置」的行為特性。<br>
-                    </samp>
-                    <br>
-                    正確的物件導向管理手法，在程式 (coding) 的部份，是思考如何提供「操作人員」合適的接口去讓「應用系統」運算，而在執行 (runtime) 的部份，則規劃運算結果該如何結合「實體裝置」做輸出、或者說驅動。絕對不是連「操作人員」「實體裝置」這種存在現實世界的事物都整個搬到程式裡面加以「物件導向」。<br>
-                    <br>
-                    比如說，設計一台「微電腦自動化咖啡沖泡機」，物件導向的導入只限於這機器裡面的應用系統，並不是連「泡咖啡的人是男是女」和「咖啡機外觀是黑是白」都要寫到物件導向程式裡面做處理。物件導向專案管理手法，依然只需要思考泡咖啡的人適合觸發哪些系統功能即可。<br>
-                    <br>
-                    坦白說「物件導向分析」「物件導向設計」只是灌上「物件導向」一詞而已，其實技術上和「物件導向程式設計」的「封裝、繼承、多型」根本扯不上關係。只能說是為了象徵自己開發手法採用「物件導向程式設計」後，不得不做一些「人事上」「實務上」的調整，然後覺得這樣有別於先前程序導向的專案管理手法，就稱作「物件導向分析」「物件導向設計」了。
-                </p>
-            </section>
+			<section>
+				<h2>第五步、導入軟體工程</h2>
+				<p>
+					<samp>
+						要將「物件導向」導入「軟體工程」時，記得：人歸人、程式歸程式、設備歸設備，不要企圖讓「程式」去涵蓋「操作人員」與「實體裝置」的行為特性。<br>
+					</samp>
+					<br>
+					正確的物件導向管理手法，在程式 (coding) 的部份，是思考如何提供「操作人員」合適的接口去讓「應用系統」運算，而在執行 (runtime) 的部份，則規劃運算結果該如何結合「實體裝置」做輸出、或者說驅動。絕對不是連「操作人員」「實體裝置」這種存在現實世界的事物都整個搬到程式裡面加以「物件導向」。<br>
+					<br>
+					比如說，設計一台「微電腦自動化咖啡沖泡機」，物件導向的導入只限於這機器裡面的應用系統，並不是連「泡咖啡的人是男是女」和「咖啡機外觀是黑是白」都要寫到物件導向程式裡面做處理。物件導向專案管理手法，依然只需要思考泡咖啡的人適合觸發哪些系統功能即可。<br>
+					<br>
+					坦白說「物件導向分析」「物件導向設計」只是灌上「物件導向」一詞而已，其實技術上和「物件導向程式設計」的「封裝、繼承、多型」根本扯不上關係。只能說是為了象徵自己開發手法採用「物件導向程式設計」後，不得不做一些「人事上」「實務上」的調整，然後覺得這樣有別於先前程序導向的專案管理手法，就稱作「物件導向分析」「物件導向設計」了。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第六步、物件導向使用規範</h2>
-                <p>
-                    隨著 Java 成為企業界首選的程式語言：「應該說成為電子商務的實作規格。」在 2000 年代根據 Java 物件導向實務經驗中，所遭遇過的癥結點，開始凝聚如下的物件導向使用規範：<br>
-                    <br>
-                    <samp>
-                        需要修改或擴充程式碼的話，才使用「繼承 (inheritance)」。<br>
-                        純粹只是使用類別的話，使用「合成 (composition)」。<br>
-                        要實現多型的話，改用「介面 (interface)」。<br>
-                    </samp>
-                    <br>
-                    尤其到 21 世紀 10 年代，這已經變成基本守則，並影響我們對物件導向程式設計的開發手法。<br>
-                    <br>
-                    但是，未來如果「以網路作平台的作業系統」問世，因為作業系統本身就是以「物件」的方式傳送「系統訊息」，所以過去發生的癥結點將獲得解決。屆時會有新的守則與規範，而顯得不適用。不過，在那天發生之前，這 21 世紀初的物件導向使用規範，是我們獲益最深的守則；因為也可能永遠不會出現物件導向作業系統。畢竟那是場意外，原本是要發明網路作業平台，沒想到具備物件導向作業系統的本質。
-                </p>
-            </section>
+			<section>
+				<h2>第六步、物件導向使用規範</h2>
+				<p>
+					隨著 Java 成為企業界首選的程式語言：「應該說成為電子商務的實作規格。」在 2000 年代根據 Java 物件導向實務經驗中，所遭遇過的癥結點，開始凝聚如下的物件導向使用規範：<br>
+					<br>
+					<samp>
+						需要修改或擴充程式碼的話，才使用「繼承 (inheritance)」。<br>
+						純粹只是使用類別的話，使用「合成 (composition)」。<br>
+						要實現多型的話，改用「介面 (interface)」。<br>
+					</samp>
+					<br>
+					尤其到 21 世紀 10 年代，這已經變成基本守則，並影響我們對物件導向程式設計的開發手法。<br>
+					<br>
+					但是，未來如果「以網路作平台的作業系統」問世，因為作業系統本身就是以「物件」的方式傳送「系統訊息」，所以過去發生的癥結點將獲得解決。屆時會有新的守則與規範，而顯得不適用。不過，在那天發生之前，這 21 世紀初的物件導向使用規範，是我們獲益最深的守則；因為也可能永遠不會出現物件導向作業系統。畢竟那是場意外，原本是要發明網路作業平台，沒想到具備物件導向作業系統的本質。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第七步、進入系統分析與設計的物件導向</h2>
-                <p>
-                    初學物件導向的人，通常會將函式改用類別設計，然後由一個主類別負責操作這些功能性類別。然而，並不是把程式寫成一個個類別，就叫物件導向，只讓一個主類別發號司令去叫喚其它類別，並未跳脫傳統結構化程式設計的思維。<br>
-                    <br>
-                    要進一步，就是將主類別操作的功能，分配給其它類別負責，讓更多類別分擔責任。由於還不熟悉系統分析與設計，所以通常每扛個責任就新增個類別，導致出現一大堆類別，顯得多餘。<br>
-                    <br>
-                    最後就是將顯得多餘的類別，透過繼承手法，精簡成一個個體系，讓系統的脈絡更有條理。能做到這地步，便是物件導向系統分析與設計的老鳥了。
-                </p>
-            </section>
+			<section>
+				<h2>第七步、進入系統分析與設計的物件導向</h2>
+				<p>
+					初學物件導向的人，通常會將函式改用類別設計，然後由一個主類別負責操作這些功能性類別。然而，並不是把程式寫成一個個類別，就叫物件導向，只讓一個主類別發號司令去叫喚其它類別，並未跳脫傳統結構化程式設計的思維。<br>
+					<br>
+					要進一步，就是將主類別操作的功能，分配給其它類別負責，讓更多類別分擔責任。由於還不熟悉系統分析與設計，所以通常每扛個責任就新增個類別，導致出現一大堆類別，顯得多餘。<br>
+					<br>
+					最後就是將顯得多餘的類別，透過繼承手法，精簡成一個個體系，讓系統的脈絡更有條理。能做到這地步，便是物件導向系統分析與設計的老鳥了。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第八步、不忘物件導向程式設計的原貌</h2>
-                <p>
-                    進行物件導向分析與設計時，不應扭曲物件導向程式設計的精神，要讓程式設計人員更容易用自己的想法完成工作。也就是系統工程師應該把寫程式的工作切開成一個個獨立性高的模組，再分配給不同程式設計師寫程式就好，而不是限制程式設計師該寫怎樣的程式內容。<br>
-                    <br>
-                    程度好的系統設計圖，是不會挑程式設計師屬於傳統結構化思維、物件導向思維、或其它範型思維的。程式設計師的寫作內容會影響你的設計圖，表示你設計圖的模組化還不夠物件導向，而不是程式設計師不會物件導向。<br>
-                    <br>
-                    說了那麼多，那怎樣的寫法，就叫物件導向程式設計呢？
-                </p>
-                <hr>
-                <section>
-                    <h3>一個常見的、也沒什麼不妥的 Java Swing 應用程式</h3>
-                    <p>
-                    底下是個 Java Swing 圖形化介面應用程式，它內含一個下拉式選單與按鈕的視窗，按下按鈕可以隨機顯示下拉式選單所顯示的撲克牌點數：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.awt.event.ActionEvent;
-                        import java.awt.event.ActionListener;
-                        import java.util.Random;
-                        import javax.swing.JButton;
-                        import javax.swing.JComboBox;
-                        import javax.swing.JFrame;
+			<section>
+				<h2>第八步、不忘物件導向程式設計的原貌</h2>
+				<p>
+					進行物件導向分析與設計時，不應扭曲物件導向程式設計的精神，要讓程式設計人員更容易用自己的想法完成工作。也就是系統工程師應該把寫程式的工作切開成一個個獨立性高的模組，再分配給不同程式設計師寫程式就好，而不是限制程式設計師該寫怎樣的程式內容。<br>
+					<br>
+					程度好的系統設計圖，是不會挑程式設計師屬於傳統結構化思維、物件導向思維、或其它範型思維的。程式設計師的寫作內容會影響你的設計圖，表示你設計圖的模組化還不夠物件導向，而不是程式設計師不會物件導向。<br>
+					<br>
+					說了那麼多，那怎樣的寫法，就叫物件導向程式設計呢？
+				</p>
+				<hr>
+				<section>
+					<h3>一個常見的、也沒什麼不妥的 Java Swing 應用程式</h3>
+					<p>
+					底下是個 Java Swing 圖形化介面應用程式，它內含一個下拉式選單與按鈕的視窗，按下按鈕可以隨機顯示下拉式選單所顯示的撲克牌點數：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.awt.event.ActionEvent;
+						import java.awt.event.ActionListener;
+						import java.util.Random;
+						import javax.swing.JButton;
+						import javax.swing.JComboBox;
+						import javax.swing.JFrame;
 
-                        public class FrenchDeckFrame extends JFrame{
+						public class FrenchDeckFrame extends JFrame{
 
-                            private JComboBox&lt;String&gt; combo_box = new JComboBox&lt;String&gt;();
-                            private JButton button = new JButton();
-                            private Random random = new Random();
+							private JComboBox&lt;String&gt; combo_box = new JComboBox&lt;String&gt;();
+							private JButton button = new JButton();
+							private Random random = new Random();
 
-                            public FrenchDeckFrame(){
+							public FrenchDeckFrame(){
 
-                                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                setLayout(null);
-                                setSize(320,240);
-                                setVisible(true);
-                                add(combo_box);
-                                add(button);
+								setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								setLayout(null);
+								setSize(320,240);
+								setVisible(true);
+								add(combo_box);
+								add(button);
 
-                                combo_box.setLocation(0,0);
-                                combo_box.setSize(100,30);
-                                combo_box.addItem("A");
-                                combo_box.addItem("2");
-                                combo_box.addItem("3");
-                                combo_box.addItem("4");
-                                combo_box.addItem("5");
-                                combo_box.addItem("6");
-                                combo_box.addItem("7");
-                                combo_box.addItem("8");
-                                combo_box.addItem("9");
-                                combo_box.addItem("10");
-                                combo_box.addItem("J");
-                                combo_box.addItem("Q");
-                                combo_box.addItem("K");
-                                combo_box.addItem("X");
+								combo_box.setLocation(0,0);
+								combo_box.setSize(100,30);
+								combo_box.addItem("A");
+								combo_box.addItem("2");
+								combo_box.addItem("3");
+								combo_box.addItem("4");
+								combo_box.addItem("5");
+								combo_box.addItem("6");
+								combo_box.addItem("7");
+								combo_box.addItem("8");
+								combo_box.addItem("9");
+								combo_box.addItem("10");
+								combo_box.addItem("J");
+								combo_box.addItem("Q");
+								combo_box.addItem("K");
+								combo_box.addItem("X");
 
-                                button.setLocation(100,0);
-                                button.setSize(100,30);
-                                button.setText("Click me");
-                                button.addActionListener(new ActionListener(){
-                                    public void actionPerformed(ActionEvent action_event){
-                                        combo_box.setSelectedIndex(nextRating());
-                                    }
-                                });
+								button.setLocation(100,0);
+								button.setSize(100,30);
+								button.setText("Click me");
+								button.addActionListener(new ActionListener(){
+									public void actionPerformed(ActionEvent action_event){
+										combo_box.setSelectedIndex(nextRating());
+									}
+								});
 
-                            }
+							}
 
-                            private int nextRating(){
-                                return random.nextInt(combo_box.getItemCount());
-                            }
+							private int nextRating(){
+								return random.nextInt(combo_box.getItemCount());
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    通常我們很直覺的會像上面這樣設計 Java 圖形化介面程式，這樣的程式就跟結構化程式設計一樣，很穩健、其實沒什麼不妥。但也因為沒什麼不妥，所以在你感到好像有些不太對勁時，卻又說不出所以然～<br>
-                    <br>
-                    其實，這程式的視窗（JFrame）負責了下拉式選單（JComboBox）的細節，它安排了下拉式選單該有哪些選項，還設計了下拉式選單該怎樣動作，所以讓整個視窗想交代的意圖變得冗雜、不夠簡潔。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>物件導向程式設計可以更進一步地這麼寫</h3>
-                    <p>
-                        別因為「多用合成、少用繼承」這句名言而害怕繼承，這句話的場合是「物件導向分析與設計」，而不是「物件導向程式設計」，所以大膽透過繼承讓 JComboBox 獨立出來吧！
-                    </p>
-                    <section>
-                        <h4>FrenchDeckComboBox.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.util.Random;
-                                import javax.swing.JComboBox;
+					<br>
+					通常我們很直覺的會像上面這樣設計 Java 圖形化介面程式，這樣的程式就跟結構化程式設計一樣，很穩健、其實沒什麼不妥。但也因為沒什麼不妥，所以在你感到好像有些不太對勁時，卻又說不出所以然～<br>
+					<br>
+					其實，這程式的視窗（JFrame）負責了下拉式選單（JComboBox）的細節，它安排了下拉式選單該有哪些選項，還設計了下拉式選單該怎樣動作，所以讓整個視窗想交代的意圖變得冗雜、不夠簡潔。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>物件導向程式設計可以更進一步地這麼寫</h3>
+					<p>
+						別因為「多用合成、少用繼承」這句名言而害怕繼承，這句話的場合是「物件導向分析與設計」，而不是「物件導向程式設計」，所以大膽透過繼承讓 JComboBox 獨立出來吧！
+					</p>
+					<section>
+						<h4>FrenchDeckComboBox.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.util.Random;
+								import javax.swing.JComboBox;
 
-                                public class FrenchDeckComboBox extends JComboBox&lt;String&gt;{
+								public class FrenchDeckComboBox extends JComboBox&lt;String&gt;{
 
-                                    public FrenchDeckComboBox(){
-                                        addItem("A");
-                                        addItem("2");
-                                        addItem("3");
-                                        addItem("4");
-                                        addItem("5");
-                                        addItem("6");
-                                        addItem("7");
-                                        addItem("8");
-                                        addItem("9");
-                                        addItem("10");
-                                        addItem("J");
-                                        addItem("Q");
-                                        addItem("K");
-                                        addItem("X");
-                                    }
+									public FrenchDeckComboBox(){
+										addItem("A");
+										addItem("2");
+										addItem("3");
+										addItem("4");
+										addItem("5");
+										addItem("6");
+										addItem("7");
+										addItem("8");
+										addItem("9");
+										addItem("10");
+										addItem("J");
+										addItem("Q");
+										addItem("K");
+										addItem("X");
+									}
 
-                                    public void nextRatings(){
-                                        setSelectedIndex(new Random().nextInt(getItemCount()));
-                                    }
+									public void nextRatings(){
+										setSelectedIndex(new Random().nextInt(getItemCount()));
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <p>
-                        如果你希望減少物件數量、降低記憶體中佔用的垃圾，可以寫 <code>private Random randdom = new Random()</code> 做為 FrenchDeckComboBox 的屬性，讓 nextRatings() 只固定用到一個物件。否則的話盡量 new 一堆 Random 物件比較漂亮，因為在這裡 Random 是個「工具」，並不是 FrenchDeckComboBox 真正需要的「屬性」。<br>
-                        <br>
-                        在物件導向程式設計的領域，你要學會習慣「揮霍物件」這樣浪費的行為，改掉傳統結構化程式設計節儉的習慣，因為「用完即丟」對程式設計來說往往是比較乾淨、衛生的。為了最佳化系統資源，而「重複使用」一堆並不該屬於類別特性的物件時，反而要比「用完即丟」小心謹慎！你必須下工夫「收納」這些物件，因為換個角度來說，「重複使用」其實又叫「廢物利用」，你留了一堆廢物做為類別的屬性，如果不好好妥善交代這些廢物的利用價值，它們將會扭曲這個類別的存在意義。<br>
-                        <br>
-                        好，言歸正傳，有了 FrenchDeckComboBox，FrenchDeckFrame 的意圖就變清晰了：
-                    </p>
-                    <section>
-                        <h4>FrenchDeckFrame.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.awt.event.ActionEvent;
-                                import java.awt.event.ActionListener;
-                                import javax.swing.JButton;
-                                import javax.swing.JFrame;
+						</p>
+					</section>
+					<p>
+						如果你希望減少物件數量、降低記憶體中佔用的垃圾，可以寫 <code>private Random randdom = new Random()</code> 做為 FrenchDeckComboBox 的屬性，讓 nextRatings() 只固定用到一個物件。否則的話盡量 new 一堆 Random 物件比較漂亮，因為在這裡 Random 是個「工具」，並不是 FrenchDeckComboBox 真正需要的「屬性」。<br>
+						<br>
+						在物件導向程式設計的領域，你要學會習慣「揮霍物件」這樣浪費的行為，改掉傳統結構化程式設計節儉的習慣，因為「用完即丟」對程式設計來說往往是比較乾淨、衛生的。為了最佳化系統資源，而「重複使用」一堆並不該屬於類別特性的物件時，反而要比「用完即丟」小心謹慎！你必須下工夫「收納」這些物件，因為換個角度來說，「重複使用」其實又叫「廢物利用」，你留了一堆廢物做為類別的屬性，如果不好好妥善交代這些廢物的利用價值，它們將會扭曲這個類別的存在意義。<br>
+						<br>
+						好，言歸正傳，有了 FrenchDeckComboBox，FrenchDeckFrame 的意圖就變清晰了：
+					</p>
+					<section>
+						<h4>FrenchDeckFrame.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.awt.event.ActionEvent;
+								import java.awt.event.ActionListener;
+								import javax.swing.JButton;
+								import javax.swing.JFrame;
 
-                                public class FrenchDeckFrame extends JFrame{
+								public class FrenchDeckFrame extends JFrame{
 
-                                    private FrenchDeckComboBox french_deck_combo_box = new FrenchDeckComboBox();
-                                    private JButton button = new JButton();
+									private FrenchDeckComboBox french_deck_combo_box = new FrenchDeckComboBox();
+									private JButton button = new JButton();
 
-                                    public FrenchDeckFrame(){
+									public FrenchDeckFrame(){
 
-                                        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                        setLayout(null);
-                                        setSize(320,240);
-                                        setVisible(true);
-                                        add(french_deck_combo_box);
-                                        add(button);
+										setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+										setLayout(null);
+										setSize(320,240);
+										setVisible(true);
+										add(french_deck_combo_box);
+										add(button);
 
-                                        french_deck_combo_box.setLocation(0,0);
-                                        french_deck_combo_box.setSize(200,30);
+										french_deck_combo_box.setLocation(0,0);
+										french_deck_combo_box.setSize(200,30);
 
-                                        button.setLocation(201,0);
-                                        button.setSize(100,30);
-                                        button.setText("Click me");
-                                        button.addActionListener(new ActionListener(){
-                                            public void actionPerformed(ActionEvent action_event){
-                                                french_deck_combo_box.nextRatings();
-                                            }
-                                        });
+										button.setLocation(201,0);
+										button.setSize(100,30);
+										button.setText("Click me");
+										button.addActionListener(new ActionListener(){
+											public void actionPerformed(ActionEvent action_event){
+												french_deck_combo_box.nextRatings();
+											}
+										});
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <p>
-                        現在無論 FrenchDeckFrame 還是 FrenchDeckcComboBox 都很簡潔，易讀易懂，更像各自做好份內的事。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>探究</h3>
-                    <p>
-                        或許你看了還想讓 JButton 獨立出來。<br>
-                        <br>
-                        然而，我們在 JFrame 中對 JButton 做的事「細節度」不高，純粹只是控制它的外觀、以及調用它的事件函式，這些都是 JButton 的本份。不像更早的範例中 JFrame 整個掌握 JComboBox 該有哪些資料、該怎麼動作，脫離了 JComboBox 真正該表達的意義。<br>
-                        <br>
-                        因此，你要獨立出來可以，但就算不獨立也很簡潔，所以這裡示範的是並未讓它獨立出來。<br>
-                        <br>
-                        事實上範例也是在視窗（Frame）中設定下拉式選單（ComboBox）的尺寸與位置，並沒有把 setLocation() 和 setSize() 也寫在 FrenchDeckComboBox 裡面，因為這些事由視窗負責會更清晰！<br>
-                        <br>
-                        依此類推，一步步挑出程式碼中冗餘的細節，獨立出來單獨封裝，為各個類別分配好各自份內的事。一旦構造出物件導向程式設計的美學，就連被嫌醜的 Java Swing 也可以寫得優美許多～<br>
-                        <br>
-                        重點是，這並沒有什麼高深的學問。物件導向程式設計之所以會搞得像玄學一樣奧妙、難解，純粹是大家想得太多、過於發揮想像力去形塑物件導向程式設計那看不見的靈魂。
-                    </p>
-                </section>
-            </section>
+						</p>
+					</section>
+					<p>
+						現在無論 FrenchDeckFrame 還是 FrenchDeckcComboBox 都很簡潔，易讀易懂，更像各自做好份內的事。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>探究</h3>
+					<p>
+						或許你看了還想讓 JButton 獨立出來。<br>
+						<br>
+						然而，我們在 JFrame 中對 JButton 做的事「細節度」不高，純粹只是控制它的外觀、以及調用它的事件函式，這些都是 JButton 的本份。不像更早的範例中 JFrame 整個掌握 JComboBox 該有哪些資料、該怎麼動作，脫離了 JComboBox 真正該表達的意義。<br>
+						<br>
+						因此，你要獨立出來可以，但就算不獨立也很簡潔，所以這裡示範的是並未讓它獨立出來。<br>
+						<br>
+						事實上範例也是在視窗（Frame）中設定下拉式選單（ComboBox）的尺寸與位置，並沒有把 setLocation() 和 setSize() 也寫在 FrenchDeckComboBox 裡面，因為這些事由視窗負責會更清晰！<br>
+						<br>
+						依此類推，一步步挑出程式碼中冗餘的細節，獨立出來單獨封裝，為各個類別分配好各自份內的事。一旦構造出物件導向程式設計的美學，就連被嫌醜的 Java Swing 也可以寫得優美許多～<br>
+						<br>
+						重點是，這並沒有什麼高深的學問。物件導向程式設計之所以會搞得像玄學一樣奧妙、難解，純粹是大家想得太多、過於發揮想像力去形塑物件導向程式設計那看不見的靈魂。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 雖然從學術上來講，封裝、繼承、多型的目的不是這樣，但就是因為傳統開發手法的需要，才開始「被這樣拿來使用」。1967 年 Kristen Nygaard 和 Ole-Johan Dahl 基於 Tony Hoare 提出的「類別」概念，進一步發表關於「繼承」的論文，該論文並成為 Simula 67 物件導向程式語言的規格定義文件。在那 60 年代，電算機能夠儲存資料的容量非常有限，寫程式對每位元都得斤斤計較，物件導向程式語言只會浪費必須節省的系統資源，因此浮不上檯面，淪為學術用的成分比較多；反而 70 年代才發明的 C 語言都要比 Simula 67 更受青睞，因為那是最接近組合語言的高階語言，能夠斤斤計較記憶體的使用量。</p>
-            </footer>
+			<footer>
+				<p>[*] 雖然從學術上來講，封裝、繼承、多型的目的不是這樣，但就是因為傳統開發手法的需要，才開始「被這樣拿來使用」。1967 年 Kristen Nygaard 和 Ole-Johan Dahl 基於 Tony Hoare 提出的「類別」概念，進一步發表關於「繼承」的論文，該論文並成為 Simula 67 物件導向程式語言的規格定義文件。在那 60 年代，電算機能夠儲存資料的容量非常有限，寫程式對每位元都得斤斤計較，物件導向程式語言只會浪費必須節省的系統資源，因此浮不上檯面，淪為學術用的成分比較多；反而 70 年代才發明的 C 語言都要比 Simula 67 更受青睞，因為那是最接近組合語言的高階語言，能夠斤斤計較記憶體的使用量。</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

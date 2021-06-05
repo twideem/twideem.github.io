@@ -2,314 +2,314 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>運算</h1>
-                <p>在前一章節《資料》裡，提到過：「程式設計的基本做法，就是設立一堆可用來保存運算結果的資料，然後加以存取。」其中「變數」就是「設立的資料」。現在這個章節，則把重點放在「運算的結果」。</p>
-            </header>
+			<header>
+				<h1>運算</h1>
+				<p>在前一章節《資料》裡，提到過：「程式設計的基本做法，就是設立一堆可用來保存運算結果的資料，然後加以存取。」其中「變數」就是「設立的資料」。現在這個章節，則把重點放在「運算的結果」。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>算術運算</h2>
-                <p>
-                    進行數學的四則運算。
-                </p>
-                <hr>
-                <section>
-                    <h3>算術運算子</h3>
-                    <p>
-                        <code>
-                            + 　　加法<br>
-                            - 　　減法、負數<br>
-                            * 　　乘法<br>
-                            / 　　除法<br>
-                            % 　　餘數<br>
-                            ++　　遞增 1<br>
-                            --　　遞減 1<br>
-                            ()　　括號優先計算
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    四則運算的部分沒什麼問題，情況就跟你想的一樣：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=5, b=8;
-                        document.write(a*b);
+			<section>
+				<h2>算術運算</h2>
+				<p>
+					進行數學的四則運算。
+				</p>
+				<hr>
+				<section>
+					<h3>算術運算子</h3>
+					<p>
+						<code>
+							+ 　　加法<br>
+							- 　　減法、負數<br>
+							* 　　乘法<br>
+							/ 　　除法<br>
+							% 　　餘數<br>
+							++　　遞增 1<br>
+							--　　遞減 1<br>
+							()　　括號優先計算
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					四則運算的部分沒什麼問題，情況就跟你想的一樣：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=5, b=8;
+						document.write(a*b);
                     </textarea>
-                    <br>
-                    網頁會顯示 40。<br>
-                    <br>
-                    比較有疑問是遞增與遞減：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=58;
-                        a--;
-                        document.write(a);
+					<br>
+					網頁會顯示 40。<br>
+					<br>
+					比較有疑問是遞增與遞減：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=58;
+						a--;
+						document.write(a);
                     </textarea>
-                    <br>
-                    網頁會顯示 57。<br>
-                    <br>
-                    看似簡單沒錯，但關於遞增與遞減，有個情況務必記起來，那就是……<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=58;
-                        document.write(a--);
+					<br>
+					網頁會顯示 57。<br>
+					<br>
+					看似簡單沒錯，但關於遞增與遞減，有個情況務必記起來，那就是……<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=58;
+						document.write(a--);
                     </textarea>
-                    <br>
-                    結果網頁顯示的是 58！並不是 57。<br>
-                    <br>
-                    這是因為遞增遞減運算子，有分「前置」與「後置」兩種，也就是說可以這樣寫：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        --a
-                        a--
+					<br>
+					結果網頁顯示的是 58！並不是 57。<br>
+					<br>
+					這是因為遞增遞減運算子，有分「前置」與「後置」兩種，也就是說可以這樣寫：<br>
+					<br>
+					<textarea class='brush:js'>
+						--a
+						a--
                     </textarea>
-                    <br>
-                    前者表示先遞增再輸出 a，後者表示先輸出 a 再遞減。關於這點，你不妨執行看看這個範例：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=58;
-                        document.write(a--);
-                        document.write(a);
+					<br>
+					前者表示先遞增再輸出 a，後者表示先輸出 a 再遞減。關於這點，你不妨執行看看這個範例：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=58;
+						document.write(a--);
+						document.write(a);
                     </textarea>
-                    <br>
-                    網頁會先輸出 58，接著輸出 57。<br>
-                    <br>
-                    這個情況告訴我們，如果我們直接就要套用資料的遞增遞減值，必須把運算符號放在資料前面：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=58;
-                        document.write(--a);
+					<br>
+					網頁會先輸出 58，接著輸出 57。<br>
+					<br>
+					這個情況告訴我們，如果我們直接就要套用資料的遞增遞減值，必須把運算符號放在資料前面：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=58;
+						document.write(--a);
                     </textarea>
-                    <br>
-                    這樣就會直接顯示 57。<br>
-                    <br>
-                    那為什麼需要「後置」的寫法？因為這樣可以先使用這筆資料的值，用完再遞增或遞減，不失為多了一種彈性的寫法！讓程式設計更靈活。只要注意到有遞增遞減有前後置的特性，設計時知道避開陷阱，好處反而更多！
-                </p>
-            </section>
+					<br>
+					這樣就會直接顯示 57。<br>
+					<br>
+					那為什麼需要「後置」的寫法？因為這樣可以先使用這筆資料的值，用完再遞增或遞減，不失為多了一種彈性的寫法！讓程式設計更靈活。只要注意到有遞增遞減有前後置的特性，設計時知道避開陷阱，好處反而更多！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>邏輯運算</h2>
-                <p>
-                    進行數位邏輯閘的運算。需要注意的是，在程式設計是以 Boolean 值的資料來進行這種運算。
-                </p>
-                <hr>
-                <section>
-                    <h3>邏輯運算子</h3>
-                    <p>
-                        <code>
-                            &amp;&amp;　　AND 邏輯閘運算<br>
-                            ||　　OR 邏輯閘運算<br>
-                            ! 　　NOT 邏輯閘運算
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    AND 必須所有資料皆為 true 才會計算出 true 的結果，否則為 false。<br>
-                    <br>
-                    OR 則是只要有一個資料為 true，就計算出 true 的結果。<br>
-                    <br>
-                    NOT 把 true 變成 false，false 變成 true。<br>
-                    <br>
-                    上面的解釋過於簡單，看了還不懂很正常，所以直接看範例來體會比較妥當：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=true, b=false;
-                        if(a&amp;&amp;b){
-                            document.write('OK');
-                        }
+			<section>
+				<h2>邏輯運算</h2>
+				<p>
+					進行數位邏輯閘的運算。需要注意的是，在程式設計是以 Boolean 值的資料來進行這種運算。
+				</p>
+				<hr>
+				<section>
+					<h3>邏輯運算子</h3>
+					<p>
+						<code>
+							&amp;&amp;　　AND 邏輯閘運算<br>
+							||　　OR 邏輯閘運算<br>
+							! 　　NOT 邏輯閘運算
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					AND 必須所有資料皆為 true 才會計算出 true 的結果，否則為 false。<br>
+					<br>
+					OR 則是只要有一個資料為 true，就計算出 true 的結果。<br>
+					<br>
+					NOT 把 true 變成 false，false 變成 true。<br>
+					<br>
+					上面的解釋過於簡單，看了還不懂很正常，所以直接看範例來體會比較妥當：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=true, b=false;
+						if(a&amp;&amp;b){
+							document.write('OK');
+						}
                     </textarea>
-                    <br>
-                    if 在 true 的情況下才會執行 document.write('OK') 這行程式。但 a 與 b 進行的是 AND 運算，結果並非都是 true，因此不會執行。<br>
-                    <br>
-                    如果是下面的程式就會執行了！<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(a||b){
-                            document.write('OK');
-                        }
+					<br>
+					if 在 true 的情況下才會執行 document.write('OK') 這行程式。但 a 與 b 進行的是 AND 運算，結果並非都是 true，因此不會執行。<br>
+					<br>
+					如果是下面的程式就會執行了！<br>
+					<br>
+					<textarea class='brush:js'>
+						if(a||b){
+							document.write('OK');
+						}
                     </textarea>
-                    <br>
-                    最後來看 NOT 運算，下面這段程式因為把 b 相反過來，false 變成 true，因此也會執行：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(!b){
-                            document.write('OK');
-                        }
+					<br>
+					最後來看 NOT 運算，下面這段程式因為把 b 相反過來，false 變成 true，因此也會執行：<br>
+					<br>
+					<textarea class='brush:js'>
+						if(!b){
+							document.write('OK');
+						}
                     </textarea>
-                    <br>
-                    一邊對照範例，一邊參透上面過於簡單的解釋，來慢慢了解邏輯運算吧！
-                </p>
-            </section>
+					<br>
+					一邊對照範例，一邊參透上面過於簡單的解釋，來慢慢了解邏輯運算吧！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>位元運算</h2>
-                <p>
-                    將資料轉換為二進位數，然後進行布林邏輯運算，最後再把計算結果以十進位數傳回。
-                </p>
-                <hr>
-                <section>
-                    <h3>位元運算子</h3>
-                    <p>
-                        <code>
-                            &amp;　　　二進位 AND 運算<br>
-                            |　　　二進位 OR 位元運算<br>
-                            ^　　　二進位 XOR 位元運算<br>
-                            ~　　　二進位 NOT 位元運算<br>
-                            &lt;&lt; 　　左移<br>
-                            &gt;&gt; 　　右移<br>
-                            &gt;&gt;&gt;　　右移補零
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    直接用範例來說明：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=5, b=8;
-                        document.write(a&amp;b);
+			<section>
+				<h2>位元運算</h2>
+				<p>
+					將資料轉換為二進位數，然後進行布林邏輯運算，最後再把計算結果以十進位數傳回。
+				</p>
+				<hr>
+				<section>
+					<h3>位元運算子</h3>
+					<p>
+						<code>
+							&amp;　　　二進位 AND 運算<br>
+							|　　　二進位 OR 位元運算<br>
+							^　　　二進位 XOR 位元運算<br>
+							~　　　二進位 NOT 位元運算<br>
+							&lt;&lt; 　　左移<br>
+							&gt;&gt; 　　右移<br>
+							&gt;&gt;&gt;　　右移補零
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					直接用範例來說明：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=5, b=8;
+						document.write(a&amp;b);
                     </textarea>
-                    <br>
-                    顯示結果為 0，這是因為 a &amp; b 實際的計算情形是這樣：<br>
-                    <br>
-                    <strong>
-                        0101 + 1000 = 0000<br>
-                    </strong>
-                    <br>
-                    如果把 b 改為 7，則會顯示 5，範例如下：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=5, b=7;
-                        document.write(a&amp;b);
+					<br>
+					顯示結果為 0，這是因為 a &amp; b 實際的計算情形是這樣：<br>
+					<br>
+					<strong>
+						0101 + 1000 = 0000<br>
+					</strong>
+					<br>
+					如果把 b 改為 7，則會顯示 5，範例如下：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=5, b=7;
+						document.write(a&amp;b);
                     </textarea>
-                    <br>
-                    因為計算的是 101 + 111 = 101，所以是 5。<br>
-                    <br>
-                    如果不太清楚範例的說明，問題應該出在對二進位數與十進位數不甚熟悉，不妨參考下面的對照表，就能理解範例：<br>
-                    <br>
-                    <strong>
-                        0000　　0<br>
-                        0001　　1<br>
-                        0010　　2<br>
-                        0011　　3<br>
-                        0100　　4<br>
-                        0101　　5<br>
-                        0110　　6<br>
-                        0111　　7<br>
-                        1000　　8<br>
-                        1001　　9<br>
-                        1010　　10<br>
-                    </strong>
-                </p>
-            </section>
+					<br>
+					因為計算的是 101 + 111 = 101，所以是 5。<br>
+					<br>
+					如果不太清楚範例的說明，問題應該出在對二進位數與十進位數不甚熟悉，不妨參考下面的對照表，就能理解範例：<br>
+					<br>
+					<strong>
+						0000　　0<br>
+						0001　　1<br>
+						0010　　2<br>
+						0011　　3<br>
+						0100　　4<br>
+						0101　　5<br>
+						0110　　6<br>
+						0111　　7<br>
+						1000　　8<br>
+						1001　　9<br>
+						1010　　10<br>
+					</strong>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>指定運算子</h2>
-                <p>
-                    將運算結果指定給變數。
-                </p>
-                <hr>
-                <section>
-                    <h3>基本的</h3>
-                    <p>
-                        <code>
-                            =　　將右邊的值、或計算結果，指定給左邊的變數。
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>活用的</h3>
-                    <p>
-                        <code>
-                            +=　　左邊的值等於自身加上右邊的值。<br>
-                            -=　　左邊的值等於自身減掉右邊的值。<br>
-                            *=　　左邊的值等於自身乘上右邊的值。<br>
-                            /=　　左邊的值等於自身除以右邊的值。<br>
-                            %=　　左邊的值等於自身除以右邊的值後取餘數。
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>艱奧的（真有需要用到再學）</h3>
-                    <p>
-                        <code>
-                            &amp;= 　　左邊的值等於左右兩邊的值做 AND 位元運算。<br>
-                            |= 　　左邊的值等於左右兩邊的值做 OR 位元運算。<br>
-                            &lt;&lt;=　　左邊的值等於左右兩邊的值做左移位元運算。<br>
-                            &gt;&gt;=　　左邊的值等於左右兩邊的值做右移位元運算。<br>
-                            ^= 　　左邊的值等於左右兩邊的值做 XOR 位元運算。
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    直接用範例來說明：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a=5, b=8;
-                        a+=b;
-                        document.write(a);
+			<section>
+				<h2>指定運算子</h2>
+				<p>
+					將運算結果指定給變數。
+				</p>
+				<hr>
+				<section>
+					<h3>基本的</h3>
+					<p>
+						<code>
+							=　　將右邊的值、或計算結果，指定給左邊的變數。
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>活用的</h3>
+					<p>
+						<code>
+							+=　　左邊的值等於自身加上右邊的值。<br>
+							-=　　左邊的值等於自身減掉右邊的值。<br>
+							*=　　左邊的值等於自身乘上右邊的值。<br>
+							/=　　左邊的值等於自身除以右邊的值。<br>
+							%=　　左邊的值等於自身除以右邊的值後取餘數。
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>艱奧的（真有需要用到再學）</h3>
+					<p>
+						<code>
+							&amp;= 　　左邊的值等於左右兩邊的值做 AND 位元運算。<br>
+							|= 　　左邊的值等於左右兩邊的值做 OR 位元運算。<br>
+							&lt;&lt;=　　左邊的值等於左右兩邊的值做左移位元運算。<br>
+							&gt;&gt;=　　左邊的值等於左右兩邊的值做右移位元運算。<br>
+							^= 　　左邊的值等於左右兩邊的值做 XOR 位元運算。
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					直接用範例來說明：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a=5, b=8;
+						a+=b;
+						document.write(a);
                     </textarea>
-                    <br>
-                    顯示結果為 13，因為計算的情況相當於 a=5+8。
-                </p>
-            </section>
+					<br>
+					顯示結果為 13，因為計算的情況相當於 a=5+8。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>特殊情況</h2>
-                <p>
-                    如果資料是 String 型態的話，+ 運算子計算的，並不是四則運算的加法，而是把兩筆文字資料相接起來！例如：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a = 'How are you!';
-                        var b = 'Fine, thank you.';
-                        document.write(a+b);
+			<section>
+				<h2>特殊情況</h2>
+				<p>
+					如果資料是 String 型態的話，+ 運算子計算的，並不是四則運算的加法，而是把兩筆文字資料相接起來！例如：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a = 'How are you!';
+						var b = 'Fine, thank you.';
+						document.write(a+b);
                     </textarea>
-                    <br>
-                    網頁會顯示「How are you! Fine, thank you.」。
-                </p>
-            </section>
+					<br>
+					網頁會顯示「How are you! Fine, thank you.」。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>運算子優先順序</h2>
-                <p>
-                    就像四則運算有「先乘除後加減」的規則，否則計算出來的數字不一樣，程式設計的各種運算子混在一起時，也有先後順序的規範需要遵循。<br>
-                    <br>
-                    （草稿中）
-                </p>
-            </section>
+			<section>
+				<h2>運算子優先順序</h2>
+				<p>
+					就像四則運算有「先乘除後加減」的規則，否則計算出來的數字不一樣，程式設計的各種運算子混在一起時，也有先後順序的規範需要遵循。<br>
+					<br>
+					（草稿中）
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

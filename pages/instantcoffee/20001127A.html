@@ -2,255 +2,255 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JTable</h1>
-            </header>
+			<header>
+				<h1>JTable</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>產生表格</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[15,16,17,18]'>
-                        import javax.swing.JFrame;
-                        import javax.swing.JScrollPane;
-                        import javax.swing.JTable;
-                        import javax.swing.table.DefaultTableModel;
+			<section>
+				<h2>產生表格</h2>
+				<p>
+					<textarea class='brush:java;highlight:[15,16,17,18]'>
+						import javax.swing.JFrame;
+						import javax.swing.JScrollPane;
+						import javax.swing.JTable;
+						import javax.swing.table.DefaultTableModel;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                JFrame frame = new JFrame();
-                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame.setSize(433, 219);
-                                frame.setVisible(true);
+								JFrame frame = new JFrame();
+								frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								frame.setSize(433, 219);
+								frame.setVisible(true);
 
-                                String[] headline = {"姓名","背號","位置"};
-                                Object[][] data = new Object[20][3];
-                                DefaultTableModel table_model = new DefaultTableModel(data, headline);
-                                JTable table = new JTable(table_model);
+								String[] headline = {"姓名","背號","位置"};
+								Object[][] data = new Object[20][3];
+								DefaultTableModel table_model = new DefaultTableModel(data, headline);
+								JTable table = new JTable(table_model);
 
-                                JScrollPane scroll_pane = new JScrollPane(table);
-                                scroll_pane.setSize(424, 185);
-                                scroll_pane.setLocation(0, 0);
+								JScrollPane scroll_pane = new JScrollPane(table);
+								scroll_pane.setSize(424, 185);
+								scroll_pane.setLocation(0, 0);
 
-                                frame.setLayout(null);
-                                frame.add(scroll_pane);
+								frame.setLayout(null);
+								frame.add(scroll_pane);
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    程式執行結果如下：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001127A_01.png' alt='插圖'>
-                </figure>
-            </section>
+					<br>
+					程式執行結果如下：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20001127A_01.png' alt='插圖'>
+				</figure>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>操作表格</h2>
-                <p>
-                    針對上一節範例的 table_model 物件，進行「欄」「列」「資料」的相關操作。
-                </p>
-                <hr>
-                <section>
-                    <h3>新增列</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            Object[] objects = new Object[3];
-                            table_model.addRow(objects);
+			<section>
+				<h2>操作表格</h2>
+				<p>
+					針對上一節範例的 table_model 物件，進行「欄」「列」「資料」的相關操作。
+				</p>
+				<hr>
+				<section>
+					<h3>新增列</h3>
+					<p>
+						<textarea class='brush:java'>
+							Object[] objects = new Object[3];
+							table_model.addRow(objects);
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>插入列</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            Object[] objects = new Object[3];
-                            table_model.insertRow(3, objects);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>插入列</h3>
+					<p>
+						<textarea class='brush:java'>
+							Object[] objects = new Object[3];
+							table_model.insertRow(3, objects);
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>搬移多列資料</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.moveRow(0, 3, 1); //第 0 列到第 3 列搬移到第 1 列
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>搬移多列資料</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.moveRow(0, 3, 1); //第 0 列到第 3 列搬移到第 1 列
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得列數</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.getRowCount();
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得列數</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.getRowCount();
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>更改列數</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.setRowCount(3);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>更改列數</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.setRowCount(3);
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>刪除列</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.removeRow(2);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>刪除列</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.removeRow(2);
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>刪最後列</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            int row_count = table_model.getRowCount() - 1;
-                            if(row_count>= 0){
-                              table_model.removeRow(row_count);
-                              table_model.setRowCount(row_count);
-                            }
-                            table.revalidate();
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>刪最後列</h3>
+					<p>
+						<textarea class='brush:java'>
+							int row_count = table_model.getRowCount() - 1;
+							if(row_count>= 0){
+							  table_model.removeRow(row_count);
+							  table_model.setRowCount(row_count);
+							}
+							table.revalidate();
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>新增欄</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.addColumn("新增欄");
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>新增欄</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.addColumn("新增欄");
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得欄位名稱</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.getColumnName(column_count);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得欄位名稱</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.getColumnName(column_count);
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得欄數</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.getColumnCount(column_count);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得欄數</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.getColumnCount(column_count);
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>刪最後欄</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            int column_count = table_model.getColumnCount() - 1;
-                            if(column_count>= 0){
-                                javax.swing.table.TableColumnModel table_column_model = table.getColumnModel();
-                                javax.swing.table.TableColumn table_column = table_column_model.getColumn(column_count);
-                                table_column_model.removeColumn(table_column);
-                                table_model.setColumnCount(column_count);
-                            }
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>刪最後欄</h3>
+					<p>
+						<textarea class='brush:java'>
+							int column_count = table_model.getColumnCount() - 1;
+							if(column_count>= 0){
+								javax.swing.table.TableColumnModel table_column_model = table.getColumnModel();
+								javax.swing.table.TableColumn table_column = table_column_model.getColumn(column_count);
+								table_column_model.removeColumn(table_column);
+								table_model.setColumnCount(column_count);
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>設定資料</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.setValueAt("HELLO", 0, 0); //第 0 列第 0 行設為 HELLO
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>設定資料</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.setValueAt("HELLO", 0, 0); //第 0 列第 0 行設為 HELLO
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得資料</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            table_model.getValueAt(0, 0).toString(); //取出第 0 列第 0 行的資料
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得資料</h3>
+					<p>
+						<textarea class='brush:java'>
+							table_model.getValueAt(0, 0).toString(); //取出第 0 列第 0 行的資料
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>讓表格能對應資料型別</h2>
-                <p>
-                    表格可以根據資料型態的種類，作出不同的顯示：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001127A_02.png' alt='插圖'>
-                    <figcaption>文字向左對齊，數值向右對齊，布林值以核取方塊顯示。</figcaption>
-                </figure>
-                <p>
-                    先建立新的類別 MyTableModel.java 讓它繼承 DefaultTableModel，然後複寫 getColumnClass()，再將 Main.java 的 DefaultTableModel 改為 MyTableModel 即可。
-                </p>
-                <hr>
-                <section>
-                    <h3>MyTableModel.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javax.swing.table.DefaultTableModel;
+			<section>
+				<h2>讓表格能對應資料型別</h2>
+				<p>
+					表格可以根據資料型態的種類，作出不同的顯示：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20001127A_02.png' alt='插圖'>
+					<figcaption>文字向左對齊，數值向右對齊，布林值以核取方塊顯示。</figcaption>
+				</figure>
+				<p>
+					先建立新的類別 MyTableModel.java 讓它繼承 DefaultTableModel，然後複寫 getColumnClass()，再將 Main.java 的 DefaultTableModel 改為 MyTableModel 即可。
+				</p>
+				<hr>
+				<section>
+					<h3>MyTableModel.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javax.swing.table.DefaultTableModel;
 
-                            public class MyTableModel extends DefaultTableModel{
+							public class MyTableModel extends DefaultTableModel{
 
-                                public MyTableModel(Object[][] data, Object[] columnNames){
-                                    super(data, columnNames);
-                                }
+								public MyTableModel(Object[][] data, Object[] columnNames){
+									super(data, columnNames);
+								}
 
-                                public Class getColumnClass(int index){
-                                    return getValueAt(0, index).getClass();
-                                }
+								public Class getColumnClass(int index){
+									return getValueAt(0, index).getClass();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            MyTableModel table_model = new MyTableModel(rows, columns);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							MyTableModel table_model = new MyTableModel(rows, columns);
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

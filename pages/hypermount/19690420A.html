@@ -2,761 +2,761 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>共通類別庫</h1>
-                <p>
-                    [<a href='#array'>Array</a>|<a href='#boolean'>Booelan</a>|<a href='#date'>Date</a>|<a href='#function'>Function</a>|<a href='#math'>Math</a>|<a href='#number'>Number</a>|<a href='#object'>Object</a>|<a href='#regexp'>RegExp</a>|<a href='#string'>String</a>]
-                </p>
-            </header>
+			<header>
+				<h1>共通類別庫</h1>
+				<p>
+					[<a href='#array'>Array</a>|<a href='#boolean'>Booelan</a>|<a href='#date'>Date</a>|<a href='#function'>Function</a>|<a href='#math'>Math</a>|<a href='#number'>Number</a>|<a href='#object'>Object</a>|<a href='#regexp'>RegExp</a>|<a href='#string'>String</a>]
+				</p>
+			</header>
 
-            <hr id='array'>
+			<hr id='array'>
 
-            <section>
-                <h2>Array</h2>
-                <p>
-                    Array 物件是 JavaScript 提供「陣列」資料結構的解決方案。雖然採行這樣的方式，只能建立一維陣列，但還是可以對陣列產生陣列的方式，來實現多維陣列的設計。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>concat(元素1,元素2,…)</td><td>將其它陣列或資料加入陣列。</td></tr>
-                        <tr><td>indexOf(資料)</td><td>從陣列開頭搜尋資料。</td></tr>
-                        <tr><td>join('區隔符號')</td><td>以指定符號為區隔，輸出陣列資料。參數省略的話預設為 , 逗號。</td></tr>
-                        <tr><td>lastIndexOf(資料)</td><td>從陣列結尾開始搜尋資料。</td></tr>
-                        <tr><td>pop()</td><td>移除最後一筆資料。</td></tr>
-                        <tr><td>push(資料1,資料2,…)</td><td>在陣列末端加入新的資料。</td></tr>
-                        <tr><td>reverse()</td><td>顛倒陣列資料的排列順序。</td></tr>
-                        <tr><td>shift()</td><td>移除第一筆資料。</td></tr>
-                        <tr><td>slice(開始位置,結束位置)</td><td>傳回指定擷取範圍內的資料。</td></tr>
-                        <tr><td>sort()</td><td>進行排序。</td></tr>
-                        <tr><td>splice(位置,數量,資料)</td><td>隨參數不同，進行移除、插入、取代資料不同動作。</td></tr>
-                        <tr><td>toString()</td><td>以字串輸出陣列的資料，並以 , 作區隔。</td></tr>
-                        <tr><td>unshift(資料1,資料2,…)</td><td>在陣列開頭加入新的資料。</td></tr>
-                        <tr><td>valueOf()</td><td>以原型輸出 Array 物件的資料。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>constructor</td><td>傳回 function Array(){ [native code] }。</td></tr>
-                        <tr><td>length</td><td>取得資料的筆數。</td></tr>
-                        <tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    產生陣列的標準做法是：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _array = new Array('AAA', 'BBB', 'CCC');
+			<section>
+				<h2>Array</h2>
+				<p>
+					Array 物件是 JavaScript 提供「陣列」資料結構的解決方案。雖然採行這樣的方式，只能建立一維陣列，但還是可以對陣列產生陣列的方式，來實現多維陣列的設計。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>concat(元素1,元素2,…)</td><td>將其它陣列或資料加入陣列。</td></tr>
+						<tr><td>indexOf(資料)</td><td>從陣列開頭搜尋資料。</td></tr>
+						<tr><td>join('區隔符號')</td><td>以指定符號為區隔，輸出陣列資料。參數省略的話預設為 , 逗號。</td></tr>
+						<tr><td>lastIndexOf(資料)</td><td>從陣列結尾開始搜尋資料。</td></tr>
+						<tr><td>pop()</td><td>移除最後一筆資料。</td></tr>
+						<tr><td>push(資料1,資料2,…)</td><td>在陣列末端加入新的資料。</td></tr>
+						<tr><td>reverse()</td><td>顛倒陣列資料的排列順序。</td></tr>
+						<tr><td>shift()</td><td>移除第一筆資料。</td></tr>
+						<tr><td>slice(開始位置,結束位置)</td><td>傳回指定擷取範圍內的資料。</td></tr>
+						<tr><td>sort()</td><td>進行排序。</td></tr>
+						<tr><td>splice(位置,數量,資料)</td><td>隨參數不同，進行移除、插入、取代資料不同動作。</td></tr>
+						<tr><td>toString()</td><td>以字串輸出陣列的資料，並以 , 作區隔。</td></tr>
+						<tr><td>unshift(資料1,資料2,…)</td><td>在陣列開頭加入新的資料。</td></tr>
+						<tr><td>valueOf()</td><td>以原型輸出 Array 物件的資料。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>constructor</td><td>傳回 function Array(){ [native code] }。</td></tr>
+						<tr><td>length</td><td>取得資料的筆數。</td></tr>
+						<tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					產生陣列的標準做法是：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _array = new Array('AAA', 'BBB', 'CCC');
                     </textarea>
-                    <br>
-                    但 JavaScript 還提供更簡便的做法：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _array = ['AAA', 'BBB', 'CCC'];
+					<br>
+					但 JavaScript 還提供更簡便的做法：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _array = ['AAA', 'BBB', 'CCC'];
                     </textarea>
-                    <br>
-                    然後就可用索引值來存取陣列裡面的每一筆資料：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        document.write(_array[0]);
+					<br>
+					然後就可用索引值來存取陣列裡面的每一筆資料：<br>
+					<br>
+					<textarea class='brush:js'>
+						document.write(_array[0]);
                     </textarea>
-                    <br>
-                    最後別小看 Array 物件，善用 sort() 與 indexOf() 可以進行 Binary search 的演算法，大幅提升資料處理的效率！
-                </p>
-            </section>
+					<br>
+					最後別小看 Array 物件，善用 sort() 與 indexOf() 可以進行 Binary search 的演算法，大幅提升資料處理的效率！
+				</p>
+			</section>
 
-            <hr id='boolean'>
+			<hr id='boolean'>
 
-            <section>
-                <h2>Boolean</h2>
-                <p>
-                    Boolean 物件用來直接下達 true 與 false 兩種值該如何輸出，看是要直接以文字的方式輸出其值？還是先按照資料本身的性質決定如何輸出？<br>
-                    <br>
-                    然而，toString() 和 valueOf() 其實是系統在內部運作時自動調用的功能，系統會根據資料的使用場合自動執行這兩個功能，原則上使用者不需要用到它，因此平常會用到 Boolean 物件的情形並不多。<br>
-                    <br>
-                    但並不是不建議使用它來保存 true 和 false，只是很少有人用罷了。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>toString()</td><td>以字串輸出 Boolean 物件的資料。</td></tr>
-                        <tr><td>valueOf()</td><td>以原型輸出 Boolean 物件的資料。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>constructor</td><td>傳回 function Boolean(){ [native code] }。</td></tr>
-                        <tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    雖然平常很少會需要用到 Boolean 物件，但它卻是很好的 JavaScript 物件教學範本。<br>
-                    <br>
-                    JavaScript 的每個物件都繼承自 Object，因此都有 toString() 和 valueOf() 兩種操作方法，但差異在哪有時候說不清楚，這時就是 Boolean 物件派上用場的時候了！<br>
-                    <br>
-                    首先來看這樣的例子：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _boolean = new Boolean(false);
-                        if(_boolean.valueOf()) document.write('TRUE');
-                        else document.write('FALSE');
+			<section>
+				<h2>Boolean</h2>
+				<p>
+					Boolean 物件用來直接下達 true 與 false 兩種值該如何輸出，看是要直接以文字的方式輸出其值？還是先按照資料本身的性質決定如何輸出？<br>
+					<br>
+					然而，toString() 和 valueOf() 其實是系統在內部運作時自動調用的功能，系統會根據資料的使用場合自動執行這兩個功能，原則上使用者不需要用到它，因此平常會用到 Boolean 物件的情形並不多。<br>
+					<br>
+					但並不是不建議使用它來保存 true 和 false，只是很少有人用罷了。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>toString()</td><td>以字串輸出 Boolean 物件的資料。</td></tr>
+						<tr><td>valueOf()</td><td>以原型輸出 Boolean 物件的資料。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>constructor</td><td>傳回 function Boolean(){ [native code] }。</td></tr>
+						<tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					雖然平常很少會需要用到 Boolean 物件，但它卻是很好的 JavaScript 物件教學範本。<br>
+					<br>
+					JavaScript 的每個物件都繼承自 Object，因此都有 toString() 和 valueOf() 兩種操作方法，但差異在哪有時候說不清楚，這時就是 Boolean 物件派上用場的時候了！<br>
+					<br>
+					首先來看這樣的例子：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _boolean = new Boolean(false);
+						if(_boolean.valueOf()) document.write('TRUE');
+						else document.write('FALSE');
                     </textarea>
-                    <br>
-                    程式會在網頁上輸出 FALSE。因為 _boolean 的資料其實是以繼承自 Object 的資料保存方式來儲存，使用 valueOf() 來提取 _boolean 的值，會先以「布林值」來送出，不適合的話才以「字串」送出。範例 _boolean 的布林值是 false，所以顯示 FASLE。<br>
-                    <br>
-                    接著來看這樣的範例：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _boolean = new Boolean(false);
-                        if(_boolean.valueOf()) document.write('TRUE');
-                        else document.write('FALSE');
+					<br>
+					程式會在網頁上輸出 FALSE。因為 _boolean 的資料其實是以繼承自 Object 的資料保存方式來儲存，使用 valueOf() 來提取 _boolean 的值，會先以「布林值」來送出，不適合的話才以「字串」送出。範例 _boolean 的布林值是 false，所以顯示 FASLE。<br>
+					<br>
+					接著來看這樣的範例：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _boolean = new Boolean(false);
+						if(_boolean.valueOf()) document.write('TRUE');
+						else document.write('FALSE');
                     </textarea>
-                    <br>
-                    這次則是在網頁上輸出 TRUE，因為 _boolean 的資料使用 toString() 來提取，會直接以「字串」來送出，所以送出的是 'false' 這樣的字串。而 if 條件式遇到大於 0 或有效存在的資料，都視為 true，因此 'flase' 這樣有效存在的資料，布林式運算結果為 true，所以顯示 TRUE。<br>
-                    <br>
-                    藉由 Boolean 物件的執行情況，讓我們得以充分了解這兩個操作方法的差異之處。<br>
-                    <br>
-                    例外的情況像 String 物件。String 的資料繼承自 Object 來保存資料時，會改成「字串」來儲存，所以使用 valueOf() 和 toString() 結果是一樣的。不過，既然 valueOf() 對 String 物件來說注定是「字串」，那不需要嘗試以 Object 來送出資料的 toString() 會比較有效率。
-                </p>
-            </section>
+					<br>
+					這次則是在網頁上輸出 TRUE，因為 _boolean 的資料使用 toString() 來提取，會直接以「字串」來送出，所以送出的是 'false' 這樣的字串。而 if 條件式遇到大於 0 或有效存在的資料，都視為 true，因此 'flase' 這樣有效存在的資料，布林式運算結果為 true，所以顯示 TRUE。<br>
+					<br>
+					藉由 Boolean 物件的執行情況，讓我們得以充分了解這兩個操作方法的差異之處。<br>
+					<br>
+					例外的情況像 String 物件。String 的資料繼承自 Object 來保存資料時，會改成「字串」來儲存，所以使用 valueOf() 和 toString() 結果是一樣的。不過，既然 valueOf() 對 String 物件來說注定是「字串」，那不需要嘗試以 Object 來送出資料的 toString() 會比較有效率。
+				</p>
+			</section>
 
-            <hr id='date'>
+			<hr id='date'>
 
-            <section>
-                <h2>Date</h2>
-                <p>
-                    Date 物件提供處理日期與時間的功能。<br>
-                    <br>
-                    然而，取得的是使用者電腦所設定的時間，所以不見得是現實生活的準確時間。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>getDate()</td><td>取得日期。</td></tr>
-                        <tr><td>getDay()</td><td>取得星期。</td></tr>
-                        <tr><td>getFullYear()</td><td>取得完整四位數的西元年份。</td></tr>
-                        <tr><td>getHours()</td><td>取得小時。</td></tr>
-                        <tr><td>getMilliseconds()</td><td>取得毫秒；一秒等於 1000 毫秒。</td></tr>
-                        <tr><td>getMinutes()</td><td>取得分鐘。</td></tr>
-                        <tr><td>getMonth()</td><td>取得月份。</td></tr>
-                        <tr><td>getSeconds()</td><td>取得秒數。</td></tr>
-                        <tr><td>getTime()</td><td>計算自 1970 年 1 月 1 日 0 點 0 分至今所經過的毫秒數。</td></tr>
-                        <tr><td>getTimezoneOffset()</td><td>取得當地時區和格林威治時間的時差，以分鐘計算。</td></tr>
-                        <tr><td>getUTCDate()</td><td>以國際協定時間的格式取得日期。</td></tr>
-                        <tr><td>getUTCDay()</td><td>以國際協定時間的格式取得星期。</td></tr>
-                        <tr><td>getUTCFullYear()</td><td>以國際協定時間的格式取得年份。</td></tr>
-                        <tr><td>getUTCHours()</td><td>以國際協定時間的格式取得小時。</td></tr>
-                        <tr><td>getUTCMilliseconds()</td><td>以國際協定時間的格式取得毫秒。</td></tr>
-                        <tr><td>getUTCMinutes()</td><td>以國際協定時間的格式取得分鐘。</td></tr>
-                        <tr><td>getUTCMonth()</td><td>以國際協定時間的格式取得月份。</td></tr>
-                        <tr><td>getUTCSeconds()</td><td>以國際協定時間的格式取得秒數。</td></tr>
-                        <tr><td>getYear()</td><td>取得年份。採用 19XX 尾數的方式，已不被建議使用。</td></tr>
-                        <tr><td>parse('西元/月/日')</td><td>計算自 1970 年 1 月 1 日 0 點 0 分至指定日期所經過的毫秒數。</td></tr>
-                        <tr><td>setDate(日)</td><td>設定日期。</td></tr>
-                        <tr><td>setFullYear(年)</td><td>設定完整四位數的西元年份。</td></tr>
-                        <tr><td>setHours(時,分,秒,毫秒)</td><td>設定小時。後面參數可同時設定完整的時間，可省略。</td></tr>
-                        <tr><td>setMilliseconds(毫秒)</td><td>設定毫秒，注意數值範圍從 0 到 999。</td></tr>
-                        <tr><td>setMinutes(分,秒,毫秒)</td><td>設定分鐘。後面的參數可同時設定秒數，可省略。</td></tr>
-                        <tr><td>setMonth(月,日)</td><td>設定月份。後面的參數可同時設定日期，可省略。</td></tr>
-                        <tr><td>setSeconds(秒,毫秒)</td><td>設定秒數。後面的參數可同時設定毫秒，可省略。</td></tr>
-                        <tr><td>setTime()</td><td>設定自 1970 年 1 月 1 日 0 點 0 分至指定日期所經過的毫秒數。</td></tr>
-                        <tr><td>setUTCDate(日)</td><td>可以輸入完整的國際協定時間格式來設定日期。</td></tr>
-                        <tr><td>setUTCFullYear(年)</td><td>可以輸入完整的國際協定時間格式來設定年份。</td></tr>
-                        <tr><td>setUTCHours(時)</td><td>可以輸入完整的國際協定時間格式來設定小時。</td></tr>
-                        <tr><td>setUTCMilliseconds(毫秒)</td><td>可以輸入完整的國際協定時間格式來設定毫秒。</td></tr>
-                        <tr><td>setUTCMinutes(分)</td><td>可以輸入完整的國際協定時間格式來設定分鐘。</td></tr>
-                        <tr><td>setUTCMonth(月)</td><td>可以輸入完整的國際協定時間格式來設定月份。</td></tr>
-                        <tr><td>setUTCSeconds(秒)</td><td>可以輸入完整的國際協定時間格式來設定秒數。</td></tr>
-                        <tr><td>setYear(19XX 年的尾數)</td><td>採用 19XX 尾數的方式來設定年份，已不被建議使用。</td></tr>
-                        <tr><td>toDateString()</td><td>輸出日期。</td></tr>
-                        <tr><td>toGMTString()</td><td>以格林威治平均時間格式輸出完整日期與時間。</td></tr>
-                        <tr><td>toISOString()</td><td>以 ISO 的格式輸出完整日期與時間。</td></tr>
-                        <tr><td>toJSON()</td><td>輸出結果跟 toISOString() 一樣。</td></tr>
-                        <tr><td>toLocaleDateString()</td><td>以作業系統的本地時間格式輸出日期。</td></tr>
-                        <tr><td>toLocaleTimeString()</td><td>以作業系統的本地時間格式輸出時間。</td></tr>
-                        <tr><td>toLocaleString()</td><td>以作業系統的本地時間格式輸出字串。</td></tr>
-                        <tr><td>toString()</td><td>已覆寫為呼叫 toUTCString() 的動作。</td></tr>
-                        <tr><td>toTimeString()</td><td>輸出時間。</td></tr>
-                        <tr><td>toUTCString()</td><td>以國際協定時間的格式輸出完整日期與時間。</td></tr>
-                        <tr><td>UTC(年,月,日,時,分,秒,毫秒)</td><td>計算自 1970 年 1 月 1 日 0 點 0 分至指定日期所經過的毫秒數。</td></tr>
-                        <tr><td>valueOf()</td><td>已覆寫為呼叫 getTime() 的動作。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>constructor</td><td>傳回 function Date(){ [native code] }。</td></tr>
-                        <tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    getDate() 與 getUTCDate() 的差異，在於前者使用本地時間的格式取得資料，依此類推。<br>
-                    <br>
-                    在設定為台北地區的作業系統使用 getTimezoneOffset()，會傳回 -480 分鐘，也就是慢八小時的意思。
-                </p>
-            </section>
+			<section>
+				<h2>Date</h2>
+				<p>
+					Date 物件提供處理日期與時間的功能。<br>
+					<br>
+					然而，取得的是使用者電腦所設定的時間，所以不見得是現實生活的準確時間。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>getDate()</td><td>取得日期。</td></tr>
+						<tr><td>getDay()</td><td>取得星期。</td></tr>
+						<tr><td>getFullYear()</td><td>取得完整四位數的西元年份。</td></tr>
+						<tr><td>getHours()</td><td>取得小時。</td></tr>
+						<tr><td>getMilliseconds()</td><td>取得毫秒；一秒等於 1000 毫秒。</td></tr>
+						<tr><td>getMinutes()</td><td>取得分鐘。</td></tr>
+						<tr><td>getMonth()</td><td>取得月份。</td></tr>
+						<tr><td>getSeconds()</td><td>取得秒數。</td></tr>
+						<tr><td>getTime()</td><td>計算自 1970 年 1 月 1 日 0 點 0 分至今所經過的毫秒數。</td></tr>
+						<tr><td>getTimezoneOffset()</td><td>取得當地時區和格林威治時間的時差，以分鐘計算。</td></tr>
+						<tr><td>getUTCDate()</td><td>以國際協定時間的格式取得日期。</td></tr>
+						<tr><td>getUTCDay()</td><td>以國際協定時間的格式取得星期。</td></tr>
+						<tr><td>getUTCFullYear()</td><td>以國際協定時間的格式取得年份。</td></tr>
+						<tr><td>getUTCHours()</td><td>以國際協定時間的格式取得小時。</td></tr>
+						<tr><td>getUTCMilliseconds()</td><td>以國際協定時間的格式取得毫秒。</td></tr>
+						<tr><td>getUTCMinutes()</td><td>以國際協定時間的格式取得分鐘。</td></tr>
+						<tr><td>getUTCMonth()</td><td>以國際協定時間的格式取得月份。</td></tr>
+						<tr><td>getUTCSeconds()</td><td>以國際協定時間的格式取得秒數。</td></tr>
+						<tr><td>getYear()</td><td>取得年份。採用 19XX 尾數的方式，已不被建議使用。</td></tr>
+						<tr><td>parse('西元/月/日')</td><td>計算自 1970 年 1 月 1 日 0 點 0 分至指定日期所經過的毫秒數。</td></tr>
+						<tr><td>setDate(日)</td><td>設定日期。</td></tr>
+						<tr><td>setFullYear(年)</td><td>設定完整四位數的西元年份。</td></tr>
+						<tr><td>setHours(時,分,秒,毫秒)</td><td>設定小時。後面參數可同時設定完整的時間，可省略。</td></tr>
+						<tr><td>setMilliseconds(毫秒)</td><td>設定毫秒，注意數值範圍從 0 到 999。</td></tr>
+						<tr><td>setMinutes(分,秒,毫秒)</td><td>設定分鐘。後面的參數可同時設定秒數，可省略。</td></tr>
+						<tr><td>setMonth(月,日)</td><td>設定月份。後面的參數可同時設定日期，可省略。</td></tr>
+						<tr><td>setSeconds(秒,毫秒)</td><td>設定秒數。後面的參數可同時設定毫秒，可省略。</td></tr>
+						<tr><td>setTime()</td><td>設定自 1970 年 1 月 1 日 0 點 0 分至指定日期所經過的毫秒數。</td></tr>
+						<tr><td>setUTCDate(日)</td><td>可以輸入完整的國際協定時間格式來設定日期。</td></tr>
+						<tr><td>setUTCFullYear(年)</td><td>可以輸入完整的國際協定時間格式來設定年份。</td></tr>
+						<tr><td>setUTCHours(時)</td><td>可以輸入完整的國際協定時間格式來設定小時。</td></tr>
+						<tr><td>setUTCMilliseconds(毫秒)</td><td>可以輸入完整的國際協定時間格式來設定毫秒。</td></tr>
+						<tr><td>setUTCMinutes(分)</td><td>可以輸入完整的國際協定時間格式來設定分鐘。</td></tr>
+						<tr><td>setUTCMonth(月)</td><td>可以輸入完整的國際協定時間格式來設定月份。</td></tr>
+						<tr><td>setUTCSeconds(秒)</td><td>可以輸入完整的國際協定時間格式來設定秒數。</td></tr>
+						<tr><td>setYear(19XX 年的尾數)</td><td>採用 19XX 尾數的方式來設定年份，已不被建議使用。</td></tr>
+						<tr><td>toDateString()</td><td>輸出日期。</td></tr>
+						<tr><td>toGMTString()</td><td>以格林威治平均時間格式輸出完整日期與時間。</td></tr>
+						<tr><td>toISOString()</td><td>以 ISO 的格式輸出完整日期與時間。</td></tr>
+						<tr><td>toJSON()</td><td>輸出結果跟 toISOString() 一樣。</td></tr>
+						<tr><td>toLocaleDateString()</td><td>以作業系統的本地時間格式輸出日期。</td></tr>
+						<tr><td>toLocaleTimeString()</td><td>以作業系統的本地時間格式輸出時間。</td></tr>
+						<tr><td>toLocaleString()</td><td>以作業系統的本地時間格式輸出字串。</td></tr>
+						<tr><td>toString()</td><td>已覆寫為呼叫 toUTCString() 的動作。</td></tr>
+						<tr><td>toTimeString()</td><td>輸出時間。</td></tr>
+						<tr><td>toUTCString()</td><td>以國際協定時間的格式輸出完整日期與時間。</td></tr>
+						<tr><td>UTC(年,月,日,時,分,秒,毫秒)</td><td>計算自 1970 年 1 月 1 日 0 點 0 分至指定日期所經過的毫秒數。</td></tr>
+						<tr><td>valueOf()</td><td>已覆寫為呼叫 getTime() 的動作。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>constructor</td><td>傳回 function Date(){ [native code] }。</td></tr>
+						<tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					getDate() 與 getUTCDate() 的差異，在於前者使用本地時間的格式取得資料，依此類推。<br>
+					<br>
+					在設定為台北地區的作業系統使用 getTimezoneOffset()，會傳回 -480 分鐘，也就是慢八小時的意思。
+				</p>
+			</section>
 
-            <hr id='function'>
+			<hr id='function'>
 
-            <section>
-                <h2>Function</h2>
-                <p>
-                    JavaScript 把 function（函式）設計為 first class object（第一級物件），所有函式都是 Function 物件，而且是最高層級的型別，能夠當作參數傳遞！
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>apply(指標, 參數群)</td><td>代入 reference 與 arguments 給函式來使用物件。</td></tr>
-                        <tr><td>call(指標, 參數1, 參數2, ...)</td><td>與 apply() 類似，但逐一輸入參數。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>arguments</td><td>這是個物件，可以更多元地處理傳進來的參數，但是只能在函式內部使用。</td></tr>
-                        <tr><td>arguments.callee</td><td>建議當作沒這個項目。</td></tr>
-                        <tr><td>caller</td><td>建議當作沒這個項目。</td></tr>
-                        <tr><td>length</td><td>傳回參數的個數。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    簡單看個範例，在某個函式物件裡面，快速傳遞參數給另一個函式物件來使用：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var S = function(x, y){
-                            this.X = x;
-                            this.Y = y;
-                        };
+			<section>
+				<h2>Function</h2>
+				<p>
+					JavaScript 把 function（函式）設計為 first class object（第一級物件），所有函式都是 Function 物件，而且是最高層級的型別，能夠當作參數傳遞！
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>apply(指標, 參數群)</td><td>代入 reference 與 arguments 給函式來使用物件。</td></tr>
+						<tr><td>call(指標, 參數1, 參數2, ...)</td><td>與 apply() 類似，但逐一輸入參數。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>arguments</td><td>這是個物件，可以更多元地處理傳進來的參數，但是只能在函式內部使用。</td></tr>
+						<tr><td>arguments.callee</td><td>建議當作沒這個項目。</td></tr>
+						<tr><td>caller</td><td>建議當作沒這個項目。</td></tr>
+						<tr><td>length</td><td>傳回參數的個數。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					簡單看個範例，在某個函式物件裡面，快速傳遞參數給另一個函式物件來使用：<br>
+					<br>
+					<textarea class='brush:js'>
+						var S = function(x, y){
+							this.X = x;
+							this.Y = y;
+						};
 
-                        var T = function(x, y, z){
-                            this.Z = z;
-                            S.call(this, x, y);
-                        };
+						var T = function(x, y, z){
+							this.Z = z;
+							S.call(this, x, y);
+						};
 
-                        var a = new T(32, 64, 128);
+						var a = new T(32, 64, 128);
 
-                        document.write(a.X);
-                        document.write(a.Y);
-                        document.write(a.Z);
+						document.write(a.X);
+						document.write(a.Y);
+						document.write(a.Z);
                     </textarea>
-                    <br>
-                    <output>
-                        32<br>
-                        64<br>
-                        128<br>
-                    </output>
-                    <br>
-                    接下來再來看個範例，由於 apply() 與 call() 第一個參數是物件的參照，所以可以這樣變通：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var S = function(x, y){
-                            this.X = x;
-                            this.Y = y;
-                        };
+					<br>
+					<output>
+						32<br>
+						64<br>
+						128<br>
+					</output>
+					<br>
+					接下來再來看個範例，由於 apply() 與 call() 第一個參數是物件的參照，所以可以這樣變通：<br>
+					<br>
+					<textarea class='brush:js'>
+						var S = function(x, y){
+							this.X = x;
+							this.Y = y;
+						};
 
-                        var T = function(z){
-                            this.Z = z;
-                        };
+						var T = function(z){
+							this.Z = z;
+						};
 
-                        var a = new Function();
-                        S.call(a, 32, 64);
-                        T.call(a, 128);
+						var a = new Function();
+						S.call(a, 32, 64);
+						T.call(a, 128);
 
-                        document.write(a.X);
-                        document.write(a.Y);
-                        document.write(a.Z);
+						document.write(a.X);
+						document.write(a.Y);
+						document.write(a.Z);
                     </textarea>
-                    <br>
-                    <output>
-                        32<br>
-                        64<br>
-                        128<br>
-                    </output>
-                    <br>
-                    bind() 與 apply() 和 call() 不一樣！它不是傳參數給函式用的，而是用來明確指定函式物件內部的 this 究竟是誰，然後傳回一份指向正確 this 作用域的新函式：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var S = {
-                            k: 0,
-                            f: function(){
-                                this.k++;
-                                return this.k;
-                            }
-                        };
+					<br>
+					<output>
+						32<br>
+						64<br>
+						128<br>
+					</output>
+					<br>
+					bind() 與 apply() 和 call() 不一樣！它不是傳參數給函式用的，而是用來明確指定函式物件內部的 this 究竟是誰，然後傳回一份指向正確 this 作用域的新函式：<br>
+					<br>
+					<textarea class='brush:js'>
+						var S = {
+							k: 0,
+							f: function(){
+								this.k++;
+								return this.k;
+							}
+						};
 
-                        document.write(S.f.bind(S)());
-                        document.write(S.f.bind(S)());
-                        document.write(S.f.bind(S)());
+						document.write(S.f.bind(S)());
+						document.write(S.f.bind(S)());
+						document.write(S.f.bind(S)());
                     </textarea>
-                    <br>
-                    <output>
-                        1<br>
-                        2<br>
-                        3<br>
-                    </output>
-                    <br>
-                    這通常發生某外層函式呼叫內層函式時，內層認定的 this 明明是函式物件本身，但外層認定的 this 卻是 global 作用域，結果外層帶入的 this 破壞了內層所預期的 this，導致內層函式物件無法正常透過 this 指定想要的項目。這時用 bind() 就能明確傳入一份 this 作用域是誰的物件做為內層函式給外層函式執行！<br>
-                    <br>
-                    例如要在陣列物件的 forEach() 這外層函式呼叫用到 this 的內層物件時，就有可能需要用 xxx.forEach(S.f.bind(S)) 的寫法，來取代 xxx.forEach(S.f)。<br>
-                    <br>
-                    由於 Java 或其它物件導向程式設計不會遇到 this 錯亂的情況，所以 bind() 解釋起來難免錯綜複雜，可能要多看、多嘗試個幾次，才能了解什麼是 bind()…甚至有人基於 bind() 可以繫結函式物件的特性，用它來取代 new 功能，這又更深奧難懂了～
-                </p>
-            </section>
+					<br>
+					<output>
+						1<br>
+						2<br>
+						3<br>
+					</output>
+					<br>
+					這通常發生某外層函式呼叫內層函式時，內層認定的 this 明明是函式物件本身，但外層認定的 this 卻是 global 作用域，結果外層帶入的 this 破壞了內層所預期的 this，導致內層函式物件無法正常透過 this 指定想要的項目。這時用 bind() 就能明確傳入一份 this 作用域是誰的物件做為內層函式給外層函式執行！<br>
+					<br>
+					例如要在陣列物件的 forEach() 這外層函式呼叫用到 this 的內層物件時，就有可能需要用 xxx.forEach(S.f.bind(S)) 的寫法，來取代 xxx.forEach(S.f)。<br>
+					<br>
+					由於 Java 或其它物件導向程式設計不會遇到 this 錯亂的情況，所以 bind() 解釋起來難免錯綜複雜，可能要多看、多嘗試個幾次，才能了解什麼是 bind()…甚至有人基於 bind() 可以繫結函式物件的特性，用它來取代 new 功能，這又更深奧難懂了～
+				</p>
+			</section>
 
-            <hr id='math'>
+			<hr id='math'>
 
-            <section>
-                <h2>Math</h2>
-                <p>
-                    Math 是適合用來做數學運算的物件。特別的是，Math 物件不能使用 new 來建立，必須直接呼叫它的函數與常數。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>abs(x)</td><td>X 的絕對值。</td></tr>
-                        <tr><td>acos(x)</td><td>反餘弦。</td></tr>
-                        <tr><td>asin(x)</td><td>反正弦。</td></tr>
-                        <tr><td>atan(x)</td><td>反正切。</td></tr>
-                        <tr><td>atan2(y,x)</td><td>傳回從X軸到點 (X,Y) 的角度。</td></tr>
-                        <tr><td>ceil(x)</td><td>將 X 無條件進位。</td></tr>
-                        <tr><td>cos(x)</td><td>餘弦。</td></tr>
-                        <tr><td>exp(x)</td><td>e 的 X 次方。</td></tr>
-                        <tr><td>floor(x)</td><td>將 X 無條件捨去。</td></tr>
-                        <tr><td>log(x)</td><td>X 的自然對數。</td></tr>
-                        <tr><td>max(x,y,z,…,n)</td><td>傳回最大的那個參數值。</td></tr>
-                        <tr><td>min(x,y,z,…,n)</td><td>傳回最小的那個參數值。</td></tr>
-                        <tr><td>pow(x,y)</td><td>X 的 Y 次方。</td></tr>
-                        <tr><td>random()</td><td>隨機取得 0 到 1 之間的小數。</td></tr>
-                        <tr><td>round(x)</td><td>將 X 四捨五入。</td></tr>
-                        <tr><td>sin(x)</td><td>正弦。</td></tr>
-                        <tr><td>sqrt(x)</td><td>X 的平方根。</td></tr>
-                        <tr><td>tan(x)</td><td>計算正切。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>E</td><td>自然對數的底數。</td></tr>
-                        <tr><td>LN2</td><td>2 的自然對數。</td></tr>
-                        <tr><td>LN10</td><td>10 的自然對數。</td></tr>
-                        <tr><td>LOG2E</td><td>以 2 為底數 e 的對數。</td></tr>
-                        <tr><td>LOG10E</td><td>以 10 為底數 e 的對數。</td></tr>
-                        <tr><td>PI</td><td>圓周率。</td></tr>
-                        <tr><td>SQRT1_2</td><td>根號 2 分之 1。</td></tr>
-                        <tr><td>SQRT2</td><td>根號 2。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    大多是中學時期學過的數學函數，只有 random() 的使用需要另外說明，它是我們取得「亂數」的管道，但它傳回的值是小數點達十幾個位數、介於 0.0 到 1.0 之間，所以如果不另外處理的話，傳回來的值不適合我們使用。<br>
-                    <br>
-                    通常我們取得亂數的情況希望是整數，因此常見的用法是使用四捨五入的方式來處理 random() 的值……<br>
-                    <br>
-                    <samp>
-                        Math.round(Math.random() * (最大值 - 最小值)) + 最小值<br>
-                    </samp>
-                    <br>
-                    如果你需要傳回 3 到 9 之間的亂數，就是：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        Math.round(Math.random() * (9 - 3)) + 3;
+			<section>
+				<h2>Math</h2>
+				<p>
+					Math 是適合用來做數學運算的物件。特別的是，Math 物件不能使用 new 來建立，必須直接呼叫它的函數與常數。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>abs(x)</td><td>X 的絕對值。</td></tr>
+						<tr><td>acos(x)</td><td>反餘弦。</td></tr>
+						<tr><td>asin(x)</td><td>反正弦。</td></tr>
+						<tr><td>atan(x)</td><td>反正切。</td></tr>
+						<tr><td>atan2(y,x)</td><td>傳回從X軸到點 (X,Y) 的角度。</td></tr>
+						<tr><td>ceil(x)</td><td>將 X 無條件進位。</td></tr>
+						<tr><td>cos(x)</td><td>餘弦。</td></tr>
+						<tr><td>exp(x)</td><td>e 的 X 次方。</td></tr>
+						<tr><td>floor(x)</td><td>將 X 無條件捨去。</td></tr>
+						<tr><td>log(x)</td><td>X 的自然對數。</td></tr>
+						<tr><td>max(x,y,z,…,n)</td><td>傳回最大的那個參數值。</td></tr>
+						<tr><td>min(x,y,z,…,n)</td><td>傳回最小的那個參數值。</td></tr>
+						<tr><td>pow(x,y)</td><td>X 的 Y 次方。</td></tr>
+						<tr><td>random()</td><td>隨機取得 0 到 1 之間的小數。</td></tr>
+						<tr><td>round(x)</td><td>將 X 四捨五入。</td></tr>
+						<tr><td>sin(x)</td><td>正弦。</td></tr>
+						<tr><td>sqrt(x)</td><td>X 的平方根。</td></tr>
+						<tr><td>tan(x)</td><td>計算正切。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>E</td><td>自然對數的底數。</td></tr>
+						<tr><td>LN2</td><td>2 的自然對數。</td></tr>
+						<tr><td>LN10</td><td>10 的自然對數。</td></tr>
+						<tr><td>LOG2E</td><td>以 2 為底數 e 的對數。</td></tr>
+						<tr><td>LOG10E</td><td>以 10 為底數 e 的對數。</td></tr>
+						<tr><td>PI</td><td>圓周率。</td></tr>
+						<tr><td>SQRT1_2</td><td>根號 2 分之 1。</td></tr>
+						<tr><td>SQRT2</td><td>根號 2。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					大多是中學時期學過的數學函數，只有 random() 的使用需要另外說明，它是我們取得「亂數」的管道，但它傳回的值是小數點達十幾個位數、介於 0.0 到 1.0 之間，所以如果不另外處理的話，傳回來的值不適合我們使用。<br>
+					<br>
+					通常我們取得亂數的情況希望是整數，因此常見的用法是使用四捨五入的方式來處理 random() 的值……<br>
+					<br>
+					<samp>
+						Math.round(Math.random() * (最大值 - 最小值)) + 最小值<br>
+					</samp>
+					<br>
+					如果你需要傳回 3 到 9 之間的亂數，就是：<br>
+					<br>
+					<textarea class='brush:js'>
+						Math.round(Math.random() * (9 - 3)) + 3;
                     </textarea>
-                    <br>
-                    除了使用四捨五入的 round()，有時候會想使用無條件進位的 ceil() 或無條件捨去的 floor()，差異如下：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        Math.round(Math.random()*10); //四捨五入：傳回 0 到 10。
-                        Math.ceil(Math.random()*10);  //無條件進位：傳回 1 到 10。
-                        Math.floor(Math.random()*10); //無條件捨去：傳回 0 到 9。
+					<br>
+					除了使用四捨五入的 round()，有時候會想使用無條件進位的 ceil() 或無條件捨去的 floor()，差異如下：<br>
+					<br>
+					<textarea class='brush:js'>
+						Math.round(Math.random()*10); //四捨五入：傳回 0 到 10。
+						Math.ceil(Math.random()*10);  //無條件進位：傳回 1 到 10。
+						Math.floor(Math.random()*10); //無條件捨去：傳回 0 到 9。
                     </textarea>
-                    <br>
-                    別以為這三種進位方式用不到，例如，當你希望產生的亂數直接對照陣列索引值，就適合直接用 floor()：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _array = new Array();
-                        _array[0] = '剪刀';
-                        _array[1] = '石頭';
-                        _array[2] = '布';
+					<br>
+					別以為這三種進位方式用不到，例如，當你希望產生的亂數直接對照陣列索引值，就適合直接用 floor()：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _array = new Array();
+						_array[0] = '剪刀';
+						_array[1] = '石頭';
+						_array[2] = '布';
 
-                        var _index = Math.floor(Math.random()*3);
-                        document.write(_array[_index]);
+						var _index = Math.floor(Math.random()*3);
+						document.write(_array[_index]);
                     </textarea>
-                    <br>
-                    程式碼可讀性提高許多。至於為何平常使用 round()？那是因為心理上覺得四捨五入比較精確，感覺無條件進位或捨去有點攏統。
-                </p>
-            </section>
+					<br>
+					程式碼可讀性提高許多。至於為何平常使用 round()？那是因為心理上覺得四捨五入比較精確，感覺無條件進位或捨去有點攏統。
+				</p>
+			</section>
 
-            <hr id='number'>
+			<hr id='number'>
 
-            <section>
-                <h2>Number</h2>
-                <p>
-                    Number 物件可以直接決定數值資料的輸出方式。<br>
-                    <br>
-                    在「字串資料導向」的 JavaScript，我們稍不留意，資料容易就會轉作字串來處理。使用 Number 物件來保存數值資料，其實是相當有保障的做法。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>toExponential(小數位數)</td><td>將資料以指數形式輸出。</td></tr>
-                        <tr><td>toFixed(小數位數)</td><td>將資料以小數點的形式輸出。</td></tr>
-                        <tr><td>toPrecision(保留位數)</td><td>設定保留的位數來輸出資料。</td></tr>
-                        <tr><td>toString()</td><td>以字串輸出 Number 物件的資料。</td></tr>
-                        <tr><td>valueOf()</td><td>以原型輸出 Number 物件的資料。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>constructor</td><td>傳回 function Number(){ [native code] }。</td></tr>
-                        <tr><td>MAX_VALUE</td><td>傳回 JavaScript 所能接受的最大數值。</td></tr>
-                        <tr><td>MIN_VALUE</td><td>傳回 JavaScript 所能接受的最小數值。</td></tr>
-                        <tr><td>NEGATIVE_INFINITY</td><td>負無限大。</td></tr>
-                        <tr><td>POSITIVE_INFINITY</td><td>無限大。</td></tr>
-                        <tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    需要注意的是 MAX_VALUE 這類全部大寫字母組成的性質，其實是「靜態資料」，用白話文講就是「不用建立就直接使用的資料」。所以應該這麼用才對：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        document.write(Number.MAX_VALUE);
+			<section>
+				<h2>Number</h2>
+				<p>
+					Number 物件可以直接決定數值資料的輸出方式。<br>
+					<br>
+					在「字串資料導向」的 JavaScript，我們稍不留意，資料容易就會轉作字串來處理。使用 Number 物件來保存數值資料，其實是相當有保障的做法。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>toExponential(小數位數)</td><td>將資料以指數形式輸出。</td></tr>
+						<tr><td>toFixed(小數位數)</td><td>將資料以小數點的形式輸出。</td></tr>
+						<tr><td>toPrecision(保留位數)</td><td>設定保留的位數來輸出資料。</td></tr>
+						<tr><td>toString()</td><td>以字串輸出 Number 物件的資料。</td></tr>
+						<tr><td>valueOf()</td><td>以原型輸出 Number 物件的資料。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>constructor</td><td>傳回 function Number(){ [native code] }。</td></tr>
+						<tr><td>MAX_VALUE</td><td>傳回 JavaScript 所能接受的最大數值。</td></tr>
+						<tr><td>MIN_VALUE</td><td>傳回 JavaScript 所能接受的最小數值。</td></tr>
+						<tr><td>NEGATIVE_INFINITY</td><td>負無限大。</td></tr>
+						<tr><td>POSITIVE_INFINITY</td><td>無限大。</td></tr>
+						<tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					需要注意的是 MAX_VALUE 這類全部大寫字母組成的性質，其實是「靜態資料」，用白話文講就是「不用建立就直接使用的資料」。所以應該這麼用才對：<br>
+					<br>
+					<textarea class='brush:js'>
+						document.write(Number.MAX_VALUE);
                     </textarea>
-                    <br>
-                    如果你寫成下面的程式，反而是錯誤的……<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _number = new Number();
-                        document.write(_number.MAX_VALUE);
+					<br>
+					如果你寫成下面的程式，反而是錯誤的……<br>
+					<br>
+					<textarea class='brush:js'>
+						var _number = new Number();
+						document.write(_number.MAX_VALUE);
                     </textarea>
-                    <br>
-                    網頁會顯示 undefined，表示 _number 沒有定義這筆資料。
-                </p>
-            </section>
+					<br>
+					網頁會顯示 undefined，表示 _number 沒有定義這筆資料。
+				</p>
+			</section>
 
-            <hr id='object'>
+			<hr id='object'>
 
-            <section>
-                <h2>Object</h2>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>eval()</td><td></td></tr>
-                        <tr><td>toSource()</td><td></td></tr>
-                        <tr><td>toString()</td><td></td></tr>
-                        <tr><td>valueOf()()</td><td></td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>性質</h3>
-                    <table>
-                        <tr><td>prototype</td><td></td></tr>
-                        <tr><td>constructor</td><td></td></tr>
-                    </table>
-                </section>
-            </section>
+			<section>
+				<h2>Object</h2>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>eval()</td><td></td></tr>
+						<tr><td>toSource()</td><td></td></tr>
+						<tr><td>toString()</td><td></td></tr>
+						<tr><td>valueOf()()</td><td></td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>性質</h3>
+					<table>
+						<tr><td>prototype</td><td></td></tr>
+						<tr><td>constructor</td><td></td></tr>
+					</table>
+				</section>
+			</section>
 
-            <hr id='regexp'>
+			<hr id='regexp'>
 
-            <section>
-                <h2>RegExp</h2>
-                <p>
-                    RegExp 物件用來實現 Regular Expressions，這是一種強大的字元匹配機制。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>compile('字串')</td><td>編譯正則表達式。</td></tr>
-                        <tr><td>exec('字串')</td><td>檢索字元串中指定的值，返回找到的值，並確定其位置。</td></tr>
-                        <tr><td>test('字串')</td><td>檢索字元串中指定的值，返回 true 或 false。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>global</td><td>RegExp 物件是否啟用 g 參數。</td></tr>
-                        <tr><td>ignoreCase</td><td>RegExp 物件是否啟用 i 參數。</td></tr>
-                        <tr><td>lastIndex</td><td>一個整數，標示開始下一次匹配的字元位置。</td></tr>
-                        <tr><td>multiline</td><td>RegExp 物件是否啟用 m 參數。</td></tr>
-                        <tr><td>source</td><td>正則表達式的源文本。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>表示法符號</h3>
-                    <table>
-                        <tr><td>[]</td><td>尋找方括號之間的任何字元。</td></tr>
-                        <tr><td>()</td><td>尋找括弧之間的字串。</td></tr>
-                        <tr><td>(?:)</td><td>同上，但只確認匹配的結果，不做擷取資料的動作。</td></tr>
-                        <tr><td>^</td><td>在括號中使用表示條件相反。</td></tr>
-                        <tr><td>-</td><td>在括號中使用表示從…到…。</td></tr>
-                        <tr><td>|</td><td>在括號中使用表示其它項目。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>元字符</h3>
-                    <table>
-                        <tr><td>.</td><td>任一個字元，不包括換行字元。</td></tr>
-                        <tr><td>\0</td><td>NUL 字元。</td></tr>
-                        <tr><td>\b</td><td>位於單詞的開頭或結尾的匹配。</td></tr>
-                        <tr><td>\B</td><td>不處在單詞的開頭或結尾的匹配。</td></tr>
-                        <tr><td>\d</td><td>數字字元。</td></tr>
-                        <tr><td>\D</td><td>非數字字元。</td></tr>
-                        <tr><td>\f</td><td>換頁字元。</td></tr>
-                        <tr><td>\n</td><td>換行字元。</td></tr>
-                        <tr><td>\r</td><td>歸位字元。</td></tr>
-                        <tr><td>\s</td><td>所有空白字元，等同 [\f\n\r\t\v]。</td></tr>
-                        <tr><td>\S</td><td>所有空白字元以外，等同 [^\f\n\r\t\v]。</td></tr>
-                        <tr><td>\t</td><td>Tab 字元（水平）。</td></tr>
-                        <tr><td>\v</td><td>Tab 字元（垂直）。</td></tr>
-                        <tr><td>\uxxxx</td><td>十六進制數 xxxx 的 Unicode 字元。</td></tr>
-                        <tr><td>\w</td><td>任何英文字母、以及數字、還有 _ 底線。</td></tr>
-                        <tr><td>\W</td><td>英文字母、以及數字、還有 _ 底線以外。</td></tr>
-                        <tr><td>\xxx</td><td>八進制數 xxx 的字元。</td></tr>
-                        <tr><td>\xdd</td><td>十六進制數 dd 的字元。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>量詞</h3>
-                    <table>
-                        <tr><td>+</td><td>包含至少一個字元串。</td></tr>
-                        <tr><td>*</td><td>包含零或多個字元串。</td></tr>
-                        <tr><td>?</td><td>包含零或一個的字元串。</td></tr>
-                        <tr><td>{X}</td><td>包含 X 個序列的字元串。</td></tr>
-                        <tr><td>{X,Y}</td><td>包含 X 或 Y 個序列的字元串。</td></tr>
-                        <tr><td>{X,}</td><td>包含至少 X 個序列的字元串。</td></tr>
-                        <tr><td>字元$</td><td>以「字元」為結尾。</td></tr>
-                        <tr><td>^字元</td><td>以「字元」為開頭。</td></tr>
-                        <tr><td>字元?=字元</td><td>找尋前面的字元，且接後面的字元。</td></tr>
-                        <tr><td>字元?!字元</td><td>找尋前面的字元，但接的不能是後面的字元。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>RegExp() 第二個參數</h3>
-                    <table>
-                        <tr><td>'g'</td><td>執行全局匹配（尋找所有匹配而非在找到第一個匹配後停止）。</td></tr>
-                        <tr><td>'i'</td><td>執行不區分大小寫的匹配。</td></tr>
-                        <tr><td>'m'</td><td>執行多行匹配。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    首先要知道一件事：「RegExp 是 JavaScript 要花最多時間來熟練的物件。」並不是因為它難，而是它東西很多，有千變萬化的組合可以搭配，花一個禮拜的時間不斷嘗試 RegExp 的各種寫法往往是最好的方法。不過，如果你覺得難，也不要氣餒，不斷練習，累積成功的經驗，是最有效學習正規表示式的方法：「這種鬼東西，搞不懂跟聰明才智無關，花時間跟它耗下去方能知道究竟。」<br>
-                    <br>
-                    如果單就 RegExp 物件本身來講，我們應該是這樣來操作它：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        //容易與數字 1 混淆，禁止使用小寫 L。
-                        var _string = 'Hello';
-                        var _regexp = new RegExp('l', 'g');
-                        if(_regexp.test(_string)) document.write('禁止使用小寫 L');
+			<section>
+				<h2>RegExp</h2>
+				<p>
+					RegExp 物件用來實現 Regular Expressions，這是一種強大的字元匹配機制。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>compile('字串')</td><td>編譯正則表達式。</td></tr>
+						<tr><td>exec('字串')</td><td>檢索字元串中指定的值，返回找到的值，並確定其位置。</td></tr>
+						<tr><td>test('字串')</td><td>檢索字元串中指定的值，返回 true 或 false。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>global</td><td>RegExp 物件是否啟用 g 參數。</td></tr>
+						<tr><td>ignoreCase</td><td>RegExp 物件是否啟用 i 參數。</td></tr>
+						<tr><td>lastIndex</td><td>一個整數，標示開始下一次匹配的字元位置。</td></tr>
+						<tr><td>multiline</td><td>RegExp 物件是否啟用 m 參數。</td></tr>
+						<tr><td>source</td><td>正則表達式的源文本。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>表示法符號</h3>
+					<table>
+						<tr><td>[]</td><td>尋找方括號之間的任何字元。</td></tr>
+						<tr><td>()</td><td>尋找括弧之間的字串。</td></tr>
+						<tr><td>(?:)</td><td>同上，但只確認匹配的結果，不做擷取資料的動作。</td></tr>
+						<tr><td>^</td><td>在括號中使用表示條件相反。</td></tr>
+						<tr><td>-</td><td>在括號中使用表示從…到…。</td></tr>
+						<tr><td>|</td><td>在括號中使用表示其它項目。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>元字符</h3>
+					<table>
+						<tr><td>.</td><td>任一個字元，不包括換行字元。</td></tr>
+						<tr><td>\0</td><td>NUL 字元。</td></tr>
+						<tr><td>\b</td><td>位於單詞的開頭或結尾的匹配。</td></tr>
+						<tr><td>\B</td><td>不處在單詞的開頭或結尾的匹配。</td></tr>
+						<tr><td>\d</td><td>數字字元。</td></tr>
+						<tr><td>\D</td><td>非數字字元。</td></tr>
+						<tr><td>\f</td><td>換頁字元。</td></tr>
+						<tr><td>\n</td><td>換行字元。</td></tr>
+						<tr><td>\r</td><td>歸位字元。</td></tr>
+						<tr><td>\s</td><td>所有空白字元，等同 [\f\n\r\t\v]。</td></tr>
+						<tr><td>\S</td><td>所有空白字元以外，等同 [^\f\n\r\t\v]。</td></tr>
+						<tr><td>\t</td><td>Tab 字元（水平）。</td></tr>
+						<tr><td>\v</td><td>Tab 字元（垂直）。</td></tr>
+						<tr><td>\uxxxx</td><td>十六進制數 xxxx 的 Unicode 字元。</td></tr>
+						<tr><td>\w</td><td>任何英文字母、以及數字、還有 _ 底線。</td></tr>
+						<tr><td>\W</td><td>英文字母、以及數字、還有 _ 底線以外。</td></tr>
+						<tr><td>\xxx</td><td>八進制數 xxx 的字元。</td></tr>
+						<tr><td>\xdd</td><td>十六進制數 dd 的字元。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>量詞</h3>
+					<table>
+						<tr><td>+</td><td>包含至少一個字元串。</td></tr>
+						<tr><td>*</td><td>包含零或多個字元串。</td></tr>
+						<tr><td>?</td><td>包含零或一個的字元串。</td></tr>
+						<tr><td>{X}</td><td>包含 X 個序列的字元串。</td></tr>
+						<tr><td>{X,Y}</td><td>包含 X 或 Y 個序列的字元串。</td></tr>
+						<tr><td>{X,}</td><td>包含至少 X 個序列的字元串。</td></tr>
+						<tr><td>字元$</td><td>以「字元」為結尾。</td></tr>
+						<tr><td>^字元</td><td>以「字元」為開頭。</td></tr>
+						<tr><td>字元?=字元</td><td>找尋前面的字元，且接後面的字元。</td></tr>
+						<tr><td>字元?!字元</td><td>找尋前面的字元，但接的不能是後面的字元。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>RegExp() 第二個參數</h3>
+					<table>
+						<tr><td>'g'</td><td>執行全局匹配（尋找所有匹配而非在找到第一個匹配後停止）。</td></tr>
+						<tr><td>'i'</td><td>執行不區分大小寫的匹配。</td></tr>
+						<tr><td>'m'</td><td>執行多行匹配。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					首先要知道一件事：「RegExp 是 JavaScript 要花最多時間來熟練的物件。」並不是因為它難，而是它東西很多，有千變萬化的組合可以搭配，花一個禮拜的時間不斷嘗試 RegExp 的各種寫法往往是最好的方法。不過，如果你覺得難，也不要氣餒，不斷練習，累積成功的經驗，是最有效學習正規表示式的方法：「這種鬼東西，搞不懂跟聰明才智無關，花時間跟它耗下去方能知道究竟。」<br>
+					<br>
+					如果單就 RegExp 物件本身來講，我們應該是這樣來操作它：<br>
+					<br>
+					<textarea class='brush:js'>
+						//容易與數字 1 混淆，禁止使用小寫 L。
+						var _string = 'Hello';
+						var _regexp = new RegExp('l', 'g');
+						if(_regexp.test(_string)) document.write('禁止使用小寫 L');
                     </textarea>
-                    <br>
-                    但因為 String 物件也提供配合 RegExp 物件的功能：match()、replace()、search()，除了可以直接針對資料作匹配，還可以第一時間編修資料，所以更多人選擇使用這樣的方式來操作：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(_string.match(_regexp)) document.write('禁止使用小寫 L');
+					<br>
+					但因為 String 物件也提供配合 RegExp 物件的功能：match()、replace()、search()，除了可以直接針對資料作匹配，還可以第一時間編修資料，所以更多人選擇使用這樣的方式來操作：<br>
+					<br>
+					<textarea class='brush:js'>
+						if(_string.match(_regexp)) document.write('禁止使用小寫 L');
                     </textarea>
-                    <br>
-                    另外還有更殺的寫法，直接把正規表示式寫在 / / 符號裡面即可。因此第一個範例可以改寫如下：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(/l/g.test(_string)) document.write('禁止使用小寫 L');
+					<br>
+					另外還有更殺的寫法，直接把正規表示式寫在 / / 符號裡面即可。因此第一個範例可以改寫如下：<br>
+					<br>
+					<textarea class='brush:js'>
+						if(/l/g.test(_string)) document.write('禁止使用小寫 L');
                     </textarea>
-                    <br>
-                    但你會發現可讀性超低，所以拿第二個範例來改會比較好一點：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(_string.match(/l/g)) document.write('禁止使用小寫 L');
+					<br>
+					但你會發現可讀性超低，所以拿第二個範例來改會比較好一點：<br>
+					<br>
+					<textarea class='brush:js'>
+						if(_string.match(/l/g)) document.write('禁止使用小寫 L');
                     </textarea>
-                    <br>
-                    因為正規表示法的出現，特殊資料除了 <samp>[陣列元素]</samp>、<samp>'字元'</samp>、<samp>'字串'</samp> 以外，又多了 <samp>/正規表示法/</samp> 的型態。<br>
-                    <br>
-                    上面幾個範例為了完整示範，所以用了 RegExp() 的第二個參數：g，但平常用不到的話其實可以省略：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(_string.match(/l/)) document.write('禁止使用小寫 L');
+					<br>
+					因為正規表示法的出現，特殊資料除了 <samp>[陣列元素]</samp>、<samp>'字元'</samp>、<samp>'字串'</samp> 以外，又多了 <samp>/正規表示法/</samp> 的型態。<br>
+					<br>
+					上面幾個範例為了完整示範，所以用了 RegExp() 的第二個參數：g，但平常用不到的話其實可以省略：<br>
+					<br>
+					<textarea class='brush:js'>
+						if(_string.match(/l/)) document.write('禁止使用小寫 L');
                     </textarea>
-                    <br>
-                    不只用到一個的話，寫在一起即可<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        if(_string.match(/l/gim)) document.write('禁止使用 L');
+					<br>
+					不只用到一個的話，寫在一起即可<br>
+					<br>
+					<textarea class='brush:js'>
+						if(_string.match(/l/gim)) document.write('禁止使用 L');
                     </textarea>
-                </p>
-                <hr>
-                <p>
-                    喘口氣吧！上一部分介紹的是 RegExp 在 JavaScript 的四種使用方式，最後這個部分要來練習「正規表示法」最複雜的「表示法符號」：
-                </p>
-                <table>
-                    <tr><td>[abc]</td><td>表示 a、b、c 三個字元。</td></tr>
-                    <tr><td>[^abc]</td><td>表示 a、b、c 以外的字元。</td></tr>
-                    <tr><td>[0-9]</td><td>表示從 0 至 9 的數字。</td></tr>
-                    <tr><td>[A-Z]</td><td>表示從小寫 a 到小寫 z 的字元。</td></tr>
-                    <tr><td>[a-z]</td><td>表示從大寫 A 到大寫 Z 的字元。</td></tr>
-                    <tr><td>[A-z]</td><td>表示從大寫 A 到小寫 z 的字元。</td></tr>
-                    <tr><td>(aaa)</td><td>表示 aaa 字串。</td></tr>
-                    <tr><td>(aaa|bbb|ccc)</td><td>表示 aaa、bbb、ccc 三組字串。</td></tr>
-                </table>
-                <p>
-                    來看幾個實際能跑的範例，底下匹配的條件是至少要出現 a 或 b 或 c 其中一個字元，由於被匹配的文字是 Hello，裡面並沒有這三個字元，因此網頁輸出的會是「啥？」：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _string = 'Hello';
-                        var _regexp = new RegExp('[abc]+');
-                        if(_regexp.test(_string)) document.write('有！');
-                        else document.write('啥？');
+				</p>
+				<hr>
+				<p>
+					喘口氣吧！上一部分介紹的是 RegExp 在 JavaScript 的四種使用方式，最後這個部分要來練習「正規表示法」最複雜的「表示法符號」：
+				</p>
+				<table>
+					<tr><td>[abc]</td><td>表示 a、b、c 三個字元。</td></tr>
+					<tr><td>[^abc]</td><td>表示 a、b、c 以外的字元。</td></tr>
+					<tr><td>[0-9]</td><td>表示從 0 至 9 的數字。</td></tr>
+					<tr><td>[A-Z]</td><td>表示從小寫 a 到小寫 z 的字元。</td></tr>
+					<tr><td>[a-z]</td><td>表示從大寫 A 到大寫 Z 的字元。</td></tr>
+					<tr><td>[A-z]</td><td>表示從大寫 A 到小寫 z 的字元。</td></tr>
+					<tr><td>(aaa)</td><td>表示 aaa 字串。</td></tr>
+					<tr><td>(aaa|bbb|ccc)</td><td>表示 aaa、bbb、ccc 三組字串。</td></tr>
+				</table>
+				<p>
+					來看幾個實際能跑的範例，底下匹配的條件是至少要出現 a 或 b 或 c 其中一個字元，由於被匹配的文字是 Hello，裡面並沒有這三個字元，因此網頁輸出的會是「啥？」：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _string = 'Hello';
+						var _regexp = new RegExp('[abc]+');
+						if(_regexp.test(_string)) document.write('有！');
+						else document.write('啥？');
                     </textarea>
-                    <br>
-                    接著來看匹配的條件是小寫 L 出現兩次，由於 Hello 連續出現兩次 l，這次網頁輸出的結果為「有！」：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _string = 'Hello';
-                        var _regexp = new RegExp('[l]{2}');
-                        if(_regexp.test(_string)) document.write('有！');
-                        else document.write('啥？');
+					<br>
+					接著來看匹配的條件是小寫 L 出現兩次，由於 Hello 連續出現兩次 l，這次網頁輸出的結果為「有！」：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _string = 'Hello';
+						var _regexp = new RegExp('[l]{2}');
+						if(_regexp.test(_string)) document.write('有！');
+						else document.write('啥？');
                     </textarea>
-                    <br>
-                    最後匹配的條件是 Here 整組單字，雖然 Hello 裡面出現 He，但並不是 Here，因此網頁輸出的是「啥？」：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _string = 'Hello';
-                        var _regexp = new RegExp('(Here)');
-                        if(_regexp.test(_string)) document.write('有！');
-                        else document.write('啥？');
+					<br>
+					最後匹配的條件是 Here 整組單字，雖然 Hello 裡面出現 He，但並不是 Here，因此網頁輸出的是「啥？」：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _string = 'Hello';
+						var _regexp = new RegExp('(Here)');
+						if(_regexp.test(_string)) document.write('有！');
+						else document.write('啥？');
                     </textarea>
-                    <br>
-                    不妨將 _string 改為 'Herello' 試看看，就會輸出「有！」。
-                </p>
-            </section>
+					<br>
+					不妨將 _string 改為 'Herello' 試看看，就會輸出「有！」。
+				</p>
+			</section>
 
-            <hr id='string'>
+			<hr id='string'>
 
-            <section>
-                <h2>String</h2>
-                <p>
-                    String 物件可以對「文字資料」進行多種操作，例如：搜尋、替換、擷取。
-                </p>
-                <hr>
-                <section>
-                    <h3>功能</h3>
-                    <table>
-                        <tr><td>charAt(字元位置)</td><td>傳回指定位置的字元。</td></tr>
-                        <tr><td>charCodeAt(字元位置)</td><td>傳回指定位置字元的 Unicode 編碼。</td></tr>
-                        <tr><td>concat('字串','字串',…)</td><td>將多個字串結合成一串。</td></tr>
-                        <tr><td>fromCharCode(字元編碼,…)</td><td>輸出 Unicode 編碼對應的字元。</td></tr>
-                        <tr><td>indexOf('比對字串')</td><td>比對是否出現所指定的字串，有的話傳回找到的字元位置。</td></tr>
-                        <tr><td>lastIndexOf('比對字串')</td><td>類似 indexOf()，但由後往前找。</td></tr>
-                        <tr><td>match(正規表示法)</td><td>比對 RegExp 條件，有的話傳回找到的資料。</td></tr>
-                        <tr><td>replace(正規表示法,'替代字串')</td><td>比對 RegExp 條件，有的話改為替代文字並傳回資料。</td></tr>
-                        <tr><td>search(正規表示法)</td><td>比對 RegExp 條件，有的話傳回找到的位置。</td></tr>
-                        <tr><td>slice(開始位置,結束位置)</td><td>擷取範圍內的字串。</td></tr>
-                        <tr><td>split('分割點',區段)</td><td>以分割點作依據，將字串切成好幾個區段。區段可省略。</td></tr>
-                        <tr><td>substr(開始位置,長度)</td><td>從指定位置開始擷取指定長度的字串。</td></tr>
-                        <tr><td>substring(位置,位置)</td><td>擷取範圍內的字串，與 slice() 差異。</td></tr>
-                        <tr><td>toLowerCase()</td><td>將英文字母以小寫輸出。</td></tr>
-                        <tr><td>toUpperCase()</td><td>將英文字母以大寫輸出。</td></tr>
-                        <tr><td>toString()</td><td>以字串輸出 String 物件的資料。</td></tr>
-                        <tr><td>valueOf()</td><td>以原型輸出 String 物件的資料。（String 的原型就是字串）</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>狀態</h3>
-                    <table>
-                        <tr><td>constructor</td><td>傳回 function String(){ [native code] }。</td></tr>
-                        <tr><td>length</td><td>取得文字的長度。</td></tr>
-                        <tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>非標準功能：以 HTML 4.01 格式輸出文字</h3>
-                    <table>
-                        <tr><td>anchor()</td><td>將文字以 &lt;A NAME&gt;&lt;/A&gt; 格式輸出</td></tr>
-                        <tr><td>big()</td><td>將文字以 &lt;BIG&gt;&lt;/BIF&gt; 格式輸出</td></tr>
-                        <tr><td>blink()</td><td>將文字以 &lt;BLNK&gt;&lt;/BLINK&gt; 格式輸出</td></tr>
-                        <tr><td>bold()</td><td>將文字以 &lt;B&gt;&lt;/B&gt; 格式輸出</td></tr>
-                        <tr><td>fixed()</td><td>將文字以 &lt;TT&gt;&lt;/TT&gt; 格式輸出</td></tr>
-                        <tr><td>fontcolor()</td><td>將文字以 &lt;FONT COLOR=''&gt;&lt;/FONT&gt; 格式輸出</td></tr>
-                        <tr><td>fontsize()</td><td>將文字以 &lt;FONT SIZE=''&gt;&lt;/FONT&gt; 格式輸出</td></tr>
-                        <tr><td>italics()</td><td>將文字以 &lt;I&gt;&lt;/I&gt; 格式輸出</td></tr>
-                        <tr><td>link()</td><td>將文字以 &lt;A HREF=''&gt;&lt;/A&gt; 格式輸出</td></tr>
-                        <tr><td>small()</td><td>將文字以 &lt;SMALL&gt;&lt;/SMALL&gt; 格式輸出</td></tr>
-                        <tr><td>strike()</td><td>將文字以 &lt;STRIKE&gt;&lt;/STRIKE&gt; 格式輸出</td></tr>
-                        <tr><td>sub()</td><td>將文字以 &lt;SUB&gt;&lt;/SUB&gt; 格式輸出</td></tr>
-                        <tr><td>sup()</td><td>將文字以 &lt;SUP&gt;&lt;/SUP&gt; 格式輸出</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <p>
-                    其實，所有以雙引號括住的「字串」，都已經以 String 物件為原型而存在，似乎不需要再多此一舉地用 String 物件對資料本身做處理動作。例如這樣的寫法是可以執行的：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        document.write('Hello'.indexOf('e'));
+			<section>
+				<h2>String</h2>
+				<p>
+					String 物件可以對「文字資料」進行多種操作，例如：搜尋、替換、擷取。
+				</p>
+				<hr>
+				<section>
+					<h3>功能</h3>
+					<table>
+						<tr><td>charAt(字元位置)</td><td>傳回指定位置的字元。</td></tr>
+						<tr><td>charCodeAt(字元位置)</td><td>傳回指定位置字元的 Unicode 編碼。</td></tr>
+						<tr><td>concat('字串','字串',…)</td><td>將多個字串結合成一串。</td></tr>
+						<tr><td>fromCharCode(字元編碼,…)</td><td>輸出 Unicode 編碼對應的字元。</td></tr>
+						<tr><td>indexOf('比對字串')</td><td>比對是否出現所指定的字串，有的話傳回找到的字元位置。</td></tr>
+						<tr><td>lastIndexOf('比對字串')</td><td>類似 indexOf()，但由後往前找。</td></tr>
+						<tr><td>match(正規表示法)</td><td>比對 RegExp 條件，有的話傳回找到的資料。</td></tr>
+						<tr><td>replace(正規表示法,'替代字串')</td><td>比對 RegExp 條件，有的話改為替代文字並傳回資料。</td></tr>
+						<tr><td>search(正規表示法)</td><td>比對 RegExp 條件，有的話傳回找到的位置。</td></tr>
+						<tr><td>slice(開始位置,結束位置)</td><td>擷取範圍內的字串。</td></tr>
+						<tr><td>split('分割點',區段)</td><td>以分割點作依據，將字串切成好幾個區段。區段可省略。</td></tr>
+						<tr><td>substr(開始位置,長度)</td><td>從指定位置開始擷取指定長度的字串。</td></tr>
+						<tr><td>substring(位置,位置)</td><td>擷取範圍內的字串，與 slice() 差異。</td></tr>
+						<tr><td>toLowerCase()</td><td>將英文字母以小寫輸出。</td></tr>
+						<tr><td>toUpperCase()</td><td>將英文字母以大寫輸出。</td></tr>
+						<tr><td>toString()</td><td>以字串輸出 String 物件的資料。</td></tr>
+						<tr><td>valueOf()</td><td>以原型輸出 String 物件的資料。（String 的原型就是字串）</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>狀態</h3>
+					<table>
+						<tr><td>constructor</td><td>傳回 function String(){ [native code] }。</td></tr>
+						<tr><td>length</td><td>取得文字的長度。</td></tr>
+						<tr><td>prototype</td><td>對物件添加「功能」或「性質」。</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>非標準功能：以 HTML 4.01 格式輸出文字</h3>
+					<table>
+						<tr><td>anchor()</td><td>將文字以 &lt;A NAME&gt;&lt;/A&gt; 格式輸出</td></tr>
+						<tr><td>big()</td><td>將文字以 &lt;BIG&gt;&lt;/BIF&gt; 格式輸出</td></tr>
+						<tr><td>blink()</td><td>將文字以 &lt;BLNK&gt;&lt;/BLINK&gt; 格式輸出</td></tr>
+						<tr><td>bold()</td><td>將文字以 &lt;B&gt;&lt;/B&gt; 格式輸出</td></tr>
+						<tr><td>fixed()</td><td>將文字以 &lt;TT&gt;&lt;/TT&gt; 格式輸出</td></tr>
+						<tr><td>fontcolor()</td><td>將文字以 &lt;FONT COLOR=''&gt;&lt;/FONT&gt; 格式輸出</td></tr>
+						<tr><td>fontsize()</td><td>將文字以 &lt;FONT SIZE=''&gt;&lt;/FONT&gt; 格式輸出</td></tr>
+						<tr><td>italics()</td><td>將文字以 &lt;I&gt;&lt;/I&gt; 格式輸出</td></tr>
+						<tr><td>link()</td><td>將文字以 &lt;A HREF=''&gt;&lt;/A&gt; 格式輸出</td></tr>
+						<tr><td>small()</td><td>將文字以 &lt;SMALL&gt;&lt;/SMALL&gt; 格式輸出</td></tr>
+						<tr><td>strike()</td><td>將文字以 &lt;STRIKE&gt;&lt;/STRIKE&gt; 格式輸出</td></tr>
+						<tr><td>sub()</td><td>將文字以 &lt;SUB&gt;&lt;/SUB&gt; 格式輸出</td></tr>
+						<tr><td>sup()</td><td>將文字以 &lt;SUP&gt;&lt;/SUP&gt; 格式輸出</td></tr>
+					</table>
+				</section>
+				<hr>
+				<p>
+					其實，所有以雙引號括住的「字串」，都已經以 String 物件為原型而存在，似乎不需要再多此一舉地用 String 物件對資料本身做處理動作。例如這樣的寫法是可以執行的：<br>
+					<br>
+					<textarea class='brush:js'>
+						document.write('Hello'.indexOf('e'));
                     </textarea>
-                    <br>
-                    那何必還需要這樣寫呢：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var _string = new String('Hello');
-                        document.write(_string.indexOf('e'));
+					<br>
+					那何必還需要這樣寫呢：<br>
+					<br>
+					<textarea class='brush:js'>
+						var _string = new String('Hello');
+						document.write(_string.indexOf('e'));
                     </textarea>
-                    <br>
-                    這不是為了提高可讀性而已，也關係到設計上的問題！只要用「變數」的觀點，就能看出這兩個程式明顯不同：「使用變數來處理字串資料，結構上變得靈活，容易維護所寫的設計；前面的寫法把程式寫死了！」資料本身該不該直接拿來動作？是否要讓資料與結構分離？這是在設計程式時，值得多加思索的議題。
-                </p>
-            </section>
+					<br>
+					這不是為了提高可讀性而已，也關係到設計上的問題！只要用「變數」的觀點，就能看出這兩個程式明顯不同：「使用變數來處理字串資料，結構上變得靈活，容易維護所寫的設計；前面的寫法把程式寫死了！」資料本身該不該直接拿來動作？是否要讓資料與結構分離？這是在設計程式時，值得多加思索的議題。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 本資料不含 ECMAScript 5 新增的功能。個人覺得那屬於透過語意層次來實現語法的機制，所以另外寫在《<a href='19690406A.html'>其它語言特性</a>》。<br>
-                    [*] 雖然標題寫共通類別庫，但其實 JavaScript 稱為「物件」而不是「類別」；可見非物件導向的 JavaScript 程式語言並沒有類別的概念。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 本資料不含 ECMAScript 5 新增的功能。個人覺得那屬於透過語意層次來實現語法的機制，所以另外寫在《<a href='19690406A.html'>其它語言特性</a>》。<br>
+					[*] 雖然標題寫共通類別庫，但其實 JavaScript 稱為「物件」而不是「類別」；可見非物件導向的 JavaScript 程式語言並沒有類別的概念。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

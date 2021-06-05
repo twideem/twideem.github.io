@@ -2,112 +2,112 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Audio and Video Reference</h1>
-            </header>
+			<header>
+				<h1>Audio and Video Reference</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>方法</h2>
-                <table>
-                    <tr><td>addTextTrack(類型,標題,語言)</td><td>向影音添加新的字軌，類型有：subtitles、caption、descriptions、chapters、metadata。</td></tr>
-                    <tr><td>canPlayType(類型)</td><td>檢查瀏覽器是否能播放指定的影音類型，類型有：video/ogg、video/mp4、video/webm、audio/mpeg、audio/ogg、audio/mp4。</td></tr>
-                    <tr><td>load()</td><td>重新加載影音元素。</td></tr>
-                    <tr><td>play()</td><td>開始播放影音。</td></tr>
-                    <tr><td>pause()</td><td>暫停當前播放的影音。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>方法</h2>
+				<table>
+					<tr><td>addTextTrack(類型,標題,語言)</td><td>向影音添加新的字軌，類型有：subtitles、caption、descriptions、chapters、metadata。</td></tr>
+					<tr><td>canPlayType(類型)</td><td>檢查瀏覽器是否能播放指定的影音類型，類型有：video/ogg、video/mp4、video/webm、audio/mpeg、audio/ogg、audio/mp4。</td></tr>
+					<tr><td>load()</td><td>重新加載影音元素。</td></tr>
+					<tr><td>play()</td><td>開始播放影音。</td></tr>
+					<tr><td>pause()</td><td>暫停當前播放的影音。</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>屬性</h2>
-                <table>
-                    <tr><td>audioTracks</td><td>表示可用音軌的 AudioTrackList 物件。</td></tr>
-                    <tr><td>autoplay</td><td>是否在加載完成後隨即播放影音。</td></tr>
-                    <tr><td>buffered</td><td>表示影音已緩衝部分的 TimeRanges 物件。</td></tr>
-                    <tr><td>controller</td><td>表示影音當前媒體控制器的 MediaController 物件。</td></tr>
-                    <tr><td>controls</td><td>影音是否顯示控制項。</td></tr>
-                    <tr><td>crossOrigin</td><td>影音的 CORS 設定。</td></tr>
-                    <tr><td>currentSrc</td><td>當前影音的 URL。</td></tr>
-                    <tr><td>currentTime</td><td>影音中的當前播放位置，以秒計。</td></tr>
-                    <tr><td>defaultMuted</td><td>影音默認是否靜音。</td></tr>
-                    <tr><td>defaultPlaybackRate</td><td>影音的默認播放速度。</td></tr>
-                    <tr><td>duration</td><td>當前影音的長度，以秒計。</td></tr>
-                    <tr><td>ended</td><td>影音的播放是否已結束。</td></tr>
-                    <tr><td>error</td><td>表示影音錯誤狀態的 MediaError 物件。</td></tr>
-                    <tr><td>loop</td><td>影音是否應在結束時重新播放。</td></tr>
-                    <tr><td>mediaGroup</td><td>影音所屬的組合，用於連接多個影音元素。</td></tr>
-                    <tr><td>muted</td><td>影音是否靜音。</td></tr>
-                    <tr><td>networkState</td><td>影音的當前網絡狀態。</td></tr>
-                    <tr><td>paused</td><td>影音是否暫停。</td></tr>
-                    <tr><td>playbackRate</td><td>影音播放的速度。</td></tr>
-                    <tr><td>played</td><td>表示影音已播放部分的 TimeRanges 物件。</td></tr>
-                    <tr><td>preload</td><td>影音是否應該在頁面加載後進行加載。（通常用 auto）</td></tr>
-                    <tr><td>readyState</td><td>影音當前的就緒狀態。</td></tr>
-                    <tr><td>seekable</td><td>表示影音可尋址部分的 TimeRanges 物件。</td></tr>
-                    <tr><td>seeking</td><td>用戶是否正在影音中進行查找。</td></tr>
-                    <tr><td>src</td><td>影音元素的當前來源。</td></tr>
-                    <tr><td>startDate</td><td>表示當前時間偏移的 Date 物件。</td></tr>
-                    <tr><td>textTracks</td><td>表示可用字軌的 TextTrackList 物件。</td></tr>
-                    <tr><td>videoTracks</td><td>表示可用視軌的 VideoTrackList 物件。</td></tr>
-                    <tr><td>volume</td><td>影音的音量。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>屬性</h2>
+				<table>
+					<tr><td>audioTracks</td><td>表示可用音軌的 AudioTrackList 物件。</td></tr>
+					<tr><td>autoplay</td><td>是否在加載完成後隨即播放影音。</td></tr>
+					<tr><td>buffered</td><td>表示影音已緩衝部分的 TimeRanges 物件。</td></tr>
+					<tr><td>controller</td><td>表示影音當前媒體控制器的 MediaController 物件。</td></tr>
+					<tr><td>controls</td><td>影音是否顯示控制項。</td></tr>
+					<tr><td>crossOrigin</td><td>影音的 CORS 設定。</td></tr>
+					<tr><td>currentSrc</td><td>當前影音的 URL。</td></tr>
+					<tr><td>currentTime</td><td>影音中的當前播放位置，以秒計。</td></tr>
+					<tr><td>defaultMuted</td><td>影音默認是否靜音。</td></tr>
+					<tr><td>defaultPlaybackRate</td><td>影音的默認播放速度。</td></tr>
+					<tr><td>duration</td><td>當前影音的長度，以秒計。</td></tr>
+					<tr><td>ended</td><td>影音的播放是否已結束。</td></tr>
+					<tr><td>error</td><td>表示影音錯誤狀態的 MediaError 物件。</td></tr>
+					<tr><td>loop</td><td>影音是否應在結束時重新播放。</td></tr>
+					<tr><td>mediaGroup</td><td>影音所屬的組合，用於連接多個影音元素。</td></tr>
+					<tr><td>muted</td><td>影音是否靜音。</td></tr>
+					<tr><td>networkState</td><td>影音的當前網絡狀態。</td></tr>
+					<tr><td>paused</td><td>影音是否暫停。</td></tr>
+					<tr><td>playbackRate</td><td>影音播放的速度。</td></tr>
+					<tr><td>played</td><td>表示影音已播放部分的 TimeRanges 物件。</td></tr>
+					<tr><td>preload</td><td>影音是否應該在頁面加載後進行加載。（通常用 auto）</td></tr>
+					<tr><td>readyState</td><td>影音當前的就緒狀態。</td></tr>
+					<tr><td>seekable</td><td>表示影音可尋址部分的 TimeRanges 物件。</td></tr>
+					<tr><td>seeking</td><td>用戶是否正在影音中進行查找。</td></tr>
+					<tr><td>src</td><td>影音元素的當前來源。</td></tr>
+					<tr><td>startDate</td><td>表示當前時間偏移的 Date 物件。</td></tr>
+					<tr><td>textTracks</td><td>表示可用字軌的 TextTrackList 物件。</td></tr>
+					<tr><td>videoTracks</td><td>表示可用視軌的 VideoTrackList 物件。</td></tr>
+					<tr><td>volume</td><td>影音的音量。</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>事件</h2>
-                <table>
-                    <tr><td>abort</td><td>影音的加載已放棄時。</td></tr>
-                    <tr><td>canplay</td><td>瀏覽器可以播放影音時。</td></tr>
-                    <tr><td>canplaythrough</td><td>瀏覽器可在不因緩衝而停頓的情況下進行播放時。</td></tr>
-                    <tr><td>durationchange</td><td>影音的時長已更改時。</td></tr>
-                    <tr><td>emptied</td><td>目前的播放列表為空時。</td></tr>
-                    <tr><td>ended</td><td>目前的播放列表已結束時。</td></tr>
-                    <tr><td>error</td><td>在影音加載期間發生錯誤時。</td></tr>
-                    <tr><td>loadeddata</td><td>瀏覽器已加載影音的當前幀時。</td></tr>
-                    <tr><td>loadedmetadata</td><td>瀏覽器已加載影音的元數據時。</td></tr>
-                    <tr><td>loadstart</td><td>瀏覽器開始查找影音時。</td></tr>
-                    <tr><td>pause</td><td>影音已暫停時。</td></tr>
-                    <tr><td>play</td><td>影音已開始或不再暫停時。</td></tr>
-                    <tr><td>playing</td><td>影音在已因緩衝而暫停或停止後已就緒時。</td></tr>
-                    <tr><td>progress</td><td>瀏覽器正在下載影音時。</td></tr>
-                    <tr><td>ratechange</td><td>影音的播放速度已更改時。</td></tr>
-                    <tr><td>seeked</td><td>用戶已移動到影音中的新位置時。</td></tr>
-                    <tr><td>seeking</td><td>用戶開始移動到影音中的新位置時。</td></tr>
-                    <tr><td>stalled</td><td>瀏覽器嘗試獲取媒體數據，但數據不可用時。</td></tr>
-                    <tr><td>suspend</td><td>瀏覽器刻意不獲取媒體數據時。</td></tr>
-                    <tr><td>timeupdate</td><td>目前的播放位置已更改時。</td></tr>
-                    <tr><td>volumechange</td><td>音量已更改時。</td></tr>
-                    <tr><td>waiting</td><td>視頻由於需要緩衝下一幀而停止時。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>事件</h2>
+				<table>
+					<tr><td>abort</td><td>影音的加載已放棄時。</td></tr>
+					<tr><td>canplay</td><td>瀏覽器可以播放影音時。</td></tr>
+					<tr><td>canplaythrough</td><td>瀏覽器可在不因緩衝而停頓的情況下進行播放時。</td></tr>
+					<tr><td>durationchange</td><td>影音的時長已更改時。</td></tr>
+					<tr><td>emptied</td><td>目前的播放列表為空時。</td></tr>
+					<tr><td>ended</td><td>目前的播放列表已結束時。</td></tr>
+					<tr><td>error</td><td>在影音加載期間發生錯誤時。</td></tr>
+					<tr><td>loadeddata</td><td>瀏覽器已加載影音的當前幀時。</td></tr>
+					<tr><td>loadedmetadata</td><td>瀏覽器已加載影音的元數據時。</td></tr>
+					<tr><td>loadstart</td><td>瀏覽器開始查找影音時。</td></tr>
+					<tr><td>pause</td><td>影音已暫停時。</td></tr>
+					<tr><td>play</td><td>影音已開始或不再暫停時。</td></tr>
+					<tr><td>playing</td><td>影音在已因緩衝而暫停或停止後已就緒時。</td></tr>
+					<tr><td>progress</td><td>瀏覽器正在下載影音時。</td></tr>
+					<tr><td>ratechange</td><td>影音的播放速度已更改時。</td></tr>
+					<tr><td>seeked</td><td>用戶已移動到影音中的新位置時。</td></tr>
+					<tr><td>seeking</td><td>用戶開始移動到影音中的新位置時。</td></tr>
+					<tr><td>stalled</td><td>瀏覽器嘗試獲取媒體數據，但數據不可用時。</td></tr>
+					<tr><td>suspend</td><td>瀏覽器刻意不獲取媒體數據時。</td></tr>
+					<tr><td>timeupdate</td><td>目前的播放位置已更改時。</td></tr>
+					<tr><td>volumechange</td><td>音量已更改時。</td></tr>
+					<tr><td>waiting</td><td>視頻由於需要緩衝下一幀而停止時。</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] http://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] http://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

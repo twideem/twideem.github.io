@@ -2,199 +2,199 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>戰鬥系統</h1>
-                <p></p>
-            </header>
+			<header>
+				<h1>戰鬥系統</h1>
+				<p></p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>指令</h2>
-                <p>
-                    <button onclick='BattleField.round()'>攻擊</button>
-                </p>
-            </section>
+			<section>
+				<h2>指令</h2>
+				<p>
+					<button onclick='BattleField.round()'>攻擊</button>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 人總喜歡找些可以重複進行的事來做，耐做又能打發時間的，就叫遊戲。</p>
-            </footer>
+			<footer>
+				<p>[*] 人總喜歡找些可以重複進行的事來做，耐做又能打發時間的，就叫遊戲。</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
-            /* Player */
-            var Player={
-                //Private attributes
-                health:32,
-                strength:16,
-                stamina:8,
-                agility:4,
-                //Attack
-                attack:function(){
-                    if(this.health>0){
-                        BattleField.situation.push('玩家準備發動攻擊！')
-                        Enemy.protect(this.strength)
-                    }
-                },
-                //Pretect
-                protect:function(x){
-                    var a=x-this.stamina
-                    if(a<0) a=1
-                    this.health-=a
-                    BattleField.situation.push('<span style=\'color:red\'>玩家受到 '+a+' 點傷害。</span><br>')
-                    if(this.health<0) this.health=0
-                },
-                //Live
-                live:function(){
-                    if(this.health>0) return true
-                },
-                //Dead
-                dead:function(){
-                    BattleField.situation.push('<span style=\'color:gray\'>玩家死亡。</span><br>')
-                }
-            }
-            /* Enemy */
-            var Enemy={
-                //Private attributes
-                conscripts:[],
-                health:[],
-                strength:[],
-                stamina:[],
-                agility:[],
-                experience :[],
-                //Enlist
-                enlist:function(x){
-                    this.conscripts.push(x[0])
-                    this.health.push(x[1])
-                    this.strength.push(x[2])
-                    this.stamina.push(x[3])
-                    this.agility.push(x[4])
-                    this.experience .push(x[5])
-                },
-                //Attack
-                attack:function(){
-                    for(var n=this.conscripts.length-1;n>=0;n--){
-                        if(Player.live()){
-                            BattleField.situation.push(this.conscripts[n]+'準備發動攻擊！')
-                            Player.protect(this.strength[n])
-                        }
-                        else{
-                            Player.dead()
-                            break
-                        }
-                    }
-                },
-                //Pretect
-                protect:function(x){
-                    var a=x-this.stamina[this.conscripts.length-1]
-                    if(a<=0) a=1
-                    this.health[this.conscripts.length-1]-=a
-                    BattleField.situation.push('<span style=\'color:green\'>'+this.conscripts[this.conscripts.length-1]+'受到 '+a+' 點傷害。</span><br>')
-                    if(this.health[this.conscripts.length-1]<=0){
-                        BattleField.situation.push('<span style=\'color:blue\'>'+this.conscripts[this.conscripts.length-1]+'死了。</span><br>')
-                        this.conscripts.pop()
-                    }
-                    if(this.conscripts.length<=0) BattleField.situation.push('<span style=\'color:orange\'>戰鬥勝利！</span><br>')
-                }
-            }
-            /* Battle */
-            var BattleField={
-                //Private attributes
-                situation:new Array(),
-                //Live
-                broadcast:function(){
-                    setTimeout(function(){
-                        if(BattleField.situation.length>0){
-                            document.getElementsByTagName('p')[0].innerHTML=BattleField.situation[0]
-                            BattleField.situation.shift()
-                            BattleField.broadcast()
-                        }
-                        else BattleField.review()
-                    },1000)
-                },
-                //Review
-                review:function(){
-                    //
-                    var a=''
-                    //
-                    if(Enemy.conscripts.length<=0){
-                        a='敵人全死光了…<br>'
-                        document.getElementsByTagName('button')[0].disabled=true
-                    }
-                    else for(var n=Enemy.conscripts.length-1; n>=0; n--) a+=Enemy.conscripts[n]+' HP:'+Enemy.health[n]+'<br>'
-                    //
-                    a+='<br>玩家 HP:'+Player.health+''
-                    //
-                    document.getElementsByTagName('p')[0].innerHTML=a
-                    document.getElementsByTagName('button')[0].disabled=false
-                },
-                //Round
-                round:function(){
-                    document.getElementsByTagName('button')[0].disabled=true
-                    Enemy.attack()
-                    Player.attack()
-                    this.broadcast()
-                }
-            }
-            //Conscript
-            var Conscripter={
-                attributes:['',0,0,0,0,0],
-                name:function(x){
-                    this.attributes[0]=x
-                    return this
-                },
-                health:function(x){
-                    this.attributes[1]=x
-                    return this
-                },
-                strength:function(x){
-                    this.attributes[2]=x
-                    return this
-                },
-                stamina:function(x){
-                    this.attributes[3]=x
-                    return this
-                },
-                agility:function(x){
-                    this.attributes[4]=x
-                    return this
-                },
-                experience:function(x){
-                    this.attributes[5]=x
-                    return this
-                },
-                reset:function(){
-                    this.attributes=['',0,0,0,0,0]
-                },
-                toArray:function(){
-                    var a=this.attributes.slice()
-                    this.reset()
-                    return a
-                }
-            }
-            //Main
-            Enemy.enlist(['青蛙怪',15,14,10,7 ,11])
-            Enemy.enlist(['角兔',10,12,8,5 ,7])
-            Enemy.enlist(['大烏鴉',9,10,6,6 ,5])
-            Enemy.enlist(Conscripter.name('史萊姆').health(8).strength(9).stamina(5).agility(4).experience(4).toArray())
-            BattleField.review()
-        </script>
+		<script>
+			/* Player */
+			var Player={
+				//Private attributes
+				health:32,
+				strength:16,
+				stamina:8,
+				agility:4,
+				//Attack
+				attack:function(){
+					if(this.health>0){
+						BattleField.situation.push('玩家準備發動攻擊！')
+						Enemy.protect(this.strength)
+					}
+				},
+				//Pretect
+				protect:function(x){
+					var a=x-this.stamina
+					if(a<0) a=1
+					this.health-=a
+					BattleField.situation.push('<span style=\'color:red\'>玩家受到 '+a+' 點傷害。</span><br>')
+					if(this.health<0) this.health=0
+				},
+				//Live
+				live:function(){
+					if(this.health>0) return true
+				},
+				//Dead
+				dead:function(){
+					BattleField.situation.push('<span style=\'color:gray\'>玩家死亡。</span><br>')
+				}
+			}
+			/* Enemy */
+			var Enemy={
+				//Private attributes
+				conscripts:[],
+				health:[],
+				strength:[],
+				stamina:[],
+				agility:[],
+				experience :[],
+				//Enlist
+				enlist:function(x){
+					this.conscripts.push(x[0])
+					this.health.push(x[1])
+					this.strength.push(x[2])
+					this.stamina.push(x[3])
+					this.agility.push(x[4])
+					this.experience .push(x[5])
+				},
+				//Attack
+				attack:function(){
+					for(var n=this.conscripts.length-1;n>=0;n--){
+						if(Player.live()){
+							BattleField.situation.push(this.conscripts[n]+'準備發動攻擊！')
+							Player.protect(this.strength[n])
+						}
+						else{
+							Player.dead()
+							break
+						}
+					}
+				},
+				//Pretect
+				protect:function(x){
+					var a=x-this.stamina[this.conscripts.length-1]
+					if(a<=0) a=1
+					this.health[this.conscripts.length-1]-=a
+					BattleField.situation.push('<span style=\'color:green\'>'+this.conscripts[this.conscripts.length-1]+'受到 '+a+' 點傷害。</span><br>')
+					if(this.health[this.conscripts.length-1]<=0){
+						BattleField.situation.push('<span style=\'color:blue\'>'+this.conscripts[this.conscripts.length-1]+'死了。</span><br>')
+						this.conscripts.pop()
+					}
+					if(this.conscripts.length<=0) BattleField.situation.push('<span style=\'color:orange\'>戰鬥勝利！</span><br>')
+				}
+			}
+			/* Battle */
+			var BattleField={
+				//Private attributes
+				situation:new Array(),
+				//Live
+				broadcast:function(){
+					setTimeout(function(){
+						if(BattleField.situation.length>0){
+							document.getElementsByTagName('p')[0].innerHTML=BattleField.situation[0]
+							BattleField.situation.shift()
+							BattleField.broadcast()
+						}
+						else BattleField.review()
+					},1000)
+				},
+				//Review
+				review:function(){
+					//
+					var a=''
+					//
+					if(Enemy.conscripts.length<=0){
+						a='敵人全死光了…<br>'
+						document.getElementsByTagName('button')[0].disabled=true
+					}
+					else for(var n=Enemy.conscripts.length-1; n>=0; n--) a+=Enemy.conscripts[n]+' HP:'+Enemy.health[n]+'<br>'
+					//
+					a+='<br>玩家 HP:'+Player.health+''
+					//
+					document.getElementsByTagName('p')[0].innerHTML=a
+					document.getElementsByTagName('button')[0].disabled=false
+				},
+				//Round
+				round:function(){
+					document.getElementsByTagName('button')[0].disabled=true
+					Enemy.attack()
+					Player.attack()
+					this.broadcast()
+				}
+			}
+			//Conscript
+			var Conscripter={
+				attributes:['',0,0,0,0,0],
+				name:function(x){
+					this.attributes[0]=x
+					return this
+				},
+				health:function(x){
+					this.attributes[1]=x
+					return this
+				},
+				strength:function(x){
+					this.attributes[2]=x
+					return this
+				},
+				stamina:function(x){
+					this.attributes[3]=x
+					return this
+				},
+				agility:function(x){
+					this.attributes[4]=x
+					return this
+				},
+				experience:function(x){
+					this.attributes[5]=x
+					return this
+				},
+				reset:function(){
+					this.attributes=['',0,0,0,0,0]
+				},
+				toArray:function(){
+					var a=this.attributes.slice()
+					this.reset()
+					return a
+				}
+			}
+			//Main
+			Enemy.enlist(['青蛙怪',15,14,10,7 ,11])
+			Enemy.enlist(['角兔',10,12,8,5 ,7])
+			Enemy.enlist(['大烏鴉',9,10,6,6 ,5])
+			Enemy.enlist(Conscripter.name('史萊姆').health(8).strength(9).stamina(5).agility(4).experience(4).toArray())
+			BattleField.review()
+		</script>
 
-    </body>
+	</body>
 
 </html>

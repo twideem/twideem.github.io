@@ -2,104 +2,104 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JavaFX Media 媒體播放</h1>
-            </header>
+			<header>
+				<h1>JavaFX Media 媒體播放</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>播放音訊</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.nio.file.Paths;
-                        import javafx.application.Application;
-                        import javafx.scene.media.Media;
-                        import javafx.scene.media.MediaPlayer;
-                        import javafx.stage.Stage;
+			<section>
+				<h2>播放音訊</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.nio.file.Paths;
+						import javafx.application.Application;
+						import javafx.scene.media.Media;
+						import javafx.scene.media.MediaPlayer;
+						import javafx.stage.Stage;
 
-                        public class Main extends Application{
+						public class Main extends Application{
 
-                            public void start(Stage stage){
+							public void start(Stage stage){
 
-                                try{
-                                    Media media = new Media(Paths.get("audio.mp3").toUri().toString());
-                                    MediaPlayer media_player = new MediaPlayer(media);
-                                    media_player.play();
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
+								try{
+									Media media = new Media(Paths.get("audio.mp3").toUri().toString());
+									MediaPlayer media_player = new MediaPlayer(media);
+									media_player.play();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>播放影像</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.nio.file.Paths;
-                        import javafx.application.Application;
-                        import javafx.scene.layout.StackPane;
-                        import javafx.scene.media.Media;
-                        import javafx.scene.media.MediaPlayer;
-                        import javafx.scene.media.MediaView;
-                        import javafx.scene.Scene;
-                        import javafx.stage.Stage;
+			<section>
+				<h2>播放影像</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.nio.file.Paths;
+						import javafx.application.Application;
+						import javafx.scene.layout.StackPane;
+						import javafx.scene.media.Media;
+						import javafx.scene.media.MediaPlayer;
+						import javafx.scene.media.MediaView;
+						import javafx.scene.Scene;
+						import javafx.stage.Stage;
 
-                        public class Main extends Application{
+						public class Main extends Application{
 
-                            public void start(Stage stage){
+							public void start(Stage stage){
 
-                                try{
+								try{
 
-                                    Media media = new Media(Paths.get("video.mp4").toUri().toString());
-                                    MediaPlayer media_player = new MediaPlayer(media);
-                                    media_player.play();
+									Media media = new Media(Paths.get("video.mp4").toUri().toString());
+									MediaPlayer media_player = new MediaPlayer(media);
+									media_player.play();
 
-                                    MediaView media_view = new MediaView(media_player);
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(media_view);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.setWidth(800);
-                                    stage.setHeight(600);
+									MediaView media_view = new MediaView(media_player);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(media_view);
+									stage.setScene(new Scene(stack_pane));
+									stage.setWidth(800);
+									stage.setHeight(600);
 
-                                    stage.show();
+									stage.show();
 
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

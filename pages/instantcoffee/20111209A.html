@@ -2,296 +2,296 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/editor.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/editor.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>使用 NIO2 處理檔案</h1>
-                <p>
-                    Java SE 7 為 New I/O 增加了 Files 和 Paths，讓檔案處理變得簡單、方便！
-                </p>
-            </header>
+			<header>
+				<h1>使用 NIO2 處理檔案</h1>
+				<p>
+					Java SE 7 為 New I/O 增加了 Files 和 Paths，讓檔案處理變得簡單、方便！
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>資料夾與檔案的複製</h2>
-                <p>
-                    檔案與資料夾的複製，一直是 java.io.File 不足的地方，總要寫冗長的程式來處理。有了 NIO2 後：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.nio.file.Files;
-                        import java.nio.file.Paths;
-                        import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+			<section>
+				<h2>資料夾與檔案的複製</h2>
+				<p>
+					檔案與資料夾的複製，一直是 java.io.File 不足的地方，總要寫冗長的程式來處理。有了 NIO2 後：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.nio.file.Files;
+						import java.nio.file.Paths;
+						import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    //複製資料夾
-                                    Files.copy(Paths.get(".\\a"), Paths.get(".\\b"), REPLACE_EXISTING);
-                                    //複製檔案
-                                    Files.copy(Paths.get(".\\a\\1.txt"), Paths.get(".\\b\\2.txt"), REPLACE_EXISTING);
-                                }
-                                catch (Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									//複製資料夾
+									Files.copy(Paths.get(".\\a"), Paths.get(".\\b"), REPLACE_EXISTING);
+									//複製檔案
+									Files.copy(Paths.get(".\\a\\1.txt"), Paths.get(".\\b\\2.txt"), REPLACE_EXISTING);
+								}
+								catch (Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    為了讓範例看起來一目了然，所以程式放在同一個 try 裡。但實際操作時，各有一個 try..catch.. 才是標準做法。
-                </p>
-            </section>
+					<br>
+					為了讓範例看起來一目了然，所以程式放在同一個 try 裡。但實際操作時，各有一個 try..catch.. 才是標準做法。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>建立日期、修改日期、存取日期</h2>
-                <p>
-                    <var>java.io.File</var> 只能顯示檔案的「修改日期」，NIO2 可以顯示「建立日期」與「存取日期」：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.nio.file.Files;
-                        import java.nio.file.Path;
-                        import java.nio.file.Paths;
-                        import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
+			<section>
+				<h2>建立日期、修改日期、存取日期</h2>
+				<p>
+					<var>java.io.File</var> 只能顯示檔案的「修改日期」，NIO2 可以顯示「建立日期」與「存取日期」：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.nio.file.Files;
+						import java.nio.file.Path;
+						import java.nio.file.Paths;
+						import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    Path path = Paths.get("text.txt");
-                                    System.out.println(Files.getAttribute(path, "basic:creationTime", NOFOLLOW_LINKS));
-                                    System.out.println(Files.getAttribute(path, "basic:lastModifiedTime", NOFOLLOW_LINKS));
-                                    System.out.println(Files.getAttribute(path, "basic:lastAccessTime", NOFOLLOW_LINKS));
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									Path path = Paths.get("text.txt");
+									System.out.println(Files.getAttribute(path, "basic:creationTime", NOFOLLOW_LINKS));
+									System.out.println(Files.getAttribute(path, "basic:lastModifiedTime", NOFOLLOW_LINKS));
+									System.out.println(Files.getAttribute(path, "basic:lastAccessTime", NOFOLLOW_LINKS));
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    也可以修改建立日期與存取日期：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.nio.file.attribute.FileTime;
-                        import java.nio.file.Files;
-                        import java.nio.file.Path;
-                        import java.nio.file.Paths;
-                        import java.text.SimpleDateFormat;
-                        import java.util.Date;
-                        import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
+					<br>
+					也可以修改建立日期與存取日期：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.nio.file.attribute.FileTime;
+						import java.nio.file.Files;
+						import java.nio.file.Path;
+						import java.nio.file.Paths;
+						import java.text.SimpleDateFormat;
+						import java.util.Date;
+						import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse("2002-08-29T12:34:56Z");
-                                    FileTime file_time = FileTime.fromMillis(date.getTime());
-                                    Path path = Paths.get("text.txt");
-                                    Files.setAttribute(path, "basic:creationTime", file_time, NOFOLLOW_LINKS);
-                                    Files.setAttribute(path, "basic:lastModifiedTime", file_time, NOFOLLOW_LINKS);
-                                    Files.setAttribute(path, "basic:lastAccessTime", file_time, NOFOLLOW_LINKS);
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse("2002-08-29T12:34:56Z");
+									FileTime file_time = FileTime.fromMillis(date.getTime());
+									Path path = Paths.get("text.txt");
+									Files.setAttribute(path, "basic:creationTime", file_time, NOFOLLOW_LINKS);
+									Files.setAttribute(path, "basic:lastModifiedTime", file_time, NOFOLLOW_LINKS);
+									Files.setAttribute(path, "basic:lastAccessTime", file_time, NOFOLLOW_LINKS);
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>讀取純文字文件</h2>
-                <hr>
-                <section>
-                    <h3>text.txt</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            猜
-                            猜
-                            我
-                            是
-                            誰
+			<section>
+				<h2>讀取純文字文件</h2>
+				<hr>
+				<section>
+					<h3>text.txt</h3>
+					<p>
+						<textarea class='brush:java'>
+							猜
+							猜
+							我
+							是
+							誰
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.nio.file.Files;
-                            import java.nio.file.Paths;
-                            import java.util.List;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.nio.file.Files;
+							import java.nio.file.Paths;
+							import java.util.List;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
-                                        List&lt;String&gt; lines = Files.readAllLines(Paths.get("text.txt"));
-                                        for(String line:lines){
-                                            System.out.print(line);
-                                        }
-                                    }
-                                    catch(Exception exception) {
-                                        exception.printStackTrace();
-                                    }
+									try{
+										List&lt;String&gt; lines = Files.readAllLines(Paths.get("text.txt"));
+										for(String line:lines){
+											System.out.print(line);
+										}
+									}
+									catch(Exception exception) {
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            猜猜我是誰
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    Java SE 8 可用 Stream API 一行搞定：<br>
-                    <br>
-                    <code>Files.lines(Paths.get("text.txt")).forEach(System.out::print);</code>
-                </p>
-            </section>
+						<br>
+						<output>
+							猜猜我是誰
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					Java SE 8 可用 Stream API 一行搞定：<br>
+					<br>
+					<code>Files.lines(Paths.get("text.txt")).forEach(System.out::print);</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>寫入純文字文件</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.nio.file.Files;
-                        import java.nio.file.Paths;
-                        import java.util.Arrays;
+			<section>
+				<h2>寫入純文字文件</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.nio.file.Files;
+						import java.nio.file.Paths;
+						import java.util.Arrays;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                try{
-                                    Files.write(Paths.get("text.txt"), Arrays.asList("猜猜","我是誰"));
-                                }
-                                catch(Exception exception) {
-                                    exception.printStackTrace();
-                                }
+								try{
+									Files.write(Paths.get("text.txt"), Arrays.asList("猜猜","我是誰"));
+								}
+								catch(Exception exception) {
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output class='editor'>
-                        猜猜<br>
-                        我是誰<br>
-                    </output>
-                    <br>
-                    Files.write() 可以下第三個參數為 <code>java.nio.file.StandardOpenOption.APPEND</code>，將資料附加上去。
-                </p>
-            </section>
+					<br>
+					<output class='editor'>
+						猜猜<br>
+						我是誰<br>
+					</output>
+					<br>
+					Files.write() 可以下第三個參數為 <code>java.nio.file.StandardOpenOption.APPEND</code>，將資料附加上去。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>讀取與輸出二進制檔案資料</h2>
-                <p>
-                    底下示範用 byte[] 讀取 image1.jpg 檔案，再將讀取的資料輸出為 image2.jpg：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.nio.file.Files;
-                        import java.nio.file.Paths;
+			<section>
+				<h2>讀取與輸出二進制檔案資料</h2>
+				<p>
+					底下示範用 byte[] 讀取 image1.jpg 檔案，再將讀取的資料輸出為 image2.jpg：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.nio.file.Files;
+						import java.nio.file.Paths;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                try{
-                                    //讀取
-                                    byte[] bytes = Files.readAllBytes(Paths.get("image1.jpg"));
-                                    //輸出
-                                    Files.write(Paths.get("image2.jpg"), bytes);
-                                }
-                                catch(Exception exception) {
-                                    exception.printStackTrace();
-                                }
+								try{
+									//讀取
+									byte[] bytes = Files.readAllBytes(Paths.get("image1.jpg"));
+									//輸出
+									Files.write(Paths.get("image2.jpg"), bytes);
+								}
+								catch(Exception exception) {
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    相當於複製圖片。
-                </p>
-            </section>
+					<br>
+					相當於複製圖片。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>串流</h2>
-                <p>
-                    底下示範用 InputStream 讀取 image1.jpg 檔案，再用 Files.copy() 以 OutputStream 輸出為 image3.jpg：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.io.InputStream;
-                        import java.nio.file.Files;
-                        import java.nio.file.Paths;
+			<section>
+				<h2>串流</h2>
+				<p>
+					底下示範用 InputStream 讀取 image1.jpg 檔案，再用 Files.copy() 以 OutputStream 輸出為 image3.jpg：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.InputStream;
+						import java.nio.file.Files;
+						import java.nio.file.Paths;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                try{
-                                    InputStream input_stream = Files.newInputStream(Paths.get("image1.jpg"));
-                                    Files.copy(input_stream, Paths.get("image3.jpg"));
-                                }
-                                catch(Exception exception) {
-                                    exception.printStackTrace();
-                                }
+								try{
+									InputStream input_stream = Files.newInputStream(Paths.get("image1.jpg"));
+									Files.copy(input_stream, Paths.get("image3.jpg"));
+								}
+								catch(Exception exception) {
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    除了 <code>newInputStream()</code>，還有 <code>newOutputStream()</code>、<code>newBufferedReader()</code>、<code>newBufferedWriter()</code>，請依樣畫葫蘆吧。
-                </p>
-            </section>
+					<br>
+					除了 <code>newInputStream()</code>，還有 <code>newOutputStream()</code>、<code>newBufferedReader()</code>、<code>newBufferedWriter()</code>，請依樣畫葫蘆吧。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Path 介面與 File 類別的相容性</h2>
-                <p>
-                    Paths.get() 傳回的是 <code>java.nio.file.Path</code> 介面，可以做比 <code>java.io.File</code> 類別更多事情，使用起來卻更簡單，未來 Path 介面很可能漸漸取代 File 成為檔案的主流。<br>
-                    <br>
-                    屆時遇到新舊功能的相容問題，可使用 <code>Path.toFile()</code> 和 <code>File.toPath()</code> 互相轉換。
-                </p>
-            </section>
+			<section>
+				<h2>Path 介面與 File 類別的相容性</h2>
+				<p>
+					Paths.get() 傳回的是 <code>java.nio.file.Path</code> 介面，可以做比 <code>java.io.File</code> 類別更多事情，使用起來卻更簡單，未來 Path 介面很可能漸漸取代 File 成為檔案的主流。<br>
+					<br>
+					屆時遇到新舊功能的相容問題，可使用 <code>Path.toFile()</code> 和 <code>File.toPath()</code> 互相轉換。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

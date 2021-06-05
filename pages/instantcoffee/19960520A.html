@@ -2,88 +2,88 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>appletviewer</h1>
-                <p>Windows 版 JDK 有個 appletviewer.exe<ins>[1]</ins>，是用來測試 Applet 的工具。</p>
-            </header>
+			<header>
+				<h1>appletviewer</h1>
+				<p>Windows 版 JDK 有個 appletviewer.exe<ins>[1]</ins>，是用來測試 Applet 的工具。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>使用方式</h2>
-                <p>
-                    先把編譯好的 Applet 嵌到網頁，再用「命令提示字元」將網頁當作參數，傳遞給 appletviewer。
-                </p>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.awt.Graphics;
-                            import javax.swing.JApplet;
+			<section>
+				<h2>使用方式</h2>
+				<p>
+					先把編譯好的 Applet 嵌到網頁，再用「命令提示字元」將網頁當作參數，傳遞給 appletviewer。
+				</p>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.awt.Graphics;
+							import javax.swing.JApplet;
 
-                            public class Main extends JApplet{
+							public class Main extends JApplet{
 
-                                public void paint(Graphics g){
-                                    g.drawString("Hello, AppletViewer!", 100, 100);
-                                }
+								public void paint(Graphics g){
+									g.drawString("Hello, AppletViewer!", 100, 100);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Applet.html</h3>
-                    <p>
-                        <textarea class='brush:html'>
-                            &lt;applet code="Main.class" width='320" height="240"&gt;&lt;/applet&gt;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Applet.html</h3>
+					<p>
+						<textarea class='brush:html'>
+							&lt;applet code="Main.class" width='320" height="240"&gt;&lt;/applet&gt;
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>命令提示字元</h3>
-                    <p>
-                        <output>
-                            appletviewer Applet.html
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>執行結果</h3>
-                    <figure>
-                    <img src='../../figures/instantcoffee/19960520A_01.png' alt='插圖'>
-                </figure>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>命令提示字元</h3>
+					<p>
+						<output>
+							appletviewer Applet.html
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>執行結果</h3>
+					<figure>
+					<img src='../../figures/instantcoffee/19960520A_01.png' alt='插圖'>
+				</figure>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] Linux 版則是 appletviewer，沒有副檔名。<br>
-                    [*] 如果你練習失敗，又找不到原因，可下載本章節範例：<a href='../../objects/downloads/19960520A.7z' target='_blank'>19960520A.7z</a>，研究看看問題出在哪？                    
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] Linux 版則是 appletviewer，沒有副檔名。<br>
+					[*] 如果你練習失敗，又找不到原因，可下載本章節範例：<a href='../../objects/downloads/19960520A.7z' target='_blank'>19960520A.7z</a>，研究看看問題出在哪？
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

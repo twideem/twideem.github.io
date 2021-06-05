@@ -2,67 +2,67 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Windows 8 Charms</h1>
-                <p>
-                    Windows 8 使用了新的 Toolbar 叫做 Charms，有意做為統一觸控與滑鼠的管理介面。<br>
-                    <br>
-                    坦白說這是一場災難，例如我把 ADSL 連線設定非為固定 IP 與浮動 IP 以便手動切換，以前只要建立個捷徑到桌面，然後點兩下就直接連線了，現在居然就是得跳到 Charms，然後一步步點固定 IP 或浮動 IP 來連線。Windows 8 Charms 讓我多按了好幾下滑鼠～<br>
-                    <br>
-                    另外，每次移動滑鼠到螢幕右下角想跳出 Windows Charms，要等個延遲時間才跳出，這也很惱人，讓我整個操作過程很不流暢。
-                </p>
-            </header>
+			<header>
+				<h1>Windows 8 Charms</h1>
+				<p>
+					Windows 8 使用了新的 Toolbar 叫做 Charms，有意做為統一觸控與滑鼠的管理介面。<br>
+					<br>
+					坦白說這是一場災難，例如我把 ADSL 連線設定非為固定 IP 與浮動 IP 以便手動切換，以前只要建立個捷徑到桌面，然後點兩下就直接連線了，現在居然就是得跳到 Charms，然後一步步點固定 IP 或浮動 IP 來連線。Windows 8 Charms 讓我多按了好幾下滑鼠～<br>
+					<br>
+					另外，每次移動滑鼠到螢幕右下角想跳出 Windows Charms，要等個延遲時間才跳出，這也很惱人，讓我整個操作過程很不流暢。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>修改 Windows 8 Charms 的延遲時間</h2>
-                <p>
-                    進入 regedit.exe，找到：<br>
-                    <br>
-                    <var>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi</var><br>
-                    <br>
-                    新增 DWORD 名稱為 <var>CharmsBarDesktopDelay</var>，數值資料為 0。<br>
-                    新增 DWORD 名稱為 <var>CharmsBarImmersiveDelay</var>，數值資料為 0。<br>
-                    <br>
-                    這樣滑鼠移到右下角，不用延遲時間就能跳出 Charms 了。
-                </p>
-            </section>
+			<section>
+				<h2>修改 Windows 8 Charms 的延遲時間</h2>
+				<p>
+					進入 regedit.exe，找到：<br>
+					<br>
+					<var>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi</var><br>
+					<br>
+					新增 DWORD 名稱為 <var>CharmsBarDesktopDelay</var>，數值資料為 0。<br>
+					新增 DWORD 名稱為 <var>CharmsBarImmersiveDelay</var>，數值資料為 0。<br>
+					<br>
+					這樣滑鼠移到右下角，不用延遲時間就能跳出 Charms 了。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>關閉螢幕右上角跳出 Windows 8 Charms 的功能</h2>
-                <p>
-                    當視窗放到最大時，滑鼠會移到螢幕最右上角，通常是為了按 X 關閉視窗，但卻老是跳出 Windows 8 Charms。幸好可以關閉：<br>
-                    <br>
-                    <var>「螢幕右角」→「設定」→「變更電腦設定」→「電腦與裝備」→「角落與邊緣」→「當我指向畫面右上角時，顯示常用鍵」→「關閉」</var>
-                </p>
-            </section>
+			<section>
+				<h2>關閉螢幕右上角跳出 Windows 8 Charms 的功能</h2>
+				<p>
+					當視窗放到最大時，滑鼠會移到螢幕最右上角，通常是為了按 X 關閉視窗，但卻老是跳出 Windows 8 Charms。幸好可以關閉：<br>
+					<br>
+					<var>「螢幕右角」→「設定」→「變更電腦設定」→「電腦與裝備」→「角落與邊緣」→「當我指向畫面右上角時，顯示常用鍵」→「關閉」</var>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 有個好消息，Windows 10 取消了這擾人的設計！
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 有個好消息，Windows 10 取消了這擾人的設計！
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

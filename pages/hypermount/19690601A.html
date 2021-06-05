@@ -2,101 +2,101 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Page Flipping</h1>
-                <p>
-                    在《<a href='19690525A.html'>Double Buffer</a>》介紹了雙重緩衝的高速繪圖技巧，雖然對 2D 遊戲來說已經盡善盡美，但如果要進一步苛求的話，那就是 Back buffer 複製到 Primary surface 的這個動作也算增加電腦的工作量。於是有人想說，為何不跳過這個動作？Back buffer 畫好直接顯示出來當 Primary surface，再把原本的 Primary surface 隱藏起來當 Back buffer，如此反覆進行不也是一樣效果嗎？<br>
-                    <br>
-                    這就是本章節要介紹的 Page Flipping 技巧！
-                </p>
-            </header>
+			<header>
+				<h1>Page Flipping</h1>
+				<p>
+					在《<a href='19690525A.html'>Double Buffer</a>》介紹了雙重緩衝的高速繪圖技巧，雖然對 2D 遊戲來說已經盡善盡美，但如果要進一步苛求的話，那就是 Back buffer 複製到 Primary surface 的這個動作也算增加電腦的工作量。於是有人想說，為何不跳過這個動作？Back buffer 畫好直接顯示出來當 Primary surface，再把原本的 Primary surface 隱藏起來當 Back buffer，如此反覆進行不也是一樣效果嗎？<br>
+					<br>
+					這就是本章節要介紹的 Page Flipping 技巧！
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>原始碼</h2>
-                <p>
-                    <textarea class='brush:js'>
-                        //全域變數
-                        var _count = 0, _position = 0;
-                        var _display_pointer = 0;
+			<section>
+				<h2>原始碼</h2>
+				<p>
+					<textarea class='brush:js'>
+						//全域變數
+						var _count = 0, _position = 0;
+						var _display_pointer = 0;
 
-                        //載入背景圖片
-                        var _background = new Image();
-                        _background.src = 'background.png';
+						//載入背景圖片
+						var _background = new Image();
+						_background.src = 'background.png';
 
-                        //載入前景圖片
-                        var _sprite = new Image();
-                        _sprite.src = 'sprite.png';
+						//載入前景圖片
+						var _sprite = new Image();
+						_sprite.src = 'sprite.png';
 
-                        //建立畫布
-                        var _surface = [ document.createElement('canvas'), document.createElement('canvas') ];
-                        for(var n in _surface){
-                            document.body.appendChild(_surface[n]);
-                            _surface[n].width = 600;
-                            _surface[n].height = 300;
-                            _surface[n].style.position = 'absolute';
-                            _surface[n].style.left = '2';
-                            _surface[n].style.top = '2';
-                            _surface[n].style.visibility = 'hidden';
-                        }
+						//建立畫布
+						var _surface = [ document.createElement('canvas'), document.createElement('canvas') ];
+						for(var n in _surface){
+							document.body.appendChild(_surface[n]);
+							_surface[n].width = 600;
+							_surface[n].height = 300;
+							_surface[n].style.position = 'absolute';
+							_surface[n].style.left = '2';
+							_surface[n].style.top = '2';
+							_surface[n].style.visibility = 'hidden';
+						}
 
-                        //將圖片描繪到畫布
-                        function draw(){
-                            _display_pointer = 1 - _display_pointer;
-                            var _context = _surface[_display_pointer].getContext('2d');
-                            _context.drawImage(_background, 0, 0);
-                            switch(_count){
-                                case 0:
-                                    _context.drawImage(_sprite, 0, 0, 96, 141, 272, _position, 96, 141);
-                                    _count++;
-                                    break;
-                                case 1:
-                                    _context.drawImage(_sprite, 96, 0, 96, 141, 272, _position+=9, 96, 141);
-                                    _count++;
-                                    break;
-                                case 2:
-                                    _context.drawImage(_sprite, 0, 0, 96, 141, 272, _position, 96, 141);
-                                    _count++;
-                                    break;
-                                case 3:
-                                    _count = 0;
-                                    _context.drawImage(_sprite, 288, 0, 96, 141, 272, _position+=9, 96, 141);
-                            }
-                            _surface[1-_display_pointer].style.visibility = 'visible';
-                            _surface[_display_pointer].style.visibility = 'hidden';
-                        }
+						//將圖片描繪到畫布
+						function draw(){
+							_display_pointer = 1 - _display_pointer;
+							var _context = _surface[_display_pointer].getContext('2d');
+							_context.drawImage(_background, 0, 0);
+							switch(_count){
+								case 0:
+									_context.drawImage(_sprite, 0, 0, 96, 141, 272, _position, 96, 141);
+									_count++;
+									break;
+								case 1:
+									_context.drawImage(_sprite, 96, 0, 96, 141, 272, _position+=9, 96, 141);
+									_count++;
+									break;
+								case 2:
+									_context.drawImage(_sprite, 0, 0, 96, 141, 272, _position, 96, 141);
+									_count++;
+									break;
+								case 3:
+									_count = 0;
+									_context.drawImage(_sprite, 288, 0, 96, 141, 272, _position+=9, 96, 141);
+							}
+							_surface[1-_display_pointer].style.visibility = 'visible';
+							_surface[_display_pointer].style.visibility = 'hidden';
+						}
 
-                        //網頁載入後執行 draw()
-                        window.onload = setInterval(draw, 250);
+						//網頁載入後執行 draw()
+						window.onload = setInterval(draw, 250);
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例下載</h2>
-                <p>
-                    <a href='../../objects/downloads/19690601A.7z' target='_blank'>19690601A.7z</a>
-                </p>
-            </section>
+			<section>
+				<h2>範例下載</h2>
+				<p>
+					<a href='../../objects/downloads/19690601A.7z' target='_blank'>19690601A.7z</a>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

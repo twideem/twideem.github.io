@@ -2,66 +2,66 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header id='top'>
-                <h1>單色螢幕 RGB 值</h1>
-                <p>
-                    檸檬：<a href='javascript:f1("#80FF00")'>80FF00</a>、<a href='javascript:f1("#009B00")'>009B00</a>、<a href='javascript:f1("#66CC33")'>66CC33</a>。<br>
-                    琥珀：<a href='javascript:f1("#FF8000")'>FF8000</a>、<a href='javascript:f1("#D38200")'>D38200</a>、<a href='javascript:f1("#CC9933")'>CC9933</a>。<br>
-                    銀白：<a href='javascript:f1("#CCCCCC")'>CCCCCC</a>。
-                </p>
-                <div id='division' style='color:#cccccc;background-color:#000000;font-family:Courier;font-size:10pt;height:378px;padding:10px;width:578px'>
-                    Starting MS-DOS...<br>
-                    <br>
-                    <br>
-                    HIMEM is testing extended memory...done.<br>
-                    <br>
-                    C:\&gt;C:\DOS\SMARTDEV.EXE /X<br>
-                    C:\><span id='content1' style='font-family:Courier'></span><span id='content2'>_</span>
-                </div>
-            </header>
+			<header id='top'>
+				<h1>單色螢幕 RGB 值</h1>
+				<p>
+					檸檬：<a href='javascript:f1("#80FF00")'>80FF00</a>、<a href='javascript:f1("#009B00")'>009B00</a>、<a href='javascript:f1("#66CC33")'>66CC33</a>。<br>
+					琥珀：<a href='javascript:f1("#FF8000")'>FF8000</a>、<a href='javascript:f1("#D38200")'>D38200</a>、<a href='javascript:f1("#CC9933")'>CC9933</a>。<br>
+					銀白：<a href='javascript:f1("#CCCCCC")'>CCCCCC</a>。
+				</p>
+				<div id='division' style='color:#cccccc;background-color:#000000;font-family:Courier;font-size:10pt;height:378px;padding:10px;width:578px'>
+					Starting MS-DOS...<br>
+					<br>
+					<br>
+					HIMEM is testing extended memory...done.<br>
+					<br>
+					C:\&gt;C:\DOS\SMARTDEV.EXE /X<br>
+					C:\><span id='content1' style='font-family:Courier'></span><span id='content2'>_</span>
+				</div>
+			</header>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 檸檬和琥珀有三種顏色，第一項是最有可能的色值，第二項是 DOSBOX 提供的色值，第三項是個人目測的色值。</p>
-            </footer>
+			<footer>
+				<p>[*] 檸檬和琥珀有三種顏色，第一項是最有可能的色值，第二項是 DOSBOX 提供的色值，第三項是個人目測的色值。</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
-            var visibility=''
-            var content1=document.getElementById('content1')
-            var content2=document.getElementById('content2')
-            var echo=[' []~(￣ー￣ )>　等我這杯喝完再幫你執行。',' ...(~￣０￣)ノ　我先出去一下，回來再幫你執行哦。',' ＺZz(￣.￣)　呼嚕～',' (〜￣▽￣)〜~(￣▽￣)~〜(￣▽￣〜)']
-            function f1(x){
-                document.getElementById('division').style.color=x
-            }
-            function f2(){
-                if(visibility) content2.style.visibility='visible'
-                else content2.style.visibility='hidden'
-                visibility=!visibility
-            }
-            setInterval('f2()',500)
-            addEventListener('keydown',function(x){
-                if(x.key=='Enter') content1.innerHTML=echo[Math.floor(Math.random()*echo.length)]
-                if(x.key.length==1){
-                    content1.innerHTML+=x.key
-                }
-            })
-        </script>
+		<script>
+			var visibility=''
+			var content1=document.getElementById('content1')
+			var content2=document.getElementById('content2')
+			var echo=[' []~(￣ー￣ )>　等我這杯喝完再幫你執行。',' ...(~￣０￣)ノ　我先出去一下，回來再幫你執行哦。',' ＺZz(￣.￣)　呼嚕～',' (〜￣▽￣)〜~(￣▽￣)~〜(￣▽￣〜)']
+			function f1(x){
+				document.getElementById('division').style.color=x
+			}
+			function f2(){
+				if(visibility) content2.style.visibility='visible'
+				else content2.style.visibility='hidden'
+				visibility=!visibility
+			}
+			setInterval('f2()',500)
+			addEventListener('keydown',function(x){
+				if(x.key=='Enter') content1.innerHTML=echo[Math.floor(Math.random()*echo.length)]
+				if(x.key.length==1){
+					content1.innerHTML+=x.key
+				}
+			})
+		</script>
 
-    </body>
+	</body>
 
 </html>

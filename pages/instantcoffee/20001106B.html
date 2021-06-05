@@ -2,69 +2,69 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/fixure.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/fixure.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Steel Theme</h1>
-            </header>
+			<header>
+				<h1>Steel Theme</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                Java SE 5.0 時，推出新的 Metal 風格，叫做 Ocean Theme，較為明亮。J2SE 1.4 時，Metal 風格叫做 Steel Theme，比較暗沉，而且元件的層次之間沒什麼立體感，辨識度較差。<br>
-                <br>
-                由於 Java SE 5.0 開始將 Ocean 做為 Metal 風格的預設主題，因此如果你想切換回 Steel 主題，程式碼如下：<br>
-                <br>
-                <textarea class='brush:java;highlight:[11]'>
-                    import javax.swing.JFrame;
-                    import javax.swing.plaf.metal.DefaultMetalTheme;
-                    import javax.swing.plaf.metal.MetalLookAndFeel;
-                    import javax.swing.UIManager;
+			<p>
+				Java SE 5.0 時，推出新的 Metal 風格，叫做 Ocean Theme，較為明亮。J2SE 1.4 時，Metal 風格叫做 Steel Theme，比較暗沉，而且元件的層次之間沒什麼立體感，辨識度較差。<br>
+				<br>
+				由於 Java SE 5.0 開始將 Ocean 做為 Metal 風格的預設主題，因此如果你想切換回 Steel 主題，程式碼如下：<br>
+				<br>
+				<textarea class='brush:java;highlight:[11]'>
+					import javax.swing.JFrame;
+					import javax.swing.plaf.metal.DefaultMetalTheme;
+					import javax.swing.plaf.metal.MetalLookAndFeel;
+					import javax.swing.UIManager;
 
-                    public class Main{
+					public class Main{
 
-                        public static void main(String[] args){
-                            //啟用 Java 預設的視窗外框
-                            JFrame.setDefaultLookAndFeelDecorated(true);
-                            MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
-                            //將視窗樣式改為 Metal 風格
-                            try{
-                                UIManager.setLookAndFeel(new MetalLookAndFeel());
-                            }
-                            catch(Exception exception){
-                                exception.printStackTrace();
-                            }
-                            //建立視窗
-                            JFrame frame = new JFrame();
-                            frame.setSize(320, 240);
-                            frame.setTitle("視窗標題");
-                            frame.setVisible(true);
-                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        }
+						public static void main(String[] args){
+							//啟用 Java 預設的視窗外框
+							JFrame.setDefaultLookAndFeelDecorated(true);
+							MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
+							//將視窗樣式改為 Metal 風格
+							try{
+								UIManager.setLookAndFeel(new MetalLookAndFeel());
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+							//建立視窗
+							JFrame frame = new JFrame();
+							frame.setSize(320, 240);
+							frame.setTitle("視窗標題");
+							frame.setVisible(true);
+							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						}
 
-                    }
-                </textarea>
-            </p>
+					}
+				</textarea>
+			</p>
 
-            <figure>
-                <img src='../../figures/instantcoffee/20080930A_01.png' alt='插圖'>
-            </figure>
+			<figure>
+				<img src='../../figures/instantcoffee/20080930A_01.png' alt='插圖'>
+			</figure>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

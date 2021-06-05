@@ -2,2596 +2,2596 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>
-            table td:nth-child(1){color:#999;width:20%}
-            table td:nth-child(2){color:#396;width:25%}
-        </style>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
-
-    <body>
-
-        <article>
-
-            <header>
-                <h1>物件導向設計模式</h1>
-                <p>
-                    首先，「物件導向設計模式」並非將「物件導向程式設計（OOP）」中反覆出現的「程式結構」整理出來成「名目表」，而是將「物件導向設計（OOD）」中屢次有效解決開發需求的實作方式整理出來。因此「程式的結構」並非「物件導向設計模式」的重點，「需求的解法」才是重點。比如說，看到 Facade 表示把複雜的系統簡化成容易操作的介面來使用，看到 Adapter 表示將別處不相容的操作介面轉換為相容此處的操作介面來使用，兩者所透露出來的設計理念才是重點，至於實作出來以後程式碼長怎樣並不是重點<ins>[1]</ins>。<br>
-                    <br>
-                    但程式碼確實會說話，對於沒有物件導向分析與設計經驗、或者用 UML 展示物件導向設計模式，反而無法在第一時間領會其奧妙的人<ins>[2]</ins>，從程式碼的結構來了解設計模式，多少還是有幫助的。因此，本文使用精簡而容易閱讀的程式碼來示範設計模式，讓習慣用程式碼探究原理的人更輕易領會。<br>
-                    <br>
-                    為了方便研究程式碼的結構，可下載本單元所有範例：<a href='../../objects/downloads/19941110A.7z' target='_blank'>19941110A.7z</a>，一邊操作其行為結果，一邊探究其組織方式。
-                </p>
-            </header>
-
-            <hr>
-
-            <section>
-                <h2>目錄</h2>
-                <p>
-                    1994 年出版了 Erich Gamma、Richard Helm、Ralph Johnson、John Vlissides 四人著作的經典鉅作《Design Patterns: Elements of Reusable Object-Oriented Software》。這本書之所以讓人讚嘆不已，在於它不只是「電腦圖書」，更是淬鍊人類智慧的「學術著作」。我們在藉由這本書學習到「物件導向設計模式」之餘，更目睹這「四人幫」(GoF: Gang of Four) 是如何展現出人類的學術潛能，能把「設計模式」寫得透徹、而且分明。有程式設計背景的人，讀這本書保證像在讀一本文學著作一樣，會讓你見識到原來電腦書籍還是可以寫得經典，由衷對整本書的安排讚嘆不已。<br>
-                    <br>
-                    言歸正傳，要建立「物件導向開發手法」卻苦於沒有經驗的累積，那最有效的方式，就是接受「物件導向設計模式」的歷練！這些設計模式是將「物件導向程式設計」十數年來，反覆出現的物件組合方式<ins>[3]</ins> 一一整理出來，讓世人更清楚了解：「物件導向平常是怎樣被使用的？」
-                </p>
-                <hr>
-                <section>
-                    <h3>生成模式</h3>
-                    <p>
-                        生成模式（Creational patterns）可以幫助我們了解設計物件導向時有哪幾種常用的物件產生手法。<br>
-                        <br>
-                        ．<a href='#ANCHOR_1'>Abstract factory</a><br>
-                        ．<a href='#ANCHOR_2'>Builder</a><br>
-                        ．<a href='#ANCHOR_3'>Factory method</a><br>
-                        ．<a href='#ANCHOR_4'>Prototype</a><br>
-                        ．<a href='#ANCHOR_5'>Singleton</a><br>
-                        <br>
-                        一開始接觸的是生成模式，短短四個（建議先跳過 Abstract factory），馬上就能掌握如何建立物件的技巧，有效提升你物件導向的手法與視野。趕快加入設計模式的行列吧～！
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>結構模式</h3>
-                    <p>
-                        結構模式（Structural patterns）可以幫助我們了解設計物件導向時有哪幾種常見的物件組合方式。<br>
-                        <br>
-                        ．<a href='#ANCHOR_6'>Adapter</a><br>
-                        ．<a href='#ANCHOR_7'>Bridge</a><br>
-                        ．<a href='#ANCHOR_8'>Composite</a><br>
-                        ．<a href='#ANCHOR_9'>Decorator</a><br>
-                        ．<a href='#ANCHOR_10'>Facade</a><br>
-                        ．<a href='#ANCHOR_11'>Flyweight</a><br>
-                        ．<a href='#ANCHOR_12'>Proxy</a><br>
-                        <br>
-                        接著的結構模式，是關於物件的組織方式，將這些視為累積物件導向使用經驗的案例，好好臨攀一下吧！
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>行為模式</h3>
-                    <p>
-                        行為模式（Behavioral patterns）可以幫助我們了解設計物件導向時有哪幾種常見的物件操作方式。<br>
-                        <br>
-                        ．<a href='#ANCHOR_13'>Chain of responsibility</a><br>
-                        ．<a href='#ANCHOR_14'>Command</a><br>
-                        ．<a href='#ANCHOR_15'>Interpreter</a><br>
-                        ．<a href='#ANCHOR_16'>Iterator</a><br>
-                        ．<a href='#ANCHOR_17'>Mediator</a><br>
-                        ．<a href='#ANCHOR_18'>Memento</a><br>
-                        ．<a href='#ANCHOR_19'>Observer</a><br>
-                        ．<a href='#ANCHOR_20'>State</a><br>
-                        ．<a href='#ANCHOR_21'>Strategy</a><br>
-                        ．<a href='#ANCHOR_22'>Template method</a><br>
-                        ．<a href='#ANCHOR_23'>Visitor</a><br>
-                        <br>
-                        比起其它設計模式，行為模式的重點不在類別結構本身，而是類別之間交互運算的關係，而且在設計上可能涉及狀態保存的程式寫法，因此釐清時複雜許多，需要多花時間去推演。從這裡開始請繃緊精神，研究時著重在資料的傳遞與變化，遇到難題只要勇敢去解題，其實頗能享受那攻城掠地的快感！
-                    </p>
-                </section>
-            </section>
-
-            <hr id='ANCHOR_1'>
-
-            <section>
-                <h2 title='Abstract Factory groups object factories that have a common theme.'>Abstract factory（別名：Kit）</h2>
-                <p>
-                    全部使用介面（interface）來建立一整群相依的物件，讓客戶端只需要透過介面來使用物件，以免過問實作細節。
-                </p>
-                <hr>
-                <section>
-                    <h3>ProductS.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface ProductS{
-                                void f1();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements ProductS{
-
-                                public void f1(){
-                                    System.out.println("AAA");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements ProductS{
-
-                                public void f1(){
-                                    System.out.println("BBB");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ProductT.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface ProductT{
-                                void f2();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>C.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class C implements ProductT{
-
-                                public void f2(){
-                                    System.out.println("CCC");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>D.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class D implements ProductT{
-
-                                public void f2(){
-                                    System.out.println("DDD");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>AbstractFactory.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface AbstractFactory{
-                                ProductS createS();
-                                ProductT createT();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ACFactory.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class ACFactory implements AbstractFactory{
-
-                                public ProductS createS(){
-                                    return new A();
-                                }
-
-                                public ProductT createT(){
-                                    return new C();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>BDFactory.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class BDFactory implements AbstractFactory{
-
-                                public ProductS createS(){
-                                    return new B();
-                                }
-
-                                public ProductT createT(){
-                                    return new D();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    AbstractFactory abstract_factory;
-                                    ProductS s;
-                                    ProductT t;
-
-                                    abstract_factory = new ACFactory();
-                                    s = abstract_factory.createS();
-                                    t = abstract_factory.createT();
-                                    s.f1();
-                                    t.f2();
-
-                                    abstract_factory = new BDFactory();
-                                    s = abstract_factory.createS();
-                                    t = abstract_factory.createT();
-                                    s.f1();
-                                    t.f2();
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            CCC<br>
-                            BBB<br>
-                            DDD
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    我真不想把這放在第一個 XDDD　這是結構最複雜、而且看不太出來在幹嘛的設計模式，放在第一個來介紹，總有震撼教育的感覺。<br>
-                    <br>
-                    其它設計模式其實簡單易懂多了，所以一時搞不清楚 Abstract factory 是什麼的話，可以先跳過，放在最後再研究也無妨～<br>
-                    <!--br>
-                    Abstract factory 模式下，就像代購的業者，他只負責跟工廠（abstract factory）下訂單說要什麼，工廠交貨時也間接轉交（abstract product）給消費者取貨（concrete product），等於只關心訂貨與取貨的這個過程，以此做為主要業務來獲取營利。至於東西是怎麼做的？東西是否合用？抱歉，那是工廠和消費者你們自己的問題～<br>
-                    <br>
-                    在 Abstract factory 的設計下，可用「介面」來分類「類別」的群屬，例如「蜜桃」「香蕉」類別可以透過 Abstract factory 分類為屬於「水果」，「蘿蔔」「芋頭」為「蔬菜」，這比沒什麼功能的「套件（package）」實用多了！<br/-->
-                </p>
-            </section>
-
-            <hr id='ANCHOR_2'>
-
-            <section>
-                <h2 title='Builder constructs complex objects by separating construction and representation.'>Builder</h2>
-                <p>
-                    用同樣的方式，組不同的物件來運作。
-                </p>
-                <hr>
-                <section>
-                    <h3>Builder.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface Builder{
-                                void f();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements Builder{
-
-                                public void f(){
-                                    System.out.println("AAA");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements Builder{
-
-                                public void f(){
-                                    System.out.println("BBB");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Director.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Director{
-
-                                public void build(Builder x){
-                                    x.f();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    Director director = new Director();
-                                    director.build(new A());
-                                    director.build(new B());
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    把建立物件的動作，改寫在 A 或 B 等其它 Builder 介面的類別上，而不是寫死在 Director 類別，這樣想設計不同的物件建立過程，只要寫新的類別去做就好。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_3'>
-
-            <section>
-                <h2 title='Factory Method creates objects without specifying the exact class to create.'>Factory method（別名：Virtual constructor）</h2>
-                <p>
-                    只公開產生物件的介面，但由其它類別決定產生怎樣的物件。
-                </p>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
-
-                                public B factoryMethod(){
-                                    return new B();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B{
-
-                                public B(){
-                                    System.out.print("BBB");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    A a = new A();
-                                    B b = a.factoryMethod();
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    通常用在產生物件的方式可能更動時。例如猶豫該用 Java 官方的 DOM 來建立 XML 剖析器好？還是第三方的 JDOM 好？於是將建立剖析器的程式寫在 Factory method，以便隨時能修改物件的產生方式。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_4'>
-
-            <section>
-                <h2 title='Prototype creates objects by cloning an existing object.'>Prototype</h2>
-                <p>
-                    將某個狀態的物件，做為用來產生其它物件的原型。
-                </p>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
-
-                                private String g;
-
-                                public A prototype(){
-                                    A a = new A();
-                                    a.g = this.g;
-                                    return a;
-                                }
-
-                                public void set(String x){
-                                    this.g = x;
-                                }
-
-                                public String get(){
-                                    return this.g;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    A a1 = new A();
-                                    a1.set("HELLO");
-                                    A a2 = a1.prototype();
-                                    System.out.print(a2.get());
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            HELLO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    可以動態建立物件，並且避免設計一堆同質性高、純粹只是狀態不一的類別。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_5'>
-
-            <section>
-                <h2 title='Singleton restricts object creation for a class to only one instance.'>Singleton</h2>
-                <p>
-                    讓類別只能產生一個（或固定數量）的實體。
-                </p>
-                <hr>
-                <section>
-                    <h3>Singleton.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Singleton{
-
-                                private static Singleton singleton = new Singleton();
-
-                                private Singleton(){}
-
-                                public static Singleton instance(){
-                                    return singleton;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    Singleton a = Singleton.instance();
-                                    Singleton b = Singleton.instance();
-
-                                    if(a==b){
-                                        System.out.print("a 和 b 為同一個物件");
-                                    }
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            a 和 b 為同一個物件
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    除了讓類別只能有固定數量的實體，其實 instance() 還可做為外部使用它的接口。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_6'>
-
-            <section>
-                <h2 title='Adapter allows classes with incompatible interfaces to work together by wrapping its own interface around that of an already existing class.'>Adapter（別名：<span title='For interface'>Wrapper</span>）</h2>
-                <p>
-                    設計一個轉接器，讓原本介面不相容的物件，可以拿來使用。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                void f();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
-
-                                public void f1(){
-                                    System.out.println("ABC");
-                                }
-
-                                public void f2(){
-                                    System.out.println("123");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Adapter.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Adapter implements S{
-
-                                private A a = new A();
-
-                                public void f(){
-                                    a.f1();
-                                    a.f2();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    S adapter = new Adapter();
-                                    adapter.f();
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            ABC<br>
-                            123
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    通常我們習慣修改 A.java 的原始碼，讓它符合 S 介面，但這並不是很好物件導向的精神。應該設計一個新的類別做為轉換器，讓原本無法接在一起使用的兩者能夠結合起來。<br>
-                    <br>
-                    例如家裡電源插座都是二孔的，買來的電器卻是三腳插頭。有些人會拿鉗子把接地端用的第三腳給剪掉，但其實買個轉接頭比較好…一個才 8~15 元不等。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_7'>
-
-            <section>
-                <h2 title='Bridge decouples an abstraction from its implementation so that the two can vary independently.'>Bridge（別名：operate-body）</h2>
-                <p>
-                    讓「抽象層次（特徵）」與「實作體系（行為）」可以分開來各自發展。
-                </p>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
-
-                                public void f(){
-                                    System.out.println("AAA");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Bridge.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Bridge{
-
-                                private A a = new A();
-
-                                public void f1(){
-                                    System.out.println("BRIDGE");
-                                }
-
-                                public void f2(){
-                                    a.f();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    Bridge bridge = new Bridge();
-                                    bridge.f1();
-                                    bridge.f2();
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            BRIDGE<br>
-                            AAA
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    物件導向程式設計通常透過繼承的方式，來表現抽象與實作。但它有抽象與實作綁死在一起的缺點，改用委託替代繼承，是更好的設計。例如 Bridge 可以在自己的抽象層次下延伸子類別，A 可以在自己的實作體系下延伸子類別，兩者各自發展，卻能搭配合作。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_8'>
-
-            <section>
-                <h2 title='Composite composes zero-or-more similar objects so that they can be manipulated as one object.'>Composite</h2>
-                <p>
-                    以樹狀結構的節點方式，表現出「整體：部份」的層次關係。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                void f();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Composite.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Composite implements S{
-
-                                private S s;
-
-                                public Composite(S x){
-                                    this.s = x;
-                                }
-
-                                public void f(){
-                                    System.out.print("*");
-                                    this.s.f();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements S{
-
-                                private String g;
-
-                                public A(String x){
-                                    this.g = x;
-                                }
-
-                                public void f(){
-                                    System.out.println(this.g);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    A a = new A("HELLO");
-
-                                    Composite composite_1 = new Composite(a);
-                                    Composite composite_2 = new Composite(composite_1);
-
-                                    a.f();
-                                    composite_1.f();
-                                    composite_2.f();
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            HELLO<br>
-                            *HELLO<br>
-                            **HELLO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    「資料夾」與「檔案」就是這樣的節點關係。資料夾可以存放「檔案」，但也可以存放「資料夾」，更可以存放「存放了檔案的資料夾」，就跟 Composite 可以存放 A 也可以存放 Composite 一樣。<br>
-                    <br>
-                    做法是讓「節點」的 Composite 遞迴「S 介面」的物件來用。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_9'>
-
-            <section>
-                <h2 title='Decorator dynamically adds/overrides behaviour in an existing method of an object.'>Decorator（別名：<span title='For object'>Wrapper</span>）</h2>
-                <p>
-                    不必衍生子類別，也能達到擴充功能的目的。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                void f();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements S{
-                                public void f(){
-                                    System.out.print("AAA");
-                                }
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Decorator.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Decorator implements S{
-                                private S s;
-                                public Decorator(A x){
-                                    this.s = x;
-                                }
-                                public void f(){
-                                    System.out.print("Decorator:");
-                                    this.s.f();
-                                }
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    Decorator decorator = new Decorator(new A());
-                                    decorator.f();
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            Decorator:AAA
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    Decorator 跟 Composite 結構一樣，差別在 Composite 是為了複合物件，可以有多個 S 介面的物件，Decorator 是為了添加權責，只含一個 S 介面的元件。<br>
-                    <br>
-                    這並沒有什麼好奇怪的，雖然「物件導向設計模式」乍看之下是一套程式結構範本，但當我們正式使用「物件導向設計模式」時，會發現其實都用在程式設計師之間溝通的語彙。當你希望一視同仁地使用基本物件與複合物件時，就會說：「來個 Composite 好了～」當你想要避免透過繼承來添加功能時，就會說：「來個 Decorator 吧！」
-                </p>
-            </section>
-
-            <hr id='ANCHOR_10'>
-
-            <section>
-                <h2 title='Facade provides a simplified interface to a large body of code.'>Facade</h2>
-                <p>
-                    改用一個操作簡單的類別，代為執行某套系統的繁雜使用過程。
-                </p>
-                <hr>
-                <section>
-                    <h3>Facade.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.BufferedReader;
-                            import java.io.BufferedWriter;
-                            import java.io.FileReader;
-                            import java.io.FileWriter;
-
-                            public class Facade{
-
-                                public void write(String filename, String data){
-                                    try{
-                                        BufferedWriter buffered_writer = new BufferedWriter(new FileWriter(filename));
-                                        buffered_writer.write(data);
-                                        buffered_writer.close();
-
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
-
-                                public String read(String filename){
-                                    String data = "";
-                                    try{
-                                        BufferedReader buffered_reader = new BufferedReader(new FileReader(filename));
-                                        data = buffered_reader.readLine();
-                                        buffered_reader.close();
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                    return data;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    Facade facade = new Facade();
-                                    facade.write("sample.txt", "HELLO");
-                                    System.out.print(facade.read("sample.txt"));
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            HELLO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    就像郵局的櫃檯一樣，我們只需透過窗口與櫃檯人員對話，他們會代為處理繁雜的流程。<br>
-                    <br>
-                    因此，範例重點放在 Main 裡使用 Facade 的 write() 與 read() 來簡化操作，而不是 Facede 裡面那堆落落長的程式在幹嘛～
-                </p>
-            </section>
-
-            <hr id='ANCHOR_11'>
-
-            <section>
-                <h2 title='Flyweight reduces the cost of creating and manipulating a large number of similar objects.'>Flyweight</h2>
-                <p>
-                    設計共用物件的機制，減少物件的建立，以精簡物件量。
-                </p>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
-
-                                public void f(String x){
-                                    System.out.println(x);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Flyweight.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Flyweight{
-
-                                private static A a = null;
-
-                                public static A creatA(){
-                                    if(a==null) a = new A();
-                                    return a;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    A a1 = Flyweight.creatA();
-                                    A a2 = Flyweight.creatA();
-                                    A a3 = Flyweight.creatA();
-
-                                    a1.f("111");
-                                    a2.f("222");
-                                    a3.f("333");
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            111<br>
-                            222<br>
-                            333
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    當你在很多地方都會 new 個 A 物件來用，卻又覺得同樣的東西 new 那麼多個很浪費，Flyweight 就派上用場了！同樣可以在各個類別中建立 A 物件，卻又不用擔心一直建立重複的東西。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_12'>
-
-            <section>
-                <h2 title='Proxy provides a placeholder for another object to control access, reduce cost, and reduce complexity.'>Proxy（別名：Surrogate）</h2>
-                <p>
-                    設計一個和實際物件相像的物件，平常代為保存實際物件的狀態，必要時才建立實際物件來執行。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                void f();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements S{
-
-                                private String g;
-
-                                public A(String x){
-                                    this.g = x;
-                                }
-
-                                public void f(){
-                                    System.out.println(this.g);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Proxy.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Proxy implements S{
-
-                                private A a = null;
-                                private String g;
-
-                                public Proxy(String x){
-                                    this.g = x;
-                                }
-
-                                public void f(){
-                                    if(this.a==null){
-                                        this.a = new A(this.g);
-                                    }
-                                    this.a.f();
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    S proxy = new Proxy("HELLO");
-                                    proxy.f();
-                                    proxy.f();
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            HELLO<br>
-                            HELLO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    建立物件是很吃重的工作時使用。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_13'>
-
-            <section>
-                <h2 title='Chain of responsibility delegates commands to a chain of processing objects.'>Chain of responsibility</h2>
-                <p>
-                    將接受訊息的物件串連起來傳遞，到有物件接收為止。
-                </p>
-                <hr>
-                <section>
-                    <h3>Responsibility.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public abstract class Responsibility{
-
-                                protected Responsibility g;
-
-                                public void chain(Responsibility x){
-                                    this.g = x;
-                                }
-
-                                public abstract void request(String x);
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A extends Responsibility{
-
-                                public void request(String x){
-                                    if(x=="AAA"){
-                                        System.out.println("CHAIN OF A");
-                                    }
-                                    else{
-                                        this.g.request(x);
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B extends Responsibility{
-
-                                public void request(String x){
-                                    if(x=="BBB"){
-                                        System.out.println("CHAIN OF B");
-                                    }
-                                    else{
-                                        this.g.request(x);
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>C.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class C extends Responsibility{
-
-                                public void request(String x){
-                                    if(x=="CCC"){
-                                        System.out.println("CHAIN OF C");
-                                    }
-                                    else{
-                                        System.out.println("NO CHAIN");;
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    A a = new A();
-                                    B b = new B();
-                                    C c = new C();
-
-                                    a.chain(b);
-                                    b.chain(c);
-
-                                    a.request("CCC"); //正常請求有在串鍊中的 CCC
-                                    a.request("DDD"); //故意請求沒在串鍊中的 DDD
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            CHAIN OF C<br>
-                            NO CHAIN
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    這個設計模式平常不會用到，因為它屬於物件結構有臭味時用到的技巧！<br>
-                    <br>
-                    設計 Chain of responsibility 模式後，不用知道哪一個物件會接收訊息，所以降低了耦合性。但也因此最後可能沒有物件接收者，設計上要考量到這點～
-                </p>
-            </section>
-
-            <hr id='ANCHOR_14'>
-
-            <section>
-                <h2 title='Command creates objects which encapsulate actions and parameters.'>Command（別名：Action、Transation）</h2>
-                <p>
-                    將傳送與接收的訊息要求，設計為物件，以便將傳送與接收兩者原本針對訊息處理的工作，轉移給訊息本身處理。
-                </p>
-                <hr>
-                <section>
-                    <h3>Command.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface Command{
-                                void execute();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements Command{
-
-                                public void execute(){
-                                    System.out.println("AAA"); //or ReceiverA.action()
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements Command{
-
-                                public void execute(){
-                                    System.out.println("BBB"); //or ReceiverB.action()
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    //Client
-                                    Command[] commands = {new A(), new B()};
-                                    //Invoker
-                                    for(Command command : commands){
-                                        command.execute();
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    這範例可能要解釋，否則看不出來哪裡符合 Command 設計模式的精神。<br>
-                    <br>
-                    以《物件導向設計模式》的 Command 結構圖來說，Main 扮演 Client（委託者）與 Invoker（啟動者）的角色，先負責保存待執行的 Command 物件，然後執行佇列中的物件。<br>
-                    <br>
-                    A 與 B 分別為 CommandA 和 CommandB，它們 execute() 的動作，其實可以另外寫在 Receiver（接收者），分別執行 ReceiverA.action() 和 ReceiverB.action()。<br>
-                    <br>
-                    這樣一來，就符合結構圖的參與者。<br>
-                    <br>
-                    寫成這樣的結構有什麼好處？原本 Invoker 與 Receiver 傳送的訊息，需要做一些加工處理時，有可能發覺這並不是兩者該有的責任，例如想紀錄與還原訊息的歷程狀態。有了 Command 的話，就可以負責處理這些工作。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_15'>
-
-            <section>
-                <h2 title='Interpreter implements a specialized language.'>Interpreter</h2>
-                <p>
-                    自製語法規則，以及解譯的程式。
-                </p>
-                <hr>
-                <section>
-                    <h3>Expression.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface Expression{
-                                void interpret(String x);
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements Expression{
-
-                                public void interpret(String x){
-                                    if(x.equals("A")){
-                                        System.out.print("甲");
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements Expression{
-
-                                public void interpret(String x){
-                                    if(x.equals("B")){
-                                        System.out.print("乙");
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>C.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class C implements Expression{
-
-                                public void interpret(String x){
-                                    if(x.equals("C")){
-                                        System.out.print("丙");
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Nonterminal.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Nonterminal implements Expression{
-
-                                Expression[] expressions = {new A(), new B(), new C()};
-
-                                public void interpret(String x){
-                                    if(x.equals(";")){
-                                        System.out.print("\n");
-                                    }
-                                    else{
-                                        for(Expression expression : expressions){
-                                            expression.interpret(x);
-                                        }
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.StringTokenizer;
-
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    Expression expression = new Nonterminal();
-
-                                    StringTokenizer context = new StringTokenizer("A B C ;");
-                                    while(context.hasMoreTokens()){
-                                        expression.interpret(context.nextToken());
-                                    }
-
-                                    context = new StringTokenizer("C C C B B A ;");
-                                    while(context.hasMoreTokens()){
-                                        expression.interpret(context.nextToken());
-                                    }
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            甲乙丙<br>
-                            丙丙丙乙乙甲
-                        </output>
-                    </p>
-                </section>
-            </section>
-
-            <hr id='ANCHOR_16'>
-
-            <section>
-                <h2 title='Iterator accesses the elements of an object sequentially without exposing its underlying representation.'>Iterator（別名：Cursor）</h2>
-                <p>
-                    可以逐一存取群集（應該說容器）內的物件，而且不用管它內部物件結構的狀況。
-                </p>
-                <hr>
-                <section>
-                    <h3>Aggregate.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.ArrayList;
-
-                            public class Aggregate{
-
-                                private ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
-
-                                public void add(String x){
-                                    this.array_list.add(x);
-                                }
-
-                                public String get(int x){
-                                    return this.array_list.get(x);
-                                }
-
-                                public int size(){
-                                    return this.array_list.size();
-                                }
-
-                                public Iterator iterator(){
-                                    return new ConcreteIterator(this);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Iterator.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Iterator{
-
-                                private Aggregate aggregate;
-                                private int index = 0;
-
-                                public Iterator(Aggregate x){
-                                    this.aggregate = x;
-                                }
-
-                                public boolean hasNext(){
-                                    if(this.index&lt;this.aggregate.size()){
-                                        return true;
-                                    }
-                                    else{
-                                        return false;
-                                    }
-                                }
-
-                                public String next(){
-                                    return this.aggregate.get(this.index++);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    Aggregate aggregate = new Aggregate();
-
-                                    aggregate.add(new String("AAA"));
-                                    aggregate.add(new String("BBB"));
-                                    aggregate.add(new String("CCC"));
-
-                                    Iterator iterator = aggregate.iterator();
-
-                                    while(iterator.hasNext()){
-                                        System.out.println(iterator.next());
-                                    }
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC
-                        </output>
-                    </p>
-                </section>
-            </section>
-
-            <hr id='ANCHOR_17'>
-
-            <section>
-                <h2 title='Mediator allows loose coupling between classes by being the only class that has detailed knowledge of their methods.'>Mediator</h2>
-                <p>
-                    將物件多對多的互連行為，封裝成一對多的物件關係。
-                </p>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
-
-                                protected String g;
-                                protected Mediator mediator;
-
-                                public void input(String x){
-                                    this.g = x;
-                                    this.mediator.updateA();
-                                }
-
-                                public void output(){
-                                    System.out.println("A:" + this.g);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B{
-
-                                protected String g;
-                                protected Mediator mediator;
-
-                                public void input(String x){
-                                    this.g = x;
-                                    this.mediator.updateB();
-                                }
-
-                                public void output(){
-                                    System.out.println("B:" + this.g);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Mediator.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Mediator{
-
-                                private A a;
-                                private B b;
-
-                                public Mediator(A a, B b){
-                                    this.a = a;
-                                    this.a.mediator = this;
-                                    this.b = b;
-                                    this.b.mediator = this;
-                                }
-
-                                public void updateA(){
-                                    this.b.g = this.a.g;
-                                }
-
-                                public void updateB(){
-                                    this.a.g = this.b.g;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    A a = new A();
-                                    B b = new B();
-                                    Mediator mediator = new Mediator(a, b);
-
-                                    a.input("AAA");
-                                    a.output();
-                                    b.output();
-
-                                    b.input("BBB");
-                                    a.output();
-                                    b.output();
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            A:AAA<br>
-                            B:AAA<br>
-                            A:BBB<br>
-                            B:BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    本範例重點在使用 protected 實現 Mediator 的設計理念。<br>
-                    <br>
-                    類別之間為了讓彼此資料同步，而過度互相操作的行為，有時候會是過度彼此依賴，導致系統僵化的設計。這時設計一個 Mediator 當斡旋者，為不同類別交換彼此內部屬性，簡化連結的結構。因此設計 Mediator 的重點在於類別內部屬性開放給自己族群存取時，其他族群的類別並不能存取。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_18'>
-
-            <section>
-                <h2 title='Memento provides the ability to restore an object to its previous state (undo).'>Memento（別名：Token）</h2>
-                <p>
-                    可以「備份」與「還原」物件狀態的設計模式。
-                </p>
-                <hr>
-                <section>
-                    <h3>Memento.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Memento{
-
-                                protected String g;
-
-                                protected Memento(String x){
-                                    this.g = x;
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.ArrayList;
-
-                            public class A{
-
-                                private ArrayList&lt;Memento&gt; mementos = new ArrayList&lt;Memento&gt;();
-
-                                public void backup(Memento x){
-                                    this.mementos.add(x);
-                                }
-
-                                public Memento recovery(int x){
-                                    return this.mementos.get(x);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B{
-
-                                private String g = new String("");
-
-                                public void update(){
-                                    this.g += "※";
-                                }
-
-                                public Memento storage(){
-                                    return new Memento(this.g);
-                                }
-
-                                public void recovery(Memento x){
-                                    this.g = x.g;
-                                }
-
-                                public void output(){
-                                    System.out.println(this.g);
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    A a = new A();
-                                    B b = new B();
-
-                                    b.update();
-                                    a.backup(b.storage());
-                                    b.output();
-
-                                    b.update();
-                                    a.backup(b.storage());
-                                    b.output();
-
-                                    b.update();
-                                    a.backup(b.storage());
-                                    b.output();
-
-                                    b.recovery(a.recovery(0));
-                                    b.output();
-
-                                    b.recovery(a.recovery(1));
-                                    b.output();
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            ※<br>
-                            ※※<br>
-                            ※※※<br>
-                            ※<br>
-                            ※※
-                        </output>
-                    </p>
-                </section>
-            </section>
-
-            <hr id='ANCHOR_19'>
-
-            <section>
-                <h2 title='Observer is a publish/subscribe pattern which allows a number of observer objects to see an event.'>Observer（別名：Dependants、Publish-subscribe）</h2>
-                <p>
-                    物件的狀態改變時，通知其它相依性物件進行更新動作。
-                </p>
-                <hr>
-                <section>
-                    <h3>Observer.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface Observer{
-                                void update();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements Observer{
-
-                                public void update(){
-                                    System.out.println("AAA");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements Observer{
-
-                                public void update(){
-                                    System.out.println("BBB");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Subject.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.ArrayList;
-
-                            public class Subject{
-
-                                private ArrayList&lt;Observer&gt; obesrvers = new ArrayList&lt;Observer&gt;();
-
-                                public void add(Observer x){
-                                    this.obesrvers.add(x);
-                                }
-
-                                public void notified(){
-                                    for(Observer observer : obesrvers){
-                                        observer.update();
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-
-                                    Subject a = new Subject();
-
-                                    a.add(new A());
-                                    a.add(new B());
-
-                                    a.notified();
-
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    這個範例直接通知物件要更新。
-                </p>
-            </section>
-
-            <hr id='ANCHOR_20'>
-
-            <section>
-                <h2 title='State allows an object to alter its behavior when its internal state changes.'>State（別名：Objects for status）</h2>
-                <p>
-                    依內部狀態而有不同行為的物件。
-                </p>
-                <hr>
-                <section>
-                    <h3>State.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface State{
-                                void operate();
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements State{
-
-                                public void operate(){
-                                    System.out.println("AAA");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements State{
-
-                                public void operate(){
-                                    System.out.println("BBB");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>C.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class C implements State{
-
-                                public void operate(){
-                                    System.out.println("CCC");
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Context.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Context{
-
-                                private State state = new A();
-
-                                public void request(){
-                                    this.state.operate();
-                                    if(this.state instanceof A){
-                                        this.state = new B();
-                                    }
-                                    else if(this.state instanceof B){
-                                        this.state = new C();
-                                    }
-                                }
-
-                            }
-                        </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
-
-                                public static void main(String[] args){
-                                    Context context = new Context();
-                                    context.request();
-                                    context.request();
-                                    context.request();
-                                }
-
-                            }
-                        </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    執行一次 request() 後，改變 context 物件的狀態，再執行時 request() 時，context 就像變成另一個物件一樣…依此類推下去，設計不斷隨狀態變化自身的物件。<br>
-                    <br>
-                    如果覺得這個設計模式莫名其妙，其實它等於如下傳統程式的物件導向寫法：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Context{
-
-                            private int state = 1;
-
-                            public void request(){
-                                if(state==1){
-                                    new A().operate();
-                                    state=2;
-                                }
-                                else if(state==2){
-                                    new B().operate();
-                                    state=3;
-                                }
-                                else if(state==3){
-                                    new C().operate();
-                                }
-                            }
-
-                        }
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>
+			table td:nth-child(1){color:#999;width:20%}
+			table td:nth-child(2){color:#396;width:25%}
+		</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
+
+	<body>
+
+		<article>
+
+			<header>
+				<h1>物件導向設計模式</h1>
+				<p>
+					首先，「物件導向設計模式」並非將「物件導向程式設計（OOP）」中反覆出現的「程式結構」整理出來成「名目表」，而是將「物件導向設計（OOD）」中屢次有效解決開發需求的實作方式整理出來。因此「程式的結構」並非「物件導向設計模式」的重點，「需求的解法」才是重點。比如說，看到 Facade 表示把複雜的系統簡化成容易操作的介面來使用，看到 Adapter 表示將別處不相容的操作介面轉換為相容此處的操作介面來使用，兩者所透露出來的設計理念才是重點，至於實作出來以後程式碼長怎樣並不是重點<ins>[1]</ins>。<br>
+					<br>
+					但程式碼確實會說話，對於沒有物件導向分析與設計經驗、或者用 UML 展示物件導向設計模式，反而無法在第一時間領會其奧妙的人<ins>[2]</ins>，從程式碼的結構來了解設計模式，多少還是有幫助的。因此，本文使用精簡而容易閱讀的程式碼來示範設計模式，讓習慣用程式碼探究原理的人更輕易領會。<br>
+					<br>
+					為了方便研究程式碼的結構，可下載本單元所有範例：<a href='../../objects/downloads/19941110A.7z' target='_blank'>19941110A.7z</a>，一邊操作其行為結果，一邊探究其組織方式。
+				</p>
+			</header>
+
+			<hr>
+
+			<section>
+				<h2>目錄</h2>
+				<p>
+					1994 年出版了 Erich Gamma、Richard Helm、Ralph Johnson、John Vlissides 四人著作的經典鉅作《Design Patterns: Elements of Reusable Object-Oriented Software》。這本書之所以讓人讚嘆不已，在於它不只是「電腦圖書」，更是淬鍊人類智慧的「學術著作」。我們在藉由這本書學習到「物件導向設計模式」之餘，更目睹這「四人幫」(GoF: Gang of Four) 是如何展現出人類的學術潛能，能把「設計模式」寫得透徹、而且分明。有程式設計背景的人，讀這本書保證像在讀一本文學著作一樣，會讓你見識到原來電腦書籍還是可以寫得經典，由衷對整本書的安排讚嘆不已。<br>
+					<br>
+					言歸正傳，要建立「物件導向開發手法」卻苦於沒有經驗的累積，那最有效的方式，就是接受「物件導向設計模式」的歷練！這些設計模式是將「物件導向程式設計」十數年來，反覆出現的物件組合方式<ins>[3]</ins> 一一整理出來，讓世人更清楚了解：「物件導向平常是怎樣被使用的？」
+				</p>
+				<hr>
+				<section>
+					<h3>生成模式</h3>
+					<p>
+						生成模式（Creational patterns）可以幫助我們了解設計物件導向時有哪幾種常用的物件產生手法。<br>
+						<br>
+						．<a href='#ANCHOR_1'>Abstract factory</a><br>
+						．<a href='#ANCHOR_2'>Builder</a><br>
+						．<a href='#ANCHOR_3'>Factory method</a><br>
+						．<a href='#ANCHOR_4'>Prototype</a><br>
+						．<a href='#ANCHOR_5'>Singleton</a><br>
+						<br>
+						一開始接觸的是生成模式，短短四個（建議先跳過 Abstract factory），馬上就能掌握如何建立物件的技巧，有效提升你物件導向的手法與視野。趕快加入設計模式的行列吧～！
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>結構模式</h3>
+					<p>
+						結構模式（Structural patterns）可以幫助我們了解設計物件導向時有哪幾種常見的物件組合方式。<br>
+						<br>
+						．<a href='#ANCHOR_6'>Adapter</a><br>
+						．<a href='#ANCHOR_7'>Bridge</a><br>
+						．<a href='#ANCHOR_8'>Composite</a><br>
+						．<a href='#ANCHOR_9'>Decorator</a><br>
+						．<a href='#ANCHOR_10'>Facade</a><br>
+						．<a href='#ANCHOR_11'>Flyweight</a><br>
+						．<a href='#ANCHOR_12'>Proxy</a><br>
+						<br>
+						接著的結構模式，是關於物件的組織方式，將這些視為累積物件導向使用經驗的案例，好好臨攀一下吧！
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>行為模式</h3>
+					<p>
+						行為模式（Behavioral patterns）可以幫助我們了解設計物件導向時有哪幾種常見的物件操作方式。<br>
+						<br>
+						．<a href='#ANCHOR_13'>Chain of responsibility</a><br>
+						．<a href='#ANCHOR_14'>Command</a><br>
+						．<a href='#ANCHOR_15'>Interpreter</a><br>
+						．<a href='#ANCHOR_16'>Iterator</a><br>
+						．<a href='#ANCHOR_17'>Mediator</a><br>
+						．<a href='#ANCHOR_18'>Memento</a><br>
+						．<a href='#ANCHOR_19'>Observer</a><br>
+						．<a href='#ANCHOR_20'>State</a><br>
+						．<a href='#ANCHOR_21'>Strategy</a><br>
+						．<a href='#ANCHOR_22'>Template method</a><br>
+						．<a href='#ANCHOR_23'>Visitor</a><br>
+						<br>
+						比起其它設計模式，行為模式的重點不在類別結構本身，而是類別之間交互運算的關係，而且在設計上可能涉及狀態保存的程式寫法，因此釐清時複雜許多，需要多花時間去推演。從這裡開始請繃緊精神，研究時著重在資料的傳遞與變化，遇到難題只要勇敢去解題，其實頗能享受那攻城掠地的快感！
+					</p>
+				</section>
+			</section>
+
+			<hr id='ANCHOR_1'>
+
+			<section>
+				<h2 title='Abstract Factory groups object factories that have a common theme.'>Abstract factory（別名：Kit）</h2>
+				<p>
+					全部使用介面（interface）來建立一整群相依的物件，讓客戶端只需要透過介面來使用物件，以免過問實作細節。
+				</p>
+				<hr>
+				<section>
+					<h3>ProductS.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface ProductS{
+								void f1();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements ProductS{
+
+								public void f1(){
+									System.out.println("AAA");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements ProductS{
+
+								public void f1(){
+									System.out.println("BBB");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ProductT.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface ProductT{
+								void f2();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>C.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class C implements ProductT{
+
+								public void f2(){
+									System.out.println("CCC");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>D.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class D implements ProductT{
+
+								public void f2(){
+									System.out.println("DDD");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>AbstractFactory.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface AbstractFactory{
+								ProductS createS();
+								ProductT createT();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ACFactory.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class ACFactory implements AbstractFactory{
+
+								public ProductS createS(){
+									return new A();
+								}
+
+								public ProductT createT(){
+									return new C();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>BDFactory.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class BDFactory implements AbstractFactory{
+
+								public ProductS createS(){
+									return new B();
+								}
+
+								public ProductT createT(){
+									return new D();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									AbstractFactory abstract_factory;
+									ProductS s;
+									ProductT t;
+
+									abstract_factory = new ACFactory();
+									s = abstract_factory.createS();
+									t = abstract_factory.createT();
+									s.f1();
+									t.f2();
+
+									abstract_factory = new BDFactory();
+									s = abstract_factory.createS();
+									t = abstract_factory.createT();
+									s.f1();
+									t.f2();
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							CCC<br>
+							BBB<br>
+							DDD
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					我真不想把這放在第一個 XDDD　這是結構最複雜、而且看不太出來在幹嘛的設計模式，放在第一個來介紹，總有震撼教育的感覺。<br>
+					<br>
+					其它設計模式其實簡單易懂多了，所以一時搞不清楚 Abstract factory 是什麼的話，可以先跳過，放在最後再研究也無妨～<br>
+					<!--br>
+					Abstract factory 模式下，就像代購的業者，他只負責跟工廠（abstract factory）下訂單說要什麼，工廠交貨時也間接轉交（abstract product）給消費者取貨（concrete product），等於只關心訂貨與取貨的這個過程，以此做為主要業務來獲取營利。至於東西是怎麼做的？東西是否合用？抱歉，那是工廠和消費者你們自己的問題～<br>
+					<br>
+					在 Abstract factory 的設計下，可用「介面」來分類「類別」的群屬，例如「蜜桃」「香蕉」類別可以透過 Abstract factory 分類為屬於「水果」，「蘿蔔」「芋頭」為「蔬菜」，這比沒什麼功能的「套件（package）」實用多了！<br/-->
+				</p>
+			</section>
+
+			<hr id='ANCHOR_2'>
+
+			<section>
+				<h2 title='Builder constructs complex objects by separating construction and representation.'>Builder</h2>
+				<p>
+					用同樣的方式，組不同的物件來運作。
+				</p>
+				<hr>
+				<section>
+					<h3>Builder.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface Builder{
+								void f();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements Builder{
+
+								public void f(){
+									System.out.println("AAA");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements Builder{
+
+								public void f(){
+									System.out.println("BBB");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Director.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Director{
+
+								public void build(Builder x){
+									x.f();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									Director director = new Director();
+									director.build(new A());
+									director.build(new B());
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					把建立物件的動作，改寫在 A 或 B 等其它 Builder 介面的類別上，而不是寫死在 Director 類別，這樣想設計不同的物件建立過程，只要寫新的類別去做就好。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_3'>
+
+			<section>
+				<h2 title='Factory Method creates objects without specifying the exact class to create.'>Factory method（別名：Virtual constructor）</h2>
+				<p>
+					只公開產生物件的介面，但由其它類別決定產生怎樣的物件。
+				</p>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
+
+								public B factoryMethod(){
+									return new B();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B{
+
+								public B(){
+									System.out.print("BBB");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									A a = new A();
+									B b = a.factoryMethod();
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					通常用在產生物件的方式可能更動時。例如猶豫該用 Java 官方的 DOM 來建立 XML 剖析器好？還是第三方的 JDOM 好？於是將建立剖析器的程式寫在 Factory method，以便隨時能修改物件的產生方式。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_4'>
+
+			<section>
+				<h2 title='Prototype creates objects by cloning an existing object.'>Prototype</h2>
+				<p>
+					將某個狀態的物件，做為用來產生其它物件的原型。
+				</p>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
+
+								private String g;
+
+								public A prototype(){
+									A a = new A();
+									a.g = this.g;
+									return a;
+								}
+
+								public void set(String x){
+									this.g = x;
+								}
+
+								public String get(){
+									return this.g;
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									A a1 = new A();
+									a1.set("HELLO");
+									A a2 = a1.prototype();
+									System.out.print(a2.get());
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							HELLO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					可以動態建立物件，並且避免設計一堆同質性高、純粹只是狀態不一的類別。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_5'>
+
+			<section>
+				<h2 title='Singleton restricts object creation for a class to only one instance.'>Singleton</h2>
+				<p>
+					讓類別只能產生一個（或固定數量）的實體。
+				</p>
+				<hr>
+				<section>
+					<h3>Singleton.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Singleton{
+
+								private static Singleton singleton = new Singleton();
+
+								private Singleton(){}
+
+								public static Singleton instance(){
+									return singleton;
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									Singleton a = Singleton.instance();
+									Singleton b = Singleton.instance();
+
+									if(a==b){
+										System.out.print("a 和 b 為同一個物件");
+									}
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							a 和 b 為同一個物件
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					除了讓類別只能有固定數量的實體，其實 instance() 還可做為外部使用它的接口。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_6'>
+
+			<section>
+				<h2 title='Adapter allows classes with incompatible interfaces to work together by wrapping its own interface around that of an already existing class.'>Adapter（別名：<span title='For interface'>Wrapper</span>）</h2>
+				<p>
+					設計一個轉接器，讓原本介面不相容的物件，可以拿來使用。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								void f();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
+
+								public void f1(){
+									System.out.println("ABC");
+								}
+
+								public void f2(){
+									System.out.println("123");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Adapter.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Adapter implements S{
+
+								private A a = new A();
+
+								public void f(){
+									a.f1();
+									a.f2();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									S adapter = new Adapter();
+									adapter.f();
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							ABC<br>
+							123
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					通常我們習慣修改 A.java 的原始碼，讓它符合 S 介面，但這並不是很好物件導向的精神。應該設計一個新的類別做為轉換器，讓原本無法接在一起使用的兩者能夠結合起來。<br>
+					<br>
+					例如家裡電源插座都是二孔的，買來的電器卻是三腳插頭。有些人會拿鉗子把接地端用的第三腳給剪掉，但其實買個轉接頭比較好…一個才 8~15 元不等。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_7'>
+
+			<section>
+				<h2 title='Bridge decouples an abstraction from its implementation so that the two can vary independently.'>Bridge（別名：operate-body）</h2>
+				<p>
+					讓「抽象層次（特徵）」與「實作體系（行為）」可以分開來各自發展。
+				</p>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
+
+								public void f(){
+									System.out.println("AAA");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Bridge.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Bridge{
+
+								private A a = new A();
+
+								public void f1(){
+									System.out.println("BRIDGE");
+								}
+
+								public void f2(){
+									a.f();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									Bridge bridge = new Bridge();
+									bridge.f1();
+									bridge.f2();
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							BRIDGE<br>
+							AAA
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					物件導向程式設計通常透過繼承的方式，來表現抽象與實作。但它有抽象與實作綁死在一起的缺點，改用委託替代繼承，是更好的設計。例如 Bridge 可以在自己的抽象層次下延伸子類別，A 可以在自己的實作體系下延伸子類別，兩者各自發展，卻能搭配合作。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_8'>
+
+			<section>
+				<h2 title='Composite composes zero-or-more similar objects so that they can be manipulated as one object.'>Composite</h2>
+				<p>
+					以樹狀結構的節點方式，表現出「整體：部份」的層次關係。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								void f();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Composite.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Composite implements S{
+
+								private S s;
+
+								public Composite(S x){
+									this.s = x;
+								}
+
+								public void f(){
+									System.out.print("*");
+									this.s.f();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements S{
+
+								private String g;
+
+								public A(String x){
+									this.g = x;
+								}
+
+								public void f(){
+									System.out.println(this.g);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									A a = new A("HELLO");
+
+									Composite composite_1 = new Composite(a);
+									Composite composite_2 = new Composite(composite_1);
+
+									a.f();
+									composite_1.f();
+									composite_2.f();
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							HELLO<br>
+							*HELLO<br>
+							**HELLO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					「資料夾」與「檔案」就是這樣的節點關係。資料夾可以存放「檔案」，但也可以存放「資料夾」，更可以存放「存放了檔案的資料夾」，就跟 Composite 可以存放 A 也可以存放 Composite 一樣。<br>
+					<br>
+					做法是讓「節點」的 Composite 遞迴「S 介面」的物件來用。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_9'>
+
+			<section>
+				<h2 title='Decorator dynamically adds/overrides behaviour in an existing method of an object.'>Decorator（別名：<span title='For object'>Wrapper</span>）</h2>
+				<p>
+					不必衍生子類別，也能達到擴充功能的目的。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								void f();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements S{
+								public void f(){
+									System.out.print("AAA");
+								}
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Decorator.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Decorator implements S{
+								private S s;
+								public Decorator(A x){
+									this.s = x;
+								}
+								public void f(){
+									System.out.print("Decorator:");
+									this.s.f();
+								}
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									Decorator decorator = new Decorator(new A());
+									decorator.f();
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							Decorator:AAA
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					Decorator 跟 Composite 結構一樣，差別在 Composite 是為了複合物件，可以有多個 S 介面的物件，Decorator 是為了添加權責，只含一個 S 介面的元件。<br>
+					<br>
+					這並沒有什麼好奇怪的，雖然「物件導向設計模式」乍看之下是一套程式結構範本，但當我們正式使用「物件導向設計模式」時，會發現其實都用在程式設計師之間溝通的語彙。當你希望一視同仁地使用基本物件與複合物件時，就會說：「來個 Composite 好了～」當你想要避免透過繼承來添加功能時，就會說：「來個 Decorator 吧！」
+				</p>
+			</section>
+
+			<hr id='ANCHOR_10'>
+
+			<section>
+				<h2 title='Facade provides a simplified interface to a large body of code.'>Facade</h2>
+				<p>
+					改用一個操作簡單的類別，代為執行某套系統的繁雜使用過程。
+				</p>
+				<hr>
+				<section>
+					<h3>Facade.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.BufferedReader;
+							import java.io.BufferedWriter;
+							import java.io.FileReader;
+							import java.io.FileWriter;
+
+							public class Facade{
+
+								public void write(String filename, String data){
+									try{
+										BufferedWriter buffered_writer = new BufferedWriter(new FileWriter(filename));
+										buffered_writer.write(data);
+										buffered_writer.close();
+
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
+
+								public String read(String filename){
+									String data = "";
+									try{
+										BufferedReader buffered_reader = new BufferedReader(new FileReader(filename));
+										data = buffered_reader.readLine();
+										buffered_reader.close();
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+									return data;
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									Facade facade = new Facade();
+									facade.write("sample.txt", "HELLO");
+									System.out.print(facade.read("sample.txt"));
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							HELLO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					就像郵局的櫃檯一樣，我們只需透過窗口與櫃檯人員對話，他們會代為處理繁雜的流程。<br>
+					<br>
+					因此，範例重點放在 Main 裡使用 Facade 的 write() 與 read() 來簡化操作，而不是 Facede 裡面那堆落落長的程式在幹嘛～
+				</p>
+			</section>
+
+			<hr id='ANCHOR_11'>
+
+			<section>
+				<h2 title='Flyweight reduces the cost of creating and manipulating a large number of similar objects.'>Flyweight</h2>
+				<p>
+					設計共用物件的機制，減少物件的建立，以精簡物件量。
+				</p>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
+
+								public void f(String x){
+									System.out.println(x);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Flyweight.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Flyweight{
+
+								private static A a = null;
+
+								public static A creatA(){
+									if(a==null) a = new A();
+									return a;
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									A a1 = Flyweight.creatA();
+									A a2 = Flyweight.creatA();
+									A a3 = Flyweight.creatA();
+
+									a1.f("111");
+									a2.f("222");
+									a3.f("333");
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							111<br>
+							222<br>
+							333
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					當你在很多地方都會 new 個 A 物件來用，卻又覺得同樣的東西 new 那麼多個很浪費，Flyweight 就派上用場了！同樣可以在各個類別中建立 A 物件，卻又不用擔心一直建立重複的東西。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_12'>
+
+			<section>
+				<h2 title='Proxy provides a placeholder for another object to control access, reduce cost, and reduce complexity.'>Proxy（別名：Surrogate）</h2>
+				<p>
+					設計一個和實際物件相像的物件，平常代為保存實際物件的狀態，必要時才建立實際物件來執行。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								void f();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements S{
+
+								private String g;
+
+								public A(String x){
+									this.g = x;
+								}
+
+								public void f(){
+									System.out.println(this.g);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Proxy.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Proxy implements S{
+
+								private A a = null;
+								private String g;
+
+								public Proxy(String x){
+									this.g = x;
+								}
+
+								public void f(){
+									if(this.a==null){
+										this.a = new A(this.g);
+									}
+									this.a.f();
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									S proxy = new Proxy("HELLO");
+									proxy.f();
+									proxy.f();
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							HELLO<br>
+							HELLO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					建立物件是很吃重的工作時使用。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_13'>
+
+			<section>
+				<h2 title='Chain of responsibility delegates commands to a chain of processing objects.'>Chain of responsibility</h2>
+				<p>
+					將接受訊息的物件串連起來傳遞，到有物件接收為止。
+				</p>
+				<hr>
+				<section>
+					<h3>Responsibility.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public abstract class Responsibility{
+
+								protected Responsibility g;
+
+								public void chain(Responsibility x){
+									this.g = x;
+								}
+
+								public abstract void request(String x);
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A extends Responsibility{
+
+								public void request(String x){
+									if(x=="AAA"){
+										System.out.println("CHAIN OF A");
+									}
+									else{
+										this.g.request(x);
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B extends Responsibility{
+
+								public void request(String x){
+									if(x=="BBB"){
+										System.out.println("CHAIN OF B");
+									}
+									else{
+										this.g.request(x);
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>C.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class C extends Responsibility{
+
+								public void request(String x){
+									if(x=="CCC"){
+										System.out.println("CHAIN OF C");
+									}
+									else{
+										System.out.println("NO CHAIN");;
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									A a = new A();
+									B b = new B();
+									C c = new C();
+
+									a.chain(b);
+									b.chain(c);
+
+									a.request("CCC"); //正常請求有在串鍊中的 CCC
+									a.request("DDD"); //故意請求沒在串鍊中的 DDD
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							CHAIN OF C<br>
+							NO CHAIN
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					這個設計模式平常不會用到，因為它屬於物件結構有臭味時用到的技巧！<br>
+					<br>
+					設計 Chain of responsibility 模式後，不用知道哪一個物件會接收訊息，所以降低了耦合性。但也因此最後可能沒有物件接收者，設計上要考量到這點～
+				</p>
+			</section>
+
+			<hr id='ANCHOR_14'>
+
+			<section>
+				<h2 title='Command creates objects which encapsulate actions and parameters.'>Command（別名：Action、Transation）</h2>
+				<p>
+					將傳送與接收的訊息要求，設計為物件，以便將傳送與接收兩者原本針對訊息處理的工作，轉移給訊息本身處理。
+				</p>
+				<hr>
+				<section>
+					<h3>Command.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface Command{
+								void execute();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements Command{
+
+								public void execute(){
+									System.out.println("AAA"); //or ReceiverA.action()
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements Command{
+
+								public void execute(){
+									System.out.println("BBB"); //or ReceiverB.action()
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									//Client
+									Command[] commands = {new A(), new B()};
+									//Invoker
+									for(Command command : commands){
+										command.execute();
+									}
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					這範例可能要解釋，否則看不出來哪裡符合 Command 設計模式的精神。<br>
+					<br>
+					以《物件導向設計模式》的 Command 結構圖來說，Main 扮演 Client（委託者）與 Invoker（啟動者）的角色，先負責保存待執行的 Command 物件，然後執行佇列中的物件。<br>
+					<br>
+					A 與 B 分別為 CommandA 和 CommandB，它們 execute() 的動作，其實可以另外寫在 Receiver（接收者），分別執行 ReceiverA.action() 和 ReceiverB.action()。<br>
+					<br>
+					這樣一來，就符合結構圖的參與者。<br>
+					<br>
+					寫成這樣的結構有什麼好處？原本 Invoker 與 Receiver 傳送的訊息，需要做一些加工處理時，有可能發覺這並不是兩者該有的責任，例如想紀錄與還原訊息的歷程狀態。有了 Command 的話，就可以負責處理這些工作。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_15'>
+
+			<section>
+				<h2 title='Interpreter implements a specialized language.'>Interpreter</h2>
+				<p>
+					自製語法規則，以及解譯的程式。
+				</p>
+				<hr>
+				<section>
+					<h3>Expression.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface Expression{
+								void interpret(String x);
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements Expression{
+
+								public void interpret(String x){
+									if(x.equals("A")){
+										System.out.print("甲");
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements Expression{
+
+								public void interpret(String x){
+									if(x.equals("B")){
+										System.out.print("乙");
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>C.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class C implements Expression{
+
+								public void interpret(String x){
+									if(x.equals("C")){
+										System.out.print("丙");
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Nonterminal.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Nonterminal implements Expression{
+
+								Expression[] expressions = {new A(), new B(), new C()};
+
+								public void interpret(String x){
+									if(x.equals(";")){
+										System.out.print("\n");
+									}
+									else{
+										for(Expression expression : expressions){
+											expression.interpret(x);
+										}
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.StringTokenizer;
+
+							public class Main{
+
+								public static void main(String[] args){
+
+									Expression expression = new Nonterminal();
+
+									StringTokenizer context = new StringTokenizer("A B C ;");
+									while(context.hasMoreTokens()){
+										expression.interpret(context.nextToken());
+									}
+
+									context = new StringTokenizer("C C C B B A ;");
+									while(context.hasMoreTokens()){
+										expression.interpret(context.nextToken());
+									}
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							甲乙丙<br>
+							丙丙丙乙乙甲
+						</output>
+					</p>
+				</section>
+			</section>
+
+			<hr id='ANCHOR_16'>
+
+			<section>
+				<h2 title='Iterator accesses the elements of an object sequentially without exposing its underlying representation.'>Iterator（別名：Cursor）</h2>
+				<p>
+					可以逐一存取群集（應該說容器）內的物件，而且不用管它內部物件結構的狀況。
+				</p>
+				<hr>
+				<section>
+					<h3>Aggregate.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.ArrayList;
+
+							public class Aggregate{
+
+								private ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+
+								public void add(String x){
+									this.array_list.add(x);
+								}
+
+								public String get(int x){
+									return this.array_list.get(x);
+								}
+
+								public int size(){
+									return this.array_list.size();
+								}
+
+								public Iterator iterator(){
+									return new ConcreteIterator(this);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Iterator.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Iterator{
+
+								private Aggregate aggregate;
+								private int index = 0;
+
+								public Iterator(Aggregate x){
+									this.aggregate = x;
+								}
+
+								public boolean hasNext(){
+									if(this.index&lt;this.aggregate.size()){
+										return true;
+									}
+									else{
+										return false;
+									}
+								}
+
+								public String next(){
+									return this.aggregate.get(this.index++);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									Aggregate aggregate = new Aggregate();
+
+									aggregate.add(new String("AAA"));
+									aggregate.add(new String("BBB"));
+									aggregate.add(new String("CCC"));
+
+									Iterator iterator = aggregate.iterator();
+
+									while(iterator.hasNext()){
+										System.out.println(iterator.next());
+									}
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC
+						</output>
+					</p>
+				</section>
+			</section>
+
+			<hr id='ANCHOR_17'>
+
+			<section>
+				<h2 title='Mediator allows loose coupling between classes by being the only class that has detailed knowledge of their methods.'>Mediator</h2>
+				<p>
+					將物件多對多的互連行為，封裝成一對多的物件關係。
+				</p>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
+
+								protected String g;
+								protected Mediator mediator;
+
+								public void input(String x){
+									this.g = x;
+									this.mediator.updateA();
+								}
+
+								public void output(){
+									System.out.println("A:" + this.g);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B{
+
+								protected String g;
+								protected Mediator mediator;
+
+								public void input(String x){
+									this.g = x;
+									this.mediator.updateB();
+								}
+
+								public void output(){
+									System.out.println("B:" + this.g);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Mediator.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Mediator{
+
+								private A a;
+								private B b;
+
+								public Mediator(A a, B b){
+									this.a = a;
+									this.a.mediator = this;
+									this.b = b;
+									this.b.mediator = this;
+								}
+
+								public void updateA(){
+									this.b.g = this.a.g;
+								}
+
+								public void updateB(){
+									this.a.g = this.b.g;
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									A a = new A();
+									B b = new B();
+									Mediator mediator = new Mediator(a, b);
+
+									a.input("AAA");
+									a.output();
+									b.output();
+
+									b.input("BBB");
+									a.output();
+									b.output();
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							A:AAA<br>
+							B:AAA<br>
+							A:BBB<br>
+							B:BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					本範例重點在使用 protected 實現 Mediator 的設計理念。<br>
+					<br>
+					類別之間為了讓彼此資料同步，而過度互相操作的行為，有時候會是過度彼此依賴，導致系統僵化的設計。這時設計一個 Mediator 當斡旋者，為不同類別交換彼此內部屬性，簡化連結的結構。因此設計 Mediator 的重點在於類別內部屬性開放給自己族群存取時，其他族群的類別並不能存取。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_18'>
+
+			<section>
+				<h2 title='Memento provides the ability to restore an object to its previous state (undo).'>Memento（別名：Token）</h2>
+				<p>
+					可以「備份」與「還原」物件狀態的設計模式。
+				</p>
+				<hr>
+				<section>
+					<h3>Memento.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Memento{
+
+								protected String g;
+
+								protected Memento(String x){
+									this.g = x;
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.ArrayList;
+
+							public class A{
+
+								private ArrayList&lt;Memento&gt; mementos = new ArrayList&lt;Memento&gt;();
+
+								public void backup(Memento x){
+									this.mementos.add(x);
+								}
+
+								public Memento recovery(int x){
+									return this.mementos.get(x);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B{
+
+								private String g = new String("");
+
+								public void update(){
+									this.g += "※";
+								}
+
+								public Memento storage(){
+									return new Memento(this.g);
+								}
+
+								public void recovery(Memento x){
+									this.g = x.g;
+								}
+
+								public void output(){
+									System.out.println(this.g);
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									A a = new A();
+									B b = new B();
+
+									b.update();
+									a.backup(b.storage());
+									b.output();
+
+									b.update();
+									a.backup(b.storage());
+									b.output();
+
+									b.update();
+									a.backup(b.storage());
+									b.output();
+
+									b.recovery(a.recovery(0));
+									b.output();
+
+									b.recovery(a.recovery(1));
+									b.output();
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							※<br>
+							※※<br>
+							※※※<br>
+							※<br>
+							※※
+						</output>
+					</p>
+				</section>
+			</section>
+
+			<hr id='ANCHOR_19'>
+
+			<section>
+				<h2 title='Observer is a publish/subscribe pattern which allows a number of observer objects to see an event.'>Observer（別名：Dependants、Publish-subscribe）</h2>
+				<p>
+					物件的狀態改變時，通知其它相依性物件進行更新動作。
+				</p>
+				<hr>
+				<section>
+					<h3>Observer.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface Observer{
+								void update();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements Observer{
+
+								public void update(){
+									System.out.println("AAA");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements Observer{
+
+								public void update(){
+									System.out.println("BBB");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Subject.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.ArrayList;
+
+							public class Subject{
+
+								private ArrayList&lt;Observer&gt; obesrvers = new ArrayList&lt;Observer&gt;();
+
+								public void add(Observer x){
+									this.obesrvers.add(x);
+								}
+
+								public void notified(){
+									for(Observer observer : obesrvers){
+										observer.update();
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+
+									Subject a = new Subject();
+
+									a.add(new A());
+									a.add(new B());
+
+									a.notified();
+
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					這個範例直接通知物件要更新。
+				</p>
+			</section>
+
+			<hr id='ANCHOR_20'>
+
+			<section>
+				<h2 title='State allows an object to alter its behavior when its internal state changes.'>State（別名：Objects for status）</h2>
+				<p>
+					依內部狀態而有不同行為的物件。
+				</p>
+				<hr>
+				<section>
+					<h3>State.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface State{
+								void operate();
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements State{
+
+								public void operate(){
+									System.out.println("AAA");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements State{
+
+								public void operate(){
+									System.out.println("BBB");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>C.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class C implements State{
+
+								public void operate(){
+									System.out.println("CCC");
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Context.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Context{
+
+								private State state = new A();
+
+								public void request(){
+									this.state.operate();
+									if(this.state instanceof A){
+										this.state = new B();
+									}
+									else if(this.state instanceof B){
+										this.state = new C();
+									}
+								}
+
+							}
+                        </textarea>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
+
+								public static void main(String[] args){
+									Context context = new Context();
+									context.request();
+									context.request();
+									context.request();
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					執行一次 request() 後，改變 context 物件的狀態，再執行時 request() 時，context 就像變成另一個物件一樣…依此類推下去，設計不斷隨狀態變化自身的物件。<br>
+					<br>
+					如果覺得這個設計模式莫名其妙，其實它等於如下傳統程式的物件導向寫法：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Context{
+
+							private int state = 1;
+
+							public void request(){
+								if(state==1){
+									new A().operate();
+									state=2;
+								}
+								else if(state==2){
+									new B().operate();
+									state=3;
+								}
+								else if(state==3){
+									new C().operate();
+								}
+							}
+
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr id='ANCHOR_21'>
+			<hr id='ANCHOR_21'>
 
-            <section>
-                <h2 title='Strategy allows one of a family of algorithms to be selected on-the-fly at runtime.'>Strategy（別名：Policy）</h2>
-                <p>
-                    將演算法封裝起來，讓類別可以變換不同演算式。
-                </p>
-                <hr>
-                <section>
-                    <h3>Strategy.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface Strategy{
-                                void perform();
-                            }
+			<section>
+				<h2 title='Strategy allows one of a family of algorithms to be selected on-the-fly at runtime.'>Strategy（別名：Policy）</h2>
+				<p>
+					將演算法封裝起來，讓類別可以變換不同演算式。
+				</p>
+				<hr>
+				<section>
+					<h3>Strategy.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface Strategy{
+								void perform();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements Strategy{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements Strategy{
 
-                                public void perform(){
-                                    for(int n=1; n&lt;=3; n++){
-                                        System.out.println(n+n+n);
-                                    }
-                                }
+								public void perform(){
+									for(int n=1; n&lt;=3; n++){
+										System.out.println(n+n+n);
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements Strategy{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements Strategy{
 
-                                public void perform(){
-                                    for(int n=1; n&lt;=3; n++){
-                                        System.out.println(n*n*n);
-                                    }
-                                }
+								public void perform(){
+									for(int n=1; n&lt;=3; n++){
+										System.out.println(n*n*n);
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Context.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Context{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Context.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Context{
 
-                                private Strategy strategy;
+								private Strategy strategy;
 
-                                public Context(Strategy x){
-                                    this.strategy = x;
-                                }
+								public Context(Strategy x){
+									this.strategy = x;
+								}
 
-                                public void f(){
-                                    this.strategy.perform();
-                                }
+								public void f(){
+									this.strategy.perform();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    A a = new A();
-                                    B b = new B();
+									A a = new A();
+									B b = new B();
 
-                                    Context context_1 = new Context(a);
-                                    Context context_2 = new Context(b);
+									Context context_1 = new Context(a);
+									Context context_2 = new Context(b);
 
-                                    context_1.f();
-                                    context_2.f();
+									context_1.f();
+									context_2.f();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            3<br>
-                            6<br>
-                            9<br>
-                            1<br>
-                            8<br>
-                            27
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							3<br>
+							6<br>
+							9<br>
+							1<br>
+							8<br>
+							27
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr id='ANCHOR_22'>
+			<hr id='ANCHOR_22'>
 
-            <section>
-                <h2 title='Template method defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior.'>Template method</h2>
-                <p>
-                    預先定義好操作功能或執行流程，但由子類別負責執行。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            abstract class S{
+			<section>
+				<h2 title='Template method defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior.'>Template method</h2>
+				<p>
+					預先定義好操作功能或執行流程，但由子類別負責執行。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							abstract class S{
 
-                                abstract void f();
+								abstract void f();
 
-                                public void TemplateMethod(){
-                                    f();
-                                }
+								public void TemplateMethod(){
+									f();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A extends S{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A extends S{
 
-                                public void f(){
-                                    System.out.println("AAA");
-                                }
+								public void f(){
+									System.out.println("AAA");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B extends S{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B extends S{
 
-                                public void f(){
-                                    System.out.println("BBB");
-                                }
+								public void f(){
+									System.out.println("BBB");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    A a = new A();
-                                    B b = new B();
-                                    a.TemplateMethod();
-                                    b.TemplateMethod();
-                                }
+								public static void main(String[] args){
+									A a = new A();
+									B b = new B();
+									a.TemplateMethod();
+									b.TemplateMethod();
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr id='ANCHOR_23'>
+			<hr id='ANCHOR_23'>
 
-            <section>
-                <h2 title='Visitor separates an algorithm from an object structure by moving the hierarchy of methods into one object.'>Visitor</h2>
-                <p>
-                    避免頻繁修改整群類別，需要擴充操作的功能時，寫在另外的類別來處理。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                void accept(Visitor x);
-                            }
+			<section>
+				<h2 title='Visitor separates an algorithm from an object structure by moving the hierarchy of methods into one object.'>Visitor</h2>
+				<p>
+					避免頻繁修改整群類別，需要擴充操作的功能時，寫在另外的類別來處理。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								void accept(Visitor x);
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements S{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements S{
 
-                                public void accept(Visitor x){
-                                    x.visitA(this);
-                                }
+								public void accept(Visitor x){
+									x.visitA(this);
+								}
 
-                                public String f1(){
-                                    return "AAA";
-                                }
+								public String f1(){
+									return "AAA";
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B implements S{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B implements S{
 
-                                public void accept(Visitor x){
-                                    x.visitB(this);
-                                }
+								public void accept(Visitor x){
+									x.visitB(this);
+								}
 
-                                public String f2(){
-                                    return "BBB";
-                                }
+								public String f2(){
+									return "BBB";
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Visitor.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Visitor{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Visitor.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Visitor{
 
-                                public void visitA(A a){
-                                    System.out.println(a.f1());
-                                }
+								public void visitA(A a){
+									System.out.println(a.f1());
+								}
 
-                                public void visitB(B b){
-                                    System.out.println(b.f2());
-                                }
+								public void visitB(B b){
+									System.out.println(b.f2());
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.ArrayList;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.ArrayList;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    ArrayList&lt;S&gt; array_list = new ArrayList&lt;S&gt;();
+									ArrayList&lt;S&gt; array_list = new ArrayList&lt;S&gt;();
 
-                                    array_list.add(new A());
-                                    array_list.add(new B());
+									array_list.add(new A());
+									array_list.add(new B());
 
-                                    Visitor visitor = new Visitor();
+									Visitor visitor = new Visitor();
 
-                                    for(S s : array_list){
-                                        s.accept(visitor);
-                                    }
+									for(S s : array_list){
+										s.accept(visitor);
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    透過一個 Visitor，能對多個 S 介面的 A 與 B 物件，施以不同功能進去。<br>
-                    <br>
-                    如果不會再追加類別，會頻繁追加的是操作方式，才適合使用 Visitor 設計模式。否則每增加 S 介面的物件，就必須增加 Visitor 的設計，如果 Visitor 是 interface，得一一到其它類別實作，耗時費力很不划算～
-                </p>
-            </section>
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					透過一個 Visitor，能對多個 S 介面的 A 與 B 物件，施以不同功能進去。<br>
+					<br>
+					如果不會再追加類別，會頻繁追加的是操作方式，才適合使用 Visitor 設計模式。否則每增加 S 介面的物件，就必須增加 Visitor 的設計，如果 Visitor 是 interface，得一一到其它類別實作，耗時費力很不划算～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>補充說明</h2>
-                <img src='../../figures/instantcoffee/20130223A_01.png' alt='插圖' style='float:right'>
-                <p>
-                    本文盡量不對程式碼作說明，希望讓讀者自己循程式碼的脈絡，看看究竟發生什麼事？這樣才能體會每個物件導向設計模式的靈魂所在。其實，如果反過來，變成讓你照我的說明比對照程式碼：「看是不是如我所說的這麼回事」，那你了解的可能是我說明的意義，而不是程式碼本身的意義。或者說，當你了解程式碼本身的意義，你會做出跟我不一樣的說明，因為每個人欠缺與關心的地方不同，需要的說明不一樣。<br>
-                    <br>
-                    也因此程式碼盡可能寫到最短，讓讀者能在五分鐘之內搞清楚在做甚麼。<br>
-                    <br>
-                    本文的缺點是，因為過於簡略，只把每個設計模式最關鍵的結構成分表現出來，所以並不符合原著《Design Patterns: Elements of Reusable Object-Oriented Software》真正的設計模式精神！原著在介紹一個設計模式時，通常該設計模式包含了其它的設計模式，讓這個設計模式可以跟其他設計模式銜接，也就是說，原著的精神是「軟體開發的可再用性」，並不是程式碼的結構本身。例如 Bridge 模式，符合原著設計精神的話應該是這樣：
-                </p>
-                <hr>
-                <section>
-                    <h3>Implementor.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface Implementor{
-                                void operate();
-                            }
+			<section>
+				<h2>補充說明</h2>
+				<img src='../../figures/instantcoffee/20130223A_01.png' alt='插圖' style='float:right'>
+				<p>
+					本文盡量不對程式碼作說明，希望讓讀者自己循程式碼的脈絡，看看究竟發生什麼事？這樣才能體會每個物件導向設計模式的靈魂所在。其實，如果反過來，變成讓你照我的說明比對照程式碼：「看是不是如我所說的這麼回事」，那你了解的可能是我說明的意義，而不是程式碼本身的意義。或者說，當你了解程式碼本身的意義，你會做出跟我不一樣的說明，因為每個人欠缺與關心的地方不同，需要的說明不一樣。<br>
+					<br>
+					也因此程式碼盡可能寫到最短，讓讀者能在五分鐘之內搞清楚在做甚麼。<br>
+					<br>
+					本文的缺點是，因為過於簡略，只把每個設計模式最關鍵的結構成分表現出來，所以並不符合原著《Design Patterns: Elements of Reusable Object-Oriented Software》真正的設計模式精神！原著在介紹一個設計模式時，通常該設計模式包含了其它的設計模式，讓這個設計模式可以跟其他設計模式銜接，也就是說，原著的精神是「軟體開發的可再用性」，並不是程式碼的結構本身。例如 Bridge 模式，符合原著設計精神的話應該是這樣：
+				</p>
+				<hr>
+				<section>
+					<h3>Implementor.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface Implementor{
+								void operate();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ConcreteImplementorA.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class ConcreteImplementorA implements Implementor{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ConcreteImplementorA.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class ConcreteImplementorA implements Implementor{
 
-                                public void operate(){
-                                    System.out.println("紅燈");
-                                }
+								public void operate(){
+									System.out.println("紅燈");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ConcreteImplementorB.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class ConcreteImplementorB implements Implementor{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ConcreteImplementorB.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class ConcreteImplementorB implements Implementor{
 
-                                public void operate(){
-                                    System.out.println("綠燈");
-                                }
+								public void operate(){
+									System.out.println("綠燈");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Abstraction.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Abstraction{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Abstraction.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Abstraction{
 
-                                private Implementor implementor;
+								private Implementor implementor;
 
-                                public Abstraction(Implementor implementor){
-                                    this.implementor = implementor;
-                                }
+								public Abstraction(Implementor implementor){
+									this.implementor = implementor;
+								}
 
-                                public void operate1(){
-                                    this.implementor.operate();
-                                }
+								public void operate1(){
+									this.implementor.operate();
+								}
 
-                                public void operate2(){
-                                    System.out.print("耐用型");
-                                    operate1();
-                                }
+								public void operate2(){
+									System.out.print("耐用型");
+									operate1();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>RefinedAbstraction.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class RefinedAbstraction extends Abstraction{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>RefinedAbstraction.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class RefinedAbstraction extends Abstraction{
 
-                                public RefinedAbstraction(Implementor implementor){
-                                    super(implementor);
-                                }
+								public RefinedAbstraction(Implementor implementor){
+									super(implementor);
+								}
 
-                                public void operate3(){
-                                    System.out.print("省電型");
-                                    super.operate2();
-                                }
+								public void operate3(){
+									System.out.print("省電型");
+									super.operate2();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //首先可以正常使用 ConcreteImplementorA 和 ConcreteImplementorB。
-                                    ConcreteImplementorA a = new ConcreteImplementorA();
-                                    ConcreteImplementorB b = new ConcreteImplementorB();
-                                    a.operate();
-                                    b.operate();
-                                    //後來經由 Abstraction 改良 ConcreteImplementorA 來使用。
-                                    Abstraction c = new Abstraction(new ConcreteImplementorA());
-                                    c.operate1();
-                                    c.operate2();
-                                    //接著 RefinedAbstraction 再基於 Abstraction 的改良技術，進一步強化 ConcreteImplementorB。
-                                    RefinedAbstraction d = new RefinedAbstraction(new ConcreteImplementorB());
-                                    d.operate1();
-                                    d.operate2();
-                                    d.operate3();
-                                }
+								public static void main(String[] args){
+									//首先可以正常使用 ConcreteImplementorA 和 ConcreteImplementorB。
+									ConcreteImplementorA a = new ConcreteImplementorA();
+									ConcreteImplementorB b = new ConcreteImplementorB();
+									a.operate();
+									b.operate();
+									//後來經由 Abstraction 改良 ConcreteImplementorA 來使用。
+									Abstraction c = new Abstraction(new ConcreteImplementorA());
+									c.operate1();
+									c.operate2();
+									//接著 RefinedAbstraction 再基於 Abstraction 的改良技術，進一步強化 ConcreteImplementorB。
+									RefinedAbstraction d = new RefinedAbstraction(new ConcreteImplementorB());
+									d.operate1();
+									d.operate2();
+									d.operate3();
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            紅燈<br>
-                            綠燈<br>
-                            紅燈<br>
-                            耐用型紅燈<br>
-                            綠燈<br>
-                            耐用型綠燈<br>
-                            省電型耐用型綠燈
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    這個範例是用來展示《Design Patterns》原著的 Bridge 模式，你可用來對照本單元原先示範的 <a href='#ANCHOR_7'>Bridge</a> 模式，看看有那些地方不一樣。<br>
-                    <br>
-                    要執行這個程式的話，請開啟範例檔中，名為 ! Standard Bridge Pattern 的資料夾。<br>
-                    <br>
-                    這個範例的 ConcreteImplementorA 與 ConcreteImplementorB 類別分別表示「紅燈」與「綠燈」，你可以正常 new 出物件來使用它們。但你還可以進一步使用 Abstraction 將紅綠燈強化為「耐用型」，甚至再進一步用 RefinedAbstraction 改良為「省電型」。<br>
-                    <br>
-                    所以建議你還是要買一本專門介紹設計模式的書籍。本文適合扮演「導讀」的角色，先讓你一眼洞悉每個物件導向設計模式的結構，然後再看書進一步研究這樣的結構可以怎樣與其它結構銜接。對有些人而言，一個設計模式包含其它設計模式，容易搞不清關鍵差異性在哪裡，這時本文就是不錯的參考資料。
-                </p>
-            </section>
+						<br>
+						<output>
+							紅燈<br>
+							綠燈<br>
+							紅燈<br>
+							耐用型紅燈<br>
+							綠燈<br>
+							耐用型綠燈<br>
+							省電型耐用型綠燈
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					這個範例是用來展示《Design Patterns》原著的 Bridge 模式，你可用來對照本單元原先示範的 <a href='#ANCHOR_7'>Bridge</a> 模式，看看有那些地方不一樣。<br>
+					<br>
+					要執行這個程式的話，請開啟範例檔中，名為 ! Standard Bridge Pattern 的資料夾。<br>
+					<br>
+					這個範例的 ConcreteImplementorA 與 ConcreteImplementorB 類別分別表示「紅燈」與「綠燈」，你可以正常 new 出物件來使用它們。但你還可以進一步使用 Abstraction 將紅綠燈強化為「耐用型」，甚至再進一步用 RefinedAbstraction 改良為「省電型」。<br>
+					<br>
+					所以建議你還是要買一本專門介紹設計模式的書籍。本文適合扮演「導讀」的角色，先讓你一眼洞悉每個物件導向設計模式的結構，然後再看書進一步研究這樣的結構可以怎樣與其它結構銜接。對有些人而言，一個設計模式包含其它設計模式，容易搞不清關鍵差異性在哪裡，這時本文就是不錯的參考資料。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>附錄：結城浩的分類法</h2>
-                <p>
-                    日本知名程式設計作家「結城浩」對 23 個設計模式的分類與解釋，很能幫助我們吸收與理解，因此整理於下；內容摘錄自李于青翻譯、博碩文化出版的《<a href='http://www.drmaster.com.tw/Bookinfo.asp?BookID=PG20214' target='_blank'>Design Patterns 於 Java 語言上的實習應用增訂第二版</a>》：
-                </p>
-                <table>
-                    <tr><td>交給子類別</td><td>Template method</td><td>由子類別實作功能。</td></tr>
-                    <tr><td></td><td>Factory method</td><td>由子類別產生物件。</td></tr>
-                    <tr><td>建立物件</td><td>Singleton</td><td>物件個體只有一個。</td></tr>
-                    <tr><td></td><td>Prototype</td><td>從一個物件個體產生另一個新物件個體。</td></tr>
-                    <tr><td></td><td>Builder</td><td>採取循序漸進的方式組合較複雜物件個體。</td></tr>
-                    <tr><td></td><td>Abstract factory</td><td>（在抽象層次將零件組合成產品。）</td></tr>
-                    <tr><td>切割層級</td><td>Bridge</td><td>將功能與實作分成兩個獨立的類別階層。</td></tr>
-                    <tr><td></td><td>Strategy</td><td>可以更換實作的演算法。</td></tr>
-                    <tr><td>一視同仁</td><td>Composite</td><td>像目錄和檔案一樣，對容器和內容一視同仁。</td></tr>
-                    <tr><td></td><td>Decorator</td><td>在物件上不斷披上裝飾。</td></tr>
-                    <tr><td>在結構中穿梭</td><td>Visitor</td><td>在物件群中穿梭，並由它對資料附加處理功能。</td></tr>
-                    <tr><td></td><td>Chain of responsibility</td><td>將物件串聯成鏈狀，依序走過這些物件來決定（承擔責任的）目標。</td></tr>
-                    <tr><td>簡單化</td><td>Facade</td><td>簡單設置單一窗口，處理複雜的物件組控。</td></tr>
-                    <tr><td></td><td>Mediator</td><td>設立一個調停用物件，成員只對它提出報告，也只有它能指示成員。</td></tr>
-                    <tr><td>管理狀態</td><td>Observer</td><td>列入觀察名單的物件狀態變化時通知觀察者。</td></tr>
-                    <tr><td></td><td>Memento</td><td>將物件狀態儲存起來，以後用來恢復狀態。</td></tr>
-                    <tr><td></td><td>State</td><td>切換類別就能表現狀態變化。</td></tr>
-                    <tr><td>精簡不浪費</td><td>Flyweight</td><td>共用已 new 的物件以減少無謂的浪費。</td></tr>
-                    <tr><td></td><td>Proxy</td><td>要用時再建立（已備好的物件）。</td></tr>
-                    <tr><td>用類別表示</td><td>Command</td><td>將命令寫成類別。</td></tr>
-                    <tr><td></td><td>Interpreter</td><td>（製作直譯器來執行迷你語言。）</td></tr>
-                    <tr><td>其它</td><td>Iterator</td><td>（不用關心內部細節就能巡訪資料。）</td></tr>
-                    <tr><td></td><td>Adapter</td><td>（將介面不相容的類別或物件轉換為相容。）</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>附錄：結城浩的分類法</h2>
+				<p>
+					日本知名程式設計作家「結城浩」對 23 個設計模式的分類與解釋，很能幫助我們吸收與理解，因此整理於下；內容摘錄自李于青翻譯、博碩文化出版的《<a href='http://www.drmaster.com.tw/Bookinfo.asp?BookID=PG20214' target='_blank'>Design Patterns 於 Java 語言上的實習應用增訂第二版</a>》：
+				</p>
+				<table>
+					<tr><td>交給子類別</td><td>Template method</td><td>由子類別實作功能。</td></tr>
+					<tr><td></td><td>Factory method</td><td>由子類別產生物件。</td></tr>
+					<tr><td>建立物件</td><td>Singleton</td><td>物件個體只有一個。</td></tr>
+					<tr><td></td><td>Prototype</td><td>從一個物件個體產生另一個新物件個體。</td></tr>
+					<tr><td></td><td>Builder</td><td>採取循序漸進的方式組合較複雜物件個體。</td></tr>
+					<tr><td></td><td>Abstract factory</td><td>（在抽象層次將零件組合成產品。）</td></tr>
+					<tr><td>切割層級</td><td>Bridge</td><td>將功能與實作分成兩個獨立的類別階層。</td></tr>
+					<tr><td></td><td>Strategy</td><td>可以更換實作的演算法。</td></tr>
+					<tr><td>一視同仁</td><td>Composite</td><td>像目錄和檔案一樣，對容器和內容一視同仁。</td></tr>
+					<tr><td></td><td>Decorator</td><td>在物件上不斷披上裝飾。</td></tr>
+					<tr><td>在結構中穿梭</td><td>Visitor</td><td>在物件群中穿梭，並由它對資料附加處理功能。</td></tr>
+					<tr><td></td><td>Chain of responsibility</td><td>將物件串聯成鏈狀，依序走過這些物件來決定（承擔責任的）目標。</td></tr>
+					<tr><td>簡單化</td><td>Facade</td><td>簡單設置單一窗口，處理複雜的物件組控。</td></tr>
+					<tr><td></td><td>Mediator</td><td>設立一個調停用物件，成員只對它提出報告，也只有它能指示成員。</td></tr>
+					<tr><td>管理狀態</td><td>Observer</td><td>列入觀察名單的物件狀態變化時通知觀察者。</td></tr>
+					<tr><td></td><td>Memento</td><td>將物件狀態儲存起來，以後用來恢復狀態。</td></tr>
+					<tr><td></td><td>State</td><td>切換類別就能表現狀態變化。</td></tr>
+					<tr><td>精簡不浪費</td><td>Flyweight</td><td>共用已 new 的物件以減少無謂的浪費。</td></tr>
+					<tr><td></td><td>Proxy</td><td>要用時再建立（已備好的物件）。</td></tr>
+					<tr><td>用類別表示</td><td>Command</td><td>將命令寫成類別。</td></tr>
+					<tr><td></td><td>Interpreter</td><td>（製作直譯器來執行迷你語言。）</td></tr>
+					<tr><td>其它</td><td>Iterator</td><td>（不用關心內部細節就能巡訪資料。）</td></tr>
+					<tr><td></td><td>Adapter</td><td>（將介面不相容的類別或物件轉換為相容。）</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>附錄：Java 中符合物件導向設計模式的案例</h2>
-                <p>
-                    java.awt.Toolkit 用了 AbstractFactory。<br>
-                    Java API 很多 Factory method 的案例。<br>
-                    java.lang.Object.clone() 可用來 Prototype，畢竟只是複製一份物件做為新的物件。<br>
-                    java.lang.Runtime 就是以 Singleton 實作。<br>
-                    java.awt.event 裡面有許多設計為 Adapter 的類別。<br>
-                    javax.swing 的元件往往有個 UI 屬性，這就是一種 Bridge 的設計。<br>
-                    java.awt.Component 是一種 Composite 的表現。<br>
-                    java.io 許多 Stream 系列，就是 Decorator 的很好案例。<br>
-                    java.lang.String.intern() 就是 Flyweight 的表現。<br>
-                    java.lang.reflect 是 Java 內建的動態 Proxy 模式。<br>
-                    java.util.Iterator 是 Java 內建的 Iterator 模式。<br>
-                    java.lang.Observer 是 Java 內建的 Observer 設計模式。<br>
-                    java.awt 中 Container 以 LayoutManager 切換排版規則，就是一種 Strategy 的表現。<br>
-                    java.awt.Component 中一系列 process 方法，很符合 Visitor 模式的精神。
-                </p>
-            </section>
+			<section>
+				<h2>附錄：Java 中符合物件導向設計模式的案例</h2>
+				<p>
+					java.awt.Toolkit 用了 AbstractFactory。<br>
+					Java API 很多 Factory method 的案例。<br>
+					java.lang.Object.clone() 可用來 Prototype，畢竟只是複製一份物件做為新的物件。<br>
+					java.lang.Runtime 就是以 Singleton 實作。<br>
+					java.awt.event 裡面有許多設計為 Adapter 的類別。<br>
+					javax.swing 的元件往往有個 UI 屬性，這就是一種 Bridge 的設計。<br>
+					java.awt.Component 是一種 Composite 的表現。<br>
+					java.io 許多 Stream 系列，就是 Decorator 的很好案例。<br>
+					java.lang.String.intern() 就是 Flyweight 的表現。<br>
+					java.lang.reflect 是 Java 內建的動態 Proxy 模式。<br>
+					java.util.Iterator 是 Java 內建的 Iterator 模式。<br>
+					java.lang.Observer 是 Java 內建的 Observer 設計模式。<br>
+					java.awt 中 Container 以 LayoutManager 切換排版規則，就是一種 Strategy 的表現。<br>
+					java.awt.Component 中一系列 process 方法，很符合 Visitor 模式的精神。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 有可能不同時代的新、舊程式語言，所實作出來的 Adapter 會有不同程式結構，甚至實作出來的程式結構長得跟 Facade 一樣，因此不能從程式碼的結構來看物件導向設計模式。唯一不會隨著不同物件導向程式語言轉變的，是為何導入 Facade 與 Adapter 的設計理念！<br>
-                    [2] 但熟於用 UML 來拆解類別的話，反而是最精闢的研究方式，建議未來還是要養成這樣的能力。<br>
-                    [3] 是「物件」的組合方式，而不是「程式碼」的組織方式。<br>
-                    [*] 本文英文簡介部分，引用自 Wikipedia《<a href='http://en.wikipedia.org/wiki/Design_Patterns' target='_blank'>Design Patterns</a>》條目的內容。<br>
-                    [*] 本單元範例參考「岩田宗之」與「堀江幸生」合著之《UML 逆引き大全 560 の極意》，由「<a href='http://www.shuwasystem.co.jp' target='_blank'>秀和システム</a>」出版。<br>
-                    <!--想法、做法、用法-->
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 有可能不同時代的新、舊程式語言，所實作出來的 Adapter 會有不同程式結構，甚至實作出來的程式結構長得跟 Facade 一樣，因此不能從程式碼的結構來看物件導向設計模式。唯一不會隨著不同物件導向程式語言轉變的，是為何導入 Facade 與 Adapter 的設計理念！<br>
+					[2] 但熟於用 UML 來拆解類別的話，反而是最精闢的研究方式，建議未來還是要養成這樣的能力。<br>
+					[3] 是「物件」的組合方式，而不是「程式碼」的組織方式。<br>
+					[*] 本文英文簡介部分，引用自 Wikipedia《<a href='http://en.wikipedia.org/wiki/Design_Patterns' target='_blank'>Design Patterns</a>》條目的內容。<br>
+					[*] 本單元範例參考「岩田宗之」與「堀江幸生」合著之《UML 逆引き大全 560 の極意》，由「<a href='http://www.shuwasystem.co.jp' target='_blank'>秀和システム</a>」出版。<br>
+					<!--想法、做法、用法-->
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

@@ -2,232 +2,232 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>table td:nth-child(1){width:35%}</style>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>table td:nth-child(1){width:35%}</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Literals</h1>
-            </header>
+			<header>
+				<h1>Literals</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>基本資料與大小範圍</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>基本資料與大小範圍</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                System.out.printf("boolean %b ~ %b%n", Boolean.FALSE, Boolean.TRUE);
-                                System.out.printf("byte    %d ~ %d%n", Byte.MIN_VALUE, Byte.MAX_VALUE);
-                                System.out.printf("short   %d ~ %d%n", Short.MIN_VALUE, Short.MAX_VALUE);
-                                System.out.printf("int     %d ~ %d%n", Integer.MIN_VALUE, Integer.MAX_VALUE);
-                                System.out.printf("long    %d ~ %d%n", Long.MIN_VALUE, Long.MAX_VALUE);
-                                System.out.printf("char    %d ~ %d%n", (long)Character.MIN_VALUE, (long)Character.MAX_VALUE);
-                                System.out.printf("float   %g ~ %g%n", Float.MIN_VALUE, Float.MAX_VALUE);
-                                System.out.printf("double  %g ~ %g%n", Double.MIN_VALUE, Double.MAX_VALUE);
+								System.out.printf("boolean %b ~ %b%n", Boolean.FALSE, Boolean.TRUE);
+								System.out.printf("byte	%d ~ %d%n", Byte.MIN_VALUE, Byte.MAX_VALUE);
+								System.out.printf("short   %d ~ %d%n", Short.MIN_VALUE, Short.MAX_VALUE);
+								System.out.printf("int	 %d ~ %d%n", Integer.MIN_VALUE, Integer.MAX_VALUE);
+								System.out.printf("long	%d ~ %d%n", Long.MIN_VALUE, Long.MAX_VALUE);
+								System.out.printf("char	%d ~ %d%n", (long)Character.MIN_VALUE, (long)Character.MAX_VALUE);
+								System.out.printf("float   %g ~ %g%n", Float.MIN_VALUE, Float.MAX_VALUE);
+								System.out.printf("double  %g ~ %g%n", Double.MIN_VALUE, Double.MAX_VALUE);
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        boolean false ~ true<br>
-                        byte &nbsp; &nbsp;-128 ~ 127<br>
-                        short &nbsp; -32768 ~ 32767<br>
-                        int &nbsp; &nbsp; -2147483648 ~ 2147483647<br>
-                        long &nbsp; &nbsp;-9223372036854775808 ~ 9223372036854775807<br>
-                        char &nbsp; &nbsp;0 ~ 65535<br>
-                        float &nbsp; 1.40130e-45 ~ 3.40282e+38<br>
-                        double &nbsp;4.90000e-324 ~ 1.79769e+308
-                    </output>
-                </p>
-                <hr>
-                <section>
-                    <h3>關於 char</h3>
-                    <p>
-                        不建議把 char 當無號整數使用，雖然它可以保存 0 到 65535 的整數，但其實是為了放 Unicode 字元碼。<br>
-                        <br>
-                        從 java.lang.Character 並不是 java.lang.Number 的子類別，也可看出端倪，跟 Byte、Integer、Float 之類的數字型態不是一族類。<br>
-                        <br>
-                        連範例中在 printf() 用 %d 輸出為整數時，都用 (long) 轉型。<br>
-                        <br>
-                        char 就是字元碼，不適合當作整數使用。
-                    </p>
-                </section>
-            </section>
+					<br>
+					<output>
+						boolean false ~ true<br>
+						byte &nbsp; &nbsp;-128 ~ 127<br>
+						short &nbsp; -32768 ~ 32767<br>
+						int &nbsp; &nbsp; -2147483648 ~ 2147483647<br>
+						long &nbsp; &nbsp;-9223372036854775808 ~ 9223372036854775807<br>
+						char &nbsp; &nbsp;0 ~ 65535<br>
+						float &nbsp; 1.40130e-45 ~ 3.40282e+38<br>
+						double &nbsp;4.90000e-324 ~ 1.79769e+308
+					</output>
+				</p>
+				<hr>
+				<section>
+					<h3>關於 char</h3>
+					<p>
+						不建議把 char 當無號整數使用，雖然它可以保存 0 到 65535 的整數，但其實是為了放 Unicode 字元碼。<br>
+						<br>
+						從 java.lang.Character 並不是 java.lang.Number 的子類別，也可看出端倪，跟 Byte、Integer、Float 之類的數字型態不是一族類。<br>
+						<br>
+						連範例中在 printf() 用 %d 輸出為整數時，都用 (long) 轉型。<br>
+						<br>
+						char 就是字元碼，不適合當作整數使用。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>使用資料</h2>
-                <hr>
-                <section>
-                    <h3>數字</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+			<section>
+				<h2>使用資料</h2>
+				<hr>
+				<section>
+					<h3>數字</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    //使用整數
-                                    System.out.println(123);
-                                    //使用短整數
-                                    System.out.println((short)123);
-                                    //使用長整數
-                                    System.out.println(123L);
-                                    //使用分隔符號
-                                    System.out.println(123_456_789); //相當於 123,456,789
-                                    //使用小數
-                                    System.out.println(1.23F);
-                                    //使用倍精確度小數
-                                    System.out.println(1.23D);
+									//使用整數
+									System.out.println(123);
+									//使用短整數
+									System.out.println((short)123);
+									//使用長整數
+									System.out.println(123L);
+									//使用分隔符號
+									System.out.println(123_456_789); //相當於 123,456,789
+									//使用小數
+									System.out.println(1.23F);
+									//使用倍精確度小數
+									System.out.println(1.23D);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            123<br>
-                            123<br>
-                            123<br>
-                            123456789<br>
-                            1.23<br>
-                            1.23
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>位元</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+						<br>
+						<output>
+							123<br>
+							123<br>
+							123<br>
+							123456789<br>
+							1.23<br>
+							1.23
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>位元</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    //使用二進位值
-                                    System.out.println(0b01111011);
-                                    //使用八進位值
-                                    System.out.println(0173); //以 0 開頭
-                                    //使用十六進位值
-                                    System.out.println(0x007B);
-                                    //使用位元組
-                                    System.out.println((byte)123);
-                                    System.out.println((byte)0b01111011);
-                                    System.out.println((byte)0x007B);
+									//使用二進位值
+									System.out.println(0b01111011);
+									//使用八進位值
+									System.out.println(0173); //以 0 開頭
+									//使用十六進位值
+									System.out.println(0x007B);
+									//使用位元組
+									System.out.println((byte)123);
+									System.out.println((byte)0b01111011);
+									System.out.println((byte)0x007B);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            123<br>
-                            123<br>
-                            123<br>
-                            123<br>
-                            123<br>
-                            123
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>文字</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+						<br>
+						<output>
+							123<br>
+							123<br>
+							123<br>
+							123<br>
+							123<br>
+							123
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>文字</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    //使用字元
-                                    char a = "a";
-                                    //使用萬國碼
-                                    char b = "\u0062";
-                                    //使用字串
-                                    String cd = "cd" ;
-                                    //使用規避字元
-                                    String e = "\\";
+									//使用字元
+									char a = "a";
+									//使用萬國碼
+									char b = "\u0062";
+									//使用字串
+									String cd = "cd" ;
+									//使用規避字元
+									String e = "\\";
 
-                                    System.out.printf("%s %s %s %s", a, b, cd, e);
+									System.out.printf("%s %s %s %s", a, b, cd, e);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            a b cd \ null
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>其它</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+						<br>
+						<output>
+							a b cd \ null
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>其它</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    String a = null; //null 也是一種值
-                                    System.out.print(a);
+									String a = null; //null 也是一種值
+									System.out.print(a);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            null
-                        </output>
-                    </p>
-                    <section>
-                        <h4>題外話</h4>
-                        <p>
-                            這個例子示範 null，它表示「不指向任何物件」。<br>
-                            <br>
-                            有趣的是，既然不指向任何物件，範例中的 String 物件卻輸出 null，難道 null 就不是單字、不是資料嗎？我設定 null 給 String 時，意思是「空資料的 String」還是「尚未建立物件的 String」？使用 null 的 String 物件時是不是發出錯誤訊息比較好？<br>
-                            <br>
-                            其實，如何定義 null 是怎樣的「資料」，是必須嚴肅探究的議題。如果你沒有限制 null 的使用場合，這邊用來表示空的物件、那邊用來當作資料的預設值，往後程式有 bug 時，會變得很難追蹤，因為 null 是合法的，不會發出警告，導致找不出 bug 原因在哪。
-                        </p>
-                    </section>
-                </section>
-            </section>
+						<br>
+						<output>
+							null
+						</output>
+					</p>
+					<section>
+						<h4>題外話</h4>
+						<p>
+							這個例子示範 null，它表示「不指向任何物件」。<br>
+							<br>
+							有趣的是，既然不指向任何物件，範例中的 String 物件卻輸出 null，難道 null 就不是單字、不是資料嗎？我設定 null 給 String 時，意思是「空資料的 String」還是「尚未建立物件的 String」？使用 null 的 String 物件時是不是發出錯誤訊息比較好？<br>
+							<br>
+							其實，如何定義 null 是怎樣的「資料」，是必須嚴肅探究的議題。如果你沒有限制 null 的使用場合，這邊用來表示空的物件、那邊用來當作資料的預設值，往後程式有 bug 時，會變得很難追蹤，因為 null 是合法的，不會發出警告，導致找不出 bug 原因在哪。
+						</p>
+					</section>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>literal 與 constant</h2>
-                <p>
-                    這兩個單字的中文經常都翻作「常數」，搞混不少學習程式設計的人。<br>
-                    <br>
-                    以 <code>final int a = 123;</code> 為例，123 是 literal，a 是 constant。<br>
-                    <br>
-                    也就是說，literal 是真正的常數，1 就是 1，2 就是 2，恆常的事實不會改變。constant 不是真正的常數，而是資料無法再更改的變數，但中文書都教說這種變數叫常數，所以台灣程式設計師聽到常數，想到的都是 constant。<br>
-                    <br>
-                    通常資訊工程系的研究生，稱 literal 為常數，constant 為常量，變數則改叫變量，值得參考。
-                </p>
-            </section>
+			<section>
+				<h2>literal 與 constant</h2>
+				<p>
+					這兩個單字的中文經常都翻作「常數」，搞混不少學習程式設計的人。<br>
+					<br>
+					以 <code>final int a = 123;</code> 為例，123 是 literal，a 是 constant。<br>
+					<br>
+					也就是說，literal 是真正的常數，1 就是 1，2 就是 2，恆常的事實不會改變。constant 不是真正的常數，而是資料無法再更改的變數，但中文書都教說這種變數叫常數，所以台灣程式設計師聽到常數，想到的都是 constant。<br>
+					<br>
+					通常資訊工程系的研究生，稱 literal 為常數，constant 為常量，變數則改叫變量，值得參考。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

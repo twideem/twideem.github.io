@@ -2,492 +2,490 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>o-_-)=O)&gt;O&lt;)</h1>
-                <p>
-                    一些不合時宜，應該丟入垃圾桶的資料，或者尚未完稿，不具實用性、淪為個人主觀想法的內容，集中存放在這裡面。<br>
-                    <br>
-                    整頁太長很難檢索？當然！放在這裡的內容「僅供參考」，不適合公開，所以不方便你閱讀、漏看多少算多少，我覺得算好事一樁 XDDD
-                </p>
-            </header>
+			<header>
+				<h1>o-_-)=O)&gt;O&lt;)</h1>
+				<p>
+					一些不合時宜，應該丟入垃圾桶的資料，或者尚未完稿，不具實用性、淪為個人主觀想法的內容，集中存放在這裡面。<br>
+					<br>
+					整頁太長很難檢索？當然！放在這裡的內容「僅供參考」，不適合公開，所以不方便你閱讀、漏看多少算多少，我覺得算好事一樁 XDDD
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>格式化數字</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.text.DecimalFormat;
+			<section>
+				<h2>格式化數字</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.text.DecimalFormat;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                DecimalFormat decimal_format = new DecimalFormat("#,###.00");
-                                System.out.print(decimal_format.format(12345.6789));
-                            }
+							public static void main(String[] args){
+								DecimalFormat decimal_format = new DecimalFormat("#,###.00");
+								System.out.print(decimal_format.format(12345.6789));
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        1,234.56
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						1,234.56
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>抽籤</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.Arrays;
-                        import java.util.LinkedList;
-                        import java.util.Random;
+			<section>
+				<h2>抽籤</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+						import java.util.LinkedList;
+						import java.util.Random;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                String[] teams = {"兄弟象","味全龍","統一獅","三商虎","時報鷹","俊國熊"};
+								String[] teams = {"兄弟象","味全龍","統一獅","三商虎","時報鷹","俊國熊"};
 
-                                LinkedList&lt;String&gt; linked_list = new LinkedList&lt;String&gt;(Arrays.asList(teams));
+								LinkedList&lt;String&gt; linked_list = new LinkedList&lt;String&gt;(Arrays.asList(teams));
 
-                                Random random = new Random();
+								Random random = new Random();
 
-                                while(!linked_list.isEmpty()){
-                                    System.out.println(linked_list.remove(random.nextInt(linked_list.size())));
-                                }
+								while(!linked_list.isEmpty()){
+									System.out.println(linked_list.remove(random.nextInt(linked_list.size())));
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        三商虎<br>
-                        味全龍<br>
-                        俊國熊<br>
-                        兄弟象<br>
-                        時報鷹<br>
-                        統一獅
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						三商虎<br>
+						味全龍<br>
+						俊國熊<br>
+						兄弟象<br>
+						時報鷹<br>
+						統一獅
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>簡易 NIO 寫入資料</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.io.RandomAccessFile;
-                        import java.nio.ByteBuffer;
-                        import java.nio.channels.FileChannel;
+			<section>
+				<h2>簡易 NIO 寫入資料</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.RandomAccessFile;
+						import java.nio.ByteBuffer;
+						import java.nio.channels.FileChannel;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                try{
-                                    FileChannel file_channel = new RandomAccessFile("text.txt", "rw").getChannel();
-                                    file_channel.write(ByteBuffer.wrap("猜猜我是誰".getBytes()));
-                                    file_channel.close();
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
+								try{
+									FileChannel file_channel = new RandomAccessFile("text.txt", "rw").getChannel();
+									file_channel.write(ByteBuffer.wrap("猜猜我是誰".getBytes()));
+									file_channel.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
 
-                            }
+							}
 
-                        }
-                        }
+						}
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>換算 Comparable.compareTo()</h2>
-                <p>
-                    <code>d.compareTo(a[e-b])&lt;0</code><br>
-                    <br>
-                    相當於…<br>
-                    <br>
-                    <code>d&lt;a[e-b]</code><br>
-                    <br>
-                    也因此，<br>
-                    <br>
-                    <code>c.compareTo(a[d-1])&lt;0</code><br>
-                    <br>
-                    相當於…<br>
-                    <br>
-                    <code>c&lt;a[d-1]</code>
-                </p>
-            </section>
+			<section>
+				<h2>換算 Comparable.compareTo()</h2>
+				<p>
+					<code>d.compareTo(a[e-b])&lt;0</code><br>
+					<br>
+					相當於…<br>
+					<br>
+					<code>d&lt;a[e-b]</code><br>
+					<br>
+					也因此，<br>
+					<br>
+					<code>c.compareTo(a[d-1])&lt;0</code><br>
+					<br>
+					相當於…<br>
+					<br>
+					<code>c&lt;a[d-1]</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Aggregation (聚合)</h2>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
+			<section>
+				<h2>Aggregation (聚合)</h2>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
 
-                                private String g;
+								private String g;
 
-                                public A(){
-                                    System.out.println("建立了 A 的物件！");
-                                }
+								public A(){
+									System.out.println("建立了 A 的物件！");
+								}
 
-                                public void setG(String x){
-                                    this.g = x;
-                                }
+								public void setG(String x){
+									this.g = x;
+								}
 
-                                public void getG(){
-                                    System.out.println("輸出 A 的資料為：" + this.g);
-                                }
+								public void getG(){
+									System.out.println("輸出 A 的資料為：" + this.g);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B{
 
-                                private A a;
+								private A a;
 
-                                public B(A a){
-                                    this.setA(a);
-                                }
+								public B(A a){
+									this.setA(a);
+								}
 
-                                public void setA(A a){
-                                    this.a = a;
-                                }
+								public void setA(A a){
+									this.a = a;
+								}
 
-                                public A getA(){
-                                    return this.a;
-                                }
+								public A getA(){
+									return this.a;
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    A a = new A();
-                                    a.setG("HELLO");
-                                    B b = new B(a);
-                                    b.getA().getG();
-                                }
+								public static void main(String[] args){
+									A a = new A();
+									a.setG("HELLO");
+									B b = new B(a);
+									b.getA().getG();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出結果</h3>
-                    <p>
-                        <output>
-                            建立了 A 的物件！<br>
-                            輸出 A 的資料為：HELLO
-                        </output>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出結果</h3>
+					<p>
+						<output>
+							建立了 A 的物件！<br>
+							輸出 A 的資料為：HELLO
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Composition (合成)</h2>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A{
+			<section>
+				<h2>Composition (合成)</h2>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A{
 
-                                private String g;
+								private String g;
 
-                                public A(){
-                                    System.out.println("建立了 A 的物件！");
-                                }
+								public A(){
+									System.out.println("建立了 A 的物件！");
+								}
 
-                                public void setG(String x){
-                                    this.g = x;
-                                }
+								public void setG(String x){
+									this.g = x;
+								}
 
-                                public void getG(){
-                                    System.out.println("輸出 A 的資料為：" + this.g);
-                                }
+								public void getG(){
+									System.out.println("輸出 A 的資料為：" + this.g);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>B.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class B{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>B.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class B{
 
-                                private A a;
+								private A a;
 
-                                public B(){
-                                    this.setA();
-                                }
+								public B(){
+									this.setA();
+								}
 
-                                private void setA(){
-                                    this.a = new A();
-                                }
+								private void setA(){
+									this.a = new A();
+								}
 
-                                public A getA(){
-                                    return this.a;
-                                }
+								public A getA(){
+									return this.a;
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    B b = new B();
-                                    b.getA().setG("HELLO");
-                                    b.getA().getG();
-                                }
+								public static void main(String[] args){
+									B b = new B();
+									b.getA().setG("HELLO");
+									b.getA().getG();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出結果</h3>
-                    <p>
-                        <output>
-                            建立了 A 的物件！<br>
-                            輸出 A 的資料為：HELLO
-                        </output>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出結果</h3>
+					<p>
+						<output>
+							建立了 A 的物件！<br>
+							輸出 A 的資料為：HELLO
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>多用合成、少用繼承的時機</h2>
-                <p>
-                    如果只想用某物件的幾個功能，就用合成，以免繼承了其它用不到的功能。這些用不到的功能，會成為日後搞壞設計的潛在因素，這就是繼承惡名昭彰的地方。<br>
-                    <br>
-                    如果你想用某個類別，但是它缺少某些功能，就用繼承的方式追加上去，然後用新的類別取代舊的類別。這種用法是安全的，濫用繼承雖然有缺點，但有它妙用的地方。<br>
-                    <br>
-                    不經思考、凡事都用繼承的話，之後經常要另外寫程式防堵用不到的功能。例如你想藉由 ArrayList 的 add() 做為增加資料的功能，用繼承的話，日後很可能要防堵有人用 remove() 和 clear() 刪除資料。所以「多用合成、少用繼承」是物件導向程式設計的共同經驗法則。<br>
-                    <br>
-                    最後補充一下，當你要防堵繼承而來的功能時，請馬上改用合成，而不是去防堵。
-                </p>
-            </section>
+			<section>
+				<h2>多用合成、少用繼承的時機</h2>
+				<p>
+					如果只想用某物件的幾個功能，就用合成，以免繼承了其它用不到的功能。這些用不到的功能，會成為日後搞壞設計的潛在因素，這就是繼承惡名昭彰的地方。<br>
+					<br>
+					如果你想用某個類別，但是它缺少某些功能，就用繼承的方式追加上去，然後用新的類別取代舊的類別。這種用法是安全的，濫用繼承雖然有缺點，但有它妙用的地方。<br>
+					<br>
+					不經思考、凡事都用繼承的話，之後經常要另外寫程式防堵用不到的功能。例如你想藉由 ArrayList 的 add() 做為增加資料的功能，用繼承的話，日後很可能要防堵有人用 remove() 和 clear() 刪除資料。所以「多用合成、少用繼承」是物件導向程式設計的共同經驗法則。<br>
+					<br>
+					最後補充一下，當你要防堵繼承而來的功能時，請馬上改用合成，而不是去防堵。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>程序導向思維與物件導向思維</h2>
-                <p>
-                    下面程式會輸出 1 和 0：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>程序導向思維與物件導向思維</h2>
+				<p>
+					下面程式會輸出 1 和 0：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public void f(int x){
-                                x += 1;
-                                System.out.println(x);
-                            }
+							public void f(int x){
+								x += 1;
+								System.out.println(x);
+							}
 
-                            public static void main(String[] args){
-                                int a = 0;
-                                new Main().f(a);
-                                System.out.println(a);
-                            }
+							public static void main(String[] args){
+								int a = 0;
+								new Main().f(a);
+								System.out.println(a);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    然後有人想說如何取得 a 的 reference 傳入 f()？答案是不行，Java 沒辦法這樣做。但問題不是出在 Java 不能這麼做，而是這根本不符合物件導向的設計精神，所以不希望你這麼做。<br>
-                    <br>
-                    物件導向至少應該這麼寫：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+					<br>
+					然後有人想說如何取得 a 的 reference 傳入 f()？答案是不行，Java 沒辦法這樣做。但問題不是出在 Java 不能這麼做，而是這根本不符合物件導向的設計精神，所以不希望你這麼做。<br>
+					<br>
+					物件導向至少應該這麼寫：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            private static int a = 0;
+							private static int a = 0;
 
-                            public void f(int x){
-                                Main.a = x + 1;
-                                System.out.println(Main.a);
-                            }
+							public void f(int x){
+								Main.a = x + 1;
+								System.out.println(Main.a);
+							}
 
-                            public static void main(String[] args){
-                                new Main().f(Main.a);
-                                System.out.println(Main.a);
-                            }
+							public static void main(String[] args){
+								new Main().f(Main.a);
+								System.out.println(Main.a);
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>變數名稱的重要性</h2>
-                <p>
-                    藉由變數名稱，來說明之所以使用物件的意圖：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        Set&lt;String&gt; 濾除重複資料並自動排序 = new TreeSet&lt;String&gt;();
+			<section>
+				<h2>變數名稱的重要性</h2>
+				<p>
+					藉由變數名稱，來說明之所以使用物件的意圖：<br>
+					<br>
+					<textarea class='brush:java'>
+						Set&lt;String&gt; 濾除重複資料並自動排序 = new TreeSet&lt;String&gt;();
                     </textarea>
-                    <br>
-                    雖然 Set 本身就是「濾除重複資料」的資料集合介面，TreeSet 本身就是「自動排序」的資料集合實作，但藉由把變數名稱取為「濾除重複資料並自動排序」，來說明使用 Set 與 TreeSet 的目的正是如此沒錯，可以加強程式碼的傳達力，讓閱讀者更直接了解你的想法。
-                </p>
-            </section>
+					<br>
+					雖然 Set 本身就是「濾除重複資料」的資料集合介面，TreeSet 本身就是「自動排序」的資料集合實作，但藉由把變數名稱取為「濾除重複資料並自動排序」，來說明使用 Set 與 TreeSet 的目的正是如此沒錯，可以加強程式碼的傳達力，讓閱讀者更直接了解你的想法。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>row 與 column</h2>
-                <p>
-                    如果以方位來講，row 是「橫」，column 是「直」，這部分中英文是一致的。<br>
-                    <br>
-                    如果以文章來講，row 是「行」，column 是「列」，但中文書寫習慣是直的為一行，英文是橫的為一行，所以這部分中英文並不一致，我們常常搞不懂 row 應該稱行才好？還是列？<br>
-                    <br>
-                    要命的是，在定義數學術語時，台灣稱 row 為「列」，column 為「行」，因為「直行、橫列」，中國相反，稱 row 為「行」，column 為「列」，因為拿隊伍來講「橫排成一行、縱排是一列」，這讓中文該稱 row 是行還是列更混亂了～<br>
-                    <br>
-                    在程式設計的場合，因為讀取純文字檔案裡一行資料時是橫的，而針對這筆資料剖析出好幾個欄位時，這些欄位是以直的來看，所以我習慣用中國的稱呼，row 為「行」，column 為「列」。在數學的場合，台灣人的我，就自動轉過來，稱 row 為「列」，column 為「列」。<br>
-                    <br>
-                    這問題無解，寫程式要連接資料庫時 row 是行，但使用試算表時正體中文版說 row 是列～
-                </p>
-            </section>
+			<section>
+				<h2>row 與 column</h2>
+				<p>
+					如果以方位來講，row 是「橫」，column 是「直」，這部分中英文是一致的。<br>
+					<br>
+					如果以文章來講，row 是「行」，column 是「列」，但中文書寫習慣是直的為一行，英文是橫的為一行，所以這部分中英文並不一致，我們常常搞不懂 row 應該稱行才好？還是列？<br>
+					<br>
+					要命的是，在定義數學術語時，台灣稱 row 為「列」，column 為「行」，因為「直行、橫列」，中國相反，稱 row 為「行」，column 為「列」，因為拿隊伍來講「橫排成一行、縱排是一列」，這讓中文該稱 row 是行還是列更混亂了～<br>
+					<br>
+					在程式設計的場合，因為讀取純文字檔案裡一行資料時是橫的，而針對這筆資料剖析出好幾個欄位時，這些欄位是以直的來看，所以我習慣用中國的稱呼，row 為「行」，column 為「列」。在數學的場合，台灣人的我，就自動轉過來，稱 row 為「列」，column 為「列」。<br>
+					<br>
+					這問題無解，寫程式要連接資料庫時 row 是行，但使用試算表時正體中文版說 row 是列～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>高科技電子產品賣的是其他訴求，不意識到這點，開發不出下一代產品！</h2>
-                <p>
-                    <samp>
-                        廠商以為 xPad 賣的是平板電腦，其實消費者買單的是觸控手勢。<br>
-                        廠商以為 xWatch 賣的是智慧手錶，其實消費者買單的是聲控智能。<br>
-                        同樣的，未來廠商以為 xRing 賣的是魔戒，其實消費者買單的是體感操作。<br>
-                    </samp>
-                    <br>
-                    如果台灣廠商持續把重點放在開發出「更好的電腦、手機、手錶、戒指」等裝置，而不是「更好的觸控、聲控、體感」等體驗，永遠也無法領先業界推出下一代產品！<br>
-                    <br>
-                    雖然消費者也覺得自己買的是平板電腦或智慧型手機，但他們為何不屑買傳統個人電腦與九宮鍵手機？存錢買平板與智慧型手機慰勞自己？因為觸控手勢帶給他們更好的體驗！所以，誰能設計出更好的觸控手勢體驗，消費者就會覺得那是比別家更棒的產品。<br>
-                    <br>
-                    既然觸控手勢已經有平板電腦或智慧型手機，下一代產品就是聲控加手錶進一步簡化或輔助觸控手勢的工作，再下一代則是透過體感戒指凌空比劃幾下手勢的動作，進一步優化觸控與聲控的工作～<br>
-                    <br>
-                    誰能領先業界讓聲控與體感成為高科技電子產品的絕妙操作介面，誰就暫時主宰一切，成為業界熱門焦點。
-                </p>
-                <hr>
-                <footer>
-                    <p>
-                        [*] 目前個人將 xGlass 歸類為觸控手勢的變種。但其實它是整合視覺觸控、聲控、體感的裝置，所以使用者反而無法有效獲得聲控與體感來簡化操作的好處，而感覺不到它是真正下一代必備的產品。也就是 xGlass 依然屬於「加法」而來的裝置，而不是「減法」而來的裝置；但每款轟動世界的下一代電子產品，都是減法而來的新裝置，並符合日後慢慢加法東西進去的條件。
-                    </p>
-                </footer>
-            </section>
+			<section>
+				<h2>高科技電子產品賣的是其他訴求，不意識到這點，開發不出下一代產品！</h2>
+				<p>
+					<samp>
+						廠商以為 xPad 賣的是平板電腦，其實消費者買單的是觸控手勢。<br>
+						廠商以為 xWatch 賣的是智慧手錶，其實消費者買單的是聲控智能。<br>
+						同樣的，未來廠商以為 xRing 賣的是魔戒，其實消費者買單的是體感操作。<br>
+					</samp>
+					<br>
+					如果台灣廠商持續把重點放在開發出「更好的電腦、手機、手錶、戒指」等裝置，而不是「更好的觸控、聲控、體感」等體驗，永遠也無法領先業界推出下一代產品！<br>
+					<br>
+					雖然消費者也覺得自己買的是平板電腦或智慧型手機，但他們為何不屑買傳統個人電腦與九宮鍵手機？存錢買平板與智慧型手機慰勞自己？因為觸控手勢帶給他們更好的體驗！所以，誰能設計出更好的觸控手勢體驗，消費者就會覺得那是比別家更棒的產品。<br>
+					<br>
+					既然觸控手勢已經有平板電腦或智慧型手機，下一代產品就是聲控加手錶進一步簡化或輔助觸控手勢的工作，再下一代則是透過體感戒指凌空比劃幾下手勢的動作，進一步優化觸控與聲控的工作～<br>
+					<br>
+					誰能領先業界讓聲控與體感成為高科技電子產品的絕妙操作介面，誰就暫時主宰一切，成為業界熱門焦點。
+				</p>
+				<hr>
+				<footer>
+					<p>
+						[*] 目前個人將 xGlass 歸類為觸控手勢的變種。但其實它是整合視覺觸控、聲控、體感的裝置，所以使用者反而無法有效獲得聲控與體感來簡化操作的好處，而感覺不到它是真正下一代必備的產品。也就是 xGlass 依然屬於「加法」而來的裝置，而不是「減法」而來的裝置；但每款轟動世界的下一代電子產品，都是減法而來的新裝置，並符合日後慢慢加法東西進去的條件。
+					</p>
+				</footer>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>下一代裝置</h2>
-                <p>
-                    兩個、三個、多個裝置接在一起，就會「演變」成另一種新進化的裝置，而且演變或進化結果，不見得是事先能夠預期的，因此吸引更多人把不同裝置接在一起嘗試，分享哪些裝置合體後適合做哪些事。
-                </p>
-            </section>
+			<section>
+				<h2>下一代裝置</h2>
+				<p>
+					兩個、三個、多個裝置接在一起，就會「演變」成另一種新進化的裝置，而且演變或進化結果，不見得是事先能夠預期的，因此吸引更多人把不同裝置接在一起嘗試，分享哪些裝置合體後適合做哪些事。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>jdk-6u45-windows-x64.exe 免安裝法</h2>
-                <p>
-                    開啟壓縮檔→.rsrc→1033→JAVA_CAB10→111→tools.zip<br>
-                    <br>
-                    然後用 uppack200 拆 jre 資料夾裡面的 rt.pack，以及 lib 資料夾裡面的 tools.pack。<br>
-                    <br>
-                    bin\unpack200.exe -r -v -l "" lib\tools.pack lib\tools.jar<br>
-                    bin\unpack200.exe -r -v -l "" jre\lib\rt.pack jre\lib\rt.jar<br>
-                    <br>
-                    基本上這樣就能編譯，有問題再拆其它 *.pack。
-                </p>
-            </section>
-            <hr>
+			<section>
+				<h2>jdk-6u45-windows-x64.exe 免安裝法</h2>
+				<p>
+					開啟壓縮檔→.rsrc→1033→JAVA_CAB10→111→tools.zip<br>
+					<br>
+					然後用 uppack200 拆 jre 資料夾裡面的 rt.pack，以及 lib 資料夾裡面的 tools.pack。<br>
+					<br>
+					bin\unpack200.exe -r -v -l "" lib\tools.pack lib\tools.jar<br>
+					bin\unpack200.exe -r -v -l "" jre\lib\rt.pack jre\lib\rt.jar<br>
+					<br>
+					基本上這樣就能編譯，有問題再拆其它 *.pack。
+				</p>
+			</section>
+			<hr>
 
-            <section>
-                <h2>其他</h2>
-                <p>
-                    ．<a href='20041207A.html'>J2SE Development Kit 安裝指南</a><br>
-                    ．<a href='20120828A.html'>再見了，Java Applet～</a><br>
-                    ．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
-                    ．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
-                    ．用 <kbd>netbeans.exe --jdkhome "%JAVA_HOME%"</kbd> 解決 6.8 版找不到 Java 的問題<br>
-                    ．<a href='20080120A.html'>美化 jEdit 操作環境</a><br>
-                    ．<a href='20080127A.html'>強化 jEdit 操作功能</a><br>
-                    <br>
-                    ．<a href='20090212A.html'>JavaFX Application 圖形化介面程式設計入門</a><br>
-                    ．<a href='20111010A.html'>FXML 圖形化介面程式設計進階</a><br>
-                    ．<a href='20090602A.html'>JavaFX CSS 圖形化介面樣式管理</a><br>
-                    ．<a id='20100422A.html'>JavaFX Text 文字、JavaFX Image 圖像、JavaFX Control 控制項</a><br>
-                    ．<a href='20100821A.html'>JavaFX Paint 塗色、JavaFX Effect 靜態特效、JavaFX Animation 動態效果</a><br>
-                    ．<a href='20120427A.html'>JavaFX Media 影音播放</a><br>
-                    ．<a id='20120814A.html'>JavaFX Canvas</a><br>
-                    ．<a id='20140318A.html'>JavaFX 3D</a><br>
-                    <br>
-                    ．其實沒有永遠的跨平台：包括 Java 與 HTML5。（軟平台是脆弱的）<br>
-                    ．傳統程式以函式存取變數，物件導向以變數綑綁函式。<br>
-                    ．Frame 與 Form 的區別：前者可以做為後者的元件。<br>
-                    ．繼承與複合，就像改裝與組裝。<br>
-                    ．JTextField、JTextArea、JTextPane：單行輸入欄、多行文字欄、圖文容器。<br>
-                    ．Ruby &gt; (Smalltalk + Perl) / 2，意思是：「養成做好垃圾分類習慣的程式語言。」<br>
-                    ．XML 不只是資料結構，還可以是操作介面。
-                </p>
-            </section>
+			<section>
+				<h2>已過時文章</h2>
+				<p>
+					．<a href='20041207A.html'>J2SE Development Kit 安裝指南</a><br>
+					．<a href='20120828A.html'>再見了，Java Applet～</a><br>
+					．<a href='20050614A.html'>WSDP &amp; Tomcat 安裝指南</a><br>
+					．<a href='20050503A.html'>NetBeans IDE 安裝指南</a><br>
+					．用 <kbd>netbeans.exe --jdkhome "%JAVA_HOME%"</kbd> 解決 6.8 版找不到 Java 的問題<br>
+					<br>
+					．<a href='20090212A.html'>JavaFX Application 圖形化介面程式設計入門</a><br>
+					．<a href='20111010A.html'>FXML 圖形化介面程式設計進階</a><br>
+					．<a href='20090602A.html'>JavaFX CSS 圖形化介面樣式管理</a><br>
+					．<a id='20100422A.html'>JavaFX Text 文字、JavaFX Image 圖像、JavaFX Control 控制項</a><br>
+					．<a href='20100821A.html'>JavaFX Paint 塗色、JavaFX Effect 靜態特效、JavaFX Animation 動態效果</a><br>
+					．<a href='20120427A.html'>JavaFX Media 影音播放</a><br>
+					．<a id='20120814A.html'>JavaFX Canvas</a><br>
+					．<a id='20140318A.html'>JavaFX 3D</a><br>
+					<br>
+					．其實沒有永遠的跨平台：包括 Java 與 HTML5。（軟平台是脆弱的）<br>
+					．傳統程式以函式存取變數，物件導向以變數綑綁函式。<br>
+					．Frame 與 Form 的區別：前者可以做為後者的元件。<br>
+					．繼承與複合，就像改裝與組裝。<br>
+					．JTextField、JTextArea、JTextPane：單行輸入欄、多行文字欄、圖文容器。<br>
+					．Ruby &gt; (Smalltalk + Perl) / 2，意思是：「養成做好垃圾分類習慣的程式語言。」<br>
+					．XML 不只是資料結構，還可以是操作介面。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

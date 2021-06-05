@@ -2,192 +2,192 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Effective Java</h1>
-            </header>
+			<header>
+				<h1>Effective Java</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>創建和銷毀物件</h2>
-                <p>
-                    <span title='Consider static factory methods instead of constructors.'>01、考慮用靜態工廠方法 (static factory methods) 代替建構子。</span><br>
-                    <span title='Consider a builder when faced with many constructor parameters.'>02、遇到多個建構子參數時要考慮用 Builder 設計模式。</span><br>
-                    <span title='Enforce the singleton property with a private constructor or an enum type.'>03、用私有建構子或者列舉類型強化 Singleton 屬性。</span><br>
-                    <span title='Enforce noninstantiability with a private constructor.'>04、通過私有建構子強化不可實例化的能力。</span><br>
-                    <span title='Avoid creating unnecessary objects.'>05、避免建立不必要的物件。</span><br>
-                    <span title='Eliminate obsolete object references.'>06、消除過期的物件參照。</span><br>
-                    <span title='Avoid finalizers.'>07、避免使用 finalizer()。</span>
-                </p>
-            </section>
+			<section>
+				<h2>創建和銷毀物件</h2>
+				<p>
+					<span title='Consider static factory methods instead of constructors.'>01、考慮用靜態工廠方法 (static factory methods) 代替建構子。</span><br>
+					<span title='Consider a builder when faced with many constructor parameters.'>02、遇到多個建構子參數時要考慮用 Builder 設計模式。</span><br>
+					<span title='Enforce the singleton property with a private constructor or an enum type.'>03、用私有建構子或者列舉類型強化 Singleton 屬性。</span><br>
+					<span title='Enforce noninstantiability with a private constructor.'>04、通過私有建構子強化不可實例化的能力。</span><br>
+					<span title='Avoid creating unnecessary objects.'>05、避免建立不必要的物件。</span><br>
+					<span title='Eliminate obsolete object references.'>06、消除過期的物件參照。</span><br>
+					<span title='Avoid finalizers.'>07、避免使用 finalizer()。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>對於所有對像都通用的方法</h2>
-                <p>
-                    <span title='Obey the general contract when overriding equals.'>08、覆寫 equals 時請遵守通用約定。</span><br>
-                    <span title='Always override hashCode when you override equals.'>09、覆寫 equals 時也覆寫 hashCode。</span><br>
-                    <span title='Always override toString.'>10、總是覆寫 toString。</span><br>
-                    <span title='Override clone judiciously.'>11、謹慎覆寫 clone。</span><br>
-                    <span title='Consider implementing Comparable.'>12、考慮實現 Comparable 介面。</span>
-                </p>
-            </section>
+			<section>
+				<h2>對於所有對像都通用的方法</h2>
+				<p>
+					<span title='Obey the general contract when overriding equals.'>08、覆寫 equals 時請遵守通用約定。</span><br>
+					<span title='Always override hashCode when you override equals.'>09、覆寫 equals 時也覆寫 hashCode。</span><br>
+					<span title='Always override toString.'>10、總是覆寫 toString。</span><br>
+					<span title='Override clone judiciously.'>11、謹慎覆寫 clone。</span><br>
+					<span title='Consider implementing Comparable.'>12、考慮實現 Comparable 介面。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>類別和介面</h2>
-                <p>
-                    <span title='Minimize the accessibility of classes and members.'>13、使類別和成員的關聯性最小化。</span><br>
-                    <span title='In public classes, use accessor methods, not public fields.'>14、在公開類別中使用訪問方法而非公開屬性。</span><br>
-                    <span title='Minimize mutability.'>15、使非可變性最小化。</span><br>
-                    <span title='Favor composition over inheritance.'>16、複合優先於繼承。</span><br>
-                    <span title='Design and document for inheritance or else prohibit it.'>17、要麼為繼承而設計，並提供文檔說明，要麼就禁止繼承。</span><br>
-                    <span title='Prefer interfaces to abstract classes.'>18、介面優於抽像類別。</span><br>
-                    <span title='Use interfaces only to define types.'>19、介面只用於定義型別。</span><br>
-                    <span title='Prefer class hierarchies to tagged classes.'>20、類別層次優於標籤類別 (Tagged classes)。</span><br>
-                    <span title='Use function objects to represent strategies.'>21、用函數物件表示策略 (Strategy)。</span><br>
-                    <span title='Favor static member classes over nonstatic.'>22、優先考慮靜態成員類別。</span>
-                </p>
-            </section>
+			<section>
+				<h2>類別和介面</h2>
+				<p>
+					<span title='Minimize the accessibility of classes and members.'>13、使類別和成員的關聯性最小化。</span><br>
+					<span title='In public classes, use accessor methods, not public fields.'>14、在公開類別中使用訪問方法而非公開屬性。</span><br>
+					<span title='Minimize mutability.'>15、使非可變性最小化。</span><br>
+					<span title='Favor composition over inheritance.'>16、複合優先於繼承。</span><br>
+					<span title='Design and document for inheritance or else prohibit it.'>17、要麼為繼承而設計，並提供文檔說明，要麼就禁止繼承。</span><br>
+					<span title='Prefer interfaces to abstract classes.'>18、介面優於抽像類別。</span><br>
+					<span title='Use interfaces only to define types.'>19、介面只用於定義型別。</span><br>
+					<span title='Prefer class hierarchies to tagged classes.'>20、類別層次優於標籤類別 (Tagged classes)。</span><br>
+					<span title='Use function objects to represent strategies.'>21、用函數物件表示策略 (Strategy)。</span><br>
+					<span title='Favor static member classes over nonstatic.'>22、優先考慮靜態成員類別。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>泛型</h2>
-                <p>
-                    <span title='Don&apos;t use raw types in new code.'>23、請不要在新代碼中使用原生態類型。</span><br>
-                    <span title='Eliminate unchecked warnings.'>24、消除非受檢警告。</span><br>
-                    <span title='Prefer lists to arrays.'>25、列表優先於數組。</span><br>
-                    <span title='Favor generic types.'>26、優先考慮泛型。</span><br>
-                    <span title='Favor generic methods.'>27、優先考慮泛型方法。</span><br>
-                    <span title='Use bounded wildcards to increase API flexibility.'>28、利用有限制通配符來提升 API 的靈活性。</span><br>
-                    <span title='Consider typesafe heterogeneous containers.'>29、優先考慮類型安全的異構容器。</span>
-                </p>
-            </section>
+			<section>
+				<h2>泛型</h2>
+				<p>
+					<span title='Don&apos;t use raw types in new code.'>23、請不要在新代碼中使用原生態類型。</span><br>
+					<span title='Eliminate unchecked warnings.'>24、消除非受檢警告。</span><br>
+					<span title='Prefer lists to arrays.'>25、列表優先於數組。</span><br>
+					<span title='Favor generic types.'>26、優先考慮泛型。</span><br>
+					<span title='Favor generic methods.'>27、優先考慮泛型方法。</span><br>
+					<span title='Use bounded wildcards to increase API flexibility.'>28、利用有限制通配符來提升 API 的靈活性。</span><br>
+					<span title='Consider typesafe heterogeneous containers.'>29、優先考慮類型安全的異構容器。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>列舉和註釋 (Annotations)</h2>
-                <p>
-                    <span title='Use enums instead of int constants.'>30、用 enum 代替 int 常量。</span><br>
-                    <span title='Use instance fields instead of ordinals.'>31、用實體欄位代替序數。</span><br>
-                    <span title='Use EnumSet instead of bit fields.'>32、用 EnumSet 代替位元欄位。</span><br>
-                    <span title='Use EnumMap instead of ordinal indexing.'>33、用 EnumMap 代替序數索引。</span><br>
-                    <span title='Emulate extensible enums with interfaces.'>34、用介面模擬可伸縮的列舉。</span><br>
-                    <span title='Prefer annotations to naming patterns.'>35、註解優先於命名模式。</span><br>
-                    <span title='Consistently use the Override annotation.'>36、堅持使用 Override 註解。</span><br>
-                    <span title='Use marker interfaces to define types.'>37、用標記介面定義類型。</span>
-                </p>
-            </section>
+			<section>
+				<h2>列舉和註釋 (Annotations)</h2>
+				<p>
+					<span title='Use enums instead of int constants.'>30、用 enum 代替 int 常量。</span><br>
+					<span title='Use instance fields instead of ordinals.'>31、用實體欄位代替序數。</span><br>
+					<span title='Use EnumSet instead of bit fields.'>32、用 EnumSet 代替位元欄位。</span><br>
+					<span title='Use EnumMap instead of ordinal indexing.'>33、用 EnumMap 代替序數索引。</span><br>
+					<span title='Emulate extensible enums with interfaces.'>34、用介面模擬可伸縮的列舉。</span><br>
+					<span title='Prefer annotations to naming patterns.'>35、註解優先於命名模式。</span><br>
+					<span title='Consistently use the Override annotation.'>36、堅持使用 Override 註解。</span><br>
+					<span title='Use marker interfaces to define types.'>37、用標記介面定義類型。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>方法</h2>
-                <p>
-                    <span title='Check parameters for validity.'>38、檢查參數的有效性。</span><br>
-                    <span title='Make defensive copies when needed.'>39、必要時進行保護性拷貝。</span><br>
-                    <span title='Design method signatures carefully.'>40、謹慎設計方法簽名。</span><br>
-                    <span title='Use overloading judiciously.'>41、慎用重載。</span><br>
-                    <span title='Use varargs judiciously.'>42、慎用可變參數 (varargs)。</span><br>
-                    <span title='Return empty arrays or collections, not nulls.'>43、返回空的陣列或者群集，而不是 null。</span><br>
-                    <span title='Write doc comments for all exposed API elements.'>44、為所有導出的 API 元素編寫文檔註釋。</span>
-                </p>
-            </section>
+			<section>
+				<h2>方法</h2>
+				<p>
+					<span title='Check parameters for validity.'>38、檢查參數的有效性。</span><br>
+					<span title='Make defensive copies when needed.'>39、必要時進行保護性拷貝。</span><br>
+					<span title='Design method signatures carefully.'>40、謹慎設計方法簽名。</span><br>
+					<span title='Use overloading judiciously.'>41、慎用重載。</span><br>
+					<span title='Use varargs judiciously.'>42、慎用可變參數 (varargs)。</span><br>
+					<span title='Return empty arrays or collections, not nulls.'>43、返回空的陣列或者群集，而不是 null。</span><br>
+					<span title='Write doc comments for all exposed API elements.'>44、為所有導出的 API 元素編寫文檔註釋。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>通用程序設計</h2>
-                <p>
-                    <span title='Minimize the scope of local variables.'>45、將區域變數的作用域最小化。</span><br>
-                    <span title='Prefer for-each loops to traditional for loops.'>46、for-each 循環優先於傳統的 for 循環。</span><br>
-                    <span title='Know and use the libraries.'>47、了解和使用程式庫。</span><br>
-                    <span title='Avoid float and double if exact answers are required.'>48、如果需要精確的答案，請避免使用 float 和 double。</span><br>
-                    <span title='Prefer primitive types to boxed primitives.'>49、基本資料型態優先於自動裝箱處理的類型。</span><br>
-                    <span title='Avoid strings where other types are more appropriate.'>50、如果其他類型更適合，則盡量避免使用字符串。</span><br>
-                    <span title='Beware the performance of string concatenation.'>51、了解字符串連接的性能。</span><br>
-                    <span title='Refer to objects by their interfaces.'>52、通過介面參照物件。</span><br>
-                    <span title='Prefer interfaces to reflection.'>53、介面優先於反射機制。</span><br>
-                    <span title='Use native methods judiciously.'>54、謹慎地使用本地方法。</span><br>
-                    <span title='Optimize judiciously.'>55、謹慎地進行優化。</span><br>
-                    <span title='Adhere to generally accepted naming conventions.'>56、遵守普遍接受的命名慣例。</span>
-                </p>
-            </section>
+			<section>
+				<h2>通用程序設計</h2>
+				<p>
+					<span title='Minimize the scope of local variables.'>45、將區域變數的作用域最小化。</span><br>
+					<span title='Prefer for-each loops to traditional for loops.'>46、for-each 循環優先於傳統的 for 循環。</span><br>
+					<span title='Know and use the libraries.'>47、了解和使用程式庫。</span><br>
+					<span title='Avoid float and double if exact answers are required.'>48、如果需要精確的答案，請避免使用 float 和 double。</span><br>
+					<span title='Prefer primitive types to boxed primitives.'>49、基本資料型態優先於自動裝箱處理的類型。</span><br>
+					<span title='Avoid strings where other types are more appropriate.'>50、如果其他類型更適合，則盡量避免使用字符串。</span><br>
+					<span title='Beware the performance of string concatenation.'>51、了解字符串連接的性能。</span><br>
+					<span title='Refer to objects by their interfaces.'>52、通過介面參照物件。</span><br>
+					<span title='Prefer interfaces to reflection.'>53、介面優先於反射機制。</span><br>
+					<span title='Use native methods judiciously.'>54、謹慎地使用本地方法。</span><br>
+					<span title='Optimize judiciously.'>55、謹慎地進行優化。</span><br>
+					<span title='Adhere to generally accepted naming conventions.'>56、遵守普遍接受的命名慣例。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>例外</h2>
-                <p>
-                    <span title='Use exceptions only for exceptional conditions.'>57、只針對例外的條件才使用例外。</span><br>
-                    <span title='Use checked exceptions for recoverable conditions and runtime exceptions for programming errors.'>58、對可恢復的條件使用受檢例外，對編程錯誤使用運行時例外。</span><br>
-                    <span title='Avoid unnecessary use of checked exceptions.'>59、避免不必要地使用受檢的例外。</span><br>
-                    <span title='Favor the use of standard exceptions.'>60、盡量使用標準的例外。</span><br>
-                    <span title='Throw exceptions appropriate to the abstraction.'>61、拋出與抽象相對應的例外。</span><br>
-                    <span title='Document all exceptions thrown by each method.'>62、每個方法拋出的所有例外都要歸檔內容。</span><br>
-                    <span title='Include failure-capture information in detail messages.'>63、在細節消息中包含失敗－捕獲信息。</span><br>
-                    <span title='Strive for failure atomicity.'>64、不要錯過失效時發生的警訊。</span><br>
-                    <span title='Don&apos;t ignore exceptions.'>65、不要忽略例外。</span>
-                </p>
-            </section>
+			<section>
+				<h2>例外</h2>
+				<p>
+					<span title='Use exceptions only for exceptional conditions.'>57、只針對例外的條件才使用例外。</span><br>
+					<span title='Use checked exceptions for recoverable conditions and runtime exceptions for programming errors.'>58、對可恢復的條件使用受檢例外，對編程錯誤使用運行時例外。</span><br>
+					<span title='Avoid unnecessary use of checked exceptions.'>59、避免不必要地使用受檢的例外。</span><br>
+					<span title='Favor the use of standard exceptions.'>60、盡量使用標準的例外。</span><br>
+					<span title='Throw exceptions appropriate to the abstraction.'>61、拋出與抽象相對應的例外。</span><br>
+					<span title='Document all exceptions thrown by each method.'>62、每個方法拋出的所有例外都要歸檔內容。</span><br>
+					<span title='Include failure-capture information in detail messages.'>63、在細節消息中包含失敗－捕獲信息。</span><br>
+					<span title='Strive for failure atomicity.'>64、不要錯過失效時發生的警訊。</span><br>
+					<span title='Don&apos;t ignore exceptions.'>65、不要忽略例外。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>平行化 (Concurrency)</h2>
-                <p>
-                    <span title='Synchronize access to shared mutable data.'>66、同步訪問共享的可變數據。</span><br>
-                    <span title='Avoid excessive synchronization.'>67、避免過多同步。</span><br>
-                    <span title='Prefer executors and tasks to threads.'>68、executor 和 task 優先於執行緒。</span><br>
-                    <span title='Prefer concurrency utilities to wait and notify.'>69、平行工具優先於 wait 和 notify。</span><br>
-                    <span title='Document thread safety.'>70、執行緒安全性的文件化。</span><br>
-                    <span title='Use lazy initialization judiciously.'>71、慎用延遲初始化。</span><br>
-                    <span title='Don&apos;t depend on the thread scheduler.'>72、不要依賴於執行緒排程 (thread scheduler)。</span><br>
-                    <span title='Avoid thread groups.'>73、避免整堆執行緒。</span>
-                </p>
-            </section>
+			<section>
+				<h2>平行化 (Concurrency)</h2>
+				<p>
+					<span title='Synchronize access to shared mutable data.'>66、同步訪問共享的可變數據。</span><br>
+					<span title='Avoid excessive synchronization.'>67、避免過多同步。</span><br>
+					<span title='Prefer executors and tasks to threads.'>68、executor 和 task 優先於執行緒。</span><br>
+					<span title='Prefer concurrency utilities to wait and notify.'>69、平行工具優先於 wait 和 notify。</span><br>
+					<span title='Document thread safety.'>70、執行緒安全性的文件化。</span><br>
+					<span title='Use lazy initialization judiciously.'>71、慎用延遲初始化。</span><br>
+					<span title='Don&apos;t depend on the thread scheduler.'>72、不要依賴於執行緒排程 (thread scheduler)。</span><br>
+					<span title='Avoid thread groups.'>73、避免整堆執行緒。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>序列化</h2>
-                <p>
-                    <span title='Implement Serializable judiciously.'>74、謹慎地實現 Serializable。</span><br>
-                    <span title='Consider using a custom serialized form.'>75、考慮使用自定義的序列化形式。</span><br>
-                    <span title='Write readObject methods defensively.'>76、保護性地編寫 readObject 方法。</span><br>
-                    <span title='For instance control, prefer enum types to readResolve.'>77、對於實例控制，列舉類型優先於 readResolve。</span><br>
-                    <span title='Consider serialization proxies instead of serialized instances.'>78、考慮用序列化代理代替序列化實例。</span>
-                </p>
-            </section>
+			<section>
+				<h2>序列化</h2>
+				<p>
+					<span title='Implement Serializable judiciously.'>74、謹慎地實現 Serializable。</span><br>
+					<span title='Consider using a custom serialized form.'>75、考慮使用自定義的序列化形式。</span><br>
+					<span title='Write readObject methods defensively.'>76、保護性地編寫 readObject 方法。</span><br>
+					<span title='For instance control, prefer enum types to readResolve.'>77、對於實例控制，列舉類型優先於 readResolve。</span><br>
+					<span title='Consider serialization proxies instead of serialized instances.'>78、考慮用序列化代理代替序列化實例。</span>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 本文轉載自「Baidu 百科」的《<a href='http://baike.baidu.com/view/9815812.htm' target='_blank'>Effective Java 中文版</a>》條目，並依據台灣的用語習慣加以修訂。該條目刊載內容為第二版，適用 Java SE 5 的新增特性。<br>
-                    [*] 需要更詳盡內容的話，推薦 Stephen Liu 的部落格文章《<a href='http://www.cnblogs.com/stephen-liu74/archive/2012/02/06/2329236.html' target='_blank'>Effective Java 读书笔记</a>》，不過內容是第一版的。<br>
-                    [*] 如果看不懂翻譯出來的中文在講什麼，可將滑鼠移到該中文上面，會顯示原著的英文。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 本文轉載自「Baidu 百科」的《<a href='http://baike.baidu.com/view/9815812.htm' target='_blank'>Effective Java 中文版</a>》條目，並依據台灣的用語習慣加以修訂。該條目刊載內容為第二版，適用 Java SE 5 的新增特性。<br>
+					[*] 需要更詳盡內容的話，推薦 Stephen Liu 的部落格文章《<a href='http://www.cnblogs.com/stephen-liu74/archive/2012/02/06/2329236.html' target='_blank'>Effective Java 读书笔记</a>》，不過內容是第一版的。<br>
+					[*] 如果看不懂翻譯出來的中文在講什麼，可將滑鼠移到該中文上面，會顯示原著的英文。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

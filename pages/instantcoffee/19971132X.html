@@ -2,230 +2,230 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>UML 類別圖速用表</h1>
-            </header>
+			<header>
+				<h1>UML 類別圖速用表</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Class (類別主體的細節)</h2>
-                <figure>
-                    <img src='../../figures/instantcoffee/19971132X_01.png' alt='插圖'>
-                </figure>
-                <p>
-                    對應的程式碼：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Class{
+			<section>
+				<h2>Class (類別主體的細節)</h2>
+				<figure>
+					<img src='../../figures/instantcoffee/19971132X_01.png' alt='插圖'>
+				</figure>
+				<p>
+					對應的程式碼：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Class{
 
-                            private Type attribute1;
-                            public static int attribute2 = 0;
+							private Type attribute1;
+							public static int attribute2 = 0;
 
-                            protected void operation1(){ }
-                            public Type operation2(){ }
-                            void operation3(int i){ }
+							protected void operation1(){ }
+							public Type operation2(){ }
+							void operation3(int i){ }
 
-                        }
+						}
                     </textarea>
-                </p>
-                <hr>
-                <section>
-                    <h3>Visibility (可視性)</h3>
-                    <table>
-                        <tr><td>-</td><td>private</td></tr>
-                        <tr><td>#</td><td>protected</td></tr>
-                        <tr><td>+</td><td>public</td></tr>
-                        <tr><td>~</td><td>package</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>Scope</h3>
-                    <table>
-                        <tr><td><span style='text-decoration:underline'>features</span></td><td>static</td></tr>
-                    </table>
-                </section>
-            </section>
+				</p>
+				<hr>
+				<section>
+					<h3>Visibility (可視性)</h3>
+					<table>
+						<tr><td>-</td><td>private</td></tr>
+						<tr><td>#</td><td>protected</td></tr>
+						<tr><td>+</td><td>public</td></tr>
+						<tr><td>~</td><td>package</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>Scope</h3>
+					<table>
+						<tr><td><span style='text-decoration:underline'>features</span></td><td>static</td></tr>
+					</table>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Relationships (類別之間的關係)</h2>
-                <p>
-                    其實這些線條，才是有益於檢視物件導向的重點！
-                </p>
-                <hr>
-                <section>
-                    <h3>Association (關聯性；結合)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_02.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A{ B }<br>
-                        </code>
-                        <br>
-                        類別 A 用了類別 B；可能做為屬性，也可能是操作時傳遞的訊息。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Dependency (相依性；依存)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_03.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A{ B }<br>
-                        </code>
-                        <br>
-                        類別 A 不只用了類別 B，而且會受其變動所影響。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Generalization (一般化；泛化)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_04.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A extends B{}<br>
-                        </code>
-                        <br>
-                        類別 A 繼承類別 B。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Realization (實現)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_05.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A implements B{}<br>
-                        </code>
-                        <br>
-                        類別 A 實作介面 B。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Aggregation (聚合)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_06.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A{ Vector&lt;B&gt; }<br>
-                        </code>
-                        <br>
-                        或<br>
-                        <br>
-                        <code>
-                            class A{<br>
-                            　private B b;<br>
-                            　public A(B b){<br>
-                            　　this.b = b;<br>
-                            　}<br>
-                            }<br>
-                        </code>
-                        <br>
-                        這是目前 UML 少數交代不清、有待新版本賦予更清晰語意的表示法！現在的主要意思是：類別 A 有一部份是類別 B<ins>[1]</ins>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Composition (組合)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_07.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A{ Composition&lt;B&gt; }<br>
-                        </code>
-                        <br>
-                        或<br>
-                        <br>
-                        <code>
-                            class A{<br>
-                            　private B b;<br>
-                            　public A(){<br>
-                            　　this.b = new B();<br>
-                            　}<br>
-                            }<br>
-                        </code>
-                        <br>
-                        比「聚合」有更嚴謹的定義：類別 B 一次只能被一個類別使用，且類別 A 銷毀時類別 B 跟著銷毀。<br>
-                        <br>
-                        由於現代新興的物件導向程式語言，都有自動銷毀物件的機制，因此顯得不適用，常常主要意思被改為「類別 A 由類別 B 組成」來用<ins>[2]</ins>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Association class (關聯類別)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_08.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        <code>
-                            A{ C&lt;B&gt; }<br>
-                        </code>
-                        <br>
-                        相當於如下多對多的關係：
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_09.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        因此也有人建議改用這樣的寫法，還比較看得懂：
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_10.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>Multiplicity (多重性)</h3>
-                    <figure>
-                        <img src='../../figures/instantcoffee/19971132X_11.png' alt='插圖'>
-                    </figure>
-                    <table>
-                        <tr><td>0..1</td><td>零或一</td></tr>
-                        <tr><td>1</td><td>剛好一</td></tr>
-                        <tr><td>0..*</td><td>零或多</td></tr>
-                        <tr><td>1..*</td><td>一或多</td></tr>
-                    </table>
-                </section>
-            </section>
+			<section>
+				<h2>Relationships (類別之間的關係)</h2>
+				<p>
+					其實這些線條，才是有益於檢視物件導向的重點！
+				</p>
+				<hr>
+				<section>
+					<h3>Association (關聯性；結合)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_02.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A{ B }<br>
+						</code>
+						<br>
+						類別 A 用了類別 B；可能做為屬性，也可能是操作時傳遞的訊息。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Dependency (相依性；依存)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_03.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A{ B }<br>
+						</code>
+						<br>
+						類別 A 不只用了類別 B，而且會受其變動所影響。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Generalization (一般化；泛化)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_04.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A extends B{}<br>
+						</code>
+						<br>
+						類別 A 繼承類別 B。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Realization (實現)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_05.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A implements B{}<br>
+						</code>
+						<br>
+						類別 A 實作介面 B。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Aggregation (聚合)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_06.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A{ Vector&lt;B&gt; }<br>
+						</code>
+						<br>
+						或<br>
+						<br>
+						<code>
+							class A{<br>
+							　private B b;<br>
+							　public A(B b){<br>
+							　　this.b = b;<br>
+							　}<br>
+							}<br>
+						</code>
+						<br>
+						這是目前 UML 少數交代不清、有待新版本賦予更清晰語意的表示法！現在的主要意思是：類別 A 有一部份是類別 B<ins>[1]</ins>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Composition (組合)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_07.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A{ Composition&lt;B&gt; }<br>
+						</code>
+						<br>
+						或<br>
+						<br>
+						<code>
+							class A{<br>
+							　private B b;<br>
+							　public A(){<br>
+							　　this.b = new B();<br>
+							　}<br>
+							}<br>
+						</code>
+						<br>
+						比「聚合」有更嚴謹的定義：類別 B 一次只能被一個類別使用，且類別 A 銷毀時類別 B 跟著銷毀。<br>
+						<br>
+						由於現代新興的物件導向程式語言，都有自動銷毀物件的機制，因此顯得不適用，常常主要意思被改為「類別 A 由類別 B 組成」來用<ins>[2]</ins>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Association class (關聯類別)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_08.png' alt='插圖'>
+					</figure>
+					<p>
+						<code>
+							A{ C&lt;B&gt; }<br>
+						</code>
+						<br>
+						相當於如下多對多的關係：
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_09.png' alt='插圖'>
+					</figure>
+					<p>
+						因此也有人建議改用這樣的寫法，還比較看得懂：
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_10.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>Multiplicity (多重性)</h3>
+					<figure>
+						<img src='../../figures/instantcoffee/19971132X_11.png' alt='插圖'>
+					</figure>
+					<table>
+						<tr><td>0..1</td><td>零或一</td></tr>
+						<tr><td>1</td><td>剛好一</td></tr>
+						<tr><td>0..*</td><td>零或多</td></tr>
+						<tr><td>1..*</td><td>一或多</td></tr>
+					</table>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 應該說「類別 B 是類別 A 的一部份」，但我們讀 UML 的類別圖時，習慣從線尾指向箭頭，所以說得這麼彆扭。<br>
-                    [2] 也就是說，對 C++ 程式設計人員來說，看到 Composition 的圖形表示法時，會覺得要注意物件銷毀的問題，但是對 Java 程式設計人員來說，可能會覺得要注意的是物件生成的手法。同樣一個圖形表示法，卻可能會有截然不同的意圖，這表示根本不夠成熟到應該放入 UML 裡面！因此建議不要使用它，甚至連「先做好團隊溝通，定義好 Aggregation 與 Composition 的語意，再使用這個圖形」都不要，因為即使當作萬不得已時才使用的特例表示法：「你團隊為何不自己特例一個更棒的圖形來表示？」用這官方規定的圖形表示法，比你特例的圖形表示法，更容易誤導人「各說各話」。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 應該說「類別 B 是類別 A 的一部份」，但我們讀 UML 的類別圖時，習慣從線尾指向箭頭，所以說得這麼彆扭。<br>
+					[2] 也就是說，對 C++ 程式設計人員來說，看到 Composition 的圖形表示法時，會覺得要注意物件銷毀的問題，但是對 Java 程式設計人員來說，可能會覺得要注意的是物件生成的手法。同樣一個圖形表示法，卻可能會有截然不同的意圖，這表示根本不夠成熟到應該放入 UML 裡面！因此建議不要使用它，甚至連「先做好團隊溝通，定義好 Aggregation 與 Composition 的語意，再使用這個圖形」都不要，因為即使當作萬不得已時才使用的特例表示法：「你團隊為何不自己特例一個更棒的圖形來表示？」用這官方規定的圖形表示法，比你特例的圖形表示法，更容易誤導人「各說各話」。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

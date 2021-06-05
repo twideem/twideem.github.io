@@ -2,551 +2,551 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/fixure.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/fixure.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>對話視窗</h1>
-            </header>
+			<header>
+				<h1>對話視窗</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>訊息視窗</h2>
-                <p>
-                    純粹跳出對話視窗顯示一下訊息，頂多搭配圖示方便使用者判斷訊息，有五種可用…
-                </p>
-                <hr>
-                <section>
-                    <h3 title='Critical Message'>緊急通報</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+			<section>
+				<h2>訊息視窗</h2>
+				<p>
+					純粹跳出對話視窗顯示一下訊息，頂多搭配圖示方便使用者判斷訊息，有五種可用…
+				</p>
+				<hr>
+				<section>
+					<h3 title='Critical Message'>緊急通報</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showMessageDialog(null, "ERROR_MESSAGE", "MESSAGE DIALOG", JOptionPane.ERROR_MESSAGE);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showMessageDialog(null, "ERROR_MESSAGE", "MESSAGE DIALOG", JOptionPane.ERROR_MESSAGE);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_01.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3 title='Information Message'>注意事項</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_01.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3 title='Information Message'>注意事項</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showMessageDialog(null, "INFORMATION_MESSAGE", "MESSAGE DIALOG", JOptionPane.INFORMATION_MESSAGE);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showMessageDialog(null, "INFORMATION_MESSAGE", "MESSAGE DIALOG", JOptionPane.INFORMATION_MESSAGE);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_02.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3 title='Warning Message'>警告標語</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_02.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3 title='Warning Message'>警告標語</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showMessageDialog(null, "WARNING_MESSAGE", "MESSAGE DIALOG", JOptionPane.WARNING_MESSAGE);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showMessageDialog(null, "WARNING_MESSAGE", "MESSAGE DIALOG", JOptionPane.WARNING_MESSAGE);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_03.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3 title='Warning Query'>警訊提報</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_03.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3 title='Warning Query'>警訊提報</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showMessageDialog(null, "QUESTION_MESSAGE", "MESSAGE DIALOG", JOptionPane.QUESTION_MESSAGE);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showMessageDialog(null, "QUESTION_MESSAGE", "MESSAGE DIALOG", JOptionPane.QUESTION_MESSAGE);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_04.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>一般訊息</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_04.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>一般訊息</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showMessageDialog(null, "PLAIN_MESSAGE", "MESSAGE DIALOG", JOptionPane.PLAIN_MESSAGE);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showMessageDialog(null, "PLAIN_MESSAGE", "MESSAGE DIALOG", JOptionPane.PLAIN_MESSAGE);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_05.png' alt='插圖'>
-                    </figure>
-                </section>
-            </section>
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_05.png' alt='插圖'>
+					</figure>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>確認視窗</h2>
-                <p>
-                    跳出詢問用的對話視窗，可根據傳回值，判斷使用者的回覆：<br>
-                    <br>
-                    <var>
-                        JOptionPane.YES_OPTION<br>
-                        JOptionPane.NO_OPTION<br>
-                        JOptionPane.CANCEL_OPTION<br>
-                        JOptionPane.OK_OPTION<br>
-                        JOptionPane.CLOSED_OPTION <br>
-                    </var>
-                    <br>
-                    依按鈕的配置，總共有四種…
-                </p>
-                <hr>
-                <section>
-                    <h3>OK</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+			<section>
+				<h2>確認視窗</h2>
+				<p>
+					跳出詢問用的對話視窗，可根據傳回值，判斷使用者的回覆：<br>
+					<br>
+					<var>
+						JOptionPane.YES_OPTION<br>
+						JOptionPane.NO_OPTION<br>
+						JOptionPane.CANCEL_OPTION<br>
+						JOptionPane.OK_OPTION<br>
+						JOptionPane.CLOSED_OPTION <br>
+					</var>
+					<br>
+					依按鈕的配置，總共有四種…
+				</p>
+				<hr>
+				<section>
+					<h3>OK</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showConfirmDialog(null, "DEFAULT_OPTION", "CONFIRIRM DIALOG", JOptionPane.DEFAULT_OPTION);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showConfirmDialog(null, "DEFAULT_OPTION", "CONFIRIRM DIALOG", JOptionPane.DEFAULT_OPTION);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_06.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>YES / NO</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_06.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>YES / NO</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showConfirmDialog(null, "YES_NO_OPTION", "CONFIRIRM DIALOG", JOptionPane.YES_NO_OPTION);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showConfirmDialog(null, "YES_NO_OPTION", "CONFIRIRM DIALOG", JOptionPane.YES_NO_OPTION);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_07.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>YES / NO / CANCEL</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_07.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>YES / NO / CANCEL</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showConfirmDialog(null, "YES_NO_CANCEL_OPTION", "CONFIRIRM DIALOG", JOptionPane.YES_NO_CANCEL_OPTION);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showConfirmDialog(null, "YES_NO_CANCEL_OPTION", "CONFIRIRM DIALOG", JOptionPane.YES_NO_CANCEL_OPTION);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_08.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>YES / CANCEL</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_08.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>YES / CANCEL</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    JOptionPane.showConfirmDialog(null, "OK_CANCEL_OPTION", "CONFIRIRM DIALOG", JOptionPane.OK_CANCEL_OPTION);
-                                }
+								public static void main(String[] args){
+									JOptionPane.showConfirmDialog(null, "OK_CANCEL_OPTION", "CONFIRIRM DIALOG", JOptionPane.OK_CANCEL_OPTION);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_09.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>補充範例</h3>
-                    <p>
-                        例如還蠻常用的情況是，用詢問視窗確認使用者是否真的要關閉：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            if(JOptionPane.showConfirmDialog(null, "確定要關閉應用程式嗎？", "對話方塊", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-                                System.exit(0);
-                            }
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_09.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>補充範例</h3>
+					<p>
+						例如還蠻常用的情況是，用詢問視窗確認使用者是否真的要關閉：<br>
+						<br>
+						<textarea class='brush:java'>
+							if(JOptionPane.showConfirmDialog(null, "確定要關閉應用程式嗎？", "對話方塊", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+								System.exit(0);
+							}
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>輸入視窗</h2>
-                <hr>
-                <section>
-                    <h3>標準型（可設定標題列與圖示）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+			<section>
+				<h2>輸入視窗</h2>
+				<hr>
+				<section>
+					<h3>標準型（可設定標題列與圖示）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    String string = JOptionPane.showInputDialog(null, "MESSAGE:", "INPUT DIALOG", JOptionPane.PLAIN_MESSAGE);
-                                }
+								public static void main(String[] args){
+									String string = JOptionPane.showInputDialog(null, "MESSAGE:", "INPUT DIALOG", JOptionPane.PLAIN_MESSAGE);
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_10.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>速用型（可輸入預設值）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[6]'>
-                            import javax.swing.JOptionPane;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_10.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>速用型（可輸入預設值）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[6]'>
+							import javax.swing.JOptionPane;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    String string = JOptionPane.showInputDialog("MESSAGE:", "預設值");
-                                }
+								public static void main(String[] args){
+									String string = JOptionPane.showInputDialog("MESSAGE:", "預設值");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_11.png' alt='插圖'>
-                    </figure>
-                </section>
-            </section>
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_11.png' alt='插圖'>
+					</figure>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>檔案視窗</h2>
-                <p>
-                    雖然有兩種方式可以呼叫不一樣的對話視窗，但其實只有標題列文字不一樣而已，取得檔案的行為一模一樣。為了方便研究，依然分開寫兩個範例如下：
-                </p>
-                <hr>
-                <section>
-                    <h3>儲存視窗</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[9,10,11]'>
-                            import java.io.File;
-                            import java.io.FileWriter;
-                            import javax.swing.JFileChooser;
+			<section>
+				<h2>檔案視窗</h2>
+				<p>
+					雖然有兩種方式可以呼叫不一樣的對話視窗，但其實只有標題列文字不一樣而已，取得檔案的行為一模一樣。為了方便研究，依然分開寫兩個範例如下：
+				</p>
+				<hr>
+				<section>
+					<h3>儲存視窗</h3>
+					<p>
+						<textarea class='brush:java;highlight:[9,10,11]'>
+							import java.io.File;
+							import java.io.FileWriter;
+							import javax.swing.JFileChooser;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //儲存檔案
-                                    JFileChooser file_chooser = new JFileChooser();
-                                    file_chooser.showSaveDialog(null);
-                                    File file = file_chooser.getSelectedFile();
-                                    //測試寫入資料到所開啟的檔案（方便進一步測試用，可跳過。）
-                                    try{
-                                        FileWriter file_writer = new FileWriter(file);
-                                        file_writer.write("Hello");
-                                        file_writer.close();
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									//儲存檔案
+									JFileChooser file_chooser = new JFileChooser();
+									file_chooser.showSaveDialog(null);
+									File file = file_chooser.getSelectedFile();
+									//測試寫入資料到所開啟的檔案（方便進一步測試用，可跳過。）
+									try{
+										FileWriter file_writer = new FileWriter(file);
+										file_writer.write("Hello");
+										file_writer.close();
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_12.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>開啟視窗</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[10,11,12]'>
-                            import java.io.BufferedReader;
-                            import java.io.File;
-                            import java.io.FileReader;
-                            import javax.swing.JFileChooser;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_12.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>開啟視窗</h3>
+					<p>
+						<textarea class='brush:java;highlight:[10,11,12]'>
+							import java.io.BufferedReader;
+							import java.io.File;
+							import java.io.FileReader;
+							import javax.swing.JFileChooser;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //開啟檔案
-                                    JFileChooser file_chooser = new JFileChooser();
-                                    file_chooser.showOpenDialog(null);
-                                    File file = file_chooser.getSelectedFile();
-                                    //讀取所開啟檔案的資料（方便進一步測試用，可跳過。）
-                                    try{
-                                        BufferedReader buffered_reader = new BufferedReader(new FileReader(file));
-                                        System.out.print(buffered_reader.readLine());
-                                        buffered_reader.close();
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									//開啟檔案
+									JFileChooser file_chooser = new JFileChooser();
+									file_chooser.showOpenDialog(null);
+									File file = file_chooser.getSelectedFile();
+									//讀取所開啟檔案的資料（方便進一步測試用，可跳過。）
+									try{
+										BufferedReader buffered_reader = new BufferedReader(new FileReader(file));
+										System.out.print(buffered_reader.readLine());
+										buffered_reader.close();
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_13.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>可選取多個檔案</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[10,13]'>
-                            import java.io.File;
-                            import javax.swing.JFileChooser;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_13.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>可選取多個檔案</h3>
+					<p>
+						<textarea class='brush:java;highlight:[10,13]'>
+							import java.io.File;
+							import javax.swing.JFileChooser;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    JFileChooser file_chooser = new JFileChooser();
+									JFileChooser file_chooser = new JFileChooser();
 
-                                    file_chooser.setMultiSelectionEnabled(true);
-                                    file_chooser.showOpenDialog(null);
+									file_chooser.setMultiSelectionEnabled(true);
+									file_chooser.showOpenDialog(null);
 
-                                    File[] file = file_chooser.getSelectedFiles();
+									File[] file = file_chooser.getSelectedFiles();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>指定預設路徑</h3>
-                    <p>
-                        你可以預設檔案對話視窗的一開始所在的資料夾位置，如下介紹的是使用者的桌面位置：<br>
-                        <br>
-                        <textarea class='brush:java;highlight:[10]'>
-                            import java.io.File;
-                            import javax.swing.JFileChooser;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>指定預設路徑</h3>
+					<p>
+						你可以預設檔案對話視窗的一開始所在的資料夾位置，如下介紹的是使用者的桌面位置：<br>
+						<br>
+						<textarea class='brush:java;highlight:[10]'>
+							import java.io.File;
+							import javax.swing.JFileChooser;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    JFileChooser file_chooser = new JFileChooser();
+									JFileChooser file_chooser = new JFileChooser();
 
-                                    file_chooser.setCurrentDirectory(new File(System.getProperty("user.home")+"/Desktop"));
-                                    file_chooser.showSaveDialog(null);
+									file_chooser.setCurrentDirectory(new File(System.getProperty("user.home")+"/Desktop"));
+									file_chooser.showSaveDialog(null);
 
-                                    File file = file_chooser.getSelectedFile();
+									File file = file_chooser.getSelectedFile();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>篩選副檔名</h3>
-                    <p>
-                        檔案對話視窗通常可以篩選副檔名，底下範例介紹如何為檔案對話視窗增加只篩選出 XML 副檔名的功能。
-                    </p>
-                    <section>
-                        <h4>XMLFileFilter.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.io.File;
-                                import javax.swing.filechooser.FileFilter;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>篩選副檔名</h3>
+					<p>
+						檔案對話視窗通常可以篩選副檔名，底下範例介紹如何為檔案對話視窗增加只篩選出 XML 副檔名的功能。
+					</p>
+					<section>
+						<h4>XMLFileFilter.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.io.File;
+								import javax.swing.filechooser.FileFilter;
 
-                                public class XMLFileFilter extends FileFilter{
+								public class XMLFileFilter extends FileFilter{
 
-                                    private String string = new String();
+									private String string = new String();
 
-                                    public boolean accept(File file){
-                                        if(file.getPath().lastIndexOf(".")&gt;0){
-                                            this.string = file.getPath().substring(file.getPath().lastIndexOf(".")+1).toLowerCase();
-                                        }
-                                        if(this.string.equals("")){
-                                            return this.string.equals("xml");
-                                        }
-                                        else{
-                                            return file.isDirectory();
-                                        }
-                                    }
+									public boolean accept(File file){
+										if(file.getPath().lastIndexOf(".")&gt;0){
+											this.string = file.getPath().substring(file.getPath().lastIndexOf(".")+1).toLowerCase();
+										}
+										if(this.string.equals("")){
+											return this.string.equals("xml");
+										}
+										else{
+											return file.isDirectory();
+										}
+									}
 
-                                    public String getDescription(){
-                                        return "XML Files (*.xml)";
-                                    }
+									public String getDescription(){
+										return "XML Files (*.xml)";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>XMLFileChooser.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.io.File;
-                                import java.io.FileOutputStream;
-                                import javax.swing.JFileChooser;
+						</p>
+					</section>
+					<section>
+						<h4>XMLFileChooser.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.io.File;
+								import java.io.FileOutputStream;
+								import javax.swing.JFileChooser;
 
-                                public class XMLFileChooser extends JFileChooser{
+								public class XMLFileChooser extends JFileChooser{
 
-                                    public XMLFileChooser(){
-                                        this.addChoosableFileFilter(new XMLFileFilter());
-                                    }
+									public XMLFileChooser(){
+										this.addChoosableFileFilter(new XMLFileFilter());
+									}
 
-                                    public void save(File file){
-                                        this.showSaveDialog(null);
-                                        try{
-                                            FileOutputStream file_output_stream;
-                                            if(this.getSelectedFile().getPath().lastIndexOf(".xml")&gt;0){
-                                                file_output_stream = new FileOutputStream(this.getSelectedFile().getPath());
-                                            }
-                                            else{
-                                                file_output_stream = new FileOutputStream(this.getSelectedFile() + ".xml");
-                                            }
-                                            file_output_stream.close();
-                                        }
-                                        catch (Exception exception){
-                                            exception.printStackTrace();
-                                        }
-                                    }
+									public void save(File file){
+										this.showSaveDialog(null);
+										try{
+											FileOutputStream file_output_stream;
+											if(this.getSelectedFile().getPath().lastIndexOf(".xml")&gt;0){
+												file_output_stream = new FileOutputStream(this.getSelectedFile().getPath());
+											}
+											else{
+												file_output_stream = new FileOutputStream(this.getSelectedFile() + ".xml");
+											}
+											file_output_stream.close();
+										}
+										catch (Exception exception){
+											exception.printStackTrace();
+										}
+									}
 
-                                    public File load(){
-                                        this.showOpenDialog(null);
-                                        return new File(this.getSelectedFile().getPath());
-                                    }
+									public File load(){
+										this.showOpenDialog(null);
+										return new File(this.getSelectedFile().getPath());
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.io.File;
-                                import javax.swing.JDialog;
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.io.File;
+								import javax.swing.JDialog;
 
-                                public class Main{
+								public class Main{
 
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        JDialog.setDefaultLookAndFeelDecorated(true);
+										JDialog.setDefaultLookAndFeelDecorated(true);
 
-                                        XMLFileChooser xml_file_chooser = new XMLFileChooser();
-                                        File file = xml_file_chooser.load();
-                                        xml_file_chooser.save(file);
+										XMLFileChooser xml_file_chooser = new XMLFileChooser();
+										File file = xml_file_chooser.load();
+										xml_file_chooser.save(file);
 
-                                    }
-                                }
+									}
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20001030A_14.png' alt='插圖'>
-                    </figure>
-                </section>
-            </section>
+						</p>
+					</section>
+					<figure>
+						<img src='../../figures/instantcoffee/20001030A_14.png' alt='插圖'>
+					</figure>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>色彩選擇器</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[7]'>
-                        import java.awt.Color;
-                        import javax.swing.JColorChooser;
+			<section>
+				<h2>色彩選擇器</h2>
+				<p>
+					<textarea class='brush:java;highlight:[7]'>
+						import java.awt.Color;
+						import javax.swing.JColorChooser;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                Color color = JColorChooser.showDialog(this, "COLOR CHOOSER", Color.GRAY);
-                            }
+							public static void main(String[] args){
+								Color color = JColorChooser.showDialog(this, "COLOR CHOOSER", Color.GRAY);
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001030A_15.png' alt='插圖' width='570'>
-                </figure>
-            </section>
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20001030A_15.png' alt='插圖' width='570'>
+				</figure>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

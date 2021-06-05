@@ -2,86 +2,86 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/fixure.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/fixure.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JTextPane</h1>
-            </header>
+			<header>
+				<h1>JTextPane</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                JTextPane 雖然能夠顯示豐富的文字樣式，但並非直接透過元件本身提供的操作來完成，而是透過 MVC 架構，搭配許多其它元件來進行。因此本章節示範大致上使用 JTextPane 的情形。<br>
-                <br>
-                <textarea class='brush:java'>
-                    import java.awt.Color;
-                    import javax.swing.JFrame;
-                    import javax.swing.JTextPane;
-                    import javax.swing.text.Document;
-                    import javax.swing.text.SimpleAttributeSet;
-                    import javax.swing.text.StyleConstants;
+			<p>
+				JTextPane 雖然能夠顯示豐富的文字樣式，但並非直接透過元件本身提供的操作來完成，而是透過 MVC 架構，搭配許多其它元件來進行。因此本章節示範大致上使用 JTextPane 的情形。<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.awt.Color;
+					import javax.swing.JFrame;
+					import javax.swing.JTextPane;
+					import javax.swing.text.Document;
+					import javax.swing.text.SimpleAttributeSet;
+					import javax.swing.text.StyleConstants;
 
-                    public class Main{
+					public class Main{
 
-                        public static void main(String[] args){
-                            try{
-                                //建立視窗。
-                                JFrame frame = new JFrame();
-                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame.setSize(320, 240);
-                                frame.setVisible(true);
-                                //建立圖文容器。
-                                JTextPane text_pane = new JTextPane();
-                                text_pane.setBounds(0,0,320,240);
-                                //取得圖文容器的文件模型。
-                                Document document = text_pane.getDocument();
-                                //建立用來設定文字樣式的屬性集。
-                                SimpleAttributeSet simple_attribute_set = new SimpleAttributeSet();
-                                //設定字型與大小並輸出第一行文字訊息。
-                                StyleConstants.setFontFamily(simple_attribute_set, "微軟正黑體");
-                                StyleConstants.setFontSize(simple_attribute_set, 24);
-                                document.insertString(document.getLength(), "第一行！\n", simple_attribute_set);
-                                //設定粗體、顏色、斜體、底線，並輸出第二行文字訊息。
-                                StyleConstants.setBold(simple_attribute_set, true);
-                                StyleConstants.setForeground(simple_attribute_set, Color.BLUE);
-                                StyleConstants.setItalic(simple_attribute_set, true);
-                                StyleConstants.setUnderline(simple_attribute_set, true);
-                                document.insertString(document.getLength(), "第二行～", simple_attribute_set);
-                                //加入圖文容器到視窗並立即顯示。
-                                frame.add(text_pane);
-                                frame.validate();
-                                frame.repaint();
-                            }
-                            catch(Exception exception){
-                                exception.printStackTrace();
-                            }
-                        }
+						public static void main(String[] args){
+							try{
+								//建立視窗。
+								JFrame frame = new JFrame();
+								frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								frame.setSize(320, 240);
+								frame.setVisible(true);
+								//建立圖文容器。
+								JTextPane text_pane = new JTextPane();
+								text_pane.setBounds(0,0,320,240);
+								//取得圖文容器的文件模型。
+								Document document = text_pane.getDocument();
+								//建立用來設定文字樣式的屬性集。
+								SimpleAttributeSet simple_attribute_set = new SimpleAttributeSet();
+								//設定字型與大小並輸出第一行文字訊息。
+								StyleConstants.setFontFamily(simple_attribute_set, "微軟正黑體");
+								StyleConstants.setFontSize(simple_attribute_set, 24);
+								document.insertString(document.getLength(), "第一行！\n", simple_attribute_set);
+								//設定粗體、顏色、斜體、底線，並輸出第二行文字訊息。
+								StyleConstants.setBold(simple_attribute_set, true);
+								StyleConstants.setForeground(simple_attribute_set, Color.BLUE);
+								StyleConstants.setItalic(simple_attribute_set, true);
+								StyleConstants.setUnderline(simple_attribute_set, true);
+								document.insertString(document.getLength(), "第二行～", simple_attribute_set);
+								//加入圖文容器到視窗並立即顯示。
+								frame.add(text_pane);
+								frame.validate();
+								frame.repaint();
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
 
-                    }
+					}
                     </textarea>
-                <br>
-                顯示結果如下：
-            </p>
+				<br>
+				顯示結果如下：
+			</p>
 
-            <figure>
-                <img src='../../figures/instantcoffee/20001113A_01.png' alt='插圖'>
-            </figure>
+			<figure>
+				<img src='../../figures/instantcoffee/20001113A_01.png' alt='插圖'>
+			</figure>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

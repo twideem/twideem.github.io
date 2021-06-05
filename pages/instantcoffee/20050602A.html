@@ -2,416 +2,416 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>interface</h1>
-                <p>
-                    Java 認為 class（類別）如果「多重繼承」的話，延伸出來的問題，多過於帶來的好處，例如每個 class 都有同樣 field（資料欄位）時，究竟誰是誰的爭議，因此堅持「單一繼承」的體制，然後提出另一種利多於弊的體制來實現「多重繼承」，那就是 interface。<br>
-                    <br>
-                    你可以視 interface 是：「裡面純粹都是 abstract 的 class。」它避開「類別的實作」，改由「抽象的宣告」來進行多重繼承。這樣一來，變成在「型別」上享有多重繼承的好處，又能避免「類別」多重繼承的壞處<ins>[1]</ins>。缺點是程式碼的結構上顯得多此一舉。<br>
-                    <br>
-                    雖然 interface 立意如此，但它「可將型態與實作切割開來」的特性，在實際的程式設計應用上變得更為靈活，演變到後來，多重繼承與否，往往不是 interface 被關心的議題，如何活用 interface 來優化物件導向程式設計才是焦點。
-                </p>
-            </header>
+			<header>
+				<h1>interface</h1>
+				<p>
+					Java 認為 class（類別）如果「多重繼承」的話，延伸出來的問題，多過於帶來的好處，例如每個 class 都有同樣 field（資料欄位）時，究竟誰是誰的爭議，因此堅持「單一繼承」的體制，然後提出另一種利多於弊的體制來實現「多重繼承」，那就是 interface。<br>
+					<br>
+					你可以視 interface 是：「裡面純粹都是 abstract 的 class。」它避開「類別的實作」，改由「抽象的宣告」來進行多重繼承。這樣一來，變成在「型別」上享有多重繼承的好處，又能避免「類別」多重繼承的壞處<ins>[1]</ins>。缺點是程式碼的結構上顯得多此一舉。<br>
+					<br>
+					雖然 interface 立意如此，但它「可將型態與實作切割開來」的特性，在實際的程式設計應用上變得更為靈活，演變到後來，多重繼承與否，往往不是 interface 被關心的議題，如何活用 interface 來優化物件導向程式設計才是焦點。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>制定 interface</h2>
-                <p>
-                    你可以比對如下範例程式中，interface 與 abstract class 的對照關係，來了解 interface 的寫法。
-                </p>
-                <hr>
-                <section>
-                    <h3>abstract class</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            abstract class A{
-                                public static final int x = 0;
-                                public abstract void f1();
-                                public abstract void f2();
-                                public abstract void f3();
-                            }
+			<section>
+				<h2>制定 interface</h2>
+				<p>
+					你可以比對如下範例程式中，interface 與 abstract class 的對照關係，來了解 interface 的寫法。
+				</p>
+				<hr>
+				<section>
+					<h3>abstract class</h3>
+					<p>
+						<textarea class='brush:java'>
+							abstract class A{
+								public static final int x = 0;
+								public abstract void f1();
+								public abstract void f2();
+								public abstract void f3();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>interface</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface A{
-                                int x = 0;
-                                void f1();
-                                void f2();
-                                void f3();
-                            }
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>interface</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface A{
+								int x = 0;
+								void f1();
+								void f2();
+								void f3();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    由於 interface 預設為 abstract method（抽象函式）、static final field（靜態常數），因此制定 interface 時省略這些語法與飾詞，是提高可讀性的建議寫法。<br>
-                    <br>
-                    上面範例程式是 default 存取權限，你可以視需要宣告為 public。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public interface A{
-                            int x = 0;
-                            void f1();
-                            void f2();
-                            void f3();
-                        }
+					</p>
+				</section>
+				<hr>
+				<p>
+					由於 interface 預設為 abstract method（抽象函式）、static final field（靜態常數），因此制定 interface 時省略這些語法與飾詞，是提高可讀性的建議寫法。<br>
+					<br>
+					上面範例程式是 default 存取權限，你可以視需要宣告為 public。<br>
+					<br>
+					<textarea class='brush:java'>
+						public interface A{
+							int x = 0;
+							void f1();
+							void f2();
+							void f3();
+						}
                     </textarea>
-                    <br>
-                    差異在於前者只能同 package 能存取，後者公開存取使用。<br>
-                    <br>
-                    除此之外，不能使用其它存取權限，例如，interface 這種有待 class 實作出功能的東西，宣告 private 表示不開放實作，根本沒有意義。
-                </p>
-            </section>
+					<br>
+					差異在於前者只能同 package 能存取，後者公開存取使用。<br>
+					<br>
+					除此之外，不能使用其它存取權限，例如，interface 這種有待 class 實作出功能的東西，宣告 private 表示不開放實作，根本沒有意義。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>實作 interface</h2>
-                <p>
-                    使用 implements 指令，讓 class 來實作 interface 的功能。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                String f();
-                            }
+			<section>
+				<h2>實作 interface</h2>
+				<p>
+					使用 implements 指令，讓 class 來實作 interface 的功能。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								String f();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements S{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements S{
 
-                                public String f(){
-                                    return "AAA";
-                                }
+								public String f(){
+									return "AAA";
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    S a = new A();
-                                    System.out.print(a.f());
-                                }
+								public static void main(String[] args){
+									S a = new A();
+									System.out.print(a.f());
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出</h3>
-                    <p>
-                        <output>
-                            AAA
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    值得注意的是，new 出來的 a 物件，雖然可以配置為 A 類別，但也可以宣告為 S 型別！<br>
-                    <br>
-                    另外，也可以在 A 類別中，於所實作的 S 的功能介面上，使用 @Override 表示，以增加可讀性。例如 A.java 改寫成這樣：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class A implements S{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出</h3>
+					<p>
+						<output>
+							AAA
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					值得注意的是，new 出來的 a 物件，雖然可以配置為 A 類別，但也可以宣告為 S 型別！<br>
+					<br>
+					另外，也可以在 A 類別中，於所實作的 S 的功能介面上，使用 @Override 表示，以增加可讀性。例如 A.java 改寫成這樣：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class A implements S{
 
-                            @Override public String f(){
-                                return "Hello!";
-                            }
+							@Override public String f(){
+								return "Hello!";
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Supertype</h2>
-                <p>
-                    一個 implements 了 interface 的 class，在 Java 的術語上，稱為 super type。<br>
-                    <br>
-                    這個術語無關語法上的使用，但對於了解 Java 的 interface 究竟如何應用，觀念上很有助益：「實作了 interface 的 class，在意義上不只是 object（物件）而已，還象徵符合了某種 type（型別）的規範。」<br>
-                    <br>
-                    下面程式將 interface 想像成 USB3 規格的制定，implements 是各家主機板廠商對該規格的實作，最後「隨身碟」相容不同主機板 USB3 實作的情況，做為整個 super type 概念上的應用。（Motherboard 不用管它）
-                </p>
-                <hr>
-                <section>
-                    <h3>USB3.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface USB3{
-                                String port();
-                            }
+			<section>
+				<h2>Supertype</h2>
+				<p>
+					一個 implements 了 interface 的 class，在 Java 的術語上，稱為 super type。<br>
+					<br>
+					這個術語無關語法上的使用，但對於了解 Java 的 interface 究竟如何應用，觀念上很有助益：「實作了 interface 的 class，在意義上不只是 object（物件）而已，還象徵符合了某種 type（型別）的規範。」<br>
+					<br>
+					下面程式將 interface 想像成 USB3 規格的制定，implements 是各家主機板廠商對該規格的實作，最後「隨身碟」相容不同主機板 USB3 實作的情況，做為整個 super type 概念上的應用。（Motherboard 不用管它）
+				</p>
+				<hr>
+				<section>
+					<h3>USB3.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface USB3{
+								String port();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Asus.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Asus extends Motherboard implements USB3{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Asus.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Asus extends Motherboard implements USB3{
 
-                                public String port(){
-                                    return "900mA 5Gbit/s";
-                                }
+								public String port(){
+									return "900mA 5Gbit/s";
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Gigabyte.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Gigabyte extends Motherboard implements USB3{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Gigabyte.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Gigabyte extends Motherboard implements USB3{
 
-                                public String port(){
-                                    return "900mA 25Gbit/s";
-                                }
+								public String port(){
+									return "900mA 25Gbit/s";
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>FlashDrive.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class FlashDrive{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>FlashDrive.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class FlashDrive{
 
-                                public void insert(USB3 usb3){
-                                    System.out.println(usb3.port());
-                                }
+								public void insert(USB3 usb3){
+									System.out.println(usb3.port());
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                    Asus 華碩 = new Asus();               //購買華碩主機板
-                                    Gigabyte 技嘉 = new Gigabyte();       //購買技嘉主機板
-                                    FlashDrive 隨身碟 = new FlashDrive(); //購買隨身碟
-                                    隨身碟.insert(華碩);                  //隨身碟插進華碩主機板
-                                    隨身碟.insert(技嘉);                  //隨身碟插進技嘉主機板
-                                }
+								public static void main(String[] args){
+									Asus 華碩 = new Asus();			   //購買華碩主機板
+									Gigabyte 技嘉 = new Gigabyte();	   //購買技嘉主機板
+									FlashDrive 隨身碟 = new FlashDrive(); //購買隨身碟
+									隨身碟.insert(華碩);				  //隨身碟插進華碩主機板
+									隨身碟.insert(技嘉);				  //隨身碟插進技嘉主機板
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出</h3>
-                    <p>
-                        <output>
-                            900mA 5Gbit/s<br>
-                            900mA 25Gbit/s
-                        </output>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出</h3>
+					<p>
+						<output>
+							900mA 5Gbit/s<br>
+							900mA 25Gbit/s
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>繼承、多重繼承</h2>
-                <p>
-                    interface 本身可用 extends 來繼承其它 interface，甚至可以使用 , 符號，來繼承多個 interface。<br>
-                    <br>
-                    底下示範 U 同時繼承了 S 與 T 兩個 interface，最後 A 實作了 U 時，必須一口氣實作 f1()、f2()、f3() 三個 method。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                int f1();
-                            }
+			<section>
+				<h2>繼承、多重繼承</h2>
+				<p>
+					interface 本身可用 extends 來繼承其它 interface，甚至可以使用 , 符號，來繼承多個 interface。<br>
+					<br>
+					底下示範 U 同時繼承了 S 與 T 兩個 interface，最後 A 實作了 U 時，必須一口氣實作 f1()、f2()、f3() 三個 method。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								int f1();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>T.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface T{
-                                int f2();
-                            }
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>T.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface T{
+								int f2();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>U.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface U extends S, T{
-                                void f3();
-                            }
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>U.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface U extends S, T{
+								void f3();
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements U{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements U{
 
-                                private int x = 9;
+								private int x = 9;
 
-                                public int f1(){
-                                    return ++x;
-                                }
+								public int f1(){
+									return ++x;
+								}
 
-                                public int f2(){
-                                    return --x;
-                                }
+								public int f2(){
+									return --x;
+								}
 
-                                public void f3(){
-                                    System.out.print(f1()+f2());
-                                }
+								public void f3(){
+									System.out.print(f1()+f2());
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>何時使用 abstract 或 interface？</h2>
-                <p>
-                    如果 class 裡面全部都是 abstract method，不如改成 interface。<br>
-                    <br>
-                    如果有些 method 需要實作，有些不要，便用 abstract。
-                </p>
-            </section>
+			<section>
+				<h2>何時使用 abstract 或 interface？</h2>
+				<p>
+					如果 class 裡面全部都是 abstract method，不如改成 interface。<br>
+					<br>
+					如果有些 method 需要實作，有些不要，便用 abstract。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>何時繼承類別？何時實作介面？</h2>
-                <p>
-                    以上是官方說法！Java 是站在多重繼承的角度，來引進 interface。但如果站在物件導向開發手法的角度，interface 會是不一樣的思考方向：「何時繼承類別或實作介面？」<br>
-                    <br>
-                    <strong>
-                        ●重複功能的程式碼，使用繼承類別的方式來精簡程式碼。<br>
-                        ●程式碼並未重複，純粹只想提供同樣的功能相互存取，就使用實作介面的方式來達成。<br>
-                    </strong>
-                    <br>
-                    例如，你在一款 RPG 中，想設計一個 Paradin（聖騎士）類別，你發現它的 hit_point 屬性和 defend() 功能，與現存 Character（角色）類別的 hit_point 和 defend() 程式碼一樣，那就用繼承的方式，這樣不僅省事，日後管理整串程式碼時會覺得容易掌握。<br>
-                    <br>
-                    過一陣子後，你想設計一個 Shield（盾牌）類別，然後你認為它也要有 defend()，而且能夠和 Paradin 物件一樣被拿來 defend()！這時，程式碼如果不一樣的話，例如：「Shield 不需要 hit_point 屬性，而 Character 的 defend() 需要用到 hit_point。」那與其讓 Shield 繼承 Character 類別來獲得 defend() 的能力，不如改用介面來重新設計；缺點是不僅 Shield 要實作介面，連 Character 也要實作介面，這樣 Paladin 才能與 Shield 一致。<br>
-                    <br>
-                    看來是多此一舉的事，為何要用 interface 來修改設計？因為可以降低類別之間的關聯性！你會發現 Shield 與 Paradin 明明是不一樣的東西，一個是裝備，一個是人物，卻可以在需要「防禦」的場合交互拿來使用。而功能互通的同時，允許你任意修改各自 defend() 程式碼的自由，因為不管內容要怎麼改，都不會影響到另一個類別的運作。<br>
-                    <br>
-                    取用時是一樣的東西，運作起來卻是不一樣的個體，這才是 interface 的魅力所在。
-                </p>
-            </section>
+			<section>
+				<h2>何時繼承類別？何時實作介面？</h2>
+				<p>
+					以上是官方說法！Java 是站在多重繼承的角度，來引進 interface。但如果站在物件導向開發手法的角度，interface 會是不一樣的思考方向：「何時繼承類別或實作介面？」<br>
+					<br>
+					<strong>
+						●重複功能的程式碼，使用繼承類別的方式來精簡程式碼。<br>
+						●程式碼並未重複，純粹只想提供同樣的功能相互存取，就使用實作介面的方式來達成。<br>
+					</strong>
+					<br>
+					例如，你在一款 RPG 中，想設計一個 Paradin（聖騎士）類別，你發現它的 hit_point 屬性和 defend() 功能，與現存 Character（角色）類別的 hit_point 和 defend() 程式碼一樣，那就用繼承的方式，這樣不僅省事，日後管理整串程式碼時會覺得容易掌握。<br>
+					<br>
+					過一陣子後，你想設計一個 Shield（盾牌）類別，然後你認為它也要有 defend()，而且能夠和 Paradin 物件一樣被拿來 defend()！這時，程式碼如果不一樣的話，例如：「Shield 不需要 hit_point 屬性，而 Character 的 defend() 需要用到 hit_point。」那與其讓 Shield 繼承 Character 類別來獲得 defend() 的能力，不如改用介面來重新設計；缺點是不僅 Shield 要實作介面，連 Character 也要實作介面，這樣 Paladin 才能與 Shield 一致。<br>
+					<br>
+					看來是多此一舉的事，為何要用 interface 來修改設計？因為可以降低類別之間的關聯性！你會發現 Shield 與 Paradin 明明是不一樣的東西，一個是裝備，一個是人物，卻可以在需要「防禦」的場合交互拿來使用。而功能互通的同時，允許你任意修改各自 defend() 程式碼的自由，因為不管內容要怎麼改，都不會影響到另一個類別的運作。<br>
+					<br>
+					取用時是一樣的東西，運作起來卻是不一樣的個體，這才是 interface 的魅力所在。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>default</h2>
-                <p>
-                    在 Java SE 8 引入 Lambda 算式的過程裡，為了能在既有的 interface 裡加入「匿名函數式」用的接口（functional interface），但又不至於影響到實作了這些 interface 的 class，開發團隊引進了新的語法：default，讓 interface 本身就能夠實作 method。這樣就能增加新的東西進去，卻不用強迫過去用了這些 interface 的 class，也得跟著回頭實作這些新的東西。
-                </p>
-                <hr>
-                <section>
-                    <h3>S.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            interface S{
-                                //原先規定 class 都得實作的 f1()。
-                                void f1();
-                                //日後增加了 f2()，但不希望強迫早先的 class 還要回過頭來實作 f2()。
-                                default void f2(){
-                                    System.out.print("BBB");
-                                }
-                            }
+			<section>
+				<h2>default</h2>
+				<p>
+					在 Java SE 8 引入 Lambda 算式的過程裡，為了能在既有的 interface 裡加入「匿名函數式」用的接口（functional interface），但又不至於影響到實作了這些 interface 的 class，開發團隊引進了新的語法：default，讓 interface 本身就能夠實作 method。這樣就能增加新的東西進去，卻不用強迫過去用了這些 interface 的 class，也得跟著回頭實作這些新的東西。
+				</p>
+				<hr>
+				<section>
+					<h3>S.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							interface S{
+								//原先規定 class 都得實作的 f1()。
+								void f1();
+								//日後增加了 f2()，但不希望強迫早先的 class 還要回過頭來實作 f2()。
+								default void f2(){
+									System.out.print("BBB");
+								}
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements S{
-                                //不受影響，A 繼續扮演實作 f1() 的角色。
-                                public void f1(){
-                                    System.out.print("AAA");
-                                }
-                            }
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements S{
+								//不受影響，A 繼續扮演實作 f1() 的角色。
+								public void f1(){
+									System.out.print("AAA");
+								}
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    了解這段 default 的歷史背景很重要！在 Java SE 8 時代暫且不要濫用 interface 的 default 功能，它是為了解決引進 Lambda 語法時所遭遇到的問題，並不是基於 interface 本身也該有實作能力而引進。過早濫用這項功能，可能破壞物件導向程式設計的精神。<br>
-                    <br>
-                    等 Java 9 時代，看看大家對 interface 的 default 使用情形，如果蔚成 pattern 再考慮「濫用」它。
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<p>
+					了解這段 default 的歷史背景很重要！在 Java SE 8 時代暫且不要濫用 interface 的 default 功能，它是為了解決引進 Lambda 語法時所遭遇到的問題，並不是基於 interface 本身也該有實作能力而引進。過早濫用這項功能，可能破壞物件導向程式設計的精神。<br>
+					<br>
+					等 Java 9 時代，看看大家對 interface 的 default 使用情形，如果蔚成 pattern 再考慮「濫用」它。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[1] 「型別」相當於「資料型態」，但是在學術派物件導向有更深一層意義：「可以自訂的資料型態才叫型別。」傳統程式設計的資料型態是寫死的，物件導向程式設計可以自行擴展資料型態。「型別」只能容納「類別」所生成的物件，本身不能產生物件，這是兩者之間的差異所在。善用「型別」可以讓「物件」的「實作」獨立開來設計；當你擔心程式設計裡，某些環節會被既定的「實作」給寫死，那讓「不同類別」有個「共通型別」做為可供遵循的規範，可以提高該一環節日後改寫的靈活與彈性。</p>
-            </footer>
+			<footer>
+				<p>[1] 「型別」相當於「資料型態」，但是在學術派物件導向有更深一層意義：「可以自訂的資料型態才叫型別。」傳統程式設計的資料型態是寫死的，物件導向程式設計可以自行擴展資料型態。「型別」只能容納「類別」所生成的物件，本身不能產生物件，這是兩者之間的差異所在。善用「型別」可以讓「物件」的「實作」獨立開來設計；當你擔心程式設計裡，某些環節會被既定的「實作」給寫死，那讓「不同類別」有個「共通型別」做為可供遵循的規範，可以提高該一環節日後改寫的靈活與彈性。</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

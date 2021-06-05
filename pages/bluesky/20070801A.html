@@ -2,43 +2,43 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>關閉或解除安裝 OneDrive</h1>
-            </header>
+			<header>
+				<h1>關閉或解除安裝 OneDrive</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                以系統管理員身分執行命令提示字元，輸入：<kbd>taskkill /f /im OneDrive.exe</kbd> 終止程序，再輸入 <kbd>%SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall</kbd> 解除安裝，最後用 <var>regedit.exe</var> 做如下設定：<br>
-                <br>
-                <code>
-                HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}<br>
-                "System.IsPinnedToNameSpaceTree"=dword:00000000<br>
-                <br>
-                HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}<br>
-                "System.IsPinnedToNameSpaceTree"=dword:00000000<br>
-                </code>
-                <br>
-                就能檔案總管側邊的 OneDrive 隱藏起來。<br>
-                <br>
-                或參考 Microsoft 官方文件《<a href='http://support.office.com/zh-tw/article/%E9%97%9C%E9%96%89%E6%88%96%E8%A7%A3%E9%99%A4%E5%AE%89%E8%A3%9D-OneDrive-f32a17ce-3336-40fe-9c38-6efb09f944b0' target='_blank'>關閉或解除安裝 OneDrive</a>》，但有點冗長。
-            </p>
+			<p>
+				以系統管理員身分執行命令提示字元，輸入：<kbd>taskkill /f /im OneDrive.exe</kbd> 終止程序，再輸入 <kbd>%SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall</kbd> 解除安裝，最後用 <var>regedit.exe</var> 做如下設定：<br>
+				<br>
+				<code>
+				HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}<br>
+				"System.IsPinnedToNameSpaceTree"=dword:00000000<br>
+				<br>
+				HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}<br>
+				"System.IsPinnedToNameSpaceTree"=dword:00000000<br>
+				</code>
+				<br>
+				就能檔案總管側邊的 OneDrive 隱藏起來。<br>
+				<br>
+				或參考 Microsoft 官方文件《<a href='http://support.office.com/zh-tw/article/%E9%97%9C%E9%96%89%E6%88%96%E8%A7%A3%E9%99%A4%E5%AE%89%E8%A3%9D-OneDrive-f32a17ce-3336-40fe-9c38-6efb09f944b0' target='_blank'>關閉或解除安裝 OneDrive</a>》，但有點冗長。
+			</p>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

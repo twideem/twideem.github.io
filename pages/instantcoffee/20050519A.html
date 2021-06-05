@@ -2,88 +2,88 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>final</h1>
-                <p>如果你覺得 final 應該不是什麼了不起的東西，現在趕快來看看它在你設計 class 時，會帶來很大的實用性。</p>
-            </header>
+			<header>
+				<h1>final</h1>
+				<p>如果你覺得 final 應該不是什麼了不起的東西，現在趕快來看看它在你設計 class 時，會帶來很大的實用性。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>final 資料欄位</h2>
-                <p>
-                    將 field 宣告為 final，表示它設定了初始值後，就不能再設定新的值給它，等於 constant（常數）。如果試圖在原始碼中修改資料，將無法通過編譯。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        private final String x = "Hello";
+			<section>
+				<h2>final 資料欄位</h2>
+				<p>
+					將 field 宣告為 final，表示它設定了初始值後，就不能再設定新的值給它，等於 constant（常數）。如果試圖在原始碼中修改資料，將無法通過編譯。<br>
+					<br>
+					<textarea class='brush:java'>
+						private final String x = "Hello";
                     </textarea>
-                    <br>
-                    值得注意的是！並不是在宣告的時候就一定要同時給予初始值！<br>
-                    <br>
-                    先宣告為 final，然後執行一段程式運算，再將計算好的結果，在 constructor（建構式）中設定給它，既可動態賦予內容，又能防止被修改，是很棒的機制！<br>
-                    <br>
-                    將這種資料欄位設為 public，對開發者來說，設計感變得更充滿彈性，而不是死板板的只能開放 method 來操作 object；畢竟！有些時候就是覺得 field 比較直覺，例如 Math.PI 其實就是 public static final double PI。<br>
-                    <br>
-                    final 資料欄位未給定初始值的話，編譯器會告知錯誤，所以可以放手去用這項設計手法。
-                </p>
-            </section>
+					<br>
+					值得注意的是！並不是在宣告的時候就一定要同時給予初始值！<br>
+					<br>
+					先宣告為 final，然後執行一段程式運算，再將計算好的結果，在 constructor（建構式）中設定給它，既可動態賦予內容，又能防止被修改，是很棒的機制！<br>
+					<br>
+					將這種資料欄位設為 public，對開發者來說，設計感變得更充滿彈性，而不是死板板的只能開放 method 來操作 object；畢竟！有些時候就是覺得 field 比較直覺，例如 Math.PI 其實就是 public static final double PI。<br>
+					<br>
+					final 資料欄位未給定初始值的話，編譯器會告知錯誤，所以可以放手去用這項設計手法。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>final 操作方式</h2>
-                <p>
-                    將 method 宣告為 final，表示禁止 override（覆寫）。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public final String s(){
-                            return "Hello";
-                        }
+			<section>
+				<h2>final 操作方式</h2>
+				<p>
+					將 method 宣告為 final，表示禁止 override（覆寫）。<br>
+					<br>
+					<textarea class='brush:java'>
+						public final String s(){
+							return "Hello";
+						}
                     </textarea>
-                    <br>
-                    這項機制可以確保特定 method 只能照你所想要的設計來運作。<br>
-                    <br>
-                    當你不希望 class 被人家透過繼承的方式給 override 掉，產生預期外的行為表現，就可以使用這項功能來限制。<br>
-                    <br>
-                    例如驗證密碼的動作，很可能被 override 後，以永遠傳回 true 的方式來規避你的設計。
-                </p>
-            </section>
+					<br>
+					這項機制可以確保特定 method 只能照你所想要的設計來運作。<br>
+					<br>
+					當你不希望 class 被人家透過繼承的方式給 override 掉，產生預期外的行為表現，就可以使用這項功能來限制。<br>
+					<br>
+					例如驗證密碼的動作，很可能被 override 後，以永遠傳回 true 的方式來規避你的設計。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>final 類別</h2>
-                <p>
-                    將 class 宣告為 final，表示不能使用 extends 來繼承。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public final class A{ }
+			<section>
+				<h2>final 類別</h2>
+				<p>
+					將 class 宣告為 final，表示不能使用 extends 來繼承。<br>
+					<br>
+					<textarea class='brush:java'>
+						public final class A{ }
                     </textarea>
-                    <br>
-                    java.lang.Math 就是裡面的數學函式跟數學符號都希望寫死，所以無法被 extends 的例子！<br>
-                    <br>
-                    很自然的，既然 class 無法被繼承，那就沒有 method 會被 override 的問題，所以 fianl 的 class 裡面 method 都是 final，或者說不需要再宣告為 final。<br>
-                    <br>
-                    但 field 還是可以修改的，並未預設為 final，這點需要留意。
-                </p>
-            </section>
+					<br>
+					java.lang.Math 就是裡面的數學函式跟數學符號都希望寫死，所以無法被 extends 的例子！<br>
+					<br>
+					很自然的，既然 class 無法被繼承，那就沒有 method 會被 override 的問題，所以 fianl 的 class 裡面 method 都是 final，或者說不需要再宣告為 final。<br>
+					<br>
+					但 field 還是可以修改的，並未預設為 final，這點需要留意。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

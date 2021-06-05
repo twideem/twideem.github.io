@@ -2,52 +2,52 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>過濾重複資料以及排序</h1>
-            </header>
+			<header>
+				<h1>過濾重複資料以及排序</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>輸入</h2>
-                <p>
-                    <textarea cols='78' rows='9' style='margin-bottom:-5px'></textarea>
-                    <button style='width:569px' onclick='f1(f2())'>執行</button>
-                </p>
-            </section>
+			<section>
+				<h2>輸入</h2>
+				<p>
+					<textarea cols='78' rows='9' style='margin-bottom:-5px'></textarea>
+					<button style='width:569px' onclick='f1(f2())'>執行</button>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>輸出</h2>
-                <p>輸入資料時，請用逗號隔開每筆資料。</p>
-            </section>
+			<section>
+				<h2>輸出</h2>
+				<p>輸入資料時，請用逗號隔開每筆資料。</p>
+			</section>
 
-        </article>
+		</article>
 
-        <script>
-            function f1(x){
-                var a=new Set(x).values(),b=''
-                for(var n of a) b+=n+'<br>'
-                document.getElementsByTagName('p')[1].innerHTML=b
-            }
-            function f2(){
-                return document.getElementsByTagName('textarea')[0].value.split(',').sort()
-            }
-        </script>
+		<script>
+			function f1(x){
+				var a=new Set(x).values(),b=''
+				for(var n of a) b+=n+'<br>'
+				document.getElementsByTagName('p')[1].innerHTML=b
+			}
+			function f2(){
+				return document.getElementsByTagName('textarea')[0].value.split(',').sort()
+			}
+		</script>
 
-    </body>
+	</body>
 
 </html>

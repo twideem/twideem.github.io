@@ -2,328 +2,328 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1 style='font-size:14pt'>用 QEMU 0.9.x 搭配 ImgBurn 和 7-Zip 玩 Windows 9x</h1>
-                <p>
-                    QEMU 可以只留 6 個檔案約 2.37MB，就能跑 Windows 9x，非常輕量級：bios.bin、fmod.dll、libusb0.dll、qemu-system-x86_64.exe（或 qemu.exe）、SDL.dll、vgabios-cirrus.bin。<br>
-                    <br>
-                    但只有 QEMU 0.9.x 適合跑 Windows 9x，新版不但開始笨重，而且只適合安裝新式作業系統。<br>
-                    <br>
-                    QEMU 可以掛載 *.img 磁碟或 *.iso 光碟，但免費軟體中，並沒有方便存取映像檔的 UltraISO 可用，這部分改用 ImgBurn 自己製作 *.img 和 *.iso 掛載到 QEMU，再搭配 7-Zip 從映像檔取出資料。<br>
-                    <br>
-                    接下來是更詳細的介紹～
-                </p>
-            </header>
+			<header>
+				<h1 style='font-size:14pt'>用 QEMU 0.9.x 搭配 ImgBurn 和 7-Zip 玩 Windows 9x</h1>
+				<p>
+					QEMU 可以只留 6 個檔案約 2.37MB，就能跑 Windows 9x，非常輕量級：bios.bin、fmod.dll、libusb0.dll、qemu-system-x86_64.exe（或 qemu.exe）、SDL.dll、vgabios-cirrus.bin。<br>
+					<br>
+					但只有 QEMU 0.9.x 適合跑 Windows 9x，新版不但開始笨重，而且只適合安裝新式作業系統。<br>
+					<br>
+					QEMU 可以掛載 *.img 磁碟或 *.iso 光碟，但免費軟體中，並沒有方便存取映像檔的 UltraISO 可用，這部分改用 ImgBurn 自己製作 *.img 和 *.iso 掛載到 QEMU，再搭配 7-Zip 從映像檔取出資料。<br>
+					<br>
+					接下來是更詳細的介紹～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>準備</h2>
-                <hr>
-                <section>
-                    <h3>QEMU 0.9.x</h3>
-                    <p>
-                        請至 <a href='http://www.h7.dion.ne.jp/~qemu-win/' target='_blank'>http://www.h7.dion.ne.jp/~qemu-win/</a> 下載 <var>qemu-0.9.0-windows.zip</var>，解壓後就得到 QEMU 0.9.0。<ins>[1]</ins>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Windows 98 開機片</h3>
-                    <p>
-                        請連到 <a href='http://www.allbootdisks.com/download/98.html' target='_blank'>http://www.allbootdisks.com/download/98.html</a>，展開 Disktte Images 後下載 <var>Windows98_SE.img</var>，即為 Windows 98 開機片。請放在 QEMU 目錄裡面，並建議重新命名為 floppy.img。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Windows 9x 安裝光碟</h3>
-                    <p>
-                        手上沒有 Windows 9x 安裝光碟的話，可至滄者極限討論區的《<a href='http://www.coolaler.com/showthread.php/271193-%E3%80%90%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E3%80%91Windows-95-OSR2-5-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E7%89%88' target='_blank'>Windows 95 OSR2.5 繁體中文版</a>》第 4 頁<ins>[2]</ins> 取得。
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>準備</h2>
+				<hr>
+				<section>
+					<h3>QEMU 0.9.x</h3>
+					<p>
+						請至 <a href='http://www.h7.dion.ne.jp/~qemu-win/' target='_blank'>http://www.h7.dion.ne.jp/~qemu-win/</a> 下載 <var>qemu-0.9.0-windows.zip</var>，解壓後就得到 QEMU 0.9.0。<ins>[1]</ins>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Windows 98 開機片</h3>
+					<p>
+						請連到 <a href='http://www.allbootdisks.com/download/98.html' target='_blank'>http://www.allbootdisks.com/download/98.html</a>，展開 Disktte Images 後下載 <var>Windows98_SE.img</var>，即為 Windows 98 開機片。請放在 QEMU 目錄裡面，並建議重新命名為 floppy.img。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Windows 9x 安裝光碟</h3>
+					<p>
+						手上沒有 Windows 9x 安裝光碟的話，可至滄者極限討論區的《<a href='http://www.coolaler.com/showthread.php/271193-%E3%80%90%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E3%80%91Windows-95-OSR2-5-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E7%89%88' target='_blank'>Windows 95 OSR2.5 繁體中文版</a>》第 4 頁<ins>[2]</ins> 取得。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>安裝</h2>
-                <p>
-                    請使用「MS-DOS 模式」或「命令提示字元」，切換路徑到 QEMU 目錄。
-                </p>
-                <hr>
-                <section>
-                    <h3>Step 1: 建立安裝 Windows 9x 的硬碟映像檔</h3>
-                    <p>
-                        輸入如下指令：<br>
-                        <br>
-                        <kbd>qemu-img create master.img 1G</kbd><br>
-                        <br>
-                        QEMU 資料夾裡面，就會出現名為 master.img 的檔案，這就是用來安裝 Windows 的硬碟。<br>
-                        <br>
-                        你可以視個人需求，將 1G 硬碟大小改為 500M 或 2G 之類。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 2: 以 Windows 98 開機片啟動 QEMU（等於開機）</h3>
-                    <p>
-                        輸入：<br>
-                        <br>
-                        <kbd>qemu -L . -M pc -m 64 -fda floppy.img -hda master.img -boot a</kbd><br>
-                        <br>
-                        然後選擇：<br>
-                        <br>
-                        <var>2. Start computer without CD-ROM support.</var><br>
-                        <br>
-                        就會看到 <var>A:\&gt;</var>，表示以 DOS 模式開機了～
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 3: 切割硬碟</h3>
-                    <p>
-                        輸入：<br>
-                        <br>
-                        <kbd>fdisk</kbd><br>
-                        <br>
-                        然後依序選擇：<br>
-                        <br>
-                        <kbd>Y</kbd> → <kbd>1</kbd> → <kbd>1</kbd> → <kbd>Y</kbd><br>
-                        <br>
-                        完成後，系統顯示：<br>
-                        <br>
-                        <output>
-                            You MUST restart your system for your changes to take effect.<br>
-                            Any drives you have created or changed must be formatted<br>
-                            AFTER you restart.<br>
-                            <br>
-                            Shut down Windows before restarting.<br>
-                        </output>
-                        <br>
-                        所以請按 <kbd>Esc</kbd> 退出回到 <var>A:\&gt;</var> 狀態後，關閉 QEMU 當作關機的動作。（你可能要按 Ctrl+Alt 才能用滑鼠按 X 關閉 QEMU。）
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 4: 格式化硬碟</h3>
-                    <p>
-                        重新以如下指令開機：
-                    </p>
-                    <section>
-                        <h4>放入 Windows 9x 安裝光碟的人請使用</h4>
-                        <p>
-                            <kbd>qemu -L . -M pc -m 64 -fda floppy.img -hda master.img -cdrom E: -soundhw sb16 -localtime -boot a</kbd>　（請視你光碟機代號修改指令的 E:）
-                        </p>
-                    </section>
-                    <section>
-                        <h4>下載 Windows 9x 映像檔的人請使用</h4>
-                        <p>
-                            <kbd>qemu -L . -M pc -m 64 -fda floppy.img -hda master.img -cdrom cdrom.iso -soundhw sb16 -localtime -boot a</kbd>
-                        </p>
-                    </section>
-                    <p>
-                        然後選擇：<br>
-                        <br>
-                        <var>1. Start computer with CD-ROM support.</var><br>
-                        <br>
-                        進入 <var>A:\&gt;</var> 狀態後，輸入：<br>
-                        <br>
-                        <kbd>format c:</kbd><br>
-                        <br>
-                        然後按 <kbd>Y</kbd> 格式化後，再直接按 <kbd>Enter</kbd> 即可。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 5: 安裝 Windows</h3>
-                    <p>
-                        建議將光碟片的 Windows 安裝檔案，全部複製到 C 槽，然後才執行 Windows 安裝程式：<br>
-                        <br>
-                        <kbd>
-                            md c:\Setup<br>
-                            copy e:\win95 c:\setup<br>
-                            c:\setup\setup /is<br>
-                        </kbd>
-                        <br>
-                        接下來都是圖形化介面，照畫面指示安裝吧～
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 6: 啟動 Windows</h3>
-                    <p>
-                        安裝好 Windows 以後，基本上用如下指令就能開機：<br>
-                        <br>
-                        <kbd>qemu -L . -M pc -m 64 -hda master.img -soundhw sb16 -localtime</kbd><br>
-                        <br>
-                        需要掛載另一顆硬碟，或者加裝網路卡的話，再附加其它參數進去～
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>安裝</h2>
+				<p>
+					請使用「MS-DOS 模式」或「命令提示字元」，切換路徑到 QEMU 目錄。
+				</p>
+				<hr>
+				<section>
+					<h3>Step 1: 建立安裝 Windows 9x 的硬碟映像檔</h3>
+					<p>
+						輸入如下指令：<br>
+						<br>
+						<kbd>qemu-img create master.img 1G</kbd><br>
+						<br>
+						QEMU 資料夾裡面，就會出現名為 master.img 的檔案，這就是用來安裝 Windows 的硬碟。<br>
+						<br>
+						你可以視個人需求，將 1G 硬碟大小改為 500M 或 2G 之類。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 2: 以 Windows 98 開機片啟動 QEMU（等於開機）</h3>
+					<p>
+						輸入：<br>
+						<br>
+						<kbd>qemu -L . -M pc -m 64 -fda floppy.img -hda master.img -boot a</kbd><br>
+						<br>
+						然後選擇：<br>
+						<br>
+						<var>2. Start computer without CD-ROM support.</var><br>
+						<br>
+						就會看到 <var>A:\&gt;</var>，表示以 DOS 模式開機了～
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 3: 切割硬碟</h3>
+					<p>
+						輸入：<br>
+						<br>
+						<kbd>fdisk</kbd><br>
+						<br>
+						然後依序選擇：<br>
+						<br>
+						<kbd>Y</kbd> → <kbd>1</kbd> → <kbd>1</kbd> → <kbd>Y</kbd><br>
+						<br>
+						完成後，系統顯示：<br>
+						<br>
+						<output>
+							You MUST restart your system for your changes to take effect.<br>
+							Any drives you have created or changed must be formatted<br>
+							AFTER you restart.<br>
+							<br>
+							Shut down Windows before restarting.<br>
+						</output>
+						<br>
+						所以請按 <kbd>Esc</kbd> 退出回到 <var>A:\&gt;</var> 狀態後，關閉 QEMU 當作關機的動作。（你可能要按 Ctrl+Alt 才能用滑鼠按 X 關閉 QEMU。）
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 4: 格式化硬碟</h3>
+					<p>
+						重新以如下指令開機：
+					</p>
+					<section>
+						<h4>放入 Windows 9x 安裝光碟的人請使用</h4>
+						<p>
+							<kbd>qemu -L . -M pc -m 64 -fda floppy.img -hda master.img -cdrom E: -soundhw sb16 -localtime -boot a</kbd>　（請視你光碟機代號修改指令的 E:）
+						</p>
+					</section>
+					<section>
+						<h4>下載 Windows 9x 映像檔的人請使用</h4>
+						<p>
+							<kbd>qemu -L . -M pc -m 64 -fda floppy.img -hda master.img -cdrom cdrom.iso -soundhw sb16 -localtime -boot a</kbd>
+						</p>
+					</section>
+					<p>
+						然後選擇：<br>
+						<br>
+						<var>1. Start computer with CD-ROM support.</var><br>
+						<br>
+						進入 <var>A:\&gt;</var> 狀態後，輸入：<br>
+						<br>
+						<kbd>format c:</kbd><br>
+						<br>
+						然後按 <kbd>Y</kbd> 格式化後，再直接按 <kbd>Enter</kbd> 即可。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 5: 安裝 Windows</h3>
+					<p>
+						建議將光碟片的 Windows 安裝檔案，全部複製到 C 槽，然後才執行 Windows 安裝程式：<br>
+						<br>
+						<kbd>
+							md c:\Setup<br>
+							copy e:\win95 c:\setup<br>
+							c:\setup\setup /is<br>
+						</kbd>
+						<br>
+						接下來都是圖形化介面，照畫面指示安裝吧～
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 6: 啟動 Windows</h3>
+					<p>
+						安裝好 Windows 以後，基本上用如下指令就能開機：<br>
+						<br>
+						<kbd>qemu -L . -M pc -m 64 -hda master.img -soundhw sb16 -localtime</kbd><br>
+						<br>
+						需要掛載另一顆硬碟，或者加裝網路卡的話，再附加其它參數進去～
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>心得</h2>
-                <hr>
-                <section>
-                    <h3>善用虛擬光碟片讓 QEMU 的 Windows 存取實機 Windows 的檔案或程式</h3>
-                    <p>
-                        例如下載了驅動程式，你可用 ImgBurn 製作成 *.iso 檔，然後把這張虛擬的光碟片掛載給 qemu，就能在進入 Windows 9x 後，從光碟機中安裝它：<br>
-                        <br>
-                        <kbd>qemu -L . -M pc -m 64 -hda master.img -cdrom cdrom.iso -soundhw sb16 -localtime</kbd><br>
-                        <br>
-                        在 <a href='http://www.claunia.com/qemu/drivers/index.html' target='_blank'>http://www.claunia.com/qemu/drivers/index.html</a> 可以下載許多專為 QEMU 準備的驅動程式。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>擴充硬碟</h3>
-                    <p>
-                        你可用 <kbd>qemu-image</kbd> 再建立一個任意大小的 <var>slave.img</var> 映像檔，然後執行 <kbd>qemu </kbd>添加時 <kbd>-hdb slave.img</kbd> 參數，例如：<br>
-                        <br>
-                        <kbd>qemu -L . -M pc -m 64 -hda master.img -hdb slave.img -soundhw sb16 -localtime</kbd><br>
-                        <br>
-                        進入 Windows 後，「我的電腦」裡就會看到多了 D 槽這個硬碟，經格式化，你的 Windows 9x 就能安裝或保存更多檔案了。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>存取 QEMU 中 Windows 9x 硬碟的檔案</h3>
-                    <p>
-                        如果有 UltraISO 的話，那 QEMU 人生就是彩色的，它能讓你任意加入或刪除 *.img 裡面的檔案。不過這是商業軟體，而免費軟體中並沒有同樣好用的替代品。<br>
-                        <br>
-                        目前折衷方案是：<br>
-                        <br>
-                        <samp>
-                        取出檔案：用 7-Zip 從 *.img 中提出檔案。<br>
-                        加入檔案：用 ImgBurn 將檔案轉為虛擬光碟片，讓 QEMU 掛載與讀取。<br>
-                        刪除檔案：進入 QEMU 的 Windows 刪除囉～<br>
-                        </samp>
-                        <br>
-                        目前正透過 <a href='http://alternativeto.net/software/ultraiso/' target='_blank'>alternativeTo</a> 列出的清單，尋找 UltraISO 的替代品中，但 WinISO 或者 Linux 的 Iso Master 都不支援磁碟用途的 *.img 檔。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>網路卡</h3>
-                    <p>
-                        要讓 Windows 上網的話，必須以 <kbd>-net nic,model=ne2k_pci -net user</kbd> 參數掛載  網路卡，例如：<br>
-                        <br>
-                        <kbd>qemu -L . -M pc -m 64 -hda master.img -soundhw sb16 -net nic,model=ne2k_pci -net user -localtime</kbd><br>
-                        <br>
-                        網路卡沒正常驅動的話，就不能上網，底下是心得：<br>
-                        <br>
-                        Windows 95 的話，建議、建議、再建議！先安裝網路卡的驅動程式，然後重新開機，再關機來掛載網路卡，這樣開機才「有機會」偵測到網路卡，因為 Windows 95 的隨插即用很笨，一搞混找不到的話，很可能再也找不到。（這時可以改用 <kbd>-net nic,model=rtl8139 -net user</kbd> 參數，換掛載 Realtek RTL8139/810X Family PCI Fast Ethemet NIC 網路卡，但是記得！請先裝好 8139 的驅動程式！別又犯同樣的毛病了！）<br>
-                        <br>
-                        Windows 98 的話，必須先到「開始」→「設定」→「控制台」→「系統」→「裝置管理員」，將「Plug and play bios (fail safe)」的驅動程式改為「PCI 匯流排」，重新開機才能偵測到「Realtek RTL8029(AS) PCI Ethernet NIC」網路卡！<br>
-                        <br>
-                        搞定網路卡後，依序操作「開始」→「設定」→「控制台」→「網路」→「新增」→「通訊協定」→「Microsoft」→「TCP/IP」，然後將「主網路登入」設定為「Windows 登入」，重新開機，就能在 QEMU 用 Windows 開 IE 上網了～
-                    </p>
-                    <figure>
-                        <img src='../../figures/bluesky/20070207A_01.jpg' alt='插圖'>
-                        <figcaption>QEMU 0.9.0 裝 Windows 98 SE 上網，防止上網亂下載東西中標 XDDD</figcaption>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>在 Linux 跑 QEMU 裝的 Windows 9x</h3>
-                    <p>
-                        同樣 0.9.x 版的 QEMU 才適合，所以到 <a href='http://old-releases.ubuntu.com/ubuntu/pool/universe/q/qemu/' target='_blank'>http://old-releases.ubuntu.com/ubuntu/pool/universe/q/qemu/</a> 下載 <var>qemu_0.9.1-5ubuntu3_i386.deb</var>：
-                    </p>
-                    <figure>
-                        <img src='../../figures/bluesky/20070207A_02.jpg' alt='插圖'>
-                        <figcaption>Lubuntu 14.10 跑 QEMU 0.9.1 裝 Windows 95 OSR 2</figcaption>
-                    </figure>
-                    <p>
-                        這時 qemu 的 -soundhw 參數建議改為 all，但我的 Linux 筆電還是抓不到音效卡，而且滑鼠游標滑起來太快，並不好用，裝來過過乾癮而已～
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>心得</h2>
+				<hr>
+				<section>
+					<h3>善用虛擬光碟片讓 QEMU 的 Windows 存取實機 Windows 的檔案或程式</h3>
+					<p>
+						例如下載了驅動程式，你可用 ImgBurn 製作成 *.iso 檔，然後把這張虛擬的光碟片掛載給 qemu，就能在進入 Windows 9x 後，從光碟機中安裝它：<br>
+						<br>
+						<kbd>qemu -L . -M pc -m 64 -hda master.img -cdrom cdrom.iso -soundhw sb16 -localtime</kbd><br>
+						<br>
+						在 <a href='http://www.claunia.com/qemu/drivers/index.html' target='_blank'>http://www.claunia.com/qemu/drivers/index.html</a> 可以下載許多專為 QEMU 準備的驅動程式。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>擴充硬碟</h3>
+					<p>
+						你可用 <kbd>qemu-image</kbd> 再建立一個任意大小的 <var>slave.img</var> 映像檔，然後執行 <kbd>qemu </kbd>添加時 <kbd>-hdb slave.img</kbd> 參數，例如：<br>
+						<br>
+						<kbd>qemu -L . -M pc -m 64 -hda master.img -hdb slave.img -soundhw sb16 -localtime</kbd><br>
+						<br>
+						進入 Windows 後，「我的電腦」裡就會看到多了 D 槽這個硬碟，經格式化，你的 Windows 9x 就能安裝或保存更多檔案了。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>存取 QEMU 中 Windows 9x 硬碟的檔案</h3>
+					<p>
+						如果有 UltraISO 的話，那 QEMU 人生就是彩色的，它能讓你任意加入或刪除 *.img 裡面的檔案。不過這是商業軟體，而免費軟體中並沒有同樣好用的替代品。<br>
+						<br>
+						目前折衷方案是：<br>
+						<br>
+						<samp>
+						取出檔案：用 7-Zip 從 *.img 中提出檔案。<br>
+						加入檔案：用 ImgBurn 將檔案轉為虛擬光碟片，讓 QEMU 掛載與讀取。<br>
+						刪除檔案：進入 QEMU 的 Windows 刪除囉～<br>
+						</samp>
+						<br>
+						目前正透過 <a href='http://alternativeto.net/software/ultraiso/' target='_blank'>alternativeTo</a> 列出的清單，尋找 UltraISO 的替代品中，但 WinISO 或者 Linux 的 Iso Master 都不支援磁碟用途的 *.img 檔。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>網路卡</h3>
+					<p>
+						要讓 Windows 上網的話，必須以 <kbd>-net nic,model=ne2k_pci -net user</kbd> 參數掛載  網路卡，例如：<br>
+						<br>
+						<kbd>qemu -L . -M pc -m 64 -hda master.img -soundhw sb16 -net nic,model=ne2k_pci -net user -localtime</kbd><br>
+						<br>
+						網路卡沒正常驅動的話，就不能上網，底下是心得：<br>
+						<br>
+						Windows 95 的話，建議、建議、再建議！先安裝網路卡的驅動程式，然後重新開機，再關機來掛載網路卡，這樣開機才「有機會」偵測到網路卡，因為 Windows 95 的隨插即用很笨，一搞混找不到的話，很可能再也找不到。（這時可以改用 <kbd>-net nic,model=rtl8139 -net user</kbd> 參數，換掛載 Realtek RTL8139/810X Family PCI Fast Ethemet NIC 網路卡，但是記得！請先裝好 8139 的驅動程式！別又犯同樣的毛病了！）<br>
+						<br>
+						Windows 98 的話，必須先到「開始」→「設定」→「控制台」→「系統」→「裝置管理員」，將「Plug and play bios (fail safe)」的驅動程式改為「PCI 匯流排」，重新開機才能偵測到「Realtek RTL8029(AS) PCI Ethernet NIC」網路卡！<br>
+						<br>
+						搞定網路卡後，依序操作「開始」→「設定」→「控制台」→「網路」→「新增」→「通訊協定」→「Microsoft」→「TCP/IP」，然後將「主網路登入」設定為「Windows 登入」，重新開機，就能在 QEMU 用 Windows 開 IE 上網了～
+					</p>
+					<figure>
+						<img src='../../figures/bluesky/20070207A_01.jpg' alt='插圖'>
+						<figcaption>QEMU 0.9.0 裝 Windows 98 SE 上網，防止上網亂下載東西中標 XDDD</figcaption>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>在 Linux 跑 QEMU 裝的 Windows 9x</h3>
+					<p>
+						同樣 0.9.x 版的 QEMU 才適合，所以到 <a href='http://old-releases.ubuntu.com/ubuntu/pool/universe/q/qemu/' target='_blank'>http://old-releases.ubuntu.com/ubuntu/pool/universe/q/qemu/</a> 下載 <var>qemu_0.9.1-5ubuntu3_i386.deb</var>：
+					</p>
+					<figure>
+						<img src='../../figures/bluesky/20070207A_02.jpg' alt='插圖'>
+						<figcaption>Lubuntu 14.10 跑 QEMU 0.9.1 裝 Windows 95 OSR 2</figcaption>
+					</figure>
+					<p>
+						這時 qemu 的 -soundhw 參數建議改為 all，但我的 Linux 筆電還是抓不到音效卡，而且滑鼠游標滑起來太快，並不好用，裝來過過乾癮而已～
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>軟體</h2>
-                <p>
-                    在 <a href='http://www.oldversion.com' target='_blank'>http://www.oldversion.com</a> 可以下載到很多 Windows 9x 年代的安裝程式，例如 Dreamweaver 3 或 Flash 4 這些讓人懷念的 30 天試用版軟體～<br>
-                    <br>
-                    在 <a href='http://netcrack.com' target='_blank'>http://netcrack.com</a> 可以找到破解試用版的程式 0.0
-                </p>
-            </section>
+			<section>
+				<h2>軟體</h2>
+				<p>
+					在 <a href='http://www.oldversion.com' target='_blank'>http://www.oldversion.com</a> 可以下載到很多 Windows 9x 年代的安裝程式，例如 Dreamweaver 3 或 Flash 4 這些讓人懷念的 30 天試用版軟體～<br>
+					<br>
+					在 <a href='http://netcrack.com' target='_blank'>http://netcrack.com</a> 可以找到破解試用版的程式 0.0
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 雖然 <a href='http://homepage3.nifty.com/takeda-toshiya/' target='_blank'>http://homepage3.nifty.com/takeda-toshiya/</a> 可以下載 QEMU on Windows Ver 0.9.1，但執行 qemu.exe 或 qemu-system-x86_64.exe 時程式錯誤。<br>
-                    [2] 第 1 頁原 PO 的載點已經失效。<br>
-                    [*] 在官網的推薦連結清單 <a href='http://wiki.qemu.org/Links' target='_blank'>http://wiki.qemu.org/Links</a> 中，可以取得更多 QEMU 資源！<br>
-                    [*] 在 <a href='http://qemu.weilnetz.de' target='_blank'>http://qemu.weilnetz.de</a> 可以下載更多版本的 QEMU～<br>
+			<footer>
+				<p>
+					[1] 雖然 <a href='http://homepage3.nifty.com/takeda-toshiya/' target='_blank'>http://homepage3.nifty.com/takeda-toshiya/</a> 可以下載 QEMU on Windows Ver 0.9.1，但執行 qemu.exe 或 qemu-system-x86_64.exe 時程式錯誤。<br>
+					[2] 第 1 頁原 PO 的載點已經失效。<br>
+					[*] 在官網的推薦連結清單 <a href='http://wiki.qemu.org/Links' target='_blank'>http://wiki.qemu.org/Links</a> 中，可以取得更多 QEMU 資源！<br>
+					[*] 在 <a href='http://qemu.weilnetz.de' target='_blank'>http://qemu.weilnetz.de</a> 可以下載更多版本的 QEMU～<br>
 
-                </p>
-            </footer>
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
-    <!--
+	<!--
 
-        [ Timeline ]
+		[ Timeline ]
 
-            1997       Delhpi 3
-            1997       FrontPage 98
-            1997 02    Visual Basic 5
-            1997 06    Netscape 4 (Netscape Communicator)
-            1997 09    IE 4
+			1997	   Delhpi 3
+			1997	   FrontPage 98
+			1997 02	Visual Basic 5
+			1997 06	Netscape 4 (Netscape Communicator)
+			1997 09	IE 4
 
-            1998 02    Photoshop 5       Windows 95 成熟期 SETUP.EXE 時代
-            1998 夏    Visaul Basic 6
-            1998 10    WinZip 7
-            1998 12    J2SE 1.2
+			1998 02	Photoshop 5	   Windows 95 成熟期 SETUP.EXE 時代
+			1998 夏	Visaul Basic 6
+			1998 10	WinZip 7
+			1998 12	J2SE 1.2
 
-            1999       PhotoImpact 5
-            1999 03    IE 5
-            1999 05    Netscape 4.60
-            1999 07    Flash 4
-            1999 12    Dreamweaver 3
+			1999	   PhotoImpact 5
+			1999 03	IE 5
+			1999 05	Netscape 4.60
+			1999 07	Flash 4
+			1999 12	Dreamweaver 3
 
-            2000       PhotoImpact 6     Windows 98 成熟期 Install.exe 時代
-            2000 03    DirectX 7.0a      DirectDraw 與 Direct3D 分開的 Windows 9x 版本，DirectX 8 開始合併在一起。
-            2000 04    WinZip 8
-            2000 05    J2SE 1.3
-            2000 07    IE 5.5
-            2000 08    Flash 5
-            2000 09    Photoshop 6
-            2000 10    Netscape 6
-            2000 12    Dreamweaver 4
+			2000	   PhotoImpact 6	 Windows 98 成熟期 Install.exe 時代
+			2000 03	DirectX 7.0a	  DirectDraw 與 Direct3D 分開的 Windows 9x 版本，DirectX 8 開始合併在一起。
+			2000 04	WinZip 8
+			2000 05	J2SE 1.3
+			2000 07	IE 5.5
+			2000 08	Flash 5
+			2000 09	Photoshop 6
+			2000 10	Netscape 6
+			2000 12	Dreamweaver 4
 
-            2001       PhotoImpact 7
-            2001 02    DirectX 8.0a      Windows 95 最終版本
-            2001 10    DirectX 8.1       Windows XP 適用
-            2001 12    WinZip 8.1
+			2001	   PhotoImpact 7
+			2001 02	DirectX 8.0a	  Windows 95 最終版本
+			2001 10	DirectX 8.1	   Windows XP 適用
+			2001 12	WinZip 8.1
 
-            2002       PhotoImpact 8     Windows XP 登場
-            2002 02    J2SE 1.4
-            2002 03    Flash MX
-            2002 08    Netscape 7
-            2002 05    Dreamweaver MX
+			2002	   PhotoImpact 8	 Windows XP 登場
+			2002 02	J2SE 1.4
+			2002 03	Flash MX
+			2002 08	Netscape 7
+			2002 05	Dreamweaver MX
 
-            2004 10    DirectX 9.0c      Windows 98 最終版本
+			2004 10	DirectX 9.0c	  Windows 98 最終版本
 
-    -->
+	-->
 
 </html>

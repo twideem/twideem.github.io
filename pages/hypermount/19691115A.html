@@ -2,94 +2,94 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/fixure.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/fixure.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Canvas API</h1>
-            </header>
+			<header>
+				<h1>Canvas API</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>方法</h2>
-                <table>
-                    <tr><td>addColorStop(stop,color)</td><td>規定漸變對像中的顏色和停止位置。</td></tr>
-                    <tr><td>arc(x,y,r,a1,a2,c)</td><td>繪製圓弧，r 為半徑，a1 a2 為弧角的起始和結束，c 為 true 表示逆時針。</td></tr>
-                    <tr><td>arcTo(x,y,x2,y2,r)</td><td>繪製兩切線之間的圓弧。</td></tr>
-                    <tr><td>beginPath()</td><td>開始繪製路徑。</td></tr>
-                    <tr><td>bezierCurveTo(x,y,x2,y2,x3,y3)</td><td>繪製貝斯曲線。</td></tr>
-                    <tr><td>clearRect(x,y,w,h)</td><td>清除矩形內的圖像。</td></tr>
-                    <tr><td>clip()</td><td>從原始畫布剪切任意形狀和尺寸的區域。</td></tr>
-                    <tr><td>closePath()</td><td>結束繪製路徑。</td></tr>
-                    <tr><td>createImageData(w,h)</td><td>建立新的 ImageData 物件。</td></tr>
-                    <tr><td>createLinearGradient(x,y,x2,y2)</td><td>建立線性漸變。</td></tr>
-                    <tr><td>createPattern(image,pattern)</td><td>指定貼圖的模式：repeat、repeat-x、repeat-y、no-repeat。</td></tr>
-                    <tr><td>createRadialGradient(x,y,r,x2,y2,r2)</td><td>建立放射狀或環形的漸變。</td></tr>
-                    <tr><td>drawImage(image,x,y)</td><td>在畫布上繪製圖像、畫布或視頻。</td></tr>
-                    <tr><td>fillRect(x,y,w,h)</td><td>繪製有填色的矩形。</td></tr>
-                    <tr><td>fillText(text,x,y,w)</td><td>在畫布上繪製文字。</td></tr>
-                    <tr><td>fill()</td><td>填色。</td></tr>
-                    <tr><td>getImageData(x,y,w,h)</td><td>將畫布指定矩形範圍內的圖像輸出為 ImageData 物件。</td></tr>
-                    <tr><td>isPointInPath(x,y)</td><td>如果指定的點位於當前路徑中傳回 true，否則 false。</td></tr>
-                    <tr><td>lineTo(x,y)</td><td>添加一個新點，然後在畫布中建立從該點到最後指定點的線條。</td></tr>
-                    <tr><td>measureText(text)</td><td>傳回指定文字寬度的物件。</td></tr>
-                    <tr><td>moveTo(x,y)</td><td>把路徑移動到畫布中的指定點，不建立線條。</td></tr>
-                    <tr><td>putImageData(ImageData,x,y)</td><td>將 ImageData 貼到畫布位置上。</td></tr>
-                    <tr><td>quadraticCurveTo(x,y,x2,y2)</td><td>繪製曲線。</td></tr>
-                    <tr><td>rect(x,y,w,h)</td><td>建立矩形。</td></tr>
-                    <tr><td>restore()</td><td>復原畫布。</td></tr>
-                    <tr><td>rotate(a)</td><td>旋轉圖像。</td></tr>
-                    <tr><td>save()</td><td>保存畫布。</td></tr>
-                    <tr><td>scale(w,h)</td><td>縮放圖像。</td></tr>
-                    <tr><td>setTransform(a,b,c,d,e,f)</td><td>重製矩陣，然後執行 transform()。</td></tr>
-                    <tr><td>stroke()</td><td>繪製路徑。</td></tr>
-                    <tr><td>strokeRect(x,y,w,h)</td><td>繪製矩形。</td></tr>
-                    <tr><td>strokeText(text,x,y,w)</td><td>在畫布上繪製外框文字。</td></tr>
-                    <tr><td>toDataURL()</td><td>將畫布以 base64 編碼的 PNG 圖檔輸出。可輸入選擇性參數 'image/jpeg' 變成 JPEG 圖檔。</td></tr>
-                    <tr><td>translate(x,y)</td><td>移動圖像位置。</td></tr>
-                    <tr><td>transform(a,b,c,d,e,f)</td><td>將圖像轉換為矩陣。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>方法</h2>
+				<table>
+					<tr><td>addColorStop(stop,color)</td><td>規定漸變對像中的顏色和停止位置。</td></tr>
+					<tr><td>arc(x,y,r,a1,a2,c)</td><td>繪製圓弧，r 為半徑，a1 a2 為弧角的起始和結束，c 為 true 表示逆時針。</td></tr>
+					<tr><td>arcTo(x,y,x2,y2,r)</td><td>繪製兩切線之間的圓弧。</td></tr>
+					<tr><td>beginPath()</td><td>開始繪製路徑。</td></tr>
+					<tr><td>bezierCurveTo(x,y,x2,y2,x3,y3)</td><td>繪製貝斯曲線。</td></tr>
+					<tr><td>clearRect(x,y,w,h)</td><td>清除矩形內的圖像。</td></tr>
+					<tr><td>clip()</td><td>從原始畫布剪切任意形狀和尺寸的區域。</td></tr>
+					<tr><td>closePath()</td><td>結束繪製路徑。</td></tr>
+					<tr><td>createImageData(w,h)</td><td>建立新的 ImageData 物件。</td></tr>
+					<tr><td>createLinearGradient(x,y,x2,y2)</td><td>建立線性漸變。</td></tr>
+					<tr><td>createPattern(image,pattern)</td><td>指定貼圖的模式：repeat、repeat-x、repeat-y、no-repeat。</td></tr>
+					<tr><td>createRadialGradient(x,y,r,x2,y2,r2)</td><td>建立放射狀或環形的漸變。</td></tr>
+					<tr><td>drawImage(image,x,y)</td><td>在畫布上繪製圖像、畫布或視頻。</td></tr>
+					<tr><td>fillRect(x,y,w,h)</td><td>繪製有填色的矩形。</td></tr>
+					<tr><td>fillText(text,x,y,w)</td><td>在畫布上繪製文字。</td></tr>
+					<tr><td>fill()</td><td>填色。</td></tr>
+					<tr><td>getImageData(x,y,w,h)</td><td>將畫布指定矩形範圍內的圖像輸出為 ImageData 物件。</td></tr>
+					<tr><td>isPointInPath(x,y)</td><td>如果指定的點位於當前路徑中傳回 true，否則 false。</td></tr>
+					<tr><td>lineTo(x,y)</td><td>添加一個新點，然後在畫布中建立從該點到最後指定點的線條。</td></tr>
+					<tr><td>measureText(text)</td><td>傳回指定文字寬度的物件。</td></tr>
+					<tr><td>moveTo(x,y)</td><td>把路徑移動到畫布中的指定點，不建立線條。</td></tr>
+					<tr><td>putImageData(ImageData,x,y)</td><td>將 ImageData 貼到畫布位置上。</td></tr>
+					<tr><td>quadraticCurveTo(x,y,x2,y2)</td><td>繪製曲線。</td></tr>
+					<tr><td>rect(x,y,w,h)</td><td>建立矩形。</td></tr>
+					<tr><td>restore()</td><td>復原畫布。</td></tr>
+					<tr><td>rotate(a)</td><td>旋轉圖像。</td></tr>
+					<tr><td>save()</td><td>保存畫布。</td></tr>
+					<tr><td>scale(w,h)</td><td>縮放圖像。</td></tr>
+					<tr><td>setTransform(a,b,c,d,e,f)</td><td>重製矩陣，然後執行 transform()。</td></tr>
+					<tr><td>stroke()</td><td>繪製路徑。</td></tr>
+					<tr><td>strokeRect(x,y,w,h)</td><td>繪製矩形。</td></tr>
+					<tr><td>strokeText(text,x,y,w)</td><td>在畫布上繪製外框文字。</td></tr>
+					<tr><td>toDataURL()</td><td>將畫布以 base64 編碼的 PNG 圖檔輸出。可輸入選擇性參數 'image/jpeg' 變成 JPEG 圖檔。</td></tr>
+					<tr><td>translate(x,y)</td><td>移動圖像位置。</td></tr>
+					<tr><td>transform(a,b,c,d,e,f)</td><td>將圖像轉換為矩陣。</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>屬性</h2>
-                <table>
-                    <tr><td>data</td><td>ImageData 物件，用於像素處理。</td></tr>
-                    <tr><td>fillStyle</td><td>填充的顏色。</td></tr>
-                    <tr><td>font</td><td>文字內容的當前字體屬性。</td></tr>
-                    <tr><td>globalAlpha</td><td>當前 alpha 值。</td></tr>
-                    <tr><td>globalCompositeOperation</td><td>新圖像如何繪製到已有的圖像上：source-over、source-atop、source-in、source-out、destination-over、destination-atop、destination-in、destination-out、lighter、copy、source-over。</td></tr>
-                    <tr><td>height</td><td>高度。</td></tr>
-                    <tr><td>lineCap</td><td>線條的結束端點樣式：butt、round、square。</td></tr>
-                    <tr><td>lineJoin</td><td>兩條線相交時，所建立的拐角類型：miter、bevel、round。</td></tr>
-                    <tr><td>lineWeight</td><td>線條寬度。</td></tr>
-                    <tr><td>miterLimit</td><td>最大斜接長度。</td></tr>
-                    <tr><td>shadowBlur</td><td>陰影的模糊級別。</td></tr>
-                    <tr><td>shadowColor</td><td>陰影的顏色。</td></tr>
-                    <tr><td>shadowOffsetX</td><td>陰影距形狀的水平距離。</td></tr>
-                    <tr><td>shadowOffsetY</td><td>陰影距形狀的垂直距離。</td></tr>
-                    <tr><td>strokeStyle</td><td>線條的顏色。</td></tr>
-                    <tr><td>textAlign</td><td>文字內容的當前對齊方式：start、end、center、left、right。</td></tr>
-                    <tr><td>textBaseline</td><td>在繪製文字時使用的當前文字基線：alphabetic、top、hanging、middle、ideographic、bottom。</td></tr>
-                    <tr><td>weight</td><td>寬度。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>屬性</h2>
+				<table>
+					<tr><td>data</td><td>ImageData 物件，用於像素處理。</td></tr>
+					<tr><td>fillStyle</td><td>填充的顏色。</td></tr>
+					<tr><td>font</td><td>文字內容的當前字體屬性。</td></tr>
+					<tr><td>globalAlpha</td><td>當前 alpha 值。</td></tr>
+					<tr><td>globalCompositeOperation</td><td>新圖像如何繪製到已有的圖像上：source-over、source-atop、source-in、source-out、destination-over、destination-atop、destination-in、destination-out、lighter、copy、source-over。</td></tr>
+					<tr><td>height</td><td>高度。</td></tr>
+					<tr><td>lineCap</td><td>線條的結束端點樣式：butt、round、square。</td></tr>
+					<tr><td>lineJoin</td><td>兩條線相交時，所建立的拐角類型：miter、bevel、round。</td></tr>
+					<tr><td>lineWeight</td><td>線條寬度。</td></tr>
+					<tr><td>miterLimit</td><td>最大斜接長度。</td></tr>
+					<tr><td>shadowBlur</td><td>陰影的模糊級別。</td></tr>
+					<tr><td>shadowColor</td><td>陰影的顏色。</td></tr>
+					<tr><td>shadowOffsetX</td><td>陰影距形狀的水平距離。</td></tr>
+					<tr><td>shadowOffsetY</td><td>陰影距形狀的垂直距離。</td></tr>
+					<tr><td>strokeStyle</td><td>線條的顏色。</td></tr>
+					<tr><td>textAlign</td><td>文字內容的當前對齊方式：start、end、center、left、right。</td></tr>
+					<tr><td>textBaseline</td><td>在繪製文字時使用的當前文字基線：alphabetic、top、hanging、middle、ideographic、bottom。</td></tr>
+					<tr><td>weight</td><td>寬度。</td></tr>
+				</table>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

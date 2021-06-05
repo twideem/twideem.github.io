@@ -2,118 +2,118 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>char、ASCII、Unicode</h1>
-            </header>
+			<header>
+				<h1>char、ASCII、Unicode</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>以 10 進位值互轉</h2>
-                <p>
-                    char 使用 10 進位數值來處理字元編碼，所以最簡單的互轉做法，就是直接在 (int) 和 (char) 之間切換即可：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>以 10 進位值互轉</h2>
+				<p>
+					char 使用 10 進位數值來處理字元編碼，所以最簡單的互轉做法，就是直接在 (int) 和 (char) 之間切換即可：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                System.out.println((int)"ㄊ");
-                                System.out.println((char)12554);
-                            }
+							public static void main(String[] args){
+								System.out.println((int)"ㄊ");
+								System.out.println((char)12554);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        12254<br>
-                        ㄊ<br>
-                    </output>
-                    <br>
-                    通常我們查到的 ASCII 值是 10 進位值，因此 ASCII 與 char 的互轉很簡單。
-                </p>
-            </section>
+					<br>
+					<output>
+						12254<br>
+						ㄊ<br>
+					</output>
+					<br>
+					通常我們查到的 ASCII 值是 10 進位值，因此 ASCII 與 char 的互轉很簡單。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>以 16 進位值互轉</h2>
-                <p>
-                    通常我們查到的 Unicode 值是 16 進位，所以必須轉換為 10 進位給 char。為了省事，建議搭配 Character 與 Integer 來轉換：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>以 16 進位值互轉</h2>
+				<p>
+					通常我們查到的 Unicode 值是 16 進位，所以必須轉換為 10 進位給 char。為了省事，建議搭配 Character 與 Integer 來轉換：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            public static void main(String[] args){
-                                System.out.println(Integer.toHexString("ㄊ"));
-                                System.out.println(Character.toChars(Integer.valueOf("310a",16)));
-                            }
+							public static void main(String[] args){
+								System.out.println(Integer.toHexString("ㄊ"));
+								System.out.println(Character.toChars(Integer.valueOf("310a",16)));
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        310a<br>
-                        ㄊ
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						310a<br>
+						ㄊ
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>常用 ASCII 十進位值</h2>
-                <table>
-                    <tr><td>Space</td><td>32</td></tr>
-                    <tr><td>0~9</td><td>49~57</td></tr>
-                    <tr><td>A~Z</td><td>65~90</td></tr>
-                    <tr><td>a~z</td><td>97~122</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>常用 ASCII 十進位值</h2>
+				<table>
+					<tr><td>Space</td><td>32</td></tr>
+					<tr><td>0~9</td><td>49~57</td></tr>
+					<tr><td>A~Z</td><td>65~90</td></tr>
+					<tr><td>a~z</td><td>97~122</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>常用 Unicode 十六進位值</h2>
-                <table>
-                    <tr><td>圖案</td><td>2600~27BF</td></tr>
-                    <tr><td>注音符號</td><td>3100~312F</td></tr>
-                    <tr><td>日文假名</td><td>3040~30FF</td></tr>
-                    <tr><td>東亞單位</td><td>3200-33FF</td></tr>
-                    <tr><td>六十四卦</td><td>4DC0~4DFF</td></tr>
-                    <tr><td>漢字</td><td>4E00~9FA5</td></tr>
-                    <tr><td>全形英數、標點符號</td><td>FF00~FFEF</td></tr>
-                    <tr><td>中文直書標點符號</td><td>FE10-FE1F</td></tr>
-                    <tr><td>全形英數直書標點符號</td><td>FE30-FE4F</td></tr>
-                </table>
-                <p>
-                    完整 Unicode 可至「<a href='http://unicode-table.com/cn/#control-character' target='_blank'>Unicode 字符百科</a>」網站查詢。
-                </p>
-            </section>
+			<section>
+				<h2>常用 Unicode 十六進位值</h2>
+				<table>
+					<tr><td>圖案</td><td>2600~27BF</td></tr>
+					<tr><td>注音符號</td><td>3100~312F</td></tr>
+					<tr><td>日文假名</td><td>3040~30FF</td></tr>
+					<tr><td>東亞單位</td><td>3200-33FF</td></tr>
+					<tr><td>六十四卦</td><td>4DC0~4DFF</td></tr>
+					<tr><td>漢字</td><td>4E00~9FA5</td></tr>
+					<tr><td>全形英數、標點符號</td><td>FF00~FFEF</td></tr>
+					<tr><td>中文直書標點符號</td><td>FE10-FE1F</td></tr>
+					<tr><td>全形英數直書標點符號</td><td>FE30-FE4F</td></tr>
+				</table>
+				<p>
+					完整 Unicode 可至「<a href='http://unicode-table.com/cn/#control-character' target='_blank'>Unicode 字符百科</a>」網站查詢。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] Windows 的主控台如果不支援 Unicode，會變成 ? 看不到字元。所以想測試日韓文字時，建議不要用 System.out.print() 來輸出，改用 FileOutputStream 以 Unicode 輸出成檔案來看比較好。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] Windows 的主控台如果不支援 Unicode，會變成 ? 看不到字元。所以想測試日韓文字時，建議不要用 System.out.print() 來輸出，改用 FileOutputStream 以 Unicode 輸出成檔案來看比較好。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

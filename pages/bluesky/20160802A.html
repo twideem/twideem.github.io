@@ -2,59 +2,59 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>如何修改登入畫面的圖片</h1>
-            </header>
+			<header>
+				<h1>如何修改登入畫面的圖片</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                開機後的畫面有兩種，最先看到的是鎖定畫面，然後才是登入畫面。<br>
-                <br>
-                鎖定畫面的圖片可以自行挑選圖片，而且有個「在登入畫面上顯示鎖定畫面背景圖片」的項目可以勾選，這樣就等於可以自行挑選登入畫面的圖片了！<br>
-                <br>
-                但 Windows 10 剛開機、尚未登入使用者帳戶時，使用的是預設圖片，因此顯示的依然是這張醜圖片：<br>
-            </p>
-            <figure>
-                <img src='../../figures/bluesky/20160802A.jpg' alt='插圖'>
-            </figure>
-            <p>
-                麻煩的是，預設圖片是從 <var>C:\Windows\SystemResources\Windows.UI.Logon.pri</var> 取出來的，等於寫死了，無法修改。<br>
-                <br>
-                這問題可以透過關閉鎖定畫面，只留登入畫面來解決！因為進入登入畫面，看停留在哪個使用者帳戶，就會顯示該使用者設定的圖片。沒了鎖定畫面，開機後進入的一定是登入畫面，就不會看到 Windows 10 預設的圖片了～<br>
-                <br>
-                關閉鎖定畫面要寫登錄檔：<br>
-                <br>
-                <code>
-                    [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]<br>
-                    "NoLockScreen"=dword:00000001<br>
-                </code>
-                <br>
-                <strong>注意！寫入這筆登錄檔後，鎖定畫面的設定介面會顯示「*這些設定有一部分已隱藏或由您的組織管理。」而無法使用。所以，日後想更換鎖定畫面的圖片，必須再把 NoLockScreen 改為 0，就恢復正常了。</strong>
-            </p>
+			<p>
+				開機後的畫面有兩種，最先看到的是鎖定畫面，然後才是登入畫面。<br>
+				<br>
+				鎖定畫面的圖片可以自行挑選圖片，而且有個「在登入畫面上顯示鎖定畫面背景圖片」的項目可以勾選，這樣就等於可以自行挑選登入畫面的圖片了！<br>
+				<br>
+				但 Windows 10 剛開機、尚未登入使用者帳戶時，使用的是預設圖片，因此顯示的依然是這張醜圖片：<br>
+			</p>
+			<figure>
+				<img src='../../figures/bluesky/20160802A.jpg' alt='插圖'>
+			</figure>
+			<p>
+				麻煩的是，預設圖片是從 <var>C:\Windows\SystemResources\Windows.UI.Logon.pri</var> 取出來的，等於寫死了，無法修改。<br>
+				<br>
+				這問題可以透過關閉鎖定畫面，只留登入畫面來解決！因為進入登入畫面，看停留在哪個使用者帳戶，就會顯示該使用者設定的圖片。沒了鎖定畫面，開機後進入的一定是登入畫面，就不會看到 Windows 10 預設的圖片了～<br>
+				<br>
+				關閉鎖定畫面要寫登錄檔：<br>
+				<br>
+				<code>
+					[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]<br>
+					"NoLockScreen"=dword:00000001<br>
+				</code>
+				<br>
+				<strong>注意！寫入這筆登錄檔後，鎖定畫面的設定介面會顯示「*這些設定有一部分已隱藏或由您的組織管理。」而無法使用。所以，日後想更換鎖定畫面的圖片，必須再把 NoLockScreen 改為 0，就恢復正常了。</strong>
+			</p>
 
-            <!--
+			<!--
 
-                修改 Windows.UI.Logon.pri 會有 Windows 10 無法開機的風險，建議上網搜尋實用的工具代勞。
-                我的做法則是別看到那張醜圖片就好，所以選擇關閉開機的登入畫面！
-                "LockScreenImage"="C:\\Windows\\Web\\Screen\\img101.png"
-            -->
+				修改 Windows.UI.Logon.pri 會有 Windows 10 無法開機的風險，建議上網搜尋實用的工具代勞。
+				我的做法則是別看到那張醜圖片就好，所以選擇關閉開機的登入畫面！
+				"LockScreenImage"="C:\\Windows\\Web\\Screen\\img101.png"
+			-->
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

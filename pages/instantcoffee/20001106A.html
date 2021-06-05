@@ -2,181 +2,181 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>變更視窗樣式</h1>
-            </header>
+			<header>
+				<h1>變更視窗樣式</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Java 內建視窗樣式</h2>
-                <p>
-                    底下程式示範將視窗更換為 Metal 樣式：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import javax.swing.JFrame;
-                        import javax.swing.plaf.metal.MetalLookAndFeel;
-                        import javax.swing.UIManager;
+			<section>
+				<h2>Java 內建視窗樣式</h2>
+				<p>
+					底下程式示範將視窗更換為 Metal 樣式：<br>
+					<br>
+					<textarea class='brush:java'>
+						import javax.swing.JFrame;
+						import javax.swing.plaf.metal.MetalLookAndFeel;
+						import javax.swing.UIManager;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                //啟用 Java 預設的視窗外框
-                                JFrame.setDefaultLookAndFeelDecorated(true);
-                                //將視窗樣式改為 Metal 風格
-                                try{
-                                    UIManager.setLookAndFeel(new MetalLookAndFeel());
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                                //建立視窗
-                                JFrame frame = new JFrame();
-                                frame.setSize(320, 240);
-                                frame.setTitle("視窗標題");
-                                frame.setVisible(true);
-                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                            }
+							public static void main(String[] args){
+								//啟用 Java 預設的視窗外框
+								JFrame.setDefaultLookAndFeelDecorated(true);
+								//將視窗樣式改為 Metal 風格
+								try{
+									UIManager.setLookAndFeel(new MetalLookAndFeel());
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+								//建立視窗
+								JFrame frame = new JFrame();
+								frame.setSize(320, 240);
+								frame.setTitle("視窗標題");
+								frame.setVisible(true);
+								frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    顯示結果：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_01.png' alt='插圖'>
-                </figure>
-                <p>
-                    其它內建的視窗樣式還有如下，請自行嘗試：<br>
-                    <br>
-                    <var>
-                        com.sun.java.swing.plaf.gtk.GTKLookAndFeel<br>
-                        com.sun.java.swing.plaf.mac.MacLookAndFeel<br>
-                        com.sun.java.swing.plaf.motif.MotifLookAndFeel<br>
-                        com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel<br>
-                        com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel<br>
-                        com.sun.java.swing.plaf.windows.WindowsLookAndFeel<br>
-                    </var>
-                    <br>
-                    其中 Windows 與 MacOS 並非跨平台的樣式，遇上相異的作業系統無法使用，會改用預設的樣式。因此顧慮跨平台問題的話，也可考慮以下自動處理跨平台問題的樣式：<br>
-                    <br>
-                    <var>
-                        UIManager.getSystemLookAndFeelClassName()<br>
-                        UIManager.getCrossPlatformLookAndFeelClassName()<br>
-                    </var>
-                </p>
-            </section>
+					<br>
+					顯示結果：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_01.png' alt='插圖'>
+				</figure>
+				<p>
+					其它內建的視窗樣式還有如下，請自行嘗試：<br>
+					<br>
+					<var>
+						com.sun.java.swing.plaf.gtk.GTKLookAndFeel<br>
+						com.sun.java.swing.plaf.mac.MacLookAndFeel<br>
+						com.sun.java.swing.plaf.motif.MotifLookAndFeel<br>
+						com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel<br>
+						com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel<br>
+						com.sun.java.swing.plaf.windows.WindowsLookAndFeel<br>
+					</var>
+					<br>
+					其中 Windows 與 MacOS 並非跨平台的樣式，遇上相異的作業系統無法使用，會改用預設的樣式。因此顧慮跨平台問題的話，也可考慮以下自動處理跨平台問題的樣式：<br>
+					<br>
+					<var>
+						UIManager.getSystemLookAndFeelClassName()<br>
+						UIManager.getCrossPlatformLookAndFeelClassName()<br>
+					</var>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>第三方視窗樣式</h2>
-                <p>
-                    網路可以找到不少 Swing 的視窗樣式可以套用，首先推薦 JTatto，因為下載這個套件，就能切換十數種樣式<ins>[1]</ins>，而且每種樣式都經過精心配置，每樣都比其他人的樣式精美。請至官網下載：<br>
-                    <br>
-                    <a href='http://www.jtattoo.net' target='_blank'>http://www.jtattoo.net</a><br>
-                    <br>
-                    目前為止 JTatto 可用的樣式如下：<br>
-                    <br>
-                    <var>
-                        com.jtattoo.plaf.acryl.AcrylLookAndFeel<br>
-                        com.jtattoo.plaf.aero.AeroLookAndFeel<br>
-                        com.jtattoo.plaf.aluminium.AluminiumLookAndFeel<br>
-                        com.jtattoo.plaf.bernstein.BernsteinLookAndFeel<br>
-                        com.jtattoo.plaf.fast.FastLookAndFeel<br>
-                        com.jtattoo.plaf.graphite.GraphiteLookAndFeel<br>
-                        com.jtattoo.plaf.hifi.HiFiLookAndFeel<br>
-                        com.jtattoo.plaf.luna.LunaLookAndFeel<br>
-                        com.jtattoo.plaf.mcwin.McWinLookAndFeel<br>
-                        com.jtattoo.plaf.mint.MintLookAndFeel<br>
-                        com.jtattoo.plaf.noire.NoireLookAndFeel<br>
-                        com.jtattoo.plaf.smart.SmartLookAndFeel<br>
-                        com.jtattoo.plaf.texture.TextureLookAndFeel<br>
-                    </var>
-                    <br>
-                    各樣式顯示結果依順序如下：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_02.png' alt='插圖'>
-                    <figcaption>Acryl</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_03.png' alt='插圖'>
-                    <figcaption>Aero</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_04.png' alt='插圖'>
-                    <figcaption>Aluminium</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_05.png' alt='插圖'>
-                    <figcaption>Bernstein</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_06.png' alt='插圖'>
-                    <figcaption>Fast</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_07.png' alt='插圖'>
-                    <figcaption>Graphite</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_08.png' alt='插圖'>
-                    <figcaption>Hifi</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_09.png' alt='插圖'>
-                    <figcaption>Luna</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_10.png' alt='插圖'>
-                    <figcaption>Mcwin</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_11.png' alt='插圖'>
-                    <figcaption>Mint</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_12.png' alt='插圖'>
-                    <figcaption>Noire</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_13.png' alt='插圖'>
-                    <figcaption>Smart</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001106A_14.png' alt='插圖'>
-                    <figcaption>Texture</figcaption>
-                </figure>
-            </section>
+			<section>
+				<h2>第三方視窗樣式</h2>
+				<p>
+					網路可以找到不少 Swing 的視窗樣式可以套用，首先推薦 JTatto，因為下載這個套件，就能切換十數種樣式<ins>[1]</ins>，而且每種樣式都經過精心配置，每樣都比其他人的樣式精美。請至官網下載：<br>
+					<br>
+					<a href='http://www.jtattoo.net' target='_blank'>http://www.jtattoo.net</a><br>
+					<br>
+					目前為止 JTatto 可用的樣式如下：<br>
+					<br>
+					<var>
+						com.jtattoo.plaf.acryl.AcrylLookAndFeel<br>
+						com.jtattoo.plaf.aero.AeroLookAndFeel<br>
+						com.jtattoo.plaf.aluminium.AluminiumLookAndFeel<br>
+						com.jtattoo.plaf.bernstein.BernsteinLookAndFeel<br>
+						com.jtattoo.plaf.fast.FastLookAndFeel<br>
+						com.jtattoo.plaf.graphite.GraphiteLookAndFeel<br>
+						com.jtattoo.plaf.hifi.HiFiLookAndFeel<br>
+						com.jtattoo.plaf.luna.LunaLookAndFeel<br>
+						com.jtattoo.plaf.mcwin.McWinLookAndFeel<br>
+						com.jtattoo.plaf.mint.MintLookAndFeel<br>
+						com.jtattoo.plaf.noire.NoireLookAndFeel<br>
+						com.jtattoo.plaf.smart.SmartLookAndFeel<br>
+						com.jtattoo.plaf.texture.TextureLookAndFeel<br>
+					</var>
+					<br>
+					各樣式顯示結果依順序如下：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_02.png' alt='插圖'>
+					<figcaption>Acryl</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_03.png' alt='插圖'>
+					<figcaption>Aero</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_04.png' alt='插圖'>
+					<figcaption>Aluminium</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_05.png' alt='插圖'>
+					<figcaption>Bernstein</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_06.png' alt='插圖'>
+					<figcaption>Fast</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_07.png' alt='插圖'>
+					<figcaption>Graphite</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_08.png' alt='插圖'>
+					<figcaption>Hifi</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_09.png' alt='插圖'>
+					<figcaption>Luna</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_10.png' alt='插圖'>
+					<figcaption>Mcwin</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_11.png' alt='插圖'>
+					<figcaption>Mint</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_12.png' alt='插圖'>
+					<figcaption>Noire</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_13.png' alt='插圖'>
+					<figcaption>Smart</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20001106A_14.png' alt='插圖'>
+					<figcaption>Texture</figcaption>
+				</figure>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 可在執行期間切換，不用重新啟動程式。甚至同一個應用程式裡，顯示不同樣式的視窗。<br>
-                    [*] 其實 Metal 風格又分為新舊兩種版本，以前的叫 Steel Theme，現在的是 Ocean Theme。如果想切換到舊版的 Metal 風格，請參考「<a href='20001106B.html'>Steel Theme</a>」。<br>
-                    [*] 基本上有 JTatto 就夠用了！其他吸引人的第三方 Swing 視窗樣式，有逼真 iOS 外貌的 <a href='http://www.randelshofer.ch/quaqua/' target='_blank'>Quaua</a>、以及長得像紙張的 <a href='http://napkinlaf.sourceforge.net/' target='_blank'>Napkin</a>。<br>
-                    [!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20001106A.7z' target='_blank'>20001106A.7z</a>，內含 JTatto 1.6.11，能直接編譯，節省你摸索的時間。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 可在執行期間切換，不用重新啟動程式。甚至同一個應用程式裡，顯示不同樣式的視窗。<br>
+					[*] 其實 Metal 風格又分為新舊兩種版本，以前的叫 Steel Theme，現在的是 Ocean Theme。如果想切換到舊版的 Metal 風格，請參考「<a href='20001106B.html'>Steel Theme</a>」。<br>
+					[*] 基本上有 JTatto 就夠用了！其他吸引人的第三方 Swing 視窗樣式，有逼真 iOS 外貌的 <a href='http://www.randelshofer.ch/quaqua/' target='_blank'>Quaua</a>、以及長得像紙張的 <a href='http://napkinlaf.sourceforge.net/' target='_blank'>Napkin</a>。<br>
+					[!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20001106A.7z' target='_blank'>20001106A.7z</a>，內含 JTatto 1.6.11，能直接編譯，節省你摸索的時間。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

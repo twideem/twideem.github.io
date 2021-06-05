@@ -2,148 +2,148 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>如何使用本單元下載的範例檔</h1>
-            </header>
+			<header>
+				<h1>如何使用本單元下載的範例檔</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>檔案結構</h2>
-                <p>
-                    每個下載的範例，裡面的檔案資料如下：
-                </p>
-                <table>
-                    <tr><td>[binaries]</td><td>編譯好的程式會放在這個資料夾。</td></tr>
-                    <tr><td>[sources]</td><td>存放原始碼的資料夾。</td></tr>
-                    <tr><td>build</td><td>方便 Linux 使用者編譯與執行的 Shell Script。</td></tr>
-                    <tr><td>build.bat</td><td>方便 Windows 使用者編譯與執行的批次檔。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>檔案結構</h2>
+				<p>
+					每個下載的範例，裡面的檔案資料如下：
+				</p>
+				<table>
+					<tr><td>[binaries]</td><td>編譯好的程式會放在這個資料夾。</td></tr>
+					<tr><td>[sources]</td><td>存放原始碼的資料夾。</td></tr>
+					<tr><td>build</td><td>方便 Linux 使用者編譯與執行的 Shell Script。</td></tr>
+					<tr><td>build.bat</td><td>方便 Windows 使用者編譯與執行的批次檔。</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>如何編譯與執行</h2>
-                <p>
-                    雖然你可以自己輸入 javac 和 java 指令來編譯與執行範例程式，但使用範例提供的 build 更為方便。
-                </p>
-                <hr>
-                <section>
-                    <h3>Windows</h3>
-                    <p>
-                        直接滑鼠雙擊 <var>build.bat</var>，即可進行「編譯」與「執行」的動作。<br>
-                        <br>
-                        批次檔跑完，會停留下來等待按任意鍵結束，避免錯過指令模式顯示的訊息。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Linux</h3>
-                    <p>
-                        請開啟終端機，切換到範例所在目錄位置，輸入 <kbd>./build</kbd> 或 <kbd>sh build</kbd> 來編譯與執行。<br>
-                        <br>
-                        如果是 Lubuntu 的話，用檔案總管開啟範例的目錄，然後按 F4 會自動以範例的目錄位置，啟動終端機，相當方便。
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>如何編譯與執行</h2>
+				<p>
+					雖然你可以自己輸入 javac 和 java 指令來編譯與執行範例程式，但使用範例提供的 build 更為方便。
+				</p>
+				<hr>
+				<section>
+					<h3>Windows</h3>
+					<p>
+						直接滑鼠雙擊 <var>build.bat</var>，即可進行「編譯」與「執行」的動作。<br>
+						<br>
+						批次檔跑完，會停留下來等待按任意鍵結束，避免錯過指令模式顯示的訊息。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Linux</h3>
+					<p>
+						請開啟終端機，切換到範例所在目錄位置，輸入 <kbd>./build</kbd> 或 <kbd>sh build</kbd> 來編譯與執行。<br>
+						<br>
+						如果是 Lubuntu 的話，用檔案總管開啟範例的目錄，然後按 F4 會自動以範例的目錄位置，啟動終端機，相當方便。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>補充說明</h2>
-                <hr>
-                <section>
-                    <h3>１</h3>
-                    <p>
-                        每個範例使用的批次檔與 Shell script 都是一樣的，不會為了個別範例的特殊條件，來修改指令參數與組態設定。<br>
-                        <br>
-                        因此當你練習範例遇到錯誤時，可以排除是不是這個範例設定了不同的編譯與執行方式才發生問題，專心把焦點放在原始碼與套件身上。<br>
-                        <br>
-                        為了做到這點，程式需要 import 第三方 package 時，本站提供的範例採取先解開 JAR 檔案然後丟到 binaries 資料夾的做法，也就是與範例編譯出來的程式放在一起，這樣就不用設定 classpath 也能 import 第三方的 package。<br>
-                        <br>
-                        但這只是為了範例方便性而折衷的做法，正式場合不建議以這種方式使用第三方套件，否則你的專案可能會有成千上萬個 *.class，要封裝暨部署時會很頭痛<ins>[1]</ins>～
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>２</h3>
-                    <p>
-                        因為有可能使用新的 JDK 編譯範例，卻用舊的 JRE 執行程式，導致練習範例時發生問題<ins>[2]</ins>，所以本範例寫在 build.bat 和 build 裡的 javac 和 java 指令，是透過 JAVA_HOME 來叫用。<br>
-                        <br>
-                        在使用 build.bat 或 build 執行範例編譯出來的程式發生問題時，請檢查你 JAVA_HOME 的路徑，結尾是不是用了 \ 或 / 符號？例如：「<var>C:\Program Files\Java\jdk\</var>」或「<var>/usr/java/jdk/</var>」。<br>
-                        <br>
-                        請把最後的 \ 和 / 移除，才是正確的 JAVA_HOME 路徑。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>３</h3>
-                    <p>
-                        為避免未來新版 JDK 的編譯條件變嚴苛，導致範例在將來可能無法通過編譯時，讓初學者誤以為是原始碼的問題，所以本站範例都已經先編譯過，證明原始碼曾經通過編譯，沒有問題。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>４</h3>
-                    <p>
-                        如果需要讀寫檔案，則一律放在每個範例的根目錄，避免翻找檔案放在哪個資料夾。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>５</h3>
-                    <p>
-                        本站預設初學者使用的作業系統是 Windows，因此原始碼使用 CR+NL 的換行格式，這樣使用「記事本」也能檢視與編輯。<br>
-                        <br>
-                        但使用的並不是 Windows 含 BOM 的 UTF-8 字元編碼，因為有些場合無法辨識 BOM 記號，結果造成非預期的執行狀況，徒增困擾。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>６</h3>
-                    <p>
-                        本站預設教導的對象是新手。而在我教導程式設計的經驗裡，發現剛開始學習程設計的人，希望直接能看到每項議題的新功能！因為對新手來說，範例中夾雜太多可有可無的程式時，容易被程式結構的繁雜給混淆，導致搞不清楚重點在哪，降低學習時效。<br>
-                        <br>
-                        因此本站的教學範例，風格上避開了「先宣告參照再來使用物件」的慣例，盡量直接建立物件來凸顯主要功能在哪<ins>[3]</ins>。遇到 try...catch... 時，也是整塊程式放在一起不細分，讓重點聚焦在一起。重複的程式碼也是如此，寧願複製貼上讓程式碼由上而下連貫起來閱讀，也避免設計成函式變成跳躍式判讀。<br>
-                        <br>
-                        但這些都是不良的程式撰寫習慣！希望正式應用在開發場合時，使用者能修正編碼風格為…<br>
-                        <br>
-                        <samp>
-                            ．多宣告變數名稱提升可讀性，多定位參照降低建立物件的成本以提升執行效率。<br>
-                            ．只讓需要拋出例外的程式存在 try 區塊，不需要的就隔開，並且更仔細 ctach 例外。<br>
-                            ．善用函式整理重複的程式碼，善用繼承整理重複的函式，善用多型整理重複的繼承。<br>
-                        </samp>
-                        <br>
-                        本站只是方便新手能夠直接看到想要的主題功能才那樣寫範例，實際應用時那些都是壞習慣。
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>補充說明</h2>
+				<hr>
+				<section>
+					<h3>１</h3>
+					<p>
+						每個範例使用的批次檔與 Shell script 都是一樣的，不會為了個別範例的特殊條件，來修改指令參數與組態設定。<br>
+						<br>
+						因此當你練習範例遇到錯誤時，可以排除是不是這個範例設定了不同的編譯與執行方式才發生問題，專心把焦點放在原始碼與套件身上。<br>
+						<br>
+						為了做到這點，程式需要 import 第三方 package 時，本站提供的範例採取先解開 JAR 檔案然後丟到 binaries 資料夾的做法，也就是與範例編譯出來的程式放在一起，這樣就不用設定 classpath 也能 import 第三方的 package。<br>
+						<br>
+						但這只是為了範例方便性而折衷的做法，正式場合不建議以這種方式使用第三方套件，否則你的專案可能會有成千上萬個 *.class，要封裝暨部署時會很頭痛<ins>[1]</ins>～
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>２</h3>
+					<p>
+						因為有可能使用新的 JDK 編譯範例，卻用舊的 JRE 執行程式，導致練習範例時發生問題<ins>[2]</ins>，所以本範例寫在 build.bat 和 build 裡的 javac 和 java 指令，是透過 JAVA_HOME 來叫用。<br>
+						<br>
+						在使用 build.bat 或 build 執行範例編譯出來的程式發生問題時，請檢查你 JAVA_HOME 的路徑，結尾是不是用了 \ 或 / 符號？例如：「<var>C:\Program Files\Java\jdk\</var>」或「<var>/usr/java/jdk/</var>」。<br>
+						<br>
+						請把最後的 \ 和 / 移除，才是正確的 JAVA_HOME 路徑。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>３</h3>
+					<p>
+						為避免未來新版 JDK 的編譯條件變嚴苛，導致範例在將來可能無法通過編譯時，讓初學者誤以為是原始碼的問題，所以本站範例都已經先編譯過，證明原始碼曾經通過編譯，沒有問題。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>４</h3>
+					<p>
+						如果需要讀寫檔案，則一律放在每個範例的根目錄，避免翻找檔案放在哪個資料夾。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>５</h3>
+					<p>
+						本站預設初學者使用的作業系統是 Windows，因此原始碼使用 CR+NL 的換行格式，這樣使用「記事本」也能檢視與編輯。<br>
+						<br>
+						但使用的並不是 Windows 含 BOM 的 UTF-8 字元編碼，因為有些場合無法辨識 BOM 記號，結果造成非預期的執行狀況，徒增困擾。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>６</h3>
+					<p>
+						本站預設教導的對象是新手。而在我教導程式設計的經驗裡，發現剛開始學習程設計的人，希望直接能看到每項議題的新功能！因為對新手來說，範例中夾雜太多可有可無的程式時，容易被程式結構的繁雜給混淆，導致搞不清楚重點在哪，降低學習時效。<br>
+						<br>
+						因此本站的教學範例，風格上避開了「先宣告參照再來使用物件」的慣例，盡量直接建立物件來凸顯主要功能在哪<ins>[3]</ins>。遇到 try...catch... 時，也是整塊程式放在一起不細分，讓重點聚焦在一起。重複的程式碼也是如此，寧願複製貼上讓程式碼由上而下連貫起來閱讀，也避免設計成函式變成跳躍式判讀。<br>
+						<br>
+						但這些都是不良的程式撰寫習慣！希望正式應用在開發場合時，使用者能修正編碼風格為…<br>
+						<br>
+						<samp>
+							．多宣告變數名稱提升可讀性，多定位參照降低建立物件的成本以提升執行效率。<br>
+							．只讓需要拋出例外的程式存在 try 區塊，不需要的就隔開，並且更仔細 ctach 例外。<br>
+							．善用函式整理重複的程式碼，善用繼承整理重複的函式，善用多型整理重複的繼承。<br>
+						</samp>
+						<br>
+						本站只是方便新手能夠直接看到想要的主題功能才那樣寫範例，實際應用時那些都是壞習慣。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 讀寫一個 100MB 的檔案，比讀寫 10000 個 1KB 的檔案要快～<br>
-                    [2] 坦白說，發生這種情況的機會很低，會裝兩套版本不同 JDK 和 JRE 而且還起衝突的人少之又少，反而因為 JAVA_HOME 路徑造成困擾的情況比較多，所以我很想取消這套做法 … <a href='appendix.html#19780722A'>More</a><br>
-                    [3] 這篇是很好的例子：<a href='appendix.html#20140423A'>某批踢踢 Java 新手問題</a>。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 讀寫一個 100MB 的檔案，比讀寫 10000 個 1KB 的檔案要快～<br>
+					[2] 坦白說，發生這種情況的機會很低，會裝兩套版本不同 JDK 和 JRE 而且還起衝突的人少之又少，反而因為 JAVA_HOME 路徑造成困擾的情況比較多，所以我很想取消這套做法 … <a href='appendix.html#19780722A'>More</a><br>
+					[3] 這篇是很好的例子：<a href='appendix.html#20140423A'>某批踢踢 Java 新手問題</a>。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

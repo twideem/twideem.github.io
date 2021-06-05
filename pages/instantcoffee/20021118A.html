@@ -2,251 +2,251 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JUnit 速成範例</h1>
-                <p>
-                    為什麼需要「測試」？<br>
-                    <br>
-                    如果你的類別寫好，往後也不會再修改它，或許沒事。但如果這個類別已經被程式其它地方拿來用，而你卻修改了原始碼，如何保證程式在其他地方跑起來不會出錯？<br>
-                    <br>
-                    最有效的做法，就是為它寫測試案例！修改後馬上跑跑看測試案例，通過的話，表示「修改後」與「修改前」執行起來結果是一致的，因此不會影響原先的運作情況！<br>
-                    <br>
-                    不只如此，你會發現越能夠單獨測試的原始碼，就會越具備物件導向各家學說訴求的好處，現在「可測試性」反而是檢視程式設計品質的最好途徑<ins>[1]</ins>！<br>
-                    <br>
-                    本章節將介紹 JUnit 測試框架，請至官網下載：<a href='http://junit.org' target='_blank'>http://junit.org</a>。
-                </p>
-            </header>
+			<header>
+				<h1>JUnit 速成範例</h1>
+				<p>
+					為什麼需要「測試」？<br>
+					<br>
+					如果你的類別寫好，往後也不會再修改它，或許沒事。但如果這個類別已經被程式其它地方拿來用，而你卻修改了原始碼，如何保證程式在其他地方跑起來不會出錯？<br>
+					<br>
+					最有效的做法，就是為它寫測試案例！修改後馬上跑跑看測試案例，通過的話，表示「修改後」與「修改前」執行起來結果是一致的，因此不會影響原先的運作情況！<br>
+					<br>
+					不只如此，你會發現越能夠單獨測試的原始碼，就會越具備物件導向各家學說訴求的好處，現在「可測試性」反而是檢視程式設計品質的最好途徑<ins>[1]</ins>！<br>
+					<br>
+					本章節將介紹 JUnit 測試框架，請至官網下載：<a href='http://junit.org' target='_blank'>http://junit.org</a>。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>JUnit 3</h2>
-                <p>
-                    JUnit 3 已經是舊版，它主要用繼承類別的方式，來產生測試體制，因此部署起來最通用、設計起來也最熟悉，目前依然有很高的使用率。
-                </p>
-                <hr>
-                <section>
-                    <h3>sample.java</h3>
-                    <p>
-                        首先，假設要開發一個類別，叫做 Sample，它有 connect 與 plus 兩個功能：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            public class Sample{
+			<section>
+				<h2>JUnit 3</h2>
+				<p>
+					JUnit 3 已經是舊版，它主要用繼承類別的方式，來產生測試體制，因此部署起來最通用、設計起來也最熟悉，目前依然有很高的使用率。
+				</p>
+				<hr>
+				<section>
+					<h3>sample.java</h3>
+					<p>
+						首先，假設要開發一個類別，叫做 Sample，它有 connect 與 plus 兩個功能：<br>
+						<br>
+						<textarea class='brush:java'>
+							public class Sample{
 
-                                public String connect(String x, String y){
-                                    return x + y;
-                                }
+								public String connect(String x, String y){
+									return x + y;
+								}
 
-                                public int plus(int x, int y){
-                                    return x + y;
-                                }
+								public int plus(int x, int y){
+									return x + y;
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>SampleTest.java</h3>
-                    <p>
-                        接著，針對 Sample 的功能，用 JUnit 撰寫一個測試案例：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import junit.framework.TestCase;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>SampleTest.java</h3>
+					<p>
+						接著，針對 Sample 的功能，用 JUnit 撰寫一個測試案例：<br>
+						<br>
+						<textarea class='brush:java'>
+							import junit.framework.TestCase;
 
-                            public class SampleTest extends TestCase{
-                                //建立準備拿來測試的原始案例。
-                                private Sample sample;
-                                //測試前要做的事。
-                                @Override
-                                protected void setUp(){
-                                    sample = new Sample();
-                                }
-                                //測試完才做的事。
-                                @Override
-                                protected void tearDown(){
-                                    sample = null;
-                                }
-                                //測試 Sample 的 connect 功能，必須 test 開頭。
-                                public void testConnect(){
-                                    assertEquals("HELLOJUNIT", sample.connect("HELLO", "JUNIT"));
-                                }
-                                //測試 Smaple 的 plus 功能，必須 test 開頭。
-                                public void testPlus(){
-                                    assertEquals(3, sample.plus(1, 2));
-                                }
-                            }
+							public class SampleTest extends TestCase{
+								//建立準備拿來測試的原始案例。
+								private Sample sample;
+								//測試前要做的事。
+								@Override
+								protected void setUp(){
+									sample = new Sample();
+								}
+								//測試完才做的事。
+								@Override
+								protected void tearDown(){
+									sample = null;
+								}
+								//測試 Sample 的 connect 功能，必須 test 開頭。
+								public void testConnect(){
+									assertEquals("HELLOJUNIT", sample.connect("HELLO", "JUNIT"));
+								}
+								//測試 Smaple 的 plus 功能，必須 test 開頭。
+								public void testPlus(){
+									assertEquals(3, sample.plus(1, 2));
+								}
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        每當修改過 Smaple.java，就執行 SampleTest.class 看看情況如何：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import junit.textui.TestRunner;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						每當修改過 Smaple.java，就執行 SampleTest.class 看看情況如何：<br>
+						<br>
+						<textarea class='brush:java'>
+							import junit.textui.TestRunner;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    TestRunner.run(SampleTest.class);
-                                }
+								public static void main(String[] args){
+									TestRunner.run(SampleTest.class);
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果：<br>
-                        <br>
-                        <output>
-                            Time:  0.002<br>
-                            OK (2 tests)<br>
-                        </output>
-                        <br>
-                        注意！如果看到 OK (0 tests)，因為是 0，表示什麼也沒測試到，請檢視你的程式碼哪裡寫錯。
-                    </p>
-                </section>
-            </section>
+						<br>
+						執行結果：<br>
+						<br>
+						<output>
+							Time:  0.002<br>
+							OK (2 tests)<br>
+						</output>
+						<br>
+						注意！如果看到 OK (0 tests)，因為是 0，表示什麼也沒測試到，請檢視你的程式碼哪裡寫錯。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>JUnit 4</h2>
-                <p>
-                    JUnit 4 引進 Annotation 語法，改用「標註」取代 JUnit 3 透過類別繼承的體制，來設計測試案例。然後再用專用的測試器「org.junit.runner.JUnitCore」來執行測試案例，讓測試案例本身不用束縛在別的類別體系裡<ins>[2]</ins>。<br>
-                    <br>
-                    使用 JUnit 4 的話，必須搭配 hamcrest-core.jar，否則無法正常執行，官網即可下載。
-                </p>
-                <hr>
-                <section>
-                    <h3>sample.java</h3>
-                    <p>
-                        首先，假設要開發一個類別，叫做 Sample，它有 connect 與 plus 兩個功能：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            public class Sample{
+			<section>
+				<h2>JUnit 4</h2>
+				<p>
+					JUnit 4 引進 Annotation 語法，改用「標註」取代 JUnit 3 透過類別繼承的體制，來設計測試案例。然後再用專用的測試器「org.junit.runner.JUnitCore」來執行測試案例，讓測試案例本身不用束縛在別的類別體系裡<ins>[2]</ins>。<br>
+					<br>
+					使用 JUnit 4 的話，必須搭配 hamcrest-core.jar，否則無法正常執行，官網即可下載。
+				</p>
+				<hr>
+				<section>
+					<h3>sample.java</h3>
+					<p>
+						首先，假設要開發一個類別，叫做 Sample，它有 connect 與 plus 兩個功能：<br>
+						<br>
+						<textarea class='brush:java'>
+							public class Sample{
 
-                                public String connect(String x, String y){
-                                    return x + y;
-                                }
+								public String connect(String x, String y){
+									return x + y;
+								}
 
-                                public int plus(int x, int y){
-                                    return x + y;
-                                }
+								public int plus(int x, int y){
+									return x + y;
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>SampleTest.java</h3>
-                    <p>
-                        接著，針對 Sample 的功能，用 JUnit 4 撰寫一個測試案例：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import static org.junit.Assert.assertEquals;
-                            import org.junit.After;
-                            import org.junit.Before;
-                            import org.junit.Test;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>SampleTest.java</h3>
+					<p>
+						接著，針對 Sample 的功能，用 JUnit 4 撰寫一個測試案例：<br>
+						<br>
+						<textarea class='brush:java'>
+							import static org.junit.Assert.assertEquals;
+							import org.junit.After;
+							import org.junit.Before;
+							import org.junit.Test;
 
-                            public class SampleTest{
-                                //建立準備拿來測試的原始案例。
-                                private Sample sample;
-                                //測試前要做的事。
-                                @Before
-                                public void before(){
-                                    sample = new Sample();
-                                }
-                                //測試完才做的事。
-                                @After
-                                public void after(){
-                                    sample = null;
-                                }
-                                //測試 connect("HELLO</td><td>JUNIT") 的結果是否為 "HELLOJUNIT"。
-                                @Test
-                                public void connect(){
-                                    assertEquals("HELLOJUNIT", sample.connect("HELLO", "JUNIT"));
-                                }
-                                //測試 plus(1,2) 的結果是否為 3。
-                                @Test
-                                public void plus(){
-                                    assertEquals(3, sample.plus(1, 2));
-                                }
-                            }
+							public class SampleTest{
+								//建立準備拿來測試的原始案例。
+								private Sample sample;
+								//測試前要做的事。
+								@Before
+								public void before(){
+									sample = new Sample();
+								}
+								//測試完才做的事。
+								@After
+								public void after(){
+									sample = null;
+								}
+								//測試 connect("HELLO</td><td>JUNIT") 的結果是否為 "HELLOJUNIT"。
+								@Test
+								public void connect(){
+									assertEquals("HELLOJUNIT", sample.connect("HELLO", "JUNIT"));
+								}
+								//測試 plus(1,2) 的結果是否為 3。
+								@Test
+								public void plus(){
+									assertEquals(3, sample.plus(1, 2));
+								}
+							}
                         </textarea>
-                        <br>
-                        可以發現，只要標註寫對就好，函式名稱可以隨意取。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>進行測試</h3>
-                    <p>
-                        每當修改過 Smaple.java，就執行 SampleTest.class 看看情況如何。<br>
-                        <br>
-                        請在主控台用 java.exe 啟動 org.junit.runner.JUnitCore 並傳入參數 SampleTest 以供測試，整個指令可能如下：<br>
-                        <br>
-                        <kbd>
-                            java -classpath junit-4.11.jar;hamcrest-core-1.3.jar<br>
-                            &nbsp;org.junit.runner.JUnitCore SampleTest<br>
-                        </kbd>
-                        <br>
-                        執行結果：<br>
-                        <br>
-                        <output>
-                            Time: 0.006<br>
-                            OK (2 tests)
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						可以發現，只要標註寫對就好，函式名稱可以隨意取。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>進行測試</h3>
+					<p>
+						每當修改過 Smaple.java，就執行 SampleTest.class 看看情況如何。<br>
+						<br>
+						請在主控台用 java.exe 啟動 org.junit.runner.JUnitCore 並傳入參數 SampleTest 以供測試，整個指令可能如下：<br>
+						<br>
+						<kbd>
+							java -classpath junit-4.11.jar;hamcrest-core-1.3.jar<br>
+							&nbsp;org.junit.runner.JUnitCore SampleTest<br>
+						</kbd>
+						<br>
+						執行結果：<br>
+						<br>
+						<output>
+							Time: 0.006<br>
+							OK (2 tests)
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>補充</h2>
-                <p>
-                    在測試功能結果時，除了用來檢測結果是否相同的 assertEquals() 以外，還有以下可用：
-                </p>
-                <table>
-                    <tr><td>assertTrue</td><td>檢測的結果是否為 true。</td></tr>
-                    <tr><td>assertFalse</td><td>檢測的結果是否為 false。</td></tr>
-                    <tr><td>assertSame</td><td>檢測兩物件是否同一個。</td></tr>
-                    <tr><td>assertNotSame</td><td>檢測兩物件是否不一樣。</td></tr>
-                    <tr><td>assertNull</td><td>檢測是否為 Null。</td></tr>
-                    <tr><td>assertNotNull</td><td>檢測是否非 Null。</td></tr>
-                    <tr><td>assertArrayEquals</td><td>檢測的對象是陣列時。</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>補充</h2>
+				<p>
+					在測試功能結果時，除了用來檢測結果是否相同的 assertEquals() 以外，還有以下可用：
+				</p>
+				<table>
+					<tr><td>assertTrue</td><td>檢測的結果是否為 true。</td></tr>
+					<tr><td>assertFalse</td><td>檢測的結果是否為 false。</td></tr>
+					<tr><td>assertSame</td><td>檢測兩物件是否同一個。</td></tr>
+					<tr><td>assertNotSame</td><td>檢測兩物件是否不一樣。</td></tr>
+					<tr><td>assertNull</td><td>檢測是否為 Null。</td></tr>
+					<tr><td>assertNotNull</td><td>檢測是否非 Null。</td></tr>
+					<tr><td>assertArrayEquals</td><td>檢測的對象是陣列時。</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 其實「可測試性」才是最值得關注的物件導向議題！當我們為了學會物件導向開發手法，去研究各家物件導向學說時，會發現細節複雜且不實用：「包括我這個網站介紹的物件導向也如此。」在還沒學會別人的理論之前，通常已經懷疑只是淪為空談了！但「可測試性」很直覺，自己就能研究，不需要追隨別人的研究腳步。因為自己就能掌握住「將原始碼設計為能夠單獨測試的元件」的原則好處，並且發現符合具備各家學說的訴求。但這裡說的是「可測試性」，而不是「寫程式前先寫測試」的「測試先行」，我覺得這是分開的議題。<br>
-                    [2] 但「測試案例（SampleTest.java）」本身就只是拿來測試而已，通常都隔絕於應用軟體的系統之外。因此死板板的即可，其實不需要兼顧測試案例的靈活性，很多人還是繼續用舊版。<br>
-                    [!] 為方便學習，可下載範例：<a href='../../objects/downloads/20021118A.7z' target='_blank'>20021118A.7z</a>，內含 JUnit 3.8.2 或 JUnit 4.12 + Java Hamcrest 1.3，能直接編譯，節省你摸索的時間。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 其實「可測試性」才是最值得關注的物件導向議題！當我們為了學會物件導向開發手法，去研究各家物件導向學說時，會發現細節複雜且不實用：「包括我這個網站介紹的物件導向也如此。」在還沒學會別人的理論之前，通常已經懷疑只是淪為空談了！但「可測試性」很直覺，自己就能研究，不需要追隨別人的研究腳步。因為自己就能掌握住「將原始碼設計為能夠單獨測試的元件」的原則好處，並且發現符合具備各家學說的訴求。但這裡說的是「可測試性」，而不是「寫程式前先寫測試」的「測試先行」，我覺得這是分開的議題。<br>
+					[2] 但「測試案例（SampleTest.java）」本身就只是拿來測試而已，通常都隔絕於應用軟體的系統之外。因此死板板的即可，其實不需要兼顧測試案例的靈活性，很多人還是繼續用舊版。<br>
+					[!] 為方便學習，可下載範例：<a href='../../objects/downloads/20021118A.7z' target='_blank'>20021118A.7z</a>，內含 JUnit 3.8.2 或 JUnit 4.12 + Java Hamcrest 1.3，能直接編譯，節省你摸索的時間。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

@@ -2,116 +2,116 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>非捲動單維陣列地圖</h1>
-                <p></p>
-            </header>
+			<header>
+				<h1>非捲動單維陣列地圖</h1>
+				<p></p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>操作說明</h2>
-                <p>
-                    請使用鍵盤方向操控地圖裡面的人物。<br>
-                    <br>
-                    至於做法，請利用瀏覽器的檢視原始碼功能來研究。
-                </p>
-            </section>
+			<section>
+				<h2>操作說明</h2>
+				<p>
+					請使用鍵盤方向操控地圖裡面的人物。<br>
+					<br>
+					至於做法，請利用瀏覽器的檢視原始碼功能來研究。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-        <script>
-            //畫面
-            var h2=document.getElementsByTagName('p')[0]
-            //h2.style.fontFamily='細明體'
-            //h2.style.fontSize='10pt'
-            h2.style.letterSpacing='4px'
-            h2.style.lineHeight='20px'
-            //陣列地圖相關數據
-            var array=[
-                2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-                2,0,0,0,0,0,2,2,2,2,2,2,2,2,2,
-                2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,
-                2,0,0,3,3,3,0,0,0,0,2,2,2,2,2,
-                2,0,0,0,3,3,0,0,0,0,0,2,2,2,2,
-                2,0,0,0,0,0,0,0,0,2,0,0,0,0,5,
-                2,0,0,0,0,0,1,0,0,2,2,2,2,2,2,
-                2,0,4,4,4,0,0,0,0,2,2,2,2,2,2,
-                2,0,4,0,0,0,0,0,0,2,2,2,2,2,2,
-                2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-            ]
-            var width=15
-            function position(){
-                for(var n=0;n<array.length;n++) if(array[n]==1) return n
-            }
-            //圖磚
-            function tile(event){
-                switch(event){
-                    case 0:return '　'
-                    case 1:return '<span style=\'color:orange\'>人</span>'
-                    case 2:return '<span style=\'color:brown\'>土</span>'
-                    case 3:return '<span style=\'color:green\'>木</span>'
-                    case 4:return '<span style=\'color:blue\'>水</span>'
-                    case 5:return '<span style=\'color:gray\'>金</span>'
-                }
-            }
-            //繪圖
-            function draw(){
-                var a=''
-                for(var n=0;n<array.length;n++){
-                    if(n%width==0&&n!==0) a+='<br>'
-                    a+=tile(array[n])
-                }
-                h2.innerHTML=a
-            }
-            //移動
-            function move(event){
-                var a=position()
-                switch(event.which){
-                    case 37:
-                        if(array[a-1]==0){
-                            array[a]=0
-                            array[a-1]=1
-                        }
-                        break
-                    case 38:
-                        if(array[a-width]==0){
-                            array[a]=0
-                            array[a-width]=1
-                        }
-                        break
-                    case 39:
-                        if(array[a+1]==0){
-                            array[a]=0
-                            array[a+1]=1
-                        }
-                        break
-                    case 40:
-                        if(array[a+width]==0){
-                            array[a]=0
-                            array[a+width]=1
-                        }
-                }
-                draw()
-            }
-            //網頁載入後的初始化動作
-            window.onload=draw
-            //監測鍵盤反應狀態
-            window.onkeydown=move
-        </script>
+		<script>
+			//畫面
+			var h2=document.getElementsByTagName('p')[0]
+			//h2.style.fontFamily='細明體'
+			//h2.style.fontSize='10pt'
+			h2.style.letterSpacing='4px'
+			h2.style.lineHeight='20px'
+			//陣列地圖相關數據
+			var array=[
+				2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+				2,0,0,0,0,0,2,2,2,2,2,2,2,2,2,
+				2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,
+				2,0,0,3,3,3,0,0,0,0,2,2,2,2,2,
+				2,0,0,0,3,3,0,0,0,0,0,2,2,2,2,
+				2,0,0,0,0,0,0,0,0,2,0,0,0,0,5,
+				2,0,0,0,0,0,1,0,0,2,2,2,2,2,2,
+				2,0,4,4,4,0,0,0,0,2,2,2,2,2,2,
+				2,0,4,0,0,0,0,0,0,2,2,2,2,2,2,
+				2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+			]
+			var width=15
+			function position(){
+				for(var n=0;n<array.length;n++) if(array[n]==1) return n
+			}
+			//圖磚
+			function tile(event){
+				switch(event){
+					case 0:return '　'
+					case 1:return '<span style=\'color:orange\'>人</span>'
+					case 2:return '<span style=\'color:brown\'>土</span>'
+					case 3:return '<span style=\'color:green\'>木</span>'
+					case 4:return '<span style=\'color:blue\'>水</span>'
+					case 5:return '<span style=\'color:gray\'>金</span>'
+				}
+			}
+			//繪圖
+			function draw(){
+				var a=''
+				for(var n=0;n<array.length;n++){
+					if(n%width==0&&n!==0) a+='<br>'
+					a+=tile(array[n])
+				}
+				h2.innerHTML=a
+			}
+			//移動
+			function move(event){
+				var a=position()
+				switch(event.which){
+					case 37:
+						if(array[a-1]==0){
+							array[a]=0
+							array[a-1]=1
+						}
+						break
+					case 38:
+						if(array[a-width]==0){
+							array[a]=0
+							array[a-width]=1
+						}
+						break
+					case 39:
+						if(array[a+1]==0){
+							array[a]=0
+							array[a+1]=1
+						}
+						break
+					case 40:
+						if(array[a+width]==0){
+							array[a]=0
+							array[a+width]=1
+						}
+				}
+				draw()
+			}
+			//網頁載入後的初始化動作
+			window.onload=draw
+			//監測鍵盤反應狀態
+			window.onkeydown=move
+		</script>
 
-    </body>
+	</body>
 
 </html>

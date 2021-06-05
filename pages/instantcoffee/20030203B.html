@@ -2,184 +2,184 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Collection 1.1</h1>
-                <p>
-                    我將 Java 1.1 時引進的資料群集，稱為 Collection 1.1，它當初有效解決了 Java 陣列大小固定、無法追加資料的窘境，為開發人員的設計提供了相當大的彈性。<br>
-                    <br>
-                    這些資料群集中，最主要使用的是 Vector…光看名稱就知道是抄 C++ 語言而來，可見當初有點應急湊用的意味。後來有更好、更符合 Java 精神的選擇：List、Set、Map，所以不建議繼續使用 Collection 1.1。<br>
-                    <br>
-                    雖然不應該再繼續使用，但新舊交替時，Collection 1.1 因為適合用在多執行緒的場合而延續了慧命。不只如此，舊的資料群集還修改介面，能與新群集相容，所以並不是每個人都覺得 Collection 1.1 應該徹底退場。<br>
-                    <br>
-                    無論如何，本章節站在舊版的歷史點，來回味 Collection 1.1 的使用方式。不過只當作懷舊而已，千萬別再自討沒趣，使用這些群集～
-                </p>
-            </header>
+			<header>
+				<h1>Collection 1.1</h1>
+				<p>
+					我將 Java 1.1 時引進的資料群集，稱為 Collection 1.1，它當初有效解決了 Java 陣列大小固定、無法追加資料的窘境，為開發人員的設計提供了相當大的彈性。<br>
+					<br>
+					這些資料群集中，最主要使用的是 Vector…光看名稱就知道是抄 C++ 語言而來，可見當初有點應急湊用的意味。後來有更好、更符合 Java 精神的選擇：List、Set、Map，所以不建議繼續使用 Collection 1.1。<br>
+					<br>
+					雖然不應該再繼續使用，但新舊交替時，Collection 1.1 因為適合用在多執行緒的場合而延續了慧命。不只如此，舊的資料群集還修改介面，能與新群集相容，所以並不是每個人都覺得 Collection 1.1 應該徹底退場。<br>
+					<br>
+					無論如何，本章節站在舊版的歷史點，來回味 Collection 1.1 的使用方式。不過只當作懷舊而已，千萬別再自討沒趣，使用這些群集～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Vector</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.Vector;
+			<section>
+				<h2>Vector</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Vector;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                /* Vector
-                                 * addElement(Object) - 加入資料。
-                                 * contains(Object) - 檢查資料是否存在。
-                                 * elementAt(int) - 取得資料。
-                                 * firstElement() - 取得第一筆資料。
-                                 * indexOf(Object) - 取得指定資料的索引位置；如果找不到會傳回 -1。
-                                 * insertElementAt(Object, int) - 插入資料。
-                                 * isEmpty() - 檢查是否尚未有任何資料。
-                                 * lastElement() - 取得最後一筆資料。
-                                 * removeAllElements() - 移除所有資料。
-                                 * removeElement(Object) - 移除資料。
-                                 * removeElementAt(int) - 根據筆數移除資料。
-                                 * setElementAt(Object, int) - 替換資料。
-                                 * capacity() - 取得資料結構目前的容量。
-                                 * setSize() - 固定資料結構的容量；此舉用以執行效率。
-                                 * trimToSize() - 根據資料筆數固定資料結構的容量。
-                                 * elements() - 將資料輸出為 Enumeration。
-                                 * toArray() - 將資料輸出為陣列。 */
-                                 Vector vector = new Vector();
-                                 vector.addElement("大内義興");
-                                 vector.addElement("尼子経久");
-                                 vector.addElement("毛利元就");
-                                 vector.addElement("今川義元");
-                                 vector.addElement("武田信玄");
-                                 vector.addElement("織田信長");
-                                 vector.addElement("豊臣秀吉");
-                                 vector.addElement("徳川家康");
-                                 System.out.print(vector.elementAt(6));
-                            }
+							public static void main(String[] args){
+								/* Vector
+								 * addElement(Object) - 加入資料。
+								 * contains(Object) - 檢查資料是否存在。
+								 * elementAt(int) - 取得資料。
+								 * firstElement() - 取得第一筆資料。
+								 * indexOf(Object) - 取得指定資料的索引位置；如果找不到會傳回 -1。
+								 * insertElementAt(Object, int) - 插入資料。
+								 * isEmpty() - 檢查是否尚未有任何資料。
+								 * lastElement() - 取得最後一筆資料。
+								 * removeAllElements() - 移除所有資料。
+								 * removeElement(Object) - 移除資料。
+								 * removeElementAt(int) - 根據筆數移除資料。
+								 * setElementAt(Object, int) - 替換資料。
+								 * capacity() - 取得資料結構目前的容量。
+								 * setSize() - 固定資料結構的容量；此舉用以執行效率。
+								 * trimToSize() - 根據資料筆數固定資料結構的容量。
+								 * elements() - 將資料輸出為 Enumeration。
+								 * toArray() - 將資料輸出為陣列。 */
+								 Vector vector = new Vector();
+								 vector.addElement("大内義興");
+								 vector.addElement("尼子経久");
+								 vector.addElement("毛利元就");
+								 vector.addElement("今川義元");
+								 vector.addElement("武田信玄");
+								 vector.addElement("織田信長");
+								 vector.addElement("豊臣秀吉");
+								 vector.addElement("徳川家康");
+								 System.out.print(vector.elementAt(6));
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Stack</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.Stack;
+			<section>
+				<h2>Stack</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Stack;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                /* Stack
-                                 * empty() - 檢查是否尚未有任何資料。
-                                 * peek() - 取出第一筆資料；取出時資料不會移除。
-                                 * pop() - 取出最後一筆資料；取出時資料會移除。
-                                 * push(Object) - 放入一筆資料。
-                                 * serch(Object) - 從第一筆開始搜尋資料的位置。 */
-                                 Stack stack = new Stack();
-                                 stack.push("大内義興");
-                                 stack.push("尼子経久");
-                                 stack.push("毛利元就");
-                                 stack.push("今川義元");
-                                 stack.push("武田信玄");
-                                 stack.push("織田信長");
-                                 stack.push("豊臣秀吉");
-                                 stack.push("徳川家康");
-                                 System.out.print(stack.pop());
-                            }
+							public static void main(String[] args){
+								/* Stack
+								 * empty() - 檢查是否尚未有任何資料。
+								 * peek() - 取出第一筆資料；取出時資料不會移除。
+								 * pop() - 取出最後一筆資料；取出時資料會移除。
+								 * push(Object) - 放入一筆資料。
+								 * serch(Object) - 從第一筆開始搜尋資料的位置。 */
+								 Stack stack = new Stack();
+								 stack.push("大内義興");
+								 stack.push("尼子経久");
+								 stack.push("毛利元就");
+								 stack.push("今川義元");
+								 stack.push("武田信玄");
+								 stack.push("織田信長");
+								 stack.push("豊臣秀吉");
+								 stack.push("徳川家康");
+								 System.out.print(stack.pop());
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Hashtable</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.Hashtable;
+			<section>
+				<h2>Hashtable</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Hashtable;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                /* Hashtable
-                                 * clear() - 清除所有資料。
-                                 * containsKey(Object) - 檢查鍵值是否存在。
-                                 * containsValue(Object) - 檢查資料是否存在。
-                                 * get(Object) - 根據鍵值取出資料。
-                                 * isEmpty() - 檢查是否尚未有任何資料。
-                                 * put(Object, Object) - 加入資料；第一個引數為鍵值，第二個引數為資料。
-                                 * remove(Object) - 移除指定鍵值關聯資料。
-                                 * size() - 取得資料筆數。 */
-                                 Hashtable hashtable = new Hashtable();
-                                 hashtable.put(1, "大内義興");
-                                 hashtable.put(2, "尼子経久");
-                                 hashtable.put(3, "毛利元就");
-                                 hashtable.put(4, "今川義元");
-                                 hashtable.put(5, "武田信玄");
-                                 hashtable.put(6, "織田信長");
-                                 hashtable.put(7, "豊臣秀吉");
-                                 hashtable.put(8, "徳川家康");
-                                 System.out.print(hashtable.get(2));
-                            }
+							public static void main(String[] args){
+								/* Hashtable
+								 * clear() - 清除所有資料。
+								 * containsKey(Object) - 檢查鍵值是否存在。
+								 * containsValue(Object) - 檢查資料是否存在。
+								 * get(Object) - 根據鍵值取出資料。
+								 * isEmpty() - 檢查是否尚未有任何資料。
+								 * put(Object, Object) - 加入資料；第一個引數為鍵值，第二個引數為資料。
+								 * remove(Object) - 移除指定鍵值關聯資料。
+								 * size() - 取得資料筆數。 */
+								 Hashtable hashtable = new Hashtable();
+								 hashtable.put(1, "大内義興");
+								 hashtable.put(2, "尼子経久");
+								 hashtable.put(3, "毛利元就");
+								 hashtable.put(4, "今川義元");
+								 hashtable.put(5, "武田信玄");
+								 hashtable.put(6, "織田信長");
+								 hashtable.put(7, "豊臣秀吉");
+								 hashtable.put(8, "徳川家康");
+								 System.out.print(hashtable.get(2));
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Enumeration</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.Vector;
-                        import java.util.Enumeration;
+			<section>
+				<h2>Enumeration</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Vector;
+						import java.util.Enumeration;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                Vector vector = new Vector();
-                                vector.addElement("大内義興");
-                                vector.addElement("尼子経久");
-                                vector.addElement("毛利元就");
-                                vector.addElement("今川義元");
-                                vector.addElement("武田信玄");
-                                vector.addElement("織田信長");
-                                vector.addElement("豊臣秀吉");
-                                vector.addElement("徳川家康");
-                                Enumeration enumeration = vector.elements();
-                                while(enumeration.hasMoreElements()){
-                                     System.out.println(enumeration.nextElement());
-                                }
-                            }
+							public static void main(String[] args){
+								Vector vector = new Vector();
+								vector.addElement("大内義興");
+								vector.addElement("尼子経久");
+								vector.addElement("毛利元就");
+								vector.addElement("今川義元");
+								vector.addElement("武田信玄");
+								vector.addElement("織田信長");
+								vector.addElement("豊臣秀吉");
+								vector.addElement("徳川家康");
+								Enumeration enumeration = vector.elements();
+								while(enumeration.hasMoreElements()){
+									 System.out.println(enumeration.nextElement());
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

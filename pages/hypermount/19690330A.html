@@ -2,110 +2,110 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>多載</h1>
-                <p>同一函式名稱，可以因為參數情況不同，而視為不同的函式。這讓我們可以設計出更更靈活使用的函式。</p>
-            </header>
+			<header>
+				<h1>多載</h1>
+				<p>同一函式名稱，可以因為參數情況不同，而視為不同的函式。這讓我們可以設計出更更靈活使用的函式。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>如何設計多載的函式</h2>
-                <p>
-                    JavaScript 並沒有多載的功能，只能自己取巧，根據參數是否為 undefined，判斷那些參數未被使用，來設計出可以多載的函式：<br>
-                    <br>
-                    <code>
-                        if(參數!=undefined){…}<br>
-                    </code>
-                    <br>
-                    但由於 undefined 在布林算式中，會被當作 false 處理，否則 true，因此要判斷參數是否未被使用，可以直接寫作：<br>
-                    <br>
-                    <code>
-                        if(參數){…}<br>
-                    </code>
-                    <br>
-                    底下來看實際的例子，random() 函式會傳回隨機數，但它會根據輸入的參數判斷如何計算隨機數。如果沒有輸入任何參數，就預設從 1 到 100 隨機產生數值。如果只輸入一個參數，則從這個數值範圍內隨機產生數值。如果輸入兩個參數，則一個視為最小值，一個視為最大值，在這範圍內產生隨機數。
-                </p>
-                <hr>
-                <section>
-                    <h3>步驟一：設計可以實現多載的函式</h3>
-                    <p>
-                        <textarea class='brush:js'>
-                            function random(parameter1, parameter2){
-                                var minimum = 0;
-                                var maximum = 0;
-                                if(parameter1&amp;&amp;parameter2){
-                                    minimum = Number(parameter1);
-                                    maximum = Number(parameter2);
-                                }
-                                else if(parameter1&amp;&amp;!parameter2){
-                                    maximum = Number(parameter1);
-                                    minimum = 1;
-                                }
-                                else if(!parameter1&amp;&amp;!parameter2){
-                                    minimum = 1;
-                                    maximum = 100;
-                                }
-                                return Math.round(Math.random()*(maximum-minimum))+minimum;
-                            }
+			<section>
+				<h2>如何設計多載的函式</h2>
+				<p>
+					JavaScript 並沒有多載的功能，只能自己取巧，根據參數是否為 undefined，判斷那些參數未被使用，來設計出可以多載的函式：<br>
+					<br>
+					<code>
+						if(參數!=undefined){…}<br>
+					</code>
+					<br>
+					但由於 undefined 在布林算式中，會被當作 false 處理，否則 true，因此要判斷參數是否未被使用，可以直接寫作：<br>
+					<br>
+					<code>
+						if(參數){…}<br>
+					</code>
+					<br>
+					底下來看實際的例子，random() 函式會傳回隨機數，但它會根據輸入的參數判斷如何計算隨機數。如果沒有輸入任何參數，就預設從 1 到 100 隨機產生數值。如果只輸入一個參數，則從這個數值範圍內隨機產生數值。如果輸入兩個參數，則一個視為最小值，一個視為最大值，在這範圍內產生隨機數。
+				</p>
+				<hr>
+				<section>
+					<h3>步驟一：設計可以實現多載的函式</h3>
+					<p>
+						<textarea class='brush:js'>
+							function random(parameter1, parameter2){
+								var minimum = 0;
+								var maximum = 0;
+								if(parameter1&amp;&amp;parameter2){
+									minimum = Number(parameter1);
+									maximum = Number(parameter2);
+								}
+								else if(parameter1&amp;&amp;!parameter2){
+									maximum = Number(parameter1);
+									minimum = 1;
+								}
+								else if(!parameter1&amp;&amp;!parameter2){
+									minimum = 1;
+									maximum = 100;
+								}
+								return Math.round(Math.random()*(maximum-minimum))+minimum;
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>步驟二、使用情況</h3>
-                    <p>
-                        <textarea class='brush:js'>
-                            document.write(random(3,9));
-                            document.write(random(10));
-                            document.write(random());
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>步驟二、使用情況</h3>
+					<p>
+						<textarea class='brush:js'>
+							document.write(random(3,9));
+							document.write(random(10));
+							document.write(random());
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>可能發生的情況</h2>
-                <p>
-                    如果希望連空字串都視為沒有輸入參數的話，會像這樣判斷參數：<br>
-                    <br>
-                    <code>
-                        if(參數==undefined||''){…}<br>
-                    </code>
-                    <br>
-                    這時要注意到的是，如果參數的值是取自先保存在 Cookie 或者 LocalStorage 的資料，那 undefined 會變成 'undefined'，所以判斷的方式要進一步寫為：<br>
-                    <br>
-                    <code>
-                        if(參數==undefined||''||'undefined'){…}<br>
-                    </code>
-                    <br>
-                    這是因為 undefined 是 JavaScript 的關鍵字，但 Cookie 或 LocalStorage 只能以字串的方式來保存資料，因此 undefined 會被當作單純的英文字母來保存，取回時其實是一組字串，而不是關鍵字了！
-                </p>
-            </section>
+			<section>
+				<h2>可能發生的情況</h2>
+				<p>
+					如果希望連空字串都視為沒有輸入參數的話，會像這樣判斷參數：<br>
+					<br>
+					<code>
+						if(參數==undefined||''){…}<br>
+					</code>
+					<br>
+					這時要注意到的是，如果參數的值是取自先保存在 Cookie 或者 LocalStorage 的資料，那 undefined 會變成 'undefined'，所以判斷的方式要進一步寫為：<br>
+					<br>
+					<code>
+						if(參數==undefined||''||'undefined'){…}<br>
+					</code>
+					<br>
+					這是因為 undefined 是 JavaScript 的關鍵字，但 Cookie 或 LocalStorage 只能以字串的方式來保存資料，因此 undefined 會被當作單純的英文字母來保存，取回時其實是一組字串，而不是關鍵字了！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 容易與「多載」(Overload) 搞混的，是「覆載」(Override)，它可以在子類別中沿用父類別某個函式名稱（參數格式都要一樣），但改寫成不一樣的功能。這通常出現在物件導向的「多型」，可參考《<a href='19690323A.html'>抽象、繼承、多型</a>》的介紹。</p>
-            </footer>
+			<footer>
+				<p>[*] 容易與「多載」(Overload) 搞混的，是「覆載」(Override)，它可以在子類別中沿用父類別某個函式名稱（參數格式都要一樣），但改寫成不一樣的功能。這通常出現在物件導向的「多型」，可參考《<a href='19690323A.html'>抽象、繼承、多型</a>》的介紹。</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

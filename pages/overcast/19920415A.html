@@ -2,98 +2,98 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>textarea{font-family:文泉驛等寬微米黑,微軟正黑體;font-size:12pt}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>textarea{font-family:文泉驛等寬微米黑,微軟正黑體;font-size:12pt}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>駐英輸入法體驗環境</h1>
-                <p>
-                    <textarea cols='72' rows='8'></textarea>
-                </p>
-            </header>
+			<header>
+				<h1>駐英輸入法體驗環境</h1>
+				<p>
+					<textarea cols='72' rows='8'></textarea>
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>簡介</h2>
-                <p>
-                    使用注音輸入法最大缺點，就是時常忘了切換到哪，想打中文時敲了一堆英文出來，想打英文時變成原地在按注音。<br>
-                    <br>
-                    不過，在使用中國漢語拼音的輸入法時，發現以英文字母做為拼音符號並沒有這個問題，中英混搭打起字來相當方便。<br>
-                    <br>
-                    於是興起讓注音與英文字母也能混搭的輸入環境，不需要在中英模式兩邊切換。<br>
-                    <br>
-                    這樣與英文混搭輸入的注音，就取名為駐英輸入法 XDDD
-                </p>
-            </section>
+			<section>
+				<h2>簡介</h2>
+				<p>
+					使用注音輸入法最大缺點，就是時常忘了切換到哪，想打中文時敲了一堆英文出來，想打英文時變成原地在按注音。<br>
+					<br>
+					不過，在使用中國漢語拼音的輸入法時，發現以英文字母做為拼音符號並沒有這個問題，中英混搭打起字來相當方便。<br>
+					<br>
+					於是興起讓注音與英文字母也能混搭的輸入環境，不需要在中英模式兩邊切換。<br>
+					<br>
+					這樣與英文混搭輸入的注音，就取名為駐英輸入法 XDDD
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>做法</h2>
-                <p>
-                    做法是將注音按法所敲出來像貓走過鍵盤留下的字，轉為對應的中文，例如「ㄏㄨㄚˊ→cj86→華」。<br>
-                    <br>
-                    但有些注音符號放在數字鍵，像「半」打起來是 104，結果 104 就被轉換成「半」了！因此這種做法並不適當。<br>
-                    <br>
-                    改進的方法像是打中文時先敲個前置字元，例如 '，再把 '104 變成「辦」。或者將 104 放在第一個候選詞讓打字者還原。<br>
-                    <br>
-                    不過，本程式還是以錯誤的做法來完成，因為這只是體驗程式，敲起來順暢比較重要。
-                </p>
-            </section>
+			<section>
+				<h2>做法</h2>
+				<p>
+					做法是將注音按法所敲出來像貓走過鍵盤留下的字，轉為對應的中文，例如「ㄏㄨㄚˊ→cj86→華」。<br>
+					<br>
+					但有些注音符號放在數字鍵，像「半」打起來是 104，結果 104 就被轉換成「半」了！因此這種做法並不適當。<br>
+					<br>
+					改進的方法像是打中文時先敲個前置字元，例如 '，再把 '104 變成「辦」。或者將 104 放在第一個候選詞讓打字者還原。<br>
+					<br>
+					不過，本程式還是以錯誤的做法來完成，因為這只是體驗程式，敲起來順暢比較重要。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>說明</h2>
-                <p>
-                    １、出現候選字但不需要挑選時，請按 Esc 或空白鍵關閉。因為本程式 <del title='但我覺得一次列出來比較好選，所以決定扮演智障的角色。'>很智障地</del> 使用英文字母來選字，不關閉候選字的話，打下一個字變成先選字才打字。<br>
-                    <br>
-                    ２、本程式純粹展示用，並不做為輸入法，因此只含日常用字。別說蠻多字打不出來的（例如「匕」「砭」），甚至有些音敲了卻沒字（例如「憋」「掰」）。<br>
-                    <br>
-                    ３、打字速度快的話，不會顯示選字清單，只能慢一點敲。這 BUG 我解決不了，除非核心程式重寫。只知道最後一個注音和聲調連在一起時，打快的話就會發生選字清單閃退，可以打注音時很快，打聲調時稍微放慢再敲，就不會發生。
-                </p>
-            </section>
+			<section>
+				<h2>說明</h2>
+				<p>
+					１、出現候選字但不需要挑選時，請按 Esc 或空白鍵關閉。因為本程式 <del title='但我覺得一次列出來比較好選，所以決定扮演智障的角色。'>很智障地</del> 使用英文字母來選字，不關閉候選字的話，打下一個字變成先選字才打字。<br>
+					<br>
+					２、本程式純粹展示用，並不做為輸入法，因此只含日常用字。別說蠻多字打不出來的（例如「匕」「砭」），甚至有些音敲了卻沒字（例如「憋」「掰」）。<br>
+					<br>
+					３、打字速度快的話，不會顯示選字清單，只能慢一點敲。這 BUG 我解決不了，除非核心程式重寫。只知道最後一個注音和聲調連在一起時，打快的話就會發生選字清單閃退，可以打注音時很快，打聲調時稍微放慢再敲，就不會發生。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>檢討</h2>
-                <p>
-                    想中英混搭的話，要解決的細節很多。例如「一聲（陰平聲調）」不適合用「空白鍵」來按，否則混搭英文字時隔個空白，就被視為一聲調的注音轉換為中文字了！要中英混搭的話，改用 1 表示「一聲」比較適合。<br>
-                    <br>
-                    雖然從字庫集把空白鍵改為 1 即可，但我將這個程式視為「體驗環境」，而不是「應用工具」。如果要先改變原先的注音輸入習慣來使用這個程式，那就不叫體驗了，而是學習另一種輸入工具。<br>
-                    <br>
-                    你不妨試著輸入「逼」時，按 1 而不是空白鍵…很彆扭不是嗎？因此讓「體驗者」以舊的注音輸入習慣來嘗試這個環境比較重要，就不將空白鍵改按 1 了。<br>
-                    <br>
-                    種種這樣需要修改設計才會更適合中英混搭的版本，將另外設計為「華英標記輸入環境」。這個程式盡可能與傳統注音輸入保持一致的習慣，做為體驗用途就好～
-                </p>
-            </section>
+			<section>
+				<h2>檢討</h2>
+				<p>
+					想中英混搭的話，要解決的細節很多。例如「一聲（陰平聲調）」不適合用「空白鍵」來按，否則混搭英文字時隔個空白，就被視為一聲調的注音轉換為中文字了！要中英混搭的話，改用 1 表示「一聲」比較適合。<br>
+					<br>
+					雖然從字庫集把空白鍵改為 1 即可，但我將這個程式視為「體驗環境」，而不是「應用工具」。如果要先改變原先的注音輸入習慣來使用這個程式，那就不叫體驗了，而是學習另一種輸入工具。<br>
+					<br>
+					你不妨試著輸入「逼」時，按 1 而不是空白鍵…很彆扭不是嗎？因此讓「體驗者」以舊的注音輸入習慣來嘗試這個環境比較重要，就不將空白鍵改按 1 了。<br>
+					<br>
+					種種這樣需要修改設計才會更適合中英混搭的版本，將另外設計為「華英標記輸入環境」。這個程式盡可能與傳統注音輸入保持一致的習慣，做為體驗用途就好～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 本程式字庫，是照抄「中華民國教育部」編著的《<a href='http://dict.mini.moe.edu.tw' target='_blank'>國語小字典</a>》而來，因此字庫部份的著作權屬於教育部所有。至於程式功能部份，請檢視原始碼，我只是很單純搭配 RegExp 和 Array 這些 JavaScript 內建的基本功能，來轉換資料而已，稱不上著作權可言吧？<br>
-                    <!--[*] 這麼一來，可以體會為何美國後來把行為表現也列為應用軟體可申請的專利範疇了吧？因為剩下的原創部份，也只有這個程式的行為表現而已，其它部份只是既有功能的正常使用。但我依然將這個程式功能以「<a href='http://creativecommons.tw' target='_blank'>創用ＣＣ計畫</a>」釋出，因為我是寓程式於文件的方式在寫作而已，所以我用圖文創作的方式公開，而不是程式工具的範疇。<br/-->
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 本程式字庫，是照抄「中華民國教育部」編著的《<a href='http://dict.mini.moe.edu.tw' target='_blank'>國語小字典</a>》而來，因此字庫部份的著作權屬於教育部所有。至於程式功能部份，請檢視原始碼，我只是很單純搭配 RegExp 和 Array 這些 JavaScript 內建的基本功能，來轉換資料而已，稱不上著作權可言吧？<br>
+					<!--[*] 這麼一來，可以體會為何美國後來把行為表現也列為應用軟體可申請的專利範疇了吧？因為剩下的原創部份，也只有這個程式的行為表現而已，其它部份只是既有功能的正常使用。但我依然將這個程式功能以「<a href='http://creativecommons.tw' target='_blank'>創用ＣＣ計畫</a>」釋出，因為我是寓程式於文件的方式在寫作而已，所以我用圖文創作的方式公開，而不是程式工具的範疇。<br/-->
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
+		<script>
 
-            var Dictionary=[
+			var Dictionary=[
 ['`','。','！','？','，','、','；','：','「','」','《','》','（','）','–','…'],
 ['1u ','逼'],
 ['1u6','鼻'],
@@ -1257,98 +1257,98 @@
 ['-6','兒','而'],
 ['-3','爾','耳','邇','餌'],
 ['-4','二','貳']
-            ]
+			]
 
-            var Input={
-                _textarea:document.getElementsByTagName('textarea')[0],
-                _position:0,
-                clear:function(){
-                    this._textarea.value=''
-                },
-                append:function(x){
-                    this._textarea.value+=x
-                },
-                replace:function(x,y,z){
-                    this._textarea.value=this._textarea.value.replace(new RegExp(x,z),y)
-                },
-                position:function(){
-                    this._position=this._textarea.textLength
-                },
-                reposition:function(){
-                    this._textarea.setSelectionRange(this._position,this._position)
-                },
-                convert:function(){
-                    for(var n=0; n<Dictionary.length; n++){
-                        if(this._textarea.value.indexOf(Dictionary[n][0])>=0){
-                            Input.replace(Dictionary[n][0]+'$',Dictionary[n][1],'i')
-                            Candidate.list(Dictionary[n])
-                            continue
-                        }
-                    }
-                },
-                addKeyUpEventListener:function(){
-                    this._textarea.onkeyup=function(x){
-                        Candidate.clear()
-                        Candidate.select(x)
-                        Input.convert()
-                    }
-                }
-            }
+			var Input={
+				_textarea:document.getElementsByTagName('textarea')[0],
+				_position:0,
+				clear:function(){
+					this._textarea.value=''
+				},
+				append:function(x){
+					this._textarea.value+=x
+				},
+				replace:function(x,y,z){
+					this._textarea.value=this._textarea.value.replace(new RegExp(x,z),y)
+				},
+				position:function(){
+					this._position=this._textarea.textLength
+				},
+				reposition:function(){
+					this._textarea.setSelectionRange(this._position,this._position)
+				},
+				convert:function(){
+					for(var n=0; n<Dictionary.length; n++){
+						if(this._textarea.value.indexOf(Dictionary[n][0])>=0){
+							Input.replace(Dictionary[n][0]+'$',Dictionary[n][1],'i')
+							Candidate.list(Dictionary[n])
+							continue
+						}
+					}
+				},
+				addKeyUpEventListener:function(){
+					this._textarea.onkeyup=function(x){
+						Candidate.clear()
+						Candidate.select(x)
+						Input.convert()
+					}
+				}
+			}
 
-            var Candidate={
-                _string:'',
-                _array:[],
-                clear:function(){
-                    if(this._string!==''){
-                        Input.replace(this._string,'','g')
-                        Input.replace('[A-z0-9 ]$','','')
-                        this._string=''
-                    }
-                },
-                list:function(x){
-                    if(x.length>2){
-                        this._array=x
-                        Input.position()
-                        this._string+='\n'
-                        //第 27 個候選字開始用 0-9 標示，否則的話用 a-z 正常標示候選字。
-                        for(var n=2; n<x.length; n++) this._string+=String.fromCharCode(n>27?20+n:95+n)+x[n]+'　'
-                        Input.append(this._string)
-                        Input.reposition()
-                    }
-                },
-                select:function(x){
-                    if(this._array.length>2){
-                        //用 a-z 的鍵值 65-90 挑選 array[2]-array[27] 來取代 array[1] 所表示的字
-                        if(x.which>=65&&x.which<this._array.length+63) Input.replace(this._array[1]+'$',this._array[x.which-63],'i')
-                        //用 0-9 的鍵值 48-57 挑選 array[28]-array[37] 來取代 array[1] 所表示的字
-                        else if(x.which>=48&&x.which<this._array.length+20) Input.replace(this._array[1]+'$',this._array[x.which-20],'i')
-                    }
-                    this._array=[]
-                }
-            }
+			var Candidate={
+				_string:'',
+				_array:[],
+				clear:function(){
+					if(this._string!==''){
+						Input.replace(this._string,'','g')
+						Input.replace('[A-z0-9 ]$','','')
+						this._string=''
+					}
+				},
+				list:function(x){
+					if(x.length>2){
+						this._array=x
+						Input.position()
+						this._string+='\n'
+						//第 27 個候選字開始用 0-9 標示，否則的話用 a-z 正常標示候選字。
+						for(var n=2; n<x.length; n++) this._string+=String.fromCharCode(n>27?20+n:95+n)+x[n]+'　'
+						Input.append(this._string)
+						Input.reposition()
+					}
+				},
+				select:function(x){
+					if(this._array.length>2){
+						//用 a-z 的鍵值 65-90 挑選 array[2]-array[27] 來取代 array[1] 所表示的字
+						if(x.which>=65&&x.which<this._array.length+63) Input.replace(this._array[1]+'$',this._array[x.which-63],'i')
+						//用 0-9 的鍵值 48-57 挑選 array[28]-array[37] 來取代 array[1] 所表示的字
+						else if(x.which>=48&&x.which<this._array.length+20) Input.replace(this._array[1]+'$',this._array[x.which-20],'i')
+					}
+					this._array=[]
+				}
+			}
 
-            onload=function(){
-                Input.clear()
-                Input.addKeyUpEventListener()
-                MyDictionary.expand()
-            }
+			onload=function(){
+				Input.clear()
+				Input.addKeyUpEventListener()
+				MyDictionary.expand()
+			}
 
-            var Debug={
-                f1:function(){
-                    var k=''
-                    for(var m=0;m<Dictionary.length;m++) for(var n=1;n<Dictionary[m].length;n++) k+=Dictionary[m][n]+', '
-                    document.write(k)
-                }
-            }
+			var Debug={
+				f1:function(){
+					var k=''
+					for(var m=0;m<Dictionary.length;m++) for(var n=1;n<Dictionary[m].length;n++) k+=Dictionary[m][n]+', '
+					document.write(k)
+				}
+			}
 
-            var MyDictionary={
-                expand:function(){
-                    Dictionary.splice(16,0,['1j6','不'])
-                }
-            }
+			var MyDictionary={
+				expand:function(){
+					Dictionary.splice(16,0,['1j6','不'])
+				}
+			}
 
-        </script>
+		</script>
 
-    </body>
+	</body>
 
 </html>

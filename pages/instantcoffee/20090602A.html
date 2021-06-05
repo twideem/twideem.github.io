@@ -2,202 +2,202 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JavaFX CSS 圖形化介面樣式管理</h1>
-                <p>
-                    JavaFX 可將控制項的外觀，另外使用簡單好用的 CSS 檔案來設計！<br>
-                    <br>
-                    有了這項功能，不但可以避免為了修改控制項外觀而重新修改 Java 原始碼，甚至設定 CSS 樣式往往比建立一堆 Java 物件還快的關係，可以提升圖形化介面程式設計的效率<ins>[1]</ins>。<br>
-                    <br>
-                    而且而且，網路有各式各樣的 CSS 檔任你下載來修改 JavaFX 圖形化介面外觀，輕輕鬆鬆就能設計出不同風格的應用程式。不但可以表現出令人懷念的 Windows XP 的視窗程式，把應用程式設計得像《魔獸世界》的操作介面也難不倒你～
-                </p>
-            </header>
+			<header>
+				<h1>JavaFX CSS 圖形化介面樣式管理</h1>
+				<p>
+					JavaFX 可將控制項的外觀，另外使用簡單好用的 CSS 檔案來設計！<br>
+					<br>
+					有了這項功能，不但可以避免為了修改控制項外觀而重新修改 Java 原始碼，甚至設定 CSS 樣式往往比建立一堆 Java 物件還快的關係，可以提升圖形化介面程式設計的效率<ins>[1]</ins>。<br>
+					<br>
+					而且而且，網路有各式各樣的 CSS 檔任你下載來修改 JavaFX 圖形化介面外觀，輕輕鬆鬆就能設計出不同風格的應用程式。不但可以表現出令人懷念的 Windows XP 的視窗程式，把應用程式設計得像《魔獸世界》的操作介面也難不倒你～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>使用 CSS 修改 JavaFX Application 的控制項樣式</h2>
-                <p>
-                    本節示範如何使用 CSS 修改 JavaFX Application 的背景顏色、以及 Button 控制項的文字顏色。
-                </p>
-                <hr>
-                <section>
-                    <h3>Style.css</h3>
-                    <p>
-                        <textarea class='brush:txt'>
-                            .root{
-                                -fx-background-color: #999;
-                            }
+			<section>
+				<h2>使用 CSS 修改 JavaFX Application 的控制項樣式</h2>
+				<p>
+					本節示範如何使用 CSS 修改 JavaFX Application 的背景顏色、以及 Button 控制項的文字顏色。
+				</p>
+				<hr>
+				<section>
+					<h3>Style.css</h3>
+					<p>
+						<textarea class='brush:txt'>
+							.root{
+								-fx-background-color: #999;
+							}
 
-                            .button{
-                                -fx-text-fill: red;
-                            }
+							.button{
+								-fx-text-fill: red;
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[25]'>
-                            import javafx.application.Application;
-                            import javafx.scene.control.Button;
-                            import javafx.scene.layout.Pane;
-                            import javafx.scene.Scene;
-                            import javafx.stage.Stage;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java;highlight:[25]'>
+							import javafx.application.Application;
+							import javafx.scene.control.Button;
+							import javafx.scene.layout.Pane;
+							import javafx.scene.Scene;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    stage.setTitle("Hello, world!");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
+									stage.setTitle("Hello, world!");
+									stage.setWidth(400);
+									stage.setHeight(300);
 
-                                    Button button = new Button();
-                                    button.setText("別亂按");
-                                    button.setPrefSize(200,20);
-                                    button.setLayoutX(100);
-                                    button.setLayoutY(100);
+									Button button = new Button();
+									button.setText("別亂按");
+									button.setPrefSize(200,20);
+									button.setLayoutX(100);
+									button.setLayoutY(100);
 
-                                    Pane pane = new Pane();
-                                    pane.getChildren().add(button);
+									Pane pane = new Pane();
+									pane.getChildren().add(button);
 
-                                    Scene scene = new Scene(pane);
-                                    scene.getStylesheets().add("Style.css");
-                                    stage.setScene(scene);
+									Scene scene = new Scene(pane);
+									scene.getStylesheets().add("Style.css");
+									stage.setScene(scene);
 
-                                    stage.show();
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <figure>
-                    <img src='../../figures/instantcoffee/20090602A_01.png' alt='插圖'>
-                </figure>
-                <p>
-                    執行時，Style.css 與 Main.class 放在一起，不是放在呼叫 main() 與 start() 的位置。
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<figure>
+					<img src='../../figures/instantcoffee/20090602A_01.png' alt='插圖'>
+				</figure>
+				<p>
+					執行時，Style.css 與 Main.class 放在一起，不是放在呼叫 main() 與 start() 的位置。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>在 FXML 使用 CSS 樣式</h2>
-                <p>
-                    很簡單，在 FXML 根元素用屬性設定 <code>stylesheets="CSS 檔案"</code> 就行了。
-                </p>
-                <hr>
-                <section>
-                    <h3>Style.css</h3>
-                    <p>
-                        <textarea class='brush:txt'>
-                            .root{
-                                -fx-background-color: #999;
-                            }
+			<section>
+				<h2>在 FXML 使用 CSS 樣式</h2>
+				<p>
+					很簡單，在 FXML 根元素用屬性設定 <code>stylesheets="CSS 檔案"</code> 就行了。
+				</p>
+				<hr>
+				<section>
+					<h3>Style.css</h3>
+					<p>
+						<textarea class='brush:txt'>
+							.root{
+								-fx-background-color: #999;
+							}
 
-                            .button{
-                                -fx-text-fill: red;
-                            }
+							.button{
+								-fx-text-fill: red;
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Pane.fxml</h3>
-                    <p>
-                        <textarea class='brush:xml;highlight:[7]'>
-                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Pane.fxml</h3>
+					<p>
+						<textarea class='brush:xml;highlight:[7]'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-                            &lt;?import java.lang.*?&gt;
-                            &lt;?import javafx.scene.control.*?&gt;
-                            &lt;?import javafx.scene.layout.*?&gt;
+							&lt;?import java.lang.*?&gt;
+							&lt;?import javafx.scene.control.*?&gt;
+							&lt;?import javafx.scene.layout.*?&gt;
 
-                            &lt;Pane stylesheets="Style.css"&gt;
-                                &lt;children&gt;
-                                    &lt;Button prefWidth="200" prefHeight="20" layoutX="100" layoutY="100" text="別亂按"/&gt;
-                                &lt;/children&gt;
-                            &lt;/Pane&gt;
+							&lt;Pane stylesheets="Style.css"&gt;
+								&lt;children&gt;
+									&lt;Button prefWidth="200" prefHeight="20" layoutX="100" layoutY="100" text="別亂按"/&gt;
+								&lt;/children&gt;
+							&lt;/Pane&gt;
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.fxml.FXMLLoader;
-                            import javafx.scene.Parent;
-                            import javafx.scene.Scene;
-                            import javafx.stage.Stage;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.fxml.FXMLLoader;
+							import javafx.scene.Parent;
+							import javafx.scene.Scene;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    stage.setTitle("Hello, world!");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
+									stage.setTitle("Hello, world!");
+									stage.setWidth(400);
+									stage.setHeight(300);
 
-                                    try{
-                                        Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
-                                        stage.setScene(new Scene(parent));
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									try{
+										Parent parent = FXMLLoader.load(getClass().getResource("Pane.fxml"));
+										stage.setScene(new Scene(parent));
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
 
-                                    stage.show();
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>更多 JavaFX CSS 樣式</h2>
-                <p>
-                    更多可用的 JavaFX CSS 樣式，請參考 Oracle 官方的《<a href='http://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html' target='_blank'>JavaFX CSS Reference Guide</a>》。<br>
-                    <br>
-                    這文件既是 Guide（說明書）也是 Reference（使用手冊），文章結構相當雜亂，不容易查閱到想要的功能。但多用幾次後，還是會發現固定規律，找到想要的功能。
-                </p>
-            </section>
+			<section>
+				<h2>更多 JavaFX CSS 樣式</h2>
+				<p>
+					更多可用的 JavaFX CSS 樣式，請參考 Oracle 官方的《<a href='http://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html' target='_blank'>JavaFX CSS Reference Guide</a>》。<br>
+					<br>
+					這文件既是 Guide（說明書）也是 Reference（使用手冊），文章結構相當雜亂，不容易查閱到想要的功能。但多用幾次後，還是會發現固定規律，找到想要的功能。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 雖然為了這點，會直接在 Java 原始碼用 setStyle("CSS 樣式設定") 來完成，不會真的另外寫在 CSS 檔裡面。<br>
-                    [*] 下載本單元範例：<a href='../../objects/downloads/20090602A.7z' target='_blank'>20090602A.7z</a>。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 雖然為了這點，會直接在 Java 原始碼用 setStyle("CSS 樣式設定") 來完成，不會真的另外寫在 CSS 檔裡面。<br>
+					[*] 下載本單元範例：<a href='../../objects/downloads/20090602A.7z' target='_blank'>20090602A.7z</a>。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

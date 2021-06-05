@@ -2,83 +2,83 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>貼圖</h1>
-                <p id='division'>
-                    本章節要示範的是在 HTML5 的 Canvas 顯示圖片：<br>
-                    <br>
-                    <script>
-                        var picture=new Image()
-                        picture.src='../../figures/hypermount/19690511A_01.jpg'
-                        var canvas=document.createElement('canvas')
-                        document.getElementById('division').appendChild(canvas)
-                        canvas.width=595
-                        canvas.height=371
-                        picture.addEventListener('load',function(event){
-                            var context=canvas.getContext('2d')
-                            context.drawImage(picture, 0, 0)
-                        })
-                    </script>
-                </p>
-            </header>
+			<header>
+				<h1>貼圖</h1>
+				<p id='division'>
+					本章節要示範的是在 HTML5 的 Canvas 顯示圖片：<br>
+					<br>
+					<script>
+						var picture=new Image()
+						picture.src='../../figures/hypermount/19690511A_01.jpg'
+						var canvas=document.createElement('canvas')
+						document.getElementById('division').appendChild(canvas)
+						canvas.width=595
+						canvas.height=371
+						picture.addEventListener('load',function(event){
+							var context=canvas.getContext('2d')
+							context.drawImage(picture, 0, 0)
+						})
+					</script>
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>原始碼</h2>
-                    <p>
-                        <textarea class='brush:js'>
-                            //載入圖片
-                            var _picture = new Image();
-                            _picture.src = 'picture.jpg';
+			<section>
+				<h2>原始碼</h2>
+					<p>
+						<textarea class='brush:js'>
+							//載入圖片
+							var _picture = new Image();
+							_picture.src = 'picture.jpg';
 
-                            //建立畫布
-                            var _canvas = document.createElement('canvas');
-                            document.body.appendChild(_canvas);
+							//建立畫布
+							var _canvas = document.createElement('canvas');
+							document.body.appendChild(_canvas);
 
-                            //調整畫布大小為圖片大小
-                            _canvas.width = 600;
-                            _canvas.height = 375;
+							//調整畫布大小為圖片大小
+							_canvas.width = 600;
+							_canvas.height = 375;
 
-                            //圖片載入後描繪到畫布上
-                            _picture.onload = function(){
-                                var _context = _canvas.getContext('2d');
-                                _context.drawImage(_picture, 0, 0);
-                            }
+							//圖片載入後描繪到畫布上
+							_picture.onload = function(){
+								var _context = _canvas.getContext('2d');
+								_context.drawImage(_picture, 0, 0);
+							}
                         </textarea>
-                    </p>
-            </section>
+					</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例下載</h2>
-                <p>
-                    <a href='../../objects/downloads/19690511A.7z' target='_blank'>19690511A.7z</a>
-                </p>
-            </section>
+			<section>
+				<h2>範例下載</h2>
+				<p>
+					<a href='../../objects/downloads/19690511A.7z' target='_blank'>19690511A.7z</a>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 本章節使用相片為 Microsoft 官方建置的「<a href='http://windows.microsoft.com/zh-TW/windows/downloads/personalize/themes' target='_blank'>Windows 7 佈景主題館</a>」桌布，在「各國風景」的「加拿大」佈景主題裡面，選用「CA-olwp6.jpg」這張圖片。</p>
-            </footer>
+			<footer>
+				<p>[*] 本章節使用相片為 Microsoft 官方建置的「<a href='http://windows.microsoft.com/zh-TW/windows/downloads/personalize/themes' target='_blank'>Windows 7 佈景主題館</a>」桌布，在「各國風景」的「加拿大」佈景主題裡面，選用「CA-olwp6.jpg」這張圖片。</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

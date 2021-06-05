@@ -2,983 +2,983 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/editor.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../scripts/toolkit.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>
-            ;(function(){
-                typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null
-                function Brush(){
-                    this.regexList=[
-                        {regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:'comments'},
-                        {regex:/=begin(.|\s)+=end/g,css:'comments'},
-                        {regex:/__END__(.|\s)+/g,css:'comments'},
-                        {regex:/(\@|@@|$|%|:)\w+/g,css:'decorator'},
-                        {regex:/\b\d+/g,css:'value'},
-                        {regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:'string'},
-                        {regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},
-                        {regex:/(\`|\/)\w+(\`|\/)/g,css:'string'},
-                        {regex:/%{(.|\s)+}/g,css:'string'},
-                        {regex:new RegExp(this.getKeywords('alias and begin BEGIN break case class def defined? do else elsif end END ensure false for if in module next nil not or redo rescue retry return self super then true undef unless until when while yield'),'gm'),css:'keyword'},
-                        {regex:new RegExp(this.getKeywords('abort at_exit autoload autoload? binding block_given? callcc caller caller_locations catch eval exec exit exit! extend fail fork format gets global_variables include iterator? lambda load local_variables loop open p print printf proc putc puts raise rand readline readlines require require_relative select set_trace_func sleep spawn sprintf srand sub syscall system test throw trace_var trap untrace_var warn new'),'gm'),css:'functions'}
-                    ]
-                    this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)
-                }
-                Brush.prototype=new SyntaxHighlighter.Highlighter()
-                Brush.aliases=['ruby','rails','ror','rb']
-                SyntaxHighlighter.brushes.Ruby = Brush
-                typeof(exports)!='undefined'?exports.Brush=Brush:null
-            })()
-        </script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/editor.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../scripts/toolkit.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>
+			;(function(){
+				typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null
+				function Brush(){
+					this.regexList=[
+						{regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:'comments'},
+						{regex:/=begin(.|\s)+=end/g,css:'comments'},
+						{regex:/__END__(.|\s)+/g,css:'comments'},
+						{regex:/(\@|@@|$|%|:)\w+/g,css:'decorator'},
+						{regex:/\b\d+/g,css:'value'},
+						{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:'string'},
+						{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},
+						{regex:/(\`|\/)\w+(\`|\/)/g,css:'string'},
+						{regex:/%{(.|\s)+}/g,css:'string'},
+						{regex:new RegExp(this.getKeywords('alias and begin BEGIN break case class def defined? do else elsif end END ensure false for if in module next nil not or redo rescue retry return self super then true undef unless until when while yield'),'gm'),css:'keyword'},
+						{regex:new RegExp(this.getKeywords('abort at_exit autoload autoload? binding block_given? callcc caller caller_locations catch eval exec exit exit! extend fail fork format gets global_variables include iterator? lambda load local_variables loop open p print printf proc putc puts raise rand readline readlines require require_relative select set_trace_func sleep spawn sprintf srand sub syscall system test throw trace_var trap untrace_var warn new'),'gm'),css:'functions'}
+					]
+					this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags)
+				}
+				Brush.prototype=new SyntaxHighlighter.Highlighter()
+				Brush.aliases=['ruby','rails','ror','rb']
+				SyntaxHighlighter.brushes.Ruby = Brush
+				typeof(exports)!='undefined'?exports.Brush=Brush:null
+			})()
+		</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>用 Ruby 草寫程式</h1>
-            </header>
+			<header>
+				<h1>用 Ruby 草寫程式</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>準備</h2>
-                <hr>
-                <section>
-                    <h3>易寫易用的 Ruby 語言</h3>
-                    <p>
-                        用過多種程式語言的資訊工程研究生松本行弘認為，電腦應該照人的想法運作程式，而不是人配合電腦的運作苦想程式。為了讓撰寫程式是件令人愉快的事，松本行弘結合 Smalltalk 的物件導向、Perl 的靈活語法、Eiffel 的編程模式，開發了讓設計師更容易撰寫程式的 Ruby 語言。<br>
-                        <br>
-                        Ruby 改善的重點並不在單字般的程式指令如 if 或 while，而是在句型般的表達式如 regular expression、slice sequences、expression substitution，因此你可用豐富多樣的句法來表達程式，使得設計程式就像寫作般抒發感想一樣，輕鬆、愉快。<br>
-                        <br>
-                        不只如此，直接根據資料本身來進行程式設計的思維，而不是只能下指令控制和處理資料，讓想入門程式設計的人，即使不熟艱澀的邏輯思維，卻能因迅速掌握 Ruby 的思維，立馬著手設計程式。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>下載與安裝 RubyInstaller</h3>
-                    <p>
-                        Ruby 的直譯器隨不同作業系統各有第三方支援，Windows 的是 <a href='http://rubyinstaller.org' target='_blank'>RubyInstaller</a>。其它第三方提供的 Ruby 直譯器，請至官方社群網站 <a href='http://www.ruby-lang.org' target='_blank'>Ruby Programming Languageg</a>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Hello, world!</h3>
-                    <p>
-                        以 Windows 為例，用記事本寫入如下程式，並儲存檔案為 hello.rb：<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            puts "Hello, world!"
+			<section>
+				<h2>準備</h2>
+				<hr>
+				<section>
+					<h3>易寫易用的 Ruby 語言</h3>
+					<p>
+						用過多種程式語言的資訊工程研究生松本行弘認為，電腦應該照人的想法運作程式，而不是人配合電腦的運作苦想程式。為了讓撰寫程式是件令人愉快的事，松本行弘結合 Smalltalk 的物件導向、Perl 的靈活語法、Eiffel 的編程模式，開發了讓設計師更容易撰寫程式的 Ruby 語言。<br>
+						<br>
+						Ruby 改善的重點並不在單字般的程式指令如 if 或 while，而是在句型般的表達式如 regular expression、slice sequences、expression substitution，因此你可用豐富多樣的句法來表達程式，使得設計程式就像寫作般抒發感想一樣，輕鬆、愉快。<br>
+						<br>
+						不只如此，直接根據資料本身來進行程式設計的思維，而不是只能下指令控制和處理資料，讓想入門程式設計的人，即使不熟艱澀的邏輯思維，卻能因迅速掌握 Ruby 的思維，立馬著手設計程式。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>下載與安裝 RubyInstaller</h3>
+					<p>
+						Ruby 的直譯器隨不同作業系統各有第三方支援，Windows 的是 <a href='http://rubyinstaller.org' target='_blank'>RubyInstaller</a>。其它第三方提供的 Ruby 直譯器，請至官方社群網站 <a href='http://www.ruby-lang.org' target='_blank'>Ruby Programming Languageg</a>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Hello, world!</h3>
+					<p>
+						以 Windows 為例，用記事本寫入如下程式，並儲存檔案為 hello.rb：<br>
+						<br>
+						<textarea class='brush:rb'>
+							puts "Hello, world!"
                         </textarea>
-                        <br>
-                        進入命令提示字元，切換到 hello.rb 位置，輸入 ruby hello.rb，Ruby 安裝正常的話會顯示：<br>
-                        <br>
-                        <output>
-                            Hello, world!
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Interactive Ruby</h3>
-                    <p>
-                        在命令提示字元輸入 irb，會進入 Interactive Ruby，能在命令提示字元運行 Ruby 程式。這環境會標示行數與傳回值別，很適合用來演練一小段 Ruby 程式碼。要結束的話輸入 exit。<br>
-                        <br>
-                        通常 Ruby 原始碼還是寫在檔案裡面，等有某段程式碼要獨立試跑看看情況怎樣，沒問題的話再正式放到原始碼檔案時，就會開 Interactive Ruby 演練看看。<ins>[1]</ins>
-                    </p>
-                </section>
-            </section>
+						<br>
+						進入命令提示字元，切換到 hello.rb 位置，輸入 ruby hello.rb，Ruby 安裝正常的話會顯示：<br>
+						<br>
+						<output>
+							Hello, world!
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Interactive Ruby</h3>
+					<p>
+						在命令提示字元輸入 irb，會進入 Interactive Ruby，能在命令提示字元運行 Ruby 程式。這環境會標示行數與傳回值別，很適合用來演練一小段 Ruby 程式碼。要結束的話輸入 exit。<br>
+						<br>
+						通常 Ruby 原始碼還是寫在檔案裡面，等有某段程式碼要獨立試跑看看情況怎樣，沒問題的話再正式放到原始碼檔案時，就會開 Interactive Ruby 演練看看。<ins>[1]</ins>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>目錄</h2>
-                <p>
-                    ．<a href='#anchor1'>Dynamic interpreter</a><br>
-                    ．<a href='#anchor2'>Comment</a><br>
-                    ．<a href='#anchor3'>Data section</a><br>
-                    ．<a href='#anchor4'>Block statement</a><br>
-                    ．<a href='#anchor5'>Object</a><br>
-                    ．<a href='#anchor6'>Variable</a><br>
-                    ．<a href='#anchor7'>Method</a><br>
-                    ．<a href='#anchor8'>Class</a><br>
-                    ．<a href='#anchor9'>Module</a><br>
-                    ．<a href='#anchor10'>Boolean</a><br>
-                    ．<a href='#anchor11'>String</a><br>
-                    ．<a href='#anchor12'>Interpolation</a><br>
-                    ．<a href='#anchor13'>Symbol</a><br>
-                    ．<a href='#anchor14'>Control flow</a><br>
-                    ．<a href='#anchor15'>Exception</a><br>
-                    ．<a href='#anchor16'>Collection</a><br>
-                    ．<a href='#anchor17'>Iterator</a><br>
-                    ．<a href='#anchor18'>Kernel methods</a><br>
-                    ．<a href='#anchor19'>Examples</a>
-                </p>
-            </section>
+			<section>
+				<h2>目錄</h2>
+				<p>
+					．<a href='#anchor1'>Dynamic interpreter</a><br>
+					．<a href='#anchor2'>Comment</a><br>
+					．<a href='#anchor3'>Data section</a><br>
+					．<a href='#anchor4'>Block statement</a><br>
+					．<a href='#anchor5'>Object</a><br>
+					．<a href='#anchor6'>Variable</a><br>
+					．<a href='#anchor7'>Method</a><br>
+					．<a href='#anchor8'>Class</a><br>
+					．<a href='#anchor9'>Module</a><br>
+					．<a href='#anchor10'>Boolean</a><br>
+					．<a href='#anchor11'>String</a><br>
+					．<a href='#anchor12'>Interpolation</a><br>
+					．<a href='#anchor13'>Symbol</a><br>
+					．<a href='#anchor14'>Control flow</a><br>
+					．<a href='#anchor15'>Exception</a><br>
+					．<a href='#anchor16'>Collection</a><br>
+					．<a href='#anchor17'>Iterator</a><br>
+					．<a href='#anchor18'>Kernel methods</a><br>
+					．<a href='#anchor19'>Examples</a>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>基礎</h2>
-                <p>
-                    本文只是摘要性整理我對 Ruby 語言的認知，適合已懂程式設計的人認識並使用 Ruby，不適合程式設計入門者學習 Ruby。例如我不會解釋什麼是類別、什麼是物件，我只介紹 Ruby 的類別怎麼寫、物件怎麼用，所以對新手來說這份文件讀起來不好吸收。<br>
-                    <br>
-                    更有系統的教學資料，請看 Ruby Taiwan 社群翻譯的《<a href='http://guides.ruby.tw/ruby/' target='_blank'>Ruby 使用手冊</a>》，或者良葛格學習筆記的《<a href='http://openhome.cc/Gossip/Ruby/' target='_blank'>Ruby Gossip</a>》。<br>
-                    <br>
-                    更完整的參考資料，請看 Ruby 官網的《<a href='http://www.ruby-lang.org/zh_tw/documentation/' target='_blank'>文件</a>》《<a href='http://ruby-doc.org/core/' target='_blank'>Index of Files, Classes &amp; Methods in Ruby</a>》《<a href='http://ruby-doc.org/stdlib/' target='_blank'>Ruby Standard Library Documentation</a>》。
-                </p>
-                <hr id='anchor1'>
-                <section>
-                    <h3>Dynamic interpreter</h3>
-                    <p>
-                        Ruby 是動態型別的直譯式語言，因此不像靜態型別的編譯式語言，用編譯器嚴密檢查程式設計的原始碼哪裡有錯，而是寬鬆條件，讓直譯器想辦法理解錯誤的原始碼想做什麼。<br>
-                        <br>
-                        所以寫 Ruby 程式可以把心力專注在你真正想要實現的功能上，不用把時間花在檢驗資料上。<br>
-                        <br>
-                        由於 Ruby 著重的是寫程式，而不是跑程式，因此它的直譯器在設計上加入大量的自動化處理工作。這導致犧牲了執行效率，卻成為最聰明的直譯器。<br>
-                        <br>
-                        若看重的是跑程式而不是寫程式，可以改用語法簡約，所以直譯器自動化處理的任務不多，執行效率較好一些的 Python。甚至非常著重執行效率的話，用 PHP 也不錯，這語言除了寫伺服端網頁程式，也能當一般直譯器寫應用程式來跑。沒有誰優誰劣，端看你的需求選擇出來，就是好語言。
-                    </p>
-                </section>
-                <hr id='anchor2'>
-                <section>
-                    <h3>Comment</h3>
-                    <p>
-                        使用 # 寫單行註解，使用 =begin 和 =end 寫多行註解。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            =begin
-                              我的第一個程式
-                              版本：2018.03.27
-                              作者：Twideem Civs
-                              聯繫：twideem@outlook.com
-                            =end
+			<section>
+				<h2>基礎</h2>
+				<p>
+					本文只是摘要性整理我對 Ruby 語言的認知，適合已懂程式設計的人認識並使用 Ruby，不適合程式設計入門者學習 Ruby。例如我不會解釋什麼是類別、什麼是物件，我只介紹 Ruby 的類別怎麼寫、物件怎麼用，所以對新手來說這份文件讀起來不好吸收。<br>
+					<br>
+					更有系統的教學資料，請看 Ruby Taiwan 社群翻譯的《<a href='http://guides.ruby.tw/ruby/' target='_blank'>Ruby 使用手冊</a>》，或者良葛格學習筆記的《<a href='http://openhome.cc/Gossip/Ruby/' target='_blank'>Ruby Gossip</a>》。<br>
+					<br>
+					更完整的參考資料，請看 Ruby 官網的《<a href='http://www.ruby-lang.org/zh_tw/documentation/' target='_blank'>文件</a>》《<a href='http://ruby-doc.org/core/' target='_blank'>Index of Files, Classes &amp; Methods in Ruby</a>》《<a href='http://ruby-doc.org/stdlib/' target='_blank'>Ruby Standard Library Documentation</a>》。
+				</p>
+				<hr id='anchor1'>
+				<section>
+					<h3>Dynamic interpreter</h3>
+					<p>
+						Ruby 是動態型別的直譯式語言，因此不像靜態型別的編譯式語言，用編譯器嚴密檢查程式設計的原始碼哪裡有錯，而是寬鬆條件，讓直譯器想辦法理解錯誤的原始碼想做什麼。<br>
+						<br>
+						所以寫 Ruby 程式可以把心力專注在你真正想要實現的功能上，不用把時間花在檢驗資料上。<br>
+						<br>
+						由於 Ruby 著重的是寫程式，而不是跑程式，因此它的直譯器在設計上加入大量的自動化處理工作。這導致犧牲了執行效率，卻成為最聰明的直譯器。<br>
+						<br>
+						若看重的是跑程式而不是寫程式，可以改用語法簡約，所以直譯器自動化處理的任務不多，執行效率較好一些的 Python。甚至非常著重執行效率的話，用 PHP 也不錯，這語言除了寫伺服端網頁程式，也能當一般直譯器寫應用程式來跑。沒有誰優誰劣，端看你的需求選擇出來，就是好語言。
+					</p>
+				</section>
+				<hr id='anchor2'>
+				<section>
+					<h3>Comment</h3>
+					<p>
+						使用 # 寫單行註解，使用 =begin 和 =end 寫多行註解。<br>
+						<br>
+						<textarea class='brush:rb'>
+							=begin
+							  我的第一個程式
+							  版本：2018.03.27
+							  作者：Twideem Civs
+							  聯繫：twideem@outlook.com
+							=end
 
-                            # 向世界打聲招呼吧
-                            puts "Hello, world!"
+							# 向世界打聲招呼吧
+							puts "Hello, world!"
                         </textarea>
-                    </p>
-                </section>
-                <hr id='anchor3'>
-                <section>
-                    <h3>Data section</h3>
-                    <p>
-                        在原始碼檔案程式最後面使用 __END__，往後的內容直譯器會略過不讀。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            puts "I love you"
+					</p>
+				</section>
+				<hr id='anchor3'>
+				<section>
+					<h3>Data section</h3>
+					<p>
+						在原始碼檔案程式最後面使用 __END__，往後的內容直譯器會略過不讀。<br>
+						<br>
+						<textarea class='brush:rb'>
+							puts "I love you"
 
-                            __END__
-                            想對妳訴說的情話
-                            一直沒能說出口
+							__END__
+							想對妳訴說的情話
+							一直沒能說出口
                         </textarea>
-                    </p>
-                </section>
-                <hr id='anchor4'>
-                <section>
-                    <h3>Block statement</h3>
-                    <section>
-                        <h4>敘述</h4>
-                        <p>
-                            每行程式後面不用加上 ; 符號，但可用 ; 符號把多行程式寫成一行。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                puts 111
-                                puts 222; puts 333; puts 444
+					</p>
+				</section>
+				<hr id='anchor4'>
+				<section>
+					<h3>Block statement</h3>
+					<section>
+						<h4>敘述</h4>
+						<p>
+							每行程式後面不用加上 ; 符號，但可用 ; 符號把多行程式寫成一行。<br>
+							<br>
+							<textarea class='brush:rb'>
+								puts 111
+								puts 222; puts 333; puts 444
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>指令區塊</h4>
-                        <p>
-                            每段指令區塊如 if 或 while，只需使用 end 表示結束，不需其它程式語言的 { 左括號表示開始。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                if true
-                                  puts 555
-                                end
+						</p>
+					</section>
+					<section>
+						<h4>指令區塊</h4>
+						<p>
+							每段指令區塊如 if 或 while，只需使用 end 表示結束，不需其它程式語言的 { 左括號表示開始。<br>
+							<br>
+							<textarea class='brush:rb'>
+								if true
+								  puts 555
+								end
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>do 區塊</h4>
-                        <p>
-                            通常函式只有執行子程式和傳回值的功能，但 Ruby 有個不一樣的地方，就是多了隨後要用 do 區塊進一步操作程式結果的功能。例如下面程式，以 open() 開啟檔案來讀時，就隨手把資料 puts() 出去了：<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                open "sample.txt","r" do |file|
-                                  puts file.read
-                                end
+						</p>
+					</section>
+					<section>
+						<h4>do 區塊</h4>
+						<p>
+							通常函式只有執行子程式和傳回值的功能，但 Ruby 有個不一樣的地方，就是多了隨後要用 do 區塊進一步操作程式結果的功能。例如下面程式，以 open() 開啟檔案來讀時，就隨手把資料 puts() 出去了：<br>
+							<br>
+							<textarea class='brush:rb'>
+								open "sample.txt","r" do |file|
+								  puts file.read
+								end
                             </textarea>
-                            <br>
-                            do 區塊要代入參數時，使用 || 符號。<br>
-                            <br>
-                            這感覺很像 Lambda 匿名函式，但 do 區塊是寫在 method 後面，不是寫在 method 參數裡面。且匿名函式即使不放在 method 參數裡面也可以獨立運作，do 區塊不行，只能跟在 method 後面執行。<br>
-                            <br>
-                            其它程式語言沒有這種特性，而 Ruby 又大量採用這項特性設計 method，所以學習 Ruby 一定要掌握這點，不然在操作程式庫時會遇到麻煩。<br>
-                            <br>
-                            最後，若 method 沒有參數，或有參數但沒有省略 () 圓弧時，do.. end 可用 {} 代替：<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                open("sample.txt","r"){
-                                  |file| puts file.read
-                                }
+							<br>
+							do 區塊要代入參數時，使用 || 符號。<br>
+							<br>
+							這感覺很像 Lambda 匿名函式，但 do 區塊是寫在 method 後面，不是寫在 method 參數裡面。且匿名函式即使不放在 method 參數裡面也可以獨立運作，do 區塊不行，只能跟在 method 後面執行。<br>
+							<br>
+							其它程式語言沒有這種特性，而 Ruby 又大量採用這項特性設計 method，所以學習 Ruby 一定要掌握這點，不然在操作程式庫時會遇到麻煩。<br>
+							<br>
+							最後，若 method 沒有參數，或有參數但沒有省略 () 圓弧時，do.. end 可用 {} 代替：<br>
+							<br>
+							<textarea class='brush:rb'>
+								open("sample.txt","r"){
+								  |file| puts file.read
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>begin 區塊</h4>
-                        <p>
-                            其它地方需要建立一個獨立區塊時，使用 begin。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                begin
-                                  puts 123
-                                end
+						</p>
+					</section>
+					<section>
+						<h4>begin 區塊</h4>
+						<p>
+							其它地方需要建立一個獨立區塊時，使用 begin。<br>
+							<br>
+							<textarea class='brush:rb'>
+								begin
+								  puts 123
+								end
                             </textarea>
-                        </p>
-                    </section>
-                </section>
-                <hr id='anchor5'>
-                <section>
-                    <h3>Object</h3>
-                    <section>
-                        <h4>True object oriented language</h4>
-                        <p>
-                            不像 Java 只是強制使用 class 設計程式，資料卻是 primitive types，Ruby 連資料本身也是物件，因此可以直接對資料進行物件的操作。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                puts 5.pred
+						</p>
+					</section>
+				</section>
+				<hr id='anchor5'>
+				<section>
+					<h3>Object</h3>
+					<section>
+						<h4>True object oriented language</h4>
+						<p>
+							不像 Java 只是強制使用 class 設計程式，資料卻是 primitive types，Ruby 連資料本身也是物件，因此可以直接對資料進行物件的操作。<br>
+							<br>
+							<textarea class='brush:rb'>
+								puts 5.pred
                             </textarea>
-                            <br>
-                            <output>
-                                4
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Data type</h4>
-                        <p>
-                            Ruby 的資料由以下物件組成：<br>
-                            <br>
-                            <samp>
-                                BasicObject &gt; Object &gt; Array<br>
-                                　　　　　　　　　　 &gt; FalseClass<br>
-                                　　　　　　　　　　 &gt; Hash<br>
-                                　　　　　　　　　　 &gt; NilClass<br>
-                                　　　　　　　　　　 &gt; Module &gt; Class<br>
-                                　　　　　　　　　　 &gt; Numeric &gt; Integer &gt; Fixnum<br>
-                                　　　　　　　　　　 　　　　　　　　　　&gt; Bignum<br>
-                                　　　　　　　　　　 　　　　　&gt; Float<br>
-                                　　　　　　　　　　 &gt; Range<br>
-                                　　　　　　　　　　 &gt; String<br>
-                                　　　　　　　　　　 &gt; Symbol<br>
-                                　　　　　　　　　　 &gt; TrueClass<br>
-                            </samp>
-                            <br>
-                            值得注意的是，Ruby 沒有 Boolean 物件。<br>
-                            <br>
-                            由於 Ruby 是動態型別，直譯器會自動為資料配對物件，使用者無需關心資料的種類。
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Data</h4>
-                        <p>
-                            想關心資料的種類，可用 <code>class</code> 屬性取得。<br>
-                            <br>
-                            可操作 <code>instance_of?</code> 判斷資料是否為某種物件，或操作 <code>is_a?</code> 判斷資料是否為某種類別。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                a = 123
-                                puts a.class
-                                puts a.instance_of? Integer
-                                puts a.instance_of? Object
-                                puts a.is_a? Integer
-                                puts a.is_a? Object
+							<br>
+							<output>
+								4
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>Data type</h4>
+						<p>
+							Ruby 的資料由以下物件組成：<br>
+							<br>
+							<samp>
+								BasicObject &gt; Object &gt; Array<br>
+								　　　　　　　　　　 &gt; FalseClass<br>
+								　　　　　　　　　　 &gt; Hash<br>
+								　　　　　　　　　　 &gt; NilClass<br>
+								　　　　　　　　　　 &gt; Module &gt; Class<br>
+								　　　　　　　　　　 &gt; Numeric &gt; Integer &gt; Fixnum<br>
+								　　　　　　　　　　 　　　　　　　　　　&gt; Bignum<br>
+								　　　　　　　　　　 　　　　　&gt; Float<br>
+								　　　　　　　　　　 &gt; Range<br>
+								　　　　　　　　　　 &gt; String<br>
+								　　　　　　　　　　 &gt; Symbol<br>
+								　　　　　　　　　　 &gt; TrueClass<br>
+							</samp>
+							<br>
+							值得注意的是，Ruby 沒有 Boolean 物件。<br>
+							<br>
+							由於 Ruby 是動態型別，直譯器會自動為資料配對物件，使用者無需關心資料的種類。
+						</p>
+					</section>
+					<section>
+						<h4>Data</h4>
+						<p>
+							想關心資料的種類，可用 <code>class</code> 屬性取得。<br>
+							<br>
+							可操作 <code>instance_of?</code> 判斷資料是否為某種物件，或操作 <code>is_a?</code> 判斷資料是否為某種類別。<br>
+							<br>
+							<textarea class='brush:rb'>
+								a = 123
+								puts a.class
+								puts a.instance_of? Integer
+								puts a.instance_of? Object
+								puts a.is_a? Integer
+								puts a.is_a? Object
                             </textarea>
-                            <br>
-                            <output>
-                                Integer<br>
-                                true<br>
-                                false<br>
-                                true<br>
-                                true<br>
-                            </output>
-                            <br>
-                            想手動轉換資料的種類，可操作 to_a、to_f、to_h、to_i、to_s，分別對應 Array、Float、Hash、Integer、String。
-                        </p>
-                    </section>
-                </section>
-                <hr id='anchor6'>
-                <section>
-                    <h3>Variable</h3>
-                    <p>
-                        變數不需宣告資料型態或物件型別即可使用，由直譯器自動處理。<br>
-                        <br>
-                        變數名稱開頭為大寫表示常數，小寫表示區域變數，$ 表示全域變數，@ 表示實例變數，@@ 表示類別變數。<br>
-                        <br>
-                        但 Ruby 的常數是可以修改的，只是被修改時直譯器會提出警示罷了，與其說是常數，不如說是不建議修改的變數。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            a = 123
-                            puts a
+							<br>
+							<output>
+								Integer<br>
+								true<br>
+								false<br>
+								true<br>
+								true<br>
+							</output>
+							<br>
+							想手動轉換資料的種類，可操作 to_a、to_f、to_h、to_i、to_s，分別對應 Array、Float、Hash、Integer、String。
+						</p>
+					</section>
+				</section>
+				<hr id='anchor6'>
+				<section>
+					<h3>Variable</h3>
+					<p>
+						變數不需宣告資料型態或物件型別即可使用，由直譯器自動處理。<br>
+						<br>
+						變數名稱開頭為大寫表示常數，小寫表示區域變數，$ 表示全域變數，@ 表示實例變數，@@ 表示類別變數。<br>
+						<br>
+						但 Ruby 的常數是可以修改的，只是被修改時直譯器會提出警示罷了，與其說是常數，不如說是不建議修改的變數。<br>
+						<br>
+						<textarea class='brush:rb'>
+							a = 123
+							puts a
                         </textarea>
-                        <br>
-                        <output>
-                            123
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor7'>
-                <section>
-                    <h3>Method</h3>
-                    <p>
-                        Ruby 自認沒有 function，因為再怎樣也是 Object 的 method。<br>
-                        <br>
-                        定義 method 使用 def，直譯器會自動找出傳回值，所以可省略 return。<br>
-                        <br>
-                        操作 mehtod 時可省略 () 符號。<br>
-                        <br>
-                        在寫作慣例上，方法名稱結尾 = 表示會設定資料，? 表示會傳回判斷後的資料值，! 表示會修改資料造成意料之外的結果。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            def f(x)
-                              x+x
-                            end
+						<br>
+						<output>
+							123
+						</output>
+					</p>
+				</section>
+				<hr id='anchor7'>
+				<section>
+					<h3>Method</h3>
+					<p>
+						Ruby 自認沒有 function，因為再怎樣也是 Object 的 method。<br>
+						<br>
+						定義 method 使用 def，直譯器會自動找出傳回值，所以可省略 return。<br>
+						<br>
+						操作 mehtod 時可省略 () 符號。<br>
+						<br>
+						在寫作慣例上，方法名稱結尾 = 表示會設定資料，? 表示會傳回判斷後的資料值，! 表示會修改資料造成意料之外的結果。<br>
+						<br>
+						<textarea class='brush:rb'>
+							def f(x)
+							  x+x
+							end
 
-                            puts f 6
+							puts f 6
                         </textarea>
-                        <br>
-                        <output>
-                            12
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor8'>
-                <section>
-                    <h3>Class</h3>
-                    <section>
-                        <h4>類別</h4>
-                        <p>
-                            用 class 指令設計類別，定義 initialize 方法做為建構子，然後對類別呼叫 new 方法建立物件。物件導向講究封裝的關係，類別裡的變數無法直接存取，要透過方法才行。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                class A
-                                  def initialize
-                                    @g = "Hello"
-                                  end
-                                  def f
-                                    @g
-                                  end
-                                end
+						<br>
+						<output>
+							12
+						</output>
+					</p>
+				</section>
+				<hr id='anchor8'>
+				<section>
+					<h3>Class</h3>
+					<section>
+						<h4>類別</h4>
+						<p>
+							用 class 指令設計類別，定義 initialize 方法做為建構子，然後對類別呼叫 new 方法建立物件。物件導向講究封裝的關係，類別裡的變數無法直接存取，要透過方法才行。<br>
+							<br>
+							<textarea class='brush:rb'>
+								class A
+								  def initialize
+									@g = "Hello"
+								  end
+								  def f
+									@g
+								  end
+								end
 
-                                a = A.new
-                                puts a.f
+								a = A.new
+								puts a.f
                             </textarea>
-                            <br>
-                            <output>
-                                Hello
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>繼承</h4>
-                        <p>
-                            Ruby 只能單一繼承，使用 &lt; 符號。<br>
-                            <br>
-                            <textarea class='brush:rb'>
-                                class A
-                                  def f1(x)
-                                    puts x
-                                  end
-                                end
+							<br>
+							<output>
+								Hello
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>繼承</h4>
+						<p>
+							Ruby 只能單一繼承，使用 &lt; 符號。<br>
+							<br>
+							<textarea class='brush:rb'>
+								class A
+								  def f1(x)
+									puts x
+								  end
+								end
 
-                                class B &lt; A
-                                  def f2
-                                    f1("Hello")
-                                  end
-                                end
+								class B &lt; A
+								  def f2
+									f1("Hello")
+								  end
+								end
 
-                                b = B.new
-                                b.f2
+								b = B.new
+								b.f2
                             </textarea>
-                            <br>
-                            <output>
-                                Hello
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr id='anchor9'>
-                <section>
-                    <h3>Module</h3>
-                    <p>
-                        可用 module 將常數和方法放在一起成為模組。<br>
-                        <br>
-                        模組內的常數使用 :: 符號取出，就像 namespace 一樣。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            module S
-                              A = 123
-                            end
+							<br>
+							<output>
+								Hello
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr id='anchor9'>
+				<section>
+					<h3>Module</h3>
+					<p>
+						可用 module 將常數和方法放在一起成為模組。<br>
+						<br>
+						模組內的常數使用 :: 符號取出，就像 namespace 一樣。<br>
+						<br>
+						<textarea class='brush:rb'>
+							module S
+							  A = 123
+							end
 
-                            S::A
+							S::A
                         </textarea>
-                        <br>
-                        <output>
-                            123<br>
-                        </output>
-                        <br>
-                        在 class 中用 include 載入模組，模組的方法會成為 class 的一部分，這項特性叫 mixin，可實現多重繼承。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            module T
-                              def f1
-                                puts 111
-                              end
-                            end
+						<br>
+						<output>
+							123<br>
+						</output>
+						<br>
+						在 class 中用 include 載入模組，模組的方法會成為 class 的一部分，這項特性叫 mixin，可實現多重繼承。<br>
+						<br>
+						<textarea class='brush:rb'>
+							module T
+							  def f1
+								puts 111
+							  end
+							end
 
-                            module U
-                              def f2
-                                puts 222
-                              end
-                            end
+							module U
+							  def f2
+								puts 222
+							  end
+							end
 
-                            class A
-                              include T,U
-                            end
+							class A
+							  include T,U
+							end
 
-                            a = A.new
-                            a.f1
-                            a.f2
+							a = A.new
+							a.f1
+							a.f2
                         </textarea>
-                        <br>
-                        <output>
-                            111<br>
-                            222
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor10'>
-                <section>
-                    <h3>Boolean</h3>
-                    <p>
-                        布林運算只有 false 和 nil 會得到假值，其它都是真值：包括 0 也是真值。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            if 0
-                              puts "真的耶"
-                            end
+						<br>
+						<output>
+							111<br>
+							222
+						</output>
+					</p>
+				</section>
+				<hr id='anchor10'>
+				<section>
+					<h3>Boolean</h3>
+					<p>
+						布林運算只有 false 和 nil 會得到假值，其它都是真值：包括 0 也是真值。<br>
+						<br>
+						<textarea class='brush:rb'>
+							if 0
+							  puts "真的耶"
+							end
                         </textarea>
-                        <br>
-                        <output>
-                            真的耶<br>
-                        </output>
-                        <br>
-                        nil 相當於其它程式語言的 null，表示物件是空的。
-                    </p>
-                </section>
-                <hr id='anchor11'>
-                <section>
-                    <h3>String</h3>
-                    <p>
-                        使用 ' 或 " 包起來的資料，都是字串物件。所以沒有字元，只有長度為 1 的字串。<br>
-                        <br>
-                        無法輸出的字元與符號，可以跟其它程式語言一樣，使用 \ 轉義字元。<br>
-                        <br>
-                        也可用 String Q 來產生字串，以 % 開頭，後接任何類型的括號皆可，裡面可以毫無顧忌的使用任何符號做為字串，連寫成多行都會幫你加入斷行符號。其它還有 %Q %q %W %w %x %r %s，詳情請參考其他資料。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            a = %{
-                              111
-                              '222'
-                              "333"
-                            }
-                            puts a
+						<br>
+						<output>
+							真的耶<br>
+						</output>
+						<br>
+						nil 相當於其它程式語言的 null，表示物件是空的。
+					</p>
+				</section>
+				<hr id='anchor11'>
+				<section>
+					<h3>String</h3>
+					<p>
+						使用 ' 或 " 包起來的資料，都是字串物件。所以沒有字元，只有長度為 1 的字串。<br>
+						<br>
+						無法輸出的字元與符號，可以跟其它程式語言一樣，使用 \ 轉義字元。<br>
+						<br>
+						也可用 String Q 來產生字串，以 % 開頭，後接任何類型的括號皆可，裡面可以毫無顧忌的使用任何符號做為字串，連寫成多行都會幫你加入斷行符號。其它還有 %Q %q %W %w %x %r %s，詳情請參考其他資料。<br>
+						<br>
+						<textarea class='brush:rb'>
+							a = %{
+							  111
+							  '222'
+							  "333"
+							}
+							puts a
                         </textarea>
-                        <br>
-                        <output>
-                            &nbsp; &nbsp; 111<br>
-                            &nbsp; &nbsp; '222'<br>
-                            &nbsp; &nbsp; "333"
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor12'>
-                <section>
-                    <h3>Interpolation</h3>
-                    <p>
-                        可在字串中用 #{} 插入程式碼。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            puts "請問一加二是多少？#{1+2}"
+						<br>
+						<output>
+							&nbsp; &nbsp; 111<br>
+							&nbsp; &nbsp; '222'<br>
+							&nbsp; &nbsp; "333"
+						</output>
+					</p>
+				</section>
+				<hr id='anchor12'>
+				<section>
+					<h3>Interpolation</h3>
+					<p>
+						可在字串中用 #{} 插入程式碼。<br>
+						<br>
+						<textarea class='brush:rb'>
+							puts "請問一加二是多少？#{1+2}"
                         </textarea>
-                        <br>
-                        <output>
-                            請問一加二是多少？3
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor13'>
-                <section>
-                    <h3>Symbol</h3>
-                    <p>
-                         以 : 開頭的識別字會成為 Symbol 物件，目的是把名稱變成符號來使用。像是用在 Hash 物件當作 Key，比用 String 當作 Key 效能更好。<br>
-                         <br>
-                         <textarea class='brush:rb'>
-                            a = {:name=&gt;"Twideem Civs",:email=&gt;"twideem@outlook.com"}
-                            puts a[:name]
-                            puts a[:email]
-                         </textarea>
-                         <br>
-                         <output>
-                             Twideem Civs<br>
-                             twideem@outlook.com<br>
-                         </output>
-                         <br>
-                         符號跟變數名稱的識別字不一樣，看到 :name 我會知道這是 Symbol 物件，而看到像是 name="abc" 的話，我會知道這是 String 物件，兩者是不一樣的物件，用途不同，自然能區別出差異了。
-                    </p>
-                </section>
-                <hr id='anchor14'>
-                <section>
-                    <h3>Control flow</h3>
-                    <p>
-                        使用 if.. elsif.. else..、unless.. else..、case.. when.. else..、while、until、for.. in..、break、next、redo 指令控制流程。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            a=1; b=2
+						<br>
+						<output>
+							請問一加二是多少？3
+						</output>
+					</p>
+				</section>
+				<hr id='anchor13'>
+				<section>
+					<h3>Symbol</h3>
+					<p>
+						 以 : 開頭的識別字會成為 Symbol 物件，目的是把名稱變成符號來使用。像是用在 Hash 物件當作 Key，比用 String 當作 Key 效能更好。<br>
+						 <br>
+						 <textarea class='brush:rb'>
+							a = {:name=&gt;"Twideem Civs",:email=&gt;"twideem@outlook.com"}
+							puts a[:name]
+							puts a[:email]
+						 </textarea>
+						 <br>
+						 <output>
+							 Twideem Civs<br>
+							 twideem@outlook.com<br>
+						 </output>
+						 <br>
+						 符號跟變數名稱的識別字不一樣，看到 :name 我會知道這是 Symbol 物件，而看到像是 name="abc" 的話，我會知道這是 String 物件，兩者是不一樣的物件，用途不同，自然能區別出差異了。
+					</p>
+				</section>
+				<hr id='anchor14'>
+				<section>
+					<h3>Control flow</h3>
+					<p>
+						使用 if.. elsif.. else..、unless.. else..、case.. when.. else..、while、until、for.. in..、break、next、redo 指令控制流程。<br>
+						<br>
+						<textarea class='brush:rb'>
+							a=1; b=2
 
-                            # if (適用 unless 只是布林條件相反)
-                            if a==1
-                              puts "a 是 1"
-                            elsif a==2
-                              puts "a 是 2"
-                            else
-                              puts "都不是"
-                            end
+							# if (適用 unless 只是布林條件相反)
+							if a==1
+							  puts "a 是 1"
+							elsif a==2
+							  puts "a 是 2"
+							else
+							  puts "都不是"
+							end
 
-                            # case
-                            case b
-                              when 1
-                                puts "b 是 1"
-                              when 2
-                                puts "b 是 2"
-                              else
-                                puts "都不是"
-                            end
+							# case
+							case b
+							  when 1
+								puts "b 是 1"
+							  when 2
+								puts "b 是 2"
+							  else
+								puts "都不是"
+							end
 
-                            # while (適用 until 只是布林條件相反)
-                            while b &lt; 4
-                              puts "b 變 #{b+=1}"
-                            end
+							# while (適用 until 只是布林條件相反)
+							while b &lt; 4
+							  puts "b 變 #{b+=1}"
+							end
 
-                            # for
-                            for n in 5..6
-                              puts "誰是 #{n}"
-                            end
+							# for
+							for n in 5..6
+							  puts "誰是 #{n}"
+							end
                         </textarea>
-                        <br>
-                        <output>
-                            a 是 1<br>
-                            b 是 2<br>
-                            b 變 3<br>
-                            b 變 4<br>
-                            誰是 5<br>
-                            誰是 6
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor15'>
-                <section>
-                    <h3>Exception</h3>
-                    <p>
-                        使用 begin.. rescue.. ensure.. 捕捉與處理例外。
-                    </p>
-                </section>
-                <hr id='anchor16'>
-                <section>
-                    <h3>Collection</h3>
-                    <p>
-                        內建 Array 和 Hash 兩種資料容器，除了呼叫 new 方法，也可以分別使用 [] 和 {} 產生。
-                    </p>
-                    <section>
-                        <h4>Array</h4>
-                        <p>
-                            <textarea class='brush:rb'>
-                                a = ["A","B","C","D","E","F","G"]
-                                print a[0]
-                                print a[1..3]
-                                print a[4,6]
-                                print a[-2]
+						<br>
+						<output>
+							a 是 1<br>
+							b 是 2<br>
+							b 變 3<br>
+							b 變 4<br>
+							誰是 5<br>
+							誰是 6
+						</output>
+					</p>
+				</section>
+				<hr id='anchor15'>
+				<section>
+					<h3>Exception</h3>
+					<p>
+						使用 begin.. rescue.. ensure.. 捕捉與處理例外。
+					</p>
+				</section>
+				<hr id='anchor16'>
+				<section>
+					<h3>Collection</h3>
+					<p>
+						內建 Array 和 Hash 兩種資料容器，除了呼叫 new 方法，也可以分別使用 [] 和 {} 產生。
+					</p>
+					<section>
+						<h4>Array</h4>
+						<p>
+							<textarea class='brush:rb'>
+								a = ["A","B","C","D","E","F","G"]
+								print a[0]
+								print a[1..3]
+								print a[4,6]
+								print a[-2]
                             </textarea>
-                            <br>
-                            <output>
-                                A<br>
-                                ["B","C","D"]<br>
-                                ["E","F","G"]<br>
-                                F
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Hash</h4>
-                        <p>
-                            <textarea class='brush:rb'>
-                                # 傳統 Ruby 寫法
-                                a = {"name"=&gt;"Twideem Civs","email"=&gt;"twideem@outlook.com"}
-                                puts a["name"]
-                                puts a["email"]
+							<br>
+							<output>
+								A<br>
+								["B","C","D"]<br>
+								["E","F","G"]<br>
+								F
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>Hash</h4>
+						<p>
+							<textarea class='brush:rb'>
+								# 傳統 Ruby 寫法
+								a = {"name"=&gt;"Twideem Civs","email"=&gt;"twideem@outlook.com"}
+								puts a["name"]
+								puts a["email"]
 
-                                # 引進 ECMAScript 寫法
-                                b = {id:"admin",password:"abc123"}
-                                puts b[:id]
-                                puts b[:password]
+								# 引進 ECMAScript 寫法
+								b = {id:"admin",password:"abc123"}
+								puts b[:id]
+								puts b[:password]
                             </textarea>
-                            <br>
-                            <output>
-                                Twideem Civs<br>
-                                twideem@outlook.com<br>
-                                admin<br>
-                                abc123
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr id='anchor17'>
-                <section>
-                    <h3>Iterator</h3>
-                    <p>
-                        有三種方式可以進行迭代：使用 Kernel 模組的 loop 方法、使用數值物件的 times 方法、使用 Array 的 each 方法。<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            # Kernel
-                            a = 0
-                            loop do
-                              puts a+=1
-                              if a&gt;=3
-                                break
-                              end
-                            end
+							<br>
+							<output>
+								Twideem Civs<br>
+								twideem@outlook.com<br>
+								admin<br>
+								abc123
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr id='anchor17'>
+				<section>
+					<h3>Iterator</h3>
+					<p>
+						有三種方式可以進行迭代：使用 Kernel 模組的 loop 方法、使用數值物件的 times 方法、使用 Array 的 each 方法。<br>
+						<br>
+						<textarea class='brush:rb'>
+							# Kernel
+							a = 0
+							loop do
+							  puts a+=1
+							  if a&gt;=3
+								break
+							  end
+							end
 
-                            # Number
-                            3.times do
-                              a+=1
-                              puts a
-                            end
+							# Number
+							3.times do
+							  a+=1
+							  puts a
+							end
 
-                            # Array
-                            [7,8,9].each do |n|
-                              puts n
-                            end
+							# Array
+							[7,8,9].each do |n|
+							  puts n
+							end
                         </textarea>
-                        <br>
-                        <output>
-                            123<br>
-                            456<br>
-                            789
-                        </output>
-                    </p>
-                </section>
-                <hr id='anchor18'>
-                <section>
-                    <h3>Kernel methods</h3>
-                    <p>
-                        Ruby 將最常用的各個物件方法，包裝成 Kernel 模組，且預設載入，因此不用指定物件名稱，就能直接呼叫如下方法…
-                    </p>
-                    <table>
-                        <tr><td>abort</td><td>輸出結束訊息後退出處理程序。</td></tr>
-                        <tr><td>at_exit</td><td>結束程序時執行一段程式區塊。</td></tr>
-                        <tr><td>autoload</td><td>登錄檔案。</td></tr>
-                        <tr><td>autoload?</td><td>檢查檔案是否登錄。</td></tr>
-                        <tr><td>binding</td><td>傳回物件的綁定情況，通常傳給 eval 使用。</td></tr>
-                        <tr><td>block_given?</td><td>檢查是否需要匿名區塊。</td></tr>
-                        <tr><td>caller</td><td>以字串追蹤方法被呼叫的對象。</td></tr>
-                        <tr><td>caller_locations</td><td>以處理程序追蹤方法被呼叫的對象。</td></tr>
-                        <tr><td>catch</td><td>捕捉 throw 拋出的例外。</td></tr>
-                        <tr><td>eval</td><td>運算程式。</td></tr>
-                        <tr><td>exec</td><td>以當前處理程序執行系統命令。</td></tr>
-                        <tr><td>exit</td><td>安全退出處理程序。</td></tr>
-                        <tr><td>exit!</td><td>強制退出處理程序。</td></tr>
-                        <tr><td>fail</td><td>單純發出例外，不關心是否要捕捉。</td></tr>
-                        <tr><td>fork</td><td>以多執行緒執行一段程式區塊。</td></tr>
-                        <tr><td>format</td><td>格式化字串。</td></tr>
-                        <tr><td>gets</td><td>從 IO 輸入中取得字串。</td></tr>
-                        <tr><td>global_variables</td><td>輸出所有全域變數。</td></tr>
-                        <tr><td>iterator?</td><td>已被 block_given? 取代，不建議使用。</td></tr>
-                        <tr><td>lambda</td><td>執行匿名函式。</td></tr>
-                        <tr><td>load</td><td>載入原始碼檔案的程式。</td></tr>
-                        <tr><td>local_variables</td><td>輸出所有區域變數。</td></tr>
-                        <tr><td>loop</td><td>無條件迴圈。</td></tr>
-                        <tr><td>open</td><td>開啟檔案或資料夾。</td></tr>
-                        <tr><td>p</td><td>輸出物件的 inspect 方法。</td></tr>
-                        <tr><td>pp</td><td>將資料縮排後輸出。</td></tr>
-                        <tr><td>print</td><td>標準輸出資料。</td></tr>
-                        <tr><td>printf</td><td>格式化輸出資料。</td></tr>
-                        <tr><td>proc</td><td>建立函式物件。</td></tr>
-                        <tr><td>putc</td><td>將編碼輸出為字元。</td></tr>
-                        <tr><td>puts</td><td>輸出字串，每輸出資料都會換行。</td></tr>
-                        <tr><td>raise</td><td>丟出給 rescue 指令捕捉的例外。</td></tr>
-                        <tr><td>rand</td><td>產生亂數。</td></tr>
-                        <tr><td>readline</td><td>從檔案讀取一行資料。</td></tr>
-                        <tr><td>readlines</td><td>從檔案讀取每行資料。</td></tr>
-                        <tr><td>require</td><td>載入模組。</td></tr>
-                        <tr><td>require_relative</td><td>用相對路徑載入模組。</td></tr>
-                        <tr><td>select</td><td>選擇已準備好的執行緒。</td></tr>
-                        <tr><td>set_trace_func</td><td>追蹤處理程序。</td></tr>
-                        <tr><td>sleep</td><td>執行序暫停執行一段時間。</td></tr>
-                        <tr><td>spawn</td><td>以名稱執行命令，並傳回處理程序的識別號碼。</td></tr>
-                        <tr><td>sprintf</td><td>格式化輸出並傳回字串。</td></tr>
-                        <tr><td>srand</td><td>重新產生亂數種子。</td></tr>
-                        <tr><td>sub</td><td>擷取字串。</td></tr>
-                        <tr><td>syscall</td><td>以識別號碼呼叫函式。</td></tr>
-                        <tr><td>system</td><td>用新的處理程序呼叫作業系統提供的命令。</td></tr>
-                        <tr><td>test</td><td>檢查檔案。</td></tr>
-                        <tr><td>throw</td><td>拋出給 catch 捕捉的例外。</td></tr>
-                        <tr><td>trace_var</td><td>追蹤變數。</td></tr>
-                        <tr><td>trap</td><td>拋出新定義的例外。</td></tr>
-                        <tr><td>untrace_var</td><td>釋放變數。</td></tr>
-                        <tr><td>warn</td><td>發出錯誤訊息。</td></tr>
-                        <!--tr><td>chomp</td><td>移除字串裡的換行符號。</td></tr>
-                        <tr><td>chop</td><td>移除字串中最後一個字。</td></tr>
-                        <tr><td>gsub</td><td>循規則擷取字串。</td></tr-->
-                    </table>
-                </section>
-            </section>
+						<br>
+						<output>
+							123<br>
+							456<br>
+							789
+						</output>
+					</p>
+				</section>
+				<hr id='anchor18'>
+				<section>
+					<h3>Kernel methods</h3>
+					<p>
+						Ruby 將最常用的各個物件方法，包裝成 Kernel 模組，且預設載入，因此不用指定物件名稱，就能直接呼叫如下方法…
+					</p>
+					<table>
+						<tr><td>abort</td><td>輸出結束訊息後退出處理程序。</td></tr>
+						<tr><td>at_exit</td><td>結束程序時執行一段程式區塊。</td></tr>
+						<tr><td>autoload</td><td>登錄檔案。</td></tr>
+						<tr><td>autoload?</td><td>檢查檔案是否登錄。</td></tr>
+						<tr><td>binding</td><td>傳回物件的綁定情況，通常傳給 eval 使用。</td></tr>
+						<tr><td>block_given?</td><td>檢查是否需要匿名區塊。</td></tr>
+						<tr><td>caller</td><td>以字串追蹤方法被呼叫的對象。</td></tr>
+						<tr><td>caller_locations</td><td>以處理程序追蹤方法被呼叫的對象。</td></tr>
+						<tr><td>catch</td><td>捕捉 throw 拋出的例外。</td></tr>
+						<tr><td>eval</td><td>運算程式。</td></tr>
+						<tr><td>exec</td><td>以當前處理程序執行系統命令。</td></tr>
+						<tr><td>exit</td><td>安全退出處理程序。</td></tr>
+						<tr><td>exit!</td><td>強制退出處理程序。</td></tr>
+						<tr><td>fail</td><td>單純發出例外，不關心是否要捕捉。</td></tr>
+						<tr><td>fork</td><td>以多執行緒執行一段程式區塊。</td></tr>
+						<tr><td>format</td><td>格式化字串。</td></tr>
+						<tr><td>gets</td><td>從 IO 輸入中取得字串。</td></tr>
+						<tr><td>global_variables</td><td>輸出所有全域變數。</td></tr>
+						<tr><td>iterator?</td><td>已被 block_given? 取代，不建議使用。</td></tr>
+						<tr><td>lambda</td><td>執行匿名函式。</td></tr>
+						<tr><td>load</td><td>載入原始碼檔案的程式。</td></tr>
+						<tr><td>local_variables</td><td>輸出所有區域變數。</td></tr>
+						<tr><td>loop</td><td>無條件迴圈。</td></tr>
+						<tr><td>open</td><td>開啟檔案或資料夾。</td></tr>
+						<tr><td>p</td><td>輸出物件的 inspect 方法。</td></tr>
+						<tr><td>pp</td><td>將資料縮排後輸出。</td></tr>
+						<tr><td>print</td><td>標準輸出資料。</td></tr>
+						<tr><td>printf</td><td>格式化輸出資料。</td></tr>
+						<tr><td>proc</td><td>建立函式物件。</td></tr>
+						<tr><td>putc</td><td>將編碼輸出為字元。</td></tr>
+						<tr><td>puts</td><td>輸出字串，每輸出資料都會換行。</td></tr>
+						<tr><td>raise</td><td>丟出給 rescue 指令捕捉的例外。</td></tr>
+						<tr><td>rand</td><td>產生亂數。</td></tr>
+						<tr><td>readline</td><td>從檔案讀取一行資料。</td></tr>
+						<tr><td>readlines</td><td>從檔案讀取每行資料。</td></tr>
+						<tr><td>require</td><td>載入模組。</td></tr>
+						<tr><td>require_relative</td><td>用相對路徑載入模組。</td></tr>
+						<tr><td>select</td><td>選擇已準備好的執行緒。</td></tr>
+						<tr><td>set_trace_func</td><td>追蹤處理程序。</td></tr>
+						<tr><td>sleep</td><td>執行序暫停執行一段時間。</td></tr>
+						<tr><td>spawn</td><td>以名稱執行命令，並傳回處理程序的識別號碼。</td></tr>
+						<tr><td>sprintf</td><td>格式化輸出並傳回字串。</td></tr>
+						<tr><td>srand</td><td>重新產生亂數種子。</td></tr>
+						<tr><td>sub</td><td>擷取字串。</td></tr>
+						<tr><td>syscall</td><td>以識別號碼呼叫函式。</td></tr>
+						<tr><td>system</td><td>用新的處理程序呼叫作業系統提供的命令。</td></tr>
+						<tr><td>test</td><td>檢查檔案。</td></tr>
+						<tr><td>throw</td><td>拋出給 catch 捕捉的例外。</td></tr>
+						<tr><td>trace_var</td><td>追蹤變數。</td></tr>
+						<tr><td>trap</td><td>拋出新定義的例外。</td></tr>
+						<tr><td>untrace_var</td><td>釋放變數。</td></tr>
+						<tr><td>warn</td><td>發出錯誤訊息。</td></tr>
+						<!--tr><td>chomp</td><td>移除字串裡的換行符號。</td></tr>
+						<tr><td>chop</td><td>移除字串中最後一個字。</td></tr>
+						<tr><td>gsub</td><td>循規則擷取字串。</td></tr-->
+					</table>
+				</section>
+			</section>
 
-            <hr id='anchor19'>
+			<hr id='anchor19'>
 
-            <section>
-                <h2>應用</h2>
-                <hr>
-                <section>
-                    <h3>取得輸入</h3>
-                    <p>
-                        <textarea class='brush:rb'>
-                            a = gets
-                            puts a*3
+			<section>
+				<h2>應用</h2>
+				<hr>
+				<section>
+					<h3>取得輸入</h3>
+					<p>
+						<textarea class='brush:rb'>
+							a = gets
+							puts a*3
                         </textarea>
-                        <br>
-                        <output>
-                            a<br>
-                            a<br>
-                            a<br>
-                            a<br>
-                        </output>
-                        <br>
-                        <textarea class='brush:rb'>
-                            a = gets.chomp
-                            puts a*3
+						<br>
+						<output>
+							a<br>
+							a<br>
+							a<br>
+							a<br>
+						</output>
+						<br>
+						<textarea class='brush:rb'>
+							a = gets.chomp
+							puts a*3
                         </textarea>
-                        <br>
-                        <output>
-                            a<br>
-                            aaa
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得參數</h3>
-                    <p>
-                        假設將如下程式碼儲存為 main.rb：<br>
-                        <br>
-                        <textarea class='brush:rb'>
-                            puts ARGV[0]
+						<br>
+						<output>
+							a<br>
+							aaa
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得參數</h3>
+					<p>
+						假設將如下程式碼儲存為 main.rb：<br>
+						<br>
+						<textarea class='brush:rb'>
+							puts ARGV[0]
                         </textarea>
-                        <br>
-                        然後執行 ruby main.rb hello，會顯示：<br>
-                        <br>
-                        <output>
-                            hello
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>讀寫檔案</h3>
-                    <p>
-                        <textarea class='brush:rb'>
-                            open "text.txt","w" do |file|
-                              file.write "aaa\nbbb\nccc"
-                            end
+						<br>
+						然後執行 ruby main.rb hello，會顯示：<br>
+						<br>
+						<output>
+							hello
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>讀寫檔案</h3>
+					<p>
+						<textarea class='brush:rb'>
+							open "text.txt","w" do |file|
+							  file.write "aaa\nbbb\nccc"
+							end
 
-                            open "text.txt","r" do |file|
-                              puts file.read
-                            end
+							open "text.txt","r" do |file|
+							  puts file.read
+							end
                         </textarea>
-                        <br>
-                        <output class='editor'>
-                            aaa<br>
-                            bbb<br>
-                            ccc<br>
-                        </output>
-                        <br>
-                        <output>
-                            aaa<br>
-                            bbb<br>
-                            ccc
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>String 與 Array</h3>
-                    <p>
-                        <textarea class='brush:rb'>
-                            # 字串轉陣列
-                            a = "AAA,BBB,CCC".split ","
-                            a.each do |n|
-                              puts n
-                            end
+						<br>
+						<output class='editor'>
+							aaa<br>
+							bbb<br>
+							ccc<br>
+						</output>
+						<br>
+						<output>
+							aaa<br>
+							bbb<br>
+							ccc
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>String 與 Array</h3>
+					<p>
+						<textarea class='brush:rb'>
+							# 字串轉陣列
+							a = "AAA,BBB,CCC".split ","
+							a.each do |n|
+							  puts n
+							end
 
-                            # 陣列轉字串
-                            b = ["AAA","BBB","CCC"].join ","
-                            puts b
+							# 陣列轉字串
+							b = ["AAA","BBB","CCC"].join ","
+							puts b
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC<br>
-                            AAA,BBB,CCC
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC<br>
+							AAA,BBB,CCC
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>感想</h2>
-                <p>
-                    <a href='javascript:Display.show()'>與主題無關，想看另外按。</a>
-                </p>
-                <hr>
-                <section class='private'>
-                    <h3>Ruby on Rails</h3>
-                    <p>
-                        2005 年之前，Ruby 程式語言雖然有名，但真正用的人不多。迅速走紅的原因，是網站應用框架 Ruby on Rails，在 2006 年用它來開發網站，效率是第一的，寫沒幾行程式就能搞定 Java 落落長的程式工作，大家紛紛跳槽過去。<br>
-                        <br>
-                        然而奇怪的事發生了！開發人員改用 Ruby on Rails 後，開發網站功能的效率雖然提升數十倍，但從未架過網站的新手用 Ruby on Rails，入門難度卻比 PHP、ASP.NET、JSP 還要高！<br>
-                        <br>
-                        其實，Ruby on Rails 雖然把網站開發人員平常耗時費力的工作簡單化，但那些工作對新手來說還用不到。也就是說，Ruby on Rails 雖然把高難度的工作給簡單化，但這些簡單化的工作丟給新手，反而是製造麻煩了～<br>
-                        <br>
-                        因此不建議想架站寫動態網頁的新手拿 Ruby on Rails 入門，還是乖乖從 PHP 學起比較平順。我們也上了一課，好用的東西不見得好學，雖然戰鬥機飛得又快又遠，但沒接受過訓練的人，還是乖乖騎著機車在附近兜風就好。
-                    </p>
-                </section>
-                <hr>
-                <section class='private'>
-                    <h3>Perl <i>v.</i> Ruby</h3>
-                    <p>
-                        對我來說，Ruby 就是純物件導向且更好用的 Perl 5，光看 Ruby 連表示鍵值對資料都用  =&gt; 符號，而且都叫 hash，就覺得抄得過火了。如果遺憾 Perl 5 不夠物件導向，純物件導向的 Perl 6 又太與眾不同，那 Ruby 就是很好的選擇！<br>
-                        <br>
-                        我不喜歡 Ruby 的地方，就是它太像 Perl！而抄過來的東西，在程序導向的 Perl 其實是優雅的設計，但在物件導向的 Ruby 來說，有些卻是多餘的。如果沒有那些多餘的東西，Ruby 寫起來會更流暢、順手，尤其門外漢寫 Ruby 時，會更少看到直譯器發出寫法錯誤的訊息。<br>
-                        <br>
-                        因為看松本行弘當初塞這麼多 Perl 的東西進來，卻沒有經過縝密的思考為什麼，所以我不認為他是很懂程式語言的行家：「Ruby 只是他把自己要用到的語言打包在一起來用，不是什麼創新的發明，只是更方便好用的改良品。」因此網路訪談或出版書籍暢談松本行弘對程式設計的理念時，我一點興趣也沒有，覺得他被抬舉了，跟真正的大師們比還差很遠。他沒有為程式設計奠定新的學術理念，只是在既有的學術基礎上多了一種實踐，而且還亂七八糟的破壞了這些學術理念。<br>
-                        <br>
-                        但後來還是看了網路訪談和出版書籍後，才發現松本行弘比這些人更貼近我們，因為他也不以大師自居，他總是和我們在同樣位置看待程式設計和語言。所以為什麼 Ruby 這麼好用？不為什麼，因為這是你我的好夥伴松本行弘設計出來的語言，而不是大師們堅持己見發明出來的語言。
-                    </p>
-                </section>
-                <hr>
-                <section class='private'>
-                    <h3>Python <i>v.</i> Ruby</h3>
-                    <p>
-                        「Python 容易學習，Ruby 容易上手。」Python 的語法走簡約路線，所以不難學習就能使用。而 Ruby 的語法走實用路線<ins>[2]</ins>，每項功能的程式寫過一次，就自然記住而上手，可能不用學習就用得很順。<br>
-                        <br>
-                        另外，用 Ruby 寫程式碼的速度很快，基本上把資料寫出來，再用物件導向的特性操作資料，構思程式時很流暢。Python 雖然也有資料即物件的特性，但本質上跟其它程式語言一樣，站在流程控制的角度處理資料，所以在構思程式時經常要停下來預測資料，緩慢許多。<br>
-                        <br>
-                        還有，語法簡約並不表示寫出來的程式碼比較少，反而就是因為可用的技倆不多，要敲的字數反而較多。所謂 Python 語法簡約，只是要學的東西簡約，但程式碼敲出來看，往往是 Ruby 比較簡約，因為 Python 要搭配多種語法與結構才寫得出來。<br>
-                        <br>
-                        「看起來 Ruby 比較好！」沒錯，對程式設計師來說，Ruby 比 Python 快狠準！確實比較好用！但對新手來說，卻不是那麼回事～<br>
-                        <br>
-                        「Python 是大家的程式語言，Ruby 是程式設計師的語言。」Python 3 是汰除 Python 2 的陋習，而不向下相容的語言，讓大家更能看懂程式碼在做什麼。照自己想法寫程式不難，但要看懂別人寫的程式是什麼想法，對新手來說可就難了。Ruby 的技術性寫法較多，語法也較凌亂，雖然也不難讀懂別人在寫什麼，但總是費時。不像學會寫 Python，就看得懂任何人寫的 Python 在做什麼，因為就像自己寫的一樣，而且靠縮排整理區塊，一行一行流暢地讀，沒有一行是沒有意義、讓人分心的 } 或 end 結尾，相當舒暢。<br>
-                        <br>
-                        建議入門者先學 Python，它有更完備的程式庫可用，能做到的事比 Ruby 更多而且方便。等上手了，想追求更快的程式寫作效率，或別人寫的程式庫滿足不了你，大多程式庫都要自己寫<ins>[3]</ins>，再換 Ruby。由於兩個語言基本上很像，不用宣告變數、都用 def 設計函式，屆時要學很快：「每項功能的程式寫過一次，就自然記住而上手了，不用學習就用得很順。」<br>
-                        <br>
-                        <output>
-                            《閒聊誰比較受歡迎》<br>
-                            <br>
-                            現在（2016）來看，Python 顯然是比 Ruby 受歡迎的程式語言，但十多年前可不是這麼回事～<br>
-                            <br>
-                            剛進入二十一世紀，Ruby 雖然稱不上熱門，但因為很像 Perl，卻有物件導向的架構，在 CGI 捧紅 Perl 的那個年代，Ruby 還是有點名氣的。這時的 Python 還只是冷門語言，甚至當時我根本沒聽過 Python，但已經知道 Ruby 的存在。<br>
-                            <br>
-                            2006 年，Python 已有名氣，但僅限於程式設計師之間的口碑流傳，真正用它寫程式的初學者不多，大多還是從 Java 或 C++ 開始學程式設計。Ruby 則因為 Ruby on Rails 的關係，CGI、PHP、Java 後端通通都閃邊站，自成第四大派系，一躍成為熱門語言，受歡迎程度更勝 Python。<br>
-                            <br>
-                            相比之下，未曾爆紅的 Python，繼續只求好不求快的務實精神，持續補充程式庫的應用領域，在各領域獲得程式設計師的歡心。這時已有跡象：Ruby 好像只有 Rails 框架，而 Python 靠內建程式庫能做到的事更多。<br>
-                            <br>
-                            隨著 Python 之父 Guido van Rossum 加入 Google，Python 成為這家技術領先公司內部的標準語言，許多框架都是 Python 的。別說科學計算、大數據雲、深度學習讓 Python 一紅再紅，連 Django 都循著 Python 只求好不求快的精神，以沉穩的步伐一步步改進，後來反而比越改越爛、變得不知所云的 Rails 簡單實用了！現在建議用 Django 開發網站的人，要比 Rials 還多～<br>
-                            <br>
-                            這段歷史軌跡，可以看出 Python 真正的魅力不是語法本身，而是語言精神。不靠華麗的招式取勝，而靠雄厚的內功修為，吸引大家奠定深厚的程式設計功力。<br>
-                            <br>
-                            但比較受歡迎的，就真的比較好嗎？不見得，俐落的 Ruby 有很多優點，不是死板的 Python 可以媲美的。如果你很清楚 Ruby 比 Python 適合你的程式寫作風格，那管他 Python 是不是更受歡迎，Ruby 對你來說才是最好的選擇！反之亦然。
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section class='private'>
-                    <h3>Java <i>v.</i> Ruby</h3>
-                    <p>
-                        Java 必須先設計類別，製造物件，才能處理資料。<br>
-                        <br>
-                        而 Ruby 的資料直接就是物件，即使不自己設計物件，也能處理得很好，甚至從頭到尾都不用自己設計類別製造物件，就能妥善完成理想的物件導向程式設計。真要設計自己的類別製造物件時，也能做得很漂亮。<br>
-                        <br>
-                        不用設計類別製造物件，就能享受物件導向的美好，表示物件導向做得更妥善，誰優誰劣已經很明顯了。<br>
-                        <br>
-                        但 Ruby 是動態型別語言，不適合開發大型專案，所以需要靜態型別語言來整合團隊之間的編程任務時，還是得選 Java。除非你的 Ruby 將根據某套事件驅動程式設計的框架進行開發，否則不要把 Ruby 用在百人團隊的大型專案，下場會很慘。
-                    </p>
-                </section>
-                <hr>
-                <section class='private'>
-                    <h3>... <i>v.</i> Ruby</h3>
-                    <p>
-                        沒有最完美的語言，只有最適合你的語言。<br>
-                        <br>
-                        只要符合你的個性、滿足你的需求，就是完美的語言。<br>
-                        <br>
-                        所以你自己覺得使用的語言很完美就好，別人有別人完美的語言，沒必要去羨慕或鄙視別人使用的語言。<br>
-                        <br>
-                        你喜好變了、或有更多需求無法滿足了，就去追尋新的完美語言！往前看、向前走，不用猶豫。下一個語言是否更完美不知道，但你得先向前走出完美的自己，才能往前看到完美語言的出現。
-                    </p>
-                </section>
-                <hr>
-                <section class='private'>
-                    <h3>Ruby <i>v.</i> Ruby</h3>
-                    <p>
-                        Ruby 最大的對手，就是 Ruby 自己。<br>
-                        <br>
-                        以 end 結束區塊，在結構層次不多時，其實很直覺也很整齊，並不難看。但四層、五層以上，整堆 end 看起來就很醜了。<br>
-                        <br>
-                        然而，無論哪種語言，語法結構寫超過三層，都不會好看。在傳統結構化程式語言，會把一層層結構寫成函式，做為減少層次的手段。在語法蜜糖多的 Ruby 更是如此，可以減少層次的寫法有很多！當你看到整堆 end 很難看，其實就是警訊，告訴你程式碼要重構一下了！<br>
-                        <br>
-                        連續出現五行 end 很醜不是 Ruby 的問題，而是連續寫出五行以上 end 程式碼的問題。不過很多框架，就是得連續寫出好幾行的 end，所以不見得是你的問題，而是設計上的問題～
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>感想</h2>
+				<p>
+					<a href='javascript:Display.show()'>與主題無關，想看另外按。</a>
+				</p>
+				<hr>
+				<section class='private'>
+					<h3>Ruby on Rails</h3>
+					<p>
+						2005 年之前，Ruby 程式語言雖然有名，但真正用的人不多。迅速走紅的原因，是網站應用框架 Ruby on Rails，在 2006 年用它來開發網站，效率是第一的，寫沒幾行程式就能搞定 Java 落落長的程式工作，大家紛紛跳槽過去。<br>
+						<br>
+						然而奇怪的事發生了！開發人員改用 Ruby on Rails 後，開發網站功能的效率雖然提升數十倍，但從未架過網站的新手用 Ruby on Rails，入門難度卻比 PHP、ASP.NET、JSP 還要高！<br>
+						<br>
+						其實，Ruby on Rails 雖然把網站開發人員平常耗時費力的工作簡單化，但那些工作對新手來說還用不到。也就是說，Ruby on Rails 雖然把高難度的工作給簡單化，但這些簡單化的工作丟給新手，反而是製造麻煩了～<br>
+						<br>
+						因此不建議想架站寫動態網頁的新手拿 Ruby on Rails 入門，還是乖乖從 PHP 學起比較平順。我們也上了一課，好用的東西不見得好學，雖然戰鬥機飛得又快又遠，但沒接受過訓練的人，還是乖乖騎著機車在附近兜風就好。
+					</p>
+				</section>
+				<hr>
+				<section class='private'>
+					<h3>Perl <i>v.</i> Ruby</h3>
+					<p>
+						對我來說，Ruby 就是純物件導向且更好用的 Perl 5，光看 Ruby 連表示鍵值對資料都用  =&gt; 符號，而且都叫 hash，就覺得抄得過火了。如果遺憾 Perl 5 不夠物件導向，純物件導向的 Perl 6 又太與眾不同，那 Ruby 就是很好的選擇！<br>
+						<br>
+						我不喜歡 Ruby 的地方，就是它太像 Perl！而抄過來的東西，在程序導向的 Perl 其實是優雅的設計，但在物件導向的 Ruby 來說，有些卻是多餘的。如果沒有那些多餘的東西，Ruby 寫起來會更流暢、順手，尤其門外漢寫 Ruby 時，會更少看到直譯器發出寫法錯誤的訊息。<br>
+						<br>
+						因為看松本行弘當初塞這麼多 Perl 的東西進來，卻沒有經過縝密的思考為什麼，所以我不認為他是很懂程式語言的行家：「Ruby 只是他把自己要用到的語言打包在一起來用，不是什麼創新的發明，只是更方便好用的改良品。」因此網路訪談或出版書籍暢談松本行弘對程式設計的理念時，我一點興趣也沒有，覺得他被抬舉了，跟真正的大師們比還差很遠。他沒有為程式設計奠定新的學術理念，只是在既有的學術基礎上多了一種實踐，而且還亂七八糟的破壞了這些學術理念。<br>
+						<br>
+						但後來還是看了網路訪談和出版書籍後，才發現松本行弘比這些人更貼近我們，因為他也不以大師自居，他總是和我們在同樣位置看待程式設計和語言。所以為什麼 Ruby 這麼好用？不為什麼，因為這是你我的好夥伴松本行弘設計出來的語言，而不是大師們堅持己見發明出來的語言。
+					</p>
+				</section>
+				<hr>
+				<section class='private'>
+					<h3>Python <i>v.</i> Ruby</h3>
+					<p>
+						「Python 容易學習，Ruby 容易上手。」Python 的語法走簡約路線，所以不難學習就能使用。而 Ruby 的語法走實用路線<ins>[2]</ins>，每項功能的程式寫過一次，就自然記住而上手，可能不用學習就用得很順。<br>
+						<br>
+						另外，用 Ruby 寫程式碼的速度很快，基本上把資料寫出來，再用物件導向的特性操作資料，構思程式時很流暢。Python 雖然也有資料即物件的特性，但本質上跟其它程式語言一樣，站在流程控制的角度處理資料，所以在構思程式時經常要停下來預測資料，緩慢許多。<br>
+						<br>
+						還有，語法簡約並不表示寫出來的程式碼比較少，反而就是因為可用的技倆不多，要敲的字數反而較多。所謂 Python 語法簡約，只是要學的東西簡約，但程式碼敲出來看，往往是 Ruby 比較簡約，因為 Python 要搭配多種語法與結構才寫得出來。<br>
+						<br>
+						「看起來 Ruby 比較好！」沒錯，對程式設計師來說，Ruby 比 Python 快狠準！確實比較好用！但對新手來說，卻不是那麼回事～<br>
+						<br>
+						「Python 是大家的程式語言，Ruby 是程式設計師的語言。」Python 3 是汰除 Python 2 的陋習，而不向下相容的語言，讓大家更能看懂程式碼在做什麼。照自己想法寫程式不難，但要看懂別人寫的程式是什麼想法，對新手來說可就難了。Ruby 的技術性寫法較多，語法也較凌亂，雖然也不難讀懂別人在寫什麼，但總是費時。不像學會寫 Python，就看得懂任何人寫的 Python 在做什麼，因為就像自己寫的一樣，而且靠縮排整理區塊，一行一行流暢地讀，沒有一行是沒有意義、讓人分心的 } 或 end 結尾，相當舒暢。<br>
+						<br>
+						建議入門者先學 Python，它有更完備的程式庫可用，能做到的事比 Ruby 更多而且方便。等上手了，想追求更快的程式寫作效率，或別人寫的程式庫滿足不了你，大多程式庫都要自己寫<ins>[3]</ins>，再換 Ruby。由於兩個語言基本上很像，不用宣告變數、都用 def 設計函式，屆時要學很快：「每項功能的程式寫過一次，就自然記住而上手了，不用學習就用得很順。」<br>
+						<br>
+						<output>
+							《閒聊誰比較受歡迎》<br>
+							<br>
+							現在（2016）來看，Python 顯然是比 Ruby 受歡迎的程式語言，但十多年前可不是這麼回事～<br>
+							<br>
+							剛進入二十一世紀，Ruby 雖然稱不上熱門，但因為很像 Perl，卻有物件導向的架構，在 CGI 捧紅 Perl 的那個年代，Ruby 還是有點名氣的。這時的 Python 還只是冷門語言，甚至當時我根本沒聽過 Python，但已經知道 Ruby 的存在。<br>
+							<br>
+							2006 年，Python 已有名氣，但僅限於程式設計師之間的口碑流傳，真正用它寫程式的初學者不多，大多還是從 Java 或 C++ 開始學程式設計。Ruby 則因為 Ruby on Rails 的關係，CGI、PHP、Java 後端通通都閃邊站，自成第四大派系，一躍成為熱門語言，受歡迎程度更勝 Python。<br>
+							<br>
+							相比之下，未曾爆紅的 Python，繼續只求好不求快的務實精神，持續補充程式庫的應用領域，在各領域獲得程式設計師的歡心。這時已有跡象：Ruby 好像只有 Rails 框架，而 Python 靠內建程式庫能做到的事更多。<br>
+							<br>
+							隨著 Python 之父 Guido van Rossum 加入 Google，Python 成為這家技術領先公司內部的標準語言，許多框架都是 Python 的。別說科學計算、大數據雲、深度學習讓 Python 一紅再紅，連 Django 都循著 Python 只求好不求快的精神，以沉穩的步伐一步步改進，後來反而比越改越爛、變得不知所云的 Rails 簡單實用了！現在建議用 Django 開發網站的人，要比 Rials 還多～<br>
+							<br>
+							這段歷史軌跡，可以看出 Python 真正的魅力不是語法本身，而是語言精神。不靠華麗的招式取勝，而靠雄厚的內功修為，吸引大家奠定深厚的程式設計功力。<br>
+							<br>
+							但比較受歡迎的，就真的比較好嗎？不見得，俐落的 Ruby 有很多優點，不是死板的 Python 可以媲美的。如果你很清楚 Ruby 比 Python 適合你的程式寫作風格，那管他 Python 是不是更受歡迎，Ruby 對你來說才是最好的選擇！反之亦然。
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section class='private'>
+					<h3>Java <i>v.</i> Ruby</h3>
+					<p>
+						Java 必須先設計類別，製造物件，才能處理資料。<br>
+						<br>
+						而 Ruby 的資料直接就是物件，即使不自己設計物件，也能處理得很好，甚至從頭到尾都不用自己設計類別製造物件，就能妥善完成理想的物件導向程式設計。真要設計自己的類別製造物件時，也能做得很漂亮。<br>
+						<br>
+						不用設計類別製造物件，就能享受物件導向的美好，表示物件導向做得更妥善，誰優誰劣已經很明顯了。<br>
+						<br>
+						但 Ruby 是動態型別語言，不適合開發大型專案，所以需要靜態型別語言來整合團隊之間的編程任務時，還是得選 Java。除非你的 Ruby 將根據某套事件驅動程式設計的框架進行開發，否則不要把 Ruby 用在百人團隊的大型專案，下場會很慘。
+					</p>
+				</section>
+				<hr>
+				<section class='private'>
+					<h3>... <i>v.</i> Ruby</h3>
+					<p>
+						沒有最完美的語言，只有最適合你的語言。<br>
+						<br>
+						只要符合你的個性、滿足你的需求，就是完美的語言。<br>
+						<br>
+						所以你自己覺得使用的語言很完美就好，別人有別人完美的語言，沒必要去羨慕或鄙視別人使用的語言。<br>
+						<br>
+						你喜好變了、或有更多需求無法滿足了，就去追尋新的完美語言！往前看、向前走，不用猶豫。下一個語言是否更完美不知道，但你得先向前走出完美的自己，才能往前看到完美語言的出現。
+					</p>
+				</section>
+				<hr>
+				<section class='private'>
+					<h3>Ruby <i>v.</i> Ruby</h3>
+					<p>
+						Ruby 最大的對手，就是 Ruby 自己。<br>
+						<br>
+						以 end 結束區塊，在結構層次不多時，其實很直覺也很整齊，並不難看。但四層、五層以上，整堆 end 看起來就很醜了。<br>
+						<br>
+						然而，無論哪種語言，語法結構寫超過三層，都不會好看。在傳統結構化程式語言，會把一層層結構寫成函式，做為減少層次的手段。在語法蜜糖多的 Ruby 更是如此，可以減少層次的寫法有很多！當你看到整堆 end 很難看，其實就是警訊，告訴你程式碼要重構一下了！<br>
+						<br>
+						連續出現五行 end 很醜不是 Ruby 的問題，而是連續寫出五行以上 end 程式碼的問題。不過很多框架，就是得連續寫出好幾行的 end，所以不見得是你的問題，而是設計上的問題～
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 少數開發經驗老道的人，會一邊開 Interactive Ruby 測試演算法，一邊把測試好的程式放到原始碼檔案，採即時測試的手法逐步架構 Ruby 物件導向程式設計。不過這不適合新手，因為後期維護效率是否提升不知道，反倒把前期工作效率給降低了。寫 Ruby 應該是很輕鬆、暢快的，而不是戰戰兢兢的。<br>
-                    [2] 通常說法是魔幻語言，但我認為 Ruby 並不魔幻，它並未將各家好用的語法都囊括進來，而只挑真正實用的進來。<br>
-                    [3] 也就是晉身 Hacker（駭客）之列了！<br>
-                    [*] <a href='http://crystal-lang.org' target='_blank'>The Crystal Programming Language</a>
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 少數開發經驗老道的人，會一邊開 Interactive Ruby 測試演算法，一邊把測試好的程式放到原始碼檔案，採即時測試的手法逐步架構 Ruby 物件導向程式設計。不過這不適合新手，因為後期維護效率是否提升不知道，反倒把前期工作效率給降低了。寫 Ruby 應該是很輕鬆、暢快的，而不是戰戰兢兢的。<br>
+					[2] 通常說法是魔幻語言，但我認為 Ruby 並不魔幻，它並未將各家好用的語法都囊括進來，而只挑真正實用的進來。<br>
+					[3] 也就是晉身 Hacker（駭客）之列了！<br>
+					[*] <a href='http://crystal-lang.org' target='_blank'>The Crystal Programming Language</a>
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
-            Display.hide()
-        </script>
+		<script>
+			Display.hide()
+		</script>
 
-    </body>
+	</body>
 
 </html>

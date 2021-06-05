@@ -2,91 +2,91 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>手工編輯登錄擋</h1>
-            </header>
+			<header>
+				<h1>手工編輯登錄擋</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>我的第一個登錄檔</h2>
-                <p>
-                    如果希望開機時啟動 NumLock 鍵，我們會在「登錄編輯程式」中，設定 HKEY_USERS\.DEFAULT\Control Panel\Keyboard 中的 InitialKeyboardIndicators 為 2。但每次都要執行 regedit，然後在「登錄編輯程式」那邊翻找，如果要修改的機碼很多，會是非常沒有效率的事～<br>
-                    <br>
-                    如果寫成登錄檔，就能一鍵搞定！以上面的例子來說，開啟「記事本」，照如下格式輸入：<br>
-                    <br>
-                    <code>
-                        Windows Registry Editor Version 5.00<br>
-                        <br>
-                        [HKEY_USERS\.DEFAULT\Control Panel\Keyboard]<br>
-                        "InitialKeyboardIndicators"="2"<br>
-                    </code>
-                    <br>
-                    然後儲存為 NumLock.reg 檔案，以後就能點兩下這個登錄檔來設定機碼的資料了！
-                </p>
-            </section>
+			<section>
+				<h2>我的第一個登錄檔</h2>
+				<p>
+					如果希望開機時啟動 NumLock 鍵，我們會在「登錄編輯程式」中，設定 HKEY_USERS\.DEFAULT\Control Panel\Keyboard 中的 InitialKeyboardIndicators 為 2。但每次都要執行 regedit，然後在「登錄編輯程式」那邊翻找，如果要修改的機碼很多，會是非常沒有效率的事～<br>
+					<br>
+					如果寫成登錄檔，就能一鍵搞定！以上面的例子來說，開啟「記事本」，照如下格式輸入：<br>
+					<br>
+					<code>
+						Windows Registry Editor Version 5.00<br>
+						<br>
+						[HKEY_USERS\.DEFAULT\Control Panel\Keyboard]<br>
+						"InitialKeyboardIndicators"="2"<br>
+					</code>
+					<br>
+					然後儲存為 NumLock.reg 檔案，以後就能點兩下這個登錄檔來設定機碼的資料了！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>其它型態的資料</h2>
-                <p>
-                    上面例子寫入的資料是「字串」，其它最基本的，還有輸入十六進位值的 DWORD 值，以及二進位值，來看範例：<br>
-                    <br>
-                    <code>
-                        Windows Registry Editor Version 5.00<br>
-                        <br>
-                        [HKEY_CURRENT_USER\Software\MyRegistry]<br>
-                        "MyString"="ABCDE"<br>
-                        "MyWord"=dword:0000d431<br>
-                        "MyBinary"=hex:68,65,6c,6c,6f<br>
-                    </code>
-                    <br>
-                    字串使用雙引號括住資料。十六進位值使用 <code>dword:</code> 開頭，後面輸入八個位數。二進位值使用 <code>hex:</code> 開頭，後面使用 <code>,</code> 一組一組接連寫入二進位資料。<br>
-                    <br>
-                    這些只是最基本的，還有更多種類的型態可用，不過其實連 DWORD 和 BINARY 都用不太到，更別說其它的了！無論要寫入文字還是整數，幾乎都是都用字串的方式來寫入，是最直覺的做法～
-                </p>
-            </section>
+			<section>
+				<h2>其它型態的資料</h2>
+				<p>
+					上面例子寫入的資料是「字串」，其它最基本的，還有輸入十六進位值的 DWORD 值，以及二進位值，來看範例：<br>
+					<br>
+					<code>
+						Windows Registry Editor Version 5.00<br>
+						<br>
+						[HKEY_CURRENT_USER\Software\MyRegistry]<br>
+						"MyString"="ABCDE"<br>
+						"MyWord"=dword:0000d431<br>
+						"MyBinary"=hex:68,65,6c,6c,6f<br>
+					</code>
+					<br>
+					字串使用雙引號括住資料。十六進位值使用 <code>dword:</code> 開頭，後面輸入八個位數。二進位值使用 <code>hex:</code> 開頭，後面使用 <code>,</code> 一組一組接連寫入二進位資料。<br>
+					<br>
+					這些只是最基本的，還有更多種類的型態可用，不過其實連 DWORD 和 BINARY 都用不太到，更別說其它的了！無論要寫入文字還是整數，幾乎都是都用字串的方式來寫入，是最直覺的做法～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>刪除機碼</h2>
-                <p>
-                    要刪除上面範例的機碼，可用「減號」來達成：<br>
-                    <br>
-                    <code>
-                        Windows Registry Editor Version 5.00<br>
-                        <br>
-                        [-HKEY_CURRENT_USER\Software\MyRegistry]
-                    </code>
-                </p>
-            </section>
+			<section>
+				<h2>刪除機碼</h2>
+				<p>
+					要刪除上面範例的機碼，可用「減號」來達成：<br>
+					<br>
+					<code>
+						Windows Registry Editor Version 5.00<br>
+						<br>
+						[-HKEY_CURRENT_USER\Software\MyRegistry]
+					</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>術語解釋</h2>
-                <p>
-                    在「登錄編輯程式」中，長得像「資料夾」可以一層層切換的，叫做「機碼」，裡面可以有「名稱」和「資料」。
-                </p>
-            </section>
+			<section>
+				<h2>術語解釋</h2>
+				<p>
+					在「登錄編輯程式」中，長得像「資料夾」可以一層層切換的，叫做「機碼」，裡面可以有「名稱」和「資料」。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

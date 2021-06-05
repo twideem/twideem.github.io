@@ -2,156 +2,156 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>addEventListener() 簡單示範</h1>
-            </header>
+			<header>
+				<h1>addEventListener() 簡單示範</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例</h2>
-                <p>
-                    <textarea class='brush:js'>
-                        var a = document.createElement('button');
-                        document.body.appendChild(a);
-                        a.innerHTML = '別亂按';
-                        a.addEventListener('click', function(){
-                            document.write('不是叫你別亂按嗎？');
-                        });
+			<section>
+				<h2>範例</h2>
+				<p>
+					<textarea class='brush:js'>
+						var a = document.createElement('button');
+						document.body.appendChild(a);
+						a.innerHTML = '別亂按';
+						a.addEventListener('click', function(){
+							document.write('不是叫你別亂按嗎？');
+						});
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>補充</h2>
-                <p>
-                    addEventListener() 可用的事件，通常只要將原本事件的 on 去掉即可。例如原本移開滑鼠的事件可能這樣寫：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a = document.createElement('button');
-                        document.body.appendChild(a);
-                        a.innerText = '別走';
-                        a.onmouseout = function(){
-                            document.write('求求你不要走～');
-                        };
+			<section>
+				<h2>補充</h2>
+				<p>
+					addEventListener() 可用的事件，通常只要將原本事件的 on 去掉即可。例如原本移開滑鼠的事件可能這樣寫：<br>
+					<br>
+					<textarea class='brush:js'>
+						var a = document.createElement('button');
+						document.body.appendChild(a);
+						a.innerText = '別走';
+						a.onmouseout = function(){
+							document.write('求求你不要走～');
+						};
                     </textarea>
-                    <br>
-                    addEventListener() 改成這樣…<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a = document.createElement('button');
-                        document.body.appendChild(a);
-                        a.innerText = '別走';
-                        a.addEventListener('mouseout', function(){
-                            document.write('求求你，不要走～');
-                        });
+					<br>
+					addEventListener() 改成這樣…<br>
+					<br>
+					<textarea class='brush:js'>
+						var a = document.createElement('button');
+						document.body.appendChild(a);
+						a.innerText = '別走';
+						a.addEventListener('mouseout', function(){
+							document.write('求求你，不要走～');
+						});
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>差異</h2>
-                <p>
-                    onXXX 系列的事件會被覆寫，addEventListener() 不會。<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var a = document.createElement('button');
-                        document.body.appendChild(a);
-                        a.innerText = 'Click';
+			<section>
+				<h2>差異</h2>
+				<p>
+					onXXX 系列的事件會被覆寫，addEventListener() 不會。<br>
+					<br>
+					<textarea class='brush:js'>
+						var a = document.createElement('button');
+						document.body.appendChild(a);
+						a.innerText = 'Click';
 
-                        a.addEventListener('click', function(){
-                            document.write('AAA');
-                        });
+						a.addEventListener('click', function(){
+							document.write('AAA');
+						});
 
-                        a.addEventListener('click', function(){
-                            document.write('BBB');
-                        });
+						a.addEventListener('click', function(){
+							document.write('BBB');
+						});
                     </textarea>
-                    <br>
-                    按下按鈕後，會接連顯示 AAA 和 BBB 兩則文字內容。
-                </p>
-            </section>
+					<br>
+					按下按鈕後，會接連顯示 AAA 和 BBB 兩則文字內容。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>注意</h2>
-                <p>
-                    如果要跑另外寫好的具名函式，請傳入「函式的參照」，而不是「呼叫函式」的觀念。所以要這樣寫才對…<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        function f1(){
-                            document.write('AAA');
-                        }
+			<section>
+				<h2>注意</h2>
+				<p>
+					如果要跑另外寫好的具名函式，請傳入「函式的參照」，而不是「呼叫函式」的觀念。所以要這樣寫才對…<br>
+					<br>
+					<textarea class='brush:js'>
+						function f1(){
+							document.write('AAA');
+						}
 
-                        function f2(){
-                            document.write('BBB');
-                        }
+						function f2(){
+							document.write('BBB');
+						}
 
-                        var a = document.createElement('button');
-                        document.body.appendChild(a);
-                        a.innerText = 'Click';
-                        a.addEventListener('click', f1);
-                        a.addEventListener('click', f2);
+						var a = document.createElement('button');
+						document.body.appendChild(a);
+						a.innerText = 'Click';
+						a.addEventListener('click', f1);
+						a.addEventListener('click', f2);
                     </textarea>
-                    <br>
-                    這樣是錯的：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        a.addEventListener('click', f1());
-                        a.addEventListener('click', f2());
+					<br>
+					這樣是錯的：<br>
+					<br>
+					<textarea class='brush:js'>
+						a.addEventListener('click', f1());
+						a.addEventListener('click', f2());
                     </textarea>
-                    <br>
-                    如果你是剛從其它程式語言跨入 JavaScript 的人，所以不懂為何會有這樣莫名其妙的情景，不妨想像 f1 其實是…<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var f1 = function(){
-                            document.write('AAA');
-                        };
+					<br>
+					如果你是剛從其它程式語言跨入 JavaScript 的人，所以不懂為何會有這樣莫名其妙的情景，不妨想像 f1 其實是…<br>
+					<br>
+					<textarea class='brush:js'>
+						var f1 = function(){
+							document.write('AAA');
+						};
                     </textarea>
-                    <br>
-                    亦即 f1 是 function 物件，接著再將這樣物件的識別名稱傳入到這樣 API 格式裡：<br>
-                    <br>
-                    <code>addEventListener(String, Function)</code><br>
-                    <br>
-                    addEventListener() 第二個參數接受的是 Function 物件，所以不要當作第二個參數是用來「呼叫函式」。
-                </p>
-            </section>
+					<br>
+					亦即 f1 是 function 物件，接著再將這樣物件的識別名稱傳入到這樣 API 格式裡：<br>
+					<br>
+					<code>addEventListener(String, Function)</code><br>
+					<br>
+					addEventListener() 第二個參數接受的是 Function 物件，所以不要當作第二個參數是用來「呼叫函式」。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>技巧</h2>
-                <hr>
-                <section>
-                    <h3>document.onready</h3>
-                    <p>
-                        <code>document.addEventListener('DOMContentLoaded', 函式, false);</code><br>
-                        <br>
-                        這相當於 jQuery 廣受好評的 .ready() 事件。
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>技巧</h2>
+				<hr>
+				<section>
+					<h3>document.onready</h3>
+					<p>
+						<code>document.addEventListener('DOMContentLoaded', 函式, false);</code><br>
+						<br>
+						這相當於 jQuery 廣受好評的 .ready() 事件。
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

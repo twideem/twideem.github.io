@@ -2,181 +2,181 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Python')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Python')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Apache HTTP Server CGI with Python</h1>
-                <p>
-                    雖然 Python 有 Django 這套 web application 框架，但個人還是對只靠 Apache HTTP Server 的 CGI 就能在伺服端跑 Python 有興趣。
-                </p>
-            </header>
+			<header>
+				<h1>Apache HTTP Server CGI with Python</h1>
+				<p>
+					雖然 Python 有 Django 這套 web application 框架，但個人還是對只靠 Apache HTTP Server 的 CGI 就能在伺服端跑 Python 有興趣。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>下載 Apache HTTP Server</h2>
-                <p>
-                    官網 <a href='http://httpd.apache.org' target='_blank'>The Apache HTTP Server Project</a> 只提供能直接在 Linux 編譯的原始碼，可在 Windows 執行的版本只到 2.2.25，所以要到 <a href='http://www.apachelounge.com' target='_blank'>Apache Lounge</a> 下載已編譯好的可執行檔。<br>
-                    <br>
-                    我將下載回來解壓後的資料夾放在 C:\Program Files\Apache，且 Python 安裝在 C:\Program Files\Python。
-                </p>
-            </section>
+			<section>
+				<h2>下載 Apache HTTP Server</h2>
+				<p>
+					官網 <a href='http://httpd.apache.org' target='_blank'>The Apache HTTP Server Project</a> 只提供能直接在 Linux 編譯的原始碼，可在 Windows 執行的版本只到 2.2.25，所以要到 <a href='http://www.apachelounge.com' target='_blank'>Apache Lounge</a> 下載已編譯好的可執行檔。<br>
+					<br>
+					我將下載回來解壓後的資料夾放在 C:\Program Files\Apache，且 Python 安裝在 C:\Program Files\Python。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>設定組態</h2>
-                <p>
-                    撰寫本文時，Apache 版本是 2.4，因此接下來的內容會針對這版號做設定。新版或有變動時，請自行調整。
-                </p>
-                <hr>
-                <section>
-                    <h3>Step 1:</h3>
-                    <p>
-                        用純文字編輯器開啟 <var>C:\Program Files\Apache\conf\httpd.conf</var>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 2:</h3>
-                    <p>
-                        將 <var>Define SRVROOT</var> 的 <var>"c:/Apache24"</var> 改為 <var>"C:/Program Files/Apache"</var>。<br>
-                        <br>
-                        沒有 SRVROOT 的話，則搜尋所有 <var>"/Apache24"</var>，全部改為 <var>"C:/Program Files/Apache"</var>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 3:</h3>
-                    <p>
-                        在 <var>Options Indexes FollowSymLinks</var> 後面，隔個空白輸入 <var>ExecCGI</var>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 4:</h3>
-                    <p>
-                        將 <var>#AddHandler cgi-script .cgi</var> 前面的 <var>#</var> 刪掉。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 5:</h3>
-                    <p>
-                        執行 <var>C:\Program Files\Apache\bin\httpd.exe</var>，啟動 Apache HTTP Server 服務。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>補充</h3>
-                    <p>
-                        若執行後出現 AH00558 的錯誤訊息，請將 <var>#ServerName www.example.com:80</var> 改為 <var>ServerName localhost:80</var>
-                    </p>
-                </section>
-            </section>
+			<section>
+				<h2>設定組態</h2>
+				<p>
+					撰寫本文時，Apache 版本是 2.4，因此接下來的內容會針對這版號做設定。新版或有變動時，請自行調整。
+				</p>
+				<hr>
+				<section>
+					<h3>Step 1:</h3>
+					<p>
+						用純文字編輯器開啟 <var>C:\Program Files\Apache\conf\httpd.conf</var>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 2:</h3>
+					<p>
+						將 <var>Define SRVROOT</var> 的 <var>"c:/Apache24"</var> 改為 <var>"C:/Program Files/Apache"</var>。<br>
+						<br>
+						沒有 SRVROOT 的話，則搜尋所有 <var>"/Apache24"</var>，全部改為 <var>"C:/Program Files/Apache"</var>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 3:</h3>
+					<p>
+						在 <var>Options Indexes FollowSymLinks</var> 後面，隔個空白輸入 <var>ExecCGI</var>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 4:</h3>
+					<p>
+						將 <var>#AddHandler cgi-script .cgi</var> 前面的 <var>#</var> 刪掉。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 5:</h3>
+					<p>
+						執行 <var>C:\Program Files\Apache\bin\httpd.exe</var>，啟動 Apache HTTP Server 服務。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>補充</h3>
+					<p>
+						若執行後出現 AH00558 的錯誤訊息，請將 <var>#ServerName www.example.com:80</var> 改為 <var>ServerName localhost:80</var>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>寫 CGI 程式來執行</h2>
-                <hr>
-                <section>
-                    <h3>Step 1:</h3>
-                    <p>
-                        新增純文字文件，輸入如下 Python 程式碼：<br>
-                        <br>
-                        <textarea class='brush:py'>
-                            #!C:\Program Files\Python\python.exe
-                            print()
-                            print('Hello, world!')
+			<section>
+				<h2>寫 CGI 程式來執行</h2>
+				<hr>
+				<section>
+					<h3>Step 1:</h3>
+					<p>
+						新增純文字文件，輸入如下 Python 程式碼：<br>
+						<br>
+						<textarea class='brush:py'>
+							#!C:\Program Files\Python\python.exe
+							print()
+							print('Hello, world!')
                         </textarea>
-                        <br>
-                        然後存檔到 <var>C:\Program Files\Apache\cgi-bin</var>，檔名為 <var>hello.cgi</var>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Step 2:</h3>
-                    <p>
-                        開啟網頁瀏覽器，輸入網址：<kbd>127.0.0.1/cgi-bin/hello.cgi</kbd>，網頁會顯示：
-                    </p>
-                    <figure>
-                        <img src='../../figures/overcast/19691121A_01.png' alt='插圖' style='border:1px solid'>
-                    </figure>
-                    <p>
-                        程式寫錯的話，會顯示 Internal Server Error 網頁。<ins>[1]</ins>
-                    </p>
-                </section>
-            </section>
+						<br>
+						然後存檔到 <var>C:\Program Files\Apache\cgi-bin</var>，檔名為 <var>hello.cgi</var>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Step 2:</h3>
+					<p>
+						開啟網頁瀏覽器，輸入網址：<kbd>127.0.0.1/cgi-bin/hello.cgi</kbd>，網頁會顯示：
+					</p>
+					<figure>
+						<img src='../../figures/overcast/19691121A_01.png' alt='插圖' style='border:1px solid'>
+					</figure>
+					<p>
+						程式寫錯的話，會顯示 Internal Server Error 網頁。<ins>[1]</ins>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>後續調整</h2>
-                <hr>
-                <section>
-                    <h3>使用 *.py 副檔名</h3>
-                    <p>
-                        不喜歡 Python 程式檔使用 *.cgi 副檔名的話，可在 <var>AddHandler cgi-script</var> 後面加上 <var>.py</var>。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>程式碼檔案跟網頁放在一起</h3>
-                    <p>
-                        程式碼檔案寫好，可以丟在 <var>C:\Program Files\Apache\htdocs</var> 當作網頁執行，不用真的丟在 cgi-bin 資料夾。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>寫 CGI 的注意事項</h3>
-                    <p>
-                        寫 CGI 時，一定要先故意輸出一行空白，才開始寫 HTML 的內容。以為這行沒用而刪掉省略的話，反而會出現 Internal Server Error 訊息的網頁。<br>
-                        <br>
-                        這是因為 CGI 使用空白行隔開 HTTP 的 header（標頭）和 content（內容），而我們前面的 Hello, world! 範例只有 content 沒有 header，才會顯得那行 print() 是多餘的。<br>
-                        <br>
-                        來看正式一點的 Python CGI 程式，就會明白那行空白的用意了：<br>
-                        <br>
-                        <textarea class='brush:py'>
-                            #!C:\Program Files\Python\python.exe
-                            print('Content-type:text/html') # 先寫 HTTP 的 header
-                            print()                         # 然後輸出一行空白表示 header 寫好了
-                            print('&lt;html&gt;')                 # 再開始寫 HTML 的 content
-                            print('  &lt;/head&gt;')
-                            print('    &lt;title&gt;個人網站&lt;/title&gt;')
-                            print('  &lt;/head&gt;')
-                            print('  &lt;body&gt;')
-                            print('    &lt;p&gt;歡迎光臨我的個人網站。&lt;/p&gt;')
-                            print('  &lt;/body&gt;')
-                            print('&lt;/html&gt;')
+			<section>
+				<h2>後續調整</h2>
+				<hr>
+				<section>
+					<h3>使用 *.py 副檔名</h3>
+					<p>
+						不喜歡 Python 程式檔使用 *.cgi 副檔名的話，可在 <var>AddHandler cgi-script</var> 後面加上 <var>.py</var>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>程式碼檔案跟網頁放在一起</h3>
+					<p>
+						程式碼檔案寫好，可以丟在 <var>C:\Program Files\Apache\htdocs</var> 當作網頁執行，不用真的丟在 cgi-bin 資料夾。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>寫 CGI 的注意事項</h3>
+					<p>
+						寫 CGI 時，一定要先故意輸出一行空白，才開始寫 HTML 的內容。以為這行沒用而刪掉省略的話，反而會出現 Internal Server Error 訊息的網頁。<br>
+						<br>
+						這是因為 CGI 使用空白行隔開 HTTP 的 header（標頭）和 content（內容），而我們前面的 Hello, world! 範例只有 content 沒有 header，才會顯得那行 print() 是多餘的。<br>
+						<br>
+						來看正式一點的 Python CGI 程式，就會明白那行空白的用意了：<br>
+						<br>
+						<textarea class='brush:py'>
+							#!C:\Program Files\Python\python.exe
+							print('Content-type:text/html') # 先寫 HTTP 的 header
+							print()						 # 然後輸出一行空白表示 header 寫好了
+							print('&lt;html&gt;')				 # 再開始寫 HTML 的 content
+							print('  &lt;/head&gt;')
+							print('	&lt;title&gt;個人網站&lt;/title&gt;')
+							print('  &lt;/head&gt;')
+							print('  &lt;body&gt;')
+							print('	&lt;p&gt;歡迎光臨我的個人網站。&lt;/p&gt;')
+							print('  &lt;/body&gt;')
+							print('&lt;/html&gt;')
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 最常寫錯的是在 Python 3 寫 print 'Hello, world!'，也就是沒加 () 符號。<br>
-                    [*] 照本文操作遇到問題，不知哪裡寫錯的話，不妨下載本文修改到的 httpd.conf、hello.cgi、hello.py，對照看看哪裡寫得不一樣：<a href='../../objects/downloads/19691121A.7z' target='_blank'>19691121A.7z</a>。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 最常寫錯的是在 Python 3 寫 print 'Hello, world!'，也就是沒加 () 符號。<br>
+					[*] 照本文操作遇到問題，不知哪裡寫錯的話，不妨下載本文修改到的 httpd.conf、hello.cgi、hello.py，對照看看哪裡寫得不一樣：<a href='../../objects/downloads/19691121A.7z' target='_blank'>19691121A.7z</a>。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

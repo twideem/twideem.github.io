@@ -2,689 +2,689 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JavaFX Paint, Effect, Animation</h1>
-            </header>
+			<header>
+				<h1>JavaFX Paint, Effect, Animation</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>JavaFX Paint</h2>
-                <p>
-                    在 <var>javafx.scene.paint.*</var> 裡有許多為 JavaFX 塗上顏色的類別。
-                </p>
-                <hr>
-                <section>
-                    <h3>Color</h3>
-                    <p>
-                        JavaFX 有自己的 Color 類別，提供多種產生顏色的方式：<br>
-                        <br>
-                        <code>
-                            Color.常數顏色名稱<br>
-                            Color.hsb(double hue, double saturation, double brightness)<br>
-                            Color.rgb(int red, int green, int blue)<br>
-                            Color.color(double red, double green, double blue, double opacity)<br>
-                            Color.web(String colorString)<br>
-                        </code>
-                        <br>
-                        可用的常數顏色請參考 Java API Specification 的 <a href='http://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html#field.summary' target='_blank'>Color (JavaFX 8)</a>，值得一提的是 <code>Color.TRANSPARENT</code> 代表透明色。<br>
-                        <br>
-                        <code>hsb()</code> 可以使用色相、飽和度、亮度決定顏色，<code>rgb()</code> 可以使用紅、綠、藍三原色決定顏色。<code>color()</code> 相當於 JavaFX 用來支援 sRGB 的新功能，<code>web()</code> 可用符合 HTML 和 CSS 的 RGB 寫法指定顏色，例如 "#ff6633" 和 "f63"。<br>
-                        <br>
-                        底下是 Color.web() 設定文字顏色的範例：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.layout.StackPane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.Scene;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.stage.Stage;
+			<section>
+				<h2>JavaFX Paint</h2>
+				<p>
+					在 <var>javafx.scene.paint.*</var> 裡有許多為 JavaFX 塗上顏色的類別。
+				</p>
+				<hr>
+				<section>
+					<h3>Color</h3>
+					<p>
+						JavaFX 有自己的 Color 類別，提供多種產生顏色的方式：<br>
+						<br>
+						<code>
+							Color.常數顏色名稱<br>
+							Color.hsb(double hue, double saturation, double brightness)<br>
+							Color.rgb(int red, int green, int blue)<br>
+							Color.color(double red, double green, double blue, double opacity)<br>
+							Color.web(String colorString)<br>
+						</code>
+						<br>
+						可用的常數顏色請參考 Java API Specification 的 <a href='http://docs.oracle.com/javase/8/javafx/api/javafx/scene/paint/Color.html#field.summary' target='_blank'>Color (JavaFX 8)</a>，值得一提的是 <code>Color.TRANSPARENT</code> 代表透明色。<br>
+						<br>
+						<code>hsb()</code> 可以使用色相、飽和度、亮度決定顏色，<code>rgb()</code> 可以使用紅、綠、藍三原色決定顏色。<code>color()</code> 相當於 JavaFX 用來支援 sRGB 的新功能，<code>web()</code> 可用符合 HTML 和 CSS 的 RGB 寫法指定顏色，例如 "#ff6633" 和 "f63"。<br>
+						<br>
+						底下是 Color.web() 設定文字顏色的範例：<br>
+						<br>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.layout.StackPane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.Scene;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(Color.web("f63"));
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(Color.web("f63"));
 
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(text);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("Color");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("Color");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_01.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>LinearGradient</h3>
-                    <p>
-                        如下建構式可以產生「線性漸層」的色彩效果：<br>
-                        <br>
-                        <code>
-                            LinearGradient(double startX, double startY, double endX, double endY,<br>
-                            boolean proportional, CycleMethod cycleMethod, Stop... stops)<br>
-                        </code>
-                        <br>
-                        範例：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.layout.StackPane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.paint.CycleMethod;
-                            import javafx.scene.paint.LinearGradient;
-                            import javafx.scene.paint.Stop;
-                            import javafx.scene.Scene;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_01.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>LinearGradient</h3>
+					<p>
+						如下建構式可以產生「線性漸層」的色彩效果：<br>
+						<br>
+						<code>
+							LinearGradient(double startX, double startY, double endX, double endY,<br>
+							boolean proportional, CycleMethod cycleMethod, Stop... stops)<br>
+						</code>
+						<br>
+						範例：<br>
+						<br>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.layout.StackPane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.paint.CycleMethod;
+							import javafx.scene.paint.LinearGradient;
+							import javafx.scene.paint.Stop;
+							import javafx.scene.Scene;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    Stop[] stops = new Stop[]{new Stop(0,Color.OLIVE), new Stop(1,Color.TOMATO)};
-                                    LinearGradient linear_gradient = new LinearGradient(0,0,1,0,true,CycleMethod.NO_CYCLE,stops);
+									Stop[] stops = new Stop[]{new Stop(0,Color.OLIVE), new Stop(1,Color.TOMATO)};
+									LinearGradient linear_gradient = new LinearGradient(0,0,1,0,true,CycleMethod.NO_CYCLE,stops);
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(linear_gradient);
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(linear_gradient);
 
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(text);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("LinearGradient");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("LinearGradient");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_02.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>RadialGradient</h3>
-                    <p>
-                        如下建構式可以產生「放射漸層」的色彩效果：<br>
-                        <br>
-                        <code>
-                            RadialGradient(double focusAngle, double focusDistance,<br>
-                            double centerX, double centerY, double radius,<br>
-                            boolean proportional, CycleMethod cycleMethod, Stop... stops)<br>
-                        </code>
-                        <br>
-                        範例：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.layout.StackPane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.paint.CycleMethod;
-                            import javafx.scene.paint.RadialGradient;
-                            import javafx.scene.paint.Stop;
-                            import javafx.scene.Scene;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_02.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>RadialGradient</h3>
+					<p>
+						如下建構式可以產生「放射漸層」的色彩效果：<br>
+						<br>
+						<code>
+							RadialGradient(double focusAngle, double focusDistance,<br>
+							double centerX, double centerY, double radius,<br>
+							boolean proportional, CycleMethod cycleMethod, Stop... stops)<br>
+						</code>
+						<br>
+						範例：<br>
+						<br>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.layout.StackPane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.paint.CycleMethod;
+							import javafx.scene.paint.RadialGradient;
+							import javafx.scene.paint.Stop;
+							import javafx.scene.Scene;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    Stop[] stops = new Stop[]{new Stop(0,Color.OLIVE), new Stop(1,Color.TOMATO)};
-                                    RadialGradient radial_gradient = new RadialGradient(0,0,1,0,1,true,CycleMethod.NO_CYCLE,stops);
+									Stop[] stops = new Stop[]{new Stop(0,Color.OLIVE), new Stop(1,Color.TOMATO)};
+									RadialGradient radial_gradient = new RadialGradient(0,0,1,0,1,true,CycleMethod.NO_CYCLE,stops);
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(radial_gradient);
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(radial_gradient);
 
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(text);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("RadialGradient");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("RadialGradient");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_03.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>ImagePattern</h3>
-                    <p>
-                        你可以使用如下建構式，製造「循環上色」的效果：<br>
-                        <br>
-                        <code>
-                            ImagePattern(Image image, double x, double y,<br>
-                            double width, double height, boolean proportional)<br>
-                        </code>
-                        <br>
-                        底下範例先在 JavaFX 產生一個圓形，但塗上的不是顏色，而是填滿 ball.png 圖片。
-                    </p>
-                    <section>
-                        <h4>ball.png</h4>
-                        <figure>
-                            <img src='../../figures/instantcoffee/20100821A_04.png' alt='插圖'>
-                        </figure>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import javafx.application.Application;
-                                import javafx.scene.image.Image;
-                                import javafx.scene.layout.StackPane;
-                                import javafx.scene.paint.ImagePattern;
-                                import javafx.scene.Scene;
-                                import javafx.scene.shape.Circle;
-                                import javafx.scene.shape.Polygon;
-                                import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_03.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>ImagePattern</h3>
+					<p>
+						你可以使用如下建構式，製造「循環上色」的效果：<br>
+						<br>
+						<code>
+							ImagePattern(Image image, double x, double y,<br>
+							double width, double height, boolean proportional)<br>
+						</code>
+						<br>
+						底下範例先在 JavaFX 產生一個圓形，但塗上的不是顏色，而是填滿 ball.png 圖片。
+					</p>
+					<section>
+						<h4>ball.png</h4>
+						<figure>
+							<img src='../../figures/instantcoffee/20100821A_04.png' alt='插圖'>
+						</figure>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import javafx.application.Application;
+								import javafx.scene.image.Image;
+								import javafx.scene.layout.StackPane;
+								import javafx.scene.paint.ImagePattern;
+								import javafx.scene.Scene;
+								import javafx.scene.shape.Circle;
+								import javafx.scene.shape.Polygon;
+								import javafx.stage.Stage;
 
-                                public class Main extends Application{
+								public class Main extends Application{
 
-                                    public void start(Stage stage){
+									public void start(Stage stage){
 
-                                        Circle circle = new Circle(100);
-                                        circle.setFill(new ImagePattern(new Image("file:ball.png"),0,0,0.1,0.1,true));
+										Circle circle = new Circle(100);
+										circle.setFill(new ImagePattern(new Image("file:ball.png"),0,0,0.1,0.1,true));
 
-                                        StackPane stack_pane = new StackPane();
-                                        stack_pane.getChildren().add(circle);
+										StackPane stack_pane = new StackPane();
+										stack_pane.getChildren().add(circle);
 
-                                        stage.setTitle("ImagePattern");
-                                        stage.setWidth(400);
-                                        stage.setHeight(300);
-                                        stage.setScene(new Scene(stack_pane));
-                                        stage.show();
+										stage.setTitle("ImagePattern");
+										stage.setWidth(400);
+										stage.setHeight(300);
+										stage.setScene(new Scene(stack_pane));
+										stage.show();
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_05.png' alt='插圖'>
-                    </figure>
-                </section>
-            </section>
+						</p>
+					</section>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_05.png' alt='插圖'>
+					</figure>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>JavaFX Effect</h2>
-                <p>
-                    在 <code>javafx.scene.effect.*</code> 裡有許多為 JavaFX 產生靜態特效的類別：<br>
-                    <br>
-                    <code>
-                        <b>Blend</b>(BlendMode mode, Effect bottomInput, Effect topInput)<br>
-                        <b>Bloom</b>(double threshold)<br>
-                        <b>BoxBlur</b>(double width, double height, int iterations)<br>
-                        <b>DisplacementMap</b>(FloatMap mapData, double offsetX, double offsetY,<br>
-                        　　　　　　　　　double scaleX, double scaleY)<br>
-                        <b>DropShadow</b>(double radius, double offsetX, double offsetY, Color color)<br>
-                        <b>GaussianBlur</b>(double radius)<br>
-                        <b>Glow</b>(double level)<br>
-                        <b>InnerShadow</b>(double radius, double offsetX, double offsetY, Color color)<br>
-                        <b>Lighting</b>(Light light)<br>
-                        <b>MotionBlur</b>(double angle, double radius)<br>
-                        <b>PerspectiveTransform</b>(double ulx, double uly, double urx, double ury,<br>
-                        　　　　　　　　　　　　double lrx, double lry, double llx, double lly)<br>
-                        <b>Reflection</b>(double topOffset, double fraction,<br>
-                        　　　　　　double topOpacity, double bottomOpacity)<br>
-                        <b>SepiaTone</b>(double level)<br>
-                        <b>Shadow</b>(BlurType blurType, Color color, double radius)<br>
-                    </code>
-                    <br>
-                    別看到落落長的參數就嚇跑了，其實大多數類別直接 new 出一個不帶參數的物件，靠預設值就能產生效果！想細部調節效果再使用上面帶參數的建構式，甚至這些建構式參數都各自有對應的 setXXX()，先建立一個不帶參數的物件，再一一設定也可以，不用真的把這堆建構式記下來～<br>
-                    <br>
-                    只是特效一經套用就很少事後修改，所以直接丟建構式比較方便，本文才列出如上密密麻麻的清單。<br>
-                    <br>
-                    JavaFX Effect 其實非常簡單好用，所以讓人愛不釋手，例如 Reflection 類別：<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[17]'>
-                        import javafx.application.Application;
-                        import javafx.scene.effect.*;
-                        import javafx.scene.layout.StackPane;
-                        import javafx.scene.paint.Color;
-                        import javafx.scene.Scene;
-                        import javafx.scene.text.Font;
-                        import javafx.scene.text.Text;
-                        import javafx.stage.Stage;
+			<section>
+				<h2>JavaFX Effect</h2>
+				<p>
+					在 <code>javafx.scene.effect.*</code> 裡有許多為 JavaFX 產生靜態特效的類別：<br>
+					<br>
+					<code>
+						<b>Blend</b>(BlendMode mode, Effect bottomInput, Effect topInput)<br>
+						<b>Bloom</b>(double threshold)<br>
+						<b>BoxBlur</b>(double width, double height, int iterations)<br>
+						<b>DisplacementMap</b>(FloatMap mapData, double offsetX, double offsetY,<br>
+						　　　　　　　　　double scaleX, double scaleY)<br>
+						<b>DropShadow</b>(double radius, double offsetX, double offsetY, Color color)<br>
+						<b>GaussianBlur</b>(double radius)<br>
+						<b>Glow</b>(double level)<br>
+						<b>InnerShadow</b>(double radius, double offsetX, double offsetY, Color color)<br>
+						<b>Lighting</b>(Light light)<br>
+						<b>MotionBlur</b>(double angle, double radius)<br>
+						<b>PerspectiveTransform</b>(double ulx, double uly, double urx, double ury,<br>
+						　　　　　　　　　　　　double lrx, double lry, double llx, double lly)<br>
+						<b>Reflection</b>(double topOffset, double fraction,<br>
+						　　　　　　double topOpacity, double bottomOpacity)<br>
+						<b>SepiaTone</b>(double level)<br>
+						<b>Shadow</b>(BlurType blurType, Color color, double radius)<br>
+					</code>
+					<br>
+					別看到落落長的參數就嚇跑了，其實大多數類別直接 new 出一個不帶參數的物件，靠預設值就能產生效果！想細部調節效果再使用上面帶參數的建構式，甚至這些建構式參數都各自有對應的 setXXX()，先建立一個不帶參數的物件，再一一設定也可以，不用真的把這堆建構式記下來～<br>
+					<br>
+					只是特效一經套用就很少事後修改，所以直接丟建構式比較方便，本文才列出如上密密麻麻的清單。<br>
+					<br>
+					JavaFX Effect 其實非常簡單好用，所以讓人愛不釋手，例如 Reflection 類別：<br>
+					<br>
+					<textarea class='brush:java;highlight:[17]'>
+						import javafx.application.Application;
+						import javafx.scene.effect.*;
+						import javafx.scene.layout.StackPane;
+						import javafx.scene.paint.Color;
+						import javafx.scene.Scene;
+						import javafx.scene.text.Font;
+						import javafx.scene.text.Text;
+						import javafx.stage.Stage;
 
-                        public class Main extends Application{
+						public class Main extends Application{
 
-                            public void start(Stage stage){
+							public void start(Stage stage){
 
-                                Text text = new Text("JavaFX");
-                                text.setFont(Font.font("Impact",72));
-                                text.setFill(Color.TOMATO);
-                                text.setEffect(new Reflection());
+								Text text = new Text("JavaFX");
+								text.setFont(Font.font("Impact",72));
+								text.setFill(Color.TOMATO);
+								text.setEffect(new Reflection());
 
-                                StackPane stack_pane = new StackPane();
-                                stack_pane.getChildren().add(text);
+								StackPane stack_pane = new StackPane();
+								stack_pane.getChildren().add(text);
 
-                                stage.setTitle("Reflection");
-                                stage.setWidth(400);
-                                stage.setHeight(300);
-                                stage.setScene(new Scene(stack_pane));
-                                stage.show();
+								stage.setTitle("Reflection");
+								stage.setWidth(400);
+								stage.setHeight(300);
+								stage.setScene(new Scene(stack_pane));
+								stage.show();
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    直接 new 給 setEffect()，漂亮反射的效果就出來了：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_06.png' alt='插圖'>
-                </figure>
-                <p>
-                    其它同樣直接 new 出來就很明顯的特效如下：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_09.png' alt='插圖'>
-                    <figcaption>DropShadow，浮影。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_12.png' alt='插圖'>
-                    <figcaption>InnerShadow，嵌影。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_07.png' alt='插圖'>
-                    <figcaption>Bloom，光暈。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_08.png' alt='插圖'>
-                    <figcaption>BoxBlur，均化。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_10.png' alt='插圖'>
-                    <figcaption>GaussianBlur，模糊。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_11.png' alt='插圖'>
-                    <figcaption>Glow，柔光，雖然用在文字也有效果，但通常用在圖片。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_13.png' alt='插圖'>
-                    <figcaption>Lighting，陰暗，雖然用在文字也有效果，但通常用在圖片。</figcaption>
-                </figure>
-                <figure>
-                    <img src='../../figures/instantcoffee/20100821A_14.png' alt='插圖'>
-                    <figcaption>SepiaTone，泛黃，幾乎不會用在文字。</figcaption>
-                </figure>
-                <p>
-                    要注意的是，有些特效的顏色是黑色，文字或圖像也是黑色時，直接 new 出物件看不出效果，這時就要設定參數使用其它顏色。<br>
-                    <br>
-                    其它需要修改參數才有顯著效果的特效，或者需要搭配其它物件操作複雜的特效，分別示範於下…
-                </p>
-                <hr>
-                <section>
-                    <h3>Blend</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.effect.Blend;
-                            import javafx.scene.effect.BlendMode;
-                            import javafx.scene.effect.ColorInput;
-                            import javafx.scene.layout.Pane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.Scene;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.stage.Stage;
+					<br>
+					直接 new 給 setEffect()，漂亮反射的效果就出來了：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_06.png' alt='插圖'>
+				</figure>
+				<p>
+					其它同樣直接 new 出來就很明顯的特效如下：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_09.png' alt='插圖'>
+					<figcaption>DropShadow，浮影。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_12.png' alt='插圖'>
+					<figcaption>InnerShadow，嵌影。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_07.png' alt='插圖'>
+					<figcaption>Bloom，光暈。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_08.png' alt='插圖'>
+					<figcaption>BoxBlur，均化。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_10.png' alt='插圖'>
+					<figcaption>GaussianBlur，模糊。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_11.png' alt='插圖'>
+					<figcaption>Glow，柔光，雖然用在文字也有效果，但通常用在圖片。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_13.png' alt='插圖'>
+					<figcaption>Lighting，陰暗，雖然用在文字也有效果，但通常用在圖片。</figcaption>
+				</figure>
+				<figure>
+					<img src='../../figures/instantcoffee/20100821A_14.png' alt='插圖'>
+					<figcaption>SepiaTone，泛黃，幾乎不會用在文字。</figcaption>
+				</figure>
+				<p>
+					要注意的是，有些特效的顏色是黑色，文字或圖像也是黑色時，直接 new 出物件看不出效果，這時就要設定參數使用其它顏色。<br>
+					<br>
+					其它需要修改參數才有顯著效果的特效，或者需要搭配其它物件操作複雜的特效，分別示範於下…
+				</p>
+				<hr>
+				<section>
+					<h3>Blend</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.effect.Blend;
+							import javafx.scene.effect.BlendMode;
+							import javafx.scene.effect.ColorInput;
+							import javafx.scene.layout.Pane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.Scene;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    ColorInput color_input = new ColorInput();
-                                    color_input.setPaint(Color.OLIVE);
-                                    color_input.setX(136);
-                                    color_input.setY(60);
-                                    color_input.setWidth(100);
-                                    color_input.setHeight(150);
+									ColorInput color_input = new ColorInput();
+									color_input.setPaint(Color.OLIVE);
+									color_input.setX(136);
+									color_input.setY(60);
+									color_input.setWidth(100);
+									color_input.setHeight(150);
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(Color.TOMATO);
-                                    text.setX(96);
-                                    text.setY(160);
-                                    text.setEffect(new Blend(BlendMode.COLOR_BURN, color_input, null));
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(Color.TOMATO);
+									text.setX(96);
+									text.setY(160);
+									text.setEffect(new Blend(BlendMode.COLOR_BURN, color_input, null));
 
-                                    Pane stack_pane = new Pane();
-                                    stack_pane.getChildren().add(text);
+									Pane stack_pane = new Pane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("Blend");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("Blend");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_15.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        這個特效相當於影像處理的「遮罩」。<br>
-                        <br>
-                        首先使用 BlendMode 的 ADD、BLUE、COLOR_BURN、COLOR_DODGE、DARKEN、DIFFERENCE、EXCLUSION、GREEN、HARD_LIGHT、LIGHTEN、MULTIPLY、OVERLAY、RED、SCREEN、SOFT_LIGHT、SRC_ATOP、SRC_OVER 指定演算法，第二參數是希望疊在下面的圖層，第三個參數是希望疊在上面的圖層，new 出物件就會將三種特效依指定演算法混合。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>DisplacementMap</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.effect.DisplacementMap;
-                            import javafx.scene.effect.FloatMap;
-                            import javafx.scene.layout.StackPane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.Scene;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_15.png' alt='插圖'>
+					</figure>
+					<p>
+						這個特效相當於影像處理的「遮罩」。<br>
+						<br>
+						首先使用 BlendMode 的 ADD、BLUE、COLOR_BURN、COLOR_DODGE、DARKEN、DIFFERENCE、EXCLUSION、GREEN、HARD_LIGHT、LIGHTEN、MULTIPLY、OVERLAY、RED、SCREEN、SOFT_LIGHT、SRC_ATOP、SRC_OVER 指定演算法，第二參數是希望疊在下面的圖層，第三個參數是希望疊在上面的圖層，new 出物件就會將三種特效依指定演算法混合。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>DisplacementMap</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.effect.DisplacementMap;
+							import javafx.scene.effect.FloatMap;
+							import javafx.scene.layout.StackPane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.Scene;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    FloatMap float_map = new FloatMap(220,100);
+									FloatMap float_map = new FloatMap(220,100);
 
-                                    for (int m=0; m&lt;float_map.getWidth(); m++){
-                                        double a = (Math.sin(m / 20.0 * Math.PI) - 0.5) / 40.0;
-                                        for (int n=0; n&lt;float_map.getHeight(); n++){
-                                            float_map.setSamples(m, n, 0, (float)a);
-                                        }
-                                    }
+									for (int m=0; m&lt;float_map.getWidth(); m++){
+										double a = (Math.sin(m / 20.0 * Math.PI) - 0.5) / 40.0;
+										for (int n=0; n&lt;float_map.getHeight(); n++){
+											float_map.setSamples(m, n, 0, (float)a);
+										}
+									}
 
-                                    DisplacementMap displacement_map = new DisplacementMap();
-                                    displacement_map.setMapData(float_map);
+									DisplacementMap displacement_map = new DisplacementMap();
+									displacement_map.setMapData(float_map);
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(Color.TOMATO);
-                                    text.setEffect(displacement_map);
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(Color.TOMATO);
+									text.setEffect(displacement_map);
 
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(text);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("DisplacementMap");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("DisplacementMap");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_16.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        這個特效相當於影像處理的「扭曲」，需要搭配 FloatMap 使用。<br>
-                        <br>
-                        就像 StringBuilder 不斷透過 append() 將字串塞進去，最後再將緩存的資料一次丟出來，FloatMap 則是不斷透過 setSamples() 將 float 型態的小數塞進去，最後再將緩存的資料一次丟給 DisplacementMap 使用。至於 FloatMap 緩存的資料是寬度和高度。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>MotionBlur</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.effect.MotionBlur;
-                            import javafx.scene.layout.StackPane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.Scene;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_16.png' alt='插圖'>
+					</figure>
+					<p>
+						這個特效相當於影像處理的「扭曲」，需要搭配 FloatMap 使用。<br>
+						<br>
+						就像 StringBuilder 不斷透過 append() 將字串塞進去，最後再將緩存的資料一次丟出來，FloatMap 則是不斷透過 setSamples() 將 float 型態的小數塞進去，最後再將緩存的資料一次丟給 DisplacementMap 使用。至於 FloatMap 緩存的資料是寬度和高度。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>MotionBlur</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.effect.MotionBlur;
+							import javafx.scene.layout.StackPane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.Scene;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(Color.TOMATO);
-                                    text.setEffect(new MotionBlur(-15,30));
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(Color.TOMATO);
+									text.setEffect(new MotionBlur(-15,30));
 
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(text);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("MotionBlur");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("MotionBlur");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_17.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        這個特效相當於影像處理的「動態模糊」，第一個參數是角度，第二個參數是半徑。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>PerspectiveTransform</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.effect.PerspectiveTransform;
-                            import javafx.scene.layout.Pane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.scene.Scene;
-                            import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_17.png' alt='插圖'>
+					</figure>
+					<p>
+						這個特效相當於影像處理的「動態模糊」，第一個參數是角度，第二個參數是半徑。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>PerspectiveTransform</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.effect.PerspectiveTransform;
+							import javafx.scene.layout.Pane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.scene.Scene;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    PerspectiveTransform perspective_trasform = new PerspectiveTransform();
+									PerspectiveTransform perspective_trasform = new PerspectiveTransform();
 
-                                    perspective_trasform.setUlx(100);
-                                    perspective_trasform.setUrx(300);
+									perspective_trasform.setUlx(100);
+									perspective_trasform.setUrx(300);
 
-                                    perspective_trasform.setLlx(50);
-                                    perspective_trasform.setLrx(350);
+									perspective_trasform.setLlx(50);
+									perspective_trasform.setLrx(350);
 
-                                    perspective_trasform.setUly(80);
-                                    perspective_trasform.setLly(180);
+									perspective_trasform.setUly(80);
+									perspective_trasform.setLly(180);
 
-                                    perspective_trasform.setUry(80);
-                                    perspective_trasform.setLry(180);
+									perspective_trasform.setUry(80);
+									perspective_trasform.setLry(180);
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setFill(Color.TOMATO);
-                                    text.setEffect(perspective_trasform);
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setFill(Color.TOMATO);
+									text.setEffect(perspective_trasform);
 
-                                    Pane pane = new Pane();
-                                    pane.getChildren().add(text);
+									Pane pane = new Pane();
+									pane.getChildren().add(text);
 
-                                    stage.setTitle("PerspectiveTransform");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(pane));
-                                    stage.show();
+									stage.setTitle("PerspectiveTransform");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_18.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        這個特效相當於影像處理的「變形」。<br>
-                        <br>
-                        方法名稱中 U 是 upper、L 是 lower、l 是 left、r 是 right，換句話說 setUlx() 表示設定左上 X 座標。<br>
-                        <br>
-                        使用時要注意的是，像 Urx 設得比 Ulx 小，會變成頂部沒有水平線，或者 Uly 設得比 Lly 低，會變成左邊沒有垂直線，等於設定錯誤，不會顯示出來。<br>
-                        <br>
-                        我個人習慣先以 Ulx 和 Urx 設定上方水平線，然後 Llx 和 Lrx 設定下方水平線，接著 Uly 和 Lly 設定左邊的垂直線，最後 Ury 和 Lry 設定右邊的垂直線。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Shadow</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import javafx.application.Application;
-                            import javafx.scene.effect.Shadow;
-                            import javafx.scene.effect.BlurType;
-                            import javafx.scene.layout.StackPane;
-                            import javafx.scene.paint.Color;
-                            import javafx.scene.text.Font;
-                            import javafx.scene.text.Text;
-                            import javafx.scene.Scene;
-                            import javafx.stage.Stage;
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_18.png' alt='插圖'>
+					</figure>
+					<p>
+						這個特效相當於影像處理的「變形」。<br>
+						<br>
+						方法名稱中 U 是 upper、L 是 lower、l 是 left、r 是 right，換句話說 setUlx() 表示設定左上 X 座標。<br>
+						<br>
+						使用時要注意的是，像 Urx 設得比 Ulx 小，會變成頂部沒有水平線，或者 Uly 設得比 Lly 低，會變成左邊沒有垂直線，等於設定錯誤，不會顯示出來。<br>
+						<br>
+						我個人習慣先以 Ulx 和 Urx 設定上方水平線，然後 Llx 和 Lrx 設定下方水平線，接著 Uly 和 Lly 設定左邊的垂直線，最後 Ury 和 Lry 設定右邊的垂直線。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Shadow</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javafx.application.Application;
+							import javafx.scene.effect.Shadow;
+							import javafx.scene.effect.BlurType;
+							import javafx.scene.layout.StackPane;
+							import javafx.scene.paint.Color;
+							import javafx.scene.text.Font;
+							import javafx.scene.text.Text;
+							import javafx.scene.Scene;
+							import javafx.stage.Stage;
 
-                            public class Main extends Application{
+							public class Main extends Application{
 
-                                public void start(Stage stage){
+								public void start(Stage stage){
 
-                                    Text text = new Text("JavaFX");
-                                    text.setFont(Font.font("Impact",72));
-                                    text.setEffect(new Shadow(BlurType.TWO_PASS_BOX, Color.TOMATO, 10));
+									Text text = new Text("JavaFX");
+									text.setFont(Font.font("Impact",72));
+									text.setEffect(new Shadow(BlurType.TWO_PASS_BOX, Color.TOMATO, 10));
 
-                                    StackPane stack_pane = new StackPane();
-                                    stack_pane.getChildren().add(text);
+									StackPane stack_pane = new StackPane();
+									stack_pane.getChildren().add(text);
 
-                                    stage.setTitle("Shadow");
-                                    stage.setWidth(400);
-                                    stage.setHeight(300);
-                                    stage.setScene(new Scene(stack_pane));
-                                    stage.show();
+									stage.setTitle("Shadow");
+									stage.setWidth(400);
+									stage.setHeight(300);
+									stage.setScene(new Scene(stack_pane));
+									stage.show();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/instantcoffee/20100821A_19.png' alt='插圖'>
-                    </figure>
-                    <p>
-                        想自訂特效時才會用到這個類別。<br>
-                        <br>
-                        第一個參數是模糊的演算法，可以使用 BlurType 的 GAUSSIAN、ONE_PASS_BOX、THREE_PASS_BOX、TWO_PASS_BOX 切換，第二個參數是顏色，第三個參數是半徑。
-                    </p>
-                </section>
-            </section>
+					</p>
+					<figure>
+						<img src='../../figures/instantcoffee/20100821A_19.png' alt='插圖'>
+					</figure>
+					<p>
+						想自訂特效時才會用到這個類別。<br>
+						<br>
+						第一個參數是模糊的演算法，可以使用 BlurType 的 GAUSSIAN、ONE_PASS_BOX、THREE_PASS_BOX、TWO_PASS_BOX 切換，第二個參數是顏色，第三個參數是半徑。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>JavaFX Animation</h2>
-                <p>
-                    有 FadeTransition、FillTransition、ParallelTransition、PathTransition、PauseTransition、RotateTransition、ScaleTransition、SequentialTransition、Stroke、Timeline、Translate 動態效果可用。以 FadeTransition 為例：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import javafx.animation.FadeTransition;
-                        import javafx.application.Application;
-                        import javafx.scene.layout.StackPane;
-                        import javafx.scene.paint.Color;
-                        import javafx.scene.Scene;
-                        import javafx.scene.text.Font;
-                        import javafx.scene.text.Text;
-                        import javafx.stage.Stage;
-                        import javafx.util.Duration;
+			<section>
+				<h2>JavaFX Animation</h2>
+				<p>
+					有 FadeTransition、FillTransition、ParallelTransition、PathTransition、PauseTransition、RotateTransition、ScaleTransition、SequentialTransition、Stroke、Timeline、Translate 動態效果可用。以 FadeTransition 為例：<br>
+					<br>
+					<textarea class='brush:java'>
+						import javafx.animation.FadeTransition;
+						import javafx.application.Application;
+						import javafx.scene.layout.StackPane;
+						import javafx.scene.paint.Color;
+						import javafx.scene.Scene;
+						import javafx.scene.text.Font;
+						import javafx.scene.text.Text;
+						import javafx.stage.Stage;
+						import javafx.util.Duration;
 
-                        public class Main extends Application{
+						public class Main extends Application{
 
-                            public void start(Stage stage){
+							public void start(Stage stage){
 
-                                Text text = new Text("JavaFX");
-                                text.setFill(Color.TOMATO);
-                                text.setFont(Font.font("Impact",72));
+								Text text = new Text("JavaFX");
+								text.setFill(Color.TOMATO);
+								text.setFont(Font.font("Impact",72));
 
-                                FadeTransition fade_transition = new FadeTransition();
-                                fade_transition.setNode(text);
-                                fade_transition.setFromValue(0);
-                                fade_transition.setToValue(1);
-                                fade_transition.setDuration(Duration.seconds(3));
-                                fade_transition.play();
+								FadeTransition fade_transition = new FadeTransition();
+								fade_transition.setNode(text);
+								fade_transition.setFromValue(0);
+								fade_transition.setToValue(1);
+								fade_transition.setDuration(Duration.seconds(3));
+								fade_transition.play();
 
-                                StackPane stack_pane = new StackPane();
-                                stack_pane.getChildren().add(text);
+								StackPane stack_pane = new StackPane();
+								stack_pane.getChildren().add(text);
 
-                                stage.setTitle("FadeTransition");
-                                stage.setWidth(400);
-                                stage.setHeight(300);
-                                stage.setScene(new Scene(stack_pane));
-                                stage.show();
+								stage.setTitle("FadeTransition");
+								stage.setWidth(400);
+								stage.setHeight(300);
+								stage.setScene(new Scene(stack_pane));
+								stage.show();
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

@@ -2,131 +2,131 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>手工製作媒體播放清單</h1>
-            </header>
+			<header>
+				<h1>手工製作媒體播放清單</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>M3U</h2>
-                <p>
-                    這是最簡單的播放清單格式，使用純文字文件，把檔名照播放順序一行一行寫下來，儲存為 *.m3u 檔案即可：<br>
-                    <br>
-                    <textarea class='brush:txt'>
-                        影片一.mp4
-                        影片二.mp4
+			<section>
+				<h2>M3U</h2>
+				<p>
+					這是最簡單的播放清單格式，使用純文字文件，把檔名照播放順序一行一行寫下來，儲存為 *.m3u 檔案即可：<br>
+					<br>
+					<textarea class='brush:txt'>
+						影片一.mp4
+						影片二.mp4
                     </textarea>
-                    <br>
-                    幾乎所有媒體播放程式都支援。<br>
-                    <br>
-                    也可以只接寫資料夾名稱，會自動照檔名順序播放。
-                </p>
-            </section>
+					<br>
+					幾乎所有媒體播放程式都支援。<br>
+					<br>
+					也可以只接寫資料夾名稱，會自動照檔名順序播放。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>ASX</h2>
-                <p>
-                    ASX 是 Advanced Stream Redirector 檔案格式的副檔名，由 Microsoft 為 Windows Media Player 以 XML 格式所規範的檔案，網頁標記時 type 為 video/x-ms-asf。
-                </p>
-                <hr>
-                <section>
-                    <h3>基本做法</h3>
-                    <p>
-                        用純文字文件，以如下格式，製作你的播放清單：<br>
-                        <br>
-                        <textarea class='brush:xml'>
-                            &lt;asx version='3.0'&gt;
-                                &lt;entry&gt;
-                                    &lt;ref href='影片一.mp4'/&gt;
-                                &lt;/entry&gt;
-                                &lt;entry&gt;
-                                    &lt;ref href='影片二.mp4'/&gt;
-                                &lt;/entry&gt;
-                            &lt;/asx&gt;
+			<section>
+				<h2>ASX</h2>
+				<p>
+					ASX 是 Advanced Stream Redirector 檔案格式的副檔名，由 Microsoft 為 Windows Media Player 以 XML 格式所規範的檔案，網頁標記時 type 為 video/x-ms-asf。
+				</p>
+				<hr>
+				<section>
+					<h3>基本做法</h3>
+					<p>
+						用純文字文件，以如下格式，製作你的播放清單：<br>
+						<br>
+						<textarea class='brush:xml'>
+							&lt;asx version='3.0'&gt;
+								&lt;entry&gt;
+									&lt;ref href='影片一.mp4'/&gt;
+								&lt;/entry&gt;
+								&lt;entry&gt;
+									&lt;ref href='影片二.mp4'/&gt;
+								&lt;/entry&gt;
+							&lt;/asx&gt;
                         </textarea>
-                        <br>
-                        然後儲存為 *.asx 檔案，即可播放。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>指定從哪個時間開始播放、以及播放多久</h3>
-                    <p>
-                        <textarea class='brush:xml'>
-                            &lt;asx version='3.0'&gt;
-                                &lt;entry&gt;
-                                    &lt;ref href='影片.mp4'/&gt;
-                                    &lt;starttime value='00:00:15.000'/&gt;
-                                    &lt;duration value='00:00:03.000'/&gt;
-                                &lt;/entry&gt;
-                            &lt;/asx&gt;
+						<br>
+						然後儲存為 *.asx 檔案，即可播放。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>指定從哪個時間開始播放、以及播放多久</h3>
+					<p>
+						<textarea class='brush:xml'>
+							&lt;asx version='3.0'&gt;
+								&lt;entry&gt;
+									&lt;ref href='影片.mp4'/&gt;
+									&lt;starttime value='00:00:15.000'/&gt;
+									&lt;duration value='00:00:03.000'/&gt;
+								&lt;/entry&gt;
+							&lt;/asx&gt;
                         </textarea>
-                        <br>
-                        將從第 15 秒開始播放，且播放 3 秒鐘。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>日文檔名</h3>
-                    <p>
-                        雖然新版 Windows 已支援 Unicode 檔名，但是在 ASX 使用非本在地的字元時，卻無法順利播放。這時只要告訴 ASX 使用哪種編碼即可，底下示範 UTF-8：<br>
-                        <br>
-                        <textarea class='brush:xml;highlight:[2]'>
-                            &lt;asx version='3.0'&gt;
-                                &lt;param name='encoding' value='UTF-8'/&gt;
-                                &lt;entry&gt;
-                                    &lt;ref href='センチメンタル.mp3'/&gt;
-                                &lt;/entry&gt;
-                            &lt;/asx&gt;
+						<br>
+						將從第 15 秒開始播放，且播放 3 秒鐘。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>日文檔名</h3>
+					<p>
+						雖然新版 Windows 已支援 Unicode 檔名，但是在 ASX 使用非本在地的字元時，卻無法順利播放。這時只要告訴 ASX 使用哪種編碼即可，底下示範 UTF-8：<br>
+						<br>
+						<textarea class='brush:xml;highlight:[2]'>
+							&lt;asx version='3.0'&gt;
+								&lt;param name='encoding' value='UTF-8'/&gt;
+								&lt;entry&gt;
+									&lt;ref href='センチメンタル.mp3'/&gt;
+								&lt;/entry&gt;
+							&lt;/asx&gt;
                         </textarea>
-                        <br>
-                        當然，存檔時記得選 UTF-8 編碼。
-                    </p>
-                </section>
-            </section>
+						<br>
+						當然，存檔時記得選 UTF-8 編碼。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>WPL</h2>
-                <p>
-                    Windows Media Player 9 開始，以 WPL（Windows Media Player Playlist）做為預設的播放清單格式。它可以建立動態播放清單，這是 ASX 與 M3U 格式無法做到的…但 WPL 不能做到的事更多，並沒有 M3U 和 ASX 好用。格式如下：<br>
-                    <br>
-                    <textarea class='brush:xml'>
-                        &lt;?wpl version='1.0'?&gt;
-                        &lt;smil&gt;
-                            &lt;body&gt;
-                                &lt;seq&gt;
-                                    &lt;media src='影片一.mp4'/&gt;
-                                    &lt;media src='影片二.mp4'/&gt;
-                                &lt;/seq&gt;
-                            &lt;/body&gt;
-                        &lt;/smil&gt;
+			<section>
+				<h2>WPL</h2>
+				<p>
+					Windows Media Player 9 開始，以 WPL（Windows Media Player Playlist）做為預設的播放清單格式。它可以建立動態播放清單，這是 ASX 與 M3U 格式無法做到的…但 WPL 不能做到的事更多，並沒有 M3U 和 ASX 好用。格式如下：<br>
+					<br>
+					<textarea class='brush:xml'>
+						&lt;?wpl version='1.0'?&gt;
+						&lt;smil&gt;
+							&lt;body&gt;
+								&lt;seq&gt;
+									&lt;media src='影片一.mp4'/&gt;
+									&lt;media src='影片二.mp4'/&gt;
+								&lt;/seq&gt;
+							&lt;/body&gt;
+						&lt;/smil&gt;
                     </textarea>
-                    <br>
-                    儲存為 *.wpl 副檔名的檔案即可。
-                </p>
-            </section>
+					<br>
+					儲存為 *.wpl 副檔名的檔案即可。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

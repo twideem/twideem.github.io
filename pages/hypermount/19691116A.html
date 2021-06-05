@@ -2,53 +2,53 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>在 window.setTimeout() 傳入 event 參數的函式</h1>
-            </header>
+			<header>
+				<h1>在 window.setTimeout() 傳入 event 參數的函式</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>格式</h2>
-                <p>
-                    <code>
-                        window.setTimeout(function(){函式名稱(參數名稱)}, 毫秒數);
-                    </code>
-                </p>
-            </section>
+			<section>
+				<h2>格式</h2>
+				<p>
+					<code>
+						window.setTimeout(function(){函式名稱(參數名稱)}, 毫秒數);
+					</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>範例</h2>
-                <p>
-                    <textarea class='brush:js'>
-                        window.onkeydown = function(event){
-                            window.setTimeout(function(){test(event)}, 3000);
-                        }
+			<section>
+				<h2>範例</h2>
+				<p>
+					<textarea class='brush:js'>
+						window.onkeydown = function(event){
+							window.setTimeout(function(){test(event)}, 3000);
+						}
 
-                        function test(e){
-                            document.write(e.which);
-                        }
+						function test(e){
+							document.write(e.which);
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

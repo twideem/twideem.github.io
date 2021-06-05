@@ -2,118 +2,118 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Object.clone()</h1>
-                <p>
-                    如果你想要複製一份物件，Object 提供了 clone()，每個繼承自 Object 的 class 都能用它來複製自己。<br>
-                    <br>
-                    不過，任意就能複製一份別人的物件來用，並不是很安全的設計。因此後來改成要使用 clone() 的話，必須宣告願意被複製的物件是 Cloneable<ins>[1]</ins> 介面，並將 protected 的 clone() 覆寫為 public，而且還要拋出 CloneNotSupportedException 例外。<br>
-                    <br>
-                    應該很簡單的事卻變得相當複雜，因此本章節示範一次 Object.clone() 的用法。
-                </p>
-            </header>
+			<header>
+				<h1>Object.clone()</h1>
+				<p>
+					如果你想要複製一份物件，Object 提供了 clone()，每個繼承自 Object 的 class 都能用它來複製自己。<br>
+					<br>
+					不過，任意就能複製一份別人的物件來用，並不是很安全的設計。因此後來改成要使用 clone() 的話，必須宣告願意被複製的物件是 Cloneable<ins>[1]</ins> 介面，並將 protected 的 clone() 覆寫為 public，而且還要拋出 CloneNotSupportedException 例外。<br>
+					<br>
+					應該很簡單的事卻變得相當複雜，因此本章節示範一次 Object.clone() 的用法。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>複製物件</h2>
-                <hr>
-                <section>
-                    <h3>A.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class A implements Cloneable{
+			<section>
+				<h2>複製物件</h2>
+				<hr>
+				<section>
+					<h3>A.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class A implements Cloneable{
 
-                                public int x;
-                                public String y;
+								public int x;
+								public String y;
 
-                                public A clone() throws CloneNotSupportedException{
-                                    return (A)super.clone();
-                                }
+								public A clone() throws CloneNotSupportedException{
+									return (A)super.clone();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
-                                        A a1 = new A();
-                                        a1.x = 123;
-                                        a1.y = "abc";
-                                        A a2 = a1.clone();
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                    System.out.println(a2.x);
-                                    System.out.println(a2.y);
+									try{
+										A a1 = new A();
+										a1.x = 123;
+										a1.y = "abc";
+										A a2 = a1.clone();
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+									System.out.println(a2.x);
+									System.out.println(a2.y);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    <output>
-                        123<br>
-                        abc
-                    </output>
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<p>
+					<output>
+						123<br>
+						abc
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>補充</h2>
-                <p>
-                    由於 Java「萬事萬物皆物件」的關係，所以「滿街都是 reference（參照）」。<br>
-                    <br>
-                    也因此在 Java 主要都是以「call by address（傳址呼叫）」的方式傳遞資料，只有 int、float、boolean…這類基本資料是「call by value（傳值呼叫）」。<br>
-                    <br>
-                    傳址呼叫意味著當你修改傳遞過來的資料時，同時也修改了原來那份資料<ins>[2]</ins>。如果你不希望修改傳過來的物件時，卻修改了原來的物件狀態，就只好「複製一份來修改」。<br>
-                    <br>
-                    只是要複製一份物件的資料做為副本來修改，應該是隨手取來才方便的事，卻得這麼費工才行 Orz<br>
-                    <br>
-                    如果要用 clone() 這 Java 內建的複製機制，來產生副本的話，還不如自己為 class 設計一個用來複製自己內部資料的 method 還比較簡單<ins>[3]</ins>～
-                </p>
-            </section>
+			<section>
+				<h2>補充</h2>
+				<p>
+					由於 Java「萬事萬物皆物件」的關係，所以「滿街都是 reference（參照）」。<br>
+					<br>
+					也因此在 Java 主要都是以「call by address（傳址呼叫）」的方式傳遞資料，只有 int、float、boolean…這類基本資料是「call by value（傳值呼叫）」。<br>
+					<br>
+					傳址呼叫意味著當你修改傳遞過來的資料時，同時也修改了原來那份資料<ins>[2]</ins>。如果你不希望修改傳過來的物件時，卻修改了原來的物件狀態，就只好「複製一份來修改」。<br>
+					<br>
+					只是要複製一份物件的資料做為副本來修改，應該是隨手取來才方便的事，卻得這麼費工才行 Orz<br>
+					<br>
+					如果要用 clone() 這 Java 內建的複製機制，來產生副本的話，還不如自己為 class 設計一個用來複製自己內部資料的 method 還比較簡單<ins>[3]</ins>～
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 當 Java 開發團隊發現到 Clonable 寫成 Cloneable 時，因為已經釋出，而且很多人就這樣拿來用，所以來不及救了 XDDD<br>
-                    [2] 雖然原來的 reference 與傳過來的 reference 是兩份 reference 沒錯，但共同指向一樣的記憶體位址，其實共用著同一個 instance。當你透過傳過來的 reference 修改 instance 的資料，那原來的 reference 存取的就是你修改過的 instance 資料。<br>
-                    [3] 通常這樣的 method 會取名為 duplicate()。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 當 Java 開發團隊發現到 Clonable 寫成 Cloneable 時，因為已經釋出，而且很多人就這樣拿來用，所以來不及救了 XDDD<br>
+					[2] 雖然原來的 reference 與傳過來的 reference 是兩份 reference 沒錯，但共同指向一樣的記憶體位址，其實共用著同一個 instance。當你透過傳過來的 reference 修改 instance 的資料，那原來的 reference 存取的就是你修改過的 instance 資料。<br>
+					[3] 通常這樣的 method 會取名為 duplicate()。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

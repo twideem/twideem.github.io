@@ -2,53 +2,53 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>使用多個 window.setInterval() 充當平行程序</h1>
-            </header>
+			<header>
+				<h1>使用多個 window.setInterval() 充當平行程序</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                設 f1 為每秒鐘累加全域變數 a 的執行序，f2 為輸出全域變數 a 的執行序，f3 為結束 f1 的執行序：<br>
-                <br>
-                <textarea class='brush:js'>
-                    var a = 0;
+			<p>
+				設 f1 為每秒鐘累加全域變數 a 的執行序，f2 為輸出全域變數 a 的執行序，f3 為結束 f1 的執行序：<br>
+				<br>
+				<textarea class='brush:js'>
+					var a = 0;
 
-                    var f1 = window.setInterval(function(){
-                        a++
-                    }, 1000);
+					var f1 = window.setInterval(function(){
+						a++
+					}, 1000);
 
-                    var f2 = window.setInterval(function(){
-                        document.body.innerHTML = a;
-                    }, 200);
+					var f2 = window.setInterval(function(){
+						document.body.innerHTML = a;
+					}, 200);
 
-                    var f3 = window.setInterval(function(){
-                        if(a>9) window.clearInterval(f1);
-                    }, 200);
+					var f3 = window.setInterval(function(){
+						if(a>9) window.clearInterval(f1);
+					}, 200);
                     </textarea>
-                <br>
-                <output>
-                    網頁從 1 到 10 顯示數字，然後停止。<br>
-                </output>
-                <br>
-                因此當你需要平行處理多個執行緒，卻礙於 Web Workers 無法存取非安全性執行緒如 DOM 元件的限制而裹足不前時，可以考慮建立多個 window.setInterval() 來充當。但要注意精準度與效率的問題，畢竟 window.setInterval() 只是個折衷的做法，並非真正的「背景執行」，無法取代 Web Workers 的設計。
-            </p>
+				<br>
+				<output>
+					網頁從 1 到 10 顯示數字，然後停止。<br>
+				</output>
+				<br>
+				因此當你需要平行處理多個執行緒，卻礙於 Web Workers 無法存取非安全性執行緒如 DOM 元件的限制而裹足不前時，可以考慮建立多個 window.setInterval() 來充當。但要注意精準度與效率的問題，畢竟 window.setInterval() 只是個折衷的做法，並非真正的「背景執行」，無法取代 Web Workers 的設計。
+			</p>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

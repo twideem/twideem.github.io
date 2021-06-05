@@ -2,1212 +2,1212 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Stream API 入門範例集</h1>
-                <p>
-                    Java SE 8 除了新增 Lambda expressions 語法，還基於這個語法設計一套函數式程式設計風格的 Streams API，主要用於元素集合的處理。<br>
-                    <br>
-                    Streams 提供比 Collections 更高階的操作介面，能讓資料結構的程式碼寫得簡短、易讀。不只如此，Streams 是直接將數據傳輸到處理器進行運算<ins>[1]</ins>，不像 Collections 先將資料結構放在記憶體再等處理器存取，所以計算效率更好，也能輕易地切換成平行運算模式，發揮多核心執行緒的處理效能。<br>
-                    <br>
-                    一次性或即時性的資料計算，用 Streams 來處理，能省去資料空間的成本，對串聯設備來說，層層節省下來自然能提升執行效率。儲存性或結構性的資料，就繼續用 Collections 來設計，且效能不一定就會變差，因為有時候還是得靠演算法與資料結構來降低「時間」的成本。
-                </p>
-            </header>
+			<header>
+				<h1>Stream API 入門範例集</h1>
+				<p>
+					Java SE 8 除了新增 Lambda expressions 語法，還基於這個語法設計一套函數式程式設計風格的 Streams API，主要用於元素集合的處理。<br>
+					<br>
+					Streams 提供比 Collections 更高階的操作介面，能讓資料結構的程式碼寫得簡短、易讀。不只如此，Streams 是直接將數據傳輸到處理器進行運算<ins>[1]</ins>，不像 Collections 先將資料結構放在記憶體再等處理器存取，所以計算效率更好，也能輕易地切換成平行運算模式，發揮多核心執行緒的處理效能。<br>
+					<br>
+					一次性或即時性的資料計算，用 Streams 來處理，能省去資料空間的成本，對串聯設備來說，層層節省下來自然能提升執行效率。儲存性或結構性的資料，就繼續用 Collections 來設計，且效能不一定就會變差，因為有時候還是得靠演算法與資料結構來降低「時間」的成本。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>基本結構</h2>
-                <p>
-                    想使用 Streams 進行函數式風格的程式設計，必須先將資料轉為 Stream&lt;T&gt;、IntStream、LongStream、DoubleStream 介面，才能串接一系列處理函數。例如：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        Stream.of("s","t","r","e","a","m").sorted().forEach(System.out::print);
+			<section>
+				<h2>基本結構</h2>
+				<p>
+					想使用 Streams 進行函數式風格的程式設計，必須先將資料轉為 Stream&lt;T&gt;、IntStream、LongStream、DoubleStream 介面，才能串接一系列處理函數。例如：<br>
+					<br>
+					<textarea class='brush:java'>
+						Stream.of("s","t","r","e","a","m").sorted().forEach(System.out::print);
                     </textarea>
-                    <br>
-                    <output>
-                        aemrst<br>
-                    </output>
-                    <br>
-                    of() 將 s t r e a m 六個字元轉為 java.util.streams.Stream&lt;T&gt; 介面後，串接 sorted() 將資料排序，以及 forEach() 逐一用 System.out.print() 輸出資料。<br>
-                    <br>
-                    接下來的章節將介紹還有哪些轉換或建立資料串流介面的方法，以及取得資料串流介面後可串接的函數。
-                </p>
-            </section>
+					<br>
+					<output>
+						aemrst<br>
+					</output>
+					<br>
+					of() 將 s t r e a m 六個字元轉為 java.util.streams.Stream&lt;T&gt; 介面後，串接 sorted() 將資料排序，以及 forEach() 逐一用 System.out.print() 輸出資料。<br>
+					<br>
+					接下來的章節將介紹還有哪些轉換或建立資料串流介面的方法，以及取得資料串流介面後可串接的函數。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>資料串流</h2>
-                <p>
-                    主要的資料串流有四種，都放在 java.util.stream 套件底下：
-                </p>
-                <table>
-                    <tr><td>Stream&lt;T&gt;</td><td>適用於物件，例如 String 或 Integer。</td></tr>
-                    <tr><td>IntStream</td><td>適用於 int、short、char、byte、boolean。</td></tr>
-                    <tr><td>LongStream</td><td>適用於 long。</td></tr>
-                    <tr><td>DoubleStream</td><td>適用於 float 和 double。</td></tr>
-                </table>
-                <p>
-                    IntStream、LongStream、DoubleStream 比 Stream&lt;T&gt; 多了 min()、max()、sum() 可用。
-                </p>
-            </section>
+			<section>
+				<h2>資料串流</h2>
+				<p>
+					主要的資料串流有四種，都放在 java.util.stream 套件底下：
+				</p>
+				<table>
+					<tr><td>Stream&lt;T&gt;</td><td>適用於物件，例如 String 或 Integer。</td></tr>
+					<tr><td>IntStream</td><td>適用於 int、short、char、byte、boolean。</td></tr>
+					<tr><td>LongStream</td><td>適用於 long。</td></tr>
+					<tr><td>DoubleStream</td><td>適用於 float 和 double。</td></tr>
+				</table>
+				<p>
+					IntStream、LongStream、DoubleStream 比 Stream&lt;T&gt; 多了 min()、max()、sum() 可用。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取得串流</h2>
-                <p>
-                    為了方便從範例中看出如何建立串流，底下範例將「一行寫完的基本結構」分拆為「將串流另外保存在 Stream 型態的多行」。建議實際使用時，合併為一行比較漂亮。
-                </p>
-                <hr>
-                <section>
-                    <h3>使用 Stream、IntStream、LongStream、DoubleStream 建立串流</h3>
-                    <section>
-                        <h4>建立物件串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.Stream;
+			<section>
+				<h2>取得串流</h2>
+				<p>
+					為了方便從範例中看出如何建立串流，底下範例將「一行寫完的基本結構」分拆為「將串流另外保存在 Stream 型態的多行」。建議實際使用時，合併為一行比較漂亮。
+				</p>
+				<hr>
+				<section>
+					<h3>使用 Stream、IntStream、LongStream、DoubleStream 建立串流</h3>
+					<section>
+						<h4>建立物件串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;String&gt; stream = Stream.of("AAA","BBB","CCC");
-                                        stream.forEach(System.out::println);
+										Stream&lt;String&gt; stream = Stream.of("AAA","BBB","CCC");
+										stream.forEach(System.out::println);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB<br>
-                                CCC
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>建立連續數列的串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.IntStream;
+							<br>
+							<output>
+								AAA<br>
+								BBB<br>
+								CCC
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>建立連續數列的串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.IntStream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        IntStream int_stream = IntStream.range(0,9);
-                                        int_stream.forEach(System.out::print);
+										IntStream int_stream = IntStream.range(0,9);
+										int_stream.forEach(System.out::print);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                012345678<br>
-                            </output>
-                            <br>
-                            注意上面範例只輸出到 8，並不包含 9。希望包含結束值的話：<br>
-                            <br>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.IntStream;
+							<br>
+							<output>
+								012345678<br>
+							</output>
+							<br>
+							注意上面範例只輸出到 8，並不包含 9。希望包含結束值的話：<br>
+							<br>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.IntStream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        IntStream int_stream = IntStream.rangeClosed(0,9);
-                                        int_stream.forEach(System.out::print);
+										IntStream int_stream = IntStream.rangeClosed(0,9);
+										int_stream.forEach(System.out::print);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                0123456789
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>執行匿名函式並將結果傳為串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								0123456789
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>執行匿名函式並將結果傳為串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;String&gt; stream = Stream.generate(() -&gt; "HELLO").limit(3);
-                                        stream.forEach(System.out::println);
+										Stream&lt;String&gt; stream = Stream.generate(() -&gt; "HELLO").limit(3);
+										stream.forEach(System.out::println);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                HELLO<br>
-                                HELLO<br>
-                                HELLO
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>含初始參數執行匿名函式並將結果傳為串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								HELLO<br>
+								HELLO<br>
+								HELLO
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>含初始參數執行匿名函式並將結果傳為串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;Integer&gt; stream = Stream.iterate(4, x -&gt; x+x).limit(3);
-                                        stream.forEach(System.out::println);
+										Stream&lt;Integer&gt; stream = Stream.iterate(4, x -&gt; x+x).limit(3);
+										stream.forEach(System.out::println);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                4<br>
-                                8<br>
-                                16<br>
-                            </output>
-                            <br>
-                            Java 9 還多載了 iterate​(T seed, Predicate hasNext, UnaryOperator next)，第二個參數變成是否還有下筆資料，讓 iterate() 能做的事更像 Iterator 物件。
-                        </p>
-                    </section>
-                    <section>
-                        <h4>建立空元素的串流或將串流設定為空元素</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								4<br>
+								8<br>
+								16<br>
+							</output>
+							<br>
+							Java 9 還多載了 iterate​(T seed, Predicate hasNext, UnaryOperator next)，第二個參數變成是否還有下筆資料，讓 iterate() 能做的事更像 Iterator 物件。
+						</p>
+					</section>
+					<section>
+						<h4>建立空元素的串流或將串流設定為空元素</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;String&gt; stream = Stream.empty();
+										Stream&lt;String&gt; stream = Stream.empty();
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>建立能使用 null 的串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.Stream;
+						</p>
+					</section>
+					<section>
+						<h4>建立能使用 null 的串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream stream = Stream.ofNullable(null);
+										Stream stream = Stream.ofNullable(null);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            空元素與 null 的差別，就像設定 String 為 "" 和 null 一樣。<br>
-                            <br>
-                            Stream 串流不能將 null 做為資料，想讓串流允許使用 null，才用 ofNullable() 建立串流。
-                        </p>
-                    </section>
-                    <section>
-                        <h4>合併成新的串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.Stream;
+							<br>
+							空元素與 null 的差別，就像設定 String 為 "" 和 null 一樣。<br>
+							<br>
+							Stream 串流不能將 null 做為資料，想讓串流允許使用 null，才用 ofNullable() 建立串流。
+						</p>
+					</section>
+					<section>
+						<h4>合併成新的串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;Integer&gt; stream = Stream.concat(Stream.of(1,2,3), Stream.of(4,5,6));
-                                        stream.forEach(System.out::print);
+										Stream&lt;Integer&gt; stream = Stream.concat(Stream.of(1,2,3), Stream.of(4,5,6));
+										stream.forEach(System.out::print);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                123456
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Stream&lt;T&gt; 轉 IntStream、LongStream、DoubleStream</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:8'>
-                                import java.util.stream.IntStream;
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								123456
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>Stream&lt;T&gt; 轉 IntStream、LongStream、DoubleStream</h4>
+						<p>
+							<textarea class='brush:java;highlight:8'>
+								import java.util.stream.IntStream;
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        IntStream int_stream = Stream.of(1,2,3,4,5).mapToInt(x-&gt;x);
-                                        int_stream.forEach(System.out::print);
+										IntStream int_stream = Stream.of(1,2,3,4,5).mapToInt(x-&gt;x);
+										int_stream.forEach(System.out::print);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                12345<br>
-                            </output>
-                            <br>
-                            使用 <code>mapToLong()</code> 和 <code>mapToDouble()</code> 轉 LongStream 和 DoubleStream。
-                        </p>
-                    </section>
-                    <section>
-                        <h4>IntStream、LongStream、DoubleStream 轉 Stream&lt;T&gt;</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:8'>
-                                import java.util.stream.Stream;
-                                import java.util.stream.IntStream;
+							<br>
+							<output>
+								12345<br>
+							</output>
+							<br>
+							使用 <code>mapToLong()</code> 和 <code>mapToDouble()</code> 轉 LongStream 和 DoubleStream。
+						</p>
+					</section>
+					<section>
+						<h4>IntStream、LongStream、DoubleStream 轉 Stream&lt;T&gt;</h4>
+						<p>
+							<textarea class='brush:java;highlight:8'>
+								import java.util.stream.Stream;
+								import java.util.stream.IntStream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;Integer&gt; stream = IntStream.of(1,2,3,4,5).boxed();
-                                        stream.forEach(System.out::print);
+										Stream&lt;Integer&gt; stream = IntStream.of(1,2,3,4,5).boxed();
+										stream.forEach(System.out::print);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                12345<br>
-                            </output>
-                            <br>
-                            LongStream 和 DoubleStream 同樣用 <code>boxed()</code> 轉 Stream&lt;Long&gt; 和 Stream&lt;Double&gt;。
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>陣列與串流</h3>
-                    <section>
-                        <h4>陣列轉串流</h4>
-                        <p>
-                            可用 Stream.of() 將陣列轉為串流，也可用 Arrays.stream() 擷取陣列元素：<br>
-                            <br>
-                            <textarea class='brush:java;highlight:9'>
-                                import java.util.Arrays;
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								12345<br>
+							</output>
+							<br>
+							LongStream 和 DoubleStream 同樣用 <code>boxed()</code> 轉 Stream&lt;Long&gt; 和 Stream&lt;Double&gt;。
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>陣列與串流</h3>
+					<section>
+						<h4>陣列轉串流</h4>
+						<p>
+							可用 Stream.of() 將陣列轉為串流，也可用 Arrays.stream() 擷取陣列元素：<br>
+							<br>
+							<textarea class='brush:java;highlight:9'>
+								import java.util.Arrays;
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        String[] strings = {"A","B","C","D","E"};
-                                        Stream&lt;String&gt; stream = Arrays.stream(strings, 1, 4);
-                                        stream.forEach(System.out::print);
+										String[] strings = {"A","B","C","D","E"};
+										Stream&lt;String&gt; stream = Arrays.stream(strings, 1, 4);
+										stream.forEach(System.out::print);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                BCD<br>
-                            </output>
-                            <br>
-                            注意！stream() 的第 2 個參數是 start inclusive：「從哪個位置『包住』元素」，第 3 個參數卻是 end exclusive：「從哪個位置『排除』元素」，意思是結束位置的元素並不會被擷取，跟 Arrays 其它 method 是 from index 和 to index（從哪個位置開始到哪個位置結束）不一樣。
-                        </p>
-                    </section>
-                    <section>
-                        <h4>串流轉陣列</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:7'>
-                                import java.util.stream.IntStream;
+							<br>
+							<output>
+								BCD<br>
+							</output>
+							<br>
+							注意！stream() 的第 2 個參數是 start inclusive：「從哪個位置『包住』元素」，第 3 個參數卻是 end exclusive：「從哪個位置『排除』元素」，意思是結束位置的元素並不會被擷取，跟 Arrays 其它 method 是 from index 和 to index（從哪個位置開始到哪個位置結束）不一樣。
+						</p>
+					</section>
+					<section>
+						<h4>串流轉陣列</h4>
+						<p>
+							<textarea class='brush:java;highlight:7'>
+								import java.util.stream.IntStream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        int[] a = IntStream.of(1,2,3,4,5).toArray();
+										int[] a = IntStream.of(1,2,3,4,5).toArray();
 
-                                        for(int n:a){
-                                            System.out.print(n);
-                                        }
+										for(int n:a){
+											System.out.print(n);
+										}
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                12345
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>群集與串流</h3>
-                    <section>
-                        <h4>群集轉串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:10'>
-                                import java.util.stream.List;
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								12345
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>群集與串流</h3>
+					<section>
+						<h4>群集轉串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:10'>
+								import java.util.stream.List;
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        String[] strings = {"AAA","BBB","CCC"};
-                                        List&lt;String&gt; list = Arrays.asList(strings);
-                                        Stream&lt;String&gt; stream = list.stream();
-                                        stream.forEach(System.out::println);
+										String[] strings = {"AAA","BBB","CCC"};
+										List&lt;String&gt; list = Arrays.asList(strings);
+										Stream&lt;String&gt; stream = list.stream();
+										stream.forEach(System.out::println);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB<br>
-                                CCC
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>串流轉群集</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:10'>
-                                import java.util.ArrayList;
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								AAA<br>
+								BBB<br>
+								CCC
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>串流轉群集</h4>
+						<p>
+							<textarea class='brush:java;highlight:10'>
+								import java.util.ArrayList;
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;String&gt; stream = Stream.of("AAA","BBB","CCC");
+										Stream&lt;String&gt; stream = Stream.of("AAA","BBB","CCC");
 
-                                        ArrayList&lt;String&gt; array_list = stream.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+										ArrayList&lt;String&gt; array_list = stream.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
-                                        for(String n:array_list){
-                                            System.out.println(n);
-                                        }
+										for(String n:array_list){
+											System.out.println(n);
+										}
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB<br>
-                                CCC<br>
-                            </output>
-                            <br>
-                            或者使用 java.util.stream.Collectors，它有 toList()、toSet()、toMap() 等操作可以轉換群集：<br>
-                            <br>
-                            <textarea class='brush:java;highlight:11'>
-                                import java.util.List;
-                                import java.util.stream.Collectors;
-                                import java.util.stream.Stream;
+							<br>
+							<output>
+								AAA<br>
+								BBB<br>
+								CCC<br>
+							</output>
+							<br>
+							或者使用 java.util.stream.Collectors，它有 toList()、toSet()、toMap() 等操作可以轉換群集：<br>
+							<br>
+							<textarea class='brush:java;highlight:11'>
+								import java.util.List;
+								import java.util.stream.Collectors;
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream&lt;String&gt; stream = Stream.of("AAA","BBB","CCC");
+										Stream&lt;String&gt; stream = Stream.of("AAA","BBB","CCC");
 
-                                        List&lt;String&gt; list = stream.collect(Collectors.toList());
+										List&lt;String&gt; list = stream.collect(Collectors.toList());
 
-                                        for(String n:list){
-                                            System.out.println(n);
-                                        }
+										for(String n:list){
+											System.out.println(n);
+										}
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB<br>
-                                CCC
-                            </output>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Iterator 轉串流</h4>
-                        <p>
-                            <textarea class='brush:java;highlight:[16,17]'>
-                                import java.util.ArrayList;
-                                import java.util.Iterator;
-                                import java.util.stream.Stream;
-                                import java.util.stream.StreamSupport;
+							<br>
+							<output>
+								AAA<br>
+								BBB<br>
+								CCC
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>Iterator 轉串流</h4>
+						<p>
+							<textarea class='brush:java;highlight:[16,17]'>
+								import java.util.ArrayList;
+								import java.util.Iterator;
+								import java.util.stream.Stream;
+								import java.util.stream.StreamSupport;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
-                                        //假設從 ArrayList 取得一個 Iterator
-                                        ArrayList&lt;String&gt; array_list = new ArrayList&lt;&gt;();
-                                        array_list.add("AAA");
-                                        array_list.add("BBB");
-                                        array_list.add("CCC");
-                                        Iterator&lt;String&gt; iterator = array_list.iterator();
-                                        //使用 Iterable 和 StreamSupport 轉為 Stream
-                                        Iterable&lt;String&gt; iterable = () -&gt; iterator;
-                                        Stream&lt;String&gt; stream = StreamSupport.stream(iterable.spliterator(), false);
-                                        //輸出結果
-                                        stream.forEach(System.out::println);
-                                    }
+									public static void main(String[] args){
+										//假設從 ArrayList 取得一個 Iterator
+										ArrayList&lt;String&gt; array_list = new ArrayList&lt;&gt;();
+										array_list.add("AAA");
+										array_list.add("BBB");
+										array_list.add("CCC");
+										Iterator&lt;String&gt; iterator = array_list.iterator();
+										//使用 Iterable 和 StreamSupport 轉為 Stream
+										Iterable&lt;String&gt; iterable = () -&gt; iterator;
+										Stream&lt;String&gt; stream = StreamSupport.stream(iterable.spliterator(), false);
+										//輸出結果
+										stream.forEach(System.out::println);
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB<br>
-                                CCC
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>從正規表示法取得串流</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:9'>
-                            import java.util.regex.Pattern;
-                            import java.util.stream.Stream;
+							<br>
+							<output>
+								AAA<br>
+								BBB<br>
+								CCC
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>從正規表示法取得串流</h3>
+					<p>
+						<textarea class='brush:java;highlight:9'>
+							import java.util.regex.Pattern;
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    String string = "AAA:BBB:CCC";
-                                    Stream&lt;String&gt; stream = Pattern.compile(":").splitAsStream(string);
-                                    stream.forEach(System.out::println);
+									String string = "AAA:BBB:CCC";
+									Stream&lt;String&gt; stream = Pattern.compile(":").splitAsStream(string);
+									stream.forEach(System.out::println);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>從檔案取得串流</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:9'>
-                            import java.nio.file.Files;
-                            import java.nio.file.Paths;
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>從檔案取得串流</h3>
+					<p>
+						<textarea class='brush:java;highlight:9'>
+							import java.nio.file.Files;
+							import java.nio.file.Paths;
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try(Stream&lt;String&gt; stream = Files.lines(Paths.get("text.txt"))){
-                                        stream.forEach(System.out::println);
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									try(Stream&lt;String&gt; stream = Files.lines(Paths.get("text.txt"))){
+										stream.forEach(System.out::println);
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>亂數與串流</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:9'>
-                            import java.util.Random;
-                            import java.util.stream.IntStream;
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>亂數與串流</h3>
+					<p>
+						<textarea class='brush:java;highlight:9'>
+							import java.util.Random;
+							import java.util.stream.IntStream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Random random = new Random();
-                                    IntStream stream = random.ints(3,1,10);
-                                    stream.forEach(System.out::println);
+									Random random = new Random();
+									IntStream stream = random.ints(3,1,10);
+									stream.forEach(System.out::println);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            每次執行結果不一樣：<br>
-                            2<br>
-                            6<br>
-                            4
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							每次執行結果不一樣：<br>
+							2<br>
+							6<br>
+							4
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>串接函數</h2>
-                <hr>
-                <section>
-                    <h3>sorted（排序資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+			<section>
+				<h2>串接函數</h2>
+				<hr>
+				<section>
+					<h3>sorted（排序資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of(9,1,8)
-                                          .sorted()
-                                          .forEach(System.out::print);
+									Stream.of(9,1,8)
+										  .sorted()
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            189
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3><del>shuffle</del>（亂序資料）</h3>
-                    <p>
-                        Stream 沒有 shuffle()，List 也沒有 shuffle() 讓你在 Stream 轉換，只能用 Collections.shuffle(List) 來完成，所以程式碼不但要拆成數行，還得指定好型別，很不順手：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.util.Collections;
-                            import java.util.List;
-                            import java.util.stream.Collectors;
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							189
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3><del>shuffle</del>（亂序資料）</h3>
+					<p>
+						Stream 沒有 shuffle()，List 也沒有 shuffle() 讓你在 Stream 轉換，只能用 Collections.shuffle(List) 來完成，所以程式碼不但要拆成數行，還得指定好型別，很不順手：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.util.Collections;
+							import java.util.List;
+							import java.util.stream.Collectors;
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    List&lt;String&gt; strings = Stream.of("AAA","BBB","CCC").collect(Collectors.toList());
-                                    Collections.shuffle(strings);
-                                    strings.forEach(System.out::println);
+									List&lt;String&gt; strings = Stream.of("AAA","BBB","CCC").collect(Collectors.toList());
+									Collections.shuffle(strings);
+									strings.forEach(System.out::println);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        解決辦法是自己設計一個能弄亂順序的 List 給 Stream.collect()，但這樣就不在標準 API 的範疇了，不見得是好的做法：
-                    </p>
-                    <section>
-                        <h4>ShuffleList.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.util.Collections;
-                                import java.util.LinkedList;
+						<br>
+						解決辦法是自己設計一個能弄亂順序的 List 給 Stream.collect()，但這樣就不在標準 API 的範疇了，不見得是好的做法：
+					</p>
+					<section>
+						<h4>ShuffleList.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.util.Collections;
+								import java.util.LinkedList;
 
-                                public class ShuffleList&lt;E&gt; extends LinkedList&lt;E&gt;{
+								public class ShuffleList&lt;E&gt; extends LinkedList&lt;E&gt;{
 
-                                    public void addShuffled(E e){
-                                        add(e);
-                                        Collections.shuffle(this);
-                                    }
+									public void addShuffled(E e){
+										add(e);
+										Collections.shuffle(this);
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                import java.util.stream.Stream;
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.util.stream.Stream;
 
-                                public class Main{
+								public class Main{
 
-                                    public static void main(String[] args){
+									public static void main(String[] args){
 
-                                        Stream.of("AAA","BBB","CCC").collect(ShuffleList::new, ShuffleList::addShuffled, ShuffleList::addAll).forEach(System.out::println);
+										Stream.of("AAA","BBB","CCC").collect(ShuffleList::new, ShuffleList::addShuffled, ShuffleList::addAll).forEach(System.out::println);
 
-                                    }
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <p>
-                        希望未來 Streams 能有 shuffle()。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>unordered（無序資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:9'>
-                            import java.util.stream.Stream;
+						</p>
+					</section>
+					<p>
+						希望未來 Streams 能有 shuffle()。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>unordered（無序資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:9'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of(9,1,8)
-                                          .parallel()
-                                          .unordered()
-                                          .forEach(System.out::print);
+									Stream.of(9,1,8)
+										  .parallel()
+										  .unordered()
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            198<br>
-                        </output>
-                        <br>
-                        資料不須照順序排列時使用，通常搭配 parallel()，可進一步提升平行運算的效率。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>disdinct（去除重複資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							198<br>
+						</output>
+						<br>
+						資料不須照順序排列時使用，通常搭配 parallel()，可進一步提升平行運算的效率。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>disdinct（去除重複資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O")
-                                          .disdinct()
-                                          .forEach(System.out::print);
+									Stream.of("H","E","L","L","O")
+										  .disdinct()
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            HELO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>map（轉換資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							HELO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>map（轉換資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O")
-                                          .map(String::toLowerCase)
-                                          .forEach(System.out::print);
+									Stream.of("H","E","L","L","O")
+										  .map(String::toLowerCase)
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            hello<br>
-                        </output>
-                        <br>
-                        有時候會取得巢狀串流（裡面是串流的串流），可以改用將巢狀平坦開來的 <code>flatMap()</code>，確保取得「裡面是資料的串流」。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>filter（篩選資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							hello<br>
+						</output>
+						<br>
+						有時候會取得巢狀串流（裡面是串流的串流），可以改用將巢狀平坦開來的 <code>flatMap()</code>，確保取得「裡面是資料的串流」。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>filter（篩選資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O")
-                                          .filter(x -&gt; x=="L")
-                                          .forEach(System.out::print);
+									Stream.of("H","E","L","L","O")
+										  .filter(x -&gt; x=="L")
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            LL
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>peek（傳一份 Stream 的副本，通常用於想結算資料，但又不想結束串流。）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							LL
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>peek（傳一份 Stream 的副本，通常用於想結算資料，但又不想結束串流。）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O")
-                                          .peek(x-&gt;System.out.print(x.toLowerCase()))
-                                          .forEach(System.out::println);
+									Stream.of("H","E","L","L","O")
+										  .peek(x-&gt;System.out.print(x.toLowerCase()))
+										  .forEach(System.out::println);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            hH<br>
-                            eE<br>
-                            lL<br>
-                            lL<br>
-                            oO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>limit（跳過後面資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							hH<br>
+							eE<br>
+							lL<br>
+							lL<br>
+							oO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>limit（跳過後面資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O")
-                                          .limit(3)
-                                          .forEach(System.out::print);
+									Stream.of("H","E","L","L","O")
+										  .limit(3)
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            HEL
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>skip（跳過前面資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							HEL
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>skip（跳過前面資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O")
-                                          .skip(2)
-                                          .forEach(System.out::print);
+									Stream.of("H","E","L","L","O")
+										  .skip(2)
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            LLO
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>takeWhile（篩選前面的資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							LLO
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>takeWhile（篩選前面的資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of(1,2,3,7,8,9)
-                                          .takeWhile(x -&gt; x&lt;4)
-                                          .forEach(System.out::print);
+									Stream.of(1,2,3,7,8,9)
+										  .takeWhile(x -&gt; x&lt;4)
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            123
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>dropWhile（篩選後面的資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:8'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							123
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>dropWhile（篩選後面的資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:8'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of(1,2,3,7,8,9)
-                                          .dropWhile(x -&gt; x&lt;4)
-                                          .forEach(System.out::print);
+									Stream.of(1,2,3,7,8,9)
+										  .dropWhile(x -&gt; x&lt;4)
+										  .forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            789
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ofNullable</h3>
-                    <p>
-                        （還沒寫完就放棄 Oracle Java 了）
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							789
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ofNullable</h3>
+					<p>
+						（還沒寫完就放棄 Oracle Java 了）
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>歸算串流</h2>
-                <p>
-                    有些 method 不會傳回 Stream&lt;T&gt; 或 IntStream 之類的串流，所以不能再串接函數，等於終止串流，通常是些結算串流資料的動作。
-                </p>
-                <hr>
-                <section>
-                    <h3>forEach（逐一使用資料）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:7'>
-                            import java.util.stream.Stream;
+			<section>
+				<h2>歸算串流</h2>
+				<p>
+					有些 method 不會傳回 Stream&lt;T&gt; 或 IntStream 之類的串流，所以不能再串接函數，等於終止串流，通常是些結算串流資料的動作。
+				</p>
+				<hr>
+				<section>
+					<h3>forEach（逐一使用資料）</h3>
+					<p>
+						<textarea class='brush:java;highlight:7'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Stream.of("H","E","L","L","O").forEach(System.out::print);
+									Stream.of("H","E","L","L","O").forEach(System.out::print);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            HELLO<br>
-                        </output>
-                        <br>
-                        群集自己就有實作 Iterable.forEach()，所以不需要轉為串流，也能使用 forEach() 跑 Lambda expressions。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>findFirst（搜尋出第一筆資料）、findAny（有任何一筆資料就搜尋出來）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[7,8]'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							HELLO<br>
+						</output>
+						<br>
+						群集自己就有實作 Iterable.forEach()，所以不需要轉為串流，也能使用 forEach() 跑 Lambda expressions。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>findFirst（搜尋出第一筆資料）、findAny（有任何一筆資料就搜尋出來）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[7,8]'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.println(Stream.of("H","E","L","L","O").findFirst());
-                                    System.out.println(Stream.empty().findAny());
+									System.out.println(Stream.of("H","E","L","L","O").findFirst());
+									System.out.println(Stream.empty().findAny());
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            Optional[H]<br>
-                            Optional.empty
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>anyMatch（類似對資料做 OR 判斷）、allMatch（類似對資料做 AND 判斷）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[7,8]'>
-                            import java.util.stream.IntStream;
+						<br>
+						<output>
+							Optional[H]<br>
+							Optional.empty
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>anyMatch（類似對資料做 OR 判斷）、allMatch（類似對資料做 AND 判斷）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[7,8]'>
+							import java.util.stream.IntStream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.println(IntStream.of(2,3,4).anyMatch(x -&gt; x==2));
-                                    System.out.println(IntStream.of(2,3,4).allMatch(x -&gt; x>1));
+									System.out.println(IntStream.of(2,3,4).anyMatch(x -&gt; x==2));
+									System.out.println(IntStream.of(2,3,4).allMatch(x -&gt; x>1));
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            true　（串流中至少有一個 2，所以回傳 true。）<br>
-                            true　（串流中所有資料都大於 1，所以回傳 true。）
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>min（取得最小值）、max（取得最大值）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[7,8]'>
-                            import java.util.stream.IntStream;
+						<br>
+						<output>
+							true　（串流中至少有一個 2，所以回傳 true。）<br>
+							true　（串流中所有資料都大於 1，所以回傳 true。）
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>min（取得最小值）、max（取得最大值）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[7,8]'>
+							import java.util.stream.IntStream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.println(IntStream.of(1,2,3).min());
-                                    System.out.println(IntStream.of(1,2,3).max());
+									System.out.println(IntStream.of(1,2,3).min());
+									System.out.println(IntStream.of(1,2,3).max());
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            OptionalInt[1]<br>
-                            OptionalInt[3]
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>count（取得元素個數）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:7'>
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							OptionalInt[1]<br>
+							OptionalInt[3]
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>count（取得元素個數）</h3>
+					<p>
+						<textarea class='brush:java;highlight:7'>
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.print(Stream.of("AAA","BBB","CCC").count());
+									System.out.print(Stream.of("AAA","BBB","CCC").count());
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            3
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>sum（計算總和）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:7'>
-                            import java.util.stream.IntStream;
+						<br>
+						<output>
+							3
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>sum（計算總和）</h3>
+					<p>
+						<textarea class='brush:java;highlight:7'>
+							import java.util.stream.IntStream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.print(IntStream.of(1,2,3,4,5).sum());
+									System.out.print(IntStream.of(1,2,3,4,5).sum());
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            15
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>reduce（遞迴算式）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:7'>
-                            import java.util.stream.IntStream;
+						<br>
+						<output>
+							15
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>reduce（遞迴算式）</h3>
+					<p>
+						<textarea class='brush:java;highlight:7'>
+							import java.util.stream.IntStream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.println(IntStream.of(1,2,3,4,5).reduce((x,y)-&gt;x+y));
+									System.out.println(IntStream.of(1,2,3,4,5).reduce((x,y)-&gt;x+y));
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            15
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							15
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>平行運算</h2>
-                <p>
-                    Stream API 可以使用「平行運算」，發揮多核心處理器的計算效能。<br>
-                    <br>
-                    做法很簡單，在建立串流後，呼叫 parallel() 即可進入平行運算模式。群集的話，更可以改用 parallelStream() 取代 stream() 來建立串流。
-                </p>
-                <hr>
-                <section>
-                    <h3>BaseStream.parallel()</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:7'>
-                            import java.util.stream.IntStream;
+			<section>
+				<h2>平行運算</h2>
+				<p>
+					Stream API 可以使用「平行運算」，發揮多核心處理器的計算效能。<br>
+					<br>
+					做法很簡單，在建立串流後，呼叫 parallel() 即可進入平行運算模式。群集的話，更可以改用 parallelStream() 取代 stream() 來建立串流。
+				</p>
+				<hr>
+				<section>
+					<h3>BaseStream.parallel()</h3>
+					<p>
+						<textarea class='brush:java;highlight:7'>
+							import java.util.stream.IntStream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    int a = IntStream.range(1,9999).parallel().sum();
-                                    System.out.print(a);
+									int a = IntStream.range(1,9999).parallel().sum();
+									System.out.print(a);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            49985001
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Collection.parallelStream()</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:10'>
-                            import java.util.Arrays;
-                            import java.util.List;
-                            import java.util.stream.Stream;
+						<br>
+						<output>
+							49985001
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Collection.parallelStream()</h3>
+					<p>
+						<textarea class='brush:java;highlight:10'>
+							import java.util.Arrays;
+							import java.util.List;
+							import java.util.stream.Stream;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    List&lt;Integer&gt; list = Arrays.asList(1,2,3,4,5);
-                                    int a = list.parallelStream().mapToInt(x-&gt;x).sum();
-                                    System.out.print(a);
+									List&lt;Integer&gt; list = Arrays.asList(1,2,3,4,5);
+									int a = list.parallelStream().mapToInt(x-&gt;x).sum();
+									System.out.print(a);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            15
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							15
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>綜合範例</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        import java.util.*;
+			<section>
+				<h2>綜合範例</h2>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.*;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                //亂數
-                                new Random().ints(3,1,10).forEach(System.out::println);
-                                //串列
-                                Arrays.asList("AAA","BBB","CCC").forEach(System.out::println);
-                                //串流
-                                Stream.of("A","B","C","D","E")
-                                      .skip(1)
-                                      .limit(3)
-                                      .map(x-&gt;x+x+x)
-                                      .forEach(System.out::println);
-                            }
+							public static void main(String[] args){
+								//亂數
+								new Random().ints(3,1,10).forEach(System.out::println);
+								//串列
+								Arrays.asList("AAA","BBB","CCC").forEach(System.out::println);
+								//串流
+								Stream.of("A","B","C","D","E")
+									  .skip(1)
+									  .limit(3)
+									  .map(x-&gt;x+x+x)
+									  .forEach(System.out::println);
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 所以取名 Streams（數據串流），因為這不是資料結構的層次，而是傳輸數據。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 所以取名 Streams（數據串流），因為這不是資料結構的層次，而是傳輸數據。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

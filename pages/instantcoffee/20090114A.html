@@ -2,682 +2,682 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>物件導向設計原則 (SOLID)</h1>
-                <p>
-                    Robert C. Martin 將所見過的物件導向設計原則彙整為五條，可幫助我們嗅出設計物件導向程式時發出了臭味。<br>
-                    <br>
-                    S - Single responsibility principle, SRP.<br>
-                    O - Open/closed principle, OCP.<br>
-                    L - Liskov substitution principle, LSP.<br>
-                    I - Interface segregation principle, ISP.<br>
-                    D - Dependency inversion principle, DIP.
-                </p>
-            </header>
+			<header>
+				<h1>物件導向設計原則 (SOLID)</h1>
+				<p>
+					Robert C. Martin 將所見過的物件導向設計原則彙整為五條，可幫助我們嗅出設計物件導向程式時發出了臭味。<br>
+					<br>
+					S - Single responsibility principle, SRP.<br>
+					O - Open/closed principle, OCP.<br>
+					L - Liskov substitution principle, LSP.<br>
+					I - Interface segregation principle, ISP.<br>
+					D - Dependency inversion principle, DIP.
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>SRP：單一責任原則（高內聚）</h2>
-                <p>
-                    <q>A class should have only a single responsibility.</q>
-                </p>
-                <hr>
-                <section>
-                    <h3>腐敗的味道</h3>
-                    <p>
-                        類別體現太多概念、提供過雜的功能，每次要修改時，都找它開刀。
-                    </p>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
+			<section>
+				<h2>SRP：單一責任原則（高內聚）</h2>
+				<p>
+					<q>A class should have only a single responsibility.</q>
+				</p>
+				<hr>
+				<section>
+					<h3>腐敗的味道</h3>
+					<p>
+						類別體現太多概念、提供過雜的功能，每次要修改時，都找它開刀。
+					</p>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
 
-                                public class A{
+								public class A{
 
-                                    public void f1(){
-                                        System.out.println("AAA");
-                                    }
+									public void f1(){
+										System.out.println("AAA");
+									}
 
-                                    public void f2(){
-                                        System.out.println("BBB");
-                                    }
+									public void f2(){
+										System.out.println("BBB");
+									}
 
-                                    //無論要重新設計 f1、f2、…fn，都得修改類別 A。
+									//無論要重新設計 f1、f2、…fn，都得修改類別 A。
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        new A().f1();
-                                        new A().f2();
-                                    }
+									public static void main(String args[]){
+										new A().f1();
+										new A().f2();
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>設計的原則</h3>
-                    <p>
-                        分散成其它類別，讓類別只為同樣一個原因被修改。
-                    </p>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A{
+							<br>
+							<output>
+								AAA<br>
+								BBB
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>設計的原則</h3>
+					<p>
+						分散成其它類別，讓類別只為同樣一個原因被修改。
+					</p>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A{
 
-                                    public void f(){
-                                        System.out.println("AAA");
-                                    }
+									public void f(){
+										System.out.println("AAA");
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>B.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class B{
+						</p>
+					</section>
+					<section>
+						<h4>B.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class B{
 
-                                    public void f(){
-                                        System.out.println("BBB");
-                                    }
+									public void f(){
+										System.out.println("BBB");
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        new A().f();
-                                        new B().f();
-                                    }
+									public static void main(String args[]){
+										new A().f();
+										new B().f();
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB
-                            </output>
-                        </p>
-                    </section>
-                </section>
-            </section>
+							<br>
+							<output>
+								AAA<br>
+								BBB
+							</output>
+						</p>
+					</section>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>OCP：開放關閉原則（鬆耦合）</h2>
-                <p>
-                    <q>Software entities ... should be open for extension, but closed for modification.</q>
-                </p>
-                <hr>
-                <section>
-                    <h3>腐敗的味道</h3>
-                    <p>
-                        每次要增加功能，都必須更改類別內部的設計。
-                    </p>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A{
+			<section>
+				<h2>OCP：開放關閉原則（鬆耦合）</h2>
+				<p>
+					<q>Software entities ... should be open for extension, but closed for modification.</q>
+				</p>
+				<hr>
+				<section>
+					<h3>腐敗的味道</h3>
+					<p>
+						每次要增加功能，都必須更改類別內部的設計。
+					</p>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A{
 
-                                    public void f(int x){
-                                        if(x==1){
-                                            System.out.println("一");
-                                        }
-                                        else if(x==2){
-                                            System.out.println("二");
-                                        }
-                                        else if(x==3){
-                                            System.out.println("三");
-                                        }
-                                        //以後想增加四～九的話，都得更動類別 A 的內部設計，增加破壞設計的風險。
-                                    }
+									public void f(int x){
+										if(x==1){
+											System.out.println("一");
+										}
+										else if(x==2){
+											System.out.println("二");
+										}
+										else if(x==3){
+											System.out.println("三");
+										}
+										//以後想增加四～九的話，都得更動類別 A 的內部設計，增加破壞設計的風險。
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        A a = new A();
-                                        a.f(1);
-                                        a.f(2);
-                                        a.f(3);
-                                    }
+									public static void main(String args[]){
+										A a = new A();
+										a.f(1);
+										a.f(2);
+										a.f(3);
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                一<br>
-                                二<br>
-                                三
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>設計的原則</h3>
-                    <p>
-                        讓類別能用擴充模組的機制來增加功能。
-                    </p>
-                    <section>
-                        <h4>S.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                interface S{
-                                    String create();
-                                }
+							<br>
+							<output>
+								一<br>
+								二<br>
+								三
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>設計的原則</h3>
+					<p>
+						讓類別能用擴充模組的機制來增加功能。
+					</p>
+					<section>
+						<h4>S.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								interface S{
+									String create();
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A{
+						</p>
+					</section>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A{
 
-                                    public void f(S x){
-                                        System.out.println(x.create());
-                                    }
+									public void f(S x){
+										System.out.println(x.create());
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>One.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class One implements S{
+						</p>
+					</section>
+					<section>
+						<h4>One.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class One implements S{
 
-                                    public String create(){
-                                        return "一";
-                                    }
+									public String create(){
+										return "一";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Two.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Two implements S{
+						</p>
+					</section>
+					<section>
+						<h4>Two.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Two implements S{
 
-                                    public String create(){
-                                        return "二";
-                                    }
+									public String create(){
+										return "二";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Three.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Three implements S{
+						</p>
+					</section>
+					<section>
+						<h4>Three.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Three implements S{
 
-                                    public String create(){
-                                        return "三";
-                                    }
+									public String create(){
+										return "三";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        A a = new A();
-                                        a.f(new One());
-                                        a.f(new Two());
-                                        a.f(new Three());
-                                        //想增加四到九的話，只要新增 Four 到 Nine 類別出來即可，不用修改舊有類別的內部設計。
-                                    }
+									public static void main(String args[]){
+										A a = new A();
+										a.f(new One());
+										a.f(new Two());
+										a.f(new Three());
+										//想增加四到九的話，只要新增 Four 到 Nine 類別出來即可，不用修改舊有類別的內部設計。
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                一<br>
-                                二<br>
-                                三
-                            </output>
-                        </p>
-                    </section>
-                </section>
-            </section>
+							<br>
+							<output>
+								一<br>
+								二<br>
+								三
+							</output>
+						</p>
+					</section>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>LSP：里氏替換原則（保護繼承相依）</h2>
-                <p>
-                    <q>Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.</q>
-                </p>
-                <hr>
-                <section>
-                    <h3>腐敗的味道</h3>
-                    <p>
-                        子類別功能退化不做事，造成子類別不能正常頂替父類別，或者父類別必須試圖呼叫子類別的功能。
-                    </p>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A{
+			<section>
+				<h2>LSP：里氏替換原則（保護繼承相依）</h2>
+				<p>
+					<q>Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.</q>
+				</p>
+				<hr>
+				<section>
+					<h3>腐敗的味道</h3>
+					<p>
+						子類別功能退化不做事，造成子類別不能正常頂替父類別，或者父類別必須試圖呼叫子類別的功能。
+					</p>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A{
 
-                                    public String f(){
-                                        return "AAA";
-                                    }
+									public String f(){
+										return "AAA";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>B.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class B extends A{
-                                    //類別 B 打算繼承類別 A 增加新功能。
-                                    public String f(String x){
-                                        return x;
-                                    }
-                                    //但又覺得類別 A 的舊功能不適合，於是讓它功能退化不做事。
-                                    public String f(){
-                                        return null;
-                                    }
-                                }
+						</p>
+					</section>
+					<section>
+						<h4>B.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class B extends A{
+									//類別 B 打算繼承類別 A 增加新功能。
+									public String f(String x){
+										return x;
+									}
+									//但又覺得類別 A 的舊功能不適合，於是讓它功能退化不做事。
+									public String f(){
+										return null;
+									}
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        System.out.println(new B().f()); //結果難免發生把 B 類別當 A 類別來用的設計瑕疵。
-                                        System.out.println(new B().f("BBB"));
-                                    }
+									public static void main(String args[]){
+										System.out.println(new B().f()); //結果難免發生把 B 類別當 A 類別來用的設計瑕疵。
+										System.out.println(new B().f("BBB"));
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                null<br>
-                                BBB
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>設計的原則</h3>
-                    <p>
-                        讓子類別隨時都能擔起父類別的責任，不然就不要有繼承關係。
-                    </p>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A{
+							<br>
+							<output>
+								null<br>
+								BBB
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>設計的原則</h3>
+					<p>
+						讓子類別隨時都能擔起父類別的責任，不然就不要有繼承關係。
+					</p>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A{
 
-                                    public String f(){
-                                        return "AAA";
-                                    }
+									public String f(){
+										return "AAA";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>B.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class B{ //與其讓繼承而來的功能不做事，不如不要繼承 A 更省事。
+						</p>
+					</section>
+					<section>
+						<h4>B.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class B{ //與其讓繼承而來的功能不做事，不如不要繼承 A 更省事。
 
-                                    public String f(String x){
-                                        return x;
-                                    }
+									public String f(String x){
+										return x;
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        System.out.println(new A().f());      //編譯器會提醒你 B 沒有 f()，不再誤用退化 A 功能的 B 功能。
-                                        System.out.println(new B().f("BBB")); //B 只有 f(String) 可用。
-                                    }
+									public static void main(String args[]){
+										System.out.println(new A().f());	  //編譯器會提醒你 B 沒有 f()，不再誤用退化 A 功能的 B 功能。
+										System.out.println(new B().f("BBB")); //B 只有 f(String) 可用。
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB
-                            </output>
-                        </p>
-                    </section>
-                </section>
-            </section>
+							<br>
+							<output>
+								AAA<br>
+								BBB
+							</output>
+						</p>
+					</section>
+				</section>
+			</section>
 
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>ISP：介面隔離原則（減少功能相依）</h2>
-                <p>
-                    <q>One should "Depend upon Abstractions. Do not depend upon concretions." Dependency injection is one method of following this principle.</q>
-                </p>
-                <hr>
-                <section>
-                    <h3>腐敗的味道</h3>
-                    <p>
-                        明明只需要幾個功能，卻依賴了其它不需要的功能，導致類別公開了某個操作介面，卻要使用者自行規避去用它。
-                    </p>
-                    <section>
-                        <h4>S.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                interface S{
-                                    String f1();
-                                    String f2();
-                                }
+			<section>
+				<h2>ISP：介面隔離原則（減少功能相依）</h2>
+				<p>
+					<q>One should "Depend upon Abstractions. Do not depend upon concretions." Dependency injection is one method of following this principle.</q>
+				</p>
+				<hr>
+				<section>
+					<h3>腐敗的味道</h3>
+					<p>
+						明明只需要幾個功能，卻依賴了其它不需要的功能，導致類別公開了某個操作介面，卻要使用者自行規避去用它。
+					</p>
+					<section>
+						<h4>S.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								interface S{
+									String f1();
+									String f2();
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A implements S{
+						</p>
+					</section>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A implements S{
 
-                                    public String f1(){
-                                        return "AAA";
-                                    }
+									public String f1(){
+										return "AAA";
+									}
 
-                                    public String f2(){
-                                        return null; //假設 A 不需要 f2() 卻偏偏得實作它。
-                                    }
+									public String f2(){
+										return null; //假設 A 不需要 f2() 卻偏偏得實作它。
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>B.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class B implements S{
+						</p>
+					</section>
+					<section>
+						<h4>B.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class B implements S{
 
-                                    public String f1(){
-                                        return ""; //假設 B 不需要 f1() 卻偏偏得實作它。
-                                    }
+									public String f1(){
+										return ""; //假設 B 不需要 f1() 卻偏偏得實作它。
+									}
 
-                                    public String f2(){
-                                        return "BBB";
-                                    }
+									public String f2(){
+										return "BBB";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        new A().f1();
-                                        new B().f2();
-                                        //然後自己留意 A.f2() 和 B.f1() 沒做事，所以不要這樣呼叫。
-                                    }
+									public static void main(String args[]){
+										new A().f1();
+										new B().f2();
+										//然後自己留意 A.f2() 和 B.f1() 沒做事，所以不要這樣呼叫。
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB
-                            </output>
-                        </p>
-                    </section>
-                </section>
-                <hr>
-                <section>
-                    <h3>設計的原則</h3>
-                    <p>
-                        抽出僅用到的那部份功能，避免讓使用端相依了它不需要的介面。
-                    </p>
-                    <section>
-                        <h4>S.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                interface S{
-                                    String f1();
-                                }
+							<br>
+							<output>
+								AAA<br>
+								BBB
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>設計的原則</h3>
+					<p>
+						抽出僅用到的那部份功能，避免讓使用端相依了它不需要的介面。
+					</p>
+					<section>
+						<h4>S.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								interface S{
+									String f1();
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>T.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                interface T{
-                                    String f2();
-                                }
+						</p>
+					</section>
+					<section>
+						<h4>T.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								interface T{
+									String f2();
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>A.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class A implements S{
+						</p>
+					</section>
+					<section>
+						<h4>A.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class A implements S{
 
-                                    public String f1(){
-                                        return "AAA";
-                                    }
+									public String f1(){
+										return "AAA";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>B.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class B implements T{
+						</p>
+					</section>
+					<section>
+						<h4>B.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class B implements T{
 
-                                    public String f2(){
-                                        return "BBB";
-                                    }
+									public String f2(){
+										return "BBB";
+									}
 
-                                }
+								}
                             </textarea>
-                        </p>
-                    </section>
-                    <section>
-                        <h4>Main.java</h4>
-                        <p>
-                            <textarea class='brush:java'>
-                                public class Main{
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								public class Main{
 
-                                    public static void main(String args[]){
-                                        new A().f1();
-                                        new B().f2();
-                                        //編譯器會告訴你沒有 A.f2() 和 B.f1() 可用。
-                                    }
+									public static void main(String args[]){
+										new A().f1();
+										new B().f2();
+										//編譯器會告訴你沒有 A.f2() 和 B.f1() 可用。
+									}
 
-                                }
+								}
                             </textarea>
-                            <br>
-                            <output>
-                                AAA<br>
-                                BBB
-                            </output>
-                        </p>
-                    </section>
-                </section>
-            </section>
+							<br>
+							<output>
+								AAA<br>
+								BBB
+							</output>
+						</p>
+					</section>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>DIP：反轉依賴原則（降低層次相依）</h2>
-                <p>
-                    <q>Many client-specific interfaces are better than one general-purpose interface.</q>
-                </p>
-                <hr>
-                <section>
-                    <h3>腐敗的味道</h3>
-                    <p>
-                        使用了過於明確的類別，導致不容易應付設計上的變更。<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.util.ArrayList;
-                            import java.util.LinkedList;
+			<section>
+				<h2>DIP：反轉依賴原則（降低層次相依）</h2>
+				<p>
+					<q>Many client-specific interfaces are better than one general-purpose interface.</q>
+				</p>
+				<hr>
+				<section>
+					<h3>腐敗的味道</h3>
+					<p>
+						使用了過於明確的類別，導致不容易應付設計上的變更。<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.util.ArrayList;
+							import java.util.LinkedList;
 
-                            public class Main{
+							public class Main{
 
-                                public static void f(ArrayList x){ //參數指定了過於具體的 ArrayList 物件。
-                                    System.out.println(x.get(0));
-                                }
+								public static void f(ArrayList x){ //參數指定了過於具體的 ArrayList 物件。
+									System.out.println(x.get(0));
+								}
 
-                                public static void main(String args[]){
+								public static void main(String args[]){
 
-                                    ArrayList&lt;String&gt; a = new ArrayList&lt;String&gt;();
-                                    LinkedList&lt;String&gt; b = new LinkedList&lt;String&gt;();
+									ArrayList&lt;String&gt; a = new ArrayList&lt;String&gt;();
+									LinkedList&lt;String&gt; b = new LinkedList&lt;String&gt;();
 
-                                    a.add("AAA");
-                                    b.add("BBB");
+									a.add("AAA");
+									b.add("BBB");
 
-                                    f(a);
-                                    //f(b);  卡住了！想輸出 b 卻規格不合，於是很可能抽換 LinkedList 或新增 f(LinkedList) 來破壞設計～
+									f(a);
+									//f(b);  卡住了！想輸出 b 卻規格不合，於是很可能抽換 LinkedList 或新增 f(LinkedList) 來破壞設計～
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>設計的原則</h3>
-                    <p>
-                        相依於抽象介面，不要相依於實作類別。<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.util.ArrayList;
-                            import java.util.LinkedList;
-                            import java.util.List;
+						<br>
+						<output>
+							AAA
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>設計的原則</h3>
+					<p>
+						相依於抽象介面，不要相依於實作類別。<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.util.ArrayList;
+							import java.util.LinkedList;
+							import java.util.List;
 
-                            public class Main{
+							public class Main{
 
-                                public static void f(List x){ //提升一個抽象層次，事情就變得美好～
-                                    System.out.println(x.get(0));
-                                }
+								public static void f(List x){ //提升一個抽象層次，事情就變得美好～
+									System.out.println(x.get(0));
+								}
 
-                                public static void main(String args[]){
+								public static void main(String args[]){
 
-                                    ArrayList&lt;String&gt; a = new ArrayList&lt;String&gt;();
-                                    LinkedList&lt;String&gt; b = new LinkedList&lt;String&gt;();
+									ArrayList&lt;String&gt; a = new ArrayList&lt;String&gt;();
+									LinkedList&lt;String&gt; b = new LinkedList&lt;String&gt;();
 
-                                    a.add("AAA");
-                                    b.add("BBB");
+									a.add("AAA");
+									b.add("BBB");
 
-                                    f(a);
-                                    f(b);
+									f(a);
+									f(b);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							AAA<br>
+							BBB
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 其他也很重要而時常隨 SOLID 一起討論的，有「最小知識原則（Principle of least knowledge）」與「去除重複原則（Don't repeat yourself）」。前者是「對物件的內部組成知道得越少越好」，例如 A.B.f() 就是不好的設計，因為知道了 A 裡面有 B。後者是「去除程式碼重複的部份」，否則軟體充斥一堆重複的程式碼，日後發現這程式碼需要修改時，必須四處一一修改與測試，當場給搞死～
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 其他也很重要而時常隨 SOLID 一起討論的，有「最小知識原則（Principle of least knowledge）」與「去除重複原則（Don't repeat yourself）」。前者是「對物件的內部組成知道得越少越好」，例如 A.B.f() 就是不好的設計，因為知道了 A 裡面有 B。後者是「去除程式碼重複的部份」，否則軟體充斥一堆重複的程式碼，日後發現這程式碼需要修改時，必須四處一一修改與測試，當場給搞死～
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

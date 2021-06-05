@@ -2,67 +2,67 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>&lt;html lang="zh"&gt;</h1>
-            </header>
+			<header>
+				<h1>&lt;html lang="zh"&gt;</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>過去有字元編碼切換的問題</h2>
-                <p>
-                    過去 HTML 文件，是各國用自己的字元編碼保存，例如 Big5、GB2312、Shift_JIS。<br>
-                    <br>
-                    於是瀏覽器在顯示不同國家的網頁時，必須切換到正確的字元編碼，否則用 Big5 字元編碼去處理 Shift_JIS 字元編碼的網頁，只會看到一堆亂碼。<br>
-                    <br>
-                    為了解決這問題，可以在網頁指定 lang 屬性，設定使用哪個國家的語系。
-                </p>
-            </section>
+			<section>
+				<h2>過去有字元編碼切換的問題</h2>
+				<p>
+					過去 HTML 文件，是各國用自己的字元編碼保存，例如 Big5、GB2312、Shift_JIS。<br>
+					<br>
+					於是瀏覽器在顯示不同國家的網頁時，必須切換到正確的字元編碼，否則用 Big5 字元編碼去處理 Shift_JIS 字元編碼的網頁，只會看到一堆亂碼。<br>
+					<br>
+					為了解決這問題，可以在網頁指定 lang 屬性，設定使用哪個國家的語系。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>現在沒有字元編碼切換的問題了</h2>
-                <p>
-                    但 HTML5 預設使用 UTF-8 字元編碼，因此即使不在 &lt;HTML&gt; 標籤設定 lang 屬性，不同國家之間開啟網頁也不會顯示亂碼了！<br>
-                    <br>
-                    既然如此，還需要刻意指定 lang 嗎？<br>
-                    <br>
-                    如果別亂碼就好，確實可以不指定。
-                </p>
-            </section>
+			<section>
+				<h2>現在沒有字元編碼切換的問題了</h2>
+				<p>
+					但 HTML5 預設使用 UTF-8 字元編碼，因此即使不在 &lt;HTML&gt; 標籤設定 lang 屬性，不同國家之間開啟網頁也不會顯示亂碼了！<br>
+					<br>
+					既然如此，還需要刻意指定 lang 嗎？<br>
+					<br>
+					如果別亂碼就好，確實可以不指定。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>UTF-8 也有自己的狀況</h2>
-                <p>
-                    但你要知道，同一個漢字和標點符號，台灣、中國、日本的寫法不見得一樣，因此同一個字、同一個全形符號，不同國家語系的人，在網頁上看到的不見得一樣：<br>
-                    <br>
-                    <samp>
-                        設為 lang="zh-TW"：<span lang='zh-TW'>才、直、具，步、邊、內。</span>（台灣習慣的中文寫法和標點符號）<br>
-                        設為 lang="ja"　 ：<span lang='ja'>才、直、具，步、邊、內。</span>（日本漢字寫法經常和中文不一樣）<br>
-                        設為 lang="zh-CN"：<span lang='zh-CN'>才、直、具，步、邊、內。</span>（中國的全形符號和台灣不一樣）<br>
-                    </samp>
-                    <br>
-                    如果你希望文字和符號固定使用哪一國的寫法，而不是不同國家顯示不同寫法的文字和符號，就可以設定 lang。
-                </p>
-            </section>
+			<section>
+				<h2>UTF-8 也有自己的狀況</h2>
+				<p>
+					但你要知道，同一個漢字和標點符號，台灣、中國、日本的寫法不見得一樣，因此同一個字、同一個全形符號，不同國家語系的人，在網頁上看到的不見得一樣：<br>
+					<br>
+					<samp>
+						設為 lang="zh-TW"：<span lang='zh-TW'>才、直、具，步、邊、內。</span>（台灣習慣的中文寫法和標點符號）<br>
+						設為 lang="ja"　 ：<span lang='ja'>才、直、具，步、邊、內。</span>（日本漢字寫法經常和中文不一樣）<br>
+						設為 lang="zh-CN"：<span lang='zh-CN'>才、直、具，步、邊、內。</span>（中國的全形符號和台灣不一樣）<br>
+					</samp>
+					<br>
+					如果你希望文字和符號固定使用哪一國的寫法，而不是不同國家顯示不同寫法的文字和符號，就可以設定 lang。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

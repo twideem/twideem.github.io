@@ -2,202 +2,202 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>table td:nth-child(1){width:25%}</style>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>table td:nth-child(1){width:25%}</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Regular Expressions（正規式）</h1>
-                <p>
-                    regular 是「有規則可循的」，將這個規則性找出來，再套用到字串比對有沒有符合規則的資料，就是 regular expression。<br>
-                    <br>
-                    中文是字面上看不出什麼意思的「正規表示法」「正則表達式」，其實功能就是：「表達某種規律形式的詞句，以比對出符合這種規律形式的資料來用。」
-                </p>
-            </header>
+			<header>
+				<h1>Regular Expressions（正規式）</h1>
+				<p>
+					regular 是「有規則可循的」，將這個規則性找出來，再套用到字串比對有沒有符合規則的資料，就是 regular expression。<br>
+					<br>
+					中文是字面上看不出什麼意思的「正規表示法」「正則表達式」，其實功能就是：「表達某種規律形式的詞句，以比對出符合這種規律形式的資料來用。」
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>語法</h2>
-                <hr>
-                <section>
-                    <h3>符號</h3>
-                    <table>
-                        <tr><td>/ /</td><td>正規式要寫在這符號裡面</td></tr>
-                        <tr><td>.</td><td>任意字元</td></tr>
-                        <tr><td>-</td><td>字元範圍</td></tr>
-                        <tr><td>[]</td><td>字元集合</td></tr>
-                        <tr><td>()</td><td>字串</td></tr>
-                        <tr><td>|</td><td>或</td></tr>
-                        <tr><td>^</td><td>開頭（出現在 [] 內表示否定）</td></tr>
-                        <tr><td>$</td><td>結尾</td></tr>
-                        <tr><td>?</td><td>0 或 1 次</td></tr>
-                        <tr><td>*</td><td>0 或多次</td></tr>
-                        <tr><td>+</td><td>1 或多次</td></tr>
-                        <tr><td>{,}</td><td>幾次</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>跳脫字元</h3>
-                    <table>
-                        <tr><td>\e</td><td>Escape</td></tr>
-                        <tr><td>\n</td><td>New line</td></tr>
-                        <tr><td>\r</td><td>Enter</td></tr>
-                        <tr><td>\t</td><td>Tab</td></tr>
-                        <tr><td>\f</td><td>Form feed</td></tr>
-                        <tr><td>\000 到 \777</td><td>以八進位值表示字元</td></tr>
-                        <tr><td>\x00 到 \xFF</td><td>以十六進位表示字元</td></tr>
-                        <tr><td>\符號</td><td>正規式用到符號</td></tr>
-                        <tr><td>\d</td><td>相當於 [0-9]</td></tr>
-                        <tr><td>\D</td><td>相當於 [^0-9]</td></tr>
-                        <tr><td>\w</td><td>相當於 [0-9a-zA-Z_]</td></tr>
-                        <tr><td>\W</td><td>相當於 [^0-9a-zA-Z_]</td></tr>
-                        <tr><td>\s</td><td>相當於 [\f\n\r\t]</td></tr>
-                        <tr><td>\S</td><td>相當於 [^\f\n\r\t]</td></tr>
-                    </table>
-                </section>
-                <hr>
-                <section>
-                    <h3>選項</h3>
-                    <p>
-                        在 <kbd>/正規式/</kbd> 後面，可以設定如下參數：
-                    </p>
-                    <table>
-                        <tr><td>g</td><td>匹配所有資料（不因匹配到資料就停止匹配其它資料）</td></tr>
-                        <tr><td>i</td><td>不分大小寫</td></tr>
-                        <tr><td>m</td><td>匹配多行資料</td></tr>
-                        <tr><td>u</td><td>匹配 Unicode 字元</td></tr>
-                    </table>
-                </section>
-            </section>
+			<section>
+				<h2>語法</h2>
+				<hr>
+				<section>
+					<h3>符號</h3>
+					<table>
+						<tr><td>/ /</td><td>正規式要寫在這符號裡面</td></tr>
+						<tr><td>.</td><td>任意字元</td></tr>
+						<tr><td>-</td><td>字元範圍</td></tr>
+						<tr><td>[]</td><td>字元集合</td></tr>
+						<tr><td>()</td><td>字串</td></tr>
+						<tr><td>|</td><td>或</td></tr>
+						<tr><td>^</td><td>開頭（出現在 [] 內表示否定）</td></tr>
+						<tr><td>$</td><td>結尾</td></tr>
+						<tr><td>?</td><td>0 或 1 次</td></tr>
+						<tr><td>*</td><td>0 或多次</td></tr>
+						<tr><td>+</td><td>1 或多次</td></tr>
+						<tr><td>{,}</td><td>幾次</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>跳脫字元</h3>
+					<table>
+						<tr><td>\e</td><td>Escape</td></tr>
+						<tr><td>\n</td><td>New line</td></tr>
+						<tr><td>\r</td><td>Enter</td></tr>
+						<tr><td>\t</td><td>Tab</td></tr>
+						<tr><td>\f</td><td>Form feed</td></tr>
+						<tr><td>\000 到 \777</td><td>以八進位值表示字元</td></tr>
+						<tr><td>\x00 到 \xFF</td><td>以十六進位表示字元</td></tr>
+						<tr><td>\符號</td><td>正規式用到符號</td></tr>
+						<tr><td>\d</td><td>相當於 [0-9]</td></tr>
+						<tr><td>\D</td><td>相當於 [^0-9]</td></tr>
+						<tr><td>\w</td><td>相當於 [0-9a-zA-Z_]</td></tr>
+						<tr><td>\W</td><td>相當於 [^0-9a-zA-Z_]</td></tr>
+						<tr><td>\s</td><td>相當於 [\f\n\r\t]</td></tr>
+						<tr><td>\S</td><td>相當於 [^\f\n\r\t]</td></tr>
+					</table>
+				</section>
+				<hr>
+				<section>
+					<h3>選項</h3>
+					<p>
+						在 <kbd>/正規式/</kbd> 後面，可以設定如下參數：
+					</p>
+					<table>
+						<tr><td>g</td><td>匹配所有資料（不因匹配到資料就停止匹配其它資料）</td></tr>
+						<tr><td>i</td><td>不分大小寫</td></tr>
+						<tr><td>m</td><td>匹配多行資料</td></tr>
+						<tr><td>u</td><td>匹配 Unicode 字元</td></tr>
+					</table>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>實例</h2>
-                <table>
-                    <tr><td>/ABC/</td><td>ABC</td></tr>
-                    <tr><td>/^ABC/</td><td>以 ABC 開頭</td></tr>
-                    <tr><td>/ABC$/</td><td>以 ABC 結尾</td></tr>
-                    <tr><td>/A.C/</td><td>A + 任意字元 + C</td></tr>
-                    <tr><td>/ABC|DEF/</td><td>ABC 或 DEF</td></tr>
-                </table>
-                <table>
-                    <tr><td>/[ABC]/</td><td>A 或 B 或 C</td></tr>
-                    <tr><td>/[(ABC)]/</td><td>ABC</td></tr>
-                    <tr><td>/A[XYZ]C/</td><td>AXC AYC AZC</td></tr>
-                    <tr><td>/A[X-Z]C/</td><td>AXC AYC AZC</td></tr>
-                    <tr><td>/A[^XYZ]C/</td><td>A + XYZ 以外的字元 + C</td></tr>
-                </table>
-                <table>
-                    <tr><td>/A{3}/</td><td>AAA</td></tr>
-                    <tr><td>/A{2,4}/</td><td>AA AAA AAAA</td></tr>
-                    <tr><td>/A{2,}/</td><td>最少兩個 A</td></tr>
-                    <tr><td>/A{,4}/</td><td>最多四個 A</td></tr>
-                    <tr><td>/AB{3}C/</td><td>ABBBC</td></tr>
-                    <tr><td>/A.{3}C/</td><td>A + 任意三個字元 + C</td></tr>
-                    <tr><td>/A[XYZ]{3}C/</td><td>A + 任意三個 X 或 Y 或 Z + C</td></tr>
-                </table>
-                <table>
-                    <tr><td>/AB?C/</td><td>AC 或 ABC</td></tr>
-                    <tr><td>/AB+C/</td><td>A + 多個 B + C</td></tr>
-                    <tr><td>/AB*C/</td><td>AC 或 A + 多個 B + C</td></tr>
-                </table>
-                <table>
-                    <tr><td>/A/i</td><td>A 或 a</td></tr>
-                </table>
-                <p>
-                    <code>[^否定條件]</code> 或 <code>[^\S]</code> 可做為萬用字元。
-                </p>
-            </section>
+			<section>
+				<h2>實例</h2>
+				<table>
+					<tr><td>/ABC/</td><td>ABC</td></tr>
+					<tr><td>/^ABC/</td><td>以 ABC 開頭</td></tr>
+					<tr><td>/ABC$/</td><td>以 ABC 結尾</td></tr>
+					<tr><td>/A.C/</td><td>A + 任意字元 + C</td></tr>
+					<tr><td>/ABC|DEF/</td><td>ABC 或 DEF</td></tr>
+				</table>
+				<table>
+					<tr><td>/[ABC]/</td><td>A 或 B 或 C</td></tr>
+					<tr><td>/[(ABC)]/</td><td>ABC</td></tr>
+					<tr><td>/A[XYZ]C/</td><td>AXC AYC AZC</td></tr>
+					<tr><td>/A[X-Z]C/</td><td>AXC AYC AZC</td></tr>
+					<tr><td>/A[^XYZ]C/</td><td>A + XYZ 以外的字元 + C</td></tr>
+				</table>
+				<table>
+					<tr><td>/A{3}/</td><td>AAA</td></tr>
+					<tr><td>/A{2,4}/</td><td>AA AAA AAAA</td></tr>
+					<tr><td>/A{2,}/</td><td>最少兩個 A</td></tr>
+					<tr><td>/A{,4}/</td><td>最多四個 A</td></tr>
+					<tr><td>/AB{3}C/</td><td>ABBBC</td></tr>
+					<tr><td>/A.{3}C/</td><td>A + 任意三個字元 + C</td></tr>
+					<tr><td>/A[XYZ]{3}C/</td><td>A + 任意三個 X 或 Y 或 Z + C</td></tr>
+				</table>
+				<table>
+					<tr><td>/AB?C/</td><td>AC 或 ABC</td></tr>
+					<tr><td>/AB+C/</td><td>A + 多個 B + C</td></tr>
+					<tr><td>/AB*C/</td><td>AC 或 A + 多個 B + C</td></tr>
+				</table>
+				<table>
+					<tr><td>/A/i</td><td>A 或 a</td></tr>
+				</table>
+				<p>
+					<code>[^否定條件]</code> 或 <code>[^\S]</code> 可做為萬用字元。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>應用</h2>
-                <hr>
-                <section>
-                    <h3>篩選圖檔名稱</h3>
-                    <p>
-                        底下 JavaScript 程式只會顯示符合條件的 image.jpg 和 image.gif，其它不會顯示：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            function f(x){
-                                var a = /[a-z]{4}\.(gif|jpg|png)/
-                                if(x.match(a)) document.write(x)
-                            }
+			<section>
+				<h2>應用</h2>
+				<hr>
+				<section>
+					<h3>篩選圖檔名稱</h3>
+					<p>
+						底下 JavaScript 程式只會顯示符合條件的 image.jpg 和 image.gif，其它不會顯示：<br>
+						<br>
+						<textarea class='brush:js'>
+							function f(x){
+								var a = /[a-z]{4}\.(gif|jpg|png)/
+								if(x.match(a)) document.write(x)
+							}
 
-                            f('image.bmp')  //副檔名為 bmp
-                            f('image.jpg')  //符合條件
-                            f('image.gif')  //符合條件
-                            f('IMAGE.jpg')  //檔名為大寫英文字母
-                            f('image2.gif') //用了非英文字母的阿拉伯數字
-                            f('img.gif')    //檔名不夠四個字母
+							f('image.bmp')  //副檔名為 bmp
+							f('image.jpg')  //符合條件
+							f('image.gif')  //符合條件
+							f('IMAGE.jpg')  //檔名為大寫英文字母
+							f('image2.gif') //用了非英文字母的阿拉伯數字
+							f('img.gif')	//檔名不夠四個字母
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>搜尋 Google Picasa 圖檔網址，取代為相對路徑。</h3>
-                    <p>
-                        在支援 Regular Expressions 的 Notepad++ 中（需勾選「類型表式」），「搜尋目標」設為 <code>(http)[\S]*(/20)</code>，「取代成」設為 <code>../../figures/overcast/20</code>，則：<br>
-                        <br>
-                        <output>
-                            &lt;img src='http://lh4.googleusercontent.com/-Z0i6ueEk-II/Tk9lJEBk_RI/AAAAAAAAAkg/5dQKz4jinuU/s640/20110715A_01.jpg' alt='插圖'/&gt;<br>
-                        </output>
-                        <br>
-                        將變成：<br>
-                        <br>
-                        <output>
-                            &lt;img src='../../figures/overcast/20110715A_01.jpg' alt='插圖'/&gt;
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>為英文加入空格</h3>
-                    <p>
-                        搜尋如下式子：<br>
-                        <br>
-                        <kbd>[一-鶴]{1}[\w]{1}|[\w]{1}[一-鶴]{1}</kbd><br>
-                        <br>
-                        搭配巨集功能，將 F3 鍵、← 鍵、空白鍵錄下來，就能連按巨集鍵，不斷為英文字前後插入空格。<br>
-                        <br>
-                        可視需要，添加日文、注音、標點符號進去：<br>
-                        <br>
-                        <kbd>[ぁ-鶴]{1}[\w\(\[\+]{1}|[\w\)\]\+\%]{1}[ぁ-鶴]{1}</kbd><br>
-                        <br>
-                        缺點是・符號也被視為文字，與其將日文和注音獨立寫出來，不妨事後搜尋前後有空格的・，取代為沒有空格的。<br>
-                        <br>
-                        一些符號與中文字連結在一起是正常的，例如網址的 _ - .，如果不是頻繁出現的話，這些符號另外搜尋就好。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>統一文言文佛經標點符號</h3>
-                    <p>
-                        <kbd>[！，、：；？]</kbd>　　取代為「&lt;b&gt;ｏ&lt;/b&gt;」<br>
-                        <kbd>[《》「」『』]</kbd>　　取代為空<br>
-                        <kbd>[\w\[\]]{9}&nbsp;</kbd>　　　取代為空（注意後面跟著半形空格）<br>
-                        <kbd>（</kbd>　　　　　　　　〔<br>
-                        <kbd>）</kbd>　　　　　　　　　〕
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>搜尋 Google Picasa 圖檔網址，取代為相對路徑。</h3>
+					<p>
+						在支援 Regular Expressions 的 Notepad++ 中（需勾選「類型表式」），「搜尋目標」設為 <code>(http)[\S]*(/20)</code>，「取代成」設為 <code>../../figures/overcast/20</code>，則：<br>
+						<br>
+						<output>
+							&lt;img src='http://lh4.googleusercontent.com/-Z0i6ueEk-II/Tk9lJEBk_RI/AAAAAAAAAkg/5dQKz4jinuU/s640/20110715A_01.jpg' alt='插圖'/&gt;<br>
+						</output>
+						<br>
+						將變成：<br>
+						<br>
+						<output>
+							&lt;img src='../../figures/overcast/20110715A_01.jpg' alt='插圖'/&gt;
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>為英文加入空格</h3>
+					<p>
+						搜尋如下式子：<br>
+						<br>
+						<kbd>[一-鶴]{1}[\w]{1}|[\w]{1}[一-鶴]{1}</kbd><br>
+						<br>
+						搭配巨集功能，將 F3 鍵、← 鍵、空白鍵錄下來，就能連按巨集鍵，不斷為英文字前後插入空格。<br>
+						<br>
+						可視需要，添加日文、注音、標點符號進去：<br>
+						<br>
+						<kbd>[ぁ-鶴]{1}[\w\(\[\+]{1}|[\w\)\]\+\%]{1}[ぁ-鶴]{1}</kbd><br>
+						<br>
+						缺點是・符號也被視為文字，與其將日文和注音獨立寫出來，不妨事後搜尋前後有空格的・，取代為沒有空格的。<br>
+						<br>
+						一些符號與中文字連結在一起是正常的，例如網址的 _ - .，如果不是頻繁出現的話，這些符號另外搜尋就好。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>統一文言文佛經標點符號</h3>
+					<p>
+						<kbd>[！，、：；？]</kbd>　　取代為「&lt;b&gt;ｏ&lt;/b&gt;」<br>
+						<kbd>[《》「」『』]</kbd>　　取代為空<br>
+						<kbd>[\w\[\]]{9}&nbsp;</kbd>　　　取代為空（注意後面跟著半形空格）<br>
+						<kbd>（</kbd>　　　　　　　　〔<br>
+						<kbd>）</kbd>　　　　　　　　　〕
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

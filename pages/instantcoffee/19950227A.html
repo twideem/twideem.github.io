@@ -2,215 +2,215 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>寫出好的程式？</h1>
-            </header>
+			<header>
+				<h1>寫出好的程式？</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>好的程式，不是寫來彰顯技術，而是讓沒技術的人也讀得懂～</h2>
-                <p>
-                    漸漸熟悉程式設計以後，首先，最容易發生的，就是質疑自己寫的程式不夠水準，然後開始思考，該怎樣寫出好的程式？<br>
-                    <br>
-                    而思考的方向往往是，怎樣寫才能讓自己顯得高竿一些？不希望寫出來的程式碼，讓人家看了以後，認為你像初學者般笨拙。<br>
-                    <br>
-                    於是可能傾向於這樣寫程式：<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[12]'>
-                        import java.io.File;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import org.w3c.dom.Element;
+			<section>
+				<h2>好的程式，不是寫來彰顯技術，而是讓沒技術的人也讀得懂～</h2>
+				<p>
+					漸漸熟悉程式設計以後，首先，最容易發生的，就是質疑自己寫的程式不夠水準，然後開始思考，該怎樣寫出好的程式？<br>
+					<br>
+					而思考的方向往往是，怎樣寫才能讓自己顯得高竿一些？不希望寫出來的程式碼，讓人家看了以後，認為你像初學者般笨拙。<br>
+					<br>
+					於是可能傾向於這樣寫程式：<br>
+					<br>
+					<textarea class='brush:java;highlight:[12]'>
+						import java.io.File;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import org.w3c.dom.Element;
 
-                        public class ArticleElement{
+						public class ArticleElement{
 
-                            private Element element;
+							private Element element;
 
-                            public ArticleElement(String x){
-                                try{
-                                    //從 x 傳入的 6 位數字中，取前四位為檔名，後兩位為索引值，來傳回 XML 檔中的某個節點。
-                                    element = (Element)DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(x.substring(0,4) + ".xml")).getElementsByTagName("article").item(Integer.parseInt(x.substring(4,6))-1);
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace() ;
-                                }
-                            }
+							public ArticleElement(String x){
+								try{
+									//從 x 傳入的 6 位數字中，取前四位為檔名，後兩位為索引值，來傳回 XML 檔中的某個節點。
+									element = (Element)DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(x.substring(0,4) + ".xml")).getElementsByTagName("article").item(Integer.parseInt(x.substring(4,6))-1);
+								}
+								catch(Exception exception){
+									exception.printStackTrace() ;
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    然而，這種純粹只是節省行數或者字數，對執行效能沒有實際提升的寫法，並不叫做好的程式。<ins>[1]</ins><br>
-                    <br>
-                    真正好的程式，是寧可多花幾行程式，讓閱讀你程式碼的人，能輕鬆自在地理解你想要傳達的想法：<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[11,12,13,16]'>
-                        import java.io.File;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import org.w3c.dom.Element;
+					<br>
+					然而，這種純粹只是節省行數或者字數，對執行效能沒有實際提升的寫法，並不叫做好的程式。<ins>[1]</ins><br>
+					<br>
+					真正好的程式，是寧可多花幾行程式，讓閱讀你程式碼的人，能輕鬆自在地理解你想要傳達的想法：<br>
+					<br>
+					<textarea class='brush:java;highlight:[11,12,13,16]'>
+						import java.io.File;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import org.w3c.dom.Element;
 
-                        public class ArticleElement{
+						public class ArticleElement{
 
-                            private Element element;
+							private Element element;
 
-                            public ArticleElement(String _id){
+							public ArticleElement(String _id){
 
-                                String filename = _id.substring(0,4);
-                                File xmlfile = new File(filename + ".xml");
-                                int which = Integer.parseInt(_id.substring(4,6))-1;
+								String filename = _id.substring(0,4);
+								File xmlfile = new File(filename + ".xml");
+								int which = Integer.parseInt(_id.substring(4,6))-1;
 
-                                try{
-                                    element = (Element)DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlfile).getElementsByTagName("article").item(which);
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace() ;
-                                }
+								try{
+									element = (Element)DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlfile).getElementsByTagName("article").item(which);
+								}
+								catch(Exception exception){
+									exception.printStackTrace() ;
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    所以，別再為「怎樣寫才叫好的程式」這種問題感到疑惑，最笨拙的寫法，往往就是最好的程式。<br>
-                    <br>
-                    自認為高竿的程式碼，但沒人明白是在做什麼事<ins>[2]</ins>，其實是最差勁的程式！能故意用最笨拙的方式，寫出連小朋友看了以後，都大概知道是在做什麼的程式碼，才是好程式<ins>[3]</ins>。
-                </p>
-            </section>
+					<br>
+					所以，別再為「怎樣寫才叫好的程式」這種問題感到疑惑，最笨拙的寫法，往往就是最好的程式。<br>
+					<br>
+					自認為高竿的程式碼，但沒人明白是在做什麼事<ins>[2]</ins>，其實是最差勁的程式！能故意用最笨拙的方式，寫出連小朋友看了以後，都大概知道是在做什麼的程式碼，才是好程式<ins>[3]</ins>。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>那這樣如何？</h2>
-                <p>
-                    那麼，把上面的範例，寫得像下面載明得更仔細呢？<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[18,19,22,23,24,39,41]'>
-                        import java.io.File;
-                        import java.io.IOException;
-                        import javax.xml.parsers.DocumentBuilder;
-                        import javax.xml.parsers.DocumentBuilderFactory;
-                        import javax.xml.parsers.FactoryConfigurationError;
-                        import javax.xml.parsers.ParserConfigurationException;
-                        import org.w3c.dom.Document;
-                        import org.w3c.dom.Element;
-                        import org.xml.sax.SAXException;
+			<section>
+				<h2>那這樣如何？</h2>
+				<p>
+					那麼，把上面的範例，寫得像下面載明得更仔細呢？<br>
+					<br>
+					<textarea class='brush:java;highlight:[18,19,22,23,24,39,41]'>
+						import java.io.File;
+						import java.io.IOException;
+						import javax.xml.parsers.DocumentBuilder;
+						import javax.xml.parsers.DocumentBuilderFactory;
+						import javax.xml.parsers.FactoryConfigurationError;
+						import javax.xml.parsers.ParserConfigurationException;
+						import org.w3c.dom.Document;
+						import org.w3c.dom.Element;
+						import org.xml.sax.SAXException;
 
-                        public class ArticleElement{
+						public class ArticleElement{
 
-                            private Document document;
-                            private Element element;
+							private Document document;
+							private Element element;
 
-                            public ArticleElement(String _id){
+							public ArticleElement(String _id){
 
-                                String filename = _id.substring(0,4);
-                                File xmlfile = new File(filename + ".xml");
+								String filename = _id.substring(0,4);
+								File xmlfile = new File(filename + ".xml");
 
-                                try{
-                                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                                    DocumentBuilder builder = factory.newDocumentBuilder();
-                                    this.document = builder.parse(xmlfile);
-                                }
-                                catch(FactoryConfigurationError factory_configuration_error){
-                                    factory_configuration_error.printStackTrace();
-                                }
-                                catch(IOException io_exception){
-                                    io_exception.printStackTrace();
-                                }
-                                catch(ParserConfigurationException parser_configuration_exception){
-                                    parser_configuration_exception.printStackTrace();
-                                }
-                                catch(SAXException sax_exception){
-                                    sax_exception.printStackTrace();
-                                }
+								try{
+									DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+									DocumentBuilder builder = factory.newDocumentBuilder();
+									this.document = builder.parse(xmlfile);
+								}
+								catch(FactoryConfigurationError factory_configuration_error){
+									factory_configuration_error.printStackTrace();
+								}
+								catch(IOException io_exception){
+									io_exception.printStackTrace();
+								}
+								catch(ParserConfigurationException parser_configuration_exception){
+									parser_configuration_exception.printStackTrace();
+								}
+								catch(SAXException sax_exception){
+									sax_exception.printStackTrace();
+								}
 
-                                int which = Integer.parseInt(_id.substring(4,6))-1;
+								int which = Integer.parseInt(_id.substring(4,6))-1;
 
-                                this.element = (Element)this.document.getElementsByTagName("article").item(which);
+								this.element = (Element)this.document.getElementsByTagName("article").item(which);
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    這是好是壞，還真的見仁見智…
-                </p>
-                <hr>
-                <section>
-                    <h3>上一節範例</h3>
-                    <p>
-                        來看兩個範例的差異，上一節認為好的範例，只是將艱澀的計算結果保存在變數裡面，好賦予一個名稱，讓我們能夠辨識這是怎樣一筆資料，然後剩下的部分保持不變。<br>
-                        <br>
-                        因為 <code>newInstance().newDocumentBuilder().parse(xmlfile)</code> 各個串接的 method，從字義上已經很明顯表達出是建立 DocumentBuilderFactory 與 DocumentBuilder，所以就不進一步為這些操作取名為 <var>factory</var> 和 <var>builder</var>。<br>
-                        <br>
-                        API 公開的操作介面會說話，這是相當重要的關鍵，懂得這招對你的設計會有幫助！<br>
-                        <br>
-                        至於 <var>document</var> 則是只用到一次，另外開設變數來命名的話，反而讓 element 的存在失焦，所以上一節認為好的範例選擇省略，如果會用到第二次的話再說。<br>
-                        <br>
-                        從語意上來看，上一節範例其實更有表達力，基本上「我個人認為」它是比較好的風格。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>這一節範例</h3>
-                    <p>
-                        但並不能說這一節範例做過頭，因為就設計上來看，它是為了日後的修改，所刻意讓出修改空間的風格。<br>
-                        <br>
-                        上一節認為好的範例常見於中國人，這一節的範例常見於台灣人。而我們常常聽到業界認為中國的程式設計師開發能力很強，但屬於個人戰力，所以讚賞台灣的程式開發人員比較懂設計，適合團隊工作，差別就在這裡。<br>
-                        <br>
-                        業界偏好事先就能周到地保留修改空間的程式風格，更勝於直覺、有效傳達語意的寫作風格。<ins>[4]</ins><br>
-                        <br>
-                        所以說這真的是見仁見智的問題…但第一個純粹節省行數的範例，確定是不合格的風格！
-                    </p>
-                </section>
-            </section>
+					<br>
+					這是好是壞，還真的見仁見智…
+				</p>
+				<hr>
+				<section>
+					<h3>上一節範例</h3>
+					<p>
+						來看兩個範例的差異，上一節認為好的範例，只是將艱澀的計算結果保存在變數裡面，好賦予一個名稱，讓我們能夠辨識這是怎樣一筆資料，然後剩下的部分保持不變。<br>
+						<br>
+						因為 <code>newInstance().newDocumentBuilder().parse(xmlfile)</code> 各個串接的 method，從字義上已經很明顯表達出是建立 DocumentBuilderFactory 與 DocumentBuilder，所以就不進一步為這些操作取名為 <var>factory</var> 和 <var>builder</var>。<br>
+						<br>
+						API 公開的操作介面會說話，這是相當重要的關鍵，懂得這招對你的設計會有幫助！<br>
+						<br>
+						至於 <var>document</var> 則是只用到一次，另外開設變數來命名的話，反而讓 element 的存在失焦，所以上一節認為好的範例選擇省略，如果會用到第二次的話再說。<br>
+						<br>
+						從語意上來看，上一節範例其實更有表達力，基本上「我個人認為」它是比較好的風格。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>這一節範例</h3>
+					<p>
+						但並不能說這一節範例做過頭，因為就設計上來看，它是為了日後的修改，所刻意讓出修改空間的風格。<br>
+						<br>
+						上一節認為好的範例常見於中國人，這一節的範例常見於台灣人。而我們常常聽到業界認為中國的程式設計師開發能力很強，但屬於個人戰力，所以讚賞台灣的程式開發人員比較懂設計，適合團隊工作，差別就在這裡。<br>
+						<br>
+						業界偏好事先就能周到地保留修改空間的程式風格，更勝於直覺、有效傳達語意的寫作風格。<ins>[4]</ins><br>
+						<br>
+						所以說這真的是見仁見智的問題…但第一個純粹節省行數的範例，確定是不合格的風格！
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>為什麼可讀性很重要</h2>
-                <p>
-                    評估好的程式有兩條方向：<br>
-                    <br>
-                    <samp>
-                        1.程式碼的執行效率<br>
-                        2.原始碼的閱讀效率<br>
-                    </samp>
-                    <br>
-                    由於程式需要被閱讀然後修改，因此可讀性非常重要！容易閱讀、理解的原始碼，不但容易增加新功能，也容易將舊功能修改成有執行效率的程式碼。反過來，在追求執行效率而犧牲閱讀效率的話，很容易成為風光一時、晚景淒涼的失敗案例。<br>
-                    <br>
-                    難處在於，程式碼的執行效率與原始碼的閱讀效率，兩者之間經常是相互牴觸的。為了讓程式跑得更有效率，原始碼會變得難懂，例如長得像物理公式或組合語言。為了讓程式讀起來容易理解，程式碼會效率變差，例如宣告太多變數會占用更多系統資源、呼叫太多函式會影響執行速度。<br>
-                    <br>
-                    程式設計師共同的經驗法則告訴我們，這時應該以閱讀效率為優先，因為難以閱讀、理解、修改的程式，也就難以維護下去。為了提升可讀性，使用大量的變數與函式，頂多降低 20% 性能比<ins>[5]</ins>，這點程度不會讓程式失敗，日後卻可以一邊兼顧可讀性一邊提升效率，讓性能比只降低 10%。真要讓某功能效率提升數倍，在可讀性優先的程式，也只是偶爾破例一下，不至於拖垮整個案子。但在不注重可讀性的案子中，偶爾來一段可讀性佳的功能，卻沒什麼幫助。
-                </p>
-            </section>
+			<section>
+				<h2>為什麼可讀性很重要</h2>
+				<p>
+					評估好的程式有兩條方向：<br>
+					<br>
+					<samp>
+						1.程式碼的執行效率<br>
+						2.原始碼的閱讀效率<br>
+					</samp>
+					<br>
+					由於程式需要被閱讀然後修改，因此可讀性非常重要！容易閱讀、理解的原始碼，不但容易增加新功能，也容易將舊功能修改成有執行效率的程式碼。反過來，在追求執行效率而犧牲閱讀效率的話，很容易成為風光一時、晚景淒涼的失敗案例。<br>
+					<br>
+					難處在於，程式碼的執行效率與原始碼的閱讀效率，兩者之間經常是相互牴觸的。為了讓程式跑得更有效率，原始碼會變得難懂，例如長得像物理公式或組合語言。為了讓程式讀起來容易理解，程式碼會效率變差，例如宣告太多變數會占用更多系統資源、呼叫太多函式會影響執行速度。<br>
+					<br>
+					程式設計師共同的經驗法則告訴我們，這時應該以閱讀效率為優先，因為難以閱讀、理解、修改的程式，也就難以維護下去。為了提升可讀性，使用大量的變數與函式，頂多降低 20% 性能比<ins>[5]</ins>，這點程度不會讓程式失敗，日後卻可以一邊兼顧可讀性一邊提升效率，讓性能比只降低 10%。真要讓某功能效率提升數倍，在可讀性優先的程式，也只是偶爾破例一下，不至於拖垮整個案子。但在不注重可讀性的案子中，偶爾來一段可讀性佳的功能，卻沒什麼幫助。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 除非你真的放著 Java API 不用，例如不知道有 collections，結果自己土法煉鋼敲了數十行程式落落長，才屬於需要降低行數來改善設計的新手。但這不是因為你需要節省行數的關係，而是你真的多寫了冤枉的數十行程式來。<br>
-                    [2] 幾個月後可能連你也不明白。<br>
-                    [3] 目的是寫出小朋友也看得懂在做什麼的程式碼，而不是小朋友也寫得出來的程式碼；不要搞錯方向。例如我們看得懂什麼叫精彩的武俠小說，但不見得自己也寫得出來一樣。程式設計是一種創作，它充滿我們個人的想法在裡面，我們要努力的是傳達自己想法給他人，而不是努力制定應用文的範本讓內容千篇一律。<br>
-                    [4] 注意！業界偏好這樣風格，不表示真的會看重這件事！業界看重的是「優化」，就算檯面上聊說怎樣風格會寫出好程式，好像這樣寫就會受業界看重，但檯面下應徵時，只有跑得快的程式才是好程式，整齊或亂七八糟是另外一回事～。所以，如果你是為了得到業界的看重，你的專業是優化，而不是開發手法；另外，本文示範的都是開發手法（程式的寫法），與優化扯不上關係（程式的跑法）。學習開發手法、或者好的寫作，純粹是自 HIGH 用的；我這不是貶抑，能夠達到自 HIGH 的境地，比獲得業界的看重還要快樂、有意義多了…至少我是這麼認為。<br>
-                    [5] 降低 20% 已經是最糟的情況了！無論 GCC、JDK、CPython、還是 SpiderMonkey，在解讀原始碼時會優化結構，不可能為了可讀性而降低這麼多性能比。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 除非你真的放著 Java API 不用，例如不知道有 collections，結果自己土法煉鋼敲了數十行程式落落長，才屬於需要降低行數來改善設計的新手。但這不是因為你需要節省行數的關係，而是你真的多寫了冤枉的數十行程式來。<br>
+					[2] 幾個月後可能連你也不明白。<br>
+					[3] 目的是寫出小朋友也看得懂在做什麼的程式碼，而不是小朋友也寫得出來的程式碼；不要搞錯方向。例如我們看得懂什麼叫精彩的武俠小說，但不見得自己也寫得出來一樣。程式設計是一種創作，它充滿我們個人的想法在裡面，我們要努力的是傳達自己想法給他人，而不是努力制定應用文的範本讓內容千篇一律。<br>
+					[4] 注意！業界偏好這樣風格，不表示真的會看重這件事！業界看重的是「優化」，就算檯面上聊說怎樣風格會寫出好程式，好像這樣寫就會受業界看重，但檯面下應徵時，只有跑得快的程式才是好程式，整齊或亂七八糟是另外一回事～。所以，如果你是為了得到業界的看重，你的專業是優化，而不是開發手法；另外，本文示範的都是開發手法（程式的寫法），與優化扯不上關係（程式的跑法）。學習開發手法、或者好的寫作，純粹是自 HIGH 用的；我這不是貶抑，能夠達到自 HIGH 的境地，比獲得業界的看重還要快樂、有意義多了…至少我是這麼認為。<br>
+					[5] 降低 20% 已經是最糟的情況了！無論 GCC、JDK、CPython、還是 SpiderMonkey，在解讀原始碼時會優化結構，不可能為了可讀性而降低這麼多性能比。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

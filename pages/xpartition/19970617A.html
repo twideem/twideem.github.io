@@ -2,55 +2,55 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/table.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/table.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>自創 NBA 球員時參考能力值查詢庫</h1>
-            </header>
+			<header>
+				<h1>自創 NBA 球員時參考能力值查詢庫</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>請輸入球員名稱</h2>
-                <p>
-                    <input><button onclick='f()'>查詢</button>
-                </p>
-            </section>
+			<section>
+				<h2>請輸入球員名稱</h2>
+				<p>
+					<input><button onclick='f()'>查詢</button>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>查詢結果</h2>
-                <table class='grid'>
-                    <tr>
-                        <td>YEAR</td><td>FG</td><td>3PT</td><td>FT</td><td>DNK</td><td>STL</td><td>BLK</td><td>ORB</td><td>DRB</td><td>PAS</td><td>OAW</td><td>DAW</td><td>SPD</td><td>QCK</td><td>JMP</td><td>DRI</td><td>STR</td><td>HRD</td><td>FAT</td><td>IN</td>
-                    </tr>
-                </table>
-            </section>
+			<section>
+				<h2>查詢結果</h2>
+				<table class='grid'>
+					<tr>
+						<td>YEAR</td><td>FG</td><td>3PT</td><td>FT</td><td>DNK</td><td>STL</td><td>BLK</td><td>ORB</td><td>DRB</td><td>PAS</td><td>OAW</td><td>DAW</td><td>SPD</td><td>QCK</td><td>JMP</td><td>DRI</td><td>STR</td><td>HRD</td><td>FAT</td><td>IN</td>
+					</tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] <a href='http://willhoopforfood.com/nba_live/ratings.htm' target='_blank'>http://willhoopforfood.com/nba_live/ratings.htm</a>
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] <a href='http://willhoopforfood.com/nba_live/ratings.htm' target='_blank'>http://willhoopforfood.com/nba_live/ratings.htm</a>
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
-            var players=[["NAME","YEAR","FG","3PT","FT","DNK","STL","BLK","ORB","DRB","PAS","OAW","DAW","SPD","QCK","JMP","DRI","STR","HRD","FAT","IN"],
+		<script>
+			var players=[["NAME","YEAR","FG","3PT","FT","DNK","STL","BLK","ORB","DRB","PAS","OAW","DAW","SPD","QCK","JMP","DRI","STR","HRD","FAT","IN"],
 ["Aaron McKie",1998,57,43,52,59,41,8,22,40,62,60,89,73,64,65,61,70,51,22,49],
 ["Aaron McKie",1999,42,26,53,50,65,7,18,35,59,47,71,72,65,61,54,61,87,64,40],
 ["Aaron McKie",2000,42,50,65,7,18,35,59,47,71,72,65,61,54,61,87,18,9,39,34],
@@ -5608,30 +5608,30 @@
 ["Hakim Warrick",2007,43,23,66,82,38,30,48,64,30,60,60,69,70,85,43,41,75,50,65],
 ["Patrick O'Bryant",2007,55,1,68,71,13,70,43,67,11,20,56,60,59,62,22,70,65,66,61]]
 
-            var input = document.getElementsByTagName('input')[0]
-            input.focus()
+			var input = document.getElementsByTagName('input')[0]
+			input.focus()
 
-            var p = document.getElementsByTagName('table')[0]
+			var p = document.getElementsByTagName('table')[0]
 
-            function f(){
-                var a='<tr>'
-                for(var n=1;n<players[0].length;n++){
-                    a+='<td>'+players[0][n]+'</td>'
-                }
-                a+='</tr>'
-                for(var n=1;n<players.length;n++){
-                    if(players[n][0]==input.value){
-                        a+='<tr>'
-                        for(var m=1;m<players[n].length;m++){
-                            a+='<td>'+players[n][m]+'</td>'
-                        }
-                        a+='</tr>'
-                    }
-                }
-                p.innerHTML=a
-            }
-        </script>
+			function f(){
+				var a='<tr>'
+				for(var n=1;n<players[0].length;n++){
+					a+='<td>'+players[0][n]+'</td>'
+				}
+				a+='</tr>'
+				for(var n=1;n<players.length;n++){
+					if(players[n][0]==input.value){
+						a+='<tr>'
+						for(var m=1;m<players[n].length;m++){
+							a+='<td>'+players[n][m]+'</td>'
+						}
+						a+='</tr>'
+					}
+				}
+				p.innerHTML=a
+			}
+		</script>
 
-    </body>
+	</body>
 
 </html>

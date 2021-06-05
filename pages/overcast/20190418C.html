@@ -2,611 +2,611 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('dotNET')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('dotNET')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Windows Forms 程式設計</h1>
-                <p>
-                    ．<a href='#hello'>基本範例</a><br>
-                    ．<a href='#centertoscreen'>視窗位置置中</a><br>
-                    ．<a href='#show'>呼叫另一個視窗</a><br>
-                    ．<a href='#close'>關閉一個視窗</a><br>
-                    ．<a href='#exit'>結束視窗應用程式</a><br>
-                    ．<a href='#font'>字型</a><br>
-                    ．<a href='#flatstyle'>外觀</a><br>
-                    ．<a href='#color'>顏色</a><br>
-                    ．<a href='#event'>常用事件</a><br>
-                    ．<a href='#sharpdevelop'>視覺化開發環境</a>
-                </p>
-            </header>
+			<header>
+				<h1>Windows Forms 程式設計</h1>
+				<p>
+					．<a href='#hello'>基本範例</a><br>
+					．<a href='#centertoscreen'>視窗位置置中</a><br>
+					．<a href='#show'>呼叫另一個視窗</a><br>
+					．<a href='#close'>關閉一個視窗</a><br>
+					．<a href='#exit'>結束視窗應用程式</a><br>
+					．<a href='#font'>字型</a><br>
+					．<a href='#flatstyle'>外觀</a><br>
+					．<a href='#color'>顏色</a><br>
+					．<a href='#event'>常用事件</a><br>
+					．<a href='#sharpdevelop'>視覺化開發環境</a>
+				</p>
+			</header>
 
-            <hr id='hello'>
+			<hr id='hello'>
 
-            <section>
-                <h2>基本範例</h2>
-                <hr>
-                <section>
-                    <h3>Form1.cs</h3>
-                    <p>
-                        <textarea class='brush:cs'>
-                            using System;
-                            using System.Drawing;
-                            using System.Windows.Forms;
+			<section>
+				<h2>基本範例</h2>
+				<hr>
+				<section>
+					<h3>Form1.cs</h3>
+					<p>
+						<textarea class='brush:cs'>
+							using System;
+							using System.Drawing;
+							using System.Windows.Forms;
 
-                            public class Form1 : Form{
+							public class Form1 : Form{
 
-                                public Form1(){
+								public Form1(){
 
-                                    Button button = new Button();
-                                    this.Controls.Add(button);
+									Button button = new Button();
+									this.Controls.Add(button);
 
-                                    button.Size = new Size(284, 30);
-                                    button.Location = new Point(0, 100);
-                                    button.Text = "別亂按！";
-                                    button.Click += new EventHandler(button_click);
+									button.Size = new Size(284, 30);
+									button.Location = new Point(0, 100);
+									button.Text = "別亂按！";
+									button.Click += new EventHandler(button_click);
 
-                                }
+								}
 
-                                void button_click(object sender, EventArgs e){
-                                    MessageBox.Show("不是叫你別亂按嗎？");
-                                }
+								void button_click(object sender, EventArgs e){
+									MessageBox.Show("不是叫你別亂按嗎？");
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>MainProgram.cs</h3>
-                    <p>
-                        <textarea class='brush:cs'>
-                            using System.Windows.Forms;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>MainProgram.cs</h3>
+					<p>
+						<textarea class='brush:cs'>
+							using System.Windows.Forms;
 
-                            class MainProgram{
+							class MainProgram{
 
-                                static void Main(){
-                                    Application.Run(new Form1());
-                                }
+								static void Main(){
+									Application.Run(new Form1());
+								}
 
-                            }
+							}
 
-                            //編譯時加 /target:winexe 參數，啟動程式時就不會出現主控台。
+							//編譯時加 /target:winexe 參數，啟動程式時就不會出現主控台。
                         </textarea>
-                    </p>
-                    <figure>
-                        <img src='../../figures/overcast/20190418C_01.png' alt='插圖'>
-                        <img src='../../figures/overcast/20190418C_02.png' alt='插圖'>
-                    </figure>
-                </section>
-                <hr>
-                <section>
-                    <h3>補充</h3>
-                    <p>
-                        Form1.cs 的事件，可以用 delegate 或 lambda 的寫法讓程式更集中、更簡短：<br>
-                        <br>
-                        <textarea class='brush:cs'>
-                            //Delegate
-                            button.Click += new EventHandler(delegate(object sender, EventArgs e){
-                                MessageBox.Show("不是叫你別亂按嗎？");
-                            });
+					</p>
+					<figure>
+						<img src='../../figures/overcast/20190418C_01.png' alt='插圖'>
+						<img src='../../figures/overcast/20190418C_02.png' alt='插圖'>
+					</figure>
+				</section>
+				<hr>
+				<section>
+					<h3>補充</h3>
+					<p>
+						Form1.cs 的事件，可以用 delegate 或 lambda 的寫法讓程式更集中、更簡短：<br>
+						<br>
+						<textarea class='brush:cs'>
+							//Delegate
+							button.Click += new EventHandler(delegate(object sender, EventArgs e){
+								MessageBox.Show("不是叫你別亂按嗎？");
+							});
 
-                            //Lambda
-                            button.Click += (sender, e) =&gt; MessageBox.Show("不是叫你別亂按嗎？");
+							//Lambda
+							button.Click += (sender, e) =&gt; MessageBox.Show("不是叫你別亂按嗎？");
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr id='centertoscreen'>
+			<hr id='centertoscreen'>
 
-            <section>
-                <h2>視窗位置置中</h2>
-                <p>
-                    對視窗呼叫 <var>CenterToScreen()</var> 方法。
-                </p>
-                <!--
-                    或將視窗的 StartPosition 屬性設為 FormStartPosition.CenterScreen。
-                -->
-            </section>
+			<section>
+				<h2>視窗位置置中</h2>
+				<p>
+					對視窗呼叫 <var>CenterToScreen()</var> 方法。
+				</p>
+				<!--
+					或將視窗的 StartPosition 屬性設為 FormStartPosition.CenterScreen。
+				-->
+			</section>
 
-            <hr id='show'>
+			<hr id='show'>
 
-            <section>
-                <h2>呼叫另一個視窗</h2>
-                <p>
-                    用 new 產生新的視窗，然後呼叫其 <var>Show()</var> 方法。
-                </p>
-            </section>
+			<section>
+				<h2>呼叫另一個視窗</h2>
+				<p>
+					用 new 產生新的視窗，然後呼叫其 <var>Show()</var> 方法。
+				</p>
+			</section>
 
-            <hr id='close'>
+			<hr id='close'>
 
-            <section>
-                <h2>關閉一個視窗</h2>
-                <p>
-                    對視窗呼叫 <var>Close()</var> 方法。
-                </p>
-            </section>
+			<section>
+				<h2>關閉一個視窗</h2>
+				<p>
+					對視窗呼叫 <var>Close()</var> 方法。
+				</p>
+			</section>
 
-            <hr id='exit'>
+			<hr id='exit'>
 
-            <section>
-                <h2>結束視窗應用程式</h2>
-                <p>
-                    使用 System.Windows.Forms.Application 的 <var>Exit()</var> 方法結束視窗應用程式。
-                </p>
-            </section>
+			<section>
+				<h2>結束視窗應用程式</h2>
+				<p>
+					使用 System.Windows.Forms.Application 的 <var>Exit()</var> 方法結束視窗應用程式。
+				</p>
+			</section>
 
-            <hr id='font'>
+			<hr id='font'>
 
-            <section>
-                <h2>字型</h2>
-                <p>
-                    元件的 <var>Font</var> 屬性表示文字樣式，可使用 System.Drawing.Font 建構函式產生文字樣式：
-                </p>
-                <table>
-                    <tr><td>Font(string familyName, float emSize)</td></tr>
-                    <tr><td>Font(string familyName, float emSize, System.Drawing.FontStyle style)</td></tr>
-                </table>
-                <p>
-                    其中 FontStyle 列舉值有：
-                </p>
-                <table>
-                    <tr><td>Bold</td><td>粗體</td></tr>
-                    <tr><td>Italic</td><td>斜體</td></tr>
-                    <tr><td>Regular</td><td>標準</td></tr>
-                    <tr><td>Strikeout</td><td>刪除線</td></tr>
-                    <tr><td>Underline</td><td>底線</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>字型</h2>
+				<p>
+					元件的 <var>Font</var> 屬性表示文字樣式，可使用 System.Drawing.Font 建構函式產生文字樣式：
+				</p>
+				<table>
+					<tr><td>Font(string familyName, float emSize)</td></tr>
+					<tr><td>Font(string familyName, float emSize, System.Drawing.FontStyle style)</td></tr>
+				</table>
+				<p>
+					其中 FontStyle 列舉值有：
+				</p>
+				<table>
+					<tr><td>Bold</td><td>粗體</td></tr>
+					<tr><td>Italic</td><td>斜體</td></tr>
+					<tr><td>Regular</td><td>標準</td></tr>
+					<tr><td>Strikeout</td><td>刪除線</td></tr>
+					<tr><td>Underline</td><td>底線</td></tr>
+				</table>
+			</section>
 
-            <hr id='flatstyle'>
+			<hr id='flatstyle'>
 
-            <section>
-                <h2>外觀</h2>
-                <p>
-                    元件的 <var>FlatStyle</var> 屬性表示外觀，可設定為 System.Windows.Forms 的 FlatStyle 列舉值：
-                </p>
-                <table>
-                    <tr><td>Flat</td><td>平面。</td></tr>
-                    <tr><td>Popup</td><td>平面，但滑鼠游標移到上面時立體。</td></tr>
-                    <tr><td>Standard</td><td>立體。</td></tr>
-                    <tr><td>System</td><td>由作業系統決定。</td></tr>
-                </table>
-                <p>
-                    可使用 System.Windows.Forms.Application 的 <var>EnableVisualStyles()</var> 啟動視覺化樣式，對整個視窗應用程式展現立體效果。
-                </p>
-            </section>
+			<section>
+				<h2>外觀</h2>
+				<p>
+					元件的 <var>FlatStyle</var> 屬性表示外觀，可設定為 System.Windows.Forms 的 FlatStyle 列舉值：
+				</p>
+				<table>
+					<tr><td>Flat</td><td>平面。</td></tr>
+					<tr><td>Popup</td><td>平面，但滑鼠游標移到上面時立體。</td></tr>
+					<tr><td>Standard</td><td>立體。</td></tr>
+					<tr><td>System</td><td>由作業系統決定。</td></tr>
+				</table>
+				<p>
+					可使用 System.Windows.Forms.Application 的 <var>EnableVisualStyles()</var> 啟動視覺化樣式，對整個視窗應用程式展現立體效果。
+				</p>
+			</section>
 
-            <hr id='color'>
+			<hr id='color'>
 
-            <section>
-                <h2>顏色</h2>
-                <p>
-                    元件的 <var>ForeColor</var> 和 <var>BackColor</var> 屬性表示前景顏色和背景顏色，可透過 System.Drawing.Color 的 <var>FromArgb(red, green, blue)</var> 方法指定顏色，或設定為 System.Drawing.Color 的列舉值：
-                </p>
-                <table>
-                    <tr><td>AliceBlue</td><td><span style='color:#F0F8FF'>█</span></td></tr>
-                    <tr><td>AntiqueWhite</td><td><span style='color:#FAEBD7'>█</span></td></tr>
-                    <tr><td>Aqua</td><td><span style='color:#00FFFF'>█</span></td></tr>
-                    <tr><td>Aquamarine</td><td><span style='color:#7FFFD4'>█</span></td></tr>
-                    <tr><td>Azure</td><td><span style='color:#F0FFFF'>█</span></td></tr>
-                    <tr><td>Beige</td><td><span style='color:#F5F5DC'>█</span></td></tr>
-                    <tr><td>Bisque</td><td><span style='color:#FFE4C4'>█</span></td></tr>
-                    <tr><td>Black</td><td><span style='color:#000000'>█</span></td></tr>
-                    <tr><td>BlanchedAlmond</td><td><span style='color:#FFEBCD'>█</span></td></tr>
-                    <tr><td>Blue</td><td><span style='color:#0000FF'>█</span></td></tr>
-                    <tr><td>BlueViolet</td><td><span style='color:#8A2BE2'>█</span></td></tr>
-                    <tr><td>Brown</td><td><span style='color:#A52A2A'>█</span></td></tr>
-                    <tr><td>BurlyWood</td><td><span style='color:#DEB887'>█</span></td></tr>
-                    <tr><td>CadetBlue</td><td><span style='color:#5F9EA0'>█</span></td></tr>
-                    <tr><td>Chartreuse</td><td><span style='color:#7FFF00'>█</span></td></tr>
-                    <tr><td>Chocolate</td><td><span style='color:#D2691E'>█</span></td></tr>
-                    <tr><td>Coral</td><td><span style='color:#FF7F50'>█</span></td></tr>
-                    <tr><td>CornflowerBlue</td><td><span style='color:#6495ED'>█</span></td></tr>
-                    <tr><td>Cornsilk</td><td><span style='color:#FFF8DC'>█</span></td></tr>
-                    <tr><td>Crimson</td><td><span style='color:#DC143C'>█</span></td></tr>
-                    <tr><td>Cyan</td><td><span style='color:#00FFFF'>█</span></td></tr>
-                    <tr><td>DarkBlue</td><td><span style='color:#00008B'>█</span></td></tr>
-                    <tr><td>DarkCyan</td><td><span style='color:#008B8B'>█</span></td></tr>
-                    <tr><td>DarkGoldenrod</td><td><span style='color:#B8860B'>█</span></td></tr>
-                    <tr><td>DarkGray</td><td><span style='color:#A9A9A9'>█</span></td></tr>
-                    <tr><td>DarkGreen</td><td><span style='color:#006400'>█</span></td></tr>
-                    <tr><td>DarkKhaki</td><td><span style='color:#BDB76B'>█</span></td></tr>
-                    <tr><td>DarkMagenta</td><td><span style='color:#8B008B'>█</span></td></tr>
-                    <tr><td>DarkOliveGreen</td><td><span style='color:#556B2F'>█</span></td></tr>
-                    <tr><td>DarkOrange</td><td><span style='color:#FF8C00'>█</span></td></tr>
-                    <tr><td>DarkOrchid</td><td><span style='color:#9932CC'>█</span></td></tr>
-                    <tr><td>DarkRed</td><td><span style='color:#8B0000'>█</span></td></tr>
-                    <tr><td>DarkSalmon</td><td><span style='color:#E9967A'>█</span></td></tr>
-                    <tr><td>DarkSeaGreen</td><td><span style='color:#8FBC8B'>█</span></td></tr>
-                    <tr><td>DarkSlateBlue</td><td><span style='color:#483D8B'>█</span></td></tr>
-                    <tr><td>DarkSlateGray</td><td><span style='color:#2F4F4F'>█</span></td></tr>
-                    <tr><td>DarkTurquoise</td><td><span style='color:#00CED1'>█</span></td></tr>
-                    <tr><td>DarkViolet</td><td><span style='color:#9400D3'>█</span></td></tr>
-                    <tr><td>DeepPink</td><td><span style='color:#FF1493'>█</span></td></tr>
-                    <tr><td>DeepSkyBlue</td><td><span style='color:#00BFFF'>█</span></td></tr>
-                    <tr><td>DimGray</td><td><span style='color:#696969'>█</span></td></tr>
-                    <tr><td>DodgerBlue</td><td><span style='color:#1E90FF'>█</span></td></tr>
-                    <tr><td>Firebrick</td><td><span style='color:#B22222'>█</span></td></tr>
-                    <tr><td>FloralWhite</td><td><span style='color:#FFFAF0'>█</span></td></tr>
-                    <tr><td>ForestGreen</td><td><span style='color:#228B22'>█</span></td></tr>
-                    <tr><td>Fuchsia</td><td><span style='color:#FF00FF'>█</span></td></tr>
-                    <tr><td>Gainsboro</td><td><span style='color:#DCDCDC'>█</span></td></tr>
-                    <tr><td>GhostWhite</td><td><span style='color:#F8F8FF'>█</span></td></tr>
-                    <tr><td>Gold</td><td><span style='color:#FFD700'>█</span></td></tr>
-                    <tr><td>Goldenrod</td><td><span style='color:#DAA520'>█</span></td></tr>
-                    <tr><td>Gray</td><td><span style='color:#808080'>█</span></td></tr>
-                    <tr><td>Green</td><td><span style='color:#008000'>█</span></td></tr>
-                    <tr><td>GreenYellow</td><td><span style='color:#ADFF2F'>█</span></td></tr>
-                    <tr><td>Honeydew</td><td><span style='color:#F0FFF0'>█</span></td></tr>
-                    <tr><td>HotPink</td><td><span style='color:#FF69B4'>█</span></td></tr>
-                    <tr><td>IndianRed</td><td><span style='color:#CD5C5C'>█</span></td></tr>
-                    <tr><td>Indigo</td><td><span style='color:#4B0082'>█</span></td></tr>
-                    <tr><td>Ivory</td><td><span style='color:#FFFFF0'>█</span></td></tr>
-                    <tr><td>Khaki</td><td><span style='color:#F0E68C'>█</span></td></tr>
-                    <tr><td>Lavender</td><td><span style='color:#E6E6FA'>█</span></td></tr>
-                    <tr><td>LavenderBlush</td><td><span style='color:#FFF0F5'>█</span></td></tr>
-                    <tr><td>LawnGreen</td><td><span style='color:#7CFC00'>█</span></td></tr>
-                    <tr><td>LemonChiffon</td><td><span style='color:#FFFACD'>█</span></td></tr>
-                    <tr><td>LightBlue</td><td><span style='color:#ADD8E6'>█</span></td></tr>
-                    <tr><td>LightCoral</td><td><span style='color:#F08080'>█</span></td></tr>
-                    <tr><td>LightCyan</td><td><span style='color:#E0FFFF'>█</span></td></tr>
-                    <tr><td>LightGoldenrodYellow</td><td><span style='color:#FAFAD2'>█</span></td></tr>
-                    <tr><td>LightGray</td><td><span style='color:#D3D3D3'>█</span></td></tr>
-                    <tr><td>LightGreen</td><td><span style='color:#90EE90'>█</span></td></tr>
-                    <tr><td>LightPink</td><td><span style='color:#FFB6C1'>█</span></td></tr>
-                    <tr><td>LightSalmon</td><td><span style='color:#FFA07A'>█</span></td></tr>
-                    <tr><td>LightSeaGreen</td><td><span style='color:#20B2AA'>█</span></td></tr>
-                    <tr><td>LightSkyBlue</td><td><span style='color:#87CEFA'>█</span></td></tr>
-                    <tr><td>LightSlateGray</td><td><span style='color:#778899'>█</span></td></tr>
-                    <tr><td>LightSteelBlue</td><td><span style='color:#B0C4DE'>█</span></td></tr>
-                    <tr><td>LightYellow</td><td><span style='color:#FFFFE0'>█</span></td></tr>
-                    <tr><td>Lime</td><td><span style='color:#00FF00'>█</span></td></tr>
-                    <tr><td>LimeGreen</td><td><span style='color:#32CD32'>█</span></td></tr>
-                    <tr><td>Linen</td><td><span style='color:#FAF0E6'>█</span></td></tr>
-                    <tr><td>Magenta</td><td><span style='color:#FF00FF'>█</span></td></tr>
-                    <tr><td>Maroon</td><td><span style='color:#800000'>█</span></td></tr>
-                    <tr><td>MediumAquamarine</td><td><span style='color:#66CDAA'>█</span></td></tr>
-                    <tr><td>MediumBlue</td><td><span style='color:#0000CD'>█</span></td></tr>
-                    <tr><td>MediumOrchid</td><td><span style='color:#BA55D3'>█</span></td></tr>
-                    <tr><td>MediumPurple</td><td><span style='color:#9370DB'>█</span></td></tr>
-                    <tr><td>MediumSeaGreen</td><td><span style='color:#3CB371'>█</span></td></tr>
-                    <tr><td>MediumSlateBlue</td><td><span style='color:#7B68EE'>█</span></td></tr>
-                    <tr><td>MediumSpringGreen</td><td><span style='color:#00FA9A'>█</span></td></tr>
-                    <tr><td>MediumTurquoise</td><td><span style='color:#48D1CC'>█</span></td></tr>
-                    <tr><td>MediumVioletRed</td><td><span style='color:#C71585'>█</span></td></tr>
-                    <tr><td>MidnightBlue</td><td><span style='color:#191970'>█</span></td></tr>
-                    <tr><td>MintCream</td><td><span style='color:#F5FFFA'>█</span></td></tr>
-                    <tr><td>MistyRose</td><td><span style='color:#FFE4E1'>█</span></td></tr>
-                    <tr><td>Moccasin</td><td><span style='color:#FFE4B5'>█</span></td></tr>
-                    <tr><td>NavajoWhite</td><td><span style='color:#FFDEAD'>█</span></td></tr>
-                    <tr><td>Navy</td><td><span style='color:#000080'>█</span></td></tr>
-                    <tr><td>OldLace</td><td><span style='color:#FDF5E6'>█</span></td></tr>
-                    <tr><td>Olive</td><td><span style='color:#808000'>█</span></td></tr>
-                    <tr><td>OliveDrab</td><td><span style='color:#6B8E23'>█</span></td></tr>
-                    <tr><td>Orange</td><td><span style='color:#FFA500'>█</span></td></tr>
-                    <tr><td>OrangeRed</td><td><span style='color:#FF4500'>█</span></td></tr>
-                    <tr><td>Orchid</td><td><span style='color:#DA70D6'>█</span></td></tr>
-                    <tr><td>PaleGoldenrod</td><td><span style='color:#EEE8AA'>█</span></td></tr>
-                    <tr><td>PaleGreen</td><td><span style='color:#98FB98'>█</span></td></tr>
-                    <tr><td>PaleTurquoise</td><td><span style='color:#AFEEEE'>█</span></td></tr>
-                    <tr><td>PaleVioletRed</td><td><span style='color:#DB7093'>█</span></td></tr>
-                    <tr><td>PapayaWhip</td><td><span style='color:#FFEFD5'>█</span></td></tr>
-                    <tr><td>PeachPuff</td><td><span style='color:#FFDAB9'>█</span></td></tr>
-                    <tr><td>Peru</td><td><span style='color:#CD853F'>█</span></td></tr>
-                    <tr><td>Pink</td><td><span style='color:#FFC0CB'>█</span></td></tr>
-                    <tr><td>Plum</td><td><span style='color:#DDA0DD'>█</span></td></tr>
-                    <tr><td>PowderBlue</td><td><span style='color:#B0E0E6'>█</span></td></tr>
-                    <tr><td>Purple</td><td><span style='color:#800080'>█</span></td></tr>
-                    <tr><td>Red</td><td><span style='color:#FF0000'>█</span></td></tr>
-                    <tr><td>RosyBrown</td><td><span style='color:#BC8F8F'>█</span></td></tr>
-                    <tr><td>RoyalBlue</td><td><span style='color:#4169E1'>█</span></td></tr>
-                    <tr><td>SaddleBrown</td><td><span style='color:#8B4513'>█</span></td></tr>
-                    <tr><td>Salmon</td><td><span style='color:#FA8072'>█</span></td></tr>
-                    <tr><td>SandyBrown</td><td><span style='color:#F4A460'>█</span></td></tr>
-                    <tr><td>SeaGreen</td><td><span style='color:#2E8B57'>█</span></td></tr>
-                    <tr><td>SeaShell</td><td><span style='color:#FFF5EE'>█</span></td></tr>
-                    <tr><td>Sienna</td><td><span style='color:#A0522D'>█</span></td></tr>
-                    <tr><td>Silver</td><td><span style='color:#C0C0C0'>█</span></td></tr>
-                    <tr><td>SkyBlue</td><td><span style='color:#87CEEB'>█</span></td></tr>
-                    <tr><td>SlateBlue</td><td><span style='color:#6A5ACD'>█</span></td></tr>
-                    <tr><td>SlateGray</td><td><span style='color:#708090'>█</span></td></tr>
-                    <tr><td>Snow</td><td><span style='color:#FFFAFA'>█</span></td></tr>
-                    <tr><td>SpringGreen</td><td><span style='color:#00FF7F'>█</span></td></tr>
-                    <tr><td>SteelBlue</td><td><span style='color:#4682B4'>█</span></td></tr>
-                    <tr><td>Tan</td><td><span style='color:#D2B48C'>█</span></td></tr>
-                    <tr><td>Teal</td><td><span style='color:#008080'>█</span></td></tr>
-                    <tr><td>Thistle</td><td><span style='color:#D8BFD8'>█</span></td></tr>
-                    <tr><td>Tomato</td><td><span style='color:#FF6347'>█</span></td></tr>
-                    <tr><td>Turquoise</td><td><span style='color:#40E0D0'>█</span></td></tr>
-                    <tr><td>Violet</td><td><span style='color:#EE82EE'>█</span></td></tr>
-                    <tr><td>Wheat</td><td><span style='color:#F5DEB3'>█</span></td></tr>
-                    <tr><td>White</td><td><span style='color:#FFFFFF'>█</span></td></tr>
-                    <tr><td>WhiteSmoke</td><td><span style='color:#F5F5F5'>█</span></td></tr>
-                    <tr><td>Yellow</td><td><span style='color:#FFFF00'>█</span></td></tr>
-                    <tr><td>YellowGreen</td><td><span style='color:#9ACD32'>█</span></td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>顏色</h2>
+				<p>
+					元件的 <var>ForeColor</var> 和 <var>BackColor</var> 屬性表示前景顏色和背景顏色，可透過 System.Drawing.Color 的 <var>FromArgb(red, green, blue)</var> 方法指定顏色，或設定為 System.Drawing.Color 的列舉值：
+				</p>
+				<table>
+					<tr><td>AliceBlue</td><td><span style='color:#F0F8FF'>█</span></td></tr>
+					<tr><td>AntiqueWhite</td><td><span style='color:#FAEBD7'>█</span></td></tr>
+					<tr><td>Aqua</td><td><span style='color:#00FFFF'>█</span></td></tr>
+					<tr><td>Aquamarine</td><td><span style='color:#7FFFD4'>█</span></td></tr>
+					<tr><td>Azure</td><td><span style='color:#F0FFFF'>█</span></td></tr>
+					<tr><td>Beige</td><td><span style='color:#F5F5DC'>█</span></td></tr>
+					<tr><td>Bisque</td><td><span style='color:#FFE4C4'>█</span></td></tr>
+					<tr><td>Black</td><td><span style='color:#000000'>█</span></td></tr>
+					<tr><td>BlanchedAlmond</td><td><span style='color:#FFEBCD'>█</span></td></tr>
+					<tr><td>Blue</td><td><span style='color:#0000FF'>█</span></td></tr>
+					<tr><td>BlueViolet</td><td><span style='color:#8A2BE2'>█</span></td></tr>
+					<tr><td>Brown</td><td><span style='color:#A52A2A'>█</span></td></tr>
+					<tr><td>BurlyWood</td><td><span style='color:#DEB887'>█</span></td></tr>
+					<tr><td>CadetBlue</td><td><span style='color:#5F9EA0'>█</span></td></tr>
+					<tr><td>Chartreuse</td><td><span style='color:#7FFF00'>█</span></td></tr>
+					<tr><td>Chocolate</td><td><span style='color:#D2691E'>█</span></td></tr>
+					<tr><td>Coral</td><td><span style='color:#FF7F50'>█</span></td></tr>
+					<tr><td>CornflowerBlue</td><td><span style='color:#6495ED'>█</span></td></tr>
+					<tr><td>Cornsilk</td><td><span style='color:#FFF8DC'>█</span></td></tr>
+					<tr><td>Crimson</td><td><span style='color:#DC143C'>█</span></td></tr>
+					<tr><td>Cyan</td><td><span style='color:#00FFFF'>█</span></td></tr>
+					<tr><td>DarkBlue</td><td><span style='color:#00008B'>█</span></td></tr>
+					<tr><td>DarkCyan</td><td><span style='color:#008B8B'>█</span></td></tr>
+					<tr><td>DarkGoldenrod</td><td><span style='color:#B8860B'>█</span></td></tr>
+					<tr><td>DarkGray</td><td><span style='color:#A9A9A9'>█</span></td></tr>
+					<tr><td>DarkGreen</td><td><span style='color:#006400'>█</span></td></tr>
+					<tr><td>DarkKhaki</td><td><span style='color:#BDB76B'>█</span></td></tr>
+					<tr><td>DarkMagenta</td><td><span style='color:#8B008B'>█</span></td></tr>
+					<tr><td>DarkOliveGreen</td><td><span style='color:#556B2F'>█</span></td></tr>
+					<tr><td>DarkOrange</td><td><span style='color:#FF8C00'>█</span></td></tr>
+					<tr><td>DarkOrchid</td><td><span style='color:#9932CC'>█</span></td></tr>
+					<tr><td>DarkRed</td><td><span style='color:#8B0000'>█</span></td></tr>
+					<tr><td>DarkSalmon</td><td><span style='color:#E9967A'>█</span></td></tr>
+					<tr><td>DarkSeaGreen</td><td><span style='color:#8FBC8B'>█</span></td></tr>
+					<tr><td>DarkSlateBlue</td><td><span style='color:#483D8B'>█</span></td></tr>
+					<tr><td>DarkSlateGray</td><td><span style='color:#2F4F4F'>█</span></td></tr>
+					<tr><td>DarkTurquoise</td><td><span style='color:#00CED1'>█</span></td></tr>
+					<tr><td>DarkViolet</td><td><span style='color:#9400D3'>█</span></td></tr>
+					<tr><td>DeepPink</td><td><span style='color:#FF1493'>█</span></td></tr>
+					<tr><td>DeepSkyBlue</td><td><span style='color:#00BFFF'>█</span></td></tr>
+					<tr><td>DimGray</td><td><span style='color:#696969'>█</span></td></tr>
+					<tr><td>DodgerBlue</td><td><span style='color:#1E90FF'>█</span></td></tr>
+					<tr><td>Firebrick</td><td><span style='color:#B22222'>█</span></td></tr>
+					<tr><td>FloralWhite</td><td><span style='color:#FFFAF0'>█</span></td></tr>
+					<tr><td>ForestGreen</td><td><span style='color:#228B22'>█</span></td></tr>
+					<tr><td>Fuchsia</td><td><span style='color:#FF00FF'>█</span></td></tr>
+					<tr><td>Gainsboro</td><td><span style='color:#DCDCDC'>█</span></td></tr>
+					<tr><td>GhostWhite</td><td><span style='color:#F8F8FF'>█</span></td></tr>
+					<tr><td>Gold</td><td><span style='color:#FFD700'>█</span></td></tr>
+					<tr><td>Goldenrod</td><td><span style='color:#DAA520'>█</span></td></tr>
+					<tr><td>Gray</td><td><span style='color:#808080'>█</span></td></tr>
+					<tr><td>Green</td><td><span style='color:#008000'>█</span></td></tr>
+					<tr><td>GreenYellow</td><td><span style='color:#ADFF2F'>█</span></td></tr>
+					<tr><td>Honeydew</td><td><span style='color:#F0FFF0'>█</span></td></tr>
+					<tr><td>HotPink</td><td><span style='color:#FF69B4'>█</span></td></tr>
+					<tr><td>IndianRed</td><td><span style='color:#CD5C5C'>█</span></td></tr>
+					<tr><td>Indigo</td><td><span style='color:#4B0082'>█</span></td></tr>
+					<tr><td>Ivory</td><td><span style='color:#FFFFF0'>█</span></td></tr>
+					<tr><td>Khaki</td><td><span style='color:#F0E68C'>█</span></td></tr>
+					<tr><td>Lavender</td><td><span style='color:#E6E6FA'>█</span></td></tr>
+					<tr><td>LavenderBlush</td><td><span style='color:#FFF0F5'>█</span></td></tr>
+					<tr><td>LawnGreen</td><td><span style='color:#7CFC00'>█</span></td></tr>
+					<tr><td>LemonChiffon</td><td><span style='color:#FFFACD'>█</span></td></tr>
+					<tr><td>LightBlue</td><td><span style='color:#ADD8E6'>█</span></td></tr>
+					<tr><td>LightCoral</td><td><span style='color:#F08080'>█</span></td></tr>
+					<tr><td>LightCyan</td><td><span style='color:#E0FFFF'>█</span></td></tr>
+					<tr><td>LightGoldenrodYellow</td><td><span style='color:#FAFAD2'>█</span></td></tr>
+					<tr><td>LightGray</td><td><span style='color:#D3D3D3'>█</span></td></tr>
+					<tr><td>LightGreen</td><td><span style='color:#90EE90'>█</span></td></tr>
+					<tr><td>LightPink</td><td><span style='color:#FFB6C1'>█</span></td></tr>
+					<tr><td>LightSalmon</td><td><span style='color:#FFA07A'>█</span></td></tr>
+					<tr><td>LightSeaGreen</td><td><span style='color:#20B2AA'>█</span></td></tr>
+					<tr><td>LightSkyBlue</td><td><span style='color:#87CEFA'>█</span></td></tr>
+					<tr><td>LightSlateGray</td><td><span style='color:#778899'>█</span></td></tr>
+					<tr><td>LightSteelBlue</td><td><span style='color:#B0C4DE'>█</span></td></tr>
+					<tr><td>LightYellow</td><td><span style='color:#FFFFE0'>█</span></td></tr>
+					<tr><td>Lime</td><td><span style='color:#00FF00'>█</span></td></tr>
+					<tr><td>LimeGreen</td><td><span style='color:#32CD32'>█</span></td></tr>
+					<tr><td>Linen</td><td><span style='color:#FAF0E6'>█</span></td></tr>
+					<tr><td>Magenta</td><td><span style='color:#FF00FF'>█</span></td></tr>
+					<tr><td>Maroon</td><td><span style='color:#800000'>█</span></td></tr>
+					<tr><td>MediumAquamarine</td><td><span style='color:#66CDAA'>█</span></td></tr>
+					<tr><td>MediumBlue</td><td><span style='color:#0000CD'>█</span></td></tr>
+					<tr><td>MediumOrchid</td><td><span style='color:#BA55D3'>█</span></td></tr>
+					<tr><td>MediumPurple</td><td><span style='color:#9370DB'>█</span></td></tr>
+					<tr><td>MediumSeaGreen</td><td><span style='color:#3CB371'>█</span></td></tr>
+					<tr><td>MediumSlateBlue</td><td><span style='color:#7B68EE'>█</span></td></tr>
+					<tr><td>MediumSpringGreen</td><td><span style='color:#00FA9A'>█</span></td></tr>
+					<tr><td>MediumTurquoise</td><td><span style='color:#48D1CC'>█</span></td></tr>
+					<tr><td>MediumVioletRed</td><td><span style='color:#C71585'>█</span></td></tr>
+					<tr><td>MidnightBlue</td><td><span style='color:#191970'>█</span></td></tr>
+					<tr><td>MintCream</td><td><span style='color:#F5FFFA'>█</span></td></tr>
+					<tr><td>MistyRose</td><td><span style='color:#FFE4E1'>█</span></td></tr>
+					<tr><td>Moccasin</td><td><span style='color:#FFE4B5'>█</span></td></tr>
+					<tr><td>NavajoWhite</td><td><span style='color:#FFDEAD'>█</span></td></tr>
+					<tr><td>Navy</td><td><span style='color:#000080'>█</span></td></tr>
+					<tr><td>OldLace</td><td><span style='color:#FDF5E6'>█</span></td></tr>
+					<tr><td>Olive</td><td><span style='color:#808000'>█</span></td></tr>
+					<tr><td>OliveDrab</td><td><span style='color:#6B8E23'>█</span></td></tr>
+					<tr><td>Orange</td><td><span style='color:#FFA500'>█</span></td></tr>
+					<tr><td>OrangeRed</td><td><span style='color:#FF4500'>█</span></td></tr>
+					<tr><td>Orchid</td><td><span style='color:#DA70D6'>█</span></td></tr>
+					<tr><td>PaleGoldenrod</td><td><span style='color:#EEE8AA'>█</span></td></tr>
+					<tr><td>PaleGreen</td><td><span style='color:#98FB98'>█</span></td></tr>
+					<tr><td>PaleTurquoise</td><td><span style='color:#AFEEEE'>█</span></td></tr>
+					<tr><td>PaleVioletRed</td><td><span style='color:#DB7093'>█</span></td></tr>
+					<tr><td>PapayaWhip</td><td><span style='color:#FFEFD5'>█</span></td></tr>
+					<tr><td>PeachPuff</td><td><span style='color:#FFDAB9'>█</span></td></tr>
+					<tr><td>Peru</td><td><span style='color:#CD853F'>█</span></td></tr>
+					<tr><td>Pink</td><td><span style='color:#FFC0CB'>█</span></td></tr>
+					<tr><td>Plum</td><td><span style='color:#DDA0DD'>█</span></td></tr>
+					<tr><td>PowderBlue</td><td><span style='color:#B0E0E6'>█</span></td></tr>
+					<tr><td>Purple</td><td><span style='color:#800080'>█</span></td></tr>
+					<tr><td>Red</td><td><span style='color:#FF0000'>█</span></td></tr>
+					<tr><td>RosyBrown</td><td><span style='color:#BC8F8F'>█</span></td></tr>
+					<tr><td>RoyalBlue</td><td><span style='color:#4169E1'>█</span></td></tr>
+					<tr><td>SaddleBrown</td><td><span style='color:#8B4513'>█</span></td></tr>
+					<tr><td>Salmon</td><td><span style='color:#FA8072'>█</span></td></tr>
+					<tr><td>SandyBrown</td><td><span style='color:#F4A460'>█</span></td></tr>
+					<tr><td>SeaGreen</td><td><span style='color:#2E8B57'>█</span></td></tr>
+					<tr><td>SeaShell</td><td><span style='color:#FFF5EE'>█</span></td></tr>
+					<tr><td>Sienna</td><td><span style='color:#A0522D'>█</span></td></tr>
+					<tr><td>Silver</td><td><span style='color:#C0C0C0'>█</span></td></tr>
+					<tr><td>SkyBlue</td><td><span style='color:#87CEEB'>█</span></td></tr>
+					<tr><td>SlateBlue</td><td><span style='color:#6A5ACD'>█</span></td></tr>
+					<tr><td>SlateGray</td><td><span style='color:#708090'>█</span></td></tr>
+					<tr><td>Snow</td><td><span style='color:#FFFAFA'>█</span></td></tr>
+					<tr><td>SpringGreen</td><td><span style='color:#00FF7F'>█</span></td></tr>
+					<tr><td>SteelBlue</td><td><span style='color:#4682B4'>█</span></td></tr>
+					<tr><td>Tan</td><td><span style='color:#D2B48C'>█</span></td></tr>
+					<tr><td>Teal</td><td><span style='color:#008080'>█</span></td></tr>
+					<tr><td>Thistle</td><td><span style='color:#D8BFD8'>█</span></td></tr>
+					<tr><td>Tomato</td><td><span style='color:#FF6347'>█</span></td></tr>
+					<tr><td>Turquoise</td><td><span style='color:#40E0D0'>█</span></td></tr>
+					<tr><td>Violet</td><td><span style='color:#EE82EE'>█</span></td></tr>
+					<tr><td>Wheat</td><td><span style='color:#F5DEB3'>█</span></td></tr>
+					<tr><td>White</td><td><span style='color:#FFFFFF'>█</span></td></tr>
+					<tr><td>WhiteSmoke</td><td><span style='color:#F5F5F5'>█</span></td></tr>
+					<tr><td>Yellow</td><td><span style='color:#FFFF00'>█</span></td></tr>
+					<tr><td>YellowGreen</td><td><span style='color:#9ACD32'>█</span></td></tr>
+				</table>
+			</section>
 
-            <hr id='event'>
+			<hr id='event'>
 
-            <section>
-                <h2>常用事件</h2>
-                <hr>
-                <section>
-                    <h3>Component 類別的事件</h3>
-                    <p>
-                        <var>Disposed += EventHandler(object sender, EventArgs e);</var>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Control 類別的事件</h3>
-                    <p>
-                        <var>
-                            AutoSizeChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            BackColorChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            BackgroundImageChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            BackgroundImageLayoutChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            BindingContextChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            CausesValidationChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            ChangeUICues += UICuesEventHandler(object sender, UICuesEventArgs e);<br>
-                            <br>
-                            Click += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            ClientSizeChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            ContextMenuChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            ContextMenuStripChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            ControlAdded += ControlEventHandler(object sender, ControlEventArgs e);<br>
-                            <br>
-                            ControlRemoved += ControlEventHandler(object sender, ControlEventArgs e);<br>
-                            <br>
-                            CursorChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            DockChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            DoubleClick += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            DpiChangedAfterParent += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            DpiChangedBeforeParent += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            DragDrop += DragEventHandler(object sender, DragEventArgs e);<br>
-                            <br>
-                            DragEnter += DragEventHandler(object sender, DragEventArgs e);<br>
-                            <br>
-                            DragLeave += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            DragOver += DragEventHandler(object sender, DragEventArgs e);<br>
-                            <br>
-                            EnabledChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Enter += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            FontChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            ForeColorChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            GiveFeedback += GiveFeedbackEventHandler(object sender, GiveFeedbackEventArgs e);<br>
-                            <br>
-                            GotFocus += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            HandleCreated += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            HandleDestroyed += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            HelpRequested += HelpEventHandler(object sender, HelpEventArgs hlpevent);<br>
-                            <br>
-                            ImeModeChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Invalidated += InvalidateEventHandler(object sender, InvalidateEventArgs e);<br>
-                            <br>
-                            KeyDown += KeyEventHandler(object sender, KeyEventArgs e);<br>
-                            <br>
-                            KeyPress += KeyPressEventHandler(object sender, KeyPressEventArgs e);<br>
-                            <br>
-                            KeyUp += KeyEventHandler(object sender, KeyEventArgs e);<br>
-                            <br>
-                            Layout += LayoutEventHandler(object sender, LayoutEventArgs e);<br>
-                            <br>
-                            Leave += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            LocationChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            LostFocus += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            MarginChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            MouseCaptureChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            MouseClick += MouseEventHandler(object sender, MouseEventArgs e);<br>
-                            <br>
-                            MouseDoubleClick += MouseEventHandler(object sender, MouseEventArgs e);<br>
-                            <br>
-                            MouseDown += MouseEventHandler(object sender, MouseEventArgs e);<br>
-                            <br>
-                            MouseEnter += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            MouseHover += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            MouseLeave += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            MouseMove += MouseEventHandler(object sender, MouseEventArgs e);<br>
-                            <br>
-                            MouseUp += MouseEventHandler(object sender, MouseEventArgs e);<br>
-                            <br>
-                            MouseWheel += MouseEventHandler(object sender, MouseEventArgs e);<br>
-                            <br>
-                            Move += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            PaddingChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Paint += PaintEventHandler(object sender, PaintEventArgs e);<br>
-                            <br>
-                            ParentChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            PreviewKeyDown += PreviewKeyDownEventHandler(object sender, PreviewKeyDownEventArgs e);<br>
-                            <br>
-                            QueryAccessibilityHelp += QueryAccessibilityHelpEventHandler(object sender, QueryAccessibilityHelpEventArgs e);<br>
-                            <br>
-                            QueryContinueDrag += QueryContinueDragEventHandler(object sender, QueryContinueDragEventArgs e);<br>
-                            <br>
-                            RegionChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Resize += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            RightToLeftChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            SizeChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            StyleChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            SystemColorsChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            TabIndexChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            TabStopChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            TextChanged += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Validated += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Validating += CancelEventHandler(object sender, CancelEventArgs e);<br>
-                            <br>
-                            VisibleChanged += EventHandler(object sender, EventArgs e);
-                        </var>
-                    </p>
-                </section>
-                <!--hr>
-                <section>
-                    <h3>Lable 類別的事件</h3>
-                    <p>
-                        TextAlignChanged += EventHandler(object sender, EventArgs e);
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ProgressBar 類別的事件</h3>
-                    <p>
-                        RightToLeftLayoutChanged += EventHandler(object sender, EventArgs e);
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>ScrollBar 類別的事件</h3>
-                    <p>
-                        Scroll += ScrollEventHandler(object sender, ScrollEventArgs e);<br>
-                        ValueChanged += EventHandler(object sender, EventArgs e);
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Splitter 類別的事件</h3>
-                    <p>
-                        SplitterMoved += SplitterEventHandler(object sender, SplitterEventArgs e);<br>
-                        SplitterMoving += SplitterEventHandler(object sender, SplitterEventArgs e);
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>StatusBar 類別的事件</h3>
-                    <p>
-                        DrawItem += StatusBarDrawItemEventHandler(object sender, StatusBarDrawItemEventArgs sbdevent);<br>
-                        PanelClick += StatusBarPanelClickEventHandler(object sender, StatusBarPanelClickEventArgs e);
-                    </p>
-                </section-->
-                <hr>
-                <section>
-                    <h3>Window 類別的事件</h3>
-                    <p>
-                        <var>
-                            Activated += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Closed += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Closing += CancelEventHandler(object sender, CancelEventArgs e);<br>
-                            <br>
-                            ContentRendered += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            Deactivated += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            SourceInitialized += EventHandler(object sender, EventArgs e);<br>
-                            <br>
-                            StateChanged += EventHandler(object sender, EventArgs e);
-                        </var>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>其他控制項的事件</h3>
-                    <p>
-                        就不一一列出了！如果不方便線上查閱 Microsoft 文件，可以寫程式列出：<br>
-                        <br>
-                        <code>
-                            using System.Linq;<br>
-                            …<br>
-                            typeof(System.Windows.Forms.Button).GetEvents().ToList().ForEach(Console.WriteLine);<br>
-                        </code>
-                        <br>
-                        然後根據事件前頭所宣告的類別型態，自行對應為 XxxHandler(object sender, XxxArgs) 的格式 += 上去即可～
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    EventHandler 是 System 名稱空間，CancelEventHandler 是 System.ComponentModel 名稱空間，剩下的是 System.Windows.Forms 名稱空間。<br>
-                    <br>
-                    由於參數型式都是固定的 (sender, e)，所以使用 lambda 來設計事件的話，就不用管什麼 XxxHandler 和 XxxArgs，只需要知道 += 前面有哪些事件可用就好～
-                </p>
-            </section>
+			<section>
+				<h2>常用事件</h2>
+				<hr>
+				<section>
+					<h3>Component 類別的事件</h3>
+					<p>
+						<var>Disposed += EventHandler(object sender, EventArgs e);</var>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Control 類別的事件</h3>
+					<p>
+						<var>
+							AutoSizeChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							BackColorChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							BackgroundImageChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							BackgroundImageLayoutChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							BindingContextChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							CausesValidationChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							ChangeUICues += UICuesEventHandler(object sender, UICuesEventArgs e);<br>
+							<br>
+							Click += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							ClientSizeChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							ContextMenuChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							ContextMenuStripChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							ControlAdded += ControlEventHandler(object sender, ControlEventArgs e);<br>
+							<br>
+							ControlRemoved += ControlEventHandler(object sender, ControlEventArgs e);<br>
+							<br>
+							CursorChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							DockChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							DoubleClick += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							DpiChangedAfterParent += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							DpiChangedBeforeParent += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							DragDrop += DragEventHandler(object sender, DragEventArgs e);<br>
+							<br>
+							DragEnter += DragEventHandler(object sender, DragEventArgs e);<br>
+							<br>
+							DragLeave += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							DragOver += DragEventHandler(object sender, DragEventArgs e);<br>
+							<br>
+							EnabledChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Enter += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							FontChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							ForeColorChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							GiveFeedback += GiveFeedbackEventHandler(object sender, GiveFeedbackEventArgs e);<br>
+							<br>
+							GotFocus += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							HandleCreated += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							HandleDestroyed += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							HelpRequested += HelpEventHandler(object sender, HelpEventArgs hlpevent);<br>
+							<br>
+							ImeModeChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Invalidated += InvalidateEventHandler(object sender, InvalidateEventArgs e);<br>
+							<br>
+							KeyDown += KeyEventHandler(object sender, KeyEventArgs e);<br>
+							<br>
+							KeyPress += KeyPressEventHandler(object sender, KeyPressEventArgs e);<br>
+							<br>
+							KeyUp += KeyEventHandler(object sender, KeyEventArgs e);<br>
+							<br>
+							Layout += LayoutEventHandler(object sender, LayoutEventArgs e);<br>
+							<br>
+							Leave += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							LocationChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							LostFocus += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							MarginChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							MouseCaptureChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							MouseClick += MouseEventHandler(object sender, MouseEventArgs e);<br>
+							<br>
+							MouseDoubleClick += MouseEventHandler(object sender, MouseEventArgs e);<br>
+							<br>
+							MouseDown += MouseEventHandler(object sender, MouseEventArgs e);<br>
+							<br>
+							MouseEnter += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							MouseHover += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							MouseLeave += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							MouseMove += MouseEventHandler(object sender, MouseEventArgs e);<br>
+							<br>
+							MouseUp += MouseEventHandler(object sender, MouseEventArgs e);<br>
+							<br>
+							MouseWheel += MouseEventHandler(object sender, MouseEventArgs e);<br>
+							<br>
+							Move += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							PaddingChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Paint += PaintEventHandler(object sender, PaintEventArgs e);<br>
+							<br>
+							ParentChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							PreviewKeyDown += PreviewKeyDownEventHandler(object sender, PreviewKeyDownEventArgs e);<br>
+							<br>
+							QueryAccessibilityHelp += QueryAccessibilityHelpEventHandler(object sender, QueryAccessibilityHelpEventArgs e);<br>
+							<br>
+							QueryContinueDrag += QueryContinueDragEventHandler(object sender, QueryContinueDragEventArgs e);<br>
+							<br>
+							RegionChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Resize += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							RightToLeftChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							SizeChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							StyleChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							SystemColorsChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							TabIndexChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							TabStopChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							TextChanged += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Validated += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Validating += CancelEventHandler(object sender, CancelEventArgs e);<br>
+							<br>
+							VisibleChanged += EventHandler(object sender, EventArgs e);
+						</var>
+					</p>
+				</section>
+				<!--hr>
+				<section>
+					<h3>Lable 類別的事件</h3>
+					<p>
+						TextAlignChanged += EventHandler(object sender, EventArgs e);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ProgressBar 類別的事件</h3>
+					<p>
+						RightToLeftLayoutChanged += EventHandler(object sender, EventArgs e);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>ScrollBar 類別的事件</h3>
+					<p>
+						Scroll += ScrollEventHandler(object sender, ScrollEventArgs e);<br>
+						ValueChanged += EventHandler(object sender, EventArgs e);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Splitter 類別的事件</h3>
+					<p>
+						SplitterMoved += SplitterEventHandler(object sender, SplitterEventArgs e);<br>
+						SplitterMoving += SplitterEventHandler(object sender, SplitterEventArgs e);
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>StatusBar 類別的事件</h3>
+					<p>
+						DrawItem += StatusBarDrawItemEventHandler(object sender, StatusBarDrawItemEventArgs sbdevent);<br>
+						PanelClick += StatusBarPanelClickEventHandler(object sender, StatusBarPanelClickEventArgs e);
+					</p>
+				</section-->
+				<hr>
+				<section>
+					<h3>Window 類別的事件</h3>
+					<p>
+						<var>
+							Activated += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Closed += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Closing += CancelEventHandler(object sender, CancelEventArgs e);<br>
+							<br>
+							ContentRendered += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							Deactivated += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							SourceInitialized += EventHandler(object sender, EventArgs e);<br>
+							<br>
+							StateChanged += EventHandler(object sender, EventArgs e);
+						</var>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>其他控制項的事件</h3>
+					<p>
+						就不一一列出了！如果不方便線上查閱 Microsoft 文件，可以寫程式列出：<br>
+						<br>
+						<code>
+							using System.Linq;<br>
+							…<br>
+							typeof(System.Windows.Forms.Button).GetEvents().ToList().ForEach(Console.WriteLine);<br>
+						</code>
+						<br>
+						然後根據事件前頭所宣告的類別型態，自行對應為 XxxHandler(object sender, XxxArgs) 的格式 += 上去即可～
+					</p>
+				</section>
+				<hr>
+				<p>
+					EventHandler 是 System 名稱空間，CancelEventHandler 是 System.ComponentModel 名稱空間，剩下的是 System.Windows.Forms 名稱空間。<br>
+					<br>
+					由於參數型式都是固定的 (sender, e)，所以使用 lambda 來設計事件的話，就不用管什麼 XxxHandler 和 XxxArgs，只需要知道 += 前面有哪些事件可用就好～
+				</p>
+			</section>
 
-            <hr id='sharpdevelop'>
+			<hr id='sharpdevelop'>
 
-            <section>
-                <h2>視覺化開發環境</h2>
-                <p>
-                    除了自己手敲程式碼，還可以用視覺化開發環境，用滑鼠拉一堆元件出來就好。<br>
-                    <br>
-                    Microsoft 免費釋出的 Visual Studio Community 就有這樣的開發環境：<br>
-                    <br>
-                    <a href='http://visualstudio.microsoft.com/zh-hant/vs/community/' target='_blank'>http://visualstudio.microsoft.com/zh-hant/vs/community/</a><br>
-                    <br>
-                    不過這是 15GB 的龐然大物，而且電腦配備要夠好才跑得動，所以我覺得檔案大小才 47MB 的 SharpDevelop 也是不錯選擇：<br>
-                    <br>
-                    <a href='http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%205.x/5.1/' target='_blank'>http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%205.x/5.1/</a><br>
-                </p>
-                <figure>
-                    <img src='../../figures/overcast/20190418C_03.png' alt='插圖'>
-                </figure>
-                <p>
-                    只要建立 Windows Application 的 Solution，就能在範本為 Form 的程式碼，看到底下有個 Design 頁籤，切換到視覺化介面。再按左邊工具箱的 Tools 頁籤，就有各式元件可以拉到視覺化視窗上。<br>
-                    <br>
-                    即使打算手敲程式碼，準備這款 SharpDevelop 在手邊也是不錯的「活範例」！先用視覺化環境拉出想要的視窗設計，再看原始碼，就知道怎樣寫出想要的功能了～
-                </p>
-            </section>
+			<section>
+				<h2>視覺化開發環境</h2>
+				<p>
+					除了自己手敲程式碼，還可以用視覺化開發環境，用滑鼠拉一堆元件出來就好。<br>
+					<br>
+					Microsoft 免費釋出的 Visual Studio Community 就有這樣的開發環境：<br>
+					<br>
+					<a href='http://visualstudio.microsoft.com/zh-hant/vs/community/' target='_blank'>http://visualstudio.microsoft.com/zh-hant/vs/community/</a><br>
+					<br>
+					不過這是 15GB 的龐然大物，而且電腦配備要夠好才跑得動，所以我覺得檔案大小才 47MB 的 SharpDevelop 也是不錯選擇：<br>
+					<br>
+					<a href='http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%205.x/5.1/' target='_blank'>http://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%205.x/5.1/</a><br>
+				</p>
+				<figure>
+					<img src='../../figures/overcast/20190418C_03.png' alt='插圖'>
+				</figure>
+				<p>
+					只要建立 Windows Application 的 Solution，就能在範本為 Form 的程式碼，看到底下有個 Design 頁籤，切換到視覺化介面。再按左邊工具箱的 Tools 頁籤，就有各式元件可以拉到視覺化視窗上。<br>
+					<br>
+					即使打算手敲程式碼，準備這款 SharpDevelop 在手邊也是不錯的「活範例」！先用視覺化環境拉出想要的視窗設計，再看原始碼，就知道怎樣寫出想要的功能了～
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

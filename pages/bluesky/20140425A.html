@@ -2,35 +2,35 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <style>body{background-color:#e8f4ff}</style>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>清除通知區域裡無效的舊圖示</h1>
-            </header>
+			<header>
+				<h1>清除通知區域裡無效的舊圖示</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                用 regedit.exe 到：<br>
-                <br>
-                <var>HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify</var><br>
-                <br>
-                刪除 <var>IconStreams</var> 與 <var>PastIconsStream</var>，然後結束 explorer.exe 並重新執行。
-            </p>
+			<p>
+				用 regedit.exe 到：<br>
+				<br>
+				<var>HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify</var><br>
+				<br>
+				刪除 <var>IconStreams</var> 與 <var>PastIconsStream</var>，然後結束 explorer.exe 並重新執行。
+			</p>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

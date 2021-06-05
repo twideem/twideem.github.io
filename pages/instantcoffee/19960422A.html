@@ -2,113 +2,113 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>jar</h1>
-                <p>
-                    JDK 提供 <var>jar</var> 指令工具，可將所有類別壓縮成一個檔案來使用。<br>
-                    <br>
-                    如果懂得自訂 MANIFEST.MF 檔案的話，甚至能夠讓你的 *.jar 成為執行檔。
-                </p>
-            </header>
+			<header>
+				<h1>jar</h1>
+				<p>
+					JDK 提供 <var>jar</var> 指令工具，可將所有類別壓縮成一個檔案來使用。<br>
+					<br>
+					如果懂得自訂 MANIFEST.MF 檔案的話，甚至能夠讓你的 *.jar 成為執行檔。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>一個一個類別打包到 JAR 壓縮檔裡面。</h2>
-                <p>
-                    <code>jar cf 壓縮檔名稱.jar 類別一.class 類別二.class</code>
-                </p>
-            </section>
+			<section>
+				<h2>一個一個類別打包到 JAR 壓縮檔裡面。</h2>
+				<p>
+					<code>jar cf 壓縮檔名稱.jar 類別一.class 類別二.class</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>將某個資料夾所有東西都打包到 JAR 壓縮檔裡面。</h2>
-                <p>
-                    <code>jar cf 壓縮檔名稱.jar -C 資料夾 .</code><br>
-                    <br>
-                    注意 <code>-C</code> 是大寫！
-                </p>
-            </section>
+			<section>
+				<h2>將某個資料夾所有東西都打包到 JAR 壓縮檔裡面。</h2>
+				<p>
+					<code>jar cf 壓縮檔名稱.jar -C 資料夾 .</code><br>
+					<br>
+					注意 <code>-C</code> 是大寫！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>只打包「子資料夾」到 JAR 壓縮檔裡面。</h2>
-                <p>
-                    <code>jar cf 壓縮檔名稱.jar -C 資料夾 ./子資料夾</code>
-                </p>
-            </section>
+			<section>
+				<h2>只打包「子資料夾」到 JAR 壓縮檔裡面。</h2>
+				<p>
+					<code>jar cf 壓縮檔名稱.jar -C 資料夾 ./子資料夾</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>如何執行 JAR 檔裡面的類別</h2>
-                <p>
-                    假設你打包了一個 Application.jar，裡面有個 application 資料夾，這個資料夾裡面有 Main.class，那麼要執行 Application.jar 裡面的 Main.class 類別，方法是：<br>
-                    <br>
-                    <code>java -classpath Application.jar application.Main</code>
-                </p>
-            </section>
+			<section>
+				<h2>如何執行 JAR 檔裡面的類別</h2>
+				<p>
+					假設你打包了一個 Application.jar，裡面有個 application 資料夾，這個資料夾裡面有 Main.class，那麼要執行 Application.jar 裡面的 Main.class 類別，方法是：<br>
+					<br>
+					<code>java -classpath Application.jar application.Main</code>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Executable JAR</h2>
-                <p>
-                    接續上一個「如何執行 JAR 檔裡面的類別」的案例，如果 application.Main 裡面有 main()，那麼在用 jar 打包時，可以多添加一個 e 參數將 application.Main 指定為入口（entrypoint）：<br>
-                    <br>
-                    <code>jar cfe Application.jar application.Main Main.class</code><br>
-                    <br>
-                    以後就能直接執行 jar 檔：<br>
-                    <br>
-                    <code>java -jar Application.jar</code><br>
-                    <br>
-                    甚至有安裝 JRE 或 IcedTea 的話，直接在 Application.jar 用滑鼠點兩下，就能執行程式，跟 *.exe 使用起來沒兩樣！
-                </p>
-            </section>
+			<section>
+				<h2>Executable JAR</h2>
+				<p>
+					接續上一個「如何執行 JAR 檔裡面的類別」的案例，如果 application.Main 裡面有 main()，那麼在用 jar 打包時，可以多添加一個 e 參數將 application.Main 指定為入口（entrypoint）：<br>
+					<br>
+					<code>jar cfe Application.jar application.Main Main.class</code><br>
+					<br>
+					以後就能直接執行 jar 檔：<br>
+					<br>
+					<code>java -jar Application.jar</code><br>
+					<br>
+					甚至有安裝 JRE 或 IcedTea 的話，直接在 Application.jar 用滑鼠點兩下，就能執行程式，跟 *.exe 使用起來沒兩樣！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>[META-INF]/MANIFEST.MF</h2>
-                <p>
-                    上一節「Executable JAR」之所以能讓 *.jar 檔案成為執行檔，是因為下達 e 參數後，JAR 裡面的 META-INF 資料夾有 MANIFEST.MF<ins>[1]</ins> 檔案出現這項設定值：<br>
-                    <br>
-                    <code>
-                        Main-Class: application.Main<br>
-                    </code>
-                    <br>
-                    你也可以自己寫好 MANIFEST.MF，再打包到 JAR 裡面，尤其需要追加更多參數給時只能這麼做。<br>
-                    <br>
-                    做法是使用 m 參數，以及你自己寫好的 MANIFEST.MF 檔案：<br>
-                    <br>
-                    <code>jar cfm Application.jar MANIFEST.MF Main.class</code><br>
-                    <br>
-                    寫 MANIFEST.MF 時，注意最後要新增一個空行，否則會有檔案結尾辨識錯誤，而找不到參數的問題。
-                </p>
-            </section>
+			<section>
+				<h2>[META-INF]/MANIFEST.MF</h2>
+				<p>
+					上一節「Executable JAR」之所以能讓 *.jar 檔案成為執行檔，是因為下達 e 參數後，JAR 裡面的 META-INF 資料夾有 MANIFEST.MF<ins>[1]</ins> 檔案出現這項設定值：<br>
+					<br>
+					<code>
+						Main-Class: application.Main<br>
+					</code>
+					<br>
+					你也可以自己寫好 MANIFEST.MF，再打包到 JAR 裡面，尤其需要追加更多參數給時只能這麼做。<br>
+					<br>
+					做法是使用 m 參數，以及你自己寫好的 MANIFEST.MF 檔案：<br>
+					<br>
+					<code>jar cfm Application.jar MANIFEST.MF Main.class</code><br>
+					<br>
+					寫 MANIFEST.MF 時，注意最後要新增一個空行，否則會有檔案結尾辨識錯誤，而找不到參數的問題。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[1] 是 MA<samp>NI</samp>FEST.MF，不是 MA<samp>IN</samp>FEST.MF 哦！</p>
-            </footer>
+			<footer>
+				<p>[1] 是 MA<samp>NI</samp>FEST.MF，不是 MA<samp>IN</samp>FEST.MF 哦！</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

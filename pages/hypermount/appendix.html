@@ -2,65 +2,65 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>附錄</h1>
-            </header>
+			<header>
+				<h1>附錄</h1>
+			</header>
 
-            <hr id='19690406A'>
+			<hr id='19690406A'>
 
-            <section>
-                <h2>re:Array.prototype.reduce()</h2>
-                <p>
-                    6 怎麼來的？這個範例中，我們在 reduce() 設定的初始值是 5，然後跑 callback 函式，因此第一次執行時，這段程式：<br>
-                    <br>
-                    <code>
-                        currentValue = previousValue + array[index];<br>
-                        document.write(currentValue);<br>
-                        return currentValue;<br>
-                    </code>
-                    <br>
-                    就等於：<br>
-                    <br>
-                    <code>
-                        5 + 1;<br>
-                        document.write(5 + 1);<br>
-                        return 5 + 1;<br>
-                    </code>
-                    <br>
-                    8 怎麼來的？由於 reduce() 會把陣列的元素值，從頭到尾逐一代入給 callback 執行，所以繼續做出如下的程式動作：<br>
-                    <br>
-                    <code>
-                        6 + 2;<br>
-                        document.write(6 + 2);<br>
-                        return 6 + 2;<br>
-                    </code>
-                    <br>
-                    因此得到 8。<br>
-                    <br>
-                    依此類推，因為還有一個元素沒跑，所以繼續做出如下程式動作，而得到 11：<br>
-                    <br>
-                    <code>
-                        8 + 3;<br>
-                        document.write(8 + 3);<br>
-                        return 8 + 3;
-                    </code>
-                </p>
-            </section>
+			<section>
+				<h2>re:Array.prototype.reduce()</h2>
+				<p>
+					6 怎麼來的？這個範例中，我們在 reduce() 設定的初始值是 5，然後跑 callback 函式，因此第一次執行時，這段程式：<br>
+					<br>
+					<code>
+						currentValue = previousValue + array[index];<br>
+						document.write(currentValue);<br>
+						return currentValue;<br>
+					</code>
+					<br>
+					就等於：<br>
+					<br>
+					<code>
+						5 + 1;<br>
+						document.write(5 + 1);<br>
+						return 5 + 1;<br>
+					</code>
+					<br>
+					8 怎麼來的？由於 reduce() 會把陣列的元素值，從頭到尾逐一代入給 callback 執行，所以繼續做出如下的程式動作：<br>
+					<br>
+					<code>
+						6 + 2;<br>
+						document.write(6 + 2);<br>
+						return 6 + 2;<br>
+					</code>
+					<br>
+					因此得到 8。<br>
+					<br>
+					依此類推，因為還有一個元素沒跑，所以繼續做出如下程式動作，而得到 11：<br>
+					<br>
+					<code>
+						8 + 3;<br>
+						document.write(8 + 3);<br>
+						return 8 + 3;
+					</code>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

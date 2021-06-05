@@ -2,67 +2,67 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>今天星期幾</h1>
-            </header>
+			<header>
+				<h1>今天星期幾</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>星期幾</h2>
-                <audio autoplay controls style='left:28px;position:relative'></audio>
-                <p style='margin-top:-2px'></p>
-            </section>
+			<section>
+				<h2>星期幾</h2>
+				<audio autoplay controls style='left:28px;position:relative'></audio>
+				<p style='margin-top:-2px'></p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Nokia Tune Remake 精選曲</h2>
-                <p>
-                    <button onclick='f(1)'>週一</button>
-                    <button onclick='f(2)'>週二</button>
-                    <button onclick='f(3)'>週三</button>
-                    <button onclick='f(4)'>週四</button>
-                    <button onclick='f(5)'>週五</button>
-                    <button onclick='f(6)'>週六</button>
-                    <button onclick='f(0)'>週日</button>
-                    <button onclick='f(7)'>明天</button>
-                </p>
-            </section>
+			<section>
+				<h2>Nokia Tune Remake 精選曲</h2>
+				<p>
+					<button onclick='f(1)'>週一</button>
+					<button onclick='f(2)'>週二</button>
+					<button onclick='f(3)'>週三</button>
+					<button onclick='f(4)'>週四</button>
+					<button onclick='f(5)'>週五</button>
+					<button onclick='f(6)'>週六</button>
+					<button onclick='f(0)'>週日</button>
+					<button onclick='f(7)'>明天</button>
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-        <script>
-            var a=[
-                ['星期日','../../objects/audio/-01390208A_07.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週日心情挑選的鈴聲。','5853','Connecting People','Mcolom','13256'],
-                ['星期一','../../objects/audio/-01390208A_01.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週一心情挑選的鈴聲。','5449','Brit Nokia','Pablo_Gomez','14766'],
-                ['星期二','../../objects/audio/-01390208A_02.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週二心情挑選的鈴聲。','12','Progressive Nokia','Ozzbozz','845'],
-                ['星期三','../../objects/audio/-01390208A_03.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週三心情挑選的鈴聲。','584','Nokia Forever','jefemusic','5047'],
-                ['星期四','../../objects/audio/-01390208A_04.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週四心情挑選的鈴聲。','171','Nokia Jazz Theme','SafeProject','4829'],
-                ['星期五','../../objects/audio/-01390208A_05.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週五心情挑選的鈴聲。','1487','Nokya In The Sky','BeppeDiBenedetto','9980'],
-                ['星期六','../../objects/audio/-01390208A_06.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週六心情挑選的鈴聲。','5677','Jasmine Flower Nokia','JasmineFlowerMusic','14866'],
-                ['未知的明天','../../objects/audio/-01390208A_08.mp3','Nokia 經典鈴聲再現賽事裡，針對每個未知的明天，個人所挑選的心情鈴聲。','5926','Nokia New Generation v2','Tom','755']
-            ]
-            function f(x){
-                document.querySelector('article section h2').innerHTML=a[x][0]
-                document.querySelector('audio').src=a[x][1]
-                document.querySelector('article section p').innerHTML='<br>'+a[x][2]+'<br><br>曲目：'+a[x][3]+'<br>曲名：'+a[x][4]+'<br>編曲：'+'<a href=\'http://www.audiodraft.com/user/profile.php?id='+a[x][6]+'\' target=\'blank\'>'+a[x][5]+'</a>'
-            }
-            addEventListener('load', f([new Date().getDay()]))
-        </script>
+		<script>
+			var a=[
+				['星期日','../../objects/audio/-01390208A_07.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週日心情挑選的鈴聲。','5853','Connecting People','Mcolom','13256'],
+				['星期一','../../objects/audio/-01390208A_01.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週一心情挑選的鈴聲。','5449','Brit Nokia','Pablo_Gomez','14766'],
+				['星期二','../../objects/audio/-01390208A_02.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週二心情挑選的鈴聲。','12','Progressive Nokia','Ozzbozz','845'],
+				['星期三','../../objects/audio/-01390208A_03.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週三心情挑選的鈴聲。','584','Nokia Forever','jefemusic','5047'],
+				['星期四','../../objects/audio/-01390208A_04.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週四心情挑選的鈴聲。','171','Nokia Jazz Theme','SafeProject','4829'],
+				['星期五','../../objects/audio/-01390208A_05.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週五心情挑選的鈴聲。','1487','Nokya In The Sky','BeppeDiBenedetto','9980'],
+				['星期六','../../objects/audio/-01390208A_06.mp3','Nokia 經典鈴聲再現賽事裡，個人針對週六心情挑選的鈴聲。','5677','Jasmine Flower Nokia','JasmineFlowerMusic','14866'],
+				['未知的明天','../../objects/audio/-01390208A_08.mp3','Nokia 經典鈴聲再現賽事裡，針對每個未知的明天，個人所挑選的心情鈴聲。','5926','Nokia New Generation v2','Tom','755']
+			]
+			function f(x){
+				document.querySelector('article section h2').innerHTML=a[x][0]
+				document.querySelector('audio').src=a[x][1]
+				document.querySelector('article section p').innerHTML='<br>'+a[x][2]+'<br><br>曲目：'+a[x][3]+'<br>曲名：'+a[x][4]+'<br>編曲：'+'<a href=\'http://www.audiodraft.com/user/profile.php?id='+a[x][6]+'\' target=\'blank\'>'+a[x][5]+'</a>'
+			}
+			addEventListener('load', f([new Date().getDay()]))
+		</script>
 
-    </body>
+	</body>
 
 </html>

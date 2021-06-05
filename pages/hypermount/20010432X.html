@@ -2,168 +2,168 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JSON</h1>
-            </header>
+			<header>
+				<h1>JSON</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>JSON 的原理與由來</h2>
-                <p>
-                    首先，JavaScript 的物件可以表示成 object literals 符號：<br>
-                    <br>
-                    <code>
-                        var array = [1,9,8,0];<br>
-                        var object = {name:'Twideem Civs', email:'twideem@outlook.com'};<br>
-                    </code>
-                    <br>
-                    接著，eval() 可將「字串」當作「程式碼」來執行：<br>
-                    <br>
-                    <code>
-                        var string = '1+2-3*4/5';<br>
-                        eval(string);<br>
-                    </code>
-                    <br>
-                    於是我們發現，JavaScript 可將物件以字串的方式來保存與使用：<br>
-                    <br>
-                    <code>
-                        var new_array = '[1,9,8,0]';<br>
-                        var array = eval(new_array);<br>
-                        <br>
-                        var new_object = "{name:'Twideem Civs', email:'twideem@outlook.com'}";<br>
-                        var object = eval('('+new_object+')');<br>
-                    </code>
-                    <br>
-                    致力於 JavaScript 的大師 Dauglas Crockford 覺得這是非常美妙的功能，於是命名為 JSON（JavaScript Object Notation）來大力倡導這樣的語言特性。<br>
-                    <br>
-                    由於 JSON 保存的字串格式可以跨平台，不只限於 JavaScript，任何程式語言稍加處理都能解析這樣格式的資料，因此開始成為一種熱門的資料格式；甚至在保存資料時，如果訴求的是便攜性，且嚴密的驗證性會破壞便攜性，那 JSON 會顯得比 XML 更適用。<br>
-                    <br>
-                    知名的 NoSQL 資料庫 MongoDB 就是採用 JSON 格式做為資料！
-                </p>
-            </section>
+			<section>
+				<h2>JSON 的原理與由來</h2>
+				<p>
+					首先，JavaScript 的物件可以表示成 object literals 符號：<br>
+					<br>
+					<code>
+						var array = [1,9,8,0];<br>
+						var object = {name:'Twideem Civs', email:'twideem@outlook.com'};<br>
+					</code>
+					<br>
+					接著，eval() 可將「字串」當作「程式碼」來執行：<br>
+					<br>
+					<code>
+						var string = '1+2-3*4/5';<br>
+						eval(string);<br>
+					</code>
+					<br>
+					於是我們發現，JavaScript 可將物件以字串的方式來保存與使用：<br>
+					<br>
+					<code>
+						var new_array = '[1,9,8,0]';<br>
+						var array = eval(new_array);<br>
+						<br>
+						var new_object = "{name:'Twideem Civs', email:'twideem@outlook.com'}";<br>
+						var object = eval('('+new_object+')');<br>
+					</code>
+					<br>
+					致力於 JavaScript 的大師 Dauglas Crockford 覺得這是非常美妙的功能，於是命名為 JSON（JavaScript Object Notation）來大力倡導這樣的語言特性。<br>
+					<br>
+					由於 JSON 保存的字串格式可以跨平台，不只限於 JavaScript，任何程式語言稍加處理都能解析這樣格式的資料，因此開始成為一種熱門的資料格式；甚至在保存資料時，如果訴求的是便攜性，且嚴密的驗證性會破壞便攜性，那 JSON 會顯得比 XML 更適用。<br>
+					<br>
+					知名的 NoSQL 資料庫 MongoDB 就是採用 JSON 格式做為資料！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>正式的用法</h2>
-                <p>
-                    直接以 eval() 來使用 JSON 資料總是有危險性，因為難保 eval() 執行的 JSON 字串不會夾帶惡意的程式碼。所以要使用 JSON 時，請忘了 eval()，改用 ECMAScript 5 特地為 JSON 準備的 API：
-                </p>
-                <table>
-                    <tr><td>JSON.parse(資料)</td><td>將 JSON 資料轉至物件。</td></tr>
-                    <tr><td>JSON.stringify(物件)</td><td>將物件轉為 JSON 資料。</td></tr>
-                </table>
-                <hr>
-                <section>
-                    <h3>範例一：將物件轉為 JSON 格式的資料</h3>
-                    <p>
-                        <textarea class='brush:js'>
-                            //建立一個物件
-                            var object = {};
-                            object.name = 'Twideem Civs';
-                            object.email = 'twideem@outlook.com';
+			<section>
+				<h2>正式的用法</h2>
+				<p>
+					直接以 eval() 來使用 JSON 資料總是有危險性，因為難保 eval() 執行的 JSON 字串不會夾帶惡意的程式碼。所以要使用 JSON 時，請忘了 eval()，改用 ECMAScript 5 特地為 JSON 準備的 API：
+				</p>
+				<table>
+					<tr><td>JSON.parse(資料)</td><td>將 JSON 資料轉至物件。</td></tr>
+					<tr><td>JSON.stringify(物件)</td><td>將物件轉為 JSON 資料。</td></tr>
+				</table>
+				<hr>
+				<section>
+					<h3>範例一：將物件轉為 JSON 格式的資料</h3>
+					<p>
+						<textarea class='brush:js'>
+							//建立一個物件
+							var object = {};
+							object.name = 'Twideem Civs';
+							object.email = 'twideem@outlook.com';
 
-                            //轉為 JSON
-                            var json = JSON.stringify(object);
+							//轉為 JSON
+							var json = JSON.stringify(object);
 
-                            //輸出轉換的結果
-                            document.write(json);
+							//輸出轉換的結果
+							document.write(json);
                         </textarea>
-                        <br>
-                        <output>
-                            {"name":"Twideem Civs","email":"twideem@outlook.com"}<br>
-                        </output>
-                        <br>
-                        從輸出結果，可以看見 object 物件的內部結構，表現為符合 JSON 格式的資料。<br>
-                        <br>
-                        不只如此，如果你將 json 變數的內容保存起來，日後更能用來還原成 JavaScript 的物件！
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>範例二：將 JSON 格式的資料轉為物件</h3>
-                    <p>
-                        <textarea class='brush:js'>
-                            //解析 JSON 格式的字串
-                            var object=JSON.parse('{"name":"Twideem Civs","email":"twideem@outlook.com"}');
+						<br>
+						<output>
+							{"name":"Twideem Civs","email":"twideem@outlook.com"}<br>
+						</output>
+						<br>
+						從輸出結果，可以看見 object 物件的內部結構，表現為符合 JSON 格式的資料。<br>
+						<br>
+						不只如此，如果你將 json 變數的內容保存起來，日後更能用來還原成 JavaScript 的物件！
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>範例二：將 JSON 格式的資料轉為物件</h3>
+					<p>
+						<textarea class='brush:js'>
+							//解析 JSON 格式的字串
+							var object=JSON.parse('{"name":"Twideem Civs","email":"twideem@outlook.com"}');
 
-                            //輸出物件屬性狀態
-                            document.write(object.name);
-                            document.write(object.email);
+							//輸出物件屬性狀態
+							document.write(object.name);
+							document.write(object.email);
                         </textarea>
-                        <br>
-                        <output>
-                            Twideem Civs<br>
-                            twideem@outlook.com<br>
-                        </output>
-                        <br>
-                        eval() 可以解析多種字串成為 JavaScript 的物件，所以不安全。因此 JSON 格式經過規範後，只有一種寫法，那就是以 {} 括住一組資料，這組資料中的「鍵」與「值」都要用「雙引號」標示，不能用「單引號」。<br>
-                        <br>
-                        範例中的單引號，是用來將 JSON 格式的 object literals 轉為字串，讓 JSON.parse() 解析。如果你將雙引號和單引號互換，會解析失敗。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>範例三：用 JSON 複製一個物件</h3>
-                    <p>
-                        <textarea class='brush:js'>
-                            //建立第一個物件
-                            var object1 = {
-                                name:'Twideem Civs',
-                                email:'twideem@outlook.com'
-                            };
+						<br>
+						<output>
+							Twideem Civs<br>
+							twideem@outlook.com<br>
+						</output>
+						<br>
+						eval() 可以解析多種字串成為 JavaScript 的物件，所以不安全。因此 JSON 格式經過規範後，只有一種寫法，那就是以 {} 括住一組資料，這組資料中的「鍵」與「值」都要用「雙引號」標示，不能用「單引號」。<br>
+						<br>
+						範例中的單引號，是用來將 JSON 格式的 object literals 轉為字串，讓 JSON.parse() 解析。如果你將雙引號和單引號互換，會解析失敗。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>範例三：用 JSON 複製一個物件</h3>
+					<p>
+						<textarea class='brush:js'>
+							//建立第一個物件
+							var object1 = {
+								name:'Twideem Civs',
+								email:'twideem@outlook.com'
+							};
 
-                            //轉為 JSON
-                            var json = JSON.stringify(object1);
+							//轉為 JSON
+							var json = JSON.stringify(object1);
 
-                            //將 JSON 建立為第二個物件
-                            var object2 = JSON.parse(json);
+							//將 JSON 建立為第二個物件
+							var object2 = JSON.parse(json);
 
-                            //輸出第二個物件的屬性值
-                            document.write(object2.name);
-                            document.write(object2.email);
+							//輸出第二個物件的屬性值
+							document.write(object2.name);
+							document.write(object2.email);
                         </textarea>
-                        <br>
-                        <output>
-                            Twideem Civs<br>
-                            twideem@outlook.com<br>
-                        </output>
-                        <br>
-                        好處是不會複製到 prototype 的東西，且屬性值是陣列的話，會複製一份新的，而不像 Object.create() 給的是參考，導致兩個物件共用同一筆資料。
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    既然有簡單的 <code>JSON.stringify()</code> 與 <code>JSON.parse()</code> 可用，除非你打算在不支援 HTML5 的瀏覽器寫網頁應用程式，否則沒理由再用 <code>eval('()')</code> 來讀取 JSON 格式的資料<ins>[1]</ins>，而且不用自己將物件轉為 JSON 格式不更省事嗎？<br>
-                    <br>
-                    有了這組 JSON 的 API，讓我們 JavaScript 程式設計的生活變得更美好！比如說，你可以把一款 RPG 的「勇者」「戰士」「僧侶」「法師」等物件，轉為四個 JSON 格式的資料，然後依序保存在 localStorage.hero、localStorage.fighter、localStorage.pilgrim、localStorage.wizard 來還原，這樣就不用寫成落落長的程式結構來保存資料。
-                </p>
-            </section>
+						<br>
+						<output>
+							Twideem Civs<br>
+							twideem@outlook.com<br>
+						</output>
+						<br>
+						好處是不會複製到 prototype 的東西，且屬性值是陣列的話，會複製一份新的，而不像 Object.create() 給的是參考，導致兩個物件共用同一筆資料。
+					</p>
+				</section>
+				<hr>
+				<p>
+					既然有簡單的 <code>JSON.stringify()</code> 與 <code>JSON.parse()</code> 可用，除非你打算在不支援 HTML5 的瀏覽器寫網頁應用程式，否則沒理由再用 <code>eval('()')</code> 來讀取 JSON 格式的資料<ins>[1]</ins>，而且不用自己將物件轉為 JSON 格式不更省事嗎？<br>
+					<br>
+					有了這組 JSON 的 API，讓我們 JavaScript 程式設計的生活變得更美好！比如說，你可以把一款 RPG 的「勇者」「戰士」「僧侶」「法師」等物件，轉為四個 JSON 格式的資料，然後依序保存在 localStorage.hero、localStorage.fighter、localStorage.pilgrim、localStorage.wizard 來還原，這樣就不用寫成落落長的程式結構來保存資料。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 就算瀏覽器實作的不是 ECMAScript 5，也能到 JSON 的官網下載函式庫來使用。官網為各式語言提供好幾套函式庫，JavaScript 的部份推薦使用 json2.js。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 就算瀏覽器實作的不是 ECMAScript 5，也能到 JSON 的官網下載函式庫來使用。官網為各式語言提供好幾套函式庫，JavaScript 的部份推薦使用 json2.js。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

@@ -2,238 +2,238 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/editor.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/editor.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>使用 NIO 讀寫檔案</h1>
-                <p>
-                    NIO 是 New I/O API 的簡稱，它是 J2SE 1.4 最吸引人的特性，提供更為低階、更為底層的輸出入功能，能根據自己需要，調校出更有效處理資料的方案，而不是只用 Java 預先設計好的解決方案！<br>
-                    <br>
-                    能根據自己設備和資料量，客製化適合自己的輸出入功能，資料處理當然會更有效率！<br>
-                    <br>
-                    除此之外，更接近底層機器的輸出入操作方式，寫出來的程式，執行上也會更加高速！過去寫 Java 網路連線程式，用 java.io.* 讀寫資料會拖累整體情況，有了 java.nio.* 能控制更多輸出入的環節，大幅降低輸出入帶來的延遲，效能高到無論網路聊天室還是 MUD 網路遊戲，用 Java 去做都可以交出完美的成品！<br>
-                    <br>
-                    然而，舊版的 File I/O，其實已經用 NIO 改寫，來提升性能了！因此不見得每次讀寫檔案都要用 NIO 不可，使用傳統 API 還是比較方便、易懂。覺得傳統 API 的通用做法無法滿足需求時，再用 NIO 調校出專屬的做法～
-                </p>
-            </header>
+			<header>
+				<h1>使用 NIO 讀寫檔案</h1>
+				<p>
+					NIO 是 New I/O API 的簡稱，它是 J2SE 1.4 最吸引人的特性，提供更為低階、更為底層的輸出入功能，能根據自己需要，調校出更有效處理資料的方案，而不是只用 Java 預先設計好的解決方案！<br>
+					<br>
+					能根據自己設備和資料量，客製化適合自己的輸出入功能，資料處理當然會更有效率！<br>
+					<br>
+					除此之外，更接近底層機器的輸出入操作方式，寫出來的程式，執行上也會更加高速！過去寫 Java 網路連線程式，用 java.io.* 讀寫資料會拖累整體情況，有了 java.nio.* 能控制更多輸出入的環節，大幅降低輸出入帶來的延遲，效能高到無論網路聊天室還是 MUD 網路遊戲，用 Java 去做都可以交出完美的成品！<br>
+					<br>
+					然而，舊版的 File I/O，其實已經用 NIO 改寫，來提升性能了！因此不見得每次讀寫檔案都要用 NIO 不可，使用傳統 API 還是比較方便、易懂。覺得傳統 API 的通用做法無法滿足需求時，再用 NIO 調校出專屬的做法～
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>以二進位檔案格式讀寫資料</h2>
-                <p>
-                    本文示範透過 FileChannel 做為記憶體緩衝區（ByteBuffer）與磁碟檔案（FileStream）之間的雙向溝通管道，來讀、寫、存、取資料，藉以了解 NIO 的基本運作方式。
-                </p>
-                <hr>
-                <section>
-                    <h3>寫入字串</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.FileOutputStream;
-                            import java.nio.ByteBuffer;
-                            import java.nio.channels.FileChannel;
+			<section>
+				<h2>以二進位檔案格式讀寫資料</h2>
+				<p>
+					本文示範透過 FileChannel 做為記憶體緩衝區（ByteBuffer）與磁碟檔案（FileStream）之間的雙向溝通管道，來讀、寫、存、取資料，藉以了解 NIO 的基本運作方式。
+				</p>
+				<hr>
+				<section>
+					<h3>寫入字串</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.FileOutputStream;
+							import java.nio.ByteBuffer;
+							import java.nio.channels.FileChannel;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
+									try{
 
-                                        String string = "猜猜我是誰";
+										String string = "猜猜我是誰";
 
-                                        FileChannel file_channel = new FileOutputStream("data.dat").getChannel();
+										FileChannel file_channel = new FileOutputStream("data.dat").getChannel();
 
-                                        ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
-                                        for(char n:string.toCharArray()){
-                                            byte_buffer.putChar(n);
-                                        }
-                                        byte_buffer.flip();
+										ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
+										for(char n:string.toCharArray()){
+											byte_buffer.putChar(n);
+										}
+										byte_buffer.flip();
 
-                                        file_channel.write(byte_buffer);
+										file_channel.write(byte_buffer);
 
-                                        file_channel.close();
+										file_channel.close();
 
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output class='editor'>
-                            猜猜我是誰
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>讀取文字</h3>
-                    <p>
-                        下面範例將讀取上一個範例所建立的 data.dat 檔案：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.io.FileInputStream;
-                            import java.nio.ByteBuffer;
-                            import java.nio.channels.FileChannel;
+						<br>
+						<output class='editor'>
+							猜猜我是誰
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>讀取文字</h3>
+					<p>
+						下面範例將讀取上一個範例所建立的 data.dat 檔案：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.io.FileInputStream;
+							import java.nio.ByteBuffer;
+							import java.nio.channels.FileChannel;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
+									try{
 
-                                        FileChannel file_channel = new FileInputStream("data.dat").getChannel();
+										FileChannel file_channel = new FileInputStream("data.dat").getChannel();
 
-                                        ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
-                                        file_channel.read(byte_buffer);
-                                        byte_buffer.flip();
+										ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
+										file_channel.read(byte_buffer);
+										byte_buffer.flip();
 
-                                        StringBuilder string_builder = new StringBuilder();
-                                        while(byte_buffer.hasRemaining()){
-                                            string_builder.append(byte_buffer.getChar());
-                                        }
+										StringBuilder string_builder = new StringBuilder();
+										while(byte_buffer.hasRemaining()){
+											string_builder.append(byte_buffer.getChar());
+										}
 
-                                        System.out.print(string_builder.toString());
+										System.out.print(string_builder.toString());
 
-                                        file_channel.close();
+										file_channel.close();
 
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            猜猜我是誰
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							猜猜我是誰
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>以純文字文件格式讀寫資料</h2>
-                <p>
-                    為避免作業系統字元編碼混亂的問題，本範例介紹純文字文件資料讀寫的同時，也介紹指定 UTF-8 字元編碼的做法。
-                </p>
-                <hr>
-                <section>
-                    <h3>寫入字串</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.FileOutputStream;
-                            import java.nio.ByteBuffer;
-                            import java.nio.channels.FileChannel;
-                            import java.nio.charset.Charset;
+			<section>
+				<h2>以純文字文件格式讀寫資料</h2>
+				<p>
+					為避免作業系統字元編碼混亂的問題，本範例介紹純文字文件資料讀寫的同時，也介紹指定 UTF-8 字元編碼的做法。
+				</p>
+				<hr>
+				<section>
+					<h3>寫入字串</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.FileOutputStream;
+							import java.nio.ByteBuffer;
+							import java.nio.channels.FileChannel;
+							import java.nio.charset.Charset;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
+									try{
 
-                                        String string = "猜猜我是誰";
+										String string = "猜猜我是誰";
 
-                                        FileChannel file_channel = new FileOutputStream("text.txt").getChannel();
+										FileChannel file_channel = new FileOutputStream("text.txt").getChannel();
 
-                                        ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
-                                        byte_buffer.put(string.getBytes(Charset.forName("UTF-8")));
-                                        byte_buffer.flip();
+										ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
+										byte_buffer.put(string.getBytes(Charset.forName("UTF-8")));
+										byte_buffer.flip();
 
-                                        file_channel.write(byte_buffer);
+										file_channel.write(byte_buffer);
 
-                                        file_channel.close();
+										file_channel.close();
 
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output class='editor'>
-                            猜猜我是誰
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>讀取文字</h3>
-                    <p>
-                        下面範例將讀取上一個範例所建立的 text.txt 檔案：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.io.FileInputStream;
-                            import java.nio.ByteBuffer;
-                            import java.nio.channels.FileChannel;
-                            import java.nio.CharBuffer;
-                            import java.nio.charset.Charset;
-                            import java.nio.charset.CharsetDecoder;
+						<br>
+						<output class='editor'>
+							猜猜我是誰
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>讀取文字</h3>
+					<p>
+						下面範例將讀取上一個範例所建立的 text.txt 檔案：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.io.FileInputStream;
+							import java.nio.ByteBuffer;
+							import java.nio.channels.FileChannel;
+							import java.nio.CharBuffer;
+							import java.nio.charset.Charset;
+							import java.nio.charset.CharsetDecoder;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
+									try{
 
-                                        FileChannel file_channel = new FileInputStream("text.txt").getChannel();
+										FileChannel file_channel = new FileInputStream("text.txt").getChannel();
 
-                                        ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
-                                        file_channel.read(byte_buffer);
-                                        byte_buffer.flip();
+										ByteBuffer byte_buffer = ByteBuffer.allocate(1024);
+										file_channel.read(byte_buffer);
+										byte_buffer.flip();
 
-                                        CharsetDecoder charset_decoder = Charset.forName("UTF-8").newDecoder();
-                                        CharBuffer char_buffer = CharBuffer.allocate(1024);
-                                        charset_decoder.decode(byte_buffer, char_buffer, false);
-                                        char_buffer.flip();
+										CharsetDecoder charset_decoder = Charset.forName("UTF-8").newDecoder();
+										CharBuffer char_buffer = CharBuffer.allocate(1024);
+										charset_decoder.decode(byte_buffer, char_buffer, false);
+										char_buffer.flip();
 
-                                        System.out.println(char_buffer.toString());
+										System.out.println(char_buffer.toString());
 
-                                        file_channel.close();
+										file_channel.close();
 
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            猜猜我是誰
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							猜猜我是誰
+						</output>
+					</p>
+				</section>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

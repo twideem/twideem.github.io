@@ -2,118 +2,118 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>Hello, PostgreSQL!</h1>
-                <p>
-                    PostgreSQL 能夠以物件的型式來儲存資料，不只如此，還允許讓資料型態透過繼承以多型的做法相互套用，成為 Java 物件導向議題中備受關注資料庫管理系統。<br>
-                    <br>
-                    差異在於，一般關聯式資料庫管理系統，是透過像 Java 這樣的程式碼來存取 SQL，但 PostgreSQL 能融入程式碼，大為提高物件導向程式設計的抽象能力！<br>
-                    <br>
-                    但能夠配合物件導向的架構，只是 PostgreSQL 長期對資料種類持續進行研究，所展現出來的強大功能之一！PostgreSQL 的本質，是把各種商業領域的問題，化作型態來解決，讓一切都能以資料的方式來處理；物件導向只是其中的一種商業型態而已。因此與其說它是「支援物件導向架構」的資料庫管理系統，不如說它是「各種商業化型態」的資料庫管理系統，否則你會因為太小看 PostgreSQL 而錯解它的價值。<br>
-                    <br>
-                    如果說 MySQL 的簡單易用，適合用來隨手架設網站伺服器，那 PostgreSQL 則能夠用來架構商業級主機的大型系統。<br>
-                    <br>
-                    不過，PostgreSQL 依然是關聯式資料庫，雖然功能強悍，但還是很容易入門！<ins>[1]</ins>
-                </p>
-            </header>
+			<header>
+				<h1>Hello, PostgreSQL!</h1>
+				<p>
+					PostgreSQL 能夠以物件的型式來儲存資料，不只如此，還允許讓資料型態透過繼承以多型的做法相互套用，成為 Java 物件導向議題中備受關注資料庫管理系統。<br>
+					<br>
+					差異在於，一般關聯式資料庫管理系統，是透過像 Java 這樣的程式碼來存取 SQL，但 PostgreSQL 能融入程式碼，大為提高物件導向程式設計的抽象能力！<br>
+					<br>
+					但能夠配合物件導向的架構，只是 PostgreSQL 長期對資料種類持續進行研究，所展現出來的強大功能之一！PostgreSQL 的本質，是把各種商業領域的問題，化作型態來解決，讓一切都能以資料的方式來處理；物件導向只是其中的一種商業型態而已。因此與其說它是「支援物件導向架構」的資料庫管理系統，不如說它是「各種商業化型態」的資料庫管理系統，否則你會因為太小看 PostgreSQL 而錯解它的價值。<br>
+					<br>
+					如果說 MySQL 的簡單易用，適合用來隨手架設網站伺服器，那 PostgreSQL 則能夠用來架構商業級主機的大型系統。<br>
+					<br>
+					不過，PostgreSQL 依然是關聯式資料庫，雖然功能強悍，但還是很容易入門！<ins>[1]</ins>
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>下載 PostgreSQL</h2>
-                <p>
-                    <a href='http://www.postgresql.org' target='_blank'>http://www.postgresql.org</a>
-                </p>
-            </section>
+			<section>
+				<h2>下載 PostgreSQL</h2>
+				<p>
+					<a href='http://www.postgresql.org' target='_blank'>http://www.postgresql.org</a>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>下載 JDBC</h2>
-                <p>
-                    <a href='http://jdbc.postgresql.org' target='_blank'>http://jdbc.postgresql.org</a>
-                </p>
-            </section>
+			<section>
+				<h2>下載 JDBC</h2>
+				<p>
+					<a href='http://jdbc.postgresql.org' target='_blank'>http://jdbc.postgresql.org</a>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>Hello, world!</h2>
-                <p>
-                    假設安裝 PostgreSQL 時，帳號設為 root，密碼為 abc123，並建立一個新的資料庫 test。記得！必須讓該範例認得 JDBC 的檔案路徑所在，否則無法在 Java 虛擬機器驅動 PostgreSQL。<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.sql.Connection;
-                        import java.sql.DriverManager;
-                        import java.sql.ResultSet;
-                        import java.sql.Statement;
+			<section>
+				<h2>Hello, world!</h2>
+				<p>
+					假設安裝 PostgreSQL 時，帳號設為 root，密碼為 abc123，並建立一個新的資料庫 test。記得！必須讓該範例認得 JDBC 的檔案路徑所在，否則無法在 Java 虛擬機器驅動 PostgreSQL。<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.sql.Connection;
+						import java.sql.DriverManager;
+						import java.sql.ResultSet;
+						import java.sql.Statement;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    //驅動 PostgreSQL
-                                    Class.forName("org.postgresql.Driver");
-                                    Connection connection = DriverManager.getConnection("jdbc:postgresql:test", "root", "abc123");
-                                    //連接指令
-                                    Statement statement = connection.createStatement();
-                                    //建立含 mycolumn 欄位的資料表 mytable
-                                    statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
-                                    //將 Hello, PostgreSQL! 這筆資料寫入 mycolumn 欄位
-                                    statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES("Hello, PostgreSQL!")");
-                                    //取出資料
-                                    ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
-                                    while(result_set.next()){
-                                        System.out.println(result_set.getString("mycolumn"));
-                                    }
-                                    //關閉
-                                    result_set.close();
-                                    statement.close();
-                                    connection.close();
-                                }
-                                catch(Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									//驅動 PostgreSQL
+									Class.forName("org.postgresql.Driver");
+									Connection connection = DriverManager.getConnection("jdbc:postgresql:test", "root", "abc123");
+									//連接指令
+									Statement statement = connection.createStatement();
+									//建立含 mycolumn 欄位的資料表 mytable
+									statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
+									//將 Hello, PostgreSQL! 這筆資料寫入 mycolumn 欄位
+									statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES("Hello, PostgreSQL!")");
+									//取出資料
+									ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
+									while(result_set.next()){
+										System.out.println(result_set.getString("mycolumn"));
+									}
+									//關閉
+									result_set.close();
+									statement.close();
+									connection.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    程式執行結果：<br>
-                    <br>
-                    <output>
-                        Hello, PostgreSQL!
-                    </output>
-                    <br>
-                    這個範例只能執行一次，如果要執行第二次，請將原始碼第 16 行註解掉。
-                </p>
-            </section>
+					<br>
+					程式執行結果：<br>
+					<br>
+					<output>
+						Hello, PostgreSQL!
+					</output>
+					<br>
+					這個範例只能執行一次，如果要執行第二次，請將原始碼第 16 行註解掉。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] 也就是除了容易入門，也能高深到用來解決更專業的問題。<br>
-                    [*] 但也不代表說，既然 PostgreSQL 這麼好，何必用 MySQL？通常我們只需要讓程式語言能夠透過 SQL 存取資料庫就夠了，這時繼續使用自己習慣的 MySQL 沒什麼不好。當我們需要讓程式碼有不一樣的表現方式時，才考慮 PostgreSQL 也無所謂；但是除非你為了物件導向而物件導向，否則需要這樣做的機率很低。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] 也就是除了容易入門，也能高深到用來解決更專業的問題。<br>
+					[*] 但也不代表說，既然 PostgreSQL 這麼好，何必用 MySQL？通常我們只需要讓程式語言能夠透過 SQL 存取資料庫就夠了，這時繼續使用自己習慣的 MySQL 沒什麼不好。當我們需要讓程式碼有不一樣的表現方式時，才考慮 PostgreSQL 也無所謂；但是除非你為了物件導向而物件導向，否則需要這樣做的機率很低。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

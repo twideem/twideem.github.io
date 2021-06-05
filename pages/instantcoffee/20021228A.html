@@ -2,576 +2,576 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>日期與時間</h1>
-                <p>
-                    Java 處理日期與時間的功能，是段艱辛悲慘又錯綜複雜的歷史。<br>
-                    <br>
-                    一開始是發現 JDK1.0 的 Date 有瑕疵<ins>[1]</ins>，所以 JDK1.1 改推 Calendar 取代它大部份的功能。注意！不是取代整個類別，而是大部份功能，也就是想把 Date 功能割掉變成新類別（就跟 Calendar 一樣新而且是不一樣的東西），而不是推出 Calendar 後形成新舊兩類別（也就不能當作 Date 一樣的舊東西），理念之複雜不是一般程式設計師能理解的；倒是 JDK1.1 剛好冒出繼承自 Date 的 java.sql.Date，但專為 JDBC 所用而不是取代。<br>
-                    <br>
-                    Calendar 功能上沒瑕疵了，但操作上比 Date 難用，要命的是，直到 Java SE 8 才推出 LocalDateTime 解決 Calendar 的不足。不過，Java SE 8 還推出 Instant 解決了 Date 根本上的問題，造成 Java 動盪不安的 Date 和 Calendar 都被擺平，終於有了美好的日期與時間功能使用環境。<br>
-                    <br>
-                    幾經波折，現在各個類別的用途如下：<br>
-                    <br>
-                    ．Date 適合「顯示時間」，指定時間<ins>[2]</ins> 的功能全部被 Deprecated 不建議使用。<br>
-                    ．Calendar 適合「指定時間」，但是很難用。<br>
-                    ．LocalDateTime 適合「指定時間」，非常簡單好用。<br>
-                    ．Instante 適合「計算時間」，過去誤差極小可以忽視，現在可以做得精準。
-                </p>
-            </header>
+			<header>
+				<h1>日期與時間</h1>
+				<p>
+					Java 處理日期與時間的功能，是段艱辛悲慘又錯綜複雜的歷史。<br>
+					<br>
+					一開始是發現 JDK1.0 的 Date 有瑕疵<ins>[1]</ins>，所以 JDK1.1 改推 Calendar 取代它大部份的功能。注意！不是取代整個類別，而是大部份功能，也就是想把 Date 功能割掉變成新類別（就跟 Calendar 一樣新而且是不一樣的東西），而不是推出 Calendar 後形成新舊兩類別（也就不能當作 Date 一樣的舊東西），理念之複雜不是一般程式設計師能理解的；倒是 JDK1.1 剛好冒出繼承自 Date 的 java.sql.Date，但專為 JDBC 所用而不是取代。<br>
+					<br>
+					Calendar 功能上沒瑕疵了，但操作上比 Date 難用，要命的是，直到 Java SE 8 才推出 LocalDateTime 解決 Calendar 的不足。不過，Java SE 8 還推出 Instant 解決了 Date 根本上的問題，造成 Java 動盪不安的 Date 和 Calendar 都被擺平，終於有了美好的日期與時間功能使用環境。<br>
+					<br>
+					幾經波折，現在各個類別的用途如下：<br>
+					<br>
+					．Date 適合「顯示時間」，指定時間<ins>[2]</ins> 的功能全部被 Deprecated 不建議使用。<br>
+					．Calendar 適合「指定時間」，但是很難用。<br>
+					．LocalDateTime 適合「指定時間」，非常簡單好用。<br>
+					．Instante 適合「計算時間」，過去誤差極小可以忽視，現在可以做得精準。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>java.util.Date</h2>
-                <p>
-                    Date 表示電腦的某個時間點，它幾乎所有功能都被列為不建議使用，所以搭配 DateFormat 或 SimpleDateFormat 轉換成日期時間格式的字串。
-                </p>
-                <hr>
-                <section>
-                    <h3>取得日期與時間</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.text.DateFormat;
-                            import java.util.Date;
+			<section>
+				<h2>java.util.Date</h2>
+				<p>
+					Date 表示電腦的某個時間點，它幾乎所有功能都被列為不建議使用，所以搭配 DateFormat 或 SimpleDateFormat 轉換成日期時間格式的字串。
+				</p>
+				<hr>
+				<section>
+					<h3>取得日期與時間</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.text.DateFormat;
+							import java.util.Date;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //取得電腦當前的時間
-                                    Date date = new Date();
-                                    //輸出日期與時間
-                                    System.out.print(DateFormat.getInstance().format(date));
-                                }
+								public static void main(String[] args){
+									//取得電腦當前的時間
+									Date date = new Date();
+									//輸出日期與時間
+									System.out.print(DateFormat.getInstance().format(date));
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            2002/8/29 下午 12:34<br>
-                        </output>
-                        <br>
-                        只想輸出日期的話，可用 <var>DateFormat.getDateInstance().format(date))</var> 輸出「2002/8/29」，只想輸出時間的話，可用 <var>DateFormat.getTimeInstance().format(date))</var> 輸出「下午 12:34:56」。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>分別取得年、月、日、週、時、分、秒</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.Date;
-                            import java.text.SimpleDateFormat;
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							2002/8/29 下午 12:34<br>
+						</output>
+						<br>
+						只想輸出日期的話，可用 <var>DateFormat.getDateInstance().format(date))</var> 輸出「2002/8/29」，只想輸出時間的話，可用 <var>DateFormat.getTimeInstance().format(date))</var> 輸出「下午 12:34:56」。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>分別取得年、月、日、週、時、分、秒</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.Date;
+							import java.text.SimpleDateFormat;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Date date = new Date();
+									Date date = new Date();
 
-                                    System.out.println("年：" + new SimpleDateFormat("y").format(date));
-                                    System.out.println("月：" + new SimpleDateFormat("M").format(date));
-                                    System.out.println("日：" + new SimpleDateFormat("d").format(date));
-                                    System.out.println("週：" + new SimpleDateFormat("E").format(date));
-                                    System.out.println("午：" + new SimpleDateFormat("a").format(date));
-                                    System.out.println("時：" + new SimpleDateFormat("h").format(date));
-                                    System.out.println("分：" + new SimpleDateFormat("m").format(date));
-                                    System.out.println("秒：" + new SimpleDateFormat("s").format(date));
+									System.out.println("年：" + new SimpleDateFormat("y").format(date));
+									System.out.println("月：" + new SimpleDateFormat("M").format(date));
+									System.out.println("日：" + new SimpleDateFormat("d").format(date));
+									System.out.println("週：" + new SimpleDateFormat("E").format(date));
+									System.out.println("午：" + new SimpleDateFormat("a").format(date));
+									System.out.println("時：" + new SimpleDateFormat("h").format(date));
+									System.out.println("分：" + new SimpleDateFormat("m").format(date));
+									System.out.println("秒：" + new SimpleDateFormat("s").format(date));
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            年：2002<br>
-                            月：8<br>
-                            日：29<br>
-                            週：星期四<br>
-                            午：下午<br>
-                            時：12<br>
-                            分：34<br>
-                            秒：56<br>
-                        </output>
-                        <br>
-                        有 SimpleDateFormat，想取得「年、月、日、週、時、分、秒」時，可別傻傻用 DateFormat 傳回的字串去剖析。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>自訂日期與時間的輸出格式</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.util.Date;
-                            import java.text.SimpleDateFormat;
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							年：2002<br>
+							月：8<br>
+							日：29<br>
+							週：星期四<br>
+							午：下午<br>
+							時：12<br>
+							分：34<br>
+							秒：56<br>
+						</output>
+						<br>
+						有 SimpleDateFormat，想取得「年、月、日、週、時、分、秒」時，可別傻傻用 DateFormat 傳回的字串去剖析。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>自訂日期與時間的輸出格式</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.util.Date;
+							import java.text.SimpleDateFormat;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    Date date = new Date();
-                                    System.out.println(new SimpleDateFormat("yyyy 年 MM 月 dd 日 E a h:m:s").format(date));
-                                }
+								public static void main(String[] args){
+									Date date = new Date();
+									System.out.println(new SimpleDateFormat("yyyy 年 MM 月 dd 日 E a h:m:s").format(date));
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            2002 年 8 月 29 日 星期四 下午 12:34:56
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							2002 年 8 月 29 日 星期四 下午 12:34:56
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>java.util.Calendar</h2>
-                <p>
-                    Calendar 取代了 Date 大多數的功能，適合需要指定日期與時間的場合。
-                </p>
-                <hr>
-                <section>
-                    <h3>指定時間</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.text.DateFormat;
-                            import java.util.Calendar;
+			<section>
+				<h2>java.util.Calendar</h2>
+				<p>
+					Calendar 取代了 Date 大多數的功能，適合需要指定日期與時間的場合。
+				</p>
+				<hr>
+				<section>
+					<h3>指定時間</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.text.DateFormat;
+							import java.util.Calendar;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //建立 Calendar
-                                    Calendar calendar = Calendar.getInstance();
-                                    //分別設定年、月、日、時、分、秒
-                                    calendar.set(Calendar.YEAR, 2002);
-                                    calendar.set(Calendar.MONTH, Calendar.AUGUST);
-                                    calendar.set(Calendar.DAY_OF_MONTH, 29);
-                                    calendar.set(Calendar.HOUR_OF_DAY, 12);
-                                    calendar.set(Calendar.MINUTE, 34);
-                                    calendar.set(Calendar.SECOND, 56);
-                                    //顯示結果
-                                    System.out.println("年：", calendar.get(Calendar.YEAR));
-                                    System.out.println("月：", calendar.get(Calendar.MONTH)+1);
-                                    System.out.println("日：", calendar.get(Calendar.DAY_OF_MONTH));
-                                    System.out.println("週：", calendar.get(Calendar.DAY_OF_WEEK)-1);
-                                    System.out.println("時：", calendar.get(Calendar.HOUR_OF_DAY));
-                                    System.out.println("分：", calendar.get(Calendar.MINUTE));
-                                    System.out.println("秒：", calendar.get(Calendar.SECOND));
-                                }
+								public static void main(String[] args){
+									//建立 Calendar
+									Calendar calendar = Calendar.getInstance();
+									//分別設定年、月、日、時、分、秒
+									calendar.set(Calendar.YEAR, 2002);
+									calendar.set(Calendar.MONTH, Calendar.AUGUST);
+									calendar.set(Calendar.DAY_OF_MONTH, 29);
+									calendar.set(Calendar.HOUR_OF_DAY, 12);
+									calendar.set(Calendar.MINUTE, 34);
+									calendar.set(Calendar.SECOND, 56);
+									//顯示結果
+									System.out.println("年：", calendar.get(Calendar.YEAR));
+									System.out.println("月：", calendar.get(Calendar.MONTH)+1);
+									System.out.println("日：", calendar.get(Calendar.DAY_OF_MONTH));
+									System.out.println("週：", calendar.get(Calendar.DAY_OF_WEEK)-1);
+									System.out.println("時：", calendar.get(Calendar.HOUR_OF_DAY));
+									System.out.println("分：", calendar.get(Calendar.MINUTE));
+									System.out.println("秒：", calendar.get(Calendar.SECOND));
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果：<br>
-                        <br>
-                        <output>
-                            年：2002<br>
-                            月：8<br>
-                            日：29<br>
-                            週：4<br>
-                            時：12<br>
-                            分：34<br>
-                            秒：56<br>
-                        </output>
-                        <br>
-                        彆扭的是，Calendar 的一月是 0，所以取得月份時要加 1，設定月份時則用常數比較直覺。星期幾就複雜了，不同地區，有些星期日是每週的第一天，有些星期一是每週是第一天，導致台灣取得星期幾要減 1。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Calendar 轉 Date</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.text.DateFormat;
-                            import java.util.Calendar;
-                            import java.util.Date;
+						<br>
+						執行結果：<br>
+						<br>
+						<output>
+							年：2002<br>
+							月：8<br>
+							日：29<br>
+							週：4<br>
+							時：12<br>
+							分：34<br>
+							秒：56<br>
+						</output>
+						<br>
+						彆扭的是，Calendar 的一月是 0，所以取得月份時要加 1，設定月份時則用常數比較直覺。星期幾就複雜了，不同地區，有些星期日是每週的第一天，有些星期一是每週是第一天，導致台灣取得星期幾要減 1。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Calendar 轉 Date</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.text.DateFormat;
+							import java.util.Calendar;
+							import java.util.Date;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Calendar calendar = Calendar.getInstance();
-                                    Date date = calendar.getTime();
-                                    System.out.print(DateFormat.getInstance().format(date));
+									Calendar calendar = Calendar.getInstance();
+									Date date = calendar.getTime();
+									System.out.print(DateFormat.getInstance().format(date));
 
-                                }
-                            }
+								}
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            2002/8/29 下午 12:34<br>
-                        </output>
-                        <br>
-                        Date 呼叫 getTime() 會回傳 long 型態的毫秒數，Calendar 呼叫 getTime() 則回傳 Date 物件。
-                    </p>
-                </section>
-            </section>
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							2002/8/29 下午 12:34<br>
+						</output>
+						<br>
+						Date 呼叫 getTime() 會回傳 long 型態的毫秒數，Calendar 呼叫 getTime() 則回傳 Date 物件。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>java.time.LocalDateTime</h2>
-                <p>
-                    LocalDateTime、LocalDate、LocalTime 是同系列的類別，可簡化日期與時間的程式設計工作。<br>
-                    <br>
-                    由於 LocalDateTime 沒有時區的功能，所以還有 ZonedDateTime，但不在本文討論範圍。
-                </p>
-                <hr>
-                <section>
-                    <h3>取得日期或時間</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.LocalDate;
-                            import java.time.LocalTime;
+			<section>
+				<h2>java.time.LocalDateTime</h2>
+				<p>
+					LocalDateTime、LocalDate、LocalTime 是同系列的類別，可簡化日期與時間的程式設計工作。<br>
+					<br>
+					由於 LocalDateTime 沒有時區的功能，所以還有 ZonedDateTime，但不在本文討論範圍。
+				</p>
+				<hr>
+				<section>
+					<h3>取得日期或時間</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.LocalDate;
+							import java.time.LocalTime;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    System.out.println(LocalDate.now()); //取得電腦當前日期
-                                    System.out.println(LocalTime.now()); //取得電腦當前時間
+									System.out.println(LocalDate.now()); //取得電腦當前日期
+									System.out.println(LocalTime.now()); //取得電腦當前時間
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            2002-08-29<br>
-                            12:34:56.000
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>分別取得年、月、日、週、時、分、秒</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.LocalDateTime;
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							2002-08-29<br>
+							12:34:56.000
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>分別取得年、月、日、週、時、分、秒</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.LocalDateTime;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    LocalDateTime local_date_time = LocalDateTime.now();
+									LocalDateTime local_date_time = LocalDateTime.now();
 
-                                    System.out.println("年：" + local_date_time.getYear());
-                                    System.out.println("月：" + local_date_time.getMonth());
-                                    System.out.println("日：" + local_date_time.getDayOfMonth());
-                                    System.out.println("週：" + local_date_time.getDayOfWeek());
-                                    System.out.println("時：" + local_date_time.getHour());
-                                    System.out.println("分：" + local_date_time.getMinute());
-                                    System.out.println("秒：" + local_date_time.getSecond());
+									System.out.println("年：" + local_date_time.getYear());
+									System.out.println("月：" + local_date_time.getMonth());
+									System.out.println("日：" + local_date_time.getDayOfMonth());
+									System.out.println("週：" + local_date_time.getDayOfWeek());
+									System.out.println("時：" + local_date_time.getHour());
+									System.out.println("分：" + local_date_time.getMinute());
+									System.out.println("秒：" + local_date_time.getSecond());
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            年：2002<br>
-                            月：AUGUST<br>
-                            日：29<br>
-                            週：THURSDAY<br>
-                            時：12<br>
-                            分：34<br>
-                            秒：56<br>
-                        </output>
-                        <br>
-                        月份與星期是 Enum，所以希望取得數值的話，在後面加上 <code>getValue()</code> 即可，例如：<code>local_date_time.getDayOfWeek().getValue()</code>，而且是輸出的數值不用加 1 或減 1，一月是 1，星期一是 1，光這點就完勝 Date 和 Calendar 了！
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>指定時間</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.LocalDateTime;
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							年：2002<br>
+							月：AUGUST<br>
+							日：29<br>
+							週：THURSDAY<br>
+							時：12<br>
+							分：34<br>
+							秒：56<br>
+						</output>
+						<br>
+						月份與星期是 Enum，所以希望取得數值的話，在後面加上 <code>getValue()</code> 即可，例如：<code>local_date_time.getDayOfWeek().getValue()</code>，而且是輸出的數值不用加 1 或減 1，一月是 1，星期一是 1，光這點就完勝 Date 和 Calendar 了！
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>指定時間</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.LocalDateTime;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    LocalDateTime local_date_time = LocalDateTime.of(2002,8,29,12,34,56);
+									LocalDateTime local_date_time = LocalDateTime.of(2002,8,29,12,34,56);
 
-                                    System.out.println("年：" + local_date_time.getYear());
-                                    System.out.println("月：" + local_date_time.getMonth());
-                                    System.out.println("日：" + local_date_time.getDayOfMonth());
-                                    System.out.println("週：" + local_date_time.getDayOfWeek());
-                                    System.out.println("時：" + local_date_time.getHour());
-                                    System.out.println("分：" + local_date_time.getMinute());
-                                    System.out.println("秒：" + local_date_time.getSecond());
+									System.out.println("年：" + local_date_time.getYear());
+									System.out.println("月：" + local_date_time.getMonth());
+									System.out.println("日：" + local_date_time.getDayOfMonth());
+									System.out.println("週：" + local_date_time.getDayOfWeek());
+									System.out.println("時：" + local_date_time.getHour());
+									System.out.println("分：" + local_date_time.getMinute());
+									System.out.println("秒：" + local_date_time.getSecond());
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果：<br>
-                        <br>
-                        <output>
-                            年：2002<br>
-                            月：8<br>
-                            日：29<br>
-                            週：4<br>
-                            時：12<br>
-                            分：34<br>
-                            秒：56<br>
-                        </output>
-                        <br>
-                        也可用 <code>LocalDateTime.parse("2002-08-29T12:34:56")</code> 剖析字串的方式指定時間。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>其它功能</h3>
-                    <p>
-                        LocalDate 可使用 <code>plusYears()</code>、<code>plusMonths()</code>、<code>plusWeeks()</code>、<code>plusDays()</code>、<code>minusYears()</code>、<code>minusMonths()</code>、<code>minusWeekss()</code>、<code>minusDays()</code> 前進後退日期點、使用 <code>getDayOfYear()</code> 取得該日子是當年的第幾天、使用 <code>isLeapYear()</code> 判斷閏年。<br>
-                        <br>
-                        LocalTime 可使用 <code>plusDays()</code>、<code>plusHours()</code>、<code>plusMinutes()</code>、<code>plusSeconds()</code>、<code>plusMillis()</code>、<code>plusNanos()</code>、 <code>minusDays()</code>、<code>minusHours()</code>、<code>minusMinutes()</code>、<code>minusSeconds()</code>、<code>minusMillis()</code>、<code>minusNanos()</code> 前進後退時間點。<br>
-                        <br>
-                        LocalDateTime 兼具上述功能，三者可用 <code>isAfter()</code>、<code>isBefore()</code> 比較日期或時間誰先誰後，<code>until()</code> 可計算日期或時間的差距。<br>
-                        <br>
-                        底下挑幾個功能作範例：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.time.LocalDate;
+						<br>
+						執行結果：<br>
+						<br>
+						<output>
+							年：2002<br>
+							月：8<br>
+							日：29<br>
+							週：4<br>
+							時：12<br>
+							分：34<br>
+							秒：56<br>
+						</output>
+						<br>
+						也可用 <code>LocalDateTime.parse("2002-08-29T12:34:56")</code> 剖析字串的方式指定時間。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>其它功能</h3>
+					<p>
+						LocalDate 可使用 <code>plusYears()</code>、<code>plusMonths()</code>、<code>plusWeeks()</code>、<code>plusDays()</code>、<code>minusYears()</code>、<code>minusMonths()</code>、<code>minusWeekss()</code>、<code>minusDays()</code> 前進後退日期點、使用 <code>getDayOfYear()</code> 取得該日子是當年的第幾天、使用 <code>isLeapYear()</code> 判斷閏年。<br>
+						<br>
+						LocalTime 可使用 <code>plusDays()</code>、<code>plusHours()</code>、<code>plusMinutes()</code>、<code>plusSeconds()</code>、<code>plusMillis()</code>、<code>plusNanos()</code>、 <code>minusDays()</code>、<code>minusHours()</code>、<code>minusMinutes()</code>、<code>minusSeconds()</code>、<code>minusMillis()</code>、<code>minusNanos()</code> 前進後退時間點。<br>
+						<br>
+						LocalDateTime 兼具上述功能，三者可用 <code>isAfter()</code>、<code>isBefore()</code> 比較日期或時間誰先誰後，<code>until()</code> 可計算日期或時間的差距。<br>
+						<br>
+						底下挑幾個功能作範例：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.time.LocalDate;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //指定寶寶生日那天
-                                    LocalDate local_date = LocalDate.of(2014,11,10);
-                                    //好奇這天是當年的第幾天
-                                    System.out.println(local_date.getDayOfYear());
-                                    //接種疫苗的日子，共三劑：出生後五天、間隔一個月、滿六個月大。
-                                    System.out.println(local_date.plusDays(5));
-                                    System.out.println(local_date.plusDays(5).plusMonths(1));
-                                    System.out.println(local_date.plusMonths(6));
-                                }
+								public static void main(String[] args){
+									//指定寶寶生日那天
+									LocalDate local_date = LocalDate.of(2014,11,10);
+									//好奇這天是當年的第幾天
+									System.out.println(local_date.getDayOfYear());
+									//接種疫苗的日子，共三劑：出生後五天、間隔一個月、滿六個月大。
+									System.out.println(local_date.plusDays(5));
+									System.out.println(local_date.plusDays(5).plusMonths(1));
+									System.out.println(local_date.plusMonths(6));
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果：<br>
-                        <br>
-                        <output>
-                            314<br>
-                            2014-11-15<br>
-                            2014-12-15<br>
-                            2015-05-10
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>LocalDateTime、LocalDate、LocalTime 轉 Date</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.text.DateFormat;
-                            import java.time.LocalDate;
-                            import java.time.LocalDateTime;
-                            import java.time.LocalTime;
-                            import java.time.ZoneId;
-                            import java.util.Date;
+						<br>
+						執行結果：<br>
+						<br>
+						<output>
+							314<br>
+							2014-11-15<br>
+							2014-12-15<br>
+							2015-05-10
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>LocalDateTime、LocalDate、LocalTime 轉 Date</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.text.DateFormat;
+							import java.time.LocalDate;
+							import java.time.LocalDateTime;
+							import java.time.LocalTime;
+							import java.time.ZoneId;
+							import java.util.Date;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //建立 LcoalDateTime、LocalDate、LocalTime
-                                    LocalDateTime local_date_time = LocalDateTime.now();
-                                    LocalDate local_date = LocalDate.now();
-                                    LocalTime local_time = LocalTime.now();
-                                    //LocalDateTime 轉 Date
-                                    Date date1 = Date.from(local_date_time.atZone(ZoneId.systemDefault()).toInstant());
-                                    //LocalDate 轉 LocalDateTime 再轉 Date
-                                    Date date2 = Date.from(local_date.atTime(local_time).atZone(ZoneId.systemDefault()).toInstant());
-                                    //LocalTime 轉 LocalDateTime 再轉 Date
-                                    Date date3 = Date.from(local_time.atDate(local_date).atZone(ZoneId.systemDefault()).toInstant());
-                                    //用 DateFormat 輸出 date1~date3 看看結果
-                                    System.out.println(DateFormat.getInstance().format(date1));
-                                    System.out.println(DateFormat.getInstance().format(date2));
-                                    System.out.println(DateFormat.getInstance().format(date3));
-                                }
+								public static void main(String[] args){
+									//建立 LcoalDateTime、LocalDate、LocalTime
+									LocalDateTime local_date_time = LocalDateTime.now();
+									LocalDate local_date = LocalDate.now();
+									LocalTime local_time = LocalTime.now();
+									//LocalDateTime 轉 Date
+									Date date1 = Date.from(local_date_time.atZone(ZoneId.systemDefault()).toInstant());
+									//LocalDate 轉 LocalDateTime 再轉 Date
+									Date date2 = Date.from(local_date.atTime(local_time).atZone(ZoneId.systemDefault()).toInstant());
+									//LocalTime 轉 LocalDateTime 再轉 Date
+									Date date3 = Date.from(local_time.atDate(local_date).atZone(ZoneId.systemDefault()).toInstant());
+									//用 DateFormat 輸出 date1~date3 看看結果
+									System.out.println(DateFormat.getInstance().format(date1));
+									System.out.println(DateFormat.getInstance().format(date2));
+									System.out.println(DateFormat.getInstance().format(date3));
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            2002/8/29 下午 12:34<br>
-                            2002/8/29 下午 12:34<br>
-                            2002/8/29 下午 12:34
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							2002/8/29 下午 12:34<br>
+							2002/8/29 下午 12:34<br>
+							2002/8/29 下午 12:34
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>java.time.Instant</h2>
-                <p>
-                    Instant 可說是功能不用被 Deprecated 的 Date，但主要用途依然是表示某個時間點，進行低階的設計。所以 Instant 雖然有完整的功能可以做到與 LocalDateTime 一樣的事，但寫法較複雜。<br>
-                    <br>
-                    Instant 將會成為各家 Framework 處理時間的基本類別，甚至看到有 Framework 將 Date 整個類別列為 Deprecated 的話也不用訝異，重要性不可言喻。<br>
-                    <br>
-                    Instant 經常搭配以奈秒為單位的 Duration 用來計算時間、以天數為單位的 Period 用來反覆某個周期。
-                </p>
-                <hr>
-                <section>
-                    <h3>取得日期與時間</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.format.DateTimeFormatter;
-                            import java.time.Instant;
-                            import java.time.ZoneId;
+			<section>
+				<h2>java.time.Instant</h2>
+				<p>
+					Instant 可說是功能不用被 Deprecated 的 Date，但主要用途依然是表示某個時間點，進行低階的設計。所以 Instant 雖然有完整的功能可以做到與 LocalDateTime 一樣的事，但寫法較複雜。<br>
+					<br>
+					Instant 將會成為各家 Framework 處理時間的基本類別，甚至看到有 Framework 將 Date 整個類別列為 Deprecated 的話也不用訝異，重要性不可言喻。<br>
+					<br>
+					Instant 經常搭配以奈秒為單位的 Duration 用來計算時間、以天數為單位的 Period 用來反覆某個周期。
+				</p>
+				<hr>
+				<section>
+					<h3>取得日期與時間</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.format.DateTimeFormatter;
+							import java.time.Instant;
+							import java.time.ZoneId;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Instant instant = Instant.now();
-                                    System.out.print(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.systemDefault()).format(instant));
+									Instant instant = Instant.now();
+									System.out.print(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.systemDefault()).format(instant));
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦當時的時間與時區而不同：<br>
-                        <br>
-                        <output>
-                            2002/8/29 12:34<br>
-                        </output>
-                        <br>
-                        這範例相當於 Date 搭配 DateFormat，Java Time API 以 Instant 搭配 DateTimeFormatter，可以做更細部的設定。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>計算間隔時間</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.Instant;
-                            import java.time.Duration;
+						<br>
+						執行結果隨電腦當時的時間與時區而不同：<br>
+						<br>
+						<output>
+							2002/8/29 12:34<br>
+						</output>
+						<br>
+						這範例相當於 Date 搭配 DateFormat，Java Time API 以 Instant 搭配 DateTimeFormatter，可以做更細部的設定。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>計算間隔時間</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.Instant;
+							import java.time.Duration;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    //保存計算前的時間點
-                                    Instant start = Instant.now();
-                                    //一個需要花時間運算的函式
-                                    f();
-                                    //跑完函式後的時間點
-                                    Instant end = Instant.now();
-                                    //以 Duration 計算兩時間點的差距後以秒數輸出
-                                    System.out.println(Duration.between(start, end).getSeconds());
-                                }
+								public static void main(String[] args){
+									//保存計算前的時間點
+									Instant start = Instant.now();
+									//一個需要花時間運算的函式
+									f();
+									//跑完函式後的時間點
+									Instant end = Instant.now();
+									//以 Duration 計算兩時間點的差距後以秒數輸出
+									System.out.println(Duration.between(start, end).getSeconds());
+								}
 
-                                public static void f(){
-                                    //純粹浪費時間不做事用的程式（所以你不用費心這塊程式有什麼意義）
-                                    int[] a = new int[300];
-                                    for(int m=0; m&lt;a.length; m++)
-                                        for(int n=0; n&lt;a.length; n++)
-                                            for(int o=0; o&lt;a.length; o++)
-                                                for(int p=0; p&lt;a.length; p++)
-                                                    ;
-                                }
+								public static void f(){
+									//純粹浪費時間不做事用的程式（所以你不用費心這塊程式有什麼意義）
+									int[] a = new int[300];
+									for(int m=0; m&lt;a.length; m++)
+										for(int n=0; n&lt;a.length; n++)
+											for(int o=0; o&lt;a.length; o++)
+												for(int p=0; p&lt;a.length; p++)
+													;
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        執行結果隨電腦運作情況不同：<br>
-                        <br>
-                        <output>
-                            8
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Date 轉 Instant</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.Instant;
-                            import java.util.Date;
+						<br>
+						執行結果隨電腦運作情況不同：<br>
+						<br>
+						<output>
+							8
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Date 轉 Instant</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.Instant;
+							import java.util.Date;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Date date = new Date();
-                                    Instant instant = date.toInstant();
+									Date date = new Date();
+									Instant instant = date.toInstant();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Instant 轉 Date</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.time.Instant;
-                            import java.util.Date;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Instant 轉 Date</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.time.Instant;
+							import java.util.Date;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Instant instant = Instant.now();
-                                    Date date = Date.from(instant);
+									Instant instant = Instant.now();
+									Date date = Date.from(instant);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] Date 內部使用一個 long 型態變數保存從 1970/1/1 0:0:0 開始累積的毫秒數，做為日期與時間的依據。像鐘錶一樣顯示電腦時間沒問題，但遇到要計算數年之中發生的 1 閏秒就沒法處理了。不像 Duration，內部使用一個 long 保存秒數，一個 int 保存奈秒數。<br>
-                    [2] 指定時間並不會修改電腦的時間，純粹只是指定某個時間點而已。<br>
-                    [*] toEpochSecond() 是「秒」，乘上 1000 才是 Date 呼叫 getTime() 的「毫秒」。<br>
-                    [*] 鎌倉幕府「征夷大将軍」架空「天皇」權力，「執権」又架空「征夷大将軍」，「内管領（得宗家執事）」又架空「執権」，讓歷史複雜起來的戲碼，在 Java 活活上演 XDDD
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] Date 內部使用一個 long 型態變數保存從 1970/1/1 0:0:0 開始累積的毫秒數，做為日期與時間的依據。像鐘錶一樣顯示電腦時間沒問題，但遇到要計算數年之中發生的 1 閏秒就沒法處理了。不像 Duration，內部使用一個 long 保存秒數，一個 int 保存奈秒數。<br>
+					[2] 指定時間並不會修改電腦的時間，純粹只是指定某個時間點而已。<br>
+					[*] toEpochSecond() 是「秒」，乘上 1000 才是 Date 呼叫 getTime() 的「毫秒」。<br>
+					[*] 鎌倉幕府「征夷大将軍」架空「天皇」權力，「執権」又架空「征夷大将軍」，「内管領（得宗家執事）」又架空「執権」，讓歷史複雜起來的戲碼，在 Java 活活上演 XDDD
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

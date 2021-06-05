@@ -2,303 +2,303 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java');sh.theme('../../objects/plugins/sh/default.css')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java');sh.theme('../../objects/plugins/sh/default.css')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>如何使用 SyntaxHighlighter 顯示程式範例</h1>
-                <p>
-                    SyntaxHighlighter 是由 Alex Gorbatchev 開發，能夠在網頁中，用高亮度識別文字，來顯示程式碼範例的 JavaScript 系統。<br>
-                    <br>
-                    <textarea class='brush:java;toolbar:true'>
-                        public class HelloWorld {
-                            public static vodi main(String[] args){
-                                System.out.print('Hello, world!');
-                            }
-                        }
+			<header>
+				<h1>如何使用 SyntaxHighlighter 顯示程式範例</h1>
+				<p>
+					SyntaxHighlighter 是由 Alex Gorbatchev 開發，能夠在網頁中，用高亮度識別文字，來顯示程式碼範例的 JavaScript 系統。<br>
+					<br>
+					<textarea class='brush:java;toolbar:true'>
+						public class HelloWorld {
+							public static vodi main(String[] args){
+								System.out.print('Hello, world!');
+							}
+						}
                     </textarea>
-                    <br>
-                    Alex Gorbatchev 這套 SyntaxHighlighter 系統，不僅預設的功能即符合大眾需求，往後也可以透過簡單的參數設定來調整功能，顯示出來的結果清爽又美觀，成為這類系統中最受歡迎的一款。<br>
-                    <br>
-                    請從下列官網的網址下載：<br>
-                    <br>
-                    <a href='http://github.com/syntaxhighlighter/' target='_blank'>http://github.com/syntaxhighlighter/</a>
-                </p>
-            </header>
+					<br>
+					Alex Gorbatchev 這套 SyntaxHighlighter 系統，不僅預設的功能即符合大眾需求，往後也可以透過簡單的參數設定來調整功能，顯示出來的結果清爽又美觀，成為這類系統中最受歡迎的一款。<br>
+					<br>
+					請從下列官網的網址下載：<br>
+					<br>
+					<a href='http://github.com/syntaxhighlighter/' target='_blank'>http://github.com/syntaxhighlighter/</a>
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>基本用法</h2>
-                <p>
-                    首先示範如何以預設的高亮度主題，用來顯示 Java 程式碼。
-                </p>
-                <hr>
-                <section>
-                    <h3>步驟 1</h3>
-                    <p>
-                        下載後解壓縮檔案，然後將 scripts 與 styles 兩個資料夾，放在你的網頁專案裡面。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>步驟 2</h3>
-                    <p>
-                        在你網頁的 head 標籤裡面，加入如下標記，但必須自行根據你網頁的相對路徑調整檔案來源：<br>
-                        <br>
-                        <textarea class='brush:html'>
-                            &lt;link href='styles/shCoreDefault.css' rel='stylesheet'&gt;
-                            &lt;script src='scripts/shCore.js'&gt;&lt;/script&gt;
-                            &lt;script src='scripts/shBrushJava.js'&gt;&lt;/script&gt;
-                            &lt;script&gt;
-                                SyntaxHighlighter.all();
-                            &lt;/script&gt;
+			<section>
+				<h2>基本用法</h2>
+				<p>
+					首先示範如何以預設的高亮度主題，用來顯示 Java 程式碼。
+				</p>
+				<hr>
+				<section>
+					<h3>步驟 1</h3>
+					<p>
+						下載後解壓縮檔案，然後將 scripts 與 styles 兩個資料夾，放在你的網頁專案裡面。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>步驟 2</h3>
+					<p>
+						在你網頁的 head 標籤裡面，加入如下標記，但必須自行根據你網頁的相對路徑調整檔案來源：<br>
+						<br>
+						<textarea class='brush:html'>
+							&lt;link href='styles/shCoreDefault.css' rel='stylesheet'&gt;
+							&lt;script src='scripts/shCore.js'&gt;&lt;/script&gt;
+							&lt;script src='scripts/shBrushJava.js'&gt;&lt;/script&gt;
+							&lt;script&gt;
+								SyntaxHighlighter.all();
+							&lt;/script&gt;
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>步驟 3</h3>
-                    <p>
-                        然後使用 pre 標籤來輸入 Java 程式範例，並指定 class 屬性為 brush:java，即能以高亮度來顯示程式碼。例如：<br>
-                        <br>
-                        <textarea class='brush:html'>
-                            &lt;pre class='brush:java'&gt;
-                                public class HelloWorld {
-                                    public static vodi main(String[] args){
-                                        System.out.print('Hello, world!');
-                                    }
-                                }
-                            &lt;/pre&gt;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>步驟 3</h3>
+					<p>
+						然後使用 pre 標籤來輸入 Java 程式範例，並指定 class 屬性為 brush:java，即能以高亮度來顯示程式碼。例如：<br>
+						<br>
+						<textarea class='brush:html'>
+							&lt;pre class='brush:java'&gt;
+								public class HelloWorld {
+									public static vodi main(String[] args){
+										System.out.print('Hello, world!');
+									}
+								}
+							&lt;/pre&gt;
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>指定其它語言</h2>
-                <p>
-                    有以下看檔名就知道是哪些語言的檔案可用：<br>
-                    <br>
-                    <samp>
-                        shBrushAS3.js<br>
-                        shBrushAppleScript.js<br>
-                        shBrushBash.js<br>
-                        shBrushCSharp.js<br>
-                        shBrushColdFusion.js<br>
-                        shBrushCpp.js<br>
-                        shBrushCss.js<br>
-                        shBrushDelphi.js<br>
-                        shBrushDiff.js<br>
-                        shBrushErlang.js<br>
-                        shBrushGroovy.js<br>
-                        shBrushJScript.js<br>
-                        shBrushJava.js<br>
-                        shBrushJavaFX.js<br>
-                        shBrushPerl.js<br>
-                        shBrushPhp.js<br>
-                        shBrushPlain.js<br>
-                        shBrushPowerShell.js<br>
-                        shBrushPython.js<br>
-                        shBrushRuby.js<br>
-                        shBrushSass.js<br>
-                        shBrushScala.js<br>
-                        shBrushSql.js<br>
-                        shBrushVb.js<br>
-                        shBrushXml.js<br>
-                    </samp>
-                    <br>
-                    其中，Cpp 是指 C++，Plain 是指純文字文件，HTML 的話則用 Xml。<br>
-                    <br>
-                    將你想要的檔案加進去網頁後，再將 pre 的 class 屬性為 brush:xxx 即可。例如底下示範新增使用 Delphi 語言：<br>
-                    <br>
-                    <textarea class='brush:html'>
-                        &lt;head&gt;
-                            …
-                            &lt;script src='scripts/shBrushDelphi.js'&gt;&lt;/script&gt;
-                            …
-                        &lt;/head&gt;
-                        &lt;body&gt;
-                            &lt;pre class='brush:delphi'&gt;
-                                program HelloWorld;
-                                begin
-                                    writeln('Hello, world');
-                                end.
-                            &lt;/pre&gt;
-                        &lt;/body&gt;
+			<section>
+				<h2>指定其它語言</h2>
+				<p>
+					有以下看檔名就知道是哪些語言的檔案可用：<br>
+					<br>
+					<samp>
+						shBrushAS3.js<br>
+						shBrushAppleScript.js<br>
+						shBrushBash.js<br>
+						shBrushCSharp.js<br>
+						shBrushColdFusion.js<br>
+						shBrushCpp.js<br>
+						shBrushCss.js<br>
+						shBrushDelphi.js<br>
+						shBrushDiff.js<br>
+						shBrushErlang.js<br>
+						shBrushGroovy.js<br>
+						shBrushJScript.js<br>
+						shBrushJava.js<br>
+						shBrushJavaFX.js<br>
+						shBrushPerl.js<br>
+						shBrushPhp.js<br>
+						shBrushPlain.js<br>
+						shBrushPowerShell.js<br>
+						shBrushPython.js<br>
+						shBrushRuby.js<br>
+						shBrushSass.js<br>
+						shBrushScala.js<br>
+						shBrushSql.js<br>
+						shBrushVb.js<br>
+						shBrushXml.js<br>
+					</samp>
+					<br>
+					其中，Cpp 是指 C++，Plain 是指純文字文件，HTML 的話則用 Xml。<br>
+					<br>
+					將你想要的檔案加進去網頁後，再將 pre 的 class 屬性為 brush:xxx 即可。例如底下示範新增使用 Delphi 語言：<br>
+					<br>
+					<textarea class='brush:html'>
+						&lt;head&gt;
+							…
+							&lt;script src='scripts/shBrushDelphi.js'&gt;&lt;/script&gt;
+							…
+						&lt;/head&gt;
+						&lt;body&gt;
+							&lt;pre class='brush:delphi'&gt;
+								program HelloWorld;
+								begin
+									writeln('Hello, world');
+								end.
+							&lt;/pre&gt;
+						&lt;/body&gt;
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>改變高亮度主題</h2>
-                <p>
-                    shCoreDefault.css 這個檔案就是預設的高亮度主題樣式，你可以改用以下檔案，來嘗試各種不同的高亮度樣式：<br>
-                    <br>
-                    <samp>
-                        shCoreDjango.css<br>
-                        shCoreEclipse.css<br>
-                        shCoreEmacs.css<br>
-                        shCoreFadeToGrey.css<br>
-                        shCoreMDUltra.css<br>
-                        shCoreMidnight.css<br>
-                        shCoreRDark.css<br>
-                    </samp>
-                    <br>
-                    補充一件事，其實 shCoreDefault.css 是 shCore.css 與 shThemeDefault.css 合併起來的檔案，如果希望常常切換主題樣式的話，可以先載入共通設定的 shCore.css，再載入其它不同的 shThemeXXX.css 來套用。<br>
-                    <br>
-                    如果你希望所有主題的字型與大小都是統一的，其它 shThemeXXX.css 只是變換顏色而已，就適合用 shCore.css + shThemeXXX.css 的方式。反過來，希望每個主題的字體、位置、顏色都不一樣的話，就適合用 shCoreXXX.css 的方式。
-                </p>
-            </section>
+			<section>
+				<h2>改變高亮度主題</h2>
+				<p>
+					shCoreDefault.css 這個檔案就是預設的高亮度主題樣式，你可以改用以下檔案，來嘗試各種不同的高亮度樣式：<br>
+					<br>
+					<samp>
+						shCoreDjango.css<br>
+						shCoreEclipse.css<br>
+						shCoreEmacs.css<br>
+						shCoreFadeToGrey.css<br>
+						shCoreMDUltra.css<br>
+						shCoreMidnight.css<br>
+						shCoreRDark.css<br>
+					</samp>
+					<br>
+					補充一件事，其實 shCoreDefault.css 是 shCore.css 與 shThemeDefault.css 合併起來的檔案，如果希望常常切換主題樣式的話，可以先載入共通設定的 shCore.css，再載入其它不同的 shThemeXXX.css 來套用。<br>
+					<br>
+					如果你希望所有主題的字型與大小都是統一的，其它 shThemeXXX.css 只是變換顏色而已，就適合用 shCore.css + shThemeXXX.css 的方式。反過來，希望每個主題的字體、位置、顏色都不一樣的話，就適合用 shCoreXXX.css 的方式。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>進階設定</h2>
-                <hr>
-                <section>
-                    <h3>改用其它標籤來顯示程式碼</h3>
-                    <p>
-                        預設只能用 pre 標籤來高亮度識別程式碼，如果你想改用其它標籤的話，可以在 JavaScript 執行如下程式：<br>
-                        <br>
-                        <code>SyntaxHighlighter.config.tagName = 'code';</code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>設定起始行號</h3>
-                    <p>
-                        你可以在高亮度顯示用標籤的 class 屬性中，以 first-line: 來指定第一行的號碼從幾號開始，寫法如下：<br>
-                        <br>
-                        <textarea class='brush:html'>
-                            &lt;pre class='brush:java;first-line:3'&gt;
-                                public static vodi main(String[] args){
-                                    System.out.print('Hello, world!');
-                                }
-                            &lt;/pre&gt;
+			<section>
+				<h2>進階設定</h2>
+				<hr>
+				<section>
+					<h3>改用其它標籤來顯示程式碼</h3>
+					<p>
+						預設只能用 pre 標籤來高亮度識別程式碼，如果你想改用其它標籤的話，可以在 JavaScript 執行如下程式：<br>
+						<br>
+						<code>SyntaxHighlighter.config.tagName = 'code';</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>設定起始行號</h3>
+					<p>
+						你可以在高亮度顯示用標籤的 class 屬性中，以 first-line: 來指定第一行的號碼從幾號開始，寫法如下：<br>
+						<br>
+						<textarea class='brush:html'>
+							&lt;pre class='brush:java;first-line:3'&gt;
+								public static vodi main(String[] args){
+									System.out.print('Hello, world!');
+								}
+							&lt;/pre&gt;
                         </textarea>
-                        <br>
-                        上述寫法的顯示結果如下，它第一行的數字顯示 3，最後一行是 5：<br>
-                        <br>
-                        <textarea class='brush:java;first-line:3;toolbar:true'>
-                            public static vodi main(String[] args){
-                                System.out.print('Hello, world!');
-                            }
+						<br>
+						上述寫法的顯示結果如下，它第一行的數字顯示 3，最後一行是 5：<br>
+						<br>
+						<textarea class='brush:java;first-line:3;toolbar:true'>
+							public static vodi main(String[] args){
+								System.out.print('Hello, world!');
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>強調某幾行</h3>
-                    <p>
-                        有時候會想強調示範的程式碼中，有哪些標記起來的地方需要注意。這時，你可以在高亮度顯示用標籤的 class 屬性中，以 <code>highlight:</code> 來指定，寫法如下：<br>
-                        <br>
-                        <textarea class='brush:html'>
-                            &lt;pre class='brush:java;highlight:3'&gt;
-                                public class HelloWorld {
-                                    public static vodi main(String[] args){
-                                        System.out.print('Hello, world!');
-                                    }
-                                }
-                            &lt;/pre&gt;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>強調某幾行</h3>
+					<p>
+						有時候會想強調示範的程式碼中，有哪些標記起來的地方需要注意。這時，你可以在高亮度顯示用標籤的 class 屬性中，以 <code>highlight:</code> 來指定，寫法如下：<br>
+						<br>
+						<textarea class='brush:html'>
+							&lt;pre class='brush:java;highlight:3'&gt;
+								public class HelloWorld {
+									public static vodi main(String[] args){
+										System.out.print('Hello, world!');
+									}
+								}
+							&lt;/pre&gt;
                         </textarea>
-                        <br>
-                        上述寫法的顯示結果如下：<br>
-                        <br>
-                        <textarea class='brush:java;highlight:3;toolbar:true'>
-                            public class HelloWorld {
-                                public static vodi main(String[] args){
-                                    System.out.print('Hello, world!');
-                                }
-                            }
+						<br>
+						上述寫法的顯示結果如下：<br>
+						<br>
+						<textarea class='brush:java;highlight:3;toolbar:true'>
+							public class HelloWorld {
+								public static vodi main(String[] args){
+									System.out.print('Hello, world!');
+								}
+							}
                         </textarea>
-                        <br>
-                        如果需要指定多行，可使用「集合陣列」，例如 2、3、4 行都需要標記起來的話，就寫 <code>highlight:[2,3,4]</code>。顯示結果就像下面這樣：<br>
-                        <br>
-                        <textarea class='brush:java;highlight:[2,3,4];toolbar:true'>
-                            public class HelloWorld {
-                                public static vodi main(String[] args){
-                                    System.out.print('Hello, world!');
-                                }
-                            }
+						<br>
+						如果需要指定多行，可使用「集合陣列」，例如 2、3、4 行都需要標記起來的話，就寫 <code>highlight:[2,3,4]</code>。顯示結果就像下面這樣：<br>
+						<br>
+						<textarea class='brush:java;highlight:[2,3,4];toolbar:true'>
+							public class HelloWorld {
+								public static vodi main(String[] args){
+									System.out.print('Hello, world!');
+								}
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>關閉左邊的行號</h3>
-                    <p>
-                        在高亮度顯示用標籤的 class 屬性裡，加入 <code>gutter:false</code> 即可。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>關掉右上角的 ? 方塊</h3>
-                    <p>
-                        在高亮度顯示用標籤的 class 屬性裡，加入 <code>toolbar:false</code> 即可。<br>
-                        <br>
-                        如果希望預設全部關掉的話，則用 JavaScript 來執行這段程式：<br>
-                        <br>
-                        <code>
-                            SyntaxHighlighter.defaults.toolbar = false;
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>折疊起來</h3>
-                    <p>
-                        在高亮度顯示用標籤的 class 屬性裡，加入 <code>collapse:true</code> 即可，但 toolbar 必須為 true，否則會整個不見。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>其它輔助撰寫的設定</h3>
-                    <p>
-                        高亮度顯示用標籤的 class 屬性中，還有一些方便我們書寫的格式化設定項目，像是：<br>
-                        <br>
-                        <code>html-script:true</code><br>
-                        <br>
-                        可以讓 &lt; &gt; 避免被視為 HTML 標籤而無法顯示，但記得在 brush:xml 時無效。<br>
-                        <br>
-                        <code>
-                            tab-size:2<br>
-                        </code>
-                        <br>
-                        用來指定 Tab 的大小，上例設定為 2 個空白。<br>
-                        <br>
-                        <code>stripBrs = true</code><br>
-                        <br>
-                        可以讓程式碼範例裡面的 &lt;br&gt; 不顯示出來。<br>
-                        <br>
-                        還有更多設定項目，請參考官網的 <a href='http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/' target='_blank'>Configuration</a> 文件。
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>關閉左邊的行號</h3>
+					<p>
+						在高亮度顯示用標籤的 class 屬性裡，加入 <code>gutter:false</code> 即可。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>關掉右上角的 ? 方塊</h3>
+					<p>
+						在高亮度顯示用標籤的 class 屬性裡，加入 <code>toolbar:false</code> 即可。<br>
+						<br>
+						如果希望預設全部關掉的話，則用 JavaScript 來執行這段程式：<br>
+						<br>
+						<code>
+							SyntaxHighlighter.defaults.toolbar = false;
+						</code>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>折疊起來</h3>
+					<p>
+						在高亮度顯示用標籤的 class 屬性裡，加入 <code>collapse:true</code> 即可，但 toolbar 必須為 true，否則會整個不見。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>其它輔助撰寫的設定</h3>
+					<p>
+						高亮度顯示用標籤的 class 屬性中，還有一些方便我們書寫的格式化設定項目，像是：<br>
+						<br>
+						<code>html-script:true</code><br>
+						<br>
+						可以讓 &lt; &gt; 避免被視為 HTML 標籤而無法顯示，但記得在 brush:xml 時無效。<br>
+						<br>
+						<code>
+							tab-size:2<br>
+						</code>
+						<br>
+						用來指定 Tab 的大小，上例設定為 2 個空白。<br>
+						<br>
+						<code>stripBrs = true</code><br>
+						<br>
+						可以讓程式碼範例裡面的 &lt;br&gt; 不顯示出來。<br>
+						<br>
+						還有更多設定項目，請參考官網的 <a href='http://alexgorbatchev.com/SyntaxHighlighter/manual/configuration/' target='_blank'>Configuration</a> 文件。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>[*] 你可以透過《<a href='20090203B.html'>線上切換 SyntaxHighlighter 樣式</a>》測試各種樣貌。</p>
-            </footer>
+			<footer>
+				<p>[*] 你可以透過《<a href='20090203B.html'>線上切換 SyntaxHighlighter 樣式</a>》測試各種樣貌。</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

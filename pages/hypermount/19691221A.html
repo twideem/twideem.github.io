@@ -2,44 +2,44 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>關閉填表元件的作用</h1>
-            </header>
+			<header>
+				<h1>關閉填表元件的作用</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <p>
-                想讓填表元件 (Form) 看得見但不能用，例如：<br>
-                <br>
-                <input><button>Button</button><br>
-                <br>
-                做法不是設定 CSS 樣式，而是以 JavaScript 設定元件屬性 disabled 為 true。例如：<br>
-                <br>
-                <textarea class='brush:js'>
-                    document.querySelector('button').disabled = true;
-                </textarea>
-            </p>
+			<p>
+				想讓填表元件 (Form) 看得見但不能用，例如：<br>
+				<br>
+				<input><button>Button</button><br>
+				<br>
+				做法不是設定 CSS 樣式，而是以 JavaScript 設定元件屬性 disabled 為 true。例如：<br>
+				<br>
+				<textarea class='brush:js'>
+					document.querySelector('button').disabled = true;
+				</textarea>
+			</p>
 
-        </article>
+		</article>
 
-        <script>
-            document.getElementsByTagName('button')[0].disabled=true
-            document.getElementsByTagName('input')[0].disabled=true
-        </script>
+		<script>
+			document.getElementsByTagName('button')[0].disabled=true
+			document.getElementsByTagName('input')[0].disabled=true
+		</script>
 
-    </body>
+	</body>
 
 </html>

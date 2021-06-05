@@ -2,92 +2,92 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>進度存取</h1>
-                <p>進一步實作情況，請檢視原始碼。</p>
-            </header>
+			<header>
+				<h1>進度存取</h1>
+				<p>進一步實作情況，請檢視原始碼。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>操作介面</h2>
-                <p>
-                    <button onclick='f1()'>建立</button>
-                    <button onclick='f2()'>儲存</button>
-                    <button onclick='f3()'>讀取</button>
-                    <button onclick='f4()'>顯示</button>
-                    <button onclick='f5()'>刪除</button>
-                </p>
-            </section>
+			<section>
+				<h2>操作介面</h2>
+				<p>
+					<button onclick='f1()'>建立</button>
+					<button onclick='f2()'>儲存</button>
+					<button onclick='f3()'>讀取</button>
+					<button onclick='f4()'>顯示</button>
+					<button onclick='f5()'>刪除</button>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>操作說明</h2>
-                <p>
-                    Step 1:讀取→顯示=NaN<br>
-                    Step 2:建立→儲存→重新整理→讀取→顯示=逍遙男劍俠<br>
-                    Step 3:刪除→重新整理→讀取→顯示=NaN
-                </p>
-            </section>
+			<section>
+				<h2>操作說明</h2>
+				<p>
+					Step 1:讀取→顯示=NaN<br>
+					Step 2:建立→儲存→重新整理→讀取→顯示=逍遙男劍俠<br>
+					Step 3:刪除→重新整理→讀取→顯示=NaN
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 使用 EMCAScript 5 的 JSON ，配合 HTML5 的 localStorage，簡單建立遊戲進度的存取方式。<br>
-                    [*] 由於 localStorage 會認站點，本機端 RIA 可能共用同一個 Storage 區域，因此不建議以 localStorage.hp 或 localStorage.mp 的方式直接存取資料，否則不同 RIA 可能存取同樣 hp 與 mp。改個別命名方式保存資料，然後再濾抽；如此也比較好刪除遊戲進度，以免遺漏的話，殘留資料在使用者本機端。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 使用 EMCAScript 5 的 JSON ，配合 HTML5 的 localStorage，簡單建立遊戲進度的存取方式。<br>
+					[*] 由於 localStorage 會認站點，本機端 RIA 可能共用同一個 Storage 區域，因此不建議以 localStorage.hp 或 localStorage.mp 的方式直接存取資料，否則不同 RIA 可能存取同樣 hp 與 mp。改個別命名方式保存資料，然後再濾抽；如此也比較好刪除遊戲進度，以免遺漏的話，殘留資料在使用者本機端。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-        <script>
-            var Player={
-                property:[],
-                name:function(x){
-                    if(x==undefined) return this.property[0]
-                    this.property[0]=x
-                },
-                gender:function(x){
-                    if(x==undefined) return this.property[1]
-                    this.property[1]=x
-                },
-                clazz:function(x){
-                    if(x==undefined) return this.property[2]
-                    this.property[2]=x
-                }
-            }
-            function f1(){
-                Player.property=['逍遙','男','劍俠']
-            }
-            function f2(){
-                localStorage.setItem('ERM20121223B',JSON.stringify(Player.property))
-            }
-            function f3(){
-                var a=localStorage.getItem('ERM20121223B')
-                if(a) Player.property=JSON.parse(a)
-            }
-            function f4(){
-                document.getElementsByTagName('p')[0].innerHTML=Player.name()+Player.gender()+Player.clazz()
-            }
-            function f5(){
-                localStorage.removeItem('ERM20121223B')
-            }
-        </script>
+		<script>
+			var Player={
+				property:[],
+				name:function(x){
+					if(x==undefined) return this.property[0]
+					this.property[0]=x
+				},
+				gender:function(x){
+					if(x==undefined) return this.property[1]
+					this.property[1]=x
+				},
+				clazz:function(x){
+					if(x==undefined) return this.property[2]
+					this.property[2]=x
+				}
+			}
+			function f1(){
+				Player.property=['逍遙','男','劍俠']
+			}
+			function f2(){
+				localStorage.setItem('ERM20121223B',JSON.stringify(Player.property))
+			}
+			function f3(){
+				var a=localStorage.getItem('ERM20121223B')
+				if(a) Player.property=JSON.parse(a)
+			}
+			function f4(){
+				document.getElementsByTagName('p')[0].innerHTML=Player.name()+Player.gender()+Player.clazz()
+			}
+			function f5(){
+				localStorage.removeItem('ERM20121223B')
+			}
+		</script>
 
-    </body>
+	</body>
 
 </html>

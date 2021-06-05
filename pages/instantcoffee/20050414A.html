@@ -2,95 +2,95 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>class、object、instance、reference、pointer</h1>
-                <p>
-                    class：類別。<br>
-                    object：物件。<br>
-                    instance：實體。<br>
-                    reference：參照。<br>
-                    pointer：指標。
-                </p>
-            </header>
+			<header>
+				<h1>class、object、instance、reference、pointer</h1>
+				<p>
+					class：類別。<br>
+					object：物件。<br>
+					instance：實體。<br>
+					reference：參照。<br>
+					pointer：指標。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>class</h2>
-                <p>
-                    就物件導向來說，class 就是原始碼階段的物件，設計好後，編譯成可供動態載入執行的位元碼元件，再經 new 指令實際配置到系統記憶體，就成為 object。<br>
-                    <br>
-                    設計 class 時，除了思考該配置怎樣的資料以外，還會將相關可供執行的程式功能放在一起，這種把資料與運算合為一體的程式碼寫法，就叫物件導向程式設計。<br>
-                    <br>
-                    與用來限定資料是哪幾個種類的 type 差異在於，class 可將設計的程式作分類來規劃，客製化新的 type 來使用。也就是說，type 是固定寫死的，class 是可以擴充的。
-                </p>
-            </section>
+			<section>
+				<h2>class</h2>
+				<p>
+					就物件導向來說，class 就是原始碼階段的物件，設計好後，編譯成可供動態載入執行的位元碼元件，再經 new 指令實際配置到系統記憶體，就成為 object。<br>
+					<br>
+					設計 class 時，除了思考該配置怎樣的資料以外，還會將相關可供執行的程式功能放在一起，這種把資料與運算合為一體的程式碼寫法，就叫物件導向程式設計。<br>
+					<br>
+					與用來限定資料是哪幾個種類的 type 差異在於，class 可將設計的程式作分類來規劃，客製化新的 type 來使用。也就是說，type 是固定寫死的，class 是可以擴充的。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>object</h2>
-                <p>
-                    編譯好的 class 程式碼，經 new 指令執行位元碼，並載入到系統記憶體後，該程式就叫做 object。<br>
-                    <br>
-                    不想嚴格區分 instance 和 reference 時，就用 object 泛稱。<br>
-                    <br>
-                    例如：<br>
-                    <br>
-                    <code>String name = new String();</code><br>
-                    <br>
-                    name 其實是 reference，但是只能放入 String 的 instance。<br>
-                    <br>
-                    但在物件導向程式設計的場合，往往不建議去區分 name 是 reference 還是 instance，才能直覺地把重點放在訊息的傳遞上面，於是用 object 來稱呼。
-                </p>
-            </section>
+			<section>
+				<h2>object</h2>
+				<p>
+					編譯好的 class 程式碼，經 new 指令執行位元碼，並載入到系統記憶體後，該程式就叫做 object。<br>
+					<br>
+					不想嚴格區分 instance 和 reference 時，就用 object 泛稱。<br>
+					<br>
+					例如：<br>
+					<br>
+					<code>String name = new String();</code><br>
+					<br>
+					name 其實是 reference，但是只能放入 String 的 instance。<br>
+					<br>
+					但在物件導向程式設計的場合，往往不建議去區分 name 是 reference 還是 instance，才能直覺地把重點放在訊息的傳遞上面，於是用 object 來稱呼。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>instance</h2>
-                <p>
-                    class 檔被 new 指令建立後，會在系統記憶體產生可執行的程式主體，這個主體就是 instance。
-                </p>
-            </section>
+			<section>
+				<h2>instance</h2>
+				<p>
+					class 檔被 new 指令建立後，會在系統記憶體產生可執行的程式主體，這個主體就是 instance。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>reference</h2>
-                <p>
-                    instance 是無法被直接取用的，必須透過記憶體位址間接取用。指向 instance 的記憶體位址，就是 reference。
-                </p>
-            </section>
+			<section>
+				<h2>reference</h2>
+				<p>
+					instance 是無法被直接取用的，必須透過記憶體位址間接取用。指向 instance 的記憶體位址，就是 reference。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>pointer</h2>
-                <p>
-                    reference 與 C 語言的 pointer（指標）其實是一樣的，但差異在於 reference 只能單純地存取，不能進行移位運算。<br>
-                    <br>
-                    pointer 之所以威力強大，就是可以透過運算來遷移所指的記憶體位址，達成許多精妙的程式任務；例如溢位寫入某組可單獨執行的系統指令碼。但缺點就是記憶體配置的資料不見得是連續的，很可能是東一塊、西一塊的，因此透過 pointer 遷移過去的位址，可能不是自己的程式範圍，結果破壞其它執行中程式的正常運作，甚至導致系統異常而癱瘓。<br>
-                    <br>
-                    Java 並不是如自己所說的：「沒有指標。」改用 reference 只能說是功能受限的指標，但其實還是指標！
-                </p>
-            </section>
+			<section>
+				<h2>pointer</h2>
+				<p>
+					reference 與 C 語言的 pointer（指標）其實是一樣的，但差異在於 reference 只能單純地存取，不能進行移位運算。<br>
+					<br>
+					pointer 之所以威力強大，就是可以透過運算來遷移所指的記憶體位址，達成許多精妙的程式任務；例如溢位寫入某組可單獨執行的系統指令碼。但缺點就是記憶體配置的資料不見得是連續的，很可能是東一塊、西一塊的，因此透過 pointer 遷移過去的位址，可能不是自己的程式範圍，結果破壞其它執行中程式的正常運作，甚至導致系統異常而癱瘓。<br>
+					<br>
+					Java 並不是如自己所說的：「沒有指標。」改用 reference 只能說是功能受限的指標，但其實還是指標！
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

@@ -2,273 +2,273 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>enum</h1>
-                <p>
-                    enum 是 Java SE 5 的「新」功能，可以讓我們像 C++ 語言早就有的「舊」功能一樣，列舉出資料項目～<br>
-                    <br>
-                    什麼是列舉？有時候我們使用的資料範圍，並不是 0~9 也不是 A~Z，而是像「星期一到星期日」「梅花、方塊、紅心、黑桃」這類各式場合專屬的項目資料。通常我們會設計用整數來代表這些資料項目，例如 1 是 SUNDAY、2 是 MONDAY、…SATURDAY 是 7：<br>
-                    <br>
-                    <code>
-                        class Day{<br>
-                        　public static final int SUNDAY = 1;<br>
-                        　public static final int MONDAY = 2;<br>
-                        　public static final int TUESDAY = 3;<br>
-                        　public static final int WEDNESDAY = 4;<br>
-                        　public static final int THURSDAY = 5;<br>
-                        　public static final int FRIDAY = 6;<br>
-                        　public static final int SATURDAY = 7;<br>
-                        }<br>
-                    </code>
-                    <br>
-                    然後這樣使用資料：<br>
-                    <br>
-                    <code>Day.SUNDAY</code><br>
-                    <br>
-                    但有了 enum 後，更好的做法是直接列舉出這些資料來：<br>
-                    <br>
-                    <code>
-                        enum Day{<br>
-                        　SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY<br>
-                        }
-                    </code>
-                </p>
-            </header>
+			<header>
+				<h1>enum</h1>
+				<p>
+					enum 是 Java SE 5 的「新」功能，可以讓我們像 C++ 語言早就有的「舊」功能一樣，列舉出資料項目～<br>
+					<br>
+					什麼是列舉？有時候我們使用的資料範圍，並不是 0~9 也不是 A~Z，而是像「星期一到星期日」「梅花、方塊、紅心、黑桃」這類各式場合專屬的項目資料。通常我們會設計用整數來代表這些資料項目，例如 1 是 SUNDAY、2 是 MONDAY、…SATURDAY 是 7：<br>
+					<br>
+					<code>
+						class Day{<br>
+						　public static final int SUNDAY = 1;<br>
+						　public static final int MONDAY = 2;<br>
+						　public static final int TUESDAY = 3;<br>
+						　public static final int WEDNESDAY = 4;<br>
+						　public static final int THURSDAY = 5;<br>
+						　public static final int FRIDAY = 6;<br>
+						　public static final int SATURDAY = 7;<br>
+						}<br>
+					</code>
+					<br>
+					然後這樣使用資料：<br>
+					<br>
+					<code>Day.SUNDAY</code><br>
+					<br>
+					但有了 enum 後，更好的做法是直接列舉出這些資料來：<br>
+					<br>
+					<code>
+						enum Day{<br>
+						　SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY<br>
+						}
+					</code>
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>基本範例</h2>
-                <p>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>基本範例</h2>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            enum Suit{ CLUBS,DIAMONS,HEART,SPADES }
+							enum Suit{ CLUBS,DIAMONS,HEART,SPADES }
 
-                            public static void f(Day x){
-                                switch(x){
-                                    case CLUBS:
-                                        System.out.print("梅花");
-                                        break;
-                                    case DIAMONS:
-                                        System.out.print("方塊");
-                                        break;
-                                    case HEART:
-                                        System.out.print("紅心");
-                                        break;
-                                    case SPADES:
-                                        System.out.print("黑桃");
-                                }
-                            }
+							public static void f(Day x){
+								switch(x){
+									case CLUBS:
+										System.out.print("梅花");
+										break;
+									case DIAMONS:
+										System.out.print("方塊");
+										break;
+									case HEART:
+										System.out.print("紅心");
+										break;
+									case SPADES:
+										System.out.print("黑桃");
+								}
+							}
 
-                            public static void main(String[] args){
-                                f(Suit.HEART);
-                            }
+							public static void main(String[] args){
+								f(Suit.HEART);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        紅心
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						紅心
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>進階範例</h2>
-                <p>
-                    其實 enum 是特殊的 class，因此可以加入 field 和 method：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+			<section>
+				<h2>進階範例</h2>
+				<p>
+					其實 enum 是特殊的 class，因此可以加入 field 和 method：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            enum Suit{
+							enum Suit{
 
-                                CLUBS,DIAMONS,HEART,SPADES; //這時要以 ; 結尾，才能加入其它項目。
+								CLUBS,DIAMONS,HEART,SPADES; //這時要以 ; 結尾，才能加入其它項目。
 
-                                public static String f(){
-                                    return "Hello";
-                                }
+								public static String f(){
+									return "Hello";
+								}
 
-                            }
+							}
 
-                            public static void main(String[] args){
-                                System.out.println(Suit.f());
-                            }
+							public static void main(String[] args){
+								System.out.println(Suit.f());
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        Hello<br>
-                    </output>
-                    <br>
-                    下面更複雜，覆寫 toString() 來改變每個列舉值的內容：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+					<br>
+					<output>
+						Hello<br>
+					</output>
+					<br>
+					下面更複雜，覆寫 toString() 來改變每個列舉值的內容：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            enum Suit{
+							enum Suit{
 
-                                CLUBS("梅花"),
-                                DIAMONS("方塊"),
-                                HEART("紅心"),
-                                SPADES("黑桃");
+								CLUBS("梅花"),
+								DIAMONS("方塊"),
+								HEART("紅心"),
+								SPADES("黑桃");
 
-                                String g;
+								String g;
 
-                                Suit(String x){
-                                    this.g=x;
-                                }
+								Suit(String x){
+									this.g=x;
+								}
 
-                                public String toString(){
-                                    return this.g;
-                                }
+								public String toString(){
+									return this.g;
+								}
 
-                            }
+							}
 
-                            public static void main(String[] args){
-                                System.out.print(Suit.HEART);
-                            }
+							public static void main(String[] args){
+								System.out.print(Suit.HEART);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        紅心<br>
-                    </output>
-                    <br>
-                    既然 enum 是 class<ins>[1]</ins>，你也可用它提供的 method 來操作資料：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+					<br>
+					<output>
+						紅心<br>
+					</output>
+					<br>
+					既然 enum 是 class<ins>[1]</ins>，你也可用它提供的 method 來操作資料：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            enum Suit{ CLUBS,DIAMONS,HEART,SPADES }
+							enum Suit{ CLUBS,DIAMONS,HEART,SPADES }
 
-                            public static void main(String[] args){
-                                System.out.print(Suit.values()[2]);
-                            }
+							public static void main(String[] args){
+								System.out.print(Suit.values()[2]);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        HEART<br>
-                    </output>
-                    <br>
-                    更多內容請查閱 Java API Specification 的 <var>java.lang.Enum</var>。<br>
-                    <br>
-                    只是如開頭所說，Java 的 enum 是用 class 來設計，因此有以上這些名堂可搞。但 enum 的本質就是用來簡單列舉資料，所以不建議這樣設計 enum，因為乾脆用 class 更理想！
-                </p>
-            </section>
+					<br>
+					<output>
+						HEART<br>
+					</output>
+					<br>
+					更多內容請查閱 Java API Specification 的 <var>java.lang.Enum</var>。<br>
+					<br>
+					只是如開頭所說，Java 的 enum 是用 class 來設計，因此有以上這些名堂可搞。但 enum 的本質就是用來簡單列舉資料，所以不建議這樣設計 enum，因為乾脆用 class 更理想！
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>補充範例</h2>
-                <p>
-                    如果真的要賦予 enum 這些功能，通常會將 enum 當作 class 一樣，獨立為一個 public 的檔案，而不是內嵌的列舉資料：
-                </p>
-                <hr>
-                <section>
-                    <h3>Suit.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public enum Suit{
+			<section>
+				<h2>補充範例</h2>
+				<p>
+					如果真的要賦予 enum 這些功能，通常會將 enum 當作 class 一樣，獨立為一個 public 的檔案，而不是內嵌的列舉資料：
+				</p>
+				<hr>
+				<section>
+					<h3>Suit.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public enum Suit{
 
-                                CLUBS,DIAMONS,HEART,SPADES;
+								CLUBS,DIAMONS,HEART,SPADES;
 
-                                public static void printAll(){
-                                    Suit[] suits = Suit.values();
-                                    for(Suit suit:suits){
-                                        System.out.println(suit);
-                                    }
-                                }
+								public static void printAll(){
+									Suit[] suits = Suit.values();
+									for(Suit suit:suits){
+										System.out.println(suit);
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							public class Main{
 
-                                public static void main(String[] args){
-                                     Suit.printAll();
-                                }
+								public static void main(String[] args){
+									 Suit.printAll();
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>輸出</h3>
-                    <p>
-                        <output>
-                            CLUBS<br>
-                            DIAMONS<br>
-                            HEART<br>
-                            SPADES
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    附帶一提，單純列舉資料的話，Java 允許最後一個列舉資料使用 <code>,</code> 符號來結尾，以便於程式設計師日後追加新的列舉資料項目時，不用往前補上它：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        public class Main{
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>輸出</h3>
+					<p>
+						<output>
+							CLUBS<br>
+							DIAMONS<br>
+							HEART<br>
+							SPADES
+						</output>
+					</p>
+				</section>
+				<hr>
+				<p>
+					附帶一提，單純列舉資料的話，Java 允許最後一個列舉資料使用 <code>,</code> 符號來結尾，以便於程式設計師日後追加新的列舉資料項目時，不用往前補上它：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
 
-                            enum Suit{
-                                CLUBS,
-                                DIAMONS,
-                                HEART,
-                                SPADES, //允許最後一個列舉資料使用 , 結尾。
-                            }
+							enum Suit{
+								CLUBS,
+								DIAMONS,
+								HEART,
+								SPADES, //允許最後一個列舉資料使用 , 結尾。
+							}
 
-                            public static void main(String[] args){
-                                System.out.print(Suit.HEART);
-                            }
+							public static void main(String[] args){
+								System.out.print(Suit.HEART);
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        HEART
-                    </output>
-                </p>
-            </section>
+					<br>
+					<output>
+						HEART
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 一個 enum 就能寫這麼長，不知該喜還是可悲～
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 一個 enum 就能寫這麼長，不知該喜還是可悲～
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

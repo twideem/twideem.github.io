@@ -2,317 +2,317 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('dotNET')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('dotNET')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>在 C# 設計 CGI 程式</h1>
-                <p>
-                    ．<a href='#anchor1'>準備</a><br>
-                    ．<a href='#anchor2'>列出所有可用資料</a><br>
-                    ．<a href='#anchor3'>Cookie 的存取</a><br>
-                    ．<a href='#anchor4'>GET 資料的接收</a><br>
-                    ．<a href='#anchor5'>POST 資料的接收</a><br>
-                    ．<a href='#anchor6'>判斷 GET 或 POST</a><br>
-                    ．<a href='#anchor7'>轉址</a>
-                </p>
-            </header>
+			<header>
+				<h1>在 C# 設計 CGI 程式</h1>
+				<p>
+					．<a href='#anchor1'>準備</a><br>
+					．<a href='#anchor2'>列出所有可用資料</a><br>
+					．<a href='#anchor3'>Cookie 的存取</a><br>
+					．<a href='#anchor4'>GET 資料的接收</a><br>
+					．<a href='#anchor5'>POST 資料的接收</a><br>
+					．<a href='#anchor6'>判斷 GET 或 POST</a><br>
+					．<a href='#anchor7'>轉址</a>
+				</p>
+			</header>
 
-            <hr id='anchor1'>
+			<hr id='anchor1'>
 
-            <section>
-                <h2>準備</h2>
-                <p>
-                    到 <a href='http://www.apachelounge.com' target='_blank'>Apache Lounge</a> 下載支援原生 CGI 的 Apache HTTP Server。<br>
-                    <br>
-                    修改 conf 資料夾裡面的 httpd.conf。將 Define SRVROOT 的 "c:/Apache24" 改為你存放 Apache 的位置。在 Options Indexes FollowSymLinks 後面隔個空白輸入 ExecCGI。將 #AddHandler cgi-script .cgi 前面的 # 刪掉。將 #ServerName www.example.com:80 改為 ServerName localhost:80。<br>
-                    <br>
-                    將 C# 程式編譯為 *.cgi 的副檔名，例如 test.cgi，放在 cgi-bin 資料夾裡面。<br>
-                    <br>
-                    執行 bin 資料夾裡面的 httpd.exe。<br>
-                    <br>
-                    開啟網頁瀏覽器，輸入網址 http://127.0.0.1/cgi-bin/test.cgi，即可跑 C# 編譯出來的可執行檔。
-                </p>
-            </section>
+			<section>
+				<h2>準備</h2>
+				<p>
+					到 <a href='http://www.apachelounge.com' target='_blank'>Apache Lounge</a> 下載支援原生 CGI 的 Apache HTTP Server。<br>
+					<br>
+					修改 conf 資料夾裡面的 httpd.conf。將 Define SRVROOT 的 "c:/Apache24" 改為你存放 Apache 的位置。在 Options Indexes FollowSymLinks 後面隔個空白輸入 ExecCGI。將 #AddHandler cgi-script .cgi 前面的 # 刪掉。將 #ServerName www.example.com:80 改為 ServerName localhost:80。<br>
+					<br>
+					將 C# 程式編譯為 *.cgi 的副檔名，例如 test.cgi，放在 cgi-bin 資料夾裡面。<br>
+					<br>
+					執行 bin 資料夾裡面的 httpd.exe。<br>
+					<br>
+					開啟網頁瀏覽器，輸入網址 http://127.0.0.1/cgi-bin/test.cgi，即可跑 C# 編譯出來的可執行檔。
+				</p>
+			</section>
 
-            <hr id='anchor2'>
+			<hr id='anchor2'>
 
-            <section>
-                <h2>列出所有可用資料</h2>
-                <p>
-                    <textarea class='brush:cs'>
-                        using System;
-                        using System.Collections;
+			<section>
+				<h2>列出所有可用資料</h2>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections;
 
-                        class MainProgram{
+						class MainProgram{
 
-                            static void Main(){
+							static void Main(){
 
-                                Console.WriteLine();
+								Console.WriteLine();
 
-                                foreach(DictionaryEntry variables in Environment.GetEnvironmentVariables()){
-                                    Console.WriteLine("{0} = {1}", variables.Key, variables.Value);
-                                }
+								foreach(DictionaryEntry variables in Environment.GetEnvironmentVariables()){
+									Console.WriteLine("{0} = {1}", variables.Key, variables.Value);
+								}
 
-                            }
+							}
 
-                        }
+						}
 
-                        //列出所有可用資料，再從中找靈感看怎麼寫 CGI 程式 🤗
+						//列出所有可用資料，再從中找靈感看怎麼寫 CGI 程式 🤗
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr id='anchor3'>
+			<hr id='anchor3'>
 
-            <section>
-                <h2>Cookie 的存取</h2>
-                <p>
-                    <textarea class='brush:cs'>
-                        using System;
+			<section>
+				<h2>Cookie 的存取</h2>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
 
-                        class HTTPCookie{
+						class HTTPCookie{
 
-                            string[] strings;
+							string[] strings;
 
-                            public void SetCookie(string name, string value){
-                                Console.WriteLine("Set-Cookie:{0}={1}; Expires=Thu, 31 Dec 2099 00:00:00 GMT", name, value);
-                            }
+							public void SetCookie(string name, string value){
+								Console.WriteLine("Set-Cookie:{0}={1}; Expires=Thu, 31 Dec 2099 00:00:00 GMT", name, value);
+							}
 
-                            public string GetValue(string name){
+							public string GetValue(string name){
 
-                                if(strings == null){
-                                    strings = Environment.GetEnvironmentVariable("HTTP_COOKIE").Split(';');
-                                }
+								if(strings == null){
+									strings = Environment.GetEnvironmentVariable("HTTP_COOKIE").Split(';');
+								}
 
-                                foreach(string n in strings){
-                                    string[] a = n.Split('=');
-                                    if(a[0].Trim() == name){
-                                        return a[1];
-                                    }
-                                }
+								foreach(string n in strings){
+									string[] a = n.Split('=');
+									if(a[0].Trim() == name){
+										return a[1];
+									}
+								}
 
-                                return "";
-                            }
+								return "";
+							}
 
-                            public void DeleteCookie(string name){
-                                Console.WriteLine("Set-Cookie:{0}={0}; Expires=Thu, 01 Jan 1970 00:00:00 GMT", name);
-                            }
+							public void DeleteCookie(string name){
+								Console.WriteLine("Set-Cookie:{0}={0}; Expires=Thu, 01 Jan 1970 00:00:00 GMT", name);
+							}
 
-                        }
+						}
 
-                        class MainProgram{
+						class MainProgram{
 
-                            static void Main(){
-                                HTTPCookie httpcookie = new HTTPCookie();
-                                httpcookie.SetCookie("name", "Twideem");
-                                httpcookie.SetCookie("number", "58");
-                                Console.WriteLine();
-                                Console.WriteLine(httpcookie.GetValue("name"));
-                                Console.WriteLine(httpcookie.GetValue("number"));
-                            }
+							static void Main(){
+								HTTPCookie httpcookie = new HTTPCookie();
+								httpcookie.SetCookie("name", "Twideem");
+								httpcookie.SetCookie("number", "58");
+								Console.WriteLine();
+								Console.WriteLine(httpcookie.GetValue("name"));
+								Console.WriteLine(httpcookie.GetValue("number"));
+							}
 
-                        }
+						}
 
-                        //寫入 Cookie 是請求動作，要在 header 進行。讀出 Cookie 才在 body 進行。
+						//寫入 Cookie 是請求動作，要在 header 進行。讀出 Cookie 才在 body 進行。
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr id='anchor4'>
+			<hr id='anchor4'>
 
-            <section>
-                <h2>GET 資料的接收</h2>
-                <p>
-                    <textarea class='brush:cs'>
-                        using System;
+			<section>
+				<h2>GET 資料的接收</h2>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
 
-                        class QueryString{
+						class QueryString{
 
-                            string[] strings = Environment.GetEnvironmentVariable("QUERY_STRING").Split('&amp;');
+							string[] strings = Environment.GetEnvironmentVariable("QUERY_STRING").Split('&amp;');
 
-                            public string GetValue(string key){
-                                foreach(string n in strings){
-                                    string[] a = n.Split('=');
-                                    if(a[0] == key){
-                                        return a[1];
-                                    }
-                                }
-                                return "";
-                            }
+							public string GetValue(string key){
+								foreach(string n in strings){
+									string[] a = n.Split('=');
+									if(a[0] == key){
+										return a[1];
+									}
+								}
+								return "";
+							}
 
-                        }
+						}
 
-                        class MainProgram{
+						class MainProgram{
 
-                            static void Main(){
+							static void Main(){
 
-                                //http://127.0.0.1/cgi-bin/test.cgi?name=twideem&amp;number=58
+								//http://127.0.0.1/cgi-bin/test.cgi?name=twideem&amp;number=58
 
-                                QueryString querystring = new QueryString();
-                                Console.WriteLine();
-                                Console.WriteLine(querystring.GetValue("name"));
-                                Console.WriteLine(querystring.GetValue("number"));
+								QueryString querystring = new QueryString();
+								Console.WriteLine();
+								Console.WriteLine(querystring.GetValue("name"));
+								Console.WriteLine(querystring.GetValue("number"));
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr id='anchor5'>
+			<hr id='anchor5'>
 
-            <section>
-                <h2>POST 資料的接收</h2>
-                <p>
-                    <textarea class='brush:cs'>
-                        using System;
-                        using System.IO;
+			<section>
+				<h2>POST 資料的接收</h2>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.IO;
 
-                        class MainProgram{
+						class MainProgram{
 
-                            class ContentLength{
+							class ContentLength{
 
-                                string[] strings;
+								string[] strings;
 
-                                public ContentLength(){
-                                    int length = Convert.ToInt32(Environment.GetEnvironmentVariable("CONTENT_LENGTH"));
-                                    byte[] bytes = new byte[length];
-                                    BinaryReader binaryreader = new BinaryReader(Console.OpenStandardInput());
-                                    binaryreader.Read(bytes, 0, length);
-                                    string content = System.Text.Encoding.Default.GetString(bytes, 0, length);
-                                    strings = content.Split('&amp;');
-                                }
+								public ContentLength(){
+									int length = Convert.ToInt32(Environment.GetEnvironmentVariable("CONTENT_LENGTH"));
+									byte[] bytes = new byte[length];
+									BinaryReader binaryreader = new BinaryReader(Console.OpenStandardInput());
+									binaryreader.Read(bytes, 0, length);
+									string content = System.Text.Encoding.Default.GetString(bytes, 0, length);
+									strings = content.Split('&amp;');
+								}
 
-                                public string GetValue(string key){
-                                    foreach(string n in strings){
-                                        string[] a = n.Split('=');
-                                        if(a[0] == key){
-                                            return a[1];
-                                        }
-                                    }
-                                    return "";
-                                }
+								public string GetValue(string key){
+									foreach(string n in strings){
+										string[] a = n.Split('=');
+										if(a[0] == key){
+											return a[1];
+										}
+									}
+									return "";
+								}
 
-                            }
+							}
 
-                            static void Main(){
+							static void Main(){
 
-                                //&lt;html&gt;
-                                //&nbsp; &lt;body&gt;
-                                //&nbsp; &nbsp; &lt;form action="cgi-bin/test.cgi" method="post"&gt;
-                                //&nbsp; &nbsp; &nbsp; &lt;input type="text" name="name" value="Twideem"&gt;
-                                //&nbsp; &nbsp; &nbsp; &lt;input type="text" name="number" value="58"&gt;
-                                //&nbsp; &nbsp; &nbsp; &lt;input type="submit"&gt;
-                                //&nbsp; &nbsp; &lt;/form&gt;
-                                //&nbsp; &lt;/body&gt;
-                                //&lt;/html&gt;
+								//&lt;html&gt;
+								//&nbsp; &lt;body&gt;
+								//&nbsp; &nbsp; &lt;form action="cgi-bin/test.cgi" method="post"&gt;
+								//&nbsp; &nbsp; &nbsp; &lt;input type="text" name="name" value="Twideem"&gt;
+								//&nbsp; &nbsp; &nbsp; &lt;input type="text" name="number" value="58"&gt;
+								//&nbsp; &nbsp; &nbsp; &lt;input type="submit"&gt;
+								//&nbsp; &nbsp; &lt;/form&gt;
+								//&nbsp; &lt;/body&gt;
+								//&lt;/html&gt;
 
-                                Console.WriteLine();
-                                ContentLength contentlength = new ContentLength();
-                                Console.WriteLine(contentlength.GetValue("name"));
-                                Console.WriteLine(contentlength.GetValue("number"));
+								Console.WriteLine();
+								ContentLength contentlength = new ContentLength();
+								Console.WriteLine(contentlength.GetValue("name"));
+								Console.WriteLine(contentlength.GetValue("number"));
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr id='anchor6'>
+			<hr id='anchor6'>
 
-            <section>
-                <h2>判斷 GET 或 POST</h2>
-                <p>
-                    <textarea class='brush:cs'>
-                        using System;
+			<section>
+				<h2>判斷 GET 或 POST</h2>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
 
-                        class MainProgram{
+						class MainProgram{
 
-                            static void Main(){
+							static void Main(){
 
-                                Console.WriteLine();
+								Console.WriteLine();
 
-                                if(Environment.GetEnvironmentVariable("REQUEST_METHOD") == "GET"){
-                                    //GET
-                                }
+								if(Environment.GetEnvironmentVariable("REQUEST_METHOD") == "GET"){
+									//GET
+								}
 
-                                if(Environment.GetEnvironmentVariable("REQUEST_METHOD") == "POST"){
-                                    //POST
-                                }
+								if(Environment.GetEnvironmentVariable("REQUEST_METHOD") == "POST"){
+									//POST
+								}
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr id='anchor7'>
+			<hr id='anchor7'>
 
-            <section>
-                <h2>轉址</h2>
-                <p>
-                    第一種做法是寫在 HTTP 的 header，請求 URL redirect：<br>
-                    <br>
-                    <textarea class='brush:cs'>
-                        using System;
+			<section>
+				<h2>轉址</h2>
+				<p>
+					第一種做法是寫在 HTTP 的 header，請求 URL redirect：<br>
+					<br>
+					<textarea class='brush:cs'>
+						using System;
 
-                        class MainProgram{
+						class MainProgram{
 
-                            static void Main(){
+							static void Main(){
 
-                                Console.WriteLine("Location: http://127.0.0.1/redirect.html");
-                                Console.WriteLine();
+								Console.WriteLine("Location: http://127.0.0.1/redirect.html");
+								Console.WriteLine();
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    第二種做法是用 HTML 來完成：<br>
-                    <br>
-                    <textarea class='brush:cs;highlight:[10]'>
-                        using System;
+					<br>
+					第二種做法是用 HTML 來完成：<br>
+					<br>
+					<textarea class='brush:cs;highlight:[10]'>
+						using System;
 
-                        class MainProgram{
+						class MainProgram{
 
-                            static void Main(){
+							static void Main(){
 
-                                Console.WriteLine();
-                                Console.WriteLine("&lt;html&gt;");
-                                Console.WriteLine(" &nbsp;&lt;head&gt;");
-                                Console.WriteLine(" &nbsp; &nbsp;&lt;meta http-equiv='refresh' content='3;url=http://127.0.0.1/index.html'&gt;");
-                                Console.WriteLine(" &nbsp;&lt;/head&gt;");
-                                Console.WriteLine(" &nbsp;&lt;body&gt;");
-                                Console.WriteLine(" &nbsp; &nbsp;&lt;p&gt;三秒後回到首頁…&lt;/p&gt;");
-                                Console.WriteLine(" &nbsp;&lt;/body&gt;");
-                                Console.WriteLine("&lt;/html&gt;");
+								Console.WriteLine();
+								Console.WriteLine("&lt;html&gt;");
+								Console.WriteLine(" &nbsp;&lt;head&gt;");
+								Console.WriteLine(" &nbsp; &nbsp;&lt;meta http-equiv='refresh' content='3;url=http://127.0.0.1/index.html'&gt;");
+								Console.WriteLine(" &nbsp;&lt;/head&gt;");
+								Console.WriteLine(" &nbsp;&lt;body&gt;");
+								Console.WriteLine(" &nbsp; &nbsp;&lt;p&gt;三秒後回到首頁…&lt;/p&gt;");
+								Console.WriteLine(" &nbsp;&lt;/body&gt;");
+								Console.WriteLine("&lt;/html&gt;");
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    還有更多種做法，像是用 JavaScript 的 location.href="網址"，道理跟第二種一樣，就不贅述了～
-                </p>
-            </section>
+					<br>
+					還有更多種做法，像是用 JavaScript 的 location.href="網址"，道理跟第二種一樣，就不贅述了～
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

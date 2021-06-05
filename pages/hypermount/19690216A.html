@@ -2,271 +2,271 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>迴圈</h1>
-                <p>反覆執行某一段程式。</p>
-            </header>
+			<header>
+				<h1>迴圈</h1>
+				<p>反覆執行某一段程式。</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>for</h2>
-                <hr>
-                <section>
-                    <h3>記數式迴圈</h3>
-                    <p>
-                        用計數器的方式，從頭數到尾地，重複執行程式：<br>
-                        <br>
-                        <code>
-                            for(變數=起始值; 變數&lt;終止值; 變數++) 程式敘述;<br>
-                        </code>
-                        <br>
-                        變數從初始值起跳，如果小於終止值，就執行一次程式敘述，並且變數遞增 1。<br>
-                        <br>
-                        程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
-                        <br>
-                        <code>
-                            for(變數=起始值; 變數&lt;終止值; 變數++){<br>
-                            　程式敘述１;<br>
-                            　程式敘述２;<br>
-                            　程式敘述３;<br>
-                            }<br>
-                        </code>
-                        <br>
-                        但這個結構可以依據需要來修正！尤其 for 迴圈的「變數」可以代入「程式敘述」來使用，因此常常會針對變數的使用需求，修正得像是：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            for(var count=0; count&lt;=100; count+=10){
-                                document.write('&lt;img src=' + count + '.jpg&gt;');
-                            }
+			<section>
+				<h2>for</h2>
+				<hr>
+				<section>
+					<h3>記數式迴圈</h3>
+					<p>
+						用計數器的方式，從頭數到尾地，重複執行程式：<br>
+						<br>
+						<code>
+							for(變數=起始值; 變數&lt;終止值; 變數++) 程式敘述;<br>
+						</code>
+						<br>
+						變數從初始值起跳，如果小於終止值，就執行一次程式敘述，並且變數遞增 1。<br>
+						<br>
+						程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
+						<br>
+						<code>
+							for(變數=起始值; 變數&lt;終止值; 變數++){<br>
+							　程式敘述１;<br>
+							　程式敘述２;<br>
+							　程式敘述３;<br>
+							}<br>
+						</code>
+						<br>
+						但這個結構可以依據需要來修正！尤其 for 迴圈的「變數」可以代入「程式敘述」來使用，因此常常會針對變數的使用需求，修正得像是：<br>
+						<br>
+						<textarea class='brush:js'>
+							for(var count=0; count&lt;=100; count+=10){
+								document.write('&lt;img src=' + count + '.jpg&gt;');
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            這程式會在網頁顯示 0.jpg、10.jpg、20.jpg、30.jpg、40.jpg、50.jpg、60.jpg、70.jpg、80.jpg、90.jpg、100.jpg 這些圖片。<br>
-                        </output>
-                        <br>
-                        for 迴圈有更複雜一點的應用方式，可用 , 符號，在迴圈結構裡面，設立更多變數條件，例如這樣一個範例…<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            for(var a=0, b=8; a&lt;b; a++, b--){
-                                document.write(a + ':' + b + '&lt;br&gt;');
-                            }
+						<br>
+						<output>
+							這程式會在網頁顯示 0.jpg、10.jpg、20.jpg、30.jpg、40.jpg、50.jpg、60.jpg、70.jpg、80.jpg、90.jpg、100.jpg 這些圖片。<br>
+						</output>
+						<br>
+						for 迴圈有更複雜一點的應用方式，可用 , 符號，在迴圈結構裡面，設立更多變數條件，例如這樣一個範例…<br>
+						<br>
+						<textarea class='brush:js'>
+							for(var a=0, b=8; a&lt;b; a++, b--){
+								document.write(a + ':' + b + '&lt;br&gt;');
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            0:8<br>
-                            1:7<br>
-                            2:6<br>
-                            3:5<br>
-                        </output>
-                        <br>
-                        該迴圈建立初始變數時，以 , 符號建立 a 和 b 兩個變數，且每執行一次迴圈，就遞增一次 a 並遞減一次 b。<br>
-                        <br>
-                        當 a 遞增到 4 的時候，b 也遞減為 4，不符合 a 小於 b 時執行迴圈的條件需求，才終止執行迴圈內容。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>瀏覽式迴圈</h3>
-                    <p>
-                        適合跑陣列索引值的迴圈：<br>
-                        <br>
-                        <code>
-                            for(變數 in 物件) 在程式敘述中使用變數;<br>
-                        </code>
-                        <br>
-                        程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
-                        <br>
-                        <code>
-                            for(變數 in 物件){<br>
-                            　程式敘述１;<br>
-                            　程式敘述２;<br>
-                            　程式敘述３;<br>
-                            }<br>
-                        </code>
-                        <br>
-                        來看個例子：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            var array = new Array('AAA', 'BBB', 'CCC');
-                            for(var x in array){
-                                document.write(array[x]);
-                            }
+						<br>
+						<output>
+							0:8<br>
+							1:7<br>
+							2:6<br>
+							3:5<br>
+						</output>
+						<br>
+						該迴圈建立初始變數時，以 , 符號建立 a 和 b 兩個變數，且每執行一次迴圈，就遞增一次 a 並遞減一次 b。<br>
+						<br>
+						當 a 遞增到 4 的時候，b 也遞減為 4，不符合 a 小於 b 時執行迴圈的條件需求，才終止執行迴圈內容。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>瀏覽式迴圈</h3>
+					<p>
+						適合跑陣列索引值的迴圈：<br>
+						<br>
+						<code>
+							for(變數 in 物件) 在程式敘述中使用變數;<br>
+						</code>
+						<br>
+						程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
+						<br>
+						<code>
+							for(變數 in 物件){<br>
+							　程式敘述１;<br>
+							　程式敘述２;<br>
+							　程式敘述３;<br>
+							}<br>
+						</code>
+						<br>
+						來看個例子：<br>
+						<br>
+						<textarea class='brush:js'>
+							var array = new Array('AAA', 'BBB', 'CCC');
+							for(var x in array){
+								document.write(array[x]);
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC<br>
-                        </output>
-                        <br>
-                        上面程式相當於如下程式，可以看出來更簡潔的地方：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            var array = new Array('AAA', 'BBB', 'CCC');
-                            for(x=0; x&lt;array.length; x++){
-                                document.write(array[x]);
-                            }
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC<br>
+						</output>
+						<br>
+						上面程式相當於如下程式，可以看出來更簡潔的地方：<br>
+						<br>
+						<textarea class='brush:js'>
+							var array = new Array('AAA', 'BBB', 'CCC');
+							for(x=0; x&lt;array.length; x++){
+								document.write(array[x]);
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>迭代式迴圈</h3>
-                    <p>
-                        專門跑 Iterator 介面的迴圈：<br>
-                        <br>
-                        <code>
-                            for(變數 of 物件) 在程式敘述中使用變數;<br>
-                        </code>
-                        <br>
-                        程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
-                        <br>
-                        <code>
-                            for(變數 of 物件){<br>
-                            　程式敘述１;<br>
-                            　程式敘述２;<br>
-                            　程式敘述３;<br>
-                            }<br>
-                        </code>
-                        <br>
-                        特別之處，在於使用 for..in 取得的是索引值，for..of 取得的是鍵值。<br>
-                        <br>
-                        來看個例子：<br>
-                        <br>
-                        <textarea class='brush:js'>
-                            var collections = ['AAA','BBB','CCC'];
-                            for(var n of collections){
-                                document.write(n);
-                            }
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>迭代式迴圈</h3>
+					<p>
+						專門跑 Iterator 介面的迴圈：<br>
+						<br>
+						<code>
+							for(變數 of 物件) 在程式敘述中使用變數;<br>
+						</code>
+						<br>
+						程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
+						<br>
+						<code>
+							for(變數 of 物件){<br>
+							　程式敘述１;<br>
+							　程式敘述２;<br>
+							　程式敘述３;<br>
+							}<br>
+						</code>
+						<br>
+						特別之處，在於使用 for..in 取得的是索引值，for..of 取得的是鍵值。<br>
+						<br>
+						來看個例子：<br>
+						<br>
+						<textarea class='brush:js'>
+							var collections = ['AAA','BBB','CCC'];
+							for(var n of collections){
+								document.write(n);
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            AAA<br>
-                            BBB<br>
-                            CCC
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>while</h2>
-                <p>
-                    根據條件式是否成立，來重複執行程式。
-                </p>
-                <hr>
-                <section>
-                    <h3>條件式迴圈</h3>
-                    <p>
-                        <code>
-                            while(條件式) 程式敘述;
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    如果條件式經由布林運算結果為 true，則執行程式敘述。<br>
-                    <br>
-                    程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
-                    <br>
-                    <code>
-                        while(條件式){<br>
-                        　程式敘述１;<br>
-                        　程式敘述２;<br>
-                        　程式敘述３;<br>
-                        }<br>
-                    </code>
-                    <br>
-                    舉個範例如下：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        var password = prompt('請設定一組密碼');
-                        while(password.length&lt;4){
-                            window.alert('輸入的密碼長度過短，請使用至少 4 個字做為密碼。');
-                            password = window.prompt('請重新設定一組密碼');
-                        }
-                        document.write('密碼設定中，請稍候。');
+			<section>
+				<h2>while</h2>
+				<p>
+					根據條件式是否成立，來重複執行程式。
+				</p>
+				<hr>
+				<section>
+					<h3>條件式迴圈</h3>
+					<p>
+						<code>
+							while(條件式) 程式敘述;
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					如果條件式經由布林運算結果為 true，則執行程式敘述。<br>
+					<br>
+					程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
+					<br>
+					<code>
+						while(條件式){<br>
+						　程式敘述１;<br>
+						　程式敘述２;<br>
+						　程式敘述３;<br>
+						}<br>
+					</code>
+					<br>
+					舉個範例如下：<br>
+					<br>
+					<textarea class='brush:js'>
+						var password = prompt('請設定一組密碼');
+						while(password.length&lt;4){
+							window.alert('輸入的密碼長度過短，請使用至少 4 個字做為密碼。');
+							password = window.prompt('請重新設定一組密碼');
+						}
+						document.write('密碼設定中，請稍候。');
                     </textarea>
-                    <br>
-                    呼叫一個輸入對話視窗要求輸入密碼，並把輸入結果設定給變數 password。接著用 while 迴圈檢查 password 的長度是否小於 4 個字元，是的話呼叫對話視窗提示訊息，並重新要求重新輸入密碼，反覆這樣的動作，直到密碼長度至少 4 個字元為止。迴圈結束的話，就可以執行下一行程式敘述，通知密碼設定中。
-                </p>
-            </section>
+					<br>
+					呼叫一個輸入對話視窗要求輸入密碼，並把輸入結果設定給變數 password。接著用 while 迴圈檢查 password 的長度是否小於 4 個字元，是的話呼叫對話視窗提示訊息，並重新要求重新輸入密碼，反覆這樣的動作，直到密碼長度至少 4 個字元為止。迴圈結束的話，就可以執行下一行程式敘述，通知密碼設定中。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>do while</h2>
-                <p>
-                    先執行程式敘述，然後判斷是否繼續執行同樣的程式敘述。
-                </p>
-                <hr>
-                <section>
-                    <h3>先執行迴圈</h3>
-                    <p>
-                        <code>
-                            do 程式敘述;<br>
-                            while(條件式);
-                        </code>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    執行程式敘述後，如果條件式經由布林運算結果為 true，則重新執行一次程式敘述。<br>
-                    <br>
-                    程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
-                    <br>
-                    <code>
-                        do {<br>
-                        　程式敘述１;<br>
-                        　程式敘述２;<br>
-                        　程式敘述３;<br>
-                        }<br>
-                        while(條件式);<br>
-                    </code>
-                    <br>
-                    舉個範例如下：<br>
-                    <br>
-                    <textarea class='brush:js'>
-                        do {
-                            var password = prompt('請設定一組密碼');
-                        }
-                        while(password.length&lt;4);
-                        document.write('密碼設定中，請稍候。');
+			<section>
+				<h2>do while</h2>
+				<p>
+					先執行程式敘述，然後判斷是否繼續執行同樣的程式敘述。
+				</p>
+				<hr>
+				<section>
+					<h3>先執行迴圈</h3>
+					<p>
+						<code>
+							do 程式敘述;<br>
+							while(條件式);
+						</code>
+					</p>
+				</section>
+				<hr>
+				<p>
+					執行程式敘述後，如果條件式經由布林運算結果為 true，則重新執行一次程式敘述。<br>
+					<br>
+					程式敘述不只一行的話，必須用 {} 將一連串的程式敘述形成區塊：<br>
+					<br>
+					<code>
+						do {<br>
+						　程式敘述１;<br>
+						　程式敘述２;<br>
+						　程式敘述３;<br>
+						}<br>
+						while(條件式);<br>
+					</code>
+					<br>
+					舉個範例如下：<br>
+					<br>
+					<textarea class='brush:js'>
+						do {
+							var password = prompt('請設定一組密碼');
+						}
+						while(password.length&lt;4);
+						document.write('密碼設定中，請稍候。');
                     </textarea>
-                    <br>
-                    呼叫一個輸入對話視窗要求輸入密碼，並把輸入結果設定給變數 password。接著用 while 迴圈檢查 password 的長度是否小於 4 個字元，是的話重新執行一次 do 的程式，直到密碼長度至少 4 個字元為止。迴圈結束的話，就可以執行下一行程式敘述，通知已經在設定這組密碼。
-                </p>
-            </section>
+					<br>
+					呼叫一個輸入對話視窗要求輸入密碼，並把輸入結果設定給變數 password。接著用 while 迴圈檢查 password 的長度是否小於 4 個字元，是的話重新執行一次 do 的程式，直到密碼長度至少 4 個字元為止。迴圈結束的話，就可以執行下一行程式敘述，通知已經在設定這組密碼。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>break 與 continue</h2>
-                <p>
-                    在迴圈結構中，可用 continue 要求迴圈跳過剩下還未執行的程式敘述，直接回頭再執行一次迴圈。<br>
-                    <br>
-                    也可用 break 強制結束整個迴圈，讓執行流程往迴圈結構的下一段程式敘述執行。
-                </p>
-            </section>
+			<section>
+				<h2>break 與 continue</h2>
+				<p>
+					在迴圈結構中，可用 continue 要求迴圈跳過剩下還未執行的程式敘述，直接回頭再執行一次迴圈。<br>
+					<br>
+					也可用 break 強制結束整個迴圈，讓執行流程往迴圈結構的下一段程式敘述執行。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

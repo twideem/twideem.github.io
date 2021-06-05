@@ -2,90 +2,90 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JScrollPane</h1>
-            </header>
+			<header>
+				<h1>JScrollPane</h1>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>捲動軸</h2>
-                <p>
-                    底下示範為 JTextArea 添加捲動軸：<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[16,17]'>
-                        import javax.swing.JFrame;
-                        import javax.swing.JScrollPane;
-                        import javax.swing.JTextArea;
+			<section>
+				<h2>捲動軸</h2>
+				<p>
+					底下示範為 JTextArea 添加捲動軸：<br>
+					<br>
+					<textarea class='brush:java;highlight:[16,17]'>
+						import javax.swing.JFrame;
+						import javax.swing.JScrollPane;
+						import javax.swing.JTextArea;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                JFrame frame = new JFrame();
-                                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame.setSize(320, 240);
-                                frame.setVisible(true);
+								JFrame frame = new JFrame();
+								frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								frame.setSize(320, 240);
+								frame.setVisible(true);
 
-                                JTextArea text_Area = new JTextArea();
+								JTextArea text_Area = new JTextArea();
 
-                                JScrollPane scroll_pane = new JScrollPane();
-                                scroll_pane.setViewportView(text_Area);
-                                scroll_pane.setSize(312, 209);
-                                scroll_pane.setLocation(0, 0);
+								JScrollPane scroll_pane = new JScrollPane();
+								scroll_pane.setViewportView(text_Area);
+								scroll_pane.setSize(312, 209);
+								scroll_pane.setLocation(0, 0);
 
-                                frame.setLayout(null);
-                                frame.add(scroll_pane);
+								frame.setLayout(null);
+								frame.add(scroll_pane);
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    執行程式並貼上文字後：
-                </p>
-                <figure>
-                    <img src='../../figures/instantcoffee/20001120A_01.png' alt='插圖'>
-                </figure>
-            </section>
+					<br>
+					執行程式並貼上文字後：
+				</p>
+				<figure>
+					<img src='../../figures/instantcoffee/20001120A_01.png' alt='插圖'>
+				</figure>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>其它設定</h2>
-                <p>
-                    可用 scroll_pane.setHorizontalScrollBarPolicy() 設定垂直捲軸的顯示時機：<br>
-                    <br>
-                    <code>JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS</code> （顯示）<br>
-                    <code>JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED</code> （自動）<br>
-                    <code>JScrollPane.HORIZONTAL_SCROLLBAR_NEVER</code> （隱藏）<br>
-                    <br>
-                    可用 scroll_pane.setVerticalScrollBarPolicy() 設定水平捲軸的顯示時機：<br>
-                    <br>
-                    <code>JScrollPane.VERTICAL_SCROLLBAR_ALWAYS</code> （顯示）<br>
-                    <code>JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED</code> （自動）<br>
-                    <code>JScrollPane.VERTICAL_SCROLLBAR_NEVER</code> （隱藏）<br>
-                    <br>
-                    將元件做為 JScrollPane() 建構式參數的話，相當於 scroll_pane.setViewportView() 的功能，例如：JScrollPane scroll_pane = new JScrollPane(text_area)。
-                </p>
-            </section>
+			<section>
+				<h2>其它設定</h2>
+				<p>
+					可用 scroll_pane.setHorizontalScrollBarPolicy() 設定垂直捲軸的顯示時機：<br>
+					<br>
+					<code>JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS</code> （顯示）<br>
+					<code>JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED</code> （自動）<br>
+					<code>JScrollPane.HORIZONTAL_SCROLLBAR_NEVER</code> （隱藏）<br>
+					<br>
+					可用 scroll_pane.setVerticalScrollBarPolicy() 設定水平捲軸的顯示時機：<br>
+					<br>
+					<code>JScrollPane.VERTICAL_SCROLLBAR_ALWAYS</code> （顯示）<br>
+					<code>JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED</code> （自動）<br>
+					<code>JScrollPane.VERTICAL_SCROLLBAR_NEVER</code> （隱藏）<br>
+					<br>
+					將元件做為 JScrollPane() 建構式參數的話，相當於 scroll_pane.setViewportView() 的功能，例如：JScrollPane scroll_pane = new JScrollPane(text_area)。
+				</p>
+			</section>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

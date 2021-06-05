@@ -2,570 +2,570 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>JDOM 速成範例集</h1>
-                <p>
-                    雖然 J2SE 1.4 開始內建 JAXP，用 W3C 的 DOM 直接剖析 XML 成了 Java 的基本功能，但 DOM 其實是針對程序導向程式語言所規範出來的 API，因此出現了 JDOM 社群，重新整合 JAXP 的 DOM 與 SAX 制定出符合物件導向機能的 XML 剖析套件。果然 JDOM 結構靈活、操作便利，速度又比 JAXP 的 DOM 快，反而成為大家的首選！甚至在 JDOM 發展約半年整個架構確定成形後，還申請為 JSR 102 希望納入 Java 的標準套件。<br>
-                    <br>
-                    但至今未能成為 Java 內建的標準套件，所以請至 <a href='http://www.jdom.org' target='_blank'>http://www.jdom.org</a> 下載。
-                </p>
-            </header>
+			<header>
+				<h1>JDOM 速成範例集</h1>
+				<p>
+					雖然 J2SE 1.4 開始內建 JAXP，用 W3C 的 DOM 直接剖析 XML 成了 Java 的基本功能，但 DOM 其實是針對程序導向程式語言所規範出來的 API，因此出現了 JDOM 社群，重新整合 JAXP 的 DOM 與 SAX 制定出符合物件導向機能的 XML 剖析套件。果然 JDOM 結構靈活、操作便利，速度又比 JAXP 的 DOM 快，反而成為大家的首選！甚至在 JDOM 發展約半年整個架構確定成形後，還申請為 JSR 102 希望納入 Java 的標準套件。<br>
+					<br>
+					但至今未能成為 Java 內建的標準套件，所以請至 <a href='http://www.jdom.org' target='_blank'>http://www.jdom.org</a> 下載。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>新建空的文件模型</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[6]'>
-                        import org.jdom2.Document;
+			<section>
+				<h2>新建空的文件模型</h2>
+				<p>
+					<textarea class='brush:java;highlight:[6]'>
+						import org.jdom2.Document;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                Document document = new Document();
-                            }
+							public static void main(String[] args){
+								Document document = new Document();
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>載入 XML 產生文件模型</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[9]'>
-                        import org.jdom2.Document;
-                        import org.jdom2.input.SAXBuilder;
-                        import java.io.File;
+			<section>
+				<h2>載入 XML 產生文件模型</h2>
+				<p>
+					<textarea class='brush:java;highlight:[9]'>
+						import org.jdom2.Document;
+						import org.jdom2.input.SAXBuilder;
+						import java.io.File;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
-                                    Document document = new SAXBuilder().build(new File("document.xml"));
-                                }
-                                catch (Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+							public static void main(String[] args){
+								try{
+									Document document = new SAXBuilder().build(new File("document.xml"));
+								}
+								catch (Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>加入根元素</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[7]'>
-                        import org.jdom2.Document;
-                        import org.jdom2.Element;
+			<section>
+				<h2>加入根元素</h2>
+				<p>
+					<textarea class='brush:java;highlight:[7]'>
+						import org.jdom2.Document;
+						import org.jdom2.Element;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                Document document = new Document(new Element("根元素"));
-                            }
+							public static void main(String[] args){
+								Document document = new Document(new Element("根元素"));
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    因為 Document 物件必須從根元素開始動作，否則無法隔空存取其它子元素，因此建立物件時就指定根元素，是比較建議的做法。<br>
-                    <br>
-                    如果是隨使用者操作情況才動態建立，則用 document.addContent() 來新增根元素。
-                </p>
-            </section>
+					<br>
+					因為 Document 物件必須從根元素開始動作，否則無法隔空存取其它子元素，因此建立物件時就指定根元素，是比較建議的做法。<br>
+					<br>
+					如果是隨使用者操作情況才動態建立，則用 document.addContent() 來新增根元素。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取得根元素、加入子元素</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[10]'>
-                        import org.jdom2.Document;
-                        import org.jdom2.Element;
+			<section>
+				<h2>取得根元素、加入子元素</h2>
+				<p>
+					<textarea class='brush:java;highlight:[10]'>
+						import org.jdom2.Document;
+						import org.jdom2.Element;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                Document document = new Document(new Element("根元素"));
+								Document document = new Document(new Element("根元素"));
 
-                                document.getRootElement().addContent(new Element("子元素"));
+								document.getRootElement().addContent(new Element("子元素"));
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    使用 getRootElement() 取得根元素，再用 addContent() 新增元素進去，即可建立子元素。
-                </p>
-            </section>
+					<br>
+					使用 getRootElement() 取得根元素，再用 addContent() 新增元素進去，即可建立子元素。
+				</p>
+			</section>
 
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取得子元素</h2>
-                <hr>
-                <section>
-                    <h3>取得一個元素</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[12]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+			<section>
+				<h2>取得子元素</h2>
+				<hr>
+				<section>
+					<h3>取得一個元素</h3>
+					<p>
+						<textarea class='brush:java;highlight:[12]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    document.getRootElement().getChild("子元素");
+									document.getRootElement().getChild("子元素");
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得整群子元素</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[15]'>
-                            import java.util.List;
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得整群子元素</h3>
+					<p>
+						<textarea class='brush:java;highlight:[15]'>
+							import java.util.List;
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
-                                    document.getRootElement().addContent(new Element("子元素"));
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    List&lt;Element&gt; elements = document.getRootElement().getChildren("子元素");
+									List&lt;Element&gt; elements = document.getRootElement().getChildren("子元素");
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>取得所有子元素</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[15]'>
-                            import java.util.List;
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>取得所有子元素</h3>
+					<p>
+						<textarea class='brush:java;highlight:[15]'>
+							import java.util.List;
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素1"));
-                                    document.getRootElement().addContent(new Element("子元素2"));
-                                    document.getRootElement().addContent(new Element("子元素3"));
+									document.getRootElement().addContent(new Element("子元素1"));
+									document.getRootElement().addContent(new Element("子元素2"));
+									document.getRootElement().addContent(new Element("子元素3"));
 
-                                    List&lt;Element&gt; elements = document.getRootElement().getChildren();
+									List&lt;Element&gt; elements = document.getRootElement().getChildren();
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>從整群元素中直接操作某個元素</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[14]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>從整群元素中直接操作某個元素</h3>
+					<p>
+						<textarea class='brush:java;highlight:[14]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
-                                    document.getRootElement().addContent(new Element("子元素"));
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    document.getRootElement().getChildren().get(0);
+									document.getRootElement().getChildren().get(0);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>為元素填入內容</h2>
-                <p>
-                    這裡內容指的是 <code>&lt;元素&gt;內容&lt;/元素&gt;</code>：<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[12]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+			<section>
+				<h2>為元素填入內容</h2>
+				<p>
+					這裡內容指的是 <code>&lt;元素&gt;內容&lt;/元素&gt;</code>：<br>
+					<br>
+					<textarea class='brush:java;highlight:[12]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    document.getRootElement().getChild("子元素").setText("內容");
+									document.getRootElement().getChild("子元素").setText("內容");
 
-                                }
+								}
 
-                            }
+							}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>讀取元素的內容</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[14]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+			<section>
+				<h2>讀取元素的內容</h2>
+				<p>
+					<textarea class='brush:java;highlight:[14]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    document.getRootElement().getChild("子元素").setText("內容");
+									document.getRootElement().getChild("子元素").setText("內容");
 
-                                    document.getRootElement().getChild("子元素").getText();
+									document.getRootElement().getChild("子元素").getText();
 
-                                }
+								}
 
-                            }
+							}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>為元素添加屬性</h2>
-                <p>
-                    這裡屬性指的是 <code>&lt;元素 屬性="值" /&gt;</code>。
-                </p>
-                <hr>
-                <section>
-                    <h3>先加入元素再設置屬性（標準範例）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[12]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+			<section>
+				<h2>為元素添加屬性</h2>
+				<p>
+					這裡屬性指的是 <code>&lt;元素 屬性="值" /&gt;</code>。
+				</p>
+				<hr>
+				<section>
+					<h3>先加入元素再設置屬性（標準範例）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[12]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    document.getRootElement().getChild("子元素").setAttribute("屬性", "值");
+									document.getRootElement().getChild("子元素").setAttribute("屬性", "值");
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>先設置好屬性再加入元素（變通範例）</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[10,11,13]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>先設置好屬性再加入元素（變通範例）</h3>
+					<p>
+						<textarea class='brush:java;highlight:[10,11,13]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    Element element = new Element("子元素");
-                                    element.setAttribute("屬性", "值");
+									Element element = new Element("子元素");
+									element.setAttribute("屬性", "值");
 
-                                    document.getRootElement().addContent(element);
+									document.getRootElement().addContent(element);
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    這兩個範例是一樣的，第一個比較容易看出來這節研究的重點，風格與先前範例一致，第二個只是變通一下，把 new Element() 拆開而已。
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<p>
+					這兩個範例是一樣的，第一個比較容易看出來這節研究的重點，風格與先前範例一致，第二個只是變通一下，把 new Element() 拆開而已。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>取得元素的屬性值</h2>
-                <p>
-                    <textarea class='brush:java;highlight:[14]'>
-                            import org.jdom2.Document;
-                            import org.jdom2.Element;
+			<section>
+				<h2>取得元素的屬性值</h2>
+				<p>
+					<textarea class='brush:java;highlight:[14]'>
+							import org.jdom2.Document;
+							import org.jdom2.Element;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document(new Element("根元素"));
+									Document document = new Document(new Element("根元素"));
 
-                                    document.getRootElement().addContent(new Element("子元素"));
+									document.getRootElement().addContent(new Element("子元素"));
 
-                                    document.getRootElement().getChild("子元素").setAttribute("屬性", "值");
+									document.getRootElement().getChild("子元素").setAttribute("屬性", "值");
 
-                                    document.getRootElement().getChild("子元素").getAttributeValue("屬性");
+									document.getRootElement().getChild("子元素").getAttributeValue("屬性");
 
-                                }
+								}
 
-                            }
+							}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>刪除元素、刪除屬性、其它常用</h2>
-                <table>
-                    <tr><td>removeChild("子元素")</td><td>刪除單個子元素</td></tr>
-                    <tr><td>removeChildren("子元素")</td><td>刪除整群子元素</td></tr>
-                    <tr><td>removeContent()</td><td>刪除所有元素</td></tr>
-                    <tr><td>removeAttribute("屬性")</td><td>刪除屬性</td></tr>
-                    <tr><td>clone()</td><td>複製元素、屬性</td></tr>
-                    <tr><td>detach()</td><td>讓子元素脫離父元素</td></tr>
-                    <tr><td>getName()</td><td>取得元素名稱、屬性名稱</td></tr>
-                    <tr><td>isRootElement()</td><td>判斷是否為根元素</td></tr>
-                </table>
-            </section>
+			<section>
+				<h2>刪除元素、刪除屬性、其它常用</h2>
+				<table>
+					<tr><td>removeChild("子元素")</td><td>刪除單個子元素</td></tr>
+					<tr><td>removeChildren("子元素")</td><td>刪除整群子元素</td></tr>
+					<tr><td>removeContent()</td><td>刪除所有元素</td></tr>
+					<tr><td>removeAttribute("屬性")</td><td>刪除屬性</td></tr>
+					<tr><td>clone()</td><td>複製元素、屬性</td></tr>
+					<tr><td>detach()</td><td>讓子元素脫離父元素</td></tr>
+					<tr><td>getName()</td><td>取得元素名稱、屬性名稱</td></tr>
+					<tr><td>isRootElement()</td><td>判斷是否為根元素</td></tr>
+				</table>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>儲存文件模型為 XML 檔案</h2>
-                <hr>
-                <section>
-                    <h3>直接以預設格式儲存</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[13,15,16,17]'>
-                            import java.io.FileOutputStream;
-                            import org.jdom2.Document;
-                            import org.jdom2.output.XMLOutputter;
+			<section>
+				<h2>儲存文件模型為 XML 檔案</h2>
+				<hr>
+				<section>
+					<h3>直接以預設格式儲存</h3>
+					<p>
+						<textarea class='brush:java;highlight:[13,15,16,17]'>
+							import java.io.FileOutputStream;
+							import org.jdom2.Document;
+							import org.jdom2.output.XMLOutputter;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    try{
+									try{
 
-                                        Document document = new Document();
+										Document document = new Document();
 
-                                        XMLOutputter xml_outputter = new XMLOutputter();
+										XMLOutputter xml_outputter = new XMLOutputter();
 
-                                        FileOutputStream file_output_stream = new FileOutputStream("document.xml");
-                                        xml_outputter.output(document, file_output_stream);
-                                        file_output_stream.close();
+										FileOutputStream file_output_stream = new FileOutputStream("document.xml");
+										xml_outputter.output(document, file_output_stream);
+										file_output_stream.close();
 
-                                    }
-                                    catch (Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									}
+									catch (Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                     </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>自訂文件格式</h3>
-                    <p>
-                        <textarea class='brush:java;highlight:[13,14,15,16,18]'>
-                            import java.io.FileOutputStream;
-                            import org.jdom2.Document;
-                            import org.jdom2.output.Format;
-                            import org.jdom2.output.LineSeparator;
-                            import org.jdom2.output.XMLOutputter;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>自訂文件格式</h3>
+					<p>
+						<textarea class='brush:java;highlight:[13,14,15,16,18]'>
+							import java.io.FileOutputStream;
+							import org.jdom2.Document;
+							import org.jdom2.output.Format;
+							import org.jdom2.output.LineSeparator;
+							import org.jdom2.output.XMLOutputter;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
+								public static void main(String[] args){
 
-                                    Document document = new Document();
+									Document document = new Document();
 
-                                    Format format = Format.getCompactFormat();
-                                    format.setEncoding("UTF-8");               //指定編碼
-                                    format.setIndent("    ");                  //指定縮排（四個空白）
-                                    format.setLineSeparator(LineSeparator.NL); //指定換行字元
+									Format format = Format.getCompactFormat();
+									format.setEncoding("UTF-8");			   //指定編碼
+									format.setIndent("	");				  //指定縮排（四個空白）
+									format.setLineSeparator(LineSeparator.NL); //指定換行字元
 
-                                    XMLOutputter xml_outputter = new XMLOutputter(format);
+									XMLOutputter xml_outputter = new XMLOutputter(format);
 
-                                    try{
-                                        FileOutputStream file_output_stream = new FileOutputStream("document.xml");
-                                        xml_outputter.output(document, file_output_stream);
-                                        file_output_stream.close();
-                                    }
-                                    catch (Exception exception){
-                                        exception.printStackTrace();
-                                    }
+									try{
+										FileOutputStream file_output_stream = new FileOutputStream("document.xml");
+										xml_outputter.output(document, file_output_stream);
+										file_output_stream.close();
+									}
+									catch (Exception exception){
+										exception.printStackTrace();
+									}
 
-                                }
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        常用的換行字元有：<code title='Line feed, 0Ah'>LineSeparator.NL</code>（UNIX）、<code title='CR+LF'>LineSeparator.CRNL</code>（DOS）、<code title='Carriage Return, 0Dh'>LineSeparator.CR</code>（MAC）。<br>
-                        <br>
-                        常見的編碼系統有：<code>ASCII</code>、<code>Big5</code>、<code>UTF-8</code>、<code>ISO-8859-1</code>、<code>Unicode</code>。
-                    </p>
-                </section>
-            </section>
+						<br>
+						常用的換行字元有：<code title='Line feed, 0Ah'>LineSeparator.NL</code>（UNIX）、<code title='CR+LF'>LineSeparator.CRNL</code>（DOS）、<code title='Carriage Return, 0Dh'>LineSeparator.CR</code>（MAC）。<br>
+						<br>
+						常見的編碼系統有：<code>ASCII</code>、<code>Big5</code>、<code>UTF-8</code>、<code>ISO-8859-1</code>、<code>Unicode</code>。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>使用 XPath 快速存取節點</h2>
-                <p>
-                    本範例需搭配 jaxen 套件：<br>
-                    <br>
-                    <textarea class='brush:java;highlight:[14,15,18,19]'>
-                        import java.io.File;
-                        import org.jdom2.Document;
-                        import org.jdom2.input.SAXBuilder;
-                        import org.jdom2.xpath.XPath;
+			<section>
+				<h2>使用 XPath 快速存取節點</h2>
+				<p>
+					本範例需搭配 jaxen 套件：<br>
+					<br>
+					<textarea class='brush:java;highlight:[14,15,18,19]'>
+						import java.io.File;
+						import org.jdom2.Document;
+						import org.jdom2.input.SAXBuilder;
+						import org.jdom2.xpath.XPath;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
-                                try{
+							public static void main(String[] args){
+								try{
 
-                                    Document document = new SAXBuilder().build(new File("document.xml"));
+									Document document = new SAXBuilder().build(new File("document.xml"));
 
-                                    //取得單一個節點
-                                    System.out.println(XPath.selectSingleNode(document, "/根元素/子元素[1]/text()"));
-                                    System.out.println(XPath.selectSingleNode(document, "/根元素/子元素[1]/@屬性"));
+									//取得單一個節點
+									System.out.println(XPath.selectSingleNode(document, "/根元素/子元素[1]/text()"));
+									System.out.println(XPath.selectSingleNode(document, "/根元素/子元素[1]/@屬性"));
 
-                                    //以 List 群集取得整群節點
-                                    System.out.println(XPath.selectNodes(document, "//子元素/text()").get(0));
-                                    System.out.println(XPath.selectNodes(document, "//子元素/@屬性").get(0));
+									//以 List 群集取得整群節點
+									System.out.println(XPath.selectNodes(document, "//子元素/text()").get(0));
+									System.out.println(XPath.selectNodes(document, "//子元素/@屬性").get(0));
 
-                                }
-                                catch (Exception exception){
-                                    exception.printStackTrace();
-                                }
-                            }
+								}
+								catch (Exception exception){
+									exception.printStackTrace();
+								}
+							}
 
-                        }
+						}
                     </textarea>
-                </p>
-            </section>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>連續操作（順便示範什麼叫可讀性低到讓人吐血的寫法）</h2>
-                <p>
-                    最後示範連續操作 jdom 的功能，雖然不建議這種可讀性低的寫法，但有時候這麼寫確實很方便：<br>
-                    <br>
-                    <textarea class='brush:java'>
-                        import java.util.*;
-                        import org.jdom2.*;
+			<section>
+				<h2>連續操作（順便示範什麼叫可讀性低到讓人吐血的寫法）</h2>
+				<p>
+					最後示範連續操作 jdom 的功能，雖然不建議這種可讀性低的寫法，但有時候這麼寫確實很方便：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.*;
+						import org.jdom2.*;
 
-                        public class Main{
+						public class Main{
 
-                            public static void main(String[] args){
+							public static void main(String[] args){
 
-                                Element root = new Document(new Element("根元素")).getRootElement();
+								Element root = new Document(new Element("根元素")).getRootElement();
 
-                                root.addContent(new Element("子元素").setAttribute("屬性一","值一").setAttribute("屬性二","值二").setText("內容"))
-                                    .addContent(new Element("子元素").setAttribute("屬性一","值一").setAttribute("屬性二","值二").setText("內容"))
-                                    .addContent(new Element("子元素").setAttribute("屬性一","值一").setAttribute("屬性二","值二").setText("內容"));
+								root.addContent(new Element("子元素").setAttribute("屬性一","值一").setAttribute("屬性二","值二").setText("內容"))
+									.addContent(new Element("子元素").setAttribute("屬性一","值一").setAttribute("屬性二","值二").setText("內容"))
+									.addContent(new Element("子元素").setAttribute("屬性一","值一").setAttribute("屬性二","值二").setText("內容"));
 
-                                Iterator&lt;Element&gt; iterator = ((List&lt;Element&gt;)root.getChildren("子元素")).iterator();
+								Iterator&lt;Element&gt; iterator = ((List&lt;Element&gt;)root.getChildren("子元素")).iterator();
 
-                                while(iterator.hasNext()) System.out.println(iterator.next().getText());
+								while(iterator.hasNext()) System.out.println(iterator.next().getText());
 
-                            }
+							}
 
-                        }
+						}
                     </textarea>
-                    <br>
-                    <output>
-                        內容<br>
-                        內容<br>
-                        內容<br>
-                    </output>
-                    <br>
-                    另外，本文之範例為了讓初學程式的人容易閱讀，因此盡量不設置變數，避免閱讀者轉換不過來。但其實像這類巡訪性結構的程式，在能夠以某個節點為基準時，就先用參照加以定位後，再進行巡訪，多少可以降低針對節點的計算，提高效率。建議實際撰寫程式的場合，多用參照定位節點再開始操作 JDOM 的功能。例如上面範例的 root 就是定位根節點的參照。
-                </p>
-            </section>
+					<br>
+					<output>
+						內容<br>
+						內容<br>
+						內容<br>
+					</output>
+					<br>
+					另外，本文之範例為了讓初學程式的人容易閱讀，因此盡量不設置變數，避免閱讀者轉換不過來。但其實像這類巡訪性結構的程式，在能夠以某個節點為基準時，就先用參照加以定位後，再進行巡訪，多少可以降低針對節點的計算，提高效率。建議實際撰寫程式的場合，多用參照定位節點再開始操作 JDOM 的功能。例如上面範例的 root 就是定位根節點的參照。
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [*] 雖然在處理大檔案的 XML 文件時，JDOM 效能不佳，但目前仍積極更新與維護，功能齊備、錯誤較少，因此主要還是使用 JDOM 比較妥當。如果遇上執行效能的瓶頸，才改用 dom4j。<br>
-                    [!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20000332X.7z' target='_blank'>20000332X.7z</a>，內含 jdom 2.0.6 與 jaxen 1.1.6，能直接編譯，節省你摸索的時間。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[*] 雖然在處理大檔案的 XML 文件時，JDOM 效能不佳，但目前仍積極更新與維護，功能齊備、錯誤較少，因此主要還是使用 JDOM 比較妥當。如果遇上執行效能的瓶頸，才改用 dom4j。<br>
+					[!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20000332X.7z' target='_blank'>20000332X.7z</a>，內含 jdom 2.0.6 與 jaxen 1.1.6，能直接編譯，節省你摸索的時間。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>

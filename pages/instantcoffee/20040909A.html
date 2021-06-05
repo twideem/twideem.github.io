@@ -2,608 +2,608 @@
 
 <html lang='zh-TW'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <title>TWIDEEM CIVS</title>
-        <link href='../../favicon.png' rel='icon'>
-        <link href='../../styles/layout.css' rel='stylesheet'>
-        <link href='../../styles/editor.css' rel='stylesheet'>
-        <script src='../../scripts/template.js'></script>
-        <script src='../../objects/plugins/sh.js'></script>
-        <script>sh.lang('Java')</script>
-    </head>
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<link href='../../styles/editor.css' rel='stylesheet'>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+		<script>sh.lang('Java')</script>
+	</head>
 
-    <body>
+	<body>
 
-        <article>
+		<article>
 
-            <header>
-                <h1>dom4j 速學範例集</h1>
-                <p>
-                    dom4j 是 Java 早期最簡單易用的 XML 框架，用以代替 JAXP 的 SAX 與 DOM 這功能不靈活、且操作複雜的套件<ins>[1]</ins>。<br>
-                    <br>
-                    可惜已不再更新，使用率越來越低，變得沒有知名度。但「據說」有理想的執行效率<ins>[2]</ins>，因此還是受到許多系統框架的青睞，做為其內建的 XML 解析器。<br>
-                    <br>
-                    你可以從官方頁面下載 dom4j 套件：<br>
-                    <br>
-                    <a href='http://github.com/dom4j/dom4j/' target='_blank'>http://github.com/dom4j/dom4j/</a><br>
-                    <br>
-                    穩定版 1.6.1 並未針對 Java SE 5 劃時代的語法功能做調整，因此建議使用 2.0.0 RC1。
-                </p>
-            </header>
+			<header>
+				<h1>dom4j 速學範例集</h1>
+				<p>
+					dom4j 是 Java 早期最簡單易用的 XML 框架，用以代替 JAXP 的 SAX 與 DOM 這功能不靈活、且操作複雜的套件<ins>[1]</ins>。<br>
+					<br>
+					可惜已不再更新，使用率越來越低，變得沒有知名度。但「據說」有理想的執行效率<ins>[2]</ins>，因此還是受到許多系統框架的青睞，做為其內建的 XML 解析器。<br>
+					<br>
+					你可以從官方頁面下載 dom4j 套件：<br>
+					<br>
+					<a href='http://github.com/dom4j/dom4j/' target='_blank'>http://github.com/dom4j/dom4j/</a><br>
+					<br>
+					穩定版 1.6.1 並未針對 Java SE 5 劃時代的語法功能做調整，因此建議使用 2.0.0 RC1。
+				</p>
+			</header>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>以 dom4j 1.6.1 讀取 XML 文件，然後剖析根元素的內容。</h2>
-                <p>
-                    底下 Sample 1 範例將以 dom4j 1.6.1 載入一份 XML 文件，並輸出其根元素的名稱，以及根元素所夾帶屬性的名稱與內容。
-                </p>
-                <hr>
-                <section>
-                    <h3>cavs.xml</h3>
-                    <p>
-                        <textarea class='brush:xml'>
-                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-                            &lt;team city="Cleveland" name="Cavaliers" arena="Quicken Loans Arena" season="2010"&gt;
-                                &lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;
-                                &lt;player number="33" position="C"&gt;Shaquille O'Neal&lt;/player&gt;
-                                &lt;player number="21" position="PF"&gt;J.J. Hickson&lt;/player&gt;
-                                &lt;player number="23" position="SF"&gt;LeBron James&lt;/player&gt;
-                                &lt;player number="18" position="SG"&gt;Anthony Parker&lt;/player&gt;
-                                &lt;player number="2" position="PG"&gt;Mo Williams&lt;/player&gt;
-                            &lt;/team&gt;
+			<section>
+				<h2>以 dom4j 1.6.1 讀取 XML 文件，然後剖析根元素的內容。</h2>
+				<p>
+					底下 Sample 1 範例將以 dom4j 1.6.1 載入一份 XML 文件，並輸出其根元素的名稱，以及根元素所夾帶屬性的名稱與內容。
+				</p>
+				<hr>
+				<section>
+					<h3>cavs.xml</h3>
+					<p>
+						<textarea class='brush:xml'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+							&lt;team city="Cleveland" name="Cavaliers" arena="Quicken Loans Arena" season="2010"&gt;
+								&lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;
+								&lt;player number="33" position="C"&gt;Shaquille O'Neal&lt;/player&gt;
+								&lt;player number="21" position="PF"&gt;J.J. Hickson&lt;/player&gt;
+								&lt;player number="23" position="SF"&gt;LeBron James&lt;/player&gt;
+								&lt;player number="18" position="SG"&gt;Anthony Parker&lt;/player&gt;
+								&lt;player number="2" position="PG"&gt;Mo Williams&lt;/player&gt;
+							&lt;/team&gt;
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Main.java</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import java.util.List;
-                            import org.dom4j.Attribute;
-                            import org.dom4j.Document;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.SAXReader;
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Main.java</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import java.util.List;
+							import org.dom4j.Attribute;
+							import org.dom4j.Document;
+							import org.dom4j.Element;
+							import org.dom4j.io.SAXReader;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //輸出根元素的名稱。
-                                        Element element = document.getRootElement();
-                                        System.out.println(element.getName());
-                                        //列出根元素全部屬性的名稱與內容。
-                                        List&lt;Attribute&gt; list = element.attributes();
-                                        for(Attribute attribute : list){
-                                            System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
-                                        }
-                                        //依索引值指定屬性，輸出其名稱與內容。（正式做法）
-                                        Attribute attribute = (Attribute)element.attributes().get(1);
-                                        System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
-                                        //依索引值指定屬性，輸出其名稱與內容。（簡化做法）
-                                        attribute = (Attribute)element.attribute(1);
-                                        System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
-                                        //依屬性名稱輸出其內容。
-                                        attribute = (Attribute)element.attribute("season");
-                                        System.out.println(attribute.getValue());
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//輸出根元素的名稱。
+										Element element = document.getRootElement();
+										System.out.println(element.getName());
+										//列出根元素全部屬性的名稱與內容。
+										List&lt;Attribute&gt; list = element.attributes();
+										for(Attribute attribute : list){
+											System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
+										}
+										//依索引值指定屬性，輸出其名稱與內容。（正式做法）
+										Attribute attribute = (Attribute)element.attributes().get(1);
+										System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
+										//依索引值指定屬性，輸出其名稱與內容。（簡化做法）
+										attribute = (Attribute)element.attribute(1);
+										System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
+										//依屬性名稱輸出其內容。
+										attribute = (Attribute)element.attribute("season");
+										System.out.println(attribute.getValue());
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-                <hr>
-                <p>
-                    第 17 行輸出結果，為根元素的名稱：<br>
-                    <br>
-                    <output>
-                        team<br>
-                    </output>
-                    <br>
-                    第 21 行輸出結果，為根元素全部屬性的名稱與內容：<br>
-                    <br>
-                    <output>
-                        city&nbsp; 　　Cleveland<br>
-                        name&nbsp; 　　Cavaliers<br>
-                        arena&nbsp;　　Quicken Loans Arena<br>
-                        season　　2010<br>
-                    </output>
-                    <br>
-                    第 25 行輸出結果，為根元素第二個屬性的名稱與內容：<br>
-                    <br>
-                    <output>
-                        name　　Cavaliers<br>
-                    </output>
-                    <br>
-                    第 28 行輸出結果，為根元素第二個屬性的名稱與內容：<br>
-                    <br>
-                    <output>
-                        name　　Cavaliers<br>
-                    </output>
-                    <br>
-                    第 31 行輸出結果，為根元素 season 屬性的內容：<br>
-                    <br>
-                    <output>
-                        2010
-                    </output>
-                </p>
-            </section>
+					</p>
+				</section>
+				<hr>
+				<p>
+					第 17 行輸出結果，為根元素的名稱：<br>
+					<br>
+					<output>
+						team<br>
+					</output>
+					<br>
+					第 21 行輸出結果，為根元素全部屬性的名稱與內容：<br>
+					<br>
+					<output>
+						city&nbsp; 　　Cleveland<br>
+						name&nbsp; 　　Cavaliers<br>
+						arena&nbsp;　　Quicken Loans Arena<br>
+						season　　2010<br>
+					</output>
+					<br>
+					第 25 行輸出結果，為根元素第二個屬性的名稱與內容：<br>
+					<br>
+					<output>
+						name　　Cavaliers<br>
+					</output>
+					<br>
+					第 28 行輸出結果，為根元素第二個屬性的名稱與內容：<br>
+					<br>
+					<output>
+						name　　Cavaliers<br>
+					</output>
+					<br>
+					第 31 行輸出結果，為根元素 season 屬性的內容：<br>
+					<br>
+					<output>
+						2010
+					</output>
+				</p>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>以 dom4j 2.0.0 讀取 XML 文件，剖析時寫法更簡易！</h2>
-                <hr>
-                <section>
-                    <h3>Sample 2</h3>
-                    <p>
-                        因為 dom4j 2.0.0 根據 Java SE 5 的語法調整，因此如上 Sample 1 的程式碼，可以簡化為：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import org.dom4j.Attribute;
-                            import org.dom4j.Document;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.SAXReader;
+			<section>
+				<h2>以 dom4j 2.0.0 讀取 XML 文件，剖析時寫法更簡易！</h2>
+				<hr>
+				<section>
+					<h3>Sample 2</h3>
+					<p>
+						因為 dom4j 2.0.0 根據 Java SE 5 的語法調整，因此如上 Sample 1 的程式碼，可以簡化為：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import org.dom4j.Attribute;
+							import org.dom4j.Document;
+							import org.dom4j.Element;
+							import org.dom4j.io.SAXReader;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //輸出根元素的名稱。
-                                        Element element = document.getRootElement();
-                                        System.out.println(element.getName());
-                                        //列出根元素全部屬性的名稱與內容。
-                                        for(Attribute attribute : element.attributes()){
-                                            System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
-                                        }
-                                        //依索引值指定屬性，輸出其名稱與內容。（正式做法）
-                                        System.out.printf("%s\t%s\t\n", element.attributes().get(1).getName(), element.attributes().get(1).getValue());
-                                        //依索引值指定屬性，輸出其名稱與內容。（簡化做法）
-                                        System.out.printf("%s\t%s\t\n", element.attribute(1).getName(), element.attribute(1).getValue());
-                                        //依屬性名稱輸出其內容。
-                                        System.out.println(element.attribute("season").getValue());
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//輸出根元素的名稱。
+										Element element = document.getRootElement();
+										System.out.println(element.getName());
+										//列出根元素全部屬性的名稱與內容。
+										for(Attribute attribute : element.attributes()){
+											System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
+										}
+										//依索引值指定屬性，輸出其名稱與內容。（正式做法）
+										System.out.printf("%s\t%s\t\n", element.attributes().get(1).getName(), element.attributes().get(1).getValue());
+										//依索引值指定屬性，輸出其名稱與內容。（簡化做法）
+										System.out.printf("%s\t%s\t\n", element.attribute(1).getName(), element.attribute(1).getValue());
+										//依屬性名稱輸出其內容。
+										System.out.println(element.attribute("season").getValue());
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        泛型的關係，去掉了 Attribute 的轉型過程，而能直接存取群集裡面的資料。
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Sample 3</h3>
-                    <p>
-                        連 Element 都可以直接使用：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import org.dom4j.Attribute;
-                            import org.dom4j.Document;
-                            import org.dom4j.io.SAXReader;
+						<br>
+						泛型的關係，去掉了 Attribute 的轉型過程，而能直接存取群集裡面的資料。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Sample 3</h3>
+					<p>
+						連 Element 都可以直接使用：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import org.dom4j.Attribute;
+							import org.dom4j.Document;
+							import org.dom4j.io.SAXReader;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //輸出根元素的名稱。
-                                        System.out.println(document.getRootElement().getName());
-                                        //列出根元素全部屬性的名稱與內容。
-                                        for(Attribute attribute : document.getRootElement().attributes()){
-                                            System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
-                                        }
-                                        //依索引值指定屬性，輸出其名稱與內容。（正式做法）
-                                        System.out.printf("%s\t%s\t\n", document.getRootElement().attributes().get(1).getName(), document.getRootElement().attributes().get(1).getValue());
-                                        //依索引值指定屬性，輸出其名稱與內容。（簡化做法）
-                                        System.out.printf("%s\t%s\t\n", document.getRootElement().attribute(1).getName(), document.getRootElement().attribute(1).getValue());
-                                        //依屬性名稱輸出其內容。
-                                        System.out.println(document.getRootElement().attribute("season").getValue());
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//輸出根元素的名稱。
+										System.out.println(document.getRootElement().getName());
+										//列出根元素全部屬性的名稱與內容。
+										for(Attribute attribute : document.getRootElement().attributes()){
+											System.out.printf("%s\t%s\t\n", attribute.getName(), attribute.getValue());
+										}
+										//依索引值指定屬性，輸出其名稱與內容。（正式做法）
+										System.out.printf("%s\t%s\t\n", document.getRootElement().attributes().get(1).getName(), document.getRootElement().attributes().get(1).getValue());
+										//依索引值指定屬性，輸出其名稱與內容。（簡化做法）
+										System.out.printf("%s\t%s\t\n", document.getRootElement().attribute(1).getName(), document.getRootElement().attribute(1).getValue());
+										//依屬性名稱輸出其內容。
+										System.out.println(document.getRootElement().attribute("season").getValue());
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        可見寫法自由許多，因此後面的範例繼續採用 2.0.0 的寫法。
-                    </p>
-                </section>
-            </section>
+						<br>
+						可見寫法自由許多，因此後面的範例繼續採用 2.0.0 的寫法。
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>讀取子元素的名稱、內容、屬性</h2>
-                <p>
-                    前面示範的是根元素內容與屬性的存取，接下來則是包含在根元素裡面的子元素。內容與屬性的操作方式其實一樣，只差在如何切換到想要的節點，來使用那些操作方式。
-                </p>
-                <hr>
-                <section>
-                    <h3>Sample 4</h3>
-                    <p>
-                        主要示範單一個子元素的存取，因此重點放在 cavs.xml 裡面唯獨一個的 coach 標記：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import org.dom4j.Document;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.SAXReader;
+			<section>
+				<h2>讀取子元素的名稱、內容、屬性</h2>
+				<p>
+					前面示範的是根元素內容與屬性的存取，接下來則是包含在根元素裡面的子元素。內容與屬性的操作方式其實一樣，只差在如何切換到想要的節點，來使用那些操作方式。
+				</p>
+				<hr>
+				<section>
+					<h3>Sample 4</h3>
+					<p>
+						主要示範單一個子元素的存取，因此重點放在 cavs.xml 裡面唯獨一個的 coach 標記：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import org.dom4j.Document;
+							import org.dom4j.Element;
+							import org.dom4j.io.SAXReader;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //列出根元素全部子元素的名稱與內容。
-                                        for(Element element : document.getRootElement().elements()){
-                                            System.out.printf("%s\t%s\t\n", element.getName(), element.getText());
-                                        }
-                                        //依索引值指定子元素，並輸出其名稱與內容。
-                                        System.out.printf("%s\t%s\t\n", document.getRootElement().elements().get(0).getName(), document.getRootElement().elements().get(0).getText());
-                                        //依子元素名稱輸出其內容。
-                                        System.out.println(document.getRootElement().element("coach").getText());
-                                        //依子元素名稱，輸出其屬性的內容。
-                                        System.out.println(document.getRootElement().element("coach").attribute("win").getValue());
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//列出根元素全部子元素的名稱與內容。
+										for(Element element : document.getRootElement().elements()){
+											System.out.printf("%s\t%s\t\n", element.getName(), element.getText());
+										}
+										//依索引值指定子元素，並輸出其名稱與內容。
+										System.out.printf("%s\t%s\t\n", document.getRootElement().elements().get(0).getName(), document.getRootElement().elements().get(0).getText());
+										//依子元素名稱輸出其內容。
+										System.out.println(document.getRootElement().element("coach").getText());
+										//依子元素名稱，輸出其屬性的內容。
+										System.out.println(document.getRootElement().element("coach").attribute("win").getValue());
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        第 15 行輸出結果，列出所有子元素的名稱與內容：<br>
-                        <br>
-                        <output>
-                            coach&nbsp;　　Mike Brown<br>
-                            player　　Shaquille O'Neal<br>
-                            player　　J.J. Hickson<br>
-                            player　　LeBron James<br>
-                            player　　Anthony Parker<br>
-                            player　　Mo Williams<br>
-                        </output>
-                        <br>
-                        第 18 行輸出結果，為第 1 個子元素的名稱與內容：<br>
-                        <br>
-                        <output>
-                            coach&nbsp;　　Mike Brown<br>
-                        </output>
-                        <br>
-                        第 20 行輸出結果，為 coach 元素的內容：<br>
-                        <br>
-                        <output>
-                            Mike Brown<br>
-                        </output>
-                        <br>
-                        第 22 行輸出結果，為 coach 元素的 win 屬性值：<br>
-                        <br>
-                        <output>
-                            61
-                        </output>
-                    </p>
-                </section>
-                <hr>
-                <section>
-                    <h3>Sample 5</h3>
-                    <p>
-                        主要示範整群子元素的存取，因此重點放在 cavs.xml 裡面好幾個的 player 標記：<br>
-                        <br>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import org.dom4j.Document;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.SAXReader;
+						<br>
+						第 15 行輸出結果，列出所有子元素的名稱與內容：<br>
+						<br>
+						<output>
+							coach&nbsp;　　Mike Brown<br>
+							player　　Shaquille O'Neal<br>
+							player　　J.J. Hickson<br>
+							player　　LeBron James<br>
+							player　　Anthony Parker<br>
+							player　　Mo Williams<br>
+						</output>
+						<br>
+						第 18 行輸出結果，為第 1 個子元素的名稱與內容：<br>
+						<br>
+						<output>
+							coach&nbsp;　　Mike Brown<br>
+						</output>
+						<br>
+						第 20 行輸出結果，為 coach 元素的內容：<br>
+						<br>
+						<output>
+							Mike Brown<br>
+						</output>
+						<br>
+						第 22 行輸出結果，為 coach 元素的 win 屬性值：<br>
+						<br>
+						<output>
+							61
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Sample 5</h3>
+					<p>
+						主要示範整群子元素的存取，因此重點放在 cavs.xml 裡面好幾個的 player 標記：<br>
+						<br>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import org.dom4j.Document;
+							import org.dom4j.Element;
+							import org.dom4j.io.SAXReader;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //輸出第一個 player 元素的內容與屬性值。
-                                        System.out.println(document.getRootElement().elements("player").get(0).getText());
-                                        System.out.println(document.getRootElement().elements("player").get(0).attribute("number").getValue());
-                                        System.out.println(document.getRootElement().elements("player").get(0).attribute("position").getValue());
-                                        //列出所有 player 元素。
-                                        for(Element element : document.getRootElement().elements("player")){
-                                            System.out.printf("%s\t%s\t%s\n", element.attribute("number").getValue(), element.attribute("position").getValue(), element.getText());
-                                        }
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//輸出第一個 player 元素的內容與屬性值。
+										System.out.println(document.getRootElement().elements("player").get(0).getText());
+										System.out.println(document.getRootElement().elements("player").get(0).attribute("number").getValue());
+										System.out.println(document.getRootElement().elements("player").get(0).attribute("position").getValue());
+										//列出所有 player 元素。
+										for(Element element : document.getRootElement().elements("player")){
+											System.out.printf("%s\t%s\t%s\n", element.attribute("number").getValue(), element.attribute("position").getValue(), element.getText());
+										}
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        第 14、15、16 行輸出結果，分別是第 1 個 player 子元素的內容、number 屬性、position 屬性：<br>
-                        <br>
-                        <output>
-                            Shaquille O'Neal<br>
-                            33<br>
-                            C<br>
-                        </output>
-                        <br>
-                        第 19 行輸出結果，則列出所有 player 子元素的 number 屬性、position 屬性、以及內容：<br>
-                        <br>
-                        <output>
-                            33　　C&nbsp;　　Shaquille O'Neal<br>
-                            21　　PF　　J.J. Hickson<br>
-                            23　　SF　　LeBron James<br>
-                            18　　SG　　Anthony Parker<br>
-                            2&nbsp;　　PG　　Mo Williams
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						第 14、15、16 行輸出結果，分別是第 1 個 player 子元素的內容、number 屬性、position 屬性：<br>
+						<br>
+						<output>
+							Shaquille O'Neal<br>
+							33<br>
+							C<br>
+						</output>
+						<br>
+						第 19 行輸出結果，則列出所有 player 子元素的 number 屬性、position 屬性、以及內容：<br>
+						<br>
+						<output>
+							33　　C&nbsp;　　Shaquille O'Neal<br>
+							21　　PF　　J.J. Hickson<br>
+							23　　SF　　LeBron James<br>
+							18　　SG　　Anthony Parker<br>
+							2&nbsp;　　PG　　Mo Williams
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>新增子元素，並另存為新的 XML 檔。</h2>
-                <p>
-                    接下來的範例，藉由增加替補球員，示範如何新增子元素。最後順便示範如何將這個更完整的文件模型，儲存為一份 XML 檔案。
-                </p>
-                <hr>
-                <section>
-                    <h3>Sample 6</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import java.io.FileOutputStream;
-                            import org.dom4j.Document;
-                            import org.dom4j.DocumentFactory;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.OutputFormat;
-                            import org.dom4j.io.SAXReader;
-                            import org.dom4j.io.XMLWriter;
+			<section>
+				<h2>新增子元素，並另存為新的 XML 檔。</h2>
+				<p>
+					接下來的範例，藉由增加替補球員，示範如何新增子元素。最後順便示範如何將這個更完整的文件模型，儲存為一份 XML 檔案。
+				</p>
+				<hr>
+				<section>
+					<h3>Sample 6</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import java.io.FileOutputStream;
+							import org.dom4j.Document;
+							import org.dom4j.DocumentFactory;
+							import org.dom4j.Element;
+							import org.dom4j.io.OutputFormat;
+							import org.dom4j.io.SAXReader;
+							import org.dom4j.io.XMLWriter;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //第一種做法：先設置好子元素，再加入根元素。
-                                        Element element = new DocumentFactory().createElement("player");
-                                        element.addText("Zydrunas Ilgauskas");
-                                        element.addAttribute("number", "11");
-                                        element.addAttribute("position", "C");
-                                        document.getRootElement().add(element);
-                                        //第二種做法：先在根元素加入子元素，再設置子元素。
-                                        element = document.getRootElement().addElement("player");
-                                        element.addText("Anderson Varejao");
-                                        element.addAttribute("number", "17");
-                                        element.addAttribute("position", "PF");
-                                        //第三種做法：直接新增子元素。
-                                        document.getRootElement().addElement("player").addText("Jamario Moon").addAttribute("number", "15").addAttribute("position", "SF");
-                                        document.getRootElement().addElement("player").addText("Delonte West").addAttribute("number", "13").addAttribute("position", "SG");
-                                        document.getRootElement().addElement("player").addText("Daniel Gibson").addAttribute("number", "1").addAttribute("position", "PG");
-                                        //為了測試新增情況，列出所有子元素。
-                                        for(Element elements : document.getRootElement().elements("player")){
-                                            System.out.printf("%s\t%s\t%s\n", elements.attribute("number").getValue(), elements.attribute("position").getValue(), elements.getText());
-                                        }
-                                        //將以上更動過的 DOM 儲存為 backup.xml。
-                                        FileOutputStream file_output_stream = new FileOutputStream("backup.xml");
-                                        XMLWriter xml_writer = new XMLWriter(file_output_stream, OutputFormat.createPrettyPrint());
-                                        xml_writer.write(document);
-                                        xml_writer.close();
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//第一種做法：先設置好子元素，再加入根元素。
+										Element element = new DocumentFactory().createElement("player");
+										element.addText("Zydrunas Ilgauskas");
+										element.addAttribute("number", "11");
+										element.addAttribute("position", "C");
+										document.getRootElement().add(element);
+										//第二種做法：先在根元素加入子元素，再設置子元素。
+										element = document.getRootElement().addElement("player");
+										element.addText("Anderson Varejao");
+										element.addAttribute("number", "17");
+										element.addAttribute("position", "PF");
+										//第三種做法：直接新增子元素。
+										document.getRootElement().addElement("player").addText("Jamario Moon").addAttribute("number", "15").addAttribute("position", "SF");
+										document.getRootElement().addElement("player").addText("Delonte West").addAttribute("number", "13").addAttribute("position", "SG");
+										document.getRootElement().addElement("player").addText("Daniel Gibson").addAttribute("number", "1").addAttribute("position", "PG");
+										//為了測試新增情況，列出所有子元素。
+										for(Element elements : document.getRootElement().elements("player")){
+											System.out.printf("%s\t%s\t%s\n", elements.attribute("number").getValue(), elements.attribute("position").getValue(), elements.getText());
+										}
+										//將以上更動過的 DOM 儲存為 backup.xml。
+										FileOutputStream file_output_stream = new FileOutputStream("backup.xml");
+										XMLWriter xml_writer = new XMLWriter(file_output_stream, OutputFormat.createPrettyPrint());
+										xml_writer.write(document);
+										xml_writer.close();
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output>
-                            33　　C&nbsp;　　Shaquille O'Neal<br>
-                            21　　PF　　J.J. Hickson<br>
-                            23　　SF　　LeBron James<br>
-                            18　　SG　　Anthony Parker<br>
-                            2&nbsp;　　PG　　Mo Williams<br>
-                            11　　C&nbsp;　　Zydrunas Ilgauskas<br>
-                            17　　PF　　Anderson Varejao<br>
-                            15　　SF　　Jamario Moon<br>
-                            13　　SG　　Delonte West<br>
-                            1&nbsp;　　PG　　Daniel Gibson<br>
-                        </output>
-                        <br>
-                        <output class='editor'>
-                            &lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
-                            &lt;team city="Cleveland" name="Cavaliers" arena="Quicken Loans Arena" season="2010"&gt;<br>
-                            　　&lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;<br>
-                            　　&lt;player number="33" position="C"&gt;Shaquille O'Neal&lt;/player&gt;<br>
-                            　　&lt;player number="21" position="PF"&gt;J.J. Hickson&lt;/player&gt;<br>
-                            　　&lt;player number="23" position="SF"&gt;LeBron James&lt;/player&gt;<br>
-                            　　&lt;player number="18" position="SG"&gt;Anthony Parker&lt;/player&gt;<br>
-                            　　&lt;player number="2" position="PG"&gt;Mo Williams&lt;/player&gt;<br>
-                            　　&lt;player number="11" position="C"&gt;Zydrunas Ilgauskas&lt;/player&gt;<br>
-                            　　&lt;player number="17" position="PF"&gt;Anderson Varejao&lt;/player&gt;<br>
-                            　　&lt;player number="15" position="SF"&gt;Jamario Moon&lt;/player&gt;<br>
-                            　　&lt;player number="13" position="SG"&gt;Delonte West&lt;/player&gt;<br>
-                            　　&lt;player number="1" position="PG"&gt;Daniel Gibson&lt;/player&gt;<br>
-                            &lt;/team&gt;
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output>
+							33　　C&nbsp;　　Shaquille O'Neal<br>
+							21　　PF　　J.J. Hickson<br>
+							23　　SF　　LeBron James<br>
+							18　　SG　　Anthony Parker<br>
+							2&nbsp;　　PG　　Mo Williams<br>
+							11　　C&nbsp;　　Zydrunas Ilgauskas<br>
+							17　　PF　　Anderson Varejao<br>
+							15　　SF　　Jamario Moon<br>
+							13　　SG　　Delonte West<br>
+							1&nbsp;　　PG　　Daniel Gibson<br>
+						</output>
+						<br>
+						<output class='editor'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+							&lt;team city="Cleveland" name="Cavaliers" arena="Quicken Loans Arena" season="2010"&gt;<br>
+							　　&lt;coach win="61" lose="21"&gt;Mike Brown&lt;/coach&gt;<br>
+							　　&lt;player number="33" position="C"&gt;Shaquille O'Neal&lt;/player&gt;<br>
+							　　&lt;player number="21" position="PF"&gt;J.J. Hickson&lt;/player&gt;<br>
+							　　&lt;player number="23" position="SF"&gt;LeBron James&lt;/player&gt;<br>
+							　　&lt;player number="18" position="SG"&gt;Anthony Parker&lt;/player&gt;<br>
+							　　&lt;player number="2" position="PG"&gt;Mo Williams&lt;/player&gt;<br>
+							　　&lt;player number="11" position="C"&gt;Zydrunas Ilgauskas&lt;/player&gt;<br>
+							　　&lt;player number="17" position="PF"&gt;Anderson Varejao&lt;/player&gt;<br>
+							　　&lt;player number="15" position="SF"&gt;Jamario Moon&lt;/player&gt;<br>
+							　　&lt;player number="13" position="SG"&gt;Delonte West&lt;/player&gt;<br>
+							　　&lt;player number="1" position="PG"&gt;Daniel Gibson&lt;/player&gt;<br>
+							&lt;/team&gt;
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>複製、交換、刪除子元素</h2>
-                <p>
-                    接著來看如何複製、交換、刪除一個元素。<br>
-                    <br>
-                    下面範例與 Sample 6 一樣，先載入 cavs.xml 取得克里夫蘭騎士隊的先發陣容，再用 Java 程式新增替補陣容。接下來不一樣的地方是，又新增球季快結束時，才交易進來的明星球員 Antawn Jamison，以及幻想自己也是騎士隊一員的 Twideem Civs。<br>
-                    <br>
-                    最後將明星球員的 Antawn Jamison 調到先發大前鋒位置，把原本先發的大前鋒 J.J. Hickson 調到板凳，再把 Twiddem Civs 這莫名其妙的傢伙給刪掉，完成整個範例。
-                </p>
-                <hr>
-                <section>
-                    <h3>Sample 7</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.File;
-                            import org.dom4j.Document;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.SAXReader;
+			<section>
+				<h2>複製、交換、刪除子元素</h2>
+				<p>
+					接著來看如何複製、交換、刪除一個元素。<br>
+					<br>
+					下面範例與 Sample 6 一樣，先載入 cavs.xml 取得克里夫蘭騎士隊的先發陣容，再用 Java 程式新增替補陣容。接下來不一樣的地方是，又新增球季快結束時，才交易進來的明星球員 Antawn Jamison，以及幻想自己也是騎士隊一員的 Twideem Civs。<br>
+					<br>
+					最後將明星球員的 Antawn Jamison 調到先發大前鋒位置，把原本先發的大前鋒 J.J. Hickson 調到板凳，再把 Twiddem Civs 這莫名其妙的傢伙給刪掉，完成整個範例。
+				</p>
+				<hr>
+				<section>
+					<h3>Sample 7</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import org.dom4j.Document;
+							import org.dom4j.Element;
+							import org.dom4j.io.SAXReader;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
-                                        SAXReader sax_reader = new SAXReader();
-                                        Document document = sax_reader.read(new File("cavs.xml"));
-                                        //以直接新增子元素的做法，建立與 Sample 6 一樣的 player 子元素。
-                                        document.getRootElement().addElement("player").addText("Zydrunas Ilgauskas").addAttribute("number", "11").addAttribute("position", "C");
-                                        document.getRootElement().addElement("player").addText("Anderson Varejao").addAttribute("number", "17").addAttribute("position", "PF");
-                                        document.getRootElement().addElement("player").addText("Jamario Moon").addAttribute("number", "15").addAttribute("position", "SF");
-                                        document.getRootElement().addElement("player").addText("Delonte West").addAttribute("number", "13").addAttribute("position", "SG");
-                                        document.getRootElement().addElement("player").addText("Daniel Gibson").addAttribute("number", "1").addAttribute("position", "PG");
-                                        //接著再新增兩筆 player 子元素。
-                                        document.getRootElement().addElement("player").addText("Antawn Jamison").addAttribute("number", "4").addAttribute("position", "PF");
-                                        document.getRootElement().addElement("player").addText("Twideem Civs").addAttribute("number", "58").addAttribute("position", "PG");
-                                        //複製第 2 個 player 子元素。
-                                        Element element = document.getRootElement().elements("player").get(1).createCopy();
-                                        //交換第 2 個 player 子元素與第 11 個 player 子元素。
-                                        document.getRootElement().elements("player").get(1).setText(document.getRootElement().elements("player").get(10).getText());
-                                        document.getRootElement().elements("player").get(1).attribute("number").setValue(document.getRootElement().elements("player").get(10).attribute("number").getValue());
-                                        document.getRootElement().elements("player").get(1).attribute("position").setValue(document.getRootElement().elements("player").get(10).attribute("position").getValue());
-                                        document.getRootElement().elements("player").get(10).setText(element.getText());
-                                        document.getRootElement().elements("player").get(10).attribute("number").setValue(element.attribute("number").getValue());
-                                        document.getRootElement().elements("player").get(10).attribute("position").setValue(element.attribute("position").getValue());
-                                        //刪除內容為 Twideem Civs 的子元素。
-                                        for(Element elements : document.getRootElement().elements("player")){
-                                            if(elements.getText().equals("Twideem Civs")){
-                                                document.getRootElement().remove(elements);
-                                            }
-                                        }
-                                        //列出結果。
-                                        for(Element elements : document.getRootElement().elements("player")){
-                                            System.out.printf("%s\t%s\t%s\n", elements.attribute("number").getValue(), elements.attribute("position").getValue(), elements.getText());
-                                        }
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//載入 cavs.xml 檔案，並配置為可受程式操作的文件模型。
+										SAXReader sax_reader = new SAXReader();
+										Document document = sax_reader.read(new File("cavs.xml"));
+										//以直接新增子元素的做法，建立與 Sample 6 一樣的 player 子元素。
+										document.getRootElement().addElement("player").addText("Zydrunas Ilgauskas").addAttribute("number", "11").addAttribute("position", "C");
+										document.getRootElement().addElement("player").addText("Anderson Varejao").addAttribute("number", "17").addAttribute("position", "PF");
+										document.getRootElement().addElement("player").addText("Jamario Moon").addAttribute("number", "15").addAttribute("position", "SF");
+										document.getRootElement().addElement("player").addText("Delonte West").addAttribute("number", "13").addAttribute("position", "SG");
+										document.getRootElement().addElement("player").addText("Daniel Gibson").addAttribute("number", "1").addAttribute("position", "PG");
+										//接著再新增兩筆 player 子元素。
+										document.getRootElement().addElement("player").addText("Antawn Jamison").addAttribute("number", "4").addAttribute("position", "PF");
+										document.getRootElement().addElement("player").addText("Twideem Civs").addAttribute("number", "58").addAttribute("position", "PG");
+										//複製第 2 個 player 子元素。
+										Element element = document.getRootElement().elements("player").get(1).createCopy();
+										//交換第 2 個 player 子元素與第 11 個 player 子元素。
+										document.getRootElement().elements("player").get(1).setText(document.getRootElement().elements("player").get(10).getText());
+										document.getRootElement().elements("player").get(1).attribute("number").setValue(document.getRootElement().elements("player").get(10).attribute("number").getValue());
+										document.getRootElement().elements("player").get(1).attribute("position").setValue(document.getRootElement().elements("player").get(10).attribute("position").getValue());
+										document.getRootElement().elements("player").get(10).setText(element.getText());
+										document.getRootElement().elements("player").get(10).attribute("number").setValue(element.attribute("number").getValue());
+										document.getRootElement().elements("player").get(10).attribute("position").setValue(element.attribute("position").getValue());
+										//刪除內容為 Twideem Civs 的子元素。
+										for(Element elements : document.getRootElement().elements("player")){
+											if(elements.getText().equals("Twideem Civs")){
+												document.getRootElement().remove(elements);
+											}
+										}
+										//列出結果。
+										for(Element elements : document.getRootElement().elements("player")){
+											System.out.printf("%s\t%s\t%s\n", elements.attribute("number").getValue(), elements.attribute("position").getValue(), elements.getText());
+										}
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                    </p>
-                </section>
-            </section>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <section>
-                <h2>建立空的文件模型</h2>
-                <p>
-                    以上範例是藉由載入一份既有的 XML 文件，做為文件模型。最後這個範例，示範全新建立一個空白的文件模型，重頭開始組織資料。
-                </p>
-                <hr>
-                <section>
-                    <h3>Sample 8</h3>
-                    <p>
-                        <textarea class='brush:java'>
-                            import java.io.FileOutputStream;
-                            import org.dom4j.Document;
-                            import org.dom4j.DocumentFactory;
-                            import org.dom4j.Element;
-                            import org.dom4j.io.OutputFormat;
-                            import org.dom4j.io.XMLWriter;
+			<section>
+				<h2>建立空的文件模型</h2>
+				<p>
+					以上範例是藉由載入一份既有的 XML 文件，做為文件模型。最後這個範例，示範全新建立一個空白的文件模型，重頭開始組織資料。
+				</p>
+				<hr>
+				<section>
+					<h3>Sample 8</h3>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.FileOutputStream;
+							import org.dom4j.Document;
+							import org.dom4j.DocumentFactory;
+							import org.dom4j.Element;
+							import org.dom4j.io.OutputFormat;
+							import org.dom4j.io.XMLWriter;
 
-                            public class Main{
+							public class Main{
 
-                                public static void main(String[] args){
-                                    try{
-                                        //建立空的文件模型
-                                        Document document = new DocumentFactory().createDocument();
-                                        //建立根元素
-                                        Element root = new DocumentFactory().createElement("team");
-                                        root.addAttribute("city", "Cleveland");
-                                        root.addAttribute("name", "Cavaliers");
-                                        //將根元素加入到文件模型
-                                        document.add(root);
-                                        //將子元素加入到根元素
-                                        root.addElement("player").addText("Anderson Varejao").addAttribute("number", "17").addAttribute("position", "C");
-                                        root.addElement("player").addText("Antawn Jamison").addAttribute("number", "4").addAttribute("position", "PF");
-                                        root.addElement("player").addText("Anthony Parker").addAttribute("number", "18").addAttribute("position", "SF");
-                                        root.addElement("player").addText("Alonzo Gee").addAttribute("number", "33").addAttribute("position", "SG");
-                                        root.addElement("player").addText("Kyrie Irving").addAttribute("number", "2").addAttribute("position", "PG");
-                                        //將新的文件模型儲存為 XML 檔案
-                                        FileOutputStream file_output_stream = new FileOutputStream("new.xml");
-                                        XMLWriter xml_writer = new XMLWriter(file_output_stream, OutputFormat.createPrettyPrint());
-                                        xml_writer.write(document);
-                                        xml_writer.close();
-                                    }
-                                    catch(Exception exception){
-                                        exception.printStackTrace();
-                                    }
-                                }
+								public static void main(String[] args){
+									try{
+										//建立空的文件模型
+										Document document = new DocumentFactory().createDocument();
+										//建立根元素
+										Element root = new DocumentFactory().createElement("team");
+										root.addAttribute("city", "Cleveland");
+										root.addAttribute("name", "Cavaliers");
+										//將根元素加入到文件模型
+										document.add(root);
+										//將子元素加入到根元素
+										root.addElement("player").addText("Anderson Varejao").addAttribute("number", "17").addAttribute("position", "C");
+										root.addElement("player").addText("Antawn Jamison").addAttribute("number", "4").addAttribute("position", "PF");
+										root.addElement("player").addText("Anthony Parker").addAttribute("number", "18").addAttribute("position", "SF");
+										root.addElement("player").addText("Alonzo Gee").addAttribute("number", "33").addAttribute("position", "SG");
+										root.addElement("player").addText("Kyrie Irving").addAttribute("number", "2").addAttribute("position", "PG");
+										//將新的文件模型儲存為 XML 檔案
+										FileOutputStream file_output_stream = new FileOutputStream("new.xml");
+										XMLWriter xml_writer = new XMLWriter(file_output_stream, OutputFormat.createPrettyPrint());
+										xml_writer.write(document);
+										xml_writer.close();
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
+									}
+								}
 
-                            }
+							}
                         </textarea>
-                        <br>
-                        <output class='editor'>
-                            &lt;team city="Cleveland" name="Cavaliers"&gt;<br>
-                            　　&lt;player number="17" position="C"&gt;Anderson Varejao&lt;/player&gt;<br>
-                            　　&lt;player number="4" position="PF"&gt;Antawn Jamison&lt;/player&gt;<br>
-                            　　&lt;player number="18" position="SF"&gt;Anthony Parker&lt;/player&gt;<br>
-                            　　&lt;player number="33" position="SG"&gt;Alonzo Gee&lt;/player&gt;<br>
-                            　　&lt;player number="2" position="PG"&gt;Kyrie Irving&lt;/player&gt;<br>
-                            &lt;/team&gt;
-                        </output>
-                    </p>
-                </section>
-            </section>
+						<br>
+						<output class='editor'>
+							&lt;team city="Cleveland" name="Cavaliers"&gt;<br>
+							　　&lt;player number="17" position="C"&gt;Anderson Varejao&lt;/player&gt;<br>
+							　　&lt;player number="4" position="PF"&gt;Antawn Jamison&lt;/player&gt;<br>
+							　　&lt;player number="18" position="SF"&gt;Anthony Parker&lt;/player&gt;<br>
+							　　&lt;player number="33" position="SG"&gt;Alonzo Gee&lt;/player&gt;<br>
+							　　&lt;player number="2" position="PG"&gt;Kyrie Irving&lt;/player&gt;<br>
+							&lt;/team&gt;
+						</output>
+					</p>
+				</section>
+			</section>
 
-            <hr>
+			<hr>
 
-            <footer>
-                <p>
-                    [1] Sun Microsystem, Inc. 提供 Java API for XML Processing (JAXP) 做為 Java 的 XML 解析器，它主要提供簡易讀取文件的 Simple API for XML (SAX)，以及可以操控文件內容的 Document Object Model (DOM)。後來更內建於 JRE 中，成為 Java 的標準功能。<br>
-                    [2] 以網路搜尋到資料來看，XML 檔案過大，例如超過 10MB 時，dom4j 的執行效率明顯高於 JDOM。<br>
-                    [*] 官方技術參考文件：<a href='http://dom4j.sourceforge.net/dom4j-1.6.1/apidocs/' target='_blank'>dom4j 1.6.1 API</a>、<a href='http://dom4j.sourceforge.net/apidocs/' target='_blank'>dom4j 2.0.0-ALPHA-2 API</a>。<br>
-                    [!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20040909A.7z' target='_blank'>20040909A.7z</a>，內含 dom4j 1.6.1 或 dom4j 2.0.0 RC1，能直接編譯，節省你摸索的時間。
-                </p>
-            </footer>
+			<footer>
+				<p>
+					[1] Sun Microsystem, Inc. 提供 Java API for XML Processing (JAXP) 做為 Java 的 XML 解析器，它主要提供簡易讀取文件的 Simple API for XML (SAX)，以及可以操控文件內容的 Document Object Model (DOM)。後來更內建於 JRE 中，成為 Java 的標準功能。<br>
+					[2] 以網路搜尋到資料來看，XML 檔案過大，例如超過 10MB 時，dom4j 的執行效率明顯高於 JDOM。<br>
+					[*] 官方技術參考文件：<a href='http://dom4j.sourceforge.net/dom4j-1.6.1/apidocs/' target='_blank'>dom4j 1.6.1 API</a>、<a href='http://dom4j.sourceforge.net/apidocs/' target='_blank'>dom4j 2.0.0-ALPHA-2 API</a>。<br>
+					[!] 為方便學習者練習，可下載範例：<a href='../../objects/downloads/20040909A.7z' target='_blank'>20040909A.7z</a>，內含 dom4j 1.6.1 或 dom4j 2.0.0 RC1，能直接編譯，節省你摸索的時間。
+				</p>
+			</footer>
 
-        </article>
+		</article>
 
-    </body>
+	</body>
 
 </html>
