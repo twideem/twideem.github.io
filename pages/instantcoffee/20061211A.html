@@ -32,272 +32,16 @@
 			<hr>
 
 			<section>
-				<h2>目錄</h2>
+				<h2>準備</h2>
 				<hr>
 				<section>
-					<h3>程式的執行</h3>
+					<h3>下載</h3>
 					<p>
-						．<a href='#anchor1'>在 Java 寫 JavaScript 程式</a><br>
-						．<a href='#anchor2'>從 Java 傳資料給 JavaScript 程式</a><br>
-						．<a href='#anchor3'>在 Java 載入 *.js 檔案</a><br>
-						．<a href='#anchor4'>直接用 JDK 執行 *.js 檔</a><br>
-						．<a href='#anchor5'>Interactive mode</a><br>
-						．<a href='#anchor6'>掛載新版 Rhino 引擎</a><strong>（推薦）</strong><br>
-						．<a href='#anchor7'>如何取得 Java 內建 JavaScript 引擎的版本</a>
-					</p>
-				</section>
-				<hr>
-				<section>
-					<h3>語言的相容</h3>
-					<p>
-						．<a href='#anchor8'>在 JavaScript 使用 Java API</a><br>
-						．<a href='#anchor9'>調用 JNI 的外部 SDK</a><br>
-						．<a href='#anchor10'>在 JavaScript 使用 Java 的資料型態</a><br>
-						．<a href='#anchor11'>調用 Java API 傳入 Java 的類別時</a><br>
-						．<a href='#anchor12'>覆載物件方法與實作介面功能</a><br>
-						．<a href='#anchor13'>多執行緒</a><br>
-						．<a href='#anchor14'>在 *.js 中載入其它 *.js</a><br>
-						．<a href='#anchor15'>最頂層物件</a><br>
-						．<a href='#anchor16'>列出 JavaScript 物件的屬性和方法</a><br>
-						．<a href='#anchor17'>Rhino 內建屬性和函式</a><br>
-						．<a href='#anchor18'>其它 Rhino 的不標準語法</a>
-					</p>
-				</section>
-				<hr>
-				<section>
-					<h3>功能的應用</h3>
-					<p>
-						．<a href='#anchor19'>Swing 視窗程式設計</a><br>
-						．<a href='#anchor20'>播放 WAVE 和 MP3 音樂</a><br>
-						．<a href='#anchor21'>播放 MIDI 音樂</a><br>
-						．<a href='#anchor22'>壓縮與解壓縮 ZIP 檔案</a><br>
-						．<a href='#anchor23'>使用 SQLite 資料庫</a><br>
-						．<a href='#anchor24'>簡易 HTTP 伺服器</a><br>
-					</p>
-				</section>
-				<hr>
-				<section>
-					<h3>其他</h3>
-					<p>
-						．<a href='#appendix'>附錄</a><br>
-						．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/' target='_blank'>JavaScript reference</a><br>
-						．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/' target='_blank'>Standard built-in objects</a><br>
-						．<a href='http://ringojs.org' target='_blank'>RingoJS</a>
-					</p>
-				</section>
-			</section>
-
-			<hr id='anchor1'>
-
-			<section>
-				<h2>在 Java 寫 JavaScript 程式</h2>
-				<p>
-					<textarea class='brush:java'>
-						import javax.script.ScriptEngine;
-						import javax.script.ScriptEngineManager;
-
-						public class Main{
-
-							public static void main(String[] args){
-
-								ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
-
-								try{
-									js.eval("print('Hello, JavaScript!')");
-								}
-								catch(Exception exception){
-									exception.printStackTrace();
-								}
-
-							}
-
-						}
-                    </textarea>
-					<br>
-					<output>
-						Hello, JavaScript!<br>
-					</output>
-					<br>
-					在 <a href='http://mozilla.github.io/rhino/javadoc/org/mozilla/javascript/package-summary.html' target='_blank'>org.mozilla.javascript</a> 套件底下，有各式類別可以組成 JavaScript，進行更細部的設計。
-				</p>
-			</section>
-
-			<hr id='anchor2'>
-
-			<section>
-				<h2>從 Java 傳資料給 JavaScript 程式</h2>
-				<hr>
-				<section>
-					<h3>寫在全域範疇</h3>
-					<p>
-						<textarea class='brush:java'>
-							import javax.script.ScriptEngine;
-							import javax.script.ScriptEngineManager;
-
-							public class Main{
-
-								public static void main(String[] args){
-
-									ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
-
-									js.put("var1", 123);
-
-									try{
-										js.eval("print(var1)");
-									}
-									catch(Exception exception){
-										exception.printStackTrace();
-									}
-
-								}
-
-							}
-                        </textarea>
+						<a href='http://github.com/mozilla/rhino/releases' target='_blank'>http://github.com/mozilla/rhino/releases</a><br>
 						<br>
-						<output>
-							123
-						</output>
+						1.7.8 版開始使用 Java SE 8 編譯，所以 Java SE 7 能用的最新版只到 1.7.7.2。
 					</p>
 				</section>
-				<hr>
-				<section>
-					<h3>寫在區域範疇（避免汙染最頂層物件）</h3>
-					<p>
-						<textarea class='brush:java'>
-							import javax.script.ScriptEngine;
-							import javax.script.ScriptEngineManager;
-
-							public class Main{
-
-								public static void main(String[] args){
-
-									ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
-
-									Bindings binding = js.createBindings();
-									binding.put("var2", 456);
-
-									try{
-										js.eval("print(var2)", binding);
-									}
-									catch(Exception exception){
-										exception.printStackTrace();
-									}
-
-								}
-
-							}
-                        </textarea>
-						<br>
-						<output>
-							456
-						</output>
-					</p>
-				</section>
-			</section>
-
-			<hr id='anchor3'>
-
-			<section>
-				<h2>在 Java 載入 *.js 檔案</h2>
-				<hr>
-				<section>
-					<h3>script.js</h3>
-					<p>
-						<textarea class='brush:js'>
-							print('Hello, JavaScript!');
-                        </textarea>
-					</p>
-				</section>
-				<hr>
-				<section>
-					<h3>Main.java</h3>
-					<p>
-						<textarea class='brush:java'>
-							import java.io.FileReader;
-							import javax.script.ScriptEngine;
-							import javax.script.ScriptEngineManager;
-
-							public class Main{
-
-								public static void main(String[] args){
-
-									ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
-
-									try{
-										js.eval(new FileReader("script.js"));
-									}
-									catch(Exception exception){
-										exception.printStackTrace();
-									}
-
-								}
-
-							}
-                        </textarea>
-						<br>
-						<output>
-							Hello, JavaScript!
-						</output>
-					</p>
-				</section>
-			</section>
-
-			<hr id='anchor4'>
-
-			<section>
-				<h2>直接用 JDK 執行 *.js 檔</h2>
-				<p>
-					Java 提供 jrunscript.exe 程式，有 JavaScript 直譯器的功能！
-				</p>
-				<hr>
-				<section>
-					<h3>script.js</h3>
-					<p>
-						<textarea class='brush:js'>
-							print('Hello, JavaScript!');
-                        </textarea>
-					</p>
-				</section>
-				<hr>
-				<section>
-					<h3>命令提示字元</h3>
-					<p>
-						<output>
-							jrunscript script.js<br>
-						</output>
-						<br>
-						<output>
-							Hello, JavaScript!
-						</output>
-					</p>
-				</section>
-			</section>
-
-			<hr id='anchor5'>
-
-			<section>
-				<h2>Interactive mode</h2>
-				<p>
-					執行 jrunscript.exe 時不加參數，會進入 interactive mode，一個能用 JavaScript 語言操作系統的環境：<br>
-					<br>
-					<output>
-						C:\Users\User&gt;jrunscript<br>
-						js> _
-					</output>
-				</p>
-			</section>
-
-			<hr id='anchor6'>
-
-			<section>
-				<h2>掛載新版 Rhino 引擎</h2>
-				<p>
-					雖然 Java 不再內建 JavaScript 引擎，但 Mozilla 一直都在維護 Rhino 專案，放在 GitHub 開放下載：<br>
-					<br>
-					<a href='http://github.com/mozilla/rhino/releases' target='_blank'>http://github.com/mozilla/rhino/releases</a><br>
-					<br>
-					1.7.8 版開始使用 Java SE 8 編譯，所以 Java SE 7 能用的最新版只到 1.7.7.2。
-				</p>
 				<hr>
 				<section>
 					<h3>直譯 *.js 檔</h3>
@@ -306,9 +50,7 @@
 							java -jar rhino.jar *.js<br>
 						</output>
 						<br>
-						用 java.exe 來執行，會比 jrunscript.exe 少很多問題，建議使用！<br>
-						<br>
-						但使用 -jar 參數，CLASSPATH 只能存取 rhino.jar 裡面的檔案，無法存取 JAR 外部的檔案，最好改用 -cp 參數：<br>
+						使用 -jar 參數的話，CLASSPATH 只能存取 rhino.jar 裡面的檔案，無法存取 JAR 外部的檔案，所以最好改用 -cp 參數：<br>
 						<br>
 						<output>
 							java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js<br>
@@ -335,8 +77,6 @@
 							java -cp rhino.jar org.mozilla.javascript.tools.jsc.Main script.js<br>
 						</output>
 						<br>
-						雖然 Java SE 6 內建 Rhino 引擎，但只打包部分功能，並未提供所有功能。所以要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools.jsc。<br>
-						<br>
 						編譯出來的 *.class 是 Rhino 的 NativeFunction 物件，所以只用 java.exe 無法執行，得掛載 Rhino：<br>
 						<br>
 						<output>
@@ -344,31 +84,62 @@
 						</output>
 					</p>
 				</section>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>目錄</h2>
 				<hr>
 				<section>
-					<h3>使用新版 Rhino 在 Java 內嵌 JavaScript 程式</h3>
+					<h3>基本功</h3>
 					<p>
-						<output>
-							javac -cp rhino.jar *.java<br>
-						</output>
-						<br>
-						因為 Java SE 6 和 Java SE 7 已經內建 Rhino，所以這比較適合內建 Nashorn 的 Java SE 8 使用，甚至兩種都沒內建的 Java SE 15。沒發現問題的話，其實用內建的就夠了～
+						．<a href='#index1'>在 JavaScript 使用 Java API</a><br>
+						．<a href='#index2'>調用第三方套件</a><br>
+						．<a href='#index3'>在 JavaScript 使用 Java 的資料型態</a><br>
+						．<a href='#index4'>調用 Java API 傳入 Java 的類別時</a><br>
+						．<a href='#index5'>覆載物件方法與實作介面功能</a><br>
+						．<a href='#index6'>多執行緒</a><br>
+						．<a href='#index7'>在 *.js 中載入其它 *.js</a><br>
+						．<a href='#index8'>最頂層物件</a><br>
+						．<a href='#index9'>列出 JavaScript 物件的屬性和方法</a><br>
+						．<a href='#index10'>Rhino 內建屬性和函式</a><br>
+						．<a href='#index11'>其它 Rhino 的不標準語法</a>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>應用招式</h3>
+					<p>
+						．<a href='#index12'>Swing 視窗程式設計</a><br>
+						．<a href='#index13'>播放 WAVE 和 MP3 音樂</a><br>
+						．<a href='#index14'>播放 MIDI 音樂</a><br>
+						．<a href='#index15'>壓縮與解壓縮 ZIP 檔案</a><br>
+						．<a href='#index16'>使用 SQLite 資料庫</a><br>
+						．<a href='#index17'>簡易 HTTP 伺服器</a><br>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>附錄</h3>
+					<p>
+						．<a href='#appendix1'>使用 Java SE 6 內建的 Rhino</a><br>
+						．<a href='#appendix2'>JavaScript 程式設計錦囊</a>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>推薦網站</h3>
+					<p>
+						．<a href='http://developer.mozilla.org/zh-TW/docs/Mozilla/Projects/Rhino/' target='_blank'>Rhino | Mozilla - MDN</a><br>
+						．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/' target='_blank'>JavaScript reference</a><br>
+						．<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/' target='_blank'>Standard built-in objects</a><br>
+						．<a href='http://ringojs.org' target='_blank'>RingoJS</a>
 					</p>
 				</section>
 			</section>
 
-			<hr id='anchor7'>
-
-			<section>
-				<h2>如何取得 Java 內建 JavaScript 引擎的版本</h2>
-				<p>
-					<output>
-						jrunscript -q
-					</output>
-				</p>
-			</section>
-
-			<hr id='anchor8'>
+			<hr id='index1'>
 
 			<section>
 				<h2>在 JavaScript 使用 Java API</h2>
@@ -398,10 +169,10 @@
 				</p>
 			</section>
 
-			<hr id='anchor9'>
+			<hr id='index2'>
 
 			<section>
-				<h2>調用 JNI 的外部 SDK</h2>
+				<h2>調用第三方套件</h2>
 				<p>
 					以「<a href='https://www.logitechg.com/zh-tw/innovation/developer-lab.html' target='_blank'>羅技 G 系列開發者實驗室</a>」開放下載的「LED 照明 SDK」為例：<br>
 					<br>
@@ -418,12 +189,14 @@
                     </textarea>
 					<br>
 					<output style='font-size:9pt'>
-						java -cp .;logiled.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
+						java -cp .;logiled.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js<br>
 					</output>
+					<br>
+					若外部 SDK 的套件名稱，不是 com、java、javax、jdk、org、sun 開頭的話，必須用 <var>Packages</var> 開頭，例如 importPackage(Packages.io.github.twideem)。
 				</p>
 			</section>
 
-			<hr id='anchor10'>
+			<hr id='index3'>
 
 			<section>
 				<h2>在 JavaScript 使用 Java 的資料型態</h2>
@@ -462,7 +235,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor11'>
+			<hr id='index4'>
 
 			<section>
 				<h2>調用 Java API 傳入 Java 的類別時</h2>
@@ -477,7 +250,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor12'>
+			<hr id='index5'>
 
 			<section>
 				<h2>覆載物件方法與實作介面功能</h2>
@@ -543,7 +316,7 @@
 				</section>
 			</section>
 
-			<hr id='anchor13'>
+			<hr id='index6'>
 
 			<section>
 				<h2>多執行緒</h2>
@@ -631,7 +404,7 @@
 				</section>
 			</section>
 
-			<hr id='anchor14'>
+			<hr id='index7'>
 
 			<section>
 				<h2>在 *.js 中載入其它 *.js</h2>
@@ -640,7 +413,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor15'>
+			<hr id='index8'>
 
 			<section>
 				<h2>最頂層物件</h2>
@@ -655,7 +428,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor16'>
+			<hr id='index9'>
 
 			<section>
 				<h2>列出 JavaScript 物件的屬性和方法</h2>
@@ -671,7 +444,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor17'>
+			<hr id='index10'>
 
 			<section>
 				<h2>Rhino 內建屬性和函式</h2>
@@ -844,7 +617,7 @@
 				</section>
 			</section>
 
-			<hr id='anchor18'>
+			<hr id='index11'>
 
 			<section>
 				<h2>其它 Rhino 的不標準語法</h2>
@@ -900,7 +673,7 @@
 				</section>
 			</section>
 
-			<hr id='anchor19'>
+			<hr id='index12'>
 
 			<section>
 				<h2>Swing 視窗程式設計</h2>
@@ -992,7 +765,7 @@
 				</section>
 			</section>
 
-			<hr id='anchor20'>
+			<hr id='index13'>
 
 			<section>
 				<h2>播放 WAVE 和 MP3 音樂</h2>
@@ -1040,7 +813,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor21'>
+			<hr id='index14'>
 
 			<section>
 				<h2>播放 MIDI 音樂</h2>
@@ -1060,7 +833,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor22'>
+			<hr id='index15'>
 
 			<section>
 				<h2>壓縮與解壓縮 ZIP 檔案</h2>
@@ -1137,7 +910,7 @@
 				</section>
 			</section>
 
-			<hr id='anchor23'>
+			<hr id='index16'>
 
 			<section>
 				<h2>使用 SQLite 資料庫</h2>
@@ -1172,7 +945,7 @@
 				</p>
 			</section>
 
-			<hr id='anchor24'>
+			<hr id='index17'>
 
 			<section>
 				<h2>簡易 HTTP 伺服器</h2>
@@ -1241,193 +1014,411 @@
 				</p>
 			</section>
 
-			<hr id='appendix'>
+			<hr id='appendix1'>
 
 			<section>
-				<h2>附錄</h2>
+				<h2>使用 Java SE 6 內建的 Rhino</h2>
 				<hr>
 				<section>
-					<h3>JavaScript 程式設計錦囊</h3>
-					<section>
-						<h4>Value object</h4>
-						<p>
-							<textarea class='brush:js'>
-								print('abc'.toUpperCase());
-								print((123).toString(2));
-								print((false).toString().toUpperCase());
-								print([111, 222, 333].reverse());
-								if(/^[A-z]\w{6,}\d$/.test('abcd1234')){
-									print('密碼有效');
-								}
-                            </textarea>
-							<br>
-							<output>
-								ABC<br>
-								1111011<br>
-								FALSE<br>
-								333,222,111<br>
-								密碼有效
-							</output>
-						</p>
-					</section>
-					<section>
-						<h4>Higher-order function</h4>
-						<p>
-							<textarea class='brush:js'>
-								// Method references 1
-								[111, 222, 333].forEach(print);
+					<h3>在 Java 寫 JavaScript 程式</h3>
+					<p>
+						<textarea class='brush:java'>
+							import javax.script.ScriptEngine;
+							import javax.script.ScriptEngineManager;
 
-								// Method references 2
-								function f(x){
-									print(x * 2);
-								}
-								[111, 222, 333].forEach(f);
+							public class Main{
 
-								// Anonymous function
-								[111, 222, 333].forEach(x =&gt; print(++x));
+								public static void main(String[] args){
 
-								// Lambda
-								function f(action){
-									action();
-								}
-								f(()=&gt;{
-									print(777);
-								})
-                            </textarea>
-							<br>
-							<output>
-								111 0 111,222,333<br>
-								222 1 111,222,333<br>
-								333 2 111,222,333<br>
-								<br>
-								222<br>
-								444<br>
-								666<br>
-								<br>
-								112<br>
-								223<br>
-								334<br>
-								<br>
-								777
-							</output>
-						</p>
-					</section>
-					<section>
-						<h4>Destructuring assignment</h4>
-						<p>
-							<textarea class='brush:js'>
-								let a, b, c;
+									ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
 
-								[a, b, c] = [123, 456, 789];
-
-								print(a);
-								print(b);
-								print(c);
-                            </textarea>
-							<br>
-							<output>
-								123<br>
-								456<br>
-								789
-							</output>
-						</p>
-					</section>
-					<section>
-						<h4>Top-level functions</h4>
-						<p>
-							善用以下函式：<br>
-							<br>
-							<var>
-								eval(string)<br>
-								parseInt(string [,radix])<br>
-								parseFloat(string)<br>
-								isFinite(value)<br>
-								encodeURI(string)<br>
-								decodeURI(string)<br>
-								encodeURIComponent(string)<br>
-								decodeURIComponent(string)<br>
-							</var>
-							<br>
-							建議用 <var>Number.isNaN()</var> 取代 isNaN()。<br>
-							建議用 <var>String.charCodeAt()</var> 取代 escape()。<br>
-							建議用 <var>String.fromCharCode()</var> 取代 unescape()。
-						</p>
-					</section>
-					<section>
-						<h4>Array.prototype.join() 和 String.prototype.split() 的妙用</h4>
-						<p>
-							<textarea class='brush:js'>
-								// 陣列轉字串
-								let string = [1, 2, 3, 4, 5, 6, 7, 8, 9].join(' ');
-								print(string);
-
-								// 字串轉陣列
-								let array = 'a,b,c,d,e'.split(',');
-								for(let n of array){
-									print(n);
-								}
-                            </textarea>
-							<br>
-							<output>
-								1 2 3 4 5 6 7 8 9<br>
-								a<br>
-								b<br>
-								c<br>
-								d<br>
-								e
-							</output>
-						</p>
-					</section>
-					<section>
-						<h4>Array.prototype.slice.call() 和 [].slice.call() 的差別</h4>
-						<p>
-							前者不用建立 Array 物件，直接調用 slice 方法。<br>
-							<br>
-							後者等於 new 一個 Array 物件，然後呼叫物件的 slice 方法。<br>
-							<br>
-							雖然前者不用 new 所以效能更好，還可避免建立大量的垃圾，但程式碼落落長，沒有後者簡短，所以只建立一個物件的話，大多數人都是用後者。<br>
-							<br>
-							在迴圈會產生大量的物件，就改用前者吧！不像網頁瀏覽器的 JavaScript 引擎（例如 SpiderMonkey），會最佳化編譯再執行，兩者執行起來差別很小，Rhino 就只是直譯而已～
-						</p>
-					</section>
-					<section>
-						<h4>自製格式化字串</h4>
-						<section>
-							<h5>寫成函式</h5>
-							<p>
-								<textarea class='brush:js'>
-									function format(){
-										return arguments[0].replace(/{(\d+)}/g, (match, index) =&gt; arguments[++index] || match);
+									try{
+										js.eval("print('Hello, JavaScript!')");
+									}
+									catch(Exception exception){
+										exception.printStackTrace();
 									}
 
-									print(format('{0} {1} {2}', 'AAA', 'BBB', 'CCC'));
-									print(format('{0} {1} {2}', 'AAA'));
-                                </textarea>
-								<br>
-								<output>
-									AAA BBB CCC<br>
-									AAA {1} {2}<br>
-								</output>
-								<br>
-								如結果所示，沒有對應的參數時顯示 {1} 和 {2}。若不喜歡這樣的設計，可以刪掉 <code>|| match</code>，沒有對應的參數會顯示 undefined。
-							</p>
-						</section>
-						<section>
-							<h5>寫在 String 物件</h5>
-							<p>
-								<textarea class='brush:js'>
-									String.prototype.format = function(){
-										return this.replace(/{(\d+)}/g, (match,index) =&gt; arguments[index] || match);
+								}
+
+							}
+                        </textarea>
+						<br>
+						<output>
+							Hello, JavaScript!<br>
+						</output>
+						<br>
+						在 <a href='http://mozilla.github.io/rhino/javadoc/org/mozilla/javascript/package-summary.html' target='_blank'>org.mozilla.javascript</a> 套件底下，有各式類別可以組成 JavaScript，進行更細部的設計。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>從 Java 傳資料給 JavaScript 程式</h3>
+					<section>
+						<h4>寫在全域範疇</h4>
+						<p>
+							<textarea class='brush:java'>
+								import javax.script.ScriptEngine;
+								import javax.script.ScriptEngineManager;
+
+								public class Main{
+
+									public static void main(String[] args){
+
+										ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+										js.put("var1", 123);
+
+										try{
+											js.eval("print(var1)");
+										}
+										catch(Exception exception){
+											exception.printStackTrace();
+										}
+
 									}
 
-									print('{0} {1} {2}'.format('AAA', 'BBB', 'CCC'));
-                                </textarea>
-								<br>
-								<output>
-									AAA BBB CCC
-								</output>
-							</p>
-						</section>
+								}
+                            </textarea>
+							<br>
+							<output>
+								123
+							</output>
+						</p>
+					</section>
+					<section>
+						<h4>寫在區域範疇（避免汙染最頂層物件）</h4>
+						<p>
+							<textarea class='brush:java'>
+								import javax.script.ScriptEngine;
+								import javax.script.ScriptEngineManager;
+
+								public class Main{
+
+									public static void main(String[] args){
+
+										ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+										Bindings binding = js.createBindings();
+										binding.put("var2", 456);
+
+										try{
+											js.eval("print(var2)", binding);
+										}
+										catch(Exception exception){
+											exception.printStackTrace();
+										}
+
+									}
+
+								}
+                            </textarea>
+							<br>
+							<output>
+								456
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>在 Java 載入 *.js 檔案</h3>
+					<section>
+						<h4>script.js</h4>
+						<p>
+							<textarea class='brush:js'>
+								print('Hello, JavaScript!');
+                            </textarea>
+						</p>
+					</section>
+					<section>
+						<h4>Main.java</h4>
+						<p>
+							<textarea class='brush:java'>
+								import java.io.FileReader;
+								import javax.script.ScriptEngine;
+								import javax.script.ScriptEngineManager;
+
+								public class Main{
+
+									public static void main(String[] args){
+
+										ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+										try{
+											js.eval(new FileReader("script.js"));
+										}
+										catch(Exception exception){
+											exception.printStackTrace();
+										}
+
+									}
+
+								}
+                            </textarea>
+							<br>
+							<output>
+								Hello, JavaScript!
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>直接用 JDK 執行 *.js 檔</h3>
+					<p>
+						JDK 提供 jrunscript.exe 程式，有 JavaScript 直譯器的功能！
+					</p>
+					<section>
+						<h4>script.js</h4>
+						<p>
+							<textarea class='brush:js'>
+								print('Hello, JavaScript!');
+                            </textarea>
+						</p>
+					</section>
+					<section>
+						<h4>命令提示字元</h4>
+						<p>
+							<output>
+								jrunscript script.js<br>
+							</output>
+							<br>
+							<output>
+								Hello, JavaScript!
+							</output>
+						</p>
+					</section>
+				</section>
+				<hr>
+				<section>
+					<h3>將 *.js 編譯成 *.class</h3>
+					<p>
+						雖然 Java SE 6 內建 Rhino 引擎，但只打包部分功能，並未提供所有功能。所以要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools.jsc。<br>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Interactive mode</h3>
+					<p>
+						執行 jrunscript.exe 時不加參數，會進入 interactive mode，一個能用 JavaScript 語言操作系統的環境：<br>
+						<br>
+						<output>
+							C:\Users\User&gt;jrunscript<br>
+							js> _
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>使用新版 Rhino 在 Java 內嵌 JavaScript 程式</h3>
+					<p>
+						<output>
+							javac -cp rhino.jar *.java<br>
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>如何取得 Java 內建 JavaScript 引擎的版本</h3>
+					<p>
+						<output>
+							jrunscript -q
+						</output>
+					</p>
+				</section>
+			</section>
+
+			<hr id='appendix2'>
+
+			<section>
+				<h2>JavaScript 程式設計錦囊</h2>
+				<hr>
+				<section>
+					<h3>Value object</h3>
+					<p>
+						<textarea class='brush:js'>
+							print('abc'.toUpperCase());
+							print((123).toString(2));
+							print((false).toString().toUpperCase());
+							print([111, 222, 333].reverse());
+							if(/^[A-z]\w{6,}\d$/.test('abcd1234')){
+								print('密碼有效');
+							}
+                        </textarea>
+						<br>
+						<output>
+							ABC<br>
+							1111011<br>
+							FALSE<br>
+							333,222,111<br>
+							密碼有效
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Higher-order function</h3>
+					<p>
+						<textarea class='brush:js'>
+							// Method references 1
+							[111, 222, 333].forEach(print);
+
+							// Method references 2
+							function f(x){
+								print(x * 2);
+							}
+							[111, 222, 333].forEach(f);
+
+							// Anonymous function
+							[111, 222, 333].forEach(x =&gt; print(++x));
+
+							// Lambda
+							function f(action){
+								action();
+							}
+							f(()=&gt;{
+								print(777);
+							})
+                        </textarea>
+						<br>
+						<output>
+							111 0 111,222,333<br>
+							222 1 111,222,333<br>
+							333 2 111,222,333<br>
+							<br>
+							222<br>
+							444<br>
+							666<br>
+							<br>
+							112<br>
+							223<br>
+							334<br>
+							<br>
+							777
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Destructuring assignment</h3>
+					<p>
+						<textarea class='brush:js'>
+							let a, b, c;
+
+							[a, b, c] = [123, 456, 789];
+
+							print(a);
+							print(b);
+							print(c);
+                        </textarea>
+						<br>
+						<output>
+							123<br>
+							456<br>
+							789
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Top-level functions</h3>
+					<p>
+						善用以下函式：<br>
+						<br>
+						<var>
+							eval(string)<br>
+							parseInt(string [,radix])<br>
+							parseFloat(string)<br>
+							isFinite(value)<br>
+							encodeURI(string)<br>
+							decodeURI(string)<br>
+							encodeURIComponent(string)<br>
+							decodeURIComponent(string)<br>
+						</var>
+						<br>
+						建議用 <var>Number.isNaN()</var> 取代 isNaN()。<br>
+						建議用 <var>String.charCodeAt()</var> 取代 escape()。<br>
+						建議用 <var>String.fromCharCode()</var> 取代 unescape()。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Array.prototype.join() 和 String.prototype.split() 的妙用</h3>
+					<p>
+						<textarea class='brush:js'>
+							// 陣列轉字串
+							let string = [1, 2, 3, 4, 5, 6, 7, 8, 9].join(' ');
+							print(string);
+
+							// 字串轉陣列
+							let array = 'a,b,c,d,e'.split(',');
+							for(let n of array){
+								print(n);
+							}
+                        </textarea>
+						<br>
+						<output>
+							1 2 3 4 5 6 7 8 9<br>
+							a<br>
+							b<br>
+							c<br>
+							d<br>
+							e
+						</output>
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>Array.prototype.slice.call() 和 [].slice.call() 的差別</h3>
+					<p>
+						前者不用建立 Array 物件，直接調用 slice 方法。<br>
+						<br>
+						後者等於 new 一個 Array 物件，然後呼叫物件的 slice 方法。<br>
+						<br>
+						雖然前者不用 new 所以效能更好，還可避免建立大量的垃圾，但程式碼落落長，沒有後者簡短，所以只建立一個物件的話，大多數人都是用後者。<br>
+						<br>
+						在迴圈會產生大量的物件，就改用前者吧！不像網頁瀏覽器的 JavaScript 引擎（例如 SpiderMonkey），會最佳化編譯再執行，兩者執行起來差別很小，Rhino 就只是直譯而已～
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>自製格式化字串</h3>
+					<section>
+						<h4>寫成函式</h4>
+						<p>
+							<textarea class='brush:js'>
+								function format(){
+									return arguments[0].replace(/{(\d+)}/g, (match, index) =&gt; arguments[++index] || match);
+								}
+
+								print(format('{0} {1} {2}', 'AAA', 'BBB', 'CCC'));
+								print(format('{0} {1} {2}', 'AAA'));
+                            </textarea>
+							<br>
+							<output>
+								AAA BBB CCC<br>
+								AAA {1} {2}<br>
+							</output>
+							<br>
+							如結果所示，沒有對應的參數時顯示 {1} 和 {2}。若不喜歡這樣的設計，可以刪掉 <code>|| match</code>，沒有對應的參數會顯示 undefined。
+						</p>
+					</section>
+					<section>
+						<h4>寫在 String 物件</h4>
+						<p>
+							<textarea class='brush:js'>
+								String.prototype.format = function(){
+									return this.replace(/{(\d+)}/g, (match,index) =&gt; arguments[index] || match);
+								}
+
+								print('{0} {1} {2}'.format('AAA', 'BBB', 'CCC'));
+                            </textarea>
+							<br>
+							<output>
+								AAA BBB CCC
+							</output>
+						</p>
 					</section>
 				</section>
 			</section>
