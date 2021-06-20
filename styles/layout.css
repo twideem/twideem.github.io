@@ -19,7 +19,7 @@ header p img{margin:4px 0 -3px 0}
 h2{font-size:12pt;font-weight:bold;letter-spacing:0.1em;margin:28px 0 22px 0}
 
 p{margin:0 0 9px 30px}
-p.private,p.paragraph{margin-top:21px}
+p+p{margin-top:21px}
 ol{list-style-position:outside;list-style-type:disc;margin:15px 0 15px 44px}
 li p{margin-left:0}
 

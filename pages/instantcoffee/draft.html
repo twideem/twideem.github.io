@@ -454,6 +454,43 @@
 					基本上這樣就能編譯，有問題再拆其它 *.pack。
 				</p>
 			</section>
+
+			<hr>
+
+			<section>
+				<h2>刪除 java.exe 的 Oracle 字樣</h2>
+				<hr>
+				<section>
+					<h3>事情描述</h3>
+					<p>
+						OpenJDK 8 的 java.exe 會顯示：<br>
+						<br>
+						<samp>
+							See http://www.oracle.com/technetwork/java/javase/documentation/index.html for more details.<br>
+							<br>
+							請參閱 http://www.oracle.com/technetwork/java/javase/documentation/index.html 暸解詳細資訊。<br>
+						</samp>
+						<br>
+						都用 OpenJDK 了，還看到這家公司的字樣，真是礙眼。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>解決辦法</h3>
+					<p>
+						OpenJDK 9 開始，就沒有這訊息了～<br>
+						<br>
+						非得用 OpenJDK 8 的話，可在 <var>rt.jar</var> 的 <var>sun\launcher\resources\</var>，用二進制編輯器修改 <var>launcher.class</var>，把顯示的文字通通改成空白字元 00，就等於把這礙眼的東西去掉了！<br>
+						<br>
+						注意！不能刪除！只能用空白字元蓋過去！因為我們不是重新編譯，而是修改位元碼，檔案內容與長度不符合驗證的話，這個檔案相當於格式損毀。<br>
+						<br>
+						正體中文作業系統的話，要改 <var>launcher_zh_TW.class</var>。由於不是標準 ASCII 字元，比較不好改，可能要編查 BIG5 碼邊改 XD<br>
+						<br>
+						不介意 java.exe 顯示英文的話，不妨只留英文的 launcher.class 就好，其它通通從 rt.jar 刪掉。
+					</p>
+				</section>
+			</section>
+
 			<hr>
 
 			<section>
