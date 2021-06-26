@@ -93,7 +93,7 @@
 					原 OpenOffice.org 團隊<br>
 				</a>
 				免費下載，家用商用都可以，任何人都能擁有！<br>
-				<a href='http://www.mozilla.org/zh-TW/firefox/'>
+				<a href='http://vivaldi.com/blog/desktop/'>
 					<img src='figures/root/firefox.png' alt='插圖' style='float:right;margin-top:5px'><br><br>
 					<b>Firefox 瀏覽器</b>　魅力無限燃燒的瀏覽器！
 				</a><br>
@@ -101,7 +101,7 @@
 				嗯，就像被狐狸騙的感覺吧！<br>
 				明明覺得像是騙局，卻會讓你向人津津樂道訴說～<br>
 				<br>
-				<a href='http://java.com/zh-TW'>
+				<a href='http://github.com/mozilla/rhino/releases'>
 					<img src='figures/root/java.png' alt='插圖' style='float:left;margin-right:15px'>
 					<br>
 					<b>Java 執行環境</b><br>
@@ -120,11 +120,13 @@
 		</article>
 
 		<script>
-			var a=document.getElementsByTagName('a')
 			if(Web.hosting()){
-				a[4].href='http://www.msn.com'
-				document.body.style.backgroundImage='url(figures/root/backgroundimage.png)'
 				document.body.style.backgroundAttachment='fixed'
+				document.body.style.backgroundImage='url(figures/root/backgroundimage.png)'
+				var a=document.getElementsByTagName('a')
+				a[4].href='http://www.msn.com'
+				a[8].href='http://www.mozilla.org/zh-TW/firefox/'
+				a[9].href='http://java.com/zh-TW/'
 			}
 			//else checkin()
 		</script>

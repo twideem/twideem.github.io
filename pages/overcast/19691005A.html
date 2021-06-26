@@ -246,18 +246,18 @@
 						<h4>Example 2</h4>
 						<p>
 							<textarea class='brush:py'>
-								print('AAA', end='\t')				# 輸出 AAA 後以 Tab 字元結尾
-								print('BBB', end='')				  # 輸出 BBB 後取消預設的 \n 結尾
-								print('CCC', end='\n\n')			  # 輸出 CCC 後換行再換行
-								print('AAA', 'BBB', 'CCC')			# 一次輸出多個資料
-								print('AAA', 'BBB', 'CCC', sep=' : ') # 一次輸出多個資料時以 : 來間隔
+								print('AAA', end='\t')              # 輸出 AAA 後以 Tab 字元結尾
+								print('BBB', end='')                # 輸出 BBB 後取消預設的 \n 結尾
+								print('CCC', end='\n\n')            # 輸出 CCC 後換行再換行
+								print('AAA', 'BBB', 'CCC')          # 一次輸出多個資料
+								print('AAA', 'BBB', 'CCC', sep=':') # 一次輸出多個資料時以 : 間隔
                             </textarea>
 							<br>
 							<output>
 								AAA &nbsp; &nbsp; BBBCCC<br>
 								<br>
 								AAA BBB CCC<br>
-								AAA : BBB : CCC
+								AAA:BBB:CCC
 							</output>
 						</p>
 					</section>
@@ -280,13 +280,13 @@
 					<h3>資料</h3>
 					<p>
 						<textarea class='brush:py'>
-							print(123)	   # 整數
-							print(0x7b)	  # 十六進位值
-							print(0o173)	 # 八進位值
+							print(123)       # 整數
+							print(0x7b)      # 十六進位值
+							print(0o173)     # 八進位值
 							print(0b1111011) # 二進位值
 							print(b'\x7b')   # 位元組
 							print('hello')   # 字串
-							print(r'\n')	 # Raw string（引號內的資料都是字串，不會轉義字元。）
+							print(r'\n')     # Raw string（引號內的資料都是字串，不會轉義字元。）
                         </textarea>
 						<br>
 						<output>
@@ -330,16 +330,16 @@
 					<h3>轉換</h3>
 					<p>
 						<textarea class='brush:py'>
-							print(int('123'))	# 轉為整數
-							print(float(123))	# 轉為小數
-							print(bin(123))	  # 轉為二進位的數字（字串）
-							print(oct(123))	  # 轉為八進位的數字（字串）
-							print(hex(123))	  # 轉為十六進位的數字（字串）
-							print(str(123))	  # 轉為字串
-							print(chr(123))	  # 轉為 Unicode 字元
-							print(ord('A'))	  # 轉為 Unicode 編碼
+							print(int('123'))   # 轉為整數
+							print(float(123))   # 轉為小數
+							print(bin(123))     # 轉為二進位的數字（字串）
+							print(oct(123))     # 轉為八進位的數字（字串）
+							print(hex(123))     # 轉為十六進位的數字（字串）
+							print(str(123))     # 轉為字串
+							print(chr(123))     # 轉為 Unicode 字元
+							print(ord('A'))     # 轉為 Unicode 編碼
 							print(ascii('哈囉')) # 轉為 ASCII 表示法（用最基本的字元表示所有資料）
-							print(bool(0))	   # 轉為布林值（可接受串列）
+							print(bool(0))      # 轉為布林值（可接受串列）
                         </textarea>
 						<br>
 						<output>
@@ -491,11 +491,11 @@
 					<h3>函數計算</h3>
 					<p>
 						<textarea class='brush:py'>
-							print(abs(-123))	 # 取絕對值
+							print(abs(-123))     # 取絕對值
 							print(complex(4, 5)) # 複數
 							print(divmod(11, 3)) # 以 Tuple 傳回商數和餘數
-							print(pow(2, 3))	 # 2 的 3 次方
-							print(round(9.6))	# 四捨五入
+							print(pow(2, 3))     # 2 的 3 次方
+							print(round(9.6))    # 四捨五入
                         </textarea>
 						<br>
 						<output>
@@ -563,7 +563,7 @@
 						<textarea class='brush:py'>
 							a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-							print(a[1])	# 取得第二筆資料。
+							print(a[1])    # 取得第二筆資料。
 							print(a[2:4])  # 從第三筆資料開始擷取，第五筆資料停止。
 							print(a[2:])   # 擷取第三筆和以後的資料。
 							print(a[:-2])  # 從頭開始擷取資料，倒數第二筆資料停止。
@@ -931,7 +931,7 @@
 							def f(x, y='BBB', z=''):
 								print(x, y, z)
 
-							f('AAA')		  # 可做為預設參數
+							f('AAA')          # 可做為預設參數
 							f('AAA', z='CCC') # 指定關鍵字下參數，適用於不照參數順序走。
 							f(111, 222, 333)  # 照參數順序走的話，不妨省略關鍵字。
                         </textarea>
@@ -1405,7 +1405,7 @@
 					<textarea class='brush:py'>
 						try:
 							x = int('z')
-						except ValueError:						   # 捕捉 ValueError 異常
+						except ValueError:                           # 捕捉 ValueError 異常
 							print('資料不為數字，無法轉為整數。')
 						except (RuntimeError, TypeError, NameError): # 一次捕捉多個異常
 							pass

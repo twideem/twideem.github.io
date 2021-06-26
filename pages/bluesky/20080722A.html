@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang='zh-TW'>
+
+	<head>
+		<meta charset='UTF-8'>
+		<title>TWIDEEM CIVS</title>
+		<link href='../../favicon.png' rel='icon'>
+		<link href='../../styles/layout.css' rel='stylesheet'>
+		<style>body{background-color:#e8f4ff}</style>
+		<script src='../../scripts/template.js'></script>
+		<script src='../../objects/plugins/sh.js'></script>
+	</head>
+
+	<body>
+
+		<article>
+
+			<header>
+				<h1>youtube-dl</h1>
+			</header>
+
+			<hr>
+
+			<section>
+				<h2>youtube-dl.conf</h2>
+				<p>
+					<textarea class='brush:txt'>
+						-o ~/Desktop/%(title)s.%(ext)s
+                    </textarea>
+				</p>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>download.bat</h2>
+				<p>
+					<textarea class='brush:txt'>
+						@MODE CON COLS=120 LINES=30
+						@IF EXIST %USERPROFILE%\youtube-dl.conf COPY youtube-dl.conf %USERPROFILE%\youtube-dl.conf
+						@SET /P URL=Video URL:
+						youtube-dl -F %URL%
+						@ECHO=
+						@SET /P CODE=Format code:
+						youtube-dl -f %CODE% %URL%
+                    </textarea>
+				</p>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>download with account.bat</h2>
+				<p>
+					<textarea class='brush:txt'>
+						@MODE CON COLS=120 LINES=30
+						@IF EXIST %USERPROFILE%\youtube-dl.conf COPY youtube-dl.conf %USERPROFILE%\youtube-dl.conf
+						@SET /P URL=Video URL:
+						youtube-dl -F %URL% -u=帳號 -p=密碼
+						@ECHO=
+						@SET /P CODE=Format code:
+						youtube-dl -f %CODE% %URL% -u=帳號 -p=密碼
+                    </textarea>
+				</p>
+			</section>
+
+		</article>
+
+	</body>
+
+</html>

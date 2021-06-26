@@ -53,10 +53,10 @@
 						使用 <code>bytes()</code> 可以產生位元組的資料。<br>
 						<br>
 						<textarea class='brush:py'>
-							print(bytes(4))					   # 產生 4 bytes 的資料
-							print(bytes([4]))					 # 將 4 轉為位元組資料
+							print(bytes(4))                       # 產生 4 bytes 的資料
+							print(bytes([4]))                     # 將 4 轉為位元組資料
 							print(bytes('ABC', encoding='UTF-8')) # 將字串編碼為 UTF-8 再以位元組傳回
-							print(bytes([4]) + b'\x0f')		   # 位元組資料的串接
+							print(bytes([4]) + b'\x0f')           # 位元組資料的串接
                         </textarea>
 						<br>
 						<output>
@@ -175,18 +175,18 @@
 					<p>
 						<textarea class='brush:py'>
 							a = 'ABCDE'
-							print('CD' in a)	 # 檢查字串中是否包含某文字
+							print('CD' in a)     # 檢查字串中是否包含某文字
 							print('FG' not in a) # 檢查字串中是否不含某文字
 
-							b = a * 2			# 複製兩次 a 字串
+							b = a * 2            # 複製兩次 a 字串
 							print(b)
 
-							print(b[2:5])		# 擷取字串中第三個到第四個文字
-							print(b[5:10:2])	 # 每間隔 2 字擷取字串中第五個到第九個文字
+							print(b[2:5])        # 擷取字串中第三個到第四個文字
+							print(b[5:10:2])     # 每間隔 2 字擷取字串中第五個到第九個文字
 
-							print(len(b))		# 計算字串長度
-							print(min(b))		# 計算字串中最小的文字
-							print(max(b))		# 計算字串中最大的文字
+							print(len(b))        # 計算字串長度
+							print(min(b))        # 計算字串中最小的文字
+							print(max(b))        # 計算字串中最大的文字
                         </textarea>
 						<br>
 						<output>
@@ -244,11 +244,11 @@
 					<h3>Example 3</h3>
 					<p>
 						<textarea class='brush:py'>
-							a = '	ABC Abc abc' # 開頭是四個空白字元
+							a = '    ABC Abc abc' # 開頭是四個空白字元
 
-							print(a.upper()	   # 轉為大寫
-							print(a.lower()	   # 轉為小寫
-							print(a.strip()	   # 刪除頭尾空白
+							print(a.upper()       # 轉為大寫
+							print(a.lower()       # 轉為小寫
+							print(a.strip()       # 刪除頭尾空白
                         </textarea>
 						<br>
 						<output>
@@ -310,8 +310,8 @@
 						<textarea class='brush:py'>
 							a = 'AAABBBCCC'
 
-							print(a.index('C'))		# 找出某文字的位置
-							print(a.count('C'))		# 計算某文字的數量
+							print(a.index('C'))        # 找出某文字的位置
+							print(a.count('C'))        # 計算某文字的數量
 
 							print(a.index('BC', 3, 7)) # 範圍內找出某文字的位置（找不到會 Error）
 							print(a.count('BC', 3, 7)) # 範圍內找出某文字的次數（找不到會 Error）
@@ -331,9 +331,9 @@
 					<p>
 						<textarea class='brush:py'>
 							# 輸出格式化字串
-							print('帳號 {0} 密碼 {1}'.format('twideem', 'abc123'))   # 指定第幾個參數
-							print('{} 加 {} 等於 {}'.format('1', '2', '3'))		  # 照參數順序
-							print('{name}'.format(name='Twideem'))				   # 關鍵字參數
+							print('帳號 {0} 密碼 {1}'.format('twideem', 'abc123'))    # 指定第幾個參數
+							print('{} 加 {} 等於 {}'.format('1', '2', '3'))           # 照參數順序
+							print('{name}'.format(name='Twideem'))                   # 關鍵字參數
 							print('{account[id]}'.format(account={'id': 'twideem'})) # 用 dict 當參數
                         </textarea>
 						<br>
@@ -441,8 +441,8 @@
 					<p>
 						<textarea class='brush:py'>
 							a = list('hello') # 將字串變成串列
-							a.sort()		  # 對串列進行排序
-							a.reverse()	   # 對串列順序反轉
+							a.sort()          # 對串列進行排序
+							a.reverse()       # 對串列順序反轉
 
 							print(a)
                         </textarea>
@@ -458,9 +458,9 @@
 					<p>
 						<textarea class='brush:py'>
 							a = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE']
-							a.pop()		 # 移除最後一筆資料
+							a.pop()         # 移除最後一筆資料
 							a.remove('BBB') # 移除某筆資料
-							del a[2]		# 刪除某一筆資料
+							del a[2]        # 刪除某一筆資料
 
 							print(len(a))   # 計算資料筆數
 							print(a)
@@ -867,22 +867,22 @@
 					<h3>數字型態</h3>
 					<p>
 						<textarea class='brush:py'>
-							print(format(123, 'n'))	 # 數值（number 的意思，等同 decimal 的 d。）
-							print(format('123', 's'))   # 字串
-							print(format(123, 'c'))	 # 字元
+							print(format(123, 'n'))    # 數值（number 的意思，等同 decimal 的 d。）
+							print(format('123', 's'))  # 字串
+							print(format(123, 'c'))    # 字元
 
-							print(format(123, 'd'))	 # 十進位值（預設，可以省略。）
-							print(format(123, 'b'))	 # 二進位值
-							print(format(123, 'o'))	 # 八進位值
-							print(format(123, 'x'))	 # 小寫十六進位值
-							print(format(123, 'X'))	 # 大寫十六進位值
+							print(format(123, 'd'))    # 十進位值（預設，可以省略。）
+							print(format(123, 'b'))    # 二進位值
+							print(format(123, 'o'))    # 八進位值
+							print(format(123, 'x'))    # 小寫十六進位值
+							print(format(123, 'X'))    # 大寫十六進位值
 
 							print(format(123.456, 'f')) # 小數
-							print(format(123, 'e'))	 # 小寫指數
-							print(format(123, 'E'))	 # 大寫指數
+							print(format(123, 'e'))     # 小寫指數
+							print(format(123, 'E'))     # 大寫指數
 							print(format(123.456, 'g')) # 一般格式化（平常是小數，太長改小寫指數。）
 							print(format(123.456, 'G')) # 一般格式化（平常是小數，太長改大寫指數。）
-							print(format(123, '%'))	 # 百分比
+							print(format(123, '%'))     # 百分比
                         </textarea>
 						<br>
 						<output>

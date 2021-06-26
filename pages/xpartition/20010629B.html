@@ -8,6 +8,7 @@
 		<link href='../../favicon.png' rel='icon'>
 		<link href='../../styles/layout.css' rel='stylesheet'>
 		<script src='../../scripts/template.js'></script>
+		<script src='../../scripts/toolkit.js'></script>
 	</head>
 
 	<body>
@@ -2654,10 +2655,28 @@
 				<section>
 					<h3>場景等級</h3>
 					<p>
-						普通　Lv.1~43<br>
-						惡夢　Lv.36~66<br>
-						地獄　Lv.67~85
+						按照下表打怪，經驗值倍率最高！
 					</p>
+					<table>
+						<tr><td>普通 Act I</td><td>等級 1 ~ 11</td></tr>
+						<tr><td>普通 Act II</td><td>等級 12 ~ 18</td></tr>
+						<tr><td>普通 Act III </td><td>等級 19 ~ 23</td></tr>
+						<tr><td>普通 Act IV</td><td>等級 24 ~ 31</td></tr>
+						<tr><td>普通 Act V</td><td>等級 32 ~ 36</td></tr>
+						<tr><td>惡夢 Act I</td><td>等級 37 ~ 42</td></tr>
+						<tr><td>惡夢 Act II</td><td>等級 43 ~ 48</td></tr>
+						<tr><td>惡夢 Act III</td><td>等級 49 ~ 52</td></tr>
+						<tr><td>惡夢 Act IV</td><td>等級 53 ~ 62</td></tr>
+						<tr><td>惡夢 Act V</td><td>經驗值倍率皆小於 Act IV，但怪物經驗值大於 Act IV。</td></tr>
+						<tr><td>地獄 Act I</td><td>等級 63 ~ 73</td></tr>
+						<tr><td>地獄 Act III</td><td>等級 74 ~ 80</td></tr>
+						<tr><td>地獄 Act II</td><td>等級 81 ~ 83</td></tr>
+						<tr><td>地獄 Act IV</td><td>等級 84 ~ 94</td></tr>
+						<tr><td>地獄 Act V</td><td>等級 96 ~ 99</td></tr>
+					</table>
+					<figure class='private'>
+						<img src='../../../localhost/figures/xpartition/20010629B.png' alt='插圖' width='570'>
+					</figure>
 				</section>
 				<hr>
 				<section>
@@ -2701,6 +2720,10 @@
 			</section>
 
 		</article>
+
+		<script>
+			if(Web.hosting()) Display.hide()
+		</script>
 
 	</body>
 
