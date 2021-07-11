@@ -287,6 +287,35 @@
 			<hr>
 
 			<section>
+				<h2>自動偵測與手動切換字元編碼</h2>
+				<hr>
+				<section>
+					<h3>自動</h3>
+					<p>
+						在 <kbd>[功能表] → Utilities → Global Options → Editing → List of fallback encodings</kbd> 輸入會用到的字元編碼，像是 Big5 和 UTF-16，並勾選 <kbd>Auto-detect file encoding when possible</kbd>。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>手動</h3>
+					<p>
+						<kbd>[功能表] → File → Reload with Encoding</kbd><br>
+						<br>
+						可在 <kbd>[功能表] → Utilities → Global Options → Editing → Selected encoding(s)</kbd> 設定可選的字元編碼。由於 jEdit 可選的字元編碼一定有 MS950，因此不用設定 Big5 和 GB2312，只要留 UTF-16 即可。UTF-8 預設的話也不用。
+					</p>
+				</section>
+				<hr>
+				<section>
+					<h3>補充</h3>
+					<p>
+						jEdit 會記錄每個檔案自動偵測或手動切換後的字元編碼狀態，導致下次開始同一個檔案時，不再自動偵測正確的字元編碼，而是沿用上次使用的字元編碼。
+					</p>
+				</section>
+			</section>
+
+			<hr>
+
+			<section>
 				<h2>備份整個設定檔</h2>
 				<p>
 					將 <var>Documents and Settings\[User]\.jedit</var> 資料夾保存起來，以後再放回使用者資料夾即可。
@@ -344,6 +373,15 @@
 					也可以把直譯命列寫在批次檔，跟每個 JavaScript 程式碼放在一起，改成執行批次檔裡面的命令，這時輸入的是：<br>
 					<br>
 					<kbd>$d\run.bat</kbd>
+				</p>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>開機時預先載入 jEdit</h2>
+				<p>
+					建立 jedit.exe -background -nogui 捷徑，放在開始功能表的「啟動」裡面，解決 jEdit 第一次啟動時間過長的問題。
 				</p>
 			</section>
 
