@@ -83,7 +83,7 @@
 			{regex:/(`)([^\1])*?\1/gm,css:'string'},
 			{regex:/(\/)([^\1])*?\1/gm,css:'string'},
 			{regex:/\b\d+\.?\w*/g,css:'value'},
-			{regex:new RegExp(this.getKeywords('await async break case catch continue default delete do else export extends false finally for if import in instanceof new of return super switch this throw true try typeof undefined void while with yield'),'gm'),css:'keyword'},
+			{regex:new RegExp(this.getKeywords('await async break case catch continue default delete do else export extends false finally for if import in instanceof new null of return super switch this throw true try typeof undefined void while with yield'),'gm'),css:'keyword'},
 			{regex:new RegExp(this.getKeywords('class const function let var'),'gm'),css:'variable'},
 			{regex:new RegExp(this.getKeywords('defineClass importPackage load loadClass'),'gm'),css:'preprocessor'}
 		]

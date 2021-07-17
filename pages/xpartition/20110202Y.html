@@ -4,46 +4,45 @@
 
 	<head>
 		<meta charset='UTF-8'>
-		<title>TWIDEEM CIVS</title>
 		<link href='../../favicon.png' rel='icon'>
 		<link href='../../styles/layout.css' rel='stylesheet'>
 		<style>
 			/*黎紫*/
-			.style1,.style1 article{background-color:#885588;border-color:#FF99CC;color:#FF99CC}
-			.style1 a:link,.style1 a:visited,.style1 a:active,.style1 hr,.style1 table a:link,.style1 table a:visited,.style1 table a:active,.style1 p,.style1 span{color:#FF99CC}
-			.style1 a:hover,.style1 table a:hover{color:#FFCCCC}
+			.style1,.style1 *{background-color:#858;border-color:#f9c;color:#f9c}
+			.style1 a:link,.style1 a:visited,.style1 a:active{color:#f9c}
+			.style1 a:hover{color:#fcc}
 			/*晨芒*/
-			.style2,.style2 article{background-color:#FFEE99;border-color:#CC9966;color:#CC9966}
-			.style2 a:link,.style2 a:visited,.style2 a:active,.style2 hr,.style2 table a:link,.style2 table a:visited,.style2 table a:active,.style2 p,.style2 span{color:#CC9966}
-			.style2 a:hover,.style2 table a:hover{color:#CCCC66}
+			.style2,.style2 *{background-color:#fe9;border-color:#c96;color:#c96}
+			.style2 a:link,.style2 a:visited,.style2 a:active{color:#c96}
+			.style2 a:hover{color:#cc6}
 			/*午白*/
-			.style3,.style3 article{background-color:#FFFFDD;border-color:#6699FF;color:#6699FF}
-			.style3 a:link,.style3 a:visited,.style3 a:active,.style3 hr,.style3 table a:link,.style3 table a:visited,.style3 table a:active,.style3 p,.style3 span{color:#6699FF}
-			.style3 a:hover,.style3 table a:hover{color:#66CCFF}
+			.style3,.style3 *{background-color:#ffd;border-color:#69f;color:#69f}
+			.style3 a:link,.style3 a:visited,.style3 a:active{color:#69f}
+			.style3 a:hover{color:#6cf}
 			/*昏黃*/
-			.style4,.style4 article{background-color:#FFCC99;border-color:#FF6666;color:#FF6666}
-			.style4 a:link,.style4 a:visited,.style4 a:active,.style4 hr,.style4 table a:link,.style4 table a:visited,.style4 table a:active,.style4 p,.style4 span{color:#FF6666}
-			.style4 a:hover,.style4 table a:hover{color:#FF9966}
+			.style4,.style4 *{background-color:#fc9;border-color:#f66;color:#f66}
+			.style4 a:link,.style4 a:visited,.style4 a:active{color:#f66}
+			.style4 a:hover{color:#f96}
 			/*晚灰*/
-			.style5,.style5 article{background-color:#225555;border-color:#999999;color:#999999}
-			.style5 a:link,.style5 a:visited,.style5 a:active,.style5 hr,.style5 table a:link,.style5 table a:visited,.style5 table a:active,.style5 p,.style5 span{color:#999999}
-			.style5 a:hover,.style5 table a:hover{color:#99CC99}
+			.style5,.style5 *{background-color:#255;border-color:#999;color:#999}
+			.style5 a:link,.style5 a:visited,.style5 a:active{color:#999}
+			.style5 a:hover{color:#9c9}
 			/*夜黑*/
-			.style6,.style6 article{background-color:#333366;border-color:#330033;color:#330033}
-			.style6 a:link,.style6 a:visited,.style6 a:active,.style6 hr,.style6 table a:link,.style6 table a:visited,.style6 table a:active,.style6 p,.style6 span{color:#330033}
-			.style6 a:hover,.style6 table a:hover{color:#330066}
+			.style6,.style6 *{background-color:#336;border-color:#303;color:#303}
+			.style6 a:link,.style6 a:visited,.style6 a:active{color:#303}
+			.style6 a:hover{color:#306}
 			/*夜燈*/
-			.style61,.style61 article{background-color:#333366;border-color:#FF6666;color:#FF6666}
-			.style61 a:link,.style61 a:visited,.style61 a:active,.style61 hr,.style61 table a:link,.style61 table a:visited,.style61 table a:active,.style61 p,.style61 span{color:#FF6666}
-			.style61 a:hover,.style61 table a:hover{color:#FF9966}
+			.style61,.style61 *{background-color:#336;border-color:#f66;color:#f66}
+			.style61 a:link,.style61 a:visited,.style61 a:active{color:#f66}
+			.style61 a:hover{color:#f96}
 			/*晴朗*/
-			.style31,.style31 article{background-color:#6699FF;border-color:#F5F5F5;color:#F5F5F5}
-			.style31 a:link,.style31 a:visited,.style31 a:active,.style31 hr,.style31 table a:link,.style31 table a:visited,.style31 table a:active,.style31 p,.style31 span{color:#F5F5F5}
-			.style31 a:hover,.style31 table a:hover{color:#FFFF55}
+			.style31,.style31 *{background-color:#69f;border-color:#F5F5F5;color:#F5F5F5}
+			.style31 a:link,.style31 a:visited,.style31 a:active{color:#F5F5F5}
+			.style31 a:hover{color:#ff5}
 			/*陰雨*/
-			.style32,.style32 article{background-color:#666666;border-color:#669999;color:#669999}
-			.style32 a:link,.style32 a:visited,.style32 a:active,.style32 hr,.style32 table a:link,.style32 table a:visited,.style32 table a:active,.style32 p,.style32 span{color:#669999}
-			.style32 a:hover,.style32 table a:hover{color:#669966}
+			.style32,.style32 *{background-color:#666;border-color:#699;color:#699}
+			.style32 a:link,.style32 a:visited,.style32 a:active{color:#699}
+			.style32 a:hover{color:#696}
 		</style>
 		<script src='../../scripts/template.js'></script>
 	</head>

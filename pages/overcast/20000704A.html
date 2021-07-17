@@ -4,7 +4,6 @@
 
 	<head>
 		<meta charset='UTF-8'>
-		<title>TWIDEEM CIVS</title>
 		<link href='../../favicon.png' rel='icon'>
 		<link href='../../styles/layout.css' rel='stylesheet'>
 		<style>button{height:24px;width:35px}</style>
@@ -49,16 +48,6 @@
 				<p>
 					累計答對題數：<span>0</span><br>
 					累計答錯題數：<span>0</span>
-				</p>
-			</section>
-
-			<hr>
-
-			<section>
-				<h2>一覽</h2>
-				<p>
-					<span></span>
-					<button onclick='list()' style='width:auto'>請輸入想一覽的英文字母</button>
 				</p>
 			</section>
 
@@ -149,20 +138,6 @@
 			function cheat(){
 				span1.innerHTML='答案是：'+dict[letter][word+1]+'，請繼續作下一個題目。'
 				quest(letter)
-			}
-			//一覽
-			var alphabet=0
-			var buffer=''
-			var span4=document.querySelectorAll('article span')[3]
-			function list(){
-				alphabet=prompt().substr(0,1).toUpperCase().charCodeAt()-65
-				if(alphabet>22||alphabet<0) buffer='輸入錯誤！請輸入 A 到 W 之間的字母。<br><br>'
-				else{
-					buffer='<table>'
-					for(var n=0;n<dict[alphabet].length;n+=2) buffer+='<tr><td>'+dict[alphabet][n+1]+'</td><td>'+dict[alphabet][n]+'</td></tr>'
-					buffer+='</table>'
-				}
-				span4.innerHTML=buffer
 			}
 			//初始動作
 			addEventListener('load',quest(0))

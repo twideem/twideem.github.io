@@ -4,7 +4,6 @@
 
 	<head>
 		<meta charset='UTF-8'>
-		<title>TWIDEEM CIVS</title>
 		<link href='../../favicon.png' rel='icon'>
 		<link href='../../styles/layout.css' rel='stylesheet'>
 		<script src='../../scripts/template.js'></script>
@@ -111,7 +110,9 @@
 			<section>
 				<h2>如何 Ctrl + Y 復原</h2>
 				<p>
-					<kbd>Ctrl + e</kbd>，然後按 <kbd>Ctrl + z</kbd>。
+					<kbd>Ctrl + e</kbd>，然後按 <kbd>Ctrl + z</kbd>。<br>
+					<br>
+					不習慣的話，可修改 Shortcuts。
 				</p>
 			</section>
 
@@ -123,6 +124,15 @@
 					選取多行然後按 <kbd>Tab</kbd> 鍵，會整列增加縮排。<br>
 					<br>
 					選取多行然後按 <kbd>Shift + Tab</kbd> 鍵，則是整列減少縮排。<br>
+				</p>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>複製當前行、移動當前行</h2>
+				<p>
+					這些功能放在 <kbd>[功能表] → Macros → Edting</kbd> 的 Duplicade Lin Belowe、Move Lines Down、Move Lines Up，請自行建立快捷鍵（Shortcut）。
 				</p>
 			</section>
 
@@ -292,7 +302,7 @@
 				<section>
 					<h3>自動</h3>
 					<p>
-						在 <kbd>[功能表] → Utilities → Global Options → Editing → List of fallback encodings</kbd> 輸入會用到的字元編碼，像是 Big5 和 UTF-16，並勾選 <kbd>Auto-detect file encoding when possible</kbd>。
+						在 <kbd>[功能表] → Utilities → Global Options → Encodings → List of fallback encodings</kbd> 輸入會用到的字元編碼，像是 Big5 和 UTF-16，並勾選 <kbd>Auto-detect file encoding when possible</kbd>。
 					</p>
 				</section>
 				<hr>
@@ -301,7 +311,9 @@
 					<p>
 						<kbd>[功能表] → File → Reload with Encoding</kbd><br>
 						<br>
-						可在 <kbd>[功能表] → Utilities → Global Options → Editing → Selected encoding(s)</kbd> 設定可選的字元編碼。由於 jEdit 可選的字元編碼一定有 MS950，因此不用設定 Big5 和 GB2312，只要留 UTF-16 即可。UTF-8 預設的話也不用。
+						可在 <kbd>[功能表] → Utilities → Global Options → Encodings → Selected encoding(s)</kbd> 設定可選的字元編碼。<br>
+						<br>
+						由於 MS950 是 jEdit 必定可選的字元編碼 ，因此不用設定 Big5 和 GB2312，只要留 UTF-16 即可。預設使用 UTF-8 的話，也不用設定 UTF-8。
 					</p>
 				</section>
 				<hr>
@@ -311,6 +323,15 @@
 						jEdit 會記錄每個檔案自動偵測或手動切換後的字元編碼狀態，導致下次開始同一個檔案時，不再自動偵測正確的字元編碼，而是沿用上次使用的字元編碼。
 					</p>
 				</section>
+			</section>
+
+			<hr>
+
+			<section>
+				<h2>開啟 URL 式的檔案</h2>
+				<p>
+					<kbd>[功能表] → Macros → Fiels → Open Path</kbd> 可以開啟 file:// 開頭、含 # &amp; ? 符號的路徑。有需要用到的人，不妨將這功能設定快捷鍵（Shortcut）。
+				</p>
 			</section>
 
 			<hr>
@@ -345,7 +366,15 @@
 					<br>
 					如果要指定特定網頁瀏覽器，或者想加入參數的話，以 Vivaldi 網頁瀏覽器、下允許播放音樂參數為例，輸入的大概會像這樣：<br>
 					<br>
-					<kbd>"C:\Program Files\Vivaldi\Application\vivaldi" $f --autoplay-policy=no-user-gesture-required</kbd>
+					<kbd>"C:\Program Files\Vivaldi\Application\vivaldi" $f --autoplay-policy=no-user-gesture-required</kbd><br>
+					<br>
+					<output>
+						如果不想為此下載 Plugin 的話，可以自己寫個 Marco：<br>
+						<br>
+						Runtime.getRuntime().exec("vivaldi \"" + buffer.getPath() + "\" --autoplay-policy=no-user-gesture-required");<br>
+						<br>
+						命名為 Run_Path.bsh，放在 jEdit 的 macros 資料夾裡，再建立快捷鍵即可。
+					</output>
 				</p>
 			</section>
 

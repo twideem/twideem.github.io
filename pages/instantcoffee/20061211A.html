@@ -4,7 +4,6 @@
 
 	<head>
 		<meta charset='UTF-8'>
-		<title>TWIDEEM CIVS</title>
 		<link href='../../favicon.png' rel='icon'>
 		<link href='../../styles/layout.css' rel='stylesheet'>
 		<script src='../../scripts/template.js'></script>
@@ -144,7 +143,8 @@
 						．<a href='#index22'>播放 MIDI 音樂</a><br>
 						．<a href='#index23'>壓縮與解壓縮 ZIP 檔案</a><br>
 						．<a href='#index24'>使用 SQLite 資料庫</a><br>
-						．<a href='#index25'>簡易 HTTP 伺服器</a><br>
+						．<a href='#index25'>存取剪貼簿文字</a><br>
+						．<a href='#index26'>簡易 HTTP 伺服器</a><br>
 					</p>
 				</section>
 				<hr>
@@ -1027,6 +1027,21 @@
 						<img src='../../figures/instantcoffee/20061211A_03.png' alt='插圖'>
 					</figure>
 				</section>
+				<hr>
+				<section>
+					<h3>啟動視窗小秘訣</h3>
+					<p>
+						由於 Java 寫的應用程式是透過 java.exe 指令執行，所以視窗應用程式啟動時，會帶一個命令提示字元，相當礙眼。<br>
+						<br>
+						請善用 <code>CMD /C START "" 指令</code>，可以在執行完指令後，自動結束命令字元視窗：<br>
+						<br>
+						<output>
+							CMD /C START "" javaw -cp .;"%JAVA_HOME%\lib\rhino.jar" org.mozilla.javascript.tools.shell.Main -version 200 -encoding UTF-8 *.js<br>
+						</output>
+						<br>
+						在其它腳本語言，通常直接建立捷徑，輸入 CMD /C START "" ... 即可。但 java.exe 掛載 rhino.jar 的參數太複雜，裡面有下給參數的參數，還得寫 %"%"%"%" 這種符號表示 ""，建議還是乖乖寫在批次檔執行吧！點兩下批次檔，照樣會自動關閉命令提示字元視窗，不但不會比較難用，反而比捷徑更容易修改、維護。
+					</p>
+				</section>
 			</section>
 
 			<hr id='index21'>
@@ -1210,6 +1225,30 @@
 			</section>
 
 			<hr id='index25'>
+
+			<section>
+				<h2>存取剪貼簿文字</h2>
+				<p>
+					<textarea class='brush:js'>
+						importPackage(java.awt);
+						importPackage(java.awt.datatransfer);
+
+						// 建立剪貼簿物件
+						let clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+						// 讀取剪貼簿文字
+						let data = clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor);
+
+						// 修改讀取的文字
+						data += '0.0';
+
+						// 寫入剪貼簿文字
+						clipboard.setContents(new StringSelection(data), null);
+                    </textarea>
+				</p>
+			</section>
+
+			<hr id='index26'>
 
 			<section>
 				<h2>簡易 HTTP 伺服器</h2>
