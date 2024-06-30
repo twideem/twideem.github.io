@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>Web Service</h1>
+		<p>
+			在過去，不同機器、系統、程式的架構，很難相互溝通，例如 Python 程式無法向 Ruby 要求執行運算並獲得結果。但網路打破這個籓籬，例如透過 HTTP，安裝 Windows 的 PC 伺服器，可以和安裝 Solaris 的 SPARC 伺服器，相互以自己的 CGI 請求與接收資料。<br>
+			<br>
+			但這架構僅限於網站伺服器之間的信息傳遞，只能間接讓程式之間溝通，並不是直接溝通。<br>
+			<br>
+			於是這架構另外發展出 Web Service，反過來讓程式能夠藉由網站提供服務的方式，來相互請求與接收資料，而不是網站藉由程式提供服務的方式請求與接收資料。差別在後者要的資料是網站自己用的，程式只是媒介。前者才是程式自己用的，網站只是媒介。<br>
+			<br>
+			有了 Web Service，不同應用程式之間，就能相互溝通與了解。不過，還不能合作與共治，讓不同應用程式組織起來，形成一個作業網路，因為這當初就不在 Web Service 的範疇內。或許未來這會是不錯的願景吧？但現在 Web Service 就是單純的資料交換標準而已，不要想得太複雜也好～
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>核心技術</h2>
+		<hr>
+		<section>
+			<h3>SOAP</h3>
+			<p>
+				Simple Object Access Protocol，簡單物件存取協定。<br>
+				<br>
+				程式向 Web Service 請求服務、以及 Web Service 向程式回覆需求時，所使用的傳輸格式。它長得很像 HTTP 傳送的 HTML 資料結構：header、breakline、content，只是 content 的部份改成 XML 語法制定的標記語言。<br>
+				<br>
+				這是 Web Service 最基本的標準，只要你的程式能夠在網路上讓對方發送 SOAP 請求執行，執行完也能將結果以 SOAP 傳送過去，這個程式就是 Web Service 了！因此你可跳過其它技術，直接用 SOAP 讓雙方溝通。但如何找到對方？要跟他溝通什麼？對方如何採取行動並回覆？這些細節要做得完善，並不是容易的事，因此你還是會樂於使用到 WSDL 和 UDDI 等其它技術。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>WSDL</h3>
+			<p>
+				Web Services Description Language，網站服務描述語言。<br>
+				<br>
+				讓程式知道 Web Service 有哪些服務可以請求、還有如何請求。<br>
+				<br>
+				雖然重要性不如 SOAP，可有可無，但 WSDL 描述的訊息很詳盡，寫出一份 WSDL 就可轉 SOAP，而寫 SOAP 卻無法轉 WSDL，因此各家 IDE 在自動化產生 Web Service 的功能上，反而把重點放在寫好 WSDL，以此做為 UDDI 與 SOAP 之間的基礎。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>UDDI</h3>
+			<p>
+				Universal Description, Discovery, and Integration.<br>
+				<br>
+				登錄 Web Services 的 WSDL 給程式請求，提供 Web Service 回復程式 SOAP 的能力。<br>
+				<br>
+				這是最常被程式設計人員忽視的技術，因為我們寫不出來，只能下載人家寫好的伺服器、框架、套件、程式庫 XDDD
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>SOAP</h2>
+		<hr>
+		<section>
+			<h3>Web Service 與 SOAP 大概的模樣</h3>
+			<p>
+				假設請求者知道網路上有個 Web Service，它的 getString(x,y) 函式會回傳字串，所以現在要呼叫 getString('ABC','123') 看看，於是發送如下的 SOAP 過去：<br>
+				<br>
+				<textarea class='brush:xml'>
+					Content-type:text/xml; charset=utf-8
+
+					&lt;?xml version="1.0" encoding="utf-8"?&gt;
+					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"&gt;
+						&lt;soap:Body&gt;
+							&lt;getString&gt;
+								&lt;x&gt;ABC&lt;/x&gt;
+								&lt;y&gt;123&lt;/y&gt;
+							&lt;/getString&gt;
+						&lt;/soap:Body&gt;
+					&lt;/soap:Envelope&gt;
+                </textarea>
+				<br>
+				接收者收到上面的 SOAP 後，經過 XML 的剖析，得知函式名稱為 getString，參數為 x 和 y，引數分別為 ABC 和 123，於是執行了做為 Web Service 服務的如下程式：<br>
+				<br>
+				<textarea class='brush:py'>
+					def getString(x,y):
+						return x+y
+
+					getString('ABC','123')
+                </textarea>
+				<br>
+				並且將結果以如下 SOAP 回傳給請求者：<br>
+				<br>
+				<textarea class='brush:xml'>
+					Content-type:text/xml; charset=utf-8
+
+					&lt;?xml version="1.0" encoding="utf-8"?&gt;
+					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"&gt;
+						&lt;soap:Body&gt;
+							&lt;getStringResponse&gt;
+								&lt;Return&gt;ABC123&lt;/Return&gt;
+							&lt;/getStringResponse&gt;
+						&lt;/soap:Body&gt;
+					&lt;/soap:Envelope&gt;
+                </textarea>
+				<br>
+				請求者也從收到的 SOAP 剖析資料，得到 ABC123，這樣就完成一個 Web Service 的服務。<br>
+				<br>
+				SOAP 還可以更複雜，使用 Namespace 和 XSI 讓訊息更清楚。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>SOAP 格式</h3>
+			<p>
+				<textarea class='brush:xml'>
+					Content-type:text/xml; charset=utf-8
+
+					&lt;?xml version="1.0" encoding="utf-8"?&gt;
+					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"&gt;
+						&lt;soap:Body&gt;
+							&lt;!-- request or response --&gt;
+						&lt;/soap:Body&gt;
+					&lt;/soap:Envelope&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>SOAP 1.1 和 1.2</h3>
+			<p>
+				SOAP 1.1 在標頭的 Content-Type 為 text/xml，SOAP 1.2 為 application/soap+xml，且不在標頭設定 SOAPAction。<br>
+				<br>
+				SOAP 1.1 的 envolope 命名空間為 http://schemas.xmlsoap.org/soap/envelope/，SOAP 1.2 為 http://www.w3.org/2003/05/soap-envelope。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Web Service 的定義</h3>
+			<p>
+				並不是兩端程式使用 SOAP 進行溝通，就叫做 Web Service，一定要在網路傳遞 SOAP，才符合 Web Service 的定義。<br>
+				<br>
+				所以在單機硬碟裡讓 Python 和 Ruby 雙方把 SOAP 寫在 XML 檔案相互讀取、剖析、執行，是稱不上 Web Service 的。且制定 Web Service 標準的組織也說，這樣做並沒有意義，單機有單機調用程式的標準了，Web Service 不是為了這用途而定義、也不應該做為這用途的標準。<br>
+				<br>
+				透過網路連線讓程式溝通（SOAP），才能進一步讓主機主動提供服務（WSDL + UDDI），才是 Web Service 真正想做的事。而在單機上不透過網路連線，就拿 SOAP 做為程式雙方溝通的標準，依目前程式語言的使用情況來說，通常都會設計成被動接受請求，不會設計為主動提供服務。<br>
+				<br>
+				或許 Node.js 或 Go 會改變情況，但這類程式語言興盛起來、需求浮現時，自然會有新的標準方案。所謂制定標準化，就是對浮現出來的需求統一定義、進行規範，在需求沒出來之前，是不能標準化的，因為那叫空談。制定 Web Service 標準時，浮現的需求就是用網路呼叫遠端的程式，打破平台與語言的隔閡。如果有新的做法可以打破平台與語言的隔閡，會有新的標準方案出來，並且取代 Web Service，進入新的時代。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>實作</h2>
+		<hr>
+		<section>
+			<h3>一般的實作</h3>
+			<p>
+				程式語言很少內建 Web Service，所以通常都是找伺服器系統、或者框架、或者模組、或者程式庫來實現。還是沒有，就只能自己實作，實作難度隨程式語言不同而天差地別。<br>
+				<br>
+				像 Java RMI 基本上就跟 Web Service 相去不遠，把通訊協定改用 HTTP、資料交換改用 XML，就差不多把 Web Service 實作了！這也是為何 Java 的 Web Service 發展最快、最成熟的原因。而 PHP 雖然不是應用程式的解決方案，但做為伺服端程式設計的語言，兩三行程式就能把 SOAP 主從架構搞定。<br>
+				<br>
+				其他語言的話，由於 SOAP 和 WSDL 都是 XML 文件，因此能實作出來的現成資源，就是 XML 剖析器、以及 RPC（Remote Procedure Call）程式庫，版本有持續更新的程式語言通常少不了這些。<br>
+				<br>
+				但一些古老的程式語言，想搭上 Web Service 可就辛苦了，沒網路底層設計經驗的人，很難實作出來。因此 Web Service 的提出，並不是每個人都拍案叫好，也有不少人批評這規格是針對特定語言所制定的，很難心服視為標準，只能在標準外以自己語言能做到的方式達到相同目的，被迫搞一套自己的標準出來～<br>
+				<br>
+				但隨著主機代管紛紛走向 PaaS，提供架設 Web Service 的環境，願意承租的話已經不是問題。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其它的實作</h3>
+			<p>
+				由於 Web Service 以網際網路為基本架構，因此不只是程式語言，網頁瀏覽器、電子郵件、Telnet…之類上網用的東西，都能向 Web Service 請求服務。只是得到 SOAP 裡面的 XML 格式內容後，要用自己眼睛去剖析資料～
+			</p>
+		</section>
+	</section>
+</article>
