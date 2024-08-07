@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/grid.css' rel='stylesheet'>
+<style>table td:nth-child(1){width:40%}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>SQL 速用表</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>建立資料庫</h2>
+		<p>
+			<code>CREATE DATABASE 資料庫名稱;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>檢視資料庫</h2>
+		<p>
+			<code>SHOW DATABASES;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>使用資料庫</h2>
+		<p>
+			<code>USE 資料庫;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>刪除資料庫</h2>
+		<p>
+			<code>DROP DATABASE 資料庫;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>建立資料表</h2>
+		<p>
+			<code>
+				CREATE TABLE 資料表名稱 (<br>
+				　欄位名稱 INT NOT NULL PRIMARY KEY AUTO_INCREMENT,<br>
+				　欄位名稱 <span style='text-decoration:underline'>資料型態</span>, …<br>
+				);
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>檢視資料表</h2>
+		<p>
+			<code>SHOW TABLES;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>刪除資料表</h2>
+		<p>
+			<code>DROP TABLE 資料表;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>新增欄位</h2>
+		<p>
+			<code>ALTER TABLE 資料表 ADD COLUMN 欄位名稱 <span style='text-decoration:underline'>資料型態</span>;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>檢視欄位</h2>
+		<p>
+			<code>SHOW COLUMNS FROM 資料表;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>修改欄位</h2>
+		<p>
+			<code>ALTER TABLE 資料表 CHANGE COLUMN 欄位 欄位名稱 <span style='text-decoration:underline'>資料型態</span>;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>刪除欄位</h2>
+		<p>
+			<code>ALTER TABLE 資料表 DROP COLUMN 欄位;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>插入資料</h2>
+		<p>
+			<code>INSERT INTO 資料表(欄位, 欄位, …) VALUES(資料, 資料, …);</code>
+			<code>INSERT INTO 資料表 VALUES(資料, 資料, …);</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>更新資料</h2>
+		<p>
+			<code>UPDATE 資料表 SET 欄位 = 資料 WHERE <span style='text-decoration:underline'>篩選條件</span>;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>選取資料</h2>
+		<p>
+			<code>SELECT 欄位 FROM 資料表 WHERE <span style='text-decoration:underline'>篩選條件</span> <span style='text-decoration:underline'>排序方式</span>;</code>
+			<code>SELECT 欄位 FROM 資料表 LIMIT 從第幾欄, 到第幾欄;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>刪除資料</h2>
+		<p>
+			<code>DELETE FROM 資料表 WHERE <span style='text-decoration:underline'>篩選條件</span>;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>資料型態</h2>
+		<p>
+			<code><span style='text-decoration:underline'>資料型別</span> <span style='text-decoration:underline'>欄位特性</span></code>
+		</p>
+		<hr>
+		<section>
+			<h3>資料型別</h3>
+			<table>
+				<tr><td>INTGER</td><td>整數</td></tr>
+				<tr><td>FLOAT</td><td>小數</td></tr>
+				<tr><td>DOUBLE</td><td>倍精度小數</td></tr>
+				<tr><td>CHAR</td><td>字元</td></tr>
+				<tr><td>TEXT</td><td>字串</td></tr>
+				<tr><td>BINARY</td><td>位元</td></tr>
+				<tr><td>NUMBER</td><td>數字</td></tr>
+				<tr><td>DATE</td><td>日期</td></tr>
+				<tr><td>TIME</td><td>時間</td></tr>
+				<tr><td>YEAR</td><td>年份</td></tr>
+				<tr><td>COUNTER</td><td>累計</td></tr>
+			</table>
+			<p>
+				還有更多，這裡列出較為實用的型別。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>欄位特性</h3>
+			<table>
+				<tr><td>PRIMARY KEY</td><td>主索引欄位</td></tr>
+				<tr><td>UNIQUE</td><td>主索引欄位的值不可重複</td></tr>
+				<tr><td>NOT NULL</td><td>欄位的值不得為空</td></tr>
+				<tr><td>UNDIGNED</td><td>沒有正負號</td></tr>
+				<tr><td>ZEROFILL</td><td>不足的位數補零</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>篩選條件</h2>
+		<p>
+			<code>欄位 <span style='text-decoration:underline'>運算子</span> 資料</code>
+		</p>
+		<hr>
+		<section>
+			<h3>運算子</h3>
+			<table>
+				<tr><td>&lt;</td><td>小於</td></tr>
+				<tr><td>&gt;</td><td>大於</td></tr>
+				<tr><td>=</td><td>等於</td></tr>
+				<tr><td>&lt;&gt;</td><td>不等於</td></tr>
+				<tr><td>&lt;=</td><td>小於等於</td></tr>
+				<tr><td>&gt;=</td><td>大於等於</td></tr>
+				<tr><td>BETWEEN 資料 AND 資料</td><td>在兩筆資料範圍之間</td></tr>
+				<tr><td>IN(資料, 資料, …)</td><td>以資料做為篩選條件條件</td></tr>
+				<tr><td>LIKE <span style='text-decoration:underline'>萬用字元</span></td><td>萬用條件</td></tr>
+				<tr><td>NOT</td><td>反閘</td></tr>
+				<tr><td>AND</td><td>及閘</td></tr>
+				<tr><td>OR</td><td>或閘</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>排序方式</h2>
+		<table>
+			<tr><td>ORDER BY 欄位 ASC</td><td>遞增</td></tr>
+			<tr><td>ORDER BY 欄位 DESC</td><td>遞減</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>萬用字元</h2>
+		<table>
+			<tr><td>%</td><td>一串字</td></tr>
+			<tr><td>_</td><td>一個字</td></tr>
+			<tr><td>#</td><td>一個數</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>資料庫結構</h2>
+		<p>
+			資料庫 (Database) 底下，有多個資料表 (Talbe)。資料表底下，有多個紀錄列 (Row)。紀錄列底下，有多個資料欄 (Column)。每個資料欄，儲存一筆資料 (Data)。<br>
+			<br>
+			如下表所示：
+		</p>
+		<table class='grid'>
+			<tr><th>Table</th><th>Column 1</th> <th>Column 2</th>   <th>Column 3</th></tr>
+			<tr><th>Row 1</th><td>Data</td><td>Data</td><td>Data</td></tr>
+			<tr><th>Row 2</th><td>Data</td><td>Data</td><td>Data</td></tr>
+		</table>
+		<p>
+			有些時候，會改用另外一套不一樣的術語：
+		</p>
+		<table class='grid'>
+			<tr><th>Table</th><th>Field 1</th><th>Field 2</th><th>Field 3</th></tr>
+			<tr><th>Record 1</th><td>Item</td><td>Item</td><td>Item</td></tr>
+			<tr><th>Record 2</th><td>Item</td><td>Item</td><td>Item</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>如何使用本資料？</h2>
+		<p>
+			中文字有劃底線的項目，表示需要往下查表。例如：<br>
+			<br>
+			<code>ALTER TABLE 資料表 ADD COLUMN 欄位名稱 <span style='text-decoration:underline'>資料型態</span>;</code><br>
+			<br>
+			「資料型態」的部分，請查閱書寫格式。<br>
+			<br>
+			中文字沒劃底線的項目，如果以「名稱」結尾，表示要取一個識別命名，例如：<br>
+			<br>
+			<code>
+				CREATE DATABASE 資料庫名稱;<br>
+			</code>
+			<br>
+			否則的話，表示引用先前取過的識別名稱。例如：<br>
+			<br>
+			<code>
+				USE 資料庫;
+			</code>
+		</p>
+	</section>
+</article>

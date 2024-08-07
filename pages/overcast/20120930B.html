@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET')</script>
+<article>
+	<header>
+		<h1>文字類別圖</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>類別</h2>
+		<p>
+			<code>|類別|</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>繼承</h2>
+		<p>
+			<code>|父類別| =&gt; |子類別|</code><br>
+			<br>
+			之所以跟 UML 箭頭相反，是因為子類別透過繼承獲得父類別的程式碼，把父類別變成自己的一部分。在「多用合成，少用繼承」的現在，繼承的目的就是獲得程式碼，不是獲得類別的型別，型別都交給介面，所以我採取這更符合現下情況的改變。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>介面</h2>
+		<p>
+			<code>/介面/</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>實作</h2>
+		<p>
+			<code>
+				/介面/ ~ |類別|<br>
+				/抽象類別/ = |類別|<br>
+			</code>
+			<br>
+			實作介面一定是單向的，而且介面和類別的符號不同，一看就知道是類別實作介面，所以不需要箭頭。<br>
+			<br>
+			由於「實作介面」不像「繼承類別」會獲得程式碼，所以另外使用 ~ 符號，不與 = 和 - 符號混淆。<br>
+			<br>
+			若使用 = 表示會獲得程式碼的「抽象類別」，而不是「介面」。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>合成</h2>
+		<p>
+			<code>
+				|主體| &lt;- |部分|<br>
+				|主體| - /介面/ ~ |實作|<br>
+			</code>
+			<br>
+			沒有由左往右的順序，顛倒過來沒關係。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>成員</h2>
+		<p>
+			<code>
+				|類別 _變數 函式()|<br>
+				|類別 _變數 _變數 函式() 函式()|<br>
+				|類別 _變數:型態 函式():傳回值|<br>
+			</code>
+			<br>
+			現在很少程式設計師用 UML 來塑模，都是用來表達物件之間的關係，所以重點在線條，而不是方框裡面的東西。因此不建議揭露類別裡面的變數和函式，寫類別名稱就好，會讓線條的關係更清楚。<br>
+			<br>
+			如果變數或函式就是要傳達的關鍵部分，才揭露出來。既然不是塑模，揭露時不要完整，只揭露必要的部分即可。<br>
+			<br>
+			塑模請用 UML 或 <a href='http://plantuml.com/zh/'>PlantUML</a>，不要用文字類別圖。文字類別圖是彌補語言文字無法描述物件之間關係時用的，請將它視為語言文字的一種，而不是塑模用的一種圖形。<br>
+			<br>
+			不鼓勵揭露的關係，既然揭露就表示 public，所以不加符號。若要揭露又要表示 private，則標上 _ 符號，但識別名稱已經使用這符號則不加。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>綜合範例</h2>
+		<p>
+			<code>/A/ ~ |B| =&gt; |C| &lt;- |D| |E| |F|</code><br>
+			<br>
+			C 類別繼承了實作 A 介面的 B 類別並合成了 D、E、F 類別。<br>
+			<br>
+			<code>|A| - /B/ ~ |C| |D| |E|</code><br>
+			<br>
+			A 類別透過 B 介面合成實作該介面的 C、D、E 類別。<br>
+			<br>
+			<code>|C| |D| |E| ~ /B/ - |A|</code><br>
+			<br>
+			同上，只是順序不一樣，不影響圖的表示。<br>
+			<br>
+			<code>|A| - /B/ = |C|</code><br>
+			<br>
+			A 類別透過 B 抽象類別相容實作該抽象類別的 C 類別。
+		</p>
+	</section>
+
+	<hr>
+	<section>
+		<h2>應用實例：Monster 設計模式</h2>
+		<hr>
+		<section>
+			<h3>目的</h3>
+			<p>
+				消除型別。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>動機</h3>
+			<p>
+				持續演化（繼承）的一頭怪獸，不受文明（物件導向設計原則）的束縛。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>結構</h3>
+			<p>
+				<code>|A| -&gt; |B| -&gt; .. -&gt; |Monster| -&gt; |Client|</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>參與者</h3>
+			<p>
+				最開始的類別 A，通常選擇 API 裡的一個資料結構來繼承，負責保存資料。<br>
+				<br>
+				然後類別 B、C、D…負責設計演算法處理類別 A 的資料。每個類別只負責合成一個物件來做事，要合成另一個物件，就繼承一個新的類別去做。<br>
+				<br>
+				最後的 Monster 負責輸出資料。<br>
+				<br>
+				Client 端像套用框架一樣繼承 Monster 來用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>實作</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Collections.Generic;
+
+					class A : List&lt;object&gt;
+					{
+						object[] data;
+
+						public void Save()
+						{
+							data = ToArray();
+						}
+
+						public void Load()
+						{
+							Clear();
+							foreach(var n in data) Add(n);
+						}
+					}
+
+					class B : A
+					{
+						Random random = new Random();
+
+						public void Shuffle()
+						{
+							Sort((x, y) =&gt; random.Next(-1, 2));
+						}
+					}
+
+					class Monster : B
+					{
+						public void Print()
+						{
+							foreach(var n in this) Console.Write("{0} ", n);
+							Console.WriteLine();
+						}
+					}
+
+					class Client : Monster
+					{
+						Client()
+						{
+							Add(123);
+							Add("ABC");
+							Save();
+							Print();
+							Clear();
+							Add(111);
+							Add(222);
+							Add(333);
+							Add(444);
+							Add(555);
+							Shuffle();
+							Print();
+							Load();
+							Print();
+						}
+
+						static void Main()
+						{
+							new Client();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123 ABC<br>
+					444 111 555 333 222<br>
+					123 ABC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>相關模式</h3>
+			<p>
+				類似 God 類別，只是功能並非全寫在一個類別，而是分散在不同類別，然後不斷繼承來用，像隻不停演化的怪獸，擺脫束縛。<br>
+				<br>
+				最終也不是 new 一個 God 物件，而是繼承 Monster 類別。<br>
+				<br>
+				God 類別的目的是無所不能的物件，Monster 類別的目的是消除型別。
+			</p>
+		</section>
+	</section>
+</article>

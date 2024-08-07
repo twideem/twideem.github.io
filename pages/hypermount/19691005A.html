@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>HTTP cookie</h1>
+	</header>
+	<hr>
+	<p>
+		<textarea class='brush:js'>
+			function setCookie(key,value,day)
+			{
+				let date=new Date();
+				date.setTime(date.getTime()+(1000*60*60*24*day));
+				document.cookie=key+'='+value+'; '+'expires='+date.toGMTString();
+			}
+
+			function getCookie(key)
+			{
+				let cookies=document.cookie.split(';');
+				for(let n=0; n&lt;cookies.length; n++){
+					let cookie=cookies[n].trim();
+					if(cookie.indexOf(key+'=')==0) return cookie.substring(key.length+1,cookie.length);
+				}
+				return '';
+			}
+        </textarea>
+	</p>
+</article>

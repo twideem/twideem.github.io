@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>Python 進階範例集：網際網路篇</h1>
+	</header>
+	<hr id='http.server'>
+	<section>
+		<h2>http.server</h2>
+		<p>
+			Python 自帶 HTTP 通訊協定的網站伺服器能力，只要切換到想當網站的資料夾，執行<ins>1</ins>：<br>
+			<br>
+			<code>python -m http.server --bind 0.0.0.0 80</code><br>
+			<br>
+			該資料夾就會掛載成網站伺服器，可在網頁瀏覽器輸入 127.0.0.1 或 192.168.x.x 之類的區域位址，以 HTTP 存取資料夾裡面的網頁和檔案。<br>
+			<br>
+			若想指定資料夾為網站伺服器，可用 <code>--directory</code> 參數，隨後輸入完整路徑的資料夾名稱。<br>
+			<br>
+			想寫 CGI 的話，可添加 <code>--cgi</code> 參數，並把 Python 原始碼放在 <code>cgi-bin</code> 或 <code>htbin</code> 資料夾裡面即可。<br>
+			<br>
+			通常會將上述指令寫在批次檔，然後放在想當網站的資料夾裡面，直接雙擊滑鼠執行即可，比較方便。<br>
+			<br>
+			要結束伺服系統，關閉該 python 處理程序即可。<br>
+			<br>
+			有時候會發生啟動了 http.server，網頁卻連很久還連不進去的情況，請關閉 python 處理程序，重新啟動一次看看。
+		</p>
+		<hr>
+		<section>
+			<h3>範例</h3>
+			<p>
+				假設我臨時想在 Windows 10 架個能執行 CGI 的網頁伺服器，為了方便還把網頁放在桌面。
+			</p>
+			<section>
+				<h4>[USER]\Desktop\index.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;html&gt;
+						  &lt;body&gt;
+							&lt;a href='cgi-bin/hello.py'&gt;Say hello&lt;/a&gt;
+						  &lt;/body&gt;
+						&lt;/html&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>[USER]\Desktop\cgi-bin\hello.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						print('Content-type:text/html')
+						print()
+						print('&lt;html&gt;')
+						print('  &lt;body&gt;')
+						print(' &lt;p&gt;Hello, CGI!&lt;/p&gt;')
+						print('  &lt;/body&gt;')
+						print('&lt;/html&gt;')
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>命令提示字元</h4>
+				<p>
+					<output>
+						Microsoft Windows [版本 10.0.17763.914]<br>
+						(c) 2018 Microsoft Corporation. 著作權所有，並保留一切權利。<br>
+						<br>
+						C:\Users\User&gt;CD Desktop<br>
+						<br>
+						C:\Users\User\Desktop&gt;python -m http.server --bind 0.0.0.0 80 --cgi<br>
+						Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>網頁瀏覽器</h4>
+				<figure>
+					<canvas width='554'>msedge('http://127.0.0.1/','_Say hello')</canvas>
+					<figcaption>index.html</figcaption>
+				</figure>
+				<figure>
+					<canvas width='554'>msedge('http://127.0.0.1/cgi-bin/hello.py','Hello, CGI!')</canvas>
+					<figcaption>hello.py</figcaption>
+				</figure>
+			</section>
+		</section>
+	</section>
+	<hr id='cgitb'>
+	<section>
+		<h2>cgitb</h2>
+		<p>
+			載入 cgitb 模組，執行 <code>cgitb.enable()</code> 的話，會追蹤程式錯誤訊息，在發生錯誤時以網頁顯示追蹤結果，方便開發人員除錯。<br>
+			<br>
+			不想直接顯示錯誤訊息，可以改為 <code>cgitb.enable(display=0, logdir='../logs')</code>，將錯誤訊息保存在伺服器的 logs 資料夾中。
+		</p>
+	</section>
+	<hr id='cgi'>
+	<section>
+		<h2>cgi</h2>
+		<p>
+			cgi 模組提供剖析連線狀態和網頁內容的功能，方便 Python 程式設計師開發 CGI 程式。
+		</p>
+		<hr>
+		<section>
+			<h3>接收 GET 或 POST 資料</h3>
+			<section>
+				<h4>form.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;html&gt;
+						  &lt;body&gt;
+							&lt;form action='cgi-bin/request.py' method='get'&gt;
+							  &lt;input type='text' name='field' value='Hi!'&gt;
+							  &lt;input type='submit'&gt;
+							&lt;/form&gt;
+						  &lt;/body&gt;
+						&lt;/html&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>cgi-bin/request.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						import cgi
+
+						form = cgi.FieldStorage()
+
+						print()
+						print(form.getvalue('field'))
+                    </textarea>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='urllib.urlparse'>
+	<section>
+		<h2>urllib.urlparse, urllib.urlunparse</h2>
+		<p>
+			設計 CGI 時，有些資訊就在網址裡，能快速有效的剖析出資料會很有幫助。<br>
+			<br>
+			反過來，如何將資料組成網址，將資訊傳出去，也是很有用的技巧。
+		</p>
+		<hr>
+		<section>
+			<h3>urllib.urlparse</h3>
+			<p>
+				<textarea class='brush:py'>
+					from urllib.parse import urlparse
+
+					parser = urlparse('http://serv.loc/chap/sect.htm?p=123#article')
+
+					print(parser)
+					print(parser.query)
+                </textarea>
+				<br>
+				<output>
+					ParseResult(scheme='http', netloc='serv.loc', path='/chap/sect.html', params='', query='p=123', fragment='article')<br>
+					p=123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>urllib.urlunparse</h3>
+			<p>
+				<textarea class='brush:py'>
+					from urllib.parse import ParseResult, urlunparse
+
+					url = urlunparse(ParseResult('scheme', 'netloc', 'path', 'params', 'query', 'fragment'))
+
+					print(url)
+                </textarea>
+				<br>
+				<output>
+					scheme://netloc/path;params?query#fragment
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='http.cookies'>
+	<section>
+		<h2>http.cookies</h2>
+		<p>
+			cookie 是在 HTTP 的 header fields 傳輸，所以儲存資料要寫在 header fields 的部分，再透過 os 取得環境變數中的 HTTP_COOKIE，然後寫在 message body：<br>
+			<br>
+			<textarea class='brush:py'>
+				import os
+
+				print('Set-Cookie:user=Twideem Civs')
+				print('Set-Cookie:email=twideem@outlook.com')
+				print()
+				print(os.environ['HTTP_COOKIE'])
+            </textarea>
+			<br>
+			重新整理網頁，會顯示 email=twideem@outlook.com; user=Twideem Civs，對它進行剖析就能獲取資料。<br>
+			<br>
+			不過上述工作可用 http.cookies 模組代勞，降低複雜度。
+		</p>
+		<hr>
+		<section>
+			<h3>儲存 cookie</h3>
+			<p>
+				<textarea class='brush:py'>
+					from http import cookies
+
+					cookie = cookies.SimpleCookie()
+					cookie['user'] = 'Twideem Civs'
+					cookie['email'] = 'twideem@outlook.com'
+
+					print(cookie)
+					print()
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>讀取 cookie</h3>
+			<p>
+				<textarea class='brush:py'>
+					from http import cookies
+					import os
+
+					cookie = cookies.SimpleCookie()
+					cookie.load(os.environ['HTTP_COOKIE'])
+
+					print()
+					print(cookie['user'].value)
+					print(cookie['email'].value)
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='codecs'>
+	<section>
+		<h2>codecs</h2>
+		<p>
+			在預設使用 ASCII 編碼系統的 Windows，Python 3 傳輸資料會用 Big5 字元編碼，所以在設定為 UTF-8 字元編碼的網頁會顯示亂碼。<br>
+			<br>
+			寫上 <code>#-*- coding: UTF-8 -*-</code> 或 <code>print('Content-Type: text/html; charset=utf-8')</code> 是沒用的，因為並不是網頁沒使用 UTF-8 編碼，正是網頁使用 UTF-8 字元編碼，去顯示 Big5 字元編碼，所以才亂碼。問題出在程式未以 UTF-8 傳送資料，不是網頁的問題。<br>
+			<br>
+			在網路上找到的解決方式是：<br>
+			<br>
+			<textarea class='brush:py'>
+				import codecs
+				import sys
+
+				sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
+
+				print()
+				print('&lt;html&gt;')
+				print('  &lt;head&gt;')
+				print(' &lt;meta charset="utf-8"&gt;')
+				print('  &lt;/head&gt;')
+				print('  &lt;body&gt;')
+				print(' &lt;p&gt;哈囉！&lt;/p&gt;')
+				print('  &lt;/body&gt;')
+				print('&lt;/html&gt;')
+            </textarea>
+			<br>
+			寫在另一個 *.py 檔，每次寫 CGI 再 import 就好。反正寫 CGI 一定會自己把功能重新打包成函式庫，放在裡面就好，並不麻煩。
+		</p>
+	</section>
+	<hr id='smtplib'>
+	<section>
+		<h2>smtplib, smtpd</h2>
+		<p>
+			smtplib 可以在客戶端寄發電子郵件，不過必須透過電子郵件服務供應商、或者電腦架為 SMTP 伺服器，否則程式跑起來正常，實際上電腦並未能把資料送出去。<br>
+			<br>
+			smtpd 套件可以架設 SMTP 伺服器，其中模組 SMPTServer 需要實作 process_message() 才能動作，而模組 DebuggingServer 已實作好可直接調用，但不會寄發郵件，純粹測試客戶端的動作用。
+		</p>
+		<hr>
+		<section>
+			<h3>透過服務供應商寄發電子郵件</h3>
+			<p>
+				根據服務供應商對資料傳輸安全的規定，各有不同做法，但大致上有 SMTP、TLS、SSL 三種。<br>
+				<br>
+				底下示範的是 Gmail，必須在「<a href='http://myaccount.google.com/security#connectedapps'>具有帳戶存取權的應用程式</a>」開啟「允許安全性較低的應用程式」，才能透過 Python 用 Gmail 寄發電子郵件。
+			</p>
+			<section>
+				<h4>SMTP</h4>
+				<p>
+					<textarea class='brush:py'>
+						from email.mime.text import MIMEText
+						from email.header import Header
+						from smtplib import SMTP
+
+						message = MIMEText('Hello!')
+						message['Subject'] = Header('To Twideem Civs')
+						message['To'] = Header('twideem@outlook.com')
+
+						try:
+							smtp = SMTP('smtp.gmail.com', 587)
+							smtp.login('帳號@gmail.com', '密碼') # 請輸入自己 Gmail 的帳號密碼
+							smtp.sendmail('你的信箱', ['twideem@outlook.com'], message.as_string())
+						finally:
+							smtp.quit()
+
+						# 這個範例無法登入，因為 Google 規定至少要搭配 TLS，請看下一個範例。
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>TLS</h4>
+				<p>
+					<textarea class='brush:py'>
+						from email.mime.text import MIMEText
+						from email.header import Header
+						from smtplib import SMTP
+
+						message = MIMEText('Hello!')
+						message['Subject'] = Header('To Twideem Civs')
+						message['To'] = Header('twideem@outlook.com')
+
+						try:
+							smtp = SMTP('smtp.gmail.com', 587)
+							smtp.starttls()
+							smtp.login('帳號@gmail.com', '密碼')
+							smtp.sendmail('你的信箱', ['twideem@outlook.com'], message.as_string())
+						finally:
+							smtp.quit()
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>SSL</h4>
+				<p>
+					<textarea class='brush:py'>
+						from email.mime.text import MIMEText
+						from email.header import Header
+						from smtplib import SMTP_SSL
+
+						message = MIMEText('Hello!')
+						message['Subject'] = Header('To Twideem Civs')
+						message['To'] = Header('twideem@outlook.com')
+
+						try:
+							smtp = SMTP_SSL()
+							smtp.connect('smtp.gmail.com', 465)
+							smtp.login('帳號@gmail.com', '密碼')
+							smtp.sendmail('你的信箱', ['twideem@outlook.com'], message.as_string())
+						finally:
+							smtp.quit()
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>從本機端寄發電子郵件</h3>
+			<p>
+				如果你的作業系統已裝載電子郵件伺服器，可以更簡單寄發出去。沒有的話，Python 內建的 DebuggingServer，是一個測試用電子郵件伺服器，雖然沒辦法把郵件寄發出去，但能單機模擬郵件收發的動作。
+			</p>
+			<section>
+				<h4>server.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						from smtpd import DebuggingServer
+						import asyncore
+
+						server = DebuggingServer(('127.0.0.1', 25), None)
+						asyncore.loop()
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>client.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						from email.mime.text import MIMEText
+						from email.header import Header
+						from smtplib import SMTP
+
+						message = MIMEText('Hello!')
+						message['Subject'] = Header('To Twideem Civs')
+						message['To'] = Header('twideem@outlook.com')
+
+						smtp = SMTP('localhost', 25)
+
+						try:
+							smtp.sendmail('', ['twideem@outlook.com'], message.as_string())
+						finally:
+							smtp.quit()
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>output</h4>
+				<p>
+					<output>
+						---------- MESSAGE FOLLOWS ----------<br>
+						mail options: ['SIZE=157']<br>
+						b'Content-Type: text/plain; charset="us-ascii"'<br>
+						b'MIME-Version: 1.0'<br>
+						b'Content-Transfer-Encoding: 7bit'<br>
+						b'Subject: To Twideem Civs'<br>
+						b'To: twideem@outlook.com'<br>
+						b'X-Peer: 127.0.0.1'<br>
+						b''<br>
+						b'Hello!'<br>
+						------------ END MESSAGE ------------
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='webbrowser'>
+	<section>
+		<h2>webbrowser</h2>
+		<p>
+			<textarea class='brush:py'>
+				import webbrowser
+
+				# 呼叫網頁瀏覽器開啟網站
+				webbrowser.open('http://www.python.org')
+            </textarea>
+			<br>
+			<canvas>msedge('http://www.python.org','../../images/overcast/19691205A.png')</canvas>
+		</p>
+	</section>
+	<hr id='urllib.request'>
+	<section>
+		<h2>urllib.request</h2>
+		<hr>
+		<section>
+			<h3>直接透過網址取得網頁內容</h3>
+			<p>
+				Python 程式可以直接透過網址請求資料，讓你不用透過網頁瀏覽器，也能取得網頁內容。
+			</p>
+			<section>
+				<h4>http://127.0.0.1/homepage.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;html&gt;
+						  &lt;head&gt;
+							&lt;title&gt;HOME PAGE&lt;/title&gt;
+						  &lt;/head&gt;
+						  &lt;body&gt;
+							&lt;p&gt;WELCOME&lt;/p&gt;
+						  &lt;/body&gt;
+						&lt;/html&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>sample1.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						from urllib import request
+
+						response = request.urlopen('http://127.0.0.1/homepage.html')
+
+						print(response.getheaders()) # 取得 HTTP 的 header 資訊
+						print(response.read())		 # 取得 HTTP 的 content 內容
+						print(response.status)		 # 取得 HTTP 的連線狀態
+                    </textarea>
+					<br>
+					<output>
+						[('Server', 'SimpleHTTP/0.6 Python/3.6.5'), ('Date', 'Tue, 28 Mar 2018 12:34:56 GMT'), ('Content-type', 'text/html'), ('Content-Length', '164'), ('Last-Modified', 'Tue, 28 Mar 2018 12:34:56 GMT')]<br>
+						<br>
+						b"&lt;html&gt;\n &nbsp;&lt;head&gt;\n &nbsp; &nbsp;&lt;title&gt;HOME PAGE&lt;/title&gt;\n &nbsp;&lt;/head&gt;\n &nbsp;&lt;body&gt;\n &nbsp; &nbsp;&lt;p&gt;WELCOME&lt;/p&gt;\n &nbsp;&lt;/body&gt;\n&lt;/html&gt;"<br>
+						<br>
+						200
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>sample2.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						from urllib import request
+
+						response = request.urlopen('http://127.0.0.1/homepage.html')
+
+						print(response.getheader('Content-type')) # 只取出指定 header 訊息
+						print(response.read().decode('utf-8'))  # 將 content 轉為 UTF-8 字串
+                    </textarea>
+					<br>
+					<output>
+						text/html<br>
+						<br>
+						&lt;html&gt;<br>
+						&nbsp; &lt;head&gt;<br>
+						&nbsp; &nbsp; &lt;title&gt;HOME PAGE&lt;/title&gt;<br>
+						&nbsp; &lt;/head&gt;<br>
+						&nbsp; &lt;body&gt;<br>
+						&nbsp; &nbsp; &lt;p&gt;WELCOM&lt;/p&gt;<br>
+						&nbsp; &lt;/body&gt;<br>
+						&lt;/html&gt;
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>向 Web Service 送出 SOAP 請求</h3>
+			<p>
+				urllib.request 甚至可以送出 SOAP 向 Web Service 請求服務：<br>
+				<br>
+				<textarea class='brush:py'>
+					from urllib import request
+
+					# 向 localhost 請求執行 getString('ABC', 123)
+					soap = """&lt;?xml version="1.0" encoding="utf-8"?&gt;
+					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"&gt;
+						&lt;soap:Body&gt;
+							&lt;getString&gt;
+								&lt;x&gt;ABC&lt;/x&gt;
+								&lt;y&gt;123&lt;/y&gt;
+							&lt;/getString&gt;
+						&lt;/soap:Body&gt;
+					&lt;/soap:Envelope&gt;
+					"""
+					result = request.Request('http://localhost', data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
+					response = request.urlopen(result)
+					print(response.read().decode('utf-8'))
+                </textarea>
+				<br>
+				得到的資料當然也是 SOAP，也就是一份 XML，可以自己再用 ElementTree 剖析出資料，在沒能安裝第三方模組時應急一下。<br>
+				<br>
+				再看一個例子，這次向 http://fhy.wra.gov.tw 線上請求調出「氣象局雨量站基本資料」，然後剖析出所有雨量站的縣市：<br>
+				<br>
+				<textarea class='brush:py'>
+					# 請求調出氣象局雨量站基本資料
+					from urllib import request
+					url = 'http://fhy.wra.gov.tw/dmchy/wra/webciacomponent/webservice/wraformalws.asmx?op=wsCwbRainStations'
+					soap = """&lt;?xml version="1.0" encoding="utf-8"?&gt;
+					&lt;soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"&gt;
+						&lt;soap12:Body&gt;
+							&lt;wsCwbRainStations xmlns="http://tempuri.org/" /&gt;
+						&lt;/soap12:Body&gt;
+					&lt;/soap12:Envelope&gt;
+					"""
+					result = request.Request(url, data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
+
+					# 列出這些雨量站的縣市
+					from xml.etree import ElementTree
+					xml = ElementTree.parse(request.urlopen(result))
+					root = xml.getroot()
+					for n in root[0][0][0][1].iter('ADDR_C'):
+						print(n.text, end=' ')
+                </textarea>
+				<br>
+				<output>
+					臺中市和平區 南投縣水里鄉 南投縣集集鎮 南投縣仁愛鄉 雲林縣北港鎮 高雄市旗山區 屏東縣屏東市 臺東縣鹿野鄉 新北市石碇區 新北市林口區 新北市坪林區 （……省略）
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='xmlrpc'>
+	<section>
+		<h2>xmlrpc.server, xmlrpc.client</h2>
+		<p>
+			使用 XML 資料格式以及 HTTP 傳輸資料的遠端程式呼叫。
+		</p>
+		<hr>
+		<section>
+			<h3>server.py</h3>
+			<p>
+				<textarea class='brush:py'>
+					from xmlrpc.server import SimpleXMLRPCServer
+
+					def procedure(x, y):
+						return x + y
+
+					server = SimpleXMLRPCServer(('localhost', 80))
+					server.register_function(procedure, 'procedure')
+					server.serve_forever()
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>client.py</h3>
+			<p>
+				<textarea class='brush:py'>
+					import xmlrpc.client
+
+					server = xmlrpc.client.ServerProxy('http://localhost')
+					print(server.procedure(123, 456))
+                </textarea>
+				<br>
+				<output>
+					579
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] Python 3.7 時，並不用下 --bind 參數。但 Python 3.8 開始，隨後要加 --bind 127.0.0.1 或實際 IP 位址，才能用 IP 位址連線，否則只能在 localhost 下單機連線。這對想區域連線卻又是浮動 IP 的人很不方便，幸好把參數設為 --bind 0.0.0.0 的話，就跟以前一樣了！
+		</p>
+	</footer>
+</article>
