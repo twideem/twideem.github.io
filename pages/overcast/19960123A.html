@@ -670,7 +670,7 @@
 					<br>
 					期限到了，Oracle JDK 17 將轉為 OTN 授權協議，必須付費，不再允許繼續免費商用 Oracle JDK 17！想繼續免費商用 Oracle JDK，方法就是升級到下一個使用 NFTC 的 LTS 版本。<br>
 					<br>
-					但你要知道，Java 通常用於後端開發，同一版本用越久越好，最好不要升級，以免承擔不相容的風險！明明 Java 17 是 LTS，能持續更新到 2029 年，選擇 Oracle JDK 17 卻只能用到 2024 年，就得升級到 Oracle JDK 21 才能繼續商用，然後等到 2026 年又得升級到 Oracle JDK 25<ins>1</ins>，這就失去 LTS 的意義了～
+					但你要知道，Java 通常用於後端開發，同一版本用越久越好，最好不要升級，以免承擔不相容的風險！明明 Java 17 是 LTS，能持續更新到 2029 年，選擇 Oracle JDK 17 卻只能用到 2024 年，就得升級到 Oracle JDK 21 才能繼續商用，然後等到 2026 年又得升級到 Oracle JDK 25，這就失去 LTS 的意義了～
 				</p>
 			</section>
 			<section>
@@ -690,7 +690,7 @@
 		<section>
 			<h3>OpenJDK</h3>
 			<p>
-				要免費使用 Java，請從其他地方下載 OpenJDK：<ins>2</ins><br>
+				要免費使用 Java，請從其他地方下載 OpenJDK：<ins>1</ins><br>
 				<br>
 				<a href='http://adoptium.net'>Eclipse Temurin</a> - 原 <a href='http://adoptopenjdk.net/releases.html'>AdoptOpenJDK</a>，高效穩定、官商中立，是最受肯定的 OpenJDK。<br>
 				<a href='http://bell-sw.com/pages/downloads/'>Bellsoft Liberica JDK</a> - 除了有內建 JavaFX 的 Full 版，還有檔案很小的 Lite 版。<br>
@@ -699,14 +699,13 @@
 				<br>
 				千萬不要在 Oracle 的網站下載任何跟 Java 有關的軟體！<br>
 				<br>
-				連官方 OpenJDK 網站都不要信任，這網站的官方其實就是 Oracle 自己，所以這網站會誤導你下載 Oracle JDK，而不是 OpenJDK！
+				連官方 <a href='http://openjdk.org'>OpenJDK</a> 網站都不要信任，這網站的官方其實就是 Oracle 自己，所以這網站會誤導你下載 Oracle JDK，而不是 OpenJDK！
 			</p>
 		</section>
 		<hr>
 		<footer>
 			<p>
-				[1] 就在 Oracle JDK 17 的 NFTC 到期後，Oracle 宣布加快 LTS 的開發週期，好讓你只能免費商用兩年，厲害吧！<br>
-				[2] Amazon Corretto、Microsoft Build of OpenJDK、SapMachine、Red Hat build of OpenJDK，各自針對 AWS、Azure、SAP、OpenShift 等雲端系統有額外的功能和增強，所以沒在推薦之列。但其實這些也是不錯的選擇，他們只提供開源免費的 OpenJDK，反而比類似 Oracle 混合商用軟體的 Azul 和 BellSoft 更有保障。
+				[1] Amazon Corretto、Microsoft Build of OpenJDK、SapMachine、Red Hat build of OpenJDK，各自針對 AWS、Azure、SAP、OpenShift 等雲端系統有額外的功能和增強，所以沒在推薦之列。但其實這些也是不錯的選擇，他們只提供開源免費的 OpenJDK，反而比類似 Oracle 混合商用軟體的 Azul 和 BellSoft 更有保障。
 			</p>
 		</footer>
 	</section>
@@ -1126,7 +1125,7 @@
 	<section>
 		<h2>StringBuilder、StringBuffer</h2>
 		<p>
-			由於 Java 的 String 有「內容不可變」的性質，當內容變更時，採取重新 new 一個物件做為新內容的做法，因此為了避免 new 太多 String，而提供 StringBuilder 來彌補。<br>
+			由於 Java 的 String 為「內容不可變」的物件，當內容變更時，採取重新 new 一個物件做為新內容的做法，為了避免 new 太多 String，而提供內容可變的 StringBuilder。<br>
 			<br>
 			既然 StringBuilder 是特別用來變更內容用的，因此有更豐富的文字修改能力，可以方便開發者編輯字串內容。但不支援 Regular Expression，因此不是用來取代 String 的，而是輔助用的，適合用在插入與刪除的場合。<br>
 			<br>
