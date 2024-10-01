@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>HTML 4.01 到 HTML5 的新做法</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>前導</h2>
+		<p>
+			<code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;</code> 改為 <code>&lt;!DOCTYPE html&gt;</code>。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>標頭</h2>
+		<p>
+			<code>&lt;meta http-equiv='Content-Language' content='zh-TW'&gt;</code> 改為 <code>&lt;html lang='zh-Hant-TW'&gt;</code>。<br>
+			<br>
+			<code>&lt;meta http-equiv='Content-Type' content='text/html; charset=utf-8'&gt;</code> 改為 <code>&lt;meta charset='utf-8'&gt;</code>。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>標籤</h2>
+		<p>
+			<code>ACRONYM</code> 由 <code>ABBR</code> 取代。<br>
+			<code>APPLET</code> 由 <code>OBJECT</code> 取代，並配合屬性 <code>type='application/x-java-applet'</code>。<br>
+			<code>BASEFONT</code> 由 CSS 的 <code>font-size</code> 取代。<br>
+			<code>BIG</code> 由 CSS 的 <code>font-size:larger</code> 取代。<br>
+			<code>CENTER</code> 由 CSS 的 <code>text-align:center</code> 取代。<br>
+			<code>DIR</code> 由 <code>UL</code> 取代。<br>
+			<code>FONT</code> 的效果由 CSS 的 <code>font</code> 取代，標籤可改用 <code>SPAN</code>，或者 <code>P</code> 搭配 <code>display:inline</code>。<br>
+			<code>FRAME</code>、<code>FRAMESET</code>、<code>NOFRAMES</code> 標籤不再使用，類似效果可用 <code>DIV</code> 產生。<br>
+			<code>ISINDEX</code> 由 <code>INPUT</code> 取代。<br>
+			<code>S</code> 和 <code>STRIKE</code> 由 CSS 的 <code>text-decoration:line-through</code> 取代。<br>
+			<code>TT</code> 由 CSS 的 <code>font-family:monospace</code> 取代。<br>
+			<code>U</code> 由 CSS 的 <code>text-decoration:underline</code> 取代。<br>
+			<code>XMP</code> 由 <code>PRE</code> 取代。<br>
+			<br>
+			允許省略 <code>HTML HEAD BODY TBODY</code> 標籤，但這是為了將錯就錯，而不是因為省略更好。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>屬性</h2>
+		<p>
+			<code>align</code> 屬性可使用 CSS 的 <code>margin</code> 或 <code>text-align</code> 取代，例如 <code>align=center</code>，可改以 <code>margin:auto</code> 或 <code>text-align:center</code> 嘗試。<br>
+			<br>
+			<code>A</code> 標籤的 <code>name</code> 屬性不再提供 <code>anchor</code> 的用途，改用 <code>id</code> 屬性代替。<br>
+			<br>
+			新增 <code>contenteditable</code>（可編輯）、<code>data-</code>（自定義屬性資料）、<code>draggable</code>（可拖曳）、<code>hidden</code>（隱藏）屬性。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>結束</h2>
+		<p>
+			沒有結束標籤的元素有：<br>
+			<br>
+			<code>AREA BASE BR COL EMBED HR IMG INPUT LINK MATE PARAM SOURCE WBR</code><br>
+			<br>
+			HTML5 不需要用 XML 的單一標籤寫法來封閉沒有結束標籤的元素，例如這樣寫就好：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;br&gt;
+            </textarea>
+			<br>
+			不需要寫成：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;br /&gt;
+            </textarea>
+			<br>
+			同理，該用成對標籤來封閉的元素，就不要用單一標籤的封閉方式來結束，例如這樣寫是錯的：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;a id='anchor_1' /&gt;
+            </textarea>
+			<br>
+			正確寫法是：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;a id='anchor_1'&gt;&lt;/a&gt;
+            </textarea>
+			<br>
+			但為了將錯就錯，HTML5 允許這些元素省略結束標籤：<br>
+			<br>
+			<code>COLGROUP DT DD HTML LI OPTGROUP OPTION P RT RP THEAD TBODY TFOOT TR TD TH</code>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] ISINDEX 在 HTML 4.01 時建議由 INPUT 取代，HTML5 則不再使用。
+		</p>
+	</footer>
+</article>

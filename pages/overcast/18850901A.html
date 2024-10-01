@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1 style='font-weight:normal'>😊→⏱→🤤→🍜→😋</h1>
+	</header>
+	<hr>
+	<p style='margin-left:0'>
+		<button style='width:100%;font-size:21px' onclick='f()'></button>
+	</p>
+	<hr>
+	<footer>
+		<p>
+			[*] 可在網址後面加參數指定秒數，例如 ?240 會以 240 秒倒數。
+		</p>
+	</footer>
+</article>
+<script>
+	let a=location.search.slice(1)||180;
+	$('button').innerHTML=`倒數 ${Math.floor(a/60)} 分鐘等吃泡麵`;
+
+	let b=[new Audio('../../objects/audio/20180604A_01.mp3'),
+		   new Audio('../../objects/audio/20180604A_02.mp3')];
+
+	function f()
+	{
+		$('button').disabled=true;
+
+		let g=setInterval(()=>{
+			if(a>1){
+				a--;
+				$('button').innerHTML=`還有 ${Math.floor(a/60)} 分 ${a%60} 秒`;
+				b[0].currentTime=0;
+				b[0].play();
+				onbeforeunload=function(){
+					return "";
+				};
+			}
+			else{
+				$('button').innerHTML='可以吃泡麵了';
+				b[1].currentTime=0;
+				b[1].play();
+				clearInterval(g);
+				onbeforeunload=null;
+			}
+
+			document.title=$('button').innerHTML;
+		},1000);
+	}
+
+	$('button').focus();
+</script>

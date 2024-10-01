@@ -1,0 +1,7 @@
+table.grid{border:1px solid #666;margin:27px 0 27px 29px}
+table.grid th,table.grid td{border:1px dotted #666;font-size:12px;padding:4px;text-align:center;width:80px}
+table.grid td:nth-child(1){color:#999}
+table.grid td:nth-child(2){color:#666}
+section section table.grid{margin-left:30px;width:569px}
+section section section table.grid{margin-left:45px;width:554px}
+section section section section table.grid{margin-left:58px;width:541px}

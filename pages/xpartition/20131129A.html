@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>Playable game guide</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>樣式一</h2>
+		<table>
+			<tr><td><canvas width='425' height='425' style='border:2px solid #333'></canvas></td><td style='padding-left:10px'>1: 向 A 聽取情報<br>2: 到 B 處拿道具<br>3: 向 C 交付任務<br><br>A: 路人<br>B: 道具<br>C: 居民<br>D: 商店<br>E: 旅館</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>樣式二</h2>
+		<p>
+			讓 fillRect() 填色時留白，可產生立體效果，適合做為山、海、壁…之類的障礙物元件：<br>
+			<br>
+			<canvas width='225' height='175' style='border:2px solid #333'></canvas>
+		</p>
+	</section>
+</article>
+<script>
+	let a=$('canvas').getContext('2d');
+
+	a.fillStyle='#ccc';
+	a.fillRect(0,0,425,525);
+	a.lineWidth=2;
+	a.strokeStyle='#333';
+	a.fillStyle='#fff';
+	a.size=25;
+	a.draw=function(x,y){
+		this.strokeRect((this.size)*x,this.size*y,this.size,this.size);
+		this.fillRect((this.size*x)+1,(this.size*y)+1,this.size-2,this.size-2);
+	};
+
+	let map=[[0,0,0,0,0,0,1,1,1,1,1,1,1,0,0],
+			 [0,0,0,0,0,0,1,0,0,0,0,0,1,1,1],
+			 [0,0,0,0,0,1,1,0,0,0,0,0,0,0,0],
+			 [0,0,0,0,0,1,0,0,0,1,1,1,0,0,0],
+			 [1,1,1,1,1,1,0,0,0,0,0,1,0,0,0],
+			 [1,0,0,0,0,1,1,0,0,0,0,1,1,1,0],
+			 [1,0,0,0,0,0,1,1,1,1,0,0,0,1,1],
+			 [1,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+			 [0,0,0,0,0,0,0,0,0,1,1,0,0,0,1],
+			 [0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+			 [0,0,0,0,0,0,1,0,0,0,1,0,0,0,1],
+			 [0,0,0,0,0,0,1,0,0,0,1,0,0,1,1],
+			 [0,0,0,0,0,0,1,0,0,1,1,1,1,1,0],
+			 [0,0,0,0,0,0,1,0,0,1,0,0,0,0,0],
+			 [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0]];
+
+	for(let n=1;n<=map[0].length;n++){
+		for(let o=1;o<=map.length;o++){
+			if(map[o-1][n-1]) a.draw(n,o);
+		}
+	}
+
+	let b=$('canvas',1).getContext('2d');
+
+	b.lineWidth=2;
+	b.strokeStyle='#333';
+	b.r=25;
+	b.f=function(x,y){
+		this.strokeRect((this.r)*x,this.r*y,this.r,this.r);
+		this.fillRect((this.r*x)+3,(this.r*y)+3,this.r-4,this.r-4);
+	};
+	b.fillStyle='tomato';
+	b.f(1,1);
+	b.f(2,1);
+	b.f(3,1);
+	b.fillStyle='orange';
+	b.f(1,3);
+	b.f(2,3);
+	b.f(3,3);
+	b.fillStyle='lime';
+	b.f(1,5);
+	b.f(2,5);
+	b.f(3,5);
+	b.fillStyle='cyan';
+	b.f(5,1);
+	b.f(6,1);
+	b.f(7,1);
+	b.fillStyle='plum';
+	b.f(5,3);
+	b.f(6,3);
+	b.f(7,3);
+	b.fillStyle='gray';
+	b.f(5,5);
+	b.f(6,5);
+	b.f(7,5);
+</script>

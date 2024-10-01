@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>API reference</h1>
+		<p>
+			這是直接用 getOwnPropertyNames() 列出物件的屬性和方法，也就是根據你瀏覽器所支援的情形顯示出資料，不會有資料過舊或瀏覽器不支援的情形。<br>
+			<br>
+			請輸入物件名稱，注意大小寫，然後按 Enter：<br>
+			<br>
+			<input style='width:590px'><br>
+			<br>
+			雖然本網頁程式支援 ECMAScript 規範的標準內建物件、以及 WHATWG 規範的 Web APIs，但有底下容易因為與 BOM 大小寫不符、或有物件別名而輸入錯誤的物件：<br>
+			<br>
+			<a href='javascript:f("Document")'>Document</a>　<a href='javascript:f("Event")'>Event</a>　<a href='javascript:f("History")'>History</a>　<a href='javascript:f("HTMLMediaElement")'>HTMLMediaElement</a>　<a href='javascript:f("Navigator")'>Navigator</a>　<a href='javascript:f("Screen")'>Screen</a>　<a href='javascript:f("Storage")'>Storage</a><br>
+			<br>
+			要知道瀏覽器所有可用的物件，查看 <a href='javascript:f("window")'>window</a> 就對了！
+		</p>
+	</header>
+	<hr hidden>
+	<section hidden><h2></h2><p></p></section>
+</article>
+<script>
+	function f(x)
+	{
+	    $('hr').hidden='';
+	    $('section').hidden='';
+		$('h2').innerHTML=x;
+		try{
+			x=eval(x);
+			let g=Object.getOwnPropertyNames(x);
+			if(x.prototype) g=g.concat(Object.getOwnPropertyNames(x.prototype));
+
+			$('p',1).innerHTML=[...new Set(g.sort())].join('<br>');
+			if(x instanceof Window) $('p',1).innerHTML=$('p',1).innerHTML.replace(/(\$<br>)|(f<br>)|(webhosting<br>)/g,'');
+		}
+		catch{
+			$('p',1).innerHTML='查不到這個物件。';
+		}
+		$('input').value='';
+	}
+
+	$('input').onkeydown=function(x){
+		if(x.keyCode==13) f($('input').value);
+	};
+</script>
