@@ -37,7 +37,7 @@
 			else if(g.textContent.match('^clear$|^clear ')) document.body.innerHTML='';
 			else if(g.textContent.match('^googler ')) location.href=`https://www.google.com/search?q=${g.textContent.replace('googler ','')}`;
 			else if(g.textContent.match('^helloworld.pl$|^helloworld.pl ')) h.innerHTML='<font color="#f69">是在哈囉</font> <font color="#f93">我沒在哈囉</font> <font color="#fc0">我也沒在哈囉</font> <font color="#6c9">我更沒在哈囉</font> <font color="#3cf">那是誰在哈囉</font> <font color="#c39">那就我在哈囉</font> <font color="#666">那就我也在哈囉</font>';
-			else if(g.textContent.match('^ls$|^ls ')) h.innerHTML='-rwxr-xr-x　1 root root　　關於本站　　　　　　　　about.html<br>-rwxr-xr-x　1 root root　　電腦教學與程式設計　　　computing.html<br>-rwxr-xr-x　1 root root　　遊戲心得與攻略　　　　　games.html<br>-rwxr-xr-x　1 root root　　佛學與宗教信仰　　　　　upadesya.html<br>-rwxr-xr-x　1 root root　　Perl example　　　　　　helloworld.pl';
+			else if(g.textContent.match('^ls$|^ls ')) h.innerHTML='-rwxr-xr-x　1 root root　　關於本站　　　　　　　about.html<br>-rwxr-xr-x　1 root root　　電腦教學與程式設計　　computing.html<br>-rwxr-xr-x　1 root root　　遊戲心得與攻略　　　　games.html<br>-rwxr-xr-x　1 root root　　佛學與宗教信仰　　　　upadesya.html<br>-rwxr-xr-x　1 root root　　Perl example　　　　　helloworld.pl';
 			else if(g.textContent.match('^lynx ')) location.href=`https://${g.textContent.split(' ')[1].replace(/(https:\/\/)|(http:\/\/)/,'')}`;
 			else h.textContent='bash: command not found';
 
