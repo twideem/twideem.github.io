@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header id='top'>
+		<h1>單色螢幕 RGB 值</h1>
+		<div style='background-color:#000000;color:#cccccc;font-family:Courier;font-size:13px;height:324px;margin-bottom:44px;padding:10px;width:578px'>
+			Starting MY-DOS...<br>
+			<br>
+			<br>
+			HIMEM is testing extended memory...done.<br>
+			<br>
+			C:\&gt;C:\DOS\SMARTDRV.EXE /X<br>
+			C:\&gt;<span style='font-family:Courier'></span><span>_</span>
+		</div>
+		<p>
+			檸檬：<a href='javascript:f1("#66CC33")'>66CC33</a>、<a href='javascript:f1("#009B00")'>009B00</a>、<a href='javascript:f1("#80FF00")'>80FF00</a><br>
+			琥珀：<a href='javascript:f1("#CC9933")'>CC9933</a>、<a href='javascript:f1("#D38200")'>D38200</a>、<a href='javascript:f1("#FF8000")'>FF8000</a><br>
+			銀白：<a href='javascript:f1("#CCCCCC")'>CCCCCC</a>
+		</p>
+	</header>
+</article>
+<script>
+	let a='';
+
+	function f1(x)
+	{
+		$('div').style.color=x;
+	}
+
+	function f2()
+	{
+		if(a) $('span',1).style.visibility='visible';
+		else $('span',1).style.visibility='hidden';
+
+		a=!a;
+	}
+
+	setInterval('f2()',500);
+</script>

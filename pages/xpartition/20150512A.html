@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>按鍵精靈 2014</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>註解</h2>
+		<p>
+			<code>//</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>變數</h2>
+		<p>
+			<code>UserVar 變數名稱=初始值 '輸入欄名稱'</code><br>
+			<br>
+			或：<br>
+			<br>
+			<code>UserVar 變數名稱=DropList{名1:值1|名2:值2}=初始索引值 '選單欄名稱'</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>迴圈</h2>
+		<hr>
+		<section>
+			<h3>條件迴圈</h3>
+			<p>
+				<code>
+					While 條件<br>
+					　欲執行程式<br>
+					Wend
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>計數迴圈</h3>
+			<p>
+				<code>
+					For 次數<br>
+					　欲執行程式<br>
+					Next
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>條件</h2>
+		<hr>
+		<section>
+			<h3>判斷</h3>
+			<p>
+				<code>
+					If 條件 Then<br>
+					　欲執行程式<br>
+					ElseIf 條件 Then<br>
+					　欲執行程式<br>
+					Else<br>
+					　欲執行程式<br>
+					End If
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>決策</h3>
+			<p>
+				<code>
+					Select Case(條件)<br>
+					Case 值<br>
+					　欲執行程式<br>
+					End Select
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>跳躍（很少用到）</h2>
+		<p>
+			使用 <code>Rem 標記名稱</code> 設定位置，再用 <code>Goto 標記名稱</code> 跳躍。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>函式</h2>
+		<hr>
+		<section>
+			<h3>程序</h3>
+			<p>
+				<code>
+					Sub 程序名稱<br>
+					　欲執行程式<br>
+					End Sub<br>
+					<br>
+					程序名稱
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>函數</h3>
+			<p>
+				<code>
+					Function 函數名稱(參數名稱,參數名稱)<br>
+					　欲執行程式<br>
+					　函數名稱 = 傳回值<br>
+					End Function<br>
+					<br>
+					函數名稱 參數,參數
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>其它</h2>
+		<hr>
+		<section>
+			<h3>移動滑鼠游標</h3>
+			<p>
+				<code>MoveTo 水平座標, 垂直座標</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>執行滑鼠按鍵的動作</h3>
+			<p>
+				<code>
+					LeftClick 次數<br>
+					LeftUp 次數<br>
+					LeftDown 次數
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>執行敲鍵盤的動作</h3>
+			<p>
+				<code>
+					KeyPress 按鍵碼 次數
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>送出字串（或者說敲一段字出來）</h3>
+			<p>
+				<code>SayString 文字</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>顯示訊息</h3>
+			<p>
+				<code>MessageBox 訊息</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>延遲</h3>
+			<p>
+				<code>Delay 毫秒</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>結束程式</h3>
+			<p>
+				<code>EndScript</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>執行軟體</h3>
+			<p>
+				<code>RunApp '執行檔'</code><br>
+				<br>
+				RunApp 只是呼叫程式或開啟路徑，並不是執行 DOS 指令。需要帶入 DOS 參數，或者執行的軟體出問題時，改呼叫「捷徑」，例如：<br>
+				<br>
+				<code>RunApp '捷徑.lnk'</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>複製檔案</h3>
+			<p>
+				<code>Plugin.File.CopyFile '舊檔案','新檔案'</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>執行插件</h3>
+			<p>
+				<code>call 插件</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>範例</h2>
+		<hr>
+		<section>
+			<h3>Tetris Friends: Battle2P 自殺程式</h3>
+			<p>
+				利用一開局就按 F5 重新整理來自殺的方式，死 23 次從 RANK 8 退級到 RANK 1。需 1366x768 螢幕解析度，且瀏覽器視窗放到最大，使用 AdBlock Plus 無廣告佔用版面。<br>
+				<br>
+				<textarea class='brush:js'>
+					UserVar Var1=23
+					While Var1>0
+						IfColor 520, 420, 'FF9A12', 0 Then
+							Var1=Var1-1
+							MoveTo 520, 420
+							Delay 100
+							LeftClick 1
+							Delay 100
+							MoveTo 200, 425
+							Delay 2000
+							LeftClick 1
+							Delay 100
+							KeyPress 115, 1
+						EndIf
+					EndWhile
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>拖曳 <del>漫畫網站的</del> 圖片</h3>
+			<p>
+				從 (900,400) 位置，將圖片拖曳到 (330,400) 位置存放，然後回到 (900,400) 位置點下一張圖片。<br>
+				<br>
+				<textarea class='brush:js'>
+					MoveTo 900, 400
+					Delay 50
+					LeftDown 1
+					Delay 50
+					UserVar Var1=900
+					While Var1>330
+						Var1=Var1-5
+						MoveTo Var1, 400
+					EndWhile
+					Delay 50
+					LeftUp 1
+					MoveTo 900, 400
+					Delay 500
+					LeftClick 1
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>自動按 100 次 Shift + 滑鼠左鍵</h3>
+			<p>
+				<textarea class='brush:js'>
+					KeyDown 'Shift', 1
+					For 100
+						LeftClick 1
+						Delay 100
+					Next
+					KeyUp 'Shift', 1
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>各版本優缺點</h2>
+		<hr>
+		<section>
+			<h3>語法混亂</h3>
+			<p>
+				按鍵精靈 8 引進新的 Q 語言，但感覺只是讓手動敲程式碼的人更混亂而已。例如 While 以 Wend 結尾，If 卻以 End If 結尾，感覺還不如以 EndWhile 和 EndIf 結尾還比較好記。由於按鍵精靈 8 和按鍵精靈 9 依然相容 VBScript 語法，因此我傾向繼續用舊語法～<br>
+				<br>
+				Q 語言的好處是，許多「函式」變得更容易輸入參數，例如 KeyPress 可以接受 'F5'，這樣就不用記鍵盤碼是多少。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>操作介面設計不良</h3>
+			<p>
+				按鍵精靈 8 以上版本，要製作「小精靈」時，有設定介面視窗過小，無法看到全部按鈕的缺點。按鍵精靈 7 以下版本，則有編輯原始碼時，常常看不到游標的缺點。<br>
+				<br>
+				按鍵精靈 2014 則解決了所有問題，成為目前為止最成熟、穩定、好用的版本。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>帶介面的腳本</h3>
+			<p>
+				按鍵精靈 9 新增「腳本介面」功能，可以自行佈置一張視窗做為按鍵精靈的操作介面！<br>
+				<br>
+				腳本介面的設計方式跟 Visual Basic 6 一樣，大多數高職和五專都有 VB 課程，應該不難上手。<br>
+				<br>
+				搭配按鍵精靈自帶的「插件命令」和「我的命令庫」，能簡單呼叫 Windows 系統功能，使得按鍵精靈不再只是自動按滑鼠鍵盤的程式，而是能當一款視窗程式設計軟體了！<br>
+				<br>
+				以《火炬之光 2》為例子，共用倉庫是以 sharedstash_v2.bin 檔案來儲存，只要用「腳本介面」拉出一堆「按鈕」，執行 Plugin.File.CopyFile 將 sharedstash_v2.bin 複製過來、複製過去的，就可以自製倉庫管理程式。
+			</p>
+		</section>
+	</section>
+</article>

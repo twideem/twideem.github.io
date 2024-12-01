@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>input{width:565px}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>九宮格數字轉方向箭頭</h1>
+		<p>
+			為了方便整理格鬥類遊戲攻略所設計的輔助工具。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>輸入</h2>
+		<p>
+			<textarea style='height:20px;width:563px'></textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>用法</h2>
+		<p>
+			請用九宮格當搖桿輸入數字，或直接將整串文字複製貼上。<br>
+			<br>
+			Num 0 是腳，Num . 是拳，Num 5 是蓄氣。
+		</p>
+	</section>
+</article>
+<script>
+	$('textarea').focus();
+
+	$('textarea').onkeyup=function(){
+		[/(1)/ig,/(2)/ig,/(3)/ig,/(4)/ig,/(5)/ig,/(6)/ig,/(7)/ig,/(8)/ig,/(9)/ig,/(0)/ig,/(\.)/ig].forEach((n,o)=>event.target.value=event.target.value.replace(n,['↙','↓','↘','←','蓄','→','↖','↑','↗','腳','拳'][o]));
+	};
+</script>

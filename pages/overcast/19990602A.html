@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Java')</script>
+<script src='../../scripts/private.js'></script>
+<article>
+	<header>
+		<h1>Tomcat + JSP + SQL 快速入門</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>Tomcat 設定</h2>
+		<p>
+			Tomcat 是一種 JSP 容器，它不僅是最熱門的 JSP 伺服器，而且無須安裝與設定，下載解開就能隨點隨用。即使不當作 JSP 伺服端系統，純粹只是要架個 HTTP 伺服器，Tomcat 也是非常輕巧的選擇～
+		</p>
+		<hr>
+		<section>
+			<h3>下載、安裝、執行</h3>
+			<section>
+				<h4>下載</h4>
+				<p>
+					請至 <a href='http://tomcat.apache.org'>http://tomcat.apache.org</a> 下載 Apache Tomcat，建議使用免安裝的版本。
+				</p>
+			</section>
+			<section>
+				<h4>安裝</h4>
+				<p>
+					解壓後無須安裝即可執行，但你必須注意是否安裝 JDK，並且設定 JAVA_HOME 環境變數指向你 JDK 所安裝的路徑，否則無法啟動 Tomcat。
+				</p>
+			</section>
+			<section>
+				<h4>啟動</h4>
+				<p>
+					直接點擊 Tomcat 裡面 bin 資料夾的 <code>startup.bat</code> 即可啟動，要關閉的話則是 <code>shutdown.bat</code>。<br>
+					<br>
+					或者使用命令提示字元，切換路徑到 Tomcat 的 bin 資料夾，輸入 <code>catalina start</code> 來啟動，然後用 <code>catalina stop</code> 關閉。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>修改網站的預設網頁路徑</h3>
+			<p>
+				修改 conf 目錄裡面的 server.xml，在 &lt;Host&gt;&lt;/Host&gt; 裡面插入：<br>
+				<br>
+				<code>&lt;Context path="" docBase="存放網頁的目錄路徑" reloadable="false" /&gt;</code><br>
+				<br>
+				存檔後重新啟動 Tomcat。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>新增網頁路徑</h3>
+			<p>
+				修改 conf 目錄裡面的 server.xml，在 &lt;Host&gt;&lt;/Host&gt; 裡面插入：<br>
+				<br>
+				<code>&lt;Context path="/名稱" docBase="存放網頁的目錄路徑" reloadable="true" /&gt;</code><br>
+				<br>
+				存檔後重新啟動 Tomcat，在網頁瀏覽器輸入 127.0.0.1:8080/名稱。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取消 8080 埠號</h3>
+			<p>
+				不希望每次輸入網址要打埠號的話，請修改 conf 目錄中 server.xml 裡面 &lt;Connector /&gt; 的 <code>port</code> 為 "80"，存檔後重新啟動 Tomcat 即可。<br>
+				<br>
+				因為 80 是預設的埠號，不輸入埠號的話會自動填入 80，所以達到不用輸入埠號的效果！<br>
+				<br>
+				需要注意的是，如果其它程序已經佔用 80 埠號，將無法連線到 Tomcat 伺服器。<br>
+				<br>
+				Linux 的話，必須以 root 權限啟動 Tomcat 伺服器，否則無法連接小於 1024 埠號的傳輸服務。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>設定管理者帳號密碼</h3>
+			<p>
+				修改 conf 目錄裡面的 tomcat-users.xml 檔案，然後加入如下敘述：<br>
+				<br>
+				<code>&lt;user name="帳號" password="密碼" roles="standard, manager" /&gt;</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>主控台亂碼</h3>
+			<p>
+				修改 conf 目錄裡面的 logging.properties 檔案，將 <code>java.util.logging.ConsoleHandler.encoding</code> 改為 <code>Big5</code>。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>JSP 語法</h2>
+		<hr>
+		<section>
+			<h3>使用 JSP 的理由</h3>
+			<p>
+				雖然 Java 已經有 Servlet 可以實現動態網頁的程式設計，但因為以輸出字串的方式來呈現 HTML 標籤，並不好判讀網頁本身的結構…<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.io.*;
+					import javax.servlet.*;
+					import javax.servlet.http.*;
+					import java.util.ArrayList;
+
+					public class Main extends HttpServlet{
+						public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+							ArrayList array_list = new ArrayList();
+							array_list.add("大家好");
+							response.setContentType("text/html;charset=UTF-8");
+							PrintWriter out=response.getWriter();
+							out.println("&lt;!DOCTYPE html&gt;");
+							out.println("&lt;html lang='zh-TW'&gt;");
+							out.println("  &lt;head&gt;");
+							out.println("    &lt;meta charset='utf-8'/&gt;");
+							out.println("  &lt;/head&gt;");
+							out.println("  &lt;body&gt;");
+							out.println("    &lt;p&gt;" + array_list.get(0) + "&lt;/p&gt;");
+							out.println("  &lt;/body&gt;");
+							out.println("&lt;/html&gt;");
+							out.close();
+						}
+					}
+                </textarea>
+				<br>
+				如果用 JSP 的話，則是以 HTML 語法為主，再把 Java 語法也當作標籤混夾在一起…<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;%@ page contentType="text/html;charset=utf-8" %&gt;
+					&lt;%@ page import="java.util.ArrayList" %&gt;
+					&lt;%
+						ArrayList array_list = new ArrayList();
+						array_list.add("大家好");
+					%&gt;
+					&lt;!DOCTYPE html&gt;
+					&lt;html lang='zh-TW'&gt;
+						&lt;head&gt;
+							&lt;meta charset='utf-8'&gt;
+						&lt;/head&gt;
+						&lt;body&gt;
+							&lt;p&gt;&lt;%=array_list.get(0)%&gt;&lt;/p&gt;
+						&lt;/body&gt;
+					&lt;/html&gt;
+                </textarea>
+				<br>
+				開發動態網頁的話，直接以網頁本身來設計與修改，是比較直覺的。顯然將 Java 程式碼插入 HTML 語法的 JSP，要比將 HTML 語法混在 Java 程式碼裡的 Servlet，更能提高開發效率！<ins>1</ins>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>基本語法結構</h3>
+			<section>
+				<h4>以 JSP 設計 Dynamic HTML 的基本結構</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;%@ page contentType="text/html;charset=utf-8" %&gt;
+						&lt;%@ page import="在這裡載入 JDK 套件" %&gt;
+						&lt;%!
+							在這裡宣告 Java 函式
+						%&gt;
+						&lt;%
+							在這裡撰寫 Java 程式碼
+						%&gt;
+						&lt;!DOCTYPE html&gt;
+						&lt;html lang='zh-TW'&gt;
+							&lt;head&gt;
+								&lt;meta charset='utf-8'&gt;
+							&lt;/head&gt;
+							&lt;body&gt;
+								&lt;p&gt;&lt;%=在這裡輸出 Java 變數或函式%&gt;&lt;/p&gt;
+							&lt;/body&gt;
+						&lt;/html&gt;
+                    </textarea>
+					<br>
+					<code>&lt;%= %&gt;</code> 相當於 <code>&lt;% out.print() %&gt;</code>。
+				</p>
+			</section>
+			<section>
+				<h4>把 JSP 當 Servlet 寫的基本範例</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;%@ page import="java.util.*" %&gt;
+						&lt;%
+							out.println("&lt;!DOCTYPE html&gt;");
+							out.println("&lt;html lang='zh-TW'&gt;");
+							out.println("  &lt;head&gt;");
+							out.println("    &lt;meta charset='utf-8'&gt;");
+							out.println("  &lt;/head&gt;");
+							out.println("  &lt;body&gt;");
+							out.println("    &lt;p&gt;Hello, world!&lt;/p&gt;");
+							out.println("  &lt;/body&gt;");
+							out.println("&lt;/html&gt;");
+						%&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>註解掉某塊 JSP 程式碼</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;%-- 註解 --%&gt;
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>內建預設物件</h3>
+			<p>
+				JSP 預先宣告了幾個物件，可以讓我們直接在 <code>&lt;%  %&gt;</code> 裡使用：
+			</p>
+			<table>
+				<tr><td>application</td><td>在 Servlet 常用的 <span title='javax.servlet.*'>ServletContext</span> 物件。</td></tr>
+				<tr><td>config</td><td>在 Servlet 常用的 <span title='javax.servlet.*'>ServletConfig</span> 物件。</td></tr>
+				<tr><td>out</td><td>JSP 自帶的 <span title='javax.servlet.jsp.*'>JspWriter</span> 物件。</td></tr>
+				<tr><td>page</td><td>基本上是個 <span title='java.lang.*'>Object</span> 的物件。</td></tr>
+				<tr><td>pageContext</td><td>JSP 自帶的 <span title='javax.servlet.jsp.*'>PageContext</span> 物件。</td></tr>
+				<tr><td>request</td><td>在 Servlet 常用的 <span title='javax.servlet.http.*'>HttpServletRequest</span> 物件。</td></tr>
+				<tr><td>response</td><td>在 Servlet 常用的 <span title='javax.servlet.http.*'>HttpServletResponse</span> 物件。</td></tr>
+				<tr><td>session</td><td>在 Servlet 常用的 <span title='javax.servlet.http.*'>HttpSession</span> 物件。</td></tr>
+				<tr><td>exception</td><td>基本上是個 <span title='java.lang.*'>Throwable</span> 的物件。</td></tr>
+			</table>
+			<section>
+				<h4>application</h4>
+				<p>
+					用來保存所有瀏覽這個站點（web-app）的使用者共用的訊息，像是聊天室就能以這個機制簡單架設，只要使用 <code>setAttribute("屬性名稱","屬性內容")</code> 紀錄訊息，然後用 <code>getAttribute("屬性名稱")</code> 取得「屬性內容」即可，也可用 <code>removeAttribute("屬性名稱")</code> 刪除。<a href='javascript:show(0)'>更多</a>…
+				</p>
+				<p class='private'>
+					其它還有一些有趣、但不常用的功能，像是可將初始化設定值寫在 web.xml 裡面當作參數，然後透過 application 的 <code>getInitParameter()</code> 取出來使用：<br>
+					<br>
+					[ WEB-INF\web.xml ]<br>
+					<textarea class='brush:xml'>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+						&lt;web-app&gt;
+							&lt;context-param hello="world"/&gt;
+						&lt;/web-app&gt;
+                    </textarea>
+					<br>
+					[ helloworld.jsp ]<br>
+					<textarea class='brush:html'>
+						&lt;%=application.getInitParameter("hello")%&gt;
+                    </textarea>
+					<br>
+					[ browser ]<br>
+					<output>
+						world
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>config</h4>
+				<p>
+					可以取得在 web.xml 為 Servlet 設定的初始化參數，基本上用不到，因此略過；不想略過的話，<a href='javascript:show(1)'>請按我</a>。
+				</p>
+				<p class='private'>
+					使用 <code>getInitParameter("屬性名稱")</code>，取得 web.xml 中以 <code>&lt;init-param&gt;&lt;param-name&gt;屬性名稱&lt;/param-name&gt;&lt;param-value&gt;屬性內容&lt;/param-value&gt;&lt;/init-param&gt;</code> 設定的「屬性內容」，例如：<br>
+					<br>
+					[ WEB-INF\web.xml ]<br>
+					<textarea class='brush:xml'>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+						&lt;web-app&gt;
+							&lt;servlet&gt;
+								&lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+								&lt;jsp-file&gt;/helloworld.jsp&lt;/jsp-file&gt;
+								&lt;init-param&gt;
+									&lt;param-name&gt;hello&lt;/param-name&gt;
+									&lt;param-value&gt;world&lt;/param-value&gt;
+								&lt;/init-param&gt;
+							&lt;/servlet&gt;
+							&lt;servlet-mapping&gt;
+								&lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+								&lt;url-pattern&gt;/helloworld.jsp&lt;/url-pattern&gt;
+							&lt;/servlet-mapping&gt;
+						&lt;/web-app&gt;
+                    </textarea>
+					<br>
+					[ helloworld.jsp ]<br>
+					<textarea class='brush:html'>
+						&lt;%=config.getInitParameter("hello")%&gt;
+                    </textarea>
+					<br>
+					[ browser ]<br>
+					<output>
+						world
+					</output>
+					<br>
+					可以使用 <code>getInitParameterNames()</code> 取得所有參數名稱。
+				</p>
+			</section>
+			<section>
+				<h4>out</h4>
+				<p>
+					用 <code>print()</code> 或 <code>println()</code> 輸出字串資料給 HTML 網頁。
+				</p>
+			</section>
+			<section>
+				<h4>page（基本上用不到）</h4>
+				<p>
+					既然是個 Object，也就表示沒什麼功能可以操作，純粹用來表示 JSP 網頁本身的物件。
+				</p>
+			</section>
+			<section>
+				<h4>pageContext（原則上別用到）</h4>
+				<p>
+					可以使用 <code>setAttribute("鍵", "值")</code> 將資料紀錄在網頁中保存，再用 <code>getAttribute("鍵")</code> 把「值」取出來。
+				</p>
+			</section>
+			<section>
+				<h4>request</h4>
+				<p>
+					負責接收 HTTP 通訊的物件，通常用來取得經由 HTTP 通訊所夾帶的訊息，例如前一張網頁遞交的 form 填表資料，通常使用 <code>getParameter("元件名稱")</code> 取得填表資料，或者在那之前使用 <code>SetCharacterEncoding("字元編碼")</code> 設定以哪一種編碼來取得資料，避免亂碼。<a href='javascript:show(2)'>更多</a>…
+				</p>
+				<p class='private'>
+					除此之外，還可用 <code>getRemoteAddr()</code> 取得 IP、<code>getRemoteHost()</code> 取得主機名稱、<code>getHeader("屬性名稱")</code> 取得使用者操作環境與 HTML 中 HEADER 的訊息，像是以 <code>request.getHeader("user-agent")</code> 來判斷使用者的作業系統與瀏覽器。
+				</p>
+			</section>
+			<section>
+				<h4>response</h4>
+				<p>
+					負責發送 HTTP 通訊的物件，主要透過其 <code>sendRedirect("網址")</code> 重新導向網頁。<br>
+					<br>
+					雖然在 Servlet 這是非常實用的物件，不過在基本上是 HTML 的 JSP 有直接做法，變得很少用到。通常需要進階描述發送出去的訊息時才會使用，像是遞交 File 物件時以 <code>setContextType()</code> 描述 MIME、或者希望能確認遞交動作是否完成而使用 <code>isCommitted()</code>、甚至最佳化 HTTP 發送的緩衝大小而使用 <code>setBufferSize()</code>。
+				</p>
+			</section>
+			<section>
+				<h4>session</h4>
+				<p>
+					用來保存使用者瀏覽期間的訊息，裡面的資料會在關閉瀏覽器後才清除，資料存在期間，使用者在網站開啟的每張 JSP 網頁，都能共用 session 物件的資料。適合跨網頁保存資料的場合，例如是否已登錄帳戶的訊息。<br>
+					<br>
+					你可以在 A.jsp 中使用 <code>session.setAttribute("屬性名稱","屬性內容")</code> 將訊息保存在 session，然後在 B.jsp 使用 <code>session.getAttribute("屬性名稱")</code> 取得「屬性內容」。<br>
+					<br>
+					與 application 物件的差別是，session 只有使用者能存取資料，其他瀏覽同一個網站的使用者並沒有共用這些資料。
+				</p>
+			</section>
+			<section>
+				<h4>exception</h4>
+				<p>
+					可用 <code>getMessage()</code> 取得前一張網頁所 throw 出的 Exception 訊息，必須搭配 <code>&lt;%@ page isErrorPage="ture" %&gt;</code> 將用到 exception 物件的 JSP 網頁，設為錯誤處理專用的頁面。<br>
+					<br>
+					通常會在前一張網頁使用 <code>&lt;%@ page errorPage="" %&gt;</code> 指令，指向含有 exception.getMessage() 的 JSP 網頁，再用 <code>&lt;% throw new Exception("") %&gt;</code> 丟出錯誤訊息，讓 exception.getMessage() 的 JSP 網頁接收～
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>指令</h3>
+			<p>
+				JSP 使用 <code>&lt;%@ 指令 %&gt;</code> 格式的「指令」，來設定 Servlet 容器或 JSP 物件的屬性：
+			</p>
+			<table>
+				<tr><td style='width:45%'>&lt;%@ page contentType="" %&gt;</td><td>指定文件格式與編碼。</td></tr>
+				<tr><td>&lt;%@ page import="" %&gt;</td><td>載入套件。</td></tr>
+				<tr><td>&lt;%@ page extends="" %&gt;</td><td>指定該 JSP 繼承自哪個類別。</td></tr>
+				<tr><td>&lt;%@ page errorPage="" %&gt;</td><td>指定處理錯誤訊息的頁面。</td></tr>
+				<tr><td>&lt;%@ page isErrorPage="true" %&gt;</td><td>設定該 JSP 為錯誤處理頁面。</td></tr>
+				<tr><td>&lt;%@ page buffer="" %&gt;</td><td>設定緩衝資料大小，請使用 8kb 的倍數。</td></tr>
+				<tr><td>&lt;%@ include file="" %&gt;</td><td>載入檔案。</td></tr>
+			</table>
+			<p>
+				其它特殊情況才會使用的指令設定：<br>
+				<br>
+				<code>&lt;%@ page buffer="none" %&gt;</code> 關閉緩衝區。<br>
+				<code>&lt;%@ page autoFlush="false" %&gt;</code> 禁止自動送出緩衝資料。<br>
+				<code>&lt;%@ page isThreadSafe="false" %&gt;</code> 不以執行緒方式啟動，而是以獨立的程序執行。<br>
+				<code>&lt;%@ page session="false" %&gt;</code> 不使用 session 物件。<br>
+				<code>&lt;%@ taglib uri="" prefix="" %&gt;</code> 載入標籤庫，可使用像是 &lt;jsp:forward page=""/&gt; 之類的標籤，來取代 response.sendRedirect() 這樣的 Java 程式設計。<br>
+				<br>
+				如果懂得善用各家標籤庫，來解決各種開發動態網頁的工作，達到不用撰寫 Java 程式碼的地步，那整張 JSP 等於全部由「標籤（Tag）」組成，這會更像 HTML 網頁！因此一般認為「標籤庫」是使用 JSP 的最理想方式，所以也是目前各家開放原始碼團隊最有興趣貢獻的領域。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>SQL 實例</h2>
+		<p>
+			本文介紹如何搭配 Tomcat 與 MySQL，建立可用 JSP 來練習 SQL 的程式設計環境。
+		</p>
+		<hr>
+		<section>
+			<h3>MySQL</h3>
+			<p>
+				MySQL 是最容易安裝與使用的關聯性資料庫伺服器，尤其被 Sun Microsystems 收購後，相當於 Java 家族的成員之一。
+			</p>
+			<section>
+				<h4>下載</h4>
+				<p>
+					請至 <a href='http://www.mysql.com'>http://www.mysql.com</a> 下載 MySQL Community Server，為了方便設定伺服器環境，建議下載 Installer 的版本。
+				</p>
+			</section>
+			<section>
+				<h4>安裝</h4>
+				<p>
+					不要安裝在 C:\Program Files 底下，建議改安裝在 D 槽，避免 Windows 系統保護權限問題，安裝後無法正常啟動 MySQL 服務。<br>
+					<br>
+					安裝後第一次執行 MySQL 時，會出現設定精靈，過程中，建議設定為「Install As Windows Service」，交由作業系統啟動 MySQL 服務，並且允許帳號可以從遠端登入伺服器。
+				</p>
+			</section>
+			<section>
+				<h4>執行</h4>
+				<p>
+					安裝 MySQL 資料庫伺服器的主要目的，是為了從外部操作環境（例如 JDK 或 Tomcat）登入伺服器，來存取 MySQL 內部資料，因此應用上比較沒有「如何執行 MySQL」的問題。只要將 MySQL 啟動為 Windows 的「服務」即可。<br>
+					<br>
+					但你還是可以透過 MySQL Command Line Clent 來輸入 SQL 指令，直接從 MySQL 內部操作資料庫。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Connector/J</h3>
+			<p>
+				要讓 Java 操作 MySQL，你必須下載一種叫做 JDBC 的驅動程式。
+			</p>
+			<section>
+				<h4>下載</h4>
+				<p>
+					請至 <a href='http://dev.mysql.com/downloads/connector/j/'>http://dev.mysql.com/downloads/connector/j/</a> 下載 Connector/J。
+				</p>
+			</section>
+			<section>
+				<h4>安裝</h4>
+				<p>
+					解壓後，將 mysql-connector-java-5.1.22-bin.jar 放到 Tomcat 所在資料夾底下的 lib 資料夾，然後重新啟動 Tomcat。<br>
+					<br>
+					5.1.22 是版本號碼，視年份日期而有不同。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<section>
+				<h4>建立程式檔案</h4>
+				<p>
+					請建立一份純文字文件，檔名為 hello.jsp，然後丟到 Tomcat 所在資料夾的 webapps 資料夾的 ROOT 資料夾裡面<ins>3</ins>。
+				</p>
+			</section>
+			<section>
+				<h4>程式碼</h4>
+				<p>
+					在 hello.jsp 文件裡面，輸入如下程式碼：<br>
+					<br>
+					<textarea class='brush:java'>
+						&lt;%@ page import="java.sql.*" %&gt;
+						&lt;%
+							try{
+								//驅動 JDBC 程式
+								Class.forName("com.mysql.jdbc.Driver");
+
+								//登入 MySQL 帳密，假設帳號為 root，密碼為 abc123。
+								Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "abc123");
+
+								//開啟指令主控台
+								Statement statement = connection.createStatement();
+								/* 下達 SQL 指令 */
+
+								//建立含 mycolumn 欄位的資料表 mytable
+								statement.execute("CREATE TABLE mytable(mycolumn CHAR(32))");
+
+								//將 Hello, world! 這筆資料寫入 mycolumn 欄位
+								statement.executeUpdate("INSERT INTO mytable(mycolumn) VALUES("Hello, world!")");
+
+								//從 mytable 資料表提取所有資料
+								ResultSet result_set = statement.executeQuery("SELECT * FROM mytable");
+
+								//輸出所提取的資料
+								while(result_set.next()){
+									out.println(result_set.getString("mycolumn"));
+								}
+
+								//關閉程式
+								result_set.close();
+								statement.close();
+								connection.close();
+							}
+							catch(Exception exception){
+								out.println("ERROR");
+							}
+						%&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>執行程式</h4>
+				<p>
+					開啟瀏覽器，輸入如下網址：<br>
+					<br>
+					<code>http://127.0.0.1:8080/hello.jsp</code><br>
+					<br>
+					順利的話，會看到網頁顯示 Hello, world!：<br>
+					<br>
+					<canvas width='554'>msedge('http://127.0.0.1:8080/hello.jsp','Hello, world!')</canvas><br>
+					<br>
+					但是這個範例重新整理的話，會顯示 ERROR，因為重複建立名為 mytable 的資料表。<br>
+					<br>
+					你必須用 MySQL 的 Command Line Client 輸入：<br>
+					<br>
+					<code>
+						DROP TABLE mytable<br>
+					</code>
+					<br>
+					將資料表刪除，才能再執行成功一次。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>在 JSP 使用 SQL 指令</h3>
+			<p>
+				Java 使用 java.sql.Statement 提供的三個方法來操作 SQL 指令：
+			</p>
+			<section>
+				<h4>java.sql.Statement</h4>
+				<table>
+					<tr><td style='width:40%'>executeUpdate("SQL 指令")</td><td>用來操作 INSERT、DELETE、UPDATE 指令。</td></tr>
+					<tr><td>executeQuery("SQL 指令")</td><td>用來操作 SELECT 指令。</td></tr>
+					<tr><td>execute("SQL 指令")</td><td>其它 SQL 指令。</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>在 JSP 取用 SQL 資料</h3>
+			<p>
+				Java 使用 java.sql.ResultSet 來保存 java.sql.Statement.executeQuery() 所傳回 SELECT 指令的資料，讓我們在程式中可以更靈活操作資料。
+			</p>
+			<section>
+				<h4>ResultSet 提供的操作方式</h4>
+				<table>
+					<tr><td>getRow()</td><td>取得游標位置</td></tr>
+					<tr><td>next()</td><td>向下移動游標</td></tr>
+					<tr><td>previous()</td><td>向上移動游標</td></tr>
+					<tr><td>relative(int)</td><td>上下移動游標，以正負值控制。</td></tr>
+					<tr><td>absolute(int)</td><td>設置游標位置。</td></tr>
+					<tr><td>beforFirst()</td><td>游標移到最前一筆的位置。</td></tr>
+					<tr><td>afterLast()</td><td>游標移到最後一筆的位置。</td></tr>
+					<tr><td>first()</td><td>游標移到資料開始的位置。</td></tr>
+					<tr><td>last()</td><td>游標移到資料結束的位置。</td></tr>
+					<tr><td>isBeforFirst()</td><td>游標是否在最前一筆的位置。</td></tr>
+					<tr><td>isAfterLast()</td><td>游標是否在最後一筆的位置。</td></tr>
+					<tr><td>ifFirst()</td><td>游標是否在資料最開始的位置。</td></tr>
+					<tr><td>ifLast()</td><td>游標是否在資料已結束的位置。</td></tr>
+					<tr><td>deleteRow()</td><td>刪除欄位資料。</td></tr>
+					<tr><td>refreshRow()</td><td>更新前的資料。</td></tr>
+					<tr><td>getFetchSize()</td><td>取得可包含最大資料筆數。</td></tr>
+				</table>
+			</section>
+			<hr>
+			<p>
+				但在那之前，你必須知道 java.sql.Connection 的 createStatement() 可接受 resultSetType 和 resultSetConcurrency 兩個參數，前者用來設定游標的移動方式，後者用來設定資料是否可以改寫。<br>
+				<br>
+				經過適當的設定，才有辦法使用前面所列的功能。
+			</p>
+			<section>
+				<h4>ResultSet 的 resultSetType 常數</h4>
+				<table>
+					<tr><td style='width:40%'>TYPE_FORWARD_ONLY</td><td>游標只能向下移動。</td></tr>
+					<tr><td>TYPE_SCROLL_INSENSITIVE</td><td>游標可上下移動，當其它 ResultSet 搬動資料時同步影響游標位置。</td></tr>
+					<tr><td>TYPE_SCROLL_SENSITIVE</td><td>游標可上下移動，當其它 ResultSet 搬動資料時不影響游標位置。</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>ResultSet 的 resultSetConcurrency 常數</h4>
+				<table>
+					<tr><td style='width:40%'>CONCUR_READ_ONLY</td><td>ResultSet 的資料唯讀。</td></tr>
+					<tr><td>CONCUR_UPDATABLE</td><td>ResultSet 的資料可更改。</td></tr>
+				</table>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 前提是「開發動態網頁」的話！有些人純粹只是透過 Servlet 的 HTTP 通訊能力，在伺服端執行 Java 程式功能，這時後端即前端的 JSP 就顯得不適合，Servlet 才是更好的方案。<br>
+			[2] 將寫好的 JSP 丟到 [TOMCAT]/webapps/ROOT/ 裡面來執行，是很不可取的做法！但本單元屬於 Hello, world! 性質的文章，為了能在無需設定伺服器環境的情況下，直接能嘗試 JSP 與 SQL 之間的程式互動，所以才採行這種權宜之計。正確的做法，應該要在 [tomcat]/conf/server.xml 向 Tomcat 配置一個 WEBAPP 才對！
+		</p>
+	</footer>
+</article>
+<script>
+	hide();
+</script>
