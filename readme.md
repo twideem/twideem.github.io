@@ -4,7 +4,7 @@
 
 感謝 *GitHub*，也感謝一路走來，有 *奇摩*、*PC home Online*、*8d8d*、*Graffiti.net*、*Freewebs*、*Google 雲端硬碟代管網頁*、*Pancake.io* 提供免費又無廣告的網頁空間服務，讓我過足寫網頁文章的癮。
 
-## 如何使用這難用得要死的首頁
+## 如何使用首頁
 
 首先輸入 ls 會列出可使用的檔案名稱。
 
