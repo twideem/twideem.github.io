@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>實體符號</h1>
+	</header>
+	<hr>
+	<p>
+		有些符號容易與 HTML 的符號衝突，因此改用以下寫法來代替：
+	</p>
+	<table>
+		<tr><td>&amp;lt;</td><td style='width:30%'>&lt;</td><td style='width:50%'>less than（小於）</td></tr>
+		<tr><td>&amp;gt;</td><td>&gt;</td><td>greater than（大於）</td></tr>
+		<tr><td>&amp;amp;</td><td>&</td><td>ampersand（AND 符號）</td></tr>
+		<tr><td>&amp;quot;</td><td>&quot;</td><td>quotation mark（引號）</td></tr>
+		<tr><td>&amp;apos;</td><td>&apos;</td><td>apostrophe（撇號）</td></tr>
+		<tr><td>&amp;nbsp;</td><td>半形空白</td><td>non-breaking space（不換行空格）</td></tr>
+	</table>
+	<p>
+		這種寫法的符號叫做 Entity（實體符號）。<br>
+		<br>
+		其實還有更多實體符號可用，但文件使用 Unicode 字元編碼的話，直接把符號寫在文件裡面不會有字元錯亂問題，而且可讀性高，因此不建議使用上述以外的實體符號。<br>
+		<br>
+		適合使用其它實體符號的情況，通常是文字編輯器無法正常顯示想要的符號，例如全形符號顯示為半形符號、或者特殊符號顯示不出來，這時用實體符號反而可讀性高。
+	</p>
+</article>

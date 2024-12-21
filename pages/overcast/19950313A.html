@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET')</script>
+<article>
+	<header>
+		<h1>演算法與資料結構</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>資料結構</h2>
+		<p>
+			一般來講，電腦程式設計常見的資料結構有…<br>
+			<br>
+			<samp>
+				線性結構　　　陣列（Array）<br>
+				　　　　　　　鏈結串列（Linked list）<br>
+				　　　　　　　堆疊（Stack）<br>
+				　　　　　　　佇列（Queue）<br>
+				非線性結構　　樹（Tree）<br>
+				　　　　　　　圖（Graph）<br>
+				表格結構　　　雜湊（Hash）
+			</samp>
+		</p>
+		<hr>
+		<section>
+			<h3>陣列</h3>
+			<p>
+				在記憶體的連續空間裡，存放一串資料，然後只要照著順序存取記憶體裡面的資料即可，因此是存取效率最高的資料結構！不過，要在資料中插入或刪除資料的話，必須搬動後面的資料，資料量大時，會有效率低落的問題。<br>
+				<br>
+				這個資料結構正式名稱其實是「循序串列（Sequential list）」，但程式語言提供的「Array（陣列）」語法就是現成的「循序串列」，用久了便直接叫它「陣列」～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>鏈結串列</h3>
+			<p>
+				如果資料筆數太長，就不見得能在記憶體裡找到足夠的連續空間。於是除了保存資料內容以外，還保存指向其它資料的記憶體位置，這樣就可將支離破碎的資料連接起來使用。<br>
+				<br>
+				當然，必須額外透過指標來存取不同筆的資料，效率會降低。不過，中途插入或刪除資料的話，只要改變指向的記憶體位置即可，效率反而比陣列來得高！<br>
+				<br>
+				只指向下一筆資料記憶體位置的，叫做單向鏈結串列，還指向上一筆資料記憶體位置的，叫做雙向鏈結串列。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>堆疊</h3>
+			<p>
+				只從線性結構的頂部存取資料！不妨想像成堆高積木一樣，存入資料時不斷往上堆高，要取出資料時也是從最高位置著手，好像害怕從底部抽掉積木會垮掉一樣。這種結構的資料有「後進先出（Last in, first out. LIFO.）」的特性，存入資料的動作叫 push，取出資料的動作叫 pop。<br>
+				<br>
+				雖然沒有強制規定，但適合使用陣列來設計堆疊。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>佇列</h3>
+			<p>
+				從線性結構的尾部存入資料，再從頭部取出資料，也就是從線性結構的兩端來存取資料。這種結構的資料有「先進先出（First in, first out. FIFO.）」的特性，存入資料叫 enqueue 或 unshift，取出資料叫 dequeue 或 shift，或者跟堆疊一樣用 push 和 pop。<br>
+				<br>
+				雖然沒有強制規定，但通常使用鏈結串列來設計佇列。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>樹</h3>
+			<p>
+				以「節點（node）」的觀念表示資料。通常由一個根節點開始，展開一或多個子節點，每個子節點又有一或多個子節點，枝枝繁生開來，整個資料結構就像一棵樹的形狀一樣。這種資料結構，可以用鏈結串列設計出來。<br>
+				<br>
+				最簡單的樹，是每個節點只有左、右兩個子節點的樹，叫做「二元樹（Binary tree）」。你可以不斷將小於節點的值放在左邊子節點，大於節點的值放在右邊，左右節點滿了再開出分枝。比起資料筆數多少深度就是多少的串列，二元樹的深度非常淺，尋找資料時需要循訪的筆數少，所以能提升存取資料的效率。<br>
+				<br>
+				除此之外，樹狀資料的特殊結構，還能套上奇奇怪怪的數學公式，像二元樹能以 2 為因子設計算式，更快找出節點！當你樂於此道，就表示你將從平庸的程式設計師成為高竿的程式設計師了！<br>
+				<br>
+				由於所有樹都能轉為二元樹，所以是最基本的樹狀結構。有名的「堆積（Heap）」資料結構就是二元樹的一種。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>圖</h3>
+			<p>
+				像樹狀結構，但重點不是放在「節點」與其歸屬關係，而是放在連接節點的「邊（edge）」與其路徑關係來解決問題。由於節點與節點之間可以任意關聯，連接起來就像畫星座一樣出現各式圖形而得名。<br>
+				<br>
+				可以使用二維陣列來設計圖的資料結構！節點一到節點二有連接關係，就將 [1][2] 設為 1，節點二到節點一有連接關係，就將 [2][1] 設為 1。<br>
+				<br>
+				設為 0 或 1 的邊，可以表示方向性、單向或雙向，也可以在邊累加數字上去，當作尋訪次數，發揮這些特性，再對二維陣列套用數學的矩陣公式進行運算，可以解決其它資料結構難以處理的問題，像是最短路徑。更別說數學就有「圖論」這門分支，可以幫助我們進行更具深度的演算法設計，解決更多難題！<br>
+				<br>
+				看起來很神奇，但圖狀結構只適合解決特殊問題，日常遇到的問題還是靠線性結構和樹狀結構來解決會表現得更好。其實圖狀結構能做的事不多、可以應用的層面不廣泛，並不是主要關注的焦點。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>雜湊</h3>
+			<p>
+				可視為一種用關鍵字來儲存資料的結構，因此在取出資料時具有最快的效率，例如給予關鍵字直接就能取得資料，是設計「搜尋演算法」時非常受歡迎的資料結構。<br>
+				<br>
+				但是在存入資料時，可能因為用關鍵字來保存資料的手法設計得很複雜，而影響效率。<br>
+				<br>
+				不過，也因為保存資料的手法可能是透過某種數學計算技巧改良而來，所以有時候設計出來變成一種可以節省空間的資料結構，而被當作能夠壓縮資料的結構亂用。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>演算法</h2>
+		<p>
+			本節將介紹設計演算法時常用的思維：遞歸、迭代、預處理、記憶、分治、貪食、隨機、窮舉。大多數演算法，都是基於這些思維或手法而設計～
+		</p>
+		<hr>
+		<section>
+			<h3>遞歸法（Recursion）</h3>
+			<p>
+				重複使用同樣一套計算過程的手法，就叫遞歸法<ins>1</ins>。<br>
+				<br>
+				例如階乘 n!=1*2*3*..*n 的公式，就適合用遞歸法來設計：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int 階乘(int x)
+					{
+						if(x&lt;=1) return 1;
+						return x*階乘(x-1);
+					}
+
+					System.Console.Write(階乘(4));
+                </textarea>
+				<br>
+				<output>
+					24
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>迭代法（Iterative method）</h3>
+			<p>
+				重複使用計算出來的結果，就叫迭代法。<br>
+				<br>
+				例如不斷用前兩個數值相加來做為下一個數值的費氏數列：0、1、1、2、3、5、8…，就適合用迭代法來設計：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int 費氏數列(int x)
+					{
+						if(x==1||x==2) return 1;
+						return 費氏數列(x-1)+費氏數列(x-2);
+					}
+
+					System.Console.Write(費氏數列(12));
+                </textarea>
+				<br>
+				<output>
+					144
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>預處理（Precalculation）</h3>
+			<p>
+				其實事先準備好答案，也是一種解題的手法，例如費氏數列就可以事先將答案準備好：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array={0,1,1,2,3,5,8,13,21,34,55,89,144,233};
+
+					int 費氏數列(int x)
+					{
+						return array[x];
+					}
+
+					System.Console.Write(費氏數列(12));
+                </textarea>
+				<br>
+				<output>
+					144
+				</output>
+				<br>
+				雖然寫死，但有時候設計演算法必須著重執行效率時，這招依然是絕活！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>記憶法（Memoization）</h3>
+			<p>
+				將計算的結果保存起來，以備下次遇到同樣問題時使用。如此既能發揮「預處理」的執行效率，又沒有答案寫死無法套公式擴充的問題。再以費氏數列為例：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array=new int[100];
+
+					int 費氏數列(int x)
+					{
+						if(array[x]==0) array[x]=費氏數列(x-1)+費氏數列(x-2);
+
+						return array[x];
+					}
+
+					array[1]=1;
+					array[2]=1;
+
+					System.Console.Write(費氏數列(12));
+                </textarea>
+				<br>
+				<output>
+					144
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>分治法（Divide and conquer algorithms）</h3>
+			<p>
+				將一個大問題分成多個小問題，然後逐一擊破解決。<br>
+				<br>
+				例如「找出偽幣」的問題，有 12 枚銀幣，其中一枚是假的，重量較輕，這時決定用天平找出偽幣：「不斷將銀幣分成兩堆來比重量，直到挑出最輕的那個為止。」就可用分治法來設計<ins>2</ins>：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array={1,1,1,1,1,1,1,1,1,0,1,1}; //第 10 枚較輕
+
+					void 找出偽幣(int start, int end)
+					{
+						//分成左右兩堆重量。
+						int left=0, right=0;
+						for(int n=start-1; n&lt;(start+end)/2; n++){
+							left+=array[n];
+						}
+						for(int n=(start+end)/2; n&lt;end; n++){
+							right+=array[n];
+						}
+						//分成各個子問題來解決：左邊較輕。
+						if(left&lt;right){
+							找出偽幣(start, (start+end)/2);
+						}
+						//分成各個子問題來解決：右邊較輕。
+						else if(left&gt;right){
+							找出偽幣((start+end)/2+1, end);
+						}
+						//分成各個子問題來解決：一樣輕。
+						else if(left==right){
+							if(start==end){
+								System.Console.Write(end);
+							}
+							else if(array[start-1]&lt;array[end-1]){
+								System.Console.Write(start);
+							}
+							else{
+								System.Console.Write(end-1);
+							}
+						}
+					}
+
+					找出偽幣(1,12);
+                </textarea>
+				<br>
+				<output>
+					10
+				</output>
+				<br>
+				另外有一種說法，出現兩次或以上遞迴的函式，就是分治法。從外表上來看確實是這樣沒錯，值得參考。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>貪食法（Greedy algorithm）</h3>
+			<p>
+				一次給予最具突破性的答案，不斷用取巧的方式求最佳解。<br>
+				<br>
+				底下以「找錢」為例，我們希望用面額最大的錢來找，例如找 50 元的話就給一枚 50 元硬幣，不要給五枚 10 元硬幣：<br>
+				<br>
+				<textarea class='brush:cs'>
+					void 找錢(int x)
+					{
+						int[] array={500,100,50,10,5,1}; //可以找的錢有這些面額
+						while(x>0){
+							for(int n=0; n&lt;array.Length; n++){
+								if(x&gt;=array[n]){
+									x-=array[n];
+									System.Console.WriteLine(array[n]);
+									break;
+								}
+							}
+						}
+					}
+
+					找錢(256); //假設要找 256 元
+                </textarea>
+				<br>
+				<output>
+					100<br>
+					100<br>
+					50<br>
+					5<br>
+					1
+				</output>
+				<br>
+				輸出的結果代表：兩張 100 元紙鈔，一枚 50 元硬幣，一枚 5 元硬幣，一枚 1 元硬幣。是最佳解沒錯！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>隨機法（Randomized algorithm）</h3>
+			<p>
+				有名的「蒙地卡羅法」，是用隨機採樣的統計方式，來模擬出接近 Pi 的答案：<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System;
+
+					double 蒙地卡羅法(double x)
+					{
+						Random random = new Random();
+						double a=0, b=0, c=0;
+
+						for(double n=1; n&lt;x; n++){
+							a=random.NextDouble();
+							b=random.NextDouble();
+							if((a*a+b*b)&lt;=1){
+								c++;
+							}
+						}
+
+						return 4.0*c/x;
+					}
+
+					Console.Write(蒙地卡羅法(1000000));
+                </textarea>
+				<br>
+				<output>
+					每次執行結果不同，例如 3.138376 或 3.141896。
+				</output>
+				<br>
+				雖然知道有這樣的思維方式，也很想試試看，但我從未成功設計出這類的演算法 Orz<br>
+				<br>
+				不過，將執行結果交由運氣決定，也算隨機演算法！例如選擇題有四個答案，分別是 1、2、3、4，將亂數控制在 1 到 4 之間，隨機給予一個值做為答案，也算是隨機演算法，並不是非得像蒙地卡羅法這麼神奇。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>窮舉法（Enumeration）</h3>
+			<p>
+				逐一嘗試所有可能性，最後總會解出答案或完成任務，這一千零一招可是有名稱的，叫窮舉法。<br>
+				<br>
+				簡單的像是：<br>
+				<br>
+				<textarea class='brush:cs'>
+					void 列出偶數(int x)
+					{
+						for(int n=2; n&lt;=x; n++){
+							if(n%2==0){
+								System.Console.Write("{0} ", n);
+							}
+						}
+					}
+
+					列出偶數(40);
+                </textarea>
+				<br>
+				<output>
+					2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40
+				</output>
+				<br>
+				複雜的像是解雞兔同籠問題：<br>
+				<br>
+				<textarea class='brush:cs'>
+					void 雞兔同籠(int head, int foot)
+					{
+						System.Console.WriteLine("今有雉兔同籠，上有 {0} 頭，下有 {1} 足，問雞兔各幾何？", head, foot);
+
+						int chicken=0, rabbit=0;
+
+						for(int n=0; n&lt;head; n++){
+							int o=head-n;
+							if(n*2+o*4==foot){
+								chicken=n;
+								rabbit=o;
+							}
+						}
+
+						System.Console.Write("雉 {0}，兔 {1}。", chicken, rabbit);
+					}
+
+					雞兔同籠(35,94);
+                </textarea>
+				<br>
+				<output>
+					今有雉兔同籠，上有 35 頭，下有 94 足，問雉兔各幾何？<br>
+					雉 23，兔 12。
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>估算程式</h2>
+		<hr>
+		<section>
+			<h3>如何對估算做量化</h3>
+			<p>
+				演算法的評估可是一門學問，甚至有些演算法該如何評估其成長率會引起一番在爭論。例如 Shell sort 這個演算法，在不同資料結構會有不同的表現，最後是經由反覆實驗才被估算為平均 n<sup>7/6</sup> 的非典型案例，可見演算法分析有時候不是那麼簡單的事。<br>
+				<br>
+				但簡單的估算還是要會，像是直接給陣列索引值：<br>
+				<br>
+				<code>array[x]</code><br>
+				<br>
+				這只需要花費執行 1 次的時間，所以估算為 <samp>1</samp>。<br>
+				<br>
+				若在迴圈逐一存取陣列：<br>
+				<br>
+				<code>for(var n of array)</code><br>
+				<br>
+				這需要花費執行 n 次的時間，就估算為 <samp>n</samp>。<br>
+				<br>
+				若是兩層迴圈：<br>
+				<br>
+				<code>
+					for(var n1 of array){<br>
+					　for(var n2 of array){<br>
+					　<br>
+					　}<br>
+					}<br>
+				</code>
+				<br>
+				就估算為 <samp>n<sup>2</sup></samp>。<br>
+				<br>
+				若把迴圈改為二分搜尋法，讓執行次數砍半，可估算為 <samp>log n</samp>。<br>
+				<br>
+				重複再跑一次的遞歸，估算為 <samp>2<sup>n</sup></samp>。<br>
+				<br>
+				但是像快速排序，先分割兩個線性序列，再遞迴排列順序，順利的話是 <samp>n log n</samp>，若資料正好百分之百顛倒排序，也就是分治法的其中一個等於沒發揮作用，其實是 <samp>n<sup>2</sup></samp> 次，可見學問很大。<br>
+				<br>
+				通常會把以上的量化放在 <samp>O()</samp> 裡面，例如 O(n log n)，表示最多要花多少時間，也是估算時我們最關心的。其它還有像是最快要花多久時間的 Ω()、至少要花多少時間的 Θ()…等等的漸進符號，在全盤分析演算法時會用到，更能評估一個演算法是否真的有效率。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>如何根據量化來估算程式以發現問題所在</h3>
+			<p>
+				估算時，要以真正影響性能的程式為基準！例如四層 for 迴圈就估算為 n<sup>4</sup>，迴圈裡面若有陣列 array[x] 就忽視不估算，因為存取陣列影響的性能，相較於多層迴圈，等於沒有影響，不需要估算在內。<br>
+				<br>
+				以四層迴圈為基準，想辦法拆掉一層迴圈，例如用 log n 的二分搜尋法拆掉一層迴圈，從 n<sup>4</sup> 降為 n<sup>3</sup> log n，就能優化性能。甚至還能再拆掉一層迴圈，降為 n<sup>2</sup> log n。總之，執行次數呈指數型成長是很恐怖的事，使用巢狀迴圈要非常注意，拆掉一層迴圈是入門演算法最簡單的第一課！<br>
+				<br>
+				但也不是說只要看到四層迴圈，就一律改良為 n<sup>2</sup> log n，要看 n 是多少，代入後推估看看總共執行幾次命令。若 n 是 1000，四層迴圈執行了 1000<sup>4</sup> 等於 1 兆次命令，遠高於 3.0 GHz 處理器每秒 30 億次的動作頻率，顯然跑不動，勢必要想辦法拆掉一層迴圈，變成 1 億次命令才行得通！但如果 n 是 10，那 10<sup>4</sup> 也就 1 萬次，顯然跑得動，那就用四層迴圈去跑無所謂～
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>時間與空間</h2>
+		<p>
+			以上介紹的都是「時間複雜度」的演算法。<br>
+			<br>
+			然而，如果發明了時間很快的演算法，但必須用 512 GB 的 RAM 才能運作，那恐怕也稱不上好的演算法<ins>3</ins>～<br>
+			<br>
+			因此有時候「空間複雜度」也是演算法設計的焦點。<br>
+			<br>
+			不過，「以空間換取時間」也是一種演算法的思維，它通常速度更快，卻又更容易設計出來！像是藉由大量使用記憶體或占用系統資源，來達到目的。雖然硬體資源寸土寸金，通常來講空間演算法不可行，但情況與條件允許你揮霍與浪費的話，不妨往「空間」方面思考解法。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>排序演算法</h2>
+		<p>
+			常見的有四大類，以及各自的改良版本：<br>
+			<br>
+			<samp>
+				交換排序（Exchange sort）　 快速排序（Quicksort）<br>
+				插入排序（Insertion sort）　希爾排序（Shellsort）<br>
+				選擇排序（Selection sort）　堆積排序（Heapsort）<br>
+				合併排序（Merge sort）　　　串列排序（Strand sort）<br>
+			</samp>
+			<br>
+			標準 API 已經有專家們設計好的排序，一般而言我們不可能寫出比他們更快的排序演算法，所以寫程式很少會需要自己設計排序。<br>
+			<br>
+			但身為程式設計師，能夠寫出應急用的簡單排序演算法是基本能力，至少要挑一個來熟記～
+		</p>
+		<hr>
+		<section>
+			<h3>Exchange sort</h3>
+			<p>
+				一路比較相鄰兩資料的大小進行交換：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array={4,3,2,1};
+
+					for(int n=0; n&lt;array.Length-1; n++){
+						for(int o=0; o&lt;array.Length-1; o++){
+							if(array[o]&gt;array[o+1]){
+								int p=array[o];
+								array[o]=array[o+1];
+								array[o+1]=p;
+							}
+						}
+					}
+
+					foreach(int n in array) System.Console.Write(n);
+                </textarea>
+				<br>
+				<output>
+					1234
+				</output>
+				<br>
+				為了提升效率，可將內層迴圈的條件句改為 <code>n&lt;array.length-1-m</code> 逐步縮小比對的範圍。但這是應急用的，好背就好，省略無所謂。使用交換排序法，目的是會動就好，沒在講效率的～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Insertion sort</h3>
+			<p>
+				照順序將資料插入到適合它的位置：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array={4,3,2,1};
+
+					for(int n=1; n&lt;array.Length; n++){
+						int o=array[n];
+						int p=n;
+						while(p&gt;0&&array[p-1]&gt;o){
+							array[p]=array[p-1];
+							--p;
+						}
+						array[p]=o;
+					}
+
+					foreach(int n in array) System.Console.Write(n);
+                </textarea>
+				<br>
+				<output>
+					1234
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Selection sort</h3>
+			<p>
+				不斷挑出最小的值，把它丟到前頭，然後縮小範圍繼續挑：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array={4,3,2,1};
+
+					for(int n=0; n&lt;array.Length-1; n++){
+						int o=n;
+						for(int p=n+1; p&lt;array.Length; p++){
+							if(array[p]&lt;array[o]){
+								o=p;
+							}
+						}
+						int q=array[n];
+						array[n]=array[o];
+						array[o]=q;
+					}
+
+					foreach(int n in array) System.Console.Write(n);
+                </textarea>
+				<br>
+				<output>
+					1234
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Merge sort</h3>
+			<p>
+				有點小複雜，不太可能記住，是追求高效率時複製貼上修改來用的。<br>
+				<br>
+				這演算法是分治法的經典範例，而且是現代電腦架構之父 John von Neumann（馮紐曼）發明的！它時間複雜度穩定在 n log n，沒有最佳和最差的問題，很適合用在資料量大的場合，還適合針對現在多核心處理器改寫優化！<a href='http://zh.wikipedia.org/zh-tw/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F'>Wikipedia</a> 有詳細的介紹與說明，值得花時間研究這個演算法～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Index sort</h3>
+			<p>
+				前面提到過「空間複雜度」的演算法，如果要排序的資料正好是整數，就可以揮霍記憶體，用陣列索引值就是現成已排序整數的特性，對索引值標上資料出現次數，達到排序的效果：<br>
+				<br>
+				<textarea class='brush:cs'>
+					int[] array={4000,300,20,1};
+					int[] index=new int[4001];
+
+					//排序，一行程式搞定
+					for(int n=0; n&lt;array.Length; n++) index[array[n]]+=1;
+
+					//輸出
+					for(int n=0; n&lt;index.Length; n++){
+						if(index[n]!=0){
+							System.Console.WriteLine(n);
+						}
+					}
+				</textarea>
+				<br>
+				<output>
+					1<br>
+					20<br>
+					300<br>
+					4000<br>
+				</output>
+				<br>
+				這很蠢，沒幾筆資料卻動用成千上萬筆資料空間去處理！但臨時應急，卻又記不起來前面三種演算法的話，這是原理最簡單、能在最快時間內完成測試的偷吃撇步。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1]「遞歸」與「迭代」是設計演算法的方式，而「遞迴」是程式語言的功能。這就像用「for 迴圈」設計「窮舉法」一樣，我們用「遞迴函式」來設計「遞歸法」與「迭代法」。<br>
+			[2] 為了更清楚地示範「分治法」，我把「尋找偽幣」的範例修改成「依電腦程式的特性」判斷偽幣，而不是「依數學物理的原理」篩選偽幣，所以交作業別用這個範例，否則會被打叉 XDDD<br>
+			[3] 因為沒有人的主記憶體這麼高，只在特定電腦才能執行，等於派不上用場的演算法。
+		</p>
+	</footer>
+</article>
