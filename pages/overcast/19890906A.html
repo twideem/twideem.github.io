@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>td:nth-child(1){width:42%}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>用最少的語法來入門程式設計</h1>
+		<p>
+			由於程式設計師是精神折磨的工作，長期處在與時間競賽的高壓力工作環境，大家都幹得不開心，因此每當遇到友人說想學程式設計，問推薦看哪本書最好，答案卻是：「我勸你放棄比較好！設計程式真的很難，連我都快學不來了，建議你不要學這個吃力不討好的事。」<br>
+			<br>
+			然而，難的是程式設計師這份工作（開發軟體），並不是程式語言很難，若對方只是想學一門程式語言玩看看，並沒想說學了要當程式設計師，就這麼勸退並不公允。<br>
+			<br>
+			好比作家，讀寫文字其實大家都會，但要寫出好的小說、好的詩句，就各憑本事了！你總不能因為當不了作家，就勸退別人學讀寫文字 ψ(｀∇´)ψ<br>
+			<br>
+			程式語言就跟文字一樣，其實大家都學得會！這篇文章將撇開「程式設計師」都該懂的技術，教你只用 var、if、while、function 四個指令寫一星期的程式，證明自己原來也可以動手寫程式，便會有興趣學更多指令讓自己變強：「初學程式設計，先動手就對了！而不是先埋首苦讀，那只會裹足不前而已。」
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>選用語言</h2>
+		<p>
+			由於 Windows 10 內建 Microsoft Edge 和 .NET Framework，因此本文使用 JavaScript 和 C# 語言來學習程式設計，無須另外安裝開發工具。<br>
+			<br>
+			由於本文訴諸簡單，不會寫複雜的程式，因此用 Windows 10 內建的記事本就夠了。日後要寫複雜的程式時，請用程式設計專用的文字編輯器！推薦 <a href='http://code.visualstudio.com'>Visual Studio Code</a>，免費使用、啟動快速、功能卓越、跨平台，是最多人使用的文字編輯器。<br>
+			<br>
+			要怎麼寫 JavaScirpt 程式？請參考《<a href='../hypermount/19690105A.html'>JavaScript 程式基本架構</a>》這篇文章，看「我的第一個 JavaScript 程式」即可，後面的不用看。<br>
+			<br>
+			要怎麼寫 C# 程式？請參考《<a href='20190418A.html'>用 C# 堆砌程式</a>》這篇文章，看「準備」即可，後面的不用看。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>資料存取</h2>
+		<p>
+			說到程式設計，大家第一個想到的且最感興趣的，想必是「判斷」功能：「如果怎樣，就怎樣怎樣…」<br>
+			<br>
+			但你得先有條件，才能判斷，所以讓我們先捨下最感興趣的這一部份，來學比較無趣的「資料」吧～<br>
+			<br>
+			你想判斷什麼？生命值為 0 的話死亡、魔法值大於 8 的話施放冰箭…判斷的條件，通常都是這類的「資料」。<br>
+			<br>
+			在程式語言裡，我們用「變數」來保存資料和取出資料。<br>
+			<br>
+			JavaScript 建立變數是這樣的：<br>
+			<br>
+			<textarea class='brush:js'>
+				var hp = 100;
+            </textarea>
+			<br>
+			<code>var</code> 是建立變數的指令。<code>hp</code> 是變數名稱，你可以取自己喜歡的名稱。<code>=</code> 用來把資料保存到變數名稱。<code>100</code> 是保存到變數名稱的資料，資料可以是數值，也可以文字，文字的話要用 <code>""</code> 符號包起來。<code>;</code> 表示這段程式已經寫完，與下一段程式隔開。<br>
+			<br>
+			要取出變數的資料很簡單，把變數名稱當資料本身叫用就好：<br>
+			<br>
+			<textarea class='brush:js'>
+				document.write(hp);
+            </textarea>
+			<br>
+			<code>document.write()</code> 是程式庫功能，用來把資料寫在網頁上面。將 hp 變數名稱放進這個程式庫功能，就會把 100 這個資料顯示在網頁上。<br>
+			<br>
+			變數如其名，裡面的資料是可以改變的，所以你可以修改變數裡面的資料：<br>
+			<br>
+			<textarea class='brush:js'>
+				hp = hp - 10;
+            </textarea>
+			<br>
+			hp 等於 hp 減 10，很簡單吧！<br>
+			<br>
+			變數就介紹到這裡，其它還有資料型態、全域變數和區域變數的生命週期、陣列…等重要功能，但先這樣就好，先簡單學會使用變數，熟悉了再精通更多變數的話題。你只要先熟悉變數最主要的功能，就如本文示範的這樣，用來保存資料，以便後面的程式取出，就夠了！其他的暫且不學，並不妨礙你寫程式時使用變數～
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>流程控制</h2>
+		<p>
+			現在來根據條件做判斷了：<br>
+			<br>
+			<textarea class='brush:js'>
+				if(hp == 0){
+					document.write("你已經死了");
+				}
+            </textarea>
+			<br>
+			<code>if</code> 用來表示判斷，如果 () 內的條件成立，就執行 {} 裡面的程式。<br>
+			<br>
+			() 內的條件，叫做 Boolean 運算式，使用 <code>==</code> 符號表示等於， <code>&gt;=</code> 符號表示大於等於， <code>&lt;=</code> 符號表示小於等於。運算結果對的話會得到指令值 <code>true</code>，不對的話會得到指令值 <code>false</code>，其實 if 就是根據得到的值是 true 或 false 執行的。<br>
+			<br>
+			當然，條件是會分支的，所以：<br>
+			<br>
+			<textarea class='brush:js'>
+				if(hp == 0){
+					document.write("你已經死了");
+				}
+				else if(hp == 100){
+					document.write("滿血狀態攻擊力加倍");
+				}
+				else if(hp &lt; 10){
+					document.write("快沒血了攻擊力減半");
+				}
+				else{
+					document.write("狀況還不錯");
+				}
+            </textarea>
+			<br>
+			<code>else</code> 用來表示條件不成立的話所執行的程式。不成立時，接 if 再次判斷，就是分支條件了！很簡單～<br>
+			<br>
+			程式設計除了判斷，還有個重要功能，就是重複執行：<br>
+			<br>
+			<textarea class='brush:js'>
+				while(hp &gt; 0){
+					hp = hp - 10;
+					document.write("你還有" + hp + "生命值");
+				}
+            </textarea>
+			<br>
+			只要 hp 大於 0，hp 就減少 10，並顯示「你還有 XX 生命值」，這就是 <code>while</code> 指令的功能，術語叫迴圈。<br>
+			<br>
+			其它還有 <code>switch</code> 和 <code>for</code> 兩個重要的指令，但我們先不學，因為這兩個指令所做的事，用 if 和 while 也做得到。暫且用 var、if、while 寫個一星期的程式，先以最簡單的語法指令，來熟悉程式設計這檔事，再學更多指令讓自己變強，享受進步的樂趣。反之，一口氣給你太多指令，寫起程式來瞻前顧後、顧此失彼，學習效果反而差～
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>程式庫</h2>
+		<p>
+			程式語言的功能，並不都是以「指令」的方式提供，更多的是以「程式庫」的方式提供！先幫你把程式寫好，再讓你拿出來用～<br>
+			<br>
+			這是因為程式設計要做的事太多了！程式語言不可能一開始就準備好齊全的指令讓你使用，所以指令只用在最基本的工作，事後再根據基本指令寫程式來做更多事，打包成「程式庫」讓你使用。像「檔案讀寫」「調用外部程式」就是放在程式庫裡，而不是程式語言指令。<br>
+			<br>
+			所以程式庫其實就跟指令一樣重要！程式語言除了變數（資料存取）和判斷（流程控制）外，第三重要的就是了解程式庫裡有哪些功能可用！有設計不出來的功能時，不是去學更多語法，而是找看看程式庫裡有沒有現成的～<br>
+			<br>
+			不過，程式庫裡面的東西，多到沒人記得起來，所以不需要像指令那樣死記起來，而是要學會「查看程式庫文件有哪些功能」，例如《<a href='https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference'>JavaScript Reference</a>》這份文件。雖然像考試允許打開課本一樣，好像很簡單，但各家編寫的格式都不一樣，很多又寫得像加工機說明書那樣艱澀，所以你得付出一番心力，才能看懂程式庫文件。要學會這件事只有一個方法：「耐著性子，慢慢研究如何解讀它！」這件事急不來的，但只要耐著性子就會懂。所以也不是說真的很難，只是沒辦法秒懂而已～<br>
+			<br>
+			以下幾個程式庫功能，能讓你這一星期練習用 var、if、while 寫程式時，過程更加有趣：<br>
+			<br>
+			<textarea class='brush:js'>
+				//將 hp 的資料儲存到電腦
+				localStorage.setItem("save", hp);
+
+				//從電腦讀取儲存的資料
+				hp = localStorage.getItem("save");
+
+				//亂數 1 到 100
+				var points = Math.ceil(Math.random()*100);
+
+				//每 2000 毫秒執行程式，()=&gt; 是匿名函式，屬於進階語法，先不用管他。
+				setInterval(()=&gt;{
+					document.write('Hello!');
+				}, 2000);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>函式</h2>
+		<p>
+			除了使用別人準備的程式庫，我們也可以把自己的程式寫好，往後重複使用，這語法功能叫「函式」：<br>
+			<br>
+			<textarea class='brush:js'>
+				function IceBolt(x){
+					x = x - 8;
+					return x;
+				}
+
+				hp = IceBolt(hp);
+
+				document.write("遭受 Ice bolt 魔法攻擊，現在生命值為：" + hp);
+            </textarea>
+			<br>
+			<code>function</code> 是用來建立函式的指令。<code>IceBolt</code> 是函式名稱，你可以取自己喜歡的名稱。<code>x</code> 是參數，你可以取自己喜歡的名稱。<code>return</code> 用來把資料傳出去，讓函式就像三角函數那樣，把資料扔進去會丟出不一樣的資料來。<br>
+			<br>
+			有了這函式，我們就可以用 <code>IceBolt(hp)</code> 計算受到魔法 Ice bolt 傷害後，還剩多少生命值，再把結果保存到 hp 裡面。<br>
+			<br>
+			不需要「參數」和「傳回值」的話可以省略，例如：<br>
+			<br>
+			<textarea class='brush:js'>
+				function IceBolt(){
+					hp = hp - 8;
+					document.write("遭受 Ice bolt 魔法攻擊，現在生命值為：" + hp);
+				}
+            </textarea>
+			<br>
+			多個參數的話，使用 <code>,</code> 隔開，例如：<br>
+			<br>
+			<textarea class='brush:js'>
+				function IceBolt(x, y){
+					hp = x - 8;
+					mp = y - 2;
+					document.write("遭受 Ice bolt 魔法攻擊，現在生命值為：" + hp);
+				}
+            </textarea>
+			<br>
+			有了函式，你就可以將自己的程式功能整理起來使用，它與變數、判斷、迴圈，都是程式設計必備的。<br>
+			<br>
+			建立自己程式庫的語法除了函式，還有「類別」，它可以進行「物件導向」的程式設計。對程式設計來說，這是可有可無的技術，如果你不是根基已經打得很穩的程式設計師，建議不要去碰它，尤其是剛入門的話，物件導向會像玄學一樣，讓你無法專心做好寫程式這件事，心思都用在空談物件導向的大道理。既然如此，不要在這裡提它就好！但你只要踏入寫程式的行列，就一定會知道有物件導向這回事，所以還是要特別提出來：「才剛入門時，千萬別分心去搞物件導向，你會兩頭空。」函式就夠了，函式才是王道！或許只用函式很蠢，但用物件導向則是自作聰明，做法很蠢並不會把事搞砸，但自作聰明會把事情搞砸。等你根基穩固、聰明絕頂了，再用物件導向開發手法來寫程式～
+		</p>
+	</section>
+	<!--故意不教註解，因為這種東西不用教，看也知道那是沒意義的一串文字，所以留給讀者自己發覺，讓他感受聰明的滋味。-->
+	<hr>
+	<section>
+		<h2>程式設計</h2>
+		<p>
+			有了前面實際撰寫一星期程式的經驗，相信你會覺得自己也能寫程式，有興趣學更多！這樣的話，恭喜，你已經入門了～<br>
+			<br>
+			接下來，請改用 C# 語言，把程式設計師的基本觀念通通學起來，底下是學習清單…
+		</p>
+		<hr>
+		<section>
+			<h3>基礎：用更多語法，開拓你的程式設計坦途</h3>
+			<section>
+				<h4>資料型態</h4>
+				<!--不要像平常教課時講 Von Neumann architecture 中 CPU 和 RAM 的程式設計原理，這篇文章的對象不是資訊科系學生，而是門外漢，教怎麼用語法就好，不要教電算機概念，不然無法吸收，降低興趣。-->
+			</section>
+			<section>
+				<h4>陣列</h4>
+			</section>
+			<section>
+				<h4>指標</h4>
+			</section>
+			<section>
+				<h4>傳值、傳址</h4>
+			</section>
+			<section>
+				<h4>變數的範疇與生命週期</h4>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>成長：用程式設計師的思維解決問題</h3>
+			<section>
+				<h4>資料結構</h4>
+			</section>
+			<section>
+				<h4>演算法</h4>
+				<!--想辦法將 for 和 switch 拖到這時才順便介紹一下，藉以弱化語法為主的觀念。學程式重要的是思維，而不是每個語言都不太一樣的語法。-->
+			</section>
+			<section>
+				<h4>API</h4>
+			</section>
+			<section>
+				<h4>語法糖</h4>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>精通：物件導向開發手法</h3>
+			<section>
+				<h4>封裝、繼承、多型</h4>
+				<!--寫出可擴充的軟體，避免日後修改舊程式碼，吃力不討好，直接寫個新的元件替換上去比較快。-->
+			</section>
+			<section>
+				<h4>動態繫結（Dynamic binding）</h4>
+			</section>
+			<section>
+				<h4>測試先行（Test-first development）</h4>
+				<!--先寫測試再實作程式的好處，就是不會且戰且走，而有深思熟慮後再著手進行的效果。-->
+			</section>
+			<section>
+				<h4>專案管理（Project management）</h4>
+				<!--
+					軟體工程專案管理。
+					只教「好習慣」，不要教「軟體工程」像是「系統分析與設計」，因為這篇文章是《程式設計入門》，重點是好好寫程式，而不是當個好的程式設計師，太多無關的事，會轉移焦點，變成把心力集中在角色養成，沒能好好地把程式寫出來。
+				-->
+			</section>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 補充一篇《<a href='19890906B.html'>如何學習程式語言成為程式設計師</a>》，給入門後有興趣學更多，想成為程式設計師的人。裡面談的是無關技術的「觀念」，有這些觀念，能幫助你在技術上遇到障礙時，度過難關，不被擊倒。
+		</p>
+	</footer>
+</article>
