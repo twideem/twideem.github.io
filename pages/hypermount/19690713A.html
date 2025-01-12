@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>HTML5 語意文件結構</h1>
+		<p>
+			過去 HTML 4.01 時代，總是用 div 標籤搭配 class 屬性，來定義文章中像是「部落格名稱」「日誌」「日誌回文」「月曆導覽」「廣告欄」…等各個不同意義的區段。到了 HTML5，特別針對網頁文章的慣用結構，定義了適切的語意標籤，方便使用者規劃網頁文件的結構，也提升未來資料被搜尋時的規劃效率。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>參考範本</h2>
+		<p>
+			<textarea class='brush:html'>
+				&lt;!DOCTYPE html&gt;
+				&lt;html lang='zh-TW'&gt;
+					&lt;head&gt;
+						&lt;meta charset='utf-8'/&gt;
+						&lt;title&gt;網站標題&lt;/title&gt;
+						&lt;link href='圖示.ico' rel='icon'/&gt;
+						&lt;link href='樣式.css' rel='stylesheet'/&gt;
+						&lt;script src='腳本.js'&gt;&lt;/script&gt;
+					&lt;/head&gt;
+					&lt;body&gt;
+						&lt;nav&gt;導覽（網站主選單）&lt;/nav&gt;
+						&lt;article&gt;
+							&lt;header&gt;
+								&lt;h1&gt;文章主標題（部落格名稱）&lt;/h1&gt;
+								&lt;h2&gt;副標題（部落格簡介）&lt;/h2&gt;
+							&lt;/header&gt;
+							&lt;hr/&gt;
+							&lt;section&gt;
+								&lt;h3&gt;子標題（今天發的網誌）&lt;/h3&gt;
+								&lt;p&gt;內文（我今天跑去觀落陰）&lt;/p&gt;
+								&lt;figure&gt;
+									&lt;img src='圖檔.png' alt='插圖'/&gt;
+									&lt;figcaption&gt;圖片文字說明（有圖有真相）&lt;/figcaption&gt;
+								&lt;/figure&gt;
+								&lt;table&gt;
+									&lt;tr&gt;&lt;td&gt;表格&lt;/td&gt;&lt;td&gt;表格&lt;/td&gt;&lt;td&gt;表格&lt;/td&gt;&lt;/tr&gt;
+									&lt;tr&gt;&lt;td&gt;表格&lt;/td&gt;&lt;td&gt;表格&lt;/td&gt;&lt;td&gt;表格&lt;/td&gt;&lt;/tr&gt;
+									&lt;tr&gt;&lt;td&gt;表格&lt;/td&gt;&lt;td&gt;表格&lt;/td&gt;&lt;td&gt;表格&lt;/td&gt;&lt;/tr&gt;
+								&lt;/table&gt;
+								&lt;footer&gt;
+									&lt;time&gt;時間&lt;/time&gt;&lt;address&gt;聯絡資料&lt;/address&gt;
+								&lt;/footer&gt;
+							&lt;/section&gt;
+							&lt;hr/&gt;
+							&lt;section&gt;
+								&lt;h3&gt;子標題（昨天發的網誌）&lt;/h3&gt;
+								&lt;p&gt;內文（我明天要去觀落陰）&lt;/p&gt;
+								&lt;hr/&gt;
+								&lt;section&gt;
+									&lt;h4&gt;次標題（回文者名稱）&lt;/h4&gt;
+									&lt;p&gt;內文（幫我向蔣公問好）&lt;/p&gt;
+									&lt;footer&gt;
+										&lt;time&gt;時間&lt;/time&gt;&lt;address&gt;聯絡資料&lt;/address&gt;
+									&lt;/footer&gt;
+								&lt;/section&gt;
+							&lt;/section&gt;
+							&lt;hr/&gt;
+							&lt;footer&gt;
+								&lt;p&gt;註解（禁止張貼色情廣告）&lt;/p&gt;
+							&lt;/footer&gt;
+						&lt;/article&gt;
+						&lt;nav&gt;導覽（例如月曆導覽）&lt;/nav&gt;
+						&lt;aside&gt;側邊欄（例如廣告）&lt;/aside&gt;
+					&lt;/body&gt;
+				&lt;/html&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>概述</h2>
+		<p>
+			一張網頁由 article（整篇文章）、nav（網站導覽）、aside（側欄） 構成，數量不拘。<br>
+			<br>
+			article 裡面可以包含 header（頁首）、section（一節內容），footer（頁腳）。<br>
+			<br>
+			section 裡面可以包含 h1-h6（標題）、p（內文）、figure（圖片）、table（表格），也可以有自己的 header 或 footer 用來放置 date（發文日期）或 address（發文者聯絡方式）。
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] <a href='appendix.html#19690713A'>為什麼是 article 包含 section？</a><br>
+		</p>
+	</footer>
+</article>

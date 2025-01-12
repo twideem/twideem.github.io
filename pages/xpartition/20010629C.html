@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>UdieToo 精華</h1>
+		<p>
+			<a href='#anchor1'>Properties</a><br>
+			<a href='#anchor2'>STATE</a><br>
+			<a href='#anchor3'>REANIMAT</a><br>
+			<a href='#anchor4'>Skill Id (9 bits)</a><br>
+			<a href='#anchor5'>Rare Prefixe</a><br>
+			<a href='#anchor6'>Rare Suffixes</a><br>
+			<a href='#anchor7'>我的物品</a>
+		</p>
+	</header>
+	<hr id='anchor1'>
+	<section>
+		<h2>Properties</h2>
+		<hr>
+		<section>
+			<h3>0</h3>
+			<p>
+				STRENGTH　　　　　　　　　　　　　　　　　+n 力量<br>
+				ENERGY　　　　　　　　　　　　　　　　　　+n 體力<br>
+				DEXTERITY　　　　　　　　　　　　　　　　 +n 敏捷<br>
+				VITALITY　　　　　　　　　　　　　　　　　+n 精力<br>
+				MAX LIFE　　　　　　　　　　　　　　　　　+n 生命<br>
+				MAX MANA　　　　　　　　　　　　　　　　　+n 法力<br>
+				MAX STAMINA　　　　　　　　　　　　　　　 +n 精力最大值<br>
+				ENHANCED DEFENSE %　　　　　　　　　　　　+n% 防禦強化<br>
+				ENCHANCED DAMAGE %　　　　　　　　　　　　+n% 增強傷害<br>
+				ENCHANCED MIN DMG %　　　　　　　　　　　 增加傷害底限
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>1</h3>
+			<p>
+				ATTACK RATING　　　　　　　　　　　　　　 +n 準確率<br>
+				CHANCE OF BLOCKING %　　　　　　　　　　　n% 增加格擋可能性<br>
+				MIN 1-HANDED DMG　　　　　　　　　　　　　+n 最小傷害值（單手）<br>
+				MAX 1-HANDED DMG　　　　　　　　　　　　　+n 最大傷害值（單手）<br>
+				MIN 2-HANDED DMG　　　　　　　　　　　　　+n 最小傷害值（雙手）<br>
+				MAX 2-HANDED DMG　　　　　　　　　　　　　+n 最大傷害值（雙手）<br>
+				DAMAGE % NV　　　　　　　　　　　　　　　 （傷害）<br>
+				REGENERATE MANA % NV　　　　　　　　　　　（法力重生）<br>
+				REGENERATE MANA PLUS %　　　　　　　　　　法力重生 n%<br>
+				HEAL STEMINA PLUS %　　　　　　　　　　　 回復體力加 n%<br>
+				DEFENSE　　　　　　　　　　　　　　　　　 +n 防禦<br>
+				DEF VS MISSILE　　　　　　　　　　　　　　+n 對近戰防禦<br>
+				DEF VS MELEE　　　　　　　　　　　　　　　+n 對飛射性防禦<br>
+				DAMAGE REDUCED BY　　　　　　　　　　　　 傷害減少 n<br>
+				MAGIC DMG REDUCED BY　　　　　　　　　　　法術傷害減少 n<br>
+				DAMAGE REDUCED BY %　　　　　　　　　　　 傷害減少 n%<br>
+				MAGIC RESISTANCE %　　　　　　　　　　　　抗魔法 +n%
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>2</h3>
+			<p>
+				MAX MAGIC RESISTANCE %　　　　　　　　　　+n% 最大魔法抵抗<br>
+				FIRE RESISTANCE %　　　　　　　　　　　　 抗火 +n%<br>
+				MAX FIRE RESISTANCE %　　　　　　　　　　 +n% 最大火焰抵抗<br>
+				LIGHTNING RESISTANCE %　　　　　　　　　　抗閃電 +n%<br>
+				MAX LIGHTNING RESISTANCE %　　　　　　　　+n% 最大閃電抵抗<br>
+				COLD RESISTANCE %　　　　　　　　　　　　 抗寒 +n%<br>
+				MAX COLD RESISTANCE %　　　　　　　　　　 +n% 最大冰凍抵抗<br>
+				POISON RESISTANCE %　　　　　　　　　　　 抗毒 +n%<br>
+				MAX POISON RESISTANCE %　　　　　　　　　 +n% 最大毒素抵抗<br>
+				FIRE DAMAGE　　　　　　　　　　　　　　　 增加 m-n 的火焰傷害<br>
+				MAX FIRE DAMAGE　　　　　　　　　　　　　 +n 火焰傷害最大值<br>
+				LIGHTNING DAMAGE　　　　　　　　　　　　　增加 m-n 的閃電傷害<br>
+				MAX LIGHTNING DMG　　　　　　　　　　　　 +n 閃電傷害最大值<br>
+				MAGIC DAMAGE　　　　　　　　　　　　　　　增加 m-n 的魔法傷害<br>
+				MAX MAGIC DAMAGE　　　　　　　　　　　　　+n 魔法傷害最大值<br>
+				COLD DAMAGE　　　　　　　　　　　　　　　 增加 m-n 的冰冷傷害<br>
+				MAX COLD DAMAGE　　　　　　　　　　　　　 +n 冰冷傷害最大值<br>
+				COLD LENGTH　　　　　　　　　　　　　　　 （冷凍時間）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>3</h3>
+			<p>
+				POISON DAMAGE　　　　　　　　　　　　　　 加 n 毒素傷害，持續時間 n 秒<br>
+				MAX POISON DMG　　　　　　　　　　　　　　+n 增加毒素傷害上限<br>
+				POISON LENGTH　　　　　　　　　　　　　　 （中毒時間）<br>
+				LIFE STOLEN PER HIT MAX　　　　　　　　　 n% 擊中偷取生命<br>
+				MANA STOLEN PER HIT MAX　　　　　　　　　 n% 擊中偷取法力<br>
+				STUN LENGTH　　　　　　　　　　　　　　　 （眩暈時間）<br>
+				RUN/WALK SPEED % NV　　　　　　　　　　　 （高速跑步 / 行走）<br>
+				ATTACK SPEED % NV　　　　　　　　　　　　 （攻擊速度）<br>
+				MAX DURABILITY　　　　　　　　　　　　　　（耐久度）<br>
+				REPLENISH LIFE　　　　　　　　　　　　　　生命補滿 +n
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>4</h3>
+			<p>
+				LIFE %　　　　　　　　　　　　　　　　　　增加生命上限 n%<br>
+				MANA %　　　　　　　　　　　　　　　　　　增加法力上限 n%<br>
+				ATTACKER TAKES DAMAGE OF　　　　　　　　　攻擊者受到傷害 n<br>
+				EXTRA GOLD FROM MONSTERS %　　　　　　　　n% 額外金幣從怪物身上取得<br>
+				CHANCE OF GETTING MAGIC ITEMS %　　　　　 n% 更佳的機會取得魔法裝備<br>
+				KNOCK BACK　　　　　　　　　　　　　　　　擊退<br>
+				ADD CLASS SKILL　　　　　　　　　　　　　 +n ～技能<br>
+				ADD EXPERIENCE　　　　　　　　　　　　　　+n% 轉為經驗值獲得<br>
+				HEAL AFTER KILL　　　　　　　　　　　　　 +n 生命值在殺死後獲得<br>
+				REDUCED PRICES　　　　　　　　　　　　　　降低所有商人的價格 n%<br>
+				DOUBLE HERB DURATION　　　　　　　　　　　（不明）<br>
+				LIGHT RADIUS　　　　　　　　　　　　　　　+n 照亮範圍<br>
+				LIGHT COLOR NV　　　　　　　　　　　　　　（照亮範圍）<br>
+				REQUIREMENTS %　　　　　　　　　　　　　　需求 +n%<br>
+				LEVEL REQUIRE　　　　　　　　　　　　　　 （增加需要等級）<br>
+				INCREASED ATTACK SPEED　　　　　　　　　　+n% 增加準確率（中文翻譯錯誤）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>5</h3>
+			<p>
+				LAST BLOCK FRAME　　　　　　　　　　　　　（格擋）<br>
+				FASTER RUN/WALK　　　　　　　　　　　　　 +n% 高速跑步 / 行走<br>
+				NON CLASS SKILL　　　　　　　　　　　　　 +n 致～（不限職業也能使用技能）<br>
+				STATE　　　　　　　　　　　　　　　　　　 （狀態，例如 137 是經驗神殿。）<br>
+				FASTER HIT RECOVERY RATE　　　　　　　　　+n% 快速再度攻擊<br>
+				FASTER BLOCK RATE　　　　　　　　　　　　 +n% 較快速格擋率<br>
+				FASTER CAST RATE　　　　　　　　　　　　　+n% 高速施展速度<br>
+				SINGLE SKILL　　　　　　　　　　　　　　　+n 致～（限職業使用）<br>
+				REST IN PEACE　　　　　　　　　　　　　　 殺死怪物回復平靜<br>
+				CURSE RESISTANCE　　　　　　　　　　　　　（抗詛咒機率）<br>
+				POISON LENGTH REDUCED BY %　　　　　　　　中毒的持續效果降低 n%<br>
+				DAMAGE　　　　　　　　　　　　　　　　　　傷害 +n<br>
+				HIT CAUSES MONSTER TO FLEE %　　　　　　　擊中使怪物逃跑 n%<br>
+				HIT BLINDS TARGET　　　　　　　　　　　　 擊中使目標目盲 +n
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>6</h3>
+			<p>
+				DAMAGE TO MANA %　　　　　　　　　　　　　n% 受損的生命移至法力<br>
+				IGNORE TARGET DEFENSE　　　　　　　　　　 忽視目標防禦力<br>
+				TARGET DEFENSE %　　　　　　　　　　　　　-n% 目標防禦<br>
+				PREVENT MONSTER HEAL　　　　　　　　　　　防止怪物自療<br>
+				HALF FREEZE DURATION　　　　　　　　　　　冰凍時間減半<br>
+				BONUS TO ATTACK RATING %　　　　　　　　　n% 額外的攻擊準確率加成<br>
+				REDUCE MONSTER DEFENSE PER HIT　　　　　　-n 每次擊中降低怪物防禦<br>
+				DAMAGE TO DEMONS %　　　　　　　　　　　　+n% 對惡魔的傷害<br>
+				DAMAGE TO UNDEAD %　　　　　　　　　　　　+n% 對不死生物的傷害<br>
+				ATTACK RATING AGAINST DEMONS　　　　　　　+n 對抗惡魔準確率<br>
+				ATTACK RATING AGAINST UNDEAD　　　　　　　+n 對抗不死生物準確率<br>
+				THROWABLE　　　　　　　　　　　　　　　　 可投擲<br>
+				ELEMENTAL SKILL　　　　　　　　　　　　　 +n 火焰技能<br>
+				ALL SKILL LEVELS　　　　　　　　　　　　　+n 所有技能<br>
+				ATTACKER TAKES LIGHTNING DMG OF　　　　　 攻擊者受到電擊傷害 n
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>7</h3>
+			<p>
+				…<br>
+				ATTACK FREEZES TARGET　　　　　　　　　　 凍結目標 +n<br>
+				CHANCE OF OPEN WOUNDS　　　　　　　　　　 n% 撕開傷口機會<br>
+				CHANCE OF CRUSHING BLOW　　　　　　　　　 n% 造成壓碎打擊的幾率<br>
+				KICK DAMAGE　　　　　　　　　　　　　　　 +n 腳踢傷害<br>
+				MANA AFTER EACH KILL　　　　　　　　　　　+n 點法力在每殺一個敵人後取得<br>
+				LIFE AFTER EACH DEMON KILL　　　　　　　　+n 生命在殺死每一個惡魔後自動取得<br>
+				CHANCE OF DEADLY STRIKE　　　　　　　　　 n% 致命攻擊<br>
+				FIRE ABSORBS %　　　　　　　　　　　　　　火焰吸收 n%<br>
+				FIRE ABSORBS　　　　　　　　　　　　　　　+n 火焰吸收<br>
+				LIGHTNING ABSORBS %　　　　　　　　　　　 閃電吸收 n%<br>
+				LIGHTNING ABSORBS　　　　　　　　　　　　 +n 閃電吸收<br>
+				MAGIC ABSORBS %　　　　　　　　　　　　　 魔法吸收 n%<br>
+				MAGIC ABSORBS　　　　　　　　　　　　　　 +n 魔法吸收<br>
+				COLD ABSORBS %　　　　　　　　　　　　　　寒冷吸收 n%<br>
+				COLD ABSORBS　　　　　　　　　　　　　　　+n 寒冷吸收<br>
+				SLOWS TARGET BY %　　　　　　　　　　　　 使目標減慢 n%<br>
+				AURA　　　　　　　　　　　　　　　　　　　等級 n ～靈氣賦予（技能代號）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>8</h3>
+			<p>
+				INDESTRUCTIBLE　　　　　　　　　　　　　　無法破壞<br>
+				CANNOT BE FROZEN　　　　　　　　　　　　　無法冰凍<br>
+				REANIMATE　　　　　　　　　　　　　　　　 （殺死怪物後復活為）<br>
+				PIERCE ATTACK %　　　　　　　　　　　　　 穿刺攻擊<br>
+				FIRE MAGIC ARROWS OR BOLTS　　　　　　　　射出魔法箭矢<br>
+				FIRE EXPLOSIVE ARROWS OR BOLTS　　　　　　箭矢或十字弓彈火焰爆炸<br>
+				MIN THROW DMG NV　　　　　　　　　　　　　（增加百分比最小遠程攻擊）<br>
+				MAX THROW DMG NV　　　　　　　　　　　　　（增加百分比最大遠程攻擊）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>9</h3>
+			<p>
+				…<br>
+				ATTACK VS MONSTER　　　　　　　　　　　　 +n% 轉為命中率相對 ～<br>
+				DAMAGE VS MONSTER　　　　　　　　　　　　 +n% 轉為傷害相對 ～<br>
+				FADE　　　　　　　　　　　　　　　　　　　（人物變透明）<br>
+				ADD SKILL TAB　　　　　　　　　　　　　　 +n ～系技能
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>10</h3>
+			<p>
+				…<br>
+				INCREASED SOCKETS　　　　　　　　　　　　 有凹槽<br>
+				SKILL ON ATTACK　　　　　　　　　　　　　 打擊時有 n% 機會施展等級 n ～<br>
+				SKILL ON KILL　　　　　　　　　　　　　　 當你殺死一敵人 n% 機會施展等級 n ～<br>
+				SKILL ON DEATH　　　　　　　　　　　　　　當你死去 n% 機會施展等級 n ～<br>
+				SKILL ON HIT　　　　　　　　　　　　　　　打擊時有 n% 機會施展等級 n ～<br>
+				SKILL ON LEVELUP　　　　　　　　　　　　　當你升級 n% 機會施展等級 n ～<br>
+				SKILL ON GET HIT　　　　　　　　　　　　　（被）攻擊時有 n% 機會施展等級 n ～<br>
+				CHARGED SKILL　　　　　　　　　　　　　　 等級 n ～ (n/n 聚氣)
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>11</h3>
+			<p>
+				…<br>
+				DEFENSE (ON LVL)　　　　　　　　　　　　　+n 防禦（以角色等級決定）<br>
+				ENHANCED DEFENSE (ON LVL)　　　　　　　　 +n% 防禦強化（以角色等級決定）<br>
+				LIFE (ON LVL)　　　　　　　　　　　　　　 +n 生命（以角色等級決定）<br>
+				MANA (ON LVL)　　　　　　　　　　　　　　 +n 法力（以角色等級決定）<br>
+				MAXIMUM DAMAGE (ON LVL)　　　　　　　　　 +n 最大傷害值（以角色等級決定）<br>
+				ENHANCED MAXDMG (ON LVL)　　　　　　　　　+n% 增加傷害上限（以角色等級決定）<br>
+				STRENGTH (ON LVL)　　　　　　　　　　　　 +n 力量（以角色等級決定）<br>
+				DEXTERITY (ON LVL)　　　　　　　　　　　　+n 敏捷（以角色等級決定）<br>
+				ENERGY (ON LVL)　　　　　　　　　　　　　 +n 精力（以角色等級決定）<br>
+				VITALITY (ON LVL)　　　　　　　　　　　　 +n 體力（以角色等級決定）<br>
+				ATT RATING (ON LVL)　　　　　　　　　　　 +n 準確率（以角色等級決定）<br>
+				BONUS TO ATT RATING % (ON LVL)　　　　　　n% 額外的攻擊準確率加成（同上）<br>
+				MAXIMUM COLD DMG (ON LVL)　　　　　　　　 +n 寒冷傷害最大值（以角色等級決定）<br>
+				MAXIMUM FIRE DMG (ON LVL)　　　　　　　　 +n 火焰傷害最大值（以角色等級決定）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>12</h3>
+			<p>
+				MAXIMUM LIGHTNING DMG (ON LVL)　　　　　　+n 閃電傷害最大值（以角色等級決定）<br>
+				MAXIMUM POISON DMG (ON LVL)　　　　　　　 +n 毒素傷害最大值（以角色等級決定）<br>
+				COLD RESISTANCE % (ON LVL)　　　　　　　　抗寒 n%（以角色等級決定）<br>
+				FIRE RESISTANCE % (ON LVL)　　　　　　　　抗火 n%（以角色等級決定）<br>
+				LIGHTNING RESISTANCE % (ON LVL)　　　　　 抗閃電 n%（以角色等級決定）<br>
+				POISON RESISTANCE % (ON LVL)　　　　　　　抗毒 n%（以角色等級決定）<br>
+				ABSORBS COLD DAMAGE (ON LVL)　　　　　　　+n 吸收冰冷傷害（以角色等級決定）<br>
+				ABSORBS FIRE DAMAGE (ON LVL)　　　　　　　+n 吸收火焰傷害（以角色等級決定）<br>
+				ABSORBS LIGHTNING DAMAGE (ON LVL)　　　　 +n 吸收閃電傷害（以角色等級決定）<br>
+				ATTACKER TAKES DAMAGE OF (ON LVL)　　　　 攻擊者受到傷害 n（以角色等級決定）<br>
+				EXTRA GOLD FROM MONSTERS % (ON LVL)　　　 n% 額外金幣從怪物身上取得（同上）<br>
+				CHANCE OF GETTING MAGIC ITEMS % (ON LVL)　n% 更佳的機會取得魔法裝備（同上）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>13</h3>
+			<p>
+				CHANCE OF CRUSHING BLOW (ON LVL)　　　　　n% 造成壓碎性打擊的機率（同上）<br>
+				CHANCE OF OPEN WOUNDS (ON LVL)　　　　　　n% 撕開傷口機會（以角色等級決定）<br>
+				KICK DAMAGE (ON LVL)　　　　　　　　　　　+n 腳踢傷害（以角色等級決定）<br>
+				CHANCE OF DEADLY STRIKE (ON LVL)　　　　　n% 致命攻擊（以角色等級決定）<br>
+				REPAIR 1 DURABILITY IN SECONDS　　　　　　回復裝備耐久度 n 於 n 秒內<br>
+				REPLENISH 1 QUANTITY IN SECONDS　　　　　 回復數量<br>
+				INCREASED STACK SIZE　　　　　　　　　　　增加的空間
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>14</h3>
+			<p>
+				…
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>15</h3>
+			<p>
+				…
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>16</h3>
+			<p>
+				…<br>
+				ITEM_PIERCE_COLD　　　　　　　　　　　　　　-n% 對敵人冰凍系抗性<br>
+				ITEM_PIERCE_FIRE　　　　　　　　　　　　　　-n% 對敵人火焰系抗性<br>
+				ITEM_PIERCE_LTNG　　　　　　　　　　　　　　-n% 對敵人雷電系抗性<br>
+				ITEM_PIERCE_POIS　　　　　　　　　　　　　　-n% 對敵人毒素系抗性
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>17</h3>
+			<p>
+				…<br>
+				PASSIVE_FIRE_MASTERY　　　　　　　　　　　　+n% 轉為火焰技能傷害<br>
+				PASSIVE_LTNG_MASTERY　　　　　　　　　　　　+n% 轉為雷電技能傷害<br>
+				PASSIVE_COLD_MASTERY　　　　　　　　　　　　+n% 轉為冰凍技能傷害<br>
+				PASSIVE_POIS_MASTERY　　　　　　　　　　　　+n% 轉為毒素技能傷害<br>
+				PASSIVE_FIRE_PIERCE　　　　　　　　　　　　 -n% 對敵人火焰系抗性<br>
+				PASSIVE_LTNG_PIERCE　　　　　　　　　　　　 -n% 對敵人雷電系抗性<br>
+				PASSIVE_COLD_PIERCE　　　　　　　　　　　　 -n% 對敵人冰凍系抗性<br>
+				VPASSIVE_POIS_PIERCE　　　　　　　　　　　　-n% 對敵人毒素系抗性<br>
+				PASSIVE_DODGE　　　　　　　　　　　　　　　 （閃避）<br>
+				PASSIVE_AVOID　　　　　　　　　　　　　　　 （躲避）<br>
+				PASSIVE_EVADE　　　　　　　　　　　　　　　 （迴避）<br>
+				PASSIVE_WARMTH　　　　　　　　　　　　　　　（熱情）
+			</p>
+		</section>
+		<hr id='anchor2'>
+		<section>
+			<h3>STATE</h3>
+			<p>
+				11111100 63　亞馬遜<br>
+				10111010 93　女武神<br>
+				11101110 119 刺客<br>
+				11010001 139 狼人<br>
+				00110001 140 熊人<br>
+				01001001 146 隱形<br>
+				00001101 176 吸血鬼塔格奧<br>
+				10001101 177 冥河娃娃<br>
+				<br>
+				10110001 141 血漣漪  <br>
+				01111001 158 刃之守衛<br>
+				11110101 175 套装光芒<br>
+				<br>
+				00000001 128 防禦神殿<br>
+				10000001 129 戰鬥神殿<br>
+				01000001 130 抗電神殿<br>
+				11000001 131 抗火神殿<br>
+				00100001 132 抗寒神殿<br>
+				10100001 133 抗毒神殿<br>
+				01100001 134 技能神殿<br>
+				11100001 135 法力重生神殿<br>
+				00010001 136 耐力神殿<br>
+				10010001 137 經驗神殿
+			</p>
+		</section>
+		<hr id='anchor3'>
+		<section>
+			<h3>REANIMAT</h3>
+			<p>
+				156 安達利爾<br>
+				211 都瑞爾<br>
+				242 墨菲斯托<br>
+				243 暗黑破壞神<br>
+				544 巴爾
+			</p>
+		</section>
+		<hr id='anchor4'>
+		<section>
+			<h3>Skill Id (9 bits)</h3>
+			<p>
+				<script>
+					function f1(x)
+					{
+						return x+((x<10)?'&nbsp;':'')+((x<100)?'&nbsp;':'')+'　';
+					}
+
+					function f2(x)
+					{
+						let g=['0','0','0','0','0','0','0','0','0'];
+						let h=x.toString(2);
+
+						for(let n=0;n<h.length;n++) g[n]=h.charAt(h.length-n-1);
+
+						return g.join('') + '　　';
+					}
+
+					function f3(x)
+					{
+						return x+'<br>';
+					}
+
+					function f4(x,y)
+					{
+						for(let n=x;n<x+y.length;n++) document.write(f1(n)+f2(n)+f3(y[n-x]));
+
+						if(x<251) document.write('<br>');
+					}
+
+					f4(6,['魔法箭','火焰箭','內視','致命攻擊','戳刺','冰箭','多重箭','閃避','威力一擊','毒槍','爆裂箭','慢速箭','躲避','刺爆','閃電球','急凍箭','導引箭','刺入','充能一擊','瘟疫標槍','砲轟','犧牲之箭','誘餌','迴避','擊退','凍結之箭','女武神','穿刺','閃電攻擊','閃電之怒']);
+					f4(36,['火彈','暖氣','充能彈','冰彈','冰封裝甲','地獄之火','靜態力場','心靈傳動','霜之新星','冰風暴','熾烈之徑','火球','新星','閃電','碎冰甲','火牆','強化','連鎖閃電','傳送','冰尖柱','隕石','雷雲風暴','能量護盾','暴風雪','寒冰裝甲','支配火焰','九頭海蛇','支配閃電','冰封球','支配冰冷']);
+					f4(66,['傷害加深','牙','白骨裝甲','支配骷髏','骷髏復甦','微暗靈視','削弱','淬毒匕首','屍體爆炸','黏土石魔','攻擊反噬','恐懼','骨牆','支配石魔','復甦骷髏法師','迷亂','偷取生命','毒爆','骨矛','鮮血石魔','吸引','衰老','骨牢','召喚反抗','鋼鐵石魔','降低抵抗','劇毒新星','白骨之魂','火焰石魔','重生']);
+					f4(96,['犧牲','重擊','力量','祈禱','抗火','聖光彈','聖火','刺針','反抗','抗冰冷','白熱','突擊','祝福瞄準','淨化','抗電','復仇','祝福之鎚','專注','神聖冰凍','精力','轉換','神聖之盾','神聖衝擊','庇護所','冥思','天堂之拳','狂熱','信念','救贖','救助']);
+					f4(126,['重擊','支配長劍','支配斧頭','支配釘頭槌','狂嗥','找尋藥劑','跳躍','雙手揮擊','支配長棍','支配飛擲','支配長矛','嘲弄','大叫','擊暈','雙手投擲','增加耐力','找尋物品','跳躍攻擊','專心','鐵布杉','戰鬥狂嗥','狂亂','加速','戰鬥體制','殘酷嚇阻','旋風','狂戰士','自然抵抗','戰嗥','戰鬥指揮']);
+					f4(221,['烏鴉','猛毒花藤','狼人變化','變形術','火風暴','橡木智者','召喚鬼狼','熊人變化','溶漿巨岩','極地風暴','食屍藤','野性狂暴','撞搥','火山爆','颶風裝甲','狼獾之心','召喚狂狼','狂犬病','燄爪','鐮鼬風','太陽藤','饑餓','震波','火山','龍捲風','刺靈','召喚灰熊','狂怒','毀天滅地','暴風']);
+					f4(251,['火焰爆震','支配利爪','心靈戰鎚','虎擊','龍爪','雷電網','刃之守衛','加速','焰拳','雙龍爪','電能守衛','火焰復甦','武器格擋','魔影斗蓬','眼鏡蛇攻擊','刃之怒','能量消解','影子戰士','雷電爪','神龍擺尾','雷光守衛','復甦獄火','心靈爆震','寒冰刃','飛龍在天','亡者守衛','刀刃之盾','毒牙','支配影子','鳳凰攻擊']);
+				</script>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor5'>
+	<section>
+		<h2>Rare Prefixe</h2>
+		<hr>
+		<section>
+			<h3>0</h3>
+			<p>
+				BEAST（野獸之）<br>
+				EAGLE（老鷹之）<br>
+				RAVEN（渡鳥之）<br>
+				VIPER（腹蛇之）<br>
+				GHOUL（食屍鬼之）<br>
+				SKULL（骷髏之）<br>
+				BLOOD（血之）<br>
+				DREAD（恐懼之）<br>
+				SHADOW（陰影之）<br>
+				STORM（暴風之）<br>
+				RUNE（符號之）<br>
+				PLAGUE（瘟疫之）<br>
+				STONE（石塊之）<br>
+				WRAITH（忿怒之）<br>
+				SPIRIT（精神之）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>1</h3>
+			<p>
+				STORM（暴風之）<br>
+				DEMON（惡魔之）<br>
+				CRUEL（殘忍之）<br>
+				EMPYRIAN（埃及之）<br>
+				BRAMBLE（野薔薇之）<br>
+				PAIN（痛苦之）<br>
+				LOATH（不願之）<br>
+				GLYPH（繪畫文字之）<br>
+				IMP（小惡魔之）<br>
+				FIEND（魔鬼之）<br>
+				HAILSTONE（霰之）<br>
+				GALE（狂風之）<br>
+				DIRE（悲慘之）<br>
+				SOUL（靈魂之）<br>
+				BRIMSTONE（硫磺之）<br>
+				CORPSE（屍體）<br>
+				CARRION（腐屍之）<br>
+				ARMAGEDDON（世界末日之）<br>
+				HAVOC（浩劫之）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>2</h3>
+			<p>
+				BITTER（受難之）<br>
+				ENTROPY（幽冥之）<br>
+				CHAOS（混沌之）<br>
+				ORDER（秩序之）<br>
+				RULE（法規）<br>
+				WARP（扭曲之）<br>
+				RIFT（破開之）<br>
+				CORRUPTION（毀滅之）
+			</p>
+		</section>
+	</section>
+	<hr id='anchor6'>
+	<section>
+		<h2>Rare Suffixes</h2>
+		<hr>
+		<section>
+			<h3>0</h3>
+			<p>
+				BITE（咬）<br>
+				SCRATCH（抓）<br>
+				SCALPEL（小刀）<br>
+				FANG（尖牙）<br>
+				GUTTER（槽）<br>
+				THIRST（渴望）<br>
+				RAZOR（剃刀）<br>
+				SCYTHE（鐮刀）<br>
+				EDGE（刃）<br>
+				SAW（鋸）<br>
+				SPLITTER（劈裂）<br>
+				CLEAVER（切肉刀）<br>
+				SEVER（斷裂者）<br>
+				SUNDER（撕碎者）<br>
+				REND（分裂）<br>
+				MANGLER（亂砍者）<br>
+				SLAYER（屠殺者）<br>
+				REAVER（強奪者）<br>
+				SPAWN（重生的）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>1</h3>
+			<p>
+				GNASH（咬牙）<br>
+				STAR（星）<br>
+				BLOW（吹）<br>
+				SMASHER（擊碎者）<br>
+				BANE（剋星）<br>
+				CRUSHER（壓碎者）<br>
+				BREAKER（破壞者）<br>
+				GRINDER（研磨者）<br>
+				CRACK（破裂）<br>
+				MALLET（大頭錘）<br>
+				KNELL（喪鐘）<br>
+				LANCE（長槍）<br>
+				SPIKE（釘）<br>
+				IMPALER（刺穿者）<br>
+				SKEWER（串列者）<br>
+				PROD（刺）<br>
+				SCOURGE（鞭）<br>
+				WAND（杖）<br>
+				WRACK（破滅）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>2</h3>
+			<p>
+				BARB（倒鉤）<br>
+				NEEDLE（針）<br>
+				DART（鏢）<br>
+				BOLT（彈）<br>
+				QUARREL（爭吵）<br>
+				FLETCH（箭雨）<br>
+				FLIGHT（翔）<br>
+				NOCK（搭弦）<br>
+				HORN（角）<br>
+				STINGER（有刺者）<br>
+				QUILL（羽）<br>
+				GOAD（刺棒）<br>
+				BRANCH（枝）<br>
+				SPIRE（螺旋）<br>
+				SONG（歌）<br>
+				CALL（呼減）<br>
+				CRY（哭喊）<br>
+				SPELL（法術）<br>
+				CHANT（曲）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>3</h3>
+			<p>
+				WEAVER（編織者）<br>
+				GNARL（節）<br>
+				VISAGE（臉）<br>
+				CREST（頂飾）<br>
+				CIRCLET（飾環）<br>
+				VEIL（面紗）<br>
+				HOOD（兜帽）<br>
+				MASK（面具）<br>
+				BROW（額頭）<br>
+				CASQUE（盔）<br>
+				VISOR（面甲）<br>
+				COWL（蒙頭斗蓬）<br>
+				HIDE（隱藏）<br>
+				PELT（投擲）<br>
+				CARAPACE（甲殼）<br>
+				COAT（外袍）<br>
+				WRAP（包裹）<br>
+				SUIT（衣）<br>
+				CLOAK（斗蓬）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>4</h3>
+			<p>
+				SHROUD（壽衣）<br>
+				JACK（水兵）<br>
+				MANTLE（披風）<br>
+				GUARD（守衛）<br>
+				BADGE（徽章）<br>
+				ROCK（石塊）<br>
+				AEGIS（庇護）<br>
+				WARD（保護）<br>
+				TOWER（塔）<br>
+				SHIELD（盾護）<br>
+				WING（翼）<br>
+				MARK（標記）<br>
+				EMBLEM（象徵）<br>
+				HAND（手）<br>
+				FIST（拳）<br>
+				CLAW（爪）<br>
+				CLUTCHES（手爪）<br>
+				GRIP（緊握）<br>
+				GRASP（抓取）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>5</h3>
+			<p>
+				HOLD（握）<br>
+				TOUCH（觸碰）<br>
+				FINGER（手指）<br>
+				KNUCKLE（指節）<br>
+				SHANK（小腿）<br>
+				SPUR（踢馬刺）<br>
+				TREAD（踏步）<br>
+				STALKER（潛行者）<br>
+				GREAVES（油渣）<br>
+				BLAZER（發光體）<br>
+				NAILS（釘）<br>
+				TRAMPLE（蹂躪）<br>
+				BROGUES（粗皮鞋）<br>
+				TRACK（追蹤）<br>
+				SLIPPERS（便鞋）<br>
+				CLASP（扣鉤）<br>
+				BUCKLE（釦帶）<br>
+				HARNESS（挽具）<br>
+				LOCK（鎖）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>6</h3>
+			<p>
+				FRINGE（邊飾）<br>
+				WINDING（捲燒）<br>
+				CHAIN（鏈條）<br>
+				STRAP（皮帶）<br>
+				LASH（抽打）<br>
+				CORD（捆綁）<br>
+				KNOT（結）<br>
+				CIRCLE（環）<br>
+				LOOP（圈）<br>
+				EYE（眼）<br>
+				TURN（轉）<br>
+				SPIRAL（螺旋）<br>
+				COIL（盤繞）<br>
+				GYRE（旋迴）<br>
+				BAND（箍）<br>
+				WHORL（螺層）<br>
+				TALISMAN（護符）<br>
+				HEART（心）<br>
+				NOOSE（套索）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>7</h3>
+			<p>
+				NECKLACE（項鍊）<br>
+				COLLAR（項圈）<br>
+				BEADS（串珠）<br>
+				TORC（金絲項圈）<br>
+				GORGET（頸甲）<br>
+				SCARAB（聖甲蟲）<br>
+				WOOD（木）<br>
+				BRAND（品牌）<br>
+				BLUDGEON（棍棒）<br>
+				CUDGEL（木棒）<br>
+				LOOM（織布機）<br>
+				HARP（豎琴）<br>
+				MASTER（專家）<br>
+				BAR（酒吧）<br>
+				HEW（砍）<br>
+				CROOK（鉤）<br>
+				MAR（毀損）<br>
+				SHELL（殼）<br>
+				STAKE（棍子）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>8</h3>
+			<p>
+				PICKET（尖木）<br>
+				PALE（蒼白）<br>
+				FINGER（手指）
+			</p>
+		</section>
+	</section>
+	<hr id='anchor7'>
+	<section>
+		<h2>我的物品</h2>
+		<hr>
+		<section>
+			<h3>法規破壞者（2 RULE 1 BREAKER）</h3>
+			<p>
+				7% 更佳的機會取得魔法裝備　　　12　CHANCE OF GETTING MAGIC ITEMS % (ON LVL)<br>
+				155% 更佳的機會取得魔法裝備　　4　 CHANCE OF GETTING MAGIC ITEMS %<br>
+				+5 照亮範圍　　　　　　　　　　4　 LIGHT RADIUS　　　　　 1001<br>
+				+200 精力最大值　　　　　　　　0　 MAX STAMINA　　　　　　00010111<br>
+				回復體力 +200%　　　　　　　　 1　 HEAL STEMINA PLUS %　　00010011<br>
+				<br>
+				<q>
+					我不喜歡跑沒幾步會累、視野太暗、掉寶率過低的設定，所以製作這護符來用。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>法規編織者（2 RULE 3 WEAER）</h3>
+			<p>
+				7% 更佳的機會取得魔法裝備　　　 12　CHANCE OF GETTING MAGIC ITEMS % (ON LVL)<br>
+				155% 更佳的機會取得魔法裝備　　 4　 CHANCE OF GETTING MAGIC ITEMS %<br>
+				+5 照亮範圍　　　　　　　　　　 4　 LIGHT RADIUS　　　　　　　　　　　 1001<br>
+				+50% 轉為經驗值獲得　　　　　　 4　 ADD EXPERIENCE　　　　　　　　　　 001001100<br>
+				<del>+25 準確率（以角色等級決定）　　11　ATT RATING (ON LVL)　　　　　　　　010011</del><br>
+				+5 體力（以角色等級決定）　　　 11　VITALITY (ON LVL)　　　　　　　　　000101<br>
+				+1 精力（以角色等級決定）　　　 11　ENERGY (ON LVL)　　　　　　　　　　000100<br>
+				<del>回復體力 +200%　　　　　　　　　1　 HEAL STEMINA PLUS %　　　　　　　　00010011</del><br>
+				+40 高速跑步 / 行走　　　　　　 5　 FASTER RUN/WALK　　　　　　　　　　0011110<br>
+				無法冰凍　　　　　　　　　　　　8　 CANNOT BE FROZEN<br>
+				<del>
+					+1.25 抗火（以角色等級決定）　　12　FIRE RESISTANCE % (ON LVL)　　　　 010100<br>
+					+1.25 抗寒（以角色等級決定）　　12　COLD RESISTANCE % (ON LVL)　　　　 010100<br>
+					+1.25 抗閃電（以角色等級決定）　12　LIGHTNING RESISTANCE % (ON LVL)　　010100<br>
+					+1.25 抗毒（以角色等級決定）　　12　POISON RESISTANCE % (ON LVL)　　　 010100<br>
+				</del>
+				<br>
+				<q>
+					惡夢難度開始，抗性不足會被圍毆瞬殺，準確度太低根本打不到人，為了更爽快進行遊戲，但又不至於主角威能，就製作這護符來用。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>不願之心（1 LOATH 6 HEART）</h3>
+			<p>
+				無法冰凍　　　　　　　　　 8　 CANNOT BE FROZEN<br>
+				等級 30 冥思靈氣賦予　　　 7　 AURA　　　　　　　　000111100 01111<br>
+				+5 精力（以角色等級決定）　11　ENERGY (ON LVL)　　 000101<br>
+				+200 法力　　　　　　　　　0　 MAX MANA　　　　　　00010111<br>
+				<br>
+				<q>
+					不想被冰凍和燃燒法力時使用。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>埃及之塔（1 EMPYRIAN 4 TOWER）</h3>
+			<p>
+				+2 所有技能　　　　　　　　　6　ALL SKILL LEVELS　　　　　　010<br>
+				+200% 增強傷害　　　　　　　 0　ENCHANCED DAMAGE %　　　　　000100110<br>
+				200% 額外的攻擊準確率加成　　6　BONUS TO ATTACK RATING %　　001110110<br>
+				+100% 防禦強化　　　　　　　 0　ENHANCED DEFENSE %　　　　　001001100<br>
+				所有抗性 +75　　　　　　　　 2　FIRE RESISTANCE %　　　　　 10111110<br>
+				　　　　　　　　　　　　　　 2　COLD RESISTANCE %　　　　　 10111110<br>
+				　　　　　　　　　　　　　　 2　LIGHTNING RESISTANCE %　　　10111110<br>
+				　　　　　　　　　　　　　　 2　POISON RESISTANCE %　　　　 10111110<br>
+				+200 精力最大值　　　　　　　0　MAX STAMINA　　　　　　　　 00010111<br>
+				回復體力 +255%　　　　　　　 1　HEAL STEMINA PLUS %<br>
+				等級 5 冥思靈氣賦予　　　　　7　AURA　　　　　　　　　　　　000111100 10100<br>
+				+50% 轉為經驗值獲得　　　　　4　ADD EXPERIENCE　　　　　　　001001100<br>
+				<br>
+				<q>
+					模仿各式神殿效果的護符。<br>
+					<br>
+					法力回復神殿與耐力神殿的部分，REGENERATE MANA PLUS % 沒辦法達到 400%，Properties 也沒有耐力不減的屬性，而 STATE 純粹只是外觀效果，實際上沒有真的回復法力，跑步也照常會累，只好另行設計。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>世界末日之渴望（1 ARMAGEDDON 0 THIRST）</h3>
+			<p>
+				+7 致 火風暴　　　5　SINGLE SKILL　　　　100001110<br>
+				+7 致 熔漿巨岩　　5　SINGLE SKILL　　　　101001110<br>
+				+7 致 火山爆　　　5　SINGLE SKILL　　　　010101110<br>
+				+7 致 火山　　　　5　SINGLE SKILL　　　　001011110<br>
+				+7 致 毀天滅地　　5　SINGLE SKILL　　　　100111110<br>
+				+7 德魯依技能　　 4　ADD CLASS SKILL　　 101<br>
+				+6 所有技能　　　 6　ALL SKILL LEVELS　　011<br>
+				<br>
+				<q>
+					將屬性設計在寶石上，讓德魯依鑲嵌於裝備，馬上成為點滿技能的火山德。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>暴風之渴望（1 STORM 0 THIRST）</h3>
+			<p>
+				+7 致 颶風裝甲　　5　SINGLE SKILL　　　　110101110<br>
+				+7 致 鎌鼬風　　　5　SINGLE SKILL　　　　000011110<br>
+				+7 致 龍捲風　　　5　SINGLE SKILL　　　　101011110<br>
+				+7 致 暴風　　　　5　SINGLE SKILL　　　　010111110<br>
+				+7 德魯依技能　　 4　ADD CLASS SKILL　　 101<br>
+				+6 所有技能　　　 6　ALL SKILL LEVELS　　011<br>
+				<br>
+				<q>
+					將屬性設計在寶石上，讓德魯依鑲嵌於裝備，馬上成為點滿技能的暴風德。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>野獸之渴望（0 BEAST 0 THIRST）</h3>
+			<p>
+				+7 致 召喚鬼狼　　5　SINGLE SKILL　　　　110001110<br>
+				+7 致 召喚狂狼　　5　SINGLE SKILL　　　　101101110<br>
+				+7 致 召喚灰熊　　5　SINGLE SKILL　　　　111011110<br>
+				+7 致 猛毒花藤　　5　SINGLE SKILL　　　　011110110<br>
+				+7 致 橡木智者　　5　SINGLE SKILL　　　　010001110<br>
+				+7 德魯依技能　　 4　ADD CLASS SKILL　　 101<br>
+				+6 所有技能　　　 6　ALL SKILL LEVELS　　011<br>
+				<br>
+				<q>
+					將屬性設計在寶石上，讓德魯依鑲嵌於裝備，馬上成為點滿技能的純召德。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>忿怒之渴望（0 WRAITH 0 THIRST）</h3>
+			<p>
+				+7 致 狼人　　　　5　SINGLE SKILL　　　　111110110<br>
+				+7 致 變形術　　　5　SINGLE SKILL　　　　000001110<br>
+				+7 致 野性狂暴　　5　SINGLE SKILL　　　　000101110<br>
+				+7 致 狂怒　　　　5　SINGLE SKILL　　　　000111110<br>
+				+7 致 狼獾之心　　5　SINGLE SKILL　　　　001101110<br>
+				+7 德魯依技能　　 4　ADD CLASS SKILL　　 101<br>
+				+6 所有技能　　　 6　ALL SKILL LEVELS　　011<br>
+				<br>
+				<q>
+					將屬性設計在寶石上，讓德魯依鑲嵌於裝備，馬上成為點滿技能的狂怒狼。
+				</q>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>混沌之渴望（2 CHAOS 0 THIRST）</h3>
+			<p>
+				+7 致 充能彈　　　5　SINGLE SKILL　　　　011001000<br>
+				+7 致 閃電　　　　5　SINGLE SKILL　　　　100011000<br>
+				+7 致 新星　　　　5　SINGLE SKILL　　　　000011000<br>
+				+7 致 連鎖閃電　　5　SINGLE SKILL　　　　101011000<br>
+				+7 致 支配閃電　　5　SINGLE SKILL　　　　111111000<br>
+				+7 法師技能　　　 4　ADD CLASS SKILL　　 100<br>
+				+6 所有技能　　　 6　ALL SKILL LEVELS　　011
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>血之渴望（0 BLOOD 0 THIRST）</h3>
+			<p>
+				0　 MAX LIFE<br>
+				11　LIFE (ON LVL)<br>
+				4　 LIFE %<br>
+				<br>
+				3　 REPLENISH LIFE<br>
+				3　 LIFE STOLEN PER HIT MAX<br>
+				4　 HEAL AFTER KILL
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>母牛關</h2>
+		<p>
+			View → Quests → The Search for Cain → 0001000000011001
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>修改心得</h2>
+		<p>
+			「辨視之書」「城鎮傳送之書」必須搭配「INCREASED STACK SIZE」才能「REPLENISH 1 QUANTITY IN SECONDS」回復數量。數量達上限，回復數量的效果就沒了，消耗後並沒回復數量，「鑰匙」也是。<br>
+			<br>
+			「辨視之書」不能上稀有詞綴，否則無法使用。
+		</p>
+	</section>
+</article>

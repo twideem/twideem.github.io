@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>Huge digital clock</title>
+<style>
+	p,span{color:#666;font-family:微軟正黑體,monospace;font-size:300px;margin:110px 0;text-align:center}
+	span:first-of-type{color:#999}
+	span:last-of-type{color:#ccc}
+</style>
+<p>00<span>:00</span><span>:00</span></p>
+<script>
+	let a=document.getElementsByTagName('p')[0];
+
+	function f(x)
+	{
+		return x.toString().padStart(2,'0');
+	}
+
+	setInterval(()=>{
+		let g=new Date(),h=g.getHours()%12;
+		a.innerHTML=`${f(h?h:12)}<span>:${f(g.getMinutes())}</span><span>:${f(g.getSeconds())}</span>`;
+	},250);
+</script>

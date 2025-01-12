@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>input{width:470px} button{width:60px}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>URL 編碼和解碼</h1>
+		<p>
+			<input><button>編碼</button><button>解碼</button>
+		</p>
+	</header>
+</article>
+<script>
+	$('input').focus();
+	$('button').addEventListener('click',()=>$('input').value=encodeURI($('input').value));
+	$('button',1).addEventListener('click',()=>$('input').value=decodeURI($('input').value));
+</script>

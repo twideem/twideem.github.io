@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>body{background-attachment:fixed;background-image:url('../../images/xpartition/20091231A_05.jpg');background-repeat:no-repeat;background-size:100%}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>工具篇：螢幕畫面補丁</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>什麼是螢幕畫面補丁？</h2>
+		<p>
+			可以修改解析度與視角的工具。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>哪裡可以下載螢幕畫面補丁？</h2>
+		<p>
+			<a href='http://patch.ali213.net/showpatch/6919.html'>http://patch.ali213.net/showpatch/6919.html</a>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>補充：組態檔是亂碼</h2>
+		<p>
+			由於文件是使用簡體中文的編碼，所以我們要編輯組態檔時，會看到裡面的註解都是亂碼。因此我把原文列出來提供參考：<br>
+			<br>
+			<code>
+				[reso]<br>
+				Width=1440 //分辨率<br>
+				Height=900<br>
+				stretch=1  //拉伸, 0=false, 1=true 宽屏去上下黑条<br>
+				<br>
+				[framereduce]<br>
+				rate=1.0   //減幀<br>
+				<br>
+				[camera]<br>
+				dist=0.5   //追尾距離 视距<br>
+				<br>
+				[hack]<br>
+				typemod=0<br>
+			</code>
+			<br>
+			你也可以把原文複製貼上到 ldrset.ini 裡面，然後另存新檔為 UTF-8 的文件，系統問你檔案已存在是否要取代時，請按「是」。或者，直接把那些英文記起來更快。
+		</p>
+	</section>
+</article>
