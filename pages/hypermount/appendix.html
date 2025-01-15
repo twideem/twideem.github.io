@@ -945,6 +945,53 @@
 			雖然用下載的方式保存檔案，以及開啟舊檔的方式讀取檔案，稱不上完美的解決方案，但對不想依賴 HTTP Server 的單機網頁應用程式來說，還是值得採用的手法，相當於瀏覽器擴充程式常用的匯出、匯入，來備份設定檔。
 		</p>
 	</section>
+	<hr id='19880924A'>
+	<section>
+		<h2>用 File System API 讀寫純文字檔案</h2>
+		<p>
+			因為 FileInput 和 FileReader 的使用體驗實在很差，所以在一面倒的呼聲下，正式納入 File System API 標準，可進行更多檔案相關的程式設計任務，連資料夾都能處理了！<br>
+			<br>
+			缺點是它很新，2020 年推出 Chromium 86 正式支援，但那時只有基本功能，完整功能至少要 2022 年推出的 Chromium 102，甚至 Android 的 Chrome 直到 2025 年推出的 132 版才開放 File System API 寫入檔案的權限，其實很多裝置無法正常使用。<br>
+			<br>
+			本文只介紹讀寫純文字檔案的部分～
+		</p>
+		<hr>
+		<section>
+			<h3>lib.js</h3>
+			<p>
+				<textarea class='brush:js'>
+					async function save(){
+						let g = await window.showSaveFilePicker({
+							types:[{
+								description:'Text',
+								accept:{'text/plain':['.txt']}
+							}]
+						});
+						let h = await g.createWritable();
+						await h.write('ABC123');
+						await h.close();
+					}
+
+					async function load(){
+						let [g] = await window.showOpenFilePicker();
+						let h = await g.getFile();
+						console.log(await h.text());
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>test.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;script src='lib.js'&gt;&lt;/script&gt;
+					&lt;button onclick='save()'&gt;Save&lt;/button&gt;
+					&lt;button onclick='load()'&gt;Load&lt;/button&gt;
+                </textarea>
+			</p>
+		</section>
+	</section>
 	<hr id='19890528A'>
 	<section>
 		<h2>data- 標籤屬性和 dataset 物件</h2>
