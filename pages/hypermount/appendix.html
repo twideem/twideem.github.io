@@ -953,13 +953,10 @@
 			<br>
 			缺點是它很新，2020 年推出 Chromium 86 正式支援，但那時只有基本功能，完整功能至少要 2022 年推出的 Chromium 102，甚至 Android 的 Chrome 直到 2025 年推出的 132 版才開放 File System API 寫入檔案的權限，其實很多裝置無法正常使用。<br>
 			<br>
-			本文只介紹讀寫純文字檔案的部分～
-		</p>
-		<hr>
-		<section>
-			<h3>lib.js</h3>
-			<p>
-				<textarea class='brush:js'>
+			本文只介紹讀寫純文字檔案的部分～<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;script&gt;
 					async function save(){
 						let g = await window.showSaveFilePicker({
 							types:[{
@@ -977,20 +974,11 @@
 						let h = await g.getFile();
 						console.log(await h.text());
 					}
-                </textarea>
-			</p>
-		</section>
-		<hr>
-		<section>
-			<h3>test.html</h3>
-			<p>
-				<textarea class='brush:html'>
-					&lt;script src='lib.js'&gt;&lt;/script&gt;
-					&lt;button onclick='save()'&gt;Save&lt;/button&gt;
-					&lt;button onclick='load()'&gt;Load&lt;/button&gt;
-                </textarea>
-			</p>
-		</section>
+				&lt;/script&gt;
+				&lt;button onclick='save()'&gt;Save&lt;/button&gt;
+				&lt;button onclick='load()'&gt;Load&lt;/button&gt;
+            </textarea>
+		</p>
 	</section>
 	<hr id='19890528A'>
 	<section>

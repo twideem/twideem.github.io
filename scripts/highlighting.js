@@ -105,8 +105,8 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 						{regex:/\b\d+\.?\w*/g,css:'value'},
 						{regex:new RegExp(this.getKeywords('as async await break case catch constructor continue default delete do else export extends false finally for from if import in instanceof new null of return static super switch this throw true try typeof undefined while with yield'),'gm'),css:'keyword'},
 						{regex:new RegExp(this.getKeywords('class const function let var void'),'gm'),css:'variable'},
-						{regex:new RegExp(this.getKeywords('defineClass importPackage load loadClass'),'gm'),css:'preprocessor'},
-						{regex:/(&amp;)|(&lt;)|(&gt;)|(\*)|(\^)|(\{)|(\})|(\[)|(\])|(\()|(\))|[!-=+|;:,./]/g,css:'symbol'}];
+						{regex:new RegExp(this.getKeywords('defineClass importPackage loadClass'),'gm'),css:'preprocessor'},
+						{regex:/(&amp;)|(&lt;)|(&gt;)|(!)|(\*)|(\^)|(\{)|(\})|(\[)|(\])|(\()|(\))|[-=+|;:,./]/g,css:'symbol'}];
 		this.forHtmlScript(r.scriptScriptTags);
 	}
 
