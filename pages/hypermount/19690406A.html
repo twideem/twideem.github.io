@@ -1822,65 +1822,86 @@
 	<hr id='ecmascript2017'>
 	<section>
 		<h2>async 和 await</h2>
+		<p>
+			async 用來建立 Promise 非同步函式，await 用來在非同步函式中，等候並接收 Promise 的行為和結果。有這兩個語法，我們可以不寫 Promise 和 then() 而做到同樣的事～
+		</p>
+		<hr>
 		<section>
-			<h4>async</h4>
+			<h3>async</h3>
 			<p>
-				以前要製作非同步函式，得自己在函式裡面 return 一個 Promise 物件出來，現在可以用 <code>async</code> 宣告一個自己會傳回 Promise 的函式：<br>
+				以前要製作非同步函式，得自己在函式裡面 return 一個 Promise 物件出來：<br>
 				<br>
 				<textarea class='brush:js'>
-					async function f()
+					function f()
 					{
-						//故意迴圈三秒鐘
-						let start=new Date().getTime();
-						while(true){
-							if((new Date().getTime()-start)&gt;3000){
-								break;
-							}
-						}
-						//傳回資料
-						return 'Hello!';
+						return Promise.resolve("Hello");
 					}
 
 					f().then(x=&gt;document.write(x));
                 </textarea>
 				<br>
 				<output>
-					（三秒鐘）<br>
-					Hello!
+					Hello!<br>
 				</output>
-			</p>
-		</section>
-		<section>
-			<h4>await</h4>
-			<p>
-				在 async function 內部，可以使用 <code>await</code> 等候接收另一個 async 函式或 Promise 的資料：<br>
+				<br>
+				現在可以用 <code>async</code> 宣告一個自己會傳回 Promise 的函式：<br>
 				<br>
 				<textarea class='brush:js'>
-					async function f1()
+					async function f()
 					{
-						let start=new Date().getTime();
-						while(true){
-							if((new Date().getTime()-start)&gt;3000){
-								break;
-							}
-						}
 						return 'Hello!';
+					}
+
+					f().then(x=&gt;document.write(x));
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>await</h3>
+			<p>
+				在 async function 內部，可以使用 <code>await</code> 等候並接收另一個 async 函式或 Promise 的結果：<br>
+				<br>
+				<textarea class='brush:js'>
+					async function f1(x)
+					{
+						return x;
 					}
 
 					async function f2()
 					{
-						return await f1();
+						console.log(await f1(111));
+						console.log(await f1(222));
+						console.log(await f1(333));
 					}
 
-					f2().then(x=&gt;document.write(x));
+					f2();
                 </textarea>
 				<br>
 				<output>
-					（三秒鐘）<br>
-					Hello!
+					111<br>
+					222<br>
+					333<br>
 				</output>
+				<br>
+				上面的 f2() 相當於：<br>
+				<br>
+				<textarea class='brush:js'>
+					function f2()
+					{
+						f1(111).then(console.log);
+						f1(222).then(console.log);
+						f1(333).then(console.log);
+					}
+                </textarea>
 			</p>
 		</section>
+		<hr>
+		<footer>
+			<p>
+				[*] 直接操作 Promise API 並沒什麼不好，只是要製作非同步函式時，必須間接操作 Promise API 來實現，這就很彆扭，會有重複的事再做一遍的感覺。async 和 await 就是用來製作非同步函式的，並不是用來取代全面取代 Promise API。在直接陳述程式功能的場合，用函數式風格的 Promise API 來設計非同步程式，是很理想的，它本身就是已設計妥當的一整套非同步函式，應該直接操作它，而不是間接包裝成另一種形式！
+			</p>
+		</footer>
 	</section>
 	<hr id='ecmascript2018'>
 	<section>
