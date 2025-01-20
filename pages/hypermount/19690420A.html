@@ -570,7 +570,7 @@
 					   .then(function(){});
             </textarea>
 			<br>
-			注意！Promise 並不是執行序，它本身並沒有執行序的功能，Promise 是用來為非同步程式設計制定一個上下文語義的框架，畢竟在本文提到的場合，執行序只是用來設計非同步運算的一個手段。所以它不叫 Thread，而叫 Promise。如果你需要的是比 setTimeout() 和 setInterval() 更正式一點的執行序，可以用 Web worker。<br>
+			注意！Promise 並不是執行序，它本身並沒有執行序的功能，Promise API 是用來為非同步程式設計制定一個上下文語義的框架，畢竟就本文所舉的例子，執行序只是用來設計非同步運算的一個手段。所以它不叫 Thread，而叫 Promise，它可用來表示非同步運算結果為成功或失敗。如果你需要的是比 setTimeout() 和 setInterval() 更正式一點的執行序，可以用 Web worker。<br>
 			<br>
 			底下範例會在三秒後輸出 Hello! 訊息：<br>
 			<br>
@@ -583,7 +583,7 @@
 				promise.then(console.log);
             </textarea>
 			<br>
-			Promise() 建構函式可接受兩個參數，第一個用在有結果的情況，通常參數名稱取為 resolve，第二個用在沒有結果的情況，通常參數名稱取為 reject。上面範例只對有結果的情況做出反應，沒有結果的話其實可以進一步除錯或防呆。<br>
+			Promise() 建構函式可接受兩個參數，第一個用在有結果的情況，通常參數名稱取為 resolve，第二個用在沒有結果的情況，通常參數名稱取為 reject。範例只對有結果的情況做出反應，沒有結果的話其實可以進一步除錯或防呆。<br>
 			<br>
 			then() 會在 Promise 送出 resolve() 的情況下有反應，它會獲得 resolve() 傳回的值，並將它傳入第一個參數，運作完會再將 Promise 本身傳回，也就是再度獲得同一個 Promise，這也是 then() 可以串接的原因，能持續對同一個 Promise 做出反應。<br>
 			<br>
@@ -592,7 +592,7 @@
 			除了用建構函式設計非同步程式，也可以直接用 Promise.resolve() 和 Promise.reject() 產生有結果的 Promise 和沒有結果的 Promise：<br>
 			<br>
 			<textarea class='brush:js'>
-				Promise.resolve('Hello').then(console.log);
+				Promise.resolve('Bye').then(console.log);
             </textarea>
 		</p>
 	</section>
