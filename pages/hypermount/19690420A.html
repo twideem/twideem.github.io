@@ -546,15 +546,53 @@
 			<tr><td>then(onFulfilled[,onRejected])</td><td>產生 Promise 時執行回呼函式。</td></tr>
 		</table>
 		<p>
+			在 JavaScript 3 時代，想另外開一個執行序來進行非同步運算，都是用 setTimeout()。但 setTimeout() 把要執行的程式寫在回呼函式裡，當非同步運算複雜到一條又一條的執行序，會導致一層又一層的回呼函式：<br>
+			<br>
+			<textarea class='brush:js'>
+				setTimeout(function(){
+					setTimeout(function(){
+						setTimeout(function(){
+							setTimeout(function(){
+								//一場回呼地獄災難
+							},200);
+						},200);
+					},200);
+				},200);
+            </textarea>
+			<br>
+			Promise 可以用串接一個又一個 then() 函式解決回呼地獄的問題：<br>
+			<br>
+			<textarea class='brush:js'>
+				let promise = new Promise(/*這裡先省略 executor 函式*/);
+				promise.then(function(){})
+					   .then(function(){})
+					   .then(function(){})
+					   .then(function(){});
+            </textarea>
+			<br>
+			注意！Promise 並不是執行序，它本身並沒有執行序的功能，Promise 是用來為非同步程式設計制定一個上下文語義的框架，畢竟在本文提到的場合，執行序只是用來設計非同步運算的一個手段。所以它不叫 Thread，而叫 Promise。如果你需要的是比 setTimeout() 和 setInterval() 更正式一點的執行序，可以用 Web worker。<br>
+			<br>
 			底下範例會在三秒後輸出 Hello! 訊息：<br>
 			<br>
 			<textarea class='brush:js'>
-				function f()
-				{
-					return new Promise(x=&gt;setTimeout(()=&gt;x('Hello!'),3000));
-				}
-
-				f().then(x=&gt;document.write(x));
+				let promise = new Promise((resolve,reject)=>{
+					setTimeout(()=>{
+						resolve('Hello!');
+					},3000);
+				});
+				promise.then(console.log);
+            </textarea>
+			<br>
+			Promise() 建構函式可接受兩個參數，第一個用在有結果的情況，通常參數名稱取為 resolve，第二個用在沒有結果的情況，通常參數名稱取為 reject。上面範例只對有結果的情況做出反應，沒有結果的話其實可以進一步除錯或防呆。<br>
+			<br>
+			then() 會在 Promise 送出 resolve() 的情況下有反應，它會獲得 resolve() 傳回的值，並將它傳入第一個參數，運作完會再將 Promise 本身傳回，也就是再度獲得同一個 Promise，這也是 then() 可以串接的原因，能持續對同一個 Promise 做出反應。<br>
+			<br>
+			就像 resolve 對應 then()，reject 的話可以用 catch() 來做反應。<br>
+			<br>
+			除了用建構函式設計非同步程式，也可以直接用 Promise.resolve() 和 Promise.reject() 產生有結果的 Promise 和沒有結果的 Promise：<br>
+			<br>
+			<textarea class='brush:js'>
+				Promise.resolve('Hello').then(console.log);
             </textarea>
 		</p>
 	</section>
