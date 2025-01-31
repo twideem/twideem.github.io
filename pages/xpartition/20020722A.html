@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>DOSBox</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>熱鍵</h2>
+		<table>
+			<tr><td>Ctrl + F11</td><td>減少 CPU speed cycles。</td></tr>
+			<tr><td>Ctrl + F12</td><td>增加 CPU speed cycles。</td></tr>
+			<tr><td>Ctrl + F7</td><td>減少 Frameskip。</td></tr>
+			<tr><td>Ctrl + F8</td><td>增加 Frameskip。</td></tr>
+			<tr><td>Ctrl + F10</td><td>解除 DOSBox 對滑鼠游標的鎖定。</td></tr>
+			<tr><td>Ctrl + F5</td><td>抓取畫面。</td></tr>
+			<tr><td>Ctrl + Alt + F5</td><td>錄製畫面。</td></tr>
+			<tr><td>Ctrl + F6</td><td>以 WAVE 格式錄音。</td></tr>
+			<tr><td>Ctrl + ALT + F8</td><td>以 MIDI 格式錄音。</td></tr>
+			<tr><td>Ctrl + F9</td><td>關閉 DOSBox。</td></tr>
+			<tr><td>Alt + Enter</td><td>切換視窗或全螢幕。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>以百分比控制 CPU 速度</h2>
+		<p>
+			<code>
+				cycles=max<br>
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>驅動光碟機</h2>
+		<p>
+			<code>mount D "D:\"</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>驅動含音軌光碟機</h2>
+		<p>
+			<code>mount D "D:\" -usecd 0 -ioctl</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>把遊戲掛載成光碟機來執行</h2>
+		<p>
+			<code>
+				mount D "C:\GAME" -t cdrom<br>
+			</code>
+			<br>
+			不要驅動實體光碟機，兩者不能同時存在。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>掛載映像檔</h2>
+		<p>
+			<code>imgmount E "IMAGE.ISO" -t iso</code><br>
+			<br>
+			可將多個映像檔掛在一起，例如：<br>
+			<br>
+			<samp>imgmount E "DISC_1.ISO" "DISC_2.ISO" -t iso</samp><br>
+			<br>
+			遊戲提示要換片時，按 <code>Ctrl + F4</code> 切換 DISC_1.ISO 和 DISC_2.ISO。
+		</p>
+		<hr>
+		<section>
+			<h3>CD 音軌</h3>
+			<p>
+				關於映像檔，ISO 是早期的格式，優點是蔚為標準，缺點是無法包含光碟音軌。有些以 Alcohol 120% 轉為 MDF/MDS 格式的遊戲光碟會含音軌，轉為 ISO 的話就沒有 CD 音源。但 DOSBox 不支援 MDF/MDS 格式，這時我們可以找一些程式工具，轉為 DOSBox 有支援的 BIN/CUE 掛載使用。<br>
+				<br>
+				掛載 CUE 檔的話，BIN 檔名不要亂改，因為 CUE 裡面有 BIN 檔名資訊，會辨識不到。<br>
+				<br>
+				進入 2014 年後，幾乎所有熟知的虛擬光碟軟體，都變相成為綁架軟體了！尤其 DAEMON Tools Lite，英文授權條款明白寫道，想用免費版，就必須接受被植入廣告做為條件（例如強制修改瀏覽器首頁），你沒得選要不要被植入，不願意被植入就不要免費用我們 DAEMON Tools Lite 這產品。裝了以後問題來了，沒辦法後悔，你找不到移除廣告的管道，只能拜谷歌大神看有沒有善心人士提供程式幫你移除，例如 AdwCleaner…但這種「以毒攻毒」的方式划算嗎 XDDD
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>畫面大小</h2>
+		<hr>
+		<section>
+			<h3>視窗尺寸</h3>
+			<p>
+				<code>
+					fullscreen=false<br>
+					windowresolution=800x600<br>
+					output=overlay
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>全螢幕</h3>
+			<p>
+				<code>
+					fullscreen=true<br>
+					windowresolution=original<br>
+					output=surface
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>簡化啟動程式介面</h2>
+		<p>
+			在捷徑後面加入 <code> -noconsole</code>，例如：<br>
+			<br>
+			<samp>"C:\Program Files (x86)\DOSBox-0.74\DOSBox.exe" -noconsole</samp>
+		</p>
+	</section>
+</article>

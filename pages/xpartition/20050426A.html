@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>世紀爭霸 II </h1>
+	</header>
+	<hr>
+	<section>
+		<h2>密技</h2>
+		<table>
+			<tr><td>icheat</td><td>開啟作弊</td></tr>
+			<tr><td>idontcheat</td><td>關掉作弊</td></tr>
+			<tr><td>loot</td><td>得到 10000 資源</td></tr>
+			<tr><td>taxes</td><td>減少 100 資源</td></tr>
+			<tr><td>punish</td><td>對指定目標造成 20 點傷害</td></tr>
+			<tr><td>convert</td><td>把指定目標變成自己的</td></tr>
+			<tr><td>recharge me</td><td>把指定目標能量回復 100%</td></tr>
+			<tr><td>win</td><td>立即勝利</td></tr>
+			<tr><td>toggle fog</td><td>開關迷霧</td></tr>
+			<tr><td>sea monkeys</td><td>立即建造</td></tr>
+			<tr><td>epoch up</td><td>立即升級時代</td></tr>
+			<tr><td>give tech</td><td>增加 50 點技術</td></tr>
+			<tr><td>play god</td><td>上帝模式</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>Windows 8 無法進入遊戲畫面</h2>
+		<p>
+			在 Windows 8 執行《世紀爭霸二》後，遊戲畫面就像自己不斷「最小化」一樣，一直縮小到工作列。<br>
+			<br>
+			這是 explorer.exe 排程起衝突的問題，只能把 explorer.exe 這個處理程序先刪掉，再進入遊戲。退出遊戲後，再啟動 explorer.exe 來恢復 Windows 桌面管理程序。<br>
+			<br>
+			整個動作建議寫在批次檔來執行，用純文字文件輸入如下指令：<br>
+			<br>
+			<code>
+				TASKKILL /F /IM explorer.exe<br>
+				EE2.exe <br>
+				START explorer.exe<br>
+			</code>
+			<br>
+			儲存為 EE2.bat 後，放在安裝《世紀爭霸二》的資料夾裡面。以後都改用 EE2.bat 來執行遊戲。<br>
+			<br>
+			資料片也是同樣的道理，重新用空白的純文字文件，輸入如下指令：<br>
+			<br>
+			<code>
+				TASKKILL /F /IM explorer.exe<br>
+				EE2X.exe <br>
+				START explorer.exe<br>
+			</code>
+			<br>
+			然後儲存為 EE2X.bat。
+		</p>
+	</section>
+</article>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>瀏覽器物件 (BOM)</h1>
+		<p>
+			為了有別於 W3C 制定的 DOM 規範，早先瀏覽器為了控制網頁裡面結構所準備出來的類別庫，被稱為 BOM (Browser Object Model)。以現在的使用情況來看，你可以視它為操縱整個瀏覽器的 API。<br>
+			<br>
+			BOM 的特徵是，它不需要使用 new 來建立，因為瀏覽器啟動時自動幫我們建立好這些物件。所以使用 BOM 的物件可以發現名稱都是小寫開頭，表示這些是變數名稱，或者說是指向物件的參照。<br>
+			<br>
+			然而，BOM 其實不是標準規範的一部分，也就是 W3C 並未將這些函式庫列為共通規格。BOM 之所以被廣泛使用，是因為這些功能從 Netscape 制定這套 JavaScript 的類別庫以來，就被其它跟進的瀏覽器沿用至今，長年以來大家都使用這套類別庫寫 JavaScript 程式，所以現在即使覺得它不適合做為規範，W3C 也很難更動它，否則幾乎所有程式都無法正常執行。<br>
+			<br>
+			總而言之 BOM 是舊時代的東西，可視為 HTML 4.01 時代的 JavaScript 開發慣例。進入 HTML5 時代，W3C 將 BOM 的 document 物件獨立出來，制定新的 Document DOM 來相容新舊時代的問題，讓我們以這個規範來改善 BOM 的架構。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>document</h2>
+		<p>
+			早期 JavaScript 用來直接控制「網頁」或者說是「BODY 標籤」的物件，但有些屬於「HEAD 標籤」的訊息也被放在 document 存取。
+		</p>
+		<table>
+			<tr><td>alinkColor</td><td>存取網頁的 ALINKCOLOR 屬性。（超鏈結作用中的顏色）</td></tr>
+			<tr><td>alinkColor</td><td>存取網頁的 ALINKCOLOR 屬性。（超鏈結作用中的顏色）</td></tr>
+			<tr><td>bgColor</td><td>存取網頁的 BGCOLOR 屬性。（網頁背景色）</td></tr>
+			<tr><td>close()</td><td>關閉 open() 開啟的資料流。</td></tr>
+			<tr><td>cookie</td><td>存取 COOKIE。（一種保存使用者資料的機制）</td></tr>
+			<tr><td>domain</td><td>取得網頁所在伺服器的網域名稱。</td></tr>
+			<tr><td>fgColor</td><td>存取網頁的 FGCOLOR 屬性。（網頁前景色）</td></tr>
+			<tr><td>formName</td><td>藉由 FORM 標籤的 NAME 屬性來存取填表。</td></tr>
+			<tr><td>lastModified</td><td>取得網頁最後修改日期。</td></tr>
+			<tr><td>linkColor</td><td>存取網頁的 LINKCOLOR 屬性。（超鏈結文字的顏色）</td></tr>
+			<tr><td>onclick</td><td>在網頁上單擊滑鼠時觸發事件。</td></tr>
+			<tr><td>ondblclick</td><td>在網頁上雙擊滑鼠時觸發事件。</td></tr>
+			<tr><td>onkeydown</td><td>在網頁上按下鍵盤時觸發事件。</td></tr>
+			<tr><td>onkeypress</td><td>在網頁上按下鍵盤的字母鍵或數字鍵時觸發事件。</td></tr>
+			<tr><td>onkeyup</td><td>在網頁上放開鍵盤時觸發事件。</td></tr>
+			<tr><td>onmousedown</td><td>在網頁上按下滑鼠時觸發事件。</td></tr>
+			<tr><td>onmouseup</td><td>在網頁上放開滑鼠時觸發事件。</td></tr>
+			<tr><td>open()</td><td>開啟資料流給 write() 或 writeln() 使用。</td></tr>
+			<tr><td>referrer</td><td>取得先前網頁的網址。</td></tr>
+			<tr><td>title</td><td>存取網頁的 TITLE 屬性。（標題文字）</td></tr>
+			<tr><td>URL</td><td>取得網頁的網址。</td></tr>
+			<tr><td>vlinkColor</td><td>存取網頁的 VLINKCOLOR 屬性。（超鏈結作用後的顏色）</td></tr>
+			<tr><td>write()</td><td>在網頁寫入資料。</td></tr>
+			<tr><td>writeln()</td><td>在網頁寫入資料並附加 \n 字元。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>document.anchors</h2>
+		<p>
+			早期 JavaScript 用來直接控制「錨點」的物件。所謂「錨點」是指 A 標籤使用 NAME 屬性設定的超鏈結，它可以讓瀏覽者跳躍到同一張網頁中某個超鏈結位置，而不是鏈結新的網頁。
+		</p>
+		<table>
+			<tr><td>length</td><td>取得錨點數量。</td></tr>
+			<tr><td>name</td><td>存取錨點名稱。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>document.forms</h2>
+		<p>
+			早期 JavaScript 用來直接控制「填表」或者說是「FORM 標籤」的物件。
+		</p>
+		<table>
+			<tr><td>action</td><td>取得填表的 ACTION 屬性值。（處理資料的程式）</td></tr>
+			<tr><td>elements[索引值]</td><td>取得填表底下的組件。</td></tr>
+			<tr><td>encoding</td><td>取得填表的 ENCTYPE 屬性值。（傳送資料的編碼）</td></tr>
+			<tr><td>length</td><td>取得填表的數量。</td></tr>
+			<tr><td>method</td><td>取得填表的 METHOD 屬性。（傳送資料的方式）</td></tr>
+			<tr><td>name</td><td>取得填表的 NAME 屬性。（名稱）</td></tr>
+			<tr><td>onreset</td><td>填表重設時觸發事件。</td></tr>
+			<tr><td>onsubmit</td><td>填表遞交時觸發事件。</td></tr>
+			<tr><td>reset()</td><td>重設填表。</td></tr>
+			<tr><td>submit()</td><td>遞交填表。</td></tr>
+			<tr><td>target</td><td>取得填表的 TARGET 屬性。（顯示回報資料的方式）</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>document.images</h2>
+		<p>
+			早期 JavaScript 用來直接控制「影像」或者說是「IMG 標籤」的物件。
+		</p>
+		<table>
+			<tr><td>align</td><td>存取圖片的 ALIGN 屬性。（對齊方式）</td></tr>
+			<tr><td>alt</td><td>存取圖片的 ALT 屬性。（替代文字）</td></tr>
+			<tr><td>border</td><td>存取圖片的 BORDER 屬性。（邊框大小）</td></tr>
+			<tr><td>complete</td><td>取得圖片是否載入的狀態。</td></tr>
+			<tr><td>height</td><td>存取圖片的 HEIGHT 屬性。（高度）</td></tr>
+			<tr><td>hspace</td><td>存取圖片的 HSPACE 屬性。（左右側的空白間隔）</td></tr>
+			<tr><td>length</td><td>取得圖片的數量。</td></tr>
+			<tr><td>lowsrc</td><td>存取替代圖片的設定值。</td></tr>
+			<tr><td>name</td><td>存取圖片的 NAME 屬性。（名稱）</td></tr>
+			<tr><td>onabort</td><td>載入圖片的過程發生中斷時觸發事件。</td></tr>
+			<tr><td>onerror</td><td>載入圖片失敗時觸發事件。</td></tr>
+			<tr><td>onload</td><td>載入圖片成功時觸發事件。</td></tr>
+			<tr><td>src</td><td>存取圖片的 SRC 屬性。（圖檔與位置）</td></tr>
+			<tr><td>title</td><td>存取圖片的 TITLE 屬性。（滑鼠快顯標籤文字）</td></tr>
+			<tr><td>useMap</td><td>存取圖片的 USEMAP 屬性。（影像地圖）</td></tr>
+			<tr><td>vspace</td><td>存取圖片的 VSPACE 屬性。（上下空白的間隔）</td></tr>
+			<tr><td>width</td><td>存取圖片的 WIDTH 屬性。（寬度）。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>document.links</h2>
+		<p>
+			早期 JavaScript 用來直接控制「超鏈結」或者說是「A 標籤」的物件。
+		</p>
+		<table>
+			<tr><td>hash</td><td>存取超鏈結的 NAME 屬性。（錨點）</td></tr>
+			<tr><td>host</td><td>取得鏈結的伺服器主機名稱與埠號。</td></tr>
+			<tr><td>hostname</td><td>取得鏈結的伺服器主機名稱。</td></tr>
+			<tr><td>href</td><td>存取超鏈結的 HREF 屬性。（鏈結目標）</td></tr>
+			<tr><td>length</td><td>取得超鏈結的數量。</td></tr>
+			<tr><td>onclick</td><td>按下超鏈結時觸發事件。</td></tr>
+			<tr><td>onmouseout</td><td>滑鼠移過超鏈結時觸發事件。</td></tr>
+			<tr><td>onmouseover</td><td>滑鼠移至超鏈結時觸發事件。</td></tr>
+			<tr><td>pathname</td><td>存取鏈結的檔案路徑。</td></tr>
+			<tr><td>port</td><td>取得鏈結目標的埠號。</td></tr>
+			<tr><td>protocol</td><td>取得鏈結目標的通訊協定。</td></tr>
+			<tr><td>search</td><td>取得鏈結目標的查詢參數。</td></tr>
+			<tr><td>target</td><td>存取超鏈結的 TARGET 屬性。（顯示目標的方式）</td></tr>
+			<tr><td>innerText</td><td>存取超鏈結顯示的文字內容。（建議改用 innerHTML）</td></tr>
+		</table>
+		<p>
+			假設網頁的第一個超鏈結如下：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;a href='http://twideem.or:8888/app/main.html?args=0'&gt;
+					LINK
+				&lt;/a&gt;
+            </textarea>
+			<br>
+			那使用 document.links[0] 分別傳回的值為：
+		</p>
+		<table>
+			<tr><td style='width:40%'>document.links[0].host</td><td>傳回 twideem.or:8888</td></tr>
+			<tr><td>document.links[0].hostname</td><td>傳回 twideem.or</td></tr>
+			<tr><td>document.links[0].pathname</td><td>傳回 /app/main.html</td></tr>
+			<tr><td>document.links[0].port</td><td>傳回 8888</td></tr>
+			<tr><td>document.links[0].protocol</td><td>傳回 http</td></tr>
+			<tr><td>document.links[0].search</td><td>傳回 ?args=0</td></tr>
+		</table>
+		<p>
+			對於解析網址相當實用！
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>event</h2>
+		<p>
+			event 物件可用來獲取系統事件之傳遞的訊息。
+		</p>
+		<table>
+			<tr><td>altKey</td><td>鍵盤事件發生時，以 Boolean 值取得 Alt 鍵被按下的狀態。</td></tr>
+			<tr><td>ctrlKey</td><td>鍵盤事件發生時，以 Boolean 值取得 Ctrl 鍵被按下的狀態。</td></tr>
+			<tr><td>height</td><td>onresize 事件發生時，取得作用區域的高度。</td></tr>
+			<tr><td>pageX</td><td>滑鼠事件發生時，取得游標所在網頁的水平座標。</td></tr>
+			<tr><td>pageY</td><td>滑鼠事件發生時，取得游標所在網頁的水平座標。</td></tr>
+			<tr><td>screenX</td><td>滑鼠事件發生時，取得游標所在螢幕的水平座標。</td></tr>
+			<tr><td>screenY</td><td>滑鼠事件發生時，取得游標所在螢幕的垂直座標。</td></tr>
+			<tr><td>shiftKey</td><td>鍵盤事件發生時，以 Boolean 值取得 Shift 鍵被按下的狀態。</td></tr>
+			<tr><td>target</td><td>取得發生事件的來源物件。</td></tr>
+			<tr><td>type</td><td>取得事件的種類。</td></tr>
+			<tr><td>which</td><td>鍵盤或滑鼠事件發生時，取得按下的鍵。</td></tr>
+			<tr><td>width</td><td>onresize 事件發生時，取得作用區域的寬度。</td></tr>
+			<tr><td>x</td><td>滑鼠事件發生時，取得游標所在標籤區域的水平座標。</td></tr>
+			<tr><td>y</td><td>滑鼠事件發生時，取得游標所在標籤區域的垂直座標。</td></tr>
+		</table>
+		<p>
+			這個物件詭異的是，它在 Netscape 相容瀏覽器的存取方式，是隱含在函式的參數裡面。例如：<br>
+			<br>
+			<code>
+				function f(事件參數)<br>
+				{<br>
+				　對事件參數的使用<br>
+				}<br>
+			</code>
+			<br>
+			此外，event 物件的傳遞，只適用於 BOM 物件的 on 系列架構，因此正式的程式結構如下：<br>
+			<br>
+			<code>
+				BOM 物件.on 系列事件=function(事件參數){<br>
+				　對事件參數的使用<br>
+				};
+			</code><br>
+			<br>
+			來個範例，底下程式在你按下「Shift + 空白鍵」時，會顯示文字內容：<br>
+			<br>
+			<textarea class='brush:js'>
+				window.onkeydown=function(x){
+					if(x.shiftKey&&x.which==32) document.write('你按下了 Shift + 空白鍵！');
+				};
+            </textarea>
+			<br>
+			要注意的是！不同瀏覽器，鍵盤值的配置有些不一樣，比如說 Google Chrome 中，在 Num Lock 燈號未亮的狀態下，字母區的數字鍵 5 是 53，九宮格鍵的數字 5 卻是 101，但 Opera Browser 則沒有將數字分為字母區和九宮格區，兩邊的 5 都是 53。<br>
+			<br>
+			再來一個範例，底下程式在你按下滑鼠時，網頁會顯示滑鼠游標的座標位置：<br>
+			<br>
+			<textarea class='brush:js'>
+				window.onmousedown=function(x){
+					document.write(x.screenX+','+x.screenY);
+				};
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>history</h2>
+		<p>
+			history 物件提供追蹤瀏覽網頁紀錄的功能。
+		</p>
+		<table>
+			<tr><td>length</td><td>瀏覽過的網頁數量。</td></tr>
+			<tr><td>back()</td><td>返回上一個網頁。</td></tr>
+			<tr><td>forward()</td><td>返回下一個網頁。</td></tr>
+			<tr><td>go(索引值)</td><td>依索引值回到指定的網頁。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>location</h2>
+		<p>
+			location 物件提供與瀏覽器當前網址相關的功能。
+		</p>
+		<table>
+			<tr><td>hash</td><td>存取瀏覽器網址的錨點。</td></tr>
+			<tr><td>host</td><td>存取瀏覽器網址中伺服器主機名稱與埠號的部分。</td></tr>
+			<tr><td>hostname</td><td>存取瀏覽器網址中伺服器主機名稱的部分。</td></tr>
+			<tr><td>href</td><td>存取瀏覽器網址。</td></tr>
+			<tr><td>pathname</td><td>存取瀏覽器網址中檔案路徑的部分。</td></tr>
+			<tr><td>port</td><td>存取瀏覽器網址中埠號的部分。</td></tr>
+			<tr><td>protocol</td><td>存取瀏覽器網址中通訊協定的部分。</td></tr>
+			<tr><td>reload()</td><td>重新載入網頁。</td></tr>
+			<tr><td>replace(網址)</td><td>以不會增加 history.length 紀錄的方式載入網頁。</td></tr>
+			<tr><td>search</td><td>存取瀏覽器網址中查詢參數的部分。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>navigator</h2>
+		<p>
+			navigator 物件提供與瀏覽器軟體本身相關的功能，通常用來檢查使用者的作業系統、瀏覽器品牌、或者版本，是否符合執行程式的環境條件。
+		</p>
+		<table>
+			<tr><td>appCodeName</td><td>取得瀏覽器的開發代號，通常都是 Mozilla。</td></tr>
+			<tr><td>appName</td><td>取得瀏覽器的名稱。</td></tr>
+			<tr><td>appVersion</td><td>取得瀏覽器版本的詳細資訊。</td></tr>
+			<tr><td>cookieEnabled</td><td>傳回瀏覽器是否啟動 Cookie 功能。</td></tr>
+			<tr><td>mimeTypes</td><td>以陣列傳回瀏覽器支援的 MIME 格式。</td></tr>
+			<tr><td>platform</td><td>取得作業系統平台的類型簡稱。</td></tr>
+			<tr><td>plugins</td><td>以陣列傳回瀏覽器安裝的 Plugin 功能。</td></tr>
+			<tr><td>userAgent</td><td>相當於 appCodeName 加上 appVersion 的資訊。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>screen</h2>
+		<p>
+			screen 物件提供桌面螢幕相關的使用方式。
+		</p>
+		<table>
+			<tr><td>availHeight</td><td>傳回桌面有效高度，或者說不包含工作列的高度。</td></tr>
+			<tr><td>availWidth</td><td>傳回桌面有效寬度，或者說不包含工作列的寬度。</td></tr>
+			<tr><td>colorDepth</td><td>傳回螢幕使用的顏色數量，通常以位元為單位。</td></tr>
+			<tr><td>height</td><td>傳回桌面的高度。</td></tr>
+			<tr><td>width</td><td>傳回桌面的寬度。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>window</h2>
+		<p>
+			window 物件提供許多與瀏覽器視窗程式相關的使用項目。<br>
+			<br>
+			其實 windows 是 BOM 最上層物件，所以像 document 正式的寫法是 window.document。但因為是最上層，所以通常被省略不寫。
+		</p>
+		<table>
+			<tr><td style='width:45%'>alert(訊息)</td><td>顯示訊息用對話視窗。</td></tr>
+			<tr><td>blur()</td><td>讓視窗失去駐點。</td></tr>
+			<tr><td>clearInterval(變數名稱)</td><td>取消 setInterval()。</td></tr>
+			<tr><td>clearTimeout(變數名稱)</td><td>取消 setTimeout()。</td></tr>
+			<tr><td>close()</td><td>關閉新開啟的視窗。</td></tr>
+			<tr><td>closed</td><td>取得視窗是否關閉。</td></tr>
+			<tr><td>confirm()</td><td>顯示確認用對話視窗，會傳回 Boolean 值。</td></tr>
+			<tr><td>defaultStatus</td><td>存取狀態列的預設訊息。</td></tr>
+			<tr><td>focus()</td><td>讓視窗獲得駐點。</td></tr>
+			<tr><td>innerHeight</td><td>取得文件區域的高度。</td></tr>
+			<tr><td>innerWidth</td><td>取得文件區域的寬度。</td></tr>
+			<tr><td>length</td><td>取得頁框數量。</td></tr>
+			<tr><td>moveBy(水平距離,垂直距離)</td><td>依距離移動瀏覽器視窗的座標位置。</td></tr>
+			<tr><td>moveTo(水平座標,垂直座標)</td><td>設定瀏覽器視窗的座標位置。</td></tr>
+			<tr><td>name</td><td>新開啟視窗的名稱。</td></tr>
+			<tr><td>onbeforeunload</td><td>離開網頁前觸發事件。</td></tr>
+			<tr><td>onblur</td><td>瀏覽器視窗失去駐點時觸發事件。</td></tr>
+			<tr><td>onerror</td><td>JavaScript 發生錯誤時觸發事件。</td></tr>
+			<tr><td>onfocus</td><td>瀏覽器視窗獲得駐點時觸發事件。</td></tr>
+			<tr><td>onload</td><td>載入網頁完成時觸發事件。</td></tr>
+			<tr><td>onmove</td><td>瀏覽器視窗移動位置時觸發事件。</td></tr>
+			<tr><td>onresize</td><td>瀏覽器視窗調整尺寸時觸發事件。</td></tr>
+			<tr><td>onscroll</td><td>瀏覽器視窗捲動頁面時觸發事件。</td></tr>
+			<tr><td>onunload</td><td>離開網頁時觸發事件。</td></tr>
+			<tr><td>open(網頁,視窗名稱,選項)</td><td>開啟新的瀏覽器視窗。</td></tr>
+			<tr><td>opener</td><td>取得新視窗是由哪一個視窗開啟。</td></tr>
+			<tr><td>outerHeight</td><td>取得瀏覽器視窗總高度。</td></tr>
+			<tr><td>outerWidth</td><td>取得瀏覽器視窗總寬度。</td></tr>
+			<tr><td>pageXOffset</td><td>取得視窗水平捲動距離。</td></tr>
+			<tr><td>pageYOffset</td><td>取得視窗垂直捲動距離。</td></tr>
+			<tr><td>parent</td><td>應用在頁框中代表母框架。</td></tr>
+			<tr><td>print()</td><td>顯示列印用對話視窗。</td></tr>
+			<tr><td>prompt(訊息,預設值)</td><td>顯示輸入用對話視窗。</td></tr>
+			<tr><td>resizeBy(水平大小,垂直大小)</td><td>依大小調整瀏覽器視窗的尺寸。</td></tr>
+			<tr><td>resizeTo(寬度,高度)</td><td>設定瀏覽器視窗的尺寸。</td></tr>
+			<tr><td>screenX</td><td>瀏覽器視窗在螢幕中的水平位置。</td></tr>
+			<tr><td>screenY</td><td>瀏覽器視窗在螢幕中的重質位置。</td></tr>
+			<tr><td>scrollBy(水平距離,垂直距離)</td><td>依距離捲動頁面。</td></tr>
+			<tr><td>scrollTo(水平位置,垂直位置)</td><td>設定頁面捲動位置。</td></tr>
+			<tr><td>self</td><td>應用在頁框中代表當前框架。</td></tr>
+			<tr><td>setInterval(函式物件,毫秒,參數)</td><td>每隔一段時間就執行程式碼。</td></tr>
+			<tr><td>setTimeout(函式物件,毫秒,參數)</td><td>設定時間一到就執行一次程式碼。</td></tr>
+			<tr><td>status</td><td>存取狀態列的訊息。</td></tr>
+			<tr><td>top</td><td>應用在頁框中代表最上一層框架。</td></tr>
+		</table>
+		<p>
+			setTimeout() 和 setInterval() 的用法，基本上有三種。<br>
+			<br>
+			第一種是傳入函式物件的參照，需要代入參數時，寫在第三個參數以後。例如五秒後執行 alert('hello')，可以這麼寫：<br>
+			<br>
+			<textarea class='brush:js'>
+				setTimeout(alert,5000,'hello');
+            </textarea>
+			<br>
+			注意！setTimeout() 或 setInterval() 第一個參數傳入的是「參照」，也就是函式物件的變數名稱，所以下面這個寫法是錯的：<br>
+			<br>
+			<textarea class='brush:js'>
+				setTimeout(alert(),5000,'hello'); //加上 () 會失效
+            </textarea>
+			<br>
+			第一個參數並不是用來呼叫函式的，而是用來寫遞迴函式的！所以要嘛傳入函式物件的參照進去，不然就直接用匿名函式寫一個函式物件進去，在第一個參數呼叫函式是無法正常讓 setTimeout() 或 setInterval() 運作的。<br>
+			<br>
+			第二種是將函式連參數寫成字串來執行，行為類似 eval()，所以不推薦：<br>
+			<br>
+			<textarea class='brush:js'>
+				setTimeout('alert("hello")',5000);
+            </textarea>
+			<br>
+			第三種是使用匿名函式來呼叫 alert('hello')，避免如上範例寫成字串：<br>
+			<br>
+			<textarea class='brush:js'>
+				setTimeout(function(){
+					alert('hello');
+				},5000);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>window.frames</h2>
+		<p>
+			早期 JavaScript 用來直接控制「頁框」或者說是「FRAME 標籤」的物件。
+		</p>
+		<table>
+			<tr><td>frames[索引值]</td><td>以陣列取得頁框底下的子頁框。</td></tr>
+			<tr><td>name</td><td>存取頁框名稱。</td></tr>
+			<tr><td>length</td><td>取得頁框的數量。</td></tr>
+			<tr><td>onblur</td><td>頁框失去駐點時觸發事件。</td></tr>
+			<tr><td>onfocus</td><td>頁框獲得駐點時觸發事件。</td></tr>
+		</table>
+		<p>
+			為了跨頁存取網頁，常常會用到 top、parent、以及 self 等特殊關鍵字，但坦白說蠻複雜的，往往會寫出這樣的程式：<br>
+			<br>
+			<code>
+				top.frames[1].frames[0]<br>
+				parent.parent.frames[1].frames[0]<br>
+			</code>
+			<br>
+			判斷的基準點，就是以撰寫 JavaScript 的這張網頁出發，往上追蹤看有多少層 parent 可以往上跳。或者一律使用 top 開始一一往下追蹤是最好的辦法。
+		</p>
+	</section>
+</article>

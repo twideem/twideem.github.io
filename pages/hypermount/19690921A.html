@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>百分號編碼</h1>
+		<p>
+			由於 ASCII 字元通用性高，因此出現能夠將各種字元與符號，轉碼為 ASCII 格式的機制。<br>
+			<br>
+			例如可用 ASCII 字元表示中文資料，讓中文在沒有編碼問題的情況下，夾帶於網址中進行傳遞。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>常用百分號編碼表</h2>
+		<p>
+			A 標籤的 HREF 屬性用到「空白字元」時，建議 <code>%20</code> 這中文俗稱「百分號編碼」的 URL Encoding 代替，避免因為不同場合傳遞 URL 資料過程，直接被當作運算符號使用掉，而產生歧義。<br>
+			<br>
+			還有更多符號的 URL Encoding 如下：
+		</p>
+		<table>
+			<tr><td>!</td><td>%21</td></tr>
+			<tr><td>'</td><td>%22</td></tr>
+			<tr><td>#</td><td>%23</td></tr>
+			<tr><td>$</td><td>%24</td></tr>
+			<tr><td>%</td><td>%25</td></tr>
+			<tr><td>&</td><td>%26</td></tr>
+			<tr><td>'</td><td>%27</td></tr>
+			<tr><td>(</td><td>%28</td></tr>
+			<tr><td>)</td><td>%29</td></tr>
+			<tr><td>*</td><td>%2A</td></tr>
+			<tr><td>+</td><td>%2B</td></tr>
+			<tr><td>,</td><td>%2C</td></tr>
+			<tr><td>-</td><td>%2D</td></tr>
+			<tr><td>.</td><td>%2E</td></tr>
+			<tr><td>/</td><td>%2F</td></tr>
+			<tr><td>:</td><td>%3A</td></tr>
+			<tr><td>;</td><td>%3B</td></tr>
+			<tr><td>&lt;</td><td>%3C</td></tr>
+			<tr><td>=</td><td>%3D</td></tr>
+			<tr><td>&gt;</td><td>%3E</td></tr>
+			<tr><td>?</td><td>%3F</td></tr>
+			<tr><td>@</td><td>%40</td></tr>
+			<tr><td>[</td><td>%5B</td></tr>
+			<tr><td>\</td><td>%5C</td></tr>
+			<tr><td>]</td><td>%5D</td></tr>
+			<tr><td>^</td><td>%5E</td></tr>
+			<tr><td>_</td><td>%5F</td></tr>
+			<tr><td>{</td><td>%7B</td></tr>
+			<tr><td>|</td><td>%7C</td></tr>
+			<tr><td>}</td><td>%7D</td></tr>
+			<tr><td>~</td><td>%7E</td></tr>
+		</table>
+		<p>
+			但沒必要一遇到這些符號就使用，因為通常都用各個場合準備的編碼函式來轉換，真的發生問題卻找不到內建函式可用，才考慮手動轉碼。<br>
+			<br>
+			況且各個接受 URL 的不同場合，會導致歧義的字元符號不一樣，所以不見得要將所有符號都轉換為 URL Encoding。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>其它文字與符號</h2>
+		<p>
+			不在上面列表的符號，或者像是中文之類，也想轉碼來看看的話，請使用下列功能：<br>
+			<br>
+			<input type='text' style='width:440px'><input type='button' value='編碼' onclick='f1()'><input type='button' value='解碼' onclick='f2()'><br>
+			<br>
+			因為是轉碼為 ASCII 字元，所以輸入本來就是 ASCII 的 123 或 abc 等於沒作用。
+		</p>
+	</section>
+</article>
+<script>
+	function f1()
+	{
+		$('input').value=encodeURIComponent($('input').value).replace(/!/g,'%21').replace(/\'/g,'%27').replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/\*/g,'%2A');
+	}
+
+	function f2()
+	{
+		$('input').value=decodeURIComponent($('input').value).replace(/\+/g,' ');
+	}
+</script>

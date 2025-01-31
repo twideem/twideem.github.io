@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('java')</script>
+<article>
+	<header>
+		<h1>JavaScript 引擎：Rhino</h1>
+		<p>
+			Rhino 是 Mozilla 以 Java 寫出來的 JavaScript 引擎，長年維護下來，功能穩定。<br>
+			<br>
+			Rhino 只需 java.exe 就能啟動，不需用到 javac.exe，因此 JRE + Rhino 的組合可以取代笨重的 JDK。不想用 Java 語言寫程式、也不想用 Kotlin，不妨試試 Rhino！<br>
+			<br>
+			雖然透過 Rhino 跑 Java 程式，執行性能會明顯下降，但能用 JavaScript 語言快敲程式碼，短時間內敲出一堆 Java 功能來跑，那爽度不是蓋的。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>下載</h3>
+			<p>
+				<a href='http://github.com/mozilla/rhino'>http://github.com/mozilla/rhino</a><br>
+				<br>
+				Java SE 6 和 Java SE 7 有內建 Rhino，但只打包部分功能，所以還是建議下載新版的來用。<br>
+				<br>
+				Rhino 從 1.7.8 版開始，使用 Java SE 8 編譯，所以 Java SE 6/7 能用的最新版只到 1.7.7.2。<br>
+				<br>
+				Java SE 8 起，改內建 Nashorn，兩者語法不相容，所以要從 Rhino 轉換 Nashorn 的話，不妨考慮下載 Rhino 來掛載就好，要比修改程式碼省事。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>直譯 *.js 檔</h3>
+			<p>
+				<output>
+					java -jar rhino.jar *.js
+				</output>
+				<br>
+				使用 -jar 參數的話，CLASSPATH 只能存取 rhino.jar 裡面的檔案，無法存取 JAR 外部的檔案，所以最好改用 -cp 參數：<br>
+				<br>
+				<output>
+					java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
+				</output>
+				<br>
+				此外，若 *.js 原始碼檔案使用不含 BOM 的 UTF-8 字元編碼，在 Windows 會有亂碼的問題。這時要下 <code>-encoding UTF-8</code> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino.jar，也可以下 <code>-Dfile.encoding=UTF-8</code> 參數給 java.exe。<br>
+				<br>
+				其他常用的參數有：
+			</p>
+			<table>
+				<tr><td>-e 檔案</td><td>執行 *.js 檔案。</td></tr>
+				<tr><td>-f 檔案</td><td>讀取純文字文件，並嘗試執行裡面的內容，類似 eval(String)。</td></tr>
+				<tr><td>-opt -1 到 9</td><td>設定編譯的最佳化程度，0 表示關閉最佳化，編譯速度最快，程式品質最差。依次從 1 到 9 提升最佳化程度。還可設定為 -1 表示直譯就好，不用編譯。</td></tr>
+				<tr><td>-strict</td><td>全域範疇預設使用 ECMAScript 5 的嚴格模式，但函式範疇還是要下 "strict mode"。</td></tr>
+				<tr><td>-version 版號</td><td>指定 SpiderMonkey 版號，有 100、110、120、130、140、150、160、170、180、200 可設定。</td></tr>
+				<tr><td>-help</td><td>查閱更多參數。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>編譯 *.js 為 *.class</h3>
+			<p>
+				<output>
+					java -cp rhino.jar org.mozilla.javascript.tools.jsc.Main script.js
+				</output>
+				<br>
+				編譯出來的 *.class 是 Rhino 的 NativeFunction 物件，所以只用 java.exe 無法執行，得掛載 Rhino：<br>
+				<br>
+				<output>
+					java -cp .;rhino.jar script
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Interactive mode</h3>
+			<p>
+				<output>
+					java -jar rhino.jar
+				</output>
+				<br>
+				<output>
+					Rhino 1.7.13 2020 09 02<br>
+					js> _
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>基本：使用 Rhino.jar 直譯 JavaScript 程式檔</h3>
+			<p>
+				<a href='#index1'>在 JavaScript 使用 Java API</a><br>
+				<a href='#index2'>調用第三方套件</a><br>
+				<a href='#index3'>在 JavaScript 使用 Java 的資料型態</a><br>
+				<a href='#index4'>調用 Java API 傳入 Java 的類別時</a><br>
+				<a href='#index5'>覆載物件方法與實作介面功能</a><br>
+				<a href='#index6'>多執行緒</a><br>
+				<a href='#index7'>在 *.js 中載入其它 *.js</a><br>
+				<a href='#index8'>最頂層物件</a><br>
+				<a href='#index9'>列出 JavaScript 物件的屬性和方法</a><br>
+				<a href='#index10'>Rhino 內建屬性和函式</a><br>
+				<a href='#index11'>其它 Rhino 的不標準語法</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>進階：使用 JDK 6/7 內建的 Rhino 引擎（非必要，可略過）</h3>
+			<p>
+				<a href='#index12'>在 Java 寫 JavaScript 程式</a><br>
+				<a href='#index13'>使用新版 Rhino 在 Java 寫 JavaScript 程式</a><br>
+				<a href='#index14'>從 Java 傳資料給 JavaScript 程式</a><br>
+				<a href='#index15'>在 Java 載入 *.js 檔案</a><br>
+				<a href='#index16'>直接用 JDK 執行 *.js 檔</a><br>
+				<a href='#index17'>在 JDK 6/7 將 *.js 編譯成 *.class</a><br>
+				<a href='#index18'>進入 JDK 內建的 Interactive mode</a><br>
+				<a href='#index19'>如何取得 Java 內建 JavaScript 引擎的版本</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>應用：Java API 範例集</h3>
+			<p>
+				<a href='#index20'>Swing 視窗程式設計</a><br>
+				<a href='#index21'>播放 WAVE 和 MP3 音樂</a><br>
+				<a href='#index22'>播放 MIDI 音樂</a><br>
+				<a href='#index23'>壓縮與解壓縮 ZIP 檔案</a><br>
+				<a href='#index24'>使用 SQLite 資料庫</a><br>
+				<a href='#index25'>存取剪貼簿文字</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>附錄</h3>
+			<p>
+				<a href='#appendix'>JavaScript 程式設計錦囊</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>站點</h3>
+			<p>
+				<a href='http://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/'>MDN Rhino</a>（頁面已撤除）<br>
+				<a href='http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/'>MDN JavaScript reference</a><br>
+				<a href='http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/'>MDN Standard built-in objects</a><br>
+				<a href='http://ringojs.org'>RingoJS</a>
+			</p>
+		</section>
+	</section>
+	<hr id='index1'>
+	<section>
+		<h2>在 JavaScript 使用 Java API</h2>
+		<p>
+			<textarea class='brush:js'>
+				importPackage(java.util);
+
+				let a = new ArrayList();
+				a.add('AAA');
+				a.add('BBB');
+				a.add('CCC');
+
+				for(let n = 0; n &lt; a.size(); n++){
+					print(a.get(n));
+				}
+            </textarea>
+			<br>
+			<output>
+				AAA<br>
+				BBB<br>
+				CCC
+			</output>
+			<br>
+			用 <code>importPackage()</code> 可以載入套件，就像 import java.util.* 一樣。但預設為不載入任何套件，所以就算是 java.lang.* 的類別也要自己載入。<br>
+			<br>
+			只想載入某個類別的話，用 <code>importClass()</code>。
+		</p>
+	</section>
+	<hr id='index2'>
+	<section>
+		<h2>調用第三方套件</h2>
+		<p>
+			以「<a href='https://www.logitechg.com/zh-tw/innovation/developer-lab.html'>羅技 G 系列開發者實驗室</a>」開放下載的「LED 照明 SDK」為例：<br>
+			<br>
+			<textarea class='brush:js'>
+				importPackage(java.lang);
+				importPackage(com.logitech.gaming);
+
+				LogiLED.LogiLedInit();
+				LogiLED.LogiLedSetLighting(0, 0, 0);
+				Thread.sleep(3000);
+				LogiLED.LogiLedShutdown();
+
+				//要安裝 Logitech G HUB 且軟體執行中，關閉的話不會有反應。
+            </textarea>
+			<br>
+			<output style='font-size:12px'>
+				java -cp .;logiled.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
+			</output>
+			<br>
+			若外部 SDK 的套件名稱，不是 com、java、javax、jdk、org、sun 開頭的話，必須用 <code>Packages</code> 開頭，例如 importPackage(Packages.io.github.twideem)。
+		</p>
+	</section>
+	<hr id='index3'>
+	<section>
+		<h2>在 JavaScript 使用 Java 的資料型態</h2>
+		<p>
+			<textarea class='brush:js'>
+				//boolean
+				let boolean = new java.lang.Boolean(true);
+				print(boolean);
+
+				//byte
+				let byte = new java.lang.Byte(0);
+				print(byte.MAX_VALUE);
+
+				//byte[]
+				let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 8);
+				bytes[0] = 16;
+				bytes[7] = 24;
+				print(bytes[0] + bytes[7]);
+
+				//char[]
+				let chars = java.lang.reflect.Array.newInstance(java.lang.Character.TYPE, 26);
+
+				for(let n = 0; n &lt; chars.length; n++){
+					chars[n] = 65 + n;
+				}
+
+				print(chars[25]);
+				print(java.lang.String(chars));
+            </textarea>
+			<br>
+			<output>
+				true<br>
+				127<br>
+				40<br>
+				90<br>
+				ABCDEFGHIJKLMNOPQRSTUVWXYZ
+			</output>
+			<br>
+			注意！JavaScript 自己也有 Array、Booelan、Date、Math、Number、Object、String 物件，所以要用 Java 的同名類別時，必須用完整套件名稱如 java.lang.String，不要用 importPackage(套件)，因為名稱衝突時優先調用 JavaScript 的同名物件，等於沒載入套件。<br>
+			<br>
+			雖然 JavaScript 沒有 Byte、Character、Double、Float、Integer，但只要是資料型態的類別，一律使用完整套件名稱，保持一致性，可讀性較高，是值得採用的編碼風格。<br>
+			<br>
+			更極端的編碼風格，是一律不載入 java.lang 套件，只要是這套件的類別，一律使用完整名稱。
+		</p>
+	</section>
+	<hr id='index4'>
+	<section>
+		<h2>調用 Java API 傳入 Java 的類別時</h2>
+		<p>
+			在調用 Java API 時，若需要傳入的參數是類別，應該把傳入的變數宣告為 Java 的物件，而不是宣告 JavaScript 的物件傳入。例如需要傳入一個 ArrayList，就 <code>let a = new ArrayList()</code> 然後傳進去，不要宣告 <code>let a = []</code> 再想方設法丟進去，以免發生自動轉型的問題，程式跑起來性能也不理想。<br>
+			<br>
+			其實，就像東西買回來應該先好好看一下說明書，寫 Rhino 程式調用 Java API 裡的東西，也應該先查閱 Java API Specification，看有沒有傳回值？需要傳入哪些物件？掌握好一切，好好去張羅，用起來比較不會遇到問題！<br>
+			<br>
+			查閱 Java API Specification、了解總共需要用到哪些物件、一個個宣告出來用…這雖然需要花費時間，但往往比直接寫 JavaScript 程式碼去碰運氣還要快。碰運氣看 JavaScript 的 Array、String、Number、Objuet 能不能丟進去用，不能時就轉型來轉型去，以我過來人的經驗，反而更花時間，更別說這樣的程式性能會很糟糕。<br>
+			<br>
+			我對 JavaScript 和 Java 兩邊自動轉型的原則是：「盡量讓 Java 物件轉為 JavaScript 物件，這點 Rhino 做得很出色。但盡量不要讓 JavaScript 物件轉 Java 物件，這部分 Rhino 跑得很慢，而且很多意料之外的狀況。」
+		</p>
+	</section>
+	<hr id='index5'>
+	<section>
+		<h2>覆載物件方法與實作介面功能</h2>
+		<hr>
+		<section>
+			<h3>以覆載 Thread 物件的 run() 方法為例</h3>
+			<p>
+				<textarea class='brush:js'>
+					importPackage(java.lang);
+
+					let thread = new Thread({
+						run: function(){
+							print('Hello!');
+						}
+					})
+
+					thread.start();
+                </textarea>
+				<br>
+				<output>
+					Hello!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以實作 Runnable 介面的 run() 功能為例</h3>
+			<p>
+				<textarea class='brush:js'>
+					importPackage(java.lang);
+
+					let program = new Runnable({
+						run: function(){
+							print('Hello!');
+						}
+					})
+
+					new Thread(program).start();
+                </textarea>
+				<br>
+				<output>
+					Hello!
+				</output>
+				<br>
+				基於 Lambda 的特性，介面只有一個功能需要實作的話，可以省略介面名稱：<br>
+				<br>
+				<textarea class='brush:js'>
+					importPackage(java.lang);
+
+					let program = {
+						run: function(){
+							print('Hello!');
+						}
+					}
+
+					new Thread(program).start();
+                </textarea>
+				<br>
+				<output>
+					Hello!
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='index6'>
+	<section>
+		<h2>多執行緒</h2>
+		<p>
+			假設有個播放音樂的函式，我們不想等音樂播完再執行後面的程式，而是一邊播放一邊執行其它的程式，這時要寫多執行緒！
+		</p>
+		<hr>
+		<section>
+			<h3>用 Java API 的 Thread 物件</h3>
+			<p>
+				<textarea class='brush:js'>
+					importPackage(java.lang);
+
+					function playMusic(file){
+						runCommand('wmplayer.exe', file);
+					}
+
+					new Thread({
+						run: function(){
+							playMusic('music.mp3');
+						}
+					}).start();
+
+					print('音樂播放中');
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用 Rhino 內建函式 spawn()</h3>
+			<p>
+				<textarea class='brush:js'>
+					function playMusic(file){
+						runCommand('wmplayer.exe', file);
+					}
+
+					spawn(function(){
+						playMusic('music.mp3');
+					});
+
+					print('音樂播放中');
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				像 playMusic() 這樣播放背景音樂的函式，可以把執行緒寫在函式裡面：
+			</p>
+			<section>
+				<h4>Thread.run()</h4>
+				<p>
+					<textarea class='brush:js'>
+						importPackage(java.lang);
+
+						function playMusic(file){
+							new Thread({
+								run: function(){
+									runCommand('wmplayer.exe', file);
+								}
+							}).start();
+						}
+
+						playMusic('music.mp3');
+						print('音樂播放中');
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>spawn()</h4>
+				<p>
+					<textarea class='brush:js'>
+						function palyMusic(file){
+							spawn(function(){
+								runCommand('wmplayer.exe', file);
+							})
+						}
+
+						playMusic('music.mp3');
+						print('音樂播放中');
+                    </textarea>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='index7'>
+	<section>
+		<h2>在 *.js 中載入其它 *.js</h2>
+		<p>
+			<code>load('檔名.js')</code>
+		</p>
+	</section>
+	<hr id='index8'>
+	<section>
+		<h2>最頂層物件</h2>
+		<p>
+			網頁瀏覽器的最頂層物件是 window，而 Rhino 則是 <code>global</code>。<br>
+			<br>
+			既然最頂層物件不同，能呼叫的內建函式<ins>1</ins> 也不盡相同，例如沒有 setTimeout() 可用。<br>
+			<br>
+			內建函式能否執行，要看執行的環境。在 interactive mode 所有功能都用，而直譯器執行 *.js 有些功能無法作用，例如 readline()。<br>
+			<br>
+			其實 Java API 能做到的，盡量用 API 去完成，往往比用內建函式省事～
+		</p>
+	</section>
+	<hr id='index9'>
+	<section>
+		<h2>列出 JavaScript 物件的屬性和方法</h2>
+		<p>
+			<textarea class='brush:js'>
+				print(Object.getOwnPropertyNames(global.prototype));
+				print(Object.getOwnPropertyNames(global));
+            </textarea>
+			<br>
+			Rhino 所有內建函式都在 global 裡，這個程式可以隨時列出來看。<br>
+			<br>
+			要看 API 文件的詳細說明，可查 org.mozilla.javascript.tools.shell.Global 類別。
+		</p>
+	</section>
+	<hr id='index10'>
+	<section>
+		<h2>Rhino 內建屬性和函式</h2>
+		<p>
+			<code>
+				arguments<br>
+				environment<br>
+				history<br>
+				help()<br>
+				defineClass(Packages.className)<br>
+				deserialize(fileName)<br>
+				gc()<br>
+				load([*.js, ...])<br>
+				loadClass(Packages.className)<br>
+				print([expr ...])<br>
+				readFile(path [, characterCoding])<br>
+				readUrl(url [, characterCoding])<br>
+				runCommand(commandName, [arg, ...] [options])<br>
+				seal(object)<br>
+				serialize(object, fileName)<br>
+				spawn(function or script)<br>
+				sync(function)<br>
+				quit()<br>
+				version([number])
+			</code>
+		</p>
+		<hr>
+		<section>
+			<h3>arguments</h3>
+			<p>
+				這不是函式物件的 arguments，而是 global 物件的，用來取得命令列的參數。<br>
+				<br>
+				範例：<br>
+				<br>
+				<textarea class='brush:js'>
+					print(arguments[0]);
+                </textarea>
+				<br>
+				<output>
+					java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js 123
+				</output>
+				<br>
+				<output>
+					123
+				</output>
+				<br>
+				要拖曳檔案給 JavaScript 程式碼，可在執行 *.js 的批次檔用 %1 到 %9 當作參數：<br>
+				<br>
+				<output>
+					java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js %1
+				</output>
+				<br>
+				再把檔案拖曳到批次檔即可。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>history</h3>
+			<p>
+				紀錄 Shell 輸入過的指令。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>defineClass()</h3>
+			<p>
+				用來載入繼承自 ScriptableObject 的 Java 類別。<br>
+				<br>
+				這種類別更符合 JavaScript 物件的特性，能用 JavaScript 的語法糖操作 Java 物件。但無法用「new Packages.類別名稱()」建立，所以用「defineClass(Packages.類別名稱)」掛載進來。
+			</p>
+			<section>
+				<h4>Sample.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import org.mozilla.javascript.ScriptableObject;
+						import org.mozilla.javascript.annotations.JSConstructor;
+						import org.mozilla.javascript.annotations.JSFunction;
+						import org.mozilla.javascript.annotations.JSGetter;
+						import org.mozilla.javascript.annotations.JSSetter;
+
+						public class Sample extends ScriptableObject{
+							private String field;
+
+							@JSConstructor public Sample(String x){
+								field = x;
+							}
+
+							public String getClassName(){
+								return "Sample";
+							}
+
+							@JSSetter public void setField(String x){
+								field = x;
+							}
+
+							@JSGetter public String getField(){
+								return field;
+							}
+
+							@JSFunction public void print(){
+								System.out.println(field);
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						defineClass(Packages.Sample);
+
+						let sample = new Sample('Hello!');
+						sample.print();
+
+						sample.field = 'Bye~';
+						print(sample.field);
+                    </textarea>
+					<br>
+					<output>
+						Hello!<br>
+						Bye~
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>loadClass()</h3>
+			<p>
+				用來執行實作 Script 介面的類別。<br>
+				<br>
+				它並不是載入類別來用，而是直接執行寫在 exec() 裡面的程式。<br>
+				<br>
+				當 JavaScript 無法正常使用 Java API 的功能，不得不用 Java 設計成 *.class 來調用時，這機制是很棒的選擇！
+			</p>
+			<section>
+				<h4>Sample.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import org.mozilla.javascript.Script;
+						import org.mozilla.javascript.Context;
+						import org.mozilla.javascript.Scriptable;
+
+						public class Sample implements Script{
+							public Object exec(Context context, Scriptable scriptable){
+								System.out.print("Hello!");
+								return null;
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						loadClass(Packages.Sample);
+                    </textarea>
+					<br>
+					<output>
+						Hello!
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='index11'>
+	<section>
+		<h2>其它 Rhino 的不標準語法</h2>
+		<hr>
+		<section>
+			<h3>var 在全域範疇的影響</h3>
+			<p>
+				<textarea class='brush:js'>
+					//在全域範疇宣告變數 a。
+					var a = 123;
+
+					//看全域物件是不是有了 a 屬性，得到的是 undefined。
+					print(global.a);
+
+					//確認全域物件是什麼，是 global 沒錯。
+					print(this);
+
+					//透過 this 取出變數 a 看看，確實是有 123 這筆資料。
+					print(this.a);
+
+					//這下知道怎麼對 global 取出變數 a 了，一定在 prototype 裡。
+					print(global.prototype.a);
+                </textarea>
+				<br>
+				<output>
+					undefined<br>
+					[object global]<br>
+					123<br>
+					123
+				</output>
+				<br>
+				Rhino 將變數放在全域物件的 prototype，這設計或多或少降低 var 對全域的汙染。但 var 的其它容錯特性還是會帶來副作用，所以 let 還是很重要。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>let 和 const 的實作並不標準</h3>
+			<p>
+				Rhino 的 <code>let</code> 和 <code>const</code> 並未完全實作 ECMAScript 6 規範的功能，所以全面改用 let 和 const 取代 var 的話，要注意與其它 JavaScript 引擎表現起來不盡相同的問題！<br>
+				<br>
+				可以把 let 用在 for() 的計數器和流程控制的 {} 裡面就好，用在其它場合的話，不要指望它能和網頁瀏覽器的 let 一樣，完全解決 var 的弊端：「因為 Rhino 的 let 像是拿 var 改出來湊用的，在全域範疇使用，依然會將變數放入 global 物件。」而 const 也有問題，修改變數不會報錯，只是資料並未修改而已，跟 var 出來的變數重複宣告不會報錯一樣。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>function 物件裡面只有一行敘述的話，可以省略 {} 括號</h3>
+			<p>
+				<textarea class='brush:js'>
+					var sayHello = function() print('Hello!');
+					sayHello();
+                </textarea>
+				<br>
+				<output>
+					Hello!
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='index12'>
+	<section>
+		<h2>在 Java 寫 JavaScript 程式</h2>
+		<p>
+			<textarea class='brush:java'>
+				import javax.script.ScriptEngine;
+				import javax.script.ScriptEngineManager;
+
+				public class Main{
+					public static void main(String[] args){
+						ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+						try{
+							js.eval("print('Hello, JavaScript!')");
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				Hello, JavaScript!
+			</output>
+			<br>
+			在 <a href='http://mozilla.github.io/rhino/javadoc/org/mozilla/javascript/package-summary.html'>org.mozilla.javascript</a> 套件底下，有各式類別可以組成 JavaScript，進行更細部的設計。
+		</p>
+	</section>
+	<hr id='index13'>
+	<section>
+		<h2>使用新版 Rhino 在 Java 寫 JavaScript 程式</h2>
+		<p>
+			<output>
+				javac -cp rhino.jar *.java
+			</output>
+		</p>
+	</section>
+	<hr id='index14'>
+	<section>
+		<h2>從 Java 傳資料給 JavaScript 程式</h2>
+		<hr>
+		<section>
+			<h3>寫在全域範疇</h3>
+			<p>
+				<textarea class='brush:java'>
+					import javax.script.ScriptEngine;
+					import javax.script.ScriptEngineManager;
+
+					public class Main{
+						public static void main(String[] args){
+							ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+							js.put("var1", 123);
+
+							try{
+								js.eval("print(var1)");
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>寫在區域範疇（避免汙染最頂層物件）</h3>
+			<p>
+				<textarea class='brush:java'>
+					import javax.script.ScriptEngine;
+					import javax.script.ScriptEngineManager;
+
+					public class Main{
+						public static void main(String[] args){
+							ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+							Bindings binding = js.createBindings();
+							binding.put("var2", 456);
+
+							try{
+								js.eval("print(var2)", binding);
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					456
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='index15'>
+	<section>
+		<h2>在 Java 載入 *.js 檔案</h2>
+		<hr>
+		<section>
+			<h3>script.js</h3>
+			<p>
+				<textarea class='brush:js'>
+					print('Hello, JavaScript!');
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Main.java</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.io.FileReader;
+					import javax.script.ScriptEngine;
+					import javax.script.ScriptEngineManager;
+
+					public class Main{
+						public static void main(String[] args){
+							ScriptEngine js = new ScriptEngineManager().getEngineByName("JavaScript");
+
+							try{
+								js.eval(new FileReader("script.js"));
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					Hello, JavaScript!
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='index16'>
+	<section>
+		<h2>直接用 JDK 執行 *.js 檔</h2>
+		<p>
+			JDK 提供 jrunscript.exe 程式，有 JavaScript 直譯器的功能！
+		</p>
+		<hr>
+		<section>
+			<h3>script.js</h3>
+			<p>
+				<textarea class='brush:js'>
+					print('Hello, JavaScript!');
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>命令提示字元</h3>
+			<p>
+				<output>
+					jrunscript script.js
+				</output>
+				<br>
+				<output>
+					Hello, JavaScript!
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='index17'>
+	<section>
+		<h2>在 JDK 6/7 將 *.js 編譯成 *.class</h2>
+		<p>
+			雖然 Java SE 6/7 內建 Rhino 引擎，但只打包部分功能，並未提供所有功能。所以要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools.jsc。
+		</p>
+	</section>
+	<hr id='index18'>
+	<section>
+		<h2>進入 JDK 內建的 Interactive mode</h2>
+		<p>
+			執行 jrunscript.exe 時不加參數，會進入 interactive mode，一個能用 JavaScript 語言操作系統的環境：<br>
+			<br>
+			<output>
+				C:\Users\User&gt;jrunscript<br>
+				js> _
+			</output>
+		</p>
+	</section>
+	<hr id='index19'>
+	<section>
+		<h2>如何取得 Java 內建 JavaScript 引擎的版本</h2>
+		<p>
+			<output>
+				jrunscript -q
+			</output>
+		</p>
+	</section>
+	<hr id='index20'>
+	<section>
+		<h2>Swing 視窗程式設計</h2>
+		<hr>
+		<section>
+			<h3>視窗、按鈕、事件</h3>
+			<p>
+				<textarea class='brush:js'>
+					importPackage(javax.swing);
+					importPackage(java.awt.event);
+
+					let frame = new JFrame();
+					frame.setSize(400, 300);
+					frame.setTitle('Hello, Swing!');
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setLayout(null);
+
+					let button = new JButton();
+					button.setLocation(40, 100);
+					button.setSize(300, 30);
+					button.setText('別亂按');
+					frame.add(button);
+
+					frame.addWindowListener(new WindowAdapter({
+						windowDeactivated: function(){
+							print('視窗縮小了');
+						},
+
+						windowDeiconified: function(){
+							print('視窗還原了');
+						}
+					}));
+
+					button.addActionListener(function(){
+						button.setText('不是叫你別亂按嗎');
+					});
+                </textarea>
+				<br>
+				<img src='../../images/overcast/20061211A_01.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>呼叫另一個視窗</h3>
+			<p>
+				<textarea class='brush:js'>
+					importPackage(javax.swing);
+
+					function Frame1(){
+						var frame = new JFrame();
+						frame.setSize(400, 300);
+						frame.setLocationRelativeTo(null);
+						frame.setTitle('Frame 1');
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setLayout(null);
+
+						var button = new JButton();
+						button.setLocation(40, 100);
+						button.setSize(300, 30);
+						button.setText('開啟另一視窗');
+						frame.add(button);
+
+						button.addActionListener(function(){
+							frame2.show();
+						});
+					}
+
+					function Frame2(){
+						var frame = new JFrame();
+						frame.setSize(400, 300);
+						frame.setTitle('Frame 2');
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+						this.show = function(){
+							frame.show();
+						};
+					}
+
+					let frame1 = new Frame1();
+					let frame2 = new Frame2();
+                </textarea>
+				<br>
+				<img src='../../images/overcast/20061211A_02.png' alt='插圖'>
+				<img src='../../images/overcast/20061211A_03.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>啟動視窗小秘訣</h3>
+			<p>
+				由於 Java 寫的應用程式是透過 java.exe 指令執行，所以視窗應用程式啟動時，會帶一個命令提示字元，相當礙眼。<br>
+				<br>
+				請善用 <code>CMD /C START "" 指令</code>，可以在執行完指令後，自動結束命令字元視窗：<br>
+				<br>
+				<output>
+					CMD /C START "" javaw -cp .;"%JAVA_HOME%\lib\rhino.jar" org.mozilla.javascript.tools.shell.Main -version 200 -encoding UTF-8 *.js
+				</output>
+				<br>
+				在其它表述語言，通常直接建立捷徑，輸入 CMD /C START "" ... 即可。但 java.exe 掛載 rhino.jar 的參數太複雜，裡面有下給參數的參數，還得寫 %"%"%"%" 這種符號表示 ""，建議還是乖乖寫在批次檔執行吧！點兩下批次檔，照樣會自動關閉命令提示字元視窗，不但不會比較難用，反而比捷徑更容易修改、維護。
+			</p>
+		</section>
+	</section>
+	<hr id='index21'>
+	<section>
+		<h2>播放 WAVE 和 MP3 音樂</h2>
+		<p>
+			<textarea class='brush:js'>
+				importPackage(java.io);
+				importPackage(javax.sound.sampled);
+
+				let audio_input_stream = AudioSystem.getAudioInputStream(new File('audio.wav'));
+				let audio_format = audio_input_stream.getFormat();
+
+				if(audio_format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
+					audio_format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audio_format.getSampleRate(), 16, audio_format.getChannels(), audio_format.getChannels() * 2, audio_format.getSampleRate(), false);
+					audio_input_stream = AudioSystem.getAudioInputStream(audio_format, audio_input_stream);
+				}
+
+				let source_data_line = AudioSystem.getLine(new DataLine.Info(SourceDataLine, audio_format));
+				source_data_line.open(audio_format);
+				source_data_line.start();
+				let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 256);
+
+				if(source_data_line != null){
+					let read = 0;
+
+					while(read != -1){
+						read = audio_input_stream.read(bytes, 0, bytes.length);
+
+						if(read != -1){
+							source_data_line.write(bytes, 0, read);
+						}
+					}
+
+					source_data_line.drain();
+					source_data_line.stop();
+					source_data_line.close();
+				}
+
+				audio_input_stream.close();
+            </textarea>
+			<br>
+			這程式可以播放 WAVE 格式音樂，同樣的程式只要到：<br>
+			<br>
+			<a href='http://sourceforge.net/projects/mp3pl/files/lib/'>http://sourceforge.net/projects/mp3pl/files/lib/</a><br>
+			<br>
+			下載 jl1.0.1.jar、mp3spi1.9.5.jar、tritonus_share-0.3.6.jar 三個套件，用 -cp 參數掛載進去：<br>
+			<br>
+			<output>
+				java -cp .;jl1.0.1.jar;mp3spi1.9.5.jar;tritonus_share-0.3.6.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
+			</output>
+			<br>
+			就具備播放 MP3 格式的能力了！不用修改程式碼。
+		</p>
+	</section>
+	<hr id='index22'>
+	<section>
+		<h2>播放 MIDI 音樂</h2>
+		<p>
+			<textarea class='brush:js'>
+				importPackage(java.io);
+				importPackage(java.lang);
+				importPackage(javax.sound.midi);
+
+				let sequencer = MidiSystem.getSequencer();
+				sequencer.open();
+				sequencer.setSequence(MidiSystem.getSequence(new File('music.midi')));
+				sequencer.start();
+				Thread.sleep(sequencer.getMicrosecondLength() / 1000);
+				sequencer.close();
+            </textarea>
+		</p>
+	</section>
+	<hr id='index23'>
+	<section>
+		<h2>壓縮與解壓縮 ZIP 檔案</h2>
+		<hr>
+		<section>
+			<h3>壓縮</h3>
+			<p>
+				將 archive 資料夾壓縮為 archive.zip：<br>
+				<br>
+				<textarea class='brush:js'>
+					importPackage(java.io);
+					importPackage(java.util.zip);
+
+					let zip_output_stream = new ZipOutputStream(new FileOutputStream('archive.zip'));
+
+					function zip(files){
+						for(let file of files){
+							if(file.isDirectory()){
+								zip_output_stream.putNextEntry(new ZipEntry(file.toString() + '/'));
+								zip_output_stream.closeEntry();
+								zip(new File(file).listFiles());
+							}
+							else{
+								let file_name = file.toString();
+								zip_output_stream.putNextEntry(new ZipEntry(file_name));
+								let buffer = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+								let buffered_input_stream = new BufferedInputStream(new FileInputStream(file_name), buffer.length);
+								let n;
+
+								while((n = buffered_input_stream.read(buffer, 0, buffer.length)) != -1){
+									zip_output_stream.write(buffer, 0, n);
+								}
+
+								buffered_input_stream.close();
+								zip_output_stream.closeEntry();
+							}
+						}
+					}
+
+					zip(new File('archive').listFiles());
+					zip_output_stream.close();
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>解壓縮</h3>
+			<p>
+				<textarea class='brush:js'>
+					importPackage(java.io);
+					importPackage(java.util);
+					importPackage(java.util.zip);
+
+					let zip_file = new ZipFile('archive.zip');
+					let enumeration = zip_file.entries();
+
+					while(enumeration.hasMoreElements()){
+						let zip_entry = enumeration.nextElement();
+
+						if(zip_entry.isDirectory()){
+							new File(zip_entry).mkdirs();
+						}
+						else{
+							let input_stream = zip_file.getInputStream(zip_entry);
+							let out_stream = new FileOutputStream(zip_entry.getName());
+							let bytes = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, 1024);
+							let n;
+
+							while((n = input_stream.read(bytes)) != -1){
+								out_stream.write(bytes, 0, n);
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='index24'>
+	<section>
+		<h2>使用 SQLite 資料庫</h2>
+		<p>
+			請到 <a href='http://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/'>http://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/</a> 下載 SQLite JDBC，然後用 -cp 參數掛載，就能使用 SQL 存取資料：<br>
+			<br>
+			<textarea class='brush:js'>
+				importPackage(java.lang);
+				importPackage(java.sql);
+
+				Class.forName('org.sqlite.JDBC');
+				let connection = DriverManager.getConnection('jdbc:sqlite:test.db');
+				let statement = connection.createStatement();
+				statement.execute('CREATE TABLE mytable(mycolumn CHAR(32))');
+				statement.executeUpdate('INSERT INTO mytable(mycolumn) VALUES("哈囉")');
+				let result_set = statement.executeQuery('SELECT * FROM mytable');
+
+				while(result_set.next()){
+					print(result_set.getString('mycolumn'));
+				}
+
+				result_set.close();
+				statement.close();
+				connection.close();
+            </textarea>
+			<br>
+			<output>
+				java -cp .;sqlite-jdbc-3.34.0.jar;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
+			</output>
+			<br>
+			<output>
+				哈囉
+			</output>
+		</p>
+	</section>
+	<hr id='index25'>
+	<section>
+		<h2>存取剪貼簿文字</h2>
+		<p>
+			<textarea class='brush:js'>
+				importPackage(java.awt);
+				importPackage(java.awt.datatransfer);
+
+				//建立剪貼簿物件
+				let clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+				//讀取剪貼簿文字
+				let data = clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor);
+
+				//修改讀取的文字
+				data += '0.0';
+
+				//寫入剪貼簿文字
+				clipboard.setContents(new StringSelection(data), null);
+            </textarea>
+		</p>
+	</section>
+	<hr id='appendix'>
+	<section>
+		<h2>JavaScript 程式設計錦囊</h2>
+		<hr>
+		<section>
+			<h3>Value object</h3>
+			<p>
+				<textarea class='brush:js'>
+					print('abc'.toUpperCase());
+					print((123).toString(2));
+					print((false).toString().toUpperCase());
+					print([111, 222, 333].reverse());
+
+					if(/^[A-z]\w{6,}\d$/.test('abcd1234')){
+						print('密碼有效');
+					}
+                </textarea>
+				<br>
+				<output>
+					ABC<br>
+					1111011<br>
+					FALSE<br>
+					333,222,111<br>
+					密碼有效
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Higher-order function</h3>
+			<p>
+				<textarea class='brush:js'>
+					//Method references 1
+					[111, 222, 333].forEach(print);
+
+					//Method references 2
+					function f(x){
+						print(x * 2);
+					}
+
+					[111, 222, 333].forEach(f);
+
+					//Anonymous function
+					[111, 222, 333].forEach(x =&gt; print(++x));
+
+					//Lambda
+					function f(action){
+						action();
+					}
+
+					f(()=&gt;{
+						print(777);
+					})
+                </textarea>
+				<br>
+				<output>
+					111 0 111,222,333<br>
+					222 1 111,222,333<br>
+					333 2 111,222,333<br>
+					<br>
+					222<br>
+					444<br>
+					666<br>
+					<br>
+					112<br>
+					223<br>
+					334<br>
+					<br>
+					777
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Destructuring assignment</h3>
+			<p>
+				<textarea class='brush:js'>
+					let a, b, c;
+
+					[a, b, c] = [123, 456, 789];
+
+					print(a);
+					print(b);
+					print(c);
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					456<br>
+					789
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Top-level functions</h3>
+			<p>
+				善用以下函式：<br>
+				<br>
+				<code>
+					eval(string)<br>
+					parseInt(string [,radix])<br>
+					parseFloat(string)<br>
+					isFinite(value)<br>
+					encodeURI(string)<br>
+					decodeURI(string)<br>
+					encodeURIComponent(string)<br>
+					decodeURIComponent(string)<br>
+				</code>
+				<br>
+				建議用 <code>Number.isNaN()</code> 取代 isNaN()。<br>
+				建議用 <code>String.charCodeAt()</code> 取代 escape()。<br>
+				建議用 <code>String.fromCharCode()</code> 取代 unescape()。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array.prototype.join() 和 String.prototype.split() 的妙用</h3>
+			<p>
+				<textarea class='brush:js'>
+					//陣列轉字串
+					let string = [1, 2, 3, 4, 5, 6, 7, 8, 9].join(' ');
+					print(string);
+
+					//字串轉陣列
+					let array = 'a,b,c,d,e'.split(',');
+
+					for(let n of array){
+						print(n);
+					}
+                </textarea>
+				<br>
+				<output>
+					1 2 3 4 5 6 7 8 9<br>
+					a<br>
+					b<br>
+					c<br>
+					d<br>
+					e
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array.prototype.slice.call() 和 [].slice.call() 的差別</h3>
+			<p>
+				前者不用建立 Array 物件，直接調用 slice 方法。<br>
+				<br>
+				後者等於 new 一個 Array 物件，然後呼叫物件的 slice 方法。<br>
+				<br>
+				雖然前者不用 new 所以效能更好，還可避免建立大量的垃圾，但程式碼落落長，沒有後者簡短，所以只建立一個物件的話，大多數人都是用後者。<br>
+				<br>
+				在迴圈會產生大量的物件，就改用前者吧！不像網頁瀏覽器的 JavaScript 引擎（例如 SpiderMonkey），會最佳化編譯再執行，兩者執行起來差別很小，Rhino 就只是直譯而已～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Rhino 1.7.13 仍不支援的新語法替代方案</h3>
+			<section>
+				<h4>Default parameter</h4>
+				<p>
+					舊做法是用 <code>if(!參數) 參數=初始值;</code> 實現類似的需求。<br>
+					<br>
+					但這判斷不夠精準，容易出包，建議寫成 <code>if(參數==undefined)</code>。<br>
+					<br>
+					如果函式的功能只是傳回參數，也可以寫成 <code>return 參數||預設值;</code>。
+				</p>
+			</section>
+			<section>
+				<h4>Rest parameter</h4>
+				<p>
+					舊做法是用 <code>arguments</code> 實現類似的需求。
+				</p>
+			</section>
+			<section>
+				<h4>Template literal</h4>
+				<p>
+					沒有類似的舊做法。<br>
+					<br>
+					有個沒這語法方便，但還算不錯用的「格式化字串」可以自己做：
+				</p>
+				<section>
+					<h5>寫成函式</h5>
+					<p>
+						<textarea class='brush:js'>
+							function format(){
+								return arguments[0].replace(/{(\d+)}/g, (match, index) =&gt; arguments[++index] || match);
+							}
+
+							print(format('{0} {1} {2}', 'AAA', 'BBB', 'CCC'));
+							print(format('{0} {1} {2}', 'AAA'));
+                        </textarea>
+						<br>
+						<output>
+							AAA BBB CCC<br>
+							AAA {1} {2}
+						</output>
+						<br>
+						如結果所示，沒有對應的參數時顯示 {1} 和 {2}。若不喜歡這樣的設計，可以刪掉 <code>|| match</code>，沒有對應的參數會顯示 undefined。
+					</p>
+				</section>
+				<section>
+					<h5>寫在 String 物件</h5>
+					<p>
+						<textarea class='brush:js'>
+							String.prototype.format = function(){
+								return this.replace(/{(\d+)}/g, (match,index) =&gt; arguments[index] || match);
+							};
+
+							print('{0} {1} {2}'.format('AAA', 'BBB', 'CCC'));
+                        </textarea>
+						<br>
+						<output>
+							AAA BBB CCC
+						</output>
+					</p>
+				</section>
+				<section>
+					<h5>引用 Java API</h5>
+					<p>
+						Java 的 <code>java.util.Formatter</code> 提供功能更完整的格式化字串功能！如果要直接輸出格式化字串的，還可以用 <code>System.out.printf()</code>。
+					</p>
+				</section>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Nashorn 二三事</h2>
+		<section>
+			<h4>jjs 或 jrunscript</h4>
+			<p>
+				建議使用 jjs，程式碼有錯誤時，會剖析語法，指出錯誤原因與程式碼位置。<br>
+				<br>
+				jrunscript 只會拋出例外，不方便除錯。
+			</p>
+		</section>
+		<section>
+			<h4>使用 ECMAScript 6 語法</h4>
+			<p>
+				<output>
+					jjs main.js --language=es6
+				</output>
+				<br>
+				Java 11 的 Nashorn 支援 `` 符號的字串，能表示多行字串，以及用 <code>${變數名稱或運算式}</code> 將程式崁在字串裡。還支援預設參數。<br>
+				<br>
+				Java 8 的 Nashorn 不支援上述功能。<br>
+				<br>
+				Nashorn 不支援 Destructuring assignment，Rhino 卻有支援，只能說 Java 底下的 JavaScript 引擎沒一個好的～
+			</p>
+		</section>
+		<section>
+			<h4>如何 import 套件</h4>
+			<p>
+				<code>load('nashorn:mozilla_compat.js')</code>，就能使用 Rhino 的 importPackage()。
+			</p>
+		</section>
+		<section>
+			<h4>關於 JFrame</h4>
+			<p>
+				不需要 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)，關閉視窗圖示就能結束視窗。但！還是要加！不然 jjs 的行程會殘留在電腦裡，不會隨視窗結束而關閉！<br>
+				<br>
+				需要用 frame.repaint() 重繪視窗元件，才能在載入視窗時顯示 JFrame.add() 的元件。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 正確說法是「那能操作的功能也不盡相同」，但通常操作最頂層物件時會省略名稱，例如 window.setTimeout() 會寫 setTimeout()，用起來活像內建函式（built-in functions）。
+		</p>
+	</footer>
+</article>
