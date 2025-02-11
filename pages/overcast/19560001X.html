@@ -118,16 +118,16 @@
 				<br>
 				<textarea class='brush:js'>
 					function f(x){
-						var a = /[a-z]{4}\.(gif|jpg|png)/
-						if(x.match(a)) document.write(x)
+						var a = /[a-z]{4}\.(gif|jpg|png)/;
+						if(x.match(a)) document.write(x);
 					}
 
-					f('image.bmp')  //副檔名為 bmp
-					f('image.jpg')  //符合條件
-					f('image.gif')  //符合條件
-					f('IMAGE.jpg')  //檔名為大寫英文字母
-					f('image2.gif') //用了非英文字母的阿拉伯數字
-					f('img.gif')	//檔名不夠四個字母
+					f('image.bmp');  //副檔名為 bmp
+					f('image.jpg');  //符合條件
+					f('image.gif');  //符合條件
+					f('IMAGE.jpg');  //檔名為大寫英文字母
+					f('image2.gif'); //用了非英文字母的阿拉伯數字
+					f('img.gif');    //檔名不夠四個字母
                 </textarea>
 			</p>
 		</section>
