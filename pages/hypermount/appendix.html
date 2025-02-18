@@ -59,7 +59,7 @@
 			<br>
 			執行速度不是決定使用哪一個的唯一考量！如果你想用 CSS Selector 語法直接指定某特定元素來查詢與修改，那就用 querySelectorAll()，而不是凡事優先使用 getElementsByTagName()。尤其 CSS Selector 功能強大，很多任務是 getElementsByTagName() 做不到的，querySelectorAll() 能省去很多寫程式的工作量。若沒明顯感到程式慢，優先使用 querySelectorAll() 和 querySelector() 才是聰明人的做法～<br>
 			<br>
-			如果要對某個樹狀結構複雜又龐大的元素，從中增加與刪除子元素，甚至還跑迴圈來執行，那就改用 getElementsByTagName() 來提升執行速度。舉個誇張的例子，就是 body 元素，你不該用 querySelectorAll('body') 複製一整棵網頁主體內容的子樹來增刪查改，而是直接用 document.body。
+			如果要對某個樹狀結構複雜又龐大的元素，從中增加與刪除子元素，甚至還跑迴圈來執行，那就改用 getElementsByTagName() 來提升執行速度。舉個誇張的例子，就是 body 元素，你不該用 querySelector('body') 複製一整棵網頁主體內容的子樹來增刪查改，而是直接用 document.body。
 		</p>
 	</section>
 	<hr id='19400413A'>

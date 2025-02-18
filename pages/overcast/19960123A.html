@@ -2973,17 +2973,22 @@
 				import java.util.logging.SimpleFormatter;
 
 				class Main{
-					public static void main(String[] args) throws Exception{
-						Logger logger = Logger.getLogger(""); //建議 "" 改為 Main.class.getName()，Main 應隨類別名稱不同而修改
-						FileHandler filehandler = new FileHandler("Main.log");
-						filehandler.setFormatter(new SimpleFormatter()); //設定為一目了然的純文字格式，否則預設使用的是給鬼看的 XML 格式
-						logger.addHandler(filehandler);
+					public static void main(String[] args){
+						try{
+							Logger logger = Logger.getLogger(""); //建議 "" 改為 Main.class.getName()，Main 應隨類別名稱不同而修改
+							FileHandler filehandler = new FileHandler("Main.log");
+							filehandler.setFormatter(new SimpleFormatter()); //設定為一目了然的純文字格式，否則預設使用的是給鬼看的 XML 格式
+							logger.addHandler(filehandler);
 
-						//log 一下
-						logger.info("Hello");
+							//log 一下
+							logger.info("Hello");
 
-						//再 log 一下
-						logger.info("Bye");
+							//再 log 一下
+							logger.info("Bye");
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
 					}
 				}
             </textarea>
@@ -3002,7 +3007,7 @@
 				資訊: Bye
 			</output>
 			<br>
-			Logger 還有 warning() 和 severe()，可以嚴重程度和 info() 交替使用。
+			Logger 還有 warning() 和 severe()，可依嚴重程度和 info() 交替使用。
 		</p>
 	</section>
 	<hr id='20010904A'>
@@ -3967,11 +3972,11 @@
 
 								public boolean accept(File file){
 									if(file.getPath().lastIndexOf(".")&gt;0){
-										this.string = file.getPath().substring(file.getPath().lastIndexOf(".")+1).toLowerCase();
+										string = file.getPath().substring(file.getPath().lastIndexOf(".")+1).toLowerCase();
 									}
 
-									if(this.string.equals("")){
-										return this.string.equals("xml");
+									if(string.equals("")){
+										return string.equals("xml");
 									}
 									else{
 										return file.isDirectory();
@@ -3995,20 +4000,20 @@
 
 							public class XMLFileChooser extends JFileChooser{
 								public XMLFileChooser(){
-									this.addChoosableFileFilter(new XMLFileFilter());
+									addChoosableFileFilter(new XMLFileFilter());
 								}
 
 								public void save(File file){
-									this.showSaveDialog(null);
+									showSaveDialog(null);
 
 									try{
 										FileOutputStream file_output_stream;
 
-										if(this.getSelectedFile().getPath().lastIndexOf(".xml")&gt;0){
-											file_output_stream = new FileOutputStream(this.getSelectedFile().getPath());
+										if(getSelectedFile().getPath().lastIndexOf(".xml")&gt;0){
+											file_output_stream = new FileOutputStream(getSelectedFile().getPath());
 										}
 										else{
-											file_output_stream = new FileOutputStream(this.getSelectedFile() + ".xml");
+											file_output_stream = new FileOutputStream(getSelectedFile() + ".xml");
 										}
 
 										file_output_stream.close();
@@ -4019,8 +4024,8 @@
 								}
 
 								public File load(){
-									this.showOpenDialog(null);
-									return new File(this.getSelectedFile().getPath());
+									showOpenDialog(null);
+									return new File(getSelectedFile().getPath());
 								}
 							}
                         </textarea>
@@ -4482,9 +4487,14 @@
 		<p>
 			<textarea class='brush:java'>
 				class Main{
-					public static void main(String[] args) throws Exception{
-						Thread.sleep(1000);
-						System.out.println("Hello!");
+					public static void main(String[] args){
+						try{
+							Thread.sleep(1000);
+							System.out.println("Hello!");
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
 					}
 				}
             </textarea>
@@ -4748,7 +4758,7 @@
 							private String attribute;
 
 							public void change(String x){
-								this.attribute = x;
+								attribute = x;
 								setChanged();
 								notifyObservers();
 							}
@@ -4804,13 +4814,13 @@
 							private String attribute;
 
 							public void change(String x){
-								this.attribute = x;
+								attribute = x;
 								setChanged();
 								notifyObservers();
 							}
 
 							public String getAttribute(){
-								return this.attribute;
+								return attribute;
 							}
 						}
                     </textarea>
