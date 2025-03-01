@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>程式基本架構</h1>
+		<p>
+			JavaScript 的最基本程式結構。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>我的第一個 JavaScript 程式</h2>
+		<p>
+			JavaScript 程式碼是 HTML 網頁的一部分，把程式寫在 SCRIPT 標籤裡面，然後用網頁瀏覽器開啟即可。
+		</p>
+		<hr>
+		<section>
+			<h3>程式基本架構</h3>
+			<p>
+				<code>
+					&lt;script&gt;<br>
+					　程式碼<br>
+					&lt;/script&gt;
+				</code>
+			</p>
+		</section>
+		<hr>
+		<p>
+			來個實例，請用純文字編輯器輸入如下程式，然後存為 html 副檔名的文件：<br>
+			<br>
+			<canvas width='569'>notepad('index.html','&lt;script&gt;',"    document.write('Hello, HTML5!');",'&lt;\/script&gt;')</canvas><br>
+			<br>
+			再用瀏覽器開啟即可顯示程式運算出來的結果：<br>
+			<br>
+			<canvas width='569'>msedge('file:///C:/Users/Twideem%20Civs/Desktop/index.html','Hello, HTML5!')</canvas>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>更完整的程式基本架構</h2>
+		<p>
+			上一節的程式基本架構過於精簡，只適用於試演程式，通常建議使用更完整的程式基本架構，將 JavaScript 定義在完整的 HTML5 格式裡面。
+		</p>
+		<hr>
+		<section>
+			<h3>符合 HTML5 規範的 JavaScript 程式基本架構</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;!DOCTYPE html&gt;
+					&lt;html&gt;
+						&lt;head&gt;
+							&lt;script&gt;
+								程式碼
+							&lt;/script&gt;
+						&lt;/head&gt;
+						&lt;body&gt;
+							操作介面
+						&lt;/body&gt;
+					&lt;/html&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<p>
+			如此可以提供更多、更明確的資訊給網頁平台，例如文件編碼格式使用 UTF-8 時，如果作業系統的文字編碼格式預設為 ANSI，中文顯示出來會變成亂碼，這時需要在 HTML5 網頁裡面明確指定字元編碼：<br>
+			<br>
+			<code>
+				&lt;meta charset='utf-8'&gt;<br>
+			</code>
+			<br>
+			此外像是使用 TITLE 標籤顯示視窗標題列的名稱、指定網頁的圖示、載入 CSS 樣式，都是相當常用到的基本工作，所以更完整的基本程式架構應該是這樣：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;!DOCTYPE html&gt;
+				&lt;html lang='zh-TW'&gt;
+					&lt;head&gt;
+						&lt;meta charset='utf-8'&gt;
+						&lt;title&gt;視窗標題列名稱&lt;/title&gt;
+						&lt;link href='圖示檔' rel='icon'&gt;
+						&lt;link href='階層樣式表' rel='stylesheet'&gt;
+						&lt;script&gt;
+							程式碼
+						&lt;/script&gt;
+					&lt;/head&gt;
+					&lt;body&gt;
+						操作介面
+					&lt;/body&gt;
+				&lt;/html&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>將程式碼寫在外部檔案</h2>
+		<p>
+			程式碼過於龐大的話，通常為了方便管理，會將不同應用性質的程式碼分開儲存在不同檔案裡面，然後再從外部載入即可：
+		</p>
+		<hr>
+		<section>
+			<h3>載入外部程式檔案</h3>
+			<p>
+				<code>
+					&lt;script src='程式檔'&gt;&lt;/script&gt;
+				</code>
+			</p>
+		</section>
+		<hr>
+		<p>
+			如果沒有特殊需求，建議使用 *.js 做為副檔名。<br>
+			<br>
+			來個範例，首先將 JavaScript 程式獨立寫在 library.js 檔案裡面：<br>
+			<br>
+			<textarea class='brush:js'>
+				function hello()
+				{
+					document.write('Hello, HTML5!');
+				}
+            </textarea>
+			<br>
+			然後在 HTML5 網頁裡面載入 library.js 並使用裡面的程式：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;!DOCTYPE html&gt;
+				&lt;html lang='zh-TW'&gt;
+					&lt;head&gt;
+						&lt;meta charset='utf-8'&gt;
+						&lt;script src='library.js'&gt;&lt;/script&gt;
+						&lt;script&gt;
+							hello();
+						&lt;/script&gt;
+					&lt;/head&gt;
+				&lt;/html&gt;
+            </textarea>
+			<br>
+			執行結果如下，跟最前面的範例是一樣的：<br>
+			<br>
+			<canvas width='569'>msedge('file:///C:/Users/Twideem%20Civs/Desktop/index.html','Hello, HTML5!')</canvas>
+		</p>
+	</section>
+</article>

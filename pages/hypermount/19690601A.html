@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>Page Flipping</h1>
+		<p>
+			在《<a href='19690525A.html'>Double Buffer</a>》介紹了雙重緩衝的高速繪圖技巧，雖然對 2D 遊戲來說已經盡善盡美，但如果要進一步苛求的話，那就是 Back buffer 複製到 Primary surface 的這個動作也算增加電腦的工作量。於是有人想說，為何不跳過這個動作？Back buffer 畫好直接顯示出來當 Primary surface，再把原本的 Primary surface 隱藏起來當 Back buffer，如此反覆進行不也是一樣效果嗎？<br>
+			<br>
+			這就是本章節要介紹的 Page Flipping 技巧！
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>原始碼</h2>
+		<p>
+			<textarea class='brush:js'>
+				//全域變數
+				let count=0;
+				let position=0;
+				let displaypointer=0;
+
+				//載入背景圖片
+				let background=new Image();
+				background.src='background.png';
+
+				//載入前景圖片
+				let sprite=new Image();
+				sprite.src='sprite.png';
+
+				//建立畫布
+				let surface=[document.createElement('canvas'),document.createElement('canvas')];
+				for(let n in surface){
+					document.body.appendChild(surface[n]);
+					surface[n].width=600;
+					surface[n].height=300;
+					surface[n].style.position='absolute';
+					surface[n].style.left='2';
+					surface[n].style.top='2';
+					surface[n].style.visibility='hidden';
+				}
+
+				//將圖片描繪到畫布
+				function draw()
+				{
+					displaypointer=1-displaypointer;
+					let context=surface[displaypointer].getContext('2d');
+					context.drawImage(background,0,0);
+
+					switch(count){
+						case 0:
+						context.drawImage(sprite,0,0,96,141,272,position,96,141);
+						count++;
+						break;
+
+						case 1:
+						context.drawImage(sprite,96,0,96,141,272,position+=9,96,141);
+						count++;
+						break;
+
+						case 2:
+						context.drawImage(sprite,0,0,96,141,272,position,96,141);
+						count++;
+						break;
+
+						case 3:
+						count=0;
+						context.drawImage(sprite,288,0,96,141,272,position+=9,96,141);
+					}
+
+					surface[1-displaypointer].style.visibility='visible';
+					surface[displaypointer].style.visibility='hidden';
+				}
+
+				//每 0.25 秒執行 draw()
+				setInterval(draw,250);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>範例下載</h2>
+		<p>
+			<a href='../../objects/downloads/19690601A.7z'>19690601A.7z</a>
+		</p>
+	</section>
+</article>

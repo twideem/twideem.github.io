@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>衝裝機率</h1>
+		<p>
+			這是用來模擬衝裝機率是否合理的小程式，你可以修改各階機率來測試。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>絕世好劍</h2>
+		<p>
+			一階：<input style='height:10pt;width:30px' value='100'> ％<br>
+			二階：<input style='height:10pt;width:30px' value='100'> ％<br>
+			三階：<input style='height:10pt;width:30px' value='100'> ％<br>
+			四階：<input style='height:10pt;width:30px' value='75'> ％<br>
+			五階：<input style='height:10pt;width:30px' value='60'> ％<br>
+			六階：<input style='height:10pt;width:30px' value='50'> ％<br>
+			七階：<input style='height:10pt;width:30px' value='35'> ％<br>
+			八階：<input style='height:10pt;width:30px' value='15'> ％<br>
+			九階：<input style='height:10pt;width:30px' value='10'> ％<br>
+			十階：<input style='height:10pt;width:30px' value='2'> ％<br>
+			<br>
+			<button onclick='f2()'>普通強化卷軸衝裝</button> <button onclick='f1()'>商城強化卷軸衝裝</button> <span></span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>快選組合</h2>
+		<p>
+			<button onclick='f4([100,100,100,75,60,50,35,15,10,2])'>低階白裝</button> <button onclick='f4([100,100,100,25,20,15,10,6,3,1.5])'>中階藍裝</button> <button onclick='f4([100,100,100,17.5,15,12.5,8,4,2,1])'>高階金裝</button> <button onclick='f4([95,90,85,75,70,60,50,25,20,4])'>正統機率</button>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 預設之機率參考《武林群俠傳 Online》，一到三為安定值，然後遞減成功機率。<br>
+			[*] 商城強化卷軸參考《武林群俠傳 Online》防爆符 12 元 + 神佑符 4.9 元 = 17 元。
+		</p>
+	</footer>
+</article>
+<script>
+	let a=0;
+	let b=0;
+
+	//防爆符
+	function f1()
+	{
+		if(a<10){
+			$('section p span').innerHTML=`你花了 ${b+=17} 元。`;
+			if(Math.ceil(Math.random()*100)<=Number($('input',a).value)){
+				a++;
+				$('p').innerHTML=`<span style='color:blue'>強化成功，武器提升為 ${a} 階！</sapn>`;
+				$('h2').innerHTML=`絕世好劍 ${f3()}`;
+			}
+			else $('p').innerHTML=`<span style='color:red'>失敗，目前武器為 ${a} 階。</span>`;
+		}
+		else $('p').innerHTML=`<span style='color:orange'>武器已強化至極限。</span>`;
+	}
+
+	//普通卷軸
+	function f2()
+	{
+		if(a<10){
+			if(Math.ceil(Math.random()*100)<=Number($('input',a).value)){
+				a++;
+				$('p').innerHTML=`<span style='color:blue'>強化成功，武器提升為 ${a} 階！</sapn>`;
+				$('h2').innerHTML=`絕世好劍 ${f3()}`;
+			}
+			else{
+				a=0;
+				$('p').innerHTML=`<span style='color:red'>強化失敗，你的武器化為烏有。`;
+				$('h2').innerHTML='絕世好劍';
+			}
+		}
+		else $('p').innerHTML=`<span style='color:orange'>武器已強化至極限。</span>`;
+	}
+
+	//星數
+	function f3()
+	{
+		let g='';
+
+		for(let n=0;n<a;n++) g+='☆';
+
+		return `<span style='color:orange'>${g}</span>`;
+	}
+
+	//快速設置機率組合
+	function f4(x)
+	{
+		$('*input').forEach((n,o)=>n.value=x[o]);
+	}
+</script>
