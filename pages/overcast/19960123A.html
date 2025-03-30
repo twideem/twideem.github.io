@@ -88,7 +88,7 @@
 				<a href='#20010904A'>命令列介面的程式設計</a><br>
 				<a href='#20011011A'>調用作業系統的命令</a><br>
 				<a href='#20001009A'>Swing 快速入門</a><br>
-				<a href='#20001106A'>變更視窗樣式</a><br>
+				<a href='#20001106A'>系統原生元件樣式與純 Java 元件</a><br>
 				<a href='#20001030A'>對話視窗</a><br>
 				<a href='#20001120A'>JScrollPane</a><br>
 				<a href='#20001127A'>JTable</a><br>
@@ -3442,192 +3442,60 @@
 	</section>
 	<hr id='20001106A'>
 	<section>
-		<h2>變更視窗樣式</h2>
-		<hr>
-		<section>
-			<h3>Java 內建視窗樣式</h3>
-			<p>
-				底下程式示範將視窗更換為 Metal 樣式：<br>
-				<br>
-				<textarea class='brush:java'>
-					import javax.swing.JFrame;
-					import javax.swing.plaf.metal.MetalLookAndFeel;
-					import javax.swing.UIManager;
+		<h2>系統原生元件樣式與純 Java 元件</h2>
+		<p>
+			Swing 預設使用 Java 自己產生出來的元件，好讓 GUI 跨平台時有更一致的表現！但視窗外框卻是作業系統原生，所以可以取消視窗外框，改用 Swing 的樣式：<br>
+			<br>
+			<textarea class='brush:java'>
+				import javax.swing.JFrame;
+				import javax.swing.JRootPane;
 
-					public class Main{
-						public static void main(String[] args){
-							//啟用 Java 預設的視窗外框
-							JFrame.setDefaultLookAndFeelDecorated(true);
-
-							//將視窗樣式改為 Metal 風格
-							try{
-								UIManager.setLookAndFeel(new MetalLookAndFeel());
-							}
-							catch(Exception exception){
-								exception.printStackTrace();
-							}
-
-							//建立視窗
-							JFrame frame = new JFrame();
-							frame.setSize(320, 240);
-							frame.setTitle("視窗標題");
-							frame.setVisible(true);
-							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						}
+				public class Main{
+					public static void main(String[] args){
+						JFrame frame = new JFrame();
+						frame.setUndecorated(true); //取消作業系統原生視窗外框
+						frame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME); //設定使用純 Java 寫的視窗外框
+						frame.setSize(320, 240);
+						frame.setTitle("視窗標題");
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					}
-                </textarea>
-				<br>
-				顯示結果：<br>
-				<br>
-				<img src='../../images/overcast/20001106A_01.png' alt='插圖'><br>
-				<br>
-				其它內建的視窗樣式還有如下，請自行嘗試：<br>
-				<br>
-				<code>
-					javax.swing.plaf.gtk.GTKLookAndFeel<br>
-					javax.swing.plaf.mac.MacLookAndFeel<br>
-					javax.swing.plaf.motif.MotifLookAndFeel<br>
-					javax.swing.plaf.nimbus.NimbusLookAndFeel<br>
-					javax.swing.plaf.windows.WindowsClassicLookAndFeel<br>
-					javax.swing.plaf.windows.WindowsLookAndFeel<br>
-				</code>
-				<br>
-				另外，Windows 與 MacOS 並非跨平台的樣式，遇上相異的作業系統無法使用，會改用預設的樣式。因此顧慮跨平台問題的話，也可考慮以下自動處理跨平台問題的樣式：<br>
-				<br>
-				<code>
-					UIManager.getSystemLookAndFeelClassName()<br>
-					UIManager.getCrossPlatformLookAndFeelClassName()<br>
-				</code>
-			</p>
-		</section>
-		<hr>
-		<section>
-			<h3>Steel Theme</h3>
-			<p>
-				Java SE 5.0 時，推出新的 Metal 風格，叫做 Ocean Theme，較為明亮。J2SE 1.4 時，Metal 風格叫做 Steel Theme，比較暗沉，而且元件的層次之間沒什麼立體感，辨識度較差。<br>
-				<br>
-				由於 Java SE 5.0 開始將 Ocean 做為 Metal 風格的預設主題，因此如果你想切換回 Steel 主題，程式碼如下：<br>
-				<br>
-				<textarea class='brush:java'>
-					import javax.swing.JFrame;
-					import javax.swing.plaf.metal.DefaultMetalTheme;
-					import javax.swing.plaf.metal.MetalLookAndFeel;
-					import javax.swing.UIManager;
+				}
+            </textarea>
+			<br>
+			顯示結果：<br>
+			<br>
+			<img src='../../images/overcast/20001106A_01.png' alt='插圖'><br>
+			<br>
+			相反的，如果想讓元件使用作業系統原生元件的樣式，則是：<br>
+			<br>
+			<textarea class='brush:java'>
+				import javax.swing.JFrame;
+				import javax.swing.UIManager;
 
-					public class Main{
-						public static void main(String[] args){
-							//啟用 Java 預設的視窗外框
-							JFrame.setDefaultLookAndFeelDecorated(true);
-							MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
-
-							//將視窗樣式改為 Metal 風格
-							try{
-								UIManager.setLookAndFeel(new MetalLookAndFeel());
-							}
-							catch(Exception exception){
-								exception.printStackTrace();
-							}
-
-							//建立視窗
-							JFrame frame = new JFrame();
-							frame.setSize(320, 240);
-							frame.setTitle("視窗標題");
-							frame.setVisible(true);
-							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				public class Main{
+					public static void main(String[] args){
+						try{
+							UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+						JFrame frame = new JFrame();
+						frame.setSize(320, 240);
+						frame.setTitle("視窗標題");
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					}
-                </textarea>
-				<br>
-				<img src='../../images/overcast/20080930A.png' alt='插圖'>
-			</p>
-		</section>
-		<hr>
-		<section>
-			<h3>第三方視窗樣式</h3>
-			<p>
-				網路可以找到不少 Swing 的視窗樣式可以套用，首先推薦 JTatto，因為下載這個套件，就能切換十數種樣式<ins>1</ins>，而且每種樣式都經過精心配置，每樣都比其他人的樣式精美。請至官網下載：<br>
-				<br>
-				<a href='http://www.jtattoo.net'>http://www.jtattoo.net</a><br>
-				<br>
-				目前為止 JTatto 可用的樣式如下：<br>
-				<br>
-				<code>
-					com.jtattoo.plaf.acryl.AcrylLookAndFeel<br>
-					com.jtattoo.plaf.aero.AeroLookAndFeel<br>
-					com.jtattoo.plaf.aluminium.AluminiumLookAndFeel<br>
-					com.jtattoo.plaf.bernstein.BernsteinLookAndFeel<br>
-					com.jtattoo.plaf.fast.FastLookAndFeel<br>
-					com.jtattoo.plaf.graphite.GraphiteLookAndFeel<br>
-					com.jtattoo.plaf.hifi.HiFiLookAndFeel<br>
-					com.jtattoo.plaf.luna.LunaLookAndFeel<br>
-					com.jtattoo.plaf.mcwin.McWinLookAndFeel<br>
-					com.jtattoo.plaf.mint.MintLookAndFeel<br>
-					com.jtattoo.plaf.noire.NoireLookAndFeel<br>
-					com.jtattoo.plaf.smart.SmartLookAndFeel<br>
-					com.jtattoo.plaf.texture.TextureLookAndFeel<br>
-				</code>
-				<br>
-				各樣式顯示結果依順序如下：
-			</p>
-			<figure>
-				<img src='../../images/overcast/20001106A_02.png' alt='插圖'>
-				<figcaption>Acryl</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_03.png' alt='插圖'>
-				<figcaption>Aero</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_04.png' alt='插圖'>
-				<figcaption>Aluminium</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_05.png' alt='插圖'>
-				<figcaption>Bernstein</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_06.png' alt='插圖'>
-				<figcaption>Fast</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_07.png' alt='插圖'>
-				<figcaption>Graphite</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_08.png' alt='插圖'>
-				<figcaption>Hifi</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_09.png' alt='插圖'>
-				<figcaption>Luna</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_10.png' alt='插圖'>
-				<figcaption>Mcwin</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_11.png' alt='插圖'>
-				<figcaption>Mint</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_12.png' alt='插圖'>
-				<figcaption>Noire</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_13.png' alt='插圖'>
-				<figcaption>Smart</figcaption>
-			</figure>
-			<figure>
-				<img src='../../images/overcast/20001106A_14.png' alt='插圖'>
-				<figcaption>Texture</figcaption>
-			</figure>
-		</section>
-		<hr>
-		<footer>
-			<p>
-				[1] 可在執行期間切換，不用重新啟動程式。甚至同一個應用程式裡，顯示不同樣式的視窗。
-			</p>
-		</footer>
+				}
+            </textarea>
+			<br>
+			但只是「樣式」而已，並不是真的調用系統原生元件，無法藉以解決 Swing 耗用較多系統資源而顯示速度稍慢一些的問題。<br>
+			<br>
+			如果需要作業系統原生元件的高反應速度、秒啟動的性能，可以用直接調用原生元件的 AWT。我們不見得有跨平台讓 GUI 保持一致的需求，且有時候只用到按鈕和輸入方塊等基本功能而已，這時 AWT 也是選擇，並非什麼都得 Swing 不可。<br>
+			<br>
+			但 AWT 調用的是 Windows 95 那種原生元件，如果你想要的是 Windows XP、Windows Vista、Windows 10 視覺效果的元件，好讓應用程式外觀長得跟其他軟體一樣，那就是用 Swing 原生元件樣式，而不是 AWT。
+		</p>
 	</section>
 	<hr id='20001030A'>
 	<section>
