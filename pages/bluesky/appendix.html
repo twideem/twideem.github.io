@@ -1532,31 +1532,54 @@
 		</section>
 		<hr>
 		<section>
-			<h3>download.bat</h3>
+			<h3>下載影片</h3>
 			<p>
 				<textarea class='brush:txt'>
-					@MODE CON COLS=120 LINES=30
-					@IF EXIST %USERPROFILE%\youtube-dl.conf COPY youtube-dl.conf %USERPROFILE%\youtube-dl.conf
 					@SET /P URL=Video URL:
-					youtube-dl -F %URL%
+					yt-dlp.exe -F %URL%
 					@ECHO=
 					@SET /P CODE=Format code:
-					youtube-dl -f %CODE% %URL%
+					yt-dlp.exe -f %CODE% %URL%
                 </textarea>
 			</p>
 		</section>
 		<hr>
 		<section>
-			<h3>download with account.bat</h3>
+			<h3>直接以 640x360 解析度下載 YouTube 播放清單</h3>
 			<p>
 				<textarea class='brush:txt'>
-					@MODE CON COLS=120 LINES=30
-					@IF EXIST %USERPROFILE%\youtube-dl.conf COPY youtube-dl.conf %USERPROFILE%\youtube-dl.conf
+					@SET /P LIST=Playlist:
+					yt-dlp.exe -f 18 %LIST%
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>登入帳號下載影片，Chromium 適用</h3>
+			<p>
+				<textarea class='brush:txt'>
+					@ECHO Close the Chromium before using it!
+					@PAUSE
 					@SET /P URL=Video URL:
-					youtube-dl -F %URL% -u=帳號 -p=密碼
+					yt-dlp.exe -F %URL% --cookies-from-browser chromium
 					@ECHO=
 					@SET /P CODE=Format code:
-					youtube-dl -f %CODE% %URL% -u=帳號 -p=密碼
+					yt-dlp.exe -f %CODE% %URL% --cookies-from-browser chromium
+                </textarea>
+				<br>
+				其他瀏覽器請修改 --cookies-from-browser 參數。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>下載字幕</h3>
+			<p>
+				<textarea class='brush:txt'>
+					@SET /P URL=Video URL:
+					yt-dlp.exe --list-sub %URL%
+					@ECHO=
+					@SET /P CODE=Format code:
+					yt-dlp.exe --sub-lang %CODE% --write-sub --skip-download %URL%
                 </textarea>
 			</p>
 		</section>
