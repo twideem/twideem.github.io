@@ -4233,7 +4233,7 @@
 					public class Main{
 						public static void main(String[] args){
 							Date date = new Date();
-							System.out.println(new SimpleDateFormat("yyyy 年 MM 月 dd 日 E a h:m:s").format(date));
+							System.out.println(new SimpleDateFormat("y 年 M 月 d 日 E a h 點 m 分 s 秒").format(date));
 						}
 					}
                 </textarea>
@@ -4241,7 +4241,7 @@
 				執行結果隨電腦當時的時間與時區而不同：<br>
 				<br>
 				<output>
-					2002 年 8 月 29 日 星期四 下午 12:34:56
+					2002 年 8 月 29 日 星期四 下午 12 點 34 分 56 秒
 				</output>
 			</p>
 		</section>
@@ -4256,7 +4256,7 @@
 					class Main{
 						public static void main(String[] args){
 							try{
-								Date date = new SimpleDateFormat("yyyy mm dd hh mm ss").parse("2002 8 29 12 34 56");
+								Date date = new SimpleDateFormat("yyyyMMdd hhmmss").parse("20020829 123456");
 							}
 							catch(Exception exception){
 								exception.printStackTrace();
