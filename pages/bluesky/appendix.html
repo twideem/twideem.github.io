@@ -880,6 +880,31 @@
 	</section>
 	<hr id='anchor38'>
 	<section>
+		<h2>解除安裝 Windows 備份 APP</h2>
+		<p>
+			2023 年九月更新（KB5030211）後，Windows 10 多了「Windows 備份」這個 APP，即使在「設定」中關閉不使用，也會在工作管理員的應用程式歷程記錄中看到這東西資源使用率排第一，看了很想刪除。<br>
+			<br>
+			<strong>然而，Windows 備份並不是獨立的 APP，而是 Windows 功能體驗套件<ins>1</ins> 的其中一個工具，想刪除的話得刪除整個 Windows 功能體驗套件，內含 emoji 面板和剪取工具之類的實用工具，確定你不需要這些工具才操作本文內容。</strong><br>
+			<br>
+			以系統管理員身份，進入 PowerShell，執行下面指令，先掃描出 Windows 功能體驗套件的名稱和版號：<br>
+			<br>
+			Get-WindowsPackage -Online | Where-Object {$_.PackageName -like "*Microsoft-Windows-UserExperience-Desktop-Package*"} | Select-Object -ExpandProperty PackageName<br>
+			<br>
+			然後輸入下面指令移除套件：<br>
+			<br>
+			Remove-WindowsPackage -Online -PackageName [掃描出來的套件名稱和版號]<br>
+			<br>
+			PowerShell 會以進度列顯示移除過程，然後詢問是否重新開機以完成解除安裝的工作。
+		</p>
+		<hr>
+		<footer>
+			<p>
+				[1] Microsoft Windows User Experience Desktop Package。
+			</p>
+		</footer>
+	</section>
+	<hr id='anchor39'>
+	<section>
 		<h2>移除 Microsoft Store 各式應用</h2>
 		<p>
 			看要移除哪個應用，然後以 PowerShell 輸入指令…
@@ -1011,7 +1036,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor39'>
+	<hr id='anchor40'>
 	<section>
 		<h2>移除檔案總管在本機時的 3D 物件資料夾</h2>
 		<p>
@@ -1025,14 +1050,14 @@
 			重新登入或下次開機時，就不會看見 3D 物件資料夾了。
 		</p>
 	</section>
-	<hr id='anchor40'>
+	<hr id='anchor41'>
 	<section>
 		<h2>修復「新增移除程式」消失不見的發行者和安裝於</h2>
 		<p>
 			Alt→工具→資料夾選項→檢視→重設資料夾
 		</p>
 	</section>
-	<hr id='anchor41'>
+	<hr id='anchor42'>
 	<section>
 		<h2>某軟體忽然沒聲音</h2>
 		<p>
@@ -1052,7 +1077,7 @@
 			大概不曉得按了什麼快捷鍵，不小心啟動 Xbox 遊戲列的關閉音效功能吧？怎麼按法我就不知道了。
 		</p>
 	</section>
-	<hr id='anchor42'>
+	<hr id='anchor43'>
 	<section>
 		<h2>版本 2004 無法切換內顯和獨顯</h2>
 		<p>
@@ -1065,7 +1090,7 @@
 			「省電」就是內建顯示晶片，「高效能」就是外接顯示卡。
 		</p>
 	</section>
-	<hr id='anchor43'>
+	<hr id='anchor44'>
 	<section>
 		<h2>Windows 10 優化</h2>
 		<p>
@@ -1084,7 +1109,7 @@
 			勾選檔案總管的「在個別的處理程序開啟資料夾視窗」可解決「內容」檢視模式遇到影音檔案會卡頓的問題。
 		</p>
 	</section>
-	<hr id='anchor44'>
+	<hr id='anchor45'>
 	<section>
 		<h2>如何進入 Windows 10 的安全模式</h2>
 		<p>
@@ -1105,7 +1130,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor45'>
+	<hr id='anchor46'>
 	<section>
 		<h2>各版最新 Visual C++ 可轉散發套件</h2>
 		<p>
@@ -1140,7 +1165,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor46'>
+	<hr id='anchor47'>
 	<section>
 		<h2>修改網路連線的名稱</h2>
 		<p>
@@ -1153,7 +1178,7 @@
 			一個個找，在 ProfileName 看到想改的名稱就修改吧～
 		</p>
 	</section>
-	<hr id='anchor47'>
+	<hr id='anchor48'>
 	<section>
 		<h2>手工編輯登錄擋</h2>
 		<hr>
@@ -1224,7 +1249,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor48'>
+	<hr id='anchor49'>
 	<section>
 		<h2>手工製作媒體播放清單</h2>
 		<hr>
@@ -1324,7 +1349,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor49'>
+	<hr id='anchor50'>
 	<section>
 		<h2>開啟音效卡錄音功能</h2>
 		<p>
@@ -1372,7 +1397,7 @@
 			</section>
 		</section>
 	</section>
-	<hr id='anchor50'>
+	<hr id='anchor51'>
 	<section>
 		<h2>緩解 ROG Zephyrus 筆電重低音喇叭破音問題</h2>
 		<p>
@@ -1387,7 +1412,7 @@
 			這做法能解決重低音喇叭爆音的問題，缺點是 Sonic Sutio 3 設定的音質無法發揮作用。但我寧可聽 Windows 那廉價的聲音，也不想聽折磨人的噪音。
 		</p>
 	</section>
-	<hr id='anchor51'>
+	<hr id='anchor52'>
 	<section>
 		<h2>在雙顯筆電中，強制使用獨立顯示卡，不要自動切換。</h2>
 		<hr>
@@ -1406,7 +1431,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor52'>
+	<hr id='anchor53'>
 	<section>
 		<h2>用 Windows 10 的夜間光線解決 IPS 面板螢幕過亮而刺眼的問題</h2>
 		<p>
@@ -1431,7 +1456,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor53'>
+	<hr id='anchor54'>
 	<section>
 		<h2>安裝編碼包後影片出現綠影</h2>
 		<hr>
@@ -1481,7 +1506,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor54'>
+	<hr id='anchor55'>
 	<section>
 		<h2>Aegisub 設定集</h2>
 		<hr>
@@ -1515,7 +1540,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor55'>
+	<hr id='anchor56'>
 	<section>
 		<h2>youtube-dl 設定集</h2>
 		<p>
