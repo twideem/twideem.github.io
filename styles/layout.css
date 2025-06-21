@@ -1,7 +1,7 @@
 *{font-family:monospace;font-size:14px}
 body{background-color:#ecedee;color:#4c4c4c;letter-spacing:0.24px;line-height:170%;margin:-1px 0 23px 0}
 article{background-color:#fff;border:solid 2px #4c4c4c;border-radius:32px 0;margin:auto;padding:20px 40px 17px 40px;width:600px}
-p{margin-left:30px}
+p{margin-left:1px}
 p~p,section+p{margin-top:24px}
 a{text-decoration:none}
 a:link,a:visited{color:#39f}
@@ -12,6 +12,7 @@ ul{margin:22px 4px}
 h1{font-size:21px;font-weight:bold;margin:18px 0 40px 0}
 header p{margin:-16px 0 15px 1px}
 h2,h2 a{font-size:16px;font-weight:bold;margin:28px 0 22px 0}
+section p{margin-left:30px}
 hr{background-color:#4c4c4c;border:1px solid #4c4c4c;margin:26px 1px}
 h3{margin:0 0 20px 30px}
 section section p{margin-left:30px}
