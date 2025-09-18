@@ -1,0 +1,76 @@
+*{font-family:monospace;font-size:14px}
+body{background-color:#ecedee;color:#4c4c4c;letter-spacing:0.24px;line-height:170%;margin:-1px 0 23px 0}
+article{background-color:#fff;border:solid 2px #4c4c4c;border-radius:32px 0;margin:auto;padding:20px 40px 17px 40px;width:600px}
+p{margin-left:1px}
+p~p,section+p{margin-top:24px}
+a{text-decoration:none}
+a:link,a:visited{color:#39f}
+a:hover,a:active{color:#f93}
+a.detail:link,a.detail:visited{color:#9c6}
+a.detail:hover,a.detail:active{color:#f93}
+ul{margin:22px 4px}
+h1{font-size:21px;font-weight:bold;margin:18px 0 40px 0}
+header p{margin:-16px 0 15px 1px}
+h2,h2 a{font-size:16px;font-weight:bold;margin:28px 0 22px 0}
+section p{margin-left:30px}
+hr{background-color:#4c4c4c;border:1px solid #4c4c4c;margin:26px 1px}
+h3{margin:0 0 20px 30px}
+section section p{margin-left:30px}
+section section p output{width:553px}
+section section footer p{margin-top:23px}
+section hr{background-color:#ccc;border-color:#ccc;margin-left:30px}
+h4{margin:20px 0 20px 29px}
+h4::before,h4::after{color:silver;content:'≡';font-family:標楷體}
+section section section p{margin-left:45px}
+section section section p output{width:538px}
+h5{margin:20px 0 20px 45px}
+h5::before,h5::after{color:silver;content:'＝';font-family:標楷體}
+section section section section p{margin-left:60px}
+section section section section p output{width:523px}
+h6{margin:20px 0 20px 60px}
+h6::before,h6::after{color:silver;content:'－';font-family:標楷體}
+section section section section section p{margin-left:75px}
+section section section section section p output{width:508px}
+samp,strong{color:#c69;font-weight:normal}
+em{background-color:#f8f8ff;color:#69c;display:block;font-style:normal}
+output{background-color:#222;color:#ccc;display:block;font-family:Consolas,monospace;margin-bottom:4px;padding:8px;width:553px}
+code{color:#396;font-style:normal}
+cite{font-family:標楷體,Serif;font-size:21px;font-style:normal}
+q{color:#69c;quotes:none;text-shadow:0 0 16px #69c}
+small{color:#d79;text-shadow:0 0 16px #d79}
+del{font-size:inherit;text-decoration-color:#69c}
+mark{background-color:#ffd}
+i{font-family:Georgia,Cursive;font-style:italic}
+sub{font-size:11px;vertical-align:-20%}
+sup{font-size:11px;vertical-align:20%}
+a img{border:none}
+img,canvas{margin-bottom:-5px}
+img~img{margin-top:8px}
+header p img{margin:4px 0 -3px 0}
+figure{margin:25px 0 19px 30px}
+header figure{margin-bottom:35px}
+section section section figure{margin-left:45px}
+section section section section figure{margin-left:58px}
+figcaption{color:#f96;margin:0 0 -3px -8px}
+figcaption::before{content:'【'}
+figcaption::after{content:'】'}
+table{border-collapse:collapse;border-spacing:0;margin:20px 0 20px 29px;width:95%}
+th{text-align:left}
+section td{vertical-align:top}
+td:nth-child(1){color:#396;width:25%}
+td:nth-child(2){color:#999}
+td:only-of-type{color:inherit}
+section section section table{margin-left:43px}
+section section section section table{margin-left:58px}
+ins{text-decoration:none}
+ins::before{content:'['}
+ins::after{content:']'}
+ins,footer p,footer p a{color:#36c;margin:26px 0 12px 0}
+section footer{margin-left:30px}
+section section footer{margin-left:0}
+footer figure{margin:15px 0}
+nav{font-weight:bold;margin:0 auto -1px auto;width:683px;text-align:right}
+nav,nav a{color:#4c4c4c;font-size:13px}
+nav a{font-weight:normal}
+nav a:link,nav a:visited{color:#390}
+nav a:hover,nav a:active{color:#f93}

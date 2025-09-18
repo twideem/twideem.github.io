@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<title>可輸入指令，例如 ls，再輸入列出來的檔案名稱。</title>
+<style>
+	*{font-family:monospace;font-size:x-large}
+	body{background-color:#2d0922;color:#bbb}
+	h1,h2,h3,h4,h5{display:inline;font-weight:normal}
+	h1{color:#9c3}
+	h2{color:#69c}
+</style>
+<script>
+	let a='<section><h1>張埠@個人網站</h1>:<h2>~/首頁</h2>$ <h3></h3><h4>▍<br></h4><h5></h5></section>';
+	let b='admin alias ar asa at awk badblocks basename batch bc bg c99 cal cat cc cd cflow chgrp chmod chown cksum cmp comm command compress cp crontab csplit ctags cut cxref date dd delta df diff dirname du echo ed env ex exit expand export expr false fc fg file find fold fort77 fsck fuser gencat get getconf getopts grep hash head history iconv id ipcrm ipcs jobs join kill less lex link ln locale localedef logger logname logout lp m4 mailx make man mesg mkdir mkfifo more mount mv newgrp nice nl nm nohup od paste patch pathchk pax perl pr printf prs ps pwd qalter qdel qhold qmove qmsg qrerun qrls qselect qsig qstat qsub read renice rm rmdel rmdir sact sccs sed set sh shutdown sleep sort split strings strip stty su sudo tabs tac tail talk tar tee test time top touch tput tr true tsort tty type ulimit umask unalias uname uncompress unexpand unget uniq unlink unmount unset useradd userdel usermod uucp uudecode uuencode uustat uux val vi wait wc what who write xargs yacc zcat';
+	let c=['[]~(￣ー￣ )>　等我這杯喝完再幫你執行','...(~￣０￣)ノ　我先出去一下 回來再幫你執行哦','(〜￣▽￣)〜~(￣▽￣)~〜(￣▽￣〜)　啦啦啦','ＺZz(￣.￣)　呼嚕','[]~(￣ー￣ )>　等我刷牙漱口完再幫你執行','...(~￣０￣)ノ　我出去買早餐 回來再幫你執行哦','(〜￣▽￣)〜~(￣▽￣)~〜(￣▽￣〜)　快樂上學去','(￣ε(#￣)　好啦 我幫你執行 不過…'];
+	let d=0;
+
+	function f()
+	{
+		let g=document.getElementsByTagName('h4')[document.getElementsByTagName('h4').length-1];
+		if(g) g.innerHTML='<br>';
+
+		document.body.innerHTML+=a;
+		scrollTo(0,document.body.scrollHeight);
+	}
+
+	onload=function(){
+		f();
+	};
+
+	onkeydown=function(x){
+		let g=document.getElementsByTagName('h3')[document.getElementsByTagName('h3').length-1];
+		let h=document.getElementsByTagName('h5')[document.getElementsByTagName('h5').length-1];
+
+		if(x.key=='Enter'){
+			if(g.textContent=='');
+			else if(g.textContent.match('^about$|^home$')) location.href=`../../${g.textContent}.html`;
+			else if(g.textContent.match('^upadesya$|^xpartition$')) location.href=`../${g.textContent}/index.html`;
+			else if(g.textContent.match('^clear$|^clear ')) document.body.innerHTML='';
+			else if(g.textContent.match('^googler ')) location.href=`https://www.google.com/search?q=${g.textContent.replace('googler ','')}`;
+			else if(g.textContent.match('^perl helloworld.pl$|^perl helloworld.pl |^helloworld.pl$|^helloworld.pl ')) h.innerHTML='<font color="#f69">是在哈囉</font> <font color="#f93">我沒在哈囉</font> <font color="#fc0">我也沒在哈囉</font> <font color="#6c9">我更沒在哈囉</font> <font color="#3cf">那是誰在哈囉</font> <font color="#c39">那就我在哈囉</font> <font color="#666">那就我也在哈囉</font>';
+			else if(g.textContent.match('^ls$|^ls ')) h.innerHTML='-rwxr-xr-x　1 root root　　關於本站　　　　　　　about<br>-rwxr-xr-x　1 root root　　電腦教學與程式設計　　home<br>-rwxr-xr-x　1 root root　　遊戲心得與攻略　　　　xpartition<br>-rwxr-xr-x　1 root root　　佛學與宗教信仰　　　　upadesya<br>-rwxr-xr-x　1 root root　　Perl example　　　　　helloworld.pl';
+			else if(g.textContent.match('^lynx ')) location.href=`https://${g.textContent.split(' ')[1].replace(/(https:\/\/)|(http:\/\/)/,'')}`;
+			else if(g.textContent.match(`^${b.replaceAll(' ',' |^')} |^${b.replaceAll(' ','$|^')}$`)) h.textContent=c[d++%c.length];
+			else h.textContent='bash: command not found';
+
+			f();
+		}
+		else if(x.key=='Backspace') g.textContent=g.textContent.slice(0,-1);
+		else if(x.key=='Escape') g.textContent='';
+		else if(x.key.length==1) g.textContent+=x.key;
+	};
+</script>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>
+	(function(){
+		SyntaxHighlighter=SyntaxHighlighter||(typeof require!='undefined'?require('shCore').SyntaxHighlighter:null);
+
+		function Brush()
+		{
+			this.regexList=[{regex:/\(\*[\s\S]*?\*\)/gm,css:'comments'},
+							{regex:/{(?!\$)[\s\S]*?}/gm,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},
+							{regex:/\{\$[a-zA-Z]+.+\}/g,css:'color1'},
+							{regex:/\b[\d]+\b/g,css:'value'},
+							{regex:/\$[a-zA-Z0-9]+\b/g,css:'value'},
+							{regex:new RegExp(this.getKeywords('begin case const constructor destructor do else end for function if implementation interface of private procedure program public repeat to then true type until unit uses var while'),'gmi'),css:'keyword'},
+							{regex:new RegExp(this.getKeywords('array boolean byte cardinal char class double integer object pointer record set single string'),'gmi'),css:'variable'},
+							{regex:/(&amp;)|(&lt;)|(&gt;)|(!)|(\*)|(\^)|(\{)|(\})|(\[)|(\])|(\()|(\))|[-=+|;:,./]/g,css:'symbol'}];
+		}
+
+		Brush.prototype=new SyntaxHighlighter.Highlighter();
+		Brush.aliases=['pas'];
+		SyntaxHighlighter.brushes.Delphi=Brush;
+		typeof(exports)!='undefined'?exports.Brush=Brush:null;
+	})();
+</script>
+<article>
+	<header>
+		<h1>用 Pascal 傳承程式</h1>
+		<p>
+			1970 年，Niklaus Wirth 為了實現、宣揚結構化程式設計，基於 ALGOL 60 開發了 Pascal 程式語言，在教授學生時使用，帶動了現代化程式設計的潮流。做為學術推廣用的 Pascal，結構嚴謹、規範周詳，在那個年代看到 Pascal 程式碼的人，相比其他結構化程式程式語言的凌亂，都會讚嘆有條有理的 Pascal 程式寫起來好優雅。<br>
+			<br>
+			隨著時代變遷，過去的優雅現在看來顯得囉嗦，現在物件導向的動態語言感覺更優雅。要形容的話，Pascal 就像濃妝豔抹的優雅、端莊，現在的 Python 則是清新脫俗的優雅、可人。<br>
+			<br>
+			不過就像日本學習傳統禮儀，藉傳承讓自己身心接受洗滌一樣，現在學 Pascal 程式設計，感受傳統結構化程式設計的精神，也頗有砥礪身心、讓自己煥然一新的妙用～<br>
+			<br>
+			我不會推薦你用 Pascal 寫程式，雖然 GNU 旗下有專案持續發展這門程式語言，所以你可以用它開發軟體，能做的事要比 Java 和 Python 來得多，但能做不代表你會做，很多要有電腦工程的專業背景才做得出來，所以不具開發效率，學了也很難在職場上展現競爭力。不像 Java 和 Python 的 API，即使完全不懂原理，也能拼湊出想要的東西來，讓老闆和客戶笑開懷。但如果你會寫程式，卻感到寫程式的生活變乏味，找不到目標，我推薦你學 Pascal 語言，當興趣就好，來看看一代宗師 Niklaus Wirth 創作的語言，讓自己感受一下過去最優雅的程式語言，藉傳承最正統的結構化程式設計砥礪身心，會有煥然一新的自我。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>下載 Pascal</h3>
+			<p>
+				首先推薦 <a href='http://www.freepascal.org'>Free Pascal</a>，它就像過去 DOS 時代的 Turbo Pascal 一樣，提供編譯器、還有藍白畫面的 IDE，濃濃 80 年代風味～<br>
+				<br>
+				想開發視窗應用程式的話，可以用媲美 Delphi 的 <a href='http://www.lazarus-ide.org'>Lazarus</a>，或許你會愛上 Pascal。不過這樣就必須寫 Object Pascal，而物件導向的它一點也不優雅，反而不比 C++ 的雅痞。<br>
+				<br>
+				我比較推薦寫傳統結構化程式設計的 Pascal，所以本文選擇 Free Pascal 來教學，而不是 Lazarus。<br>
+				<br>
+				但學會 Pascal 語法，急著想開發應用軟體的話，應該改用視覺化開發環境、拉一拉元件就能寫程式的 Lazarus。這樣一來跟 Java 或 Python 比，到底誰有開發效率，就很難說了～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<p>
+				用記事本寫入如下程式，並儲存檔案為 main.pas：<br>
+				<br>
+				<canvas width='569'>notepad('main.pas','begin','  writeln(\'Hello, world!\');','end.')</canvas><br>
+				<br>
+				進入命令提示字元，然後用 Free Pascal 的 <code>fpc.exe</code> 編譯 main.pas，正常的話會編譯出 main.o 和 main.exe 兩個檔案，執行 main.exe 會顯示 Hello, world!：<br>
+				<br>
+				<canvas width='569'>cmd('C:\\Users\\User\\Desktop>C:\\FPC\\2.6.4\\bin\\i386-win32\\fpc main.pas','','C:\\Users\\User\\Desktop>main','Hello, world!','','C:\\Users\\User\\Desktop>_')</canvas>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>參考手冊</h3>
+			<p>
+				Free Pascal 的 doc 資料夾裡，有完整的說明書，以 PDF 檔呈現，製作用心程度，就跟購買商業編譯器附的厚厚好幾本說明書一樣：
+			</p>
+			<table>
+				<tr><td>user.pdf</td><td>User's Guide</td></tr>
+				<tr><td>prog.pdf</td><td>Programmer's Guide</td></tr>
+				<tr><td>ref.pdf</td><td>Language Reference guide</td></tr>
+				<tr><td>rtl.pdf</td><td>Run-Time Library Reference guide</td></tr>
+				<tr><td>fcl.pdf</td><td>Free Component Library Reference guide</td></tr>
+			</table>
+			<section>
+				<h4>User's Guide</h4>
+				<p>
+					使用者指南，介紹 Free Pascal 軟體本身，即編譯器和編輯器的安裝與使用，與程式語言無關。基本上跳過不讀，等需要用到時，再翻開來找目錄查閱想要的資料。
+				</p>
+			</section>
+			<section>
+				<h4>Programmer's Guide</h4>
+				<p>
+					程式設計師指南，介紹系統工程師可以用 Free Pascal 完成哪些程式開發工作，像處理器和記憶體的控制啊、多執行緒的排程啊、與作業系統底層的訊息交換啊、最佳化編譯執行啊…還是看下一本好了～
+				</p>
+			</section>
+			<section>
+				<h4>Language Reference guide</h4>
+				<p>
+					語言工具書，寫程式時放在手邊查閱用的，這本不是教你 Pascal 語言怎麼用的，而是對語法的運作方式做深入說明。但根本就沒有詳細指導該怎麼用 Pascal 語言寫程式的書，所以新手或剛入門的人，真正要讀的還是這本。
+				</p>
+			</section>
+			<section>
+				<h4>Run-Time Library Reference guide</h4>
+				<p>
+					函式庫工具書，程式寫不出來就翻翻看有沒有現成的，有 1780 頁，跟大雄哭著找哆啦 A 夢有沒有道具一樣，每次都有新發現。
+				</p>
+			</section>
+			<section>
+				<h4>Free Component Library Reference guide</h4>
+				<p>
+					類別庫工具書，因為 Free Pascal 支援 Object Pascal。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>基礎</h3>
+			<p>
+				<a href='#anchor1'>區塊</a><br>
+				<a href='#anchor2'>敘述</a><br>
+				<a href='#anchor3'>大小寫</a><br>
+				<a href='#anchor4'>資料與宣告</a><br>
+				<a href='#anchor5'>列舉</a><br>
+				<a href='#anchor6'>陣列</a><br>
+				<a href='#anchor7'>集合</a><br>
+				<a href='#anchor8'>紀錄</a><br>
+				<a href='#anchor9'>定義型態</a><br>
+				<a href='#anchor10'>程序與函式</a><br>
+				<a href='#anchor11'>程式與單元</a><br>
+				<a href='#anchor12'>流程控制</a><br>
+				<a href='#anchor13'>註解</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>焦點</h3>
+			<p>
+				<a href='#anchor14'>結構化程式之美</a><br>
+				<a href='#anchor15'>傳統之美與現代之美</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>進階</h3>
+			<p>
+				<a href='#anchor16'>指標</a><br>
+				<a href='#anchor17'>類別與物件</a>
+			</p>
+		</section>
+	</section>
+
+	<hr>
+	<section>
+		<h2>基礎</h2>
+		<hr id='anchor1'>
+		<section>
+			<h3>區塊</h3>
+			<p>
+				主程式必須寫在區塊裡面，區塊以 <code>begin</code> 開始，<code>end</code> 結束。但隨著區塊的不同，end 後面會接不同的符號。<br>
+				<br>
+				<code>end.</code> 表示整份程式碼到此結束。<br>
+				<br>
+				連續出現區塊時，使用 <code>end;</code> 表示分隔，通常用在函式區塊的結束，因為函式與程序通常寫在主程式區塊外面，形成連續的區塊。<br>
+				<br>
+				而像流程控制，每個指令分支下的區塊，本來就是各自獨立的，所以用 <code>end</code> 就好，不用加符號。<br>
+				<br>
+				一個沒有意義，但能通過編譯，表現各種 begin end 關係的程式：<br>
+				<br>
+				<textarea class='brush:pas'>
+					begin
+					  begin
+						begin
+
+						end
+					  end;
+					  begin
+						begin
+						  begin
+
+						  end
+						end;
+						begin
+						  begin
+
+						  end
+						end
+					  end
+					end.
+                </textarea>
+				<br>
+				其實除了 if 結構以外，其他地方的 end 加 ; 分號並不會報錯，嫌麻煩的話一律用 end; 就好 XD　至少一律加分號報錯的機率，遠低於不加分號 XDDD
+			</p>
+		</section>
+		<hr id='anchor2'>
+		<section>
+			<h3>敘述</h3>
+			<p>
+				分號 <code>;</code> 並不是敘述的結束，而是分隔多行敘述。<br>
+				<br>
+				換句話說，只有一行敘述的話，並不用加分號。或者區塊內有多行敘述的話，最後一行的敘述其實不用加分號。<br>
+				<br>
+				但加了分號也不會報錯，不加反而常常該加的也忘了加，時常報錯，所以個人習慣是所有敘述通通加分號。
+			</p>
+		</section>
+		<hr id='anchor3'>
+		<section>
+			<h3>大小寫</h3>
+			<p>
+				Pascal 不分大小寫，識別字 sayhello 和 SayHello 是一樣的名稱、var 和 Var 是一樣的指令、true 和 True 是一樣的值。
+			</p>
+		</section>
+		<hr id='anchor4'>
+		<section>
+			<h3>資料、宣告</h3>
+			<p>
+				宣告型態蠻多的，但基本上這四個就夠了：
+			</p>
+			<table>
+				<tr><td>integer</td><td>整數，大小隨 16, 32, 64-bit 系統而定。</td></tr>
+				<tr><td>single</td><td>單精度浮點數。</td></tr>
+				<tr><td>string</td><td>字串，使用 <code>'</code> 單引號，不能使用 <code>"</code> 雙引號。</td></tr>
+				<tr><td>boolean</td><td>false 和 true。</td></tr>
+			</table>
+			<p>
+				其次是：
+			</p>
+			<table>
+				<tr><td>cardinal</td><td>無號整數，大小隨 16, 32, 64-bit 系統而定。</td></tr>
+				<tr><td>double</td><td>倍精度浮點數。</td></tr>
+				<tr><td>char</td><td>字元。</td></tr>
+				<tr><td>pointer</td><td>指標（存取記憶體位址用）</td></tr>
+			</table>
+			<p>
+				還有資料結構以及物件導向的：
+			</p>
+			<table>
+				<tr><td>array</td><td>陣列</td></tr>
+				<tr><td>set</td><td>集合</td></tr>
+				<tr><td>record</td><td>紀錄（鍵值對資料）</td></tr>
+				<tr><td>class</td><td>類別</td></tr>
+				<tr><td>object</td><td>物件</td></tr>
+			</table>
+			<p>
+				直接將資料結構做為宣告納入 Pascal，也是這門語言的特色！當時的程式語言，資料結構是要自己寫的，頂多幫你寫好然後放到內建函式庫。但 Niklaus Wirth 認為「程式設計就是演算法加資料結構」，既然 Pascal 要用來教授學生什麼才是程式設計，就將資料結構的觀念也加到語言裡面，於是指令不是只有設計演算法的功能而已，還有資料結構的功能。<br>
+				<br>
+				最後是固定位元數，大小範圍不變的：
+			</p>
+			<table>
+				<tr><td>byte</td><td>0 ~ 255</td></tr>
+				<tr><td>word</td><td>0 ~ 65535</td></tr>
+				<tr><td>shortint</td><td>-128 ~ 127</td></tr>
+				<tr><td>smallint</td><td>-32768 ~ 32767</td></tr>
+				<tr><td>longint</td><td>-2147483648 ~ -2147483647</td></tr>
+				<tr><td>int64</td><td>-9223372036854775808 ~ 9223372036854775807</td></tr>
+				<tr><td>currency</td><td>只留小數 4 位的浮點數</td></tr>
+			</table>
+			<p>
+				剩下還有一個用來相容早期 Pascal 處理小數用的 <code>real</code>（實數）。早期各家編譯器對浮點數的設計都不一樣，直到 1980 年 Intel 推出 8087 這顆專門處理浮點數的輔助處理器，大家開始以它的設計為標準，甚至原生支援 8087 的浮點數省得自己來，速度又快，索性成為 IEEE 754 業界標準。1970 年就問世的 Pascal 也不例外，它使用介於 single (4-bit) 和 double (8-bit) 之間的 6-bit 設計浮點數，支援 IEEE 754 後，real 只做為相容舊版 Pascal 程式時使用，往後都用原生支援處理器浮點數的 single 和 double，光執行效率就差很多。<br>
+				<br>
+				最後就是宣告變數要放在 <code>var</code>，宣告常數要放在 <code>const</code>，同樣型態的變數可用 <code>,</code> 宣告在一起，宣告時可同時用 <code>=</code> 給予預設值。<br>
+				<br>
+				<textarea class='brush:pas'>
+					const
+					  i : integer = 123;
+					  s : string = 'abc';
+					var
+					  l : boolean;
+					  b : byte = 255;
+					  c1, c2, c3 : char;
+					begin
+					  l := true;
+					  c1 := 'A';
+					end.
+                </textarea>
+			</p>
+		</section>
+		<hr id='anchor5'>
+		<section>
+			<h3>列舉</h3>
+			<p>
+				<textarea class='brush:pas'>
+					var
+					  E : (AAA, BBB, CCC, DDD, EEE);
+					begin
+					  writeln(E.CCC);
+					  writeln(CCC);
+					end.
+                </textarea>
+				<br>
+				<output>
+					CCC<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr id='anchor6'>
+		<section>
+			<h3>陣列</h3>
+			<p>
+				<textarea class='brush:pas'>
+					var
+					  A : array[1..3] of integer;
+					begin
+					  A[1] := 123;
+					  A[2] := 456;
+					  A[3] := A[1] + A[2];
+					  writeln(A[3]);
+					end.
+                </textarea>
+				<br>
+				<output>
+					579
+				</output>
+			</p>
+		</section>
+		<hr id='anchor7'>
+		<section>
+			<h3>集合</h3>
+			<section>
+				<h4>數列集合</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  S : set of 1..10;
+						begin
+						  S := [1, 3, 5, 7, 9];
+						  writeln(1 in S);
+						  writeln(2 in S);
+						end.
+                    </textarea>
+					<br>
+					<output>
+						TRUE<br>
+						FALSE
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>字元集合</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  S : set of char;
+						begin
+						  S := ['A', 'B', 'C', 'D', 'E'];
+						  writeln('C' in S);
+						  writeln('G' in S);
+						end.
+                    </textarea>
+					<br>
+					<output>
+						TRUE<br>
+						FALSE
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>列舉集合</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  S : set of (AAA, BBB, CCC, DDD, EEE);
+						begin
+						  S := [AAA, CCC, EEE];
+						  writeln(AAA in S);
+						  writeln(BBB in S);
+						end.
+                    </textarea>
+					<br>
+					<output>
+						TRUE<br>
+						FALSE
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr id='anchor8'>
+		<section>
+			<h3>紀錄</h3>
+			<p>
+				<textarea class='brush:pas'>
+					var
+					  R : record
+						s : string;
+						i : integer;
+					  end;
+					begin
+					  R.s := 'ABC';
+					  R.i := 123;
+					  writeln(R.s);
+					  writeln(R.i);
+					end.
+                </textarea>
+				<br>
+				<output>
+					ABC<br>
+					123
+				</output>
+			</p>
+		</section>
+		<hr id='anchor9'>
+		<section>
+			<h3>定義型態</h3>
+			<p>
+				<code>type</code> 可以定義型態，將複雜的資料結構寫成型態，往後只要簡單宣告一下就能使用。尤其多個變數用的是同樣資料結構時，就更需要定義成型態來用，才不會寫一堆重複的程式碼。
+			</p>
+			<section>
+				<h4>區間</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type
+						  THitPoint = 0..5000;
+						var
+						  hp : THitPoint;
+						begin
+						  hp := 2331;
+						end.
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>列舉</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type
+						  TCharacter = (Amazon, Necromancer, Barbarian, Sorceress, Paladin);
+						var
+						  character : TCharacter;
+						begin
+						  character := Barbarian;
+						end.
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>陣列</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type
+						  TEquipment = array [1..10] of string;
+						var
+						  equipments : TEquipment;
+						begin
+						  equipments[1] := '不朽之王的碎魂者';
+						  equipments[3] := '不朽之王的意志';
+						  equipments[4] := '不朽之王的靈魂牢籠';
+						  equipments[5] := '不朽之王的瑣事';
+						  equipments[6] := '不朽之王的融爐';
+						  equipments[7] := '不朽之王之柱';
+						  equipments[8] := '金屬網格';
+						  equipments[9] := '烏鴉之霜';
+						  equipments[10] := '瑪那得的治療';
+						end.
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>集合</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type
+						  TRune = set of (El, Eld, Tir, Nef, Eth, Ith, Tal, Ral, Ort, Thul);
+						var
+						  runes : TRune;
+						begin
+						  runes := [Tir, El];
+						end.
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>紀錄</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type
+						  TAccount = record
+							id : string;
+							password : integer;
+						  end;
+						var
+						  account : TAccount;
+						begin
+						  account.id := 'Barblo';
+						  account.password := 12345;
+						end.
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr id='anchor10'>
+		<section>
+			<h3>程序、函式</h3>
+			<p>
+				不傳回資料的話用 <code>procedure</code>，要傳回資料的話用 <code>function</code>。<br>
+				<br>
+				<textarea class='brush:pas'>
+					procedure say(x : string);
+					begin
+					  writeln(x);
+					end;
+					function hello() : string;
+					begin
+					  hello := 'Hello!';
+					end;
+					function goodbye() : string;
+					begin
+					  goodbye := 'Bye~';
+					end;
+					begin
+					  say(hello());
+					  say(goodbye());
+					end.
+                </textarea>
+				<br>
+				<output>
+					Hello!<br>
+					Bye~
+				</output>
+			</p>
+		</section>
+		<hr id='anchor11'>
+		<section>
+			<h3>程式、單元</h3>
+			<p>
+				Pascal 原始碼分 <code>program</code> 與 <code>unit</code> 兩種，前者是主程式，後者是外部程式，有了這層關係上的定義，就能在主程式使用外部程式。<br>
+				<br>
+				不使用外部程式的話，主程式可以不寫 program。要使用外部程式的話，就必須寫上去，否則無法通過編譯。<br>
+				<br>
+				unit 可做為程序導向程式設計的模組，也可做為物件導向程式設計的介面。
+			</p>
+			<section>
+				<h4>module.pas</h4>
+				<p>
+					<textarea class='brush:pas'>
+						unit module;
+						interface
+						  procedure f();
+						implementation
+						  procedure f();
+						  begin
+							writeln('Hello!');
+						  end;
+						end.
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.pas</h4>
+				<p>
+					<textarea class='brush:pas'>
+						program main;
+						uses module;
+						begin
+						  f();
+						end.
+                    </textarea>
+					<br>
+					<output>
+						Hello!
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr id='anchor12'>
+		<section>
+			<h3>流程控制</h3>
+			<section>
+				<h4>if</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  a : integer;
+						begin
+						  a := 123;
+						  if a = 100 then
+						  begin
+							writeln('Bingo');
+						  end
+						  else if a &gt; 100 then
+						  begin
+							writeln('Bigger');
+						  end
+						  else
+						  begin
+							writeln('Smaller');
+						  end
+						end.
+                    </textarea>
+					<br>
+					<output>
+						Bigger
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>case</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  a : string;
+						begin
+						  a := 'tw';
+						  case a of
+							'us' : writeln('Unistate America');
+							'tw' : writeln('Taiwan');
+						  else
+							writeln('Earth');
+						  end
+						end.
+                    </textarea>
+					<br>
+					<output>
+						Taiwan
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>while</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  n : integer;
+						begin
+						  n := 1;
+						  while n &lt;= 3 do
+						  begin
+							writeln(n);
+							n := n + 1;
+						  end
+						end.
+                    </textarea>
+					<br>
+					<output>
+						1<br>
+						2<br>
+						3
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>repeat</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  n : integer;
+						begin
+						  n := 1;
+						  repeat
+						  begin
+							writeln(n);
+							n := n + 1;
+						  end
+						  until  n &gt; 3;
+						end.
+                    </textarea>
+					<br>
+					<output>
+						1<br>
+						2<br>
+						3
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>for</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  n : integer;
+						begin
+						  for n := 1 to 3 do
+						  begin
+							writeln(n);
+						  end
+						end.
+                    </textarea>
+					<br>
+					<output>
+						1<br>
+						2<br>
+						3
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>break, continue</h4>
+				<p>
+					使用 <code>break</code> 可以強制離開流程結構，使用 <code>continue</code> 可以跳過迴圈接下來的程式，再重新迴圈一次。
+				</p>
+			</section>
+		</section>
+		<hr id='anchor13'>
+		<section>
+			<h3>註解</h3>
+			<p>
+				<textarea class='brush:pas'>
+					{ 註解 }
+					(* 註解 *)
+					// 註解
+                </textarea>
+				<br>
+				Pascal 那個年代，很多國家的鍵盤配置只有 () 括號，沒有 {} 括號，且作業系統是 DOS 那種操作介面，沒辦法像現在容易找到其他辦法打出想要的符號，因此設計了 (* *) 的註解。<br>
+				<br>
+				現在這些國家的鍵盤都有 AltGr 鍵，能按出各種字母和符號，已經不是問題。<br>
+				<br>
+				即使沒有，Windows 作業系統也能靠 Ctrl+Alt 達到相同效果。<br>
+				<br>
+				如果你覺得程式設計軟體總喜歡設計一堆 Ctrl+Alt+.. 組合鍵，就是這麼來的，反正他們平常都要按 Ctrl+Alt，索性多來幾個組合鍵功能。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>焦點</h2>
+		<hr id='anchor14'>
+		<section>
+			<h3>結構化程式之美</h3>
+			<p>
+				看完上述基礎語法，來實際感受一下為何人們總說 Pascal 優雅了～<br>
+				<br>
+				<textarea class='brush:pas'>
+					program main;
+					const
+					  hello : string = 'Hello!';
+					var
+					  byebye : string;
+					procedure
+					  say(x : string);
+					  begin
+						if x = 'Hello!' then
+						  x := 'Ahoy!';
+						writeln(x);
+					  end;
+					function
+					  goodbye() : string;
+					  begin
+						byebye := 'Bye~';
+						goodbye := byebye;
+					  end;
+					begin
+					  say(hello);
+					  say(goodbye());
+					end.
+                </textarea>
+				<br>
+				首先是結構分明，常數、變數、程序、函式、主程式一目了然，可讀性高，容易找到想要的東西在哪。<br>
+				<br>
+				然後是只在數據上使用符號，流程順序都用英文指令完成，所以程式碼讀起來就像唸著一段又一段的情節一樣，既流暢又自然。反觀 C 語言讀到 {} 之類的符號，因為沒意義總跳過不唸，讀起來就比較跳躍，情節陳鋪上便沒那麼流暢。當然，不是說 C 語言不好，Pascal 這樣做容易閱讀，C 語言則是方便編寫，各有各有的優點。<br>
+				<br>
+				還有，範例程式碼沒用空行將不同區塊分隔開來，就已經條理分明，照單字讀完程式就差不多把程式碼的結構說出來了。我只有把 procedure 和 function 編排得像 const 和 var 而已。更進一步研究適合 Pascal 的編排風格，會更具可讀性、也更優美，你說這語言不值得一學嗎？<br>
+				<br>
+				編譯器的訊息也是 Pascal 優雅的一環，你很容易從詳實的錯誤訊息中修正程式碼，還會提醒哪些變數沒用到、哪些資料超過型態大小、哪些設計有溢位的瑕疵…之類，讓你寫出更穩固的程式檔案。
+			</p>
+		</section>
+		<hr id='anchor15'>
+		<section>
+			<h3>傳統之美與現代之美</h3>
+			<p>
+				Pascal 能將語法複雜的靜態型別結構化程式語言，整理得這麼有條理，固然是很了不起的成就！然而，還有另一種優雅的表現方式，則是不讓程式語言這麼複雜，用簡約的語法讓事情變簡單，那本身就很有條理了。<br>
+				<br>
+				進入 21 世紀，動態型別物件導向表述語言的 Python，讓我們看到另一種優雅的程式，而且感覺更迷人，已在 10 年代成為最受肯定的程式語言。<br>
+				<br>
+				我不想說 Python 是比 Pascal 更優雅的語言，因為 Pascal 就是 Pascal，它才能將編譯式靜態型別傳統結構化程式語言表現得這麼優美。Python 既然是類型完全不同的語言，再優美也沒辦法做到 Pascal 能做的事。<br>
+				<br>
+				我平常喜歡用 Python 寫程式，但我也喜歡寫 Pascal 程式讓它繼續走下去。如此一款編譯品質跟 C 語言同樣優良的程式語言，又有著更嚴謹、周詳的結構化語法，實在不該長期埋沒下去。<br>
+				<br>
+				在 GNU 自由、開源下持續發展的 Free Pascal 與 Lazarus，說真的堪稱驚為天人之作，前者能在個人電腦和智慧型裝置及各種作業系統編譯出原生程式，後者能在桌面環境以視覺化操作介面開發視窗應用程式，善加使用的話，可以開創美好的程式設計願景。<br>
+				<br>
+				只是知道的人少、推廣率低，希望有一天能見到 Pascal 登上業界主流。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>進階</h2>
+		<hr id='anchor16'>
+		<section>
+			<h3>指標</h3>
+			<p>
+				所謂指標就是記憶體位址，宣告為指標的變數，能放進去的資料就是記憶體位址。而資料本來就是放在記憶體裡面，因此指標變數就是直接透過記憶體位址存取資料的變數。<br>
+				<br>
+				資料型態前面使用 <code>^</code> 表示宣告指標，放在變數後面表示透過指標存取內容，對資料 <code>@</code> 可取得記憶體位址。
+			</p>
+			<section>
+				<h4>^ 和 @</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  i : integer = 123;
+						  p : ^integer;
+						begin
+						  p := @i;
+						  writeln(integer(p^))
+						end.
+                    </textarea>
+					<br>
+					<output>
+						123
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>pointer</h4>
+				<p>
+					<textarea class='brush:pas'>
+						var
+						  i : integer = 123;
+						  b : boolean = true;
+						  c : char = 'C';
+						  p : pointer;
+						begin
+						  p := @i;
+						  p := @b;
+						  p := @c;
+						end.
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr id='anchor17'>
+		<section>
+			<h3>類別與物件</h3>
+			<p>
+				雖然 Pascal 寫程序導向的程式很優雅，但是寫物件導向的話卻很醜，讀起來會吐血：
+			</p>
+			<section>
+				<h4>Example 1: 只一個操作功能的簡單物件</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type TObject = object
+						  public
+							procedure dosomething();
+						  end;
+						  procedure TObject.dosomething();
+						  begin
+							writeln('Hello!');
+						  end;
+						var
+						  obj : TObject;
+						begin
+						  obj.dosomething();
+						end.
+                    </textarea>
+					<br>
+					<output>
+						Hello!
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2: 加入私有屬性、建構子、解構子的完整物件</h4>
+				<p>
+					<textarea class='brush:pas'>
+						type TObject = object
+						  private
+							field : integer;
+						  public
+							constructor new;
+							destructor destroy;
+							procedure dosomething(x : integer);
+						  end;
+						  constructor TObject.new;
+						  begin
+							writeln('NEW');
+						  end;
+						  destructor TObject.destroy;
+						  begin
+							writeln('DESTROY');
+						  end;
+						  procedure TObject.dosomething(x : integer);
+						  begin
+							field := x * 2;
+							writeln(field);
+						  end;
+						var
+						  obj : TObject;
+						begin
+						  obj.new;
+						  obj.dosomething(123);
+						  obj.destroy;
+						end.
+                    </textarea>
+					<br>
+					<output>
+						NEW<br>
+						246<br>
+						DESTROY
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 3: 寫在單元裡</h4>
+				<section>
+					<h5>module.pas</h5>
+					<p>
+						<textarea class='brush:pas'>
+							unit module;
+							interface
+							  type TObject = object
+								public
+								  procedure dosomething();
+								end;
+							implementation
+							  procedure TObject.dosomething();
+							  begin
+								writeln('Hello!');
+							  end;
+							end.
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>main.pas</h5>
+					<p>
+						<textarea class='brush:pas'>
+							program main;
+							uses module;
+							var
+							  obj : TObject;
+							begin
+							  obj.dosomething();
+							end.
+                        </textarea>
+						<br>
+						<output>
+							Hello!
+						</output>
+					</p>
+				</section>
+			</section>
+			<p>
+				程序導向程式設計是揭露細節越詳細，越能理解程式結構，Pascal 在這方面能夠詳實交代細節，所以能寫出優美的結構化程式。<br>
+				<br>
+				但物件導向是越隱藏細節，越能發揮抽象的語意，這時 Pascal 詳實交代來龍去脈的特色，就成反作用，顯得繁文縟禮了。<br>
+				<br>
+				反而以較多符號取代單字、且前後文不太交代區塊之間關係的 C++，寫出的物件導向程式，較能用「意會」的方式看待物件，而不是 Object Pascl 用「認知」的方式一窺物件。<br>
+				<br>
+				雖然 C++ 稱不上優雅，但很雅痞，物件導向這彷若城市化發展中的繁雜社會，就適合這努力擠身為菁英的調調，不需要什麼優雅的身段。
+			</p>
+		</section>
+	</section>
+</article>
