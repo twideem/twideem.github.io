@@ -886,22 +886,30 @@
 		<p>
 			2023 年九月更新（KB5030211）後，Windows 10 多了「Windows 備份」這個 APP，即使在「設定」中關閉不使用，也會在工作管理員的應用程式歷程記錄中看到這東西資源使用率排第一，看了很想刪除。<br>
 			<br>
-			<strong>然而，Windows 備份並不是獨立的 APP，而是 Windows 功能體驗套件<ins>1</ins> 的其中一個工具，想刪除的話得刪除整個 Windows 功能體驗套件，內含 emoji 面板和剪取工具之類的實用工具，確定你不需要這些工具才操作本文內容。</strong><br>
+			<strong>然而，Windows 備份並不是獨立的 APP，而是 Windows 功能體驗套件<ins>1</ins> 的其中一個工具，想刪除的話得刪除整個 Windows 功能體驗套件，內含 emoji 面板、剪取工具、歷史剪貼簿之類的實用工具，確定你不需要這些工具才操作本文內容。</strong><br>
 			<br>
-			以系統管理員身份，進入 PowerShell，執行下面指令，先掃描出 Windows 功能體驗套件的名稱和版號：<br>
+			首先我們要掃描出 Windows 功能體驗套件的名稱和版號！以系統管理員身份，進入命令提示字元，執行下面指令：<br>
 			<br>
-			Get-WindowsPackage -Online | Where-Object {$_.PackageName -like "*Microsoft-Windows-UserExperience-Desktop-Package*"} | Select-Object -ExpandProperty PackageName<br>
+			DISM /Online /Get-Packages<br>
 			<br>
-			然後輸入下面指令移除套件：<br>
+			然後找類似如下的名稱，把版號最高的整行複製下來，可以按 Ctrl=F 搜尋：<br>
 			<br>
-			Remove-WindowsPackage -Online -PackageName [掃描出來的套件名稱和版號]<br>
+			Microsoft-Windows-UserExperience-Desktop-Package~31bf3856ad364e35~amd64~~10.0.19041.版號
 			<br>
-			PowerShell 會以進度列顯示移除過程，然後詢問是否重新開機以完成解除安裝的工作。
+			這樣就能輸入下面指令移除套件：<br>
+			<br>
+			DISM /Online /Remove-Package /PackageName:[套件名稱和版號]<br>
+			<br>
+			會以進度列顯示移除過程，然後詢問是否重新開機以完成解除安裝的工作。<br>
+			<br>
+			反悔想恢復的話：<br>
+			<br>
+			DISM /Online /Add-Capability /CapabilityName:Windows.Client.ShellComponents~~~~0.0.1.0
 		</p>
 		<hr>
 		<footer>
 			<p>
-				[1] Microsoft Windows User Experience Desktop Package。
+				[1] Microsoft Windows User Experience Desktop Package
 			</p>
 		</footer>
 	</section>
