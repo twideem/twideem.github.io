@@ -213,48 +213,44 @@
 				<br>
 				特別是，原本喊說 Windows 10 是最後一個版本的關係，既然不用再打造新的作業系統，心思便都放在優化功耗和硬體加速的各種調校上，從版本 1511 到版本 2004，Windows 10 自己就在逐步停用用處不大又影響功耗性價的服務，所以其實不用再自己關閉服務，該關的都關了，再關只是破壞 Windows 10 調校好的良好體驗而已。<br>
 				<br>
-				最後，<strong>優化過後，會忘了之前改過哪些東西，導致哪天想執行某功能出問題改不回來的人，請勿依照本文進行優化！</strong>
+				最後，<strong>優化過後，會忘了之前改過哪些東西，導致哪天想執行某功能出問題改不回來的人，請勿依照本文進行優化！</strong>反悔又不知道怎麼改回預設值的話，可在 <a href='http://batcmd.com/windows/10/services/'>Windows 10 Services</a> 網站查看。
 			</p>
 		</section>
 		<hr>
 		<section>
-			<h3>不妨停用或手動</h3>
+			<h3>停用</h3>
 			<p>
-				AVCTP service<br>
-				BitLocker Drive Encryption Service<br>
-				Bluetooth Support Service<br>
-				Computer Browser<br>
 				Connected User Experiences and Telemetry<br>
-				Diagnostic Policy Service<br>
-				Diagnostic Tracking Service<br>
-				Distributed Link Tracking Client<br>
-				Downloaded Maps Manager<br>
-				File History Service<br>
-				Infrared monitor service<br>
-				Internet Connection Sharing<br>
-				IP Helper<br>
-				Netlogon<br>
-				Parental Control<br>
-				Print Spooler<br>
-				Program Compatibility Assistant Service<br>
-				Remote Registry<br>
-				Secondary Logon<br>
-				TCP/IP NetBIOS Helper<br>
-				Windows Camera Frame Server<br>
+				Problem Reports Control Panel Support<br>
 				Windows Error Reporting Service<br>
-				Windows Image Acquisition<br>
 				Windows Insider Service<br>
-				Windows Search<br>
-				<br>
-				有些服務找不到的話，可能改為中文名稱，請自行比對。
+				Windows 測試人員服務（Windows Insider Service）<br>
+				建議的疑難排解服務（Recommended Troubleshooting Service）
 			</p>
 		</section>
 		<hr>
 		<section>
-			<h3>視情況停用或自動</h3>
+			<h3>手動</h3>
 			<p>
-				Superfetch = 自動（新版改名為 SysMain，且關閉的話會影響快速開機功能。）<br>
-				Nahimic service = 停用（會讓程式啟動速度慢到懷疑人生，所以我選擇停用～）
+				Diagnostic Policy Service（停用的話影響工作管理員的應用程式歷程記錄）<br>
+				Downloaded Maps Manager<br>
+				IP Helper<br>
+				Print Spooler
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>視情況啟動</h3>
+			<p>
+				BitLocker Drive Encryption Service：不想使用硬碟加密，且害怕硬碟哪天被加密惹麻煩的話停用。<br>
+				<br>
+				Nahimic Service：優化音質用的，會讓程式啟動速度慢到懷疑人生，所以我選擇停用。<br>
+				<br>
+				SysMain：以前叫 Superfetch，關閉會影響快速開機功能，建議保持自動。<br>
+				<br>
+				Windows Biometric Service：停用會導致「帳戶」「登入選項」無法進入，建議保持手動。<br>
+				<br>
+				Windows Search：有用到 HDD 硬碟的話建議「停用」，只有 SSD 硬碟的話保持自動。
 			</p>
 		</section>
 	</section>
