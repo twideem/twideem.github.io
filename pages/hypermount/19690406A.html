@@ -1854,6 +1854,8 @@
 
 					f().then(x=&gt;document.write(x));
                 </textarea>
+				<br>
+				然而，async 函式沒辦法把回呼函式轉成 Promise 物件傳回：例如常見的 setTimeout()，這時還是得另外 new 一個 Promise 物件包裝起來傳回！
 			</p>
 		</section>
 		<hr>
@@ -1896,12 +1898,6 @@
                 </textarea>
 			</p>
 		</section>
-		<hr>
-		<footer>
-			<p>
-				[*] 直接操作 Promise API 並沒什麼不好，只是要製作非同步函式時，必須間接操作 Promise API 來實現，這就很彆扭，會有重複的事再做一遍的感覺。async 和 await 就是用來製作非同步函式的，並不是用來取代全面取代 Promise API。在直接陳述程式功能的場合，用函數式風格的 Promise API 來設計非同步程式，是很理想的，它本身就是已設計妥當的一整套非同步函式，應該直接操作它，而不是間接包裝成另一種形式！
-			</p>
-		</footer>
 	</section>
 	<hr id='ecmascript2018'>
 	<section>
