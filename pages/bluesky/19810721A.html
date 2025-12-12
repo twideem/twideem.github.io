@@ -67,6 +67,13 @@
 	</section>
 	<hr>
 	<section>
+		<h2>暫停幾秒</h2>
+		<p>
+			<code>TIMEOUT 秒數</code>
+		</p>
+	</section>
+	<hr>
+	<section>
 		<h2>尋訪</h2>
 		<p>
 			<code>FOR %%變數 IN (篩選) DO 指令 [參數]</code><br>
@@ -160,20 +167,6 @@
 	</section>
 	<hr>
 	<section>
-		<h2>暫停幾秒</h2>
-		<p>
-			<code>TIMEOUT /T 秒數</code>
-		</p>
-	</section>
-	<hr>
-	<section>
-		<h2>輸入</h2>
-		<p>
-			<code>SET /P 變數名稱=說明文字</code>
-		</p>
-	</section>
-	<hr>
-	<section>
 		<h2>詢問</h2>
 		<p>
 			<code>CHOICE</code><br>
@@ -191,6 +184,13 @@
 				IF %ERRORLEVEL%==3 ECHO 往南走了<br>
 				IF %ERRORLEVEL%==4 ECHO 往西走了
 			</output>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>輸入</h2>
+		<p>
+			<code>SET /P 變數名稱=說明文字</code>
 		</p>
 	</section>
 	<hr>
@@ -381,9 +381,195 @@
 	</section>
 	<hr>
 	<section>
+		<h2>作業系統自帶功能</h2>
+		<hr>
+		<section>
+			<h3>*.exe</h3>
+			<p>
+				小算盤<br>
+				<code>calc.exe</code><br>
+				<br>
+				命令提示字元<br>
+				<code>cmd.exe</code><br>
+				<br>
+				檔案總管<br>
+				<code>explorer.exe</code><br>
+				<br>
+				本機<br>
+				<code>explorer.exe /n,::{20D04FE0-3AEA-1069-A2D8-08002B30309D}</code><br>
+				<br>
+				我的文件<br>
+				<code>explorer.exe /n,::{450D8FBA-AD25-11D0-98A8-0800361B1103}</code><br>
+				<br>
+				網路芳鄰<br>
+				<code>explorer.exe /n,::{208D2C60-3AEA-1069-A2D7-08002B30309D}</code><br>
+				<br>
+				資源回收筒<br>
+				<code>explorer.exe /n,::{645FF040-5081-101B-9F08-00AA002F954E}</code><br>
+				<br>
+				小畫家<br>
+				<code>mspaint.exe</code><br>
+				<br>
+				ODBC 資料來源管理器<br>
+				<code>odbcad32.exe</code><br>
+				<br>
+				記事本<br>
+				<code>notepad.exe</code><br>
+				<br>
+				工作管理員<br>
+				<code>taskmgr.exe</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>*.msc</h3>
+			<p>
+				電腦管理<br>
+				<code>compmgmt.msc</code><br>
+				<br>
+				事件檢視器<br>
+				<code>eventvwr.msc</code><br>
+				<br>
+				效能監視器<br>
+				<code>perfmon.msc</code><br>
+				<br>
+				服務<br>
+				<code>services.msc</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>rundll32.exe</h3>
+			<p>
+				控制台<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL</code><br>
+				<br>
+				輕鬆存取中心<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL access.cpl</code><br>
+				<br>
+				新增移除程式<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL appwiz.cpl</code><br>
+				<br>
+				開啟或關閉 Windows 功能<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL appwiz.cpl,,2</code><br>
+				<br>
+				藍芽與其他裝置<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL bthprops.cpl</code><br>
+				<br>
+				顯示器<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl</code><br>
+				<br>
+				顯示器<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl</code><br>
+				<br>
+				桌面圖示設定<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,0</code><br>
+				<br>
+				螢幕保護程式<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,1</code><br>
+				<br>
+				背景<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,2</code><br>
+				<br>
+				防火牆<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL Firewall.cpl</code><br>
+				<br>
+				裝置管理員<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL hdwwiz.cpl</code><br>
+				<br>
+				網際網路<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL inetcpl.cpl</code><br>
+				<br>
+				地區<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL intl.cpl</code><br>
+				<br>
+				遊戲控制器<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL joy.cpl</code><br>
+				<br>
+				滑鼠<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL main.cpl</code><br>
+				<br>
+				聲音<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl</code><br>
+				<br>
+				數據機連線<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL modem.cpl</code><br>
+				<br>
+				網路連線<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL ncpa.cpl</code><br>
+				<br>
+				電源選項<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL powercfg.cpl</code><br>
+				<br>
+				系統內容<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL sysdm.cpl</code><br>
+				<br>
+				電話連線<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL telephon.cpl</code><br>
+				<br>
+				日期和時間<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL timedate.cpl</code><br>
+				<br>
+				安全性與維護<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL wscui.cpl</code><br>
+				<br>
+				新增印表機裝置<br>
+				<code>rundll32.exe shell32.dll,SHHelpShortcuts_RunDLL AddPrinter</code><br>
+				<br>
+				字型<br>
+				<code>rundll32.exe shell32.dll,SHHelpShortcuts_RunDLL FontsFolder</code><br>
+				<br>
+				以上指令尾端，可接 <code>,,數字</code> 切換頁籤。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>進階設定</h2>
+		<hr>
+		<section>
+			<h3>電源</h3>
+			<p>
+				切換平衡的電源模式為更好的電池<br>
+				<code>POWERCFG /OVERLAYSETACTIVE OVERLAY_SCHEME_MIN</code><br>
+				<br>
+				切換平衡的電源模式為最佳效能<br>
+				<code>POWERCFG /OVERLAYSETACTIVE OVERLAY_SCHEME_MAX</code><br>
+				<br>
+				切換電源計畫為省電、平衡、高效能<br>
+				<code>POWERCFG /S 電源配置GUID（可用 /L 參數查詢）</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>服務</h3>
+			<p>
+				啟動服務<br>
+				<code>sc start 服務名稱</code><br>
+				<br>
+				停止服務<br>
+				<code>sc stop 服務名稱</code><br>
+				<br>
+				停用服務<br>
+				<code>sc config 服務名稱 START=DISABLED</code><br>
+				<br>
+				刪除無效的服務<br>
+				<code>sc delete 服務名稱</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
 		<h2>釘選到工作列或開始畫面</h2>
 		<p>
 			為批次檔建立捷徑，然後在圖示按「滑鼠右鍵」→「內容」，修改「目標」，在前面加上 <code>CMD /C</code> 即可。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>恢復命令提示字元視窗的預設值</h2>
+		<p>
+			HKEY_CURRENT_USER\Console
 		</p>
 	</section>
 	<hr>
