@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>用 PHP 網住程式</h1>
+	</header>
+	<hr id='about_php'>
+	<section>
+		<h2>關於 PHP</h2>
+		<p>
+			1995 年，Rasmus Lerdorf 在大學有項研究計畫，需要透過網頁蒐集資料，為了方便完成工作，興起了能將 CGI 程式內嵌在 HTML 網頁執行的想法，而開發 PHP/FI 表述語言，名稱取自去年 Rasmus Lerdorf 為 C 語言製作的一套 CGI 程式庫：Personal Home Page Toolkit。這時功能有限，比較像自己工作方便的小玩意兒，經歷兩年多的測試與調整，才正式發布 <a href='http://php.net/manual/phpfi2.php'>PHP/FI 2.0</a> 給大家使用。<br>
+			<br>
+			1997 年，Zeev Suraski 和 Andi Gutmans 為 PHP/FI 重寫剖析器：Zend（取自兩人的名字），除了提升性能以及穩定性，還提供模組化架構，讓 PHP 更容易擴充與維護。Rasmus Lerdorf 開始與兩人合作，改寫 PHP/FI，並改名為 PHP: Hypertext Preprocessor（重點在縮寫又是 PHP），隔年正式發布 PHP 3，也就是現今 C 語言的程式設計手法，搭配 Perl 的資料型態的表述語言。<br>
+			<br>
+			2000 年，Zend Engine 1.0 正式發布，直接使用該引擎的 PHP 4 問世。<br>
+			<br>
+			2004 年，引進物件導向資料架構的 Zend Engine 2 正式發布，推出 PHP 5。<br>
+			<br>
+			2010 年，原本計畫 PHP 6 起改用 Unicode 字元編碼，但帶來的困擾與性能降低等問題，官方都找不到解法，只好宣布放棄。<br>
+			<br>
+			2015 年，優化執行性能的 Zend Engine 3 發布，推出 PHP 7，有些特性不相容 PHP 5，造成許多企業不敢升級。尤其外包做出來的 PHP 網站，企業本身往往沒能力調整相容性問題。<br>
+			<br>
+			2019 年，已延長技術支援期限的 PHP 5.6，終於還是到了不再提供安全性更新的日子，全面升級 PHP 7.x 的時代來臨。（但還有企業繼續用 2008 年便不再維護的 PHP 4 架站就是了）
+		</p>
+	</section>
+	<hr id='thread_safe'>
+	<section>
+		<h2>關於 Thread Safe 版</h2>
+		<p>
+			Windows 版的 PHP 從 5.2 開始，有分 None Thread Safe 和 Thread Safe 兩種版本。<br>
+			<br>
+			早先 PHP 的架構，是在 Linux 透過 CGI 與 Apache 接合，後來移植到 Windows 同樣透過 CGI 與 IIS 接合時，大家發現 PHP 的表現很差。這是因為 Windows 的多工採 multi process，不像 UNIX 和 CGI 都採 multi threaded，所以在 Windows 跑 CGI 會因為不斷開新的行程，耗盡系統資源。<br>
+			<br>
+			那時 PHP 不適合在 Windows 跑，所以想在 Windows 架動態網頁的人，都用 ASP 或 JSP。於是 PHP 改透過 ISAPI 與 IIS 接合，推出 Thread Safe 版本。取這個名字的原因，是要另外檢查多行程的安全性問題，所以還是比 Linux 版的 PHP 慢，但至少讓 PHP 在 Windows 不會輸給 ASP 和 JSP 了。<br>
+			<br>
+			後來 Microsoft 為此推出 FastCGI，讓 PHP 能在 Windows 透過 CGI 與 Apache 接合，速度比透過 ISAPI 還快。<br>
+			<br>
+			結論：用 IIS 的話才用 Thread Safe，否則用 None Thread Safe 就好。<br>
+			<br>
+			因此我下載 Non Thread Safe 的版本，它透過 FastCGI 執行，速度比透過 ISAPI 執行的 Thread Safe 版快。<br>
+			<br>
+			只有用 IIS 架 HTTP Server，才需要下載 Thread Safe 的版本。不只是因為保護多行程安全而已，而是 IIS 天生和 CGI 架構，所以 PHP 透過 ISAPI 與 IIS 結合，還是比透過 FastCGI 與 IIS 結合來得快。但如果用 Apache 架站的話，就選 Non Thread Safe 版的 PHP，因為 Windows 的 Apache 是用 FastCGI 對外結合的。
+		</p>
+	</section>
+	<hr id='best_language'>
+	<section>
+		<h2>PHP 是最好的網站程式設計語言</h2>
+		<hr>
+		<section>
+			<h3>一種嘲諷 PHP 程式設計員的用語</h3>
+			<p>
+				或許你聽過「PHP 是世界上最好的語言」，但這是大家用來嘲諷 PHP 開發者的玩笑話，並不是真心在說 PHP 最好。<br>
+				<br>
+				差不多快 2010 年代，Ruby on Rails 及 Django 等其它表述語言的 Web 框架興起，挑戰 PHP 霸主地位時，PHP 社群不甘示弱，開始爭誰才是最好的！<br>
+				<br>
+				寫 PHP 的，程式設計功力大多來講並不深厚，基本上就是網頁設計師為了寫伺服端功能，才學著用的，他們的專業只放在網站身上，對於怎樣設計電腦應用軟體、深入控制作業系統不太關心。而 Ruby on Rails 和 Django 通常都是 Ruby 和 Python 高手，早已熟練寫電腦應用程式，現在為了寫網站程式，才用這些框架，程式設計功力深厚許多。於是 PHP 社群這些網頁設計師們，在與這群駭客爭辯過程中，越來越顯得自己技術較低，開始歇斯底里地用：「反正 PHP 是世界上最好的語言，不管你怎麼說都…」口氣爭辯，於是「PHP 是世界上最好的語言」成了程式設計高手用來嘲諷 PHP 程度不夠，卻自認為天下第一的梗。<br>
+				<br>
+				當然，在 2000 年代，也有些程式功力深厚的程式設計師，選擇用 PHP 寫伺服端網頁。但在 2010 年代有 Ruby on Rails 和 Django 之類的 Web 框架可用後，大半都從 PHP 跳過去了～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>自覺引據官方說的話</h3>
+			<p>
+				那為什麼 PHP 社群會說出「PHP 是世界上最好的語言」這句話呢？因為 PHP 官方 FAQ 文件《<a href='http://php.net/manual/fa/faq.languages.php'>PHP and other languages</a>》，確實說過類似的話：<br>
+				<br>
+				<q>PHP is the best language for web programming, but what about other languages?</q><br>
+				<br>
+				你知道的，在討論區引據時，不會先查得清楚再寫，而會把印象中的事表達出來。於是「PHP 是最好的網站程式設計語言」就引據成「PHP 是最好的語言」，對於只寫網站程式設計的 PHP 網頁程式設計師來說，兩句話意思確實是一樣的，我想他們也不覺得自己說錯，只是看在真正的程式設計師眼裡覺得可愛。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>很好、但不是最好</h3>
+			<p>
+				總之，PHP 是連網頁設計師都學得起來、而且也願意去學的程式語言，因為它主要就是用來設計動態網頁程式，不是設計整台伺服器系統的網路資料運作，簡單易懂。<br>
+				<br>
+				當設計動態網頁程式已經滿足不了商務需求，變得是在設計網站應用程式了，改用 Ruby on Rails 會更快完成工作，但這議題已經進階了，甚至與有點平面設計性質的網頁設計師無關，屬於網站工程師的工作。<br>
+				<br>
+				對初學程式設計的人來說，PHP 是很好上手的程式語言，只需要學一下很 Perl 的 C 語言，會用 var、if、foreach、while、function，然後從頭到尾呼叫函式來表現想要的動態網頁功能就好。但對專業的人來說，PHP 的函式庫規劃得相當糟糕，不一致的函式命名格式（有的用 _ 底線區隔單字有的不用）、不一致的參數位置排放（例如陣列有的放前面有的放後面）。好不好學、易不易用當然很重要，但當你學會用時，發現沒有規律記不起來，便覺得 PHP 難記難用。<br>
+				<br>
+				PHP 是最好的「網站（全球資訊網；WWW）」程式設計語言，但絕對不是「世界」上最好的程式語言！Rasmus Lerdorf 開發 PHP/FI 的初衷，並不是為了發明自己心目中更理想的程式語言（我猜他覺得 C 語言就很理想了），而是一個實用就好的開發工具。因此整個 PHP 並不講究語法的創新與進步，只講究 PHP 能做哪些事、做得好不好。因此 PHP 是只顧東拚西湊一堆函式、且不加思索就放進來的語言，在這門語言身上是找不到優雅和藝術的，反而有點粗暴和蠻橫。但正如角色扮演遊戲有法師有補師，程式設計界也有個性像戰士一樣，喜歡 PHP 這樣粗曠、豪爽的語言！
+			</p>
+		</section>
+	</section>
+	<hr id='pear_and_pecl'>
+	<section>
+		<h2>PEAR 和 PECL</h2>
+		<hr>
+		<section>
+			<h3>PHP Extension and Application Repository</h3>
+			<p>
+				<a href='http://pear.php.net'>http://pear.php.net</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>The PHP Extension Community Library</h3>
+			<p>
+				<a href='http://pecl.php.net'>http://pecl.php.net</a>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p style='color:#999;white-space:nowrap'>かめはめ波<span style='color:#f96'>（ﾟДﾟ)<span style='font-size:18px'>｛</span></span><q>二二二二二二二二二二））⊂弌弌弌弌弌弌弌弌弌弌</q><span style='color:#396'><span style='display:inline-block;font-size:18px;transform:scaleX(-1)'>σ</span>(ﾟДﾟ）</span>魔貫光殺砲</p>
+	</footer>
+</article>
+<script>
+	let a=15;
+	let b=true;
+
+	function f()
+	{
+		if(a==5) b=true;
+		else if(a==17) b=false;
+
+		if(b) a++;
+		else a--;
+
+		return '二'.repeat(a)+'））⊂'+'弌'.repeat(20-a);
+	}
+
+	setInterval(()=>$('footer p q').innerHTML=f(),250);
+</script>

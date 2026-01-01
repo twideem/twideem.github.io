@@ -1,0 +1,4884 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/private.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script src='../../scripts/window.js'></script>
+<script>lang('Java')</script>
+<article>
+	<header>
+		<h1>用 Java 入門物件導向程式設計</h1>
+		<p>
+			Object 是指讓某個可以獨立運作的程式區段，變得像與你相互對立的「對象」，讓你可以與它溝通交流、協力合作。而不是企圖把整個世界搬到程式裡面，成為各個互相對等的「存在」，因為這樣做叫 things，而不是 object。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2><a href='javascript:show(0)'>序</a></h2>
+		<p class='private'>
+			程式語言有分簡約語言和魔幻語言，而 Java 就是簡約的物件導向程式語言。<br>
+			<br>
+			在 1990 年代，比 C++ 容易入門物件導向程式設計的 Java，令人喜愛的程度，就跟現在的 Python 一樣～<br>
+			<br>
+			當時我們的想法是：「用 Java 學物件導向程式設計，再適合不過。」興起一股大家來學物件導向程式語言的風氣。<br>
+			<br>
+			然而，現在 Java 跟 Python、Go、.NET Core 相比，只剩伺服端系統在用，沒人願意用 Java 寫應用端程式，讓我對自己的 Java 教學起了改版的念頭：「與其用現代的 Java 跟 Python 和 Go 拚搏卻是在誤人子弟，不如用傳統的 Java 教怎麼入門物件導向程式設計。」
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2><a href='javascript:show(1)'>前言</a></h2>
+		<p class='private'>
+			原《爪哇即溶咖啡》改版為《用 Java 入門物件導向程式設計》，重點變成「物件導向」，而不是「Java 程式設計」。<br>
+			<br>
+			因此我把 Java 8 以後的內容刪除，改為 Java 7 之前的純物件導向，所以本文就 Java 程式設計來說是過時的：「你無法從本文學到正確的 Java 語言。」<br>
+			<br>
+			但對研究物件導向程式設計來說，用復古的 Java 7 寫法，概念會更清晰、觀念會更清楚！雖然我這麼做弊大於利，但我還是覺得不得不做這樣錯謬的事，《用 Java 入門物件導向程式設計》是和《用 Pascal 傳承程式》同系列的單元，而不是和《用 C# 堆砌程式》《用 Python 快寫程式》《用 PHP 網住程式》同系列。<br>
+			<br>
+			總之，請不要用本資料學 Java 程式設計：「我還把三分之二對了解物件導向沒幫助的 API 範例砍光，你根本學不到什麼。」本文是用 Java 來入門物件導向的！範例精簡到只剩三分之一，反而方便你反覆練習寫 Java 程式，實際感受 Java 物件導向程式設計是怎麼回事～
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>焦點話題</h3>
+			<p>
+				<a href='#20000424A'>從 C++ 到 Java 的物件導向程式設計</a><br>
+				<br>
+				物件導向設計原則（SOLID）… <a href='http://zh.wikipedia.org/zh-tw/SOLID_(%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1)' class='detail'>Wikipedia</a><br>
+				物件導向設計模式 … <a href='http://www.runoob.com/design-pattern/design-pattern-intro.html' class='detail'>菜鸟教程</a><br>
+				MVC 軟體架構 … <a href='http://zh.wikipedia.org/zh-tw/MVC' class='detail'>Wikipedia</a><br>
+				重構（Refactoring）… <a href='http://w1a2d3s4q5e6.blogspot.tw/2012/02/blog-post.html' class='detail'>林維展的學習筆記</a><br>
+				Scrum 與敏捷開發 … <a href='http://www.microsoft.com/zh-tw/microsoft-365/business-insights-ideas/resources/how-to-choose-the-best-agile-methodology-for-your-project' class='detail'>Microsoft 365 Team：如何為您的專案選擇最佳敏捷做法</a><br>
+				<br>
+				<a href='#19950109A'>是抽象還是想像？</a><br>
+				<a href='#19950116A'>為何會把物件導向拿來對照真實世界的物件？</a><br>
+				<a href='#19950130A'>不要違反 Java 的物件導向思維</a><br>
+				<a href='#19921217'>如何用 Java 語言進行物件導向程式設計？用物件導向保存你的程式設計結果！</a><br>
+				<a href='#19950227A'>如何寫出好的程式？什麼是好的設計？</a><br>
+				用 UML 進行物件導向系統分析與設計，用 Java 進行物件導向程式設計。<br>
+				<a href='#19770616A'>Java 不再免費？</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>應用範例</h3>
+			<p>
+				<a href='#20030106A'>String</a>（不可變物件的字串）<br>
+				<a href='#20030113A'>StringBuilder</a>（可變字串）<br>
+				<a href='#20050123A'>格式化字串</a><br>
+				<a href='#20030120A'>Regular Expression</a><br>
+				<br>
+				<a href='#20030210A'>陣列</a><br>
+				<a href='#20030203A'>Collections 速成</a>（各式資料結構）<br>
+				<a href='#20030217A'>亂數</a><br>
+				<br>
+				<a href='#20030310A'>資料夾與檔案的管理</a><br>
+				<a href='#20030317A'>純文字文件的寫入與讀取</a><br>
+				<a href='#20030707A'>以二進制格式讀寫資料</a><br>
+				<a href='#20030901A'>將 Java 物件轉為檔案形式</a>（序列化）<br>
+				<a href='#20040508A'>用 Apache Commons IO 讓事情做起來更簡單</a><br>
+				<a href='#20211124A'>用 Logger 取代 printStackTrace()</a><br>
+				<br>
+				<a href='#20010904A'>命令列介面的程式設計</a><br>
+				<a href='#20011011A'>調用作業系統的命令</a><br>
+				<a href='#20001009A'>Swing 快速入門</a><br>
+				<a href='#20001106A'>系統原生元件樣式與純 Java 元件</a><br>
+				<a href='#20001030A'>對話視窗</a><br>
+				<a href='#20001120A'>JScrollPane</a><br>
+				<a href='#20001127A'>JTable</a><br>
+				<br>
+				<a href='#20021228A'>日期與時間</a><br>
+				<a href='#20030127A'>計時器</a><br>
+				<a href='#20030818A'>暫停一段時間</a><br>
+				<a href='#20030905A'>列印</a><br>
+				<br>
+				<a href='#20030224A'>複製物件</a><br>
+				<a href='#20050504A'>Observer pattern</a>（觀察者設計模式）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其它功能</h3>
+			<p>
+				<a href='#19960415A'>javac</a><br>
+				<a href='#19960422A'>jar</a><br>
+				<a href='20061211A.html'>JavaScript 引擎：Rhino</a><br>
+				<a href='19990602A.html'>Tomcat + JSP + SQL 快速入門</a>
+			</p>
+		</section>
+	</section>
+	<hr id='20000424A'>
+	<section>
+		<h2>從 C++ 到 Java 的物件導向程式設計</h2>
+		<p>
+			在 90 年代，C++ 是物件導向程式設計的首選，它的 class 語法簡單又直覺，軟體開發人員很容易用物件的概念組織程式。但 C++ 相容 C 語言，因此很多人在使用物件導向程式設計的同時，摻雜了程序導向的程式設計，久而久之破壞了物件導向程式設計的穩固性。<br>
+			<br>
+			如果程式碼不能穩固地使用，就失去物件導向的核心利益了！這樣還不如繼續用 C 語言以程序導向寫好結構化程式設計，何必浪費將程式碼拆成一個個類別的時間？<br>
+			<br>
+			隨著網際網路興起，能在不同作業系統執行的 Applet 成了程式設計的熱門話題，人們開始學習 Java 語言，並注意到它參考的是 C++ 語法，它將物件導向的部分發揚光大，然後剔除程序導向的部分，讓人們可以享受用 C++ 語法寫出優雅物件導向程式的樂趣，於是用 Java 語言學習物件導向程式設計成了第二個熱門話題！<br>
+			<br>
+			事實上，在當時用 Java 寫應用程式並不是好主意，執行速度太慢。但學習 Java 程式設計卻是件很有意義的事，寫不好 C++ 物件導向程式設計的人，可以在 Java 學會如何正確使用物件導向語法。結果，網路上最流行的不是教你寫 Applet，而是教你學 Java 語言，展開了 Java 成為 2000 年代最受歡迎程式語言的序章～
+		</p>
+		<hr>
+		<section>
+			<h3>類別（Class）</h3>
+			<p>
+				Java 規定所有程式都必須以類別來撰寫，所以即使只想宣告一個整數型態的變數，也必須這麼寫：<br>
+				<br>
+				<textarea class='brush:java'>
+					class A{
+						int i;
+					}
+                </textarea>
+				<br>
+				將類別建立成物件，並存取變數的方式如下：<br>
+				<br>
+				<textarea class='brush:java'>
+					class A{
+						int i;
+
+						public static void main(String[] args){
+							A a = new A();
+							a.i = 5;
+							System.out.print(a.i);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					5
+				</output>
+				<br>
+				main() 是 Java 內定的函式，Java 虛擬機器只要看到這個名稱的函式，就會自動執行裡面的程式碼。static 表示不用建立物件也能使用，也就是說不用 new 一個 A 物件就能呼叫 main()。main() 一定要宣告為 public 表示公開使用，否則 Java 虛擬主機會找不到它。<br>
+				<br>
+				Java 跟 C++ 一樣，將類別變數和函式稱為成員（member），但 C++ 將類別裡面的變數和函式稱為成員變數和成員函式，Java 改稱欄位（field）和方法（method）。<br>
+				<br>
+				物件導向將呼叫物件的函式，稱為傳遞訊息（message passing）。程式只透過物件之間的訊息傳遞，來組織軟體，就叫物件導向程式設計。<ins>1</ins><br>
+				<br>
+				Java 的類別也引進了 C++ 的建構子、封裝、繼承、多型、覆載、多載、抽象…等物件導向基本功能，下面將逐一介紹。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>建構子（Constructor）</h3>
+			<p>
+				跟 C++ 一樣，名稱與類別一樣，且沒有傳回值，就是建構子：<br>
+				<br>
+				<textarea class='brush:java'>
+					class A{
+						int i;
+
+						A(){
+							i = 1;
+						}
+					}
+                </textarea>
+				<br>
+				如果有傳回值，像是 int、String、void，則是函式，而不是建構子。<br>
+				<br>
+				建構子可以有參數，藉由參數的不同，來為類別設計多個建構子。<br>
+				<br>
+				沒有建構子的話，Java 會自動建立一個呼叫 super() 函式的建構子。已經有建構子的話，就沒有自動呼叫 super() 的建構子，所以需要執行父類別的建構子時要記得要自己呼叫。<br>
+				<br>
+				Java 虛擬機器有一套垃圾收集系統，會自動將浪費記憶體資源的物件釋放掉，所以不需要解構子（destructor）。雖然 Java 有 finalize() 函式，但這並不是解構子，而是垃圾收集決定回收該物件時自動執行的函式。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>封裝（Encapsulation）</h3>
+			<p>
+				Java 引進了 C++ 的 public、private、protected，用來規劃類別的成員是公開存取還是限制存取：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class A{
+						private int i;
+
+						public void inc(){
+							i++;
+						}
+					}
+                </textarea>
+				<br>
+				變數 i 使用 private 表示只有自己能存取，函式 inc 使用 public 表示別的物件也能使用。<br>
+				<br>
+				比較特別的是，Java 規定類別使用 public 的話，存放該類別的檔案，檔名必須與類別名稱一樣。<br>
+				<br>
+				protected 表示開放給子類別存取。<br>
+				<br>
+				不使用存取權限的話，表示同套件的類別彼此間都能存取。雖然 Java 預設使用這種存取權限，但建議物件導向新手明確宣告 public 和 private，否則你會覺得整個設計一團亂、在組織程式元件的規劃上失去控制權。只有物件導向專家，才懂得用預設的存取權限，將物件用群組化的方式來設計，平常人會一團糟。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>繼承（Inheritance）</h3>
+			<p>
+				Java 使用 extends 指令來繼承類別：<br>
+				<br>
+				<textarea class='brush:java'>
+					class A{
+						int i;
+
+						void inc(){
+							i++;
+						}
+					}
+
+					class B extends A{
+						int get(){
+							return i;
+						}
+					}
+                </textarea>
+				<br>
+				沒有使用 extends 時，Java 會自動繼承 java.lang.Object 物件。<br>
+				<br>
+				在 C++ 使用多重繼承時，常常產生成員歸屬問題，所以 Java 只能繼承一個類別。Java 使用多重實作介面（interface）的方式，來表達多重繼承的關係。介面只宣告函式名稱，不實作函式功能，所以沒有責任歸屬的問題，一律由實作的類別負責。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>多型（Polymorphism）</h3>
+			<p>
+				Java 跟 C++ 一樣，透過繼承讓不同子類別有共同的行為能力，再藉由子類別覆寫（override）父類別的函式，來實現多型的程式設計。<br>
+				<br>
+				不一樣的是，Java 預設所有方法都是 virtual，所以子類別的方法只要同名、同參數，就能覆寫父類別的方法，這也是 Java 之所以稱為簡約語言的主要原因：<br>
+				<br>
+				<textarea class='brush:java'>
+					class A{
+						void f(){
+							System.out.println("AAA");
+						}
+					}
+
+					class B extends A{
+						void f(){
+							System.out.println("BBB");
+						}
+					}
+
+					class C extends A{
+						void f(){
+							System.out.println("CCC");
+						}
+					}
+
+					class Main{
+						static void test(A a){
+							a.f();
+						}
+
+						public static void main(String[] args){
+							B b = new B();
+							C c = new C();
+							test(b);
+							test(c);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				或許，不是每個用過 C++ 的人都了解多型的意義，所以這裡還是補充一下觀念。<br>
+				<br>
+				多型就是以同樣的訊息來表達不同的內容，或者以同樣的行為來進行不同的動作。舉個例子，你可以反覆用「你叫什麼名字」這行為向不同人發問，然後每個人會反應自己的狀況。<br>
+				<br>
+				這項語法特性是物件導向程式設計與程序導向程式設計差異最大的地方，以往只能事先寫死程式碼來執行各種動作，有了多型會將程式碼設計成可擴充的元件，事後想要什麼再新增一個元件去用，靈活很多。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>多載（Overload）</h3>
+			<p>
+				在 C++，類別的成員函式有個很棒的功能，就是函式名稱可以重複，只要參數不同，就可以視為不同函式。Java 也支援這項功能，讓物件導向程式設計更能表達語意：<br>
+				<br>
+				<textarea class='brush:java'>
+					class A{
+						void f(){
+							System.out.println("AAA");
+						}
+
+						void f(String x){
+							System.out.println(x);
+						}
+
+						void f(String x, String y){
+							System.out.println(x + ", " + y + "!");
+						}
+					}
+
+					class Main{
+						public static void main(String[] args){
+							A a = new A();
+							a.f();
+							a.f("Hello");
+							a.f("Hello", "world");
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					Hello<br>
+					Hello, world!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其它特性</h3>
+			<p>
+				除了上述對 C++ 語法的改進，Java 也對物件導向程式設計做了重大改進！<br>
+				<br>
+				像是廢除指標運算能力的參照（reference）、不用再寫解構式的垃圾回收（garbage collection）、介面與實作分離的 abstract 和 interface、用例外機制（Exception）取代函式傳回判斷值…這些影響物件導向發展的特性，都是 Java 帶頭發動的！<br>
+				<br>
+				加上 Java 包山包海的程式庫（Java API）、編譯出來的檔案能直接在不同作業系統執行、沙盒般的安全性<ins>2</ins>，Java 是技術進步又有開發效率的程式設計方案！<br>
+				<br>
+				事過境遷，從對比 C++ 的 1990 年代，來到對比 Python 的 2010 年代，Java 已不再是時時提出新觀念的領先者，反而成了處處引用其他語言功能的跟隨者，而且語法實現起來，不是用起來很彆扭，就是寫起來很醜陋。反觀比 Java 更早就朝多範式程式語言（Multi-paradigm）轉型的 C#，用起來就很順手、寫起來也很漂亮。在 Python 和 C# 雙面夾擊下，Java 不再是值得推薦給新手的程式語言，而是維護老項目<ins>3</ins> 用的舊技術～
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 不過柯達控告 Java 抄襲他所收購王安實驗室的「某一應用向另一應用請求協助」專利勝訴，Sun Microsystems 以 9200 萬美元和解後，就很少人這麼解釋物件導向程式設計了。<br>
+				[2] Java SE 7 連環爆出漏洞前，安全性真的是 Java 訴求的特性之一。常常拿 Java 應用程式比 Windows 原生程式安全來說嘴的我，當年被打臉打得很腫。<br>
+				[3] 維護老項目的樂趣，可是比使用新東西來得絕妙！當你有超過二十年的程式設計經驗，程度來到自己覺得很難還有成長空間，就能體會到一種絕妙的樂趣：用自己完美的程度，去享受老項目那份殘缺～
+			</p>
+		</footer>
+	</section>
+	<hr id='19950109A'>
+	<section>
+		<h2>是抽象還是想像？</h2>
+		<p>
+			不要把現實世界的物體，搬到物件導向的程式裡。
+		</p>
+		<hr>
+		<section>
+			<h3>想像</h3>
+			<p>
+				坦白說，物件導向程式設計的開發手法，其實還是跟程序導向一樣，可以重複利用的，就加以模組化，只是從函式改成類別來模組化你的程式，能夠更靈活管理一大群模組罷了！<br>
+				<br>
+				亦即，物件導向絕對不是用來對照現實世界的開發手法！<br>
+				<br>
+				學過「封裝」「繼承」「多型」依然不知道物件導向程式設計是怎樣的開發手法，就是因為想把現實世界搬到程式設計；但那不叫「抽象」，而叫「想像」。下場通常是過兩三年了，還無法建立起能夠彰顯物件導向精神的開發手法。<br>
+				<br>
+				要建立讓自己感覺到漂亮的物件導向開發手法，應該回過頭來讓程式設計去像現實世界，這樣才叫「抽象」。或者說，你應該抽象的對象是依然是「程式」本身，而不是「現實世界的物體」，錯這一步就全盤通輸。<br>
+				<br>
+				在傳統程式設計裡，根據程式的需求，分割出函式來使用，這就是一種針對程式本身所進行的抽象了！現在你只需要把函式改用類別來設計，就能在往後修改程式時，發現到程式具備的穩固性，不會因為大量修改而破壞系統的運作。千萬不要以為把現實事物寫在程式世界裡面叫做抽象！<br>
+				<br>
+				所以「物件導向程式設計」並不複雜，只是一種能夠更靈活管理模組的程式語言而已，是牽扯上「物件導向專案管理」的手法才導致「物件導向」變成像玄學一樣詭譎的議題。因此，當你在初學「物件導向」感到迷惘時，請跳脫「物件導向分析」「物件導向設計」，剩下「物件導向編程」就好，單純地從程式設計的觀點，來理解物件導向的基本精神，會比較有效率。<br>
+				<br>
+				但並不是拋棄「物件導向分析」「物件導向設計」，而是原本正常的學習過程，就應該從「程式設計」本身建立起物件導向的開發手法，然後為了「明文規範」這樣的開發手法，才將這些擴展為「物件導向分析」「物件導向設計」。<ins>1</ins>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>抽象</h3>
+			<p>
+				在破除了把「想像」當「抽象」的魔障後，接著進一步來描述抽象的手法。<br>
+				<br>
+				讓某個可以獨立運作的程式區段，變得像某個「對象」可以與它溝通交流，然後協力運作，這就是 object 了！<br>
+				<br>
+				object 這一詞所表示的「物件」，是可以與你「相對立」的東西，而不是與你「相對等」的存在。<br>
+				<br>
+				把程式碼變成與你相對立的東西，讓你可以對它進行操作，就是物件導向程式設計的精隨。讓某個程式區段變成可以穩固操作，而且沒有副作用，是很快樂的事！這件事就像從化學排列組織中調配出新的藥方，可以有效治療某個症狀，但身體卻沒有副作用一樣，設計物件導向程式的時候，都會感受到這樣的快樂<ins>2</ins>。<br>
+				<br>
+				如果你企圖把整個世界搬到程式裡面，成為各個相對等的存在，那叫 things，而不是 object。把明明不真實存在的事情搬到程式裡面，然後說服自己說：「這些是物件。」你發揮的是想像，並不是抽象。把確實存在的程式碼，設計成相對立的東西，讓你可以更穩固、有效地重複使用它，才是物件導向真正所要的抽象精神。
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 一開始就從「專案管理手法」來理解「物件導向」是怎麼回事，通常是博士班的研究生在幹的事，他們專長原本就是再複雜的學問都能釐清。但如果沒有釐清複雜事務的高人智商，從「程式設計」本身來掌握「物件導向開發手法」其實也沒有比較慢，何苦作賤自己。<br>
+				[2] 如果你感受不到，表示你設計出來不是相對立的物件，而是一段普通的程式碼。
+			</p>
+		</footer>
+	</section>
+	<hr id='19950116A'>
+	<section>
+		<h2>為何會把物件導向拿來對照真實世界的物件？</h2>
+		<p>
+			「把現實世界搬到程式設計」的物件導向觀念，容易讓你誤入歧途，但為何大多數人正在這麼做？
+		</p>
+		<hr>
+		<section>
+			<h3>為了物件而物件，或多或少在兌現獨立個體的設計～</h3>
+			<p>
+				物件導向程式設計語言並不是讓你把 Ball（球）、Court（球場）、Stand（球架）、Player（球員）、Rule（規則）、Score（計分）鉅細靡遺搬到程式裡面，企圖堆砌出一個想像世界的技術。但當你這麼做時，卻相當貼近物件導向程式設計的精神了：「每個物體都保持獨立性，球是球、場地是場地，球不必關心場地座落在哪或造價多少來製造，場地也不必關心球是哪個品牌或哪種顏色來設計。」<br>
+				<br>
+				所以，你並不是不能建立 Ball、Stand、Player、Score…這些類別，只是我們並非為了把所有真實世界存在的物體，通通搬進程式碼裡面，讓我們的程式世界應有盡有，而建立出這些類別。我們是為了方便整理「可獨立運作的程式碼」才建立這些類別，讓外界只能接觸該個體公諸於世的功能特性使用它，讓它始終就是那樣的個體，不會時常因外界的需求條件變成另一種個體。<br>
+				<br>
+				因此，不要為了物件而物件似的，瘋狂比照現實世界的事物，建立一堆類別。而是要讓不同個體能獨立於外物，讓某塊程式碼照自己需求條件發展，不受外界影響往後的設計，而寫成類別來管理。否則，即使你把所有事物都搬進程式碼裡面，卻彼此牽扯不清：「球會挑南北場地、場地會挑球的顏色。」那你的物件導向程式設計不管怎麼寫，永遠都不會有成熟的一天～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>做為最高道德標準，不要陷入迷思。</h3>
+			<p>
+				以籃球來講，有室內球跟室外球的設計之分，這就是在挑場地了！<br>
+				<br>
+				這時，我們繼續堅持保有類別不受外界影響的獨立性，不讓該類別被修改設計，以免時常演變成另一種不一樣的類別。只要費心思考，依然能夠不破壞程式碼獨立性，最小限度地「附加」公諸於世的新功能特性上去，而不是破壞設計。<br>
+				<br>
+				但也不要陷入迷思，以為類別應該完全禁止受外界影響，我們的目標是：「以免『時常』演變成另一種不一樣的類別」，並不是『絕對』不能。<br>
+				<br>
+				如果真的該設計一顆「拿到戶外打就會爆掉的室內籃球」，那就放手去設計這顆可以當炸彈的籃球吧 XDDD
+			</p>
+		</section>
+	</section>
+	<hr id='19950130A'>
+	<section>
+		<h2>不要違反 Java 的物件導向思維</h2>
+		<p>
+			因為 Java 不是純正的物件導向程式語言，而是一款規範說應該怎樣使用物件導向程式設計的語言，所以不要違背 Java 制定的規則。
+		</p>
+		<hr>
+		<section>
+			<h3>Java 並不適合做為「學術派物件導向程式設計」的語言</h3>
+			<p>
+				你可能會想藉由 Java 來建立一套自己的物件導向思維，但真的不建議幹這種事，你會發現很多事都不能做。像是鉅細靡遺 import 所有用到的套件（甚至連 lang 都寫進來）、全面使用 this 叫用自身屬性與方法、不宣告 reference（參照）直接 new 一個 object（物件）…我知道這麼做一定有自己的想法，但在 Java 幹這些事，吃虧的份要比佔便宜來得大。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>因為 Java 並非完整的物件導向程式語言</h3>
+			<p>
+				Java 一向自稱是完全物件導向的程式語言，而不是「完整的」物件導向程式語言。<br>
+				<br>
+				這差異在於，Java 只是規定你必須用物件導向的結構來開發程式，因此使用 Java 語言設計出來的程式，確實是完全物件導向的結構。<br>
+				<br>
+				不過，Java 卻把物件導向的做法給寫死，要求你照 Java 那一套物件導向思維來設計程式。而許多不在 Java 物件導向思維的語法功能，則不會納入 Java 語言。<br>
+				<br>
+				於是 Java 語言確實是完全物件導向的程式設計，但卻是會讓你綁手綁腳的物件導向程式語言，因為它物件導向的機制不足，你心中思維的物件導向架構，有可能無法在 Java 程式語言建立起來，只能被迫改變自己真正想要的結構來通過 Java 認定的規範，因此稱不上是一款完整的物件導向程式語言
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>解決之道</h3>
+			<p>
+				若真要架構自己的物件導向規範，物件導向語法強大的 C++ 反而是比較適合的選擇。<br>
+				<br>
+				但有時候我們不是為了開發軟體而在眾多語言中選擇 Java，而是為了跑 Java 所以試圖在上頭開發應用程式，沒得選擇。既然用 Java 程式語言，那與其建立自己的一套物件導向學術思維，不如遵循 Java 預設的物件導向學術思維～<br>
+				<br>
+				那為何在物件導向的領域，Java 比 C++ 來得熱門？因為 C++ 的語法功能強悍到難以駕馭，剛上路的物件導向程式設計師，不曉得該怎樣整合得宜這群語法結構。反而規定你只能怎樣使用物件導向的 Java 是最好入門的選擇！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>不盡然是缺點</h3>
+			<p>
+				雖然 Java 稱不上是完整的物件導向程式語言，但像這樣把物件導向的做法給規範成固定幾種範本，有個好處就是每個人寫出來的程式會變得類似，有助於團隊的開發。<br>
+				<br>
+				Java 原本就不是自比 Perl 這類「There's more than one way to do it（不只一種做法來做一件事）」的萬能型程式語言，反而是希望做法減到最低，能在特定幾個領域提升開發效率的程式語言。
+			</p>
+		</section>
+	</section>
+	<hr id='19921217'>
+	<section>
+		<h2>如何用 Java 語言進行物件導向程式設計？用物件導向保存你的程式設計結果！</h2>
+		<p>
+			這裡要教你的，不是軟體工程學的物件導向，而是在物件導向正式納入軟體工程前，物件導向程式設計是怎麼回事？怎樣叫做 Java 物件導向程式設計？因為，軟體工程把物件導向複雜化，如果一開始就從物件導向分析、設計、編程的角度切入物件導向程式設計，會讓初學者無所適從，學不起來。讓我們把問題簡單化，而不是複雜化！不提軟體工程學的話，物件導向程式設計是很簡單的。<br>
+			<br>
+			總之，來看看用 Java 語言進行物件導向程式設計，寫程式的過程大概是怎樣吧？<br>
+			<br>
+			首先，當 Java 的 API 沒有直接提供我們想要的功能時，就必須自己間接寫出來。最常見的，就是要刪除資料夾的話，必須裡面沒有東西。如果資料夾裡面有檔案的話，必須自己寫程式刪除。幾經折騰，總算寫出一個能完成工作的 deleteDirectory() 函式。<br>
+			<br>
+			下次在其他程式案子要再用到這個功能的話，常見的做法是把 deleteDirectory() 函式整段程式碼複製貼上。但是在物件導向程式語言，可以設計成一個 class 保存在 Directory.java 裡面，跟其他 *.java 放在一起，這樣只要複製檔案就能使用這段程式碼。<br>
+			<br>
+			既然寫成 *.java 然後四處複製貼上這些檔案，那還可以進一步編譯成 *.class，然後指向 CLASSPATH，讓你這個類別就像 Java API 一樣，所有程式碼都能共用這個功能。這就是 Java 更勝傳統程式設計的物件導向機制！不只是從原始碼的層次加以整理，而是能事先編譯好，成為一個元件，把程式功能元件化，再用功能元件打造你下一個程式專案。Java 能讓你的程式專案，不再全都是由原始碼組合，而是用已編譯好的程式去組合成更大的程式。這對大型開發很有幫助，你只需要面對少量的核心原始碼，更容易去理解與維護它，已編譯好的元件就當它是 API，再龐大都無所謂，反正只管去用它就好，不用連帶去理解與維護它～<br>
+			<br>
+			你要盡量把工作結果，寫成類別，然後編譯成 *.class 來用，而不是複製貼上 deleteDirectory() 函式或 Directory.java 檔案。逐年累積工作結果下來，就會有能讓你比別人更快完成工作的程式寶庫，你自己的獨家 API～<br>
+			<br>
+			所以，當你疑惑該如何用 Java 語言進行物件導向程式設計？或者說怎樣才叫 Java 物件導向程式設計？答案就是用 Java 的物件導向機制，保存你的程式設計結果，就這麼簡單！這麼做，就能受用物件導向帶來的益處，比物件導向分析、設計、編程受用多了。
+		</p>
+	</section>
+	<hr id='19950227A'>
+	<section>
+		<h2>如何寫出好的程式？什麼是好的設計？</h2>
+		<hr>
+		<section>
+			<h3>好的程式，不是寫來彰顯技術，而是讓沒技術的人也讀得懂～</h3>
+			<p>
+				漸漸熟悉程式設計以後，首先，最容易發生的，就是質疑自己寫的程式不夠水準，然後開始思考，該怎樣寫出好的程式？<br>
+				<br>
+				而思考的方向往往是，怎樣寫才能讓自己顯得高竿一些？不希望寫出來的程式碼，讓人家看了以後，認為你像初學者般笨拙。<br>
+				<br>
+				於是可能傾向於這樣寫程式：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.io.File;
+					import javax.xml.parsers.DocumentBuilderFactory;
+					import org.w3c.dom.Element;
+
+					public class ArticleElement{
+						private Element element;
+
+						public ArticleElement(String x){
+							try{
+								//從 x 傳入的 6 位數字中，取前四位為檔名，後兩位為索引值，來傳回 XML 檔中的某個節點。
+								element = (Element)DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(x.substring(0,4) + ".xml")).getElementsByTagName("article").item(Integer.parseInt(x.substring(4,6))-1);
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				然而，這種純粹只是節省行數或者字數，對執行效能沒有實際提升的寫法，並不叫做好的程式。<ins>1</ins><br>
+				<br>
+				真正好的程式，是寧可多花幾行程式，讓閱讀你程式碼的人，能輕鬆自在地理解你想要傳達的想法：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.io.File;
+					import javax.xml.parsers.DocumentBuilderFactory;
+					import org.w3c.dom.Element;
+
+					public class ArticleElement{
+						private Element element;
+
+						public ArticleElement(String id){
+							String filename = id.substring(0,4);
+							File xmlfile = new File(filename + ".xml");
+							int which = Integer.parseInt(id.substring(4,6))-1;
+
+							try{
+								element = (Element)DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlfile).getElementsByTagName("article").item(which);
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				所以，別再為「怎樣寫才叫好的程式」這種問題感到疑惑，最笨拙的寫法，往往就是最好的程式。<br>
+				<br>
+				自認為高竿的程式碼，但沒人明白是在做什麼事，其實是最差勁的程式！能故意用最笨拙的方式，寫出連小朋友看了以後，都大概知道是在做什麼的程式碼，才是好程式。<ins>2</ins>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>除了好的程式，還要有好的設計。</h3>
+			<p>
+				那麼，把上面的範例，寫得像下面載明得更仔細呢？<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.io.File;
+					import java.io.IOException;
+					import javax.xml.parsers.DocumentBuilder;
+					import javax.xml.parsers.DocumentBuilderFactory;
+					import javax.xml.parsers.FactoryConfigurationError;
+					import javax.xml.parsers.ParserConfigurationException;
+					import org.w3c.dom.Document;
+					import org.w3c.dom.Element;
+					import org.xml.sax.SAXException;
+
+					public class ArticleElement{
+						private Document document;
+						private Element element;
+
+						public ArticleElement(String id){
+							String filename = id.substring(0,4);
+							File xmlfile = new File(filename + ".xml");
+
+							try{
+								DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+								DocumentBuilder builder = factory.newDocumentBuilder();
+								this.document = builder.parse(xmlfile);
+							}
+							catch(FactoryConfigurationError factory_configuration_error){
+								factory_configuration_error.printStackTrace();
+							}
+							catch(IOException io_exception){
+								io_exception.printStackTrace();
+							}
+							catch(ParserConfigurationException parser_configuration_exception){
+								parser_configuration_exception.printStackTrace();
+							}
+							catch(SAXException sax_exception){
+								sax_exception.printStackTrace();
+							}
+
+							int which = Integer.parseInt(id.substring(4,6))-1;
+							this.element = (Element)this.document.getElementsByTagName("article").item(which);
+						}
+					}
+                </textarea>
+				<br>
+				這是好是壞，還真的見仁見智…
+			</p>
+			<section>
+				<h4>上一節範例</h4>
+				<p>
+					來看兩個範例的差異，上一節認為好的範例，只是將艱澀的計算結果保存在變數裡面，好賦予一個名稱，讓我們能夠辨識這是怎樣一筆資料，然後剩下的部分保持不變。<br>
+					<br>
+					因為 <code>newInstance().newDocumentBuilder().parse(xmlfile)</code> 各個串接的 method，從字義上已經很明顯表達出是建立 DocumentBuilderFactory 與 DocumentBuilder，所以就不進一步為這些操作取名為 <code>factory</code> 和 <code>builder</code>。<br>
+					<br>
+					API 公開的操作介面會說話，這是相當重要的關鍵，懂得這招對你的設計會有幫助！<br>
+					<br>
+					至於 <code>document</code> 則是只用到一次，另外開設變數來命名的話，反而讓 element 的存在失焦，所以上一節認為好的範例選擇省略，如果會用到第二次的話再說。<br>
+					<br>
+					從語意上來看，上一節範例其實更有表達力，基本上「我個人認為」它是比較好的風格。
+				</p>
+			</section>
+			<section>
+				<h4>這一節範例</h4>
+				<p>
+					但並不能說這一節範例做過頭，因為就設計上來看，它是為了日後的修改，所刻意讓出修改空間的風格。<br>
+					<br>
+					上一節認為好的範例常見於中國人，這一節的範例常見於台灣人。而我們常常聽到業界認為中國的程式設計師開發能力很強，但屬於個人戰力，所以讚賞台灣的程式開發人員比較懂設計，適合團隊工作，差別就在這裡。<ins>3</ins><br>
+					<br>
+					業界偏好事先就能周到地保留修改空間的程式風格，更勝於直覺、有效傳達語意的寫作風格。<br>
+					<br>
+					能寫出好的程式，不一定就能產生好的設計！好的程式，必須易於閱讀，而好的設計，必須易於修改。然而，易於閱讀的程式雖然對易於修改很有幫助，但那只是其中一環而已，易於修改的好設計並不是光靠可讀性就能達成。甚至為了易於修改，像是大量使用物件導向設計模式的話，反而可讀性會降低。所以好的程式跟好的設計其實是不一樣的議題，我們必須另外努力去做，才能達成！
+				</p>
+			</section>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 除非你真的放著 Java API 不用，例如不知道有 collections，結果自己土法煉鋼敲了數十行程式落落長，才屬於需要降低行數來改善設計的新手。但這不是因為你需要節省行數的關係，而是你真的多寫了冤枉的數十行程式來。<br>
+				[2] 目的是寫出小朋友也看得懂在做什麼的程式碼，而不是小朋友也寫得出來的程式碼；不要搞錯方向。例如我們看得懂什麼叫精彩的武俠小說，但不見得自己也寫得出來一樣。程式設計是一種創作，它充滿我們個人的想法在裡面，我們要努力的是傳達自己想法給他人，而不是努力制定應用文的範本讓內容千篇一律。<br>
+				[3] 這篇文章是 2000 年代寫的，已不符現在的事實。在 2010 年代後期，中國開發大型專案的經驗遠比台灣豐富，現在無論開發還是設計，都比台灣程式設計師高好幾個檔次。過去台灣是靠 1990 年代為中小企業開發應用軟體累積了經驗，普遍比 2000 年代的中國程式設計師有更多軟體工程的實踐，但也就僅止於此，我們很少有大型專案的經驗。
+			</p>
+		</footer>
+	</section>
+	<hr id='19770616A'>
+	<section>
+		<h2>Java 不再免費？</h2>
+		<hr>
+		<section>
+			<h3>JDK 11 和 JDK 8</h3>
+			<section>
+				<h4>官方下載的 JDK 已經不是免費使用，變成商用授權軟體</h4>
+				<p>
+					JDK 11 和 JDK 8 Update 211 開始，全面使用 OTN 授權協議（Oracle Technology Network License Agreement），取代舊的 BCL 授權協議（Oracle Binary Code License Agreement），Oracle JDK 確定不再免費，屬於向官方取得授權然後商業使用的軟體。<br>
+					<br>
+					但純粹只是 Oracle 自己的 JDK 不再免費，並非 Java 不再免費！Oracle 已為一般免費使用者鋪好 OpenJDK 的路，只要改用 OpenJDK，依然跟之前一樣，可以免費使用 Java 技術開發應用程式、商轉企業系統。為此 Oracle 還釋出許多 Java 的專利給 OpenJDK，讓兩者在技術上保持一致。<br>
+					<br>
+					這裡有個坑，Oracle JDK 依然是免費下載的，但只能評估和測試用！若只在自己電腦使用，Oracle 會視為評估和測試用途，不會向你收錢。但只要是在有營運的公司內部使用 Oracle JDK 開發或執行 Java 程式，就要與 Oracle 洽談合約！所以請不要在工作上使用 Oracle JDK 開發程式，也不要在公司網站採用 Oracle JDK 運行程式～<br>
+					<br>
+					換句話說，Oracle JDK 並不是過去的 Java SE Development Kit，而是 Oracle 另外自己用獨家專利打造的 JDK 產品，是給企業用的，而不是給大家下載使用的免費軟體資源。過去的 Java SE Development Kit，已遷移到 OpenJDK，繼續讓大家能下載並免費使用 Java！
+				</p>
+			</section>
+			<section>
+				<h4>但 Java 依然是可以免費使用的技術</h4>
+				<p>
+					其實還是跟以前一樣，Java 有免費使用和商業使用兩種！只是 Oracle 不再提供免費使用的版本，把免費使用的版本移交到 OpenJDK 而已。<br>
+					<br>
+					所以嚴格來說，變的只有 Oracle 的業務，Java 程式語言可以免費使用的情況並沒有變！你依然可以像過去那樣免費使用 Java，只是要改用 OpenJDK，不要再從 Oracle 網站下載 JDK。<br>
+					<br>
+					其實這樣的改變，反而更能保障免費使用 Java 的開發者和企業！過去 Oracle 提供付費和免費兩種 Java 時，想免費使用卻會誤入商業使用的陷阱，現在 Oracle 只提供付費的 Java，免費使用的 Java 由 OpenJDK 提供，付費版和免費版界線分明，使用者不用再擔心有哪些陷阱。<br>
+					<br>
+					坦白說這招走得漂亮！一方面 Oracle 能用自己獨家技術的 JDK 從 Java 賺錢，實現 Oracle 一直想從 Java 開設業務來賺錢的心願，一方面又讓免費使用的 OpenJDK 更完善，讓想免費使用 Java 的人更方便往沒有付費陷阱的 OpenJDK 遷移～
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Oracle JDK 17</h3>
+			<section>
+				<h4>免費送你三年商用許可</h4>
+				<p>
+					隨著新的 LTS 版 Java 問世，Oracle 使用 NFTC 授權協議（Oracle No-Fee Terms and Conditions），允許在期限內免費商用 Oracle JDK 17！<br>
+					<br>
+					免費的期限是下一個 LTS 版本推出後滿一年截止，也就是三年。這段期間將 Oracle JDK 17 用於公司營運，不需要向 Oracle 商談合約付授權金，等於談妥三年合約了！<br>
+					<br>
+					期限到了，Oracle JDK 17 將轉為 OTN 授權協議，必須付費，不再允許繼續免費商用 Oracle JDK 17！想繼續免費商用 Oracle JDK，方法就是升級到下一個使用 NFTC 的 LTS 版本。<br>
+					<br>
+					但你要知道，Java 通常用於後端開發，同一版本用越久越好，最好不要升級，以免承擔不相容的風險！明明 Java 17 是 LTS，能持續更新到 2029 年，選擇 Oracle JDK 17 卻只能用到 2024 年，就得升級到 Oracle JDK 21 才能繼續商用，然後等到 2026 年又得升級到 Oracle JDK 25，這就失去 LTS 的意義了～
+				</p>
+			</section>
+			<section>
+				<h4>但 Oracle JDK 依然是商用授權軟體</h4>
+				<p>
+					僅 Oracle JDK 17 和往後的版本，適用新的 NFTC 授權協議！Oracle JDK 8 和 Oracle JDK 11 依然使用 OTN 授權協議，請勿貿然下載最新的 Oracle JDK 8 和 Oracle JDK 11 在商用上。<br>
+					<br>
+					所以，並不能說 Oracle JDK 成為免費軟體，Oracle JDK 仍舊是商用授權軟體，只是 Oracle 免費提供兩三年的商用合約而已。<br>
+					<br>
+					要免費商用 Java 技術，依然是 OpenJDK 才有保障，不建議轉換到法律關係複雜的 Oracle JDK！<br>
+					<br>
+					想商用 Oracle JDK 的話，要有「換約」的觀念，當個知道怎麼守法律條文的人，積極了解與關心 Oracle 是否每一版或每一年都擬定不一樣的合約出來，及時遵照授權協議的變動去商用 Oracle JDK，以免誤觸法律陷阱。如果你不願關心法律和合約的事，請不要使用 Oracle JDK！以為就此免費，卻變成違法使用 Oracle JDK，反而付出慘痛的代價。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>OpenJDK</h3>
+			<p>
+				要免費使用 Java，請從其他地方下載 OpenJDK：<ins>1</ins><br>
+				<br>
+				<a href='http://adoptium.net'>Eclipse Temurin</a> - 原 <a href='http://adoptopenjdk.net/releases.html'>AdoptOpenJDK</a>，高效穩定、官商中立，是最受肯定的 OpenJDK。<br>
+				<a href='http://bell-sw.com/pages/downloads/'>Bellsoft Liberica JDK</a> - 除了有內建 JavaFX 的 Full 版，還有檔案很小的 Lite 版。<br>
+				<a href='http://www.azul.com/downloads/#zulu'>Azul Zulu</a> - 主打最長 EOL 維護期！有 7u352 和 13.0.14 之類絕無僅有的版本。<br>
+				<a href='http://developer.ibm.com/languages/java/semeru-runtimes/'>IBM Semeru Runtimes</a> - 記憶體占用低，可藉由調校 JIT 和 AOT 編譯提升性能。<br>
+				<br>
+				千萬不要在 Oracle 的網站下載任何跟 Java 有關的軟體！<br>
+				<br>
+				連官方 <a href='http://openjdk.org'>OpenJDK</a> 網站都不要信任，這網站的官方其實就是 Oracle 自己，所以會誤導你下載 Oracle JDK，而不是 OpenJDK！
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] Amazon Corretto、Microsoft Build of OpenJDK、SapMachine、Red Hat build of OpenJDK，各自針對 AWS、Azure、SAP、OpenShift 等雲端系統有額外的功能和增強，所以沒在推薦之列。但其實這些也是不錯的選擇，他們只提供開源免費的 OpenJDK，反而比類似 Oracle 混合商用軟體的 Azul 和 BellSoft 更有保障。
+			</p>
+		</footer>
+	</section>
+	<hr id='20030106A'>
+	<section>
+		<h2>String</h2>
+		<p>
+			請把 String 視為進入 Java 程式設計的第一課，它比你所想的還要不簡單！<br>
+			<br>
+			你應該對 String 的種種功能感到興奮、有趣，而不是覺得怎麼光一個 String 就這麼麻煩…否則勸你還是趁早放棄物件導向程式語言，因為可以操控物件的各式各樣功能來完成任務，是物件導向程式設計人員最基本的樂趣～<br>
+			<br>
+			對學習物件導向程式設計來說，學習怎麼用 String，要比學習各式設計類別的花招來得重要！因為物件導向程式設計的重點，是用物件來設計程式，類別只是達成這目的的手段而已。<br>
+			<br>
+			藉由這一章的 String 還有下一章的 StringBuilder，了解「操作物件」是怎麼回事，然後我們也設法把自己的程式，都設計成像 String 這樣的物件來用，我告訴你，這就是物件導向程式設計！<ins>1</ins>
+		</p>
+		<hr>
+		<section>
+			<h3>比較字串內容</h3>
+			<p>
+				有三種，而且比較的原理不同，請務必釐清箇中差異，否則依賴比對字串來動作的程式將設計失敗：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "HELLO";
+							String b = "HELLO";
+
+							if(a==b){
+								System.out.println("兩物件指向同一筆資料。");
+							}
+
+							if(a.intern()==b.intern()){
+								System.out.println("兩物件傳回的資料相同。");
+							}
+
+							if(a.equals(b)){
+								System.out.println("兩物件的資料相同。");
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					兩物件指向同一筆資料。<br>
+					兩物件傳回的資料相同。<br>
+					兩物件的資料相同。
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>從字串中尋找文字所在位置</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "ABCDEFG";
+							System.out.println(a.indexOf("D"));
+							System.out.println(a.indexOf("FG"));
+							System.out.println(a.indexOf("Z"));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					3<br>
+					5<br>
+					-1
+				</output>
+				<br>
+				找不到的話傳回 -1，因此這個功能也常常用來檢查字串中有沒有特定文字，例如：<br>
+				<br>
+				<code>
+					if(a.indexOf("#")&lt;0){<br>
+					　doSomething();<br>
+					}<br>
+				</code>
+				<br>
+				另外還有類似的 lastIndexOf() 可用，差別在於改從字串尾端往前尋找，但結果不變。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以 Regular Expression 比對資料</h3>
+			<p>
+				雖然 indexOf() 就可用來檢查字串中有沒有特定資料，但主要任務並非如此，所以可以選用真正專門用來執行這樣任務的 matches()，它可用 Regular Expression 語法來檢查資料。<br>
+				<br>
+				底下範例用 Regular Expression 設定條件，檢查字串的資料是否符合 Hex 寫法的 RGB 值：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "#6699CC";
+							System.out.println(a.matches("[#]?[\\da-fA-F]{6}"));
+
+							String b = "#RRGGBB";
+							System.out.println(b.matches("[#]?[\\da-fA-F]{6}"));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					true<br>
+					false
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取得某個位置的字元</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "ABCDEFG";
+							System.out.print(a.charAt(3));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					D
+				</output>
+				<br>
+				因為要指定第一個字元的話是 0，所以指定為 3 所獲得的字元為 D。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>擷取字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "ABCDEFG";
+							System.out.println(a.substring(2,4));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					CD
+				</output>
+				<br>
+				不是很直覺的參數，容易誤以為是第三個字元到第五個字元，但其實第二個參數是「終點」，並不是「從…到…」，要特別記住。<br>
+				<br>
+				也可以不用第二個參數，這樣則是從指定的某個字元開始擷取往後的所有字串內容。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>混搭 indexOf() 與 substring()</h3>
+			<p>
+				底下範例從 <code>[password=abc123]</code> 這組字串中<ins>2</ins>，擷取出 password 與 abc123。<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String section = "[password=abc123]";
+
+							String name = section.substring(section.indexOf("[") + 1, section.indexOf("="));
+							System.out.println(name);
+
+							String value = section.substring(section.indexOf("=") + 1, section.indexOf("]"));
+							System.out.println(value);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					password<br>
+					abc123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>分離字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String string = "AAA,BBB,CCC";
+							String[] strings = string.split(",");
+							System.out.print(strings[2]);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					CCC
+				</output>
+				<br>
+				上面的程式可以簡化成：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							System.out.print("AAA,BBB,CCC".split(",")[2]);
+						}
+					}
+                </textarea>
+				<br>
+				這招尤其適合用來快速取得 CSV 格式中想要的資料！特別是以純文字文件的「行」為 row，以 split() 的陣列索引值為 column，一個「資料表」很簡單就實現了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>替換字串中的文字資料</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "HELLO";
+							String b = a.replace("L", "-");
+							System.out.print(b);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					HE--O
+				</output>
+				<br>
+				值得注意的是，b 雖然是 HE--O，但 a 依然是 HELLO。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以 Regular Expression 一次替換多種條件</h3>
+			<p>
+				如果想替換掉的文字不只一個，又不想多寫一行程式來替換，可以使用 Regular Expression 做為條件。下面的範例，一行就將 HELLO 中的 L 和 O 全部替換為 - 符號：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "HELLO";
+							String b = a.replaceAll("L|O", "-");
+							System.out.print(b);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					HE---
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>連接字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "ABCDEFG";
+							String b = a.concat("HIJKLMNOP");
+							System.out.println(b);
+							System.out.println(a);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABCDEFGHIJKLMNOP<br>
+					ABCDEFG
+				</output>
+				<br>
+				這個範例值得注意的是，b 雖然獲得連接了字串的內容，但 a 本身的資料並未改變。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>削掉頭尾空白</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = " ABCDEFG"; //注意 A 的前面留了一個空白
+							System.out.println(a);
+							System.out.println(a.trim());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					&nbsp;ABCDEFG<br>
+					ABCDEFG
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>轉換為大小寫</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "Twideem Civs";
+							System.out.println(a.toUpperCase());
+							System.out.println(a.toLowerCase());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					TWIDEEM CIVS<br>
+					twideem civs
+				</output>
+				<br>
+				有時候需要檢查字串內容時，先全部轉為大寫或小寫，再來處理會比較適合。所以這個功能雖然只適用於英文字母，但還是用得到，尤其是設計登入介面，處理英文字母的帳號。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>將數值轉為字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							int a = 123;
+							int b = 456;
+							System.out.println(a+b);
+							System.out.println(String.valueOf(a)+String.valueOf(b));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					579<br>
+					123456
+				</output>
+				<br>
+				如果想將兩個數值資料用 + 串起來成為文字，會變成兩個數值進行加法運算，而不是串接。這時就適合用 valueOf() 功能。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>將物件型態的字串轉輸出為基本型態 char 的陣列</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "ABCDEFG";
+							char[] b = a.toCharArray();
+
+							for(int n=0; n&lt;b.length; n++){
+								b[n]+=1;
+							}
+
+							System.out.println(b);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					BCDEFGH
+				</output>
+				<br>
+				適合逐一針對字串裡面每個字元進行運算的場合。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>字串的 Unicode 值</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							String a = "猜猜我是誰";
+							char[] b = a.toCharArray();
+
+							for(int n=0; n&lt;b.length; n++){
+								System.out.println(b[n] + " \\u" + Integer.toHexString(b[n]) + " &amp;#" + (int)b[n] +";");
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					猜 \u731c &#29468;<br>
+					猜 \u731c &#29468;<br>
+					我 \u6211 &#25105;<br>
+					是 \u662f &#26159;<br>
+					誰 \u8ab0 &#35504;
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>直接對字串資料操作物件功能</h3>
+			<p>
+				以 "" 括住的資料，本身就是 String 物件了，因此可以直接對其呼叫 Stirng 的功能：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							System.out.print("ABCDEFG".indexOf("D"));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					3
+				</output>
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 物件導向程式設計的重點，並不是實作與介面分離，而是有沒有把程式運作的細節都裝在物件裡面，讓程式碼看上去整片都是用操作物件的方式來完成。介面分離到照樣把細節攤在眼前、把處理細節的程式碼混夾在操作物件之間，依然不是物件導向程式設計！<br>
+				[2] 這組字串的結構，是過去 Windows 95/98 時代很常見到「INI 組態檔」資料格式。當時應用軟體常常這樣的格式，將軟體的設定值寫在純文字文件來保存。
+			</p>
+		</footer>
+	</section>
+	<hr id='20030113A'>
+	<section>
+		<h2>StringBuilder、StringBuffer</h2>
+		<p>
+			由於 Java 的 String 為「內容不可變」的物件，當內容變更時，採取重新 new 一個物件做為新內容的做法，為了避免 new 太多 String，而提供內容可變的 StringBuilder。<br>
+			<br>
+			既然 StringBuilder 是特別用來變更內容用的，因此有更豐富的文字修改能力，可以方便開發者編輯字串內容。但不支援 Regular Expression，因此不是用來取代 String 的，而是輔助用的，適合用在插入與刪除的場合。<br>
+			<br>
+			最後，StringBuffer 其實與 StringBuilder 一樣，只差在支援多執行緒；如果設計上沒用到多執行緒，那使用 StringBuilder 有更佳的執行效能。
+		</p>
+		<hr>
+		<section>
+			<h3>加入字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder();
+							string_builder.append("ABCDEFG");
+							System.out.print(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABCDEFG
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>插入字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.insert(3,"XYZ");
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABCXYZDEFG
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>輸出字串</h3>
+			<p>
+				StringBuilder 並非 String，因此不能將它代入 String 的參數，必須使用 toString() 將內容以 String 輸出：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder();
+							string_builder.append("ABCDEFG");
+							List&lt;String&gt; list = new ArrayList&gt;String&gt;();
+							list.add(string_builder.toString()); //沒 toString() 將編譯失敗
+							System.out.print(list.get(0));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABCDEFG
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取得字元</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							System.out.print(string_builder.charAt(3));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					D
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>擷取字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							System.out.println(string_builder.substring(2,4));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					CD
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>更改字元</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.setCharAt(3,"-");
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABC-EFG
+				</output>
+				<br>
+				注意！既然是字元，第二參數用的是單引號，而不是雙引號，否則將編譯錯誤。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>更改字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.replace(1,6,"-");
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					A-G
+				</output>
+				<br>
+				注意，與 String 的 replace() 參數用法不一樣。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>將字串順序反過來</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.reverse();
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					GFEDCBA
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>刪除單一字元</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.deleteCharAt(2);
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABDEFG
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>刪除連續字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.delete(1,6);
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					AG
+				</output>
+				<br>
+				注意！跟 String 的 substring() 一樣，參數看起來並不直覺，第二個參數是終點（到哪裡為止），所以 (1,6) 而不是從第二個字元刪到第七個字元。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>清空字串</h3>
+			<p>
+				StringBuilder 並沒有 clear() 這類操作方式，只好用 setLength(0) 將字串長度設為 0，以資料歸零的做法來折衷：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							string_builder.setLength(0);
+							string_builder.append("HIJKLMNOP");
+							System.out.print(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					HIJKLMNOP
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>削掉頭尾空白</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder(" ABCDEFG ");
+							string_builder.trimToSize();
+							System.out.println(string_builder.toString());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABCDEFG
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>從字串中尋找文字所在位置</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							System.out.println(string_builder.indexOf("D"));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					3
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取得字串長度</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder("ABCDEFG");
+							System.out.println(string_builder.length());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					7
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='20050123A'>
+	<section>
+		<h2>格式化字串</h2>
+		<hr>
+		<section>
+			<h3>Example 1</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.Formatter;
+
+					public class Main{
+						public static void main(String[] args){
+							System.out.print(new Formatter().format("%d", 123));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 2</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.Formatter;
+
+					public class Main{
+						public static void main(String[] args){
+							StringBuilder string_builder = new StringBuilder();
+							Formatter formatter = new Formatter(string_builder);
+							formatter.format("%1$d + %1$d = %2$d", 1, 2);
+							System.out.print(string_builder);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					1 + 1 = 2
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 3</h3>
+			<p>
+				System.out.printf() 跑的其實就是 Formatter：<br>
+				<br>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							System.out.print(String.format("%1$d + %1$d = %2$d\n", 1, 2));
+							System.out.printf("%1$d + %1$d = %2$d", 1, 2);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					1 + 1 = 2<br>
+					1 + 1 = 2
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='20030120A'>
+	<section>
+		<h2>Regular Expression</h2>
+		<p>
+			雖然 Java 的 String 可以進行 Regular Expression（正規表示式），但正式的做法是使用 java.util.regex.Pattern，它需要混搭物件，所以稍嫌麻煩，但也因此賦予許多靈巧的機制，可以設計出較有彈性的程式結構。
+		</p>
+		<hr>
+		<section>
+			<h3>基本用法</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.regex.Pattern;
+					import java.util.regex.Matcher;
+
+					public class Main{
+						public static void main(String[] args){
+							//設定規則為三個數字。
+							Pattern pattern = Pattern.compile("[\\d]{3}");
+							//輸入 ABC123 資料進行匹配，並且將結果傳至 Matcher 物件。
+							Matcher matcher = pattern.matcher("ABC123");
+
+							//如果資料匹配結果出現符合規則的字串，輸出符合匹配的結果。
+							if(matcher.find()){
+								System.out.print(matcher.group());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取得成功匹配結果的開頭位置與終點</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.regex.Pattern;
+					import java.util.regex.Matcher;
+
+					public class Main{
+						public static void main(String[] args){
+							Pattern pattern = Pattern.compile("[\\d]{3}");
+							Matcher matcher = pattern.matcher("ABC123");
+
+							if(matcher.find()){
+								System.out.println(matcher.start());
+								System.out.println(matcher.end());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					3<br>
+					6
+				</output>
+				<br>
+				注意開頭位置是「第幾個字元開始」，但終點卻不是「第幾個字元結束」，而是「到哪裡為止」。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取代字串</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.regex.Pattern;
+					import java.util.regex.Matcher;
+
+					public class Main{
+						public static void main(String[] args){
+							Pattern pattern = Pattern.compile("[\\d]");
+							Matcher matcher = pattern.matcher("ABC123");
+
+							if(matcher.find()){
+								System.out.print(matcher.replaceAll("-"));
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABC---
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>完整匹配</h3>
+			<p>
+				有時候希望更簡單就能以嚴密的方式，比對整個字串是否能通過驗證。如下範例，Pattern 所 matcher() 的字串，必須從頭到尾都符合 compile() 設定的條件，才會傳回 true：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.regex.Pattern;
+					import java.util.regex.Matcher;
+
+					public class Main{
+						public static void main(String[] args){
+							//設定規則為三個數字
+							Pattern pattern = Pattern.compile("[\\d]{3}");
+							//傳入 123 三個數字
+							Matcher matcher = pattern.matcher("123");
+							//輸出結果
+							System.out.println(matcher.matches());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					true
+				</output>
+				<br>
+				底下示範無法通過規範：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.regex.Pattern;
+					import java.util.regex.Matcher;
+
+					public class Main{
+						public static void main(String[] args){
+							//設定規則為三個數字
+							Pattern pattern = Pattern.compile("[\\d]{3}");
+							//傳入 1234 四個數字
+							Matcher matcher = pattern.matcher("1234");
+							//輸出結果
+							System.out.println(matcher.matches());
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					false
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>切割字串</h3>
+			<p>
+				使用 Pattern 的 split() 可將字串依照 compile() 所建立的規則，切割為好幾段的字串，而切割出來字串，以 String 陣列傳回：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.regex.Pattern;
+
+					public class Main{
+						public static void main(String[] args){
+							//以 , 做為切割的依據
+							Pattern pattern = Pattern.compile(",");
+							//開始分割字串
+							String[] strings = pattern.split("ABC,123,:)");
+
+							//將陣列輸出
+							for(int n=0; n&lt;strings.length; n++){
+								System.out.println(strings[n]);
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ABC<br>
+					123<br>
+					:)
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='20030210A'>
+	<section>
+		<h2>陣列、java.util.Arrays</h2>
+		<hr>
+		<section>
+			<h3>陣列</h3>
+			<p>
+				陣列是程式設計語言都有的語法功能，用來連續建立同樣型態的資料。
+			</p>
+			<section>
+				<h4>建立陣列</h4>
+				<p>
+					空白陣列：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								String[] a = new String[3];
+							}
+						}
+                    </textarea>
+					<br>
+					含初始值的陣列：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+							}
+						}
+                    </textarea>
+					<br>
+					匿名陣列：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.print(new int[]{1,3,5,7}[2]);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						5
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>存取陣列</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+								a[2] = "DDD";
+								System.out.print(a[2]);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						DDD
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>陣列長度</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+								System.out.print(a.length);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						3
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>巡訪陣列</h4>
+				<p>
+					傳統做法：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+
+								for(int n=0; n&lt;a.length; n++){
+									System.out.println(a[n].toLowerCase());
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						aaa<br>
+						bbb<br>
+						ccc
+					</output>
+					<br>
+					Java SE 5 新增的語法 For-each loop：<br>
+					<br>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+
+								for(String n:a){
+									System.out.println(n.toLowerCase());
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						aaa<br>
+						bbb<br>
+						ccc
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>java.util.Arrays</h3>
+			<p>
+				陣列本身不是物件，因此沒有足夠的功能可以操作。為了更進一步靈活使用陣列，Java 提供了 Arrays。<br>
+				<br>
+				它更讓人驚豔的是採用高效率的演算法來執行工作，提升解決問題的能力！
+			</p>
+			<section>
+				<h4>代入陣列到資料群集</h4>
+				<p>
+					想要將陣列依序放入群集時，通常會寫如下的程式：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.ArrayList;
+
+						public class Main{
+							public static void main(String[] args){
+								ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+								String[] strings = {"AAA","BBB","CCC"};
+
+								for(int n=0; n&lt;strings.length; n++){
+									array_list.add(strings[n]);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					對於這樣的動作，Arrays 設計更高效率的演算法，寫法如下：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.ArrayList;
+						import java.util.Arrays;
+
+						public class Main{
+							public static void main(String[] args){
+								ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+								String[] strings = {"AAA","BBB","CCC"};
+								array_list.addAll(Arrays.asList(strings));
+							}
+						}
+                    </textarea>
+					<br>
+					注意！使用 Arrays.asList() 取出的資料，必須改用 List.addAll() 一次存入。
+				</p>
+			</section>
+			<section>
+				<h4>擷取陣列、複製陣列</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+								String[] b = Arrays.copyOf(a, a.length);
+
+								for(String n:b){
+									System.out.println(n);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+					<br>
+					擷取完整長度的陣列，就變成複製陣列了。<br>
+					<br>
+					擷取資料還有 <code>copyOfRange(陣列, 起點, 終點)</code> 可用。
+				</p>
+			</section>
+			<section>
+				<h4>比對陣列</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"AAA","BBB","CCC"};
+								String[] b = Arrays.copyOf(a, a.length);
+
+								if(Arrays.equals(a, b)){
+									System.out.print("兩陣列所含資料相同");
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						兩陣列所含資料相同
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>填滿陣列</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+
+						public class Main{
+							public static void main(String[] args){
+								String[] a = new String[3];
+								Arrays.fill(a, "XXX");
+
+								for(String n:a){
+									System.out.println(n);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						XXX<br>
+						XXX<br>
+						XXX
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>排序資料</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+
+						public class Main{
+							public static void main(String[] args){
+								int[] a = {9,2,1};
+								Arrays.sort(a);
+
+								for(int n:a){
+									System.out.println(n);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						1<br>
+						2<br>
+						9
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>依自訂的比較規則排序資料</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+						import java.util.Comparator;
+
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"A","B","C"};
+
+								Arrays.sort(a, new Comparator&lt;String&gt;(){
+									public int compare(String x, String y){
+										return y.compareTo(x);
+									}
+								});
+
+								for(String n:a){
+									System.out.println(n);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						C<br>
+						B<br>
+						A
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>打亂排序的資料</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Arrays;
+						import java.util.Comparator;
+						import java.util.Random;
+
+						public class Main{
+							public static void main(String[] args){
+								String[] a = {"A","B","C"};
+
+								Arrays.sort(a, new Comparator&lt;String&gt;(){
+									public int compare(String x, String y){
+										return new Random().nextInt();
+									}
+								});
+
+								for(String n:a){
+									System.out.println(n);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						每次執行結果不一樣：<br>
+						C<br>
+						B<br>
+						A
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>搜尋資料</h4>
+				<p>
+					排序過的陣列，可以使用 <code>binarySearch(陣列, 資料)</code> 和 <code>binarySearch(陣列, 起點, 終點, 資料)</code> 搜尋資料，找到的話會傳回索引值。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='20030203A'>
+	<section>
+		<h2>Collections 速成</h2>
+		<p>
+			如果你懂得根據資料的處理方式，善用合適的 Collection，可以簡化程式碼的結構，提升可讀性。例如既要過濾重複資料、又要排序資料，那直接用 TreeSet 一次搞定，要比先用 HashSet 過濾，再轉存到 ArrayList 讓 java.util.Collections.sort() 排序來得乾淨俐落！<br>
+			<br>
+			反過來，明明 Java 已經提供這些高效能演算法的資料結構，卻還自己土法煉鋼去處理，變成要敲二三十行的程式碼，錯失只需兩三行程式就能搞定的快感，而且處理時間可能要多兩三倍。
+		</p>
+		<hr>
+		<section>
+			<h3>使用時機</h3>
+			<p>
+				陣列用途：
+			</p>
+			<table>
+				<tr><td>ArrayList</td><td>允許重複資料、照先後順序排列、適合讀取資料。</td></tr>
+				<tr><td>LinkedList</td><td>允許重複資料、照先後順序排列、適合更動資料。</td></tr>
+				<tr><td>HashSet</td><td>濾除重複資料、特殊演算順序。</td></tr>
+				<tr><td>LinkedHashSet</td><td>濾除重複資料、照先後順序排列。</td></tr>
+				<tr><td>TreeSet</td><td>濾除重複資料、自動排序。</td></tr>
+			</table>
+			<p>
+				關聯表用途：<br>
+			<p>
+			<table>
+				<tr><td>HashMap</td><td>鍵/值對資料、特殊演算順序。</td></tr>
+				<tr><td>LinkedHashMap</td><td>鍵/值對資料、照先後順序排列。</td></tr>
+				<tr><td>TreeMap</td><td>鍵/值對資料、自動排序。</td></tr>
+			</table>
+			<p>
+				巡訪資料：<br>
+			<p>
+			<table>
+				<tr><td>Iterator</td><td>使用 hasNext() 和 next() 巡訪資料。</td></tr>
+			</table>
+			<p>
+				舊版做法：<br>
+			<p>
+			<table>
+				<tr><td>Vector</td><td>建議用 ArrayList 替代。</td></tr>
+				<tr><td>Stack</td><td>建議用 LinkedList 替代。</td></tr>
+				<tr><td>Hashtable</td><td>建議用 HashMap 替代。</td></tr>
+				<tr><td>Enumeration</td><td>建議用 Iterator 替代。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>範例</h3>
+			<p>
+				先以 ArrayList 為例：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.ArrayList;
+					import java.util.Iterator;
+					import java.util.List;
+
+					public class Main{
+						public static void main(String[] args){
+							List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+							list.add("AAA");
+							list.add("BBB");
+							list.add("CCC");
+							Iterator&lt;String&gt; iterator = list.iterator();
+
+							while(iterator.hasNext()){
+								System.out.println(iterator.next().toLowerCase());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					aaa<br>
+					bbb<br>
+					ccc
+				</output>
+				<br>
+				再以 TreeSet 為例：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.Iterator;
+					import java.util.Set;
+					import java.util.TreeSet;
+
+					public class Main{
+						public static void main(String[] args){
+							Set&lt;Integer&gt; set = new TreeSet&lt;Integer&gt;();
+							set.add(8);
+							set.add(4); //雖然是第二筆，但會被自動排序在 8 的前面。
+							set.add(8); //重複的資料，因此不會真的被加進去。
+							Iterator&lt;Integer&gt; iterator = set.iterator();
+
+							while(iterator.hasNext()){
+								System.out.println(iterator.next());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					4<br>
+					8
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				為什麼使用 List list=new ArrayList() 或 Set set=new HashSet() 的方式來宣告參照？這是為了往後隨時可以抽換成其它類別。當我們發現所選的群集在處理資料並不適任時，就可以由 ArrayList 抽換成 LinkedList、或由 HashSet 抽換成 LinkedHashSet，而不影響程式其它部分。<br>
+				<br>
+				當然，還可以更進一步！如果希望將來可以在 List 與 Set 中替換，那可以改用 Collection 介面，因為它是 List 與 Set 的共通介面：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.Collection;
+					import java.util.HashSet;
+					import java.util.Iterator;
+
+					public class Main{
+						public static void main(String[] args){
+							Collection&lt;String&gt; collection = new HashSet&lt;String&gt;();
+							collection.add("AAA");
+							collection.add("BBB");
+							collection.add("CCC");
+							Iterator&lt;String&gt; iterator = collection.iterator();
+
+							while(iterator.hasNext()){
+								System.out.println(iterator.next());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				上例是用 HashSet 實作，現在直接換成 ArrayList，但其它地方都不需要修改：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.ArrayList;
+					import java.util.Collection;
+					import java.util.Iterator;
+
+					public class Main{
+						public static void main(String[] args){
+							Collection&lt;String&gt; collection = new ArrayList&lt;String&gt;();
+							collection.add("AAA");
+							collection.add("BBB");
+							collection.add("CCC");
+							Iterator&lt;String&gt; iterator = collection.iterator();
+
+							while(iterator.hasNext()){
+								System.out.println(iterator.next());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				然而，這樣做是需要犧牲的！例如 Collection 介面並沒有 List 介面的 get(int)，因此雖然可以從 Set 介面替換為 List 介面，但既然使用 Collection 介面，就不認得 get(int)，因此只能用 iterator() 來巡訪資料<ins>1</ins>。<br>
+				<br>
+				這是理所當然的，既然要能隨時互相替換，那就應該用彼此都有的方式來操作。<br>
+				<br>
+				如何在「初寫的方便性」與「修改的靈活性」之間做抉擇，端看我們對需求的掌握程度。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>進階</h3>
+			<p>
+				java.util.Collections 提供許多 static 的 method，方便我們處理 Collection 的資料：
+			</p>
+			<table>
+				<tr><td style='width:40%'>binarySearch(List, Object)</td><td>搜尋 List 內容的 Object 元素。</td></tr>
+				<tr><td>copy(List dest, List src)</td><td>複製 src 的元素給 dest。</td></tr>
+				<tr><td>enumerarion(Collection)</td><td>傳回舊式的 Enumerarion 迭代器。</td></tr>
+				<tr><td>fill(List, Object)</td><td>將 List 內容填滿為 Object。</td></tr>
+				<tr><td>max(Collection)</td><td>傳回 Collection 中最大的元素。</td></tr>
+				<tr><td>min(Collection)</td><td>傳回 Collection 中最小的元素。</td></tr>
+				<tr><td>reverse(List)</td><td>顛倒 List 內容的排列順序。</td></tr>
+				<tr><td>shuffle(List)</td><td>亂排 List 的內容。</td></tr>
+				<tr><td>sort(List)</td><td>排序 List 的內容。</td></tr>
+				<tr><td>swap(List, int i, int j)</td><td>交換 List 中 i 與 j 位置兩筆元素。</td></tr>
+			</table>
+			<p>
+				簡單示範其中的 shuffle，設計用電腦抽籤來決定聯盟球隊選秀順位的程式：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.ArrayList;
+					import java.util.Collections;
+					import java.util.Iterator;
+
+					public class Main{
+						public static void main(String[] args){
+							ArrayList&lt;String&gt; array_list = new ArrayList&lt;String&gt;();
+							array_list.add("兄弟象");
+							array_list.add("味全龍");
+							array_list.add("統一獅");
+							array_list.add("三商虎");
+							array_list.add("時報鷹");
+							array_list.add("俊國熊");
+							Collections.shuffle(array_list);
+							Iterator&lt;String&gt; iterator = array_list.iterator();
+
+							while(iterator.hasNext()){
+								System.out.println(iterator.next());
+							}
+						}
+					}
+                </textarea>
+				<br>
+				每次執行結果都不一樣：<br>
+				<br>
+				<output>
+					三商虎<br>
+					味全龍<br>
+					俊國熊<br>
+					兄弟象<br>
+					時報鷹<br>
+					統一獅
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				用來處理陣列的 java.util.Arrays，對 Collections 也有幫助，底下是利用 Arrays 產生 List 的範例，程式相當簡潔：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.util.List;
+					import java.util.Arrays;
+
+					public class Main{
+						public static void main(String[] args){
+							List&lt;String&gt; list = Arrays.asList("AAA","BBB","CCC");
+
+							for(String n:list){
+								System.out.print(n);
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				如果可以再寫成 <code>List&lt;String&gt; list = {"AAA","BBB","CCC"} </code> 就好了，可惜 Java 不支援。
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 頂多用 toArray() 轉成陣列再處理。
+			</p>
+		</footer>
+	</section>
+	<hr id='20030217A'>
+	<section>
+		<h2>亂數</h2>
+		<p>
+			<textarea class='brush:java'>
+				import java.util.Random;
+
+				public class Main{
+					public static void main(String[] args){
+						System.out.print(new Random().nextInt(3));
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				從 0 到 2 之間，隨機產生一個數值。
+			</output>
+			<br>
+			你可能會感到疑惑說，預設的計算結果並不直覺，為何設定 3，並不是 0 到 3 或 1 到 3，偏偏是 0 到 2？<br>
+			<br>
+			是不直覺沒錯，但這樣有個好處是，能直接處理「陣列」或「群集」的資料，因為這些結構在資料長度為 3 的時候，卻是從 0 到 2 去存取。可能設計 API 的人認為這種情況居多，所以預設這樣的值吧？<br>
+			<br>
+			自己變通一下，把得到數值加 1，即為 1 到 3 之間的亂數了。<br>
+			<br>
+			最小值到最大值的話：<br>
+			<br>
+			<code>new Random().nextInt(最大值-最小值)+最小值;</code><br>
+			<br>
+			用起來跟 <code>Math.round(Math.random()*(最大值-最小值))+最小值;</code> 一樣，為什麼不提供 <samp>nextInt(最小值, 最大值)</samp> 把這細節裝在物件裡面？確實 java.util.Random 的設計不夠物件導向，但卻是不錯的反教材：「我們不該像 java.util.Random 這樣，設計一個其實重複的類別，我們應該設計進一步抽象掉細節層次的類別。」
+		</p>
+	</section>
+	<hr id='20030310A'>
+	<section>
+		<h2>資料夾與檔案的管理</h2>
+		<hr>
+		<section>
+			<h3>基本範例</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.io.File;
+					import java.util.Date;
+					import java.text.DateFormat;
+
+					public class Main{
+						public static void main(String[] args){
+							try{
+								//建立資料夾。
+								new File(".\\新增資料夾").mkdir();
+								//建立檔案。
+								new File(".\\新文字文件.txt").createNewFile();
+								//移動檔案。
+								new File(".\\新文字文件.txt").renameTo(new File(".\\新增資料夾\\新文字文件.txt"));
+								//更改檔名。
+								new File(".\\新增資料夾\\新文字文件.txt").renameTo(new File(".\\新增資料夾\\舊文字文件.txt"));
+								//取得檔案最後修改日期。
+								Date date = new Date(new File(".\\新增資料夾\\舊文字文件.txt").lastModified());
+								DateFormat date_rormat = DateFormat.getDateInstance();
+								System.out.println(date_rormat.format(date));
+								//檢查檔案是否存在，然後刪除檔案。（亦適用於檢查資料夾是否存在）
+								File file = new File(".\\新增資料夾\\舊文字文件.txt");
+
+								if(file.exists()){
+									file.delete();
+								}
+
+								//取得資料夾檔案清單。
+								String[] list = new File("C:").list();
+
+								for(int n=0; n&lt;list.length; n++){
+									System.out.print(list[n] + ", ");
+								}
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其它常見功能</h3>
+			<table>
+				<tr><td style='width:35%'>canExecute()</td><td>是否為可執行檔。</td></tr>
+				<tr><td>canRead()</td><td>是否可讀取。</td></tr>
+				<tr><td>canWrite()</td><td>是否可寫入。</td></tr>
+				<tr><td>compareTo(File)</td><td>合併檔案。</td></tr>
+				<tr><td>getFreeSpace()</td><td>取得所在磁碟的剩餘容量，單位是 byte。</td></tr>
+				<tr><td>getName()</td><td>取得檔案名稱。</td></tr>
+				<tr><td>getParent()</td><td>取得當前資料夾。</td></tr>
+				<tr><td>getPath()</td><td>取得完整路徑。</td></tr>
+				<tr><td>getTotalSpace()</td><td>取得所在磁碟的容量，單位是 byte。</td></tr>
+				<tr><td>getUsableSpace()</td><td>取得所在磁碟的可用容量，單位 byte。</td></tr>
+				<tr><td>isDirectory()</td><td>是否為資料夾。</td></tr>
+				<tr><td>isFile()</td><td>是否為檔案。</td></tr>
+				<tr><td>isHidden()</td><td>是否為隱藏檔。</td></tr>
+				<tr><td>length()</td><td>取得檔案大小，單位是 byte。</td></tr>
+				<tr><td>listFiles()</td><td>以 File 陣列傳回檔案。</td></tr>
+				<tr><td>setExecutable(boolean)</td><td>設定執行權限。</td></tr>
+				<tr><td>setLastModified(long)</td><td>設定檔案修改日期。</td></tr>
+				<tr><td>setReadable(boolean)</td><td>設定讀取權限。</td></tr>
+				<tr><td>setReadOnly()</td><td>設定唯讀。</td></tr>
+				<tr><td>setWritable(boolean)</td><td>設定寫入權限。</td></tr>
+				<tr><td>toURL()</td><td>以 java.net.URL 輸出。</td></tr>
+			</table>
+			<p>
+				<textarea class='brush:java'>
+					import java.io.File;
+					import java.text.SimpleDateFormat;
+					import java.util.Date;
+
+					public class Main{
+						public static void main(String[] args){
+							//修改資料夾內所有檔案的最後日期
+							try{
+								SimpleDateFormat simple_date_format = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
+								Date date = simple_date_format.parse("2002/02/06-12:34:56");
+								File files[] = new File("C:\\Users\\Twideem\\Documents").listFiles();
+
+								for(File file : files){
+									if(file.isFile()){
+										file.setLastModified(date.getTime());
+									}
+								}
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='20030317A'>
+	<section>
+		<h2>純文字文件的寫入與讀取</h2>
+		<p>
+			檔案讀寫是 Java 最讓人津津樂道的物件導向經典案例！它有最基本功能的物件方便使用，事後用俗稱 decorator pattern（裝飾者模式）的設計，可以不斷堆加功能上去來滿足需求。<br>
+			<br>
+			請在本章節好好看 Java 怎麼做，然後用同樣套路強化我們的類別！
+		</p>
+		<hr>
+		<section>
+			<h3>直接套用作業系統預設格式來讀寫文字的 FileWriter 與 FileReader</h3>
+			<p>
+				為了方便程式設計師在不同作業系統，都能以相同的程式寫法，來存取純文字檔案的資料，Java 提供 FileWriter 與 FileReader，它會直接用作業系統預設的字元編碼與換行格式，來寫入與讀取純文字資料！
+			</p>
+			<section>
+				<h4>寫入純文字文件</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.FileWriter;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立輸出用文字檔案
+									FileWriter file_writer = new FileWriter("sample.txt");
+									//輸出文字
+									file_writer.write("猜\n");
+									file_writer.write("猜\n");
+									file_writer.write("我\n");
+									file_writer.write("是\n");
+									file_writer.write("誰\n");
+									//關閉檔案
+									file_writer.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output class='editor'>
+						猜<br>
+						猜<br>
+						我<br>
+						是<br>
+						誰
+					</output>
+					<br>
+					注意！這個範例沒有建立空白新檔的動作，所以你必須事先準備好檔名為 sample.txt 的純文字文件，否則無法執行程式。
+				</p>
+			</section>
+			<section>
+				<h4>讀取純文字文件</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.FileReader;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立讀取用文字檔案
+									FileReader file_reader = new FileReader("sample.txt");
+									//逐行讀取資料
+									char[] chars=new char[1024];
+
+									while(file_reader.ready()){
+										System.out.println(new String(chars, 0, file_reader.read(chars)));
+									}
+
+									//關閉檔案
+									file_reader.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					如果讀取的 sample.txt 是前一個範例所產生，程式執行結果為：<br>
+					<br>
+					<output>
+						猜<br>
+						猜<br>
+						我<br>
+						是<br>
+						誰
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>提升檔案讀寫效率的 BufferedWriter 與 BufferedReader</h3>
+			<p>
+				使用 FileWriter 與 FileReader 是直接對硬碟的檔案進行讀寫，如果讀寫頻繁的話，因為硬碟往往是電腦中速度最慢的裝置，應用程式的效率可能會被拖慢。因此 Java 又另外提供了 BufferedWriter 與 BufferedReader，可以先將硬碟檔案的資料緩存在速度較快記憶體來讀寫，提高應用程式的執行效率！<br>
+				<br>
+				不只如此，BufferedWriter 與 BufferedReader 提供了更容易使用的方式來讀寫文字，所以很少人直接用 FileWriter 和 FileReader，寧願多一道程序捆入 BufferedWriter 和 BufferedReader。
+			</p>
+			<section>
+				<h4>寫入純文字文件</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.BufferedWriter;
+						import java.io.FileWriter;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立輸出用文字檔案
+									BufferedWriter buffered_writer = new BufferedWriter(new FileWriter("sample.txt"));
+									//輸出文字
+									buffered_writer.write("猜猜我是誰");
+									//關閉檔案
+									buffered_writer.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output class='editor'>
+						猜猜我是誰
+					</output>
+					<br>
+					注意！這個範例沒有建立空白新檔的動作，所以你必須事先準備好檔名為 sample.txt 的純文字文件，否則無法執行程式。
+				</p>
+			</section>
+			<section>
+				<h4>讀取純文字文件</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.BufferedReader;
+						import java.io.FileReader;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立讀取用文字檔案
+									BufferedReader buffered_reader = new BufferedReader(new FileReader("sample.txt"));
+									//讀取一行資料
+									System.out.println(buffered_reader.readLine());
+									//關閉檔案
+									buffered_reader.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					如果讀取的 sample.txt 是前一個範例所產生，程式執行結果為：<br>
+					<br>
+					<output>
+						猜猜我是誰
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>使用 FileOutputStream 與 FileInputStream 指定字元編碼</h3>
+			<p>
+				常常聽到 FileWriter 和 FileReader 跨平台的說法！其實是「檔案讀寫」這個程式動作跨平台，而不是文字檔案本身跨平台。例如在預設使用 Big5 編碼的 Windows 寫入純文字文件，拿到預設使用 UTF-8 編碼的 Linux 碼讀取，還是會有亂碼的情況發生。所以我們應該掌握如何指定以某字元編碼來讀寫純文字文件的做法：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.io.BufferedReader;
+					import java.io.BufferedWriter;
+					import java.io.FileInputStream;
+					import java.io.FileOutputStream;
+					import java.io.InputStreamReader;
+					import java.io.OutputStreamWriter;
+
+					public class Main{
+						public static void main(String[] args){
+							try{
+								//以 UTF-8 儲存文字檔案
+								BufferedWriter buffered_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("sample.txt"), "UTF-8"));
+								buffered_writer.write("猜猜我是誰");
+								buffered_writer.close();
+								//以 UTF-8 讀取文字檔案
+								BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(new FileInputStream("sample.txt"), "UTF-8"));
+								System.out.print(buffered_reader.readLine());
+								buffered_reader.close();
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					猜猜我是誰
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='20030707A'>
+	<section>
+		<h2>以二進制格式讀寫資料</h2>
+		<hr>
+		<section>
+			<h3>DataInputStream、DataOutputStream</h3>
+			<p>
+				與「純文字文件」不同的是，「二進制檔案」無法用「記事本」或「文書軟體」開啟來閱讀，會看到一堆亂碼。有些人不希望保存資料的檔案能夠直接被閱讀與修改，或者希望提高檔案的資料處理效率而使用它，屬於進階應用的檔案保存手法。
+			</p>
+			<section>
+				<h4>寫入</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.DataOutputStream;
+						import java.io.FileInputStream;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									DataOutputStream data_output_stream = new DataOutputStream(new FileOutputStream("data.dat"));
+									data_output_stream.writeUTF("AAA");
+									data_output_stream.writeUTF("BBB");
+									data_output_stream.writeUTF("CCC");
+									data_output_stream.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					將產生名為 data.dat、內容為二進制格式的檔案。
+				</p>
+			</section>
+			<section>
+				<h4>讀取</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.DataInputStream;
+						import java.io.FileInputStream;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									DataInputStream data_input_stream = new DataInputStream(new FileInputStream("data.dat"));
+									System.out.println(data_input_stream.readUTF());
+									System.out.println(data_input_stream.readUTF());
+									System.out.println(data_input_stream.readUTF());
+									data_input_stream.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					輸出結果：<br>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>補充</h4>
+				<p>
+					除了 writeUTF() 和 readUTF()，還有更多像是 writeInt() 和 readInt() 之類的功能可操作。<br>
+					<br>
+					FileInputStream 和 FileOutputStream 通常會用 java.io.BufferedInputStream() 和 java.io.BufferedOutputStream() 包起來，以提升執行效率。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>RandomAccessFile</h3>
+			<p>
+				RandomAccessFile 能進行 DataInputStream 與 DataOutputStream 一樣的工作效果，但只需要建立一個物件～
+			</p>
+			<section>
+				<h4>Example 1</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.RandomAccessFile;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立隨機存取檔案
+									RandomAccessFile random_access_file = new RandomAccessFile("data.dat", "rw");
+									//按順序寫入各種型態的資料
+									random_access_file.seek(0);
+									random_access_file.writeInt(123);
+									random_access_file.writeUTF("ABC");
+									random_access_file.writeBoolean(true);
+									//按順序讀取資料
+									random_access_file.seek(0);
+									System.out.println(random_access_file.readInt());
+									System.out.println(random_access_file.readUTF());
+									System.out.println(random_access_file.readBoolean());
+									//關閉檔案。
+									random_access_file.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					將產生名為 data.dat、內容為二進制格式的檔案，並輸出如下結果：<br>
+					<br>
+					<output>
+						123<br>
+						ABC<br>
+						true
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.RandomAccessFile;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立隨機存取檔案
+									RandomAccessFile random_access_file = new RandomAccessFile("data.dat", "rw");
+									//跳著寫入資料
+									random_access_file.seek(0);
+									random_access_file.writeInt(123);
+									random_access_file.seek(4);
+									random_access_file.writeUTF("ABC");
+									random_access_file.seek(9);
+									random_access_file.writeBoolean(true);
+									//跳著讀取資料
+									random_access_file.seek(9);
+									System.out.println(random_access_file.readBoolean());
+									random_access_file.seek(0);
+									System.out.println(random_access_file.readInt());
+									random_access_file.seek(4);
+									System.out.println(random_access_file.readUTF());
+									//關閉檔案。
+									random_access_file.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					將產生名為 data.dat、內容為二進制格式的檔案，並輸出如下結果：<br>
+					<br>
+					<output>
+						true<br>
+						123<br>
+						ABC
+					</output>
+					<br>
+					使用 seek() 必須注意資料長度的問題，例如在 seek(0) 使用了 writeInt() 的話，因為整數是 byte[4] 長度，所以必須至少從 seek(4) 開始才行，否則等於從原先資料的中間插入新資料，把原先資料給破壞掉。<br>
+					<br>
+					特別是 writeUTF()，長度不固定，文字越多就越長，這時 seek() 要保持足夠間距來應付才行！至於長度的計算，公式是「目前 seek() + 字數 + 2」，所以要取得本範例的 boolean 資料時 seek 為 4+3+2。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>FileInputStream、FileOutputStream</h3>
+			<p>
+				前面範例是透過 Java 將資料以二進制格式寫入資料，往後再用 Java 讀出來用。但如果要讀取的，是像可執行檔、圖片、音樂、或其它程式產生的二進制檔案內容，那使用 FileInputStream 和 FileOutputStream 比較適合：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.io.File;
+					import java.io.FileInputStream;
+					import java.io.FileOutputStream;
+					import java.io.InputStream;
+					import java.io.OutputStream;
+
+					public class Main{
+						public static void main(String[] args){
+							try{
+								//讀取
+								byte[] bytes = new byte[(int)new File("a.jpg").length()];
+								InputStream input_stream = new FileInputStream("a.jpg");
+								input_stream.read(bytes);
+								input_stream.close();
+								//寫入
+								OutputStream output_stream = new FileOutputStream("b.jpg");
+								output_stream.write(bytes);
+								output_stream.close();
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				以二進制格式讀取檔案內容，再轉存為另一個檔案，這招等於複製檔案！
+			</p>
+		</section>
+	</section>
+	<hr id='20030901A'>
+	<section>
+		<h2>將 Java 物件轉為檔案形式</h2>
+		<p>
+			Java 能夠將程式執行中的「物件」，以檔案的形式儲存起來；這樣的過程術語叫「序列化」。當然，我們可將序列化的檔案還原為物件，善用序列化，可以讓我們寫出更優雅的物件導向程式設計，例如遊戲進度的存檔會更直覺、物件深層複製也能用這招來解決。
+		</p>
+		<hr>
+		<section>
+			<h3>基本範例</h3>
+			<section>
+				<h4>Test.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import  java.io.Serializable;
+
+						public class Test implements Serializable{
+							public String g = "Hello";
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>Main.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.FileInputStream;
+						import java.io.FileOutputStream;
+						import java.io.ObjectInputStream;
+						import java.io.ObjectOutputStream;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									//建立物件 test1
+									Test test1 = new Test();
+									//將物件 test1 儲存為檔案 test.ser
+									ObjectOutputStream object_output_stream = new ObjectOutputStream(new FileOutputStream("test.ser"));
+									object_output_stream.writeObject(test1);
+									object_output_stream.close();
+									//將檔案還原到物件 test2
+									ObjectInputStream object_input_stream = new ObjectInputStream(new FileInputStream("test.ser"));
+									Test test2 = (Test)object_input_stream.readObject();
+									object_input_stream.close();
+									//輸出還原物件的資料
+									System.out.print(test2.g);
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						Hello
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>進階項目</h3>
+			<p>
+				如果物件某些狀態不想被序列化的話，可以加上 <code>transient</code> 指令：
+			</p>
+			<section>
+				<h4>Test.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import  java.io.Serializable;
+
+						public class Test implements Serializable{
+							public transient String g = "Hello";
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>Main.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.FileInputStream;
+						import java.io.FileOutputStream;
+						import java.io.ObjectInputStream;
+						import java.io.ObjectOutputStream;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									Test test1 = new Test();
+
+									ObjectOutputStream object_output_stream = new ObjectOutputStream(new FileOutputStream("test.ser"));
+									object_output_stream.writeObject(test1);
+									object_output_stream.close();
+
+									ObjectInputStream object_input_stream = new ObjectInputStream(new FileInputStream("test.ser"));
+									Test test2 = (Test)object_input_stream.readObject();
+									object_input_stream.close();
+
+									System.out.print(test2.g);
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						Null
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='20040508A'>
+	<section>
+		<h2>用 Apache Commons IO 讓事情做起來更簡單</h2>
+		<p>
+			有時候借助第三方程式庫，要比一昧使用 Java API 來得好！像 Java 的檔案操作設計得很難用，別說刪除檔案遇到資料夾要自己寫迴圈逐一 delete()，誇張的是連複製檔案都沒有，要你用 FileInputStream 和 FileOutputStream 讀寫檔案。與其受鳥氣，不如下載 <a href='http://commons.apache.org/proper/commons-io/'>Apache Commons IO</a> 取而代之：<br>
+			<br>
+			<textarea class='brush:java'>
+				import org.apache.commons.io.FileUtils;
+
+				class Main{
+					public static void main(String[] args){
+						try{
+							FileUtils.copyFile(FileUtils.getFile("A.png"), FileUtils.getFile("B/A.png"));
+							FileUtils.cleanDirectory(FileUtils.getFile("B"));
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				javac -classpath commons-io-2.6.jar *.java<br>
+				java -classpath commons-io-2.6.jar Main
+			</output>
+			<br>
+			更多物件與功能，請看 <a href='http://javadoc.io/doc/commons-io/commons-io/2.6/index.html'>Apache Commons IO API</a>。
+		</p>
+	</section>
+	<hr id='20211124A'>
+	<section>
+		<h2>用 Logger 取代 printStackTrace()</h2>
+		<p>
+			寫程式的階段，在 try.. catch.. 使用 printStackTrace() 對除錯很有幫助！但正式發布產品的話，卻不是好習慣，輸出的可是程式內部訊息，說不定會洩漏什麼不該被看到的東西～<br>
+			<br>
+			應該使用 log 才對！底下是 Java 內建的 Logger 用法，它能輸出包含事發時間的訊息，並把結果保存為日誌檔案，請自行應用在 catch 裡面：<br>
+			<br>
+			<textarea class='brush:java'>
+				import java.util.logging.FileHandler;
+				import java.util.logging.Logger;
+				import java.util.logging.SimpleFormatter;
+
+				class Main{
+					public static void main(String[] args){
+						try{
+							Logger logger = Logger.getLogger(""); //建議 "" 改為 Main.class.getName()，Main 應隨類別名稱不同而修改
+							FileHandler filehandler = new FileHandler("Main.log");
+							filehandler.setFormatter(new SimpleFormatter()); //設定為一目了然的純文字格式，否則預設使用的是給鬼看的 XML 格式
+							logger.addHandler(filehandler);
+
+							//log 一下
+							logger.info("Hello");
+
+							//再 log 一下
+							logger.info("Bye");
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				11月 24, 2021 12:34:56 下午 Main main<br>
+				資訊: Hello<br>
+				11月 24, 2021 12:34:56 下午 Main main<br>
+				資訊: Bye
+			</output>
+			<br>
+			<output class='editor'>
+				11月 24, 2021 12:34:56 下午 Main main<br>
+				資訊: Hello<br>
+				11月 24, 2021 12:34:56 下午 Main main<br>
+				資訊: Bye
+			</output>
+			<br>
+			Logger 還有 warning() 和 severe()，可依嚴重程度和 info() 交替使用。
+		</p>
+	</section>
+	<hr id='20010904A'>
+	<section>
+		<h2>命令列介面的程式設計</h2>
+		<p>
+			應用程式（Application）一般分為「視窗軟體（Window）」的「圖型化使用者介面（GUI; Graphical User Interface）」，以及「主控台指令（Console）」的「命令列介面（CLI; Command Line Interface）」。本文將介紹如何用 Java 設計指令模式的程式～
+		</p>
+		<hr>
+		<section>
+			<h3>輸入</h3>
+			<p>
+				底下示範 Java 如何取得使用者用鍵盤輸入的資料～
+			</p>
+			<section>
+				<h4>Example 1-1</h4>
+				<p>
+					第一個範例雖然不常用，但比較簡單，它用來取得使用者按下的是哪個鍵：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.InputStreamReader;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									InputStreamReader input_stream_reader = new InputStreamReader(System.in);
+									System.out.print(input_stream_reader.read());
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						a 　（假設使用者輸入時敲的是 a 鍵）<br>
+						97　（結果輸出 a 的 ASCII 十進位碼）
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 1-2</h4>
+				<p>
+					第二個範例來看如何取得使用者輸入的文字，雖然它可用第三個範例的寫法來取代…<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.BufferedReader;
+						import java.io.InputStreamReader;
+
+						public class Main{
+							public static void main(String[] args){
+								try{
+									BufferedReader buffered_reader = new BufferedReader(new InputStreamReader(System.in));
+									System.out.print(buffered_reader.readLine());
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						aaa　（假設使用者輸入時敲了 aaa）<br>
+						aaa　（輸出結果為 aaa）
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 1-3</h4>
+				<p>
+					第三個範例，將使用者輸入的資料分解成字串和整數等資料型態來使用，方便我們處理輸入的資料，避免寫一堆落落長的程式來擷取與轉換：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.util.Scanner;
+
+						public class Main{
+							public static void main(String[] args){
+								System.out.println("請輸入參數與設定值：");
+
+								Scanner scanner = new Scanner(System.in);
+
+								if(scanner.next().equals("double")){
+									System.out.print(scanner.nextInt() * 2);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						請輸入參數與設定值：<br>
+						double 200　（這是使用者的輸入情況）<br>
+						400
+					</output>
+					<br>
+					Scanner 還有更多轉換或取出資料的功能，請參考 Java API Specification。<br>
+					<br>
+					Scanner 是 Java SE 5.0 開始支援的物件，它比過去的 java.io.StreamTokenizer 操作簡單、功能更強，而且不只可以引入 System.in，其實也可以引入 String 和 File。自從有了 Scanner，就很少人再用 StreamTokenizer 和 StringTokenizer 了～<br>
+					<br>
+					不只如此，你可以發現這個範例比上一個範例簡潔多了！確實，自從有了 Scanner，也很少人再用 InputStreamReader 和 BufferedReader 來設計命令列介面程式的輸入功能了！
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>輸出</h3>
+			<p>
+				命令列模式的輸出很簡單，使用 <code>System.out.print()</code> 能直接將資料以字串輸出，<code>System.out.println()</code> 一樣，但會自動換行。<code>System.out.format()</code> 提供了格式化輸出的功能，但因為這是仿效 C 語言的 printf() 而來，所以又提供 <code>System.out.printf()</code> 來呼叫它：
+			</p>
+			<section>
+				<h4>Example 2-1</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.print("AAA");
+								System.out.println("BBB");
+								System.out.printf("%s", "CCC");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						AAABBB<br>
+						CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2-2</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.printf("Hello, %s", "world!");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						Hello, world!
+					</output>
+					<br>
+					更多 printf() 格式化參數：
+				</p>
+				<table>
+					<tr><td>%d</td><td>輸出十進位整數</td></tr>
+					<tr><td>%o</td><td>輸出八進位整數</td></tr>
+					<tr><td>%x</td><td>輸出十六進位整數</td></tr>
+					<tr><td>%f</td><td>輸出十進位小數</td></tr>
+					<tr><td>%g</td><td>輸出科學標記法</td></tr>
+					<tr><td>%a</td><td>輸出十六進位指數</td></tr>
+					<tr><td>%c</td><td>輸出字元</td></tr>
+					<tr><td>%s</td><td>輸出字串</td></tr>
+					<tr><td>%b</td><td>輸出布林值</td></tr>
+					<tr><td>%n</td><td>換行</td></tr>
+					<tr><td>%數字$</td><td>第幾個參數</td></tr>
+					<tr><td>%數字</td><td>固定佔用寬度</td></tr>
+					<tr><td>%.數字</td><td>設定小數點位數</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>Example 2-3</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.printf("%2$d", 111, 222, 333);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						222
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2-4</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.printf("%3s %3s %3s %n", "A", "BB", "CCC");
+								System.out.printf("%3s %3s %3s", "AAA", "BBB", "C");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						&nbsp; A &nbsp;BB CCC<br>
+						AAA BBB &nbsp; C
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2-5</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.printf("%.2f", 123.456789);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						123.46
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>參數</h3>
+			<p>
+				在命令列下達程式指令時，經常都能尾隨一些參數，底下示範做法：
+			</p>
+			<section>
+				<h4>Example 3-1</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								System.out.println(args[0]);
+								System.out.println(args[1]);
+								System.out.println(args[2]);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						java Main aaa bbb ccc<br>
+						aaa<br>
+						bbb<br>
+						ccc
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 3-2</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								if(args[0].equals("hello")){
+									System.out.print("哈囉");
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						java Main hello<br>
+						哈囉
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 3-3</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								switch(args[0]){
+									case "/create":
+									System.out.printf("已建立 %s 檔案", args[1]);
+									break;
+
+									case "/rename":
+									System.out.printf("已將 %s 檔案改名為 %s", args[1], args[2]);
+									break;
+
+									default:
+									System.out.println("命令語法不正確");
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						java Main<br>
+						命令語法不正確
+					</output>
+					<br>
+					<output>
+						java Main /create text.txt<br>
+						已建立 text.txt 檔案
+					</output>
+					<br>
+					<output>
+						java Main /rename text.txt image.img<br>
+						已將 text.txt 檔案改名為 image.img
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>暫停</h3>
+			<p>
+				可以使用 <code>System.in.read()</code> 暫停動作，等待使用者按確定再繼續。
+			</p>
+		</section>
+	</section>
+	<hr id='20011011A'>
+	<section>
+		<h2>調用作業系統的命令</h2>
+		<p>
+			<textarea class='brush:java'>
+				public class Main{
+					public static void main(String[] args){
+						try{
+							Runtime.getRuntime().exec("cmdmp3win.exe music.mp3");
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+					}
+				}
+            </textarea>
+			<br>
+			如果你不知道怎麼播放 MP3 音樂，又懶得找套件研究怎麼寫一大串程式碼，那像這樣調用工具指令來完成，是湊合著用也不錯的取巧手法～<br>
+			<br>
+			同樣的，在 Java 要複製檔案或刪除裡面有檔案的資料夾，程式碼寫起來也是非常囉唆！如果你確定自己用的 Java 應用軟體只會跑在 Windows，不需要跨平台，不妨調用 DOS 指令來完成：<br>
+			<br>
+			<textarea class='brush:java'>
+				//複製資料夾
+				Runtime.getRuntime().exec("XCOPY 資料夾一 資料夾二 /EIY");
+				//清空資料夾
+				Runtime.getRuntime().exec("CMD /C DEL /Q 資料夾");
+            </textarea>
+			<br>
+			這種做法之所以不鼓勵，就是外部程式出錯時，無法在 Java 抓蟲除錯。只有一兩個功能的小程式，用用很可以，但不要濫用，要懂得做取捨～
+		</p>
+	</section>
+	<hr id='20001009A'>
+	<section>
+		<h2>Swing 快速入門</h2>
+		<hr>
+		<section>
+			<h3>建立視窗</h3>
+			<p>
+				<textarea class='brush:java'>
+					import javax.swing.JFrame;
+
+					public class Main{
+						public static void main(String[] args){
+							//建立視窗物件。
+							JFrame frame = new JFrame();
+							//設定視窗大小、標題文字、然後顯示出來。
+							frame.setSize(400, 300);
+							frame.setTitle("Hello, world!");
+							frame.setVisible(true);
+							//按下關閉圖示鈕時結束應用程式，否則只是視窗不見，程序其實殘留著。
+							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						}
+					}
+                </textarea>
+				<br>
+				顯示結果：<br>
+				<br>
+				<img src='../../images/overcast/20001009A_01.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>加入按鈕</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.awt.event.ActionEvent;
+					import java.awt.event.ActionListener;
+					import javax.swing.JButton;
+					import javax.swing.JFrame;
+
+					public class Main{
+						private JFrame frame = new JFrame();
+						private JButton button = new JButton();
+
+						public Main(){
+							//建立視窗。
+							frame.setSize(400, 300);
+							frame.setTitle("Hello, world!");
+							frame.setVisible(true);
+							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+							//設定按鈕的位置、大小、標題文字。
+							button.setLocation(40, 100);
+							button.setSize(300, 30);
+							button.setText("別亂按");
+
+							//加入按鈕到視窗裡面。
+							frame.setLayout(null);
+							frame.add(button);
+
+							//觸發按下按鈕事件時，改變視窗的文字標題。
+							button.addActionListener(new ActionListener(){
+								public void actionPerformed(ActionEvent action_event){
+									button.setText("不是叫你別亂按嗎");
+								}
+							});
+						}
+
+						public static void main(String[] args){
+							new Main();
+						}
+					}
+                </textarea>
+				<br>
+				顯示結果：<br>
+				<br>
+				<img src='../../images/overcast/20001009A_02.png' alt='插圖'>
+				<img src='../../images/overcast/20001009A_03.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>你已經快速入門了～</h3>
+			<p>
+				依樣畫葫蘆，陸續加入像是：文字標籤的 JLabel、文字區域的 JTextArea、單行輸入欄的 JTextField、密碼輸入欄位 JPasswordField…等等各式組件，就能打造出視窗了！<br>
+				<br>
+				接著再查 API 看看各個元件有哪些功能可用，然後深入研究 java.awt.event 的其它事件處理，就能熟悉 Java 的視窗應用程式設計！
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[*] 可進一步參考《<a href='20001016A.html'>Swing 速用表</a>》與《<a href='20001023A.html'>AWT 事件速用表</a>》。
+			</p>
+		</footer>
+	</section>
+	<hr id='20001106A'>
+	<section>
+		<h2>系統原生元件樣式與純 Java 元件</h2>
+		<p>
+			Swing 預設使用 Java 自己產生出來的元件，好讓 GUI 跨平台時有更一致的表現！但視窗外框卻是作業系統原生，所以可以取消視窗外框，改用 Swing 的樣式：<br>
+			<br>
+			<textarea class='brush:java'>
+				import javax.swing.JFrame;
+				import javax.swing.JRootPane;
+
+				public class Main{
+					public static void main(String[] args){
+						JFrame frame = new JFrame();
+						frame.setUndecorated(true); //取消作業系統原生視窗外框
+						frame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME); //設定使用純 Java 寫的視窗外框
+						frame.setSize(320, 240);
+						frame.setTitle("視窗標題");
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					}
+				}
+            </textarea>
+			<br>
+			顯示結果：<br>
+			<br>
+			<img src='../../images/overcast/20001106A_01.png' alt='插圖'><br>
+			<br>
+			相反的，如果想讓元件使用作業系統原生元件的樣式，則是：<br>
+			<br>
+			<textarea class='brush:java'>
+				import javax.swing.JFrame;
+				import javax.swing.UIManager;
+
+				public class Main{
+					public static void main(String[] args){
+						try{
+							UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+						JFrame frame = new JFrame();
+						frame.setSize(320, 240);
+						frame.setTitle("視窗標題");
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					}
+				}
+            </textarea>
+			<br>
+			但只是「樣式」而已，並不是真的調用系統原生元件，無法藉以解決 Swing 耗用較多系統資源而顯示速度稍慢一些的問題。<br>
+			<br>
+			如果需要作業系統原生元件的高反應速度、秒啟動的性能，可以用直接調用原生元件的 AWT。我們不見得有跨平台讓 GUI 保持一致的需求，且有時候只用到按鈕和輸入方塊等基本功能而已，這時 AWT 也是選擇，並非什麼都得 Swing 不可。<br>
+			<br>
+			但 AWT 調用的是 Windows 95 那種原生元件，如果你想要的是 Windows XP、Windows Vista、Windows 10 視覺效果的元件，好讓應用程式外觀長得跟其他軟體一樣，那就是用 Swing 原生元件樣式，而不是 AWT。
+		</p>
+	</section>
+	<hr id='20001030A'>
+	<section>
+		<h2>對話視窗</h2>
+		<hr>
+		<section>
+			<h3>訊息視窗</h3>
+			<p>
+				純粹跳出對話視窗顯示一下訊息，頂多搭配圖示方便使用者判斷訊息，有五種可用…
+			</p>
+			<section>
+				<h4 title='Critical Message'>緊急通報</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showMessageDialog(null, "ERROR_MESSAGE", "MESSAGE DIALOG", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_01.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4 title='Information Message'>注意事項</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showMessageDialog(null, "INFORMATION_MESSAGE", "MESSAGE DIALOG", JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_02.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4 title='Warning Message'>警告標語</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showMessageDialog(null, "WARNING_MESSAGE", "MESSAGE DIALOG", JOptionPane.WARNING_MESSAGE);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_03.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4 title='Warning Query'>警訊提報</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showMessageDialog(null, "QUESTION_MESSAGE", "MESSAGE DIALOG", JOptionPane.QUESTION_MESSAGE);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_04.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>一般訊息</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showMessageDialog(null, "PLAIN_MESSAGE", "MESSAGE DIALOG", JOptionPane.PLAIN_MESSAGE);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_05.png' alt='插圖'>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>確認視窗</h3>
+			<p>
+				跳出詢問用的對話視窗，可根據傳回值，判斷使用者的回覆：<br>
+				<br>
+				<code>
+					JOptionPane.YES_OPTION<br>
+					JOptionPane.NO_OPTION<br>
+					JOptionPane.CANCEL_OPTION<br>
+					JOptionPane.OK_OPTION<br>
+					JOptionPane.CLOSED_OPTION <br>
+				</code>
+				<br>
+				依按鈕的配置，總共有四種…
+			</p>
+			<section>
+				<h4>OK</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showConfirmDialog(null, "DEFAULT_OPTION", "CONFIRIRM DIALOG", JOptionPane.DEFAULT_OPTION);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_06.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>YES / NO</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showConfirmDialog(null, "YES_NO_OPTION", "CONFIRIRM DIALOG", JOptionPane.YES_NO_OPTION);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_07.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>YES / NO / CANCEL</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showConfirmDialog(null, "YES_NO_CANCEL_OPTION", "CONFIRIRM DIALOG", JOptionPane.YES_NO_CANCEL_OPTION);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_08.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>YES / CANCEL</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								JOptionPane.showConfirmDialog(null, "OK_CANCEL_OPTION", "CONFIRIRM DIALOG", JOptionPane.OK_CANCEL_OPTION);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_09.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>補充範例</h4>
+				<p>
+					例如還蠻常用的情況是，用詢問視窗確認使用者是否真的要關閉：<br>
+					<br>
+					<textarea class='brush:java'>
+						if(JOptionPane.showConfirmDialog(null, "確定要關閉應用程式嗎？", "對話方塊", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+							System.exit(0);
+						}
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>輸入視窗</h3>
+			<section>
+				<h4>標準型（可設定標題列與圖示）</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								String string = JOptionPane.showInputDialog(null, "MESSAGE:", "INPUT DIALOG", JOptionPane.PLAIN_MESSAGE);
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_10.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>速用型（可輸入預設值）</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.JOptionPane;
+
+						public class Main{
+							public static void main(String[] args){
+								String string = JOptionPane.showInputDialog("MESSAGE:", "預設值");
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_11.png' alt='插圖'>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>檔案視窗</h3>
+			<p>
+				雖然有兩種方式可以呼叫不一樣的對話視窗，但其實只有標題列文字不一樣而已，取得檔案的行為一模一樣。為了方便研究，依然分開寫兩個範例如下：
+			</p>
+			<section>
+				<h4>儲存視窗</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.File;
+						import java.io.FileWriter;
+						import javax.swing.JFileChooser;
+
+						public class Main{
+							public static void main(String[] args){
+								//儲存檔案
+								JFileChooser file_chooser = new JFileChooser();
+								file_chooser.showSaveDialog(null);
+								File file = file_chooser.getSelectedFile();
+
+								//測試寫入資料到所開啟的檔案（方便進一步測試用，可跳過。）
+								try{
+									FileWriter file_writer = new FileWriter(file);
+									file_writer.write("Hello");
+									file_writer.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_12.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>開啟視窗</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.BufferedReader;
+						import java.io.File;
+						import java.io.FileReader;
+						import javax.swing.JFileChooser;
+
+						public class Main{
+							public static void main(String[] args){
+								//開啟檔案
+								JFileChooser file_chooser = new JFileChooser();
+								file_chooser.showOpenDialog(null);
+								File file = file_chooser.getSelectedFile();
+
+								//讀取所開啟檔案的資料（方便進一步測試用，可跳過。）
+								try{
+									BufferedReader buffered_reader = new BufferedReader(new FileReader(file));
+									System.out.print(buffered_reader.readLine());
+									buffered_reader.close();
+								}
+								catch(Exception exception){
+									exception.printStackTrace();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<img src='../../images/overcast/20001030A_13.png' alt='插圖'>
+				</p>
+			</section>
+			<section>
+				<h4>可選取多個檔案</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.io.File;
+						import javax.swing.JFileChooser;
+
+						public class Main{
+							public static void main(String[] args){
+								JFileChooser file_chooser = new JFileChooser();
+								file_chooser.setMultiSelectionEnabled(true);
+								file_chooser.showOpenDialog(null);
+								File[] file = file_chooser.getSelectedFiles();
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>指定預設路徑</h4>
+				<p>
+					你可以預設檔案對話視窗的一開始所在的資料夾位置，如下介紹的是使用者的桌面位置：<br>
+					<br>
+					<textarea class='brush:java'>
+						import java.io.File;
+						import javax.swing.JFileChooser;
+
+						public class Main{
+							public static void main(String[] args){
+								JFileChooser file_chooser = new JFileChooser();
+								file_chooser.setCurrentDirectory(new File(System.getProperty("user.home")+"/Desktop"));
+								file_chooser.showSaveDialog(null);
+								File file = file_chooser.getSelectedFile();
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>篩選副檔名</h4>
+				<p>
+					檔案對話視窗通常可以篩選副檔名，底下範例介紹如何為檔案對話視窗增加只篩選出 XML 副檔名的功能。
+				</p>
+				<section>
+					<h5>XMLFileFilter.java</h5>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import javax.swing.filechooser.FileFilter;
+
+							public class XMLFileFilter extends FileFilter{
+								private String string = new String();
+
+								public boolean accept(File file){
+									if(file.getPath().lastIndexOf(".")&gt;0){
+										string = file.getPath().substring(file.getPath().lastIndexOf(".")+1).toLowerCase();
+									}
+
+									if(string.equals("")){
+										return string.equals("xml");
+									}
+									else{
+										return file.isDirectory();
+									}
+								}
+
+								public String getDescription(){
+									return "XML Files (*.xml)";
+								}
+							}
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>XMLFileChooser.java</h5>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import java.io.FileOutputStream;
+							import javax.swing.JFileChooser;
+
+							public class XMLFileChooser extends JFileChooser{
+								public XMLFileChooser(){
+									addChoosableFileFilter(new XMLFileFilter());
+								}
+
+								public void save(File file){
+									showSaveDialog(null);
+
+									try{
+										FileOutputStream file_output_stream;
+
+										if(getSelectedFile().getPath().lastIndexOf(".xml")&gt;0){
+											file_output_stream = new FileOutputStream(getSelectedFile().getPath());
+										}
+										else{
+											file_output_stream = new FileOutputStream(getSelectedFile() + ".xml");
+										}
+
+										file_output_stream.close();
+									}
+									catch (Exception exception){
+										exception.printStackTrace();
+									}
+								}
+
+								public File load(){
+									showOpenDialog(null);
+									return new File(getSelectedFile().getPath());
+								}
+							}
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>Main.java</h5>
+					<p>
+						<textarea class='brush:java'>
+							import java.io.File;
+							import javax.swing.JDialog;
+
+							public class Main{
+								public static void main(String[] args){
+									JDialog.setDefaultLookAndFeelDecorated(true);
+
+									XMLFileChooser xml_file_chooser = new XMLFileChooser();
+									File file = xml_file_chooser.load();
+									xml_file_chooser.save(file);
+								}
+							}
+                        </textarea>
+					</p>
+				</section>
+				<p>
+					<img src='../../images/overcast/20001030A_14.png' alt='插圖'>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>色彩選擇器</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.awt.Color;
+					import javax.swing.JColorChooser;
+
+					public class Main{
+						public static void main(String[] args){
+							Color color = JColorChooser.showDialog(this, "COLOR CHOOSER", Color.GRAY);
+						}
+					}
+                </textarea>
+				<br>
+				<img src='../../images/overcast/20001030A_15.png' alt='插圖' width='570'>
+			</p>
+		</section>
+	</section>
+	<hr id='20001120A'>
+	<section>
+		<h2>JScrollPane</h2>
+		<hr>
+		<section>
+			<h3>捲動軸</h3>
+			<p>
+				底下示範為 JTextArea 添加捲動軸：<br>
+				<br>
+				<textarea class='brush:java'>
+					import javax.swing.JFrame;
+					import javax.swing.JScrollPane;
+					import javax.swing.JTextArea;
+
+					public class Main{
+						public static void main(String[] args){
+							JFrame frame = new JFrame();
+							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							frame.setSize(320, 240);
+							frame.setVisible(true);
+							frame.setLayout(null);
+
+							JTextArea text_Area = new JTextArea();
+							JScrollPane scroll_pane = new JScrollPane();
+							scroll_pane.setViewportView(text_Area);
+							scroll_pane.setSize(312, 209);
+							scroll_pane.setLocation(0, 0);
+							frame.add(scroll_pane);
+						}
+					}
+                </textarea>
+				<br>
+				執行程式並貼上文字後：<br>
+				<br>
+				<img src='../../images/overcast/20001120A.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其它設定</h3>
+			<p>
+				可用 scroll_pane.setHorizontalScrollBarPolicy() 設定垂直捲軸的顯示時機：<br>
+				<br>
+				<code>JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS</code> （顯示）<br>
+				<code>JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED</code> （自動）<br>
+				<code>JScrollPane.HORIZONTAL_SCROLLBAR_NEVER</code> （隱藏）<br>
+				<br>
+				可用 scroll_pane.setVerticalScrollBarPolicy() 設定水平捲軸的顯示時機：<br>
+				<br>
+				<code>JScrollPane.VERTICAL_SCROLLBAR_ALWAYS</code> （顯示）<br>
+				<code>JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED</code> （自動）<br>
+				<code>JScrollPane.VERTICAL_SCROLLBAR_NEVER</code> （隱藏）<br>
+				<br>
+				將元件做為 JScrollPane() 建構式參數的話，相當於 scroll_pane.setViewportView() 的功能，例如：JScrollPane scroll_pane = new JScrollPane(text_area)。
+			</p>
+		</section>
+	</section>
+	<hr id='20001127A'>
+	<section>
+		<h2>JTable</h2>
+		<hr>
+		<section>
+			<h3>產生表格</h3>
+			<p>
+				<textarea class='brush:java'>
+					import javax.swing.JFrame;
+					import javax.swing.JScrollPane;
+					import javax.swing.JTable;
+					import javax.swing.table.DefaultTableModel;
+
+					public class Main{
+						public static void main(String[] args){
+							JFrame frame = new JFrame();
+							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							frame.setSize(433, 219);
+							frame.setVisible(true);
+							frame.setLayout(null);
+
+							String[] headline = {"姓名","背號","位置"};
+							Object[][] data = new Object[20][3];
+							DefaultTableModel table_model = new DefaultTableModel(data, headline);
+							JTable table = new JTable(table_model);
+
+							JScrollPane scroll_pane = new JScrollPane(table);
+							scroll_pane.setSize(424, 185);
+							scroll_pane.setLocation(0, 0);
+							frame.add(scroll_pane);
+						}
+					}
+                </textarea>
+				<br>
+				顯示結果如下：<br>
+				<br>
+				<img src='../../images/overcast/20001127A_01.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>操作表格</h3>
+			<p>
+				針對上一節範例的 table_model 物件，進行「欄」「列」「資料」的相關操作。<br>
+				<br>
+				<textarea class='brush:java'>
+					//新增列
+					Object[] objects = new Object[3];
+					table_model.addRow(objects);
+
+					//插入列
+					Object[] objects = new Object[3];
+					table_model.insertRow(3, objects);
+
+					//搬移多列資料
+					table_model.moveRow(0, 3, 1); //第 0 列到第 3 列搬移到第 1 列
+
+					//取得列數
+					table_model.getRowCount();
+
+					//更改列數
+					table_model.setRowCount(3);
+
+					//刪除列
+					table_model.removeRow(2);
+
+					//刪最後列
+					int row_count = table_model.getRowCount() - 1;
+
+					if(row_count&gt;=0){
+						table_model.removeRow(row_count);
+						table_model.setRowCount(row_count);
+					}
+
+					table.revalidate();
+
+					//新增欄
+					table_model.addColumn("新增欄");
+
+					//取得欄位名稱
+					table_model.getColumnName(column_count);
+
+					//取得欄數
+					table_model.getColumnCount(column_count);
+
+					//刪最後欄
+					int column_count = table_model.getColumnCount() - 1;
+
+					if(column_count&gt;=0){
+						javax.swing.table.TableColumnModel table_column_model = table.getColumnModel();
+						javax.swing.table.TableColumn table_column = table_column_model.getColumn(column_count);
+						table_column_model.removeColumn(table_column);
+						table_model.setColumnCount(column_count);
+					}
+
+					//設定資料
+					table_model.setValueAt("HELLO", 0, 0); //第 0 列第 0 行設為 HELLO
+
+					//取得資料
+					table_model.getValueAt(0, 0).toString(); //取出第 0 列第 0 行的資料
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>讓表格能對應資料型別</h3>
+			<p>
+				表格可以根據資料型態的種類，作出不同的顯示：
+			</p>
+			<figure>
+				<img src='../../images/overcast/20001127A_02.png' alt='插圖'>
+				<figcaption>文字向左對齊，數值向右對齊，布林值以核取方塊顯示。</figcaption>
+			</figure>
+			<p>
+				先建立新的類別 MyTableModel.java 讓它繼承 DefaultTableModel，然後複寫 getColumnClass()，再將 Main.java 的 DefaultTableModel 改為 MyTableModel 即可。
+			</p>
+			<section>
+				<h4>MyTableModel.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import javax.swing.table.DefaultTableModel;
+
+						public class MyTableModel extends DefaultTableModel{
+							public MyTableModel(Object[][] data, Object[] columnNames){
+								super(data, columnNames);
+							}
+
+							public Class getColumnClass(int index){
+								return getValueAt(0, index).getClass();
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>Main.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						//自訂表格
+						MyTableModel table_model = new MyTableModel(rows, columns);
+                    </textarea>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='20021228A'>
+	<section>
+		<h2>日期與時間</h2>
+		<p>
+			java.util.* 裡的 Date 是個失敗的設計，它代表時戳並強制使用作業系統的時區且無法分割、通包所有處理時間的功能、精度不足…要說什麼是神類別，這就是最好的案例！<br>
+			<br>
+			在 JDK 1.1 看到的解決辦法是，改推 Calendar 取代 Date 大部份的功能，然後把 Date 該被 Calendar 取代的功能整排 deprecated 掉。這做法不是取代整個類別，而是把 Date 功能割掉當成新類別（就跟 Calendar 一樣新而且是不一樣的東西），不是推出 Calendar 後形成新舊兩類別（也就不能當作 Date 一樣的舊東西），理念之複雜不是一般程式設計師能理解的。<br>
+			<br>
+			但 Date 時區的問題還是沒有解決，後來 Java 8 推出新的 java.time.*，時戳、時區、時間各自獨立，且精度達到奈秒。<br>
+			<br>
+			然而，練習舊的、設計不良的 Date，要比新的 Instant、LocalDateTime、ZoneId/ZoneOffset 更能了解 Java 物件導向程式設計。從 Date 的錯誤設計到 Calendar 和 DateFormat 的失敗套路，我們可以學到很多東西<ins>1</ins>，所以本文還是刊載舊的來練習…只是練習，正式場合請不要用舊的寫法處理日期和時間 XDDD
+		</p>
+		<hr>
+		<section>
+			<h3>取得日期與時間</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.text.DateFormat;
+					import java.util.Date;
+
+					public class Main{
+						public static void main(String[] args){
+							//取得電腦當前的時間
+							Date date = new Date();
+							//輸出日期與時間
+							System.out.print(DateFormat.getInstance().format(date));
+						}
+					}
+                </textarea>
+				<br>
+				執行結果隨電腦當時的時間與時區而不同：<br>
+				<br>
+				<output>
+					2002/8/29 下午 12:34
+				</output>
+				<br>
+				只想輸出日期的話，可用 <code>DateFormat.getDateInstance().format(date))</code> 輸出「2002/8/29」，只想輸出時間的話，可用 <code>DateFormat.getTimeInstance().format(date))</code> 輸出「下午 12:34:56」。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>分別取得年、月、日、週、時、分、秒</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.Date;
+					import java.text.SimpleDateFormat;
+
+					public class Main{
+						public static void main(String[] args){
+							Date date = new Date();
+							System.out.println("年：" + new SimpleDateFormat("y").format(date));
+							System.out.println("月：" + new SimpleDateFormat("M").format(date));
+							System.out.println("日：" + new SimpleDateFormat("d").format(date));
+							System.out.println("週：" + new SimpleDateFormat("E").format(date));
+							System.out.println("午：" + new SimpleDateFormat("a").format(date));
+							System.out.println("時：" + new SimpleDateFormat("h").format(date));
+							System.out.println("分：" + new SimpleDateFormat("m").format(date));
+							System.out.println("秒：" + new SimpleDateFormat("s").format(date));
+						}
+					}
+                </textarea>
+				<br>
+				執行結果隨電腦當時的時間與時區而不同：<br>
+				<br>
+				<output>
+					年：2002<br>
+					月：8<br>
+					日：29<br>
+					週：星期四<br>
+					午：下午<br>
+					時：12<br>
+					分：34<br>
+					秒：56
+				</output>
+				<br>
+				有 SimpleDateFormat，想取得「年、月、日、週、時、分、秒」時，可別傻傻用 DateFormat 傳回的字串去剖析。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>自訂日期與時間的輸出格式</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.Date;
+					import java.text.SimpleDateFormat;
+
+					public class Main{
+						public static void main(String[] args){
+							Date date = new Date();
+							System.out.println(new SimpleDateFormat("y 年 M 月 d 日 E a h 點 m 分 s 秒").format(date));
+						}
+					}
+                </textarea>
+				<br>
+				執行結果隨電腦當時的時間與時區而不同：<br>
+				<br>
+				<output>
+					2002 年 8 月 29 日 星期四 下午 12 點 34 分 56 秒
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>指定時間</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.text.SimpleDateFormat;
+					import java.util.Date;
+
+					class Main{
+						public static void main(String[] args){
+							try{
+								Date date = new SimpleDateFormat("yyyyMMdd hhmmss").parse("20020829 123456");
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				可以使用 <code>getTime()</code> 將 Date 轉為 long。許多 API 功能需要傳入時間當參數時，不是使用 Date，而是使用 1970 年 1 月 1 日起的毫秒數。<br>
+				<br>
+				因為 Date 最早是設計來處理時間大小功能的工具箱，並不是時間專用的資料，所以早先的 API 不使用 Date 而是 long。後來閹割 Date 功能，才改為專門用來保存時間值的資料型態，結果 API 一下子用 long、一下子用 Date，導致不一致。<br>
+				<br>
+				Java 給的這個歷史包袱，是我們在使用物件導向時很好的教訓！時時以 Date 當例子，能讓我們避免犯類似的錯誤，寫出更好的設計。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取代 Date 大部分功能的 Calendar</h3>
+			<p>
+				<textarea class='brush:java'>
+					import java.util.Calendar;
+
+					public class Main{
+						public static void main(String[] args){
+							//建立 Calendar
+							Calendar calendar = Calendar.getInstance();
+							//設定年、月、日、時、分、秒
+							calendar.set(2002, Calendar.AUGUST, 29, 12, 34, 25);
+							//顯示結果
+							System.out.println(calendar.get(Calendar.YEAR));
+							System.out.println(calendar.get(Calendar.MONTH)+1);
+							System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+							System.out.println(calendar.get(Calendar.DAY_OF_WEEK)-1);
+							System.out.println(calendar.get(Calendar.HOUR_OF_DAY));
+							System.out.println(calendar.get(Calendar.MINUTE));
+							System.out.println(calendar.get(Calendar.SECOND));
+						}
+					}
+                </textarea>
+				<br>
+				執行結果：<br>
+				<br>
+				<output>
+					2002<br>
+					8<br>
+					29<br>
+					4<br>
+					12<br>
+					34<br>
+					56
+				</output>
+				<br>
+				彆扭的是，Calendar 的一月是 0，所以取得月份時要加 1，設定月份時則用常數比較直覺。星期幾就複雜了，不同地區，有些星期日是每週的第一天，有些星期一是每週是第一天，導致台灣取得星期幾要減 1。<br>
+				<br>
+				可以用 <code>getTime()</code> 傳回 Date，用 <code>getTimeInMillis()</code> 傳回 long。<br>
+				<br>
+				有了 Calendar，Date 變成用來表示「時間點」，相當於一種時間專用的資料，而不是處理時間的工具箱。Date 和 Calendar 的關係，類似 Java 8 的 Instant 和 LocalDateTime。
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 考量到它是 <mark>java.util</mark>.Date 類別，而不是 <mark>java.date</mark>.* 套件，換做我也會把 Date 設計成神類別。所以學到的不只是教訓不要再犯，而是這種事隨時都會再犯，無可避免！屆時 Date 從設計之初到一改再改的整個過程，都是很好的經驗法則，好好研究 Date 的歷史，對物件導向程式設計很有幫助！
+			</p>
+		</footer>
+	</section>
+	<hr id='20030127A'>
+	<section>
+		<h2>計時器</h2>
+		<p>
+			<textarea class='brush:java'>
+				import java.util.Timer;
+				import java.util.TimerTask;
+
+				public class Main{
+					public static void main(String[] args){
+						Timer timer = new Timer();
+
+						timer.schedule(new TimerTask(){
+							public void run(){
+								System.out.print("*");
+							}
+						}, 1000, 2000);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				（一秒後，每兩秒輸出一個 * 符號。）
+			</output>
+		</p>
+	</section>
+	<hr id='20030818A'>
+	<section>
+		<h2>暫停一段時間</h2>
+		<p>
+			<textarea class='brush:java'>
+				class Main{
+					public static void main(String[] args){
+						try{
+							Thread.sleep(1000);
+							System.out.println("Hello!");
+						}
+						catch(Exception exception){
+							exception.printStackTrace();
+						}
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				（一秒後）<br>
+				Hello!
+			</output>
+			<br>
+			在某些場合，sleep() 是很頻繁使用的功能，每次都寫在 try 裡很噁心，整串程式碼都寫在 try 裡又很愚蠢，所以在需要用到 sleep() 的場合，不妨丟出例外就好，不要處理例外。<br>
+			<br>
+			或者另外寫個 sleep() 函式處理好例外：<br>
+			<br>
+			<code>
+				void sleep(int x){<br>
+				　try{<br>
+				　　Thread.sleep(x * 1000);<br>
+				　}<br>
+				　catch(Exception e){<br>
+				　　e.printStackTrace();<br>
+				　}<br>
+				}<br>
+			</code>
+			<br>
+			往後都改用這個 sleep() 函式。
+		</p>
+	</section>
+	<hr id='20030905A'>
+	<section>
+		<h2>列印</h2>
+		<p>
+			列印的原理有點怪，但講起來也很簡單：「用畫的。」<br>
+			<br>
+			我覺得這是很有意思、也很有意義的範例，練習用不一樣的視野來開拓我們的設計。
+		</p>
+		<hr>
+		<section>
+			<h3>事前準備</h3>
+			<p>
+				除非你嫌墨匣太多，否則建議安裝 <a href='http://sourceforge.net/projects/pdfcreator/'>PDFCreator</a> 充當印表機，在練習列印的功能時，將列印結果以 PDF 文件來儲存。或者 Windows Vista 開始內建的 Microsoft XPS Document Writer 也有同樣功能。<br>
+				<br>
+				這樣在執行列印功能時，就不用拿真的印表機來測試，列印的結果改用 PDF 文件或 XPS 文件來輸出與顯示：
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>基本列印的語法架構</h3>
+			<p>
+				底下範例是最簡單的列印<ins>1</ins>，會在紙張上印出 Hello 字串：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.awt.Graphics;
+					import java.awt.print.PageFormat;
+					import java.awt.print.Printable;
+					import java.awt.print.PrinterException;
+					import java.awt.print.PrinterJob;
+
+					public class Main implements Printable{
+						//實作 Printable 介面的 print() 功能
+						public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+							if(page_index&gt;0){
+								return Printable.NO_SUCH_PAGE;
+							}
+							else{
+								//在 (100, 150) 的位置，繪出 Hello 字串。
+								graphics.drawString("Hello", 100, 150);
+								return Printable.PAGE_EXISTS;
+							}
+						}
+
+						public static void main(String[] args){
+							try{
+								//建立列印工作。
+								PrinterJob printer_job = PrinterJob.getPrinterJob();
+								//指定系統預設的紙張格式（A4），排入 Main() 實作的列印行程。
+								printer_job.setPrintable(new Main(), printer_job.defaultPage());
+
+								//呼叫列印對話視窗，確定後正式列印文件。
+								if(printer_job.printDialog()){
+									printer_job.print();
+								}
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>改變文字樣式、取得紙張大小與可列印範圍</h3>
+			<p>
+				你可以透過 Graphics 改變文字的字型、大小、顏色，或其它樣式。而透過 PageFormat 的 getWidth()、getHeight()、getImageableWidth()、getImageableHeight()，可以取得紙張範圍的大小，避免資料列印到外界去了，例如：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.awt.Color;
+					import java.awt.Font;
+					import java.awt.Graphics;
+					import java.awt.print.PageFormat;
+					import java.awt.print.Printable;
+					import java.awt.print.PrinterException;
+					import java.awt.print.PrinterJob;
+
+					public class Main implements Printable{
+						public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+							if(page_index&gt;0){
+								return Printable.NO_SUCH_PAGE;
+							}
+							else{
+								//Dialog 字體、粗體、32 大小。
+								graphics.setFont(new Font("Dialog", Font.BOLD, 32));
+								//藍色。
+								graphics.setColor(Color.BLUE);
+								//在可列印範圍皆除以二的位置，繪出 Hello 字串。
+								graphics.drawString("Hello", (int)page_format.getImageableWidth()/2, (int)page_format.getImageableHeight()/2);
+								return Printable.PAGE_EXISTS;
+							}
+						}
+
+						public static void main(String[] args){
+							try{
+								PrinterJob printer_job = PrinterJob.getPrinterJob();
+								printer_job.setPrintable(new Main(), printer_job.defaultPage());
+
+								if(printer_job.printDialog()){
+									printer_job.print();
+								}
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>自訂紙張格式</h3>
+			<p>
+				或者使用 PageFormat 透過 Paper 自訂紙張尺寸，如下範例，它加大了 A4 紙張的可列印範圍，否則雖然紙張夠大，但允許的可列印範圍不夠，列印時超出範圍的部分會被切割掉：<br>
+				<br>
+				<textarea class='brush:java'>
+					import java.awt.Graphics;
+					import java.awt.print.PageFormat;
+					import java.awt.print.Paper;
+					import java.awt.print.Printable;
+					import java.awt.print.PrinterException;
+					import java.awt.print.PrinterJob;
+
+					public class Main implements Printable{
+						public int print(Graphics graphics, PageFormat page_format, int page_index) throws PrinterException{
+							if(page_index&gt;0){
+								return Printable.NO_SUCH_PAGE;
+							}
+							else{
+								graphics.drawString("Hello", 100, 150);
+								return Printable.PAGE_EXISTS;
+							}
+						}
+
+						public static void main(String[] args){
+							try{
+								PrinterJob printer_job = PrinterJob.getPrinterJob();
+								//自訂紙張範圍
+								PageFormat page_format = new PageFormat();
+								Paper paper = new Paper();
+								paper.setSize(590, 840);
+								paper.setImageableArea(10, 10, 580, 830);
+								page_format.setPaper(paper);
+								//以自訂的紙張紙張格式，排入 Main() 實作的列印行程。
+								printer_job.setPrintable(new Main(), page_format);
+
+								if(printer_job.printDialog()){
+									printer_job.print();
+								}
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='20030224A'>
+	<section>
+		<h2>複製物件</h2>
+		<p>
+			如果你想要複製一份物件，Object 提供了 clone()，每個繼承自 Object 的 class 都能用它來複製自己。<br>
+			<br>
+			不過，任意就能複製一份別人的物件來用，並不是很安全的設計，所以後來改成要使用 clone() 的話，必須宣告願意被複製的物件是 Cloneable 介面，並將 protected 的 clone() 覆寫為 public，而且還要拋出 CloneNotSupportedException 例外。<br>
+			<br>
+			簡單的事變得這麼複雜，著實令人厭煩！但先別急，正好就是這樣的例子，可以見識 Java 如何藉由物件導向應對變化，學到很多東西～
+		</p>
+		<hr>
+		<section>
+			<h3>A.java</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class A implements Cloneable{
+						public int x;
+						public String y;
+
+						public A clone() throws CloneNotSupportedException{
+							return (A)super.clone();
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Main.java</h3>
+			<p>
+				<textarea class='brush:java'>
+					public class Main{
+						public static void main(String[] args){
+							try{
+								A a1 = new A();
+								a1.x = 123;
+								a1.y = "abc";
+								A a2 = a1.clone();
+							}
+							catch(Exception exception){
+								exception.printStackTrace();
+							}
+
+							System.out.println(a2.x);
+							System.out.println(a2.y);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					abc
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='20050504A'>
+	<section>
+		<h2>Observer pattern</h2>
+		<p>
+			Java 內建設計模式中的 Observer，它用來監視物件狀態，當物件狀態改變時，它會通知監視該物件的對象，讓監視者可以做出反應；本範例中 View 物件將監視 Model 物件。
+		</p>
+		<hr>
+		<section>
+			<h3>範例一：被監視者在狀態改變時發出通知，讓監視者做出反應。</h3>
+			<section>
+				<h4>Model.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Observable;
+
+						public class Model extends Observable{
+							private String attribute;
+
+							public void change(String x){
+								attribute = x;
+								setChanged();
+								notifyObservers();
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>View.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Observable;
+						import java.util.Observer;
+
+						public class View implements Observer{
+							public void update(Observable o, Object arg){
+								System.out.print("所監視物件更新了狀態！");
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>Main.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								View view = new View();
+								Model model = new Model();
+								model.addObserver(view);
+								model.change("hello");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						所監視物件更新了狀態！
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>範例二：取得被監視物件的狀態</h3>
+			<section>
+				<h4>Model.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Observable;
+
+						public class Model extends Observable{
+							private String attribute;
+
+							public void change(String x){
+								attribute = x;
+								setChanged();
+								notifyObservers();
+							}
+
+							public String getAttribute(){
+								return attribute;
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>View.java</h4>
+				<p>
+					<textarea class='brush:java'>
+						import java.util.Observable;
+						import java.util.Observer;
+
+						public class View implements Observer{
+							public void update(Observable o, Object arg){
+								System.out.print("所監視物件更新狀態為：");
+								System.out.print(((Model)o).getAttribute());
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<hr>
+			<section>
+				<h3>Main.java</h3>
+				<p>
+					<textarea class='brush:java'>
+						public class Main{
+							public static void main(String[] args){
+								View view = new View();
+								Model model = new Model();
+								model.addObserver(view);
+								model.change("hello");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						所監視物件更新狀態為：hello
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='19960415A'>
+	<section>
+		<h2>javac</h2>
+		<p>
+			<output>javac -參數 參數值 [-參數2 參數值2...] 原始碼</output>
+		</p>
+		<hr>
+		<section>
+			<h3>常用參數</h3>
+			<table>
+				<tr><td>-d</td><td>指定編譯出來的類別，要存放在哪個資料夾。</td></tr>
+				<tr><td>-classpath</td><td>指定類別或掛載第三方套件到 CLASSPATH 環境變數。</td></tr>
+				<tr><td>-encoding</td><td>指定原始碼的字元編碼系統。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>進階參數</h3>
+			<table>
+				<tr><td>-source</td><td>以哪一版的 Java 語法來編譯原始碼。</td></tr>
+				<tr><td>-target</td><td>以哪一版的 Java 架構來產生位元檔。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>其它參數</h3>
+			<table>
+				<tr><td>-version</td><td>查閱 JDK 的版本。</td></tr>
+				<tr><td>-verbose</td><td>顯示更詳細的編譯錯誤訊息。</td></tr>
+				<tr><td>-Xlint</td><td>顯示新版編譯器建議的新做法。</td></tr>
+				<tr><td>-nowarn</td><td>停用警告訊息。</td></tr>
+				<tr><td>-g</td><td>編譯出來的類別含完整除錯用資訊。</td></tr>
+				<tr><td>-g:none</td><td>編譯出來的類別只含位元碼，連反組譯用的資訊都沒。</td></tr>
+				<tr><td>-O</td><td>優化編譯，提升類別的執行效率。</td></tr>
+				<tr><td>-help</td><td>顯示並說明更多其它的參數。</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr id='19960422A'>
+	<section>
+		<h2>jar</h2>
+		<p>
+			JDK 提供 <code>jar</code> 指令工具，可將所有類別壓縮成一個檔案來使用。
+		</p>
+		<hr>
+		<section>
+			<h3>將類別檔打包到 JAR 壓縮檔裡面</h3>
+			<p>
+				<output>jar cf 壓縮檔名稱.jar *.class</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>將資料夾打包到 JAR 壓縮檔裡面</h3>
+			<p>
+				<output>jar cf 壓縮檔名稱.jar -C 資料夾 .</output>
+				<br>
+				注意 <code>-C</code> 是大寫！<br>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>如何執行 JAR 檔裡面的類別</h3>
+			<p>
+				<output>java -classpath 壓縮檔名稱.jar 含main()類別名稱</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Executable JAR</h3>
+			<p>
+				在用 jar 打包時，可以多添加一個 e 參數，指定 main() 的類別：<br>
+				<br>
+				<output>jar cfe 壓縮檔名稱.jar 含main()類別名稱 *.class</output>
+				<br>
+				以後就能下 -jar 使用 jar 檔，差別在不用輸入含 main() 的類別名稱：<br>
+				<br>
+				<output>java -jar 壓縮檔名稱.jar</output>
+				<br>
+				甚至有安裝 JRE 的話，直接在 JAR 檔案上面用滑鼠點兩下，就能執行程式！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>MANIFEST.MF</h3>
+			<p>
+				-jar 和 -classpath 無法同時使用，要下 -classpath 載入其他 JAR 的話，必須自己寫一份 MANIFEST.MF，再打包到 JAR 裡面：<br>
+				<br>
+				<canvas width='569'>notepad('MANIFEST.FM','Manifest-Version: 1.0','Main-Class: Main','Class-Path: . jl1.0.1.jar mp3spi1.9.5.jar tritonus_share.jar')</canvas><br>
+				<br>
+				注意！最後要新增一個空行，否則會出現「沒有主要資訊清單屬性」的錯誤。<br>
+				<br>
+				然後用 m 參數指定 MANIFEST.MF 檔案：<br>
+				<br>
+				<output>jar cfm 壓縮檔名稱.jar MANIFEST.MF *.class</output>
+				<br>
+				這樣就不用再指定含 main() 的類別名稱，也不用下 -classpath 載入第三方套件了。<br>
+				<br>
+				然而，MANIFEST.MF 能做的事非常有限，無法包辦 java.exe 的工作，變成得在批次檔和 MANIFEST.MF 兩頭修改，增加工作複雜度。還不如打包普通的 JAR 就好，一律用<br>-classpath 載入 JAR，沒必要非得讓 JAR 檔案能用 -jar 參數執行。<br>
+				<br>
+				對此，你也可以把小寫的 m 改成大寫的 M，讓 JAR 裡面不含 MANIFEST.MF：<br>
+				<br>
+				<output>jar cfM 壓縮檔名稱.jar *.class</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>相關網站</h2>
+		<p>
+			<a href='http://openjfx.io'>JavaFX</a> - OpenJDK 不含 JavaFX，因為獨立成 Open JavaFX。<br>
+			<a href='http://www.eclipse.org/swt/'>SWT</a> - 原生元件的圖形使用者介面。<br>
+			<a href='http://groovy-lang.org'>Groovy</a> - 以 Java 語法為基礎，加以擴充各式先進語法機制進去的表述語言。<br>
+			<a href='http://www.scala-lang.org'>Scala</a> - 基於 JVM 的函數式程式語言，但又提供比 Java 物件導向更純正的結構。<br>
+			<a href='http://kotlinlang.org'>Kotlin</a> - 可編譯為 Java 類別檔或 JavaScript 程式碼，且賦予資料型別的特性。<br>
+			<br>
+			<a href='http://netbeans.org'>NetBeans</a> - Java 官方推出的開發環境，以最友善的視覺化環境為優點。<br>
+			<a href='http://www.eclipse.org'>Eclipse</a> - 口碑第一的 Java 開發環境，但著重在整合開發不是編輯環境，已退流行。<br>
+			<a href='http://www.oracle.com/tools/downloads/jdeveloper-12c-downloads.html'>JDeveloper</a> - Oracle 開放免費下載使用，所整合功能最強悍的開發環境。<br>
+			<a href='http://www.bluej.org'>BlueJ</a> - 以 UML 來檢視專案結構的整合式發展環境，藉以養成好的物件導向開發習慣。<br>
+			<a href='http://www.jedit.org'>jEdit</a> - 雖然操作介面不夠方便，但編輯性能堪稱第一的文字編輯器。<br>
+			<a href='http://ant.apache.org'>Ant</a> - 將編譯、測試、部署工作自動化的專案管理工具。<br>
+			<a href='http://maven.apache.org'>Maven</a> - 軟體專案管理及自動構建工具。<br>
+			<a href='http://gradle.org'>Gradle</a> - 基於 Ant 和 Maven 概念的專案自動化建構工具。<br>
+			<br>
+			<a href='http://www.junit.org'>JUnit</a> - 可實現「測試先行開發模式」的單元測試框架。<br>
+			<a href='http://struts.apache.org'>Struts</a> - 符合 MVC 設計精神來開發 Web Application 的 Framework。<br>
+			<a href='http://www.springsource.org'>Spring</a> - 全方位應用程式框架，可建立輕量級的 EJB 應用程式。<br>
+			<a href='http://www.hibernate.org'>Hibernate</a> - 能將物件的關係，對照為關聯式資料的開發框架，更有效結合資料庫。<br>
+			<a href='http://tomcat.apache.org'>Tomcat</a> - 可執行 JSP 的 HTTP 伺服器系統。<br>
+			<a href='http://jakarta.ee'>Jakarta EE</a> - 原 Java EE，企業級 Java 應用程式架構，移交給 Eclipse 而改名。<br>
+			<a href='http://glassfish.java.net'>GlassFish</a> - 企業級 Java 應用程式伺服環境。<br>
+			<a href='http://www.eclipse.org/jetty/'>Jetty</a> - 基於 Java 的網頁伺服器和 Java Servlet 容器。<br>
+			<a href='http://commons.apache.org'>Apache Commons</a> - 提供各式實用套件，除了 Java API，第二個想到的就是它。<br>
+			<a href='http://dom4j.github.io'>dom4j</a> - 比 Java API 簡單易用的 XML 解析器。<br>
+			<a href='http://www.jdom.org'>JDOM</a> - 比 Java API 簡單易用的 XML 解析器。<br>
+			<a href='http://jaxen.codehaus.org'>jaxen</a> - 能夠讓 DOM 以 XPath 存取節點。<br>
+			<a href='http://www.xom.nu'>XOM</a> - 能將 Java 物件序列化為 XML 模型。<br>
+			<a href='http://www.jcraft.com'>JCraft</a> - 提供 JOrbis、JSch、JZlib、JRexec…等各式套件。<br>
+			<a href='http://www.jpct.net'>jPCT</a> - 3D 引擎。<br>
+			<br>
+			<a href='http://docs.oracle.com/en/java/javase/index.html'>Java SE Documention</a> - Java 官方使用說明書，含程式設計指南與 API 規格書。<br>
+			<a href='http://java.cunzaima.cn'>The Java Tutorials</a> - Java 官方教程，尤其是主題性介紹 API 用途，堪稱必讀！<br>
+			<a href='http://blogs.oracle.com/java/'>The Java Source</a> - Java 官方部落格，第一時間窺探技術動向。
+		</p>
+	</section>
+</article>
+<script>
+	hide();
+</script>

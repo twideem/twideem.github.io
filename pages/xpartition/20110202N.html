@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>捲動式單維陣列地圖</h1>
+		<p></p>
+	</header>
+	<hr>
+	<section>
+		<h2>操作說明</h2>
+		<p>
+			請使用鍵盤方向操控地圖裡面的人物。<br>
+			<br>
+			實作的細節內容，請利用瀏覽器的檢視原始碼功能來研究。
+		</p>
+	</section>
+</article>
+<script>
+	/*
+		由於 scope（視線範圍）的關係，array（陣列地圖）最外圍必須逐一道 scope 厚度的界線，避免描繪維度錯誤的索引值。否則的話，必須設計演算法來略過不需要描繪的圖磚；就計算效能來講，修改設計的部分放在陣列地圖上，是最簡單實用的做法。
+		另外，捲動式地圖通常較大，使用 position() 的計算速度恐影響效能，因此「人」不紀錄在 array 裡面，另外保存於 position。
+	*/
+
+	//畫面
+	let h2=document.getElementsByTagName('p')[0];
+	h2.style.letterSpacing='4px';
+	h2.style.lineHeight='20px';
+
+	//陣列地圖相關數據
+	let array=[
+		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+		6,6,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,6,6,6,
+		6,6,6,2,0,0,0,0,0,2,2,2,2,2,2,2,2,2,6,6,6,
+		6,6,6,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,6,6,6,
+		6,6,6,2,0,0,3,3,3,0,0,0,0,2,2,2,2,2,6,6,6,
+		6,6,6,2,0,0,0,3,3,0,0,0,0,0,2,2,2,2,6,6,6,
+		6,6,6,2,0,0,0,0,0,0,0,0,2,0,0,0,0,5,6,6,6,
+		6,6,6,2,0,0,0,0,0,0,0,0,2,2,2,2,2,2,6,6,6,
+		6,6,6,2,0,4,4,4,0,0,0,0,2,2,2,2,2,2,6,6,6,
+		6,6,6,2,0,4,0,0,0,0,0,0,2,2,2,2,2,2,6,6,6,
+		6,6,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,6,6,6,
+		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
+	];
+
+	let position=198;
+	let scope=3;
+	let width=15+scope*2;
+
+	//圖磚
+	function tile(x)
+	{
+		switch(x){
+			case 0: return '　';
+			case 1: return '<span style=\'color:orange\'>人</span>';
+			case 2: return '<span style=\'color:brown\'>土</span>';
+			case 3: return '<span style=\'color:green\'>木</span>';
+			case 4: return '<span style=\'color:blue\'>水</span>';
+			case 5: return '<span style=\'color:gray\'>金</span>';
+			case 6: return '<span style=\'color:darkblue\'>Ｘ</span>';
+		}
+	}
+
+	//繪圖
+	function draw()
+	{
+		let g='';
+
+		for(let n=scope;n>=-scope;n--){
+			for(let o=scope;o>=-scope;o--){
+				if(position-width*n-o==position) g+=tile(1);
+				else if(array[position-width*n-o]==undefined) g+='Ｘ';
+				else g+=tile(array[position-width*n-o]);
+			}
+
+			g+='<br>';
+		}
+
+		h2.innerHTML=g;
+	}
+
+	//移動
+	function move()
+	{
+		switch(event.which){
+			case 37:
+			if(array[position-1]==0) position--;
+			break;
+
+			case 38:
+			if(array[position-width]==0) position-=width;
+			break;
+
+			case 39:
+			if(array[position+1]==0) position++;
+			break;
+
+			case 40:
+			if(array[position+width]==0) position+=width;
+		}
+
+		draw();
+	}
+
+	//監測鍵盤反應狀態
+	window.onkeydown=move;
+
+	//初始動作
+	draw();
+</script>

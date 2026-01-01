@@ -1,0 +1,3943 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>
+	(function(){
+		typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
+
+		function Brush()
+		{
+			this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:'string'},
+							{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},
+							{regex:/\b([\d]+(\.[\d]+)?|0x[a-f0-9]+)\b/gi,css:'value'},
+							{regex:/^ *#.*/gm,css:'preprocessor'},
+							{regex:new RegExp(this.getKeywords('break case const default else enum for goto if NULL return sizeof static struct switch typedef union while'),'gm'),css:'keyword'},
+							{regex:new RegExp(this.getKeywords('char double int void'),'gm'),css:'variable'},
+							{regex:/(&amp;)|(&lt;)|(&gt;)|(!)|(\*)|(\^)|(\{)|(\})|(\[)|(\])|(\()|(\))|[-=+|;:,./]/g,css:'symbol'}];
+		}
+
+		Brush.prototype=new SyntaxHighlighter.Highlighter();
+		Brush.aliases=['c'];
+		SyntaxHighlighter.brushes.Cpp=Brush;
+		typeof(exports)!='undefined'?exports.Brush=Brush:null;
+	})();
+</script>
+<article>
+	<header>
+		<h1>用 C 語言精通程式</h1>
+		<p>
+			C 語言用指標搞定大小事，是開發手法最接近組合語言（低階語言）的結構化程式語言（高階語言），用來描述電腦結構與行為再確切不過！<br>
+			<br>
+			語法幾十年來也沒什麼變化，不曾求新求變，用來用去都是那幾個套路。無論快退休的 60 歲老鳥，還是正巔峰的 30 歲高手，會互相熟悉彼此寫出來的程式碼，不會有新舊世代互相看不懂新舊兩套語法的問題，所以 C 語言是程式設計師用來描述電腦內部結構和操作行為的共通語言。<br>
+			<br>
+			然而，C 語言是程式設計師用的，不是給電腦初學者用的，不適合做為入門的程式語言。如果你沒想過要把程式設計當畢生職志非學會不可，而是抱著「入門看看」的心態來學 C 語言，我勸你現在就可以放棄：「你一定是那種稍微碰到麻煩就想放棄，後悔當初不該選 C 語言的人，注定失敗收場。」要入門看看的話，建議選 Python 比較好～<br>
+			<br>
+			倒不是 C 語言很難學：「它不難學，但是用的時候麻煩。」C 是要脫褲子放屁的語言，寫程式要顧慮的細節相當多，沒有一定程度的電算機知識、也沒有電腦工程師把一切擔當下來的性格，你會覺得寫程式是項嚴峻的考驗。建議有程式設計經驗、或下決心要成為程式設計師的人，才來學習 C 語言，學習時遇到困難，只要像這些人勇於面對，就沒有克服不了的問題，成功學會用 C 語言設計程式。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>下載 C 語言編譯器</h3>
+			<p>
+				推薦使用檔案小又免安裝的 Tiny C Compiler：<br>
+				<br>
+				<a href='http://bellard.org/tcc/'>http://bellard.org/tcc/</a><br>
+				<br>
+				像我下載 tcc-0.9.27-win64-bin.zip，解開才 1.68MB，直接就能在命令提示字元下編譯 C 程式！<br>
+				<br>
+				Tiny C Compiler 純粹是 C 語言的編譯器，因此不支援 C++ 語言。而本資料正好就是為了推廣純 C 語言程式設計而來，不支援 C++ 的寫法，避免混用，真是再好不過了～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<p>
+				用記事本寫入如下程式，並儲存檔案為 main.c：<br>
+				<br>
+				<canvas width='569'>notepad('main.c','#include &lt;stdio.h&gt;','','main()','{','    printf("hello, world\\n");','}');</canvas><br>
+				<br>
+				進入命令提示字元，切換到 main.c 位置，然後用 Tiny C Compiler 的 <code>tcc.exe</code> 編譯程式，正常的話會編譯出 main.exe 檔案，執行它會顯示 hello, world：<br>
+				<br>
+				<canvas width='569'>cmd('C:\\Users\\User\\Desktop>C:\\tcc\\tcc.exe main.c','','C:\\Users\\User\\Desktop>main','hello, world','','C:\\Users\\User\\Desktop>_');</canvas>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>C 語言教學</h3>
+			<p>
+				網路已經有很多 C 語言教學，不需要再多寫一份 C 語言的教學，因此本文內容放在正式應用 C 語言時經常會遇到的瓶頸、疑難…或者聊聊秘辛之類的。<br>
+				<br>
+				然後推薦 <a href='http://www.gnu.org/software/libc/manual/html_mono/libc.html'>The GNU C Library</a>，裡面列出所有 GCC 可用的函式，而且賦予詳實的說明！你可以另存新檔，做為隨手查閱的工具書～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>標準語法</h3>
+			<p>
+				<a href='#section1'>註解</a><br>
+				<a href='#section2'>資料型態</a><br>
+				<a href='#section3'>指標</a><br>
+				<a href='#section4'>陣列</a><br>
+				<a href='#section5'>字串</a><br>
+				<a href='#section6'>流程控制</a><br>
+				<a href='#section7'>函式</a><br>
+				<a href='#section8'>列舉、結構、聯集</a><br>
+				<a href='#section9'>主控台</a>（輸出、輸入、命令列參數）<br>
+				<a href='#section10'>檔案</a><br>
+				<a href='#section11'>演算</a>（計算、排序、搜尋、亂數、亂序）<br>
+				<a href='#section12'>其它雜項</a>（關閉程式、呼叫程式、載入程式碼、寫標頭檔、環境變數、時間、暫停）<br>
+				<a href='#section13'>前置處理指令</a><br>
+				<a href='#section14'>標準標頭檔</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>進階應用</h3>
+			<p>
+				<a href='#dll'>DLL 動態連結程式庫</a><br>
+				<a href='#gui'>GUI 視窗程式設計</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>附錄</h3>
+			<p>
+				<a href='#appendixa'>關於本文範例</a><br>
+				<a href='#appendixb'>C 語言演進</a><br>
+				<a href='#appendixc'>關於 C++</a><br>
+				<a href='#appendixd'>跨平台</a><br>
+				<a href='#appendixe'>TCC 妙用</a><br>
+				<a href='#appendixf'>下載 MinGW-w64 獲得 GCC 編譯環境</a>
+			</p>
+		</section>
+	</section>
+	<hr id='section1'>
+	<section>
+		<h2>註解</h2>
+		<p>
+			其實 1989 年制訂的 ANSI X3.159-1989，註解只有 <code>/* */</code> 一種，<code>//</code> 是 C++ 才有的。<br>
+			<br>
+			所以古老的純 C 編譯器、或者編譯器下參數使用 ANSI C 標準時，// 註解是無法編譯的。<br>
+			<br>
+			是在 1999 年制定 ISO/IEC 9899:1999 才支援 // 註解。<br>
+			<br>
+			要不要用 // 註解，看你寫的是純 ANIS C？還是持續更新標準化作業的 ISO C？
+		</p>
+	</section>
+	<hr id='section2'>
+	<section>
+		<h2>資料型態</h2>
+		<hr>
+		<section>
+			<h3>資料型態（type）</h3>
+			<table>
+				<tr><td>char</td><td>字元</td></tr>
+				<tr><td>int</td><td>整數（預設、可省略但不建議）</td></tr>
+				<tr><td>float</td><td>浮點數</td></tr>
+				<tr><td>double</td><td>倍精度浮點數</td></tr>
+				<tr><td>void</td><td>空傳回值</td></tr>
+			</table>
+			<p>
+				由於 int 是預設資料型態，可以省略，所以變數 <code>int a = 0;</code> 寫成 <code>a = 0;</code> 是可以通過編譯的！但這跟變數設為 0 的程式一模一樣，看不出來是宣告變數 a？還是設定變數 a？<br>
+				<br>
+				<textarea class='brush:c'>
+					a = 0; /* 這行看不出來是宣告變數，得往前確認 a 是第一次出現才知道 */
+					a = 123;
+                </textarea>
+				<br>
+				所以別因為 C 語言允許你這麼做，就決定這樣寫程式。<br>
+				<br>
+				你可能會有疑問，當初為什麼允許這樣做？因為當初的 K&R C，宣告變數時不能用 = 設定初始值，必須先寫一行宣告變數的程式，下一行再賦值，所以頂多看到這樣的程式：<br>
+				<br>
+				<textarea class='brush:c'>
+					a; /* 光看這行就知道是使用預設資料型態宣告的 int 變數 */
+					a = 123;
+                </textarea>
+				<br>
+				那為什麼引進變數初始值後，不移除 int 是預設可省略的特性？因為這個特性已被大家廣泛使用，也就是把 long int 和 short int 寫成 long 和 short。移除這個特性，一堆人的程式碼就沒辦法用了 XDDD
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>修飾詞（modifier）</h3>
+			<table>
+				<tr><td>short</td><td>減小資料範圍。</td></tr>
+				<tr><td>long</td><td>增大資料範圍。</td></tr>
+				<tr><td>signed</td><td>有正負號。（預設、通常省略）</td></tr>
+				<tr><td>unsigned</td><td>無正數號。</td></tr>
+			</table>
+			<p>
+				由於 int 是預設資料型態，可以省略，因此 <code>long int a = 0;</code> 經常寫作 <code>long a = 0;</code>，使得 long 和 short 被誤會成是種資料型態 XDDD<br>
+				<br>
+				C 語言沒有 boolean 資料型態，通常用 int 表示，0 為 false，1 或非 0 為 true。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>指定詞（specifier）</h3>
+			<table>
+				<tr><td>auto</td><td>變數僅生存於區塊內。（預設、通常省略）</td></tr>
+				<tr><td>extern</td><td>變數可跨檔案生存。</td></tr>
+				<tr><td>register</td><td>將變數宣告在暫存器內而不是主記憶體。</td></tr>
+				<tr><td>static</td><td>變數僅限原始碼檔案內部存取，禁止跨檔使用。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>限定詞（qualifier）</h3>
+			<table>
+				<tr><td>const</td><td>程式執行期間不能再修改該變數資料。</td></tr>
+				<tr><td>restrict</td><td>讓指標不為同一個位址。（C99）</td></tr>
+				<tr><td>volatile</td><td>將變數放在主記憶體，確保隨時能被外部程式存取。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>資料範圍</h3>
+			<p>
+				電腦和作業系統不同，資料範圍也不同。如下程式碼可以取得各個資料型態的上限與下限：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;float.h&gt;
+					#include &lt;limits.h&gt;
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						printf("char               \t%i~%i\n", CHAR_MIN, CHAR_MAX);
+						printf("unsigned char      \t%u\n", UCHAR_MAX);
+
+						printf("short int          \t%i~%i\n", SHRT_MIN, SHRT_MAX);
+						printf("unsigned short int \t%u\n", USHRT_MAX);
+						printf("int                \t%i~%i\n", INT_MIN, INT_MAX);
+						printf("unsigned int       \t%u\n", UINT_MAX);
+						printf("long int           \t%li~%li\n", LONG_MIN, LONG_MAX);
+						printf("unsigned long int  \t%lu\n", ULONG_MAX);
+
+						printf("float              \t%e~%e\n", FLT_MIN, FLT_MAX);
+						printf("double             \t%e~%e\n", DBL_MIN, DBL_MAX);
+						printf("long double        \t%Le~%Le\n", LDBL_MIN, LDBL_MAX);
+					}
+                </textarea>
+				<br>
+				在 64 位元 Windows 10 的 tcc 編譯後，執行結果如下：<br>
+				<br>
+				<output>
+					char &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　-128~127<br>
+					unsigned char &nbsp; &nbsp; 　　　255<br>
+					short int &nbsp; &nbsp; &nbsp; &nbsp; 　　　-32768~32767<br>
+					unsigned short int　　　65535<br>
+					int &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 　　　-2147483648~2147483647<br>
+					unsigned int &nbsp; &nbsp; &nbsp;　　　4294967295<br>
+					long int &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　-2147483648~2147483647<br>
+					unsigned long int 　　　4294967295<br>
+					float &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 　　　1.175494e-038~3.402823e+038<br>
+					double &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　2.225074e-308~1.797693e+308<br>
+					long double &nbsp; &nbsp; &nbsp; 　　　0.000000e+000~1.#INF00e+000
+				</output>
+				<br>
+				在 64 位元 Windows 10 的 gcc 編譯後，執行結果如下：<br>
+				<br>
+				<output>
+					char &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　-128~127<br>
+					unsigned char &nbsp; &nbsp; 　　　255<br>
+					short int &nbsp; &nbsp; &nbsp; &nbsp; 　　　-32768~32767<br>
+					unsigned short int　　　65535<br>
+					int &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 　　　-2147483648~2147483647<br>
+					unsigned int &nbsp; &nbsp; &nbsp;　　　4294967295<br>
+					long int &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　-2147483648~2147483647<br>
+					unsigned long int 　　　4294967295<br>
+					float &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 　　　1.175494e-038~3.402823e+038<br>
+					double &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　2.225074e-308~1.797693e+308<br>
+					long double &nbsp; &nbsp; &nbsp; 　　　3.172905e-317~3.172897e+317
+				</output>
+				<br>
+				在 64 位元 Lubuntu 14.04 的 gcc 編譯後，執行結果如下：<br>
+				<br>
+				<output>
+					char &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　-128~127<br>
+					unsigned char &nbsp; &nbsp; 　　　255<br>
+					short int &nbsp; &nbsp; &nbsp; &nbsp; 　　　-32768~32767<br>
+					unsigned short int　　　65535<br>
+					int &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 　　　-2147483648~2147483647<br>
+					unsigned int &nbsp; &nbsp; &nbsp;　　　4294967295<br>
+					long int &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　-9223372036854775808~9223372036854775807<br>
+					unsigned long int 　　　18446744073709551615<br>
+					float &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 　　　1.175494e-038~3.402823e+038<br>
+					double &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;　　　2.225074e-308~1.797693e+308<br>
+					long double &nbsp; &nbsp; &nbsp; 　　　3.362103e-4932~1.189731e+4932
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>轉換資料型態</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						double d = 12.3;
+
+						printf("%d", (int)d);
+					}
+                </textarea>
+				<br>
+				<output>
+					12
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>文字和數值的轉換</h3>
+			<section>
+				<h4>char[] 轉 char*</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							char array[] = "ABC";
+							char* pointer = array;
+
+							puts(pointer);
+						}
+                    </textarea>
+					<br>
+					<output>
+						ABC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>char* 轉 char[]</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;string.h&gt;
+
+						main()
+						{
+							char* pointer = "ABC";
+							char array[4];
+							strcpy(array, pointer);
+
+							puts(array);
+						}
+                    </textarea>
+					<br>
+					<output>
+						ABC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>char 轉 int</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							char character = '3';
+							int integer = character - '0';
+
+							printf("%d", integer);
+						}
+                    </textarea>
+					<br>
+					<output>
+						3
+					</output>
+					<br>
+					字元 '3' 轉成整數的話，其實是 ASCII 編碼 51。所以要減掉 ASCII 編碼 48 的字元 '0'，才會是我們想要的數值 3。
+				</p>
+			</section>
+			<section>
+				<h4>int 轉 char</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							int integer = 7;
+							char character = integer + '0';
+
+							printf("%c", character);
+						}
+                    </textarea>
+					<br>
+					<output>
+						7
+					</output>
+					<br>
+					個位數才可以轉字元，雙位數以上得轉字串了！所以這例子不常用，都轉字串一招搞定就好。
+				</p>
+			</section>
+			<section>
+				<h4>char* 轉 int</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						main()
+						{
+							char* string = "123";
+							int integer = atoi(string);
+
+							printf("%d", integer);
+						}
+                    </textarea>
+					<br>
+					<output>
+						123
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>int 轉 char*</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							int integer = 123;
+							char* string;
+							sprintf(string, "%d", integer);
+
+							puts(string);
+						}
+                    </textarea>
+					<br>
+					<output>
+						123
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>char[] 轉 int</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						main()
+						{
+							char string[] = "123";
+							int integer = atoi(string);
+
+							printf("%d", integer);
+						}
+                    </textarea>
+					<br>
+					<output>
+						123
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>int 轉 char[]</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							int integer = 123;
+							char string[4];
+							sprintf(string, "%d", integer);
+
+							puts(string);
+						}
+                    </textarea>
+					<br>
+					<output>
+						123
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>指標與陣列的轉換</h3>
+			<p>
+				陣列轉指標的話，直接把 <code>陣列名稱</code> 傳給指標即可，不喜歡的話就 <code>&陣列名稱[0]</code>。<br>
+				<br>
+				指標轉陣列的話，得借助 string.h 的 <code>memcpy()</code> 將指標的資料寫入陣列，而不是轉換。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>別名</h3>
+			<p>
+				可以使用 <code>typedef</code> 為資料型態取另外的名稱：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						typedef int integer;
+
+						integer i = 123;
+
+						printf("%d", i);
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='section3'>
+	<section>
+		<h2>指標</h2>
+		<hr>
+		<section>
+			<h3>第一課：記憶體位址</h3>
+			<p>
+				<code>*</code> 出現在資料型態後面，表示宣告的變數用來存放記憶體位址，這種變數就叫「指標」。<br>
+				<br>
+				指標只能存放記憶體位址，你可以用 stdlib.h 的 <code>malloc()</code> 配置一塊記憶體空間來獲得位址：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						int* i = malloc(sizeof(int));
+
+						printf("%d", i);
+					}
+                </textarea>
+				<br>
+				<output>
+					40515824（分配到的記憶體位址，每次結果不盡相同。）
+				</output>
+				<br>
+				或者用 <code>&</code> 取址運算子，將另一個變數的記憶體位址傳給指標：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int a;
+
+						int* b = &amp;a;
+
+						printf("%d", b);
+					}
+                </textarea>
+				<br>
+				<output>
+					6356316（獲得的記憶體位址，每次結果不盡相同。）
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>第二課：存取資料</h3>
+			<p>
+				<code>*</code> 單獨出現在變數前面時，叫做取值運算子，可以透過指標在記憶體位址存入或取出資料：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						int* i = malloc(sizeof(int));
+
+						*i = 123;
+
+						printf("%d", *i);
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>第三課：觀念整理</h3>
+			<p>
+				宣告指標時，後面接的一定是記憶體位址！要嘛接取址運算子的變數，要嘛用 malloc() 獲得記憶體位址，要嘛接其它傳回指標的函式。如果設定一個 int 資料給指標的話，是直接指定記憶體位址編號給指標：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int* i = 50000000;
+
+						*i = 123;
+
+						printf("%d\n", *i);
+					}
+                </textarea>
+				<br>
+				<output>
+					123（不一定能成功，因為該記憶體位址有可能被限制存取。）
+				</output>
+				<br>
+				這顯然是很不安全的，誰知道那塊記憶體是不是未被使用的？就這樣拿來存入資料的話，萬一破壞哪個程式在用的資料怎麼辦？<br>
+				<br>
+				「哪有人會幹這種事？想太多！」其實新手在不熟悉指標時，還真的會幹這種事。尤其是很少人像本文範例宣告指標時把 * 放在資料型態後面，幾乎所有人一律把 * 放在變數名稱前面：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int *i = malloc(sizeof(int));
+
+						*i = 123;
+
+						printf("%d\n", *i);
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+				<br>
+				於是初學者看了會想說：「後面的 *a 都能設定為資料 123，那前面的 *a 初始化為 456 也沒問題吧…」他以為像宣告變數那樣將資料初始化為 456，其實是把指標設定為編號 456 的記憶體位址。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>第四課：移動指標存取其它記憶體位址的資料</h3>
+			<p>
+				指標可以用 <code>+</code> 和 <code>-</code> 移動位址。移動的距離取決於資料型態的大小（byte），例如 char 的指標 +1，記憶體位址數字會加 1，int 的指標 +1，記憶體位址數字會加 4。<br>
+				<br>
+				透過這功能，你可以在記憶體空間前後移動，存取其他資料：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						int* i = malloc(sizeof(int));
+
+						*i = 111;
+						*(i+1) = 222;
+						*(i+2) = 333;
+
+						printf("%d %d %d", *i, *(i+1), *(i+2));
+					}
+                </textarea>
+				<br>
+				<output>
+					111 222 333
+				</output>
+				<br>
+				這也是指標為什麼容易破壞資料、甚至有可能讓電腦當機的原因！沒做好記憶體配置出空間的話，你有可能把指標移到重要資料或程式片段的地方，在這裡寫入資料就造成破壞了！<br>
+				<br>
+				其實不移動位址的話，指標是很安全的。自稱沒有指標（pointer），只有參考（reference），所以比 C/C++ 安全的 Java，坦白說參考就是保存物件位址的指標，只是禁止使用 + - 運算移動位址而已。把這危險的功能拔掉，確實 Java 是很安全的！你很難設計出讓電腦系統資料損毀導致當機卡死不動的程式<ins>1</ins>。<br>
+				<br>
+				但是在 C 語言不用指標移動記憶體位址，我認為並不理智，它先天設計上就是以這種方式表達程式，從 K&R C 開始就提供了函式幫助你做好這件事。與其禁用這項功能，不如改用沒有指標的程式語言，否則就好好學習怎樣在 C 語言善用這項功能吧！<br>
+				<br>
+				其實，本範例第六行寫成 <code>int* i = malloc(sizeof(int)*3);</code>，確實配置出足夠筆數的空間，就不怕下面三行程式會破壞其他程式的資料了！不過，這只表示配置三筆 int 資料的記憶體空間，不表示指標只能移動三筆，其實還是可以任意移到破壞資料的地方，但根據資料大小配置足夠的空間是好習慣！<br>
+				<br>
+				最後，不要對指標使用 <code>++</code> 或 <code>--</code> 或 <code>+=</code> 或 <code>-=</code> 改變指標的初始位址，因為無法正常使用 <code>free()</code> 釋放指標占用的記憶體。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>第五課：更多記憶體配置函式</h3>
+			<p>
+				在 C 語言要配置連續資料，是用指標搭配 stdlib.h 的 <code>malloc()</code> 獲得一塊記憶體空間，再移動指標位址，連續存取資料。<br>
+				<br>
+				用完後以 <code>free()</code> 釋放指標。<br>
+				<br>
+				雖然上面兩個函式就夠了，C 語言還是提供連續配置資料空間的 <code>calloc()</code> 和重新配置資料大小的 <code>realloc()</code>，讓記憶體配置的程式碼可以更簡潔。<br>
+				<br>
+				如果 calloc 和 realloc 搞得你一頭霧水，先練習 malloc 和 free 就好，熟悉以後就能體會其它函式的意義～
+			</p>
+			<section>
+				<h4>釋放占用的記憶體空間</h4>
+				<p>
+					<code>free(指標);</code><br>
+					<br>
+					表示這塊記憶體空間不再占用了，而不是清除指標的位址和資料。本來占用 15% 記憶體空間，free() 後就釋放出來，讓其它程式可以使用這 15% 記憶體空間，是這個意思。<br>
+					<br>
+					free() 後，指標依然指向該位址，所以繼續取出裡面的資料，編譯器不會報錯，甚至有些編譯器還可以取出和先前一樣的資料，真是個陷阱！不是每個編譯器都能正常拿回資料，所以千萬別寫這樣的程式。<br>
+					<br>
+					在 main() 裡動態配置的指標，懶得 free() 還說得過去，在會被反復調用的函式裡，務必養成習慣，凡 malloc() 或 calloc() 就一定要 free()！<br>
+					<br>
+					free() 後的指標建議設為 <code>NULL</code>，避免後面還有程式的話，可能會使用這已經廢棄的指標。NULL 是記憶體位址 0 的意思，用來表示沒有記憶體位址。
+				</p>
+			</section>
+			<section>
+				<h4>連續配置好幾塊記憶體空間，且資料初始化為 0</h4>
+				<p>
+					<code>資料型態* 指標 = calloc(大小, sizeof(資料型態));</code><br>
+					<br>
+					相當於 <code>資料型態* 指標 = malloc(sizeof(資料型態)*大小);</code> 再用迴圈通通初始化為 0。
+				</p>
+			</section>
+			<section>
+				<h4>重新配置占用的記憶體大小，並保留原先的資料</h4>
+				<p>
+					<code>指標 = realloc(指標, 大小);</code><br>
+					<br>
+					僅適用於調整 malloc() 或 calloc() 所配置的記憶體空間，不要用於「指標 = "字串"」這種指標。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>第六課：其他用法</h3>
+			<section>
+				<h4>void*</h4>
+				<p>
+					void 指標可以做為萬用資料型態！<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							void* a = (char*)"ABC";
+
+							puts(a);
+
+							a = (int*)123;
+
+							printf("%d", a);
+						}
+                    </textarea>
+					<br>
+					<output>
+						ABC<br>
+						123
+					</output>
+					<br>
+					malloc() 和 calloc() 傳回的也是 void*，所以使用時轉型為正確的資料型態是好習慣，例如：<code>int* a = (int*) malloc(sizeof(int));</code>。
+				</p>
+			</section>
+			<section>
+				<h4>**</h4>
+				<p>
+					有時候會看到 <code>char**</code> 這樣用了兩個 * 符號的指標，這表示保存 char* 型別位址的指標。把連續兩個 ** 隔開寫的話，就能理解這程式其實是什麼意思了：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							char* a = "ABC";
+							char* *b = &amp;a;
+
+							puts(*b);
+						}
+                    </textarea>
+					<br>
+					<output>
+						ABC
+					</output>
+					<br>
+					*** 的話依此類推，是保存 ** 型別位址的指標：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							char* a = "ABC";
+							char* *b = &amp;a;
+							char* **c = &amp;b;
+
+							puts(**c);
+						}
+                    </textarea>
+					<br>
+					<output>
+						ABC
+					</output>
+					<br>
+					這種多重指標，可以當多維陣列用，<code>char** a</code> 相當於 <code>char* a[]</code>，<code>char*** a</code> 相當於 <code>char* a[][]</code>。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='section4'>
+	<section>
+		<h2>陣列</h2>
+		<p>
+			若資料筆數能固定下來的話，就用陣列產生連續資料，比用指標配置記憶體空間要省事得多。<br>
+			<br>
+			在其他程式語言，資料的配置是以陣列為主，但寫 C 語言的話，是以指標為主，陣列只是指標的語法糖而已，將指標用來設計資料結構的工作另外語法化。<br>
+			<br>
+			所以你會發現，宣告函式傳回值的資料型態時，竟然不能宣告成陣列，只能宣告為指標。函式裡面用過的陣列，是不能傳回的！因為陣列既然是指標的語法工具，最終當然得還原成指標再傳回～<br>
+			<br>
+			因此指標才是 C 語言的基礎與原理，陣列只是一種工具和輔助而已。善用陣列簡化指標的工作，但工作完成依然是指標。
+		</p>
+		<hr>
+		<section>
+			<h3>計算陣列長度</h3>
+			<p>
+				陣列的長度（length）可用如下公式取得：<br>
+				<br>
+				<code>sizeof(陣列名稱)/sizeof(陣列名稱[0])</code><br>
+				<br>
+				也就是陣列元素的總和大小，除以第一個元素的大小，取得元素的個數，做為陣列的長度。<br>
+				<br>
+				通常用 #define 設計成巨集：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					#define LENGTH_OF_ARRAY(x) sizeof(x)/sizeof(*x)
+
+					int array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+					main()
+					{
+						printf("%d", LENGTH_OF_ARRAY(array));
+					}
+                </textarea>
+				<br>
+				<output>
+					9
+				</output>
+				<br>
+				無法設計成函式，因為把陣列做為函式參數時，會是個指標，導致只能取得陣列的第一個元素，因此如下的程式只會計算出錯誤的結果：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+					int getArrayLength(int* x)
+					{
+						return sizeof(x) / sizeof(x[0]);
+					}
+
+					main()
+					{
+						printf("%d", getArrayLength(array));
+					}
+                </textarea>
+				<br>
+				<output>
+					2
+				</output>
+				<br>
+				巨集是在編譯時期就計算結果，與執行時期的效能無關，所以像計算陣列長度這樣的事，原本就適合交給 #define 執行。畢竟 C 語言在建立陣列時大小就已經固定了，陣列長度多少其實是程式設計師自己的工作，這樣的工作寫成巨集，要比設計成程式來執行更合理。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>陣列當指標</h3>
+			<p>
+				陣列就像有語法糖的指標，所以陣列名稱就跟指標名稱一樣，會傳回變數的記憶體位址，於是陣列可以用指標的方式存取資料：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int array[3];
+
+						*array = 111;
+						*(array+1) = 222;
+						*(array+2) = 333;
+
+						printf("%d %d %d", *array, *(array+1), *(array+2));
+					}
+                </textarea>
+				<br>
+				<output>
+					111 222 333
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>陣列轉指標</h3>
+			<p>
+				既然陣列像是一種指標，那直接把陣列丟給指標就行了：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int array[] = { 111, 222, 333 };
+
+						int* pointer = array;
+
+						printf("%d %d %d", *pointer, *(pointer+1), *(pointer+2));
+					}
+                </textarea>
+				<br>
+				<output>
+					111 222 333
+				</output>
+				<br>
+				但畢竟陣列只是一種指標，並不真的完全跟指標一模一樣，所以不認為陣列是指標的人，喜歡寫成：<code>int* pointer = &array[0];</code>，傳回陣列開頭的記憶體位址，以表示陣列就是一種資料結構，不應該看作指標。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>指標轉陣列</h3>
+			<p>
+				雖然陣列像是一種指標，但指標可不是陣列，所以指標是沒辦法反過來用 &array[0] = pointer 轉陣列的，只能一筆一筆把指標的資料寫進陣列：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						int* pointer = malloc(sizeof(int));
+
+						*pointer = 111;
+						*(pointer+1) = 222;
+						*(pointer+2) = 333;
+
+						int array[] = { *pointer, *(pointer+1), *(pointer+2) };
+
+						printf("%d %d %d", array[0], array[1], array[2]);
+					}
+                </textarea>
+				<br>
+				<output>
+					111 222 333
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>指標當陣列</h3>
+			<p>
+				如果只是希望能像陣列一樣，用索引值存取資料，指標倒是有支援 [] 語法：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						int* pointer = malloc(sizeof(int));
+
+						pointer[0] = 111;
+						pointer[1] = 222;
+						pointer[2] = 333;
+
+						printf("%d %d %d", pointer[0], pointer[1], pointer[2]);
+					}
+                </textarea>
+				<br>
+				<output>
+					111 222 333
+				</output>
+				<br>
+				但不支援 { 111, 222, 333 } 的寫法來賦值。如果真要直接賦值，可以用 () 轉型：<br>
+				<br>
+				<code>int* pointer = (int[]){ 111, 222, 333 };</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>什麼時候用陣列？什麼時候用指標？</h3>
+			<p>
+				陣列適合用於筆數可以固定下來的場合。<br>
+				<br>
+				資料筆數會增加的場合，就用 malloc() 建立指標，藉由移動指標位置，將資料寫在記憶體裡面。<br>
+				<br>
+				也可以用 calloc() 建立指標，它可以分配筆數，並初始化為 0。但並不是限制只能使用多少筆數的意思，比較像是初始化為 0 多少筆數，其實還是可以移動指標增加筆數，所以可以做跟 malloc() 一樣的事，但配置出來的記憶體在讀寫資料時會更安全無誤。像字串就適合用 calloc() 配置，在操作 string.h 裡面的函式時，比較不會遇到資料夾雜奇怪東西的問題。<br>
+				<br>
+				如果你用指標的目的，是為了在記憶體裡逐筆讀寫，而不是為了記憶體裡的資料，可以只用 malloc() 就好。如果你用指標的目的是取代陣列，覺得重點是記憶體裡的資料，其次才是在記憶體裡逐筆讀寫，那就改用 calloc()。
+			</p>
+		</section>
+	</section>
+	<hr id='section5'>
+	<section>
+		<h2>字串</h2>
+		<hr>
+		<section>
+			<h3>字串型態</h3>
+			<p>
+				C 語言沒有字串型態，而是以 char 指標表現：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						char* string = malloc(sizeof(char));
+
+						*string = 'h';
+						*(string+1) = 'e';
+						*(string+2) = 'l';
+						*(string+3) = 'l';
+						*(string+4) = 'o';
+						*(string+5) = '\0';
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				最後要以 '\0' 結尾，才算一筆「字串」資料。<br>
+				<br>
+				由於這樣寫太複雜了，所以像上面的例子，通常改寫成字元陣列，再輸出不含索引值的陣列名稱，這樣就等於丟出陣列索引值 0 的記憶體位址，也就是指標開頭了：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						char string[] = { 'h','e','l','l','o','\0' };
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				但最終還是 char 指標，這點務必要牢記！因為寫 C 語言在處理字串時，就是用移動指標的方式修改資料。例如標準函式庫裡是沒有 replace() 可用的，而是以 strstr() 尋找字串起點，加上字串長度的 strlen() 移到結尾，在一塊連續記憶體空間中移動，一個個修改字元。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>字串符號</h3>
+			<p>
+				每次想使用字串，都寫成字元陣列的結構，未免太不方便了！因此 C 語言提供「雙引號」做為字串資料的運算符：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						char* string;
+
+						string = "hello";
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				"hello" 會在記憶體配置 'h','e','l','l','o','\0' 的資料，並傳回位址給指標。<br>
+				<br>
+				換句話說，這雙引號其實只是運算符，並不代表資料本身！<br>
+				<br>
+				將雙引號視為資料的其它程式語言，<samp>"AAA" + "BBB"</samp> 是兩筆資料，所以可以串接起來。但是 C 語言不行，因為雙引號括起來的並不是資料本身，而是運算符，所以兩對雙引號相加的話，其實是記憶體位址移動到很遠很遠的地方去，於是 C 語言根本就沒有用 + 串接 " " 的功能！這也證明 " " 跟 1234567890 根本是不對等的存在，前者只是蜜糖般的運算符，後者是資料。<br>
+				<br>
+				習慣用字元陣列的話也是可以：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						char string[] = "hello";
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				不過只能在建立陣列時就給 "" 初值，否則像下面例子是錯的：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						char string[];
+
+						string = "hello"; /* 無法通過編譯 */
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					main.c:5: error: unknown type size
+				</output>
+				<br>
+				想之後才給值的話，得先配置好陣列大小，再用 string.h 的 <code>strcpy()</code> 函式將字串複製過來：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char string[6];
+
+						strcpy(string, "hello");
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				使用 malloc() 配置的指標，也應該使用 strcpy() 複製字串進去，而不是事後用 "" 指定，因為兩者記憶體位址不一樣。都配置一塊記憶體空間了，卻又另外指向字串資料的記憶體位址，感覺很奇怪不是嗎？
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以字串做為函式的傳回值或參數</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					char* f(char* x)
+					{
+						return x;
+					}
+
+					main()
+					{
+						puts(f("hello"));
+					}
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>字串串接</h3>
+			<section>
+				<h4>基本用法</h4>
+				<p>
+					C 語言以雙引號刮起來的字串資料，沒辦法像其它語言用 + 串接，得用 string.h 的 <code>strcat()</code> 完成：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;string.h&gt;
+
+						main()
+						{
+							char* string1 = "AAA";
+							char* string2 = "BBB";
+
+							puts(strcat(string1, string2));
+						}
+                    </textarea>
+					<br>
+					<output>
+						AAABBB
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>注意事項</h4>
+				<p>
+					strcat() 使用上有個限制，就是長度要夠，否則無法串接。因此底下寫法要避免：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;string.h&gt;
+
+						main()
+						{
+							/* 先建立一個空字串 */
+							char* string = "";
+
+							/* 然後不斷串接字串上去 */
+							strcat(string, "AAA");
+							strcat(string, "BBB");
+							strcat(string, "CCC");
+
+							puts(string);
+						}
+                    </textarea>
+					<br>
+					<output>
+						<br>
+					</output>
+					<br>
+					輸出結果是空白的，因為 string = "" 時，這指標只配置到 '\0' 這個字元的長度而已，不夠長度再串接資料上。<br>
+					<br>
+					請乖乖配置足夠的長度：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+						#include &lt;string.h&gt;
+
+						main()
+						{
+							char* string = calloc(10, sizeof(char));
+
+							strcat(string, "AAA");
+							strcat(string, "BBB");
+							strcat(string, "CCC");
+
+							puts(string);
+						}
+                    </textarea>
+					<br>
+					<output>
+						AAABBBCCC
+					</output>
+					<br>
+					或者：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;string.h&gt;
+
+						main()
+						{
+							char string[10];
+
+							strcat(string, "AAA");
+							strcat(string, "BBB");
+							strcat(string, "CCC");
+
+							puts(string);
+						}
+                    </textarea>
+					<br>
+					<output>
+						AAABBBCCC
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>比較字串是否完全相同</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char* string1 = "ABC";
+						char* string2 = "ABC";
+
+						if(strcmp(string1, string2)==0) puts("兩字串相同。");
+					}
+                </textarea>
+				<br>
+				<output>
+					兩字串相同。
+				</output>
+				<br>
+				如果小於 0，表示 string1 比 string2 小，大於 0 表示 string1 比 string2 大。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>比較字串不相同處</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char* string1 = "ABCDEF";
+						char* string2 = "ABCXYZ";
+
+						printf("%d", strspn(string1, string2));
+					}
+                </textarea>
+				<br>
+				<output>
+					3
+				</output>
+				<br>
+				傳回字元陣列索引值。0 到 2 的 ABC 相同，3 開始的 DEF 和 XYZ 不相同，因此傳回 3。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>切割字串</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char* string = strtok("AAA,BBB,CCC", ",");
+
+						while(string != NULL){
+							puts(string);
+							string = strtok(NULL, ",");
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				這函式怪異的是，第一次使用時傳入被切割的字串，但往後繼續切割時，卻改為傳入空指標（NULL）。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>擷取字串</h3>
+			<p>
+				雖然 C 語言標準函式庫沒有 substr() 可用，但 string.h 的 <code>strncpy()</code> 變通一下，就可以指定起點和結尾擷取字串了！<br>
+				<br>
+				strncpy() 需要三個參數，第一個是用來保存結果的新字串，第二個是被拿來截取的字串，第三個是長度。那起點呢？被擷取的字串就是起點！而所謂字串就是字元陣列也就是指標位址，所以往後移動記憶體位址就等於設定起點了！<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char* string = calloc(5, sizeof(char));
+
+						strncpy(string, "ABCDEFG" + 2, 4);
+
+						puts(string);
+					}
+                </textarea>
+				<br>
+				<output>
+					CDEF
+				</output>
+				<br>
+				雖然 C 語言沒有其他程式語言那麼方便，但 C 語言就是這樣有趣，對吧？
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>搜尋字串與開頭位置</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char* string1 = "AAA BBB CCC";
+
+						char* string2 = strstr(string1, "BBB");
+
+						printf("%d\n", string2);
+						printf("%d\n", string2 - string1);
+						puts(string2);
+					}
+                </textarea>
+				<br>
+				<output>
+					7324804<br>
+					4<br>
+					BBB CCC
+				</output>
+				<br>
+				找到字串的話，傳回出現的指標位置，否則傳回 NULL。<br>
+				<br>
+				其他程式語言找到字串是傳回第一次出現位置，其實把找到的字串指標位置減掉被搜尋字串的指標位置就是了！再加上字串長度，又取得結尾位置！<br>
+				<br>
+				由於傳回的是搜尋到的字串指標位置，因此直接輸出指標就是找到的字串。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取得字串長度</h3>
+			<p>
+				字串長度並不是資料長度，所以不該用 sizeof() 取得，應該用 string.h 的 <code>strlen()</code>：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					main()
+					{
+						char* string = "hello";
+
+						printf("%d", strlen(string));
+					}
+                </textarea>
+				<br>
+				<output>
+					5
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取代字串</h3>
+			<p>
+				C 語言並沒有提供替換字串的函式，必須用 strstr() 和 strcpy() 來實現。通常會自行寫一個函式來重複使用，請參考 GeeksforGeeks 網站的《<a href='http://www.geeksforgeeks.org/c-program-replace-word-text-another-given-word/'>C program to Replace a word in a text by another given word</a>》，程式碼摘錄於下：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+					#include &lt;string.h&gt;
+
+					/*
+					Anuj Chauhan
+					25 Jul, 2020
+					https://www.geeksforgeeks.org/c-program-replace-word-text-another-given-word/
+					*/
+					char* replaceWord(const char* s, const char* oldW, const char* newW)
+					{
+						char* result;
+						int i, cnt = 0;
+						int newWlen = strlen(newW);
+						int oldWlen = strlen(oldW);
+
+						for(i = 0; s[i]!='\0'; i++){
+							if(strstr(&s[i], oldW)==&s[i]){
+								cnt++;
+								i += oldWlen - 1;
+							}
+						}
+
+						result = (char*)malloc(i + cnt * (newWlen - oldWlen) + 1);
+
+						i = 0;
+						while(*s){
+							if(strstr(s, oldW)==s){
+								strcpy(&result[i], newW);
+								i += newWlen;
+								s += oldWlen;
+							}
+							else result[i++] = *s++;
+						}
+
+						result[i] = '\0';
+						return result;
+					}
+                </textarea>
+				<br>
+				為什麼不直接修改傳進去的字串，而要傳回字串？因為這樣可以直接帶入字串，比只能代入變數更加泛用！例如：<br>
+				<br>
+				<textarea class='brush:c'>
+					main()
+					{
+						char* string = replaceWord("Hello, world!", "Hello", "Hi");
+						puts(string);
+
+						puts(replaceWord("Hello, world!", "Hello", "Hey"));
+					}
+                </textarea>
+				<br>
+				<output>
+					Hi, world!<br>
+					Hey, world!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ctype.h 常用函式</h3>
+			<table>
+				<tr><td>int isalnum(int)</td><td>判斷字元是否為英文字母或數字。</td></tr>
+				<tr><td>int isalpha(int)</td><td>判斷字元是否為英文字母。</td></tr>
+				<tr><td>int isblank(int)</td><td>判斷字元是否為空白字元或 Tab 字元。</td></tr>
+				<tr><td>int iscntrl(int)</td><td>判斷字元是否為 0x00~0x1f 與 0x7f 這些控制字元。</td></tr>
+				<tr><td>int isdigit(int)</td><td>判斷字元是否為數字。</td></tr>
+				<tr><td>int isgraph(int)</td><td>判斷字元是否為可顯示的字元。</td></tr>
+				<tr><td>int islower(int)</td><td>判斷字元是否為小寫字母。</td></tr>
+				<tr><td>int isprint(int)</td><td>判斷字元是否為可列印的字元。</td></tr>
+				<tr><td>int ispunct(int)</td><td>判斷字元是否為標點符號。</td></tr>
+				<tr><td>int isspace(int)</td><td>判斷字元是否為空白、Tab、換行…等隱藏字元。</td></tr>
+				<tr><td>int isupper(int)</td><td>判斷字元是否為大寫字母。</td></tr>
+				<tr><td>int tolower(int)</td><td>將字元轉為小寫。</td></tr>
+				<tr><td>int toupper(int)</td><td>將字元轉為大寫。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				由於 char 的 bytes 一定是 1，不像 int 有可能是 2 或 4，因此在 malloc() 裡不用特意寫落落長的 sizeof(char) 或 sizeof(char)*100，直接寫 1 和 100 進去即可。
+			</p>
+		</section>
+	</section>
+	<hr id='section6'>
+	<section>
+		<h2>流程控制</h2>
+		<hr>
+		<section>
+			<h3>if.. else..</h3>
+			<p>
+				雖然執行的程式只有一行時，不用加大括號，但 C 語言不像 Python 的條件判斷式使用 if.. elif.. else 三個關鍵字，C 語言的 else if 並不是 elif，而是在 else 後面再跑一個 if，每個 if 可以有多個 else，所以一個又一個 if.. else.. 下來，容易把 else 搞錯成不對的 if 分歧句：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int a = 0;
+						int b = 0;
+						int c = 1;
+
+						/* 有縮排就不是很好讀了 */
+						if(a)
+							if(b)
+								puts("AB");
+							else if(c)
+								puts("C");
+								else
+									puts("D");
+						else puts("E");
+
+						/* 如果沒有縮排幾乎讀不出來 */
+						if(a)
+						if(b)
+						puts("AB");
+						else if(c)
+						puts("C");
+						else
+						puts("D");
+						else puts("E");
+
+						/* 但最恐怖的不是沒縮排而是縮排錯了 */
+						if(a)
+							if(b)
+								puts("AB");
+						else if(c)
+							puts("C"); /* 縮排的關係你以為會輸出 C */
+							else
+								puts("D");
+						else puts("E");
+					}
+                </textarea>
+				<br>
+				<output>
+					EEE
+				</output>
+				<br>
+				只有一層 if 一目了然時，省略大括號其實無所謂，甚至更好讀。但多個 if.. else.. 時，請一律使用大括號，避免造成錯亂。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>switch.. case.. default..</h3>
+			<section>
+				<h4>關於 break</h4>
+				<p>
+					即使 case 到資料了，switch 還是會繼續往下一個 case 進行比對，因此透過這種特性，可以優雅的篩選資料：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							int a = 456;
+
+							switch(a){
+								case 555:
+								case 666:
+								case 777:
+									puts("恭喜您中了二獎");
+									break;
+								case 888:
+									puts("恭喜您中了頭獎");
+									break;
+								default:
+									puts("沒中");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						沒中
+					</output>
+					<br>
+					只是越早結束流程效率越好，且這種篩選方式，因為流程的分支得一段段往上判讀，在 switch 變得很長時，修改起來時常疏忽而出錯，所以大多數人認為這種寫法應該禁用，規定每個 case 都應該加上 break 才對！<br>
+					<br>
+					然而，若繞過語法原本預期的方式寫程式取巧，禁用還說得過去，但這本來就是 switch 預期大家能這樣使用的語法特性，並不是寫法上的取巧，沒有不用的道理。<br>
+					<br>
+					不過用的原則是：<br>
+					<br>
+					switch 很短時才用。<br>
+					<br>
+					switch 很長但不會再追加 case 上去時也可以用，有錯當下就該發現。<br>
+					<br>
+					switch 很長，且超多 break 形成的分支時，千萬不要用，這表示該用 if 了！<br>
+					<br>
+					switch 很長，且往後會追加 case 上去，死都不要用，那絕對是 BUG 來源！真的要用，請寫好測試程式，每次修改這 switch 時就測試「每一段的分支」看看。
+				</p>
+			</section>
+			<section>
+				<h4>談談 return</h4>
+				<p>
+					如果在函式中使用 switch 來傳回值，那 return 都已經結束整個函式的流程了，所以就不用再下 break 結束 switch 的流程：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						int f(int x)
+						{
+							switch(x){
+								case 555:
+								case 666:
+								case 777:
+									return 2;
+									puts("故意加這行程式證明有 return 就不用 break");
+								case 888:
+									return 1;
+							}
+
+							return 0;
+						}
+
+						main()
+						{
+							if(f(777)){
+								puts("中獎了！會顯示故意加上去的程式訊息嗎？");
+							}
+							else{
+								puts("沒中");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						中獎了！會顯示故意加上去的程式訊息嗎？
+					</output>
+					<br>
+					沒有顯示「故意加這行程式證明有 return 就不用 break」，證明 return 後就不再往下執行程式了。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>for..</h3>
+			<p>
+				ANSI C 時 for 不能宣告變數，所以會看到這樣的程式：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int i;
+						for(i=1; i&lt;=3; i++){
+							printf("%d\n", i);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					1<br>
+					2<br>
+					3
+				</output>
+				<br>
+				這種用過即丟的變數，到了 C99 決定讓 for() 自己就能宣告。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>do.. while..</h3>
+			<p>
+				有些人會怕永無止盡的跑下去，而不敢用 while。勇敢去用、去嘗試就對了！寫 C 語言，無窮迴圈是很重要的伎倆哦！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>goto</h3>
+			<p>
+				程式總是由上往下一直執行下去，goto 可以讓你往上執行程式：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						int a = 0;
+
+						gogogo:
+							printf("%d", ++a);
+							if(a==3) return;
+
+						goto gogogo;
+					}
+                </textarea>
+				<br>
+				<output>
+					1<br>
+					2<br>
+					3
+				</output>
+				<br>
+				除了像條件判斷式可以跑分支流程，值得注意的是，上面範例如果沒有 return 跳出 main() 的話，可是會不停來來回回的跑 gogogo 和 goto，跟迴圈一樣執行下去，通包兩種功能，看起來很好用…<br>
+				<br>
+				然而 goto 可是惡名昭彰，使用 goto 往前跳時，自然得進行中斷程式不再往後跑的設計，當程式充滿這種設計，就會變得很難掌握流程的動線。所以只要程式還得設計說怎麼跳過 goto 時，就表示程式碼該刪掉了，不該繼續用 goto 設計程式，應該改用其它流程控制。像本文的範例就是應該刪掉的程式碼，不該出現。<br>
+				<br>
+				若 goto 單純只是跳躍執行分支流程，不會因此要寫跳過 goto 的程式碼，那其實還是可以用的。像巢狀迴圈就可以用 goto 一口氣跳出，比一層一層用 break 結束迴圈有效率多了。<br>
+				<br>
+				總之，雖然 goto 惡名昭彰，但 goto 確實有其它指令無法替代的卓越語法特性，是攸關開發效率的一種技巧。所以我個人並未完全禁用 goto，而是局部性、在可視範圍內使用 goto。我知道什麼時候該刪掉用 goto 寫出來的程式碼，也知道什麼時候該用 goto 寫程式碼。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>break, continue</h3>
+			<p>
+				<code>break</code> 用來結束流程，往下執行程式。<br>
+				<br>
+				<code>continue</code> 用來跳過流程，往上回到流程起點位置。
+			</p>
+		</section>
+	</section>
+	<hr id='section7'>
+	<section>
+		<h2>函式</h2>
+		<hr>
+		<section>
+			<h3>隨時結束函式</h3>
+			<p>
+				<code>return</code> 雖然用來傳回資料，但同時也結束函式的執行，因此你想結束函式時，可以單獨使用 reutrn，即使函式是 void 也可以。<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int a;
+
+					void f()
+					{
+						if(a) return; /* 如果變數 a 已經有資料就結束函式吧 */
+						a = 123;
+					}
+
+					main()
+					{
+						a = 456;
+
+						printf("%d", f());
+					}
+                </textarea>
+				<br>
+				<output>
+					456
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>傳值呼叫</h3>
+			<p>
+				C 語言的函式，參數為傳值呼叫，若把變數傳給函式當參數，會複製一份變數的值傳進去，而不是變數本身整個傳過去，相當於 <code>參數 = 變數</code> 這程式。所以修改參數的值，並不會影響到變數的值，等於有兩個不同的變數名稱：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					void f(int x)
+					{
+						x = 123;
+					}
+
+					main()
+					{
+						int a = 456;
+
+						f(a);
+
+						printf("%d", a);
+					}
+                </textarea>
+				<br>
+				<output>
+					456
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>傳址呼叫</h3>
+			<p>
+				若希望在函式修改的參數就是傳入的變數本身，可透過指標設計成傳址呼叫，寫成相當於 <code>指標 = &變數</code> 的程式：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					void f(int* x)
+					{
+						*x = 123;
+					}
+
+					main()
+					{
+						int a = 456;
+
+						f(&a);
+
+						printf("%d", a);
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+				<br>
+				另外，看到函式的參數是指標，而我們想把變數傳進去時，也是在變數前面加個 <code>&</code> 符號即可，可不要把變數放在指標再傳進去。<br>
+				<br>
+				反過來說，資料已經宣告為指標的話，既然本身就是指標，那就不用加 <code>&</code>，直接將識別名稱傳進去即可：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					void f(int* x)
+					{
+						*x = 123;
+					}
+
+					main()
+					{
+						int* a = malloc(sizeof(int));
+						*a = 456;
+
+						f(a);
+
+						printf("%d", *a);
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+				<br>
+				比較麻煩的是字串型態 char*，它已經是指標，所以要傳址的話，函式參數要宣告為指標的指標：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					void f(char** x)
+					{
+						*x = "ABC";
+					}
+
+					main()
+					{
+						char* a = "DEF";
+
+						f(&a);
+
+						puts(a);
+					}
+                </textarea>
+				<br>
+				<output>
+					ABC
+				</output>
+				<br>
+				既然是指標的指標，那麼要將字串變數傳進函式時就要使用 & 符號，將變數的指標的位址傳進去，而不是變數的位址。<br>
+				<br>
+				字串是 C 語言最讓人頭大的難題，它會讓學習者對指標和傳址的觀念陷入一團亂，然後遭受到極大的挫敗。建議先把基本資料型態像是 int 和 char 的指標和傳址掌握好、應用得熟練了，再另外找時間把 char* 以獨立的議題去面對、解決、處理，全心全意去克服這個門檻。這個門檻跨過的話，恭喜，你學通 C 語言了！<br>
+				<br>
+				很多人跨不過這個門檻，絕望地放棄 C 語言，這很正常，其實大家都經歷過這麼一段。要跨過這個門檻的方法，就是收拾好心情，把整件事分成「基本資料型態的指標」和「指標的指標」兩部分來面對。先把基本資料型態的指標搞定、不管遭遇什麼事都不會對此感到一團亂後，再全心全意攻克指標的指標、要亂也只亂在指標的指標這部分，這樣你就會發現其實不難，純粹是我們一團亂時腦子無法正常運作而已。只要腦子能正常運作，指標的指標其實是很容易釐清的概念，三兩下就能攻克！甚至你會發現就算無法釐清，大不了把 char* 的情況特殊給死記下來就好，不至於要放棄 C 語言～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>關於傳回指標</h3>
+			<p>
+				首先示範一個正常傳回指標的函式：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int* f1()
+					{
+						int a = 123;
+						return &amp;a;
+					}
+
+					main()
+					{
+						int* a = f1();
+						printf("%d\n", *a);
+					}
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+				<br>
+				然而 C 語言的函式使用自己一塊記憶體配置空間，它會釋放已經用過的指標空間，騰出來給下一個函式使用，因此另外一個函式也傳回指標的話，會出現資料被覆寫的情況：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int* f1()
+					{
+						int a = 123;
+						return &amp;a;
+					}
+
+					int* f2()
+					{
+						int b = 456;
+						return &amp;b;
+					}
+
+					main()
+					{
+						int* a = f1();
+						int* b = f2();
+						printf("%d\n", *a);
+						printf("%d\n", *b);
+					}
+                </textarea>
+				<br>
+				<output>
+					456<br>
+					0
+				</output>
+				<br>
+				這時要用 <code>static</code>：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int* f1()
+					{
+						static int a = 123;
+						return &amp;a;
+					}
+
+					int* f2()
+					{
+						static int b = 456;
+						return &amp;b;
+					}
+
+					main()
+					{
+						int* a = f1();
+						int* b = f2();
+						printf("%d\n", *a);
+						printf("%d\n", *b);
+					}
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					456
+				</output>
+				<br>
+				不同於全域和區域兩種記憶體空間，static 是程式為自己執行時期需要，所配置的第三塊記憶體空間。因此在函式區塊建立 static 變數後，函式結束也還會存在，不會被釋放。既然變數還在、仍有效，也就不會被釋放與覆蓋。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>如何傳回陣列</h3>
+			<p>
+				雖然函式的參數可以傳入陣列，但你有沒有發現到，C 語言的函式，傳回值型態是不能宣告為陣列的：<br>
+				<br>
+				<textarea class='brush:c'>
+					int[] f()
+					{
+						static int a[] = { 111, 222, 333 };
+						return a;
+					}
+                </textarea>
+				<br>
+				<output>
+					main.c:1: error: identifier expected
+				</output>
+				<br>
+				只能宣告為指標，再把陣列的位址傳出去：<br>
+				<br>
+				<textarea class='brush:c'>
+					int* f()
+					{
+						static int a[] = { 111, 222, 333 };
+						return a;
+					}
+                </textarea>
+				<br>
+				雖然陣列就像指標，但指標可不是陣列！於是陣列轉指標傳回容易，傳回的指標想丟給陣列就困難了，可借助 string.h 的 <code>memcpy()</code> 函式幫忙：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;string.h&gt;
+
+					int* f()
+					{
+						static int a[] = { 111, 222, 333 };
+						return a;
+					}
+
+					main()
+					{
+						int b[3];
+
+						memcpy(b, f(), sizeof(b));
+
+						printf("%d %d %d", b[0], b[1], b[2]);
+					}
+                </textarea>
+				<br>
+				<output>
+					111 222 333
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>預設的資料型態與預設的傳回值</h3>
+			<p>
+				由於 int 是預設的資料型態，因此函式的資料型態是 int 時可省略，或者說，省略的話表示函式的資料型態是 int。這也是為何 main() 前面什麼也沒寫也能正常執行，因為編譯器會自動補上 int。<br>
+				<br>
+				此外，函式竟然還會預設傳回 int 的 1，於是…<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					donothing()
+					{
+						/* 什麼也不做 */
+					}
+
+					main()
+					{
+						printf("%d", donothing());
+					}
+                </textarea>
+				<br>
+				<output>
+					1
+				</output>
+				<br>
+				事實上 main() 沒寫 return 時也是一樣，會自動傳回預設的 1 表示不正常關閉。所以能在 main() 寫上 return 0 是好習慣。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>void 會傳回資料</h3>
+			<p>
+				void 並非沒有傳回值的意思，而是這個函式不需要傳回資料，也就是不代表它沒有傳回任何東西。視編譯器不同，有可能傳回除錯編號、有可能傳回記憶體位址、甚至是程式執行的結果：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int a;
+
+					void f()
+					{
+						a = 123;
+					}
+
+					main()
+					{
+						printf("%d", f());
+					}
+                </textarea>
+				<br>
+				<output>
+					tcc main.c<br>
+					main<br>
+					123
+				</output>
+				<br>
+				當然，void 函式傳回的資料，是不能賦值給變數的，除非…<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					int a;
+
+					void f()
+					{
+						a = 123;
+					}
+
+					main()
+					{
+						int b = (int)f();
+
+						printf("%d", b);
+					}
+                </textarea>
+				<br>
+				<output>
+					tcc main.c<br>
+					main<br>
+					123
+				</output>
+				<br>
+				以上兩種寫法千萬不要用！哪天改用其它編譯器不是沒辦法通過，就是資料跟你當初拿到的不一樣！
+			</p>
+		</section>
+	</section>
+	<hr id='section8'>
+	<section>
+		<h2>列舉、結構、聯集</h2>
+		<hr>
+		<section>
+			<h3>列舉</h3>
+			<section>
+				<h4>列舉資料</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						enum arrow{left, up, right, down};
+
+						main()
+						{
+							enum arrow a;
+
+							a = right;
+
+							printf("%d", a);
+						}
+                    </textarea>
+					<br>
+					<output>
+						2
+					</output>
+					<br>
+					注意！enum 的 {} 結尾有個 ;，忘了加的話等於製作 enum 的同時宣告變數或函式。
+				</p>
+			</section>
+			<section>
+				<h4>列舉資料的同時宣告變數</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							enum arrow{left, up, right, down} a;
+
+							a = right;
+
+							printf("%d", a);
+						}
+                    </textarea>
+					<br>
+					<output>
+						2
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>列舉資料時設定初始值</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							enum arrow{left=37, up, right, down} a;
+
+							a = right;
+
+							printf("%d", a);
+						}
+                    </textarea>
+					<br>
+					<output>
+						39
+					</output>
+				</p>
+			</section>
+			<p>
+				看起來像能夠限制變數的值，只能用列舉出來的資料，其實不然，C 語言並沒有阻止你把這些範例的變數寫成列舉以外的資料，所以你寫個 <code>a = 123</code> 也沒事。<br>
+				<br>
+				換句話說，這跟宣告 left、up、right、down 四個 int 變數，各設為 37、38、39、40，再指定給變數 a 沒兩樣，變數 a 還是可以設定為其它資料。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>結構</h3>
+			<section>
+				<h4>製作結構</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						struct position
+						{
+							int x;
+							int y;
+						};
+
+						main()
+						{
+							struct position p;
+
+							p.x = 111;
+							p.y = 222;
+
+							printf("%d %d", p.x, p.y);
+						}
+                    </textarea>
+					<br>
+					<output>
+						111 222
+					</output>
+					<br>
+					注意！struct 的 {} 結尾有個 ;，忘了加的話等於製作 struct 的同時宣告變數或函式。<br>
+					<br>
+					事實上忘了加 ; 的事經常發生，若寫程式的習慣不好，像本範例省略 main() 型態，那就等於 main() 要傳回一個 struct position 一樣！
+				</p>
+			</section>
+			<section>
+				<h4>製作結構的同時宣告變數</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							struct position{
+								int x;
+								int y;
+							} p;
+
+							p.x = 111;
+							p.y = 222;
+
+							printf("%d %d", p.x, p.y);
+						}
+                    </textarea>
+					<br>
+					<output>
+						111 222
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>宣告結構的同時直接賦值</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						struct position
+						{
+							int x;
+							int y;
+						};
+
+						main()
+						{
+							struct position p = {111, 222};
+
+							printf("%d %d", p.x, p.y);
+						}
+                    </textarea>
+					<br>
+					<output>
+						111 222
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>結構指標</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						struct position
+						{
+							int x;
+							int y;
+						};
+
+						main()
+						{
+							struct position p1 = {111, 222};
+
+							struct position* p2 = &amp;p1;
+
+							printf("%d %d\n", (*p2).x, (*p2).y);
+							printf("%d %d\n", p2-&gt;x, p2-&gt;y); /* 或改用 -&gt; 符號存取結構 */
+						}
+                    </textarea>
+					<br>
+					<output>
+						111 222<br>
+						111 222
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>聯集</h3>
+			<p>
+				union 和 struct 語法是一樣的，差別在 union 配置資料的方式，並非為每一筆資料分配獨自的記憶體空間，而是每筆資料共用同一個記憶體開頭。看個範例：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						union position{
+							int x;
+							int y;
+						} p;
+
+						p.x = 111;
+						p.y = 222;
+
+						printf("%d %d", p.x, p.y);
+					}
+                </textarea>
+				<br>
+				<output>
+					222 222
+				</output>
+				<br>
+				由於 p.y 與 p.x 共用同樣的記憶體空間，因此 p.y = 222 後，輸出 p.x 時也變成 222 了。<br>
+				<br>
+				早期記憶體容量很少，三不五時就有不夠用的問題，因此用過即丟的變數，就以 union 共用同一塊記憶體空間，節省記憶體。<br>
+				<br>
+				隨著時代進步，現在記憶體大到我們正常寫程式是不可能塞滿的，所以不建議再用這招，以免留下溢位覆寫的問題。
+			</p>
+		</section>
+	</section>
+	<hr id='section9'>
+	<section>
+		<h2>主控台</h2>
+		<hr>
+		<section>
+			<h3>輸出</h3>
+			<section>
+				<h4>輸出字串</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							puts("Hello, world!");
+						}
+                    </textarea>
+					<br>
+					<output>
+						Hello, world!
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>格式化輸出整數</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							printf("%d", 123);
+						}
+                    </textarea>
+					<br>
+					<output>
+						123
+					</output>
+					<br>
+					更多 printf 可用的 % 格式化參數：
+				</p>
+				<table>
+					<tr><td>%c</td><td>以 char 輸出訊號。</td></tr>
+					<tr><td>%d</td><td>以帶正負號十進位整數輸出訊號。</td></tr>
+					<tr><td>%e</td><td>以科學符號輸出訊號。</td></tr>
+					<tr><td>%f</td><td>以 float 輸出訊號。</td></tr>
+					<tr><td>%i</td><td>以 int 輸出訊號。</td></tr>
+					<tr><td>%li</td><td>以 long int 輸出訊號。</td></tr>
+					<tr><td>%lf</td><td>以 double 輸出訊號。</td></tr>
+					<tr><td>%llf</td><td>以 long double 輸出訊號。</td></tr>
+					<tr><td>%o</td><td>以八進位整數 輸出訊號。</td></tr>
+					<tr><td>%p</td><td>取出指標的值做為輸出訊號。</td></tr>
+					<tr><td>%s</td><td>以 char[] 輸出訊號。</td></tr>
+					<tr><td>%u</td><td>以無正負號十進位整數輸出訊號。</td></tr>
+					<tr><td>%x</td><td>以十六進制整數輸出訊號。</td></tr>
+					<tr><td>%0</td><td>格式化 0 填補，例如 %04d 接 12，會輸出 0012。</td></tr>
+					<tr><td>%+</td><td>強制為數值加上正負號。</td></tr>
+					<tr><td>%%</td><td>輸出 % 符號。</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>輸入</h3>
+			<section>
+				<h4>輸入字串</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						main()
+						{
+							char* a = calloc(256, sizeof(char));
+							gets(a);
+
+							printf("Hello, %s!", a);
+						}
+                    </textarea>
+					<br>
+					<output>
+						（假設輸入的是 Twideem）<br>
+						Hello, Twideem!
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>以格式化輸入取得整數</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							int a;
+							scanf("%d", &a);
+
+							printf("%d", a+1);
+						}
+                    </textarea>
+					<br>
+					<output>
+						（假設輸入的是 3）<br>
+						4
+					</output>
+					<br>
+					% 格式化參數跟 printf() 一樣，還多了 <code>%[]</code> 可正規表示字元的集合。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>命令列參數</h3>
+			<section>
+				<h4>讀取命令列參數</h4>
+				<p>
+					在 MS-DOS 模式執行程式時，後面常常搭配一些參數。用 C 語言寫的程式，該怎樣接收使用者輸入的參數呢？請看如下範例：<br>
+					<br>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						main(int argc, char* argv[])
+						{
+							printf("%s\n%s\n%d", argv[0], argv[1], argc);
+						}
+                    </textarea>
+					<br>
+					以 <code>tcc main.c</code> 編譯，輸入 <code>main hello</code> 的執行結果：<br>
+					<br>
+					<output>
+						main<br>
+						hello<br>
+						2
+					</output>
+					<br>
+					argv 以陣列保存使用者輸入的一連串參數，由於 <code>argv[0]</code> 內定為程式的主檔名，所以要讀取使用者輸入的參數，必須從 <code>argv[1]</code> 開始。<br>
+					<br>
+					argc 是參數個數。因為無論是否輸入參數，都至少有 <code>argv[0]</code> 這個參數，所以範例中只下一個 hello 參數，卻傳回 2。
+				</p>
+			</section>
+			<section>
+				<h4>禁用命令列參數</h4>
+				<p>
+					使用 <code>main(void)</code> 做主程式，那使用者下命令列參數的話會報錯。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='section10'>
+	<section>
+		<h2>檔案</h2>
+		<p>
+			這節範例，檔名和資料都使用英文。使用中文的話，要注意原始碼的字元編碼，是否與作業系統預設的字元編碼一致，否則被視為亂碼會出錯。
+		</p>
+		<hr>
+		<section>
+			<h3>在文字檔案寫入一行字串</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						FILE* file = fopen("text.txt", "w");
+
+						fputs("ABC", file);
+
+						fclose(file);
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					ABC
+				</output>
+				<br>
+				fopen() 第二個參數 <code>"w"</code> 表示 write（寫入），會從檔案開頭寫入資料。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>在文字檔案寫入多行字串</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						FILE* file = fopen("text.txt", "a");
+
+						fputs("AAA\n", file);
+						fputs("BBB\n", file);
+						fputs("CCC\n", file);
+
+						fclose(file);
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				fopen() 第二個參數 <code>"a"</code> 表示 append（添加），會從檔案尾端加入資料。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>從文字檔案讀取一行字串</h3>
+			<section>
+				<h4>text.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						ABC
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						main()
+						{
+							FILE* file = fopen("text.txt", "r");
+
+							char* string = calloc(4, sizeof(char));
+							fgets(string, 4, file);
+							puts(string);
+
+							fclose(file);
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				<output>
+					ABC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用函式傳回文字檔案讀取的一行字串</h3>
+			<section>
+				<h4>text.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						ABC
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						char* f()
+						{
+							FILE* file = fopen("text.txt", "r");
+							char* string = calloc(4, sizeof(char));
+							fgets(string, 4, file);
+							fclose(file);
+
+							return string;
+						}
+
+						main()
+						{
+							puts(f());
+						}
+                    </textarea>
+					<br>
+					<output>
+						ABC
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>從文字檔案讀取每一行字串</h3>
+			<section>
+				<h4>text.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						AAA
+						BBB
+						CCC
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						main()
+						{
+							FILE* file = fopen("text.txt", "r");
+
+							char* string = calloc(4, sizeof(char));
+							while(fgets(string, 4, file)){
+								puts(string);
+							}
+
+							fclose(file);
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>格式化讀取文字檔案</h3>
+			<p>
+				除了用 fgets() 從文字檔案中讀取資料，還可用更方便的 <code>fscanf()</code>！它可以使用指標保存所讀取的字串，省得還要設定字元陣列的大小。更酷的是可以把字串當數值讀取，直接拿來四則運算。
+			</p>
+			<section>
+				<h4>text.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						ABC 123 456
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+
+						main()
+						{
+							FILE* file = fopen("text.txt", "r");
+
+							char* string = calloc(4, sizeof(char));
+							fscanf(file, "%s", string);
+							puts(string);
+
+							int a, b;
+							fscanf(file, "%d", &a);
+							fscanf(file, "%d", &b);
+							printf("%d", a + b);
+
+							fclose(file);
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				<output>
+					ABC579
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>複製檔案</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						FILE* file1 = fopen("old.mp3", "rb");
+						FILE* file2 = fopen("new.mp3", "wb");
+
+						char c;
+						while(!feof(file1)){
+							c = fgetc(file1);
+							fputc(c, file2);
+						}
+
+						fclose(file1);
+						fclose(file2);
+					}
+                </textarea>
+				<br>
+				主要使用 fgetc() 逐字元取出資料，使用 fputc() 逐字元寫入資料，其次使用 feof() 判斷是否讀取到檔案結尾（EOF）了！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>刪除檔案</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						remove("text.txt");
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>更改檔名</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					main()
+					{
+						rename("text.txt", "temp.tmp");
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>建立資料夾</h3>
+			<p>
+				用 stdlib.h 的 <code>system()</code> 下作業系統指令：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						system("MD \"New Folder\"");
+					}
+                </textarea>
+				<br>
+				GCC 的話 unistd.h 有 <code>mkdir("資料夾名稱")</code>，但這不是 ISO C 標準，其它編譯器可能不支援。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>刪除資料夾</h3>
+			<p>
+				用 stdlib.h 的 <code>system()</code> 下作業系統指令：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						system("RD \"New Folder\"");
+					}
+                </textarea>
+				<br>
+				GCC 的話 unistd.h 有 <code>rmdir("資料夾名稱")</code>，但這不是 ISO C 標準，其它編譯器可能不支援。
+			</p>
+		</section>
+	</section>
+	<hr id='section11'>
+	<section>
+		<h2>演算</h2>
+		<hr>
+		<section>
+			<h3>數學計算</h3>
+			<p>
+				math.h 裡有 <code>acos() asin() atan() atan2() ceil() cos() cosh() exp() fabs() floor() fmod() frexp() ldexp() log() log10() modf() pow() sin() sinh() sqrt() tan() tanh()</code>…等 ANSI C 這些 C++ 能相容的函式，以及 ISO C 自己延伸的 <code>exp2() expm1() fdim() fma() fmax() fmin() frexp() hypot() isfinite() isinf() ilogb() isnan() log1p() log10() logb() nan() round()</code>…等函式或巨集，可做為數學運算用。<br>
+				<br>
+				stdlib.h 裡有 <code>abs() atof() atoi() atol() atoll() bsearch() div() qsort() rand() srand()</code>…等函式，可幫助處理數字。<br>
+				<br>
+				以上泰半都能望文生義，用法錯時編譯器也會給予提示，因此詳細用法請查閱函式庫。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>排序</h3>
+			<p>
+				stdlib.h 裡面已經有 <code>qsort()</code>，可以讓我們更容易使用 Tony Hoare 發明的 Quicksort 演算法！但必須先設計一個比較大小的 compare() 函式傳給 qsort()，範例如下：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					int compare(const void* x, const void* y)
+					{
+						return *(int*)x - *(int*)y;
+					}
+
+					main()
+					{
+						int array[] = {2, 6, 4, 9, 5};
+
+						qsort(array, 5, sizeof(int), compare);
+
+						for(int n=0; n&lt;5; n++){
+							printf("%d", array[n]);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					24569
+				</output>
+				<br>
+				字串也可以：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					int compare(const void* str1, const void* str2)
+					{
+						return *(char*)str2 - *(char*)str1;
+					}
+
+					main()
+					{
+						char* array[] = {"CCC","BBB","AAA"};
+
+						qsort(array, 3, sizeof(char*), compare);
+
+						for(int n=0; n&lt;3; n++){
+							puts(array[n]);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					AAABBBCCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>搜尋</h3>
+			<p>
+				stdlib.h 裡面已經有 <code>bsearch()</code>，讓我們更容易使用 Binary search 演算法<ins>2</ins>！它會傳回搜尋到的第一個元素，但必須先設計一個比較大小的 compare() 函式傳給 bsearch()：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					int compare(const void* x, const void* y)
+					{
+						return *(int*)x - *(int*)y;
+					}
+
+					main()
+					{
+						int array[] = {2, 4, 6, 8, 10};
+						int key = 8;
+
+						int* result = bsearch(&key, array, 5, sizeof(int), compare);
+
+						printf("%d", *result);
+					}
+                </textarea>
+				<br>
+				<output>
+					8
+				</output>
+				<br>
+				搜尋不到資料會傳回 NULL。<br>
+				<br>
+				字串也可以：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+					#include &lt;string.h&gt;
+
+					int compare(const void* str1, const void* str2)
+					{
+						return strcmp(*(char**)str1, *(char**)str2);
+					}
+
+					main()
+					{
+						char* array[] = {"AAA", "BBB", "CCC", "DDD", "EEE"};
+						char* key = "DDD";
+
+						char** result = bsearch(&key, array, 5, sizeof(char*), compare);
+
+						puts(*result);
+					}
+                </textarea>
+				<br>
+				<output>
+					DDD
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>亂數</h3>
+			<p>
+				先用 stdlib.h 的 <code>srand()</code> 打亂順序，再用 <code>rand()</code> 取得亂數。其中使用 time.h 的 <code>time()</code> 傳回電腦時間秒數，做為順序值。
+			</p>
+			<section>
+				<h4>0 到 MAX</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+						#include &lt;time.h&gt;
+
+						main()
+						{
+							srand(time(NULL));
+
+							printf("%d ", rand()%10);
+						}
+                    </textarea>
+					<br>
+					<output>
+						0 到 10 之間隨機值。
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>1 到 MAX</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+						#include &lt;time.h&gt;
+
+						main()
+						{
+							srand(time(NULL));
+
+							printf("%d ", rand()%10+1);
+						}
+                    </textarea>
+					<br>
+					<output>
+						1 到 10 之間隨機值。
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>MIN 到 MAX</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+						#include &lt;time.h&gt;
+
+						main()
+						{
+							srand(time(NULL));
+
+							int min=8;
+							int max=12;
+
+							printf("%d ", rand()%(max-min+1)+min);
+						}
+                    </textarea>
+					<br>
+					<output>
+						8 到 12 之間隨機值。
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>亂序</h3>
+			<p>
+				以字串陣列為例：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+					#include &lt;time.h&gt;
+
+					int compare(const void* str1, const void* str2)
+					{
+						return rand() % 2 ? 1 : -1;
+					}
+
+					main()
+					{
+						char* array[] = {"A","B","C","D","E"};
+
+						srand(time(NULL));
+
+						qsort(array, 5, sizeof(char*), compare);
+
+						for(int n=0; n&lt;5; n++){
+							puts(array[n]);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					DABCE（每次執行結果不一樣）
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='section12'>
+	<section>
+		<h2>其它雜項</h2>
+		<hr>
+		<section>
+			<h3>關閉程式</h3>
+			<p>
+				可用 stdlib.h 的 <code>exit()</code> 提早結束程式，或者 <code>abort()</code> 讓程式不正常關閉，差異在不正常關閉程式的話會通知作業系統。<br>
+				<br>
+				exit() 應該傳入 0 或 1 為參數，等同於 main() 裡面執行 return 0 或 return 1。其中 0 代表正常結束程式，1 代表不正常關閉。<br>
+				<br>
+				那 exit(0) 和 return 0 差別在哪？差別在 main() 這特殊的函式在遇到 return 時會結束程式，但其它函式遇到不會，所以在其它函式關閉程式只能調用 exit()。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>呼叫程式</h3>
+			<p>
+				stdlib.h 的 <code>system()</code> 用來呼叫外部的程式。<br>
+				<br>
+				這函式可是寫程式的大絕招！例如想播放音樂或影片，與其自己寫，倒不如下載個播放程式，然後：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						/* 用 MPC-HC 播放多個音效 */
+						system("START mpc-hc64.exe se1.mp3 /minimized /close /new");
+						system("START mpc-hc64.exe se2.mp3 /minimized /close /new");
+						system("START mpc-hc64.exe se3.mp3 /minimized /close /new");
+
+						/* 用 MPC-HC 播放過場影片 */
+						system("mpc-hc64.exe theend.mp4 /fullscreen /close");
+					}
+                </textarea>
+			</p>
+			<section>
+				<h4>完整路徑</h4>
+				<p>
+					因為 \ 是跳脫字元的符號，所以 MS-DOS 指令用到資料夾路徑時，<code>\</code> 符號必須寫成 <code>\\</code>。<br>
+					<br>
+					另外，資料夾含空白字元時，建議使用 <code>\"</code> 將路徑包起來，比較不會出錯。<br>
+					<br>
+					來看個例子：<br>
+					<br>
+					<samp>"C:\Program Files\Audacity\audacity.exe"</samp><br>
+					<br>
+					應寫成：<br>
+					<br>
+					<samp>"\"C:\\Program Files\\Audacity\\audacity.exe\""</samp>
+				</p>
+			</section>
+			<section>
+				<h4>隱藏命令提示字元視窗</h4>
+				<p>
+					有些外部程式執行時會顯示命令提示字元的視窗，可用如下指令寫法隱藏：<br>
+					<br>
+					<code>CMD /C START 外部程式</code>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>載入其它 C 原始碼檔案</h3>
+			<section>
+				<h4>other.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+
+						void f()
+						{
+							puts("ABC");
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include "other.c"
+
+						main()
+						{
+							f();
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				<output>
+					tcc main.c<br>
+					main<br>
+					ABC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>自己寫標頭檔</h3>
+			<section>
+				<h4>source.h</h4>
+				<p>
+					<textarea class='brush:c'>
+						#ifndef SOURCE_H
+						#define SOURCE_H
+						#include &lt;stdio.h&gt;
+						void f();
+						#endif
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>source.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include "source.h"
+
+						void f()
+						{
+							puts("ABC");
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.c</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include "source.h"
+
+						main()
+						{
+							f();
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				<output>
+					tcc main.c source.c -o main.exe　（注意編譯了兩個原始碼）<br>
+					main<br>
+					ABC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>取得作業系統的環境變數</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						puts(getenv("OS"));
+					}
+                </textarea>
+				<br>
+				<output>
+					Windows_NT
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>時間</h3>
+			<p>
+				先用 <code>time()</code> 取得 1970 年 1 月 1 日 0 點 0 分 0 秒至今的秒數，再送給 <code>localtime()</code> 分析，並將分析結果保存在 tm 結構中，就能從 tm 結構分別取得想要的時間資訊：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;time.h&gt;
+
+					main()
+					{
+						time_t seconds = time(NULL);
+
+						struct tm* time = localtime(&seconds);
+
+						printf("%d年", time-&gt;tm_year+1900);
+						printf("%d月", time-&gt;tm_mon+1);
+						printf("%d日", time-&gt;tm_mday);
+						printf("星期%d ", time-&gt;tm_wday);
+						printf("%d點", time-&gt;tm_hour);
+						printf("%d分", time-&gt;tm_min);
+						printf("%d秒", time-&gt;tm_sec);
+					}
+                </textarea>
+				<br>
+				<output>
+					2009年8月16日星期0 6點15分33秒　（隨電腦當時的時間而不同）
+				</output>
+				<br>
+				年份是 19xx 的尾數，所以加 1900 表示西元年。<br>
+				<br>
+				月份從 0 開始，所以一月是 0，十二月是 11。<br>
+				<br>
+				星期一到星期六分別是 1~6，星期天是 0。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>暫停幾秒再執行</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#include &lt;stdlib.h&gt;
+
+					main()
+					{
+						puts("Hello!");
+
+						_sleep(3000);
+
+						puts("Bye~");
+					}
+                </textarea>
+				<br>
+				<output>
+					Hello!<br>
+					Bye~
+				</output>
+				<br>
+				GCC 的話 unistd.h 有 <code>sleep(秒數)</code> 可用，但這不是 ISO C 標準，其它編譯器可能不支援。
+			</p>
+		</section>
+	</section>
+	<hr id='section13'>
+	<section>
+		<h2>前置處理指令</h2>
+		<p>
+			在編譯原始碼之前，可用前置處理指令對編譯器設置一些工作，像是告訴編譯器外部有已經寫好的原始碼，或者擴充關鍵字讓編譯器能夠辨識。
+		</p>
+		<hr>
+		<section>
+			<h3>#include</h3>
+			<p>
+				讀取外部檔案，通常用來掛載標頭檔，例如常見的 <code>#include &lt;stdio.h&gt;</code>，也可用來讀取其他 *.c 原始碼。<br>
+				<br>
+				掛載編譯器內建的標頭檔使用 <code>&lt;&gt;</code> 符號，用來掛載其它 C 原始碼的檔案使用 <code>""</code> 符號。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>#define</h3>
+			<p>
+				用來替換文字，例如想讓 C 語言有 boolean 型態，以及 true 和 false 值可用的話：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#define boolean int
+					#define false 0
+					#define true 1
+
+					main()
+					{
+						boolean a = true;
+
+						if(a) puts("Hello");
+					}
+                </textarea>
+				<br>
+				<output>
+					Hello
+				</output>
+				<br>
+				或者想讓 C 語言長得像 PASCAL 語言的話：<br>
+				<br>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+					#define begin {
+					#define end }
+
+					main()
+					begin
+						puts("Hello");
+					end
+                </textarea>
+				<br>
+				<output>
+					Hello
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>#undef</h3>
+			<p>
+				移除 #define 的定義，格式為 <code>#undef 名稱</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>#if #ifdef #ifndef #elif #else #endif</h3>
+			<p>
+				讓前置處理指令也可以使用條件式，設計更精妙的巨集，輔助編譯器的不足。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>#error</h3>
+			<p>
+				讓編譯器不要編譯該原始碼檔案，並顯示錯誤訊息，格式為 <code>#error 訊息</code>。
+			</p>
+		</section>
+	</section>
+	<hr id='section14'>
+	<section>
+		<h2>標準標頭檔</h2>
+		<hr>
+		<section>
+			<h3>NULL</h3>
+			<p>
+				<code>NULL</code> 常數定義於 stddef.h，但幾乎每個標準標頭檔都會間接的掛載 stddef.h 和 stdarg.h（命令列參數用）兩個標頭檔，所以已掛載標準標頭檔的話，就不用再掛載了。<br>
+				<br>
+				但完全沒掛載任何標準標頭檔時，就需要掛載 stddef.h。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>bool、true、false</h3>
+			<p>
+				C99 新增了 <code>_Bool</code> 型態，並內建 stdbool.h 定義了 <code>bool</code>、<code>true</code>、<code>false</code> 常數，讓每位開發者能有同樣的表達性。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>FILE、EOF、BUFSIZ</h3>
+			<p>
+				stdio.h 定義了 <code>FILE</code> 型態，用以保存檔案。還定義了 <code>EOF</code> 常數用以檢查檔案結尾，以及 <code>BUFSIZ</code> 常數獲得緩衝區的大小。
+			</p>
+		</section>
+	</section>
+	<hr id='dll'>
+	<section>
+		<h2>DLL 動態連結程式庫</h2>
+		<hr>
+		<section>
+			<h3>hello.c</h3>
+			<p>
+				<textarea class='brush:c'>
+					#include &lt;stdio.h&gt;
+
+					__declspec(dllexport) void hello()
+					{
+						puts("Hello, DLL!");
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>main.c</h3>
+			<p>
+				<textarea class='brush:c'>
+					void hello(void);
+
+					main()
+					{
+						hello();
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>編譯</h3>
+			<p>
+				不同編譯器有不同做法，版號 0.9.27 的 tcc 為：<br>
+				<br>
+				<output>
+					tcc -shared hello.c<br>
+					tcc -impdef hello.dll<br>
+					tcc main.c hello.def<br>
+					main<br>
+					Hello, DLL!
+				</output>
+				<br>
+				0.9.26 的 tcc 沒有 -impdef 參數，而是用 tiny_impdef.exe 完成。
+			</p>
+		</section>
+	</section>
+	<hr id='gui'>
+	<section>
+		<h2>GUI 視窗程式設計</h2>
+		<p>
+			每個作業系統的圖型使用者介面架構都不一樣，因此這部分是沒有 ISO C 標準的。<br>
+			<br>
+			這時可以選擇跨平台的 libui！無論你用哪一種編譯器，只要下載 libui，再透過動態連結程式庫的調用，就能寫 GUI 程式。<br>
+			<br>
+			請至 <a href='http://github.com/andlabs/libui'>http://github.com/andlabs/libui</a> 下載！進去後看你想要哪一版本，點一下 Assets，然後下載 libui 開頭、shared 結尾的檔案。之後解開檔案，與你的 C 程式原始碼放一起，再以動態連結程式庫的方式調用 libui，就能寫 GUI 程式。<br>
+			<br>
+			底下程式碼大致示範一下建立視窗、佈局、按鈕和事件，感受 libui 寫 GUI 的情形：<br>
+			<br>
+			<textarea class='brush:c'>
+				#include "ui.h"
+
+				/* 宣告元件 */
+				uiInitOptions* options;
+				uiWindow* window;
+				uiGrid* grid;
+				uiButton* button;
+
+				/* 結束視窗事件 */
+				int onClosing(uiWindow* w, void* data)
+				{
+					uiQuit();
+					return 1;
+				}
+
+				/* 按鈕事件 */
+				void onClicked(uiButton* b, void* data)
+				{
+					uiButtonSetText(button, "不是叫你別亂按嗎");
+				}
+
+				/* 寫 Windows 程式改用 WinMain() 才不會跳出命令提示字元 */
+				WinMain()
+				{
+					/* libui 的初始化工作 */
+					uiInit(&options); /* 正常要檢查 options 的值防止錯誤，但範例而已略過 */
+
+					/* 視窗 */
+					window = uiNewWindow("視窗應用程式", 400, 300, 0);
+					uiWindowOnClosing(window, onClosing, NULL);
+					uiControlShow(uiControl(window));
+
+					/* 佈局 */
+					grid = uiNewGrid();
+					uiWindowSetChild(window, uiControl(grid));
+
+					/* 按鈕 */
+					button = uiNewButton("別亂按");
+					uiGridAppend(grid, uiControl(button), 0, 0, 1, 1, 1, uiAlignFill, 1, uiAlignCenter);
+					uiButtonOnClicked(button, onClicked, 1);
+
+					/* libui 正式開始行程 */
+					uiMain();
+				}
+            </textarea>
+			<br>
+			<img src='../../images/overcast/19720001X_01.png' alt='插圖'><br>
+			<img src='../../images/overcast/19720001X_02.png' alt='插圖'><br>
+			<br>
+			有興趣的人自行上網找資料吧！不過不太好找，要多研究怎麼敲關鍵字，才會出現你想要的資料。<br>
+			<br>
+			主要是 libui 不只 C 語言在用，除了 Go 直接就拿 libui 當 GUI，其它語言像是 Rust、Perl、Ruby、Julia、PHP、Node.js…都為 libui 設計套件，甚至自己就有內建 GUI 的 Python 和 Kotlin 也有 libui 的套件，這些語言的資料反而比 C 語言的還多。<br>
+			<br>
+			其次是 libui 的 Documentation 還沒寫，官方建議先讀 ui.h 了解有哪些功能，再搭配官方提供的 <a href='http://github.com/andlabs/libui/tree/master/examples'>examples</a> 和 <a href='http://github.com/andlabs/libui/tree/master/test'>test</a> 來摸索，這對新手來說學習困難。而老手已經會其他 GUI 沒興趣改用 libui，所以使用率不高，沒什麼人討論用 C 語言寫 libui。反而其他語言的 libui 套件有更完整且詳實的說明文件，討論的人較多。<br>
+			<br>
+			但從上面範例來看，libui 其實蠻簡單的，有非常好的規則性可以遵循，能直覺的寫出程式。
+		</p>
+		<hr>
+		<section>
+			<h3>Grid 佈局</h3>
+			<p>
+				libui 沒有辦法直接對元件設定座標和尺寸，只有自動配置的方式。<br>
+				<br>
+				而功能足夠配置出想要位置和尺寸的佈局，只有過於複雜的 Grid 一種，另一種 Box 的功能又太過簡單。<br>
+				<br>
+				將來能納入 <a href='http://github.com/kusti8/libui'>kusti8</a> 所寫的 uiFixed（座標佈局）和 uiNaturalSize（元件尺寸）就好了～<br>
+				<br>
+				在夢想成真前，Grid 是寫 libui 首先要掌握起來的課題。
+			</p>
+			<section>
+				<h4>恐怖的一堆參數</h4>
+				<p>
+					將元件放進 Grid 的 <code>uiGridAppend()</code> 有 10 個參數，看起來很複雜、難用，依序是：<br>
+					<br>
+					grid - 被放入元件的佈局。<br>
+					control - 要放入的元件。<br>
+					left - 元件要放在從左到右第幾個格子，相當於水平位置，從 0 算起。<br>
+					top - 元件要放在從上到下第幾個格子，相當於垂直位置，從 0 算起。<br>
+					xspan - 元件占用的水平格數，相當於寬度，1 表示 1 格且不占用其它格子。<br>
+					yspan - 元件占用的垂直格數，相當於高度，1 表示 1 格且不占用其它格子。<br>
+					hexpand - 垂直對齊，用 0 和 1 關閉和開啟。<br>
+					halign - 垂直對齊的方式。<br>
+					vexpand - 水平對齊，用 0 和 1 關閉和開啟。<br>
+					valign - 水平對齊的方式。<br>
+					<br>
+					垂直和水平對齊的方式有 <code>uiAlignStart</code>（靠前）、<code>uiAlignCenter</code>（置中）、<code>uiAlignEnd</code>（靠後）、<code>uiAlignFill</code>（填滿）四種。
+				</p>
+			</section>
+			<section>
+				<h4>直覺地使用參數</h4>
+				<p>
+					一個比較直覺的用法，是 hexpand 和 vexpand 設為 1，halign 和 valign 設為 uiAlignFill，讓 Gird 自動將元件的大小調整為填滿占用的格子，這樣等於對著視窗畫滿格子就好，left、top、xspan、yspan 設定起來比較容易掌握～<br>
+					<br>
+					比如由上往下畫三個格子，那 left 都 0，只需將 top 從 0 排到 2：<br>
+					<br>
+					<samp>
+						uiGridAppend(grid, uiControl(a), <b>0, 0, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(b), <b>0, 1, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(c), <b>0, 2, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+					</samp>
+					<br>
+					<img src='../../images/overcast/19720001X_03.png' alt='插圖'><br>
+					<br>
+					由左到右畫三個格子的話，那就 top 都 0，只需將 left 從 0 排到 2：<br>
+					<br>
+					<samp>
+						uiGridAppend(grid, uiControl(a), <b>0, 0, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(b), <b>1, 0, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(c), <b>2, 0, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+					</samp>
+					<br>
+					<img src='../../images/overcast/19720001X_04.png' alt='插圖'><br>
+					<br>
+					上面一格、下面二格，那就是：<br>
+					<br>
+					按鈕 a 放在 [左 0 上 0] 的位置，占用水平空間 2 格。<br>
+					按鈕 b 放在 [左 0 上 1] 的位置。<br>
+					按鈕 c 放在 [左 1 上 1] 的位置。<br>
+					<br>
+					<samp>
+						uiGridAppend(grid, uiControl(a), <b>0, 0, 2, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(b), <b>0, 1, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(c), <b>1, 1, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+					</samp>
+					<br>
+					<img src='../../images/overcast/19720001X_05.png' alt='插圖'><br>
+					<br>
+					左邊一格、右邊二格，那就是：<br>
+					<br>
+					按鈕 a 放在 [左 0 上 0] 的位置，占用垂直空間 2 格。<br>
+					按鈕 b 放在 [左 1 上 0] 的位置。<br>
+					按鈕 c 放在 [左 1 上 1] 的位置。<br>
+					<br>
+					<samp>
+						uiGridAppend(grid, uiControl(a), <b>0, 0, 1, 2,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(b), <b>1, 0, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(c), <b>1, 1, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+					</samp>
+					<br>
+					<img src='../../images/overcast/19720001X_06.png' alt='插圖'><br>
+					<br>
+					左邊兩格、右邊一格，那就是：<br>
+					<br>
+					按鈕 a 放在 [左 0 上 0] 的位置。<br>
+					按鈕 b 放在 [左 0 上 1] 的位置。<br>
+					按鈕 c 放在 [左 1 上 0] 的位置，占用垂直空間 2 格。<br>
+					<br>
+					<samp>
+						uiGridAppend(grid, uiControl(a), <b>0, 0, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(b), <b>0, 1, 1, 1,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+						uiGridAppend(grid, uiControl(c), <b>1, 0, 1, 2,</b> 1, uiAlignFill, 1, uiAlignFill);<br>
+					</samp>
+					<br>
+					<img src='../../images/overcast/19720001X_07.png' alt='插圖'><br>
+					<br>
+					由此可見，填滿的話，就像這樣直覺許多！遇到複雜的佈局，就先把同組的元件佈局到 Box，再以這種方式把各個 Box 填滿到 Grid 裡即可。<br>
+					<br>
+					但是想留白的話，這全部填滿的方式反而複雜！視情況將 uiAlignFill 改為 uiAlignStart，從頭開始排列元件，沒排滿的空間自然就留白，說不定就是你想要的了。真不行再用這種全填滿的方式多占幾格去留白～
+				</p>
+			</section>
+			<section>
+				<h4>另一種加入元件的方法</h4>
+				<p>
+					也可以用 <code>uiGridInsertAt()</code> 在元件間插入元件，參數跟 uiGridAppend() 大同小異，只是 left 和 top 變成基準元件和插入的方式：<br>
+					<br>
+					<samp>
+						uiGridAppend(grid, uiControl(a), 0, 0, 1, 1, 1, uiAlignFill, 1, uiAlignFill);<br>
+						<br>
+						uiGridInsertAt(grid, uiControl(b), uiControl(a), uiAtBottom, 1, 1, 1, uiAlignFill, 1, uiAlignFill);<br>
+					</samp>
+					<br>
+					插入的方式有 <code>uiAtBottom</code>（下面）、<code>uiAtTop</code>（上面）、<code>uiAtTrailingui</code>（後面）、<code>AtLeading</code>（前面）四種。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Box 佈局</h3>
+			<p>
+				這是只能由上往下或由左往右自動排列的佈局，程式碼簡單又直覺：<br>
+				<br>
+				<samp>
+					uiBox* box = uiNewVerticalBox();<br>
+					uiBoxAppend(box, uiControl(a), 1);<br>
+					uiBoxAppend(box, uiControl(b), 1);<br>
+					uiBoxAppend(box, uiControl(c), 1);<br>
+				</samp>
+				<br>
+				參數設 1 表示填滿，0 會自動設定成適合的尺寸。<br>
+				<br>
+				這範例是由上往下自動排列，由左往右的話請用 <code>uiNewHorizontalBox()</code>。<br>
+				<br>
+				Box 可以放入 uiGridAppend() 當面板，也可以放入 uiWindowSetChild() 做為視窗的佈局方式。<br>
+				<br>
+				Box 有個獨特的功能，可以用 <code>uiBoxDelete(佈局, 索引值)</code> 移除元件！
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>附錄</h2>
+		<hr id='appendixa'>
+		<section>
+			<h3>關於本文範例</h3>
+			<p>
+				本文為了直接示範各語法與函式的功能，略過很多預防程式當掉的處理細節。<br>
+				<br>
+				C 是「由程式設計師自行負責檢查資料邊界」的程式語言，寫程式時，應該先用 if 檢查資料是否成立，再執行語法與函式功能，否則資料成立的話沒事，不成立的話會當掉。<br>
+				<br>
+				底下是比較正確的撰寫風格：
+			</p>
+			<section>
+				<h4>範例一</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+						#include &lt;string.h&gt;
+
+						char* array[] = {"a", "b", "c", "d", "e"};
+
+						int compare(const void* str1, const void* str2)
+						{
+							return strcmp(*(char**)str1, *(char**)str2);
+						}
+
+						int search(char* key)
+						{
+							char** result = bsearch(&key, array, 5, sizeof(char*), compare);
+
+							if(result!=NULL){			 /* 先判斷指標是否為空再存取資料 */
+								printf("%s\n", *result); /* 否則程式會當掉 */
+								return 1;				 /* 找到資料的話傳回 1 方便除錯 */
+							}
+							else{
+								puts("NULL\n");
+							}
+
+							return 0;					 /* 找不到資料傳回 0 方便除錯 */
+						}
+
+						int main()						 /* 明確寫上傳回值 */
+						{
+							search("a");
+							search("x");
+
+							return 0;
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>範例二</h4>
+				<p>
+					<textarea class='brush:c'>
+						#include &lt;stdio.h&gt;
+						#include &lt;stdlib.h&gt;
+						#include &lt;string.h&gt;
+
+						int main()
+						{
+							char* string = (char*)calloc(10, sizeof(char));
+
+							if(string!=NULL){  /* 動態配置後檢查是否成功 */
+								strcat(string, "AAA");
+								strcat(string, "BBB");
+								strcat(string, "CCC");
+
+								puts(string);
+
+								free(string);  /* 凡動態配置就一定 free() */
+								string = NULL; /* free() 後設為 NULL 避免後面程式使用 */
+							}
+							else{
+								return 1;	   /* 傳回 1 表示有狀況 */
+							}
+
+							return 0;		   /* 傳回 0 表示正常結束 */
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				本文快速掌握 C 語言用法或許很有幫助，卻是壞的示範：「沒有人 C 語言是像本文範例那樣寫的。」
+			</p>
+		</section>
+		<hr id='appendixb'>
+		<section>
+			<h3>C 語言演進</h3>
+			<p>
+				C 語言並不是只有分歧出 C++ 語言，光 C 語言本身就有如下演進：
+			</p>
+			<section>
+				<h4>K&R C</h4>
+				<p>
+					1978 年，C 語言之父 Dennis Ritchie 偕同 Brian Kernighan 合著《The C Programming Language》，這本書成為早期大家使用古典 C 語言的依據，因此在語法演進史上被稱 K&R C。
+				</p>
+			</section>
+			<section>
+				<h4>ANSI C</h4>
+				<p>
+					1983 年起 ANSI 展開 C 語言在美國的標準化工作，花了六年時間，終於在 1989 年完成 ANSI X3.159-1989，制定出 ANSI C 標準。<br>
+					<br>
+					以 K&R C 為基礎，新增了函式可傳回 struct 或 union 的特性，以及 void 傳回值和 void* 型態…之類，變動幅度相當大，新寫法的原始碼無法在舊版 C 編譯器使用。<br>
+					<br>
+					除此之外，ANSI C 汰除許多 K&R C 中其實有弊端的寫法，因此舊寫法的原始碼也不能百分之百在新版 C 編譯器使用，沒有向下相容。<br>
+					<br>
+					對此 Dennis Ritchie 和 Brian Kernighan 還改版出了《The C Programming Language Senond Edition》一書，封面還蓋了一個章：ANSI C，迎向這更美好的 C 語言～
+				</p>
+			</section>
+			<section>
+				<h4>ISO C</h4>
+				<p>
+					1990 年，ISO 進一步將 ANSI C 進行國際標準化作業，完成 ISO/IEC 9899:1990，制定出 ISO C 標準。<br>
+					<br>
+					ANSI 決定採用 ISO C 做為美國標準，不再繼續制定新的 ANSI C 標準。<br>
+					<br>
+					ISO C 持續有新的標準推出，依年份有 C90、C94、C99、C11、C18 等版本。因此 ANSI C 通常被稱為 C89。<br>
+					<br>
+					C90 只能說是 ISO 版的 ANSI C，幾乎沒什麼更動。C94 則是 C90 的文詞修正與公文調整，也沒什麼更動。C99 就有非常大幅度的更動了！因此 C89 和 C99 成為寫 C 語言時比較需要關心的話題，從此 ISO C 的原始碼無法在 ANSI C 的編譯器使用～
+				</p>
+			</section>
+			<p>
+				透過 <code>__STDC__</code> 可檢查編譯器是否符合 ANSI C 標準，是的話 1，不是或不支援這的話 0。注意！像 C99 就設計成不支援，因為更動幅度太大，照這標準寫的程式是無法在 ANSI C 通過編譯的。<br>
+				<br>
+				透過 <code>__STDC_VERSION__</code> 可得知編譯器支援的版本，C94 是 199409，C99 是 199901，C11 是 201112，C18 是 201710。而 C89 和 C90 不支援，所以這版要檢查是否為空。
+			</p>
+		</section>
+		<hr id='appendixc'>
+		<section>
+			<h3>關於 C++</h3>
+			<p>
+				C++ 唸法是西ㄆ拉斯ㄆ拉斯，唸起來有夠長的，像在施放什麼咒語一樣 XDDD　所以在中文圈我還是喜歡唸西加加。
+			</p>
+			<section>
+				<h4>C 和 C++</h4>
+				<p>
+					建議不要把 C++ 視為 C 語言的強化版（認為學 C++ 就會 C），而要當作兩個不同的程式語言學習！<br>
+					<br>
+					C 語言與 C++ 各有自己的編碼風格與開發手法，把 C++ 的思維混入 C 語言，將寫不出好的 C 程式。<br>
+					<br>
+					在少數人心目中，C 語言是勝過 C++ 的！雖然 C++ 向下相容 C 語言，照理說 C++ 勝過 C 語言。但就是 C++ 功能太強大，同樣一件事有多樣表現手法，寫出來的程式碼往往不是在表達如何與電腦溝通，而是在表現某種學術思想。這時，用來用去就那幾招標準做法便能搞定軟硬體大小事的 C 語言，因為直接讓我們了解電腦結構與行為，所以常常還是覺得 C 語言勝過 C++。這不是語法功能的問題，而是語言傳達的問題<ins>3</ins>：「C 是我們用來描述電腦構造與系統運作的共通語言！」<br>
+					<br>
+					所以，建議視 C++ 與 C 語言為兩個不同的語言學習！學 C 語言時，重點放在它先天簡單的制式做法命令電腦工作。學 C++ 時，重點放在如何專案管理錯綜複雜的原始碼。
+				</p>
+			</section>
+			<section>
+				<h4>C++ 語言相較於 C 的優點</h4>
+				<p>
+					如果 C 語言程式設計的指標，真的讓你感到頭大、不知道怎麼變通做更多事，那就用有 String 和 Vector 物件的 C++ 語言吧！難度會下降好幾個級數～<br>
+					<br>
+					這沒什麼好洩氣的，你不是第一個覺得 C 語言困難的人，也不會是最後一個。就像你不會是第一個覺得數學困難的人，也不會是最後一個，不會就不會，沒什麼好在意的。<br>
+					<br>
+					C++ 的 "" 字串可以用 + 串接，而且 String 物件提供許多方便的操作，像是 insert() 和 replace()，在 C 語言屬於進階技術的字串，在 C++ 變成很簡單的東西。加上可以任意增刪資料的 Vector 類別，讓你就算沒聽過陣列大小固定和指標移動這兩件事，也能開發程式。<br>
+					<br>
+					由於 C++ 相容 C 語言，改用 C++ 後，仍可繼續用 C 語言的傳統結構化程式設計手法寫程式，物件導向的部分只管 new 現成的類別出來用就好，其他什麼思維不去多想，也是一種駕馭 C++ 的程式設計手法。C++ 的複雜、難學，在於功能過於強大的物件導向，但不把重點放在研擬一套物件導向手法的話，C++ 確實提供許多解決 C 語言難題的功能，不失為 C 語言的避風港。
+				</p>
+			</section>
+			<section>
+				<h4>C++ 語言相較於 C 的缺失</h4>
+				<p>
+					寫 C 語言程式，由於它沒有什麼讓你抽象掉細節的高級語法，所以你會明白自己是如何將資料配置於記憶體、何時在中央處理單元執行動作。<br>
+					<br>
+					C++ 有許多高級語法可以讓你不必關心細節，像是字串，它會自動將字元陣列配置於記憶體，既然不是手動配置，你就不清楚資料背地裡是怎樣配置的～<br>
+					<br>
+					以高階語言來說，C++ 這樣做很好，很適合用來設計應用軟體，例如繪圖軟體、影音播放程式、電玩遊戲，設計時只要關心軟體該設計成怎樣就好，不應該去關心記憶體和處理器的事。但如果你要設計的是作業系統或驅動程式，每一位元組的資料與空間，都要照自己設想的結果進行配置，才能確保執行起來會達到該有的性能，這時 C++ 就沒有 C 來得理想，因為 C++ 背地裡做了哪些事，你並不知道，所以你無法寫程式時就精確算出會用多少記憶體來配置字串資料、也無法算出配置字串資料時處理器的工作量與延遲，只能在跑程式時才知道，為硬體寫程式是不能容忍這種事的。<br>
+					<br>
+					這就是為什麼 C++ 不能完全取代 C 的原因！C++ 能在軟體設計方面解決 C 語言大量的問題，但是在硬體設計方面會有少量的問題。該純手工做好每一件事的程式設計，就該用純手工的程式語言，最好是組合語言，其次是 C 語言。貿然把半自動的 C++ 取代純手動的 C 語言，不但不能解決 C 語言所有的問題，反而會帶進 C++ 自己的問題。
+				</p>
+			</section>
+		</section>
+		<hr id='appendixd'>
+		<section>
+			<h3>跨平台</h3>
+			<p>
+				Java 喊著 Wirte once, run anywhere 口號主打跨平台優勢，好像跨平台只有 Java 做得到。但 C/C++ 只是 Write once, compile anywhere，寫出來的程式照樣能跨平台編譯後執行：「而且可以編譯 C 語言的地方比可以跑 Java 的地方還多。」更別說其它直譯式語言，直接跨平台就能跑程式碼。<br>
+				<br>
+				所以，跨平台並不是 Java 專屬的解決方案。<br>
+				<br>
+				甚至就跨平台解決方案來講，Java 不管在哪個平台下重新編譯原始碼，也都是同樣的二進位檔，所以在面對不同平台之間執行上的差異時反而麻煩：「只能在各個不同平台實際測試執行情況找出差異。」而別的程式語言可能在各自平台重新編譯各自的執行檔便能解決。所以 Java 的跨平台又被戲稱為 Write once, debug everywhere，編譯好以後就是四處除錯。（別忘了 debug 是抓臭蟲的意思，也就是 Java 的問題不是那種顯而易見的平台差異性，要用 debug 的精神去找出來。）<br>
+				<br>
+				確實 80% 來講 Java 的跨平台方案最為方便，平台差異最少，也都很好解決：「只是那些差異看了會讓人噴飯而已。」但不表示 C/C++ 不能做為跨平台方案的選擇，各有利弊、各有跨平台時麻煩的地方～
+			</p>
+		</section>
+		<hr id='appendixe'>
+		<section>
+			<h3>TCC 妙用</h3>
+			<section>
+				<h4>一次編譯所有原始碼</h4>
+				<p>
+					0.9.27 版可以用 <code>*.c</code> 的寫法，一次編譯所有 C 原始碼，不必一個一個檔名寫上去了！
+				</p>
+			</section>
+			<section>
+				<h4>可以當直譯器</h4>
+				<p>
+					TCC 不但是 C 編譯器，還能像 Perl 和 Python 那樣當直譯器使用！<br>
+					<br>
+					下參數 <code>tcc.exe -run *.c</code>，不用產生執行檔就能直接執行 C 原始碼，也可以在原始碼開頭寫上：<code>#!C:\Program Files\TCC\tcc.exe -run</code> 或 <code>#!usr/bin/tcc</code>，透過其它能調用表述語言的系統將 C 原始碼當腳本程式執行。<br>
+					<br>
+					像是 Apache HTTP Server，有了 TCC，用 C 語言寫 CGI 就不用每次修改原始碼就重新編譯，直接把 C 原始碼當表述語言跑就行了：<br>
+					<br>
+					<textarea class='brush:c'>
+						#!C:\Progran Files\TCC\tcc.exe -run
+
+						#include &lt;stdio.h&gt;
+
+						main()
+						{
+							puts("");
+							puts("Hello, CGI!");
+						}
+
+						/* 唯一限制是副檔名必須用 .c，不能用 .cgi，因為 tcc.exe 只接受 .c */
+                    </textarea>
+					<br>
+					<canvas width='554'>msedge('http://127.0.0.1/cgi-bin/hello.c','Hello, CGI!')</canvas><br>
+					<br>
+					當然，先把原始碼編譯好是最有效率的！但寫 CGI 重點往往是方便改寫，不是執行效率。
+				</p>
+			</section>
+		</section>
+		<hr id='appendixf'>
+		<section>
+			<h3>下載 MinGW-w64 獲得 GCC 編譯環境</h3>
+			<section>
+				<h4>GCC</h4>
+				<p>
+					免費且開放原始碼的 C/C++ 語言編譯器，最有名的就是 GCC，全名是 GNU Compiler Collection。Linux 就是用這打造起來的！<br>
+					<br>
+					在 Windows 要以 GCC 編譯出 C/C++ 語言的程式，通常使用 MinGW 或 Cygwin。<br>
+					<br>
+					Cygwin 是在 Windows 提供一個 UNIX 的環境來編譯程式，它可以將原本寫給 Linux 的原始碼編譯成 Windows 程式來跑，但編譯出來的 Windows 程式，有點像在 UNIX 以相容的方式跑 Windows 程式，所以執行效率較差，其實不太適合當 Windows 版 C/C++ 編譯器，比較適合當 Windows 底下的 UNIX 虛擬系統，只是這個系統專門用來編譯 C/C++ 程式而已。<br>
+					<br>
+					MinGW 就比較像單純 Windows 版的 C/C++ 編譯器！編譯出來的程式直接與 Windows API 結合，執行上沒有性能的問題。雖然 MinGW 沒辦法百分之百將 Linux 的原始碼編譯成 Windows 程式，不過純粹只想要 Windows 版 GCC 寫 C/C++ 語言程式的人通常也沒這個需求。
+				</p>
+			</section>
+			<section>
+				<h4>Mingw-w64</h4>
+				<p>
+					目前作業系統已進入 64 位元，而 MinGW 只能編譯出 32 位元的程式，加上維護與更新的腳步緩慢，還曾久未更新到被誤以為不再維護了，因此後來有人另起爐灶，開發 Mingw-w64，成為現在 Windows 上最受歡迎的 GCC 編譯器，官方網站是：<br>
+					<br>
+					<a href='http://mingw-w64.org'>http://mingw-w64.org</a><br>
+					<br>
+					官方網站只提供網路安裝程式，可到他們放在 SourceForge 網站的開放原始碼專案庫，直接下載打包好的壓縮檔：<br>
+					<br>
+					<a href='http://sourceforge.net/projects/mingw-w64/files/'>http://sourceforge.net/projects/mingw-w64/files/</a><br>
+					<br>
+					純粹想要一個 Windows 版的 C/C++ 編譯器，建議選 x86_64-win32-seh，編譯出來的程式執行效率高。想編譯 Linux 的原始碼，建議選 x86_64-posix-sjlj，比較容易編譯成功。
+				</p>
+			</section>
+			<section>
+				<h4>SJLJ 和 SEH</h4>
+				<p>
+					檔名後面的 sjlj 和 seh 是錯誤與異常的處理機制。<br>
+					<br>
+					最早 GNU 設計的除錯機制叫做 DWARF，由於只能用於 32 位元，所以重新設計可用於 64 位元的 SJLJ，它相容性高，可通用於 Linux 和 Windows，但代價是編譯出來的程式執行性能會降低。<br>
+					<br>
+					SEH 是 Microsoft 用於 Windows 的異常處理機制，採用這種方式的 Mingw-w64 編譯出 Windows 程式自然不會影響性能，但想編譯 GNU 和 Linux 的程式，相容性會變差。<br>
+					<br>
+					通常下載 Mingw-w64 就只是想要一個 C/C++ 編譯器，自己寫程式編譯成可執行檔來用。真要編譯 Linux 的原始碼來跑，還不如用 Cygwin。所以不知道怎麼選的話，就用 x86_64-win32-seh 吧！
+				</p>
+			</section>
+			<section>
+				<h4>打造編譯器環境</h4>
+				<p>
+					GCC 有豐富的參數可以調整編譯器的能力，幫助你寫出想要的程式，例如：<br>
+					<br>
+					<code>-ansi</code> 使用 ANSI C 標準，不使用 ISO C 的功能。<br>
+					<code>-std=c99</code> 使用 C99 標準，不使用最新版 ISO C 的功能。<br>
+					<code>-Wall -pedantic</code> 會顯示更多的規範要求我們遵循。<br>
+					<br>
+					如果寫的程式只打算在這台電腦或這套作業系統執行，用語言機制寬鬆、靈活的 TCC 就夠了。<br>
+					<br>
+					但程式碼要跨平台編譯的話，GCC 最適合！它會很嚴格抓出寫法上不標準的地方，幫助你寫出最標準化的 C 原始碼，以免搬移時發現自己用了一堆無法通過編譯的寫法，到時就頭大了～
+				</p>
+			</section>
+			<section>
+				<h4>GNU 標準</h4>
+				<p>
+					GCC 的絕對性優勢，在於已經內建無所不包的程式庫。像 XML 和 JSON 格式、SQLite 資料庫、Tk 圖形使用者介面…等 API，連當膠水語言的 Python 都內建在內且相關 API 也準備妥當！<br>
+					<br>
+					這也是為何正式開發程式和軟體時，大家喜歡選用 GCC 的原因，每個人都能在同樣完整的開發資源，寫出彼此都能通過編譯的程式碼。<br>
+					<br>
+					ISO C 標準對於程式庫的擴充非常保守，用起來已經不合時宜，總要自行塞九成的第三方程式庫進來，影響程式的通用性與原始碼的流通性。<br>
+					<br>
+					而囊括當下迫切需要程式庫的 GCC，自成了所謂 GNU 的標準（gnu90、gnu99、gnu11、gnu18），適時地為業界帶來巨大幫助！推薦正式開發程式軟體，優先選擇免費開源的 GCC，積極擁抱 GNU 標準！
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] Java 只能寫出讓電腦負荷不了、作業系統變慢到感覺不動的程式，可按 Ctrl+Alt+Delete 關閉程式，不算真的當機。而 C/C++ 寫出的當機程式，是把資料寫在作業系統的核心程序上面，一執行到這被破壞掉的程序就完全卡死，無法正常有下一步程序，按鍵盤沒有反應，只能按電源重新開機。<br>
+			[2] 如果你沒聽過 Binary search（二分搜尋法），只要知道使用前必須先排序就好，否則演算法無法正常作用。<br>
+			[3] 例如標準 C 的 I/O 函式庫，是根據「資料如何被電腦處理」設計處理功能。而 C++ 的 ANSI I/O 有點將資料的細節隱藏起來，改站在「使用者如何操作電腦」提供所需的操作方式。當我們想看的就是電腦底層的實作細節、而不是程式設計師如何方便寫作時，C 語言比 C++ 來得有效率。
+		</p>
+	</footer>
+</article>
