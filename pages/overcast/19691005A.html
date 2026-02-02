@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>table td:nth-child(1){width:20%}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>用 Python 快寫程式</h1>
+		<p>
+			Python 的哲學是：「每件事的做法最好只有一種，而且既簡單又明確的那一種，是最漂亮的做法！」所以 Python 不需要學習各式各樣花俏的程式寫法，幾招樸實的做法，就能完成各式各樣的任務。招數不多便容易學成，招式簡單便容易使用，自然是易學易用了。<br>
+			<br>
+			易學易用的特性，讓 Python 在 21 世紀 10 年代，成為最流行的程式語言！你能用它寫好絕大部分的事，而且解決問題的過程並不費力，這讓 Python 超越之前所有熱門程式語言，帶動人人都該學程式設計的熱潮。Python 適合做為程式設計新手的第一個語言，也很適合做為程式設計老手的主力語言，這樣的魅力確實難以抗拒。<br>
+			<br>
+			但 Python 做為汎用語言，依然有比不上專用語言的先天缺陷！汎用就是你能用 Python 簡單不費力地做好絕大部分的事，但只是堪用，不會比其他專用語言表現得更好。所以選擇 Python 的你，不要因為他最流行、最熱門，便迷信自己所選的是萬靈丹，Python 還是有不靈光的時候。<br>
+			<br>
+			這時請發揮它膠水語言（glue language）的特色，以 Python 快速開發出負責收發請求的控制器（controller），居中將其他程式功能（model）與平台（view）結合在一起運作，便能以其他更好的程式設計方案解決問題，而不是有我一個 Python 就好～
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>下載與安裝 CPython</h3>
+			<p>
+				Python 有多家直譯器，其中官方開發的是 CPython，請至 <a href='http://www.python.org'>http://www.python.org</a> 下載安裝程式。<br>
+				<br>
+				安裝時，勾選「Add Python 3.x to PATH」就不用自己設定系統變數了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<p>
+				用記事本寫入如下程式，並儲存檔案為 main.py：<br>
+				<br>
+				<canvas width='569'>notepad('main.py','print(\'Hello, world!\')')</canvas><br>
+				<br>
+				進入命令提示字元，切換到 main.py 位置，輸入 <code>python main.py</code>，Python 安裝正常的話會顯示 Hello, world!：<br>
+				<br>
+				<canvas width='569'>cmd('C:\\Users\\User\\Desktop>python main.py','Hello, world!','','C:\\Users\\User\\Desktop>_')</canvas>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Python shell</h3>
+			<p>
+				輸入 <code>python</code> 後面不接原始碼檔案，會進入 Python shell，一個能夠用 Python 語言操作系統的環境。<br>
+				<br>
+				你可以一邊使用 <code>help('指令')</code> 查詢指令，一邊撰寫 Python 程式。或使用 <code>dir('物件')</code> 列出功能來操作。<br>
+				<br>
+				通常會使用到 <code>os</code> 模組，與作業系統聯繫，例如取得作業系統的環境變數：<br>
+				<br>
+				<output>
+					>>> import os<br>
+					>>> print(os.environ['PATH'])
+				</output>
+				<br>
+				或者調用作業系統的指令：<br>
+				<br>
+				<output>
+					>>> os.system['cls']
+				</output>
+				<br>
+				想結束 Python shell 請輸入 <code>exit()</code> 或 <code>Ctrl+C</code>。
+			</p>
+		</section>
+	</section>
+	<hr id='index'>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>教學資源</h3>
+			<p>
+				Python 官方的入門教程《<a href='http://docs.python.org/zh-tw/3/tutorial/'>The Python Tutorial</a>》已有中文翻譯，自然是學習的首選！還可以下載到自己電腦隨時閱讀：<a href='http://docs.python.org/zh-tw/3/download.html'>http://docs.python.org/zh-tw/3/download.html</a>，真覺得我之前寫的這些教學範例是多餘的 XD<br>
+				<br>
+				其次是「菜鸟教程」用範例一步驟一步驟教學的《<a href='http://www.runoob.com/python3/python3-tutorial.html'>Python 3 教程</a>》，它像 1998 年代電腦人（PCuSER）推出的 Tips 系列叢書，去掉大量說明文字，用圖解把重點 step by step 教給你。<br>
+				<br>
+				學會 Python 3 以後，再看《<a href='http://seanlin0800.github.io/py-idioms/'>Python 慣用語</a>》學習成熟的 Python 程式寫作技巧，然後懂得查《<a href='http://docs.python.org/3/library/'>The Python Standard Library</a>》發揮 Python 內建程式庫的功能，就搞定一切了。<br>
+				<br>
+				愛上 Python 後，你會很享受《<a href='http://www.google.com/search?q=Effective+Python+%E7%AD%86%E8%A8%98'>Effective Python 閱讀筆記</a>》的內容。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>基礎範例集</h3>
+			<p>
+				<a href='#anchor1'>資料與輸出入</a><br>
+				<a href='#anchor2'>運算</a><br>
+				<a href='#anchor3'>陣列</a><br>
+				<a href='#anchor4'>敘述、區塊、段落</a><br>
+				<a href='#anchor5'>流程</a><br>
+				<a href='#anchor6'>迭代</a><br>
+				<a href='#anchor7'>函式</a><br>
+				<a href='#anchor8'>類別</a><br>
+				<a href='#anchor9'>模組</a><br>
+				<a href='#anchor10'>Docstring</a><br>
+				<a href='#anchor11'>異常（Exception）</a><br>
+				<a href='#anchor12'>推斷（Assertion）</a><br>
+				<a href='#anchor13'>開頭宣告與設定</a><br>
+				<a href='#anchor14'>字串格式化</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>應用範例集</h3>
+			<p>
+				<a href='19691031A.html#bytes'>bytes</a><br>
+				<a href='19691031A.html#str'>str</a><br>
+				<a href='19691031A.html#tuple'>tuple</a><br>
+				<a href='19691031A.html#list'>list</a><br>
+				<a href='19691031A.html#set'>set</a><br>
+				<a href='19691031A.html#dict'>dict</a><br>
+				<a href='19691031A.html#iterable'>處理可迭代資料</a><br>
+				<a id='19691031A.html#object'>處理物件與變數</a><br>
+				<a href='19691031A.html#expression'>處理算式</a><br>
+				<a href='19691031A.html#format'>格式化數字</a><br>
+				<a href='19691031A.html#file'>讀寫檔案</a><br>
+				<a href='19691031A.html#breakpoint'>breakpoint</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>進階範例集</h3>
+			<p>
+				<a href='19880307A.html'>tkinter 圖形化介面</a><br>
+				<a href='19691201A.html#os'>os, shutil 作業系統與檔案系統</a><br>
+				<a href='19691201A.html#sys'>sys 直譯器的系統環境與功能設置</a><br>
+				<a href='19691201A.html#ctypes'>ctypes 調用 DLL 程式功能</a><br>
+				<a href='19691201A.html#time'>time 日期與時間的表示法</a><br>
+				<a href='19691201A.html#datetime'>datetime 計算日期與時間</a><br>
+				<a href='19691201A.html#calendar'>calendar 月曆</a><br>
+				<a href='19691201A.html#random'>random 亂數產生器</a><br>
+				<a href='19691201A.html#re'>re 匹配資料</a><br>
+				<a href='19691201A.html#sqlite3'>sqlite3 資料庫系統</a><br>
+				<a href='19691201A.html#csv'>csv 字符分隔表</a><br>
+				<a href='19691201A.html#pickle'>pickle 序列化（二進制檔案）</a><br>
+				<a href='19691201A.html#json'>json 序列化（純文字格式）</a><br>
+				<a href='19691201A.html#etree'>xml.etree.ElementTree 剖析 XML 檔案</a><br>
+				<a href='19691201A.html#tarfile'>tarfile, gzip, bz2, lzma 檔案封裝與壓縮</a><br>
+				<a href='19691201A.html#zipfile'>zipfile 最通用壓縮格式</a><br>
+				<a href='19691201A.html#base64'>base64 字元轉碼</a><br>
+				<a href='19691201A.html#logging'>logging 日誌檔</a><br>
+				<a href='19691201A.html#pdb'>pdb 除錯器</a><br>
+				socket 網路連線<br>
+				<a href='19691205A.html#http.server'>http.server 自帶網站伺服器能力</a><br>
+				<a href='19691205A.html#cgitb'>cgitb 獲取執行異常訊息</a><br>
+				<a href='19691205A.html#cgi'>cgi 接收 GET 或 POST 資料</a><br>
+				<a href='19691205A.html#urllib.urlparse'>urllib.rulparse, urllib.urlunparse 網址的剖析</a><br>
+				<a href='19691205A.html#http.cookies'>http.cookies 客端資料儲存</a><br>
+				<a href='19691205A.html#codecs'>codecs 解決 Windows 的 UTF-8 亂碼問題</a><br>
+				<a href='19691205A.html#smtplib'>smtplib, smtpd 寄發電子郵件</a><br>
+				<a href='19691205A.html#webbrowser'>webbrowser 啟動網頁瀏覽器</a><br>
+				<a href='19691205A.html#urllib.request'>urllib.request 程式端網頁存取</a><br>
+				<a href='19691205A.html#xmlrpc'>xmlrpc.server, xmlrpc.client 遠端呼叫</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>延伸主題選</h3>
+			<p>
+				<a href='19690622A.html'>Pythonic：這樣寫才 Python！</a><br>
+				<a href='19690325A.html#style'>Python 編程風格指南</a><br>
+				<a href='19690325A.html#zen'>Pyton 之禪</a><br>
+				<a href='19691210A.html'>Effective Python 中文版目錄</a><br>
+				Web Service … <a href='http://wiki.python.org/moin/WebServices' class='detail'>Python Wiki</a><br>
+				Pygame
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>附錄</h3>
+			<p>
+				<a href='19690325A.html#keyword'>Python 3 指令一覽表</a><br>
+				<a href='19690325A.html#bif'>Python 3 內建函式一覽表</a><br>
+				<a href='19690325A.html#underline'>底線命名原則</a><br>
+				<a href='19690325A.html#batteriesincluded'>從 PEP 594 看 Python 的變革</a><br>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor1'>
+	<section>
+		<h2>資料與輸出入</h2>
+		<hr>
+		<section>
+			<h3>輸入、輸出、變數</h3>
+			<section>
+				<h4>Example 1</h4>
+				<p>
+					<textarea class='brush:py'>
+						# 要求輸入資料並放在 name 變數裡
+						name = input('請輸入你的名字：')
+
+						# 格式化輸出 Python 2
+						print('哈囉 %s，這是你第 %d 次參訪。' % (name, 1))
+
+						# 格式化輸出 Python 3.6
+						print(f'再見 {name}，歡迎下次再來～')
+                    </textarea>
+					<br>
+					<output>
+						請輸入你的名字：Twideem<br>
+						哈囉 Twideem，這是你第 1 次參訪。<br>
+						再見 Twideem，歡迎下次再來～
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2</h4>
+				<p>
+					<textarea class='brush:py'>
+						print('AAA', end='\t')				# 輸出 AAA 後以 Tab 字元結尾
+						print('BBB', end='')				# 輸出 BBB 後取消預設的 \n 結尾
+						print('CCC', end='\n\n')			# 輸出 CCC 後換行再換行
+						print('AAA', 'BBB', 'CCC')			# 一次輸出多個資料
+						print('AAA', 'BBB', 'CCC', sep=':') # 一次輸出多個資料時以 : 間隔
+                    </textarea>
+					<br>
+					<output>
+						AAA &nbsp; &nbsp; BBBCCC<br>
+						<br>
+						AAA BBB CCC<br>
+						AAA:BBB:CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 3</h4>
+				<p>
+					<textarea class='brush:py'>
+						# 將資料輸出到檔案
+						print('ABC', file=open('text.txt', 'w'))
+                    </textarea>
+					<br>
+					<output>
+						（會將 ABC 保存在 text.txt，而且不會顯示 ABC。）
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>資料</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(123)		 # 整數
+					print(0x7b)		 # 十六進位值
+					print(0o173)	 # 八進位值
+					print(0b1111011) # 二進位值
+					print(b'\x7b')   # 位元組
+					print('hello')   # 字串
+					print(r'\n')	 # Raw string（引號內的資料都是字串，不會轉義字元。）
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					123<br>
+					123<br>
+					123<br>
+					b'{'<br>
+					hello<br>
+					\n
+				</output>
+				<br>
+				資料本身就是物件，所以可以直接對資料操作物件的功能：<br>
+				<br>
+				<textarea class='brush:py'>
+					print('ABC'.lower())
+                </textarea>
+				<br>
+				<output>
+					abc
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>型態</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 取得資料的型態
+					a = 123
+					print(type(a))
+                </textarea>
+				<br>
+				<output>
+					&lt;class 'int'&gt;
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>轉換</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(int('123'))    # 轉為整數
+					print(float(123))    # 轉為小數
+					print(bin(123))      # 轉為二進位的數字（字串）
+					print(oct(123))      # 轉為八進位的數字（字串）
+					print(hex(123))      # 轉為十六進位的數字（字串）
+					print(str(123))      # 轉為字串
+					print(chr(123))      # 轉為 Unicode 字元
+					print(ord('A'))      # 轉為 Unicode 編碼
+					print(ascii('哈囉')) # 轉為 ASCII 表示法（用最基本的字元表示所有資料）
+					print(bool(0))       # 轉為布林值（可接受串列）
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					123.0<br>
+					0b1111011<br>
+					0o173<br>
+					0x7b<br>
+					123<br>
+					{<br>
+					65<br>
+					'\u54c8\u56c9'<br>
+					False
+				</output>
+				<br>
+				用 bin() oct() hex() 轉出來的是字串，因此無法直接拿來做數學四則運算，必須先將字串轉為整數：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = int(bin(123), 2) + int(bin(123), 2)
+					print(bin(a))
+                </textarea>
+				<br>
+				<output>
+					0b11110110
+				</output>
+				<br>
+				既然是字串，就可以用 <code>[2:]</code> 擷取 0b 以後的文字，獲得 11110110。<br>
+				<br>
+				很少需要將整數轉為其他進位的數來計算，平常都是直接拿 <code>0b 0o 0x</code> 開頭的資料計算就好，會將十進位整數轉為其他進位的數，通常都是為了看轉換結果而已，而不是拿來計算，所以使用字串提高輸出的效率很合理。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>True 與 False</h3>
+			<p>
+				底下資料為 False：<br>
+				<br>
+				<code>'' 0 [] () {} set() None</code><br>
+				<br>
+				除此之外都是 True。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor2'>
+	<section>
+		<h2>運算</h2>
+		<hr>
+		<section>
+			<h3>數學運算</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 10
+					b = 3
+
+					print(a + b)  # 加
+					print(a - b)  # 減
+					print(a * b)  # 乘
+					print(a / b)  # 除
+					print(a % b)  # 取餘數
+					print(a // b) # 取商數
+					print(a ** b) # 次方
+                </textarea>
+				<br>
+				<output>
+					13<br>
+					7<br>
+					30<br>
+					3.3333333333333335<br>
+					1<br>
+					3<br>
+					1000
+				</output>
+				<br>
+				Python 沒有 ++ 和 -- 之類的功能，但是有 <code>+=</code> 和 <code>-=</code> 之類的可用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>邏輯運算</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = True
+					b = False
+
+					print(a and b)
+					print(a or b)
+					print(not a)
+                </textarea>
+				<br>
+				<output>
+					False<br>
+					True<br>
+					False
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>關係運算</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 8
+					b = 2
+
+					print(a &lt; b)
+					print(a &gt; b)
+					print(a == b)
+					print(a != b)
+                </textarea>
+				<br>
+				<output>
+					False<br>
+					True<br>
+					False<br>
+					True
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>位元運算</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 0b1001
+					b = 0b1111
+
+					print(bin(a & b))
+					print(bin(a | b))
+					print(bin(a ^ b))
+					print(bin(a &gt;&gt; 1))
+					print(bin(a &lt;&lt; 1))
+					print(bin(~a))
+                </textarea>
+				<br>
+				<output>
+					0b1001<br>
+					0b1111<br>
+					0b110<br>
+					0b10010<br>
+					0b100<br>
+					-0b1010
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>函數計算</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(abs(-123))	 # 取絕對值
+					print(complex(4, 5)) # 複數
+					print(divmod(11, 3)) # 以 Tuple 傳回商數和餘數
+					print(pow(2, 3))	 # 2 的 3 次方
+					print(round(9.6))	 # 四捨五入
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					(4+5j)<br>
+					(3, 2)<br>
+					8<br>
+					10
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor3'>
+	<section>
+		<h2>陣列</h2>
+		<p>
+			其實 Python 沒有陣列，是用 list 物件來滿足同樣的功能，而且做得更多。
+		</p>
+		<hr>
+		<section>
+			<h3>Example 1</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = ['AAA', 'BBB', 'CCC']
+
+					print(a[0])
+					print(a[1])
+					print(a[2])
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 2</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = ['AAA', 'BBB', 'CCC']
+					b = ['ABC'] * 3
+					c = a + b
+
+					print(a)
+					print(b)
+					print(c)
+                </textarea>
+				<br>
+				<output>
+					['AAA', 'BBB', 'CCC']<br>
+					['ABC', 'ABC', 'ABC']<br>
+					['AAA', 'BBB', 'CCC', 'ABC', 'ABC', 'ABC']
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 3</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+					print(a[1])    # 取得第二筆資料。
+					print(a[2:4])  # 從第三筆資料開始擷取，第五筆資料停止。
+					print(a[2:])   # 擷取第三筆和以後的資料。
+					print(a[:-2])  # 從頭開始擷取資料，倒數第二筆資料停止。
+					print(a[::2])  # 每隔二筆取出資料。
+					print(a[::-1]) # 反轉資料。
+                </textarea>
+				<br>
+				<output>
+					2<br>
+					[3, 4]<br>
+					[3, 4, 5, 6, 7, 8, 9]<br>
+					[1, 2, 3, 4, 5, 6, 7]<br>
+					[1, 3, 5, 7, 9]<br>
+					[9, 8, 7, 6, 5, 4, 3, 2, 1]
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 4</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 判斷串列中是否有某筆資料
+					print('xyz' in ['AAA', 'BBB', 'CCC'])
+                </textarea>
+				<br>
+				<output>
+					False
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor4'>
+	<section>
+		<h2>敘述、區塊、段落</h2>
+		<hr>
+		<section>
+			<h3>敘述與區塊</h3>
+			<p>
+				一段完整的程式叫做「敘述（statment）」，連續個敘述叫做「區塊（block）」。<br>
+				<br>
+				在 Python 每一行就表示一個敘述，因此你不能跳行寫程式，每一句完整程式就是要在一行寫完。<br>
+				<br>
+				Python 使用縮排表示區塊，同樣縮排的連續個敘述，視為同一區塊。至於要怎樣縮排沒有硬性規定，吃飽沒事用「一個 Tab 字元 + 八個空白字元」這種方式來縮排也可以，只要每行敘述都以同樣方式縮排即可。官方建議使用四個空白字元縮排。<br>
+				<br>
+				如果執行程式時看到 IndentationError 訊息，就表示不符合縮排規定。<br>
+				<br>
+				其它程式語言經常使用 ; 表示一段敘述，所以在下 ; 符號之前，程式碼可以不斷換行寫下去。然後使用 {} 或 begin end 將區塊包起來，在範圍之內的程式就算亂排也是同一區塊。相比之下 Python 的規定不甚自由，但犧牲自由換來乾淨整潔、讀起來甚為舒適的程式碼，還是很值得的。其它程式語言一定要用 ; 或 } 作結尾，再怎麼縮排也無法像 Python 乾淨、美觀，可是羨慕得流口水呢～<br>
+				<br>
+				但靠縮排表示區塊也有缺點，像 lambda 因此只能寫一個敘述，沒辦法像其他語言直接用匿名函數寫一整塊程式來執行，詳情請看匿名函數的範例。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>段落</h3>
+			<p>
+				凡事總有例外的時候，如果非得打破一行代表一段敘述、同樣縮排代表一個區塊的規定怎麼辦？<br>
+				<br>
+				<textarea class='brush:py'>
+					# 寫成一行
+					a = 'ABC'; a += a; print(a)
+
+					# 拆成多行
+					a = 'AAA' + \
+						'BBB' + \
+						'CCC'
+
+					# 多行字串
+					a = """AAA
+					BBB
+					CCC"""
+
+					# 空佔一行
+					pass
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor5'>
+	<section>
+		<h2>流程</h2>
+		<hr>
+		<section>
+			<h3>條件</h3>
+			<section>
+				<h4>if.. elif.. else</h4>
+				<p>
+					<textarea class='brush:py'>
+						a = 123
+
+						if a &gt; 0:
+							print('大於零')
+						elif a &lt; 0:
+							print('小於零')
+						else:
+							print('等於零')
+                    </textarea>
+					<br>
+					<output>
+						大於零
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Conditional expression</h4>
+				<p>
+					if.. else.. 有專屬語句可用，句型是：<br>
+					<br>
+					<code>肯定運算式 if 條件 else 否定運算式</code><br>
+					<br>
+					if 成立的話，會執行前面的運算式，否則執行 else 後面的運算式：<br>
+					<br>
+					<textarea class='brush:py'>
+						x = 11
+
+						# x 小於 10 的話，讓 x 乘以 x，超過 10 的話，x 再大也是 10 乘以 10。
+						print(x*x if x&lt;10 else 10*10)
+                    </textarea>
+					<br>
+					<output>
+						100
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>迴圈</h3>
+			<section>
+				<h4>while</h4>
+				<p>
+					<textarea class='brush:py'>
+						a = int(input('請輸入 1- 10 數字：'))
+
+						while a &gt; 1:
+							a -= 1
+							print(a)
+                    </textarea>
+					<br>
+					<output>
+						請輸入 1- 10 數字：5<br>
+						4<br>
+						3<br>
+						2<br>
+						1
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>break、continue</h4>
+				<p>
+					<textarea class='brush:py'>
+						while True:
+							a = input('請輸入密碼：')
+							if a != 'ABC123':
+								continue
+							else:
+								print('帳號登入中，請稍候…')
+								break
+                    </textarea>
+					<br>
+					<output>
+						請輸入密碼：ABC<br>
+						請輸入密碼：123<br>
+						請輸入密碼：ABC123<br>
+						帳號登入中，請稍候…
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='anchor6'>
+	<section>
+		<h2>迭代</h2>
+		<hr>
+		<section>
+			<h3>for.. in..</h3>
+			<p>
+				Python 的 for 並不是 C 語言的 for 迴圈，而是 C Shell Script 的 foreach 迭代，只能搭配 iterator 使用。<br>
+				<br>
+				不過，寫過傳統結構化程式設計的人，看到 for 就想拿來跑計數器迴圈，所以最常用到的 iterator 是 <code>range()</code>，產生連續數值讓 foreach 迭代。但別忘了 list 或 generator 之類的可迭代資料，也是 foreach 的迭代對象，可別又拿 range() 當索引值去迭代它們 XD
+			</p>
+			<section>
+				<h4>Example 1</h4>
+				<p>
+					<textarea class='brush:py'>
+						# 相當於 C 語言的 for(int n=0; n&lt;5; n++)：
+						for n in range(0, 5):
+							print(n)
+                    </textarea>
+					<br>
+					<output>
+						0<br>
+						1<br>
+						2<br>
+						3<br>
+						4
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 2</h4>
+				<p>
+					<textarea class='brush:py'>
+						# 相當於 C 語言的 for(int n=1; n&lt;9; n+=2)
+						for n in range(1, 9, 2):
+							print(n)
+                    </textarea>
+					<br>
+					<output>
+						1<br>
+						3<br>
+						5<br>
+						7
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 3</h4>
+				<p>
+					<textarea class='brush:py'>
+						a = ['AAA', 'BBB', 'CCC']
+
+						# 對串列迭代
+						for n in a:
+							print(n)
+                    </textarea>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 4</h4>
+				<p>
+					<textarea class='brush:py'>
+						a = 'AAA', 'BBB', 'CCC'
+
+						# 對串列迭代且需要索引值時
+						for index, element in enumerate(a):
+							print(index, element)
+                    </textarea>
+					<br>
+					<output>
+						0 AAA<br>
+						1 BBB<br>
+						2 CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Example 5</h4>
+				<p>
+					<textarea class='brush:py'>
+						a = 'AAA', 'BBB', 'CCC'
+
+						# 索引值需要初始化時
+						for index, element in enumerate(a, 1):
+							print(index, element)
+                    </textarea>
+					<br>
+					<output>
+						1 AAA<br>
+						2 BBB<br>
+						3 CCC
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>for.. else..</h3>
+			<p>
+				for 可以使用 else，但容易誤解的是，它並不是找不到的話才執行，而是迭代完再執行：<br>
+				<br>
+				<textarea class='brush:py'>
+					for n in range(1, 4):
+						print(n)
+					else:
+						print('end')
+                </textarea>
+				<br>
+				<output>
+					1<br>
+					2<br>
+					3<br>
+					end
+				</output>
+				<br>
+				你可以在 for 裡面用 <code>break</code> 來跳過 else 的程式。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>List comprehension expression</h3>
+			<p>
+				for.. in.. 有專屬語句，句型是：<br>
+				<br>
+				<code>已傳元素運算式 for 元素 in 串列 未傳元素運算式</code><br>
+				<br>
+				先看後面的「未傳元素運算式」，在這裡可以對正在迭代而還沒傳回的元素進行運算，例如用 if n%2==0 篩選出能夠整除的偶數，或者再用 for.. in.. 變成多維陣列的迭代句。前面的「已傳元素運算式」可以對 for 每次迭代出來的項目進行運算，例如 n*3 將結果通通乘以三倍：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+					print([n*3 for n in a if n%2==0])
+                </textarea>
+				<br>
+				<output>
+					[6, 12, 18, 24]
+				</output>
+				<br>
+				使用 list comprehension expression 所獲得的資料是 generator 物件，這是一種可迭代資料（iterable）的物件，所以上面的範例，前後用 [] 包住，讓 print() 以 list 資料輸出，可視場合改用 {} 或 () 或不包，這不是語法結構的一部分。<br>
+				<br>
+				重點是要操作 generator 物件來使用迭代句，例如在前面加上 * 符號，直接將資料拆解出來：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = (n*n for n in [1, 2, 3])
+					print(a)  # 這樣只會輸出 generator 物件訊息
+					print(*a) # 前面加個星號進行 iterable 的拆解
+                </textarea>
+				<br>
+				<output>
+					&lt;generator object &lt;genexpr&gt; at 0x0000024E48B9BFC0&gt;<br>
+					1 4 9
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor7'>
+	<section>
+		<h2>函式</h2>
+		<hr>
+		<section>
+			<h3>具名函式</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 函式
+					def f(x):
+						return x
+
+					print(f(123))
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>預設參數</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 關鍵字參數
+					def f(x, y='BBB', z=''):
+						print(x, y, z)
+
+					f('AAA')		  # 可做為預設參數
+					f('AAA', z='CCC') # 指定關鍵字下參數，適用於不照參數順序走。
+					f(111, 222, 333)  # 照參數順序走的話，不妨省略關鍵字。
+                </textarea>
+				<br>
+				<output>
+					AAA BBB<br>
+					AAA BBB CCC<br>
+					111 222 333
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>不定參數</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 可接受 tuple 形式的參數
+					def f1(*x):
+						print(x)
+
+					# 可接受 dict 形式的參數
+					def f2(**x):
+						print(x)
+
+					f1(1, 3, 5)
+					f2(a=1, b=3, c=5)
+                </textarea>
+				<br>
+				<output>
+					(1, 3, 5)<br>
+					{'a': 1, 'b': 3, 'c': 5}
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>順位參數</h3>
+			<p>
+				參數可以使用 <code>/</code> 符號，在這符號之前的參數，只能像傳統程式設計的函式一樣，照位置順序傳入使用，無法再使用關鍵字引數：<br>
+				<br>
+				<textarea class='brush:py'>
+					def f(x, y, z, /):
+						print(x, y, z)
+
+					f(111, 222, 333)
+					f(333, 222, 111)
+					f(x=111, y=222, z=333)
+                </textarea>
+				<br>
+				<output>
+					111 222 333<br>
+					333 222 111<br>
+					TypeError: f() got some positional-only arguments passed as keyword arguments: 'a, b, c'
+				</output>
+				<br>
+				<code>/</code> 只對前面的參數產生限制，後面的參數則可正常使用，因此可設計出混搭照位置順序使用的參數與用關鍵字選擇性使用的參數。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>函式注釋</h3>
+			<p>
+				函式的參數，可以用 <code>:</code> 符號註釋：<br>
+				<br>
+				<textarea class='brush:py'>
+					def f(x: int):
+						return x
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>匿名函數</h3>
+			<p>
+				用 lambda 指令即時跑一個匿名函數：<br>
+				<br>
+				<textarea class='brush:py'>
+					(lambda x: print(x))('Hello')
+                </textarea>
+				<br>
+				<output>
+					Hello
+				</output>
+				<br>
+				礙於一行一敘述、又無法縮排寫多行程式的限制，lambda 只能寫短短一行程式。唯一解決方式是另外寫個具名函式來用，有夠鳥的 (σﾟ∀ﾟ)σﾟ∀ﾟ)σﾟ∀ﾟ)σ<br>
+				<br>
+				<textarea class='brush:py'>
+					def f(x):
+						if x &lt;= 100:
+							a = 123 - x
+						else:
+							a = 123 + x
+						print(a)
+
+					(lambda x: f(x))(456)
+                </textarea>
+				<br>
+				<output>
+					579
+				</output>
+				<br>
+				那些靠 } 或 end 表示區塊結束的語言，只要沒結束區塊前，要塞多少行程式給 lambda 都無所謂，反而沒這個問題 o(*≧▽≦)ツ┏━┓
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>產生器</h3>
+			<p>
+				<textarea class='brush:py'>
+					def f():
+						yield 'AAA'
+						yield 'BBB'
+						yield 'CCC'
+
+					a = f()
+
+					for n in a:
+						print(n)
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				yield 跟 return  一樣，用來傳回資料，但不會結束函式，程式會繼續往下執行，而且可以再用 yield 傳出資料，讓函式可以傳回多筆資料。善用這項特性，可以讓程式碼有更多樣的設計。<br>
+				<br>
+				yield 能傳回多筆資料，是因為使用了像 list 一樣可以連續保存資料的 generator。所以用 yield 傳回資料的話，函式的型態就是 generator，不像 return 傳回 'ABC' 時函式是字串型態，傳回 123 時是整數型態；yield 不管傳回 'ABC' 或 123 都是 generator 物件型態。也因此，使用 yield 的函式，大家會稱為產生器（Generator）。<br>
+				<br>
+				由於 generator 是種 iterable 資料，因此除了可以迭代，也可使用 * 符號拆解資料：<br>
+				<br>
+				<textarea class='brush:py'>
+					def f():
+						yield 'AAA'
+						yield 'BBB'
+						yield 'CCC'
+
+					a = f()
+
+					print(*a)
+                </textarea>
+				<br>
+				<output>
+					AAA BBB CCC
+				</output>
+				<br>
+				初涉入 Python 的人，最感到棘手的，正好就是產生器的資料不知如何使用！幾乎函式丟出的資料都是產生器，輸出時總顯示說這是物件，卻又不知道如何從中取得資料，尤其是沒辦法用陣列的索引值方式去取出資料，最讓其它語言跳過來的人感到困擾。所以底下特別示範一下用法，遇到這問題時別困擾太久：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = 'abcde'
+
+					# 用 next() 一個個拿：
+					b = reversed(a)
+					print(next(b), end=' ')
+					print(next(b), end=' ')
+					print(next(b), end=' ')
+					print(next(b), end=' ')
+					print(next(b), end=' ')
+					print()
+
+					# 跑迭代：
+					for n in reversed(a):
+						print(n, end=' ')
+					print()
+
+					# 直接拆解：
+					print(*reversed(a))
+
+					# 調用資料所屬物件的功能，例如本例是字串：
+					print(' '.join(reversed(a)))
+                </textarea>
+				<br>
+				<output>
+					e d c b a<br>
+					e d c b a<br>
+					e d c b a<br>
+					e d c b a
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor8'>
+	<section>
+		<h2>類別</h2>
+		<hr>
+		<section>
+			<h3>封裝、繼承、多型</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 封裝
+					class S:
+						__g = 0
+						def __init__(self):
+							self.__g = 111
+						def f(self, x):
+							print(self.__g + x)
+
+					# 繼承
+					class T(S):
+						g = 111
+						def f(self):
+							super().f(self.g)
+
+					# 多型
+					# 動態語言本身就已基於多型，並不是只透過類別才能使用多型。
+
+					# 物件
+					a = T()
+					a.g = 222
+					a.f()
+                </textarea>
+				<br>
+				<output>
+					333
+				</output>
+				<br>
+				類別裡的函式，一定要有第一個參數，通常命名為 self。<br>
+				<br>
+				以 <code>__</code> 開頭的變數，無法從外部取用，達到封裝資料的目的。不以 __ 開頭的變數，就可以從外部存取。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>多重繼承</h3>
+			<p>
+				<textarea class='brush:py'>
+					class S1:
+						def f1(self):
+							print('AAA')
+
+					class S2:
+						def f2(self):
+							print('BBB')
+
+					class S3(S1, S2):
+						def f3(self):
+							print('CCC')
+
+					a = S3()
+					a.f1()
+					a.f2()
+					a.f3()
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>函式多載</h3>
+			<p>
+				Python 沒有參數不同就視為不同函式的功能，通常用預設參數的方式來表現，但還是沒有多載那樣方便：<br>
+				<br>
+				<textarea class='brush:py'>
+					class S:
+						def f(self, x=None, y=None):
+							if x and y:
+								print('%s, %s.' % (x, y))
+							elif x:
+								print(x + '!')
+							else:
+								print('Hello.')
+
+					a = S()
+					a.f()
+					a.f('Ahoy')
+					a.f('Holla', 'if ya hear me')
+                </textarea>
+				<br>
+				<output>
+					Hello.<br>
+					Ahoy!<br>
+					Holla, if ya hear me.
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>運算子覆載</h3>
+			<p>
+				<textarea class='brush:py'>
+					class S:
+						g = '*'
+						def __add__(self, x):
+							self.g *= x
+
+					a = S()
+					a + 5
+					print(a.g)
+                </textarea>
+				<br>
+				<output>
+					*****
+				</output>
+				<br>
+				其它可以覆載的符號有：<code>__sub__</code>、<code>__mul__</code>、<code>__matmul__</code>、<code>__truediv__</code>、<code>__floordiv__</code>、<code>__mod__</code>、<code>__divmod__</code>、<code>__pow__</code>、<code>__lshift__</code>、<code>__rshift__</code>、<code>__and__</code>、<code>__xor__</code>、<code>__or__</code>，以及不是符號，但覆載運算子時常一起覆載的 <code>__str__</code>，即物件導向程式設計常見的 toString()。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor9'>
+	<section>
+		<h2>模組</h2>
+		<hr>
+		<section>
+			<h3>Module</h3>
+			<p>
+				每個原始碼檔案就是一個模組（module），可在其它原始碼檔案用 impoer 指令載入使用。解譯器載入模組時，會編譯成 *.pyc 檔案，讓該模組再被使用時提升執行效率。
+			</p>
+			<section>
+				<h4>module.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						def hello(name):
+							print('哈囉%s，歡迎使用模組。' % name)
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>sample.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						# 載入模組
+						import module
+						module.hello('范笠衣')
+
+						# 載入模組時設定別名
+						import module as mod
+						mod.hello('范厲惡')
+
+						# 只載入模組中特定功能且無須模組名稱直接叫用
+						from module import hello
+						hello('范莉珊')
+
+						# 載入模組中所有功能且無須模組名稱直接叫用
+						from module import *
+						hello('范力士')
+                    </textarea>
+					<br>
+					<output>
+						哈囉范笠衣，歡迎使用模組。<br>
+						哈囉范厲惡，歡迎使用模組。<br>
+						哈囉范莉珊，歡迎使用模組。<br>
+						哈囉范力士，歡迎使用模組。
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Package</h3>
+			<p>
+				用資料夾整理這些模組叫做套件（package），每個資料夾可以建立名為 <code>__init__.py</code> 的檔案，用來處理初始化工作，因為解譯器在載入時會先找看看有沒有 __init__.py 可以執行。
+			</p>
+			<section>
+				<h4>package/__init__.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						print('歡迎使用本套件。')
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>package/module.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						def f():
+							print('感謝使用本模組。')
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>sample.py</h4>
+				<p>
+					<textarea class='brush:py'>
+						import package.module
+
+						package.module.f()
+                    </textarea>
+					<br>
+					<output>
+						歡迎使用本套件。<br>
+						感謝使用本模組。
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='anchor10'>
+	<section>
+		<h2>Docstring</h2>
+		<p>
+			每個 function、class、module 都有 <code>__doc__</code> 屬性，可做為像是 <code>help()</code> 用來說明的文件內容。不過這 __doc__ 屬性的內容是怎麼來的？可以在 function、class、module 的開頭，使用三引號多行字串來輸入：<br>
+			<br>
+			<textarea class='brush:py'>
+				def do_nothing():
+					"""什麼都不做，有意見嗎？"""
+					pass
+
+				help(do_nothing)
+            </textarea>
+			<br>
+			<output>
+				Help on function do_nothing in module __main__:<br>
+				<br>
+				do_nothing()<br>
+				&nbsp; &nbsp; 什麼都不做，有意見嗎？
+			</output>
+			<br>
+			雖然這看起來很像寓文件於註解的 Doc comment，但 Docstring 純粹就是多行字串，沒有像是 @version、@since、@param、@return 的標記功能。想寫得正式，可遵照 PEP 257《<a href='http://www.python.org/dev/peps/pep-0257/'>Docstring Conventions</a>》的規範：<br>
+			<br>
+			<textarea class='brush:py'>
+				def do_something(p1='Hello', p2='world'):
+					"""這是一個函式。
+
+					參數：
+					p1 -- 第一個參數 (預設為 'Hello')
+					p2 -- 第二個參數 (預設為 'world')
+					"""
+					print('%s, %s!' % (p1, p2))
+
+				help(do_something)
+				do_something()
+            </textarea>
+			<br>
+			<output>
+				Help on function f in module __main__:<br>
+				<br>
+				do_something(p1='Hello', p2='world')<br>
+				&nbsp; &nbsp; 這是一個函式。<br>
+				<br>
+				&nbsp; &nbsp; 參數：<br>
+				&nbsp; &nbsp; p1 -- 第一個參數 (預設為 'Hello')<br>
+				&nbsp; &nbsp; p2 -- 第二個參數 (預設為 'world')<br>
+				<br>
+				Hello, world!
+			</output>
+		</p>
+	</section>
+	<hr id='anchor11'>
+	<section>
+		<h2>異常（Exception）</h2>
+		<p>
+			<code>try.. except.. finally..</code> 用來設計程式執行期間發生異常的反應，<code>with.. as..</code> 可以在發生異常時，自動執行一些程式，例如跑 open() 發生異常時，會自動執行 close() 關閉檔案。底下是這兩套指令放在一起使用的範例：<br>
+			<br>
+			<textarea class='brush:py'>
+				with open('text.txt') as file:
+					for line in file:
+						try:
+							print(int(line) * 2)
+						except:
+							print('檔案中出現無法轉為數值的資料')
+						finally:
+							print(line)
+            </textarea>
+			<br>
+			想捕捉特定異常的話：<br>
+			<br>
+			<textarea class='brush:py'>
+				try:
+					x = int('z')
+				except ValueError:							 # 捕捉 ValueError 異常
+					print('資料不為數字，無法轉為整數。')
+				except (RuntimeError, TypeError, NameError): # 一次捕捉多個異常
+					pass
+            </textarea>
+			<br>
+			除了接收異常，我們也可以發出異常，用 raise 即可：<br>
+			<br>
+			<textarea class='brush:py'>
+				# 如果參數是數值就輸出參數，否則發出異常：
+				def f(x):
+					if int(x):
+						print(x)
+					else:
+						raise
+
+				# 故意輸入字串參數
+				try:
+					f('AAA')
+				except:
+					print('發生異常')
+            </textarea>
+			<br>
+			<output>
+				發生異常
+			</output>
+			<br>
+			想發出特定異常的話：<br>
+			<br>
+			<textarea class='brush:py'>
+				raise RuntimeError
+            </textarea>
+			<br>
+			<output>
+				RuntimeError
+			</output>
+		</p>
+	</section>
+	<hr id='anchor12'>
+	<section>
+		<h2>推斷（Assertion）</h2>
+		<p>
+			用 <code>assert</code> 可以檢查資料是否符合某種結果，若不符合，程式會發出 <code>AssertionError</code>。<br>
+			<br>
+			<textarea class='brush:py'>
+				digit = 1 # 希望保持在個位數的變數
+
+				for n in range(1,5):
+					digit += n
+					assert digit &lt; 10, 'digit 變數來到十位數了'
+					print(digit)
+            </textarea>
+			<br>
+			<output>
+				2<br>
+				4<br>
+				7<br>
+				Traceback (most recent call last):<br>
+				&nbsp; Fiel "sample.py", line 5, in &lt;module&gt;<br>
+				&nbsp; &nbsp; assert digit &lt; 10, 'digit 變數來到十位數了'<br>
+				AssertionError: digit 變數來到十位數了
+			</output>
+		</p>
+	</section>
+	<hr id='anchor13'>
+	<section>
+		<h2>開頭宣告與設定</h2>
+		<hr>
+		<section>
+			<h3>宣告這是 Python 格式的可執行檔</h3>
+			<p>
+				<textarea class='brush:py'>
+					#!/usr/bin/python3
+					print('Hello, world!')
+                </textarea>
+				<br>
+				在 Unix-like 作業系統，會根據文件開頭的這段敘述，判斷該用哪個指令工具執行。在 Windows 作業系統的話，是根據附檔名來判斷用哪個應用軟體開啟，不寫也可以。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>設定字元編碼</h3>
+			<p>
+				<textarea class='brush:py'>
+					#coding=Big5
+					print('啥米？你用大五碼！')
+                </textarea>
+				<br>
+				Python 3 預設使用 Unicode 編碼系統，如果你的程式碼以 Big5 字元編碼保存，程式將無法執行。這時可以如範例設定使用 Big5 字元編碼。<br>
+				<br>
+				但強烈建議用 UTF-8 保存程式碼，因為 Python 3 特性之一，就是全面改用 Unicode 編碼系統，字串物件與相關函式都針對 Unicode 重新設計，用 Big5 常常會遇到需要轉碼的問題，自找麻煩。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>import 並不是開頭宣告</h3>
+			<p>
+				import 可以在任何位置中使用，甚至有些模組的 import 是在 try.. except..，並不是開頭宣告的一環。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor14'>
+	<section>
+		<h2>字串格式化</h2>
+		<p>
+			有 % 和 {} 新舊兩種字串格式化做法：<br>
+			<br>
+			<textarea class='brush:py'>
+				# 舊的做法
+				a = '%s, %s!' % ('Hello', 'world')
+				print(a)
+
+				# 新的做法
+				b = '{0}, {1}!'.format('Hello', 'world')
+				print(b)
+
+				# 新的做法還可以這樣簡化
+				c = '{} {} {}'.format('AAA', 'BBB', 'CCC')
+				print(c)
+
+				# 新的做法也可以這樣進化
+				d = '{name}'.format(name='Twideem Civs')
+				print(d)
+
+				# 新舊兩做法對照
+				print('%03.2f' % (3.1415926))
+				print('{:03.2f}'.format(3.1415926))
+            </textarea>
+			<br>
+			<output>
+				Hello, world!<br>
+				Hello, world!<br>
+				AAA BBB CCC<br>
+				Twideem Civs
+			</output>
+			<br>
+			字串格式化的樣式可以很複雜，雖然可讀性低，但經常能將複雜的邏輯簡單設計出來！功能寫不出來總比看不懂在寫什麼好時，就會覺得這功能很重要 XD
+		</p>
+		<hr>
+		<section>
+			<h3>舊的字串格式化更多語法符號</h3>
+			<p>
+				語法：<br>
+				<br>
+				<code>填充字元 對齊符號 正負號 # 0 寬度 千位數分隔號 .小數位數 型態</code>
+			</p>
+			<section>
+				<h4>填充字元</h4>
+				<p>
+					可為任意英文字母和標點符號。
+				</p>
+			</section>
+			<section>
+				<h4>對齊符號</h4>
+				<p>
+					有 <code>^ &lt; &gt;</code>，分别表示置中、置左、置右。
+				</p>
+			</section>
+			<section>
+				<h4>正負號</h4>
+				<p>
+					有 <code>+ -</code>，前者會在正整數前面標上加號，後者在負數前面使用負號。
+				</p>
+			</section>
+			<section>
+				<h4>#</h4>
+				<p>
+					使用 <code>#</code> 符號，會在八進位值前面顯示 0，十六進位值前面顯示 0x。
+				</p>
+			</section>
+			<section>
+				<h4>0</h4>
+				<p>
+					使用 <code>0</code>，會在數字前面填充 0。
+				</p>
+			</section>
+			<section>
+				<h4>寬度</h4>
+				<p>
+					設定格式化字串的長度。
+				</p>
+			</section>
+			<section>
+				<h4>千位數分隔號</h4>
+				<p>
+					有 <code>, _</code> 兩種符號可用，會將數字每三位數加上符號。
+				</p>
+			</section>
+			<section>
+				<h4>群組</h4>
+				<p>
+					有 <code>_ ,</code> 兩種符號。
+				</p>
+			</section>
+			<section>
+				<h4>.小數位數</h4>
+				<p>
+					設定要顯示出來的小數位數。
+				</p>
+			</section>
+			<section>
+				<h4>型態</h4>
+				<table>
+					<tr><td>%c</td><td>字元</td></tr>
+					<tr><td>%s</td><td>字串</td></tr>
+					<tr><td>%d</td><td>整數</td></tr>
+					<tr><td>%u</td><td>無號整數</td></tr>
+					<tr><td>%o</td><td>八進位值</td></tr>
+					<tr><td>%x</td><td>十六進位值（使用小寫 a~f）</td></tr>
+					<tr><td>%X</td><td>十六進位值（使用大寫 A~F）</td></tr>
+					<tr><td>%f</td><td>小數（隨後可用數字設定位數）</td></tr>
+					<tr><td>%e</td><td>小寫指數</td></tr>
+					<tr><td>%E</td><td>大寫指數</td></tr>
+					<tr><td>%g</td><td>一般格式化（平常是小數，太長改小寫指數。）</td></tr>
+					<tr><td>%G</td><td>一般格式化（平常是小數，太長改大寫指數。）</td></tr>
+					<tr><td>%p</td><td>記憶體位址</td></tr>
+					<tr><td>%%</td><td>百分比符號</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>新的字串格式化語法進階功能</h3>
+			<p>
+				可用 <code>^ &lt; &gt;</code> 分别表示置中、置左、置右，後面可以用數字表示寬度。<br>
+				<br>
+				可用 <code>:</code> 設定填充的符號或字元，預設為空白字元。
+			</p>
+		</section>
+	</section>
+</article>

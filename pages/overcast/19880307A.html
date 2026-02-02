@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>tkinter 圖形化介面程式設計</h1>
+		<p>
+			Tk 是開放原始碼的圖形化介面開發工具，具備跨平台的特性，它使用 Tcl 表述語言，所以通常合稱 Tcl/Tk，能夠三行程式碼寫出一個時鐘視窗程式。Python 程式語言為了 Tk 設計一套 interface，命名為 Tkinter。Perl、Ruby、Haskell、Common Lisp、Ada 也都有自己的程式庫來進行 Tk 程式設計，可見 Tk 被廣泛使用。<br>
+			<br>
+			Windows 和 macOS 版的 CPython 內附 Tcl/Tk 執行環境，加上大多 Linux 發行版都預裝好 Tcl/Tk，等於 Tkinter 模組是 Python 內建的圖形介面程式庫！在 Python 使用 Tkinter 開發的 Tk 視窗程式，幾乎能在所有作業系統的 Python 直譯器執行！<br>
+			<br>
+			但 Tkinter 不太像標準程式庫，有些作業系統沒有 Tcl/Tk，這些作業系統的 CPython 不但沒有 Tcl/Tk，連 Tkinter 模組都沒內建進去。<br>
+			<br>
+			無論如何，Tkinter 是 Python 官方預設的 GUI 模組，使用 Tkinter 設計圖形介面應用程式，依然是最容易發行給大家使用的！
+		</p>
+	</header>
+	<hr id='anchor1'>
+	<section>
+		<h2>基礎範例</h2>
+		<hr>
+		<section>
+			<h3>Step 1: 先簡單產生一個應用程式視窗</h3>
+			<p>
+				<textarea class='brush:py'>
+					import tkinter
+
+					tk = tkinter.Tk()
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_01.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 2: 接著設定視窗大小與標題</h3>
+			<p>
+				<textarea class='brush:py'>
+					import tkinter
+
+					tk = tkinter.Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = tkinter.Frame(width=300, height=200)
+					frame.pack()
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_02.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 3: 然後加入元件例如按鈕</h3>
+			<p>
+				<textarea class='brush:py'>
+					import tkinter
+
+					tk = tkinter.Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = tkinter.Frame(width=300, height=200)
+					frame.pack()
+
+					button = tkinter.Button(text='別亂按')
+					button.place(x=75, y=80, width=150, height=40)
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_03.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 4: 最後設計按鈕的功能</h3>
+			<p>
+				<textarea class='brush:py'>
+					import tkinter
+
+					tk = tkinter.Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = tkinter.Frame(width=300, height=200)
+					frame.pack()
+
+					button = tkinter.Button(text='別亂按')
+					button.place(x=75, y=80, width=150, height=40)
+					button['command'] = lambda:tk.title('不是叫你別亂按嗎')
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_04.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 5: 一個視窗程式就設計出來了</h3>
+			<p>
+				以這視窗為基礎，再依樣畫葫蘆將：Canvas、Checkbutton、Entry、Frame、Label、LabelFrame、Listbox、Menu、Menubutton、Message、OptionMenu、PanedWindow、Radiobutton、Scale、Scrollbar、Spinbox、Text、Toplevel 等元件加進去，Tk 視窗程式設計就這樣而已，很簡單對吧！<br>
+				<br>
+				這些元件不用全背下來，而是要學會看文件，邊查元件功能邊寫程式，或者用程式設計專用文字編輯器的語法提示功能，就能視為學完 Tk 程式設計了。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>再探基礎範例</h2>
+		<hr>
+		<section>
+			<h3>更方便快寫 Tk 程式</h3>
+			<p>
+				為了更快速撰寫 Tk 視窗程式，上一章節的程式碼可以改為：<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					tk = Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = Frame(width=300, height=200)
+					frame.pack()
+
+					button = Button(text='別亂按', command=lambda:tk.title('不是叫你別亂按嗎'))
+					button.place(x=75, y=80, width=150, height=40)
+
+					tk.mainloop()
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>將事件分開來寫</h3>
+			<p>
+				如果按鈕的動作很多行，寫在元件的建構參數裡面就不適合，所以建議將事件的動作，用函式分開來寫：<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					def button_click():
+						tk.title('不是叫你別亂按嗎')
+
+					tk = Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = Frame(width=300, height=200)
+					frame.pack()
+
+					button = Button(text='別亂按', command=button_click)
+					button.place(x=75, y=80, width=150, height=40)
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				注意！事件（例如 command）接受的是「函式名稱」，後面並沒有 () 符號，所以不是「呼叫函式」。既然不是呼叫函式，而是傳函式物件的參考給事件，那寫給事件的函式想帶參數怎麼辦？要用 lambda 執行：<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					def button_click(x):
+						tk.title(x)
+
+					tk = Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = Frame(width=300, height=200)
+					frame.pack()
+
+					button = Button(text='別亂按', command=lambda:button_click('不是叫你別亂按嗎'))
+					button.place(x=75, y=80, width=150, height=40)
+
+					tk.mainloop()
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>另外加入事件</h3>
+			<p>
+				每個元件，可用 <code>bind()</code> 將函式與事件繫結在一起，例如：<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					def button_click(event): # 注意這裡要加個參數給 callback 用
+						tk.title('不是叫你別亂按嗎')
+
+					tk = Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = Frame(width=300, height=200)
+					frame.pack()
+
+					button = Button(text='別亂按')
+					button.place(x=75, y=80, width=150, height=40)
+					button.bind('&lt;Button-1&gt;', button_click)
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				更多可繫結的事件：
+			</p>
+			<table>
+				<tr><td style='width:35%'>&lt;Button-1&gt;</td><td>按一下滑鼠左鍵</td></tr>
+				<tr><td>&lt;Button-2&gt;</td><td>按一下滑鼠中鍵</td></tr>
+				<tr><td>&lt;Button-3&gt;</td><td>按一下滑鼠右鍵</td></tr>
+				<tr><td>&lt;Double-Button-1&gt;</td><td>雙擊滑鼠左鍵</td></tr>
+				<tr><td>&lt;Double-Button-2&gt;</td><td>雙擊滑鼠中鍵</td></tr>
+				<tr><td>&lt;Double-Button-3&gt;</td><td>雙擊滑鼠右鍵</td></tr>
+				<tr><td>&lt;ButtonRelease-1&gt;</td><td>放開滑鼠左鍵</td></tr>
+				<tr><td>&lt;ButtonRelease-2&gt;</td><td>放開滑鼠中鍵</td></tr>
+				<tr><td>&lt;ButtonRelease-3&gt;</td><td>放開滑鼠右鍵</td></tr>
+				<tr><td>&lt;Enter&gt;</td><td>滑鼠游標移進</td></tr>
+				<tr><td>&lt;Leave&gt;</td><td>滑鼠游標移出</td></tr>
+				<tr><td>&lt;Key&gt;</td><td>按下鍵盤（可用 callback 的 event 參數判斷哪個鍵）</td></tr>
+				<tr><td>&lt;Shift_L&gt;</td><td>按下 Shift 鍵</td></tr>
+				<tr><td>&lt;Control_L&gt;</td><td>按下 Ctrl 鍵</td></tr>
+				<tr><td>&lt;Alt_L&gt;</td><td>按下 Alt 鍵</td></tr>
+				<tr><td>&lt;Return&gt;</td><td>按下 Enter 鍵</td></tr>
+				<tr><td>&lt;Cancel&gt;</td><td>按下 Esc 鍵</td></tr>
+				<tr><td>&lt;F1&gt; ~ &lt;F12&gt;</td><td>按下 F1~F12 鍵</td></tr>
+				<tr><td>&lt;Up&gt; &lt;Down&gt; &lt;Left&gt; &lt;Right&gt;</td><td>按下 ↑ ↓ ← →  鍵</td></tr>
+				<tr><td>&lt;FocusIn&gt;</td><td>取得駐點</td></tr>
+				<tr><td>&lt;FocusOut&gt;</td><td>失去駐點</td></tr>
+				<tr><td>&lt;Configure&gt;</td><td>狀態變動</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>事後修改元件屬性</h3>
+			<p>
+				元件的屬性可用 <code>config()</code> 修改，例如 <code>button.config(text='再亂按啊')</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>預設元件樣式</h3>
+			<p>
+				可以在 Tk() 物件用 <code>option_add()</code> 預設元件的樣式：<br>
+				<br>
+				<textarea class='brush:py'>
+					import tkinter
+
+					tk = tkinter.Tk()
+					tk.title('Python 視窗程式設計')
+					tk.option_add('*font', '標楷體 16')     # 預設所有元件的字型
+					tk.option_add('*Button*borderWidth', 0) # 預設所有按鈕的框線
+
+					frame = tkinter.Frame(width=300, height=200)
+					frame.pack()
+
+					button1 = tkinter.Button(text='確定').place(x=0)
+					button2 = tkinter.Button(text='取消').place(x=100)
+					button3 = tkinter.Button(text='說明').place(x=200)
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				需要注意有大小寫之分，而且樣式屬性寫錯不會報錯，所以寫這程式時要馬上測試結果，才不會到後來找不到問題出在哪。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>改用 ttk 元件</h3>
+			<p>
+				Tk 使用作業系統原生圖形，所以在不同作業系統會有不一樣的風貌。如果要保持一致的外觀，可用 ttk 元件。<br>
+				<br>
+				由於 ttk 元件相容 Tk 元件，所以可以不修改程式，只要引進 ttk 模組取代 tk 模組，就改用 ttk 元件了：<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+					from tkinter.ttk import *
+
+					tk = Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = Frame(width=300, height=200)
+					frame.pack()
+
+					button = Button(text='別亂按', command=lambda:tk.title('不是叫你別亂按嗎'))
+					button.place(x=75, y=80, width=150, height=40)
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_05.png' alt='插圖'><br>
+				<br>
+				會改為 ttk 的元件有：Button、Checkbutton、Entry、Frame、Label、LabelFrame、Menubutton、PanedWindow、Radiobutton、Scale、Scrollbar，此外還追加了 Combobox、Notebook、Progressbar、Separator、Sizegrip、Treeview。<br>
+				<br>
+				如果想同時混用 tk 和 ttk 的元件，可以這樣寫：<br>
+				<br>
+				<textarea class='brush:py'>
+					import tkinter
+					import tkinter.ttk as ttk
+
+					tk = tkinter.Tk()
+					tk.title('Python 視窗程式設計')
+
+					frame = tkinter.Frame(width=300, height=200)
+					frame.pack()
+
+					button = ttk.Button(text='別亂按', command=lambda:tk.title('不是叫你別亂按嗎'))
+					button.place(x=75, y=80, width=150, height=40)
+
+					tk.mainloop()
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>視窗內元件的布局管理</h2>
+		<p>
+			Tkinter 提供三種在視窗內配置元件的機制：指定座標配置元件的 <code>place()</code>、指定方位配置元件的 <code>pack()</code>、劃分格子配置元件的 <code>grid()</code>。
+		</p>
+		<hr>
+		<section>
+			<h3>place</h3>
+			<p>
+				在基礎範例已經示範過 place()，所以就略過不再重複介紹了。<br>
+				<br>
+				需要補充的是，只有 place() 可以指定元件的大小，其它是自動調整元件大小。<br>
+				<br>
+				其它可用的參數：<br>
+				<br>
+				<code>
+					anchor = N, E, S, W, NE, NW, SE, SW<br>
+					bordermode = INSIDE | OUTSIDE<br>
+					relheight = 0.0 ~ 1.0<br>
+					relwidth = 0.0 ~ 1.0<br>
+					relx = 0.0 ~ 1.0<br>
+					rely = 0.0 ~ 1.0
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>pack</h3>
+			<p>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					tk = Tk()
+
+					button1 = Button(text='Button 1')
+					button1.pack(side='top')
+
+					button2 = Button(text='Button 2')
+					button2.pack(side='left')
+
+					button3 = Button(text='Button 3')
+					button3.pack(side='right')
+
+					button4 = Button(text='Button 4')
+					button4.pack(side='bottom')
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_06.png' alt='插圖'><br>
+				<br>
+				其它可用的參數：<br>
+				<br>
+				<code>
+					expand = False | True<br>
+					fill = NONE | X | Y | BOTH<br>
+				</code>
+				<br>
+				不下參數的話，直接打 xxx.pack()，會位置置中，從上到下排列下去。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>grid</h3>
+			<p>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					tk = Tk()
+
+					button1 = Button(text='Button 1')
+					button1.grid(row=0, column=0)
+
+					button2 = Button(text='Button 2')
+					button2.grid(row=0, column=1)
+
+					button3 = Button(text='Button 3')
+					button3.grid(row=1, column=0)
+
+					button4 = Button(text='Button 4')
+					button4.grid(row=1, column=1)
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_07.png' alt='插圖'><br>
+				<br>
+				其它可用的參數：<br>
+				<br>
+				<code>
+					rowspan = 佔用格數<br>
+					columnspan = 佔用格數<br>
+					ipadx = 像素大小<br>
+					ipady = 像素大小<br>
+					padx = 像素大小<br>
+					pady = 像素大小<br>
+					sticky = '' | N | E | S | W | NE | NW | SE | SW
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Tkinter 8.5 reference: a GUI for Python 導讀</h2>
+		<p>
+			不知道為什麼，Python 官方文件《<a href='http://docs.python.org/3/library/tkinter.html'>Python interface to Tcl/Tk</a>》寫得奇差無比，明明是 The Python Standard Library 文件，卻像 Tutorial 分門別類地教你認識這玩意兒，無法當辭典查找想要的資料。因此實際寫 Tk 圖形介面程式的話，我用《<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/index.html'>Tkinter 8.5 reference: a GUI for Python</a>》邊查功能邊寫程式。
+		</p>
+		<hr>
+		<section>
+			<h3>Widgets, pop-up dialogs</h3>
+			<p>
+				一覽各 Widgets 的 options 和 methods：<br>
+				<br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/button.html'>Button</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/canvas.html'>Canvas</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/checkbutton.html'>Checkbutton</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/entry.html'>Entry</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/frame.html'>Frame</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/label.html'>Label</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/labelframe.html'>LabelFrame</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/listbox.html'>Listbox</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/menu.html'>Menu</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/menubutton.html'>Menubutton</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/message.html'>Message</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/optionmenu.html'>OptionMenu</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/panedwindow.html'>PanedWindow</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/radiobutton.html'>Radiobutton</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/scale.html'>Scale</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/scrollbar.html'>Scrollbar</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/spinbox.html'>Spinbox</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/text.html'>Text</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Button.html'>ttk.Button</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Checkbutton.html'>ttk.Checkbutton</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Combobox.html'>ttk.Combobox</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Entry.html'>ttk.Entry</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Frame.html'>ttk.Frame</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Label.html'>ttk.Label</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-LabelFrame.html'>ttk.LabelFrame</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Menubutton.html'>ttk.Menubutton</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Notebook.html'>ttk.Notebook</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-PanedWindow.html'>ttk.PanedWindow</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Progressbar.html'>ttk.Progressbar</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Radiobutton.html'>ttk.Radiobutton</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Scale.html'>ttk.Scale</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Scrollbar.html'>ttk.Scrollbar</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Separator.html'>ttk.Separator</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Sizegrip.html'>ttk.Sizegrip</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/ttk-Treeview.html'>ttk.Treeview</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/toplevel.html'>Toplevel</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/tkMessageBox.html'>messagebox</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/tkFileDialog.html'>filedialog</a><br>
+				<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/tkColorChooser.html'>colorchooser</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Standard attributes</h3>
+			<p>
+				各 Widget 的 options 設定方式，不外乎這些：<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/dimensions.html'>Dimensions</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/coordinates.html'>The coordinate system</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/colors.html'>Colors</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/fonts.html'>Type fonts</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/anchors.html'>Anchors</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/relief.html'>Relief styles</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/bitmaps.html'>Bitmaps</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/cursors.html'>Cursors</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/images.html'>Images</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/geometry.html'>Geometry strings</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/window-names.html'>Window names</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/cap-join-styles.html'>Cap and join styles</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/dash-patterns.html'>Dash patterns</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/stipple-offset.html'>Matching stipple patterns</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Universal widget methods</h3>
+			<p>
+				在 <a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/universal.html'>Universal widget methods</a> 整理了每個 Widget 都有的 methods。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Events</h3>
+			<p>
+				最後把事件的架構弄得更清楚點：<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/binding-levels.html'>Levels of binding</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/event-sequences.html'>Event sequences</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/event-types.html'>Event types</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/event-modifiers.html'>Event modifiers</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/key-names.html'>Key names</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/event-handlers.html'>Writing your handler: The Event class</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/extra-args.html'>The extra arguments trick</a>、<a href='http://anzeljg.github.io/rin2/book2/2405/docs/tkinter/virtual-events.html'>Virtual events</a>。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>應用範例集</h2>
+		<hr>
+		<section>
+			<h3>Message</h3>
+			<p>
+				Label 適合顯示標題文字（單行），不適合顯示段落文字（多行），想顯示多行文字，應該用 Message。<br>
+				<br>
+				Message 會自動斷行，因此通常得設定 <code>width</code> 決定每行文字的長度，否則你會發現它每個單字就斷行。<br>
+				<br>
+				預設是置中靠左對齊，你可以用 <code>anchor</code> 改變位置。<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+
+					tk = Tk()
+
+					Message(text='《觀刈麥》白居易\n田家少閑月，五月人倍忙。夜來南風起，小麥覆隴黃。婦姑荷簞食，童稚攜壺漿。相隨餉田去，丁壯在南岡。足蒸暑土氣，背灼炎天光。力盡不知熱，但惜夏日長。復有貧婦人，抱子在其旁。右手秉遺穗，左臂懸敝筐。聽其相顧言，聞者為悲傷。家田輸稅盡，拾此充饑腸。今我何功德，曾不事農桑。吏祿三百石，歲晏有餘糧。念此私自愧，盡日不能忘。', width=290).pack()
+
+					tk.mainloop()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19880307A_08.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>呼叫另一個視窗</h3>
+			<p>
+				使用 <code>os.system()</code> 直接執行另一個 *.pyw 即可。<br>
+				<br>
+				如果會跳出命令提示字元視窗，覺得礙眼的話，就改用 subprocess 模組的 call()：<br>
+				<br>
+				<textarea class='brush:py'>
+					from tkinter import *
+					import subprocess
+
+					tk = Tk()
+
+					button = Button(text='別亂按', command=lambda:subprocess.call('Form 2.pyw', shell=True)).pack()
+
+					tk.mainloop()
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>視覺化開發環境</h2>
+		<p>
+			Tk 有沒有視覺化工具？有個套件就是朝 RAD 設計，叫做 Pygubu…屁股噗。<br>
+			<br>
+			由於 Tkinter 在架構上就很簡單，因此 Pygubu 的 GUI builder for tkinter 很容易上手，沒什麼複雜的項目，一看就懂。<br>
+			<br>
+			但功能略嫌簡陋，像元件布局管理只能用 grid，無法對應 place，所以跟一般拖來拉去的 Visual Basic 和 C++ Builder 還是有落差，純粹就是看得到而已，卻像隔著透明玻璃一樣摸不到。<br>
+			<br>
+			當然，畫好格子再把元件丟進去的 grid，確實是最理想的布局方式，既能自動調整布局、又能詳細微調每個位置，只是用起來沒那麼直覺而已，不熟 grid 的人會覺得難用。然而趁這個機會把 gird 的特性通盤掌握起來，對跨平台設計 GUI 其實是很有幫助的！
+		</p>
+		<hr>
+		<section>
+			<h3>pygubu 套件</h3>
+			<p>
+				請安裝 pygubu 套件：<br>
+				<br>
+				<code>pip install pygubu</code><br>
+				<br>
+				或前往 <a href='http://pypi.org/project/pygubu/'>http://pypi.org/project/pygubu/</a> 下載原始碼，執行 <code>python setup.py install</code> 安裝。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>執行 pygubu-designer.py</h3>
+			<p>
+				執行 <code>[Python]\Scripts\pygubu-designer.py</code>，即可開啟 Pygubu a GUI builder for tkinter 視覺化開發環境。<br>
+				<br>
+				<img src='../../images/overcast/19880307A_09.png' alt='插圖' width='570'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>疑難</h3>
+			<p>
+				若執行 pygubu-designer.py 時，出現找不到 appdir 套件的錯誤訊息，安裝一下就好：<br>
+				<br>
+				<code>pip install appdir</code><br>
+				<br>
+				或前往 <a href='http://pypi.org/project/appdirs/'>http://pypi.org/project/appdirs/</a> 下載原始碼，執行 <code>python setup.py install</code> 安裝。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>解除安裝</h3>
+			<p>
+				只能用 <code>pip uninstall pygubu</code>，無法用原始碼解除安裝。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] <a href='http://www.tutorialspoint.com/python/python_gui_programming.htm'>Python - GUI Programming (Tkinter)</a>
+		</p>
+	</footer>
+</article>

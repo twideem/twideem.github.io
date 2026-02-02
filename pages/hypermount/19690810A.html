@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>.fix{margin-bottom:20px}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>CSS 釋疑</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>font-family:通用字型</h2>
+		<table>
+			<tr><td>Serif</td><td>襯線體，例如 Times New Roman、細明體。</td></tr>
+			<tr><td>Sans-serif</td><td>無襯線體，例如 Arial、正黑體。<ins>1</ins></td></tr>
+			<tr><td>Monospace</td><td>等寬體，例如 Courier。</td></tr>
+			<tr><td>Cursive</td><td>手寫體，例如 Comic Sans。</td></tr>
+			<tr><td>Fantasy</td><td>藝術體，例如 Impact。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>position</h2>
+		<p>
+			position 樣式有四種設定值：static、relative、absolute、fixed。
+		</p>
+		<hr>
+		<section>
+			<h3>static（靜態的）</h3>
+			<p>
+				自動將元素排列在前一個元素之後，通常，前一個元素的 display 是 block，就排在下方，是 inline 的話，就擺在後面。<br>
+				<br>
+				也因為自動排列的關係，所以 position 為 static 的狀況下，設定 left 與 top 是沒有作用的。或者說，所謂靜態的，就是無法動態改變位置的意思。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>relative（相對的）</h3>
+			<p class='fix'>
+				可用 left 與 top 設定位置。以父元素的原點為起點，不過讓人很難理解的是，它先照 static 的規則，將元素排在前一個元素後面，才來就定位置：
+			</p>
+			<div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+				<div style='background-color:pink;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:relative;top:15px;width:150px'>
+					position:relative;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+				<div style='background-color:wheat;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:relative;top:15px;width:150px'>
+					position:relative;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+			</div>
+			<div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+				<div style='background-color:pink;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:relative;top:15px;width:150px'>
+					position:relative;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+				<div style='background-color:wheat;font-family:Courier;font-size:11px;height:60px;left:30px;padding:10px;position:relative;top:30px;width:150px'>
+					position:relative;<br>
+					left:30px;<br>
+					top:30px;
+				</div>
+			</div>
+			<p>
+				第一個線框中，紅、黃兩者都是 (15,15)，但後面的黃色區塊被前面的紅色區塊給擠了下來。<br>
+				<br>
+				第二個線框，黃色區塊改為 (30,30)，如果扣除紅色區塊的話，黃色區塊確實是 (30,30) 沒錯，只是被紅色區塊給卡了下來。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>absolute（絕對的）</h3>
+			<p class='fix'>
+				可用 left 與 top 設定位置，起點為父元素的原點，而且這次沒有後一個元素要被前一個元素卡下來的問題。<br>
+				<br>
+				例如，紅色區塊是 (15,15)，黃色區塊是 (30,30) 的話，顯示結果如下：
+			</p>
+			<div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+				<div style='background-color:pink;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:absolute;top:15px;width:150px'>
+					position:absolute;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+				<div style='background-color:wheat;font-family:Courier;font-size:11px;height:60px;left:30px;opacity:0.75;padding:10px;position:absolute;top:30px;width:150px'>
+					position:absolute;<br>
+					left:30px;<br>
+					top:30px;
+				</div>
+			</div>
+			<p class='fix'>
+				兩者都是 (15,15) 的話，表示位置相同，因此疊在一起：
+			</p>
+			<div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+				<div style='background-color:pink;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:absolute;top:15px;width:150px'>
+					position:absolute;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+				<div style='background-color:wheat;font-family:Courier;font-size:11px;height:60px;left:15px;opacity:0.75;padding:10px;position:absolute;top:15px;width:150px'>
+					position:absolute;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+			</div>
+			<p class='fix'>
+				由於 absolute 好理解多了，所以請再跟 relative 比較看看，absolute 要與 relative 結果一致的話，left 與 top 分別是：
+			</p>
+			<div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+				<div style='background-color:pink;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:absolute;top:15px;width:150px'>
+					position:absolute;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+				<div style='background-color:wheat;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:absolute;top:95px;width:150px'>
+					position:absolute;<br>
+					left:15px;<br>
+					top:95px;
+				</div>
+			</div>
+			<div style='border-color:#666;border-style:solid;border-width:1px;height:220px;left:30px;margin-bottom:20px;position:relative;width:220px'>
+				<div style='background-color:pink;font-family:Courier;font-size:11px;height:60px;left:15px;padding:10px;position:absolute;top:15px;width:150px'>
+					position:absolute;<br>
+					left:15px;<br>
+					top:15px;
+				</div>
+				<div style='background-color:wheat;font-family:Courier;font-size:11px;height:60px;left:30px;padding:10px;position:absolute;top:110px;width:150px'>
+					position:absolute;<br>
+					left:30px;<br>
+					top:110px;
+				</div>
+			</div>
+			<p>
+				藉由 absolute 這直覺的 (left,top) 位置設定，了解到 relative 那詭異的位置排列模式，原來只是被前一個元素給卡了下來而已；如果扣除前一個元素的話，確實是照所指定的 (left,top) 距離就定位置。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>fixed（固定的）</h3>
+			<p>
+				可用 left 與 top 設定位置，起點以視野所見的頁面最左上角為原點，而且拉動捲軸會自動調整位置，永遠固定在所見頁面的那個位置。<br>
+				<br>
+				如果你無法體會什麼是固定位置的話，<a href='javascript:f()'>請按我一下</a>，然後上下移動捲動看看。
+			</p>
+			<div style='background-color:wheat;display:none;font-family:Courier;font-size:11px;height:60px;left:80px;padding:10px;position:fixed;top:300px;width:150px' id='fixedposition'>
+				position:fixed;<br>
+				left:40px;<br>
+				top:300px;
+			</div>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Flexbox</h2>
+		<p>
+			設定區塊的排列行為，這樣式能設定更多細節，像是由下往上排列，排列的時候按劃分的占用格數由右往左堆上去，堆的時候不填滿而是按各自大小散落分布，為不同螢幕解析度的手機設計網頁時，是最好的解決方案！<br>
+			<br>
+			這樣式分為兩部分：外部的容器（container）、內部的項目（items）。
+		</p>
+		<hr>
+		<section>
+			<h3>Flex container</h3>
+			<table>
+				<tr><td>display</td><td>flex｜inline-flex</td></tr>
+				<tr><td>flex-direction</td><td>row｜row-reverse｜column｜column-reverse (排列方向)</td></tr>
+				<tr><td>flex-wrap</td><td>nowrap｜wrap｜wrap-reverse (換行方式)</td></tr>
+				<tr><td>flex-flow</td><td>flex-direction flex-wrap</td></tr>
+				<tr><td>justify-content</td><td>flex-start｜flex-end｜center｜space-between｜space-around (水平對齊)</td></tr>
+				<tr><td>align-items</td><td>flex-start｜flex-end｜center｜baseline｜stretch (垂直對齊)</td></tr>
+				<tr><td>align-content</td><td>flex-start｜flex-end｜center｜space-between｜space-around｜stretch (多行對齊)</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>Flex items</h3>
+			<table>
+				<tr><td>order</td><td>[n] (順序)</td></tr>
+				<tr><td>flex-grow</td><td>[n=0] (伸展量)</td></tr>
+				<tr><td>flex-shrink</td><td>[n=1] (‎收縮量)</td></tr>
+				<tr><td>flex-basis</td><td>[px] (初始長度)</td></tr>
+				<tr><td>flex</td><td>flex-grow flex-shrink flex-basis</td></tr>
+				<tr><td>align-self</td><td>auto|stretch｜center｜flex-start｜flex-end｜baseline｜initial｜inherit (依元件對齊)</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Grid</h2>
+		<p>
+			用劃分格線的方式，來布置區塊。比起只能一行一行照指定順序排列下去的 Flexbox，Grid 能夠跨格，一次占用多行，產生更多樣的布局。<br>
+			<br>
+			先將容器設定為 <code>display:grid</code>，然後搭配 <code>grid-template-columns</code> 設定水平格線、<code>grid-template-rows</code> 設定垂直格線。
+		</p>
+		<hr>
+		<section>
+			<h3>依占比填滿格數</h3>
+			<section>
+				<h4>1:1:1 columns</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;p style='display:grid; grid-template-columns:1fr 1fr 1fr'&gt;
+							&lt;span style='background-color:#f69'&gt;1&lt;/span&gt;
+							&lt;span style='background-color:#f93'&gt;2&lt;/span&gt;
+							&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+							&lt;span style='background-color:#69c'&gt;4&lt;/span&gt;
+							&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+						&lt;/p&gt;
+                    </textarea>
+				</p>
+				<p style='display:grid;grid-template-columns:1fr 1fr 1fr'>
+					<span style='background-color:#f69'>1</span>
+					<span style='background-color:#f93'>2</span>
+					<span style='background-color:#9c3'>3</span>
+					<span style='background-color:#69c'>4</span>
+					<span style='background-color:#c39'>5</span>
+				</p>
+				<p>
+					像這樣重複 3 次 1fr，可以改寫成 <code>repeat(3,1fr)</code>。
+				</p>
+			</section>
+			<section>
+				<h4>1:2 columns</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;p style='display:grid; grid-template-columns:1fr 2fr'&gt;
+							&lt;span style='background-color:#f69'&gt;1&lt;/span&gt;
+							&lt;span style='background-color:#f93'&gt;2&lt;/span&gt;
+							&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+							&lt;span style='background-color:#69c'&gt;4&lt;/span&gt;
+							&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+						&lt;/p&gt;
+                    </textarea>
+				</p>
+				<p style='display:grid;grid-template-columns:1fr 2fr'>
+					<span style='background-color:#f69'>1</span>
+					<span style='background-color:#f93'>2</span>
+					<span style='background-color:#9c3'>3</span>
+					<span style='background-color:#69c'>4</span>
+					<span style='background-color:#c39'>5</span>
+				</p>
+			</section>
+			<section>
+				<h4>1:2 columns / 1:2:3 rows</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;p style='display:grid; grid-template-columns:1fr 2fr;grid-template-rows:1fr 2fr 3fr'&gt;
+							&lt;span style='background-color:#f69'&gt;1&lt;/span&gt;
+							&lt;span style='background-color:#f93'&gt;2&lt;/span&gt;
+							&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+							&lt;span style='background-color:#69c'&gt;4&lt;/span&gt;
+							&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+						&lt;/p&gt;
+                    </textarea>
+				</p>
+				<p style='display:grid;grid-template-columns:1fr 2fr;grid-template-rows:1fr 2fr 3fr'>
+					<span style='background-color:#f69'>1</span>
+					<span style='background-color:#f93'>2</span>
+					<span style='background-color:#9c3'>3</span>
+					<span style='background-color:#69c'>4</span>
+					<span style='background-color:#c39'>5</span>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>依尺寸劃格數</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;p style='display:grid; grid-template-columns:200px 200px'&gt;
+						&lt;span style='background-color:#f69'&gt;1&lt;/span&gt;
+						&lt;span style='background-color:#f93'&gt;2&lt;/span&gt;
+						&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+						&lt;span style='background-color:#69c'&gt;4&lt;/span&gt;
+						&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+					&lt;/p&gt;
+                </textarea>
+			</p>
+			<p style='display:grid;grid-template-columns:200px 200px'>
+				<span style='background-color:#f69'>1</span>
+				<span style='background-color:#f93'>2</span>
+				<span style='background-color:#9c3'>3</span>
+				<span style='background-color:#69c'>4</span>
+				<span style='background-color:#c39'>5</span>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>格子的最小尺寸和最大尺寸</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;p style='display:grid; grid-template-columns:minmax(10px,20px)'&gt;
+						&lt;span style='background-color:#f69'&gt;1&lt;/span&gt;
+						&lt;span style='background-color:#f93'&gt;2&lt;/span&gt;
+						&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+						&lt;span style='background-color:#69c'&gt;4&lt;/span&gt;
+						&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+					&lt;/p&gt;
+                </textarea>
+			</p>
+			<p style='display:grid;grid-template-columns:minmax(10px,20px)'>
+				<span style='background-color:#f69'>1</span>
+				<span style='background-color:#f93'>22</span>
+				<span style='background-color:#9c3'>333</span>
+				<span style='background-color:#69c'>4444</span>
+				<span style='background-color:#c39'>55555</span>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>依格線劃格數</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;p style='display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(4,1fr)'&gt;
+						&lt;span style='background-color:#f69; grid-column-start:1; grid-column-end:3'&gt;1&lt;/span&gt;
+						&lt;span style='background-color:#f93; grid-row-start:2; grid-row-end:4'&gt;2&lt;/span&gt;
+						&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+						&lt;span style='background-color:#69c; grid-row-start:3; grid-row-end:5'&gt;4&lt;/span&gt;
+						&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+					&lt;/p&gt;
+                </textarea>
+			</p>
+			<p style='display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr)'>
+				<span style='background-color:#f69;grid-column-end:3;grid-column-start:1'>1</span>
+				<span style='background-color:#f93;grid-row-end:4;grid-row-start:2'>2</span>
+				<span style='background-color:#9c3'>3</span>
+				<span style='background-color:#69c;grid-row-end:5;grid-row-start:3'>4</span>
+				<span style='background-color:#c39'>5</span>
+			</p>
+			<p>
+				可以想像每個格子有框線，然後由左往右和由上往下，數第幾條線到第幾條線，來設定 x-x-start 和 x-x-end。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>間距</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;p style='display:grid; grid-template-columns:repeat(3,1fr); grid-column-gap:5px; grid-row-gap:10px'&gt;
+						&lt;span style='background-color:#f69'&gt;1&lt;/span&gt;
+						&lt;span style='background-color:#f93'&gt;2&lt;/span&gt;
+						&lt;span style='background-color:#9c3'&gt;3&lt;/span&gt;
+						&lt;span style='background-color:#69c'&gt;4&lt;/span&gt;
+						&lt;span style='background-color:#c39'&gt;5&lt;/span&gt;
+					&lt;/p&gt;
+                </textarea>
+			</p>
+			<p style='display:grid;grid-column-gap:5px;grid-row-gap:10px;grid-template-columns:repeat(3,1fr)'>
+				<span style='background-color:#f69'>1</span>
+				<span style='background-color:#f93'>2</span>
+				<span style='background-color:#9c3'>3</span>
+				<span style='background-color:#69c'>4</span>
+				<span style='background-color:#c39'>5</span>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] sans 源自法語，無的意思。
+		</p>
+	</footer>
+</article>
+<script>
+	function f()
+	{
+		$('#fixedposition').style.display='block';
+	}
+</script>

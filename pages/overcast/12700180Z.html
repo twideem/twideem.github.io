@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<style>
+	table td:nth-child(1){width:15%;color:#999}
+	table td:nth-child(2){width:40%;color:#396}
+	table td:nth-child(3){width:45%}
+</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>
+	(function(){
+		typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
+
+		function Brush()
+		{
+			this.regexList=[{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:'comments'},
+							{regex:SyntaxHighlighter.regexLib.doubleQuotedString,css:'string'},
+							{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},
+							{regex:SyntaxHighlighter.regexLib.multiLineDoubleQuotedString,css:'string'},
+							{regex:SyntaxHighlighter.regexLib.multiLineSingleQuotedString,css:'string'},
+							{regex:/\b\d+\.?\w*/g,css:'value'},
+							{regex:/&lt;\?php|\?&gt;/g,css:'preprocessor'},
+							{regex:/\$\w+/g,css:'variable'},
+							{regex:new RegExp(this.getKeywords('PHP_EOL TRUE'),'gmi'),css:'constants'},
+							{regex:new RegExp(this.getKeywords('as declare echo foreach function if new return use while'),'gm'),css:'keyword'},
+							{regex:/(&amp;)|(&lt;)|(&gt;)|(!)|(\*)|(\^)|(\{)|(\})|(\[)|(\])|(\()|(\))|[-=+|;:,./]/g,css:'symbol'}];
+			this.forHtmlScript(SyntaxHighlighter.regexLib.phpScriptTags);
+		}
+
+		Brush.prototype=new SyntaxHighlighter.Highlighter();
+		Brush.aliases=['php'];
+		SyntaxHighlighter.brushes.Php=Brush;
+		typeof(exports)!='undefined'?exports.Brush=Brush:null;
+	})();
+</script>
+<article>
+	<header>
+		<h1>用 PHP 網住程式</h1>
+		<p>
+			PHP 是門能將伺服端程式內嵌於 HTML 文件裡的表述語言！它使用 C++ 和 Perl 的語法，有 C 語言傳統結構化程式設計的易學、Perl 的動態表述語言的易用、Java 物件導向程式設計的大型專案開發效益，是 2000 年代最能迎合程式設計師撰寫動態網頁程式的語言。<br>
+			<br>
+			網頁設計師想設計伺服端程式控制的網頁，學 PHP 比較簡單易懂，因為它主要就是針對動態網頁設計所開發的程式語言，不用深厚的程式設計功力就能充分掌握。<br>
+			<br>
+			當你設計的重點不是網頁，而是設計網站應用程式，適合改用 Ruby on Rails 或其它語言的 Web 框架，快速解決設計程式時網站本身帶來的瑣碎細節。<br>
+			<br>
+			PHP 沒辦法像 Ruby on Rails 刁鑽靈活的打造網站應用程式，但 Ruby on Rails 沒辦法像 PHP 簡單易用的設計動態網頁，兩者應用不盡相同，PHP 就是比較基本的網頁伺服端，Ruby on Rails 則是進階許多的商務網站。需求到哪就選擇真正適合你的程式語言，並不是進階許多的技術就比基本的技術好，需求沒到那兒，用了不會比較有開發效率。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>下載 PHP</h3>
+			<p>
+				純粹想練習寫寫動態網頁程式的話，可到 <a href='http://www.php.net'>PHP 官方網站</a> 下載程式引擎，不用搭配 <a href='http://httpd.apache.org'>Apache HTTP Server</a> 就能跑 PHP 程式。<br>
+				<br>
+				想架站跑 PHP 程式的話，為免除設定的麻煩，建議下載整合包，一次安裝全都搞定！例如 Apache + MariaDB + PHP + Perl 的 <a href='http://www.apachefriends.org'>XAMPP</a>。<br>
+				<br>
+				本文示範的程式就是練習用，所以直接拿 PHP 程式引擎來跑。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<p>
+				PHP 除了與各 HTTP Server 軟體搭配使用，也可單獨當解譯器使用，為作業系統寫腳本跑程式。<br>
+				<br>
+				用文字編輯器，輸入如下程式碼，並儲存為 main.php：<br>
+				<br>
+				<canvas width='569'>notepad('main.php','&lt;?php','    echo \'Hello, world!\';','?&gt;')</canvas><br>
+				<br>
+				進入命令提示字元，然後用 PHP 資料夾裡面的 <code>php.exe</code> 執行 main.php，沒問題的話會顯示 Hello, world!：<br>
+				<br>
+				<canvas width='569'>cmd('C:\\Users\\User\\Desktop>C:\\php-7.1.33-nts-Win32-VC14-x64\\php main.php','Hello, world!','','C:\\Users\\User\\Desktop>_')</canvas>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Run with built-in web server</h3>
+			<p>
+				php.exe 內建網頁伺服器的功能，切換到存放網頁的目錄，輸入：<br>
+				<br>
+				<output>
+					php.exe -S 127.0.0.1:80
+				</output>
+				<br>
+				這樣就能用網頁瀏覽器，輸入 http://127.0.0.1 連上網頁。<br>
+				<br>
+				要開放區域網路或網際網路連線的話，則須輸入你電腦分配到的 IP 位址。<br>
+				<br>
+				覺得切換到網頁所在目錄麻煩的話，可以用 <code>-t</code> 參數指定存放網頁的目錄。<br>
+				<br>
+				預設網頁為 <code>index.php</code> 或 <code>index.html</code>，也就是這兩個網頁名稱不用輸入，PHP 網頁伺服器也能連。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Run as interactive shell</h3>
+			<p>
+				php.exe 也有 Shell 模式可用，提供直接以 PHP 語言寫程式的環境：<br>
+				<br>
+				<output>
+					php.exe -a
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>基本語法</h3>
+			<p>
+				<a href='#section1'>原始碼基本架構</a>、<a href='#section2'>分號與敘述</a>、<a href='#section3'>註解</a>、<a href='#section4'>變數</a>、<a href='#section5'>資料型態</a>、<a href='#section6'>常數</a>、<a href='#section7'>陣列</a>、<a href='#section8'>迭代</a>、<a href='#section9'>字串</a>、<a href='#section10'>多行字串</a>、<a href='#section11'>運算子</a>、<a href='#section12'>流程控制</a>、<a href='#section13'>函式</a>、<a href='#section14'>匿名函式</a>、<a href='#section15'>發布函式</a>、<a href='#section16'>構詞</a>、<a href='#section17'>命名空間</a>、<a href='#section18'>錯誤訊息</a>、<a href='#section19'>執行式</a>、<a href='#section20'>組態</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>物件導向</h3>
+			<p>
+				<a href='#section21'>類別</a>、<a href='#section22'>物件</a>、<a href='#section23'>抽象和介面</a>、<a href='#section24'>自動載入</a>、<a href='#section25'>例外處理</a>…<a href='#section26'>相關函式</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>命令列程式設計</h3>
+			<p>
+				<a href='#output'>輸出</a>、<a href='#input'>輸入</a>、<a href='#argv'>參數</a>…<a href='#section27'>相關函式</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>動態網頁程式設計</h3>
+			<p>
+				<a href='#header'>標頭</a>、<a href='#request'>傳送網頁資料</a>、<a href='#session'>暫時保存跨頁資料</a>、<a href='#cookie'>長期保存網站資料</a>、<a href='#env'>環境變數</a>、<a href='#server'>伺服器資訊</a>…<a href='#section28'>相關函式</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>函式庫</h3>
+			<p>
+				<a href='#section29'>雜類</a>、<a href='#type'>資料型態</a>、<a href='#function'>函式</a>、<a href='#string'>字串</a>、<a href='#regex'>正規式</a>、<a href='#array'>陣列</a>、<a href='#math'>數學</a>、<a href='#file'>檔案系統</a>、<a href='#sqlite'>SQLite</a>、<a href='#time'>時間</a>、<a href='#phpinfo'>PHP 組態</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>範例集</h3>
+			<p>
+				<a href='#list'>list 構詞</a>、<a href='#variable_parsing'>變數解析</a>、<a href='#preg'>preg_match()</a>、<a href='#plain'>純文字文件</a>、<a href='#ini'>INI</a>、<a href='#xml'>XML</a>、<a href='#dom'>DOM</a>、<a href='#xpath'>XPath</a>、<a href='#json'>JSON</a>、<a href='#csv'>CSV</a>、<a href='#hexstring'>偽 HEX 檔案</a>、<a href='#bytestring'>將數值寫入檔案</a>、<a href='#dir'>列出所有檔案和子目錄</a>、<a href='#phpini'>列出能設定的 php.ini 項目</a>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>附錄</h3>
+			<p>
+				<a href='19216811Z.html#about_php'>關於 PHP</a>、<a href='19216811Z.html#thread_safe'>關於 Thread Safe 版</a>、<a href='19216811Z.html#best_language'>PHP 是最好的網站程式設計語言</a>、<a href='19216811Z.html#pear_and_pecl'>PEAR 和 PECL</a>。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>很 Perl 的 C 語言</h2>
+		<p>
+			PHP 結合 C++ 和 Perl 兩種語言的語法，基本上採用的是 C 語言手法在寫程式，然後加上 Perl 的動態型別資料簡化 C 語言的工作，所以沒有帶來學習和使用上的負擔，反而更易學易用。而 C++ 的物件導向只是一種輔助語法，團隊開發大型專案時可以用到，用不到時放著不用管它，絲毫不影響你 PHP 的寫作方式。PHP 是多麼清爽的程式語言啊！<br>
+			<br>
+			總之，大致上會寫 C 程式就會 PHP，所以底下只挑出 Perl 和 C++ 的部分，為 C 語言做補充說明，來介紹 PHP 語法，而不是完整說明。<br>
+			<br>
+			完整教學，已經有 W3Schools 的《<a href='http://www.w3schools.com/php7/'>PHP 7 Tutorial</a>》，或「菜鸟教程」翻譯成中文的《<a href='http://www.runoob.com/php/php-tutorial.html'>PHP 教程</a>》，簡單明瞭、條目詳盡，應該沒人可以寫得比這網站好。<br>
+			<br>
+			若要取得更詳盡的操作指南，還有官方文件《<a href='http://php.net/manual/zh/'>PHP 手册</a>》，入門者建議從《<a href='http://php.net/manual/zh/langref.php'>语言参考</a>》閱讀學習。這官方說明文件不但提供中文翻譯，而且還能下載閱讀，非常實用！
+		</p>
+		<hr id='section1'>
+		<section>
+			<h3>原始碼基本架構</h3>
+			<p>
+				PHP 程式碼寫在如下符號裡面：<br>
+				<br>
+				<code>
+					&lt;?php<br>
+					<br>
+					?&gt;<br>
+				</code>
+				<br>
+				你可以把多個這樣的 PHP 程式碼，隨意插在 HTML 裡面。<br>
+				<br>
+				不與 HTML 混用的話，可以省略 <code>?&gt;</code> 結尾符號。<br>
+				<br>
+				<code>&lt;?php echo 資料?&gt;</code> 可以寫成 <code>&lt;?=資料?&gt;</code>。<br>
+				<br>
+				還有其它風格的符號可用，像是 ASP 風格（&lt;%%&gt;）、HTML 風格（SCRIPT 標籤），有興趣的自行搜尋資料吧～
+			</p>
+		</section>
+		<hr id='section2'>
+		<section>
+			<h3>分號與敘述</h3>
+			<p>
+				PHP 的 <code>;</code> 並不是一段敘述的結尾，而是將不同段的敘述分隔開來。<br>
+				<br>
+				因此，若程式只有一道敘述，其實不用加 <code>;</code> 也能執行。但有多個敘述，就要用 <code>;</code> 分隔，且最後一個敘述可以不加。<br>
+				<br>
+				但每段敘述都加 <code>;</code> 並不會報錯，且大家都這麼寫、也都誤以為 PHP 每行程式要加分號表示結束，所以關於 <code>;</code> 的事，知道一下就好，不用真的省略～<br>
+				<br>
+				將錯就錯，有時候是好事。
+			</p>
+		</section>
+		<hr id='section3'>
+		<section>
+			<h3>註解</h3>
+			<p>
+				<code>
+					/* 註解 */<br>
+					// 註解<br>
+					# 註解
+				</code>
+			</p>
+		</section>
+		<hr id='section4'>
+		<section>
+			<h3>變數</h3>
+			<p>
+				以 <code>$</code> 開頭的識別名稱為變數，不須指定資料型態，由 PHP 自動根據資料配置型別。<br>
+				<br>
+				大小寫不同，視為不同變數名稱。（但 PHP 的指令和函式不分大小寫。）<br>
+				<br>
+				在變數前面使用 <code>global</code> 指令，可宣告為全域變數。
+			</p>
+		</section>
+		<hr id='section5'>
+		<section>
+			<h3>資料型態</h3>
+			<p>
+				PHP 有 <code>string</code>、<code>integer</code>、<code>float</code>、<code>boolean</code>、<code>array</code>、<code>object</code>、<code>null</code> 等型態的資料，由程式引擎自動根據資料配置型態，不需個別宣告。<br>
+				<br>
+				想強制限定資料型態的話，使用 <code>declare(strict_types=1)</code>，就能以 <code>array</code>、<code>bool</code>、<code>callable</code>、<code>float</code>、<code>int</code>、<code>interfaces</code>、<code>string</code> 宣告型態。<br>
+				<br>
+				轉型可使用 C 語言的 <code>(型別)</code> 語法，或 <code>setType(變數, 型別)</code> 函式。<br>
+				<br>
+				布林值使用 <code>TRUE</code> 和 <code>FALSE</code>，且保留 C 語言非 0 即 true 的設計。
+			</p>
+		</section>
+		<hr id='section6'>
+		<section>
+			<h3>常數</h3>
+			<p>
+				必須呼叫 <code>define('常數', '資料')</code> 函式定義常數，資料可為陣列的型式。<br>
+				<br>
+				常數一律全域範疇。<br>
+				<br>
+				常數不用加上 $ 符號，因此為了容易辨識常數，避免與關鍵字或函式混淆，建議全大寫。<br>
+				<br>
+				可用 <code>defined(常數)</code> 檢查常數是否已定義。
+			</p>
+			<section>
+				<h4>內定常數（Core predefined constants）</h4>
+				<table>
+					<tr><td>string</td><td>DEFAULT_INCLUDE_PATH</td><td>PHP 載入程式時會尋找的目錄</td></tr>
+					<tr><td>32767</td><td>E_ALL</td><td>所有的錯誤和警報（正式上線用）</td></tr>
+					<tr><td>64</td><td>E_COMPILE_ERROR</td><td>編譯時發生錯誤</td></tr>
+					<tr><td>128</td><td>E_COMPILE_WARNING</td><td>編譯時發出警報</td></tr>
+					<tr><td>16</td><td>E_CORE_ERROR</td><td>PHP 初始啟動時發生錯誤</td></tr>
+					<tr><td>32</td><td>E_CORE_WARNING</td><td>PHP 初始啟動時發出警報</td></tr>
+					<tr><td>8192</td><td>E_DEPRECATED</td><td>執行期用了將列為警報的功能</td></tr>
+					<tr><td>1</td><td>E_ERROR</td><td>執行期發生錯誤</td></tr>
+					<tr><td>8</td><td>E_NOTICE</td><td>執行期用了將列為錯誤的功能</td></tr>
+					<tr><td>4</td><td>E_PARSE</td><td>編譯時剖析發生錯誤</td></tr>
+					<tr><td>4096</td><td>E_RECOVERABLE_ERROR</td><td>發生可捕獲的錯誤</td></tr>
+					<tr><td>2048</td><td>E_STRICT</td><td>更多所有的錯誤和警報（開發測試用）</td></tr>
+					<tr><td>256</td><td>E_USER_ERROR</td><td>使用者造成錯誤</td></tr>
+					<tr><td>512</td><td>E_USER_WARNING</td><td>使用者造成警報</td></tr>
+					<tr><td>1024</td><td>E_USER_NOTICE</td><td>使用者用了將列為錯誤的功能</td></tr>
+					<tr><td>16384</td><td>E_USER_DEPRECATED</td><td>使用者用了將列為警報的功能</td></tr>
+					<tr><td>2</td><td>E_WARNING</td><td>執行期發出警報</td></tr>
+					<tr><td>boolean</td><td>FALSE</td><td>Boolean 資料型態的假值</td></tr>
+					<tr><td>null</td><td>NULL</td><td>Null 資料型態的值</td></tr>
+					<tr><td>string</td><td>PEAR_EXTENSION_DIR</td><td>PEAR 套件目錄位置</td></tr>
+					<tr><td>string</td><td>PEAR_INSTALL_DIR</td><td>PEAR 安裝目錄位置</td></tr>
+					<tr><td>string</td><td>PHP_BINARY</td><td>PHP 執行檔的完整路徑和檔名</td></tr>
+					<tr><td>string</td><td>PHP_BINDIR</td><td>PHP 的 bin（執行檔）目錄存放位置</td></tr>
+					<tr><td>string</td><td>PHP_CONFIG_FILE_PATH</td><td>php.ini 的路徑</td></tr>
+					<tr><td>string</td><td>PHP_CONFIG_FILE_SCAN_DIR</td><td>php.ini 可掃描的目錄</td></tr>
+					<tr><td>string</td><td>PHP_DATADIR</td><td>PHP 的 data（資料）目錄存放位置</td></tr>
+					<tr><td>integer</td><td>PHP_DEBUG</td><td>用來判斷除錯模式是否啟用</td></tr>
+					<tr><td>string</td><td>PHP_EOL</td><td>換行（End Of Line）</td></tr>
+					<tr><td>string</td><td>PHP_EXTENSION_DIR</td><td>PHP 存放套件的目錄位置</td></tr>
+					<tr><td>string</td><td>PHP_EXTRA_VERSION</td><td>PHP 版號中的延伸名稱</td></tr>
+					<tr><td>string</td><td>PHP_FD_SETSIZE</td><td>最多能選擇多少檔案數量</td></tr>
+					<tr><td>integer</td><td>PHP_FLOAT_DIG</td><td>小數位數.</td></tr>
+					<tr><td>float</td><td>PHP_FLOAT_EPSILON</td><td>科學記號最小值</td></tr>
+					<tr><td>float</td><td>PHP_FLOAT_MAX</td><td>小數最大範圍</td></tr>
+					<tr><td>float</td><td>PHP_FLOAT_MIN</td><td>小數最小範圍</td></tr>
+					<tr><td>integer</td><td>PHP_INT_MAX</td><td>整數最大範圍</td></tr>
+					<tr><td>integer</td><td>PHP_INT_MIN</td><td>整數最小範圍</td></tr>
+					<tr><td>integer</td><td>PHP_INT_SIZE</td><td>整數位元組</td></tr>
+					<tr><td>string</td><td>PHP_LIBDIR</td><td>PHP 的 lib（程式庫）目錄存放位置</td></tr>
+					<tr><td>string</td><td>PHP_LOCALSTATEDIR</td><td>PHP 在客端電腦留下資料的目錄</td></tr>
+					<tr><td>integer</td><td>PHP_MAJOR_VERSION</td><td>PHP 的主要版號。</td></tr>
+					<tr><td>string</td><td>PHP_MANDIR</td><td>PHP 的 man（手冊）目錄存放位置</td></tr>
+					<tr><td>integer</td><td>PHP_MAXPATHLEN</td><td>檔案名稱最長可用多少字元</td></tr>
+					<tr><td>integer</td><td>PHP_MINOR_VERSION</td><td>PHP 的次要版號。</td></tr>
+					<tr><td>string</td><td>PHP_OS</td><td>作業系統種類（例如 WINNT）</td></tr>
+					<tr><td>string</td><td>PHP_OS_FAMILY</td><td>作業系統名稱（例如 Windows）</td></tr>
+					<tr><td>string</td><td>PHP_PREFIX</td><td>prefix 參數</td></tr>
+					<tr><td>integer</td><td>PHP_RELEASE_VERSION</td><td>PHP 的更新版號。</td></tr>
+					<tr><td>string</td><td>PHP_SAPI</td><td>cli-server 或 cli</td></tr>
+					<tr><td>string</td><td>PHP_SHLIB_SUFFIX</td><td>動態程式庫的附檔名（例如 dll）</td></tr>
+					<tr><td>string</td><td>PHP_SYSCONFDIR</td><td>PHP 在客端系統讀取設定的目錄</td></tr>
+					<tr><td>string</td><td>PHP_VERSION</td><td>PHP 的主要、次要、更新三個版號</td></tr>
+					<tr><td>integer</td><td>PHP_VERSION_ID</td><td>PHP 版號以五個位數的整數</td></tr>
+					<tr><td>integer</td><td>PHP_ZTS</td><td>判斷 Zend Thread Safety 是否啟用</td></tr>
+					<tr><td>boolean</td><td>TRUE</td><td>Boolean 資料型態的真值</td></tr>
+					<tr><td>integer</td><td>__COMPILER_HALT_OFFSET__</td><td>搭配 <a href='http://php.net/manual/en/function.halt-compiler.php'>__halt_compiler()</a> 時用</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>魔術常數（Magic constants）</h4>
+				<table>
+					<tr><td>string</td><td>__CLASS__</td><td>類別名稱</td></tr>
+					<tr><td>string</td><td>__DIR__</td><td>目前檔案的目錄</td></tr>
+					<tr><td>string</td><td>__FILE__</td><td>目前檔案的完整路徑和檔名</td></tr>
+					<tr><td>string</td><td>__FUNCTION__</td><td>目前的函式名稱或匿名函式的閉包</td></tr>
+					<tr><td>string</td><td>__LINE__</td><td>目前檔案的行數</td></tr>
+					<tr><td>string</td><td>__METHOD__</td><td>目前的方法名稱</td></tr>
+					<tr><td>string</td><td>__NAMESPACE__</td><td>目前的命名空間</td></tr>
+					<tr><td>string</td><td>__TRAIT__</td><td>目前的靜態方法名稱</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='section7'>
+		<section>
+			<h3>陣列</h3>
+			<p>
+				串列：<br>
+				<br>
+				<code>$陣列名稱 = array(值, 值, ...)</code><br>
+				<br>
+				雜湊表：<br>
+				<br>
+				<code>$陣列名稱 = array('鍵'=&gt;值, ...)</code><br>
+				<br>
+				陣列解構式：<br>
+				<br>
+				<code>
+					$串列 = [值, 值, ...]<br>
+					$雜湊表 = ['鍵'=&gt;值, ...]<br>
+				</code>
+				<br>
+				陣列解構式是相當實用的語法功能，如果你想交換兩個變數的資料，只要這樣寫：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					$a = 111;
+					$b = 222;
+					[$a, $b] = [$b, $a];
+					echo $a, PHP_EOL, $b;
+                </textarea>
+				<br>
+				<output>
+					222<br>
+					111
+				</output>
+				<br>
+				過去沒這語法時，都寫成 <samp>$temp = $a; $a = $b; $b = $temp</samp>～
+			</p>
+		</section>
+		<hr id='section8'>
+		<section>
+			<h3>迭代</h3>
+			<p>
+				對於陣列，PHP 提供指令方便我們迭代資料：<br>
+				<br>
+				<code>
+					foreach($陣列 as $變數){<br>
+					　程式;<br>
+					}<br>
+				</code>
+				<br>
+				<code>
+					foreach($陣列 as $變數=&gt;$變數){<br>
+					　程式;<br>
+					}<br>
+				</code>
+				<br>
+				比必須用 <code>reset()</code> 讓迭代器歸零的 <code>each()</code> 函式方便多了～
+			</p>
+		</section>
+		<hr id='section9'>
+		<section>
+			<h3>字串</h3>
+			<p>
+				除了雙引號，也可以用 <code>'</code> 單引號表示字串資料。但兩者仍有差異，例如雙引號字串能正常轉換跳脫字元，單引號字串會把倒斜線視為一般字元來顯示（\\ 和 \' 除外）：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					echo "AAA\nBBB\nCCC\n", 'AAA\nBBB\nCCC\n';
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC<br>
+					AAA\nBBB\nCCC\n
+				</output>
+				<br>
+				雙引號字串內的變數名稱，會直接輸出資料，單引號字串不會：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					$a = '123';
+					echo "$a", PHP_EOL, '$a';
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					$a
+				</output>
+				<br>
+				如果變數輸出的資料顯示 Array，請用 <code>{}</code> 符號括住變數，即可取值。<br>
+				<br>
+				建議用單引號字串，搭配 <code>PHP_EOL</code> 常數解決無法用 \n 換行的問題，因為性能較佳。在需要跳脫字元或自動輸出變數的資料時，才用雙引號字串。<br>
+				<br>
+				字串使用 <code>.</code> 串接，而不是加號。<br>
+				<br>
+				字串可以用陣列索引值的語法取出字元，例如 $name[0] 表示 $name 字串變數的第一個字元。
+			</p>
+		</section>
+		<hr id='section10'>
+		<section>
+			<h3>多行字串</h3>
+			<p>
+				PHP 提供 UNIX Shell 的 Here document 功能，適合表現多行字串：<br>
+				<br>
+				<code>
+					$變數 = &lt;&lt;&lt;標記<br>
+					　字串<br>
+					　字串<br>
+					　字串<br>
+					標記;<br>
+				</code>
+				<br>
+				標記裡面的資料，空白和換行會如實呈現，所以裡面的字串就別跟著程式碼縮排了。<br>
+				<br>
+				字串裡的變數會直接顯示資料，不想這樣的話，可在第一個標記前後加上單引號：<br>
+				<br>
+				<code>
+					$變數 = &lt;&lt;&lt;'標記'<br>
+					　字串<br>
+					標記;
+				</code>
+			</p>
+		</section>
+		<hr id='section11'>
+		<section>
+			<h3>運算子</h3>
+			<p>
+				跟 JavaScript 一樣，除了 <code>==</code> 和 <code>!=</code>，還提供型別檢查的 <code>===</code> 和 <code>!==</code>。<br>
+				<br>
+				<code>變數 ?? 值</code> 會檢查變數是否為 NULL，是的話會賦值給變數，相當於「isset(變數) ? 變數 : 值」的寫法。<br>
+				<br>
+				<code>&lt;=&gt;</code> 用來比較兩個值，小於的話傳回 -1，等於的話傳回 0，大於的話傳回 1。
+			</p>
+		</section>
+		<hr id='section12'>
+		<section>
+			<h3>流程控制</h3>
+			<p>
+				除了傳統用大括號 <code>{}</code> 的寫法，還允許用冒號的寫法：<br>
+				<br>
+				<code>
+					if(判斷式):<br>
+					　程式;<br>
+					elseif(判斷式):<br>
+					　程式;<br>
+					else:<br>
+					　程式;<br>
+					endif;<br>
+					<br>
+					switch(判斷式):<br>
+					　case 值:<br>
+					　　程式;<br>
+					　default:<br>
+					　　程式;<br>
+					endswitch;<br>
+					<br>
+					while(條件式):<br>
+					　程式;<br>
+					endwhile;<br>
+					<br>
+					for(;;):<br>
+					　程式;<br>
+					endfor;<br>
+				</code>
+				<br>
+				if 只能有一個 else，要判斷多個條件，使用 <code>elseif</code> 指令。如果用 C 語言的習慣，會變成巢狀 if 結構，而不是多重條件分支。
+			</p>
+		</section>
+		<hr id='section13'>
+		<section>
+			<h3>函式</h3>
+			<p>
+				函式的基本結構如下：<br>
+				<br>
+				<code>
+					function 函式名稱($參數=預設值, $參數){<br>
+					　return 傳回值;<br>
+					}<br>
+				</code>
+				<br>
+				函式名稱不分大小寫，因此 fa()、Fa()、FA() 視為同一函式。但參數同變數，區分大小寫。<br>
+				<br>
+				也可以不寫參數，改用內建函式處理參數：<br>
+				<br>
+				<code>
+					function 函式名稱(){<br>
+					　func_get_arg(第幾個引數);<br>
+					}<br>
+				</code>
+				<br>
+				或用 <code>func_get_args()</code> 將引數以陣列傳回，放在變數使用。<code>func_num_args()</code> 則可用來取得引數的數量。<br>
+				<br>
+				不定參數可用 <code>...</code> 表示。<br>
+				<br>
+				函式的參數為傳值呼叫，在參數前面使用 <code>&</code> 符號，表示傳址呼叫。<br>
+				<br>
+				函式裡面的區域變數，可用 <code>static</code> 指令，宣告為靜態變數，即使函式執行完仍保留下來。<br>
+				<br>
+				呼叫函式不能像 Perl 那樣省略括號。
+			</p>
+		</section>
+		<hr id='section14'>
+		<section>
+			<h3>匿名函式</h3>
+			<p>
+				PHP 支援匿名函式，因此可寫出立即函式：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					(function($x){
+						echo 123 + $x;
+					})(456);
+                </textarea>
+				<br>
+				<output>
+					579
+				</output>
+				<br>
+				所以直接將函式寫在參數裡面不是問題：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					print((function(){
+						return 'ABC';
+					})());
+                </textarea>
+				<br>
+				<output>
+					ABC
+				</output>
+				<br>
+				函式也可以是物件：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					$f = function(){
+						echo 'ABC';
+					};
+					$f();
+                </textarea>
+				<br>
+				<output>
+					ABC
+				</output>
+				<br>
+				也支援 closure，不過比較麻煩，除了內部函式要使用 <code>use</code> 將想變成 closure 的變數寫出來，還得用 <code>&</code> 將變數宣告為傳址呼叫，才會是我們真正想要的：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					function closure(){
+						$x = 3;
+						return function() use (&$x){
+							return $x += 1;
+						};
+					}
+					$f = closure();
+					echo $f(), $f(), $f();
+                </textarea>
+				<br>
+				<output>
+					456
+				</output>
+			</p>
+		</section>
+		<hr id='section15'>
+		<section>
+			<h3>發布函式</h3>
+			<p>
+				每執行幾次程式，就觸發一次函式：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					function hello(){
+						echo 'Hello!!';
+					}
+					register_tick_function('hello');
+					declare(ticks=3){
+						echo 3;
+						print(2);
+						printf('%d', 1);
+					}
+                </textarea>
+				<br>
+				<output>
+					321Hello!!
+				</output>
+			</p>
+		</section>
+		<hr id='section16'>
+		<section>
+			<h3>構詞</h3>
+			<p>
+				PHP 有一種長得像函式，用起來卻像指令一樣執行效率高、有些還可省略括號的東西，叫做 language construct，表示構成語言的要素。有：
+			</p>
+			<table>
+				<tr><td>array</td><td>array()</td><td>建立陣列</td></tr>
+				<tr><td>void</td><td>die([狀態值或訊息文字])</td><td>結束程式的執行</td></tr>
+				<tr><td>void</td><td>echo(字串, ...)</td><td>輸出一或多個字串</td></tr>
+				<tr><td>boolean</td><td>empty(變數)</td><td>檢查變數是否為空</td></tr>
+				<tr><td>mixed</td><td>eval(字串)</td><td>執行寫成字串的 PHP 程式碼</td></tr>
+				<tr><td>void</td><td>exit([狀態值或訊息文字])</td><td>die() 的別名</td></tr>
+				<tr><td>integer</td><td>include(檔案)</td><td>載入外部程式碼檔案（載入失敗仍會繼續執行）</td></tr>
+				<tr><td>integer</td><td>include_once(檔案)</td><td>載入外部程式碼檔案且不重複載入</td></tr>
+				<tr><td>boolean</td><td>isset(變數, ...)</td><td>檢查變數是否已設值</td></tr>
+				<tr><td>array</td><td>list(變數, ...)</td><td>將陣列的資料分拆到多個變數</td></tr>
+				<tr><td>integer</td><td>require(檔案)</td><td>請求外部程式碼檔案（請求失敗會報錯並終止執行）</td></tr>
+				<tr><td>integer</td><td>require_once(檔案)</td><td>請求外部程式碼檔案且不重複請求</td></tr>
+				<tr><td>void</td><td>unset(變數, ...)</td><td>解除變數</td></tr>
+			</table>
+			<p>
+				基本上這是種已經最佳化編譯好的函式，不像函式需要直譯後執行，因此性能極高，甚至比指令還高。
+			</p>
+		</section>
+		<hr id='section17'>
+		<section>
+			<h3>命名空間</h3>
+			<p>
+				用 <code>namespace</code> 設定命名空間，並以 <code>use</code> 使用命名空間。
+			</p>
+		</section>
+		<hr id='section18'>
+		<section>
+			<h3>錯誤訊息</h3>
+			<p>
+				程式敘述前面使用 <code>@</code> 可以忽略錯誤訊息。
+			</p>
+		</section>
+		<hr id='section19'>
+		<section>
+			<h3>執行式</h3>
+			<p>
+				以一對 <code>`</code> 括住的字串，會以作業系統的指令模式執行。<br>
+				<br>
+				例如 `ver`，等於在 Windows 的命令提示字元執行 ver 指令，顯示作業系統的版本。
+			</p>
+		</section>
+		<hr id='section20'>
+		<section>
+			<h3>組態</h3>
+			<p>
+				可透過 <code>php.ini</code> 設定 PHP 程式語言環境的功能。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>物件導向</h2>
+		<p>
+			PHP 4 時就有簡單的物件導向功能，雖然只有類別和繼承，但對弱型別的表述語言來說其實也夠用了。只是當時 Java 語言稱霸程式設計，誰沒跟上它的物件導向機制，就像沒辦法打造走在時代尖端技術的程式碼一樣，使用者強逼 PHP 5 照抄了一套來用。<br>
+			<br>
+			在 PHP 5 推出的 2004 年，我完全無法想像 Java 語言的物件導向，在十年後反而是種落後時代的技術表現。隨著函數式程式設計興起，人們漸漸接觸動態型別的表述語言，發現其實都處理得很好，利大於弊，於是開始對強型別感到厭煩。Java 走在時代尖端的那套技術，如今被視為沒有寫作效率的程式寫法了～<br>
+			<br>
+			時代確實不一樣了！如果從頭到尾都用同一個程式語言開發專案，你確實離不開 Java 語言那樣的物件導向功能，來管理終將變得巨大無比的程式碼。但現在開發的專案，比較常見的是發揮不同程式語言的特性來解決問題，因此接觸到的是各種語言寫成的小而美程式，確實用不到那套物件導向業界標準了！<br>
+			<br>
+			現在欠缺的是新一套開發標準，如何更有效率地將開放原始碼倉庫中用不同語言做好的解決方案，結合起來完成想要的專案…將在 2020 年代有重大轉變。
+		</p>
+		<hr id='section21'>
+		<section>
+			<h3>類別</h3>
+			<p>
+				類別的語法有：<br>
+				<br>
+				<code>
+					class 類別名稱 extends 父類別{<br>
+					<br>
+					　const 常數 = 初始值;<br>
+					<br>
+					　var $屬性 = 初始值;<br>
+					<br>
+					　function 方法($參數){<br>
+					　　程式;<br>
+					　}<br>
+					<br>
+					　function __construct(){<br>
+					　　建構式;<br>
+					　}<br>
+					<br>
+					　function __destruct(){<br>
+					　　解構式;<br>
+					　}<br>
+					<br>
+					　function __set(){<br>
+					　　設定不存在的屬性時執行程式;<br>
+					　}<br>
+					<br>
+					　function __get(){<br>
+					　　取出不存在的屬性時執行程式;<br>
+					　}<br>
+					<br>
+					　function __call(){<br>
+					　　呼叫不存在的方法時執行程式;<br>
+					　}<br>
+					<br>
+					}<br>
+				</code>
+				<br>
+				var 可改用 <code>public</code>、<code>private</code>、<code>protected</code> 限制存取範疇，方法前面也可加上去。<br>
+				<br>
+				類別的屬性和方法可用 <code>static</code> 宣告為靜態，在不建立物件的情況下以 <code>類別名稱::屬性或方法</code> 方式存取。<br>
+				<br>
+				方法可用 <code>final</code> 禁止覆寫。<br>
+				<br>
+				可用 <code>$this</code> 表示物件自己，但無法存取 static 屬性和方法，因為這不是物件的一部分，而是類別的。因此 PHP 5 後，新增 <code>self</code> 表示類別自己，以及 <code>parent</code> 表示父類別。
+			</p>
+		</section>
+		<hr id='section22'>
+		<section>
+			<h3>物件</h3>
+			<p>
+				<code>
+					$物件名稱 = new 類別名稱();<br>
+					$物件名稱-&gt;屬性或方法;<br>
+				</code>
+				<br>
+				複製物件使用 <code>clone</code> 指令。
+			</p>
+		</section>
+		<hr id='section23'>
+		<section>
+			<h3>抽象和介面</h3>
+			<p>
+				可用 <code>abstract</code> 和 <code>interface</code> 設計抽象和介面。
+			</p>
+		</section>
+		<hr id='section24'>
+		<section>
+			<h3>自動載入</h3>
+			<p>
+				PHP 沒有 package 的設計，因此外部類別是用 require 一個個載入的，沒有 import php.util.* 這類一次載入所有類別的寫法。變通的方式，就是覆寫 <code>__autoload()</code>，當 PHP 引擎找不到類別時，自動執行裡面的程式。<br>
+				<br>
+				<code>
+					function __autoload($class){<br>
+					　require_once("存放類別的目錄/$class.php");<br>
+					}<br>
+				</code>
+				<br>
+				這項功能將廢棄，改用 <code>spl_autoload_register()</code> 代替。
+			</p>
+		</section>
+		<hr id='section25'>
+		<section>
+			<h3>例外處理</h3>
+			<p>
+				<code>try</code>、<code>catch</code>、<code>throw</code>…在 PHP 可有可無，就不介紹了。
+			</p>
+		</section>
+		<hr id='section26'>
+		<section>
+			<h3>相關函式</h3>
+			<table>
+				<tr><td>boolean</td><td>class_exists(類別)</td><td>檢查是否定義了類別</td></tr>
+				<tr><td>array</td><td>get_declared_classes()</td><td>取得已定義的所有類別</td></tr>
+				<tr><td>array</td><td>method_exists(物件, 方法)</td><td>檢查物件是否擁有方法</td></tr>
+				<tr><td>array</td><td>get_class_vars(類別)</td><td>取得類別所有屬性</td></tr>
+				<tr><td>array</td><td>get_class_methods(類別)</td><td>取得類別所有方法</td></tr>
+				<tr><td>array</td><td>get_object_vars(物件)</td><td>取得物件所有屬性</td></tr>
+				<tr><td>boolean</td><td>is_a(物件, 類別)</td><td>檢查物件是否為類別的實體</td></tr>
+				<tr><td>boolean</td><td>is_subclass_of(物件, 父類別)</td><td>檢查物件是否為父類別的子類別</td></tr>
+				<tr><td>string</td><td>get_class(物件)</td><td>查詢物件是哪個類別</td></tr>
+				<tr><td>string</td><td>get_parent_class(物件)</td><td>查詢物件的父類別</td></tr>
+				<tr><td>string</td><td>serialize(物件)</td><td>將物件轉為字串（序列化物件）</td></tr>
+				<tr><td>mixed</td><td>unserialize(字串)</td><td>轉序列化字串為物件</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>命令列程式設計</h2>
+		<p>
+			PHP 從 4.2 版便實驗性的推出 Command Line Interface 計畫，讓 PHP 也能做為電腦應用程式的表述語言，並在 4.3 正式成為 PHP 主要功能。<br>
+			<br>
+			雖然做為動態網頁程式設計的表述語言，PHP 內建的程式庫都集中在 HTTP 伺服端功能上，且有忽視作業系統相關功能的傾向，因此不太可能像 Python 這樣的表述語言實用，甚至顯得不適合、功能有限、自討沒趣…<br>
+			<br>
+			不過這種自討沒趣卻又挺有趣的 XDDDDDD<br>
+			<br>
+			事實上，PHP 官方提供了許許多多需要另外安裝的模組，連 <a href='http://php.net/manual/en/book.ui.php'>GUI</a> 都有！用 PHP 寫電腦應用程式並非不可行～
+		</p>
+		<hr id='output'>
+		<section>
+			<h3>輸出</h3>
+			<section>
+				<h4>echo</h4>
+				<p>
+					如果使用多次 echo 構詞：<br>
+					<br>
+					<code>
+						echo 'AAA';<br>
+						echo 'BBB';<br>
+						echo 'CCC';<br>
+					</code>
+					<br>
+					不妨考慮用逗號寫在一起：<br>
+					<br>
+					<code>echo 'AAA', 'BBB', 'CCC';</code><br>
+					<br>
+					你可能會覺得這樣不如用句號接在一起把字串接好，再送給 echo，只執行一次就好：<br>
+					<br>
+					<code>echo 'AAA'.'BBB'.'CCC';</code><br>
+					<br>
+					不過執行多次 echo，要比把字串接起來更有效率，因為串接字串的工作量要比執行多次 echo 來得繁重，而且 echo 是特別優化過的，不怕多執行幾次，只怕你不知道要盡量用 echo 提升效率。
+				</p>
+			</section>
+			<section>
+				<h4>print</h4>
+				<p>
+					<code>print</code> 是指令，但速度反而沒有構詞的 echo 來得好。
+				</p>
+			</section>
+			<section>
+				<h4>printf()</h4>
+				<p>
+					<code>printf()</code> 提供格式化輸出的功能：<br>
+					<br>
+					<textarea class='brush:php'>
+						&lt;?php
+						printf('歡迎光臨，%s，你是第 %d 位來賓。', 'abc', 123);
+                    </textarea>
+					<br>
+					<output>
+						歡迎光臨，abc，你是第 123 位來賓
+					</output>
+					<br>
+					<code>
+						%d　　整數<br>
+						%f　　小數<br>
+						%c　　字元<br>
+						%s　　字串<br>
+						%b　　二進位值<br>
+						%u　　十進位值<br>
+						%o　　八進位值<br>
+						%x　　十六進位值
+					</code>
+				</p>
+			</section>
+			<section>
+				<h4>其它</h4>
+				<p>
+					<code>print_r()</code> 輸出陣列和物件的資料結構。<br>
+					<code>var_dump()</code> 輸出資料的詳細情報。<br>
+					<code>var_export()</code> 輸出資料的簡單情報。
+				</p>
+			</section>
+		</section>
+		<hr id='input'>
+		<section>
+			<h3>輸入</h3>
+			<p>
+				命令列模式的輸入，使用 <code>readline('說明文字')</code> 函式。
+			</p>
+		</section>
+		<hr id='argv'>
+		<section>
+			<h3>參數</h3>
+			<p>
+				若以直譯器的方式執行 PHP 程式碼時，隨後附加參數：<br>
+				<br>
+				<output>
+					pnp.exe main.php -abc -123
+				</output>
+				<br>
+				那 PHP 程式碼可以用 <code>$argv[0]</code> <code>$argv[1]</code> 之類的系統變數取得參數。
+			</p>
+		</section>
+		<hr id='section27'>
+		<section>
+			<h3>相關函式</h3>
+			<table>
+				<tr><td>string</td><td>exec(程式)</td><td>執行外部程式並傳回結果</td></tr>
+				<tr><td>void</td><td>passthru(程式)</td><td>執行外部程式並顯示結果</td></tr>
+				<tr><td>string</td><td>system(程式)</td><td>執行外部程式並顯示與傳回結果</td></tr>
+				<tr><td>string</td><td>shell_exec(命令)</td><td>以作業系統執行命令並傳回結果</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>動態網頁程式設計</h2>
+		<p>
+			伺服端程式設計是 PHP 的強項！程式庫幾乎都是繞著 HTTP Server 設計的，連 Web Service 都能兩三行搞定，就知道拿 PHP 設計網頁伺服器有多好用了。
+		</p>
+		<hr id='header'>
+		<section>
+			<h3>標頭</h3>
+			<p>
+				寫 PHP 動態網頁時，經常使用如下函式設定標頭，例如文件的字元編碼：<br>
+				<br>
+				<code>header('Content-Type: text/plain; charset: utf-8');</code>
+			</p>
+		</section>
+		<hr id='request'>
+		<section>
+			<h3>傳送網頁資料</h3>
+			<p>
+				使用 HTML 的 FORM 系列元件送出填表資料，然後用 <code>$_GET['元件名稱']</code> 或 <code>$_POST['元件名稱']</code> 接收。<br>
+				<br>
+				不確定送出的資料是哪一種方式，可根據 <code>$_SERVER['REQUEST_METHOD']</code> 是 <code>'GET'</code> 還是 <code>'POST'</code> 來設計。<br>
+				<br>
+				若上傳的資料包含檔案，則用 <code>$_FILES</code> 處理。
+			</p>
+		</section>
+		<hr id='session'>
+		<section>
+			<h3>暫時保存跨頁資料</h3>
+			<p>
+				這是一種暫時保存共用資料，當瀏覽結束就自動釋放資料，不會在使用者電腦留下紀錄的設計，適合用來跨頁傳遞資料。<br>
+				<br>
+				先用 <code>session_start()</code> 啟動暫存功能，就能以 <code>$_SESSION['識別名稱']</code> 跨頁存取資料。完成工作後，使用 <code>session_destroy()</code> 清除資料。
+			</p>
+		</section>
+		<hr id='cookie'>
+		<section>
+			<h3>長期保存網站資料</h3>
+			<p>
+				Cookie 是瀏覽器提供長期保存資料的功能，透過 JavaScript 就能寫入和讀取。<br>
+				<br>
+				PHP 有自己更易用的實作方式，寫入用 <code>setcookie('識別名稱', '資料', 期限)</code>，讀取用 <code>$_COOKIE['識別名稱']</code>：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					# 授予十分鐘的私鑰
+					setcookie('privatekey', 'R2HmVQ91wjC8RJbDDsajZ8LZ', time()+600);
+					# 取得私鑰
+					$_COOKIE['privatekey'];
+                </textarea>
+				<br>
+				刪除 Cookie 的方式，則是把資料清空，或把期限設為過期：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					setcookie('privatekey', '', time()-1);
+                </textarea>
+				<br>
+				Cookie 也可做為跨頁傳遞資料的技術，尤其寫入資料時，省略第三個參數，用起來就類似 Session，在關閉瀏覽器時失效。缺點是有可能在使用者電腦留下「空資料」的紀錄，但優點是不像 Session 把資料放在伺服器增加負擔。
+			</p>
+		</section>
+		<hr id='env'>
+		<section>
+			<h3>環境變數</h3>
+			<p>
+				<code>$_ENV</code> 可用來取得作業系統的環境變數，像是 <code>$_ENV['OS']</code> 傳回作業系統、<code>$_ENV['USERNAME']</code> 傳回使用者名稱、<code>$_ENV['HOMEPATH']</code> 傳回使用者家目錄。
+			</p>
+		</section>
+		<hr id='server'>
+		<section>
+			<h3>伺服器資訊</h3>
+			<p>
+				<code>$_SERVER</code> 可用來取得系統的資訊，隨不同伺服器系統，會有不一樣的情況，不清楚時，可先用 <code>print_r()</code> 全列出來。常用到的資訊有：<br>
+				<br>
+				<code>
+					$_SERVER['HTTP_ACCEPT']<br>
+					$_SERVER['HTTP_ACCEPT_CHARSET']<br>
+					$_SERVER['HTTP_ACCEPT_ENCODING']<br>
+					$_SERVER['HTTP_ACCEPT_LANGUAGE']<br>
+					$_SERVER['HTTP_CONNECTION']<br>
+					$_SERVER['HTTP_HOST']<br>
+					$_SERVER['HTTP_REFERER']<br>
+					$_SERVER['HTTP_USER_AGENT']<br>
+					$_SERVER['PHP_SELF']<br>
+					$_SERVER['QUERY_STRING']<br>
+					$_SERVER['REMOTE_ADDR']<br>
+					$_SERVER['REMOTE_HOST']<br>
+					$_SERVER['REQUEST_METHOD']<br>
+					$_SERVER['REQUEST_URI']<br>
+					$_SERVER['REMOTE_PORT']<br>
+					$_SERVER['SERVER_ADMIN']<br>
+					$_SERVER['SERVER_NAME']<br>
+					$_SERVER['SERVER_PORT']<br>
+					$_SERVER['SERVER_PROTOCOL']<br>
+					$_SERVER['SERVER_SIGNATURE']<br>
+					$_SERVER['SERVER_SOFTWARE']
+				</code>
+			</p>
+		</section>
+		<hr id='section28'>
+		<section>
+			<h3>相關函式</h3>
+			<table>
+				<tr><td>integer</td><td>ignore_user_abort(布林)</td><td>與客端斷線時是否終止程式繼續執行</td></tr>
+				<tr><td>mixed</td><td>get_browser()</td><td>取得瀏覽器的訊息</td></tr>
+				<tr><td>mixed</td><td>highlight_file(檔案)</td><td>以色彩標示程式檔</td></tr>
+				<tr><td>mixed</td><td>highlight_string(字串)</td><td>以色彩標示程式碼</td></tr>
+				<tr><td>string</td><td>htmlentities(字串)</td><td>將字串中的 & &apos; &quot; &lt; &gt; 轉為 HTML 實體</td></tr>
+				<tr><td>string</td><td>rawurlencode(字串)</td><td>將字串中的白字元換成 URI 編碼</td></tr>
+				<tr><td>string</td><td>rawurldecode(字串)</td><td>恢復字串中的 URI 編碼</td></tr>
+				<tr><td>string</td><td>urlencode(字串)</td><td>將字串編碼為 URI 字元</td></tr>
+				<tr><td>string</td><td>urldecode(字串)</td><td>將 URI 字元解碼為字串</td></tr>
+				<tr><td>string</td><td>addslashes(字串)</td><td>將字串中的 &apos; &quot; \ NULL 換成跳脫字元</td></tr>
+				<tr><td>string</td><td>stripslashes(字串)</td><td>恢復字串中的跳脫字元</td></tr>
+				<tr><td>mixed</td><td>parse_url(字串)</td><td>拆解 URL 字串為 scheme、user、password、host、port、path、query、fragment 等部分</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>函式庫</h2>
+		<p>
+			更多且詳盡的函式庫，請看官方說明文件《<a href='http://php.net/manual/en/funcref.php'>Function Reference</a>》。
+		</p>
+		<hr id='section29'>
+		<section>
+			<h3>雜類</h3>
+			<table>
+				<tr><td>string</td><td>php_strip_whitespace(檔名)</td><td>取得 PHP 程式碼字串</td></tr>
+				<tr><td>integer</td><td>sleep(秒數)</td><td>暫停幾秒再執行往後的程式（只能正整數）</td></tr>
+				<tr><td>string</td><td>uniqid(前綴, 後綴)</td><td>以當前時間的微秒數產生 ID 碼</td></tr>
+			</table>
+		</section>
+		<hr id='type'>
+		<section>
+			<h3>資料型態</h3>
+			<section>
+				<h4>檢查</h4>
+				<table>
+					<tr><td>boolean</td><td>is_bool(變數)</td><td>檢查變數是否為 boolean 資料型態</td></tr>
+					<tr><td>boolean</td><td>is_int(變數)</td><td>檢查變數是否為 integer 資料型態</td></tr>
+					<tr><td>boolean</td><td>is_float(變數)</td><td>檢查變數是否為 float 資料型態</td></tr>
+					<tr><td>boolean</td><td>is_string(變數)</td><td>檢查變數是否為 string 資料型態</td></tr>
+					<tr><td>boolean</td><td>is_array(變數)</td><td>檢查變數是否為 array 資料型態</td></tr>
+					<tr><td>boolean</td><td>is_object(變數)</td><td>檢查變數是否為 object 資料型態</td></tr>
+					<tr><td>boolean</td><td>is_null(變數)</td><td>檢查變數是否為 null 型態</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>轉換</h4>
+				<table>
+					<tr><td>boolean</td><td>settype(變數, 型態)</td><td>轉換變數的資料型態</td></tr>
+					<tr><td>integer</td><td>intval(變數)</td><td>將變數轉為 integer 資料型態</td></tr>
+					<tr><td>float</td><td>floatval(變數)</td><td>將變數轉為 float 資料型態</td></tr>
+					<tr><td>string</td><td>strval(變數)</td><td>將變數轉為 string 資料型態</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>其它</h4>
+				<table>
+					<tr><td>array</td><td>get_defined_vars()</td><td>取得所有定義的變數</td></tr>
+					<tr><td>string</td><td>gettype(變數)</td><td>取得變數的資料型態</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='function'>
+		<section>
+			<h3>函式</h3>
+			<table>
+				<tr><td>array</td><td>get_defined_functions()</td><td>取得所有定義的函式</td></tr>
+				<tr><td>boolean</td><td>function_exists(函式)</td><td>檢查函式是否已定義</td></tr>
+			</table>
+		</section>
+		<hr id='string'>
+		<section>
+			<h3>字串</h3>
+			<section>
+				<h4>資料</h4>
+				<table>
+					<tr><td>string</td><td>strstr(字串, 資料[,長度])</td><td>傳回資料後面多大長度的字串</td></tr>
+					<tr><td>string</td><td>stristr(字串, 資料)</td><td>不分大小寫傳回資料後面的字串</td></tr>
+					<tr><td>string</td><td>strrchr(字串, 資料)</td><td>從字串後面開始找資料並傳回後面的字串</td></tr>
+					<tr><td>string</td><td>substr(字串, 位置, 長度)</td><td>擷取字串</td></tr>
+					<tr><td>string</td><td>str_repeat(字串, 次數)</td><td>重複字串</td></tr>
+					<tr><td>string</td><td>strtok(字串, 字元)</td><td>依字元分割字串（第一次先用這函式）</td></tr>
+					<tr><td>string</td><td>strtok(字元)</td><td>依字元分割字串（第二次以後改用這函式）</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>編輯</h4>
+				<table>
+					<tr><td>mixed</td><td>str_replace(舊資料, 新資料, 字串)</td><td>改寫字串中的資料</td></tr>
+					<tr><td>mixed</td><td>str_ireplace(舊資料, 新資料, 字串)</td><td>不分大小寫改寫字串中的資料</td></tr>
+					<tr><td>mixed</td><td>substr_replace(字串, 資料, 從, 到)</td><td>取代字串中的資料</td></tr>
+					<tr><td>string</td><td>strtr(字串, 雜湊表)</td><td>用雜湊表改寫字串中的資料</td></tr>
+					<tr><td>string</td><td>strtr(字串, 從, 到)</td><td>取出字串中的資料</td></tr>
+					<tr><td>string</td><td>str_pad(字串, 長度, 字元)</td><td>依字串長度填滿字元</td></tr>
+					<tr><td>string</td><td>strrev(字串)</td><td>倒轉英文字母（非英文的 2 bytes 字元會亂碼）</td></tr>
+					<tr><td>string</td><td>str_shuffle(字串)</td><td>打亂字串的字元順序</td></tr>
+					<tr><td>string</td><td>strtoupper(字串)</td><td>轉為大寫字母</td></tr>
+					<tr><td>string</td><td>strtolower(字串)</td><td>轉為小寫字母</td></tr>
+					<tr><td>string</td><td>ucfirst(字串)</td><td>第一個字母轉為大寫</td></tr>
+					<tr><td>string</td><td>ucwords(字串)</td><td>每個單字的首字母轉為大寫</td></tr>
+					<tr><td>string</td><td>trim(字串[,自訂字元])</td><td>刪除頭尾空白或自定字元</td></tr>
+					<tr><td>string</td><td>ltrim(字串[,自訂字元])</td><td>刪除開頭空白或自定字元</td></tr>
+					<tr><td>string</td><td>rtrim(字串[,自訂字元])</td><td>刪除結尾空白或自定字元</td></tr>
+					<tr><td>string</td><td>chunk_split(字串, 字數)</td><td>依字數拆成多行文字</td></tr>
+					<tr><td>string</td><td>wordwrap(字串, 字數)</td><td>依字數拆成多行文字且自動加上換行字元</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>計算</h4>
+				<table>
+					<tr><td>integer</td><td>strpos(字串, 資料)</td><td>尋找資料出現位置</td></tr>
+					<tr><td>integer</td><td>strrpos(字串, 資料)</td><td>尋找資料最後出現的位置</td></tr>
+					<tr><td>integer</td><td>strlen(字串)</td><td>字串長度</td></tr>
+					<tr><td>integer</td><td>substr_count(字串, 資料)</td><td>統計字串中資料出現次數</td></tr>
+					<tr><td>mixed</td><td>count_chars(字串)</td><td>統計 ASCII 字元出現次數</td></tr>
+					<tr><td>mixed</td><td>str_word_count(字串, 資料)</td><td>統計資料出現次數</td></tr>
+					<tr><td>integer</td><td>strspn(字串, 資料)</td><td>統計資料出現的字數</td></tr>
+					<tr><td>integer</td><td>strcspn(字串, 資料)</td><td>統計資料未出現的字數</td></tr>
+					<tr><td>integer</td><td>strcmp(字串, 字串)</td><td>比較字串大小（相等 0，較大 1，較小 -1）</td></tr>
+					<tr><td>integer</td><td>strcoll(字串, 字串)</td><td>依系統設置比較字串大小（有些系統 A 字元 &gt; a 字元）</td></tr>
+					<tr><td>integer</td><td>strcasecmp(字串, 字串)</td><td>不分大小寫比較字串大小</td></tr>
+					<tr><td>integer</td><td>strnatcmp(字串, 字串)</td><td>以自然排序比較字串大小（尤其數字）</td></tr>
+					<tr><td>integer</td><td>strnatcasecmp(字串, 字串, 長度)</td><td>以自然排序不分大小寫比較字串大小</td></tr>
+					<tr><td>integer</td><td>strncmp(字串, 字串, 長度)</td><td>最大長度內比較字串大小（有時候字串長得嚇人不適合從頭比到尾）</td></tr>
+					<tr><td>integer</td><td>strncasecmp(字串, 字串, 長度)</td><td>最大長度內不分大小寫比較字串大小</td></tr>
+					<tr><td>integer</td><td>similar_text(字串, 字串)</td><td>統計兩字串資料相同數</td></tr>
+					<tr><td>integer</td><td>levenshtein(字串, 字串)</td><td>統計兩字串資料不同數</td></tr>
+					<tr><td>integer</td><td>substr_compare(字串, 資料, 位置)</td><td>比較字串和資料</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>轉換</h4>
+				<table>
+					<tr><td>string</td><td>chr(字元編碼)</td><td>轉為字元</td></tr>
+					<tr><td>integer</td><td>ord(字元)</td><td>轉為字元編碼</td></tr>
+					<tr><td>string</td><td>bin2hex(字串)</td><td>轉十六進位表示法</td></tr>
+					<tr><td>string</td><td>pack(格式, 字串)</td><td>將資料轉為 binary string（<a href='http://php.net/manual/en/function.pack.php'>格式</a>）</td></tr>
+					<tr><td>array</td><td>unpack(格式, 字串)</td><td>將 binary string 轉為資料（<a href='http://php.net/manual/en/function.pack.php'>格式</a>）</td></tr>
+					<tr><td>array</td><td>str_split(字串)</td><td>將字串轉為陣列</td></tr>
+					<tr><td>mixed</td><td>sscanf(字串, 格式, 資料, ...)</td><td>格式化產生字串（<a href='http://php.net/manual/en/function.sscanf.php'>格式</a>）</td></tr>
+					<tr><td>string</td><td>addslashes(字串)</td><td>將 ' " \ NULL 轉為跳脫字元</td></tr>
+					<tr><td>string</td><td>addcslashes(字串, 格式)</td><td>將格式中列出的符號轉為跳脫字元</td></tr>
+					<tr><td>string</td><td>quotemeta(字串)</td><td>將 $ ^ * () + [ ] \ . ? 轉為跳脫字元</td></tr>
+					<tr><td>string</td><td>stripslashes(字串)</td><td>還原 ' " \ NULL 跳脫字元</td></tr>
+					<tr><td>string</td><td>stripcslashes(字串)</td><td>還原所有跳脫字元</td></tr>
+					<tr><td>string</td><td>str_rot13(字串)</td><td>以 ROT13 編碼加密字串（加密過的字串再加密一次就能解碼）</td></tr>
+					<tr><td>string</td><td>md5(字串)</td><td>以 MD5 編碼加密字串（無法解碼）</td></tr>
+					<tr><td>string</td><td>sha1(字串)</td><td>以 SHA1 編碼加密字串（無法解碼）</td></tr>
+					<tr><td>string</td><td>crypt(字串)</td><td>隨作業系統採用不同編碼加密字串（無法解碼）</td></tr>
+					<tr><td>void</td><td>parse_str(字串)</td><td>剖析 URL 參數中 k1=v&k2=v...</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='regex'>
+		<section>
+			<h3>正規式</h3>
+			<table>
+				<tr><td>integer</td><td>preg_match(正規式, 字串)</td><td>匹配字串中的資料</td></tr>
+				<tr><td>integer</td><td>preg_match_all(正規式, 字串)</td><td>匹配字串中所有資料</td></tr>
+				<tr><td>array</td><td>preg_grep(正規式, 陣列)</td><td>匹配陣列中的資料</td></tr>
+				<tr><td>mixed</td><td>preg_replace(正規式, 取代, 字串)</td><td>取代字串中的資料</td></tr>
+				<tr><td>mixed</td><td>preg_replace_callback(正規式, 函式, 字串)</td><td>用回呼函式取代字串中的資料</td></tr>
+				<tr><td>array</td><td>preg_split(正規式, 字串)</td><td>分割字串</td></tr>
+				<tr><td>string</td><td>preg_quote(字串[,自訂])</td><td>將正規式符號轉為跳脫字元</td></tr>
+			</table>
+		</section>
+		<hr id='array'>
+		<section>
+			<h3>陣列</h3>
+			<section>
+				<h4>通用</h4>
+				<table>
+					<tr><td>integer</td><td>array_push(陣列, 資料)</td><td>在尾端追加資料</td></tr>
+					<tr><td>mixed</td><td>array_pop(陣列)</td><td>移除尾端資料</td></tr>
+					<tr><td>integer</td><td>array_unshift(陣列, 資料)</td><td>在頭端加入資料</td></tr>
+					<tr><td>mixed</td><td>array_shift(陣列)</td><td>移除頭端資料</td></tr>
+					<tr><td>mixed</td><td>reset(陣列)</td><td>移至第一個順序</td></tr>
+					<tr><td>mixed</td><td>end(陣列)</td><td>移至最後一個順序</td></tr>
+					<tr><td>mixed</td><td>next(陣列)</td><td>移至下一個順序</td></tr>
+					<tr><td>mixed</td><td>prev(陣列)</td><td>移至上一個順序</td></tr>
+					<tr><td>mixed</td><td>current(陣列)</td><td>取得當前順序的資料</td></tr>
+					<tr><td>array</td><td>array_slice(陣列, 開始, 長度)</td><td>擷取一串資料</td></tr>
+					<tr><td>array</td><td>array_splice(陣列, 開始, 長度)</td><td>刪除一串資料</td></tr>
+					<tr><td>array</td><td>array_unique(陣列)</td><td>刪除重複資料（以新陣列傳回結果）</td></tr>
+					<tr><td>number</td><td>array_sum(陣列)</td><td>所有資料的總和</td></tr>
+					<tr><td>array</td><td>array_count_values(陣列)</td><td>統計資料的出現次數（以雜湊表保存）</td></tr>
+					<tr><td>mixed</td><td>array_rand(陣列, 數量)</td><td>隨機串列索引值或雜湊鍵</td></tr>
+					<tr><td>integer</td><td>count(陣列)</td><td>取得陣列數量</td></tr>
+					<tr><td>boolean</td><td>in_array(資料, 陣列)</td><td>陣列中是否有這筆資料</td></tr>
+					<tr><td>mixed</td><td>array_search(資料, 陣列)</td><td>搜尋資料並傳回索引值或雜湊鍵</td></tr>
+					<tr><td>array</td><td>array_diff(陣列, ...)</td><td>比較多個陣列資料的差異處</td></tr>
+					<tr><td>array</td><td>array_diff_assoc(陣列, ...)</td><td>比較多個陣列資料和索引的差異處</td></tr>
+					<tr><td>array</td><td>array_udiff(陣列, ..., 函式)</td><td>用函式自訂條件比較多個陣列資料的差異</td></tr>
+					<tr><td>array</td><td>array_intersect(陣列, ...)</td><td>比較多個陣列資料的相同處</td></tr>
+					<tr><td>array</td><td>array_intersect_assoc(陣列, ...)</td><td>比較多個陣列資料和索引的相同處</td></tr>
+					<tr><td>array</td><td>array_merge(陣列, ...)</td><td>合併多個陣列且覆蓋重複的資料</td></tr>
+					<tr><td>array</td><td>array_merge_recursive(陣列, ...)</td><td>合併多個陣列但重複時用多維陣列並存</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>串列</h4>
+				<table>
+					<tr><td>array</td><td>range(從, 到)</td><td>產生範圍內資料的陣列</td></tr>
+					<tr><td>array</td><td>array_pad(陣列, 長度, 資料)</td><td>加入多個資料</td></tr>
+					<tr><td>boolean</td><td>sort(陣列)</td><td>不自然排序（1,10,2,3）</td></tr>
+					<tr><td>boolean</td><td>rsort(陣列)</td><td>遞減排序</td></tr>
+					<tr><td>boolean</td><td>natsort(陣列)</td><td>自然排序（1,2,3,10）</td></tr>
+					<tr><td>boolean</td><td>natcasesort(陣列)</td><td>不分大小寫的自然排序</td></tr>
+					<tr><td>boolean</td><td>usort(陣列, 函式)</td><td>用函式自訂條件排序陣列資料</td></tr>
+					<tr><td>boolean</td><td>array_multisort(陣列[,遞減,型態], 陣列[,遞減,型態])</td><td>排序多個陣列</td></tr>
+					<tr><td>boolean</td><td>shuffle(陣列)</td><td>亂排資料</td></tr>
+					<tr><td>array</td><td>array_reverse(陣列)</td><td>反轉資料（以新陣列傳回結果）</td></tr>
+					<tr><td>array</td><td>array_chunk(陣列, 長度)</td><td>依長度將陣列拆為多個小陣列</td></tr>
+					<tr><td>string</td><td>implode(符號, 陣列)</td><td>將陣列轉為以符號分隔的字串</td></tr>
+					<tr><td>array</td><td>explode(符號, 字串)</td><td>依分隔符號將字串轉為陣列</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>雜湊表</h4>
+				<table>
+					<tr><td>mixed</td><td>key(陣列)</td><td>取得鍵</td></tr>
+					<tr><td>array</td><td>array_keys(陣列)</td><td>取得所有的鍵</td></tr>
+					<tr><td>array</td><td>array_values(陣列)</td><td>取得所有的值</td></tr>
+					<tr><td>array</td><td>array_change_key_case(陣列[,CASE_UPPER|CASE_LOWER])</td><td>將鍵轉為全大寫或小寫</td></tr>
+					<tr><td>boolean</td><td>ksort(陣列)</td><td>依鍵遞增排序</td></tr>
+					<tr><td>boolean</td><td>krsort(陣列)</td><td>依鍵遞減排序</td></tr>
+					<tr><td>boolean</td><td>asort(陣列)</td><td>依值遞增排序</td></tr>
+					<tr><td>boolean</td><td>arsort(陣列)</td><td>依值遞減排序</td></tr>
+					<tr><td>boolean</td><td>uksort(陣列, 函式)</td><td>用函式自訂條件排序鍵</td></tr>
+					<tr><td>boolean</td><td>uasort(陣列, 函式)</td><td>用函式自訂條件排序值</td></tr>
+					<tr><td>array</td><td>array_diff_uassoc(陣列, ..., 函式)</td><td>用函式自訂條件比較多個陣列的鍵之差異</td></tr>
+					<tr><td>array</td><td>array_udiff_assoc(陣列, ..., 函式)</td><td>用函式自訂條件比較多個陣列的值之差異</td></tr>
+					<tr><td>array</td><td>array_udiff_uassoc(陣列, ..., 函式)</td><td>用函式自訂條件比較多個陣列的鍵和值之差異</td></tr>
+					<tr><td>array</td><td>array_flip(陣列)</td><td>將鍵和值對調</td></tr>
+					<tr><td>integer</td><td>extract(陣列)</td><td>將雜湊表轉為多個以鍵為名稱、值為資料的變數</td></tr>
+					<tr><td>array</td><td>compact(變數, ...)</td><td>將變數轉為以名稱為鍵、資料為值的雜湊表</td></tr>
+					<tr><td>array</td><td>array_combine(陣列, 陣列)</td><td>合併陣列為雜湊表，第一個陣列為鍵，第二個為值。</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>進階</h4>
+				<table>
+					<tr><td>array</td><td>array_map(函式, 陣列, ...)</td><td>操作多個陣列（需用回呼函式設計）</td></tr>
+					<tr><td>array</td><td>array_filter(陣列, 函式)</td><td>篩選資料（需用回呼函式設計）</td></tr>
+					<tr><td>mixed</td><td>array_reduce(陣列, 函式)</td><td>將陣列削減成一筆資料（需用回呼函式設計）</td></tr>
+					<tr><td>boolean</td><td>array_walk(陣列, 函式)</td><td>設計布林算式走訪陣列資料（需用回呼函式設計）</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='math'>
+		<section>
+			<h3>數學</h3>
+			<section>
+				<h4>不分類</h4>
+				<table>
+					<tr><td>boolean</td><td>is_finite(數值)</td><td>判斷是否為有限值</td></tr>
+					<tr><td>boolean</td><td>is_infinite(數值)</td><td>判斷是否為無限值</td></tr>
+					<tr><td>boolean</td><td>is_nan(數值)</td><td>判斷是否非數值</td></tr>
+					<tr><td>mixed</td><td>max(數值, 數值, ...)</td><td>取得最大值</td></tr>
+					<tr><td>mixed</td><td>min(數值, 數值, ...)</td><td>取得最小值</td></tr>
+					<tr><td>float</td><td>fmod(被除數, 除數)</td><td>取餘數</td></tr>
+					<tr><td>number</td><td>pow(數值, 次方)</td><td>取得數值的次方</td></tr>
+					<tr><td>float</td><td>sqrt(數值)</td><td>數值的平方根</td></tr>
+					<tr><td>number</td><td>abs(數值)</td><td>絕對值</td></tr>
+					<tr><td>float</td><td>round(數值)</td><td>四捨五入</td></tr>
+					<tr><td>float</td><td>floor(數值)</td><td>無條件捨去</td></tr>
+					<tr><td>float</td><td>ceil(數值)</td><td>無條件進位</td></tr>
+					<tr><td>void</td><td>srand([數值])</td><td>打亂隨機數</td></tr>
+					<tr><td>integer</td><td>rand(從, 到)</td><td>取得隨機數</td></tr>
+					<tr><td>integer</td><td>mt_rand(從, 到)</td><td>以 Mersenne Twister 演算法取得隨機數</td></tr>
+					<tr><td>float</td><td>lcg_value()</td><td>取得 0.0 到 1.0 之間的隨機數</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>科學</h4>
+				<table>
+					<tr><td>float</td><td>log(數值, 基底)</td><td>取得對數</td></tr>
+					<tr><td>float</td><td>log10(數值)</td><td>取得以 10 為基底的對數</td></tr>
+					<tr><td>float</td><td>exp(次方)</td><td>自然底數的次方</td></tr>
+					<tr><td>float</td><td>pi()</td><td>取得圓周率</td></tr>
+					<tr><td>float</td><td>sin(數值)</td><td>三角函數的正弦</td></tr>
+					<tr><td>float</td><td>cos(數值)</td><td>三角函數的餘弦</td></tr>
+					<tr><td>float</td><td>tan(數值)</td><td>三角函數的正切</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>進位</h4>
+				<table>
+					<tr><td>string</td><td>decbin(數值)</td><td>十進制轉二進制</td></tr>
+					<tr><td>string</td><td>dechex(數值)</td><td>十進制轉十六進制</td></tr>
+					<tr><td>string</td><td>decoct(數值)</td><td>十進制轉八進制</td></tr>
+					<tr><td>number</td><td>bindec(數值)</td><td>二進制轉十進制</td></tr>
+					<tr><td>number</td><td>octdec(數值)</td><td>八進制轉十進制</td></tr>
+					<tr><td>number</td><td>hexdec(數值)</td><td>十六進制轉十進制</td></tr>
+					<tr><td>string</td><td>base_convert(數值, 從, 到)</td><td>從 2~36 進制轉到 2~36 進制</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='file'>
+		<section>
+			<h3>檔案系統</h3>
+			<section>
+				<h4>路徑</h4>
+				<table>
+					<tr><td>string</td><td>realpath(路徑)</td><td>取得絕對路徑</td></tr>
+					<tr><td>mixed</td><td>pathinfo(路徑)</td><td>將路徑拆解為 dirname、basename、extension、filename 並傳回雜湊表</td></tr>
+					<tr><td>string</td><td>dirname(路徑)</td><td>取得絕對路徑</td></tr>
+					<tr><td>string</td><td>realpath(路徑)</td><td>取得絕對路徑</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>目錄</h4>
+				<table>
+					<tr><td>boolean</td><td>mkdir(命名, 模式)</td><td>新增目錄</td></tr>
+					<tr><td>boolean</td><td>rmdir(目錄)</td><td>刪除目錄</td></tr>
+					<tr><td>boolean</td><td>chdir(目錄)</td><td>切換目錄</td></tr>
+					<tr><td>string</td><td>getcwd()</td><td>取得當前目錄</td></tr>
+					<tr><td>resource</td><td>opendir(目錄)</td><td>開啟目錄</td></tr>
+					<tr><td>string</td><td>readdir(opendir)</td><td>讀取目錄的檔名（一次一個）</td></tr>
+					<tr><td>void</td><td>rewinddir(opendir)</td><td>重設 readdir 走訪位置</td></tr>
+					<tr><td>void</td><td>closedir(opendir)</td><td>關閉目錄（才能再 opendir 同個目錄）</td></tr>
+					<tr><td>array</td><td>scandir(路徑[,1])</td><td>讀取目錄內容、1 為降冪</td></tr>
+					<tr><td>string</td><td>dirname(路徑)</td><td>取得根目錄名稱</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>檔案</h4>
+				<table>
+					<tr><td>boolean</td><td>touch(檔名)</td><td>建立空白檔案</td></tr>
+					<tr><td>integer</td><td>readfile(檔名)</td><td>顯示純文字文件的內容</td></tr>
+					<tr><td>integer</td><td>fpassthru(檔名)</td><td>顯示二進制檔案內容</td></tr>
+					<tr><td>array</td><td>file(檔名)</td><td>讀取檔案內容</td></tr>
+					<tr><td>string</td><td>file_get_contents(檔名)</td><td>讀取檔案內容</td></tr>
+					<tr><td>int</td><td>file_put_contents(檔名, 字串[,FILE_APPEND])</td><td>寫入檔案內容</td></tr>
+					<tr><td>boolean</td><td>copy(檔名, 目的)</td><td>複製檔案</td></tr>
+					<tr><td>boolean</td><td>unlink(檔名)</td><td>刪除檔案</td></tr>
+					<tr><td>string</td><td>basename(路徑)</td><td>取得檔名（不含副檔名）</td></tr>
+					<tr><td>R1</td><td>fopen(檔名, 'r|w|a|+|b|t')</td><td>新增或開啟檔案（read、write、append 和 binary、text）</td></tr>
+					<tr><td>boolean</td><td>flock(R1, LOCK_EX)</td><td>禁止再有程式開啟 fopen() 檔案</td></tr>
+					<tr><td>string</td><td>fread(R1, 大小)</td><td>讀取 fopen() 檔案的內容</td></tr>
+					<tr><td>string</td><td>fgetc(R1)</td><td>讀取 fopen() 檔案一個字元</td></tr>
+					<tr><td>string</td><td>fgets(R1)</td><td>讀取 fopen() 檔案一行字串</td></tr>
+					<tr><td>string</td><td>fgetss(R1)</td><td>讀取 fopen() 檔案的內容並刪除 HTML 標籤</td></tr>
+					<tr><td>integer</td><td>fwrite(R1, 字串)</td><td>寫入字串到 fopen() 檔案</td></tr>
+					<tr><td>integer</td><td>fputs(R1, 字串)</td><td>fwrite() 的別名</td></tr>
+					<tr><td>integer</td><td>fprintf(R1, 格式, 字串, ...)</td><td>用格式化寫入字串到 fopen() 檔案</td></tr>
+					<tr><td>integer</td><td>vfprintf(R1, 格式, 陣列)</td><td>用格式化寫入陣列到 fopen() 檔案</td></tr>
+					<tr><td>int</td><td>set_file_buffer(R1, 大小)</td><td>設定寫入資料到 fopen() 所開啟檔案的緩衝區大小</td></tr>
+					<tr><td>bool</td><td>ftruncate(R1, 大小)</td><td>將 fopen() 開啟的檔案切割到只剩指定大小</td></tr>
+					<tr><td>boolean</td><td>rewind(R1)</td><td>重設 fopen() 檔案讀寫位置</td></tr>
+					<tr><td>integer</td><td>fseek(R1, 位移)</td><td>移動 fopen() 檔案讀寫位置</td></tr>
+					<tr><td>integer</td><td>ftell(R1)</td><td>取得 fopen() 檔案讀寫位置</td></tr>
+					<tr><td>boolean</td><td>feof(R1)</td><td>檢查 fopen() 檔案讀寫位置是否結尾</td></tr>
+					<tr><td>boolean</td><td>fclose(R1)</td><td>關閉 fopen() 開啟的檔案</td></tr>
+					<tr><td>R1</td><td>tmpfile()</td><td>建立會自動刪除檔案的 fopn()</td></tr>
+					<tr><td>string</td><td>tempnam(目錄, 詞綴)</td><td>指定 tmpfile 的存放位置與命名詞綴</td></tr>
+					<tr><td>array</td><td>glob(規則)</td><td>依匹配規則尋找路徑和檔名。</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>通用</h4>
+				<table>
+					<tr><td>boolean</td><td>rename(檔名, 命名)</td><td>重新命名檔案或目錄</td></tr>
+					<tr><td>array</td><td>stat(檔名)</td><td>取得檔案或目錄的詳細資訊</td></tr>
+					<tr><td>array</td><td>lstat(檔名)</td><td>同 stat() 但多了捷徑的詳細資訊</td></tr>
+					<tr><td>void</td><td>clearstatcache()</td><td>清除舊快取以更新檔案或目錄的資訊</td></tr>
+					<tr><td>integer</td><td>filectime(檔名)</td><td>取得檔案或目錄建立日期</td></tr>
+					<tr><td>integer</td><td>filemtime(檔名)</td><td>取得檔案或目錄修改日期</td></tr>
+					<tr><td>integer</td><td>fileatime(檔名)</td><td>取得檔案或目錄存取日期</td></tr>
+					<tr><td>integer</td><td>fileperms(檔名)</td><td>取得檔案或目錄的權限</td></tr>
+					<tr><td>integer</td><td>fileowner(檔名)</td><td>取得檔案或目錄的使用者</td></tr>
+					<tr><td>integer</td><td>filegroup(檔名)</td><td>取得檔案或目錄的群組</td></tr>
+					<tr><td>integer</td><td>filesize(檔名)</td><td>取得檔案或目錄大小</td></tr>
+					<tr><td>string</td><td>filetype(檔名)</td><td>傳回檔名的檔案系統種類</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>檢查</h4>
+				<table>
+					<tr><td>boolean</td><td>file_exists(檔名)</td><td>檢查檔案或目錄是否存在</td></tr>
+					<tr><td>boolean</td><td>is_dir(檔名)</td><td>檢查是否為目錄</td></tr>
+					<tr><td>boolean</td><td>is_executable(檔名)</td><td>檢查是否為執行檔</td></tr>
+					<tr><td>boolean</td><td>is_file(檔名)</td><td>檢查是否為檔案</td></tr>
+					<tr><td>boolean</td><td>is_link(檔名)</td><td>檢查是否為捷徑</td></tr>
+					<tr><td>boolean</td><td>is_readable(檔名)</td><td>檢查是否可讀</td></tr>
+					<tr><td>boolean</td><td>is_writeable(檔名)</td><td>檢查是否可寫</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='sqlite'>
+		<section>
+			<h3>SQLite</h3>
+			<section>
+				<h4>SQLite file resource</h4>
+				<table>
+					<tr><td>R2</td><td>sqlite_open(檔案)</td><td>開啟 SQLite 檔案</td></tr>
+					<tr><td>bool</td><td>sqlite_exec(R2, 語法)</td><td>執行 SQL 語法</td></tr>
+					<tr><td>array</td><td>sqlite_single_query(R2, 語法)</td><td>執行 SQL 語法並提取下一筆紀錄為陣列</td></tr>
+					<tr><td>array</td><td>sqlite_array_query(R2, 語法)</td><td>執行 SQL 語法並提取每第一欄資料</td></tr>
+					<tr><td>integer</td><td>sqlite_changes(R2)</td><td>傳回最後一次更動多少資料筆數</td></tr>
+					<tr><td>integer</td><td>sqlite_last_insert_rowid(R2)</td><td>查詢最近插入之紀錄的 ID</td></tr>
+					<tr><td>void</td><td>sqlite_close(R2)</td><td>關閉 SQLite 檔案</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>Query resource</h4>
+				<table>
+					<tr><td>R3</td><td>sqlite_query(R2, 語法)</td><td>執行 SQL 語法並傳回結果</td></tr>
+					<tr><td>R3</td><td>sqlite_unbuffered_query(R2, 語法)</td><td>執行 SQL 語法並傳回結果（不快取不緩衝，直接搜尋資料。）</td></tr>
+					<tr><td>array</td><td>sqlite_fetch_array(R3)</td><td>提取傳回結果下一筆紀錄為陣列</td></tr>
+					<tr><td>object</td><td>sqlite_fetch_object(R3)</td><td>提取傳回結果下一筆紀錄為物件</td></tr>
+					<tr><td>string</td><td>sqlite_fetch_single(R3)</td><td>提取傳回結果下一筆紀錄第一欄資料</td></tr>
+					<tr><td>mixed</td><td>sqlite_column(R3, 索引)</td><td>提取傳回結果第幾筆紀錄中的欄位</td></tr>
+					<tr><td>string</td><td>sqlite_field_name(R3, 索引)</td><td>取得欄位名稱</td></tr>
+					<tr><td>integer</td><td>sqlite_num_rows(R3)</td><td>取得紀錄筆數</td></tr>
+					<tr><td>integer</td><td>sqlite_num_fields(R3)</td><td>取得欄位數</td></tr>
+					<tr><td>boolean</td><td>sqlite_seek(R3, 筆數)</td><td>移動到第幾筆紀錄</td></tr>
+					<tr><td>boolean</td><td>sqlite_next(R3)</td><td>移動到下一筆紀錄</td></tr>
+					<tr><td>boolean</td><td>sqlite_prev(R3)</td><td>移動到上一筆紀錄</td></tr>
+					<tr><td>boolean</td><td>sqlite_rewind(R3)</td><td>移動到第一筆紀錄</td></tr>
+					<tr><td>array</td><td>sqlite_current(R3)</td><td>提取傳回結果的當前紀錄為陣列</td></tr>
+					<tr><td>boolean</td><td>sqlite_has_more(R3)</td><td>是否有下一筆紀錄</td></tr>
+					<tr><td>boolean</td><td>sqlite_valid(R3)</td><td>是否有下一筆紀錄的資料</td></tr>
+					<tr><td>boolean</td><td>sqlite_has_prev(R3)</td><td>是否有上一筆紀錄</td></tr>
+				</table>
+			</section>
+			<section>
+				<h4>Other</h4>
+				<table>
+					<tr><td>string</td><td>sqlite_escape_string(字串)</td><td>轉換 SQLite 適用的跳脫字元</td></tr>
+					<tr><td>string</td><td>sqlite_libversion()</td><td>傳回 SQLite 的版號</td></tr>
+					<tr><td>string</td><td>sqlite_libencoding()</td><td>傳回 SQLite 的字元編碼系統</td></tr>
+					<tr><td>void</td><td>sqlite_busy_timeout(毫秒)</td><td>修改系統忙碌的逾時（預設 60000）</td></tr>
+					<tr><td>string</td><td>sqlite_error_string(R2)</td><td>取得錯誤訊息</td></tr>
+					<tr><td>integer</td><td>sqlite_last_error(R2)</td><td>取得錯誤代碼</td></tr>
+				</table>
+			</section>
+		</section>
+		<hr id='time'>
+		<section>
+			<h3>時間</h3>
+			<table>
+				<tr><td>integer</td><td>time()</td><td>取得電腦當前 POSIX 時間</td></tr>
+				<tr><td>integer</td><td>mktime(時,分,秒,月,日,年)</td><td>依參數產生 POSIX 時間</td></tr>
+				<tr><td>integer</td><td>strtotime(字串)</td><td>解析字串中的時間格式成 POSIX 時間</td></tr>
+				<tr><td>string</td><td>date(格式)</td><td>依指定格式輸出 POSIX 時間（<a href='http://php.net/manual/en/function.date.php'>格式</a>）</td></tr>
+			</table>
+		</section>
+		<hr id='phpinfo'>
+		<section>
+			<h3>PHP 組態</h3>
+			<table>
+				<tr><td>boolean</td><td>phpinfo()</td><td>輸出 php.ini 的設定</td></tr>
+				<tr><td>string</td><td>ini_get(項目)</td><td>取得 php.ini 的設定</td></tr>
+				<tr><td>string</td><td>ini_set(項目, 設定)</td><td>設定 php.ini 的組態（非全部能改）</td></tr>
+				<tr><td>void</td><td>ini_restore()</td><td>還原 php.ini 原先的組態</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>範例集</h2>
+		<hr id='list'>
+		<section>
+			<h3>list 構詞</h3>
+			<p>
+				將陣列的資料分拆到多個變數：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					list($a, $b, $c) = array('AAA', 'BBB', 'CCC');
+					echo $a, PHP_EOL,
+						 $b, PHP_EOL,
+						 $c;
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				但 list() 的功能，可用陣列解構式完成：<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					[$a, $b, $c] = ['AAA', 'BBB', 'CCC'];
+					echo $a, PHP_EOL,
+						 $b, PHP_EOL,
+						 $c;
+                </textarea>
+			</p>
+		</section>
+		<hr id='variable_parsing'>
+		<section>
+			<h3>變數解析</h3>
+			<p>
+				<textarea class='brush:php'>
+					&lt;?php
+					$abc = 'ABC';
+					echo "{$abc}";
+					echo "${abc}";
+                </textarea>
+				<br>
+				<output>
+					ABC<br>
+					ABC
+				</output>
+			</p>
+		</section>
+		<hr id='preg'>
+		<section>
+			<h3>preg_match(), preg_replace(), preg_split()</h3>
+			<p>
+				<textarea class='brush:php'>
+					&lt;?php
+					$string = '庭院,深深,深幾許';
+					if(preg_match('/院/', $string))
+						echo '有院子嘛～';
+					$string = preg_replace('/深/', '髒', $string);
+					foreach(preg_split('/,/', $string) as $piece)
+						echo "[$piece]\n";
+                </textarea>
+				<br>
+				<output>
+					有院子嘛～<br>
+					[庭院]<br>
+					[髒髒]<br>
+					[髒幾許]
+				</output>
+			</p>
+		</section>
+		<hr id='plain'>
+		<section>
+			<h3>純文字文件</h3>
+			<section>
+				<h4>寫入</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						$file = fopen('sample.txt', 'w');
+						fputs($file, "AAA\nBBB\nCCC");
+						fclose($file);
+                    </textarea>
+					<br>
+					<output class='editor'>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>讀取</h4>
+				<section>
+					<h5>sample.txt</h5>
+					<p>
+						<textarea class='brush:txt'>
+							AAA
+							BBB
+							CCC
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							$file = fopen('sample.txt', 'r');
+							echo fgets($file),
+								 fgets($file),
+								 fgets($file);
+							fclose($file);
+                        </textarea>
+						<br>
+						<output>
+							AAA<br>
+							BBB<br>
+							CCC
+						</output>
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4>其它</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						file_put_contents('sample.txt', "AAA\nBBB\nCCC");
+						echo file_get_contents('sample.txt');
+                    </textarea>
+					<br>
+					<output class='editor'>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr id='ini'>
+		<section>
+			<h3>INI</h3>
+			<p>
+				只內建讀取的函式，沒有寫入。
+			</p>
+			<section>
+				<h4>sample.ini</h4>
+				<p>
+					<textarea class='brush:txt'>
+						user = Twideem Civs
+						email = twideem@outlook.com
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.php</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						$ini = parse_ini_file('sample.ini');
+						echo $ini['user'], PHP_EOL,
+							 $ini['email'];
+                    </textarea>
+					<br>
+					<output>
+						Twideem Civs<br>
+						twideem@outlook.com
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr id='xml'>
+		<section>
+			<h3>XML</h3>
+			<p>
+				SimpleXML 可以用來讀取、編輯、儲存 XML 資料，但不能新增元素和屬性。想新增的話，要改用像腳綁著鐵球闖複雜迷宮一樣難度的 DOM。
+			</p>
+			<section>
+				<h4>讀取 XML 檔案</h4>
+				<section>
+					<h5>sample.xml</h5>
+					<p>
+						<textarea class='brush:xml'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+							&lt;sample&gt;
+								&lt;user&gt;Twideem Civs&lt;/user&gt;
+								&lt;email&gt;twideem@outlook.com&lt;/email&gt;
+							&lt;/sample&gt;
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							$xml = simplexml_load_file('sample.xml');
+							echo $xml-&gt;user, PHP_EOL,
+								 $xml-&gt;email;
+                        </textarea>
+						<br>
+						<output>
+							Twideem Civs<br>
+							twideem@outlook.com
+						</output>
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4>儲存 XML 檔</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						$xml = simplexml_load_string('&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+						&lt;sample&gt;
+							&lt;user&gt;User&lt;/user&gt;
+							&lt;email&gt;user@e.mail&lt;/email&gt;
+						&lt;/sample&gt;');
+						$xml-&gt;user = 'Twideem Civs';
+						$xml-&gt;email = 'twideem@outlook.com';
+						$xml-&gt;saveXML('sample.xml');
+                    </textarea>
+					<br>
+					<output class='editor'>
+						&lt;?xml version='1.0' encoding='UTF-8'?&gt;<br>
+						&lt;sample&gt;<br>
+						　　&lt;user&gt;Twideem Civs&lt;/user&gt;<br>
+						　　&lt;email&gt;twideem@outlook.com&lt;/email&gt;<br>
+						&lt;/sample&gt;
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>存取 XML 元素</h4>
+				<section>
+					<h5>sample.xml</h5>
+					<p>
+						<textarea class='brush:xml'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+							&lt;sample&gt;
+								&lt;users&gt;
+									&lt;user email="twideem@outlook.com"&gt;Twideem Civs&lt;/user&gt;
+									&lt;user email="raideem@gmx.com"&gt;Raideem Toukin&lt;/user&gt;
+								&lt;/users&gt;
+							&lt;/sample&gt;
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							$xml = simplexml_load_file('sample.xml');
+							echo $xml-&gt;users-&gt;user[0], PHP_EOL,
+								 $xml-&gt;users-&gt;user[0]['email'], PHP_EOL,
+								 $xml-&gt;users-&gt;user[1], PHP_EOL,
+								 $xml-&gt;users-&gt;user[1]['email'];
+                        </textarea>
+						<br>
+						<output>
+							Twideem Civs<br>
+							twideem@outlook.com<br>
+							Raideem Toukin<br>
+							raideem@gmx.com
+						</output>
+					</p>
+				</section>
+				<p>
+					一個子元素時，用 <code>-&gt;</code> 存取。<br>
+					<br>
+					多個同名子元素時，用 <code>[索引編號]</code> 存取，或 <code>children()</code> 傳回陣列存取。<br>
+					<br>
+					屬性用 <code>[屬性名稱]</code> 存取，或 <code>attributes()</code> 傳回陣列存取。
+				</p>
+			</section>
+			<section>
+				<h4>刪除元素或屬性</h4>
+				<p>
+					使用 <code>unset()</code> 函式。
+				</p>
+			</section>
+		</section>
+		<hr id='dom'>
+		<section>
+			<h3>DOM</h3>
+			<p>
+				DOM 是相當難用的 API，不過底下範例化繁為簡，只用到部分功能，能「存、取、增、刪」就好。詳盡功能，請參考 PHP 官方文件《<a href='http://php.net/manual/en/book.dom.php'>Document Object Model</a>》。
+			</p>
+			<section>
+				<h4>載入 XML 文件並讀取元素和屬性</h4>
+				<section>
+					<h5>document.xml</h5>
+					<p>
+						<textarea class='brush:xml'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+							&lt;html&gt;
+								&lt;article&gt;
+									&lt;h1&gt;Header&lt;/h1&gt;
+									&lt;p&gt;Paragraph 1&lt;/p&gt;
+									&lt;p&gt;Paragraph 2&lt;/p&gt;
+									&lt;p&gt;Paragraph 3&lt;/p&gt;
+									&lt;img src="figure.png" width="640" alt="插圖"/&gt;
+								&lt;/article&gt;
+							&lt;/html&gt;
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							# Load XML document
+							$dom = new DOMDocument();
+							$dom-&gt;load('document.xml');
+							# Get a element content by name
+							echo $dom-&gt;getElementsByTagName('h1')[0]-&gt;textContent, PHP_EOL;
+							# Get a attribute value by name
+							echo $dom-&gt;getElementsByTagName('img')[0]-&gt;getAttribute('src'), PHP_EOL,
+								 $dom-&gt;getElementsByTagName('img')[0]-&gt;getAttribute('width'), PHP_EOL,
+								 $dom-&gt;getElementsByTagName('img')[0]-&gt;getAttribute('alt'), PHP_EOL;
+							# Get all elements name and value
+							$nodes = $dom-&gt;childNodes;
+							foreach($nodes as $node)
+								echo $node-&gt;nodeName, '=', $node-&gt;nodeValue, PHP_EOL;
+							# Get all attributes name and value
+							$attributes = $dom-&gt;getElementsByTagName('img')[0]-&gt;attributes;
+							foreach($attributes as $attribute)
+								echo $attribute-&gt;name, '=', $attribute-&gt;value, PHP_EOL;
+                        </textarea>
+						<br>
+						<output>
+							Header<br>
+							figure.png<br>
+							640<br>
+							插圖<br>
+							html=<br>
+							<br>
+							　Header<br>
+							　Paragraph 1<br>
+							　Paragraph 2<br>
+							　Paragraph 3<br>
+							<br>
+							<br>
+							<br>
+							src=figure.png<br>
+							width=640<br>
+							alt=插圖
+						</output>
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4>載入 XML 文件並修改元素和屬性</h4>
+				<section>
+					<h5>document.xml</h5>
+					<p>
+						同上。
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							# Load XML document
+							$dom = new DOMDocument();
+							$dom-&gt;load('document.xml');
+							# Set element content
+							$elements = $dom-&gt;getElementsByTagName('p');
+							$elements[0]-&gt;textContent = 'AAA';
+							$elements[1]-&gt;textContent = 'BBB';
+							$elements[2]-&gt;textContent = 'CCC';
+							# Set attribute value
+							$dom-&gt;getElementsByTagName('img')[0]-&gt;setAttribute('src', 'picture.jpg');
+							$dom-&gt;getElementsByTagName('img')[0]-&gt;setAttribute('width', '320');
+							$dom-&gt;getElementsByTagName('img')[0]-&gt;setAttribute('alt', '相片');
+							# Save XML document
+							$dom-&gt;save('backup.xml');
+                        </textarea>
+						<br>
+						<output class='editor'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+							&lt;html&gt;<br>
+							　&lt;article&gt;<br>
+							　　&lt;h1&gt;Header&lt;/h1&gt;<br>
+							　　&lt;p&gt;AAA&lt;/p&gt;<br>
+							　　&lt;p&gt;BBB&lt;/p&gt;<br>
+							　　&lt;p&gt;CCC&lt;/p&gt;<br>
+							　　&lt;img src="picture.jpg" width="320" alt="相片"/&gt;<br>
+							　&lt;/article&gt;<br>
+							&lt;/html&gt;
+						</output>
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4>建立空白 XML 文件並新增元素和屬性</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						# Create XML document
+						$dom = new DOMDocument('1.0', 'UTF-8');
+						# Create root element
+						$root = $dom-&gt;createElement('root');
+						$dom-&gt;appendChild($root);
+						# Create element and attribute
+						$element = $dom-&gt;createElement('element');
+						$element-&gt;nodeValue = 'content';
+						$element-&gt;setAttribute('attribute', 'value');
+						$root-&gt;appendChild($element);
+						# Save XML document
+						$dom-&gt;formatOutput = TRUE;
+						$dom-&gt;save('new.xml');
+                    </textarea>
+					<br>
+					<output class='editor'>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+						&lt;root&gt;<br>
+						　&lt;element attribute="value"&gt;content&lt;/element&gt;<br>
+						&lt;/root&gt;
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>載入 XML 文件並移除元素和屬性</h4>
+				<p>
+					你可能會疑惑，DOM 為何被嫌得臭頭？看完這一節範例，你就知道原因了…
+				</p>
+				<section>
+					<h5>document.xml</h5>
+					<p>
+						同上上。
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							# Load XML document
+							$dom = new DOMDocument();
+							$dom-&gt;load('document.xml');
+							# Remove element
+							$element = $dom-&gt;getElementsByTagName('p')[0];
+							$element-&gt;parentNode-&gt;removeChild($element);
+							# Remove content
+							$element = $dom-&gt;getElementsByTagName('p')[1];
+							$element-&gt;removeChild($element-&gt;childNodes[0]);
+							# Remove attribute
+							$element = $dom-&gt;getElementsByTagName('img')[0];
+							$element-&gt;removeAttribute('width');
+							# Save XML document
+							$dom-&gt;save('other.xml');
+                        </textarea>
+						<br>
+						<output class='editor'>
+							&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+							&lt;html&gt;<br>
+							　&lt;article&gt;<br>
+							　　&lt;h1&gt;Header&lt;/h1&gt;<br>
+							　　<br>
+							　　&lt;p&gt;Paragraph 2&lt;/p&gt;<br>
+							　　&lt;p/&gt;<br>
+							　　&lt;img src="figure.png" alt="插圖"/&gt;<br>
+							　&lt;/article&gt;<br>
+							&lt;/html&gt;
+						</output>
+						<br>
+						首先看刪除元素，做法是先取得要刪除的元素，再從它的父元素呼叫 removeChild() 去刪除子元素。然後看刪除內容，做法是取得元素後，呼叫 removeChild() 刪除自己的第一個子元素；前提是這個元素的第一個子元素是內容結點，如果是包含各種類型的節點，請逐一檢查 nodeType 屬性是不是 XML_TEXT_NODE。刪除屬性呢？取得元素後，呼叫 removeAttribute() 刪除屬性。而且從範例輸出的 other.xml 來看，移除 P 元素後，仍留下一種叫文字節點的東西需要刪除。<br>
+						<br>
+						可以看到，元素、內容、屬性的刪除方式，竟然都不一樣。而且刪除時可能還得一個一個檢查結點的種類，對了再刪。不然就是反過來，刪完後恐怕還得再刪其它種類的節點，才是你想要的結果～<br>
+						<br>
+						DOM 真是了不起的發明！常用 DOM 就像多玩益智遊戲一樣，能促進腦力激盪，集中注意力，防止癡呆…我並不討厭 DOM 的設計，反而很喜歡就 DOM 的規則，玩一場又一場的益智遊戲，跟魔術方塊一樣有趣。
+					</p>
+				</section>
+			</section>
+		</section>
+		<hr id='xpath'>
+		<section>
+			<h3>XPath</h3>
+			<p>
+				XPath 可簡化 DOM 取得節點的工作，甚至可以篩選資料。<br>
+				<br>
+				下面範例為三井寿射進三分球，所以添加到他的得分紀錄中。
+			</p>
+			<section>
+				<h4>湘北高等学校.xml</h4>
+				<p>
+					<textarea class='brush:xml'>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+						&lt;players&gt;
+							&lt;player name="赤木剛憲" points="16"/&gt;
+							&lt;player name="桜木花道" points="4"/&gt;
+							&lt;player name="流川楓" points="32"/&gt;
+							&lt;player name="三井寿" points="24"/&gt;
+							&lt;player name="宮城リョータ" points="8"/&gt;
+						&lt;/players&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.php</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						# 載入 XML
+						$dom = new DOMDocument();
+						$dom-&gt;load('湘北高等学校.xml');
+						# 產生 XPath
+						$xpath = new DOMXPath($dom);
+						# 尋找 NodeList
+						$elements = $xpath-&gt;query('//player[@name="三井寿"]');
+						# 取出 Attribute
+						$value = (int)$elements[0]-&gt;getAttribute('points');
+						$value += 3;
+						# 修改 Attribute
+						$elements[0]-&gt;setAttribute('points', $value);
+						# 輸出 Attribute
+						echo $elements[0]-&gt;getAttribute('points');
+                    </textarea>
+					<br>
+					<output>
+						27
+					</output>
+				</p>
+			</section>
+			<p>
+				SimpleXML 產生的物件，本身自帶 xpath() 方法，將 XPath 語法傳進參數，會傳回 SimpleXMLElement 的陣列。<br>
+				<br>
+				更詳盡 XPath 操作方式，請參考「菜鸟教程」的《<a href='http://www.runoob.com/xpath/xpath-syntax.html'>XPath 语法</a>》。
+			</p>
+		</section>
+		<hr id='json'>
+		<section>
+			<h3>JSON</h3>
+			<p>
+				<textarea class='brush:php'>
+					&lt;?php
+					# Array to JSON
+					$array1 = array('name'=&gt;'Twideem Civs', 'email'=&gt;'twideem@outlook.com');
+					echo json_encode($array1, JSON_UNESCAPED_UNICODE), PHP_EOL;
+					# JSON to Array
+					$json2 = '{"name":"Twideem Civs","email":"twideem@outlook.com"}';
+					$array2 = json_decode($json2, TRUE);
+					echo $array2['name'], PHP_EOL,
+						 $array2['email'], PHP_EOL;
+					# Object to JSON
+					class Password{
+						public $password = 'abc123';
+					}
+					$object3 = new Password();
+					echo json_encode($object3), PHP_EOL;
+					# JSON to Object
+					$json4 = '{"password":"abc123"}';
+					$object4 = json_decode($json4);
+					echo $object4-&gt;password;
+                </textarea>
+				<br>
+				<output>
+					{"name":"Twideem Civs","email":"twideem@outlook.com"}<br>
+					Twideem Civs twideem@outlook.com<br>
+					{"password":"abc123"}<br>
+					abc123
+				</output>
+				<br>
+				既然 PHP 內嵌於 HTML，那透過 JSON 格式，將資料產生出來給 JavaScript 用，哦耶！
+			</p>
+		</section>
+		<hr id='csv'>
+		<section>
+			<h3>CSV</h3>
+			<section>
+				<h4>讀取資料</h4>
+				<section>
+					<h5>diablo.csv</h5>
+					<p>
+						<textarea class='brush:txt'>
+							ID,CHARACTER,LV
+							1,Amazon,1
+							2,Necromancer,89
+							3,Barbarian,67
+							4,Sorceress,23
+							5,Paladin,45
+                        </textarea>
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							$file = fopen('diablo.csv', 'r');
+							$csv = [];
+							while(!feof($file))
+								array_push($csv, fgetcsv($file, 512));
+							echo "{$csv[2][1]} 的等級是 {$csv[2][2]}";
+							fclose($file);
+                        </textarea>
+						<br>
+						<output>
+							Necromancer 的等級是 89
+						</output>
+					</p>
+				</section>
+				<p>
+					<code>fgetcsv()</code> 在剖析雙位元組字串（如中文）時，會錯漏資料，例如 "1,王子麵,5" 剖析成 "1" 和 "王子麵,5" 兩筆資料，而不是 1、王子麵、5 三筆資料。解決辦法是在使用前呼叫 <code>setlocale(LC_ALL, 'en_US.UTF-8')</code> 或 <code>setlocale(LC_ALL, 'zh_TW.BIG5')</code>，端看你檔案的字元編碼而定。
+				</p>
+			</section>
+			<section>
+				<h4>修改和寫入還有更好的讀取方式</h4>
+				<section>
+					<h5>diablo.csv</h5>
+					<p>
+						同上。
+					</p>
+				</section>
+				<section>
+					<h5>main.php</h5>
+					<p>
+						<textarea class='brush:php'>
+							&lt;?php
+							# 讀取
+							$csv = array_map('str_getcsv', file('diablo.csv'));
+							# 修改
+							$csv[1][2] = 11;
+							# 寫入
+							$file = fopen('new.csv', 'w');
+							foreach($csv as $row)
+								fputcsv($file, $row);
+							fclose($file);
+                        </textarea>
+						<br>
+						<output class='editor'>
+							ID,CHARACTER,LV<br>
+							1,Amazon,11<br>
+							2,Necromancer,89<br>
+							3,Barbarian,67<br>
+							4,Sorceress,23<br>
+							5,Paladin,45
+						</output>
+					</p>
+				</section>
+			</section>
+		</section>
+		<hr id='hexstring'>
+		<section>
+			<h3>偽 HEX 檔案</h3>
+			<p>
+				<textarea class='brush:php'>
+					&lt;?php
+					# 寫入
+					$file = fopen('hex.txt', 'w');
+					$array = unpack('H*', 'abcdefg hijklmnop qrstuv wxyz');
+					fputs($file, $array[1]);
+					fclose($file);
+					# 讀取
+					$file = fopen('hex.txt', 'r');
+					$string = fgets($file);
+					echo pack('H*', $string);
+					fclose($file);
+                </textarea>
+				<br>
+				<output class='editor'>
+					616263646566672068696a6b6c6d6e6f7020717273747576207778797a
+				</output>
+				<br>
+				<output>
+					abcdefg hijklmnop qrstuv wxyz
+				</output>
+				<br>
+				其實還是純文字文件，只是文字被編碼了。
+			</p>
+		</section>
+		<hr id='bytestring'>
+		<section>
+			<h3>將數值寫入檔案</h3>
+			<p>
+				fwrite() 或 fputs() 會將數值轉為字串再寫入檔案，就算 fopen() 第二個參數下了 'b' 也一樣。解法是用 pack() 將數值轉為 binary string 後再寫入～<br>
+				<br>
+				<textarea class='brush:php'>
+					&lt;?php
+					# 寫入
+					$file = fopen('data.bin', 'w');
+					fwrite($file, pack('i', 1024768).PHP_EOL);
+					fwrite($file, pack('i', 1366768).PHP_EOL);
+					fwrite($file, pack('i', 512));
+					fclose($file);
+					# 讀取
+					$file = fopen('data.bin', 'r');
+					while(!feof($file)){
+						$string = unpack('i', fgets($file));
+						echo $string[1], PHP_EOL;
+					}
+					fclose($file);
+                </textarea>
+				<br>
+				<output class='editor'>
+					<strong>NUL</strong> ? <strong>NUL</strong><br>
+					謪 <strong>DC4</strong> <strong>NUL</strong><br>
+					<strong>NUL</strong> <strong>STX</strong> <strong>NUL</strong> <strong>NUL</strong>
+				</output>
+				<br>
+				<output>
+					1024768<br>
+					1366768<br>
+					512
+				</output>
+			</p>
+		</section>
+		<hr id='dir'>
+		<section>
+			<h3>列出所有檔案和子目錄</h3>
+			<section>
+				<h4>做法一：使用 opendir()、readdir()、closedir()</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						# 取得目錄裡面所有內容
+						function f($x, &$y=array()){
+							if(is_dir($x)){
+								$a = opendir($x);
+								while($b = readdir($a))
+									if($b!='.' && $b!='..')
+										f("$x/$b", $y);
+								closedir($a);
+							}
+							if(is_file($x))
+								$y[] = $x;
+							return $y;
+						}
+						# 逐一列出結果
+						foreach(f('.') as $n)
+							echo $n, PHP_EOL;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>做法二：使用 scandir()</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						# 取得目錄裡面所有內容
+						function f($x, &$y=array()){
+							if(is_dir($x)){
+								$a = scandir($x);
+								foreach($a as $n)
+									if($n!='.' && $n!='..')
+										f("$x/$n", $y);
+							}
+							if(is_file($x))
+								$y[] = $x;
+							return $y;
+						}
+						# 逐一列出結果
+						foreach(f('.') as $n)
+							echo $n, PHP_EOL;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>做法三：使用 glob()</h4>
+				<p>
+					<textarea class='brush:php'>
+						&lt;?php
+						function f($x){
+							foreach(glob($x.'\*') as $n){
+								if(is_dir($n)) f($n);
+								else echo $n, PHP_EOL;
+							}
+						}
+						f('.');
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr id='phpini'>
+		<section>
+			<h3>列出能設定的 php.ini 項目</h3>
+			<p>
+				<textarea class='brush:php'>
+					&lt;?php
+					$array = ini_get_all();
+					foreach($array as $key1=&gt;$value1)
+						foreach($value1 as $key2=&gt;$value2)
+							if($key2=='access'&&($value2==1||$value2==7))
+								echo $key1, PHP_EOL;
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p style='color:#999;white-space:nowrap'>魔貫光殺砲<span style='color:#396'>（ﾟДﾟ)<span style='font-size:18px'>σ</span></span><q>弌弌弌弌弌弌弌弌弌弌⊃（（二二二二二二二二二二</q><span style='color:#f96'><span style='font-size:18px'>｝</span>(ﾟДﾟ）</span>かめはめ波</p>
+	</footer>
+</article>
+<script>
+	let a=15;
+	let b=true;
+
+	function f()
+	{
+		if(a==5) b=true;
+		else if(a==17) b=false;
+
+		if(b) a++;
+		else a--;
+
+		return '弌'.repeat(a)+'⊃（（'+'二'.repeat(20-a);
+	}
+
+	setInterval(()=>$('footer p q').innerHTML=f(),250);
+</script>

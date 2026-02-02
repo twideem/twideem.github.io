@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>洛克人</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>四代</h2>
+		<hr>
+		<section>
+			<h3>攻略順序</h3>
+			<p>
+				TOAD MAN<br>
+				BRIGHT MAN<br>
+				PHARAOH MAN（有隱藏裝備）<br>
+				RING MAN<br>
+				DUST MAN<br>
+				SKULL MAN<br>
+				DIVE MAN（有隱藏裝備）<br>
+				DRILL MAN
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>修改</h3>
+			<p>
+				預設只開啟特殊武器，其它功能請依自己需求勾選。
+			</p>
+			<section>
+				<h4>VirtuaNES</h4>
+				<p>
+					<code>
+						#1 00B1-3-9C9C9C &nbsp; Coil, Marine, Jet<br>
+						#1 00B5-2-9C9C &nbsp; &nbsp; Wire, Balloon<br>
+						#0 00B4-1-9C &nbsp; &nbsp; &nbsp; All weapons 1/3<br>
+						#0 00B7-4-9C9C9C9C All weapons 2/3<br>
+						#0 00BB-3-9C9C9C &nbsp; All weapons 3/3<br>
+						#0 003C-1-06 &nbsp; &nbsp; &nbsp; God mode<br>
+						#0 00A2-1-09 &nbsp; &nbsp; &nbsp; E cans<br>
+					</code>
+					<br>
+					複製貼上到純文字文件，並且以 *.vct 副檔名儲存，然後在 VirtuaNES 的 Tool - Cheat code - Load 載入使用。
+				</p>
+			</section>
+			<section>
+				<h4>Nestopia</h4>
+				<p>
+					<code>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+						&lt;cheats version="1.0"&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B1&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;COIL&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B3&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;MARINE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B2&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;JET&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B5&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;WIRE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B6&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;BALLOON&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BC&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;BRIGHT&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B4&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;TOAD&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B9&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;DRILL&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BB&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;PHARAOH&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B8&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;RING&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BA&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;DUST&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B7&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;DIVE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BD&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;SKULL&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x003C&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x06&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;GOD MODE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00A2&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x09&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;E CANS&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&lt;/cheats&gt;<br>
+					</code>
+					<br>
+					複製貼上到純文字文件，並且以 *.xml 副檔名儲存，然後在 Nestopia 的 Options - Cheats - Permanent Codes 按 Import.. 載入。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>五代</h2>
+		<hr>
+		<section>
+			<h3>攻略順序</h3>
+			<p>
+				STONE MAN<br>
+				CHARGE MAN<br>
+				WAVE MAN<br>
+				STAR MAN<br>
+				GRAVITY MAN<br>
+				GYRO MAN<br>
+				CRYSTAL MAN<br>
+				NAPALM MAN
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>修改</h3>
+			<p>
+				預設只開啟特殊武器，其它功能請依自己需求勾選。
+			</p>
+			<section>
+				<h4>VirtuaNES</h4>
+				<p>
+					<code>
+						; ロックマン 5 ブルースの罠!?<br>
+						#1 00BA-3-9C9C9C &nbsp; Coil, Jet, Beat<br>
+						#1 00B5-1-9C &nbsp; &nbsp; &nbsp; Arrow<br>
+						#0 00B1-4-9C9C9C9C All weapons 1/2<br>
+						#0 00B6-4-9C9C9C9C All weapons 2/2<br>
+						#0 05B8-1-04 &nbsp; &nbsp; &nbsp; God mode<br>
+						#0 00BD-2-0909 &nbsp; &nbsp; E and M cans<br>
+					</code>
+					<br>
+					複製貼上到純文字文件，並且以 *.vct 副檔名儲存，然後在 VirtuaNES 的 Tool - Cheat code - Load 載入使用。
+				</p>
+			</section>
+			<section>
+				<h4>Nestopia</h4>
+				<p>
+					<code>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+						&lt;cheats version="1.0"&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BA&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;COIL&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BB&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;JET&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BC&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;BEAT&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B5&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;ARROW&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B1&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;WAVE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B2&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;ATTACK&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B3&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;EYE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B4&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;BOMB&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B6&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;STONE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B7&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;HOLD&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B8&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9D&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;KICK&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00B9&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x9C&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;CRASH&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x05B8&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x04&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;GOD MODE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BD&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x09&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;E CANS&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00BE&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x09&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;M CANS&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&lt;/cheats&gt;<br>
+					</code>
+					<br>
+					複製貼上到純文字文件，並且以 *.xml 副檔名儲存，然後在 Nestopia 的 Options - Cheats - Permanent Codes 按 Import.. 載入。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>六代</h2>
+		<hr>
+		<section>
+			<h3>攻略順序</h3>
+			<p>
+				WIND MAN<br>
+				FLAME MAN（過關獲得 RUSH POWRT ADAPTER）<br>
+				BLIZZARD MAN<br>
+				PLANT MAN（過關獲得 RUSH JET ADAPTER）<br>
+				TOMAHAWK MAN（可蒐集到 B 字）（有隱藏道具 ENERGIE BALANCER）<br>
+				YAMATO MAN（可蒐集到 E 字）<br>
+				KNIGHT MAN（可蒐集到 A 字）<br>
+				CENTAUR MAN（可蒐集到 T 字）<br>
+				<br>
+				集滿 "B" "E" "A" "T" 可獲得 BEAT 鳥。<br>
+				<br>
+				ENERGIE BALANCER 的功能是吃能量罐時，會自動補充特殊武器的能量，不用切換。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>修改</h3>
+			<p>
+				預設只開啟特殊武器，其它功能請依自己需求勾選。
+			</p>
+			<section>
+				<h4>VirtuaNES</h4>
+				<p>
+					<code>
+						; ロックマン 6 史上最大の戦い!!<br>
+						#1 0691-1-1B &nbsp; &nbsp; &nbsp; Beat<br>
+						#1 0696-1-01 &nbsp; &nbsp; &nbsp; Energie balancer<br>
+						#0 0689-4-1B1B1B1B All weapons 1/2<br>
+						#0 068D-4-1B1B1B1B All weapons 2/2<br>
+						#0 00A2-1-55 &nbsp; &nbsp; &nbsp; God mode<br>
+						#0 06A1-1-09 &nbsp; &nbsp; &nbsp; E cans<br>
+					</code>
+					<br>
+					複製貼上到純文字文件，並且以 *.vct 副檔名儲存，然後在 VirtuaNES 的 Tool - Cheat code - Load 載入使用。
+				</p>
+			</section>
+			<section>
+				<h4>Nestopia</h4>
+				<p>
+					<code>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+						&lt;cheats version="1.0"&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x0691&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;BEAT&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x0696&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x01&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;ENERGIE BALANCER&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x0689&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;SPEAR&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x068A&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;STORM&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x068B&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;ATTACK&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x068C&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;BLAST&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x068D&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;PLANT&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x068E&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;KNIGHT&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x068F&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;SILVER&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x0690&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x1B&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;FLASH&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x00A2&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x05&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;GOD MODE&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x06A1&lt;/address&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x09&lt;/value&gt;<br>
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;E CANS&lt;/description&gt;<br>
+						&nbsp; &nbsp; &lt;/cheat&gt;<br>
+						&lt;/cheats&gt;<br>
+					</code>
+					<br>
+					複製貼上到純文字文件，並且以 *.xml 副檔名儲存，然後在 Nestopia 的 Options - Cheats - Permanent Codes 按 Import.. 載入。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>七代</h2>
+		<hr>
+		<section>
+			<h3>攻略順序</h3>
+			<p>
+				BURST MAN<br>
+				CLOUD MAN<br>
+				JUNK MAN<br>
+				FREEZE MAN<br>
+				SLASH MAN<br>
+				SPRING MAN<br>
+				SHADE MAN<br>
+				TURBO MAN
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>修改</h3>
+			<p>
+				體力　<code>7E0C2E1C</code><br>
+				無敵　<code>7E0C2FFF</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>密碼</h3>
+			<p>
+				進入威利城，全武器、全道具：<br>
+				<br>
+				7 2 5 1<br>
+				5 8 4 2<br>
+				2 8 4 7<br>
+				6 1 3 7
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Rockman X4</h2>
+		<p>
+			第一次雙主角，帥氣到不行的 ZERO 擄獲廣大玩家的心！加上為了讓更多人接觸這系列作品，難度設計得容易許多，是最多人視為經典的洛克人！
+		</p>
+		<hr>
+		<section>
+			<h3>攻略順序</h3>
+			<section>
+				<h4>X</h4>
+				<p>
+					WEB SPIDER → SPLIT MUSHROOM → CYBER PEACOCK → STORM OWL → MAGMA DRAGOON → FROST WALRUS → JET STINGRAY → SLASH BEAST
+				</p>
+			</section>
+			<section>
+				<h4>Zero</h4>
+				<p>
+					MAGMA DRAGOON → WEB SPIDER → SPLIT MUSHROOM → CYBER PEACOCK → STORM OWL → FROST WALRUS → JET STINGRAY → SLASH BEAST
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>密技</h3>
+			<section>
+				<h4>X</h4>
+				<p>
+					1、選人物時把框移到洛克人上。<br>
+					2、按 ╳ 兩下。<br>
+					3、按 ← 六下。<br>
+					4、按 L1 + R2 不放。<br>
+					5、按 ○ 開始遊戲。<br>
+					6、成功的話，主角身上會有紫色部位，但還未真正獲得終極鎧甲，先到 WEB SPIDER 拿到一個部位才算完成。
+				</p>
+			</section>
+			<section>
+				<h4>Zero</h4>
+				<p>
+					1、選人物時把框移到 Zero 上。<br>
+					2、按住 R1 不放。<br>
+					3、按 → 六下。<br>
+					4、放開 R1。<br>
+					5、按住 ╳ 不放。<br>
+					6、按 ○ 開始遊戲。<br>
+					7、成功的話，Zero 會是黑色的。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='20121217'>
+	<section>
+		<h2>Street Fighter X Mega Man</h2>
+		<hr>
+		<section>
+			<h3>簡介</h3>
+			<p>
+				CAPCOM 紀念洛克人25 周年，與正在製作快打旋風洛克人同人遊戲的 Seow Zong Hui 合作，推出 Street Fighter X Mega Man，並免費放在官網下載：<br>
+				<br>
+				<a href='http://www.capcom-unity.com/mega_man?no_redir=1'>http://www.capcom-unity.com/mega_man?no_redir=1</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>攻略順序</h3>
+			<p>
+				Ryu<br>
+				Chun-Li<br>
+				Crimson<br>
+				Dhalsim<br>
+				Blanka<br>
+				Rose<br>
+				Rolento<br>
+				Urien
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>密技</h3>
+			<p>
+				在標題畫面，長按 SHOOT 和 JUMP，聽到特殊音效，再進入遊戲，會開放「星影圓舞」的能力！不但可以按 ↓↘→＋SHOOT 打「波動拳」，更可以同時按 SHOOT 和 SWAP1 進入「星影圓舞」狀態，攻擊、速度、跳躍能力通通上昇。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Mega Man 11</h2>
+		<p>
+			新人難度容易過關，手殘的我終於也能爽快玩洛克人了 XD<br>
+			<br>
+			攻略順序從左上角的 BLOCKMAN 開始打，然後順時針一個個挑戰下去即可。
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] Nestopia 會破圖，但手把操作流暢。VirtuaNES 不會破圖，但手把反應有時會遲緩。
+		</p>
+	</footer>
+</article>

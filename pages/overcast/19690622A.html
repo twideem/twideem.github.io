@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>Pythonic</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>這樣寫才 Python</h2>
+		<p>
+			正如寫程式應盡量套用 API，不要老是自己也寫一堆程式碼，把事情變得雜亂。寫 Python 也應該盡量用它特有的表達方式，程式碼看起來才會簡潔，不要把事情變複雜。<br>
+			<br>
+			例如從其它程式語言過來的人，要交換 a 和 b 變數的資料時，會這樣寫程式：<br>
+			<br>
+			<textarea class='brush:py'>
+				temp = a
+				a = b
+				b = temp
+            </textarea>
+			<br>
+			但在 Python 的話，建議這樣寫：<br>
+			<br>
+			<textarea class='brush:py'>
+				a, b = b, a
+            </textarea>
+			<br>
+			不然一看就知道是從別的語言過來寫 Python 的人，一點也不 Pythonic。<br>
+			<br>
+			學習寫 Pythonic 的程式碼，就跟懂得套用 API 寫程式是一樣的，並不是什麼高深的技術，而是有沒有善用現成的資源解決問題。所以不要覺得學完 Python 還要學 Pythonic 很討厭，Pythonic 是能把程式寫得更簡單的議題，而不是什麼高深的程式技術，其實去了解 Pythonic 會感到愉快，慶幸自己沒再繼續當冤大頭。
+		</p>
+		<hr>
+		<section>
+			<h3>Example 2</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = ['a', 'aa', 'aaa']
+					b = a[0]
+					c = a[1]
+					d = a[2]
+
+					# Pythonic
+					a = ['a', 'aa', 'aaa']
+					(b, c, d) = a
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 3</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					if a &lt; b and b &lt; c and c &lt; d:
+						pass
+
+					# Pythonic
+					if a &lt; b &lt; c &lt; d:
+						pass
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 4</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					if a &gt; 0 and a &lt; 10:
+						pass
+
+					# Pythonic
+					if 0 &lt; a &lt; 10:
+						pass
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 5</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					if f() == True:
+						pass
+					if f() == False:
+						pass
+
+					# Pythonic
+					if f():
+						pass
+					if not f():
+						pass
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 6</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					if len(a) == 0:
+						pass
+					if len(a):
+						pass
+
+					# Pythonic
+					if not a:
+						pass
+					if a:
+						pass
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 7</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					if a=='a' or a=='aa' or a=='aaa':
+						pass
+
+					# Pythonic
+					if a in ('a', 'aa', 'aaa'):
+						pass
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 8</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = 123
+					if a:
+						b = 'yes'
+					else:
+						b = 'no'
+
+					# Pythonic
+					a = 123
+					b = 'yes' if a else 'no'
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 9</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = {'k':'v', 'kk':'vv', 'kkk':'vvv'}
+					b = dict()
+					for key, value in a.items():
+						b[value] = key
+
+					# Pythonic
+					a = {'k':'v', 'kk':'vv', 'kkk':'vvv'}
+					b = {value:key for key, value in a.items()}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 10</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					f = open('file.txt', 'w')
+					try:
+						f.write('')
+					finally:
+						f.close()
+
+					# Pythonic
+					with open('file.txt', 'w') as f:
+						f.write('')
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>很 Pythonic 的寫法</h2>
+		<p>
+			還有一些能將複雜程式寫法，用 Python 內建函式加以簡化的範例，會讓你的程式更 Pythonic，讓人覺得你寫 Python 經驗老到。<br>
+			<br>
+			但不這麼寫就不 Pythonic 嗎？看起來不是，好像是「可以這樣寫 Python 程式」，而不是「務必這樣寫 Python 程式」，因此這些範例另外放～
+		</p>
+		<hr>
+		<section>
+			<h3>Example 11</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = ['a', 'aa', 'aaa']
+					n = 0
+					while n &lt; len(a):
+						print(n, a[n])
+						n += 1
+
+					# Pythonic
+					a = ['a','aa','aaa']
+					for n, x in enumerate(a):
+						print(n, x)
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 12</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = 123
+					if type(a) is type(1):
+						pass
+
+					# Pythonic
+					a = 123
+					if isinstance(a, int):
+						pass
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 13</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = {'k':'v', 'kk':'vv', 'kkk':'vvv'}
+					b = dict()
+					for key, value in a.items():
+						b[value] = key
+
+					# Pythonic
+					a = {'k':'v', 'kk':'vv', 'kkk':'vvv'}
+					a = dict(zip(a.values(), a.keys()))
+
+					# 比 Example 9 簡單易懂
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 14</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = {'aaa':111}
+					b = 0
+					if 'aaa' in a:
+						b = a['aaa']
+					else:
+						b = 222
+
+					# Pythonic
+					a = {'aaa':111}
+					b = a.get('aaa', 222)
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 15</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = ['a', 'aa', 'aaa']
+					b = ''
+					for n in a:
+						b += n + ':'
+					b = b[:-1]
+
+					# Pythonic
+					a = ['a', 'aa', 'aaa']
+					b = ':'.join(a)
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 16</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					a = 'abc'
+					if a[:2] == 'ab':
+						pass
+
+					# Pythonic
+					a = 'abc'
+					if a.startswith('ab'):
+						pass
+
+					# 別忘了還有 endswith()
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>其他建議事項</h2>
+		<hr>
+		<section>
+			<h3>Example 17</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					f = lambda x, y: x + y
+					f(1, 2)
+
+					# Pythonic
+					def f(x, y):
+						return x + y
+					f(1, 2)
+
+					# lambda 不是用來產生具名函式，而是用來表現匿名函數。既然要具名，用 def 才對味。
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 18</h3>
+			<p>
+				<textarea class='brush:py'>
+					# Programming
+					# 沒想過函式傳回多值
+
+					# Pythonic
+					def f():
+						return ('aaa', 'bbb')
+					(a, b) = f()
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 我喜歡 Python，但我不喜歡 Pythonic。講究 Pythonic 精神，要比 Python 語法本身還要博大精深，這樣一來並沒有比較簡單。Pythonic 讓我寫程式之餘，還要擔心是否牴觸某個群體的政治正確。事實上，我喜歡可以寫得很愚蠢的 JavaScript，更勝於必須寫得很正確的 Python。
+		</p>
+	</footer>
+</article>

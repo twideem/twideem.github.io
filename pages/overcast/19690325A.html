@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>用 Python 快寫程式：附錄</h1>
+	</header>
+	<hr id='keyword'>
+	<section>
+		<h2>Python 3 指令一覽表</h2>
+		<p>
+			<code>
+				False None True and as assert async await break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield<br>
+				[] {} ' " : \ = + - * / % .
+			</code>
+		</p>
+	</section>
+	<hr id='bif'>
+	<section>
+		<h2>Python 3 內建函式一覽表</h2>
+		<p>
+			<code>
+				abs(x)<br>
+				all(iterable)<br>
+				any(iterable)<br>
+				ascii(object)<br>
+				bin(x)<br>
+				bool([x])<br>
+				breakpoint()<br>
+				bytearray([source[, encoding[, errors]]])<br>
+				bytes([source[, encoding[, errors]]])<br>
+				callable(object)<br>
+				chr(i)<br>
+				classmethod(function)<br>
+				compile(source, filename, mode, flags=0, dont_inherit=False,<br>
+				&nbsp; &nbsp; &nbsp; &nbsp; optimize=-1)<br>
+				complex([real[, imag]])<br>
+				delattr(object, name)<br>
+				dict(**kwarg)<br>
+				dict(iterable, **kwarg)<br>
+				dict(mapping, **kwarg)<br>
+				dir([object])<br>
+				divmod(x, y)<br>
+				enumerate(iterable, start=0)<br>
+				eval(expression, globals=None, locals=None)<br>
+				exec(object[, globals[, locals]])<br>
+				filter(function, iterable)<br>
+				float([x])<br>
+				format(value[, format_spec])<br>
+				frozenset([iterable])<br>
+				getattr(object, name[, default])<br>
+				globals()<br>
+				hasattr(object, name)<br>
+				hash(object)<br>
+				help([object])<br>
+				hex(x)<br>
+				id(object)<br>
+				input([prompt])<br>
+				int(x=0)<br>
+				int(x, base=10)<br>
+				isinstance(object, classinfo)<br>
+				issubclass(class, classinfo)<br>
+				iter(object[, sentinel])<br>
+				len(s)<br>
+				list([iterable])<br>
+				locals()<br>
+				map(function, iterable, ...)<br>
+				max(arg1, arg2, *args[, key])<br>
+				max(iterable, *[, key])<br>
+				memoryview(obj)<br>
+				min(arg1, arg2, *args[, key])<br>
+				min(iterable, *[, key])<br>
+				next(iterator[, default])<br>
+				object()<br>
+				oct(x)<br>
+				open(file, mode='r', buffering=-1, encoding=None, errors=None,<br>
+				&nbsp; &nbsp; &nbsp;newline=None, closefd=True, opener=None)<br>
+				ord(c)<br>
+				pow(x, y[, z])<br>
+				print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)<br>
+				property(fget=None, fset=None, fdel=None, doc=None)<br>
+				range(stop)<br>
+				range(start, stop[, step])<br>
+				repr(object)<br>
+				reversed(seq)<br>
+				round(number[, ndigits])<br>
+				set([iterable])<br>
+				setattr(object, name, value)<br>
+				slice(stop)<br>
+				slice(start, stop[, step])<br>
+				sorted(iterable[, key][, reverse])<br>
+				staticmethod(function)<br>
+				str(object='')<br>
+				str(object=b'', encoding='utf-8', errors='strict')<br>
+				sum(iterable[, start])<br>
+				super([type[, object-or-type]])<br>
+				tuple([iterable])<br>
+				type(object)<br>
+				type(name, bases, dict)<br>
+				vars([object])<br>
+				zip(*iterables)<br>
+				__import__(name, globals=None, locals=None, fromlist=(), level=0)<br>
+			</code>
+			<br>
+			已移除的 Python 2 內建函式：apply、basestring、buffer、cmp、coerce、execfile、intern、long、raw_input、reduce、reload、unichr、unicode、xrange。
+		</p>
+	</section>
+	<hr id='ctypes'>
+	<section>
+		<h2>鍵盤代碼</h2>
+		<p>
+			<textarea class='brush:py'>
+				# 鍵盤代碼
+				KEY_CODE = {
+					'1': 49,
+					'2': 50,
+					'3': 51,
+					'4': 52,
+					'5': 53,
+					'6': 54,
+					'7': 55,
+					'8': 56,
+					'9': 57,
+					'a': 65,
+					'b': 66,
+					'c': 67,
+					'd': 68,
+					'e': 69,
+					'f': 70,
+					'g': 71,
+					'h': 72,
+					'i': 73,
+					'j': 74,
+					'k': 75,
+					'l': 76,
+					'm': 77,
+					'n': 78,
+					'o': 79,
+					'p': 80,
+					'q': 81,
+					'r': 82,
+					's': 83,
+					't': 84,
+					'u': 85,
+					'v': 86,
+					'w': 87,
+					'x': 88,
+					'y': 89,
+					'z': 90,
+					';': 186,
+					'=': 187,
+					'-': 189,
+					'/': 191,
+					'`': 192,
+					'[': 219,
+					'\\': 220,
+					']': 221,
+					'\'': 222,
+					'backspace': 8,
+					'tab': 9,
+					'enter': 13,
+					'shift': 16,
+					'ctrl': 17,
+					'alt': 18,
+					'capslock': 20,
+					'esc': 27,
+					'space': 32,
+					'pageup': 33,
+					'pagedown': 34,
+					'end': 35,
+					'home': 36,
+					'left': 37,
+					'up': 38,
+					'right': 39,
+					'down': 40,
+					'insert': 45,
+					'delete': 46,
+					'clear': 12,
+					'help': 47,
+					'numlock': 144,
+					'num0': 96,
+					'num1': 97,
+					'num2': 98,
+					'num3': 99,
+					'num4': 100,
+					'num5': 101,
+					'num6': 102,
+					'num7': 103,
+					'num8': 104,
+					'num9': 105,
+					'num+': 107,
+					'num-': 109,
+					'num*': 106,
+					'num.': 110,
+					'num/': 111,
+					'numenter': 108,
+					'f1': 112,
+					'f2': 113,
+					'f3': 114,
+					'f4': 115,
+					'f5': 116,
+					'f6': 117,
+					'f7': 118,
+					'f8': 119,
+					'f9': 120,
+					'f10': 121,
+					'f11': 122,
+					'f12': 123
+				}
+
+				# 多媒體鍵盤代碼
+				MEDIA_KEY_CODE = {
+					# 網際網路
+					'homepage': 172,
+					'back': 166,
+					'forward': 167,
+					'refresh': 168,
+					'stop': 169,
+					'bookmark': 171,
+					'search': 170,
+					'email': 180,
+					# 影音
+					'vol+': 175,
+					'vol-': 174,
+					'mute': 173,
+					'next': 176,
+					'previous': 177,
+					'pause': 179,
+					'stop': 178,
+					'playlist': 181
+				}
+            </textarea>
+		</p>
+	</section>
+	<hr id='style'>
+	<section>
+		<h2>Python 編程風格指南（Style Guide for Python Code）</h2>
+		<p>
+			完整內容請見《<a href='http://www.python.org/dev/peps/pep-0008/'>Style Guide for Python Code</a>》，底下是從官網擷取的內容：
+		</p>
+		<hr>
+		<section>
+			<h3>縮排</h3>
+			<p>
+				以下都是允許的風格，並不只限於一種：<br>
+				<br>
+				<textarea class='brush:py'>
+					foo = long_function_name(var_one, var_two,
+											 var_three, var_four)
+
+					def long_function_name(
+							var_one, var_two, var_three,
+							var_four):
+						print(var_one)
+
+					foo = long_function_name(
+						var_one, var_two,
+						var_three, var_four)
+
+					my_list = [
+						1, 2, 3,
+						4, 5, 6,
+						]
+
+					result = some_function_that_takes_arguments(
+						'a', 'b', 'c',
+						'd', 'e', 'f',
+						)
+
+					my_list = [
+						1, 2, 3,
+						4, 5, 6,
+					]
+
+					result = some_function_that_takes_arguments(
+						'a', 'b', 'c',
+						'd', 'e', 'f',
+					)
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>空白字元</h3>
+			<p>
+				使用 4 個空白字元，在 Python 用 Tab 縮排會被嘴得很慘。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>每行字數</h3>
+			<p>
+				每行最多 79 個字元。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>多行運算式</h3>
+			<p>
+				運算式要寫成多行的話，運算符放在每行前面，並與第一個運算子保持對齊：<br>
+				<br>
+				<textarea class='brush:py'>
+					income = (gross_wages
+							  + taxable_interest
+							  + (dividends - qualified_dividends)
+							  - ira_deduction
+							  - student_loan_interest)
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>原始碼檔案編碼</h3>
+			<p>
+				使用 UTF-8 字元編碼。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>載入模組</h3>
+			<p>
+				除非 from，否則一行 import 一個模組，不要用 , 一次 import 多個模組：<br>
+				<br>
+				<textarea class='brush:py'>
+					import os
+					import sys
+					from subprocess import Popen, PIPE
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>字串</h3>
+			<p>
+				官方強調字串用 ' 還是 " 都一樣，這部分官方不做任何建議。<br>
+				<br>
+				但多行字串的話，由於 PEP 257 Docstring Conventions 的關係，建議使用 " 符號：<br>
+				<br>
+				<textarea class='brush:py'>
+					"""This is the example module.
+
+					This module does stuff.
+					"""
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>在運算式和敘述句裡的空白</h3>
+			<p>
+				括號裡面：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					spam(ham[1], {eggs: 2})
+
+					# No
+					spam( ham[ 1 ], { eggs: 2 } )
+                </textarea>
+				<br>
+				在逗號後和右括號之間：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					foo = (0,)
+
+					# No
+					bar = (0, )
+                </textarea>
+				<br>
+				在逗號、冒號、分號前：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					if x == 4: print x, y; x, y = y, x
+
+					# No
+					if x == 4 : print x , y ; x , y = y , x
+                </textarea>
+				<br>
+				切開集合：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+					ham[lower:upper], ham[lower:upper:], ham[lower::step]
+					ham[lower+offset : upper+offset]
+					ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+					ham[lower + offset : upper + offset]
+
+					# No
+					ham[lower + offset:upper + offset]
+					ham[1: 9], ham[1 :9], ham[1:9 :3]
+					ham[lower : : upper]
+					ham[ : upper]
+                </textarea>
+				<br>
+				呼叫函式：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					spam(1)
+
+					# No
+					spam (1)
+                </textarea>
+				<br>
+				鍵值和索引：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					dct['key'] = lst[index]
+
+					# No
+					dct ['key'] = lst [index]
+                </textarea>
+				<br>
+				指定運算：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					x = 1
+					y = 2
+					long_variable = 3
+
+					# No
+					x			= 1
+					y			= 2
+					long_variable = 3
+                </textarea>
+				<br>
+				四則運算：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					i = i + 1
+					submitted += 1
+					x = x*2 - 1
+					hypot2 = x*x + y*y
+					c = (a+b) * (a-b)
+
+					# No
+					i=i+1
+					submitted +=1
+					x = x * 2 - 1
+					hypot2 = x * x + y * y
+					c = (a + b) * (a - b)
+                </textarea>
+				<br>
+				函式注釋：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					def munge(input: AnyStr): ...
+					def munge() -&gt; AnyStr: ...
+
+					# No
+					def munge(input:AnyStr): ...
+					def munge()-&gt;PosInt: ...
+                </textarea>
+				<br>
+				預設參數：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					def complex(real, imag=0.0):
+						return magic(r=real, i=imag)
+
+					# No
+					def complex(real, imag = 0.0):
+						return magic(r = real, i = imag)
+                </textarea>
+				<br>
+				函式注釋和預設參數一起用時：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					def munge(sep: AnyStr = None): ...
+					def munge(input: AnyStr, sep: AnyStr = None, limit=1000): ...
+
+					# No
+					def munge(input: AnyStr=None): ...
+					def munge(input: AnyStr, limit = 1000): ...
+                </textarea>
+				<br>
+				可以寫成多行的話，就不鼓勵使用複合語句：<br>
+				<br>
+				<textarea class='brush:py'>
+					#Yes
+					if foo == 'blah':
+						do_blah_thing()
+					do_one()
+					do_two()
+					do_three()
+
+					# No
+					if foo == 'blah': do_blah_thing()
+					do_one(); do_two(); do_three()
+                </textarea>
+				<br>
+				最後是逗號結尾的排版風格：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					FILES = [
+						'setup.cfg',
+						'tox.ini',
+						]
+					initialize(FILES,
+							   error=True,
+							   )
+
+					# No
+					FILES = ['setup.cfg', 'tox.ini',]
+					initialize(FILES, error=True,)
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>註解</h3>
+			<p>
+				註解符號與註解內容之間隔一個空白，註解內容第一個字母要大寫。<br>
+				<br>
+				註解寫在每行程式碼後面的話，註解符號前面隔一個空白，多行註解之間不要對齊：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					a = 12	# Variable a
+					b = 345   # Variable b
+					c = a + b # Variable c
+
+					# No
+					a = 12	# Variable a
+					b = 345   # Variable b
+					c = a + b # Variable c
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>邏輯</h3>
+			<p>
+				程式在設計上的寫法，邏輯直不直覺，也會影響可讀性：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					if foo is not None:
+
+					# No
+					if not foo is None:
+                </textarea>
+				<br>
+				函式傳回值的邏輯也要小心，經常寫出不嚴謹的設計：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					def foo(x):
+						if x >= 0:
+							return math.sqrt(x)
+						else:
+							return None
+					def bar(x):
+						if x &lt; 0:
+							return None
+						return math.sqrt(x)
+
+					# No
+					def foo(x):
+						if x &gt;= 0:
+							return math.sqrt(x)
+					def bar(x):
+						if x &lt; 0:
+							return
+						return math.sqrt(x)
+                </textarea>
+				<br>
+				另外，程式要放在 try 的話，最好把程式拆開來寫，讓 try 裡面的工作變簡單，這樣發生異常時才好處理，：<br>
+				<br>
+				<textarea class='brush:py'>
+					# Yes
+					try:
+						value = collection[key]
+					except KeyError:
+						return key_not_found(key)
+					else:
+						return handle_value(value)
+
+					# No
+					try:
+						# Too broad!
+						return handle_value(collection[key])
+					except KeyError:
+						# Will also catch KeyError raised by handle_value()
+						return key_not_found(key)
+                </textarea>
+				<br>
+				PEP 8 還寫了很多程式設計上的建議，更多內容請看官方文件的 Programming Recommendations 一節。
+			</p>
+		</section>
+	</section>
+	<hr id='zen'>
+	<section>
+		<h2>Python 之禪（The Zen of Python）</h2>
+		<p>
+			完整內容請見《<a href='http://www.python.org/dev/peps/pep-0020/'>The Zen of Python</a>》，底下是中文翻譯：<br>
+			<br>
+			優美勝於醜陋。<br>
+			清楚勝於隱晦。<br>
+			簡單勝於複雜。<br>
+			複雜勝於凌亂。<br>
+			平舖直述勝於深層嵌套。<br>
+			間隔勝於緊湊。<br>
+			可讀性很重要。<br>
+			特殊情況也不足以打破上述原則。<br>
+			尤其講求實用性時，它會打擊你遵守這些原則的想法。<br>
+			<br>
+			不該無視錯誤訊息<ins>1</ins>。<br>
+			除非你確實打算關掉那個錯誤項目。<br>
+			<br>
+			面對多種可能，不要隨便猜一個來用。<br>
+			應該會有一種、也最好只有一種簡單明確的好做法。<br>
+			雖然那個做法起先不覺得簡明<ins>2</ins>，但之後你會明白 Python 之父為何這麼設計。<br>
+			<br>
+			動手去做勝過放著不做。<br>
+			但放著不做有時比不認真做好。<br>
+			<br>
+			如果實作的方式很難解釋，肯定是壞的設計。<br>
+			如果實作的方式容易解釋，可能是好的設計。<br>
+			<br>
+			命名空間是最棒的設計！<br>
+			<br>
+			以上，讓我們基於這些原則，實際表現更多優點給大家看吧！
+		</p>
+	</section>
+	<hr id='underline'>
+	<section>
+		<h2>底線命名原則</h2>
+		<p>
+			variable：可正常存取的變數。<br>
+			variable_：變數名稱重複時，習慣上在後面加個底線。<br>
+			_variable：不建議有人存取這個變數時，習慣上在前面加個底線。<br>
+			__variable：類別繼承時，不會共用該變數。<br>
+			__variable__：Python 軟體基金會制定語言規格用的命名方式，不建議我們這樣命名。
+		</p>
+	</section>
+	<hr id='batteriesincluded'>
+	<section>
+		<h2>從 PEP 594 看 Python 的變革</h2>
+		<p>
+			PEP 594 提案廢除二十多個標準程式庫裡的模組，包括 cgi 和 cgitb，已確定在 Python 3.13 刪除，Python 3.12 是最後一個包山包海的版本，新舊版本不相容的情形又更惡化了…<br>
+			<br>
+			在 Python 還是冷門語言、生態還不是那麼發達的年代，主打 batteries included（內建電池），盡可能在標準程式庫通包所有功能，以簡化開發者的工作量。現在不一樣，Python 有第一大的生態，開始拋棄 batteries included 這項理念，刪除內建的模組，藉以鼓勵使用者使用第三方模組，進一步壯大 Python 生態的影響力！<br>
+			<br>
+			Python 將不再是那個把事情變得簡單的程式設計方案，而是把事情做得更好但同時變得複雜的某種產業標準，也就是不再為電腦初學者設想，而是為從業者量身訂做，成為忘失初衷的程式語言。<br>
+			<br>
+			這不見是壞事！能跟上時代的變化，必然會是比之前更好的 Python 語言！只是過往推廣 Python 時所聲稱的簡單易用哲學，將不再適用這門語言，Python 會成為專門用來滿足科技產業需求的小複雜語言，屆時我們又會推廣某個比 Python 更簡易好用的新語言～
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 是 errors 不是 bugs，所以我想他指的是 warnings。有時候受設備和系統的限制，程式跳出的警告，實在沒辦法照做，只能無可奈何的關閉該項警告。<br>
+			[2] 像 from tkinter import * 這樣的寫法就很不簡明，怎麼看都是從套件載入所有東西的意思，但用意卻是省略套件名稱、直接呼叫裡面的東西。畢竟 import tkinter 就是載入所有東西了，只是呼叫時要打上 tkinter.xxx()，但這兩者的區別，用那種寫法實在看不出所以然來～
+		</p>
+	</footer>
+</article>

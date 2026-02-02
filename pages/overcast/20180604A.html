@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>木魚</title>
+<body style='margin:0'>
+<button style='background-color:burlywood;color:saddlebrown;font-family:Arial;font-size:200px;width:100%' onclick='knock()'>0</button>
+<p>從 <input value='0' style='text-align:center;width:60px' onchange='change()'> 起跳（<button onclick='save()'>儲存</button> <button onclick='load()'>載入</button> <button onclick='localStorage.clear()'>清除</button>），每 <input value='10' style='text-align:center;width:30px'> 次敲一下鐘（<button onclick='limit(4)'>4</button> <button onclick='limit(10)'>10</button> <button onclick='limit(18)'>18</button> <button onclick='limit(108)'>108</button>），或做為達到遍數時的提示音效。其它配色：<button onclick='lazurite()'>青金石</button>。</p>
+<script>
+	let a=[document.getElementsByTagName('button')[0],
+		   document.getElementsByTagName('input')[0],
+		   document.getElementsByTagName('input')[1]];
+	let b=[new Audio('../../objects/audio/20180604A_01.mp3'),
+		   new Audio('../../objects/audio/20180604A_02.mp3')];
+
+	function change()
+	{
+		a[0].innerHTML=Number(a[1].value);
+		view(a[0].innerHTML);
+	}
+
+	function increment()
+	{
+		return Number(a[0].innerHTML)+1;
+	}
+
+	function knock()
+	{
+		a[0].innerHTML=increment();
+		b[0].currentTime=0;
+		b[0].play();
+		ring();
+	}
+
+	function lazurite()
+	{
+		a[0].style.backgroundColor='midnightblue';
+		a[0].style.color='mintcream';
+	}
+
+	function limit(x)
+	{
+		a[2].value=x;
+	}
+
+	function load()
+	{
+		a[0].innerHTML=localStorage.counts||0;
+		view(a[0].innerHTML);
+	}
+
+	function ring()
+	{
+		if(Number(a[0].innerHTML)%Number(a[2].value)==0){
+			b[1].currentTime=0;
+			b[1].play();
+		}
+	}
+
+	function save()
+	{
+		localStorage.counts=a[0].innerHTML;
+	}
+
+	function view(x)
+	{
+		a[0].innerHTML=x;
+	}
+
+	a[0].style.height=window.innerHeight+1+'px';
+	a[0].focus();
+	a[2].value=10;
+	b[0].play();
+	b[1].play();
+</script>

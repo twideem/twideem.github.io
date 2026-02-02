@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>熱血格鬥傳說</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>全角色 Lv.30 密碼</h2>
+		<p>
+			くにお　　　めるどぜのぎぎらぬまぎね<br>
+			しぱた　　　もにのちまぎぎらぢぞぎま<br>
+			いしづき　　つげえざごふぁほぢぁぁぎ<br>
+			やまいし　　さたぼせげなぎよゅぎぎく<br>
+			りき　　　　けひょおおおおやびぞおぢ<br>
+			えびはら　　ぽにねちめのおゅげのおく<br>
+			ましば　　　えほぉずあああぽぇうあぉ<br>
+			じんない　　づっいしつけぁほびふぁぎ<br>
+			ひめやま　　っざまなこゅきょすゅきぉ<br>
+			らいどう　　ねなぺぜすぞうめにぎうほ<br>
+			あおい　　　ぽげやしおおおやぢもおか<br>
+			あんざわ　　すぐぉしねもうむままうけ<br>
+			みどう　　　ぜゃたこてううむぎぢうお<br>
+			ふじくら　　えしおけべてあぽせのあぴ<br>
+			すが　　　　きねゅぉぉぉぉゃぷづぉぜ<br>
+			おおくま　　ねひやすむもおやぞゆおか<br>
+			とらいち　　ほでみこかおうぇでぶうお<br>
+			とらじ　　　しっほごあああぃおげあぁ
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>國雄的必殺技</h2>
+		<p>
+			スピンアタック　　落地時按Ａ。<br>
+			バクレツキック　　落地時按Ｂ。<br>
+			マッハキック　　　按Ｂ。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>修改</h2>
+		<p>
+			預設只開啟玩家不死，其它功能請依自己需求勾選。
+		</p>
+		<hr>
+		<section>
+			<h3>VirtuaNES</h3>
+			<p>
+				<code>
+					#1 04C2-02-FFFF &nbsp; &nbsp; 1P 2P 不死<br>
+					#0 04C4-02-0000 &nbsp; &nbsp; 3P 4P 瀕死<br>
+				</code>
+				<br>
+				複製貼上到純文字文件，然後以 *.vct 副檔名儲存，在 VirtuaNES 的 Tool - Cheat code - Load 載入使用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Nestopia</h3>
+			<p>
+				<code>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+					&lt;cheats version="1.0"&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x04C2&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xFF&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;1P 不死&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x04C3&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xFF&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;2P 不死&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x04C4&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x00&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;3P 瀕死&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x04C5&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x00&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;4P 瀕死&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&lt;/cheats&gt;<br>
+				</code>
+				<br>
+				複製貼上到純文字文件，然後以 *.xml 副檔名儲存，在 Nestopia 的 Options - Cheats - Permanent Codes 按 Import.. 載入。
+			</p>
+		</section>
+	</section>
+</article>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>
+	td:nth-child(1){width:40%}
+	i{color:#bbb}
+</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>CSS 速用表</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>A</h2>
+		<table>
+			<tr><td>align-content</td><td>stretch｜center｜flex-start｜flex-end｜space-between｜space-around</td></tr>
+			<tr><td>align-items</td><td>stretch｜center｜flex-start｜flex-end｜baseline</td></tr>
+			<tr><td>align-self</td><td>auto｜stretch｜center｜flex-start｜flex-end｜baseline</td></tr>
+			<tr><td>all</td><td>initial</td></tr>
+			<tr><td>animation</td><td><i>name duration timing-function delay iteration-count direction fill-mode play-state</i></td></tr>
+			<tr><td>animation-delay</td><td><i>time</i></td></tr>
+			<tr><td>animation-direction</td><td>normal｜reverse｜alternate｜alternate-reverse</td></tr>
+			<tr><td>animation-duration</td><td><i>time</i></td></tr>
+			<tr><td>animation-fill-mode</td><td>none｜forwards｜backwards｜both</td></tr>
+			<tr><td>animation-iteration-count</td><td><i>number</i>｜infinite</td></tr>
+			<tr><td>animation-name</td><td><i>keyframename</i>｜none</td></tr>
+			<tr><td>animation-play-state</td><td>paused｜running</td></tr>
+			<tr><td>animation-timing-function</td><td>linear｜ease｜ease-in｜ease-out｜ease-in-out｜step-start｜step-end｜steps(<i>int</i>,start｜end)｜cubic-bezier(<i>n,n,n,n</i>)</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>B</h2>
+		<table>
+			<tr><td>backface-visibility</td><td>visible｜hidden</td></tr>
+			<tr><td>background</td><td><i>background-color background-image background-position background-size background-repeat background-origin background-clip background-attachment</i></td></tr>
+			<tr><td>background-attachment</td><td>scroll｜fixed｜local</td></tr>
+			<tr><td>background-blend-mode</td><td>normal｜multiply｜screen｜overlay｜darken｜lighten｜color-dodge｜saturation｜color｜luminosity</td></tr>
+			<tr><td>background-clip</td><td>border-box｜padding-box｜content-box</td></tr>
+			<tr><td>background-color</td><td><i>color</i>｜transparent</td></tr>
+			<tr><td>background-image</td><td>url(<i>path</i>)｜none｜conic-gradient(<i>[from angle] [at position,] color degree,color degree, ...</i>)｜linear-gradient(<i>direction,color-stop1,color-stop2, ...</i>)｜radial-gradient(<i>shape size at position,start-color, ...,last-color</i>)｜repeating-conic-gradient(<i>[from angle] [at position,] color degree,color degree, ...</i>)｜repeating-linear-gradient(<i>angle or side-or-corner,color-stop1,color-stop2, ...</i>)｜repeating-radial-gradient(<i>shape size at position,start-color, ...,last-color</i>)</td></tr>
+			<tr><td>background-origin</td><td>padding-box｜border-box｜content-box</td></tr>
+			<tr><td>background-position</td><td>left top｜left center｜left bottom｜right top｜right center｜right bottom｜center top｜center center｜center bottom｜% %｜<i>xpos ypos</i></td></tr>
+			<tr><td>background-repeat</td><td>repeat｜repeat-x｜repeat-y｜no-repeat｜space｜round</td></tr>
+			<tr><td>background-size</td><td>auto｜<i>length</i>｜cover｜contain</td></tr>
+			<tr><td>border</td><td><i>border-width border-style border-color</i></td></tr>
+			<tr><td>border-bottom</td><td><i>border-width border-style border-color</i></td></tr>
+			<tr><td>border-bottom-color</td><td><i>color</i>｜transparent</td></tr>
+			<tr><td>border-bottom-left-radius</td><td><i>length</i>｜% [<i>length</i>｜%]</td></tr>
+			<tr><td>border-bottom-right-radius</td><td><i>length</i>｜% [<i>length</i>｜%]</td></tr>
+			<tr><td>border-bottom-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>border-bottom-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>border-collapse</td><td>separate｜collapse</td></tr>
+			<tr><td>border-color</td><td><i>color</i>｜transparent</td></tr>
+			<tr><td>border-image</td><td><i>border-image-source border-image-slice border-image-width border-image-outset border-image-repeat</i></td></tr>
+			<tr><td>border-image-outset</td><td><i>length</i>｜<i>number</i></td></tr>
+			<tr><td>border-image-repeat</td><td>stretch｜repeat｜round｜space</td></tr>
+			<tr><td>border-image-slice</td><td><i>number</i>｜%｜fill</td></tr>
+			<tr><td>border-image-source</td><td>none｜<i>image</i></td></tr>
+			<tr><td>border-image-width</td><td><i>number</i>｜<i>length</i>｜auto</td></tr>
+			<tr><td>border-left</td><td><i>border-width border-style border-color</i></td></tr>
+			<tr><td>border-left-color</td><td><i>color</i>｜transparent</td></tr>
+			<tr><td>border-left-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>border-left-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>border-radius</td><td>1~4｜% / 1~4｜%</td></tr>
+			<tr><td>border-right</td><td><i>border-width border-style border-color</i></td></tr>
+			<tr><td>border-right-color</td><td><i>color</i>｜transparent</td></tr>
+			<tr><td>border-right-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>border-right-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>border-spacing</td><td><i>length</i></td></tr>
+			<tr><td>border-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>border-top</td><td><i>border-width border-style border-color</i></td></tr>
+			<tr><td>border-top-color</td><td><i>color</i>｜transparent</td></tr>
+			<tr><td>border-top-left-radius</td><td><i>length</i>｜% [<i>length</i>｜%]</td></tr>
+			<tr><td>border-top-right-radius</td><td><i>length</i>｜% [<i>length</i>｜%]</td></tr>
+			<tr><td>border-top-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>border-top-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>border-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>bottom</td><td>auto｜<i>length</i></td></tr>
+			<tr><td>box-decoration-break</td><td>slice｜clone</td></tr>
+			<tr><td>box-shadow</td><td>none｜<i>h-offset v-offset blur spread color</i>｜inset</td></tr>
+			<tr><td>box-sizing</td><td>content-box｜border-box</td></tr>
+			<tr><td>break-after</td><td>auto｜all｜always｜avoid｜avoid-column｜avoid-page｜avoid-region｜column｜left｜page｜recto｜region｜right｜verso</td></tr>
+			<tr><td>break-before</td><td>auto｜all｜always｜avoid｜avoid-column｜avoid-page｜avoid-region｜column｜left｜page｜recto｜region｜right｜verso</td></tr>
+			<tr><td>break-inside</td><td>auto｜avoid｜avoid-column｜avoid-page｜avoid-region</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>C</h2>
+		<table>
+			<tr><td>caption-side</td><td>top｜bottom</td></tr>
+			<tr><td>caret-color</td><td>auto｜<i>color</i></td></tr>
+			<tr><td>@charset</td><td>"<i>encoding</i>"</td></tr>
+			<tr><td>clear</td><td>none｜left｜right｜both</td></tr>
+			<tr><td>clip</td><td>auto｜rect(<i>top,right,bottom,left</i>)</td></tr>
+			<tr><td>clip-path</td><td><i>clip-source</i>｜<i>basic-shape</i>｜margin-box｜border-box｜padding-box｜content-box｜fill-box｜stroke-box｜view-box｜none</td></tr>
+			<tr><td>color</td><td><i>color</i></td></tr>
+			<tr><td>column-count</td><td><i>number</i>｜auto</td></tr>
+			<tr><td>column-fill</td><td>balance｜auto</td></tr>
+			<tr><td>column-gap</td><td><i>length</i>｜normal</td></tr>
+			<tr><td>column-rule</td><td><i>column-rule-width column-rule-style column-rule-color</i></td></tr>
+			<tr><td>column-rule-color</td><td><i>color</i></td></tr>
+			<tr><td>column-rule-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>column-rule-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>column-span</td><td>none｜all</td></tr>
+			<tr><td>column-width</td><td>auto｜length</td></tr>
+			<tr><td>columns</td><td>auto｜<i>column-width column-count</i></td></tr>
+			<tr><td>content</td><td>normal｜none｜counter｜attr(<i>attribute</i>)｜<i>string</i>｜open-quote｜close-quote｜no-open-quote｜no-close-quote｜url(<i>path</i>)</td></tr>
+			<tr><td>counter-increment</td><td>none｜<i>id</i></td></tr>
+			<tr><td>counter-reset</td><td>none｜<i>id number</i></td></tr>
+			<tr><td>cursor</td><td>alias｜all-scroll｜auto｜cell｜context-menu｜col-resize｜copy｜crosshair｜default｜e-resize｜ew-resize｜grab｜grabbing｜help｜move｜n-resize｜ne-resize｜nesw-resize｜ns-resize｜nw-resize｜nwse-resize｜no-drop｜none｜not-allowed｜pointer｜progress｜row-resize｜s-resize｜se-resize｜sw-resize｜text｜url(<i>path</i>)｜vertical-text｜w-resize｜wait｜zoom-in｜zoom-out</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>D</h2>
+		<table>
+			<tr><td>direction</td><td>ltr｜rtl</td></tr>
+			<tr><td>display</td><td>inline｜block｜contents｜flex｜grid｜inline-block｜inline-flex｜inline-grid｜inline-table｜list-item｜run-in｜table｜table-caption｜table-column-group｜table-header-group｜table-footer-group｜table-row-group｜table-cell｜table-column｜table-row｜none</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>E</h2>
+		<table>
+			<tr><td>empty-cells</td><td>show｜hide</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>F</h2>
+		<table>
+			<tr><td>filter</td><td>none｜blur(<i>px</i>)｜brightness(%)｜contrast(%)｜drop-shadow(<i>h-shadow,v-shadow,blur,spread,color</i>)｜grayscale(%)｜hue-rotate(<i>deg</i>)｜invert(%)｜opacity(%)｜saturate(%)｜sepia(%)｜url(<i>path</i>)</td></tr>
+			<tr><td>flex</td><td><i>flex-grow flex-shrink flex-basis</i>｜auto</td></tr>
+			<tr><td>flex-basis</td><td><i>number</i>｜auto</td></tr>
+			<tr><td>flex-direction</td><td>row｜row-reverse｜column｜column-reverse</td></tr>
+			<tr><td>flex-flow</td><td><i>flex-direction flex-wrap</i></td></tr>
+			<tr><td>flex-grow</td><td><i>number</i>｜auto</td></tr>
+			<tr><td>flex-shrink</td><td><i>number</i>｜auto</td></tr>
+			<tr><td>flex-wrap</td><td>nowrap｜wrap｜wrap-reverse</td></tr>
+			<tr><td>float</td><td>none｜left｜right</td></tr>
+			<tr><td>font</td><td><i>font-style font-variant font-weight font-size/line-height font-family</i>｜caption｜icon｜menu｜message-box｜small-caption｜status-bar</td></tr>
+			<tr><td>@font-face{<br>　font-family;<br>　src;<br>　font-stretch;<br>　font-style;<br>　font-weight;<br>　unicode-range<br>}</td><td></td></tr>
+			<tr><td>font-family</td><td><i>family-name</i>｜Cursive｜Fantasy｜Monospace｜Sans-serif｜Serif</td></tr>
+			<tr><td>font-feature-settings</td><td>normal｜{1｜0｜on｜off}</td></tr>
+			<tr><td>font-kerning</td><td>auto｜normal｜none</td></tr>
+			<tr><td>font-size</td><td>medium｜xx-small｜x-small｜small｜large｜x-large｜xx-large｜smaller｜larger｜<i>length</i></td></tr>
+			<tr><td>font-size-adjust</td><td><i>number</i>｜none</td></tr>
+			<tr><td>font-stretch</td><td>ultra-condensed｜extra-condensed｜condensed｜semi-condensed｜normal｜semi-expanded｜expanded｜extra-expanded｜ultra-expanded</td></tr>
+			<tr><td>font-style</td><td>normal｜italic｜oblique</td></tr>
+			<tr><td>font-variant</td><td>normal｜small-caps</td></tr>
+			<tr><td>font-variant-caps</td><td>normal｜small-caps｜all-small-caps｜petite-caps｜all-petite-caps｜unicase｜titling-caps</td></tr>
+			<tr><td>font-weight</td><td>normal｜bold｜bolder｜lighter｜100~900</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>G</h2>
+		<table>
+			<tr><td>gap</td><td><i>row-gap column-gap</i></td></tr>
+			<tr><td>grid</td><td>none｜<i>grid-template-rows / grid-template-columns</i>｜<i>grid-template-areas</i>｜<i>grid-template-rows / [grid-auto-flow] grid-auto-columns</i>｜<i>[grid-auto-flow] grid-auto-rows / grid-template-columns</i></td></tr>
+			<tr><td>grid-area</td><td><i>grid-row-start / grid-column-start / grid-row-end / grid-column-end</i>｜<i>itemname</i></td></tr>
+			<tr><td>grid-auto-columns</td><td>auto｜fit-content(<i>stretch</i>)｜max-content｜min-content｜minmax(<i>min,max</i>)｜<i>length</i></td></tr>
+			<tr><td>grid-auto-flow</td><td>row｜column｜dense｜row dense｜column dense</td></tr>
+			<tr><td>grid-auto-rows</td><td>auto｜max-content｜min-content｜<i>length</i></td></tr>
+			<tr><td>grid-column</td><td><i>grid-column-start / grid-column-end</i></td></tr>
+			<tr><td>grid-column-end</td><td>auto｜span <i>n</i>｜<i>column-line</i></td></tr>
+			<tr><td>grid-column-gap</td><td><i>length</i></td></tr>
+			<tr><td>grid-column-start</td><td>auto｜span <i>n</i>｜<i>column-line</i></td></tr>
+			<tr><td>grid-gap</td><td><i>grid-row-gap grid-column-gap</i></td></tr>
+			<tr><td>grid-row</td><td><i>grid-row-start / grid-row-end</i></td></tr>
+			<tr><td>grid-row-end</td><td>auto｜<i>row-line</i>｜span <i>n</i></td></tr>
+			<tr><td>grid-row-gap</td><td><i>length</i></td></tr>
+			<tr><td>grid-row-start</td><td>auto｜<i>row-line</i></td></tr>
+			<tr><td>grid-template</td><td>none｜<i>grid-template-rows / grid-template-columns</i>｜<i>grid-template-areas</i></td></tr>
+			<tr><td>grid-template-areas</td><td>none｜<i>itemnames</i></td></tr>
+			<tr><td>grid-template-columns</td><td>none｜auto｜max-content｜min-content｜<i>length</i></td></tr>
+			<tr><td>grid-template-rows</td><td>none｜auto｜max-content｜min-content｜<i>length</i></td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>H</h2>
+		<table>
+			<tr><td>hanging-punctuation</td><td>none｜first｜last｜allow-end｜force-end</td></tr>
+			<tr><td>height</td><td>auto｜<i>length</i></td></tr>
+			<tr><td>hyphens</td><td>none｜manual｜auto</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>I</h2>
+		<table>
+			<tr><td>image-rendering</td><td>auto｜smooth｜high-quality｜crisp-edges｜pixelated</td></tr>
+			<tr><td>@import</td><td><i>url(path)</i>｜<i>string [list of media queries]</i></td></tr>
+			<tr><td>isolation</td><td>auto｜isolate</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>J</h2>
+		<table>
+			<tr><td>justify-content</td><td>flex-start｜flex-end｜center｜space-between｜space-around｜space-evenly</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>K</h2>
+		<table>
+			<tr><td>@keyframes <i>animationname</i>{<br>　<i>keyframes-selector</i>{<br>　　<i>css-styles;</i><br>　}<br>}</td><td></td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>L</h2>
+		<table>
+			<tr><td>left</td><td>auto｜<i>length</i></td></tr>
+			<tr><td>letter-spacing</td><td>normal｜<i>length</i></td></tr>
+			<tr><td>line-height</td><td>normal｜<i>number</i>｜<i>length</i></td></tr>
+			<tr><td>list-style</td><td><i>list-style-type list-style-position list-style-image</i></td></tr>
+			<tr><td>list-style-image</td><td>none｜url(<i>path</i>)</td></tr>
+			<tr><td>list-style-position</td><td>inside｜outside</td></tr>
+			<tr><td>list-style-type</td><td>disc｜armenian｜circle｜cjk-ideographic｜decimal｜decimal-leading-zero｜georgian｜hebrew｜hiragana｜hiragana-iroha｜katakana｜katakana-iroha｜lower-alpha｜lower-greek｜lower-latin｜lower-roman｜none｜square｜upper-alpha｜upper-greek｜upper-latin｜upper-roman</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>M</h2>
+		<table>
+			<tr><td>margin</td><td><i>length</i>｜auto｜<i>margin-top margin-right margin-bottom margin-left</i>｜<i>[margin-top and margin-bottom] [margin-right and margin-left]</i></td></tr>
+			<tr><td>margin-bottom</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>margin-left</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>margin-right</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>margin-top</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>mask-image</td><td>none｜<i>image</i>｜url(<i>path</i>)</td></tr>
+			<tr><td>mask-mode</td><td>match-source｜luminance｜alpha</td></tr>
+			<tr><td>mask-origin</td><td>border-box｜content-box｜padding-box｜margin-box｜fill-box｜stroke-box｜view-box</td></tr>
+			<tr><td>mask-position</td><td>left top｜left center｜left bottom｜right top｜right center｜right bottom｜center top｜center center｜center bottom｜x% y%｜xpos ypos</td></tr>
+			<tr><td>mask-repeat</td><td>repeat｜repeat-x｜repeat-y｜space｜round｜no-repeat</td></tr>
+			<tr><td>mask-size</td><td>auto｜<i>size</i>｜contain｜cover</td></tr>
+			<tr><td>max-height</td><td>none｜<i>length</i></td></tr>
+			<tr><td>max-width</td><td>none｜<i>length</i></td></tr>
+			<tr><td>@media<br>　not｜only<br>　all｜print｜screen｜speech<br>　and(<br>　　any-hover;<br>　　any-pointer;<br>　　aspect-ratio;<br>　　color;<br>　　color-gamut;<br>　　color-index;<br>　　grid;<br>　　height;<br>　　hover;<br>　　inverted-colors;<br>　　light-level;<br>　　max-aspect-ratio;<br>　　max-color;<br>　　max-color-index;<br>　　max-height;<br>　　max-monochrome;<br>　　max-resolution;<br>　　max-width;<br>　　min-aspect-ratio;<br>　　min-color;<br>　　min-color-index;<br>　　min-height;<br>　　min-monochrome;<br>　　min-resolution;<br>　　min-width;<br>　　monochrome;<br>　　orientation;<br>　　overflow-block;<br>　　overflow-inline;<br>　　pointer;<br>　　resolution;<br>　　scan;<br>　　scripting;<br>　　update;<br>　　width;<br>　　and｜or｜not　同上<br>　){<br>　CSS<br>}</td><td></td></tr>
+			<tr><td>min-height</td><td><i>length</i></td></tr>
+			<tr><td>min-width</td><td><i>length</i></td></tr>
+			<tr><td>mix-blend-mode</td><td>normal｜multiply｜screen｜overlay｜darken｜lighten｜color-dodge｜color-burn｜difference｜exclusion｜hue｜saturation｜color｜luminosity</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>O</h2>
+		<table>
+			<tr><td>object-fit</td><td>fill｜contain｜cover｜scale-down｜none</td></tr>
+			<tr><td>object-position</td><td><i>position</i></td></tr>
+			<tr><td>opacity</td><td>0.0~1.0</td></tr>
+			<tr><td>order</td><td><i>number</i></td></tr>
+			<tr><td>orphans</td><td><i>integer</i></td></tr>
+			<tr><td>outline</td><td><i>outline-width outline-style outline-color</i></td></tr>
+			<tr><td>outline-color</td><td>invert｜<i>color</i></td></tr>
+			<tr><td>outline-offset</td><td><i>length</i></td></tr>
+			<tr><td>outline-style</td><td>none｜hidden｜dotted｜dashed｜solid｜double｜groove｜ridge｜inset｜outset</td></tr>
+			<tr><td>outline-width</td><td>medium｜thin｜thick｜<i>length</i></td></tr>
+			<tr><td>overflow</td><td>visible｜hidden｜scroll｜auto</td></tr>
+			<tr><td>overflow-wrap</td><td>normal｜anywhere｜break-word</td></tr>
+			<tr><td>overflow-x</td><td>visible｜hidden｜scroll｜auto</td></tr>
+			<tr><td>overflow-y</td><td>visible｜hidden｜scroll｜auto</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>P</h2>
+		<table>
+			<tr><td>padding</td><td><i>length</i>｜auto｜<i>padding-top padding-right padding-bottom padding-left</i>｜<i>[padding-top and padding-bottom] [padding-right and padding-left]</i></td></tr>
+			<tr><td>padding-bottom</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>padding-left</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>padding-right</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>padding-top</td><td><i>length</i>｜auto</td></tr>
+			<tr><td>page-break-after</td><td>auto｜always｜avoid｜left｜right</td></tr>
+			<tr><td>page-break-before</td><td>auto｜always｜avoid｜left｜right</td></tr>
+			<tr><td>page-break-inside</td><td>auto｜avoid</td></tr>
+			<tr><td>perspective</td><td><i>length</i>｜none</td></tr>
+			<tr><td>perspective-origin</td><td>{left｜center｜right｜<i>length</i>} {top｜center｜bottom｜<i>length</i>}</td></tr>
+			<tr><td>pointer-events</td><td>auto｜none</td></tr>
+			<tr><td>position</td><td>static｜absolute｜fixed｜relative｜sticky</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>Q</h2>
+		<table>
+			<tr><td>quotes</td><td>none｜<i>string string string string</i></td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>R</h2>
+		<table>
+			<tr><td>resize</td><td>none｜both｜horizontal｜vertical</td></tr>
+			<tr><td>right</td><td>auto｜<i>length</i></td></tr>
+			<tr><td>row-gap</td><td><i>length</i>｜normal</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>S</h2>
+		<table>
+			<tr><td>scroll-behavior</td><td>auto｜smooth</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>T</h2>
+		<table>
+			<tr><td>tab-size</td><td><i>number</i>｜<i>length</i></td></tr>
+			<tr><td>table-layout</td><td>auto｜fixed</td></tr>
+			<tr><td>text-align</td><td>left｜right｜center｜justify</td></tr>
+			<tr><td>text-align-last</td><td>auto｜left｜right｜center｜justify｜start｜end</td></tr>
+			<tr><td>text-decoration</td><td><i>text-decoration-line text-decoration-color text-decoration-style text-decoration-thickness</i></td></tr>
+			<tr><td>text-decoration-color</td><td><i>color</i></td></tr>
+			<tr><td>text-decoration-line</td><td>none｜underline｜overline｜line-through</td></tr>
+			<tr><td>text-decoration-style</td><td>solid｜double｜dotted｜dashed｜wavy</td></tr>
+			<tr><td>text-decoration-thickness</td><td>auto｜from-font｜<i>length</i></td></tr>
+			<tr><td>text-indent</td><td><i>length</i></td></tr>
+			<tr><td>text-justify</td><td>auto｜inter-word｜inter-character｜none</td></tr>
+			<tr><td>text-overflow</td><td>clip｜ellipsis｜<i>string</i></td></tr>
+			<tr><td>text-shadow</td><td><i>h-shadow v-shadow blur-radius color</i>｜none</td></tr>
+			<tr><td>text-transform</td><td>none｜capitalize｜uppercase｜lowercase</td></tr>
+			<tr><td>top</td><td>auto｜<i>length</i></td></tr>
+			<tr><td>transform</td><td>none｜matrix(<i>n,n,n,n,n,n</i>)｜matrix3d(<i>n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n</i>)｜perspective(<i>n</i>)｜rotate(<i>angle</i>)｜rotate3d(<i>x,y,z,angle</i>)｜rotateX(<i>angle</i>)｜rotateY(<i>angle</i>)｜rotateZ(<i>angle</i>)｜scale(<i>x,y</i>)｜scale3d(<i>x,y,z</i>)｜scaleX(<i>x</i>)｜scaleY(<i>y</i>)｜scaleZ(<i>z</i>)｜skew(<i>x-angle,y-angle</i>)｜skewX(<i>angle</i>)｜skewY(<i>angle</i>)｜translate(<i>x,y</i>)｜translate3d(<i>x,y,z</i>)｜translateX(<i>x</i>)｜translateY(<i>y</i>)｜translateZ(<i>z</i>)</td></tr>
+			<tr><td>transform-origin</td><td>{left｜center｜right｜<i>length｜%</i>} {top｜center｜bottom｜<i>length｜%</i>} <i>length</i></td></tr>
+			<tr><td>transform-style</td><td>flat｜preserve-3d</td></tr>
+			<tr><td>transition</td><td><i>property duration timing-function delay</i></td></tr>
+			<tr><td>transition-delay</td><td><i>time</i></td></tr>
+			<tr><td>transition-duration</td><td><i>time</i></td></tr>
+			<tr><td>transition-property</td><td>none｜all｜<i>property</i></td></tr>
+			<tr><td>transition-timing-function</td><td>linear｜ease｜ease-in｜ease-out｜ease-in-out｜step-start｜step-end｜steps(<i>int</i>,start｜end)｜cubic-bezier(<i>n,n,n,n</i>)</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>U</h2>
+		<table>
+			<tr><td>unicode-bidi</td><td>normal｜embed｜bidi-override｜isolate｜isolate-override｜plaintext</td></tr>
+			<tr><td>user-select</td><td>auto｜none｜text｜all</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>V</h2>
+		<table>
+			<tr><td>vertical-align</td><td>baseline｜<i>length</i>｜sub｜super｜top｜text-top｜middle｜bottom｜text-bottom</td></tr>
+			<tr><td>visibility</td><td>visible｜hidden｜collapse</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>W</h2>
+		<table>
+			<tr><td>white-space</td><td>normal｜nowrap｜pre｜pre-line｜pre-wrap</td></tr>
+			<tr><td>widows</td><td><i>integer</i></td></tr>
+			<tr><td>width</td><td>auto｜<i>length</i></td></tr>
+			<tr><td>word-break</td><td>normal｜break-all｜keep-all｜break-word</td></tr>
+			<tr><td>word-spacing</td><td>normal｜<i>length</i></td></tr>
+			<tr><td>word-wrap</td><td>normal｜break-word</td></tr>
+			<tr><td>writing-mode</td><td>horizontal-tb｜vertical-rl｜vertical-lr</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>Z</h2>
+		<table>
+			<tr><td>z-index</td><td>auto｜<i>number</i></td></tr>
+		</table>
+	</section>
+	<hr id='selectors'>
+	<section>
+		<h2>Selectors</h2>
+		<hr>
+		<section>
+			<h3>Element</h3>
+			<p>
+				<code>
+					*<br>
+					<i>element</i><br>
+					<span title='A 和 B'><i>element</i> , <i>element</i></span><br>
+					<span title='A 內層所有 B'><i>element</i> <i>element</i></span><br>
+					<span title='A 內層第一個 B'><i>element</i> &gt; <i>element</i></span><br>
+					<span title='A 後面所有同層 B'><i>element</i> ~ <i>element</i></span><br>
+					<span title='A 後面第一個同層 B'><i>element</i> + <i>element</i></span><br>
+					:root
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Child</h3>
+			<p>
+				<code>
+					:empty<br>
+					:first-of-type<br>
+					:last-of-type<br>
+					:nth-of-type(<i>value</i>)<br>
+					:nth-last-of-type(<i>value</i>)<br>
+					:only-of-type<br>
+					:first-child<br>
+					:last-child<br>
+					:nth-child(<i>value</i>)<br>
+					:nth-last-child(<i>value</i>)<br>
+					:only-child
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Content</h3>
+			<p>
+				<code>
+					::after<br>
+					::before<br>
+					::first-letter<br>
+					::first-line
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Attribute</h3>
+			<p>
+				<code>
+					.<i>class</i><br>
+					#<i>id</i><br>
+					:lang(<i>language</i>)<br>
+					[<i>attribute</i>]<br>
+					[<i>attribute</i>=<i>value</i>]<br>
+					[<i>attribute</i>|=<i>value</i>]<br>
+					[<i>attribute</i>~=<i>value</i>]<br>
+					[<i>attribute</i>^=<i>value</i>]<br>
+					[<i>attribute</i>$=<i>value</i>]<br>
+					[<i>attribute</i>*=<i>value</i>]
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Link</h3>
+			<p>
+				<code>
+					:link<br>
+					:visited<br>
+					:active<br>
+					:hover<br>
+					:target
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Input</h3>
+			<p>
+				<code>
+					:checked<br>
+					:disabled<br>
+					:enabled<br>
+					:focus<br>
+					:in-range<br>
+					:invalid<br>
+					:optional<br>
+					:out-of-range<br>
+					:read-only<br>
+					:read-write<br>
+					:required<br>
+					:valid
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Other</h3>
+			<p>
+				<code>
+					:not(<i>selector</i>)<br>
+					<span title='選取的文字'>::selection</span>
+				</code>
+			</p>
+		</section>
+		<hr>
+		<p>
+			以斜體字標示者，表示並非關鍵字，而是識別名稱或任意條件。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Values</h2>
+		<hr>
+		<section>
+			<h3>Global</h3>
+			<p>
+				<code>
+					inherit<br>
+					initial<br>
+					unset
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Number</h3>
+			<p>
+				<code>0 1 2 3 4 5 6 7 8 9</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Length,size</h3>
+			<p>
+				<code>
+					%<br>
+					in<br>
+					cm<br>
+					mm<br>
+					em<br>
+					ex<br>
+					pt<br>
+					pc<br>
+					px
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Color</h3>
+			<p>
+				<code>
+					rgb(0~255, 0~255, 0~255)<br>
+					rgba(0~255, 0~255, 0~255, 0.0~1.0)<br>
+					hsl(0~360, 0~100%, 0~100%)<br>
+					hsla(0~360, 0~100%, 0~100%, 0.0~1.0)<br>
+					#000000~#FFFFFF<br>
+					HTML COLOR NAME
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Functions</h2>
+		<p>
+			<code>
+				calc(<i>expression</i>)<br>
+				counter(<i>countername, counterstyle</i>)<br>
+				max(<i>value1, value2, ...</i>)<br>
+				min(<i>value1, value2, ...</i>)<br>
+				var(--<i>name, value</i>)
+			</code>
+		</p>
+	</section>
+</article>

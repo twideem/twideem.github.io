@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>body{background-color:#dcefff}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET','Java')</script>
+<article>
+	<header>
+		<h1>jEdit 設定集</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>設定文件使用的緩衝區編碼為 UTF-8</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Encoding → Default character encoding = UTF-8</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定文件使用的格式為 Unix</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → General → Default line separator = Unix(\n)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定顯示區域使用的字型為支援 Unicode 的字型</h2>
+		<p>
+			將字型放在 Java 的 lib\fonts 資料夾，重新啟動 jEdit，即可在挑選字型的清單找到它。<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Text Area → Text Font = DialogInput</code><br>
+			<br>
+			Java 以前不支援文字渲染，所以有些字型在舊版 jEdit 有字數過長時程式變慢的問題，建議使用 5.6 版。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>如何 Ctrl + Y 復原</h2>
+		<p>
+			<code>Ctrl + e</code>，然後按 <code>Ctrl + z</code>。<br>
+			<br>
+			不習慣的話，可修改 Shortcuts。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>避免自動對齊功能使用 Tab 字元</h2>
+		<p>
+			<code>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → global defaults → Soft (emulated with spaces) tabs = (核取)<br>
+				<br>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → Java → Use default settings
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>避免按 { 字元時自動縮排</h2>
+		<p>
+			<code>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → global defaults → Indent width = 1<br>
+				<br>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → Java → Use default settings
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>多行縮排</h2>
+		<p>
+			選取多行然後按 <code>Tab</code> 鍵，會整列增加縮排。<br>
+			<br>
+			選取多行然後按 <code>Shift + Tab</code> 鍵，則是整列減少縮排。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>縱向選取</h2>
+		<p>
+			按 <code>Alt + \</code> 後，可用 <code>Shift + 方向鍵</code> 縱向選取，適合多行修改。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>複合選取</h2>
+		<p>
+			按 <code>Ctrl + \</code> 後，可用 <code>Shift + 方向鍵</code> 跳躍式選取不同區塊來修改。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>複製當前行、移動當前行</h2>
+		<p>
+			這些功能放在 <code>[功能表] → Macros → Edting</code> 的 Duplicade Lin Belowe、Move Lines Down、Move Lines Up，請自行建立快捷鍵（Shortcut）。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>程式碼片段</h2>
+		<p>
+			jEdit 也有像 Visual Studio Code 的 Snippets 功能，敲簡單幾個字後按 Tab 鍵，會轉換成程式片段。請到如下位置設定：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Abbreviations</code><br>
+			<br>
+			預設按空白鍵轉換，但必須勾選 <code>Space bar expands abbrevs</code>。<br>
+			<br>
+			要修改成 Tab 鍵的話的話：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Shortcuts → Expand Abbreviation = Tab</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>自訂語法高亮度關鍵字</h2>
+		<p>
+			進入 jEdit 所在資料夾，再修改 modes 裡面各語法的 xml 檔。
+		</p>
+		<hr>
+		<section>
+			<h3>*.html 的 &lt;style&gt;&lt;/style&gt; 遇到含 : 字元的屬性就解析錯誤</h3>
+			<p>
+				jEdit 5.1.0 有這個問題，但 jEdit 5.2pre1 有解決。<br>
+				<br>
+				可以考慮把 html.xml 裡面的如下語法給刪除：<br>
+				<br>
+				&lt;!-- stylesheet --&gt;<br>
+				&lt;SEQ_REGEXP TYPE="MARKUP" DELEGATE="STYLE_TAG"<br>
+				&nbsp; &nbsp; HASH_CHAR="&lt;"&gt;&lt;(?=STYLE\b)&lt;/SEQ_REGEXP&gt;
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>讓 JavaScript 支援 Template literal 的多行字串與插值</h2>
+		<p>
+			編輯 modes 資料夾裡的 javascript.xml，加入下面高亮度標示起來的內容：<br>
+			<br>
+			<textarea class='brush:xml'>
+				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)"&gt;
+					...
+					&lt;SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION"&gt;
+						&lt;BEGIN&gt;`&lt;/BEGIN&gt;
+						&lt;END&gt;`&lt;/END&gt;
+					&lt;/SPAN&gt;
+					...
+				&lt;/RULES&gt;
+				&lt;RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\"&gt;
+					&lt;SPAN TYPE="LITERAL2" ESCAPE="\"&gt;
+						&lt;BEGIN&gt;${&lt;/BEGIN&gt;
+						&lt;END&gt;}&lt;/END&gt;
+					&lt;/SPAN&gt;
+				&lt;/RULES&gt;
+            </textarea>
+			<br>
+			如果你想讓變數名稱和 ${} 符號不同色的話，上面的設定修改為：<br>
+			<br>
+			<textarea class='brush:xml'>
+				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)"&gt;
+					...
+					&lt;SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION"&gt;
+						&lt;BEGIN&gt;`&lt;/BEGIN&gt;
+						&lt;END&gt;`&lt;/END&gt;
+					&lt;/SPAN&gt;
+					...
+				&lt;/RULES&gt;
+				&lt;RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\"&gt;
+					&lt;SPAN TYPE="LITERAL2" ESCAPE="\" DELEGATE="EXPRESSION"&gt;
+						&lt;BEGIN&gt;${&lt;/BEGIN&gt;
+						&lt;END&gt;}&lt;/END&gt;
+					&lt;/SPAN&gt;
+				&lt;/RULES&gt;
+				&lt;RULES SET="EXPRESSION" DEFAULT="LITERAL3" ESCAPE="\" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)" /&gt;
+            </textarea>
+			<br>
+			或者直接下載 Roman Tsourick 修正好的 javascript.xml，網址是：<br>
+			<br>
+			<a href='http://sourceforge.net/p/jedit/patches/613/'>http://sourceforge.net/p/jedit/patches/613/</a>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>套用第三方語法高亮度配色主題</h2>
+		<p>
+			jEidt 雖然能修改高亮度顏色，但資料與整個 jEdit 的組態檔放在一起，無法個別保存，不容易將自訂好的主題配色分享給他人套用。<br>
+			<br>
+			透過 Plugins 下載 <code>Editor Scheme</code> 即可解決這個缺憾，可以自行製作多種主題配色，而且已內建多套主題配色。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>顯示空白字元</h2>
+		<p>
+			用 Plugin Manager 下載 <code>WhiteSpace</code>。<br>
+			<br>
+			記得到 Plugin Options 設定預設開啟，順便調整顏色。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>取消 80 字元準線</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Text Area → Wrap guide = (不核取)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>開啟行號</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Gutter → Line numbering = (核取)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定行號的字型</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Gutter → Gutter font = DialogInput</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>啟用摺疊功能</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Editing → Folding mode → indent</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Folding markup</h2>
+		<p>
+			jEidt 有一套自己摺疊內容的語法，首先在文件開頭加入這段宣告：<br>
+			<br>
+			<code>&lt;!--:folding=explicit:collapseFolds=1:--&gt;</code><br>
+			<br>
+			然後將想要摺疊起來的內容，用下面所示標記包起來，就可以摺疊了：<br>
+			<br>
+			<code>
+				&lt;!--{{{ 註解 --&gt;<br>
+				<br>
+				&lt;!--}}}--&gt;
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>顯示檔案瀏覽器</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Docking → File Browser = Left</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>關閉預設的緩衝區選擇器</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → View → Show buffer switcher = (不核取)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>頁簽式緩衝區選擇器</h2>
+		<p>
+			用 Plugin Manager 下載 <code>BufferTabs</code>。<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → BufferTabs → Enable BufferTabs by default = (核取)</code><br>
+			<br>
+			設定頁簽式緩衝區選擇器的位置：<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → BufferTabs → Location on BufferTabs = top</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>啟用 Java Swing 外觀</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Apperance</code>:<br>
+			<br>
+			1. <code>Draw window borders using Swing look & fell = (核取)</code><br>
+			2. <code>Draw dialog box borders using Swing look & fell = (核取)</code><br>
+			<br>
+			重新啟動 jEdit。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>更換工具列圖示</h2>
+		<p>
+			將下載回來的 JAR 檔案放到 JRE 的 <code>lib\ext</code> 裡面。<br>
+			<br>
+			例如 gnome_jedit_icons.jar 檔案。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>手動調整程式視窗大小</h2>
+		<p>
+			修改 <code>Documents and Settings\[User]\.jedit\perspective.xml</code>：<br>
+			<br>
+			<code>WIDTH="800" HEIGHT="600"</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>取消自動備份</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Autosave & Backuspan = (全部空白)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>開啟檔案時預設為作用中文件所在資料夾</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → File System Browser → General→ Default path = Parent directory of current buffer</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>自動偵測與手動切換字元編碼</h2>
+		<hr>
+		<section>
+			<h3>自動</h3>
+			<p>
+				在 <code>[功能表] → Utilities → Global Options → Encodings → List of fallback encodings</code> 輸入會用到的字元編碼，像是 Big5 和 UTF-16，並勾選 <code>Auto-detect file encoding when possible</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>手動</h3>
+			<p>
+				<code>[功能表] → File → Reload with Encoding</code><br>
+				<br>
+				可在 <code>[功能表] → Utilities → Global Options → Encodings → Selected encoding(s)</code> 設定可選的字元編碼。<br>
+				<br>
+				由於 MS950 是 jEdit 必定可選的字元編碼 ，因此不用設定 Big5 和 GB2312，只要留 UTF-16 即可。預設使用 UTF-8 的話，也不用設定 UTF-8。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				jEdit 會記錄每個檔案自動偵測或手動切換後的字元編碼狀態，導致下次開始同一個檔案時，不再自動偵測正確的字元編碼，而是沿用上次使用的字元編碼。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>在 jEdit 開啟 URL 路徑格式的檔案</h2>
+		<p>
+			在 jEdit 按 Ctrl + O 開啟檔案時，會發現無法開啟 file:// 開頭、含 # & ? 符號的路徑。<br>
+			<br>
+			這問題可以改用 <code>[功能表] → Macros → Files → Open Path</code> 解決，有需要用到的人，不妨將這功能設定快捷鍵（Shortcut）。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>用網頁瀏覽器開啟正在編輯的 HTML 檔案</h2>
+		<p>
+			用 Plugin Manager 下載 <code>Console</code>。<br>
+			<br>
+			先設定快捷鍵：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → Shortcuts → Run Current Buffer</code><br>
+			<br>
+			然後設定指令，在：<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → Console → Compile & Run → Set compiler/interpreter for edit mode: html → Interpreter → Use custom command</code><br>
+			<br>
+			輸入：<br>
+			<br>
+			<code>$f</code><br>
+			<br>
+			就能以預設的網頁瀏覽器開啟 HTML 檔案來檢視。<br>
+			<br>
+			<em>
+				如果不想為此下載 Plugin 的話，可以自己寫個 Macro：<br>
+				<br>
+				Runtime.getRuntime().exec("C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe " + buffer.getPath());<br>
+				<br>
+				命名為 Run_Path.bsh，放在 jEdit 的 macros 資料夾裡，再建立快捷鍵即可。
+			</em>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>直譯或執行正在編輯的 JavaScript 檔案</h2>
+		<p>
+			到 Plugin Manager 下載 <code>Console</code>。<br>
+			<br>
+			先設定快捷鍵：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → Shortcuts → Run Current Buffer</code><br>
+			<br>
+			然後設定指令，以 Rhino 直譯 *.js 檔案為例，在：<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → Console → Compile & Run → Set compiler/interpreter for edit mode: javascript → Interpreter → Use custom command</code><br>
+			<br>
+			輸入：<br>
+			<br>
+			<code>java -cp ".;%JAVA_HOME%\lib\rhino.jar" org.mozilla.javascript.tools.shell.Main -version 200 -encoding UTF-8 $f</code><br>
+			<br>
+			就能按快捷鍵執行正在編輯的 JavaScript 程式碼。<br>
+			<br>
+			也可以把直譯命列寫在批次檔，跟每個 JavaScript 程式碼放在一起，改成執行批次檔裡面的命令，這時輸入的是：<br>
+			<br>
+			<code>$d\run.bat</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>提升 jEdit 啟動速度</h2>
+		<p>
+			先建立 <code>jedit.exe -nogui</code> 捷徑，放在開始功能表的「啟動」裡面，這樣每次開機就預熱執行，解決 jEdit 第一次啟動時間過長的問題。<br>
+			<br>
+			再建立 <code>jedit.exe -background</code> 捷徑，用來執行 jEdit，這樣會常駐在背景處理程序，每次執行都秒開。<br>
+			<br>
+			最後是用檔案關聯的方式開啟 jEdit 也能背景執行！使用登錄編輯程式，切換到 <code>HKEY_CLASSES_ROOT\Applications\jedit.exe\shell\open\command</code>，編輯裡面的字串，在 <code>"%1"</code> 前面加上 <code>-background</code>。然後搜尋所有用 jedit.exe 開啟的 xxx_auto_file，同樣在每個 "%1" 前面加上 -background。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>properties</h2>
+		<p>
+			jEdit 設定過的資料，會永遠留在 properties 組態檔裡面。即使把設定回復到原先的狀態、或者移除 plugin，組態檔依然會保留這些用不到的設定。長期設定下來，properties 檔案會變大，裡面有三分之二以上都是用不到的設定…什麼設定都想按看看、什麼 plugin 都想下載用看看，那十分之九都是殘留的設定值也不誇張。<br>
+			<br>
+			有潔癖的人，不妨每個階段，就保存一份 properties，以便日後還原到過去乾淨的狀態。<br>
+			<br>
+			雖然檔案大小不會很大，20KB ~ 100KB，但設定筆數 1000 行以上，對啟動速度多少有影響。<br>
+			<br>
+			沒隨便亂修改太多設定、也沒下載一堆 plugin 的話，正常應該 10KB 以下，400 行以下。超過的話不妨打開 properties 檔案看看，裡面是不是有一堆過去殘留下來的設定～
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>手動清除檔案游標位置</h2>
+		<p>
+			刪除 <code>recent.xml</code> 檔案。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>備份整個設定檔</h2>
+		<p>
+			將 <code>Documents and Settings\[User]\.jedit</code>（Windows XP）或 <code>[User]\AppData\Roaming\jEdit</code>（Windows Vista）資料夾保存起來，以後再放回去即可。
+		</p>
+	</section>
+</article>

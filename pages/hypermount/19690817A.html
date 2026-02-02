@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>
+	table td:nth-child(1){width:50%}
+	table td:nth-child(2){font-size:12px}
+</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>Selector 範例集</h1>
+		<p>
+			本文針對《CSS 速用表》的 Selectors 一節提供範例與說明～
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>Element</h2>
+		<table>
+			<tr><td>* { font-family:文泉驛正黑 }</td><td>所有元素的字體為文泉驛正黑。</td></tr>
+			<tr><td>p { color:red }</td><td>設定 p 元素的顏色為 red。</td></tr>
+			<tr><td>article p { color:red }</td><td>設定 article 裡面的 p 元素顏色為 red。</td></tr>
+			<tr><td>article &gt; p { color:red }</td><td>設定父元素為 article 的 p 元素顏色為 red。</td></tr>
+			<tr><td>h1, h2 { color:red }</td><td>設定 h1 與 h2 元素的顏色為 red。</td></tr>
+			<tr><td>p + p</td><td>p 後面緊接著的 p 元素。</td></tr>
+			<tr><td>p ~ p</td><td>p 後面的所有 p 元素。</td></tr>
+			<tr><td>:root { background:black }</td><td>設定根元素背景為 black，相當於 html 元素。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>Child</h2>
+		<table>
+			<tr><td>div:empty { background:red }</td><td>將子元素為空的 div 元素，背景設為 red 顏色。</td></tr>
+			<tr><td>p:first-of-type { color:red }</td><td>設定第一個 p 元素的顏色為 red。</td></tr>
+			<tr><td>p:last-of-type { color:red }</td><td>設定最後一個 p 元素的顏色為 red。</td></tr>
+			<tr><td>p:nth-of-type(2) { color:red }</td><td>設定第二個 p 元素的顏色為 red。</td></tr>
+			<tr><td>p:nth-last-of-type(2){ color:red }</td><td>設定倒數第二個 p 元素的顏色為 red。</td></tr>
+			<tr><td>p:only-of-type { color:red }</td><td>只有一個 p 子元素時，顏色為 red。</td></tr>
+			<tr><td>p:first-child { color:red }</td><td>設定第一個子元素為 p 的顏色為 red。</td></tr>
+			<tr><td>p:last-child { color:red }</td><td>設定最後一個子元素為 p 的顏色為 red。</td></tr>
+			<tr><td>p:nth-child(2) { color:red }</td><td>設定 p 的第二個子元素顏色為 red。</td></tr>
+			<tr><td>p:nth-last-child(2){ color:red }</td><td>設定 p 的倒數第二個子元素顏色為 red。</td></tr>
+			<tr><td>p:only-child { color:red }</td><td>只有一個子元素為 p 時，顏色為 red。</td></tr>
+		</table>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				<code>nth-child()</code> 與 <code>nth-last-child()</code> 還可以使用 <code>even</code> 表示第奇數個的元素，以及 <code>odd</code> 表示第偶數個的元素。甚至可用 <code>3n</code> 表示每三個元素，個數依此類推。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>說明</h3>
+			<p>
+				<code>p:nth-of-type(2)</code> 的意思是指定第二個 p 元素，例如下面這個例子是成立的：<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;article&gt;
+						&lt;p&gt;111&lt;/p&gt;
+						&lt;p&gt;222&lt;/p&gt; &lt;!-- 是 article 的第 2 個 p 元素沒錯 --&gt;
+						&lt;p&gt;333&lt;/p&gt;
+					&lt;/article&gt;
+                </textarea>
+				<br>
+				但如下例子就不符合條件了：<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;article&gt;
+						&lt;h1&gt;111&lt;/h1&gt;
+						&lt;p&gt;222&lt;/p&gt; &lt;!-- 這是 article 的第 1 個 p 元素 --&gt;
+						&lt;i&gt;333&lt;/i&gt;
+					&lt;/article&gt;
+                </textarea>
+				<br>
+				<code>p:nth-child(2)</code> 的意思是指定 p 元素，且它是某父元素的第二的子元素，因此下兩個例子都是成立的：<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;article&gt;
+						&lt;p&gt;111&lt;/p&gt;
+						&lt;p&gt;222&lt;/p&gt; &lt;!-- 是 p 元素沒錯，而且是 article 的第 2 個元素。 --&gt;
+						&lt;p&gt;333&lt;/p&gt;
+					&lt;/article&gt;
+                </textarea>
+				<br>
+				<textarea class='brush:html'>
+					&lt;article&gt;
+						&lt;h1&gt;111&lt;/h1&gt;
+						&lt;p&gt;222&lt;/p&gt; &lt;!-- 是 p 元素沒錯，而且是 article 的第 2 個元素。 --&gt;
+						&lt;i&gt;333&lt;/i&gt;
+					&lt;/article&gt;
+                </textarea>
+				<br>
+				用 -child 容易會錯意，所以建議用 -of-type 比較不會出錯。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Content</h2>
+		<table>
+			<tr><td>p::after { content:'》' }</td><td>在 p 元素文字結尾插入》符號。</td></tr>
+			<tr><td>p::before { content:'《' }</td><td>在 p 元素文字開頭插入《符號。</td></tr>
+			<tr><td>p::first-letter { font-size:26px }</td><td>設定 p 元素的第一個字為 26px 大小。</td></tr>
+			<tr><td>p::first-line { color:red }</td><td>設定 p 元素的第一行文字顏色為 red。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>Attribute</h2>
+		<table>
+			<tr><td>.new { color:red }</td><td>設定 class 屬性為 new 的元素顏色為 red。</td></tr>
+			<tr><td>#deprecated { color:red }</td><td>設定 id 屬性 deprecated 的元素顏色為 red。</td></tr>
+			<tr><td>p:lang(zh) { color:red }</td><td>設定 lang 屬性為 zh 的 p 元素顏色為 red。</td></tr>
+			<tr><td>[title] { color:red }</td><td>設定所有用到 title 屬性的元素顏色為 red。</td></tr>
+			<tr><td>[title=草稿中] { color:red }</td><td>設定所有 title 為「草稿中」的元素顏色為 red。</td></tr>
+			<tr><td>img[src^=big] { width:640px }</td><td>設定 src 以 empty 開頭的 img 寬度為 640 像素。</td></tr>
+			<tr><td>img[src$=png] { width:100px }</td><td>設定 src 以 png 結尾的 img 寬度為 100 像素。</td></tr>
+			<tr><td>img[src*=sexy] { width:0 }</td><td>設定 src 含 sexy 字串的 img 寬度為 0。</td></tr>
+			<tr><td>img[src|=sexy] { width:0 }</td><td>設定 src 以 sexy 開頭接 - 的 img 寬度為 0。</td></tr>
+			<tr><td>img[src~=sexy] { width:0 }</td><td>設定 src 以 sexy 開頭接空白的 img 寬度為 0。</td></tr>
+		</table>
+		<hr>
+		<section>
+			<h3>說明</h3>
+			<p>
+				<code>|=</code> 需要進一步舉例才搞得清楚！如下圖檔名稱就符合 <code>img[src|=sexy]</code> 的條件：<br>
+				<br>
+				<samp>&lt;img src='sexy-18x.png'/&gt;</samp><br>
+				<br>
+				但這樣的話就不符合：<br>
+				<br>
+				<samp>&lt;img src='small-sexy-18x.jpg'/&gt;</samp><br>
+				<br>
+				也就是必須以 sexy 開頭，而且以 - 間隔開來。<br>
+				<br>
+				<code>~=</code> 的話，下面兩者都符合 <code>img[src~=sexy]</code> 的條件：<br>
+				<br>
+				<samp>
+					&lt;img src='sexy 18x.jpg'/&gt;<br>
+					&lt;img src='small sexy 18x.jpg'/&gt;<br>
+				</samp>
+				<br>
+				還是搞不清楚沒關係，乾脆禁用 <code>|=</code> 與 <code>~=</code> 這 CSS2 的產物吧！使用 CSS3 的 <code>^=</code> 和 <code>*=</code> 就夠了。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Link or Action</h2>
+		<table>
+			<tr><td>:link { color:green }</td><td>設定超鍊結文字顏色為 green。</td></tr>
+			<tr><td>:visited { color:pink }</td><td>設定已參訪超鍊結文字顏色為 pink。</td></tr>
+			<tr><td>:hover { color:orange }</td><td>設定滑鼠移置上方的超鍊結文字顏色為 orange。</td></tr>
+			<tr><td>:active { color:red }</td><td>設定被點選中超鍊結文字顏色為 red。</td></tr>
+			<tr><td>:target { color:purple }</td><td>設定進入錨點目標後的顏色為 red。</td></tr>
+		</table>
+		<hr>
+		<section>
+			<h3>說明</h3>
+			<p>
+				建議照如上順序設定，否則會有類似覆寫的情況發生，導致看不見效果。<br>
+				<br>
+				其中 <code>:target</code> 用法需要進一步說明，如下超鍊結指向 id 為 test 的錨點：<br>
+				<br>
+				<samp>
+					&lt;a href='#test'&gt;Click me&lt;/a&gt;<br>
+					&lt;p id='test'&gt;Hello&lt;/p&gt;<br>
+				</samp>
+				<br>
+				按下 a 之後，p 的 color 就會變成 purple。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Input</h2>
+		<table>
+			<tr><td>input:checked { left:5px }</td><td>被核取的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:disabled { left:5px }</td><td>禁用狀態的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:enabled { left:5px }</td><td>啟用狀態的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:focus { left:5px }</td><td>駐點狀態的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:in-range { left:5px }</td><td>數值在 min 到 max 範圍內的 input 往右 5 像素。</td></tr>
+			<tr><td>input:invalid { left:5px }</td><td>資料驗證無效的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:optional { left:5px }</td><td>被圈選的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:out-of-range { left:5px }</td><td>數值超過 min 到 max 範圍的 input 往右 5 像素。</td></tr>
+			<tr><td>input:read-only { left:5px }</td><td>唯讀狀態的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:read-write { left:5px }</td><td>可寫狀態的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:required { left:5px }</td><td>必填資料的 input 元件往右縮排 5 像素。</td></tr>
+			<tr><td>input:valid { left:5px }</td><td>資料驗證有效的 input 元件往右縮排 5 像素。</td></tr>
+		</table>
+		<hr>
+		<section>
+			<h3>說明</h3>
+			<p>
+				要測試如上範例的話，記得設定 input 元件的 position 為 relative，否則 left 不會有效果。或者將 left 改為 margin-left 來測試。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Other</h2>
+		<table>
+			<tr><td>p:not(.new) { color:red }</td><td>除非 p 的 class 為 new 否則顏色為 red。</td></tr>
+			<tr><td>p::selection { background:red }</td><td>p 的文字被選取時背景為 red。</td></tr>
+		</table>
+	</section>
+</article>

@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>附錄</h1>
+	</header>
+	<hr id='-2621356A'>
+	<section>
+		<h2>表述語言</h2>
+		<p>
+			不同於 programming language 要將程式碼編譯為機器碼，script language 本身既是程式碼，也是可執行碼，所以嚴格來說應該是：「用表述語言，寫腳本程式。」<br>
+			<br>
+			因此我不把 script 統稱為腳本，而是依使用情況，分別稱為表述語言和腳本程式。<br>
+			<br>
+			雖然這樣一來大家會聽不懂，但唯獨這件事我不想妥協！中文「腳本語言」這一詞會誤導使用 script language 的人，導致用這語言寫了一輩子的程式，卻還不知道 script 一詞的真正涵義～<br>
+			<br>
+			英文母語的人倒是沒這問題，他們早就知道 script 的多種意思，哪像台灣人看到「腳本」一詞總會霧煞煞：「是哪裡像腳本了？」統稱腳本，就等於「用腳本寫腳本」的意思一樣，不霧煞煞才怪！
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>腳本程式</h2>
+		<p>
+			script 是「隨手把事情抄記下來」的意思，因此腳本語言 (Scripting language) 的意思，是隨手就能寫一段程式來跑的語言。雖說隨手抄記，但通常有一定形式要照著寫，不是隨心所欲亂寫一通，例如航海日誌、賽事紀錄、舞台排演、考試卷…各有自己的表現格式！但也就是有格式了，方能隨手劃個記號上去就好，而寫得更少。例如在第一隊第二號投手的三振欄，單單寫個 4 即可，你不用寫「某隊的某某某上場中繼投出 4 次三振」。總之 script 跟 note 是很不一樣滴，它比較像填寫，而不是書寫～<br>
+			<br>
+			腳本語言通常內建在某個軟體或特定領域，用來直接表述軟體的功能，而不是開發軟體或設計功能。軟體和功能已經開發好了，我只是用腳本語言操作它。JavaScript 就是這麼一款用來操作網頁瀏覽器內建功能的語言，你無法用它開發新的視窗應用軟體，而是在網頁這個特定領域裡發揮創意，用網頁的形式去做跟視窗應用軟體沒兩樣的事。<br>
+			<br>
+			相對比傳統程式語言，安裝困難、語法嚴格、編譯麻煩，寫起程式就像大工程一樣，JavaScript 這樣的腳本語言，確實寫起來執行時，很輕巧、又快活。<br>
+			<br>
+			中文維基百科稱之為「手稿語言」，比「腳本語言」更容易理解。我自己則稱「表述語言」，因為它表達與陳述的對象是軟體既有功能。寫出來的程式則稱「腳本程式」，因為這段程式只是寫給特定領域辦個活動用的，就像寫給舞台上演出用的劇本一樣～
+		</p>
+	</section>
+	<hr id='19281207A'>
+	<section>
+		<h2>getElementsByTagName() 與 querySelectorAll()</h2>
+		<p>
+			querySelectorAll 傳回 NodeList，它是另外複製一份出來的獨立子樹，當 HTML 母樹結構有變化時，無法反應到子樹，只有子樹發生變化時，會更新到 HTML 樹。優點是支援 forEach()，缺點是增刪查改 HTML 結構樹的速度較慢，因為必須先修改子樹，再更新到母樹。<br>
+			<br>
+			getElementsByTagName 傳回 HTMLCollection，它有點像 HTML 樹狀結構中一小部分內容的參照（reference），當 HTML 樹狀結構變化時，反應的就是最新的狀態。優點是增刪查改 HTML 結構的速度較快，因為直接改，沒有額外成本。缺點是不支援 forEach()，但可用 for of 代替。<br>
+			<br>
+			<textarea class='brush:js'>
+				let a=document.getElementsByTagName('p');
+				let b=document.querySelectorAll('p');
+
+				document.body.appendChild(document.createElement('p'));
+				document.body.appendChild(document.createElement('p'));
+				document.body.appendChild(document.createElement('p'));
+
+				console.log(a.length,b.length);
+            </textarea>
+			<br>
+			<output>
+				5 2
+			</output>
+			<br>
+			執行速度不是決定使用哪一個的唯一考量！如果你想用 CSS Selector 語法直接指定某特定元素來查詢與修改，那就用 querySelectorAll()，而不是凡事優先使用 getElementsByTagName()。尤其 CSS Selector 功能強大，很多任務是 getElementsByTagName() 做不到的，querySelectorAll() 能省去很多寫程式的工作量。若沒明顯感到程式慢，優先使用 querySelectorAll() 和 querySelector() 才是聰明人的做法～<br>
+			<br>
+			如果要對某個樹狀結構複雜又龐大的元素，從中增加與刪除子元素，甚至還跑迴圈來執行，那就改用 getElementsByTagName() 來提升執行速度。舉個誇張的例子，就是 body 元素，你不該用 querySelector('body') 複製一整棵網頁主體內容的子樹來增刪查改，而是直接用 document.body。
+		</p>
+	</section>
+	<hr id='19400413A'>
+	<section>
+		<h2>善用「事件可以覆寫」的特性</h2>
+		<hr>
+		<section>
+			<h3>事件裡面的程式隨時隨地都能被改寫</h3>
+			<p>
+				事件是會被覆寫的：<br>
+				<br>
+				<textarea class='brush:js'>
+					window.onkeydown=function(){        //按下鍵盤事件
+
+						document.write('AAA');          //首先顯示 AAA
+
+						window.onkeydown=function(){    //才顯示完就改寫 onkeydown 的內容
+							document.write('BBB');      //以後改成顯示 BBB
+						};
+
+					};
+                </textarea>
+				<br>
+				<output>
+					第一次在網頁按下鍵盤時，會顯示 AAA，以後則顯示 BBB。
+				</output>
+				<br>
+				因此寫 JavaScript 程式，你精心佈局的事件驅動模式，很容易就可以被重寫掉。例如某人從外部載入你的 *.js 程式庫，卻不知道你裡面用了 window.onload 為網頁處理一些特殊工作，而他自己也在網頁內部用了 window.onload，這很可能會導致你所提供的程式庫無法正常執行，因為被改寫了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>善用事件隨時可以覆寫的特性</h3>
+			<p>
+				但另一方面來說，這也是讓程式結構變得簡潔的語法特性。<br>
+				<br>
+				比如說，你希望設計一個用鍵盤方向鍵來操控的遊戲，如果事件無法覆寫，那一個網頁只能限制用一次 window.onkeydown，你只好把所有動作通通塞在 window.onkeydown 裡面，程式會非常地亂…<br>
+				<br>
+				<textarea class='brush:js'>
+					//紀錄使用者操控狀態
+					let ui_state='地圖';
+
+					//為鍵盤碼的取個識別名稱
+					const KEY_UP=38;
+					const KEY_DOWN=40;
+					const KEY_LEFT=37;
+					const KEY_RIGHT=39;
+
+					//按下鍵盤事件
+					window.onkeydown=function(x){
+						switch(x.which){
+							case KEY_UP:
+							if(ui_state=='地圖') 人物往上方格子移動();
+							else if(ui_state=='選單') 游標往上個指令移動();
+							else if(ui_state=='戰場') 游標往上個技能移動();
+							else if(ui_state=='道具') 游標往上個物品移動();
+							break;
+
+							case KEY_DOWN:
+							if(ui_state=='地圖') 人物往下方格子移動();
+							else if(ui_state=='選單') 游標往下個指令移動();
+							else if(ui_state=='戰場') 游標往下個技能移動();
+							else if(ui_state=='道具') 游標往下個物品移動();
+							break;
+
+							case KEY_LEFT:
+							if(ui_state=='地圖') 人物往左方格子移動();
+							else if(ui_state=='選單') 游標往左邊指令移動();
+							else if(ui_state=='戰場') 游標往左邊技能移動();
+							else if(ui_state=='道具') 游標往左邊物品移動();
+							break;
+
+							case KEY_RIGHT:
+							if(ui_state=='地圖') 人物往右方格子移動();
+							else if(ui_state=='選單') 游標往右邊指令移動();
+							else if(ui_state=='戰場') 游標往右邊技能移動();
+							else if(ui_state=='道具') 游標往右邊物品移動();
+						};
+					};
+                </textarea>
+				<br>
+				更別說每個 if 裡面還需要補充其它特殊處理狀況的程式時，會有多雜亂了～<br>
+				<br>
+				這時還不如利用事件可以覆寫的特性，改寫為：<br>
+				<br>
+				<textarea class='brush:js'>
+					function 地圖()
+					{
+						window.onkeydown=function(x){
+							switch(x.which){
+								case KEY_UP:
+								人物往上方格子移動();
+								break;
+
+								case KEY_DOWN:
+								人物往下方格子移動();
+								break;
+
+								case KEY_LEFT:
+								人物往左方格子移動();
+								break;
+
+								case KEY_RIGHT:
+								人物往右方格子移動();
+							}
+						};
+					}
+
+					function 選單()
+					{
+						window.onkeydown=function(x){
+							switch(x.which){
+								case KEY_UP:
+								游標往上個指令移動();
+								break;
+
+								case KEY_DOWN:
+								游標往下個指令移動();
+								break;
+
+								case KEY_LEFT:
+								游標往左邊指令移動();
+								break;
+
+								case KEY_RIGHT:
+								游標往右邊指令移動();
+							}
+						};
+					}
+
+					function 戰場()
+					{
+						window.onkeydown=function(x){
+							switch(x.which){
+								case KEY_UP:
+								游標往上個技能移動();
+								break;
+
+								case KEY_DOWN:
+								游標往下個技能移動();
+								break;
+
+								case KEY_LEFT:
+								游標往左邊技能移動();
+								break;
+
+								case KEY_RIGHT:
+								游標往右邊技能移動();
+							}
+						};
+					}
+
+					function 道具()
+					{
+						window.onkeydown=function(x){
+							switch(x.which){
+								case KEY_UP:
+								游標往上個物品移動();
+								break;
+
+								case KEY_DOWN:
+								游標往下個物品移動();
+								break;
+
+								case KEY_LEFT:
+								游標往左邊物品移動();
+								break;
+
+								case KEY_RIGHT:
+								游標往右邊物品移動();
+							}
+						};
+					}
+                </textarea>
+				<br>
+				根據變換的遊戲操作介面狀況，切換不同的事件處理函式，例如進入地圖模式時，就呼叫「地圖()」改寫 window.onload 的內容，進入選單畫面時，就呼叫「選單()」改寫 window.onload 的內容…程式顯得更有組織多了！而且每次改寫，只執行分屬不同遊戲操作介面的程式，不用全部混雜在一起，擔心誤判的話執行錯誤的遊戲指令，程式執行起來更穩定。而在地圖模式想按 ESC 鍵切換到選單模式，追加程式時相當直覺：<br>
+				<br>
+				<textarea class='brush:js'>
+					const KEY_ESC=27;
+
+					function 地圖()
+					{
+						window.onkeydown=function(x){
+							switch(x.which){
+								case KEY_UP:
+								人物往上方格子移動();
+								break;
+
+								case KEY_DOWN:
+								人物往下方格子移動();
+								break;
+
+								case KEY_LEFT:
+								人物往左方格子移動();
+								break;
+
+								case KEY_RIGHT:
+								人物往右方格子移動();
+								break;
+
+								case KEY_ESC: //在地圖模式按 ESC 鍵切換到選單模式
+								選單();
+							}
+						};
+					}
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='19471014A'>
+	<section>
+		<h2>addEventListener() 簡單示範</h2>
+		<hr>
+		<section>
+			<h3>範例</h3>
+			<p>
+				<textarea class='brush:js'>
+					let a=document.createElement('button');
+					document.body.appendChild(a);
+					a.innerHTML='別亂按';
+					a.addEventListener('click',()=>{
+						document.write('不是叫你別亂按嗎？');
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				addEventListener() 可用的事件，通常只要將原本事件的 on 去掉即可。例如原本移開滑鼠的事件可能這樣寫：<br>
+				<br>
+				<textarea class='brush:js'>
+					let a=document.createElement('button');
+					document.body.appendChild(a);
+					a.innerText='別走';
+					a.onmouseout=function(){
+						document.write('求求你不要走～');
+					};
+                </textarea>
+				<br>
+				addEventListener() 改成這樣…<br>
+				<br>
+				<textarea class='brush:js'>
+					let a=document.createElement('button');
+					document.body.appendChild(a);
+					a.innerText='別走';
+					a.addEventListener('mouseout',()=>{
+						document.write('求求你，不要走～');
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>差異</h3>
+			<p>
+				onXXX 系列的事件會被覆寫，addEventListener() 不會。<br>
+				<br>
+				<textarea class='brush:js'>
+					let a=document.createElement('button');
+					document.body.appendChild(a);
+					a.innerText='Click';
+
+					a.addEventListener('click',()=>{
+						document.write('AAA');
+					});
+
+					a.addEventListener('click',()=>{
+						document.write('BBB');
+					});
+                </textarea>
+				<br>
+				按下按鈕後，會接連顯示 AAA 和 BBB 兩則文字內容。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>注意</h3>
+			<p>
+				如果要跑另外寫好的具名函式，請傳入「函式的參照」，而不是「呼叫函式」的觀念。所以要這樣寫才對…<br>
+				<br>
+				<textarea class='brush:js'>
+					function f1()
+					{
+						document.write('AAA');
+					}
+
+					function f2()
+					{
+						document.write('BBB');
+					}
+
+					let a=document.createElement('button');
+					document.body.appendChild(a);
+					a.innerText='Click';
+					a.addEventListener('click',f1);
+					a.addEventListener('click',f2);
+                </textarea>
+				<br>
+				這樣是錯的：<br>
+				<br>
+				<textarea class='brush:js'>
+					a.addEventListener('click',f1());
+					a.addEventListener('click',f2());
+                </textarea>
+				<br>
+				如果你是剛從其它程式語言跨入 JavaScript 的人，所以不懂為何會有這樣莫名其妙的情景，不妨想像 f1 其實是…<br>
+				<br>
+				<textarea class='brush:js'>
+					let f1=function(){
+						document.write('AAA');
+					};
+                </textarea>
+				<br>
+				亦即 f1 是 function 物件，接著再將這樣物件的識別名稱傳入到這樣 API 格式裡：<br>
+				<br>
+				<code>addEventListener(String,Function)</code><br>
+				<br>
+				addEventListener() 第二個參數接受的是 Function 物件，所以不要當作第二個參數是用來「呼叫函式」。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>技巧</h3>
+			<section>
+				<h4>document.onready</h4>
+				<p>
+					<code>document.addEventListener('DOMContentLoaded',函式);</code><br>
+					<br>
+					這相當於 jQuery 廣受好評的 .ready() 事件，只要網頁的 DOM 結構配置完成就會觸發，不用等其它圖片之類的資源載入完才觸發。
+				</p>
+			</section>
+			<section>
+				<h4>once:true</h4>
+				<p>
+					<code>addEventListener('click',函式,{once:true});</code><br>
+					<br>
+					只觸發一次。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='19541103A'>
+	<section>
+		<h2>onbeforeunload 事件</h2>
+		<p>
+			若程式還沒執行完畢，網頁就被關閉時，希望能提示「是否要離開網站？可能無法儲存您所做的變更。」可以加入這段程式：<br>
+			<br>
+			<textarea class='brush:js'>
+				onbeforeunload=function(){
+					return '';
+				};
+            </textarea>
+			<br>
+			然後在工作結束後加入這行程式：<br>
+			<br>
+			<textarea class='brush:js'>
+				onbeforeunload=null;
+            </textarea>
+			<br>
+			為防止彈出訊息框干擾使用者，網頁瀏覽器會阻擋這項功能！所以這項功能要寫在使用者手動執行時觸發，不要寫在頁面載入時自動觸發。
+		</p>
+	</section>
+	<hr id='19680319A'>
+	<section>
+		<h2>Drag and Drop</h2>
+		<p>
+			在兩個 DIV 元素之間拖曳 P 元素：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;script&gt;
+					function dragstart()
+					{
+						event.dataTransfer.setData('id',event.target.id);
+					}
+
+					function dragover()
+					{
+						event.preventDefault();
+					}
+
+					function drop()
+					{
+						event.preventDefault();
+						event.target.appendChild(document.getElementById(event.dataTransfer.getData('id')));
+					}
+				&lt;/script&gt;
+				&lt;div id='division1' ondrop='drop()' ondragover='dragover()' style='width:150px;height:150px;border:1px solid black'&gt;
+					&lt;p id='paragraph' draggable='true' ondragstart='dragstart()'&gt;
+						朝辭白帝彩雲間&lt;br&gt;
+						千里江陵一日還&lt;br&gt;
+						兩岸猿聲啼不住&lt;br&gt;
+						輕舟已過萬重山
+					&lt;/p&gt;
+				&lt;/div&gt;
+				&lt;div id='division2' ondrop='drop()' ondragover='dragover()' style='width:150px;height:150px;border:1px solid black'&gt;&lt;/div&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr id='19690122A'>
+	<section>
+		<h2>XMLHttpRequest 與 Fetch</h2>
+		<p>
+			這兩個可以做同樣的事：由客戶端發出請求，取得回應資料。<br>
+			<br>
+			XMLHttpRequest 其實是 IE5 的 ActiveXObject("Microsoft.XMLHTTP")，後來 Mozilla 也仿造了一個 nsIXMLHttpRequest 來用，於是 W3C 為它進行了標準化，日後成為 Ajax 技術的基礎。<br>
+			<br>
+			後來改制定 Promise 風格的 Fetch 簡化操作，還解決 XMLHttpRequest 職責混亂的缺失，只要看過新 API 的範例都會拋棄舊的才對。<br>
+			<br>
+			現在的網頁瀏覽器，會封鎖本地檔案的來源請求，所以本章節範例只能在 HTTP 正常運作，沒辦法在 file:// 下載入資料。
+		</p>
+		<hr>
+		<section>
+			<h3>XMLHttpRequest 基本範例</h3>
+			<section>
+				<h4>data.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						ABC123
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>client.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;script&gt;
+							let request=new XMLHttpRequest();
+
+							request.open('get','data.txt');
+
+							request.send();
+
+							request.onload=function(){
+								document.write(request.responseText);
+							};
+						&lt;/script&gt;
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Fetch 基本範例</h3>
+			<section>
+				<h4>data.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						ABC123
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>client.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;script&gt;
+							fetch('data.txt').then(response=&gt;{
+								return response.text();
+							}).then(text=&gt;{
+								document.write(text);
+							});
+						&lt;/script&gt;
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>進階範例</h3>
+			<p>
+				若 XMLHttpRequest 請求的檔案是 HTML 標記文件，可以用 <code>responseXML</code> 直接轉為 DOM 格式的資料，例如：<br>
+			</p>
+			<section>
+				<h4>data.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;section&gt;
+							&lt;h1 style='color:orange'&gt;Header&lt;/h1&gt;
+							&lt;p&gt;Paragraph&lt;/p&gt;
+						&lt;/section&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>client.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;script&gt;
+							let request=new XMLHttpRequest();
+
+							request.responseType='document';
+
+							request.onload=function(){
+								document.body.appendChild(a.responseXML.querySelector('section'));
+							};
+
+							request.open('get','data.html');
+
+							request.send();
+						&lt;/script&gt;
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				Fetch 只能取得 text 格式的資料，必須另外用 <code>DOMParser</code> 轉為 DOM：<br>
+				<br>
+				<textarea class='brush:js'>
+					fetch('data.html').then(response=&gt;{
+						return response.text();
+					}).then(text=&gt;{
+						let dom=new DOMParser().parseFromString(text,'text/html');
+						document.body.appendChild(dom.querySelector('section'));
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='19690406A'>
+	<section>
+		<h2>re:Array.prototype.reduce()</h2>
+		<p>
+			6 怎麼來的？這個範例中，我們在 reduce() 設定的初始值是 5，然後跑 callback 函式，因此第一次執行時，這段程式：<br>
+			<br>
+			<code>
+				currentValue=previousValue+array[index];<br>
+				document.write(currentValue);<br>
+				return currentValue;<br>
+			</code>
+			<br>
+			就等於：<br>
+			<br>
+			<code>
+				5+1;<br>
+				document.write(5+1);<br>
+				return 5+1;<br>
+			</code>
+			<br>
+			8 怎麼來的？由於 reduce() 會把陣列的元素值，從頭到尾逐一代入給 callback 執行，所以繼續做出如下的程式動作：<br>
+			<br>
+			<code>
+				6+2;<br>
+				document.write(6+2);<br>
+				return 6+2;<br>
+			</code>
+			<br>
+			因此得到 8。<br>
+			<br>
+			依此類推，因為還有一個元素沒跑，所以繼續做出如下程式動作，而得到 11：<br>
+			<br>
+			<code>
+				8+3;<br>
+				document.write(8+3);<br>
+				return 8+3;
+			</code>
+		</p>
+	</section>
+	<hr id='19690713A'>
+	<section>
+		<h2>為什麼是 article 包含 section？</h2>
+		<p>
+			因為你會用 article 表示一篇文章、一串討論、一張網頁，而不會用 section。因此 article 是更像 nav 和 aside 這樣的專欄區，而 section 則用來在這些區域中分割多個子區塊。<br>
+			<br>
+			當然，如果是在 body 這個區塊中，用 section 分割好幾個子區塊，再各自放入 article，其實也是可以的！因此誰包含誰並不是絕對，端看你網頁結構的語意。<br>
+			<br>
+			但通常 body 就是劃分成 header、nav、article、footer、aside 等區塊，所以 HTML5 才會定義這些標籤！不用這些，偏偏用 section 來分割 body，感覺就跟 HTML 4.01 一律用 div 來分割沒兩樣，不是很適合～<br>
+			<br>
+			除非這網頁不是一篇內容為主的文章，而是功能為主的 Webapp，那就很有可能 section 包含 article 會顯得更適切，這時就用 section 吧！
+		</p>
+		<hr>
+		<footer>
+			<p>
+				[*] 但是讓 section 跟 header、nav、article、footer、aside 並列，做為 Webapp 的專欄區，就 HTML5 語意來講依然不適合。section 就是用來分割數個對等的子區塊，而不是獨立成一個跟別人並存的主區塊。
+			</p>
+		</footer>
+	</section>
+	<hr id='19690720A'>
+	<section>
+		<h2>何時使用 &lt;hgroup&gt;？</h2>
+		<p>
+			如果只是用了好幾個 H1 到 H6 等標籤，其實並不用包括在 HGROUP 裡面：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;header&gt;
+					&lt;h1&gt;主標題&lt;/h1&gt;
+					&lt;h2&gt;副標題&lt;/h2&gt;
+				&lt;/header&gt;
+            </textarea>
+			<br>
+			但如果多個 H1 到 H6 等標籤外，還有其它種類的標籤，就適合放在 HGROUP 裡面來區隔：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;header&gt;
+					&lt;hgroup&gt;
+						&lt;h1&gt;主標題&lt;/h1&gt;
+						&lt;h2&gt;副標題&lt;/h2&gt;
+					&lt;/hgroup&gt;
+					&lt;nav&gt;
+						&lt;ul&gt;
+							&lt;li&gt;選項&lt;/li&gt;
+							&lt;li&gt;選項&lt;/li&gt;
+							&lt;li&gt;選項&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/nav&gt;
+				&lt;/header&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr id='19690727A'>
+	<section>
+		<h2>&lt;html lang='zh'&gt;</h2>
+		<hr>
+		<section>
+			<h3>過去有字元編碼切換的問題</h3>
+			<p>
+				過去 HTML 文件，是各國用自己的字元編碼保存，例如 Big5、GB2312、Shift_JIS。<br>
+				<br>
+				於是瀏覽器在顯示不同國家的網頁時，必須切換到正確的字元編碼，否則用 Big5 字元編碼去處理 Shift_JIS 字元編碼的網頁，只會看到一堆亂碼。<br>
+				<br>
+				為了解決這問題，可以在網頁指定 lang 屬性，設定使用哪個國家的語系。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>UTF-8 也有自己的狀況</h3>
+			<p>
+				但你要知道，同一個漢字和標點符號，台灣、中國、日本的寫法不見得一樣，因此同一個字、同一個全形符號，不同國家語系的人，在網頁上看到的不見得一樣：<br>
+				<br>
+				<samp>
+					設為 lang='zh-TW'：<span lang='zh-TW'>才、直、具，步、邊、內。</span>（台灣習慣的中文寫法和標點符號）<br>
+					設為 lang='ja'　 ：<span lang='ja'>才、直、具，步、邊、內。</span>（日本漢字寫法經常和中文不一樣）<br>
+					設為 lang='zh-CN'：<span lang='zh-CN'>才、直、具，步、邊、內。</span>（中國的全形符號和台灣不一樣）<br>
+				</samp>
+				<br>
+				如果你希望文字和符號固定使用哪一國的寫法，而不是不同國家顯示不同寫法的文字和符號，就可以設定 lang。
+			</p>
+		</section>
+	</section>
+	<hr id='19690813A'>
+	<section>
+		<h2>複製文字到剪貼簿</h2>
+		<p>
+			使用 <code>document.execCommand('copy')</code> 複製選取的文字到剪貼簿。<br>
+			<br>
+			可搭配 <code>元件.select()</code> 選取填表元件的文字，以及把想複製的文字寫在填表元件選取。
+		</p>
+	</section>
+	<hr id='19691007A'>
+	<section>
+		<h2>快取與離線應用</h2>
+		<p>
+			將檔案放在「快取」以後，沒有網路連線也能使用網頁。
+		</p>
+		<hr>
+		<section>
+			<h3>cache.manifest</h3>
+			<p>
+				指定 index.html 和 style.css 為快取：<br>
+				<br>
+				<textarea class='brush:txt'>
+					CACHE MANIFEST
+
+					CACHE:
+					index.html
+					style.css
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>index.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;meta charset='utf-8'&gt;
+					&lt;link href='style.css' rel='stylesheet'&gt;
+					&lt;p&gt;Hello, world!&lt;/p&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>style.css</h3>
+			<p>
+				<textarea class='brush:css'>
+					p { color:blue }
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<p>
+			測試時，先以網頁瀏覽器開啟 webhosting 的 index.html，然後中斷連線，再重新整理網頁，並不會發生「找不到伺服器」的訊息，而是像保持連線那樣正常顯示網頁。<br>
+			<br>
+			必須注意的是，快取通常在 cache.manifest 的檔案修改日期變動過，才會更新 index.html 和 style.css，修改 index.html 或 style.css 是不會更新快取的。所以，雖然 cache.manifest 內容沒變，也應該重新儲存一下更新修改日期，確保對方能更新檔案。
+		</p>
+	</section>
+	<hr id='19691017A'>
+	<section>
+		<h2>&lt;meta&gt;</h2>
+		<hr>
+		<section>
+			<h3>作用</h3>
+			<p>
+				附加資訊在網頁裡面，而不視為內容的一部分。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用法</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;meta name='名稱' content='附加訊息'&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>常用名稱</h3>
+			<table>
+				<tr><td>author</td><td>作者。</td></tr>
+				<tr><td>copyright</td><td>版權宣告。</td></tr>
+				<tr><td>description</td><td>簡介、摘要。</td></tr>
+				<tr><td>distribution</td><td>發布區域、限定地區。</td></tr>
+				<tr><td>generator</td><td>產生網頁的工具。<ins>1</ins></td></tr>
+				<tr><td>keywords</td><td>提供搜尋的關鍵字。</td></tr>
+				<tr><td>robots</td><td>給搜尋引擎的權限，可設定為：all（允許搜尋全部）、follow（允許搜尋超鏈結）、index（允許搜尋內容）、nofollow（禁止搜尋超鏈結）、none（禁止搜尋全部）、noindex（禁止搜尋內容）。</td></tr>
+				<tr><td>viewport</td><td>頁面尺寸，可用鍵值對的語法設定 width（通常設為 device-width）、initial-scale（初始縮放倍率）、maximum-scale（最大縮放倍率）、user-scalabl（使用者能否自訂縮放倍率，以 0 和 1 表示）。</td></tr>
+			</table>
+			<p>
+				meta 的 name 值有標準、非標準之分，像上面的 robots 就不是標準，copyright 則是已汰除。<br>
+				<br>
+				但夾帶的附加訊息有必要規範與標準嗎？這部分我的態度是沒必要，有人需要夾帶這條訊息，那就夾帶給他，並不影響不需要的人，所以也不會有相容性的問題。<br>
+				<br>
+				夾帶訊息的相容性和影響層面，是由需要的人定義與承擔，需求者自己就是規範與標準。<br>
+				<br>
+				所以，想要滿足某方需求，就放手去用，不用管標準與規範。夾帶訊息本來就是滿足不同需求者用的，用於這種無法統一標準化規範的場合。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>HTTP-EQUIV 屬性</h3>
+			<p>
+				META 除了藉由 NAME 屬性提供附加訊息，還有另外一個功能，就是用 HTTP-EQUIV 屬性提供參數給瀏覽器，以執行軟體本身的功能。<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;meta http-equiv='content-type' content='text/html; charset=UTF-8'&gt;
+					&lt;meta http-equiv='default-style' content='text/css'&gt;
+					&lt;meta http-equiv='refresh' content='10'&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>在 JavaScript 取得 META 訊息</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;meta name='options' content='hello'&gt;
+					&lt;script&gt;
+						let elements=document.getElementsByName('options');
+						document.write(elements[0].content);
+					&lt;/script&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[1] 早期 FrontPage 和 Dreamweaver 產生的 HTML 格式並不相容！FrontPage 產生的 HTML 是 IE 能正常顯示就好的不標準格式，Dreamweaver 是遵循 W3C 規範，在 Netscape Navigator 和 IE 都能正常顯示。因此在 2000 年代初期，有時候很需要藉由 generator 的資訊，判斷這會是怎樣規範的 HTML。
+			</p>
+		</footer>
+	</section>
+	<hr id='19691121A'>
+	<section>
+		<h2>使用多個 window.setInterval() 充當平行程序</h2>
+		<p>
+			設 f1 為每秒鐘累加全域變數 a 的執行序，f2 為輸出全域變數 a 的執行序，f3 為結束 f1 的執行序：<br>
+			<br>
+			<textarea class='brush:js'>
+				let a=0;
+
+				let f1=window.setInterval(()=>{
+					a++
+				},1000);
+
+				let f2=window.setInterval(()=>{
+					document.body.innerHTML=a;
+				},200);
+
+				let f3=window.setInterval(()=>{
+					if(a>9) window.clearInterval(f1);
+				},200);
+            </textarea>
+			<br>
+			<output>
+				網頁從 1 到 10 顯示數字，然後停止。
+			</output>
+			<br>
+			因此當你需要平行處理多個執行緒，卻礙於 Web Workers 無法存取非安全性執行緒如 DOM 元件的限制而裹足不前時，可以考慮建立多個 window.setInterval() 來充當。但要注意精準度與效率的問題，畢竟 window.setInterval() 只是個折衷的做法，並非真正的「背景執行」，無法取代 Web Workers 的設計。
+		</p>
+	</section>
+	<hr id='19691228A'>
+	<section>
+		<h2>關閉填表元件的作用</h2>
+		<p>
+			想讓填表元件 (Form) 看得見但不能用，例如：<br>
+			<br>
+			<input><button>Button</button><br>
+			<br>
+			做法不是設定 CSS 樣式，而是以 JavaScript 設定元件屬性 <code>disabled</code> 為 true。例如：<br>
+			<br>
+			<textarea class='brush:js'>
+				document.querySelector('button').disabled=true;
+            </textarea>
+		</p>
+		<script>
+			$('button').disabled=true;
+			$('input').disabled=true;
+		</script>
+	</section>
+	<hr id='19720627A'>
+	<section>
+		<h2>觸發 SELECT 元件的事件</h2>
+		<p>
+			<code>
+				元件.focus();<br>
+				元件.selectedIndex=選擇項目;<br>
+				元件.onchange();
+			</code>
+		</p>
+	</section>
+	<hr id='19800902A'>
+	<section>
+		<h2>FileInput + FileReader</h2>
+		<hr>
+		<section>
+			<h3>file.txt</h3>
+			<p>
+				<textarea class='brush:txt'>
+					hello
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>sample.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;input type='file'&gt;
+					&lt;p&gt;&lt;/p&gt;
+					&lt;script&gt;
+						document.querySelector('input').oninput=function(){
+							let file_reader=new FileReader();
+							file_reader.readAsText(document.querySelector('input').files[0]);
+							file_reader.onload=function(){
+								document.querySelector('p').innerHTML=event.target.result;
+							};
+						};
+					&lt;/script&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>操作方式</h3>
+			<p>
+				用支援 HTML5 的瀏覽器開啟 sample.html，然後用網頁的按鈕點選 file.txt 檔案，就會讀取檔案內容「hello」到網頁的 p 標籤裡面。
+			</p>
+		</section>
+	</section>
+	<hr id='19861113A'>
+	<section>
+		<h2>Write file</h2>
+		<p>
+			<textarea class='brush:js'>
+				let a=document.createElement('a');
+				a.download='save.txt';
+				a.href=URL.createObjectURL(new Blob(['hello!'],{type:'text/plain'}));
+				a.click();
+            </textarea>
+			<br>
+			搭配上一節載入檔案的程式，就能實現本機端純文字文件讀寫的功能！<br>
+			<br>
+			雖然用下載的方式保存檔案，以及開啟舊檔的方式讀取檔案，稱不上完美的解決方案，但對不想依賴 HTTP Server 的單機網頁應用程式來說，還是值得採用的手法，相當於瀏覽器擴充程式常用的匯出、匯入，來備份設定檔。
+		</p>
+	</section>
+	<hr id='19880924A'>
+	<section>
+		<h2>用 File System API 讀寫純文字檔案</h2>
+		<p>
+			因為 FileInput 和 FileReader 的使用體驗實在很差，所以在一面倒的呼聲下，正式納入 File System API 標準，可進行更多檔案相關的程式設計任務，連資料夾都能處理了！<br>
+			<br>
+			缺點是它很新，2020 年推出 Chromium 86 正式支援，但那時只有基本功能，完整功能至少要 2022 年推出的 Chromium 102，甚至 Android 的 Chrome 直到 2025 年推出的 132 版才開放 File System API 寫入檔案的權限，其實很多裝置無法正常使用。<br>
+			<br>
+			本文只介紹讀寫純文字檔案的部分～<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;script&gt;
+					async function save(){
+						let g = await window.showSaveFilePicker({
+							types:[{
+								description:'Text',
+								accept:{'text/plain':['.txt']}
+							}]
+						});
+						let h = await g.createWritable();
+						await h.write('ABC123');
+						await h.close();
+					}
+
+					async function load(){
+						let [g] = await window.showOpenFilePicker();
+						let h = await g.getFile();
+						console.log(await h.text());
+					}
+				&lt;/script&gt;
+				&lt;button onclick='save()'&gt;Save&lt;/button&gt;
+				&lt;button onclick='load()'&gt;Load&lt;/button&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr id='19890528A'>
+	<section>
+		<h2>data- 標籤屬性和 dataset 物件</h2>
+		<p>
+			<textarea class='brush:html'>
+				&lt;p data-number='58' data-position='PG'&gt;Twideem Civs&lt;/p&gt;
+				&lt;script&gt;
+					let a=document.querySelector('p');
+					console.log(a.dataset.number);
+					console.log(a.dataset.position);
+				&lt;/script&gt;
+            </textarea>
+			<br>
+			<output>
+				58<br>
+				PG
+			</output>
+		</p>
+	</section>
+	<hr id='20080519A'>
+	<section>
+		<h2>網站變黑白</h2>
+		<p>
+			對 HTML 標籤使用 <code>filter:grayscale(1)</code> 樣式，例如：<br>
+			<br>
+			<samp>
+				html { filter:grayscale(1) }<br>
+				<br>
+				&lt;html style='filter:grayscale(1)'&gt;<br>
+			</samp>
+			<br>
+			之所以不用在 BODY 標籤，是因為 backgroundImage 不會變黑白，得另外準備黑白的背景圖。
+		</p>
+	</section>
+	<hr id='20080519B'>
+	<section>
+		<h2>剪影</h2>
+		<p>
+			<code>color:transparent; text-shadow:0 0 0 black</code>
+		</p>
+	</section>
+	<hr id='20220222A'>
+	<section>
+		<h2>置中</h2>
+		<p>
+			做法千奇百怪，我慣用的有四種：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;!-- 傳統 Table 做法，適用於指定長寬。 --&gt;
+				&lt;table style='background-color:#eee;height:150px;width:100%'&gt;
+					&lt;tr&gt;
+						&lt;td style='text-align:center;vertical-align:middle'&gt;
+							Table
+						&lt;/td&gt;
+					&lt;/tr&gt;
+				&lt;/table&gt;
+
+				&lt;!-- 使用 Padding 技巧，適用於未指定高度。 --&gt;
+				&lt;div style='background-color:#ddd;padding:75px;text-align:center'&gt;
+					Padding
+				&lt;/div&gt;
+
+				&lt;!-- 使用 Flex 樣式從中間開始排列。 --&gt;
+				&lt;div style='background-color:#bbb;height:150px;display:flex;align-items:center;justify-content:center'&gt;
+					Flex
+				&lt;/div&gt;
+
+				&lt;!-- 使用 Grid 樣式表現居中。 --&gt;
+				&lt;div style='background-color:#ccc;height:150px;display:grid;place-items:center'&gt;
+					Grid
+				&lt;/div&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr id='20241213A'>
+	<section>
+		<h2>Emoji 顯示為黑白圖示而不是彩色圖案的問題</h2>
+		<p>
+			這問題發生在 font-family 設定為文字適用的字型，設定為 Emoji 專用的字型，例如 Segoe UI Emoji，即可解決問題。
+		</p>
+	</section>
+</article>

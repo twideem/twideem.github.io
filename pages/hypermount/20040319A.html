@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script src='https://unpkg.com/showdown/dist/showdown.min.js'></script>
+<article>
+	<header>
+		<h1>在網頁瀏覽器將 Markdown 轉為 HTML</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>下載 Showdownjs</h2>
+		<p>
+			<a href='http://showdownjs.com'>http://showdownjs.com</a>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>使用方法</h2>
+		<p>
+			將下載的壓縮檔解開，在 HTML 載入 dist 資料夾裡的 <code>showdown.min.js</code>。<br>
+			<br>
+			然後寫 JavaScript 程式，用 <code>new showdown.Converter()</code> 產生 Showdownjs 物件，再對該物件操作 <code>makeHtml()</code> 將 Markdown 格式的文字轉換為 HTML 格式的內容。<br>
+			<br>
+			最後將 HTML 格式的內容指定給負責顯示結果的標籤即可。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>用法示範</h2>
+		<p>
+			底下範例將 Markdown 格式的文字寫在 HTML 的 P 標籤，然後用 Showdownjs 將它轉成 HTML 格式的內容後，直接覆寫到 P 標籤：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;script src='showdown.min.js'&gt;&lt;/script&gt;
+				&lt;p&gt;
+				# Chapter
+				## Section
+				* A
+
+				  aaa
+
+				  aaa
+
+				  aaa
+
+				* B
+
+				  bbb
+				&lt;/p&gt;
+				&lt;script&gt;
+					var paragraph=document.querySelector('p');
+					var converter=new showdown.Converter();
+					paragraph.innerHTML=converter.makeHtml(paragraph.innerHTML);
+				&lt;/script&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>顯示結果</h2>
+		<p>
+# Chapter
+## Section
+* A
+
+aaa
+
+aaa
+
+aaa
+
+* B
+
+bbb
+		</p>
+	</section>
+</article>
+<script>
+	$('p',3).innerHTML=new showdown.Converter().makeHtml($('p',3).innerHTML)
+</script>

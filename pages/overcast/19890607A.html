@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>用 Shell 環境操作 Linux 作業系統</h1>
+		<p>
+			Louis Pouzin 在發展 Multics 作業系統時，使用 Shell（殼）來稱呼「使用者操作介面」，有別於 Core（核）。就這樣從 UNIX 傳承到 BSD 與 Linux，大家習慣把「使用者操作介面」的術語稱為 Shell。<br>
+			<br>
+			雖然「圖形化使用者介面（GUI；Graphical User Interface）」也是一種 Shell，但大多還是習慣把 Shell 視為傳統「指令列介面（CLI；Command Line Interface）」的環境，然後將「圖形化使用介面」另外稱為 Desktop 環境加以區別。<br>
+			<br>
+			Shell 發展至今有許多種，Linux 預設使用 Bash（Bourne Again Shell），是 Brian Fox 特地為 GUN 計畫設計的指令操作模式。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>磁碟操作與檔案處理等基本控制</h2>
+		<table>
+			<tr><td style='width:45%'>cd 完整路徑</td><td>切換所在資料夾位置。</td></tr>
+			<tr><td>cd 資料夾名稱</td><td>切換到這一層指定名稱的資料夾</td></tr>
+			<tr><td>cd ..</td><td>切換到上一層資料夾。</td></tr>
+			<tr><td>ls</td><td>顯示資料夾與檔案。</td></tr>
+			<tr><td>ls -al</td><td>以清單列出資料夾與檔案。</td></tr>
+			<tr><td>man 程式指令</td><td>查閱程式或指令的使用指南。</td></tr>
+			<tr><td>find / -name 程式指令</td><td>查詢指令的存放路徑。</td></tr>
+			<tr><td>cat 檔案名稱</td><td>從頭開始往下顯示檔案內容。</td></tr>
+			<tr><td>cat -n 檔案名稱</td><td>從頭開始往下顯示檔案內容，並且標上行號。</td></tr>
+			<tr><td>tac 檔案名稱</td><td>從尾開始往上顯示檔案內容。</td></tr>
+			<tr><td>more 檔案名稱</td><td>以每頁文件的模式來檢閱檔案內容。</td></tr>
+			<tr><td>less 檔案名稱</td><td>用文字處理器來檢閱檔案內容。</td></tr>
+			<tr><td>head 檔案名稱</td><td>顯示檔案最前面十行的內容。</td></tr>
+			<tr><td>tail -f 檔案名稱</td><td>顯示檔案最後面十行的內容，並持續更新。</td></tr>
+			<tr><td>paste 檔案一 檔案二</td><td>以欄位並列的方式顯示兩個檔案</td></tr>
+			<tr><td>grep 正規表示法 檔案名稱</td><td>以<a href='19560001X.html'>正規表示法</a>篩選檔案內容來檢視。</td></tr>
+			<tr><td>wc -c 檔案名稱</td><td>顯示檔案的大小。</td></tr>
+			<tr><td>wc -w 檔案名稱</td><td>顯示檔案的字元數。</td></tr>
+			<tr><td>wc -l 檔案名稱</td><td>顯示檔案的列數</td></tr>
+			<tr><td>sh 程式指令</td><td>執行程式指令。</td></tr>
+			<tr><td>mkdir 資料夾名稱</td><td>建立新資料夾。</td></tr>
+			<tr><td>touch 檔案名稱</td><td>建立新檔案，若檔案已存在則更新修改與存取時間。</td></tr>
+			<tr><td>touch -t 198906071357.35</td><td>指定為 1989 年 6 月 7 日 13 點 57 分 35 秒。</td></tr>
+			<tr><td>touch -a 檔案名稱</td><td>只更新檔案存取時間。</td></tr>
+			<tr><td>touch -m 檔案名稱</td><td>只更新檔案修改時間。</td></tr>
+			<tr><td>vi 檔案名稱</td><td>編輯文字檔案的內容，通常用來<a href='19911102A.html'>修改設定檔</a>。</td></tr>
+			<tr><td>cp 來源資料夾或檔案 目的名稱</td><td>複製資料夾或檔案。</td></tr>
+			<tr><td>mv 來源資料夾或檔案 目的名稱</td><td>搬移資料夾或檔案；重新命名也是透過這指令來完成。</td></tr>
+			<tr><td>rm -fr 資料夾或檔案</td><td>強制刪除資料夾或檔案。</td></tr>
+			<tr><td>mount 裝置名稱 資料夾名稱</td><td>將裝置掛載到資料夾。</td></tr>
+			<tr><td>unmount 資料夾名稱</td><td>卸載資料夾。</td></tr>
+			<tr><td>rename s/舊/新/ 檔案</td><td>批次改檔名，例如 rename s/jpg/jpeg/ *.jpeg。</td></tr>
+			<tr><td>tar -cf 目的 來源</td><td>將檔案打包成單個檔案來保存。</td></tr>
+			<tr><td>tar -rf 目的 來源</td><td>將檔案加入到封裝檔裡面。</td></tr>
+			<tr><td>tar -xf 封裝檔案</td><td>解開打包起來的檔案。</td></tr>
+			<tr><td>tar -tf 封裝檔案</td><td>檢視封裝檔案的內容。</td></tr>
+			<tr><td>tar -zcf 目的 來源</td><td>將檔案以 gzip 壓縮起來保存，通常改用 gzip。</td></tr>
+			<tr><td>tar -zxf 封裝檔案</td><td>解開 gzip 壓縮檔，通常改用 gunzip 指令。</td></tr>
+			<tr><td>split -n 行數 來源檔案 目的檔名</td><td>將檔案依行數大小切割為多個檔案。</td></tr>
+			<tr><td>chomd 777 資料夾或檔案名稱</td><td>修改使用權限為可讀可寫可執行。（不建議使用）</td></tr>
+			<tr><td>chmod 555 資料夾或檔案名稱</td><td>修改使用權限為唯讀可執行。</td></tr>
+			<tr><td>df -a</td><td>顯示檔案使用的磁碟系統訊息。</td></tr>
+			<tr><td>fdisk /dev/裝置名稱</td><td>以交談介面啟動磁碟分割工具。</td></tr>
+			<tr><td>mkfs -t 格式 掛載裝置</td><td>格式化磁碟。</td></tr>
+			<tr><td>mkswap 磁碟裝置</td><td>格式化為虛擬磁碟。</td></tr>
+			<tr><td>fsck -f</td><td>檢修檔案系統。</td></tr>
+			<tr><td>badblocks -vs 分割槽</td><td>檢修是否壞軌，可用 -n 參數修復，但可能破壞檔案。</td></tr>
+			<tr><td>指令 &gt; 檔案名稱</td><td>將指令執行結果儲存為檔案。</td></tr>
+			<tr><td>history</td><td>列出輸入過的指令。</td></tr>
+			<tr><td>clear</td><td>清空畫面。</td></tr>
+			<tr><td>shutdown -h now</td><td>關機。</td></tr>
+			<tr><td>shutdown -r now</td><td>重新開機，通常改用 reboot 指令。</td></tr>
+			<tr><td>*</td><td>萬用一或多字元。</td></tr>
+			<tr><td>?</td><td>萬用單一字元。</td></tr>
+			<tr><td>.</td><td>表示當前資料夾所在位置。</td></tr>
+		</table>
+		<hr>
+		<p>
+			tail -f 可用在系統軟體產生的訊息文件，藉以監控系統狀態，相當實用。<br>
+			<br>
+			存取檔案時，不要為了貪圖方便，使用 chmod 777 修改使用權限，不如輸入 sudo -i 進入管理員權限。只有在確定資料夾或檔案的使用權限應該如何，才使用 chmod 修正過來。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>程序管理</h2>
+		<table>
+			<tr><td style='width:45%'>ps -aux</td><td>顯示所有執行程序。</td></tr>
+			<tr><td>top</td><td>持續顯示所有執行程序，並定期更新狀態。</td></tr>
+			<tr><td>kill -KILL 程序識別號</td><td>終止執行程序。</td></tr>
+			<tr><td>bg</td><td>背景執行程序，通常在程式指令後面加 & 代替。</td></tr>
+			<tr><td>jobs -l</td><td>顯示背景執行的程序。</td></tr>
+			<tr><td>nice -n 等級 程序</td><td>設定程序執行的優先等級，-20到19，越低越優先。</td></tr>
+			<tr><td>/etc/rc.d/init.d/服務名稱 start</td><td>啟動服務程序。</td></tr>
+			<tr><td>/etc/rc.d/init.d/服務名稱 stop</td><td>停止服務程序。</td></tr>
+			<tr><td>/etc/rc.d/init.d/服務名稱 restart</td><td>重新啟動服務程序。</td></tr>
+		</table>
+		<hr>
+		<p>
+			背景執行是指輸入程式指令後，立刻歸還命令提示狀態，可以一邊執行程式、一邊繼續輸入其它指令。通常輸入程式指令，必須等待程式動作完畢，才能再輸入下一個指令。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>帳戶管理</h2>
+		<table>
+			<tr><td style='width:45%'>useradd -m 使用者名稱</td><td>新增使用者。</td></tr>
+			<tr><td>passwd 使用者名稱</td><td>設定使用者密碼。</td></tr>
+			<tr><td>userdel -r 使用者名稱</td><td>刪除使用者帳戶，並清除資料夾。</td></tr>
+			<tr><td>usermod -s 殼 使用者帳戶</td><td>更改使用者帳戶的 SHELL。</td></tr>
+			<tr><td>usermod -p 密碼 使用者帳戶</td><td>更改使用者帳戶的密碼，通常改用 passwd 指令。</td></tr>
+			<tr><td>usermod -d 目錄名稱 使用者帳戶</td><td>更改使用者帳戶的家目錄名稱。</td></tr>
+			<tr><td>su 使用者名稱</td><td>切換到其他帳戶。</td></tr>
+			<tr><td>sudo 程式指令</td><td>以管理員權限執行程式指令。</td></tr>
+			<tr><td>exit</td><td>關閉 SHELL。</td></tr>
+			<tr><td>logout</td><td>登出帳戶。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>系統資訊</h2>
+		<table>
+			<tr><td style='width:45%'>export 變數名稱=值</td><td>設定變數。</td></tr>
+			<tr><td>unset 變數名稱</td><td>移除變數。</td></tr>
+			<tr><td>set</td><td>顯示系統變數。</td></tr>
+			<tr><td>env</td><td>顯示環境變數。</td></tr>
+			<tr><td>echo $變數名稱</td><td>檢視單一變數內容。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>其它</h2>
+		<table>
+			<tr><td style='width:45%'>date</td><td>顯示日期與時間。</td></tr>
+			<tr><td>apt-get update</td><td>更新套件列表。</td></tr>
+			<tr><td>apt-get install 套件</td><td>安裝應用程式。</td></tr>
+			<tr><td>apt-get remove 套件</td><td>移除應用程式。</td></tr>
+			<tr><td>q</td><td>幾乎所有 SHELL 底下的程式，都按 q 來離開。</td></tr>
+			<tr><td>Ctrl+C</td><td>關閉程式。</td></tr>
+			<tr><td>Ctrl+Z</td><td>將程式放到背景執行。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] $ 表示一般使用者權限，# 表示系統管理員權限，~ 表示使用者目錄。<br>
+			[*] 要將 bash 指令寫在純文字文件執行的話，可以在文件最前方標上 <code>#!/bin/bash</code>。
+		</p>
+	</footer>
+</article>

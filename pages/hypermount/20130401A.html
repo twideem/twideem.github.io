@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>April Fool!</h1>
+		<p>
+			在歐美一些國家，陽曆４月１日是愚人節（幽默節），這一天，人們以多種方式開周圍的人的玩笑，上當者當被告知是愚人節時，才恍然大悟，所以這一天總是能夠引出許多笑話，不過某些玩笑也會因開得過大而引起人們的恐慌，或改變形勢衍生成為（網路）謠言與都會傳奇。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>各國名稱</h2>
+		<p>
+			英文：April Fools' Day<br>中文：愚人節<br>日文：エイプリルフール
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>變更內容</h2>
+		<p>
+			<button onclick='$("h1").innerHTML=prompt("請輸入內容：")'>主題</button>
+			<button onclick='$("header p").innerHTML=prompt("請輸入內容：")'>概要</button>
+			<button onclick='$("h2").innerHTML=prompt("請輸入內容：")'>標題</button>
+			<button onclick='$("h2+p").innerHTML=prompt("請輸入內容：")'>內文</button>
+			<button onclick='$("footer p").innerHTML=prompt("請輸入內容：")'>註腳</button>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 本文摘錄自維基百科的文獻。
+		</p>
+	</footer>
+</article>

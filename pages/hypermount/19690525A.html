@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>Double Buffer</h1>
+		<p>
+			在《<a href='19690518A.html'>Sprite</a>》介紹了連續圖像的高速繪圖技巧，適用於 2D 遊戲的開發，像是 RPG 的主角在地圖上移動、或者超級馬力歐兄弟在橫向捲動地圖上跑跑跳跳。<br>
+			<br>
+			然而該範例有個缺點，就是它直接在畫面上描繪 Sprite，在電腦效能低落的情況下，玩家有可能會看到畫面出現描繪 Sprite 時留下的痕跡，導致畫面閃爍不好看。<br>
+			<br>
+			因此請進一步探究本章節所要介紹的 Double Buffer，它其實很簡單，純粹只是再建立一個畫面，專門在私底下做繪圖的動作，畫好之後再把結果複製到主要畫面，這樣就能避免留下繪圖的痕跡<ins>1</ins>。除此之外，這種做法會像卡通連續顯示所有畫好的畫面一樣，畫面會變得相當流暢。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>原始碼</h2>
+		<p>
+			<textarea class='brush:js'>
+				//全域變數
+				let count=0;
+				let position=0;
+
+				//載入背景圖片
+				let background=new Image();
+				background.src='background.png';
+
+				//載入前景圖片
+				let sprite=new Image();
+				sprite.src='sprite.png';
+
+				//建立畫布
+				let backbuffer=document.createElement('canvas');
+				let primarysurface=document.createElement('canvas');
+				document.body.appendChild(primarysurface);
+
+				//調整畫布大小
+				backbuffer.width=600;
+				backbuffer.height=300;
+				primarysurface.width=600;
+				primarysurface.height=300;
+
+				//將圖片描繪到畫布
+				function draw()
+				{
+					let backcontext=backbuffer.getContext('2d');
+					backcontext.drawImage(background,0,0);
+
+					switch(count){
+						case 0:
+						backcontext.drawImage(sprite,0,0,96,141,272,position,96,141);
+						count++;
+						break;
+
+						case 1:
+						backcontext.drawImage(sprite,96,0,96,141,272,position+=9,96,141);
+						count++;
+						break;
+
+						case 2:
+						backcontext.drawImage(sprite,0,0,96,141,272,position,96,141);
+						count++;
+						break;
+
+						case 3:
+						count=0;
+						backcontext.drawImage(sprite,288,0,96,141,272,position+=9,96,141);
+					}
+
+					let primarycontext=primarysurface.getContext('2d');
+					primarycontext.drawImage(backcontext.canvas,0,0);
+				}
+
+				//每 0.25 秒執行 draw()
+				setInterval(draw,250);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>範例下載</h2>
+		<p>
+			<a href='../../objects/downloads/19690525A.7z'>19690525A.7z</a>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 但還是有可能因為畫面更新頻率 (FPS) 的問題，導致圖沒畫完就顯示，畫面看起來變得破碎。
+		</p>
+	</footer>
+</article>

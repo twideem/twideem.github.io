@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>Numerickeypadless Calculator Update</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>Numerickeypadless</h2>
+		<p>
+			14' 螢幕的筆記型電腦沒有九宮鍵區，每次使用附屬應用程式的「計算機」就覺得不方便，於是設計這個改用英文字母做為運算符號的計算機。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Calculator</h2>
+		<p style='color:cornflowerblue'></p>
+	</section>
+	<hr>
+	<section>
+		<h2>Update</h2>
+		<p>
+			實在難用到爆，所以追加設計，將「加、減、乘、除、等於、清除」對照為英打鍵區的「+」「-」「Space」「\」「Enter」「Esc」，再將「餘數、退回」對照為英打鍵區的「Shift+%」「←」。16 進位轉 10 進位請以 0x?? 格式輸入再按 Enter 或 E，輸出或計算 16 進位請按 H，A 到 F 請按 Shift+A 到 Shift+F。
+		</p>
+	</section>
+</article>
+<script>
+	let p=$('p',1);
+	let string='(0-9)umber　(A)dd　(S)ubtract　(M)ultiply　(D)ivide　(E)auals　(C)lear　(B)ack';
+	let switching=false;
+
+	function append(x)
+	{
+		if(p.innerHTML==string||switching){
+			p.innerHTML='';
+			switching=false;
+		}
+
+		p.innerHTML+=x;
+	}
+
+	function clear()
+	{
+		p.innerHTML=string;
+	}
+
+	function error()
+	{
+		p.innerHTML='0.0a';
+	}
+
+	function calc(x)
+	{
+		try{
+			if(x==16) append(`=0x${Number(eval(p.innerHTML)).toString(16)}`);
+			else append(`=${eval(p.innerHTML)}`);
+		}
+		catch(y){
+			append('=無解');
+		}
+
+		switching=true;
+
+		if(p.innerHTML=='=NaN') error();
+	}
+
+	function back()
+	{
+		if(p.innerHTML!==string&&!switching){
+			p.innerHTML=p.innerHTML.substr(0,p.innerHTML.length-1);
+			if(p.innerHTML.length<=0) p.innerHTML=string;
+		}
+	}
+
+	addEventListener('keydown',x=>{
+		switch(x.which){
+			case 88:
+			append('x');
+			break;
+
+			case x.shiftKey&&65:
+			case x.shiftKey&&66:
+			case x.shiftKey&&67:
+			case x.shiftKey&&68:
+			case x.shiftKey&&69:
+			case x.shiftKey&&70:
+			append(String.fromCharCode(x.which).toLowerCase());
+			break;
+
+			case 61:
+			case 65:
+			case 187:
+			append('+');
+			break;
+
+			case 83:
+			case 173:
+			case 189:
+			append('-');
+			break;
+
+			case 77:
+			case 32:
+			case x.shiftKey&&56:
+			append('*');
+			break;
+
+			case 68:
+			case 191:
+			case 220:
+			append('/');
+			break;
+
+			case 82:
+			case x.shiftKey&&83:
+			append('%');
+			break;
+
+			case x.shiftKey&&54:
+			append('Math.pow(');
+			break;
+
+			case 188:
+			append(',');
+			break;
+
+			case x.shiftKey&&57:
+			append('(');
+			break;
+
+			case x.shiftKey&&48:
+			append(')');
+			break;
+
+			case 48:
+			case 49:
+			case 50:
+			case 51:
+			case 52:
+			case 53:
+			case 54:
+			case 55:
+			case 56:
+			case 57:
+			append(x.which-48);
+			break;
+
+			case 190:
+			append('.');
+			break;
+
+			case 69:
+			case 13:
+			calc();
+			break;
+
+			case 72:
+			calc(16);
+			break;
+
+			case 67:
+			case 27:
+			clear();
+			break;
+
+			case 66:
+			case 8:
+			case 37:
+			back();
+		}
+	});
+
+	addEventListener('load',()=>p.innerHTML=string);
+</script>

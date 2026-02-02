@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>網頁物件 (DOM)</h1>
+		<p>
+			早期 Internet Explorer 與 Netscape Navagator 兩大瀏覽器最主要的競爭方式，就是搶先實現出更多可程式化標籤的功能，搶先的結果演變成各自用不同的寫法來實作，導致互不相容，於是 W3C 制定了 DOM (Document Object Model) 統一規範。<br>
+			<br>
+			DOM 的原理，就是先將 HTML 這類標記文件的結構，用程式設計常見的「樹狀結構」來展現，並制定一套函式介面來存取樹裡面的每個枝節，來達成一致寫法的規範標準。<br>
+			<br>
+			因此學習 DOM，首先要知道標記文件變成樹狀結構後長怎樣，然後熟練相關的函式來控制這結構當中你想要的節點，這樣就能用程式來操作它。<br>
+			<br>
+			換句話說，藉由 DOM 讓 JavaScript 得以完全掌控住 HTML 網頁的每個組成，這樣就能透過程式設計的寫法來修改整張 HTML 網頁的內容，完全達成「動態網頁設計」的目的；網頁不再寫死的，而是可以通過程式語言靈活變動的。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>節點</h2>
+		<p>
+			在 DOM 中，標籤（tag）、標籤夾起來的內容（text）、屬性（attribute）、&lt;!-- --&gt; 註解（comment）、&amp; 之類的實體（entity），都是節點（node）。<br>
+			<br>
+			DOM 提供 Node 介面做為共通的屬性和方法，然後視功能需要繼承出其它介面，例如 Element 介面來處理標籤和屬性之間的關係。
+		</p>
+		<table>
+			<tr><td style='width:50%'>appendChild(節點)</td><td>加入節點到這個節點。</td></tr>
+			<tr><td>attributes</td><td>傳回所有屬性。</td></tr>
+			<tr><td>childNodes</td><td>所有子節點。</td></tr>
+			<tr><td>cloneNode()</td><td>複製並傳回這個節點。</td></tr>
+			<tr><td>currentScript</td><td>取得執行程式的 SCRIPT 標籤節點。</td></tr>
+			<tr><td>firstChild</td><td>傳回第一個子節點。</td></tr>
+			<tr><td>hasAttributes()</td><td>檢查這個節點是否有屬性。</td></tr>
+			<tr><td>hasChildNodes()</td><td>檢查這個節點是否有子節點。</td></tr>
+			<tr><td>insertBefore(新節點,子節點)</td><td>將新節點插入在子節點前。</td></tr>
+			<tr><td>lastChild</td><td>傳回最後一個子節點。</td></tr>
+			<tr><td>nextSibling</td><td>傳回這個節點的下一個節點。</td></tr>
+			<tr><td>nodeName</td><td>傳回節點名稱。</td></tr>
+			<tr><td>nodeType</td><td><a href='#anchor'>傳回節點類型。</a></td></tr>
+			<tr><td>nodeValue</td><td>存取節點內容。</td></tr>
+			<tr><td>parentNode</td><td>傳回這個節點的父節點</td></tr>
+			<tr><td>previousSibling</td><td>傳回這個節點的上一個節點</td></tr>
+			<tr><td>removeChild(節點)</td><td>刪除子節點。</td></tr>
+			<tr><td>replaceChild(新節點,子節點)</td><td>用新節點取代子節點。</td></tr>
+		</table>
+		<p>
+			傳回多個節點時會取得 NodeList 物件，當陣列物件看待即可，透過索引值直接取得裡面的 Node，或使用 length 取得節點數量。<br>
+			<br>
+			產生新節點：
+		</p>
+		<table>
+			<tr><td style='width:50%'>document.createElement(標籤名稱)</td><td>產生標籤節點</td></tr>
+			<tr><td>document.createText(文字內容)</td><td>產生內容節點</td></tr>
+			<tr><td>document.createAttribute()</td><td>產生屬性節點</td></tr>
+			<tr><td>document.createComment()</td><td>產生註解節點</td></tr>
+			<tr><td>document.createDocumentFragment()</td><td>產生空白節點樹</td></tr>
+		</table>
+		<p id='anchor'>
+			節點類型：
+		</p>
+		<table>
+			<tr><td style='width:50%'>ELEMENT_NODE</td><td>1</td></tr>
+			<tr><td>ATTRIBUTE_NODE</td><td>2</td></tr>
+			<tr><td>TEXT_NODE</td><td>3</td></tr>
+			<tr><td>CDATA_SECTION_NODE</td><td>4</td></tr>
+			<tr><td>ENTITY_REFERENCE_NODE</td><td>5</td></tr>
+			<tr><td>ENTITY_NODE</td><td>6</td></tr>
+			<tr><td>PROCESSING_INSTRUCTION_NODE</td><td>7</td></tr>
+			<tr><td>COMMENT_NODE</td><td>8</td></tr>
+			<tr><td>DOCUMENT_NODE</td><td>9</td></tr>
+			<tr><td>DOCUMENT_TYPE_NODE</td><td>10</td></tr>
+			<tr><td>DOCUMENT_FRAGMENT_NODE</td><td>11</td></tr>
+			<tr><td>NOTATION_NODE</td><td>12</td></tr>
+		</table>
+		<p>
+			來看些範例，首先是插入節點，例如在 BODY 標籤的開頭與結尾，各加入 HR 標籤：<br>
+			<br>
+			<textarea class='brush:js'>
+				document.body.insertBefore(document.createElement('hr'),document.body.firstChild);
+				document.body.appendChild(document.createElement('hr'));
+			</textarea>
+			<br>
+			要注意的是，空白和換行也算一個節點！所以 insertBefore() 第二參數使用 <code>childNodes[索引值]</code> 時，必須連空行節點也數進去！<br>
+			<br>
+			然後是節點樹，用它來增加元素，再把節點樹增加到網頁，避免頻繁更新整個頁面的 DOM 結構，降低運算開銷：<br>
+			<br>
+			<textarea class='brush:js'>
+				let frag=document.createDocumentFragment();
+
+				let p1=document.createElement('p');
+				p1.textContent='RED';
+				p1.style.color='#f00';
+
+				let p2=document.createElement('p');
+				p2.textContent='GREEN';
+				p2.style.color='#0f0';
+
+				let p3=document.createElement('p');
+				p3.textContent='BLUE';
+				p3.style.color='#00f';
+
+				frag.appendChild(p1);
+				frag.appendChild(p2);
+				frag.appendChild(p3);
+
+				document.body.appendChild(frag);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>元素</h2>
+		<p>
+			HTML 的標籤 (Tag) 在 DOM 改稱為元素 (Element)，底下是 Element 介面的屬性和方法：
+		</p>
+		<table>
+			<tr><td style='width:50%'>children</td><td>所有子元素。</td></tr>
+			<tr><td>getAttribute(屬性)</td><td>傳回屬性值。</td></tr>
+			<tr><td>getAttributeNode(屬性)</td><td>傳回屬性節點。</td></tr>
+			<tr><td>hasAttribute(屬性)</td><td>檢查是否有某個屬性。</td></tr>
+			<tr><td>removeAttribute(屬性)</td><td>以名稱刪除屬性。</td></tr>
+			<tr><td>removeAttributeNode(屬性節點)</td><td>以節點刪除屬性。</td></tr>
+			<tr><td>setAttribute(屬性,值)</td><td>新增或設定屬性。</td></tr>
+			<tr><td>setAttributeNode(屬性節點)</td><td>新增屬性。</td></tr>
+			<tr><td>tagName</td><td>傳回標籤名稱。</td></tr>
+		</table>
+		<p>
+			由於網頁是由標籤和屬性構成，因此元素的使用，大多不在產生新的元素，而是取得現成的元素節點，也就是剖析文件！底下是 DOM 提供的方法，可用於 XML：<br>
+			<br>
+			<code>
+				document.getElementById('ID 屬性')<br>
+				document.getElementsByClassName('CLASS 屬性')[索引值]<br>
+				document.getElementsByTagName('標籤名稱')[索引值]<br>
+				document.querySelector('CSS 選擇器')<br>
+				document.querySelectorAll('CSS 選擇器')[索引值]<br>
+			</code>
+			<br>
+			也可以用 BOM 直接取得 HTML 的節點，但這不是 DOM 標準，不適用於 XML：
+		</p>
+		<table>
+			<tr><td style='width:55%'>document.body</td><td>BODY 元素節點</td></tr>
+			<tr><td>document.currentScript</td><td>取得執行程式的 SCRIPT 元素節點</td></tr>
+			<tr><td>document.documentElement</td><td>根元素，也就是 HTML 元素節點</td></tr>
+			<tr><td>document.embeds[索引值]</td><td>EMBED 元素節點</td></tr>
+			<tr><td>document.forms[索引值]</td><td>FORM 元素節點</td></tr>
+			<tr><td>document.forms[索引值].elements[索引值]</td><td>FORM 元素節點和裡面的控制項</td></tr>
+			<tr><td>document.head</td><td>HEAD 元素節點</td></tr>
+			<tr><td>document.images[索引值]</td><td>IMG 元素節點</td></tr>
+			<tr><td>document.links[索引值]</td><td>A 與 AREA 元素節點</td></tr>
+			<tr><td>document.plugins[索引值]</td><td>PLUGIN 元素節點</td></tr>
+			<tr><td>document.scripts[索引值]</td><td>SCRIPT 元素節點</td></tr>
+		</table>
+		<p>
+			「依 ID 名稱取得節點」以及「直接取得節點」是最直覺的！建議應用程式都採取這種做法來存取元素，有助於保障開發時效。<br>
+			<br>
+			至於其它做法，通常是為了「剖析資料」用的，例如 Ajax 的通訊、或者像是 docx 附檔名的 Microsoft Office Word XML Format 文件。由於不知道節點的元素名稱與排列架構，只好用巡迴的方式逐筆處理資料，但如果不是這種場合，大可跳過這些做法。<br>
+			<br>
+			另外，getElementsByTagName() 是傳回節點樹本身，所以查詢速度快，但每增刪節點都會動到整棵節點樹，所以增刪速度慢。querySelectorAll() 則是另外複製一棵小節點樹，所以查詢速度慢，但增刪節點只動這小棵節點樹，所以增刪速度快。<br>
+			<br>
+			currentScript 如果寫在另一個 SCRIPT 標籤的函式來調用，將無法傳回元素節點，所以只能在當前 SCRIPT 標籤使用。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>內容、屬性</h2>
+		<p>
+			取得元素節點後，來看 JavaScript 能用它來做哪些事～
+		</p>
+		<hr>
+		<section>
+			<h3>存取標籤所括住的文字內容</h3>
+			<p>
+				<code>元素節點.textContent</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以 HTML 格式存取標籤所括住的內容</h3>
+			<p>
+				<code>元素節點.innerHTML</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>照抄 HTML 標籤的屬性來設定元素</h3>
+			<p>
+				<code>元素節點.標籤屬性=設定值</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>設定 CSS 樣式</h3>
+			<p>
+				<code>元素節點.style.樣式名稱=設定值</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>變更 CSS 類型</h3>
+			<p>
+				<code>元素節點.className=樣式類型</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>設定事件</h3>
+			<p>
+				<code>
+					1) 元素節點.事件=函式;<br>
+					2) 元素節點.addEventListener(事件,函式,true);
+				</code>
+			</p>
+		</section>
+		<hr>
+		<p>
+			首先來看 textContent，它可以讓你存取元素的文字內容。底下範例在 BODY 裡面新增一個 DIV 元素，然後又在 DIV 裡面新增一個 B 元素，最後在 B 元素使用 textContent 輸入 Hello 做為文字內容：<br>
+			<br>
+			<textarea class='brush:js'>
+				let div=document.createElement('DIV');
+				document.body.appendChild(div);
+
+				let b=document.createElement('B');
+				div.appendChild(b);
+				b.textContent='Hello';
+            </textarea>
+			<br>
+			接著來看 innerHTML，它可以直接在元素節點裡面輸入 HTML 語法，上面的範例可以因此簡化為……<br>
+			<br>
+			<textarea class='brush:js'>
+				let div=document.createElement('DIV');
+				document.body.appendChild(div);
+				div.innerHTML='&lt;b&gt;Hello&lt;/b&gt;';
+            </textarea>
+			<br>
+			然後來看存取 HTML 標籤的屬性，例如 IMG 標籤有個 SRC 屬性，那 JavaScript 建立一個 IMG 元素時，就可以這樣來設定，比 setAttribute() 省事多了：<br>
+			<br>
+			<textarea class='brush:js'>
+				let img=document.createElement('IMG');
+				document.body.append(img);
+				img.src='image.png';
+            </textarea>
+			<br>
+			再來看設定 CSS 樣式，下面的範例將先前程式的 b 用 CSS 設定為紅色，且字型設定為「微軟正黑體」：<br>
+			<br>
+			<textarea class='brush:js'>
+				b.style.color='red';
+				b.style.fontFamily='微軟正黑體';
+            </textarea>
+			<br>
+			上面程式相當於如下 CSS 描述：<br>
+			<br>
+			<code>b { color:red; font-family:微軟正黑體 }</code><br>
+			<br>
+			請注意 CSS 的 font-family 橫線，到了 JavaScript 改成 fontFamily 字母大寫。<br>
+			<br>
+			但有些樣式名稱並不規則，例如 CSS 的 float 在 JavaScript 是 cssFolat。<br>
+			<br>
+			最後來看事件，將 b 加入「在上面按滑鼠左鍵會跳出『別亂按』訊息」的功能：<br>
+			<br>
+			<textarea class='brush:js'>
+				b.onclick=function(){
+					document.write('別亂按～');
+				};
+            </textarea>
+			<br>
+			addEventListener() 是 DOM 標準寫法，不像設定 on 事件會覆寫掉原先的功能，它是追加功能進去，按先後順序執行，並且可用 removeEventListener() 移除。它有第三個參數，設為 true 可以阻止往它層元素傳遞事件，也就是只在自己這層元素觸發事件。
+		</p>
+	</section>
+</article>

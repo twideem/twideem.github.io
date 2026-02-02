@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>My ECMAScript now</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>新舊寫法的取捨</h2>
+		<hr>
+		<section>
+			<h3>我並未全面改用 let</h3>
+			<p>
+				我會在 function 函式物件裡，用 var 表示向物件增加變數屬性，增加語言表達能力。用 let 的話，比較像在表示區域變數，表達能力沒有 var 強。<br>
+				<br>
+				事實上，要藉由 window 物件保存全域變數時，也只能繼續用 var 才能把變數添加到 window 物件，沒辦法改用 let，所以我在 function 物件裡用 var 添加屬性是說得過去的。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>我不打算全面改用 =&gt; 箭頭函式</h3>
+			<p>
+				雖然我也覺得 function 這關鍵字有點長，如果能像 Rust 的 fn 或 Kotlin 的 fun 一樣短就好了！但要指定一個函式物件給指標變數時，我會繼續用 function() 函式物件，藉由關鍵字的字眼清楚交代我在做什麼。<br>
+				<br>
+				只有在傳遞函式參數時，我才會改用 =&gt; 箭頭函式，因為 ()=&gt; 的寫法不見得比 function() 好看：<br>
+				<br>
+				<textarea class='brush:js'>
+					//在指定運算子的場合 ()=&gt; 其實很醜，辨識度變差，解讀起來有障礙。
+					onload=function(){
+						document.write('AAA');
+					};
+					onload=()=&gt;{
+						document.write('BBB');
+					};
+
+					//當參數傳遞時 ()=&gt; 才會好看，但 function() 也不醜，很容易辨識與解讀。
+					addEventListener('load',function(){
+						document.write('CCC');
+					},false);
+					addEventListener('load',()=&gt;{
+						document.write('DDD');
+					},false);
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Hello, world! 和 print()、clear()</h2>
+		<p>
+			<textarea class='brush:txt'>
+				&lt;!DOCTYPE&gt;
+				&lt;html&gt;
+					&lt;head&gt;
+						&lt;style&gt;
+							a{color:blue;cursor:pointer}
+							a:hover{color:orange}
+						&lt;/style&gt;
+					&lt;/head&gt;
+					&lt;body&gt;
+						&lt;script&gt;
+							let p=document.createElement('p');
+							document.body.appendChild(p);
+							function print(x)
+							{
+								p.innerHTML+=x+'&lt;br&gt;';
+							}
+							function clear()
+							{
+								p.innerHTML='';
+							}
+							document.clear=clear;
+							print('&lt;a onclick="clear()"&gt;Hello, world!&lt;/a&gt;');
+						&lt;/script&gt;
+					&lt;/body&gt;
+				&lt;/html&gt;
+            </textarea>
+			<br>
+			一律使用 A 標籤當 BUTTON 元件，但避開會在狀態烈顯示網址的 href 屬性，改用 onclick，因此事先透過 CSS 設定 A 標籤在沒有超鏈結時也有樣式。<br>
+			<br>
+			若從 DOM 建立的 A 元素之 onclick 事件呼叫函式，作用域會從 document 物件出發，而 document 已經有 clear() 了，因此我們這其實是 window.clear() 的函式並不會被呼叫。為了仿 C 語言，不打算改函式名稱，而 document.clear() 已被 deprecated，因此大可用取代的方式規避問題。<br>
+			<br>
+			我也曾考慮用 MS-DOS 的 echo 和 cls 來命名。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>sleep()</h2>
+		<p>
+			<textarea class='brush:js'>
+				function sleep(seconds)
+				{
+					let start=new Date().getTime();
+					while(true){
+						if((new Date().getTime()-start)&gt;seconds*1000){
+							break;
+						}
+					}
+				}
+
+				//測試看看
+				document.write('AAA');
+				sleep(1);
+				document.write('BBB');
+				sleep(1);
+				document.write('CCC');
+            </textarea>
+			<br>
+			setTimeout() 其實不適合當 sleep() 用，它語意上並不是暫停幾秒的意思，而是倒數計時執行程式的意思，也就是有牽動性。為了配合這牽動性，就等於把下一步要執行的程式寫在這一步裡面，整個程式的架構經常會搞亂掉。<br>
+			<br>
+			setTimeout() 和 setInterval() 是很函數式風格的，它很適合用來運算出結果，但不適合表達程式的流程。而我們用 sleep() 時意思是暫停流程的執行，setTimeout() 意思卻是延後程式的運算，所以在不提供 sleep() 的 ECMAScript 拿 setTimeout() 來充當，經常讓我們寫出整個敗壞掉難以維護下去的程式。<br>
+			<br>
+			雖然現在大家鼓吹函數式程式設計有多美好，但它只是在運算結果上提供了優化的手法，其實無關於結構化程式設計的流程管理。所以函數式和結構化程式設計是並存的，而不是誰取代誰。你應該在結構化程式設計的流程中運用函數式程式設計來優化運算，而不是以為函數式程式設計是種取代結構化程式設計的新手法。<br>
+			<br>
+			除非你下載完全函數式風格的框架來寫程式，也就是幫你把所有結構化程式設計的流程都事件驅動化，你只要不斷寫函式進去跑就好，否則正常寫 ECMAScript 程式不要過度美化函式數程式設計的手法，畢竟這是一門物件導向的結構化程式設計語言<ins>1</ins>。<br>
+			<br>
+			在巢狀 while 迴圈裡失靈時，改用 setTimeout() 搭配 Promeise：<br>
+			<br>
+			<textarea class='brush:js'>
+				async function sleep(seconds)
+				{
+					return new Promise(function(x){
+						setTimeout(x,seconds*1000);
+					});
+				}
+
+				async function main()
+				{
+					document.write('AAA');
+					await sleep(1);
+					document.write('BBB');
+					await sleep(1);
+					document.write('CCC');
+				}
+
+				main();
+            </textarea>
+			<br>
+			有點彆扭，我不是很喜歡。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Array.sort() 和 Math.random()</h2>
+		<p>
+			Array.sort() 是以字串進行排序，要排序數值，必須：<br>
+			<br>
+			<textarea class='brush:js'>
+				let a=[9,876,54,321];
+				a.sort((x,y)=&gt;x-y);
+				document.write(a);
+            </textarea>
+			<br>
+			Array.sort() 也可以用來打亂資料，相當於 shuffle()：<br>
+			<br>
+			<textarea class='brush:js'>
+				let a=[1,2,3,4,5,6,7,8,9];
+				a.sort(()=&gt;Math.random()-0.5);
+				document.write(a);
+            </textarea>
+			<br>
+			上例只適合偶爾打亂個幾次資料，應急用。若要瞬間不停地打亂資料，建議實作一個正統的 shuffle()，才不會重複：<br>
+			<br>
+			<textarea class='brush:js'>
+				Array.prototype.shuffle=function(){
+					let a=this.length;
+					while(a){
+						let b=Math.floor(Math.random()*a--);
+						[this[b],this[a]]=[this[a],this[b]];
+					}
+					return this;
+				};
+            </textarea>
+			<br>
+			如果只是想隨機取出陣列裡面一筆資料，用 Math.floor()：<br>
+			<br>
+			<textarea class='brush:js'>
+				let a=['AAA','BBB','CCC','DDD','EEE'];
+				document.write(a[Math.floor(Math.random()*a.length)]);
+            </textarea>
+			<br>
+			話說最常用到的隨機數，是產生 1 到最大值，Math.ceil() 可以讓事情變簡單：<br>
+			<br>
+			<textarea class='brush:js'>
+				document.write(Math.ceil(Math.random()*100)); //1~100
+            </textarea>
+			<br>
+			最小值到最大值的話，用 Math.round()，然後 Math.random() 先乘以「最大值減最小值」，再加上「最小值」：<br>
+			<br>
+			<textarea class='brush:js'>
+				document.write(Math.round(Math.random()*6+3)); //3~9
+            </textarea>
+			<br>
+			Math.round() 方便的是，可以用來產生 0 或 1，或者用在 50% 機率：<br>
+			<br>
+			<textarea class='brush:js'>
+				if(Math.round(Math.random())) document.write('Yes');
+				else document.write('No');
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>bgm()、se()</h2>
+		<p>
+			<textarea class='brush:js'>
+				let audio1=document.createElement('audio');
+				let audio2=document.createElement('audio');
+				document.body.appendChild(audio1);
+				document.body.appendChild(audio2);
+
+				function bgm(file)
+				{
+					audio1.src=file;
+					audio1.loop='loop';
+					audio1.currentTime=0;
+					audio1.play();
+				}
+
+				function pause()
+				{
+					audio1.pause();
+				}
+
+				function play()
+				{
+					audio1.play();
+				}
+
+				function se(file,polyphony)
+				{
+					if(polyphony){
+						let a=document.createElement('audio');
+						document.body.appendChild(a);
+						a.src=file;
+						a.play();
+					}
+					else{
+						audio2.src=file;
+						audio2.currentTime=0;
+						audio2.play();
+					}
+				}
+
+				//測試看看
+				bgm('music.mp3');
+				se('voice.mp3',1);
+				se('sword.mp3');
+            </textarea>
+			<br>
+			Background music 與 Sound effect。<br>
+			<br>
+			背景音樂會自動重播，可暫停播放。<br>
+			<br>
+			音效設計成多聲混音播放與單聲重新播放兩種，一來可選擇是要同時發出多個音效？還是新的音效中斷前一個音效？二來可避免建立太多 AUDIO 元素浪費記憶體。放音效不一定需要多聲混音播放，還比較耗系統資源，所以預設單聲重新播放。需要時再隨便填個 1 給第二個參數就好。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>列出所有方法和屬性</h2>
+		<p>
+			用 <code>Object.getOwnPropertyNames(物件)</code> 可以取得物件的方法和屬性！<br>
+			<br>
+			但不包含 prototype 裡面的方法和屬性，因為 prototype 本身就是一個屬性，所以只會看到物件有個 prototype 屬性而已。<br>
+			<br>
+			想列出所有方法和屬性，必須寫兩行程式：<br>
+			<br>
+			<textarea class='brush:js'>
+				console.log(Object.getOwnPropertyNames(Array));
+				console.log(Object.getOwnPropertyNames(Array.prototype));
+            </textarea>
+			<br>
+			為了這目的重複使用 getOwnPropertyNames，不妨寫成函式來調用：<br>
+			<br>
+			<textarea class='brush:js'>
+				function dir(object)
+				{
+					console.log(Object.getOwnPropertyNames(object).concat(Object.getOwnPropertyNames(object.prototype)).sort().join(' '));
+				}
+
+				dir(Array);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>資料處理注意事項</h2>
+		<p>
+			仰賴自動轉型時，計算資料建議用 Number() 轉換為數值，引用資料用 String() 轉換為字串。<br>
+			<br>
+			轉十進位：parseInt(數值,進制)<br>
+			轉二、八、十六進位：toString(進制)<br>
+			<br>
+			整數超過 999,999,999,999,999 會失去準確度，例如 9,999,999,999,999,991 會變成 9,999,999,999,999,992，9,999,999,999,999,999 會變成 10,000,000,000,000,000。（因為 ECMAScript 的數值其實都是以 double 型態保存，並沒有 long int。）<br>
+			<br>
+			true+true+true 會得到 3。（因為 true 是 1，false 是 0。）<br>
+			<br>
+			'7' + 3 會得到 73，但 '7' - 3 會得到 4。（因為字串覆寫+做為串接運算子，所以相加的資料有字串時，優先使用串接運算子。但字串沒有覆寫 - 運算子，所以相加的資料有字串時，就使用減法運算子，同時啟動自動拆箱機制，將字串轉為數值。）
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>函式的參數只能傳值，但是可以把參照當值傳進去。</h2>
+		<hr>
+		<section>
+			<h3>傳值</h3>
+			<p>
+				所謂傳值，就是傳變數的值進去，而不是把變數的記憶體位址傳進去。<br>
+				<br>
+				函式會在內部用參數去保存變數傳來的值，相當於函式自己再宣告一個變數出來。因此，修改函式內部參數的值，並不會影響到函式外部變數的值，等於兩筆不一樣的變數。<br>
+				<br>
+				ECMAScript 的函式，參數一律是傳值：<br>
+				<br>
+				<textarea class='brush:js'>
+					let a=123;
+
+					function f(x)
+					{
+						x=0;
+					}
+
+					f(a);
+
+					print(a);
+                </textarea>
+				<br>
+				<output>
+					123
+				</output>
+				<br>
+				丟 object 和 array 進去也一樣：<br>
+				<br>
+				<textarea class='brush:js'>
+					// Object literals
+					let object={a:111,b:222,c:333};
+
+					function f1(x)
+					{
+						x.a='aaa';
+						x.b='bbb';
+						x.c='ccc';
+					}
+
+					f1(object);
+
+					print(object.a+object.b+object.c);
+
+					// Array
+					let array=[111,222,333];
+
+					function f2(x)
+					{
+						x[0]='aaa';
+						x[1]='bbb';
+						x[2]='ccc';
+					}
+
+					f2(array);
+
+					print(array[0]+array[1]+array[2]);
+                </textarea>
+				<br>
+				<output>
+					666<br>
+					666
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>傳址</h3>
+			<p>
+				ECMAScript 並沒有 C 語言的指標，因為是不能傳址的，只能傳值。<br>
+				<br>
+				由於不能直接在函式修改傳進去的變數，使得我們只好 <code>retrun x;</code> 把參數結果傳出來，然後寫 <code>a=f(a);</code> 這種重複兩次變數名稱的程式。<br>
+				<br>
+				但「物件變數」的「值」就是「址」，所以把「址」傳值給參數，還是可以間接產生「傳址」的效果，在函式內部修改外部資料：<br>
+				<br>
+				<textarea class='brush:js'>
+					// Object literals
+					let object={a:111,b:222,c:333};
+
+					function f1(x)
+					{
+						x.a='aaa';
+						x.b='bbb';
+						x.c='ccc';
+					}
+
+					f1(object);
+
+					print(object.a+object.b+object.c);
+
+					// Array
+					let array=[111,222,333];
+
+					function f2(x)
+					{
+						x[0]='aaa';
+						x[1]='bbb';
+						x[2]='ccc';
+					}
+
+					f2(array);
+
+					print(array[0]+array[1]+array[2]);
+                </textarea>
+				<br>
+				<output>
+					aaabbbccc<br>
+					aaabbbccc
+				</output>
+				<br>
+				這依然是傳值！你無法因為修改函式內部的 x 參數，而讓函式外部 object 和 array 變數變成另一個新的物件和陣列。但現在並不是在修改 x 參數，而是在讀取 x 參數，然後透過讀取 x 參數得到的物件或陣列參照，去存取它的屬性或索引值。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>其他好用的語法組合或程式技巧</h2>
+		<p>
+			<code>
+				資料||資料不存在時的資料<br>
+				<br>
+				[陣列][索引值]<br>
+				[陣列轉字串].join('')<br>
+				<br>
+				'字串裡逐個字元轉陣列'.split('')　→ 比 Array.from('字串') 簡短<br>
+				'資料 資料 資料'.split(' ')<br>
+				'夾雜 空白,夾雜 空白,夾雜 空白'.split(',')<br>
+				<br>
+				陣列轉二進值=[1,1,1,0].join('')<br>
+				二進值轉十進值=parseInt(1110,2)<br>
+				十進值轉十六進值=(14).toString(16)<br>
+				十六進值轉十進值=parseInt('e',16)<br>
+				十進值轉二進值=(14).toString(2)<br>
+				二進值轉陣列='1110'.split('')
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>個人偏見</h2>
+		<hr>
+		<section>
+			<h3>與其逃避語法帶來的陷阱，我選擇控管好會出錯的環節。</h3>
+			<p>
+				除非真的遇到資料型態的問題，我才會用 === 比對資料，否則我一向使用 ==。我認為應該把可能出錯的環節控制好，讓 == 能正常作用，而不是為了規避 == 的陷阱，改用 ===，然後忽視資料在比對時的環節。<br>
+				<br>
+				其他語法也是同樣情形，我幾乎不理大師們建議的「守則」，因為那樣的寫法太彆扭了！我喜歡放手讓 JavaScript 展現它靈活寫意的最初模樣，讓程式碼如原先般簡潔有力。規避東、限制西的，整個 JavaScript 寫出來，感覺就像 C 語言靠一堆函式傳回值除錯一樣冗餘、骯髒。<br>
+				<br>
+				確實，我會寫出掉入語法陷阱的錯誤程式，但我依然堅持把發生問題的環節處理好，而不是改用沒有這個陷阱的語法：「與其看到醜語法，我寧願花十倍時間，把周遭問題處理得乾乾淨淨。」處理乾淨後，整個程式碼檔案都會變得漂亮，而不只是某一小段好看。<ins>2</ins><br>
+				<br>
+				雖然我不是大師，沒資格反駁他們的建議，但在 JavaScript 程式寫作上，我有自己的堅持，寫我真正想看到的 JavaScript 程式碼～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>在 ECMAScript 寫你想要的程式</h3>
+			<p>
+				大多數程式語言，學會用越多功能越好，ECMAScript 當然也不例外！<br>
+				<br>
+				但做為可塑高、開放客製化的程式語言，其實也不排斥「用越少功能越好」。<br>
+				<br>
+				畢竟，你想用 C 或 Java 還是 Python 風格寫 ECMAScript 都無所謂，只挑幾種自認為最實用、簡單的語法，重新組合自己的 ECMAScript 語言來寫程式，並沒什麼不好～<br>
+				<br>
+				所以，ECMAScript 除了用來讓廠商實作出 JavaScript 網頁瀏覽器表述語言，我們也可以暗自選出自己喜歡的語法來用就好，擬定自己獨家專用的程式語言，用自己的方式寫基於 ECMAScript 的程式：「我總認為，這才是 ECMAScript 的魅力所在。」
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 注意！物件導向和程序導向都是結構化程式語言！很多人看到結構化程式語言，就以為那是指程序導向程式語言 XD　所以別跟我反駁說物件導向程式語言不是結構化程式語言，我知道你想說的是：「物件導向程式語言不是程序導向程式語言。」但我並沒說錯 :)<br>
+			[2] 當然，這只是表面上好看。既然有陷阱在，往後寫程式，這地方就會出問題，這種好看是沒用的～
+		</p>
+	</footer>
+</article>

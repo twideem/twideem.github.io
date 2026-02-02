@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>用 vi 修改設定檔</h1>
+		<p>
+			vi 不只是工具，而是 Linux 規定編輯文字的標準指令<ins>1</ins>！如何在沒有 X 桌面環境的情況下，執行 vi 來修改組態檔的設定，是 Linux 系統管理員必備的能力<ins>2</ins>！<br>
+			<br>
+			但 vi 真他Ｘ的難用，所以我們就別再講 vi 有：「檢視模式、編輯模式、指令模式」了，真正用的時候根本不會留意是哪種模式。反正剛進去就是檢視模式，我們只需要知道在檢視模式該怎麼按就好了～
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>真他Ｘ的簡單</h2>
+		<p>
+		</p>
+		<hr>
+		<section>
+			<h3>Step 1:</h3>
+			<p>
+				在純 Shell 介面的終端作業環境底下<ins>3</ins>，看你要修改什麼檔案，輸入 vi 指令，後面加上檔名，就可以啟動 vim 文字編輯器載入檔案。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 2:</h3>
+			<p>
+				剛進入以後，只能檢視文字內容，不能輸入文字。因此第一件事，就是用方向鍵移動游標來檢視組態檔，看要修改的地方在哪。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 3:</h3>
+			<p>
+				找到要修改的地方以後…<br>
+				<br>
+				如果想刪除一個字，請按 <code>x</code>。<br>
+				如果想刪除一整行，請按 <code>dd</code>。<br>
+				如果想取代一個字，請按 <code>r</code>，然後把想取代的字打進去。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 4:</h3>
+			<p>
+				想在游標後面加入文字，請按 <code>a</code>。打完字後養成習慣按 Esc，好繼續移動游標找想改的地方。<br>
+				<br>
+				想在游標前面插入文字，請按 <code>i</code>。打完字後養成習慣按 Esc，好繼續移動游標找想改的地方。<br>
+				<br>
+				想新增一行來寫入文字，請按 <code>o</code>。打完字後養成習慣按 Esc，好繼續移動游標找想改的地方。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Step 5:</h3>
+			<p>
+				知道以上這些操作方式，就能順利修改組態檔的設定了！改好後，請按「<code>Shift + ;</code>」，然後依如下情況輸入指令：<br>
+				<br>
+				改好了，想存檔離開，請輸入 <code>wq</code>。（寫入然後離開的意思）<br>
+				改錯了，想離開重來，請輸入 <code>q!</code>。（強制離開的意思）
+			</p>
+		</section>
+		<hr>
+		<p>
+			怎樣，簡單多了吧～！根本不用管它什麼檢視模式、編輯模式、指令模式。初學者光記按鍵組合就焦頭爛額了，還要暗記現在是哪種模式，只會更手忙腳亂、無所適從啊～
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>真他Ｘ的好用</h2>
+		<p>
+			在移動游標檢視文字內容時…
+		</p>
+		<hr>
+		<section>
+			<h3>Tips 1:</h3>
+			<p>
+				如果想複製某字串，請按 <code>yw</code>。<br>
+				如果想複製一整行，請按 <code>yy</code>。<br>
+				<br>
+				要貼上時請按 <code>p</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Tips 2:</h3>
+			<p>
+				字打錯或刪錯想返回上一步，請按 <code>u</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Tips 3:</h3>
+			<p>
+				想直接尋找字串的話，請按「<code>/</code>」，然後輸入你要搜尋的資料，游標就會跳到有該資料的那一行。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>真他Ｘ的厲害</h2>
+		<p>
+			以上介紹 vim 修改組態檔時會用到的操作方式，更多功能就不介紹了。<br>
+			<br>
+			然而，vim 這麼難用，為何這麼多人推薦它來寫程式？<br>
+			<br>
+			很簡單，因為這是「純文字介面」的軟體，所以從頭到尾不需要用滑鼠，只要敲鍵盤，就能進行「剪下、複製、貼上、尋找、取代……」各式動作。滑鼠雖然簡單，但是要點的項目在哪裡？每款軟體放的地方不一樣，翻來找去沒有比較快。<br>
+			<br>
+			更多按鍵組合，就留給有興趣用 vim 作文字編輯器的人去探究吧～
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 早期像 Mandrake Linux 發行版是用 vim 程式來編輯文字，後來 vi 正式被列為標準指令：「也就是規定 Linux 都必須提供 vi 這個功能。」現在像 Ubuntu 都是輸入 vi 指令來編輯文字，但其實執行的是 vim 程式。<br>
+			[2] 因為沒辦法在純 Shell 環境使用 gedit 或 kate 這種圖形化介面的軟體。<br>
+			[3] 在 Dsektop 介面的視窗作業環境，就用 Linux 發行版內建的 GUI 文字編輯器吧，vi 是沒辦法時才使用的編輯器。
+		</p>
+	</footer>
+</article>

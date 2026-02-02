@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>Effective Python 中文版目錄</h1>
+		<p>
+			寫出良好 Python 程式的 59 個具體做法。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>第一章：Pythonic 思維</h2>
+		<p>
+			知道你所用的 Python 版本<br>
+			遵循 PEP8 風格指南<br>
+			搞清楚 bytes、str 與 unicode 之間的差異<br>
+			撰寫輔助函式而非複雜的運算式<br>
+			知道如何切割序列<br>
+			避免在單一切片中使用 start、end 與 stride<br>
+			使用串列概括式而非 map 或 filter<br>
+			在串列概括式中不要使用超過兩個運算式<br>
+			考慮使用產生器運算式取代大型概括式<br>
+			優先選用 enumerate 而非 range<br>
+			使用 zip 來平行處理迭代器<br>
+			避免在 for 或 while 迴圈之後使用 else 區塊<br>
+			善用 try/except/else/finally 中的每個區塊
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第二章：函式</h2>
+		<p>
+			優先選用例外而非回傳 None<br>
+			知道 Closures 如何與變數範疇互動<br>
+			考慮使用產生器而非回傳串列<br>
+			迭代引數時要做好防備<br>
+			以可變的位置引數來減少視覺雜訊<br>
+			以關鍵字引數提供選擇性的行為<br>
+			使用 None 與 Docstrings 來指定動態的預設引數<br>
+			強制使用僅限關鍵字引數來讓程式碼更清楚易懂
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第三章：類別與繼承</h2>
+		<p>
+			優先選用輔助類別而非使用字典或元組來管理紀錄<br>
+			接受函式作為簡單的介面，而非使用類別<br>
+			使用 @classmethod 多型機制來建構泛用物件<br>
+			使用 super 來初始化父類別<br>
+			多重繼承只用於 Mix-in 工具類別<br>
+			優先選用公開屬性而非私有屬性<br>
+			繼承 collections.abc 以建立自訂的容器型別
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第四章：元類別與屬性</h2>
+		<p>
+			使用普通的屬性而非 Get 或 Set 方法<br>
+			考慮使用 @property 而非重構屬性<br>
+			使用描述器來建立可重用的 @property 方法<br>
+			使用 __getattr__、__getattribute__ 與 __setattr__ 來建立惰性屬性<br>
+			以元類別來驗證子類別<br>
+			以 Metaclasses 註冊類別的存在<br>
+			以 Metaclasses 來注釋類別屬性
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第五章：共時與平行處理</h2>
+		<p>
+			使用 subprocess 來管理子行程<br>
+			執行緒用於阻斷式的 I/O，避免用於平行處理<br>
+			使用 Lock 來避免執行緒中的資料靜態<br>
+			使用 Queue 來協調執行緒之間的工作<br>
+			考慮使用 Coroutines 來共時執行許多函式<br>
+			考慮使用 concurrent.futures 來達成真正的平行處理
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第六章：內建模組</h2>
+		<p>
+			以 functools.wraps 定義函式裝飾器<br>
+			考慮使用 contextlib 與 with 述句來建立可重用的 try/finally 行為<br>
+			用 copyreg 來使 pickle 更可靠<br>
+			本地時鐘使用 datetime 而非 time<br>
+			使用內建的演算法與資料結構<br>
+			精確度很重要時就使用 decimal<br>
+			知道去哪找社群建置的模組
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第七章：協作</h2>
+		<p>
+			為每個函式、類別與模組撰寫 Docstrings<br>
+			使用套件來組織模組並提供穩定的 API<br>
+			定義一個根例外來隔離呼叫者與 API<br>
+			知道如何打破循環依存性<br>
+			使用虛擬環境來建立孤立且可重現的依存性
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>第八章：推出產品</h2>
+		<p>
+			考慮使用以模組為範疇的程式碼來設置部署環境<br>
+			使用 repr 字串作為除錯輸出<br>
+			所有的東西都使用 unittest 來測試<br>
+			考慮使用 pdb 來進行互動式的除錯<br>
+			最佳化之前先進行效能評測<br>
+			使用 tracemalloc 來了解記憶體用量或是否有洩漏
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 雖然只有目錄，沒有實際說明，但朝這方向寫程式，多少可體會箇中道理，即使體會不出來，至少能獲得好處。<br>
+			[*] <a href='http://tw.pyladies.com'>PyLadies Taiwan</a> 主辦的 Python 讀書會，有留下《Effective Python》時的簡報：<script>for(var n=1;n<=8;n++) document.write(`<a href='http://tw.pyladies.com/~maomao/${n}_effective_python.slides.html'>第 ${n} 章</a>${n<8?'、':'。'}`)</script>這簡報使用網頁右下角的方向鍵切換章節與換頁，能指引你了解這本書所提的 59 個最佳實務做法。
+		</p>
+	</footer>
+</article>

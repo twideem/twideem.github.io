@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Java')</script>
+<article>
+	<header>
+		<h1>如何使用 SyntaxHighlighter 顯示程式範例</h1>
+		<p>
+			SyntaxHighlighter 是由 Alex Gorbatchev 開發，能夠在網頁中，用高亮度識別文字，來顯示程式碼範例的 JavaScript 系統。<br>
+			<br>
+			<textarea class='brush:java'>
+				public class HelloWorld {
+					public static vodi main(String[] args){
+						System.out.print('Hello, world!');
+					}
+				}
+            </textarea>
+			<br>
+			Alex Gorbatchev 這套 SyntaxHighlighter 系統，不僅預設的功能即符合大眾需求，往後也可以透過簡單的參數設定來調整功能，顯示出來的結果清爽又美觀，成為這類系統中最受歡迎的一款，可在官方專案庫下載：<br>
+			<br>
+			<a href='http://github.com/syntaxhighlighter'>http://github.com/syntaxhighlighter</a><br>
+			<br>
+			最新版是 4.0.1，它不用設定組態，大幅簡化使用方式，但下載回來的檔案，必須另外用 glup 建置出完成品，無法直接使用。3.0.90 沒有提供 XRegExp，自行下載時版本不能太舊，又不能太新。因此本文使用舊版 3.0.83，下載回來就能用。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>基本用法</h2>
+		<p>
+			首先示範如何以預設的高亮度主題，用來顯示 Java 程式碼。
+		</p>
+		<hr>
+		<section>
+			<h3>步驟 1</h3>
+			<p>
+				下載後解壓縮檔案，然後將 scripts 與 styles 兩個資料夾，放在你的網頁專案裡面。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>步驟 2</h3>
+			<p>
+				在你網頁的 head 標籤裡面，加入如下標記，但必須自行根據你網頁的相對路徑調整檔案來源：<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;link href='styles/shCoreDefault.css' rel='stylesheet'&gt;
+					&lt;script src='scripts/shCore.js'&gt;&lt;/script&gt;
+					&lt;script src='scripts/shBrushJava.js'&gt;&lt;/script&gt;
+					&lt;script&gt;
+						SyntaxHighlighter.all();
+					&lt;/script&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>步驟 3</h3>
+			<p>
+				然後使用 pre 標籤來輸入 Java 程式範例，並指定 class 屬性為 brush:java，即能以高亮度來顯示程式碼。例如：<br>
+				<br>
+				<textarea class='brush:html'>
+					&lt;pre class='brush:java'&gt;
+						public class HelloWorld {
+							public static vodi main(String[] args){
+								System.out.print('Hello, world!');
+							}
+						}
+					&lt;/pre&gt;
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>指定其它語言</h2>
+		<p>
+			有以下看檔名就知道是哪些語言的檔案可用：<br>
+			<br>
+			<code>
+				shBrushAS3.js<br>
+				shBrushAppleScript.js<br>
+				shBrushBash.js<br>
+				shBrushCSharp.js<br>
+				shBrushColdFusion.js<br>
+				shBrushCpp.js<br>
+				shBrushCss.js<br>
+				shBrushDelphi.js<br>
+				shBrushDiff.js<br>
+				shBrushErlang.js<br>
+				shBrushGroovy.js<br>
+				shBrushJScript.js<br>
+				shBrushJava.js<br>
+				shBrushJavaFX.js<br>
+				shBrushPerl.js<br>
+				shBrushPhp.js<br>
+				shBrushPlain.js<br>
+				shBrushPowerShell.js<br>
+				shBrushPython.js<br>
+				shBrushRuby.js<br>
+				shBrushSass.js<br>
+				shBrushScala.js<br>
+				shBrushSql.js<br>
+				shBrushVb.js<br>
+				shBrushXml.js<br>
+			</code>
+			<br>
+			其中，Cpp 是指 C++，Plain 是指純文字文件，HTML 的話則用 Xml。<br>
+			<br>
+			將你想要的檔案加進去網頁後，再將 pre 的 class 屬性為 brush:xxx 即可。例如底下示範新增使用 Delphi 語言：<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;script src='scripts/shBrushDelphi.js'&gt;&lt;/script&gt;
+				&lt;pre class='brush:delphi'&gt;
+					program HelloWorld;
+					begin
+						writeln('Hello, world');
+					end.
+				&lt;/pre&gt;
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>改變高亮度主題</h2>
+		<p>
+			shCoreDefault.css 這個檔案就是預設的高亮度主題樣式，你可以改用以下檔案，來嘗試各種不同的高亮度樣式：<br>
+			<br>
+			<code>
+				shCoreDjango.css<br>
+				shCoreEclipse.css<br>
+				shCoreEmacs.css<br>
+				shCoreFadeToGrey.css<br>
+				shCoreMDUltra.css<br>
+				shCoreMidnight.css<br>
+				shCoreRDark.css<br>
+			</code>
+			<br>
+			補充一件事，其實 shCoreDefault.css 是 shCore.css 與 shThemeDefault.css 合併起來的檔案，如果希望常常切換主題樣式的話，可以先載入共通設定的 shCore.css，再載入其它不同的 shThemeXXX.css 來套用。<br>
+			<br>
+			如果你希望所有主題的字型與大小都是統一的，其它 shThemeXXX.css 只是變換顏色而已，就適合用 shCore.css + shThemeXXX.css 的方式。反過來，希望每個主題的字體、位置、顏色都不一樣的話，就適合用 shCoreXXX.css 的方式。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>進階設定</h2>
+		<hr>
+		<section>
+			<h3>SyntaxHighlighter.config</h3>
+			<p>
+				<code>
+					space: ' '<br>
+					useScriptTags: true<br>
+					bloggerMode: false<br>
+					stripBrs: false<br>
+					tagName: 'pre'
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>SyntaxHighlighter.defaults</h3>
+			<p>
+				<code>
+					'class-name': ''<br>
+					'first-line': 1<br>
+					'pad-line-numbers': false<br>
+					'highlight': null<br>
+					'title': null<br>
+					'smart-tabs': true<br>
+					'tab-size': 4<br>
+					'gutter': true<br>
+					'quick-code': true<br>
+					'collapse': false<br>
+					'auto-links': true<br>
+					'unindent': true<br>
+					'html-script': false<br>
+					'toolbar': true
+				</code>
+			</p>
+		</section>
+	</section>
+</article>

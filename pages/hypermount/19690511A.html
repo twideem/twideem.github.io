@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>貼圖</h1>
+		<p>
+			本章節要示範的是在 HTML5 的 Canvas 顯示圖片：<br>
+			<br>
+			<script>
+				let a=new Image();
+				a.src='../../images/hypermount/19690511A_01.jpg';
+
+				let b=document.createElement('canvas');
+				$('p').appendChild(b);
+				b.width=595;
+				b.height=371;
+
+				a.addEventListener('load',()=>b.getContext('2d').drawImage(a,0,0));
+			</script>
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>原始碼</h2>
+			<p>
+				<textarea class='brush:js'>
+					//載入圖片
+					let picture=new Image();
+					picture.src='picture.jpg';
+
+					//建立畫布
+					let canvas=document.createElement('canvas');
+					document.body.appendChild(canvas);
+
+					//調整畫布大小為圖片大小
+					canvas.width=600;
+					canvas.height=375;
+
+					//圖片載入後描繪到畫布上
+					picture.onload=function(){
+						let context=canvas.getContext('2d');
+						context.drawImage(picture,0,0);
+					};
+                </textarea>
+			</p>
+	</section>
+	<hr>
+	<section>
+		<h2>範例下載</h2>
+		<p>
+			<a href='../../objects/downloads/19690511A.7z'>19690511A.7z</a>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 本章節使用相片為 Microsoft 官方建置的「<a href='http://windows.microsoft.com/zh-TW/windows/downloads/personalize/themes'>Windows 7 佈景主題館</a>」桌布，在「各國風景」的「加拿大」佈景主題裡面，選用「CA-olwp6.jpg」這張圖片。
+		</p>
+	</footer>
+</article>

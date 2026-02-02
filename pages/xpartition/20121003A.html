@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>生命值與命中率的設定關係</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>命中率</h2>
+		<p>
+			設基準式：<br>
+			<br>
+			<span style='text-decoration:underline'>迴避率 0% 的角色 HP 為 100</span><br>
+			<br>
+			相當於：<br>
+			<br>
+			<span style='text-decoration:underline'>迴避率 50% 的角色 HP 為 50</span><br>
+			<br>
+			也相當於：<br>
+			<br>
+			<span style='text-decoration:underline'>迴避率 75% 的角色 HP 為 25</span><br>
+			<br>
+			得公式：<br>
+			<br>
+			<samp>
+				HP% = 100-迴避率<br>
+			</samp>
+			<br>
+			例如：<br>
+			<br>
+			「遊戲內定 HP 上限為 500。」<br>
+			<br>
+			「設戰士迴避率 20%。」<br>
+			「得 HP% 為 100-20 等於 80%，因此 HP 最高上限適合設為 500*0.8 = 400。」<br>
+			<br>
+			「設刺客迴避率 50%。」<br>
+			「得 HP% 為 100-50 等於 50%，因此 HP 最高上限適合設為 500*0.5 = 250。」<br>
+			<br>
+			以此基準做為平衡兩職業的數據。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>格擋率</h2>
+		<p>
+			設基準式：<br>
+			<br>
+			<span style='text-decoration:underline'>100% 格擋率，抵銷 50% 傷害。</span><br>
+			<br>
+			相當於：<br>
+			<br>
+			<span style='text-decoration:underline'>50% 迴避率，抵銷 100% 傷害。</span><br>
+			<br>
+			得公式：<br>
+			<br>
+			<samp>
+				HP% = 100-((迴避率x100%)+(格擋率x抵銷比%))<br>
+				HP% = 100-((迴避率x1)+(格擋率x抵銷比%))<br>
+				HP% = 100-(迴避率+(格擋率x抵銷比%))<br>
+			</samp>
+			<br>
+			例如：<br>
+			<br>
+			「遊戲內定 HP 上限為 500，格擋可抵銷 40% 傷害。」<br>
+			<br>
+			「設戰士迴避率 20%，格擋率 40%。」<br>
+			「得 HP% 為 100-(20+(40*0.4)) 等於 64%，因此 HP 最高上限適合設為 320。」<br>
+			<br>
+			「設刺客迴避率 50%，格擋率 10%。」<br>
+			「得 HP% 為 100-(50+(10*0.4)) 等於 46%，因此 HP 最高上限適合設為 230。」<br>
+			<br>
+			以此基準做為平衡兩職業的數據。
+		</p>
+	</section>
+</article>

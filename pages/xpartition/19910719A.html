@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>忍者貓</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>操作</h2>
+		<p>
+			Ａ　　　跳躍<br>
+			Ｂ　　　攻撃<br>
+			↑＋Ｂ　忍法<br>
+			→→　　跑步<br>
+			↑　　　爬梯子<br>
+			START　 切換角色
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>主角</h2>
+		<hr>
+		<section>
+			<h3>ヤッたろう</h3>
+			<p>
+				武器：刀<br>
+				射程：Ａ<br>
+				攻速：Ｂ<br>
+				忍法：Ｃ
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>スカシー</h3>
+			<p>
+				武器：傘<br>
+				射程：Ｂ<br>
+				攻速：Ｃ<br>
+				忍法：Ｂ
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>プルルン</h3>
+			<p>
+				武器：爪<br>
+				射程：Ｃ<br>
+				攻速：Ａ<br>
+				忍法：Ａ
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>同伴</h2>
+		<hr>
+		<section>
+			<h3>リキノシン</h3>
+			<p>
+				按→＋Ｂ可以擊碎石頭。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ミエトル</h3>
+			<p>
+				Ａ按住不放可以飛行。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ゴットン</h3>
+			<p>
+				可以挖土，也就是能在砂土中移動。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ネッキー</h3>
+			<p>
+				適合在水中活動。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>接關密碼</h2>
+		<p>
+			427123　　第二關<br>
+			140901　　第三關<br>
+			260388　　第四關<br>
+			600445　　第五關<br>
+			912210　　第六關<br>
+			192397　　第七關<br>
+			128256　　第八關<br>
+			924748　　第九關<br>
+			641114　　第十關<br>
+			390227　　第十一關
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>修改</h2>
+		<hr>
+		<section>
+			<h3>VirtuaNES</h3>
+			<p>
+				<code>
+					#0 008F-01-0F &nbsp; &nbsp; &nbsp; 無敵（無法吃道具）<br>
+					#1 003F-01-0A &nbsp; &nbsp; &nbsp; 生命不減<br>
+					#1 0040-01-FF &nbsp; &nbsp; &nbsp; 忍法不減<br>
+					#1 0041-01-C0 &nbsp; &nbsp; &nbsp; HELP 不減<br>
+				</code>
+				<br>
+				複製貼上到純文字文件，然後以 *.vct 副檔名儲存，在 VirtuaNES 的 Tool - Cheat code - Load 載入使用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Nestopia</h3>
+			<p>
+				<code>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+					&lt;cheats version="1.0"&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x008F&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0F&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;無敵（無法吃道具）&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x003F&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0A&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x0040&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xFF&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;忍法不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x0041&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xC0&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;HELP 不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&lt;/cheats&gt;<br>
+				</code>
+				<br>
+				複製貼上到純文字文件，然後以 *.xml 副檔名儲存，在 Nestopia 的 Options - Cheats - Permanent Codes 按 Import.. 載入。
+			</p>
+		</section>
+	</section>
+</article>

@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET')</script>
+<article>
+	<header>
+		<h1>用 C# 堆砌程式</h1>
+		<p>
+			Windows Vista 起內建 .NET Framework Developer Pack，既然都被迫裝進去了，還占用不少硬碟空間，為什麼不用看看再說 😀
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>使用內建的 C# 編譯器</h3>
+			<p>
+				在 C:\Windows\Microsoft.NET\Framework\ 和 C:\Windows\Microsoft.NET\Framework64\ 裡有各種版本的 <code>csc.exe</code> 可編譯 C# 程式碼。<br>
+				<br>
+				建議將 csc.exe 所在路徑加入 PATH，以便隨時能呼叫 csc.exe 編譯 C# 原始碼。以 Windows 10 內建 .NET Framework 4.8 為例，做法是：<br>
+				<br>
+				<code>控制台 → 系統及安全性 → 系統 → 進階系統設定 → 環境變數 → PATH → 編輯 → 新增 → C:\Windows\Microsoft.NET\Framework64\v4.0.30319 → 確定 → 確定</code><br>
+				<br>
+				Windows 10 內建的編譯器只支援到 C# 5，所以本文不會介紹 C# 6 以上的語法功能 😏
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<p>
+				用記事本寫入如下程式，並儲存檔案為 launch.cs：<br>
+				<br>
+				<canvas width='569'>notepad('launch.cs','class Launch','{','    static void Main()','    {','        System.Console.Write("Hello, world!");','    }','}')</canvas><br>
+				<br>
+				進入命令提示字元，切換到 launch.cs 位置，然後用 csc.exe 來編譯程式，正常的話會編譯出 launch.exe 檔案，執行它會顯示 Hello, world!：<br>
+				<br>
+				<canvas width='569'>cmd('C:\\Users\\User\\Desktop>csc *.cs','','C:\\Users\\User\\Desktop>launch','Hello, world!','','C:\\Users\\User\\Desktop>_')</canvas>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>Microsoft Docs</h3>
+			<p>
+				<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/tour-of-csharp/'>A tour of the C# language</a>：C# 導覽，快速了解 C# 語言。<br>
+				<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/programming-guide/'>C# programming guide</a>：程式設計手冊，完整掌握 C# 語言。<br>
+				<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/'>C# reference</a>：語法辭典，快速查閱想要的語法功能。<br>
+				<a href='http://docs.microsoft.com/zh-tw/dotnet/csharp/linq/'>Language Integrated Query (LINQ)</a>：直接像資料庫般寫程式調閱資料。<br>
+				<a href='http://learn.microsoft.com/en-us/dotnet/api/?view=netframework-4.8'>.NET API browser</a>：程式庫文件。（連方法名稱都機翻，有夠離譜 😱）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>基本</h3>
+			<p>
+				<a href='#csharp'>語法簡介、資料型態、指標、陣列、字串、流程控制</a>、<a href='#objectoriented'>類別、抽象、介面</a>、<a href='#anonymoustype'>匿名物件</a>、<a href='#struct'>結構</a>、<a href='#enum'>列舉</a>、<a href='#generic'>泛型</a>、<a href='#covariant'>協變、逆變</a>、<a href='#namespace'>命名空間</a>、<a href='#assembly'>組件</a>、<a href='#attribute'>特性</a>、<a href='#method'>函式</a>、<a href='#extensionmethod'>擴充方法</a>、<a href='#iterator'>迭代器</a>、<a href='#property'>屬性</a>、<a href='#indexer'>索引器</a>、<a href='#operatoroverloading'>運算子重載</a>、<a href='#delegate'>委派、函數物件、函數傳參、匿名函式、λ 運算式、多播、事件</a>、<a href='#reflection'>反射</a>、<a href='#exceptionhandling'>例外處理</a>、<a href='#garbagecollection'>垃圾收集</a>、<a href='#querysyntax'>查詢語句</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>應用</h3>
+			<p>
+				<a href='20190418B.html#linq'>LINQ</a><br>
+				<a href='20190418B.html#collections'>集合</a><br>
+				<a href='20190418B.html#shuffle'>打亂資料</a><br>
+				<a href='20190418B.html#random'>Random 的建議用法</a><br>
+				<a href='20190418B.html#filesystem'>操作檔案</a><br>
+				<a href='20190418B.html#file'>讀寫檔案資料</a><br>
+				<a href='20190418B.html#xml'>XML</a>、<a href='20190418B.html#xpath'>XPath</a><br>
+				<a href='20190418B.html#sqlite'>SQLite</a><br>
+				<a href='20190418B.html#serializable'>序列化</a>（Binary、SOAP、XML、JSON）<br>
+				<a href='20190418B.html#zipfile'>Zip 壓縮檔案</a><br>
+				<a href='20190418B.html#sound'>播放音樂</a><br>
+				<a href='20190418B.html#process'>調用外部程式功能</a><br>
+				<a href='20190418B.html#kill'>終止外部程式執行</a><br>
+				<a href='20190418B.html#sleep'>暫停一段時間</a><br>
+				<a href='20190418B.html#datetime'>日期和時間</a><br>
+				<a href='20190418B.html#cli'>命令列程式設計</a><br>
+				<a href='20190418C.html'>WinForms 視窗程式設計</a><br>
+				<a href='20190418B.html#xaml'>使用者介面與程式碼分離的 WPF + XAML 視窗程式設計</a><br>
+				<a href='20190418B.html#cgi'>CGI 程式設計</a><br>
+				<a href='20190418B.html#httplistener'>用 HTTPListener 開發後端<br>用 HTTPListener 架網頁伺服器</a><br>
+				<a href='20190418B.html#websocket'>WebSocket 伺服器</a><br>
+				<a href='20190418B.html#webclient'>用 WebClient 取得網頁內容</a><br>
+				<a href='20190418B.html#uri'>解析網址</a><br>
+				<a href='20190418B.html#dns'>取得內網 IP 和主機名稱</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>附錄</h3>
+			<p>
+				<a href='20190418D.html#version'>各 Windows 內建的 .NET Framework 版本與相容性問題</a><br>
+				<a href='20190418D.html#roslyn'>升級 .NET Framework 新版編譯器</a><br>
+				<a href='20190418D.html#gsudo'>用 gsudo 解決「以系統管理員身分執行」的問題</a><br>
+				<a href='20190418D.html#jscript'>改用 JScript 設計 .NET Framework 程式</a><br>
+				<a href='20190418D.html#aspnet'>如何執行 ASP.NET 程式</a><br>
+				<a href='20190418D.html#apireference'>離線查閱 .NET API</a><br>
+				<a href='20190418D.html#effective'>Effective C#</a><br>
+				<a href='20190418D.html#uppercamelcase'>為什麼方法和屬性要大寫開頭？</a><br>
+				<a href='20190418D.html#hungariannotation'>為什麼介面要用 I 開頭？</a><br>
+				<br>
+				對 csc.exe 下 <code>/win32icon:圖示檔</code> 設定應用程式的圖示。
+			</p>
+		</section>
+	</section>
+	<hr id='csharp'>
+	<section>
+		<h2>C# 語法簡介</h2>
+		<hr>
+		<section>
+			<h3>與 C++ 的關係</h3>
+			<p>
+				只要 C++ 已經有現成的語法，C# 就會照抄過來。所以像 if、switch、while、for 是一樣的，用 class 設計類別和使用 : 繼承也一樣，命名空間用 namespace{} 和運算子重載用 operator 也一樣，支援 struct 和 enum，連指標的 * 和 & 還有 # 開頭的前置處理器都保留下來 😉<br>
+				<br>
+				C# 在照抄 C++ 各語法的同時，也簡化其複雜的功能。像 private 和 public 並不是 C++ 影響整塊區域的範疇，而是像 Java 個別宣告在屬性和方法的開頭；不允許多重繼承，改用 interface；一律使用 . 符號存取成員，不用再分 -&gt; 和 :: 的場合。<br>
+				<br>
+				若想要的功能和語法 C++ 沒有，C# 才會自行擴充上去，例如 C++ 沒有委派，因此 C# 新增了 delegate 指令。C++ 沒有 foreach，因此 C# 也自行新增上去。<br>
+				<br>
+				C# 2 時，會 C++ 的人基本上都看得懂 C# 程式碼。然而，C# 3 開始，有逐漸往動態型別表述語言學習的趨勢，發展到 C# 6 已經越來越不像 C++，到了 C# 9 更是完全看不懂在寫什麼（雖然能把新語法全用上的人不多），不能再說 C# 是照搬 C++ 語法進來的程式語言了～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>與 Java 的異同</h3>
+			<p>
+				檔案名稱不用與類別名稱相同。<br>
+				<br>
+				無論有多少個類別，都只會編譯有 Main() 的類別為 *.exe 執行檔，所用到的類別都會編譯在裡面，而不是每個類別都編譯出一個 *.class 檔。<br>
+				<br>
+				沒有 package 綁資料夾的規定，只有用巢狀 namespace 在語法上建立關係。<br>
+				<br>
+				變數和方法預設 private，但類別預設為 internal，表示同屬一整個程式底下的組件（Assemblies）都能存取，也就是同屬於一個 *.exe 或 *.dll 底下的，都能存取。換句話說，如果 library.dll 有個 internal 的類別、屬性、方法，那就無法在 launch.exe 中存取使用，只有同屬 library.dll 裡面的可以。<br>
+				<br>
+				介面只能宣告函式，不能建立變數，而且無法指定存取權限，一律視為 public。<br>
+				<br>
+				公開的一律大寫開頭，私有的小寫開頭。因此類別名稱開頭大寫，欄位小寫，方法大寫。<br>
+				<br>
+				Java 鼓勵寫一堆 setXXX()、getXXX() 來改變狀態，避免使用 = 改變物件的狀態。但 C# 引進 set 和 get 語法發明了 property 的概念，可以控制使用 = 改變物件狀態時的行為。結果，查 API 時，Java 只要看有哪些 method 就好，C# 還得看有哪些 property。C# 操作一個物件有時候用 () 呼叫函式、有時用 = 設定狀態，不像 Java 一律都是用呼叫函式的。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>C# 的特點</h3>
+			<section>
+				<h4>資料型態</h4>
+				<p>
+					<code>int</code>、<code>long</code>、<code>short</code> 都有 u 開頭的無號版！而 <code>byte</code> 本身就是無號的，要用 s 開頭表示有號。<br>
+					<br>
+					<code>dynamic</code> 執行時期判定型別，適合動態型別程式設計。<code>var</code> 編譯時期決定型別，適合靜態型別程式設計，它看似自動型別判定的語法，但其實是用來宣告 AnonymousType 型別物件用的，好比用 int 宣告 Int32 型態的資料那樣。C# 畢竟是強型別的程式語言，設計程式時應該明確寫上型別，不該全面改用 var，只用在 AnonymousType 類型的物件。但 Microsoft 官方的《<a href='http://learn.microsoft.com/zh-tw/dotnet/csharp/fundamentals/coding-style/coding-conventions#implicitly-typed-local-variables'>C# 編碼慣例</a>》，倒是建議一看就知道資料是什麼型態時使用 var，而不是只用在 AnonymousType，且整篇文章的範例就大量使用 var 來宣告物件或保存方法的傳回值，所以看自己編碼風格去用吧！使不使用 var，編譯出來的程式完全一樣，所以不會影響性能，純粹就是可讀性的取捨問題～<br>
+					<br>
+					<code>bool</code> 就是 <code>false</code> 和 <code>true</code>，無法用 int 的 0 和 1 替換。<br>
+					<br>
+					宣告資料型態時後面加上 <code>?</code> 符號，表示變數可指定為 <code>null</code>，等同於用 System.Nullable&lt;T&gt; 宣告一個結構。這種資料賦值給其他標準資料型態的變數，自然會有不相容的情況發生，因此 C# 提供 <code>變數 = 可空類型資料 ?? 預設值</code> 的語法解決問題。<br>
+					<br>
+					<code>readonly</code> 類似於 <code>const</code>，但只能用在類別的成員變數，不能用在函式之類的區塊變數，而且宣告同時即使給了值，也可以在建構式修改。
+				</p>
+			</section>
+			<section>
+				<h4>指標</h4>
+				<p>
+					將類別或函式宣告為 <code>unsafe</code>，編譯時下 <code>/unsafe</code> 參數，就能在裡面使用 C 語言的指標！<br>
+					<br>
+					<code>stackalloc 型態[大小]</code> 可用來配置記憶體空間。<br>
+					<br>
+					<code>sizeof(資料型態)</code> 取得資料的位元組大小。<br>
+					<br>
+					對指標使用 <code>fixed</code> 可防止垃圾回收機制清理指標，對陣列使用可建立 C 語言風格的陣列，讓指標與陣列的對等關係跟 C 語言一致。<br>
+					<br>
+					在 C/C++，<samp>int* A, B;</samp> 只有 A 是指標，B 是 int 變數，C# 不一樣，兩個都宣告為指標，這也造成 C/C++ 真正慣用的 <samp>int *A, *B;</samp> 寫法，在 C# 會無法辨識而報錯。<br>
+					<br>
+					所謂「不安全（Unsafe）」並非指這樣的程式碼有危害，而是指跳脫 CLR（Common Language Runtim）對記憶體驗證的安全機制。
+				</p>
+			</section>
+			<section>
+				<h4>陣列</h4>
+				<p>
+					陣列大家都很熟了，來看 C# 讓事情變有趣的語法糖，自動型別判定且匿名的陣列：<br>
+					<br>
+					<code>
+						new[] { 資料, 資料, ... };<br>
+						<br>
+						new[]<br>
+						{<br>
+						　new[] { 資料, 資料, ... },<br>
+						　new[] { 資料, 資料, ... },<br>
+						　new[] { 資料, 資料, ... }<br>
+						};<br>
+						<br>
+						new[,]<br>
+						{<br>
+						　{ 資料, 資料, ... },<br>
+						　{ 資料, 資料, ... },<br>
+						　{ 資料, 資料, ... }<br>
+						};<br>
+					</code>
+					<br>
+					<code>[,]</code> 是名符其實的多維陣列，而不是 <code>[][]</code> 陣列的陣列。<br>
+					<br>
+					[,] 陣列每組維度大小是相同的，且迭代時會一次跑所有維度的資料。<br>
+					<br>
+					[][] 陣列可以混合不同大小的維度，且迭代只會跑一個維度的資料。<br>
+					<br>
+					這兩種可以混搭在一起，例如 array[1,2][3]。
+				</p>
+			</section>
+			<section>
+				<h4>字串</h4>
+				<p>
+					字串可以用 <code>[]</code> 索引值直接取出字元。<br>
+					<br>
+					<code>@"字串"</code> 裡面可以直接使用跳脫字元，例如 \ 符號和換行字元，所以有多行字串的功能。也因此字串裡面不能使用 \"，必須寫成 ""。
+				</p>
+			</section>
+			<section>
+				<h4>流程控制</h4>
+				<p>
+					switch 為避免 fall through 的弊端，規定 <code>case</code> 區塊一定要用 <code>break</code> 結束，連 <code>default</code> 也不例外。但 case 沒有寫區塊程式的話，允許 fall through。有了這項規定，default 可以放在任意位置，不用放在最後。
+				</p>
+			</section>
+			<section>
+				<h4>其它</h4>
+				<p>
+					並行相關指令有：<code>lock</code>、<code>volatile</code>、<code>async</code>、<code>await</code>。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='objectoriented'>
+	<section>
+		<h2>類別（Class）、抽象（Abstract）、介面（Interface）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				abstract class Base
+				{
+					protected string hidden = "";
+
+					public void Hidden()
+					{
+						;
+					}
+
+					public virtual void Virtual()
+					{
+						Console.WriteLine("virtual");
+					}
+
+					public abstract void Abstract();
+				}
+
+				class Derived : Base
+				{
+					new string hidden = "hidden";
+
+					new public void Hidden()
+					{
+						Console.WriteLine(hidden);
+					}
+
+					public override void Virtual()
+					{
+						Console.WriteLine("override");
+					}
+
+					public override void Abstract()
+					{
+						Console.WriteLine("abstract");
+					}
+				}
+
+				interface Interface
+				{
+					void Operation();
+				}
+
+				class Implement : Interface
+				{
+					public void Operation()
+					{
+						Console.WriteLine("interface");
+					}
+				}
+
+				class Launch
+				{
+					static void Main()
+					{
+						//hidden, virtual, override
+						Derived derived = new Derived();
+						derived.Hidden();
+						derived.Virtual();
+						derived.Abstract();
+
+						//interface
+						Interface implement = new Implement();
+						implement.Operation();
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				hiden<br>
+				override<br>
+				abstract<br>
+				interface
+			</output>
+			<br>
+			將類別和方法宣告為 <code>partial</code>，可以寫在不同檔案。<br>
+			<br>
+			要覆寫父類別的函式，做法是將父類別的函式宣告為有實作的 <code>virtual</code> 或不實作的 <code>abstract</code>，子類別的函式宣告為 <code>override</code>。不這麼做的話無法多型，即使傳入子類別物件，也會調用父類別的方法，而不是子類別覆寫的方法。<br>
+			<br>
+			雖然子類別可以在同名成員前使用 <code>new</code> 強行覆寫過去，但這叫隱藏（hiden），不是覆載（override），所以情況還是一樣，在多型的場合不會調用子類別覆寫的方法。這麼做只是讓編譯器不會發出 warning 警告而已，如果只是要編譯器別發出 warning，還不如下 /w:0 參數關閉 warning，保持程式碼的簡潔 😛<br>
+			<br>
+			可用 <code>sealed</code> 禁止類別被繼承或禁止覆寫成員函式。<br>
+			<br>
+			要在類別的建構函式呼叫另一個建構函式，做法是建構函式後面使用 <code>:this(參數)</code>。子類別的建構函式要呼叫父類別的建構函式，則是 <code>:base(參數)</code><br>
+			<br>
+			<code>變數 is 型別</code> 用來檢查變數是否為型別。<br>
+			<br>
+			<code>物件 as 型別</code> 用來轉換物件為型別，與 <code>(型別)變數</code> 不一樣的是，在無法轉型時不會拋出例外，而是變成 <code>null</code>，且只能用於類別的物件，不能用於基本資料型態的變數。
+		</p>
+	</section>
+	<hr id='anonymoustype'>
+	<section>
+		<h2>匿名物件（Anonymous types）</h2>
+		<p>
+			<code>var 變數 = new { 鍵=值, 鍵=值, ... };</code><br>
+			<br>
+			鍵可以是英文字，不需使用 "" 符號。<br>
+			<br>
+			這語法糖傳回自動判定型別的 AnonymousType 物件，所以指派給變數必須用 var，不能用明確的型態定義變數。<br>
+			<br>
+			匿名物件是唯讀的，所以無法修改資料。
+		</p>
+	</section>
+	<hr id='struct'>
+	<section>
+		<h2>結構（Structure types）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				struct Player
+				{
+					public string Name;
+					public int Number;
+				}
+
+				class _
+				{
+					static void Main()
+					{
+						Player player;
+						player.Name = "Twideem Civs";
+						player.Number = 58;
+
+						Console.Write("#{0} {1}", player.Number, player.Name);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				#58 Twideem Civs
+			</output>
+		</p>
+		<hr>
+		<section>
+			<h3>其它語法</h3>
+			<p>
+				結構的成員變數在宣告時不能直接用 = 預設，只能在建構式初始化。<br>
+				<br>
+				建構式不能有空參數的建構子，且建構子裡必須設定所有成員變數，不能只設定部分成員變數。<br>
+				<br>
+				結構裡成員的預設存取權限是 private，所以包括建構式都要 public 才能使用。<br>
+				<br>
+				結構不能繼承。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>為何使用</h3>
+			<p>
+				結構當參數傳入函式是傳值，類別是傳參考。<br>
+				<br>
+				結構是在 stack 記憶體建立，存取資料更直接而快速，用完會自動釋放空間，節省記憶體。類別是在 heap 記憶體建立，存取資料是鍊式的，所以比較間接，加上自動垃圾回收機制的關係，不但占用大量記憶體空間，資料還可能東一塊西一塊的不連續，性能沒有結構好。<br>
+				<br>
+				但並不是類別的性能差，而是結構的性能要比類別更好！我們是為了更好的性能而使用結構，而不是認為類別性能差不敢用通通改成結構。不要小看 Microsoft 團隊菁英為 .NET 設計的 heap 記憶體模式，性能已經是完美無缺的了，一點也不慢，不需要擔心類別拖累性能的問題。<br>
+				<br>
+				總之，盡量用類別組織程式架構，不用擔心性能的問題。程式架構中用的資料，能用結構去做是最好的選擇，但是用類別去做也不要緊。
+			</p>
+		</section>
+	</section>
+	<hr id='enum'>
+	<section>
+		<h2>列舉（Enumeration types）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				class Launch
+				{
+					enum Prime { Two, Three, Five=5, Seven, Eleven }
+
+					static void Main()
+					{
+						Console.WriteLine(Prime.Two);
+						Console.WriteLine((int)Prime.Two);
+
+						Console.WriteLine(Prime.Eleven);
+						Console.Write((int)Prime.Eleven);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				Two<br>
+				0<br>
+				Eleven<br>
+				7
+			</output>
+		</p>
+	</section>
+	<hr id='generic'>
+	<section>
+		<h2>泛型（Generic）</h2>
+		<p>
+			進行物件導向程式設計，經常要寫一堆只有型別不同，剩下幾乎相同的程式碼，泛型可以消除重複：<br>
+			<br>
+			<textarea class='brush:cs'>
+				using System;
+
+				class Class&lt;TYPE&gt;
+				{
+					TYPE variable;
+
+					public Class(TYPE x)
+					{
+						variable = x;
+					}
+
+					public TYPE Get()
+					{
+						return variable;
+					}
+				}
+
+				class Launch
+				{
+					static void Main()
+					{
+						Class&lt;int&gt; class1 = new Class&lt;int&gt;(123);
+						Console.WriteLine(class1.Get());
+
+						Class&lt;string&gt; class2 = new Class&lt;string&gt;("ABC");
+						Console.Write(class2.Get());
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				123<br>
+				ABC
+			</output>
+			<br>
+			函式也可以用泛型，將重複程式碼的多載函式寫成一個！
+		</p>
+	</section>
+	<hr id='covariant'>
+	<section>
+		<h2>協變（Covariance）、逆變（Contravariance）</h2>
+		<p>
+			不像 string 可以向上轉型為 object，泛型 G&lt;string&gt; 無法轉 G&lt;object&gt;，不然就失去型別安全的目的了，等於開放做出越過限制的行為。<br>
+			<br>
+			但介面和委託並沒有實作功能，也就沒有破壞型別安全的問題，因此介面和委託的泛型，可以在型別前面使用 out，讓型別能向上轉型，也就是協變：<br>
+			<br>
+			<code>
+				interface G&lt;out T&gt;{}<br>
+			</code>
+			<br>
+			相反的，要向下轉型的話（逆變），在型別前面使用 in：<br>
+			<br>
+			<code>
+				interface G&lt;in T&gt;{}
+			</code>
+		</p>
+	</section>
+	<hr id='namespace'>
+	<section>
+		<h2>命名空間（Namespace）</h2>
+		<hr>
+		<section>
+			<h3>namespace</h3>
+			<p>
+				<textarea class='brush:cs'>
+					//用命名空間可避免類別名稱與別人重複起衝突
+					namespace Project
+					{
+						class Class1
+						{
+							public Class1()
+							{
+								System.Console.WriteLine("Class 1");
+							}
+						}
+					}
+
+					//命名空間可以再包含一個命名空間
+					namespace Project
+					{
+						namespace Test
+						{
+							class Class2
+							{
+								public Class2()
+								{
+									System.Console.WriteLine("Class 2");
+								}
+							}
+						}
+					}
+
+					//嵌套命名空間的另外一種寫法
+					namespace Project.Test
+					{
+						class Class3
+						{
+							public Class3()
+							{
+								System.Console.WriteLine("Class 3");
+							}
+						}
+					}
+
+					//透過命名空間使用類別
+					class Launch
+					{
+						static void Main()
+						{
+							new Project.Class1();
+							new Project.Test.Class2();
+							new Project.Test.Class3();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					Class 1<br>
+					Class 2<br>
+					Class 3
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>using</h3>
+			<section>
+				<h4>class1.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						namespace Project
+						{
+							class Class1
+							{
+								public Class1()
+								{
+									System.Console.WriteLine("Class 1");
+								}
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>class2.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						namespace Project
+						{
+							class Class2
+							{
+								public Class2()
+								{
+									System.Console.WriteLine("Class 2");
+								}
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>class3.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						namespace Project.Test
+						{
+							class Class3
+							{
+								public Class3()
+								{
+									System.Console.WriteLine("Class 3");
+								}
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>launch.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using Project;                      //進入（Accessing）命名空間
+						using test = Project.Test;          //對命名空間使用別名
+						using class3 = Project.Test.Class3; //對類別使用別名
+
+						class Launch
+						{
+							static void Main()
+							{
+								new Class1();
+								new Class2();
+								new test::Class3();
+								new class3();
+							}
+						}
+                        </textarea>
+					<br>
+					<output>
+						Class 1<br>
+						Class 2<br>
+						Class 3<br>
+						Class 3
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='assembly'>
+	<section>
+		<h2>組件（Assembly）</h2>
+		<hr>
+		<section>
+			<h3>編譯成 DLL 並載入執行</h3>
+			<section>
+				<h4>library.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+
+						public class Library
+						{
+							public static void Print()
+							{
+								Console.Write("Hello!");
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						csc /t:library library.cs
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>launch.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+
+						class Launch
+						{
+							static void Main()
+							{
+								Library.Print();
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						csc /r:library.dll launch.cs<br>
+						launch<br>
+						Hello!
+					</output>
+					<br>
+					善用動態連結程式庫在執行期載入的特性，是很有幫助的程式設計手法 💪
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>別名</h3>
+			<p>
+				載入多個組件時，若命名空間和類別名稱重複，可先在編譯器下參數 <code>/r:別名一=組件一.dll</code>，然後在程式碼開頭使用 <code>extern alias 別名一;</code> 載入別名，就能用 <code>別名一::命名空間.類別</code> 解決衝突問題。別名二依此類推。
+			</p>
+		</section>
+	</section>
+	<hr id='attribute'>
+	<section>
+		<h2>特性（Attribute）</h2>
+		<p>
+			特性可夾帶數據（Metadata）給類別，語法為：<br>
+			<br>
+			<code>
+				[特性]<br>
+				class 類別名稱<br>
+				{<br>
+				　…<br>
+				}<br>
+			</code>
+			<br>
+			除了 C# 已提供的特性，我們也可以透過繼承 System.Attribute 產生新的特性來用。
+		</p>
+	</section>
+	<hr id='method'>
+	<section>
+		<h2>函式（Method）</h2>
+		<p>
+			呼叫函式時，可以用 <code>參數名稱:值</code> 不照順序下參數。<br>
+			<br>
+			設計函式時，參數可以用 <code>=</code> 指定預設值。<br>
+			<br>
+			在陣列型態的參數前面使用 <code>params</code>，表示不定數量參數。<br>
+			<br>
+			參數前面使用 <code>ref</code> 表示傳址參數，傳入的變數必須有資料，不能空值。（另外還有 <code>out</code> 傳址參數，必須在函式中先初始化，也因為這樣的關係，可以傳入未初始化、空值的變數。）<br>
+			<br>
+			可將其它程式語言編譯出來的函式引用到 C# 裡面，語法為：<br>
+			<br>
+			<code>
+				[DllImport("程式庫檔")]<br>
+				extern 傳回值 函式名稱(參數);<br>
+			</code>
+			<br>
+			程式庫除了 DLL 檔，也支援 Linux 常用的 shared object 檔（*.so），但 DllImport 要下更多參數解決差異性問題，請參考 System.Runtime.InteropServices.DllImport 的 API。
+		</p>
+	</section>
+	<hr id='extensionmethod'>
+	<section>
+		<h2>擴充方法（Extension method）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				public static class ExtensionMethod
+				{
+					public static string Triple(this string x)
+					{
+						return x + x + x;
+					}
+
+					public static int Triple(this int x)
+					{
+						return x * 3;
+					}
+
+					public static string Triple&lt;T&gt;(this T x)
+					{
+						return "TRIPLE";
+					}
+				}
+
+				class Launch
+				{
+					static void Main()
+					{
+						string a = "ABC";
+						Console.WriteLine(a.Triple());
+
+						int b = 123;
+						Console.WriteLine(b.Triple());
+
+						object c = new Object();
+						Console.Write(c.Triple());
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				ABCABCABC<br>
+				369<br>
+				TRIPLE
+			</output>
+			<br>
+			重點在方法的參數使用了 this，且必須宣告為 static。<br>
+			<br>
+			有這語法，就不用為了擴充方法另外繼承一個新的類別，而是直接追加進去！
+		</p>
+	</section>
+	<hr id='iterator'>
+	<section>
+		<h2>迭代器（Iterator）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+				using System.Collections;
+
+				class Launch
+				{
+					static IEnumerable F()
+					{
+						yield return "AAA";
+						yield return "BBB";
+						yield return "CCC";
+					}
+
+					static void Main()
+					{
+						foreach(string n in F())
+						{
+							Console.WriteLine(n);
+						}
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				AAA<br>
+				BBB<br>
+				CCC
+			</output>
+			<br>
+			也可以用泛型的 System.Collections.Generic.IEnumerable&lt;T&gt;<br>
+			<br>
+			在迴圈中可以使用 yield break 完成迭代
+		</p>
+	</section>
+	<hr id='property'>
+	<section>
+		<h2>屬性（Property）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				class Property
+				{
+					string text;
+
+					public int Number { get; set; }
+
+					public string Text
+					{
+						get
+						{
+							return "Hello, " + text + "!";
+						}
+
+						set
+						{
+							text = value + value;
+						}
+					}
+				}
+
+				class Launch
+				{
+					static void Main()
+					{
+						Property property = new Property();
+						property.Number = 123;
+						property.Text = "ABC";
+						Console.Write("{0} {1}", property.Number, property.Text);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				123 Hello, ABCABC!
+			</output>
+			<br>
+			get 和 set 這樣的語法功能，在 C# 叫做存取器（Accessor）。<br>
+			<br>
+			若狀態會保存起來被使用到，就設計為屬性！方法用在不會保存狀態，單純計算出資料或運行些動作的場合。<br>
+			<br>
+			但如果狀態不是保存在自身，而是其它物件，則用方法，而不是屬性。也就是寫成：<br>
+			<br>
+			<strong>自身.方法(他物件, 狀態)</strong><br>
+			<br>
+			而不是：<br>
+			<br>
+			<strong>自身.他物件.屬性 = 狀態</strong>
+		</p>
+	</section>
+	<hr id='indexer'>
+	<section>
+		<h2>索引器（Indexer）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				class Indexer&lt;T&gt;
+				{
+					T[] index = new T[100];
+
+					public T this[int n]
+					{
+						get
+						{
+							return index[n];
+						}
+
+						set
+						{
+							index[n] = value;
+						}
+					}
+				}
+
+				class Launch
+				{
+					static void Main()
+					{
+						Indexer&lt;string&gt; indexer = new Indexer&lt;string&gt;();
+						indexer[0] = "indexer";
+						Console.Write(indexer[0]);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				indexer
+			</output>
+		</p>
+	</section>
+	<hr id='operatoroverloading'>
+	<section>
+		<h2>運算子重載（Operator overloading）</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+
+				class OperatorOverloading
+				{
+					string star;
+
+					public OperatorOverloading()
+					{
+						star = "*";
+					}
+
+					public OperatorOverloading(string x)
+					{
+						star = x;
+					}
+
+					public override string ToString()
+					{
+						return star;
+					}
+
+					public static OperatorOverloading operator ++(OperatorOverloading x)
+					{
+						OperatorOverloading result = new OperatorOverloading(x.star);
+						result.star = x.star + "*";
+						return result;
+					}
+
+					public static OperatorOverloading operator +(OperatorOverloading x, OperatorOverloading y)
+					{
+						OperatorOverloading result = new OperatorOverloading(x.star);
+						result.star = x.star + y.star;
+						return result;
+					}
+
+					public static explicit operator int(OperatorOverloading x)
+					{
+						return x.star.Length;
+					}
+				}
+
+				class Launch
+				{
+					static void Main()
+					{
+						OperatorOverloading oper = new OperatorOverloading();
+						Console.WriteLine(++oper);
+						Console.WriteLine(oper + oper);
+						Console.Write((int)oper);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				**<br>
+				****<br>
+				2
+			</output>
+		</p>
+	</section>
+	<hr id='delegate'>
+	<section>
+		<h2>委派、函數物件、函數傳參、匿名函式、λ 運算式、多播、事件</h2>
+		<p>
+			委派的相關功能，是隨著 C# 版本不斷追加進去的，所以不同寫法做的卻是同一件事時，盡量用新的寫法取代舊的，除非編譯器版本老舊不支援 😎
+		</p>
+		<hr>
+		<section>
+			<h3>用委派設計函數物件</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						//制定委派的格式
+						delegate void Function(int x);
+
+						//符合委派格式的函式
+						static void F1(int x)
+						{
+							Console.WriteLine(x);
+						}
+
+						static void F2(int x)
+						{
+							Console.WriteLine(x*2);
+						}
+
+						static void F3(int x)
+						{
+							Console.WriteLine(x*3);
+						}
+
+						//切換函數物件
+						static void Main()
+						{
+							Function function;
+							function = new Function(F1);
+							function(123);
+							function = new Function(F2);
+							function(123);
+							function = new Function(F3);
+							function(123);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					246<br>
+					369
+				</output>
+				<br>
+				<code>function = new Function(F1)</code> 的寫法，可以寫成 <code>function = F1</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>傳遞函數物件為參數</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						//制定委派的格式
+						delegate string Function();
+
+						//符合委派格式的函式
+						static string GetString()
+						{
+							return "Hello!";
+						}
+
+						//參數宣告為委派格式的函式
+						static void Print(Function x)
+						{
+							Console.Write(x());
+						}
+
+						//將符合委派的函式傳入參數
+						static void Main()
+						{
+							Print(GetString);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					Hello!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>藉由函數物件參數實現匿名函式（Anonymous function）</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						//制定委派的格式
+						delegate void Function(string x);
+
+						//參數宣告為委派格式的函式
+						static void World(Function x)
+						{
+							x("world");
+						}
+						static void MyFriend(Function x)
+						{
+							x("my friend");
+						}
+
+						//利用委派產生匿名函式
+						static void Main()
+						{
+							World(
+								delegate(string x)
+								{
+									Console.WriteLine("Hello, {0}!", x);
+								}
+							);
+
+							MyFriend(
+								delegate(string x)
+								{
+									Console.WriteLine("Hello, {0}!", x);
+								}
+							);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					Hello, world!<br>
+					Hello, my friend!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>匿名函式可改寫為 λ 運算式（Lambda expression）</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						//制定委派的格式
+						delegate void Function(string x);
+
+						//參數宣告為委派格式的函式
+						static void World(Function x)
+						{
+							x("world");
+						}
+
+						static void MyFriend(Function x)
+						{
+							x("my friend");
+						}
+
+						//使用 Lambda 運算式
+						static void Main()
+						{
+							World((x) =&gt; Console.WriteLine("Hello, {0}!", x));
+							MyFriend((x) =&gt; Console.Write("Hello, {0}!", x));
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					Hello, world!<br>
+					Hello, my friend!
+				</output>
+				<br>
+				只有一個參數時，可以省略 () 符號，也就是 <code>(x)=&gt;</code> 寫成 <code>x=&gt;</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>多播（Multicast）</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						//制定委派的格式
+						delegate void Function();
+
+						//符合委派格式的函式
+						static void F1()
+						{
+							Console.WriteLine(111);
+						}
+						static void F2()
+						{
+							Console.WriteLine(222);
+						}
+						static void F3()
+						{
+							Console.WriteLine(333);
+						}
+
+						//多播
+						static void Main()
+						{
+							Function function;
+							function = F1;
+							function += F2;
+							function += F3;
+							function();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					111<br>
+					222<br>
+					333
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>事件（Event）</h3>
+			<p>
+				.NET 提供的事件，就是以委派為架構，搭配 event 關鍵字自動化多播，所設計出來的！雖然平常不太需要自己設計事件來用，但了解一下是怎麼設計的，滿足一下求知欲也不錯：<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System;
+
+					delegate void Handler();
+
+					class Event
+					{
+						public event Handler handler;
+
+						public void OnEvent()
+						{
+							handler();
+						}
+					}
+
+					class Launch
+					{
+						static void Handler()
+						{
+							Console.WriteLine("ON EVENT 1");
+						}
+
+						static void Main()
+						{
+							Event evt = new Event();
+							evt.handler += Handler;
+							evt.handler += () =&gt; Console.Write("ON EVENT 2");
+							evt.OnEvent();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ON EVENT 1<br>
+					ON EVENT 2
+				</output>
+				<br>
+				event 的多播可以用 <code>add</code> 存取器和 <code>remove</code> 存取器覆寫 += 和 -= 的功能。<br>
+				<br>
+				為相容 .NET 的事件，通常委派時設計成 void Handler(object sender, EventArgs e) 的形式，即使這些參數沒有要用也沒關係，系統會自動略過。
+			</p>
+		</section>
+	</section>
+	<hr id='reflection'>
+	<section>
+		<h2>反射（Reflection）</h2>
+		<p>
+			反射可以讓我們在執行期檢視物件內部結構，當我們不知道執行期會遇到哪個物件、也不知道會有哪些功能，就可以透過反射來使用未知的物件…雖然這通常不會是很好的設計，往往都在破壞物件導向設計原則。<br>
+			<br>
+			.NET 提供了 System.Type 類別，用來分析類別和物件的內部組成，可用如下方式取得 Type 物件：<br>
+			<br>
+			<code>
+				typeof(類別名稱)<br>
+				物件實體.GetType()<br>
+				Type.GetType(字串)<br>
+			</code>
+			<br>
+			要調用內部功能的話，可對 Type 物件呼叫 <code>GetMethods()</code> 取得 MethodInfo 物件，再執行 MethodInfo 的 <code>Invoke(object obj, object[] parameters)</code> 即可。其它內部成員依此類推，取得對應的 XxxInfo 物件，再看怎樣去使用它。<br>
+			<br>
+			反射是深入研究的話會很龐大的主題，在 System.Reflection 命名空間提供完整的支援。
+		</p>
+		<hr>
+		<section>
+			<h3>用反射機制列出物件規格</h3>
+			<p>
+				若不需要範例和說明，只想速查物件有哪些功能可用，不妨直接寫 C# 程式反射出來：<br>
+				<br>
+				<code>
+					foreach(MemberInfo n in typeof(類別).GetMembers()) Console.WriteLine(n);<br>
+					foreach(Array n in typeof(列舉).GetEnumValues()) Console.WriteLine(n);<br>
+				</code>
+				<br>
+				不然每次都翻 API 太麻煩了 😩
+			</p>
+		</section>
+	</section>
+	<hr id='exceptionhandling'>
+	<section>
+		<h2>例外處理（Exception handling）</h2>
+		<p>
+			過去透過函式傳回值來判斷錯誤訊息，經常因為除錯的程式碼和執行的程式碼混在一起，苦不堪言。例外為除錯提供專屬區塊，要執行的程式碼放在 try，要捕捉的錯誤放在 catch，結構化變得更清晰，大幅提升可讀性。語法如下：<br>
+			<br>
+			<code>
+				try<br>
+				{<br>
+				　可能會發生狀況的程式<br>
+				　checked<br>
+				　{<br>
+				　　整數發生不會導致錯誤的溢位時仍拋出例外<br>
+				　}<br>
+				　unchecked<br>
+				　{<br>
+				　　整數發生會導致錯誤的溢位時也不拋出例外<br>
+				　}<br>
+				}<br>
+				catch(XxxException)<br>
+				{<br>
+				　捕捉到特定狀況的訊息<br>
+				}<br>
+				catch(XxxException e)<br>
+				{<br>
+				　透過物件進一步獲取狀況的內容<br>
+				}<br>
+				catch<br>
+				{<br>
+				　捕捉到其他狀況的訊息<br>
+				}<br>
+				finally<br>
+				{<br>
+				　一定會執行的程式<br>
+				}<br>
+			</code>
+			<br>
+			可以繼承 System.Exception 新增自己的例外，然後用 <code>throw</code> 拋出，拋出例外時記得 new 成物件。
+		</p>
+	</section>
+	<hr id='garbagecollection'>
+	<section>
+		<h2>垃圾收集（Garbage collection）</h2>
+		<hr>
+		<section>
+			<h3>回收</h3>
+			<p>
+				建議交由系統自動回收，真要強制回收的話，執行 <code>GC.Collect()</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>丟棄</h3>
+			<p>
+				使用完需要 Dispose() 的物件，可以寫在 <code>using(){}</code> 裡面，用完會自動呼叫。<br>
+				<br>
+				Dispose() 表示棄置物件，釋放物件佔用的記憶體資源，通常會在裡面呼叫 Close()。<br>
+				<br>
+				Close() 表示結束物件的操作，釋放操作時佔用的系統資源，但物件還在記憶體裡，並未清除，不見得會呼叫 Dispose()。<br>
+				<br>
+				每個物件的 Close() 意思不一樣，像是 Form 的 Close() 是關閉視窗，與記憶體資源和系統資源無關。因此 .NET 統一使用 Dispose() 來關閉物件，設計在 IDisposable 介面讓需要自動關閉的物件遵循，只要實作了 Dispose() 就會在 using 區塊裡自動呼叫。
+			</p>
+		</section>
+	</section>
+	<hr id='querysyntax'>
+	<section>
+		<h2>查詢語句（Query Syntax）</h2>
+		<p>
+			C# 獨有，簡化 LINQ API 而來，下語法就能操作資料。<br>
+			<br>
+			由於查詢語句的語法很接近 SQL，已經會的人學習門檻低，而且用起來方便有效率，可以突破不少傳統程式設計處理資料的瓶頸與限制，讓大家對它愛不釋手。
+		</p>
+		<hr>
+		<section>
+			<h3>語法概述</h3>
+			<p>
+				查詢語句一律以 <code>from.. in..</code> 開頭，以 <code>select</code> 或 <code>group.. by..</code> 結束，中間可加入各種子句，像是 <code>join.. in.. on.. equals..</code>、<code>where</code>、<code>orderby</code>、<code>let</code>。<br>
+				<br>
+				開頭和中間子句能使用多個一樣指令的句子，一層層或一批批處理資料。巧妙應用的話，經常能把幾十行程式碼才能搞定的事，縮短成三四行。<br>
+				<br>
+				若要重複整個查詢語句，可以追加 <code>into</code> 構成分句，將這一次查詢語句的結果保存在識別名稱，做為下一個查詢語句的資料來源。<br>
+				<br>
+				另外，在結束子句用 <code>new</code> 將資料結構化成物件傳回也是很常見的用法。<br>
+				<br>
+				查詢語句結束後，會傳回實作 <code>IEnumerable&lt;T&gt;</code> 的物件，查閱這介面的 API 可以了解更多操作資料的方式。由於查詢語句並未提供該介面的所有功能，因此查詢語句經常會用 <code>(查詢語句).API 方法()</code> 的形式，呼叫 API 的方法操作資料。所以並不是只會查詢語句就算完整，還得了解 Enumerable 物件有哪些方法可以操作。<br>
+				<br>
+				查詢語句是用起來很精妙的語法！我們除了把自己日常處理資料的語句建立起來外，日後還要多看別人寫的查詢語句，把好的句子抄下來，找機會用上。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>基本子句（from、where、select）</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Collections.Generic;
+					using System.Linq;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//使用查詢語句處理資料然後用 foreach 輸出
+							int[] array = { 1, 3, 5, 7, 9, 2, 4, 6, 8, 10 };
+							IEnumerable&lt;int&gt; query1 = from n in array where n &gt; 5 select n;
+							foreach(int n in query1)
+							{
+								Console.Write(n);
+							}
+
+							//用於 Dictionary
+							Dictionary&lt;string, int&gt; dictionary = new Dictionary&lt;string, int&gt;()
+							{
+								{"A", 111},
+								{"B", 222},
+								{"C", 333},
+								{"D", 444},
+								{"E", 555}
+							};
+							IEnumerable&lt;string&gt; query2 = from n in dictionary
+														 where n.Value &gt;= 333
+														 select n.Key;
+							foreach(string n in query2)
+							{
+								Console.Write(n);
+							}
+
+							//九九乘法表
+							var query3 = from n1 in Enumerable.Range(2, 8)
+										 from n2 in Enumerable.Range(1, 9)
+										 select new { Factor1 = n1, Factor2 = n2, Product = n1 * n2 };
+							foreach(var n in query3)
+							{
+								Console.WriteLine("{0} * {1} = {2}", n.Factor1, n.Factor2, n.Product);
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					796810<br>
+					<br>
+					CDE<br>
+					<br>
+					2 * 1 = 2<br>
+					2 * 2 = 4<br>
+					2 * 3 = 6<br>
+					2 * 4 = 8<br>
+					2 * 5 = 10<br>
+					2 * 6 = 12<br>
+					2 * 7 = 14<br>
+					2 * 8 = 16<br>
+					2 * 9 = 18<br>
+					（太長省略）<br>
+					9 * 9 = 81
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其它常用子句</h3>
+			<section>
+				<h4>join</h4>
+				<p>
+					句法：<code>join 變數 in 資料 on ＦＲＯＭ變數 equals ＪＯＩＮ變數</code><br>
+					<br>
+					相當於關聯式資料庫將資料表依相同鍵值互相關聯起來使用一樣，依 equals 將 join 與 from 互相關聯起來使用。（如果你不知道關聯式資料庫，就是將兩份資料中相同鍵值的部分篩選出來，要注意的是並非合併成新的一份資料，同樣是兩份資料，只是各自都只剩篩選出來的資料。）<br>
+					<br>
+					換句話說，join 緊接在 from 句子的後面，將兩份資料互相關聯起來。如果你不太能理解 join，不妨想成這是 from 開頭子句的更多指令，而不是真有一個 join 子句…雖然這麼想是錯的，但確實能幫助理解 join 與其它中間子句的不同。<br>
+					<br>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Linq;
+
+						class Launch
+						{
+							static void Main()
+							{
+								string[] array1 = {"A", "B", "C", "D", "E"};
+								string[] array2 = {"G", "F", "E", "D", "C"};
+
+								var query = from n1 in array1
+											join n2 in array2 on n1 equals n2
+											select n1 + ":" + n2;
+
+								foreach(string n in query) Console.WriteLine(n);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						C:C<br>
+						D:D<br>
+						E:E
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>orderby</h4>
+				<p>
+					句法：<code>orderby 資料 descending</code><br>
+					<br>
+					排序資料。descending 是遞減排序，省略的話是遞增排序。
+				</p>
+			</section>
+			<section>
+				<h4>let</h4>
+				<p>
+					句法：<code>let 變數 = 算式</code><br>
+					<br>
+					建立一個保存資料的變數，讓其它子句使用。
+				</p>
+			</section>
+			<section>
+				<h4>group</h4>
+				<p>
+					句法：<code>group 資料 by 鍵值</code><br>
+					<br>
+					將資料依鍵值分組為 IGrouping&lt;TKey, TElement&gt; 物件。<br>
+					<br>
+					假設有一組球員資料，想依位置分組，就可以用 group 簡單完成：<br>
+					<br>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections.Generic;
+						using System.Linq;
+
+						class Player
+						{
+							public string Name;
+							public string Position;
+
+							public Player(string name, string position)
+							{
+								Name = name;
+								Position = position;
+							}
+						}
+
+						class Launch
+						{
+							static void Main()
+							{
+								Player[] players =
+								{
+									new Player("赤木剛憲", "C"),
+									new Player("三井寿", "SG"),
+									new Player("木暮公延", "SF"),
+									new Player("宮城リョータ", "PG"),
+									new Player("潮崎哲士", "SG"),
+									new Player("角田悟", "C"),
+									new Player("安田靖春", "PG"),
+									new Player("桑田登紀", "PG"),
+									new Player("佐々岡智", "PF"),
+									new Player("流川楓", "SF"),
+									new Player("石井健太郎", "SF"),
+									new Player("桜木花道", "PF")
+								};
+
+								IEnumerable&lt;IGrouping&lt;string, Player&gt;&gt; query =
+									from n in players group n by n.Position;
+
+								foreach(IGrouping&lt;string, Player&gt; n1 in query)
+								{
+									Console.WriteLine(n1.Key);
+
+									foreach(Player n2 in n1)
+									{
+										Console.WriteLine(n2.Name);
+									}
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						C<br>
+						赤木剛憲<br>
+						角田悟<br>
+						SG<br>
+						三井寿<br>
+						潮崎哲士<br>
+						SF<br>
+						木暮公延<br>
+						流川楓<br>
+						石井健太郎<br>
+						PG<br>
+						宮城リョータ<br>
+						安田靖春<br>
+						桑田登紀<br>
+						PF<br>
+						佐々岡智<br>
+						桜木花道
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>into</h4>
+				<p>
+					句法：<code>into 變數 新的語句</code><br>
+					<br>
+					將查詢語句結果，命名為變數，展開新的查詢語句。<br>
+					<br>
+					換句話說，into 接在 select 或 group 結束子句後面，然後就跟展開新的 from 開始語句一樣，繼續串接中間子句。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>查詢語句轉 Array</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Linq;
+
+					class Launch
+					{
+						static void Main()
+						{
+							int[] array = (from n in Enumerable.Range(7, 3) select n*n).ToArray();
+
+							foreach(int n in array) Console.WriteLine(n);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					49<br>
+					64<br>
+					81
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] C# 是多範式的程式語言！用最少的語法功能，把程式寫得像 C/C++，讓沒學過 C# 的人能看懂，也是一種範式。不見得要把所有最新語法用上，寫出別人沒學過就看不懂的 C# 程式 🤪
+		</p>
+	</footer>
+</article>

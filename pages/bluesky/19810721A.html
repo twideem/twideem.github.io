@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>body{background-color:#dcefff}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>BAT 批次檔</h1>
+		<p>
+			MS-DOS 與 Windows 作業系統，可以使用副檔名為 *.bat 的純文字文件格式，來編寫命令，讓系統執行工作。內容除了可以執行 DOS 命令外，還提供些許存取系統資料與邏輯控制等功能。在不方便使用 Java 或 C 語言來執行程式功能的場合，改用 BAT 批次檔來完成工作，不失為有效的解決方案。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>檔案格式</h2>
+		<p>
+			批次檔必須使用 CR+LF 換行，否則無法順利執行多行指令。<br>
+			<br>
+			Windows 作業系統預設使用在地字元編碼的關係，批次檔建議使用 Big5 或 ANSI 字元編碼，比較不會遭遇問題。若要使用 UTF-8 編碼，必須在開頭執行 <code>CHCP 65001</code> 指令。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>輸出訊息</h2>
+		<p>
+			<code>ECHO 訊息</code><br>
+			<br>
+			用來輸出自己想要顯示出來的訊息。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>隱藏指令執行時輸出的訊息</h2>
+		<p>
+			<code>@</code><br>
+			<br>
+			DOS 命令在執行時，會顯示過程中產生的訊息。如果不想看到這樣的訊息，可用 @ 表示這行程式不顯示過程訊息。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>關閉指令執行時輸出的訊息</h2>
+		<p>
+			<code>ECHO OFF</code><br>
+			<br>
+			所有程式都不顯示過程訊息。<br>
+			<br>
+			通常連 ECHO OFF 這行程式也不希望顯示過程訊息，因此會在前面加上 @，變成 @ECHO OFF。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>輸出空行</h2>
+		<p>
+			<code>@ECHO;</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>暫停</h2>
+		<p>
+			<code>PAUSE</code><br>
+			<br>
+			程式停止執行，等待使用者按任意鍵再繼續。<br>
+			<br>
+			如果想自己另外用 ECHO 輸出訊息，忽略 PAUSE 的「請按任意鍵繼續」，可以將訊息導向 NUL：<br>
+			<br>
+			<code>PAUSE &gt;NUL</code><br>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>暫停幾秒</h2>
+		<p>
+			<code>TIMEOUT 秒數</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>尋訪</h2>
+		<p>
+			<code>FOR %%變數 IN (篩選) DO 指令 [參數]</code><br>
+			<br>
+			FOR 指令與其說是迴圈，不如說是用來尋訪檔案。變數保存的是尋訪的檔案名稱。<br>
+			<br>
+			篩選的寫法像是 (*.mp4 *.mkv)，沒有篩選條件的話用萬用字元 (*)。<br>
+			<br>
+			底下範例會開啟批次檔所在資料夾下所有 *.txt 檔案：<br>
+			<br>
+			<output>FOR %%n IN (*.txt) DO %%n</output>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>跳躍</h2>
+		<p>
+			跳到特定位置，執行其後的程式。
+		</p>
+		<hr>
+		<section>
+			<h3>設定跳躍點</h3>
+			<p>
+				<code>:標題</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>跳躍</h3>
+			<p>
+				<code>GOTO 標題</code>
+			</p>
+		</section>
+		<hr>
+		<p>
+			最常見的用法是設定 :end 做為批次檔的結尾，然後在批次檔已經完成任務時，就可以跳過接下來的程式，直接結束工作。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>條件</h2>
+		<hr>
+		<section>
+			<h3>檢查資料</h3>
+			<p>
+				<code>IF 變數==資料</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>檢查資料夾或檔案是否存在</h3>
+			<p>
+				<code>IF EXIST 資料夾或檔案</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>檢查批次檔接受到的數值資料</h3>
+			<p>
+				<code>IF ERRORLEVEL 數值</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>反向條件</h3>
+			<p>
+				IF 後面可用 <code>NOT</code> 作相反條件的判斷。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>分歧條件</h3>
+			<p>
+				<code>IF 判斷式 (執行功能) ELSE (執行功能)</code><br>
+				<br>
+				注意！ELSE 與前面的 ) 符號不能斷行！<br>
+				<br>
+				也因此，為了讓批次檔的分歧條件式，能夠更像結構化程式語言的 if else，可以採用如下的編寫風格：<br>
+				<br>
+				<code>
+					IF 判斷式 (<br>
+					　執行功能<br>
+					) ELSE (<br>
+					　執行功能<br>
+					)<br>
+				</code>
+				<br>
+				甚至多數人覺得，在批次檔使用 GOTO，反而比 IF ELSE 容易閱讀。（不過 GOTO 比較不好寫，因為用「下一行」取代 ELSE 的情況下，要更花費心力，才能安排好執行流程。）
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>詢問</h2>
+		<p>
+			<code>CHOICE</code><br>
+			<br>
+			會詢問 Y/N。<br>
+			<br>
+			其後應搭配 <code>IF %ERRORLEVEL%==1</code> 判斷使用者選的是 Y，或者 <code>IF %ERRORLEVEL%==2</code> 選的是 N。<br>
+			<br>
+			CHOICE 還允許自定更多選項，例如：<br>
+			<br>
+			<output>
+				CHOICE /C NESW /M "N=北 E=東 S=南 W=西"<br>
+				IF %ERRORLEVEL%==1 ECHO 往北走了<br>
+				IF %ERRORLEVEL%==2 ECHO 往東走了<br>
+				IF %ERRORLEVEL%==3 ECHO 往南走了<br>
+				IF %ERRORLEVEL%==4 ECHO 往西走了
+			</output>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>輸入</h2>
+		<p>
+			<code>SET /P 變數名稱=說明文字</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>參數</h2>
+		<p>
+			接在批次檔後面的參數，可用 <code>%1</code> 到 <code>%9</code> 來取得。<br>
+			<br>
+			%1 是帶入的檔案的話：
+		</p>
+		<table>
+			<tr><td>%~D1</td><td>磁碟機代號</td></tr>
+			<tr><td>%~P1</td><td>路徑</td></tr>
+			<tr><td>%~N1</td><td>檔名</td></tr>
+			<tr><td>%~X1</td><td>副檔名</td></tr>
+			<tr><td>%~NX1</td><td>檔名與副檔名</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>變數</h2>
+		<p>
+			取一個識別名稱，保存程式中所要用到的資料，以便讀取。
+		</p>
+		<hr>
+		<section>
+			<h3>設定變數</h3>
+			<p>
+				<code>SET 變數名稱=資料</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>讀取變數</h3>
+			<p>
+				<code>
+					%變數名稱%<br>
+					%變數名稱:~開始位置,擷取字數%
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>系統環境變數</h3>
+			<p>
+				Windows 作業系統已經內定許多環境變數，可以方便我們設計批次檔時，更簡單、明確進行想要的操作目標：
+			</p>
+			<table>
+				<tr><td style='width:30%'>%APPDATA%</td><td>使用者家目錄的 AppData 的 Roaming 資料夾。</td></tr>
+				<tr><td>%CD%</td><td>當前路徑。</td></tr>
+				<tr><td>%DATE%</td><td>日期。</td></tr>
+				<tr><td>%HOMEDRIVE%</td><td>使用者家目錄所在磁碟機的代號。</td></tr>
+				<tr><td>%HOMEPATH%</td><td>使用者家目錄的資料夾路徑，不含磁碟機代號。</td></tr>
+				<tr><td>%PROGRAMFILES%</td><td>系統 Program Files 資料夾的路徑。</td></tr>
+				<tr><td>%PROGRAMFILES(X86)%</td><td>系統 Program Files (x86) 資料夾的路徑。</td></tr>
+				<tr><td>%RANDOM%</td><td>隨機取得 0 到 32767 之間的整數。</td></tr>
+				<tr><td>%SYSTEMDRIVE%</td><td>安裝作業系統的磁碟機代號。</td></tr>
+				<tr><td>%SYSTEMROOT%</td><td>安裝作業系統的資料夾。</td></tr>
+				<tr><td>%TEMP%</td><td>暫存檔 temp 資料夾的路徑。</td></tr>
+				<tr><td>%TIME%</td><td>時間。</td></tr>
+				<tr><td>%USERNAME%</td><td>使用者帳號名稱。</td></tr>
+				<tr><td>%USERPROFILE%</td><td>使用者家目錄完整路徑。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>綜合範例</h3>
+			<p>
+				<output>
+					SET MONTH=%DATE:~5,2%<br>
+					SET DAY=%DATE:~8,2%<br>
+					TAR -cf MyBackup-%MONTH%%DAY%.tar D:\MyBackup<br>
+					@ECHO %TIME%<br>
+					PAUSE
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>呼叫外部批次檔</h2>
+		<p>
+			<code>CALL 批次檔</code><br>
+			<br>
+			執行另一個批次檔，然後繼續往下一個流程執行。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>結束批次檔</h2>
+		<p>
+			<code>EXIT</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>結束正在執行的程式</h2>
+		<p>
+			<code>
+				TASKKILL /IM 程序名稱<br>
+				TASKKILL /PID 處理程序識別碼
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>一行內執行多道指令</h2>
+		<p>
+			使用 <code>&</code> 符號。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>多行指令寫成一道指令</h2>
+		<p>
+			用 <code>()</code> 符號括住。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>註解</h2>
+		<p>
+			<code>REM 註解文字</code><br>
+			<br>
+			不會被批次檔執行，適合用來說明程式意圖，方便往後閱讀程式碼。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>配色</h2>
+		<p>
+			<code>COLOR 背景顏色和前景顏色</code><br>
+			<br>
+			0 黑色<br>
+			1 藍色<br>
+			2 綠色<br>
+			3 藍綠色<br>
+			4 紅色<br>
+			5 紫色<br>
+			6 黃色<br>
+			7 淺灰色<br>
+			8 深灰色<br>
+			9 淡藍色<br>
+			A 淡綠色<br>
+			B 淡藍綠色<br>
+			C 淡紅色<br>
+			D 淡紫色<br>
+			E 淡黃色<br>
+			F 白色<br>
+			<br>
+			兩個顏色要連在一起，例如：<br>
+			<br>
+			<output>COLOR F1</output>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>視窗大小</h2>
+		<p>
+			<code>MODE CON COLS=寬度 LINES=高度</code><br>
+			<br>
+			單位分別是字元數和行數，不是像素。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>視窗標題</h2>
+		<p>
+			<code>TITLE 標題</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>免命令提示字元視窗執行應用程式</h2>
+		<p>
+			<code>
+				START "" 程式<br>
+				START /D 路徑 程式
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>說明</h2>
+		<p>
+			各指令的更完整功能，請用 <code>HELP 指令</code> 查閱。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>作業系統自帶功能</h2>
+		<hr>
+		<section>
+			<h3>*.exe</h3>
+			<p>
+				小算盤<br>
+				<code>calc.exe</code><br>
+				<br>
+				命令提示字元<br>
+				<code>cmd.exe</code><br>
+				<br>
+				檔案總管<br>
+				<code>explorer.exe</code><br>
+				<br>
+				本機<br>
+				<code>explorer.exe /n,::{20D04FE0-3AEA-1069-A2D8-08002B30309D}</code><br>
+				<br>
+				我的文件<br>
+				<code>explorer.exe /n,::{450D8FBA-AD25-11D0-98A8-0800361B1103}</code><br>
+				<br>
+				網路芳鄰<br>
+				<code>explorer.exe /n,::{208D2C60-3AEA-1069-A2D7-08002B30309D}</code><br>
+				<br>
+				資源回收筒<br>
+				<code>explorer.exe /n,::{645FF040-5081-101B-9F08-00AA002F954E}</code><br>
+				<br>
+				小畫家<br>
+				<code>mspaint.exe</code><br>
+				<br>
+				ODBC 資料來源管理器<br>
+				<code>odbcad32.exe</code><br>
+				<br>
+				記事本<br>
+				<code>notepad.exe</code><br>
+				<br>
+				工作管理員<br>
+				<code>taskmgr.exe</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>*.msc</h3>
+			<p>
+				電腦管理<br>
+				<code>compmgmt.msc</code><br>
+				<br>
+				事件檢視器<br>
+				<code>eventvwr.msc</code><br>
+				<br>
+				效能監視器<br>
+				<code>perfmon.msc</code><br>
+				<br>
+				服務<br>
+				<code>services.msc</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>rundll32.exe</h3>
+			<p>
+				控制台<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL</code><br>
+				<br>
+				輕鬆存取中心<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL access.cpl</code><br>
+				<br>
+				新增移除程式<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL appwiz.cpl</code><br>
+				<br>
+				開啟或關閉 Windows 功能<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL appwiz.cpl,,2</code><br>
+				<br>
+				藍芽與其他裝置<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL bthprops.cpl</code><br>
+				<br>
+				顯示器<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl</code><br>
+				<br>
+				顯示器<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl</code><br>
+				<br>
+				桌面圖示設定<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,0</code><br>
+				<br>
+				螢幕保護程式<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,1</code><br>
+				<br>
+				背景<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,2</code><br>
+				<br>
+				防火牆<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL Firewall.cpl</code><br>
+				<br>
+				裝置管理員<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL hdwwiz.cpl</code><br>
+				<br>
+				網際網路<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL inetcpl.cpl</code><br>
+				<br>
+				地區<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL intl.cpl</code><br>
+				<br>
+				遊戲控制器<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL joy.cpl</code><br>
+				<br>
+				滑鼠<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL main.cpl</code><br>
+				<br>
+				聲音<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl</code><br>
+				<br>
+				數據機連線<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL modem.cpl</code><br>
+				<br>
+				網路連線<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL ncpa.cpl</code><br>
+				<br>
+				電源選項<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL powercfg.cpl</code><br>
+				<br>
+				系統內容<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL sysdm.cpl</code><br>
+				<br>
+				電話連線<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL telephon.cpl</code><br>
+				<br>
+				日期和時間<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL timedate.cpl</code><br>
+				<br>
+				安全性與維護<br>
+				<code>rundll32.exe shell32.dll,Control_RunDLL wscui.cpl</code><br>
+				<br>
+				新增印表機裝置<br>
+				<code>rundll32.exe shell32.dll,SHHelpShortcuts_RunDLL AddPrinter</code><br>
+				<br>
+				字型<br>
+				<code>rundll32.exe shell32.dll,SHHelpShortcuts_RunDLL FontsFolder</code><br>
+				<br>
+				以上指令尾端，可接 <code>,,數字</code> 切換頁籤。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>進階設定</h2>
+		<hr>
+		<section>
+			<h3>電源</h3>
+			<p>
+				切換平衡的電源模式為更好的電池<br>
+				<code>POWERCFG /OVERLAYSETACTIVE OVERLAY_SCHEME_MIN</code><br>
+				<br>
+				切換平衡的電源模式為最佳效能<br>
+				<code>POWERCFG /OVERLAYSETACTIVE OVERLAY_SCHEME_MAX</code><br>
+				<br>
+				切換電源計畫為省電、平衡、高效能<br>
+				<code>POWERCFG /S 電源配置GUID（可用 /L 參數查詢）</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>服務</h3>
+			<p>
+				啟動服務<br>
+				<code>sc start 服務名稱</code><br>
+				<br>
+				停止服務<br>
+				<code>sc stop 服務名稱</code><br>
+				<br>
+				停用服務<br>
+				<code>sc config 服務名稱 START=DISABLED</code><br>
+				<br>
+				刪除無效的服務<br>
+				<code>sc delete 服務名稱</code>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>釘選到工作列或開始畫面</h2>
+		<p>
+			為批次檔建立捷徑，然後在圖示按「滑鼠右鍵」→「內容」，修改「目標」，在前面加上 <code>CMD /C</code> 即可。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>恢復命令提示字元視窗的預設值</h2>
+		<p>
+			HKEY_CURRENT_USER\Console
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 路徑、檔名、或者資料，建議用雙引號 " 包起來，比較不會出錯。<br>
+			[*] *.cmd 是不支援 DOS 的 Windows NT 用 cmd.exe 解譯指令的腳本檔案。<br>
+			[*] *.bat 是 DOS 時期逐行執行指令用的檔案，所以採用這個副檔名才是對的！
+		</p>
+	</footer>
+</article>

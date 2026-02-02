@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>科拿米世界</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>操作</h2>
+		<p>
+			↑＋Ａ　　切換同伴<br>
+			↓＋Ａ　　變換武器<br>
+			長按Ｂ　　主角飛行
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>攻略</h2>
+		<hr>
+		<section>
+			<h3>流程</h3>
+			<p>
+				江戸（救出ゴエモン）→悪魔城（救出シモン、拿魔王房間右上方隱藏通道的クロス）→港町（救出マイキー、拿パチンコ和ビームガン）→都会（救出コング，拿バナナ）→地獄（拿マント，男女主角長按跳躍可飛行）→江戸（拿マネキネコ和ウェポン）→悪魔城（拿ヒートガン和アーマー）→地獄（救出フウマ，拿手裏剣）→イースター島（救出モアイ，拿イオンリング）→３番シャッター
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>影片</h3>
+			<p>
+				<a href='http://youtu.be/JPo0Rv7UwCY'>http://youtu.be/JPo0Rv7UwCY</a>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>修改</h2>
+		<p>
+			預設只開啟男女主角生命不減，其它功能請依自己需求勾選。
+		</p>
+		<hr>
+		<section>
+			<h3>VirtuaNES</h3>
+			<p>
+				<code>
+					#1 07D0-02-0E0E &nbsp; &nbsp; 男女主角生命不減<br>
+					#0 07D8-01-FF &nbsp; &nbsp; &nbsp; 同伴全開<br>
+					#0 07D2-04-0E0E0E0E 同伴生命不減 1/2<br>
+					#0 07D6-02-0E0E &nbsp; &nbsp; 同伴生命不減 2/2<br>
+					#0 07B1-02-FFFF &nbsp; &nbsp; 道具全開<br>
+					#0 07DB-02-0303 &nbsp; &nbsp; 消耗品滿 1/2<br>
+					#0 07DD-03-636363 &nbsp; 消耗品滿 2/2<br>
+				</code>
+				<br>
+				複製貼上到純文字文件，然後以 *.vct 副檔名儲存，在 VirtuaNES 的 Tool - Cheat code - Load 載入使用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Nestopia</h3>
+			<p>
+				<code>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+					&lt;cheats version="1.0"&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D0&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;コナミマン生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="1"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D1&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;コナミレディ生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D8&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xFF&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;同伴全開&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D2&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;ゴエモン生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D3&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;シモン生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D4&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;フウマ生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D5&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;マイキー生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D6&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;モアイ生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07D7&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x0E&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;コング生命不減&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07B1&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xFF&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;道具全開 1/2&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07B2&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0xFF&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;道具全開 2/2&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07DB&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x03&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;消耗品滿 1/5&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07DC&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x03&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;消耗品滿 2/5&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07DD&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x63&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;消耗品滿 3/5&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07DE&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x63&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;消耗品滿 4/5&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&nbsp; &nbsp; &lt;cheat enabled="0"&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;address&gt;0x07DF&lt;/address&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;value&gt;0x63&lt;/value&gt;<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &lt;description&gt;消耗品滿 5/5&lt;/description&gt;<br>
+					&nbsp; &nbsp; &lt;/cheat&gt;<br>
+					&lt;/cheats&gt;<br>
+				</code>
+				<br>
+				複製貼上到純文字文件，然後以 *.xml 副檔名儲存，在 Nestopia 的 Options - Cheats - Permanent Codes 按 Import.. 載入。
+			</p>
+		</section>
+	</section>
+</article>

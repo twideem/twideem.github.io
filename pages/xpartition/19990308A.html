@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>信長之野望烈風傳</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>Cheat Engine</h2>
+		<hr>
+		<section>
+			<h3>保持軍團、開發、建設未行動狀態</h3>
+			<p>
+				將 Value Type 改為 Array of byte，取消 Hex 勾選，以空格為區隔，在 Value 輸入武將的「政治」「戰鬥」「智謀」「指揮」，例如武田信玄為 95 95 94 99。搜尋到資料後，用 Memory Viewer 檢視資料，往上三行、往左四格，按滑鼠右鍵選單的 Add this address to the list，鎖定資料，即可保持為未行動的狀態。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>保持戰鬥未行動狀態</h3>
+			<p>
+				搜尋武將的兵力，找到後用 Memory Viewer 檢視，往下一行，往右五格，按滑鼠右鍵選單的 Add this address to the list，鎖定資料為 0，即可保持未行動狀態。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>歷史事件大全</h2>
+		<p>
+			這是寫在登錄檔，而不是存檔，因此換台電腦就要重新來過，無法隨遊戲轉移。<br>
+			<br>
+			不妨自己寫個登錄檔全解開吧：<br>
+			<br>
+			<textarea class='brush:txt'>
+				Windows Registry Editor Version 5.00
+
+				[HKEY_CURRENT_USER\Software\Koei\Reppuu\Data]
+				"Event1"=dword:ffffffff
+				"Event2"=dword:ffffffff
+            </textarea>
+			<br>
+			Steam 版是 <code>HKEY_CURRENT_USER\SOFTWARE\TecmoKoei\Nobunaga8anniv\Data</code>。
+		</p>
+	</section>
+</article>

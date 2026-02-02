@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>
+	table td:nth-child(1){width:20%}
+	table td:nth-child(2){width:30%}
+</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>Linux 檔案系統階層標準</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>基本架構</h2>
+		<p>
+			底下列出每個目錄名稱的英文意思與中文說明，滑鼠游標移到第三欄位上會有舉例。
+		</p>
+		<table>
+			<tr><td>/bin</td><td>binary</td><td title='例如 cd 或 rm。'>存放每個使用者都會用到的標準指令集。</td></tr>
+			<tr><td>/boot</td><td></td><td title='像是 vmlinuz 和 grub。'>提供開機用的檔案。</td></tr>
+			<tr><td>/dev</td><td>device</td><td title='像是 hda 或 jp0。'>周邊裝置都集中在這裡，以備使用。</td></tr>
+			<tr><td>/etc</td><td>etcetera</td><td title='像是 init.d 或 rc.d。'>底層系統專屬的組態檔。</td></tr>
+			<tr><td>/home</td><td></td><td>存放使用者家目錄。</td></tr>
+			<tr><td>/lost+found</td><td></td><td>Linux 的檔案日誌。</td></tr>
+			<tr><td>/lib</td><td>library</td><td>底層系統呼叫的函式庫。</td></tr>
+			<tr><td>/media</td><td></td><td title='例如隨身碟。'>系統自動掛載的可插拔式裝置。</td></tr>
+			<tr><td>/mnt</td><td>mount</td><td title='例如分割磁區。'>使用者手動掛載進來用的周邊裝置。</td></tr>
+			<tr><td>/opt</td><td>optional packages</td><td>第三方廠商提供的套件，通常是閉源軟體。</td></tr>
+			<tr><td>/proc</td><td>process</td><td>Linux 的分頁檔。</td></tr>
+			<tr><td>/root</td><td></td><td>系統管理員的家目錄。</td></tr>
+			<tr><td>/sbin</td><td>superuser binaries</td><td title='例如 fsck 和 init。'>系統管理員用來操控電腦底層的指令。</td></tr>
+			<tr><td>/srv</td><td>service</td><td title='例如 Apache 的 www。'>放置伺服器所提供服務的檔案。</td></tr>
+			<tr><td>/tmp</td><td>temporary</td><td>開放給任何人暫時存放過度資料的地方。</td></tr>
+			<tr><td>/usr</td><td>unix system resources</td><td title='例如 /usr/bin/vi'>作業系統所安裝的電腦應用軟體與原始碼。</td></tr>
+			<tr><td>/var</td><td>various</td><td>電腦應用軟體的組態檔放在這裡。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>補充說明</h2>
+		<hr>
+		<section>
+			<h3>依變動的程度隔開，自成體系</h3>
+			<p>
+				Linux 的檔案系統階層，可分為三種：「系統管理用」「公用」「使用者私用」。依變動頻繁的程度，規劃在不同權限的體系下，避免破壞系統結構。<br>
+				<br>
+				例如程式指令的存放位置有如下幾種：
+			</p>
+			<table>
+				<tr><td>sbin、etc、lib</td><td>系統管理用的工具</td></tr>
+				<tr><td>bin</td><td>系統內建的共用指令</td></tr>
+				<tr><td>/usr/local/bin</td><td>額外安裝的公用程式</td></tr>
+				<tr><td>/home/[username]/.local/bin</td><td>使用者安裝給自己用的軟體</td></tr>
+			</table>
+			<p>
+				越往上一層的資料夾，越不會被使用者更動。當系統因為使用者頻繁更動，導致運作不穩時，可由最下層開始砍掉重建，降低對上層的影響。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>media 與 mnt</h3>
+			<p>
+				早期並沒有 media，現在則習慣用它取代 mnt……嗯，我覺得這樣很ＯＫ，不需要再吹毛求疵，硬要分別哪些裝置是可插拔或自動掛載？哪些裝置是已放著來手動掛載？
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>/usr/bin 與 /usr/local/bin 與 /opt</h3>
+			<p>
+				想裝載的應用軟體，是與 GPL 開源軟體格格不入的閉源軟體，就丟在 /opt 裡面，避免跟 /usr/bin 混放在一起。<br>
+				<br>
+				不過 Kubuntu 的習慣，則是將 KDE 專屬的軟體放在 /opt 裡面，當與不相容的環境衝突時，方便使用者隔離開來使用。<br>
+				<br>
+				所以這沒有絕對性，自己喜歡哪種做法就去做～<br>
+				<br>
+				至於 /usr/bin 與 /usr/local/bin 的區別，前者有「照標準做法安裝起來、大家一致推薦使用的軟體」的意味，後者有「依自行喜好安裝進來、有興趣的人也能使用」的意味。<br>
+				<br>
+				這也不是硬性規定，純粹只是說有這樣的「意味」而已。<br>
+				<br>
+				不要把程式安裝在 /tmp 裡面就好，因為重灌或升級作業系統時，大家共識就是裡面的東西可以移除。
+			</p>
+		</section>
+	</section>
+</article>

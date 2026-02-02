@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>HTML5 可用的文字樣式</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>具有語意，可幫助網路資料的建成，所以首先考慮使用的樣式</h2>
+		<p style='line-height:30px'>
+			<abbr>&lt;abbr&gt;縮寫&lt;/abbr&gt;</abbr><br>
+			&lt;blockquote&gt;轉載別人文章&lt;/blockquote&gt;<br>
+			<q>&lt;cite&gt;轉載或引用的來源和出處&lt;/cite&gt;</q><br>
+			<code>&lt;code&gt;程式碼&lt;/code&gt;</code><br>
+			<del>&lt;del&gt;刪除的文字&lt;/del&gt;</del><br>
+			<dfn>&lt;dfn&gt;將某個術語標示起來&lt;/dfn&gt;</dfn><br>
+			<em>&lt;em&gt;強調這是全文中最關鍵的一段話&lt;/em&gt;</em>
+			<ins>&lt;ins&gt;插入的文字&lt;/ins&gt;</ins><br>
+			<code>&lt;kbd&gt;提示輸入這段鍵盤指令&lt;/kbd&gt;</code><br>
+			<mark>&lt;mark&gt;在書中標示起來的文字&lt;/mark&gt;</mark><br>
+			&lt;p&gt;文章段落&lt;/p&gt;<br>
+			<q>&lt;q&gt;引用某段內容到自己文章&lt;/q&gt;</q><br>
+			<samp>&lt;samp&gt;列舉出是怎樣的項目&lt;/samp&gt;</samp><br>
+			<small>&lt;small&gt;在書中補寫上去的小記&lt;/small&gt;</small><br>
+			<strong>&lt;strong&gt;標示說這段文字很重要&lt;/strong&gt;</strong><br>
+			<var>&lt;var&gt;需要修改與設定的項目&lt;/var&gt;</var>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>不具語意的裝飾性樣式</h2>
+		<p style='line-height:30px'>
+			<b>&lt;b&gt;粗體&lt;/b&gt;</b><br>
+			<i>&lt;i&gt;斜體&lt;/i&gt;</i>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>辨析</h2>
+		<p>
+			blockquote 是 block 元素，有轉載別人整篇文章的語意。轉載不是引用！轉載就好比同時刊登別人的內容，來跟自己文章相比較的另一篇文章，並沒有引用到自己文章成為一部份的意思。通常自己發表的內容寫在 p 標籤，別人發表的內容另外寫在 blockquote 標籤，兩段落各自獨立，不該把 blockquote 夾雜在 p 裡面。<br>
+			<br>
+			q 是 inline 元素，有引用某段內容在自己文章裡的語意，也就是可以夾雜在 p 標籤裡。<br>
+			<br>
+			cite 是標示出處，可用在前兩者。<br>
+			<br>
+			b 純粹只是粗體沒有語意，應用 strong 表示「這是重點」的語意。<br>
+			<br>
+			i 純粹只是斜體沒有語意，應用 em 表示「全文要旨」的語意。<br>
+			<br>
+			em 比 strong 更強烈，em 是至關全文主旨的要點，strong 只是強調語氣來獲得關注的重點。<br>
+			<br>
+			字體放大一級的 big 雖然被淘汰，但字體縮小一級的 small 卻留著，語意是旁註、抄記。
+		</p>
+	</section>
+</article>

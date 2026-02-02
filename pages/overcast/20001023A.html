@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Java')</script>
+<article>
+	<header>
+		<h1>java.awt.event.* 事件速用表</h1>
+		<p>
+			<a href='#actionlistener'>ActionListener</a><br>
+			<a href='#adjustmentlistener'>AdjustmentListener</a><br>
+			<a href='#awteventlistener'>AWTEventListener</a><br>
+			<a href='#componentlistener'>ComponentListener</a><br>
+			<a href='#containerlistener'>ContainerListener</a><br>
+			<a href='#focuslistener'>FocusListener</a><br>
+			<a href='#hierarchylistener'>HierarchyListener、HierarchyBoundsListener</a><br>
+			<a href='#inputmethodlistener'>InputMethodListener</a><br>
+			<a href='#itemlistener'>ItemListener</a><br>
+			<a href='#keylistener'>KeyListener</a><br>
+			<a href='#mouselistener'>MouseListener、MouseMotionListener、MouseWheelListener</a><br>
+			<a href='#propertychangelistener'>PropertyChangeListener</a><br>
+			<a href='#textlistener'>TextListener</a><br>
+			<a href='#windowlistener'>WindowListener、WindowFocusListener、WindowStateListener</a><br>
+			<a href='#removelistener'>移除事件</a>
+		</p>
+	</header>
+	<hr id='actionlistener'>
+	<section>
+		<h2>ActionListener</h2>
+		<hr>
+		<section>
+			<h3>actionPerformed</h3>
+			<p>
+				<textarea class='brush:java'>
+					addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent event){
+
+						}
+					});
+                </textarea>
+				<br>
+				用 <code>event.getModifiers() & ActionEvent.SHIFT_MASK) != 0</code> 判斷是否按下 Shift 鍵。ALT_MASK 和 CTRL_MASK 依此類推。
+			</p>
+		</section>
+	</section>
+	<hr id='adjustmentlistener'>
+	<section>
+		<h2>AdjustmentListener</h2>
+		<hr>
+		<section>
+			<h3>adjustmentValueChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addAdjustmentListener(new AdjustmentListener(){
+						public void adjustmentValueChanged(AdjustmentEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='awteventlistener'>
+	<section>
+		<h2>AWTEventListener</h2>
+		<hr>
+		<section>
+			<h3>eventDispatched</h3>
+			<p>
+				<textarea class='brush:java'>
+					addAWTEventListener(new AWTEventListener(){
+						public void eventDispatched(AWTEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='componentlistener'>
+	<section>
+		<h2>ComponentListener</h2>
+		<hr>
+		<section>
+			<h3>componentShown</h3>
+			<p>
+				<textarea class='brush:java'>
+					addComponentListener(new ComponentAdapter(){
+						public void componentShown(ComponentEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>componentHidden</h3>
+			<p>
+				<textarea class='brush:java'>
+					addComponentListener(new ComponentAdapter(){
+						public void componentHidden(ComponentEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>componentMoved</h3>
+			<p>
+				<textarea class='brush:java'>
+					addComponentListener(new ComponentAdapter(){
+						public void componentMoved(ComponentEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>componentResized</h3>
+			<p>
+				<textarea class='brush:java'>
+					addComponentListener(new ComponentAdapter(){
+						public void componentResized(ComponentEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='containerlistener'>
+	<section>
+		<h2>ContainerListener</h2>
+		<hr>
+		<section>
+			<h3>componentAdded</h3>
+			<p>
+				<textarea class='brush:java'>
+					addContainerListener(new ContainerListener(){
+						public vois componentAdded(ContainerEvent event){
+
+						};
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>componentRemoved</h3>
+			<p>
+				<textarea class='brush:java'>
+					addContainerListener(new ContainerListener(){
+						public vois componentRemoved(ContainerEvent event){
+
+						};
+					}
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='focuslistener'>
+	<section>
+		<h2>FocusListener</h2>
+		<hr>
+		<section>
+			<h3>focusGained</h3>
+			<p>
+				<textarea class='brush:java'>
+					addFocusListener(new FocusAdapter(){
+						public void focusGained(FocusEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>focusLost</h3>
+			<p>
+				<textarea class='brush:java'>
+					addFocusListener(new FocusAdapter(){
+						public void focusLost(FocusEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='hierarchylistener'>
+	<section>
+		<h2>HierarchyListener、HierarchyBoundsListener</h2>
+		<hr>
+		<section>
+			<h3>hierarchyChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addHierarchyListener(new HierarchyListener(){
+						public void hierarchyChanged(HierarchyEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ancestorMoved</h3>
+			<p>
+				<textarea class='brush:java'>
+					addHierarchyBoundsListener(new HierarchyBoundsAdapter(){
+						public void ancestorMoved(HierarchyEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ancestorResized</h3>
+			<p>
+				<textarea class='brush:java'>
+					addHierarchyBoundsListener(new HierarchyBoundsAdapter(){
+						public void ancestorResized(HierarchyEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='inputmethodlistener'>
+	<section>
+		<h2>InputMethodListener</h2>
+		<hr>
+		<section>
+			<h3>caretPositionChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addInputMethodListener(new InputMethodAdapter(){
+						public void caretPositionChanged(InputMethodEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>inputMethodTextChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addInputMethodListener(new InputMethodAdapter(){
+						public void inputMethodTextChanged(InputMethodEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='itemlistener'>
+	<section>
+		<h2>ItemListener</h2>
+		<hr>
+		<section>
+			<h3>itemStateChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addItemListener(new ItemListener(){
+						public void itemStateChanged(ItemEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='keylistener'>
+	<section>
+		<h2>KeyListener</h2>
+		<hr>
+		<section>
+			<h3>keyPressed</h3>
+			<p>
+				<textarea class='brush:java'>
+					addKeyListener(new KeyAdapter(){
+						public void keyPressed(KeyEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>keyReleased</h3>
+			<p>
+				<textarea class='brush:java'>
+					addKeyListener(new KeyAdapter(){
+						public void keyReleased(KeyEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>keyTyped</h3>
+			<p>
+				<textarea class='brush:java'>
+					addKeyListener(new KeyAdapter(){
+						public void keyTyped(KeyEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<p>
+			可根據 <code>event.getKeyCode()</code> 的傳回值，判斷使用者按下哪一個滑鼠鍵：<br>
+			<br>
+			<code>
+				KeyEvent.VK_A ~ KeyEvent.VK_Z<br>
+				KeyEvent.VK_0 ~ KeyEvent.VK_9<br>
+				KeyEvent.VK_NUMPAD0 ~ KeyEvent.VK_NUMPAD9<br>
+				KeyEvent.VK_F1 ~ KeyEvent.VK_F12
+			</code>
+		</p>
+		<table>
+			<tr><td style='width:40%'>KeyEvent.VK_BACK_QUOTE</td><td>`</td></tr>
+			<tr><td>KeyEvent.VK_MINUS</td><td>-</td></tr>
+			<tr><td>KeyEvent.VK_EQUALS</td><td>=</td></tr>
+			<tr><td>KeyEvent.VK_OPEN_BRACKET</td><td>[</td></tr>
+			<tr><td>KeyEvent.VK_CLOSE_BRACKET</td><td>]</td></tr>
+			<tr><td>KeyEvent.VK_BACK_SLASH</td><td>\</td></tr>
+			<tr><td>KeyEvent.VK_SEMICOLON</td><td>;</td></tr>
+			<tr><td>KeyEvent.VK_COMMA</td><td>,</td></tr>
+			<tr><td>KeyEvent.VK_PERIOD</td><td>.</td></tr>
+			<tr><td>KeyEvent.VK_SLASH</td><td>/</td></tr>
+		</table>
+		<p>
+			<code>
+				KeyEvent.VK_ESCAPE<br>
+				KeyEvent.VK_TAB<br>
+				KeyEvent.VK_CAPS_LOCK<br>
+				KeyEvent.VK_SHIFT<br>
+				KeyEvent.VK_CONTROL<br>
+				KeyEvent.VK_WINDOWS<br>
+				KeyEvent.VK_ALT<br>
+				KeyEvent.VK_SPACE<br>
+				KeyEvent.VK_BACKSPACE<br>
+				KeyEvent.VK_ENTER<br>
+				<br>
+				KeyEvent.VK_PAUSE<br>
+				KeyEvent.VK_PRINTSCREEN<br>
+				KeyEvent.VK_INSERT<br>
+				KeyEvent.VK_DELETE<br>
+				KeyEvent.VK_HOME<br>
+				KeyEvent.VK_END<br>
+				KeyEvent.VK_PAGE_UP<br>
+				KeyEvent.VK_PAGE_DOWN<br>
+				<br>
+				KeyEvent.VK_UP<br>
+				KeyEvent.VK_DOWN<br>
+				KeyEvent.VK_LEFT<br>
+				KeyEvent.VK_RIGHT<br>
+			</code>
+			<br>
+			還有更多傳回值，請參考《<a href='https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html'>Java API Specification</a>》。<br>
+			<br>
+			根據 <code>event.isAltDown()</code>、<code>event.isShiftDown()</code>、<code>event.isControlDown()</code> 可判斷是否搭配 Alt、Shift、Ctrl 組合鍵。<br>
+			<br>
+			綜合範例如下：<br>
+			<br>
+			<textarea class='brush:java'>
+				addKeyListener(new KeyAdapter(){
+					public void keyPressed(KeyEvent event){
+						if(event.isShiftDown() && event.getKeyCode() == KeyEvent.VK_A){
+							setTitle("HELLO");
+						}
+					}
+				});
+            </textarea>
+		</p>
+	</section>
+	<hr id='mouselistener'>
+	<section>
+		<h2>MouseListener、MouseMotionListener、MouseWheelListener</h2>
+		<hr>
+		<section>
+			<h3>mouseClicked</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseListener(new MouseAdapter(){
+						public void mouseClicked(MouseEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>mouseExited</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseListener(new MouseAdapter(){
+						public void mouseExited(MouseEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>mousePressed</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseListener(new MouseAdapter(){
+						public void mousePressed(MouseEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>mouseReleased</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseListener(new MouseAdapter(){
+						public void mouseReleased(MouseEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>mouseMoved</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseMotionListener(new MouseMotionAdapter(){
+						public void mouseMoved(MouseEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>mouseDragged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseMotionListener(new MouseMotionAdapter(){
+						public void mouseDragged(MouseEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>mouseWheelMoved</h3>
+			<p>
+				<textarea class='brush:java'>
+					addMouseWheelListener(new MouseWheelListener(){
+						public void mouseWheelMoved(MouseWheelEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<p>
+			MouseEvent 可根據 <code>getButton()</code> 的傳回值，判斷使用者按下哪一個滑鼠鍵：
+		</p>
+		<table>
+			<tr><td>MouseEvent.BUTTON1</td><td>左鍵</td></tr>
+			<tr><td>MouseEvent.BUTTON2</td><td>中鍵</td></tr>
+			<tr><td>MouseEvent.BUTTON3</td><td>右鍵</td></tr>
+		</table>
+		<p>
+			綜合範例如下：<br>
+			<br>
+			<textarea class='brush:java'>
+				addMouseListener(new MouseAdapter(){
+					public void mousePressed(MouseEvent event){
+						switch(event.getButton()){
+							case MouseEvent.BUTTON1:
+								setTitle("你按了滑鼠左鍵。");
+								break;
+							case MouseEvent.BUTTON2:
+								setTitle("你按了滑鼠中鍵。");
+								break;
+							case MouseEvent.BUTTON3:
+								setTitle("你按了滑鼠右鍵。");
+						}
+					}
+				});
+            </textarea>
+			<br>
+			可用 <code>event.isAltDown()</code>、<code>event.isShiftDown()</code>、<code>event.isControlDown()</code> 判斷是否同時按下 Alt、Shift、Ctrl 組合鍵。<br>
+			<br>
+			MouseWheelEvent 可根據 <code>getWheelRotation()</code> 傳回值是正數還是負數，可判斷使用者滾輪是往上滾動還是往下：<br>
+			<br>
+			<textarea class='brush:java'>
+				addMouseWheelListener(new MouseWheelListener(){
+					public void mouseWheelMoved(MouseWheelEvent event){
+						if(event.getWheelRotation() &lt; 0){
+							setTitle("滾輪往上");
+						}
+						else{
+							setTitle("滾輪往下");
+						}
+					}
+				});
+            </textarea>
+		</p>
+	</section>
+	<hr id='propertychangelistener'>
+	<section>
+		<h2>PropertyChangeListener</h2>
+		<hr>
+		<section>
+			<h3>propertyChange</h3>
+			<p>
+				<textarea class='brush:java'>
+					addPropertyChangeListener(new java.beans.PropertyChangeListener(){
+						public void propertyChange(java.beans.PropertyChangeEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='textlistener'>
+	<section>
+		<h2>TextListener</h2>
+		<hr>
+		<section>
+			<h3>textValueChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addTextListener(new TextListener(){
+						public void textValueChanged(TextEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='windowlistener'>
+	<section>
+		<h2>WindowListener、WindowFocusListener、WindowStateListener</h2>
+		<hr>
+		<section>
+			<h3>windowActivated</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowActivated(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowClosed</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowClosed(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowClosing</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowClosing(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowDeactivated</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowDeactivated(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowDeiconified</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowDeiconified(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowIconified</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowIconified(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowOpened</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowListener(new WindowAdapter(){
+						public void windowOpened(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowGainedFocus, windowLostFocus </h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowFocusListener(new WindowFocusListener(){
+						public void windowGainedFocus(WindowEvent event){
+
+						}
+						public void windowLostFocus(WindowEvent event){
+
+						}
+					});
+                </textarea>
+				<br>
+				沒有 WindowsFocusAdapter。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>windowStateChanged</h3>
+			<p>
+				<textarea class='brush:java'>
+					addWindowStateListener(new WindowStateListener(){
+						public void windowStateChanged(WindowEvent event){
+
+						}
+					});
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='removelistener'>
+	<section>
+		<h2>移除事件</h2>
+		<p>
+			可透過以下方式，取消登記過的事件：<br>
+			<br>
+			<code>
+				removeComponentListener(ComponentListener)<br>
+				removeFocusListener(FocusListener)<br>
+				removeHierarchyBoundsListener(HierarchyBoundsListener)<br>
+				removeHierarchyListener(HierarchyListener)<br>
+				removeInputMethodListener(InputMethodListener)<br>
+				removeKeyListener(KeyListener)<br>
+				removeMouseListener(MouseListener)<br>
+				removeMouseMotionListener(MouseMotionListener)<br>
+				removeMouseWheelListener(MouseWheelListener)<br>
+				removePropertyChangeListener(PropertyChangeListener)
+			</code>
+		</p>
+	</section>
+</article>

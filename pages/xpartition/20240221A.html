@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>最後紀元</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>修改</h2>
+		<p>
+			可以在 [USER]\AppData\LocalLow\Eleventh Hour Games\Last Epoch\Saves 直接改存檔。<br>
+			<br>
+			不要改 .bak 檔案，這是備份檔，改了也沒效果。
+		</p>
+		<hr>
+		<section>
+			<h3>1CHARACTERSLOT_BETA_0 之類的檔案</h3>
+			<p>
+				用來保存角色的能力、通關狀態、背包和裝備。<br>
+				<br>
+				可以直接最前面的 "level" 改為 100 讓等級攻頂！由於角色能力和天賦點數，是直接根據等級計算出來，所以不用再改其他屬性、點數，等級 1 到 100 就是一切能力的來源。<br>
+				<br>
+				技能的話在 "savedSkillTrees":[] 裡面，將 "slotNumber":0 到 "slotNumber":4 後面的 "xp" 改為 5700000 即可等級 20 也就是練滿。由於技能點數是用技能等級扣除已使用點數計算出來，所以沒有技能點數這項資料，想修改技能點數，就是把 "nodeIDs" 和 "nodePoints" 改為 [] 來重置點數。<br>
+				<br>
+				轉職是 "chosenMastery"，可設定為 0 到 2，分別對應可轉換的三種職業。職業天賦配點是 "savedCharacterTree":{}，同樣可以把裡面的 "nodeIDs" 和 "nodePoints" 改為 [] 來重置天賦。<br>
+				<br>
+				物品和裝備在 "savedItems":[] 裡。物品有鍛造值的話，可以在 "data":[] 的第 11 個數值修改，最高可改為 255，這樣就能好好提升詞綴的階級，打造好裝來穿，可說是樂趣最高的修改！但沒有鍛造值的套裝、獨特裝、傳奇裝不能這樣改，會變成打叉的錯誤裝備，所以要確認好再改！由於角色身上裝備和物品一堆，很難從大量的 "data" 中辨識想要改的物品，建議準備一個空無一物的倉庫頁，例如 STASH_0_TAB_1，把想修改的裝備丟進去，會比較好改。<br>
+				<br>
+				陣營是 "factions":{}，緊接於後的數字 "0" 表示命運，"1" 表示商人，將 "rank" 設定為 12 表示最高階級。<br>
+				<br>
+				祝福是 "blessingsDiscovered":[]，在裡面填入 0,1,2,3 一直到 223 便全解開。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>STASH_0 之類的檔案</h3>
+			<p>
+				這裡的項目，是所有角色共用的！<br>
+				<br>
+				例如金錢就是共用的，在這裡有 "gold" 可以改。<br>
+				<br>
+				也可以改工藝材料，"savedShards":[] 裡面是詞綴、"materialsList":[] 裡面是符文和雕文，可以透過 "quantity" 修改數量！<br>
+				<br>
+				想解開全部詞綴、符文和雕文，且數量 100 個的話，1.1.7 版的設定值是：<br>
+				<br>
+				<textarea class='brush:js'>
+					"savedShards":[
+						{"shardType":0,"quantity":100},{"shardType":1,"quantity":100},{"shardType":2,"quantity":100},{"shardType":3,"quantity":100},{"shardType":4,"quantity":100},{"shardType":5,"quantity":100},{"shardType":6,"quantity":100},{"shardType":7,"quantity":100},{"shardType":8,"quantity":100},{"shardType":9,"quantity":100},{"shardType":10,"quantity":100},{"shardType":11,"quantity":100},{"shardType":12,"quantity":100},{"shardType":13,"quantity":100},{"shardType":14,"quantity":100},{"shardType":15,"quantity":100},{"shardType":16,"quantity":100},{"shardType":17,"quantity":100},{"shardType":18,"quantity":100},{"shardType":19,"quantity":100},{"shardType":20,"quantity":100},{"shardType":21,"quantity":100},{"shardType":22,"quantity":100},{"shardType":23,"quantity":100},{"shardType":24,"quantity":100},{"shardType":25,"quantity":100},{"shardType":26,"quantity":100},{"shardType":27,"quantity":100},{"shardType":28,"quantity":100},{"shardType":29,"quantity":100},{"shardType":30,"quantity":100},{"shardType":31,"quantity":100},{"shardType":32,"quantity":100},{"shardType":33,"quantity":100},{"shardType":34,"quantity":100},{"shardType":35,"quantity":100},{"shardType":36,"quantity":100},{"shardType":37,"quantity":100},{"shardType":38,"quantity":100},{"shardType":39,"quantity":100},{"shardType":40,"quantity":100},{"shardType":41,"quantity":100},{"shardType":42,"quantity":100},{"shardType":43,"quantity":100},{"shardType":44,"quantity":100},{"shardType":45,"quantity":100},{"shardType":46,"quantity":100},{"shardType":47,"quantity":100},{"shardType":48,"quantity":100},{"shardType":49,"quantity":100},{"shardType":50,"quantity":100},{"shardType":51,"quantity":100},{"shardType":52,"quantity":100},{"shardType":53,"quantity":100},{"shardType":54,"quantity":100},{"shardType":55,"quantity":100},{"shardType":56,"quantity":100},{"shardType":57,"quantity":100},{"shardType":58,"quantity":100},{"shardType":59,"quantity":100},{"shardType":60,"quantity":100},{"shardType":61,"quantity":100},{"shardType":62,"quantity":100},{"shardType":63,"quantity":100},{"shardType":64,"quantity":100},{"shardType":65,"quantity":100},{"shardType":66,"quantity":100},{"shardType":67,"quantity":100},{"shardType":68,"quantity":100},{"shardType":69,"quantity":100},{"shardType":70,"quantity":100},{"shardType":71,"quantity":100},{"shardType":72,"quantity":100},{"shardType":73,"quantity":100},{"shardType":74,"quantity":100},{"shardType":75,"quantity":100},{"shardType":76,"quantity":100},{"shardType":77,"quantity":100},{"shardType":78,"quantity":100},{"shardType":79,"quantity":100},{"shardType":80,"quantity":100},{"shardType":81,"quantity":100},{"shardType":82,"quantity":100},{"shardType":83,"quantity":100},{"shardType":84,"quantity":100},{"shardType":85,"quantity":100},{"shardType":86,"quantity":100},{"shardType":87,"quantity":100},{"shardType":88,"quantity":100},{"shardType":89,"quantity":100},{"shardType":90,"quantity":100},{"shardType":91,"quantity":100},{"shardType":92,"quantity":100},{"shardType":93,"quantity":100},{"shardType":94,"quantity":100},{"shardType":95,"quantity":100},{"shardType":96,"quantity":100},{"shardType":97,"quantity":100},{"shardType":98,"quantity":100},{"shardType":99,"quantity":100},{"shardType":100,"quantity":100},{"shardType":101,"quantity":100},{"shardType":102,"quantity":100},{"shardType":103,"quantity":100},{"shardType":104,"quantity":100},{"shardType":192,"quantity":100},{"shardType":330,"quantity":100},{"shardType":331,"quantity":100},{"shardType":332,"quantity":100},{"shardType":333,"quantity":100},{"shardType":334,"quantity":100},{"shardType":335,"quantity":100},{"shardType":336,"quantity":100},{"shardType":337,"quantity":100},{"shardType":338,"quantity":100},{"shardType":339,"quantity":100},{"shardType":340,"quantity":100},{"shardType":341,"quantity":100},{"shardType":342,"quantity":100},{"shardType":343,"quantity":100},{"shardType":344,"quantity":100},{"shardType":345,"quantity":100},{"shardType":346,"quantity":100},{"shardType":347,"quantity":100},{"shardType":348,"quantity":100},{"shardType":349,"quantity":100},{"shardType":350,"quantity":100},{"shardType":351,"quantity":100},{"shardType":352,"quantity":100},{"shardType":353,"quantity":100},{"shardType":354,"quantity":100},{"shardType":355,"quantity":100},{"shardType":356,"quantity":100},{"shardType":357,"quantity":100},{"shardType":358,"quantity":100},{"shardType":359,"quantity":100},{"shardType":360,"quantity":100},{"shardType":361,"quantity":100},{"shardType":362,"quantity":100},{"shardType":363,"quantity":100},{"shardType":364,"quantity":100},{"shardType":365,"quantity":100},{"shardType":366,"quantity":100},{"shardType":367,"quantity":100},{"shardType":368,"quantity":100},{"shardType":369,"quantity":100},{"shardType":370,"quantity":100},{"shardType":371,"quantity":100},{"shardType":372,"quantity":100},{"shardType":373,"quantity":100},{"shardType":374,"quantity":100},{"shardType":375,"quantity":100},{"shardType":376,"quantity":100},{"shardType":377,"quantity":100},{"shardType":378,"quantity":100},{"shardType":379,"quantity":100},{"shardType":380,"quantity":100},{"shardType":381,"quantity":100},{"shardType":382,"quantity":100},{"shardType":383,"quantity":100},{"shardType":384,"quantity":100},{"shardType":385,"quantity":100},{"shardType":386,"quantity":100},{"shardType":387,"quantity":100},{"shardType":388,"quantity":100},{"shardType":389,"quantity":100},{"shardType":390,"quantity":100},{"shardType":391,"quantity":100},{"shardType":392,"quantity":100},{"shardType":393,"quantity":100},{"shardType":394,"quantity":100},{"shardType":395,"quantity":100},{"shardType":396,"quantity":100},{"shardType":397,"quantity":100},{"shardType":398,"quantity":100},{"shardType":399,"quantity":100},{"shardType":400,"quantity":100},{"shardType":401,"quantity":100},{"shardType":402,"quantity":100},{"shardType":404,"quantity":100},{"shardType":405,"quantity":100},{"shardType":406,"quantity":100},{"shardType":407,"quantity":100},{"shardType":408,"quantity":100},{"shardType":409,"quantity":100},{"shardType":410,"quantity":100},{"shardType":411,"quantity":100},{"shardType":412,"quantity":100},{"shardType":413,"quantity":100},{"shardType":414,"quantity":100},{"shardType":415,"quantity":100},{"shardType":416,"quantity":100},{"shardType":417,"quantity":100},{"shardType":418,"quantity":100},{"shardType":419,"quantity":100},{"shardType":420,"quantity":100},{"shardType":421,"quantity":100},{"shardType":422,"quantity":100},{"shardType":423,"quantity":100},{"shardType":424,"quantity":100},{"shardType":425,"quantity":100},{"shardType":426,"quantity":100},{"shardType":427,"quantity":100},{"shardType":428,"quantity":100},{"shardType":429,"quantity":100},{"shardType":431,"quantity":100},{"shardType":432,"quantity":100},{"shardType":433,"quantity":100},{"shardType":434,"quantity":100},{"shardType":435,"quantity":100},{"shardType":437,"quantity":100},{"shardType":439,"quantity":100},{"shardType":440,"quantity":100},{"shardType":442,"quantity":100},{"shardType":443,"quantity":100},{"shardType":446,"quantity":100},{"shardType":448,"quantity":100},{"shardType":449,"quantity":100},{"shardType":451,"quantity":100},{"shardType":453,"quantity":100},{"shardType":454,"quantity":100},{"shardType":457,"quantity":100},{"shardType":459,"quantity":100},{"shardType":461,"quantity":100},{"shardType":463,"quantity":100},{"shardType":468,"quantity":100},{"shardType":469,"quantity":100},{"shardType":471,"quantity":100},{"shardType":473,"quantity":100},{"shardType":475,"quantity":100},{"shardType":477,"quantity":100},{"shardType":479,"quantity":100},{"shardType":481,"quantity":100},{"shardType":483,"quantity":100},{"shardType":485,"quantity":100},{"shardType":487,"quantity":100},{"shardType":489,"quantity":100},{"shardType":494,"quantity":100},{"shardType":496,"quantity":100},{"shardType":498,"quantity":100},{"shardType":500,"quantity":100},{"shardType":501,"quantity":100},{"shardType":502,"quantity":100},{"shardType":503,"quantity":100},{"shardType":504,"quantity":100},{"shardType":505,"quantity":100},{"shardType":506,"quantity":100},{"shardType":507,"quantity":100},{"shardType":509,"quantity":100},{"shardType":511,"quantity":100},{"shardType":513,"quantity":100},{"shardType":515,"quantity":100},{"shardType":517,"quantity":100},{"shardType":519,"quantity":100},{"shardType":521,"quantity":100},{"shardType":524,"quantity":100},{"shardType":526,"quantity":100},{"shardType":528,"quantity":100},{"shardType":530,"quantity":100},{"shardType":532,"quantity":100},{"shardType":534,"quantity":100},{"shardType":536,"quantity":100},{"shardType":537,"quantity":100},{"shardType":539,"quantity":100},{"shardType":540,"quantity":100},{"shardType":541,"quantity":100},{"shardType":542,"quantity":100},{"shardType":543,"quantity":100},{"shardType":544,"quantity":100},{"shardType":545,"quantity":100},{"shardType":546,"quantity":100},{"shardType":547,"quantity":100},{"shardType":548,"quantity":100},{"shardType":549,"quantity":100},{"shardType":550,"quantity":100},{"shardType":551,"quantity":100},{"shardType":552,"quantity":100},{"shardType":553,"quantity":100},{"shardType":554,"quantity":100},{"shardType":555,"quantity":100},{"shardType":556,"quantity":100},{"shardType":557,"quantity":100},{"shardType":558,"quantity":100},{"shardType":559,"quantity":100},{"shardType":560,"quantity":100},{"shardType":561,"quantity":100},{"shardType":562,"quantity":100},{"shardType":563,"quantity":100},{"shardType":564,"quantity":100},{"shardType":565,"quantity":100},{"shardType":566,"quantity":100},{"shardType":567,"quantity":100},{"shardType":568,"quantity":100},{"shardType":569,"quantity":100},{"shardType":570,"quantity":100},{"shardType":571,"quantity":100},{"shardType":572,"quantity":100},{"shardType":573,"quantity":100},{"shardType":574,"quantity":100},{"shardType":575,"quantity":100},{"shardType":576,"quantity":100},{"shardType":577,"quantity":100},{"shardType":578,"quantity":100},{"shardType":579,"quantity":100},{"shardType":580,"quantity":100},{"shardType":581,"quantity":100},{"shardType":582,"quantity":100},{"shardType":583,"quantity":100},{"shardType":584,"quantity":100},{"shardType":585,"quantity":100},{"shardType":586,"quantity":100},{"shardType":587,"quantity":100},{"shardType":588,"quantity":100},{"shardType":589,"quantity":100},{"shardType":590,"quantity":100},{"shardType":591,"quantity":100},{"shardType":592,"quantity":100},{"shardType":593,"quantity":100},{"shardType":594,"quantity":100},{"shardType":595,"quantity":100},{"shardType":596,"quantity":100},{"shardType":597,"quantity":100},{"shardType":598,"quantity":100},{"shardType":599,"quantity":100},{"shardType":600,"quantity":100},{"shardType":601,"quantity":100},{"shardType":602,"quantity":100},{"shardType":603,"quantity":100},{"shardType":604,"quantity":100},{"shardType":605,"quantity":100},{"shardType":606,"quantity":100},{"shardType":607,"quantity":100},{"shardType":608,"quantity":100},{"shardType":609,"quantity":100},{"shardType":610,"quantity":100},{"shardType":611,"quantity":100},{"shardType":612,"quantity":100},{"shardType":613,"quantity":100},{"shardType":614,"quantity":100},{"shardType":615,"quantity":100},{"shardType":616,"quantity":100},{"shardType":617,"quantity":100},{"shardType":618,"quantity":100},{"shardType":619,"quantity":100},{"shardType":620,"quantity":100},{"shardType":621,"quantity":100},{"shardType":622,"quantity":100},{"shardType":623,"quantity":100},{"shardType":624,"quantity":100},{"shardType":625,"quantity":100},{"shardType":626,"quantity":100},{"shardType":627,"quantity":100},{"shardType":628,"quantity":100},{"shardType":629,"quantity":100},{"shardType":630,"quantity":100},{"shardType":631,"quantity":100},{"shardType":632,"quantity":100},{"shardType":633,"quantity":100},{"shardType":634,"quantity":100},{"shardType":635,"quantity":100},{"shardType":636,"quantity":100},{"shardType":637,"quantity":100},{"shardType":638,"quantity":100},{"shardType":639,"quantity":100},{"shardType":640,"quantity":100},{"shardType":641,"quantity":100},{"shardType":642,"quantity":100},{"shardType":643,"quantity":100},{"shardType":644,"quantity":100},{"shardType":645,"quantity":100},{"shardType":646,"quantity":100},{"shardType":647,"quantity":100},{"shardType":648,"quantity":100},{"shardType":649,"quantity":100},{"shardType":652,"quantity":100},{"shardType":653,"quantity":100},{"shardType":654,"quantity":100},{"shardType":655,"quantity":100},{"shardType":656,"quantity":100},{"shardType":660,"quantity":100},{"shardType":661,"quantity":100},{"shardType":662,"quantity":100},{"shardType":663,"quantity":100},{"shardType":665,"quantity":100},{"shardType":666,"quantity":100},{"shardType":667,"quantity":100},{"shardType":669,"quantity":100},{"shardType":670,"quantity":100},{"shardType":671,"quantity":100},{"shardType":672,"quantity":100},{"shardType":680,"quantity":100},{"shardType":681,"quantity":100},{"shardType":682,"quantity":100},{"shardType":683,"quantity":100},{"shardType":684,"quantity":100},{"shardType":687,"quantity":100},{"shardType":688,"quantity":100},{"shardType":690,"quantity":100},{"shardType":691,"quantity":100},{"shardType":693,"quantity":100},{"shardType":694,"quantity":100},{"shardType":695,"quantity":100},{"shardType":696,"quantity":100},{"shardType":709,"quantity":100},{"shardType":715,"quantity":100},{"shardType":717,"quantity":100},{"shardType":718,"quantity":100},{"shardType":719,"quantity":100},{"shardType":720,"quantity":100},{"shardType":721,"quantity":100},{"shardType":722,"quantity":100},{"shardType":723,"quantity":100},{"shardType":724,"quantity":100},{"shardType":725,"quantity":100},{"shardType":726,"quantity":100},{"shardType":727,"quantity":100},{"shardType":728,"quantity":100},{"shardType":729,"quantity":100},{"shardType":730,"quantity":100},{"shardType":731,"quantity":100},{"shardType":732,"quantity":100},{"shardType":733,"quantity":100},{"shardType":734,"quantity":100},{"shardType":735,"quantity":100},{"shardType":737,"quantity":100},{"shardType":739,"quantity":100},{"shardType":747,"quantity":100},{"shardType":748,"quantity":100},{"shardType":749,"quantity":100},{"shardType":759,"quantity":100},{"shardType":760,"quantity":100}
+					],
+
+					"materialsList":[
+						{"itemData":null,"data":[1,102,0],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,1],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,2],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,3],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,4],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,5],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,6],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,102,7],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,103,0],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,103,1],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,103,2],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,103,3],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,103,4],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2},{"itemData":null,"data":[1,103,5],"inventoryPosition":{"x":-4,"y":-4},"quantity":100,"formatVersion":2}
+					],
+                </textarea>
+				<br>
+				然而，新舊版本開放使用的詞綴可能不一樣，比如說 1.0 版可能沒有 1.1 新增的詞綴、1.1 版可能廢除 1.0 版的某些詞綴、未來 1.2 版可能多了新的詞綴，因此上面的修改只適用 1.1.7 版。<br>
+				<br>
+				祝福是 "unlockedBlessings":[]，裡面填入 0,1,2,3 一直到 223。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>STASH_0_TAB_0 之類的檔案</h3>
+			<p>
+				共用倉庫，物品都在 "savedShards":[] 裡面。<br>
+				<br>
+				地下城和競技場鑰匙，使用前請備份倉庫檔，以便還原，不然你倉庫的東西會被覆蓋：<br>
+				<br>
+				<textarea class='brush:js'>
+					"savedItems":[
+						{"itemData":null,"data":[3,255,255,104,7],"inventoryPosition":{"x":0,"y":11},"quantity":1,"formatVersion":2},{"itemData":null,"data":[3,255,255,104,3],"inventoryPosition":{"x":0,"y":12},"quantity":1,"formatVersion":2},{"itemData":null,"data":[3,255,255,104,0],"inventoryPosition":{"x":0,"y":13},"quantity":1,"formatVersion":2},{"itemData":null,"data":[3,255,255,104,4],"inventoryPosition":{"x":0,"y":14},"quantity":1,"formatVersion":2},{"itemData":null,"data":[3,255,255,104,6],"inventoryPosition":{"x":0,"y":15},"quantity":1,"formatVersion":2},{"itemData":null,"data":[3,255,255,104,5],"inventoryPosition":{"x":0,"y":16},"quantity":1,"formatVersion":2}
+					],
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>遊戲設定</h2>
+		<p>
+			保存在登錄檔，而不是檔案：<br>
+			<br>
+			HKEY_CURRENT_USER\Software\Eleventh Hour Games\Last Epoch
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>疑難雜症</h2>
+		<p>
+			第一次玩，左類比搖桿無法移動的話，必須點 CALIBRATE 完成校準動作。
+		</p>
+	</section>
+		<hr>
+		<footer>
+			<p>
+				[*] <a href='http://www.lastepochtools.com/zh/' target='_blank'>Last Epoch Tools</a>
+			</p>
+		</footer>
+</article>

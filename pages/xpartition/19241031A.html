@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>button{width:75px}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>猜拳遊戲的真相</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>遊戲</h2>
+		<p>
+			<button onclick='f(0)'>剪刀</button> <button onclick='f(1)'>石頭</button> <button onclick='f(2)'>布</button><br>
+			<br>
+			<span>請猜拳！</span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>程式碼</h2>
+		<p>
+			你覺得這猜拳遊戲是怎麼寫的呢？亂數決定電腦出什麼拳，然後和玩家出的拳比較？<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;button onclick='猜拳(0)'&gt;剪刀&lt;/button&gt;
+				&lt;button onclick='猜拳(1)'&gt;石頭&lt;/button&gt;
+				&lt;button onclick='猜拳(2)'&gt;布&lt;/button&gt;
+				&lt;p&gt;請猜拳！&lt;/p&gt;
+				&lt;script&gt;
+					let 出拳=['剪刀','石頭','布'];
+					let 訊息=document.querySelector('p');
+					function 猜拳(玩家){
+						let 電腦 = Math.floor(Math.random()*3);
+						switch((玩家-電腦+3)%3){
+						case 0:
+							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[電腦]} = 平手。`;
+							break;
+						case 1:
+							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[電腦]} = 你贏了！`;
+							break;
+						case 2:
+							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[電腦]} = 你輸了～`;
+						}
+					}
+				&lt;/script&gt;
+            </textarea>
+			<br>
+			跟真人互猜的話，或許是這樣寫沒錯，但與電腦猜拳的話，真相是…<br>
+			<br>
+			<textarea class='brush:html'>
+				&lt;button onclick='猜拳(0)'&gt;剪刀&lt;/button&gt;
+				&lt;button onclick='猜拳(1)'&gt;石頭&lt;/button&gt;
+				&lt;button onclick='猜拳(2)'&gt;布&lt;/button&gt;
+				&lt;p&gt;請猜拳！&lt;/p&gt;
+				&lt;script&gt;
+					let 出拳=['剪刀','石頭','布'];
+					let 訊息=document.querySelector('p');
+					function 猜拳(玩家){
+						let 機率=Math.ceil(Math.random()*100);
+						if(機率&lt;=50)
+							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[(玩家+1)%3]} = 你輸了～`;
+						else if(機率&lt;=75)
+							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[玩家]} = 平手。`;
+						else
+							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[(玩家+2)%3]} = 你贏了！`;
+					}
+				&lt;/script&gt;
+            </textarea>
+			<br>
+			直接 50% 機率猜輸，有 25% 機率平手，剩下 25% 會贏，然後根據輸贏，看你出什麼，電腦就跟著出什麼，根本不需要費心處理雙方各猜什麼！
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>省思</h2>
+		<p>
+			在設計遊戲，總想不出程式該怎麼動作才對時，表示你不該再站在「玩家」的立場思考，而應該站在設下這場賭局的「莊家」立場，來釐清究竟是怎麼回事～
+		</p>
+	</section>
+</article>
+<script>
+	let a=['剪刀','石頭','布'];
+
+	function f(x)
+	{
+		let g=Math.ceil(Math.random()*100);
+
+		if(g<50) $('span').innerHTML=`${a[x]} vs ${a[(x+1)%3]} = <span style='color:orangered'>你輸了～</span>`;
+		else if(g<75) $('span').innerHTML=`${a[x]} vs ${a[x]} = <span style='color:dodgerblue'>平手。</span>`;
+		else $('span').innerHTML=`${a[x]} vs ${a[(x+2)%3]} = <span style='color:yellowgreen'>你贏了！</span>`;
+	}
+</script>

@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>Python 進階範例集</h1>
+		<p>
+			這裡示範的是雖然內建於 Python 標準程式庫，但必須 import 才能使用的模組。<br>
+			<br>
+			標準模組通常用來解決特定問題，有需求了再學怎麼用就好，不必急著把所有標準模組都學起來。它是選用的，不是必要的。
+		</p>
+	</header>
+	<hr id='os'>
+	<section>
+		<h2>os</h2>
+		<p>
+			這模組功能太多了，根本就是一套 DOS 或 Shell，示範不完。推薦查 RUNOOB.COM 整理的《<a href='http://www.runoob.com/python/os-file-methods.html'>Python OS 文件/目录方法</a>》常用一覽表，或直接翻《<a href='http://docs.python.org/3/library/os.html'>16.1. os — Miscellaneous operating system interfaces</a>》比較實際。
+		</p>
+		<hr>
+		<section>
+			<h3>作業系統</h3>
+			<table>
+				<tr><td style='width:60%'>os.name</td><td>作業系統名稱</td></tr>
+				<tr><td>os.cpu_count()</td><td>處理器核心數</td></tr>
+				<tr><td>os.getlogin()</td><td>登入者帳號</td></tr>
+				<tr><td>os.putenv(key, value)</td><td>加入環境變數</td></tr>
+				<tr><td>os.getenv(key)</td><td>取得環境變數</td></tr>
+				<tr><td>os.unsetenv(key)</td><td>移除環境變數</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>資料夾與檔案</h3>
+			<p>
+				os 雖然提供檔案系統的功能，但並不完善，所以要搭配 shutil 或其它模組。
+			</p>
+			<table>
+				<tr><td style='width:60%'>os.sep</td><td>資料夾階層符號 / 或 \</td></tr>
+				<tr><td>os.linesep</td><td>換行字元（CR、LF）</td></tr>
+				<tr><td>os.mkdir(path)</td><td>建立資料夾</td></tr>
+				<tr><td>shutil.copytree(src, dst)</td><td>複製資料夾</td></tr>
+				<tr><td>shutil.rmtree(path)</td><td>刪除資料夾</td></tr>
+				<tr><td>shutil.move(src, dst)</td><td>移動或改名資料夾或檔案</td></tr>
+				<tr><td>os.chdir(path)</td><td>切換資料夾</td></tr>
+				<tr><td>os.getcwd()</td><td>顯示現在所在資料夾</td></tr>
+				<tr><td>os.listdir(path)</td><td>顯示資料夾和檔案</td></tr>
+				<tr><td>os.walk(path)</td><td>顯示子資料夾和檔案</td></tr>
+				<tr><td>open(file, 'w')</td><td>建立檔案</td></tr>
+				<tr><td>shutil.copyfile(src, dst)</td><td>複製檔案</td></tr>
+				<tr><td>os.remove(path)</td><td>刪除檔案</td></tr>
+				<tr><td>os.stat(fd)</td><td>顯示檔案訊息</td></tr>
+				<tr><td>os.path.getsize(path)</td><td>取得檔案大小</td></tr>
+				<tr><td>os.path.abspath(path)</td><td>取得完整路徑</td></tr>
+				<tr><td>os.path.dirname(path)</td><td>取得不含檔案名稱的路徑</td></tr>
+				<tr><td>os.path.splitdrive(path)[0]</td><td>取得磁碟機代號</td></tr>
+				<tr><td>os.path.basename(path)</td><td>取得檔案名稱</td></tr>
+				<tr><td>os.path.splitext(path)[-1]</td><td>取得副檔名</td></tr>
+				<tr><td>os.path.join(path, *paths)</td><td>合併路徑字串</td></tr>
+				<tr><td>os.path.exists(path)</td><td>檢查檔案或資料夾是否存在</td></tr>
+				<tr><td>os.path.isdir(path)</td><td>檢查是否為資料夾</td></tr>
+				<tr><td>os.path.isfile(path)</td><td>檢查是否為檔案</td></tr>
+				<tr><td>glob.glob(path, times)</td><td>按匹配規則取得資料夾和檔案</td></tr>
+				<tr><td>os.utime(path, times)</td><td>設定修改與存取日期</td></tr>
+			</table>
+			<section>
+				<h4>列出資料夾和檔案</h4>
+				<p>
+					<textarea class='brush:py'>
+						import os
+
+						for root, dirs, files in os.walk('C:\Program Files\Python\Tools'):
+							for file in files:
+								print(os.path.join(root, file))
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>規則式匹配</h4>
+				<p>
+					<textarea class='brush:py'>
+						import glob
+
+						print(glob.glob('*.py'))  # 列出副檔名為 py 的檔案
+						print(glob.glob('???.*')) # 列出檔名只有三個字的檔案
+						print(glob.glob('../*'))  # 列出上一層目錄的所有檔案
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>設定檔案修改與存取日期</h4>
+				<p>
+					<textarea class='brush:py'>
+						import os
+
+						os.utime('sample.py', (665251200, 665251200))
+
+						# 要修改建立日期的話，
+						# Linux 可調用 touch -t 199101310000.00 sample.py 終端機指令。
+						# Windows 可調用 PoserShell 的 Get-Item 修改 creationtime 屬性：
+						# powershell $(Get-Item 檔名).creationtime=$(Get-Date 時間)
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>直接調用作業系統指令工具</h3>
+			<table>
+				<tr><td style='width:60%'>os.system(command)</td><td>執行指令。</td></tr>
+			</table>
+			<p>
+				從其它程式語言跨過來 Python 的人，經常看不起這個模組功能，覺得調用作業系統指令沒尊嚴，非得用程式設計的方式完成任務才行。但 Python 的精神就是：「這個模組超好用，很多工作用這個功能就能完成，而且很有效率。」所以別想太多，放手去用吧！<br>
+				<br>
+				Python 是表述語言，用 os.system() 呼叫系統指令，在第一時間解決問題，同時又確保功能正常，是很自然而然的編程手法。爾後再找時間查看看有沒有模組可用，屆時再改寫。例如想設計修圖軟體，如果電腦已經有 ImageMagick 工具程式可調用，那就不見得要安裝 Pillow 模組。<br>
+				<br>
+				表述語言（scripting language）就是隨手抄寫一段程式碼來跑的語言，不必用傳統程式語言嚴肅的態度，隨時都拿開發軟體的精神寫程式。放鬆心情，好好享受程式寫作的樂趣。無論為誰工作寫程式，你總能為自己寫 Python，而不是只為公司寫 C++ 或 Java，這就是它與眾不同的地方。
+			</p>
+			<section>
+				<h4>更改命令提示字元的背景和文字顏色</h4>
+				<p>
+					<textarea class='brush:py'>
+						import os
+
+						os.system('color f9')
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>用 PoserShell 修改檔案日期</h4>
+				<p>
+					<textarea class='brush:py'>
+						import os
+
+						powershell = r'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+						file = '$(Get-Item sample.py)'
+						date = '$(Get-Date 1991-01-31T12:00:00.0+08:00)'
+
+						os.system('%s %s.CreationTime=%s' % (powershell, file, date))
+						os.system('%s %s.LastWriteTime=%s' % (powershell, file, date))
+						os.system('%s %s.LastAccessTime=%s' % (powershell, file, date))
+                    </textarea>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='sys'>
+	<section>
+		<h2>sys</h2>
+		<p>
+			sys 模組用來操作直譯器，進階一點的可以關閉某些直譯器的功能，基本一點的就是取得平台參數。
+		</p>
+		<hr>
+		<section>
+			<h3>取得指令參數</h3>
+			<p>
+				沒有輸入參數的話，會顯示 IndexError: list index out of range 錯誤，所以使用前應檢查資料長度。檢查時，因為 sys.argv[0] 已經放原始碼的檔名，所以 sys.argv 長度至少是 1。於是程式碼寫起來就像…<br>
+				<br>
+				<textarea class='brush:py'>
+					import sys
+
+					if len(sys.argv) &gt; 1:
+						print(sys.argv[1])
+                </textarea>
+				<br>
+				假設將上面程式儲存為 sample.py，然後在命令提示字元輸入 python sample.py hello：<br>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				由於要處理的細節很多，所以真要仰賴指令參數來操作程式的話，應找第三方模組掛載來用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用的作業系統</h3>
+			<p>
+				<textarea class='brush:py'>
+					import sys
+
+					# 輸出作業系統名稱
+					print(sys.platform)
+
+					# 判斷使用的作業系統
+					if sys.platform.startswith('win'):
+						print(0.0)
+                </textarea>
+				<br>
+				<output>
+					win32<br>
+					0.0
+				</output>
+				<br>
+				即使是 64 位元的 Windows 10，Python 還是取名為 win32。所以想判斷哪種作業系統時，建議使用檢查開頭是否符合字串的 startswith()，這樣只要檢查是否為 win 開頭就好，不然 if sys.platform=='win32' 感覺過時了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用的 Python 版本</h3>
+			<p>
+				<textarea class='brush:py'>
+					import sys
+
+					# 顯示 Python 版號
+					print(sys.version_info)
+
+					# 判斷是否使用 Python 3
+					if sys.version_info.major == 3:
+						print(0.0)
+                </textarea>
+				<br>
+				<output>
+					sys.version_info(major=3, minor=6, micro=5, releaselevel='final', serial=0<br>
+					0.0
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='ctypes'>
+	<section>
+		<h2>ctypes</h2>
+		<p>
+			ctypes 讓 Python 可以支援 C 語言程式設計，像是資料型態的相容與轉換、系統底層信號的獲取與聯繫、程式庫的調用。<br>
+			<br>
+			尤其 ctypes 底下的 windll，直接提供 gdi32、kernel32、ole32…琳瑯滿目的 Windows 動態連結程式庫，當 Python 的功能不足，無法解決問題時，除了下載第三方模組外，就是深入研究 ctypes 了～
+		</p>
+		<hr>
+		<section>
+			<h3>滑鼠</h3>
+			<p>
+				<textarea class='brush:py'>
+					import ctypes
+
+					# 取得滑鼠游標位置
+					class Point(ctypes.Structure):
+						_fields_ = [('x', ctypes.c_long), ('y', ctypes.c_long)]
+					point = Point()
+					ctypes.windll.user32.GetCursorPos(ctypes.byref(point))
+					print(point.x, point.y)
+
+					# 移動滑鼠
+					ctypes.windll.user32.SetCursorPos(100, 20)	# 移動滑鼠
+
+					# 按下滑鼠
+					ctypes.windll.user32.mouse_event(2, 0, 0, 0, 0) # 按下滑鼠左鍵
+					ctypes.windll.user32.mouse_event(4, 0, 0, 0, 0) # 放開滑鼠左鍵
+
+					# 8  按下滑鼠右鍵
+					# 16 放開滑鼠右鍵
+					# 32 按下滑鼠中鍵
+					# 64 放開滑鼠中鍵
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>鍵盤</h3>
+			<p>
+				<textarea class='brush:py'>
+					import ctypes
+
+					ctypes.windll.user32.keybd_event(18, 0, 0, 0) # 按下 Alt 鍵
+					ctypes.windll.user32.keybd_event(18, 0, 2, 0) # 放開 Alt 鍵
+                </textarea>
+				<br>
+				你可能會需要查看「<a href='19690325A.html#ctypes'>鍵盤代碼</a>」。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>調用 Windows 系統能力播放 MP3 格式音樂</h3>
+			<p>
+				<textarea class='brush:py'>
+					import ctypes
+					import sys
+					import time
+
+					ctypes.windll.winmm.mciSendStringA('open "audio.mp3" alias playaudio'.encode(sys.getfilesystemencoding()))
+					buffer = ctypes.c_buffer(255)
+					ctypes.windll.winmm.mciSendStringA('status playaudio length'.encode(sys.getfilesystemencoding()), buffer, 254, 0)
+					ctypes.windll.winmm.mciSendStringA(('play playaudio from 0 to ' + buffer.value.decode()).encode(sys.getfilesystemencoding()))
+
+					time.sleep(float(buffer.value) / 1000.0)
+                </textarea>
+				<br>
+				這只是範例，如果需要播放 MP3 等各式音樂，應使用專人設計的模組。<br>
+				<br>
+				由於 Python 不支援播放 MP3 格式音樂的能力，所以示範如何藉由 ctypes 調用 Windows 系統播放音樂的能力，不是真的要你這樣播放音樂。<br>
+				<br>
+				推薦使用 PyPI 上的 <a href='http://pypi.org/project/playsound/'>playsound</a> 模組，這模組除了可用 pip 安裝外，也可直接下載解開，跟你的原始碼放在一起使用，而且還跨平台！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>載入其它 DLL 檔調用程式功能</h3>
+			<p>
+				底下調用 <a href='http://github.com/andlabs/libui'>libui.dll</a> 裡面的 uiInit()、uiNewWindow()、uiControlShow()、uiMain() 等程式功能，寫個視窗來跑。由於同時示範了結構、指標和轉型，所以看不懂的話，只看高亮度標示起來的程式即可，知道怎麼調用 DLL 裡面的程式就好：<br>
+				<br>
+				<textarea class='brush:py'>
+					import ctypes
+
+					# 調用 libui 功能時需要用到的介面，這不重要，請跳過直接往下看…
+					class uiInitOptions(ctypes.Structure):
+						pass
+
+					class uiWindow(ctypes.Structure):
+						pass
+
+					class uiControl(ctypes.Structure):
+						pass
+
+					# 載入跟 Python 原始碼放在一起的 libui.dll
+					dll = ctypes.cdll.LoadLibrary('.\libui.dll')
+
+					# 調用取得的 DLL 各項程式功能
+					options = ctypes.byref(uiInitOptions())
+					dll.uiInit(options)
+
+					string = ctypes.c_char_p(bytes('TITLE', 'utf-8'))
+					dll.uiNewWindow.restype = ctypes.POINTER(uiWindow)
+					window = dll.uiNewWindow(string, 320, 240, 0)
+
+					control = ctypes.cast(window, ctypes.POINTER(uiControl))
+					dll.uiControlShow(control)
+
+					dll.uiMain()
+                </textarea>
+				<br>
+				<img src='../../images/overcast/19691201A.png' alt='插圖'><br>
+				<br>
+				如果調用的 DLL 是 Windows 專用，改用 <code>ctypes.windll.LoadLibrary()</code> 載入。<br>
+				<br>
+				ctypes.cdll.LoadLibrary() 和 ctypes.windll.LoadLibrary() 各有別名 <code>ctypes.CDLL()</code> 和 <code>ctypes.WINDLL()</code> 可代替。
+			</p>
+		</section>
+	</section>
+	<hr id='msvcrt'>
+	<section>
+		<h2>msvcrt</h2>
+		<p>
+			<textarea class='brush:py'>
+				import msvcrt
+				import time
+
+				def f():
+					if msvcrt.kbhit():
+						return msvcrt.getch()
+					return False
+
+				while True:
+					a = f()
+					if a:
+						print(a)
+					time.sleep(0.5)
+            </textarea>
+		</p>
+	</section>
+	<hr id='time'>
+	<section>
+		<h2>time</h2>
+		<p>
+			time 模組用來產生 timestamp 和 time.struct_time 兩種時間格式，適合處理 POSIX 時間，並且表示為 UTC 時間。
+		</p>
+		<hr>
+		<section>
+			<h3>取得現在日期與時間</h3>
+			<p>
+				<textarea class='brush:py'>
+					import time
+
+					time = time.localtime()
+
+					print('年', time.tm_year)
+					print('月', time.tm_mon)
+					print('日', time.tm_mday)
+					print('時', time.tm_hour)
+					print('分', time.tm_min)
+					print('秒', time.tm_sec)
+					print('週', time.tm_wday + 1) # 要加 1 才符合台灣慣用的星期數
+                </textarea>
+				<br>
+				執行結果隨電腦時間不一樣，我的情況是：<br>
+				<br>
+				<output>
+					年 2016<br>
+					月 9<br>
+					日 23<br>
+					時 2<br>
+					分 24<br>
+					秒 47<br>
+					週 5
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>產生時間與時間轉換</h3>
+			<p>
+				POSIX 時間是 UNIX 作業系統計算時間的方式，以 UTC 時間 1970 年 1 月 1 日 0 時 0 分 0 為基準，累加或累減的總秒數，在 Python 稱為 timestamp。以秒數為單位的話，時間就能以整數表示<ins>1</ins>，較方便對時間進行十進制的四則計算：「946753440 秒加 93784 秒，比 2000 年 1 月 2 日 3 點 4 分 5 秒加 1 天 2 小時 3 分 4 秒好算多了。」因此成為現在電腦表示時間的標準做法。<br>
+				<br>
+				但用總秒數表示時間只是方便電腦計算而已，不方便人類表示時間，例如 665251200 秒是幾月幾日幾點幾分？所以從電腦取得的時間，還是得轉換成人類習慣的時間表示法才行。Python 使用 time.struct_time 保存 UTC 時間（世界協調時間），把時間分為天、時、分、秒，採用格里曆計算年份。<br>
+				<br>
+				<textarea class='brush:py'>
+					import time
+
+					# UTC 轉 POSIX Time（time.struct_time 轉 timestamp）
+					print(time.mktime((1991, 1, 31, 0, 0, 0, 0, 0, 0))) # 年 月 日 時 分 秒 週 天 日光節約
+
+					# POSIX Time 轉 UTC（timestamp 轉 time.struct_time）
+					print(time.localtime(665251200))
+                </textarea>
+				<br>
+				<output>
+					665251200.0<br>
+					time.struct_time(tm_year=1991, tm_mon=1, tm_mday=31, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=31, tm_isdst=0)
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>格式化輸出時間</h3>
+			<p>
+				透過格式化字串的參數，可以簡化取得日期與時間的寫法：<br>
+				<br>
+				<textarea class='brush:py'>
+					import time
+
+					# 格式化輸出時間
+					print(time.strftime('%m / %d'))
+                </textarea>
+				<br>
+				執行結果隨電腦時間不一樣，我的情況是：<br>
+				<br>
+				<output>
+					09 / 23
+				</output>
+				<br>
+				要打中文的話，必須載入 locale 模組，用 <code>locale.setlocale(locale.LC_ALL, '')</code> 清除直譯器的地區與語言設置，否則格式化字串時無法解碼中文。往後遇到中文亂碼問題，也用這招解決。<br>
+				<br>
+				更多格式化參數如下：
+			</p>
+			<table>
+				<tr><td style='width:10%'>%a</td><td>英文星期縮寫。</td></tr>
+				<tr><td style='width:10%'>%A</td><td>英文星期名稱。</td></tr>
+				<tr><td style='width:10%'>%b</td><td>英文月份縮寫。</td></tr>
+				<tr><td style='width:10%'>%B</td><td>英文月份名稱。</td></tr>
+				<tr><td style='width:10%'>%c</td><td>直接套用直譯器默認的在地化日期與時間。</td></tr>
+				<tr><td style='width:10%'>%d</td><td>日，01 到 31。</td></tr>
+				<tr><td style='width:10%'>%H</td><td>時，00 到 23。</td></tr>
+				<tr><td style='width:10%'>%I</td><td>時，01 到 12。</td></tr>
+				<tr><td style='width:10%'>%j</td><td>一年的第幾天，閏年的關係，從 001 到 366。</td></tr>
+				<tr><td style='width:10%'>%m</td><td>月，01 到 12。</td></tr>
+				<tr><td style='width:10%'>%M</td><td>分，00 到 59。</td></tr>
+				<tr><td style='width:10%'>%p</td><td>AMP 或 PM。</td></tr>
+				<tr><td style='width:10%'>%S</td><td>秒，閏秒的關係，可從 00 到 61 秒。</td></tr>
+				<tr><td style='width:10%'>%U</td><td>一年的第幾週。</td></tr>
+				<tr><td style='width:10%'>%w</td><td>星期，星期日是 0。</td></tr>
+				<tr><td style='width:10%'>%W</td><td>一年的第幾週。</td></tr>
+				<tr><td style='width:10%'>%x</td><td>直接套用直譯器默認的在地化日期。（不見得與作業系統的在地化一致）</td></tr>
+				<tr><td style='width:10%'>%X</td><td>直接套用直譯器默認的在地化時間。（不見得與作業系統的在地化一致）</td></tr>
+				<tr><td style='width:10%'>%y</td><td>年，00 到 99。</td></tr>
+				<tr><td style='width:10%'>%Y</td><td>年。</td></tr>
+				<tr><td style='width:10%'>%z</td><td>時區，例如台灣是 +0800。</td></tr>
+				<tr><td style='width:10%'>%Z</td><td>時區名稱，例如台灣是台北標準時間。</td></tr>
+				<tr><td style='width:10%'>%%</td><td>輸出 % 符號。</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>格式化剖析時間</h3>
+			<p>
+				沿用格式化字串的參數，可以更簡單產生日期與時間：<br>
+				<br>
+				<textarea class='brush:py'>
+					import time
+
+					print(time.strptime('1991/1/31', '%Y/%m/%d'))
+					print(time.strptime('20160923', '%Y%m%d'))
+					print(time.strptime('2018 3 27', '%Y %m %d'))
+
+					# 先給日期與時間，再根據字串格式，正確引入參數，進行剖析。
+                </textarea>
+				<br>
+				<output>
+					time.struct_time(tm_year=1991, tm_mon=1, tm_mday=31, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=31, tm_isdst=-1)<br>
+					time.struct_time(tm_year=2016, tm_mon=9, tm_mday=23, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=4, tm_yday=267, tm_isdst=-1)<br>
+					time.struct_time(tm_year=2018, tm_mon=3, tm_mday=27, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=1, tm_yday=86, tm_isdst=-1)
+				</output>
+				<br>
+				由於預設的參數是 <code>%a %b %d %H:%M:%S %Y</code>，所以懶得下參數，只照字串格式寫也可以：<br>
+				<br>
+				<textarea class='brush:py'>
+					import time
+
+					print(time.strptime('Thu Jan 31 0:0:0 1991'))
+                </textarea>
+				<br>
+				<output>
+					time.struct_time(tm_year=1991, tm_mon=1, tm_mday=31, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=31, tm_isdst=-1)
+				</output>
+				<br>
+				要說 strptime 與 strftime 的差別，一個是產生時間用的，所以傳回的是 time.struct_time 物件，一個是輸出時間用的，所以傳回的是字串。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>暫停</h3>
+			<p>
+				<textarea class='brush:py'>
+					import time
+
+					for n in range(1, 4):
+						print(n)
+						time.sleep(2)
+                </textarea>
+				<br>
+				每兩秒顯示一行：<br>
+				<br>
+				<output>
+					1<br>
+					2<br>
+					3
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='datetime'>
+	<section>
+		<h2>datetime</h2>
+		<p>
+			datetime 模組設計了 time、date、datetime、timedelta、tzinfo、timezone 等物件，適合計算日期與時間，以及處理時區的問題。
+		</p>
+		<hr>
+		<section>
+			<h3>表示日期與時間</h3>
+			<p>
+				<textarea class='brush:py'>
+					import datetime
+
+					# date 物件，適合處理日期。
+					print(datetime.date.today())
+					print(datetime.date(1991, 1, 31))
+
+					# time 物件，datetime 內部用來處理時間，基本上用不到，不建議使用。
+					print(datetime.time(8, 30, 59))
+
+					# datetime 物件，由 date 和 time 構成，適合處理時間。
+					print(datetime.datetime.now())
+					print(datetime.datetime(1991, 1, 31, 0, 0, 0))
+                </textarea>
+				<br>
+				<output>
+					2016-09-23<br>
+					1991-01-31<br>
+					08:30:59<br>
+					2016-09-23 02:24:47.000020<br>
+					1991-01-31 00:00:00
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>計算日期與時間</h3>
+			<p>
+				<textarea class='brush:py'>
+					import datetime
+
+					# 1991 年 1 月 31 日加 3 天
+					date = datetime.date(1991, 1, 31) + datetime.timedelta(days=3)
+					print(date)
+
+					# 現在時間減 8 小時又 5 分鐘
+					time = datetime.datetime.now() - datetime.timedelta(hours=8, minutes=5)
+					print(time)
+
+					# 所有 timedelta() 可用關鍵字參數如下：
+					# weeks, days, hours, minutes, seconds, milliseconds, microseconds
+                </textarea>
+				<br>
+				<output>
+					1991-02-03<br>
+					2016-09-22 18:19:47
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>datatime 轉 timestamp 和 time.struct_time</h3>
+			<p>
+				<textarea class='brush:py'>
+					import datetime
+
+					# datatime 轉 timestamp
+					print(datetime.datetime.now().timestamp())
+
+					# datatime 轉 time.struct_time
+					print(datetime.datetime.now().timetuple())
+
+					# timestamp 轉 datatime
+					print(datetime.datetime.fromtimestamp(665251200))
+
+					# 沒有 time.struct_time 轉 datatime，只好先轉成 timestamp：
+					import time
+					timetuple = time.struct_time((1991, 1, 31, 0, 0, 0, 0, 0, 0))
+					timestamp = time.mktime(timetuple)
+					print(datetime.datetime.fromtimestamp(timestamp))
+                </textarea>
+				<br>
+				<output>
+					1474568687.0<br>
+					time.struct_time(tm_year=2016, tm_mon=9, tm_mday=23, tm_hour=2, tm_min=24, tm_sec=47, tm_wday=4, tm_yday=267, tm_isdst=-1)<br>
+					1991-01-31 00:00:00<br>
+					1991-01-31 00:00:00
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='calendar'>
+	<section>
+		<h2>calendar</h2>
+		<p>
+			<textarea class='brush:py'>
+				import calendar
+
+				print(calendar.month(2016, 3))
+            </textarea>
+			<br>
+			<output>
+				&nbsp; &nbsp; &nbsp;March 2016<br>
+				Mo Tu We Th Fr Sa Su<br>
+				&nbsp; &nbsp; 1&nbsp; 2&nbsp; 3&nbsp; 4&nbsp; 5&nbsp; 6<br>
+				&nbsp;7 &nbsp;8 &nbsp;9 10 11 12 13<br>
+				14 15 16 17 18 19 20<br>
+				21 22 23 24 25 26 27<br>
+				28 29 30 31
+			</output>
+			<br>
+			改成 <code>calendar.calendar(2016)</code> 則是年曆。
+		</p>
+	</section>
+	<hr id='random'>
+	<section>
+		<h2>random</h2>
+		<p>
+			<textarea class='brush:py'>
+				import random
+
+				# 隨機取得整數
+				print(random.randrange(10))
+				print(random.randrange(1, 100))
+
+				# 隨機取得串列中的元素
+				print(random.example([1, 2, 3, 4, 5], 3))
+				print(random.choice('abcde'))
+
+				# 隨機排序串列
+				a = [1, 2, 3, 4, 5]
+				random.shuffle(a)
+				print(a)
+
+				# 浮點數
+				print(random.random())
+				print(random.uniform(1, 10))
+            </textarea>
+			<br>
+			每次執行結果不一樣，我的情況是：<br>
+			<br>
+			<output>
+				2<br>
+				45<br>
+				[3, 2, 4]<br>
+				b<br>
+				[5, 3, 2, 1, 4]<br>
+				0.1667224583656005<br>
+				7.823417145446308
+			</output>
+		</p>
+	</section>
+	<hr id='re'>
+	<section>
+		<h2>re</h2>
+		<p>
+			re 是 regular expression 的縮寫，它有獨特的語法可以描述「規則」，例如 (abc) 表示 abc，[abc] 表示 a 或 b 或 c，a{3} 表示 aaa，a{2, 4} 表示二到四個 a，.{5} 表示任意五個字元…，原本要用十幾行程式來比對字串的資料，用 regular expression 可以一行搞定。缺點是很難看得懂在寫什麼。<br>
+			<br>
+			本節只介紹 re 模組的功能，更多 regular expression 語法，請參考《<a href='19560001X.html'>Regular Expressions</a>》。
+		</p>
+		<hr>
+		<section>
+			<h3>用 re.search() 比對資料</h3>
+			<p>
+				<textarea class='brush:py'>
+					import re
+
+					print(re.search('abc', 'abc123')) # 比對看看有沒有 abc 這資料
+					print(re.search('xyz', 'abc123')) # 比對看看有沒有 xyz 這資料
+                </textarea>
+				<br>
+				<output>
+					&lt;_sre.SRE_Match object; span=(0, 3), match='abc'&gt;<br>
+					None
+				</output>
+				<br>
+				比對到資料，會傳回落落長不曉得是什麼訊息的東西，其實這是 MatchObject 物件。<br>
+				<br>
+				比對不到資料，則傳回 None。<br>
+				<br>
+				有傳回物件的話，if 會判定為 True。None 的話，if 判定為 False。只想檢查有沒有資料時，就夠功能設計出來了：<br>
+				<br>
+				<textarea class='brush:py'>
+					import re
+
+					if re.search('abc123', input('請輸入通關密語：')):
+						print('帳戶登入中，請稍候…')
+					else:
+						print('密碼錯誤。')
+                </textarea>
+				<br>
+				<output>
+					請設定通關密語：abc123<br>
+					帳戶登入中，請稍候…
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>對 MatchObject 的操作</h3>
+			<p>
+				接著來看怎樣處理 MatchObject 物件。我們看到上面範例輸出結果，有個 span=(0, 3)，這是所找到資料的位置，還有 match='abc'，這是所找到的資料，可分別用 span() 和 group() 取出：<br>
+				<br>
+				<textarea class='brush:py'>
+					import re
+
+					print(re.search('abc', 'abc123').span())
+                </textarea>
+				<br>
+				<output>
+					(0, 3)
+				</output>
+				<br>
+				既然比對不到資料會傳回 None，就表示有可能不是 MatchObject 物件。既然不見得是 MatchObject，直接對 re.search() 操作 span() 不就程式錯誤了！所以…<br>
+				<br>
+				<textarea class='brush:py'>
+					import re
+
+					a = re.search('abc', 'abc123')
+					if a:
+						print(a.span())
+
+					a = re.search('\d{3}', 'abc123')
+					if a:
+						print(a.group())
+                </textarea>
+				<br>
+				<output>
+					(0, 3)<br>
+					123
+				</output>
+				<br>
+				這樣就不會在比對不到資料時，把 None 當作 MatchObject 操作了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用 re.sub() 取代資料</h3>
+			<p>
+				<textarea class='brush:py'>
+					import re
+
+					# 將小寫字母改為 - 符號
+					print(re.sub('[a-z]', '-', 'abc123'))
+                </textarea>
+				<br>
+				<output>
+					---123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用 re.match() 比對開頭資料</h3>
+			<p>
+				雖然 regular expression 就有用 ^ 表示開頭的語法，但 ^ 放在集合中卻是 not 的意思，所以有些人會改用 re.match() 比對開頭資料，讓 ^ 只用來表示 not：<br>
+				<br>
+				<textarea class='brush:py'>
+					import re
+
+					# 用 ^ 檢查開頭是否為空白字元
+					if re.search('^\s', ' abc'):
+						print(True)
+
+					# 用 re.match() 檢查開頭是否為空白字元
+					if re.match('\s', ' abc'):
+						print(True)
+
+					# 在 re.match() 測試開頭不是空白字元的反應
+					if re.match('\s', 'a b c'):
+						print(True)
+					else:
+						print(False)
+                </textarea>
+				<br>
+				<output>
+					True<br>
+					True<br>
+					False
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='sqlite3'>
+	<section>
+		<h2>sqlite3</h2>
+		<p>
+			Python 內附 SQLite 這款資料庫管理系統，因此我們無須安裝任何資料庫，就能在 Python 用 SQL 管理資料：<br>
+			<br>
+			<textarea class='brush:py'>
+				import sqlite3
+
+				# 建立或連接資料庫
+				with sqlite3.connect('sqlite.db') as connect:
+
+					# 建立名為 MyTable 的資料表且內含一個 TEXT 型態的 MyColumn 欄位
+					connect.execute('CREATE TABLE MyTable(MyColumn TEXT)')
+
+					# 新增資料
+					connect.execute('INSERT INTO MyTable(MyColumn) VALUES("Hello, SQLite!")')
+					connect.commit()
+
+					# 選出資料
+					row = connect.execute('SELECT MyColumn FROM MyTable')
+					connect.commit()
+
+					# 選出的資料是 sqlite3 模組特有的 cursor 物件，
+					# 通常用 for.. in.. 迭代它。
+					# 但本例只有一筆資料，所以直接對它輸出：
+					print(row.fetchone()[0])
+            </textarea>
+			<br>
+			<output>
+				（程式會在執行處建立名為 sqlite.db 的檔案，並顯示如下資料…）<br>
+				Hello, SQLite!
+			</output>
+			<br>
+			一路用 connect.execute() 下 SQL 指令而已，如果你會 SQL，就會覺得這模組既簡單又好用！需要管理大筆資料、或者資料項目很複雜，就可以派上用場。<br>
+			<br>
+			資料庫又容易備份，把 sqlite.db 檔案複製起來就好，非常好管理。<br>
+			<br>
+			如果你不會 SQL，建議學起來，有些進階的資料結構與演算法，是可用 SQL 語法實現的哦！屆時就能用 sqlite3 模組提升資料處理的效率。
+		</p>
+	</section>
+	<hr id='csv'>
+	<section>
+		<h2>csv</h2>
+		<p>
+			CSV 是 Comma Separated Values 的縮寫，一種透過分隔符號，將資料寫在純文字文件，就能當資料表用的格式。由於規則簡單、格式輕巧，易輸入也易讀取，在還沒有 XML 和 JSON 時，CSV 是非常廣泛使用的資料格式。由於沒有標準規範，每個人都能依自己喜好修改 CSV 的表現方式，所以到現在還是很受用。
+		</p>
+		<hr>
+		<section>
+			<h3>table.csv</h3>
+			<p>
+				<textarea class='brush:txt'>
+					選手, 打率, 本塁打, 打点, 盗塁, 年度
+					野村謙二郎, 315, 32, 75, 30, 1995
+					正田耕三, 274, 3, 38, 7, 1995
+					前田智徳, 313, 19, 65, 0, 1996
+					江藤智, 286, 39, 106, 14, 1995
+					金本知憲, 274, 24, 67, 14, 1995
+					緒方孝市, 316, 10, 43, 47, 1995
+					西山秀二, 314, 3, 41, 4, 1996
+					浅井樹, 339, 6, 28, 7, 1996
+					町田公二郎, 308, 9, 23, 2, 1996
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>sample.py</h3>
+			<p>
+				<textarea class='brush:py'>
+					import csv
+
+					# 讀取 CSV 檔案
+					with open('table.csv', encoding='utf-8') as file:
+						# 取出資料
+						values = csv.reader(file)
+						# 沒用到第一行做為欄位名稱的資料所以跳過去
+						next(values)
+						# 列出每行第一欄資料
+						for n in values:
+							print(n[0])
+                </textarea>
+				<br>
+				<output>
+					野村謙二郎<br>
+					正田耕三<br>
+					前田智徳<br>
+					江藤智<br>
+					金本知憲<br>
+					緒方孝市<br>
+					西山秀二<br>
+					浅井樹<br>
+					町田公二郎
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='pickle'>
+	<section>
+		<h2>pickle</h2>
+		<p>
+			Python 可將程式裡的資料，寫入到檔案裡面保存，以便隨時從檔案讀取出來還原資料，也就是所謂的序列化（serialization）：<br>
+			<br>
+			<textarea class='brush:py'>
+				import pickle
+
+				# 程式裡的資料
+				save = [123, 456, 789]
+
+				# 將資料序列化到檔案
+				with open('save.dat', 'wb') as file:
+					pickle.dump(save, file)
+
+				# 從檔案解序列化出資料
+				with open('save.dat', 'rb') as file:
+					load = pickle.load(file)
+					print(*load)
+            </textarea>
+			<br>
+			<output>
+				123 456 789
+			</output>
+		</p>
+	</section>
+	<hr id='json'>
+	<section>
+		<h2>json</h2>
+		<p>
+			JSON 源於 JavaScript，一種將物件表現為 object literal 後字串化，然後透過 eval() 將字串化的 object literal 還原成物件的技巧，也就是把物件變成字串，再從字串還原物件。<br>
+			<br>
+			由於跨平台傳輸資料時，字串是相容性很好的資料格式，於是 JSON 成為傳輸物件資料的熱門格式。而且 JSON 比 XML 輕巧，正取而代之成為傳輸資料的標準格式！<br>
+			<br>
+			然而 Python 物件不像 JavaScript 物件統一使用 {} 做為 object literal，而是不同物件有不同 literal，例如 list 是 []，set 是 ()，dict 是 {} …其實也沒有物件專屬的 literal。最後 Python 以語法相近的 dict 來容納 JSON 資料。<br>
+			<br>
+			<textarea class='brush:py'>
+				import json
+
+				object = {'string': 'abc', 'number': 123, 'boolean': True, 'value': None}
+
+				# dict 轉 JSON
+				dict2json = json.dumps(object)
+
+				# JSON 轉 dict
+				json2dict = json.loads(dict2json)
+
+				# 輸出 JSON 資料看看
+				print(dict2json)
+
+				# 看看從 JSON 還原的 dict 是否能正常使用
+				print(json2dict['string'])
+				print(json2dict['number'])
+				print(json2dict['boolean'])
+				print(json2dict['value'])
+            </textarea>
+			<br>
+			<output>
+				{"value": null, "number": 123, "string": "abc", "boolean": true}<br>
+				abc<br>
+				123<br>
+				True<br>
+				None
+			</output>
+			<br>
+			首先要知道一點，轉出來的 JSON 是個字串！前面說過，字串是相容性高的資料格式。<br>
+			<br>
+			接著要知道的是，輸出的 JSON 資料，None 變成 null，True 變成 true，也就是轉為 JavaScript 的值，畢竟是 JavaScript Object Notation。<br>
+			<br>
+			將 JSON 字串還原成新的 dict 後，字串裡面的 JavaScript 值又轉為 Python 的值。<br>
+			<br>
+			既然 JSON 是字串，那用 open() 很容易能保存到純文字檔，改天再從純文字檔讀取字串，還原成 dict 物件在 Python 中使用，很有趣吧！
+		</p>
+	</section>
+	<hr id='etree'>
+	<section>
+		<h2>xml.etree.ElementTree</h2>
+		<p>
+			雖然 Python 有內建 DOM 與 SAX 模組可用，但官方認為這兩項技術在效率上有瓶頸，因此自行研發了 ElementTree，可以更有效率剖析 XML 檔案。<br>
+			<br>
+			除非被要求使用 DOM 寫 XML 程式，否則在 Python 建議使用 ElementTree XML API。
+		</p>
+		<hr>
+		<section>
+			<h3>robben.xml</h3>
+			<p>
+				<textarea class='brush:xml'>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+					&lt;player name="Arjen Robben"&gt;
+						&lt;pace&gt;9&lt;/pace&gt;
+						&lt;dribbling&gt;9&lt;/dribbling&gt;
+						&lt;shooting&gt;8&lt;/shooting&gt;
+						&lt;defence&gt;3&lt;/defence&gt;
+						&lt;pass&gt;8&lt;/pass&gt;
+						&lt;health&gt;6&lt;/health&gt;
+					&lt;/player&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>sample1.py</h3>
+			<p>
+				<textarea class='brush:py'>
+					from xml.etree import ElementTree
+
+					# 載入 XML
+					xml = ElementTree.parse('robben.xml')
+
+					# 取得根元素
+					root = xml.getroot()
+
+					# 取得標籤名稱
+					print(root.tag)
+
+					# 取得屬性值
+					print(root.attrib['name'])
+
+					# 取得子元素內容
+					for n in root:
+						print(n.text, end=' ')
+
+					# 修改特定元素
+					root.find('pace').text = '10'
+
+					# 修改第幾個元素
+					root[5].text = '7'
+
+					# 儲存 XML
+					xml.write('new.xml', encoding='UTF-8', xml_declaration=True)
+                </textarea>
+				<br>
+				<output>
+					player<br>
+					Arjen Robben<br>
+					9 9 8 3 8 6
+				</output>
+				<br>
+				<output class='editor'>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+					&lt;player name="Arjen Robben"&gt;<br>
+					&nbsp; &nbsp; &lt;pace&gt;10&lt;/pace&gt;<br>
+					&nbsp; &nbsp; &lt;dribbling&gt;9&lt;/dribbling&gt;<br>
+					&nbsp; &nbsp; &lt;shooting&gt;8&lt;/shooting&gt;<br>
+					&nbsp; &nbsp; &lt;defence&gt;3&lt;/defence&gt;<br>
+					&nbsp; &nbsp; &lt;pass&gt;8&lt;/pass&gt;<br>
+					&nbsp; &nbsp; &lt;health&gt;7&lt;/health&gt;<br>
+					&lt;/player&gt;
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>sample2.py</h3>
+			<p>
+				<textarea class='brush:py'>
+					from xml.etree import ElementTree
+
+					# 建立空白 XML 的根元素
+					root = ElementTree.Element('root')
+
+					# 建立子元素
+					child = ElementTree.Element('child')
+					root.append(child)
+
+					# 加入子元素的內容
+					child.text = 'text'
+
+					# 加入子元素的屬性
+					child.set('attribute', 'value')  # 或 child.attrib['attribute'] = 'value'
+
+					# 更快建立子元素
+					ElementTree.SubElement(root, "child2", attribute2="value2").text = "text2"
+
+					# 儲存 XML
+					xml = ElementTree.ElementTree(root)
+					xml.write('new.xml', encoding='UTF-8', xml_declaration=True)
+                </textarea>
+				<br>
+				<output class='editor'>
+					&lt;?xml version='1.0' encoding='UTF-8'?&gt;<br>
+					&lt;root&gt;&lt;child attribute="value"&gt;text&lt;/child&gt;&lt;child2 attribute2="value2"&gt;text2&lt;/child2&gt;&lt;/root&gt;
+				</output>
+				<br>
+				輸出後並未排版，ElementTree 也沒辦法做到，要搭配 minidom 才行。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>sample3.py</h3>
+			<p>
+				<textarea class='brush:py'>
+					from xml.etree import ElementTree
+
+					# 用字串快速寫一個標記語言來用
+					string = """
+					&lt;html&gt;
+						&lt;body&gt;
+							&lt;article&gt;
+								&lt;h1&gt;HEADER&lt;/h1&gt;
+								&lt;p class='red'&gt;PARAGRAPH 1&lt;/p&gt;
+								&lt;p class='green'&gt;PARAGRAPH 2&lt;/p&gt;
+								&lt;p class='blue'&gt;PARAGRAPH 3&lt;/p&gt;
+							&lt;/article&gt;
+						&lt;/body&gt;
+					&lt;/html&gt;
+					"""
+					xml = ElementTree.fromstring(string)
+
+					# 使用 XPath 取得所有 P 標籤
+					for n in xml.findall('.//body//article//p'):
+						print(n.text)
+
+					# 使用 XPath 取得 class 屬性為 red 的 P 標籤
+					for n in xml.findall('.//body//article//p[@class="red"]'):
+						print(n.text)
+                </textarea>
+				<br>
+				<output>
+					PARAGRAPH 1<br>
+					PARAGRAPH 2<br>
+					PARAGRAPH 3<br>
+					PARAGRAPH 1
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>SQLite、JSON、XML 的使用時機</h3>
+			<p>
+				1. 在用戶端保存需要大量處理的資料時用 SQLite。<br>
+				2. 點對點傳遞物件狀態、或跨平台同步資料時用 JSON。<br>
+				3. 想將資料與程式切割開來時用 XML。<br>
+				<br>
+				Pickle 是 Python 的資料序列化檔案格式，跨程式傳輸資料不方便。CSV 是 20 世紀 70 年代的產物，可被 JSON 和 XML 取代。因此兩者不在比較之列。
+			</p>
+		</section>
+	</section>
+	<hr id='tarfile'>
+	<section>
+		<h2>tarfile, gzip, bz2, lzma</h2>
+		<p>
+			tar 源自於 UNIX，原意是 tape archive（磁帶檔案庫），能將多個檔案轉成線性化的資料結構，好保存到磁帶。後來磁碟時代來臨，磁軌檢索的檔案存取模式，讓大家漸漸忘了 tar 原本是用來把檔案儲存到磁帶用的，只知道它能把多個檔案打包成線性結構的一個檔案，變成了打包用的工具。<br>
+			<br>
+			gzip 是 GNU Project 推出的檔案壓縮工具，用來取代 UNIX 有專利限制的 compress 工具。由於 GNU 草創時有個精神，就是善用已存在的套件，不要重複造輪胎，所以 gzip 只能壓縮檔案，不能打包檔案：「打包已經有 tar 了。」<br>
+			<br>
+			於是早年玩 Linux 時，經常看到 *.tar.gz 的副檔名，就是先把多個檔案 tar，再對它 gzip。<br>
+			<br>
+			後來出現壓縮率更好的 bzip<ins>2</ins> 和 xz，gzip 已不再是 GNU/Linux 主要的壓縮格式。但為了相容舊機器，GNU/Linux 開放下載的程式，還是會另外提供 gzip 的檔案，能見度很高。
+		</p>
+		<hr>
+		<section>
+			<h3>*.tar</h3>
+			<p>
+				<textarea class='brush:py'>
+					import tarfile
+
+					# 打包
+					with tarfile.open('archive.tar', 'w') as tar:
+						tar.add('我的資料夾')
+
+					# 拆包
+					with tarfile.open('archive.tar', 'r:') as tar:
+						tar.extractall()
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>*.gz</h3>
+			<p>
+				<textarea class='brush:py'>
+					import gzip
+
+					# 壓縮
+					with gzip.open('archive.tar.gz', 'wb') as gz:
+						gz.write(open('archive.tar', 'rb').read())
+
+					# 解壓
+					with open('archive.tar', 'wb') as tar:
+						tar.write(gzip.open('archive.tar.gz', 'rb').read())
+
+					# 關閉 write() 的檔案時，會連帶關閉 open() 的檔案，所以我沒全放在 with 裡。
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>*.bz2</h3>
+			<p>
+				<textarea class='brush:py'>
+					import bz2
+
+					# 壓縮
+					with bz2.open('archive.tar.bz2', 'wb') as bz:
+						bz.write(open('archive.tar', 'rb').read())
+
+					# 解壓
+					with open('archive.tar', 'wb') as tar:
+						tar.write(bz2.open('archive.tar.bz2', 'rb').read())
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>*.xz</h3>
+			<p>
+				<textarea class='brush:py'>
+					import lzma
+
+					# 壓縮
+					with lzma.open('archive.tar.xz', 'wb') as xz:
+						xz.write(open('archive.tar', 'rb').read())
+
+					# 解壓
+					with open('archive.tar', 'wb') as tar:
+						tar.write(lzma.open('archive.tar.xz', 'rb').read())
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='zipfile'>
+	<section>
+		<h2>zipfile</h2>
+		<p>
+			Phil Katz 設計的 PKARC 軟體，因為侵犯了 System Enhancement Associates 公司的 ARC 專利，於是在 1989 年重新開發出 PKZIP，使用自己發明的 Deflate 無損壓縮演算法，還將格式免費開放使用，成為廣受歡迎的壓縮格式。1991 年，Nico Mak Computing 為 PKZIP 提供了直覺好用的圖形化介面，名為 WinZip，以共享軟體釋出，成為 Windows 時代每個人必裝的壓縮軟體，造就現在流傳最廣的壓縮格式。<br>
+			<br>
+			雖然隨著時代的進步，ZIP 格式已是落後的壓縮技術，但流傳最廣的關係，若不著重壓縮比率，只要求能把檔案快速壓縮成一個封裝檔案時，還是會採用 ZIP 格式，例如看漫畫軟體的 *.cbz、LibreOffice 的 *.odt、Java 的 *.jar，其實都是用 ZIP 格式的壓縮檔。
+		</p>
+		<hr>
+		<section>
+			<h3>壓縮檔案</h3>
+			<p>
+				<textarea class='brush:py'>
+					import zipfile
+
+					with zipfile.ZipFile('archive.zip', mode='w', compression=zipfile.ZIP_DEFLATED) as zip:
+						zip.write('1.png')
+						zip.write('2.png')
+						zip.write('3.png')
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>壓縮資料夾</h3>
+			<p>
+				<textarea class='brush:py'>
+					import os
+					import zipfile
+
+					with zipfile.ZipFile('archive.zip', mode='w', compression=zipfile.ZIP_DEFLATED) as zip:
+						for dirpath, dirnames, filenames in os.walk('我的資料夾'):
+							for file in filenames:
+								zip.write(os.path.join(dirpath, file))
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>解壓縮</h3>
+			<p>
+				<textarea class='brush:py'>
+					import zipfile
+
+					with zipfile.ZipFile('archive.zip') as zip:
+						zip.extractall()
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='base64'>
+	<section>
+		<h2>base64</h2>
+		<p>
+			Base64 是一種能將二進制資料用 ASCII 字元編碼的演算法，常見的用途像是：上傳資料時將檔案路徑編碼，被攔截時除非解碼否則看不出是什麼資料夾和檔案。或者將圖檔轉為字串後，直接放在網頁裡面解碼，等於把圖直接嵌入網頁中。
+		</p>
+		<hr>
+		<section>
+			<h3>文字</h3>
+			<p>
+				在文字編碼部分，必須是 ASCII 字元，且要轉為 byte，所以不但英文字串前要加 b，中文字串後要用 encode()，有點麻煩：<br>
+				<br>
+				<textarea class='brush:py'>
+					import base64
+
+					# 編碼
+					a = base64.b64encode(b'Hi')
+					b = base64.b64encode('嗨'.encode('utf-8'))
+					print(a)
+					print(b)
+
+					# 解碼
+					print(base64.b64decode(a).decode('utf-8'))
+					print(base64.b64decode(b).decode('utf-8'))
+                </textarea>
+				<br>
+				<output>
+					b'SGk='<br>
+					b'5Zeo'<br>
+					Hi<br>
+					嗨
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>檔案</h3>
+			<p>
+				<textarea class='brush:py'>
+					import base64
+
+					# 將 image1.gif 轉為 base64 字串並儲存到 text.txt
+					with open('image1.gif', 'rb') as image, open('text.txt', 'wb') as text:
+						base64.encode(image, text)
+
+					# 解碼 base64 字串檔案 text.txt 並還原成圖檔 image2.gif
+					with open('text.txt', 'rb') as text, open('image2.gif', 'wb') as image:
+						base64.decode(text, image)
+
+					# 只想取得 image1.gif 轉為 base64 的字串
+					with open('image1.gif', 'rb') as image:
+						string = base64.b64encode(image.read())
+
+					# 將 base64 的字串還原成圖檔 image3.gif
+					with open('image3.gif', 'wb') as image:
+						image.write(base64.b64decode(string))
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='logging'>
+	<section>
+		<h2>logging</h2>
+		<p>
+			對動態型別表述語言的 Python 來說，使用 *.log 檔案紀錄程式執行的動向，可事後獲得靜態型別檢查般的好處，藉由追蹤程式執行的動向，找出問題的環節在哪。<br>
+			<br>
+			為程式寫日誌，就像寫程式要宣告資料型態屬於麻煩的差事，所以你不必因為 Python 內建 logging  這套好用的模組，就覺得寫程式非得用它嚴密監控程式不可。只在你的程式必須維持品質時再寫就好。<br>
+			<br>
+			logging 模組可以紀錄不同層級的日誌：
+		</p>
+		<table>
+			<tr><td>logging.debug()</td><td>除錯追蹤時紀錄日誌。</td></tr>
+			<tr><td>logging.info()</td><td>正常運作時紀錄日誌。</td></tr>
+			<tr><td>logging.warning()</td><td>操作錯誤時紀錄日誌。</td></tr>
+			<tr><td>logging.error()</td><td>程式故障時紀錄日誌。</td></tr>
+			<tr><td>logging.exception()</td><td>跟 error() 同樣層級，外部檔案故障時用。</td></tr>
+			<tr><td>logging.critical()</td><td>災情發生時紀錄日誌，例如會員資料全毀那種慘狀。</td></tr>
+			<tr><td>logging.log()</td><td>先設定層級，再紀錄日誌。</td></tr>
+		</table>
+		<p>
+			然後在 logging.basicConfig() 中，給 level 參數如下的設定值，決定要留下哪些層級的紀錄：
+		</p>
+		<table>
+			<tr><td>logging.DEBUG</td><td>紀錄所有層級的日誌。</td></tr>
+			<tr><td>logging.INFO</td><td>不紀錄 DEBUG 層級的日誌。</td></tr>
+			<tr><td>logging.WARNING</td><td>不紀錄 INFO 層級的日誌。</td></tr>
+			<tr><td>logging.ERROR</td><td>不紀錄 WARINIG 層級的日誌。</td></tr>
+			<tr><td>logging.NOTSET</td><td>不紀錄所有層級的日誌。</td></tr>
+		</table>
+		<p>
+			看個實際範例吧：
+		</p>
+		<section>
+			<h4>sample.py</h4>
+			<p>
+				<textarea class='brush:py'>
+					import logging
+
+					logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s] %(levelname)s: %(message)s', filename='sample.log', filemode='a')
+
+					print('其實我蠻喜歡你的，怎樣？乾脆我們兩個交往吧！[y/n]')
+					logging.debug('告白了。')
+
+					answer = input()
+					if answer == 'y':
+						print('於是親吻了對方。')
+						logging.info('答應了。')
+					elif answer == 'n':
+						print('那…那麼認真幹嘛，我開玩笑的，開玩笑的啦…！')
+						logging.error('拒絕了。')
+					else:
+						print('是嗎？你不知道怎麼回答是吧？')
+						logging.warning('答非所問。')
+                </textarea>
+				<br>
+				<output>
+					其實我蠻喜歡你的，怎樣？乾脆我們兩個交往吧！[y/n]<br>
+					n<br>
+					那…那麼認真幹嘛，我開玩笑的，開玩笑的啦…！
+				</output>
+				<br>
+				<output class='editor'>
+					[1997-11-10 12:34:56,789] DEBUG: 告白了。<br>
+					[1997-11-10 12:34:98,765] ERROR: 拒絕了。
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='pdb'>
+	<section>
+		<h2>pdb</h2>
+		<p>
+			Python 的除錯器設計成模組來使用：<br>
+			<br>
+			<textarea class='brush:py'>
+				import pdb
+				pdb.set_trace()
+            </textarea>
+			<br>
+			進入除錯模式後，最基本的操作方式是：
+		</p>
+		<table>
+			<tr><td>l</td><td>檢視程式碼。</td></tr>
+			<tr><td>n</td><td>執行程式，並跳到下一行。</td></tr>
+			<tr><td>p 變數名稱</td><td>檢視變數。</td></tr>
+			<tr><td>q</td><td>離開 dpb 模式。</td></tr>
+		</table>
+		<p>
+			遇到函式時：
+		</p>
+		<table>
+			<tr><td>s</td><td>進入函式內的程式。</td></tr>
+			<tr><td>r</td><td>執行程式到傳回結果為止。</td></tr>
+		</table>
+		<p>
+			設定中斷點：
+		</p>
+		<table>
+			<tr><td>b 程式碼行數</td><td>設定中斷點。</td></tr>
+			<tr><td>c</td><td>執行程式到中斷點停止。</td></tr>
+		</table>
+		<p>
+			除錯器是很常用到的功能，卻經常要寫 <code>import pdb; pdb.set_trace()</code> 的醜程式碼使用，所以 Python 3.7 起內建 <code>breakpoint()</code> 函式代勞。
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 後來以毫秒數為單位，而變成浮點數。<br>
+			[2] 附帶一提，bzip 因為使用的演算法有專利問題，所以重新設計出 bzip2，不再使用了！因此經常看到的副檔名是 *.tar.bz2。
+		</p>
+	</footer>
+</article>

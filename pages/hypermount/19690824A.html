@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>
+	::placeholder{color:rosybrown}
+	output{background-color:inherit;color:inherit;font-family:inherit;width:auto}
+</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>填表元件展示</h1>
+		<p>
+			本章節展示 HTML5 可用的填表（Form）元件，詳情請自行檢視原始碼。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>Button</h2>
+		<p>
+			<button>Button</button>
+			<button type='submit'>Submit</button>
+			<button type='reset'>Reset</button>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Fieldset、Legend</h2>
+		<fieldset>
+			<legend>Legend</legend>
+			Fieldset
+		</fieldset>
+	</section>
+	<hr>
+	<section>
+		<h2>Input</h2>
+		<p>
+			input 標籤透過 type 屬性，可表現 button、checkbox、color、date、datetime、datetime-local、email、file、hidden、image、month、number、password、radio、range、reset、search、submit、tel、text、time、url、week 等元件。
+		</p>
+		<hr>
+		<section>
+			<h3>Text、Password、E-Mail、URL、Search、Datalist</h3>
+			<p>
+				<input type='text'><br>
+				<input type='password' maxlength='8'><br>
+				<input type='email' placeholder='someone@example.com'><br>
+				<input type='url'><br>
+				<input type='search' autocomplete='on'><br>
+				<input list='lists'>
+				<datalist id='lists'>
+					<option>List 1</option>
+					<option>List 2</option>
+					<option>List 3</option>
+				</datalist>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Image button</h3>
+			<p>
+				<input type='image' src='../../images/root/index.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Check box</h3>
+			<p>
+				<input type='checkbox' value='1'>Yes<br>
+				<input type='checkbox' value='0' checked>No
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Radio button</h3>
+			<p>
+				<input name='yesno' type='radio' value='1'>Yes<br>
+				<input name='yesno' type='radio' value='0' checked>No
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Number</h3>
+			<p>
+				<input type='number' min='0' max='100' value='50'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Range</h3>
+			<p>
+				<input type='range' min='0' max='100' step='10' value='50'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>File</h3>
+			<p>
+				<input type='file'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Color</h3>
+			<p>
+				<input type='color'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Date、Month、Time、Week...</h3>
+			<p>
+				<input type='Date'><br>
+				<input type='Month'><br>
+				<input type='Time'><br>
+				<input type='Week'>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>Label</h2>
+		<p>
+			<input type='radio' id='label1' name='labels'> <label for='label1'>Label 1</label><br>
+			<input type='radio' id='label2' name='labels'> <label for='label2'>Label 2</label><br>
+			<input type='radio' id='label3' name='labels'> <label for='label3'>Label 3</label>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Meter</h2>
+		<p>
+			<meter max='100' min='0' high='80' low='20' value='50'></meter>
+			<meter max='100' min='0' high='80' low='20' value='10'></meter>
+			<meter max='100' min='0' high='80' low='20' value='90'></meter>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Output</h2>
+        <form oninput='output.value=parseInt(input.value)+100' style='margin-left:30px'>
+            <input type='number' value='50' id='input'>
+            <output id='output'>output</output>
+        </form>
+	</section>
+	<hr>
+	<section>
+		<h2>Progress</h2>
+		<p>
+			<progress max='100' value='75'></progress>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Select、Option、Optgroup</h2>
+		<p>
+			<select>
+				<option value='1'>1</option>
+				<option value='2'>2</option>
+				<option value='3'>3</option>
+			</select>
+			<select>
+				<optgroup label='A'>
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+				</optgroup>
+				<optgroup label='B'>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+					<option value='6'>6</option>
+				</optgroup>
+			</select>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Textarea</h2>
+		<p>
+			<textarea cols='10' rows='3'>Textarea</textarea>
+		</p>
+	</section>
+</article>

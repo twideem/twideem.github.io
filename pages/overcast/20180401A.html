@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>過濾重複資料並且排序</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>輸入（請用逗號隔開每筆資料）</h2>
+		<p>
+			<textarea style='height:160px;margin-bottom:-7px;width:563px'></textarea>
+			<button style='width:569px' onclick='f()'>執行</button>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>輸出</h2>
+		<p>
+			執行後，結果將輸出在這裡。
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 要用其他符號隔開，可在網址後面加參數，例如 ?; 會以 ; 隔開。
+		</p>
+	</footer>
+</article>
+<script>
+	function f(x=location.search.slice(1)||',')
+	{
+		$('p',1).innerHTML='';
+		new Set($('textarea').value.split(x).sort()).forEach(n=>$('p',1).innerHTML+=`${n}<br>`);
+	}
+</script>

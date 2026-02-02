@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET')</script>
+<article>
+	<header>
+		<h1>用 C# 堆砌程式：附錄</h1>
+	</header>
+	<hr id='version'>
+	<section>
+		<h2>各 Windows 內建的 .NET Framework 版本</h2>
+		<table>
+			<tr><td style='width:40%'>Windows Vista</td><td>.NET Framework 3.0</td><td>C# 3</td></tr>
+			<tr><td>Windows 7</td><td>.NET Framework 3.5</td><td>C# 3</td></tr>
+			<tr><td>Windows 8</td><td>.NET Framework 4.5</td><td>C# 5</td></tr>
+			<tr><td>Windows 8.1</td><td>.NET Framework 4.5.1</td><td>C# 5</td></tr>
+			<tr><td>Windows 10</td><td>.NET Framework 4.6</td><td>C# 5</td></tr>
+			<tr><td>Windows 10 Version 1511</td><td>.NET Framework 4.6.1</td><td>C# 5</td></tr>
+			<tr><td>Windows 10 Version 1607</td><td>.NET Framework 4.6.2</td><td>C# 5</td></tr>
+			<tr><td>Windows 10 Version 1703</td><td>.NET Framework 4.7</td><td>C# 5</td></tr>
+			<tr><td>Windows 10 Version 1709</td><td>.NET Framework 4.7.1</td><td>C# 5</td></tr>
+			<tr><td>Windows 10 Version 1804</td><td>.NET Framework 4.7.2</td><td>C# 5</td></tr>
+			<tr><td>Windows 10 Version 1903</td><td>.NET Framework 4.8</td><td>C# 5</td></tr>
+			<tr><td>Windows 11</td><td>.NET Framework 4.8</td><td>C# 5</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>.NET Framework 版本相容性問題</h2>
+		<p>
+			<samp>
+				.NET Framework 2.0 相容 1.1<br>
+				.NET Framework 3.x 相容 2.0 / 1.1<br>
+				.NET Framework 4.x 不相容 3.x / 2.0 / 1.1<br>
+			</samp>
+			<br>
+			也就是說，電腦應該安裝 .NET Framework 3.x 和 .NET Framework 4.x 兩套，才能執行所有 .NET 程式。<br>
+			<br>
+			<samp>大版號一樣的話，小版號不會影響相容性，因為編譯出來的，都是基於同樣版本的 CLR 規範。</samp><br>
+			<br>
+			所以 3.5 編譯的程式可以在 3.0 環境執行，4.8 編譯的程式可以在 4.0 環境執行。但可以執行不表示執行過程不會出問題，其實還是不建議的。（<a href='http://learn.microsoft.com/zh-tw/dotnet/framework/migration-guide/versions-and-dependencies#remarks-for-version-45-and-later'>詳情</a>）<br>
+			<br>
+			最後，各版 Windows 能安裝的 .NET Framework：<br>
+			<br>
+			<samp>
+				Windows 2000 只能安裝 2.0。<br>
+				Windows XP 請安裝 3.5 和 4.0。<br>
+				Windows Vista 內建 3.0，請再安裝 4.6。<br>
+				Windows 7 內建 3.5，請再安裝 4.8。<br>
+				Windows 8 內建 4.5，請再安裝 3.5。<br>
+				Windows 10 內建 4.8，請再安裝 3.5。
+			</samp>
+		</p>
+	</section>
+	<hr id='roslyn'>
+	<section>
+		<h2>升級 .NET Framework 新版編譯器</h2>
+		<hr>
+		<section>
+			<h3>下載 Roslyn</h3>
+			<p>
+				雖然 .NET Framework 已不再更新，未來只會發展 .NET Core，但編譯器是獨立為 Roslyn 專案另外發展的，所以仍在更新版本，目前已到 C# 11。<br>
+				<br>
+				請至 NuGet Gallery 的 <a href='http://www.nuget.org/packages/Microsoft.Net.Compilers.Toolset/'>Microsoft.Net.Compilers.Toolset</a> 按 Download package 下載 *.nupkg 檔，不想安裝的話，可以用 ZIP 格式解壓開來，在 tasks 資料夾裡就有最新版本的 csc.exe。<br>
+				<br>
+				跟 Java 用新版 JDK 編譯出來的程式沒辦法在舊版 JRE 跑不一樣，以新版 csc.exe 編譯出來的程式，跟舊版都是一樣的 CLR 4 規格，能正常在 .NET Framework 4.8 執行。<br>
+				<br>
+				但不是所有新語法都能在 .NET Framework 使用！從 Roslyn 2.11.0 的 C# 8 開始，有些語法得搭配 .NET Core 才有的新 API 功能，.NET Framework 必須 <a href='http://github.com/dotnet/runtime/tree/main/src/libraries'>抄程式碼</a> 補 API 的缺才能使用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>優化 Roslyn</h3>
+			<p>
+				雖然新版編譯器支援更多語法，但 Roslyn 是用 C# 和 VB.NET 重寫的，csc.exe 自己就是一款 .NET 程式，所以每次執行都要動用笨重的 .NET 平台，啟動速度慢，沒有舊版秒快。<br>
+				<br>
+				如果要秒啟動，可以下 <code>/shared</code> 參數，VBCSCompiler.exe 會常駐作業系統，讓 csc.exe 和 vbc.exe 改用這輕巧的伺服器程序執行，大幅提升編譯器的執行速度和處理性能。<br>
+				<br>
+				但常駐時間是有限制的，六分鐘後會自動關閉。<br>
+				<br>
+				你可以修改 <code>VBCSCompiler.exe.config</code> 的 <code>&lt;add key="keepalive" value="秒數" /&gt;</code> 改變時間，或者下 <code>/keepalive:秒數</code> 參數設定常駐時間。
+			</p>
+		</section>
+	</section>
+	<hr id='gsudo'>
+	<section>
+		<h2>用 gsudo 解決「以系統管理員身分執行」的問題</h2>
+		<p>
+			到 <a href='http://github.com/gerardog/gsudo'>http://github.com/gerardog/gsudo</a> 下載 gsudo.portable.zip，用裡面的 gsudo.exe 來呼叫 C# 編譯出來的程式，就能以系統管理員身分執行：<br>
+			<br>
+			<output>
+				gsudo.exe MyProgram.exe
+			</output>
+			<br>
+			把這樣的指令寫在 *.bat 批次檔，代替 MyProgram.exe 可執行檔作為啟動應用程式的檔案吧！
+		</p>
+	</section>
+	<hr id='jscript'>
+	<section>
+		<h2>改用 JScript 設計 .NET Framework 程式</h2>
+		<p>
+			.NET Framework 裡面有 jsc.exe，能編譯 JScript 程式，這表示可以用 JScript 寫 .NET Framework 程式：<br>
+			<br>
+			<textarea class='brush:js'>
+				import System;
+				import System.IO;
+
+				File.WriteAllText("sample.txt", "Hello!");
+				Console.Write(File.ReadAllText("sample.txt"));
+            </textarea>
+			<br>
+			<output>
+				jsc main.js<br>
+				main<br>
+				Hello!
+			</output>
+			<br>
+			<output class='editor'>
+				Hello!
+			</output>
+			<br>
+			若覺得物件導向程式語言的 C# 寫起來太囉嗦，純粹只想受用 .NET Framework 程式庫的功能，改用表述語言的 JScript 會有不錯的體驗～<br>
+			<br>
+			學習這個語言，可下載《<a href='http://www.jb51.net/books/25046.html'>JScript 8.0 中文手册 chm 版</a>》，下載頁面有「解压密码」，別忘了複製起來！
+		</p>
+		<hr>
+		<section>
+			<h3>字元編碼</h3>
+			<p>
+				jsc.exe 在預設情況下，只能編譯符合 ASCII 的字元編碼，因此原始碼裡面有中文的話，必須以 Big5 字元編碼儲存，使用 UTF-8 或其它字元編碼的話，編譯時會有問題。<br>
+				<br>
+				若想使用 UTF-8 字元編碼，必須下參數：<br>
+				<br>
+				<code>/codepage:65001</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>資料型態</h3>
+			<p>
+				畢竟 .NET Framework 是強型態的，所以寫 JScript 程式難免會遇到資料型態的問題。<br>
+				<br>
+				JScript 可以在宣告變數時，使用 <code>:</code> 符號來指定資料型態，例如：<br>
+				<br>
+				<code>var a : String[] = ["AAA", "BBB", "CCC"];</code><br>
+				<br>
+				這語法也能用在函式的傳回值型態。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>類別、介面、套件</h3>
+			<p>
+				用 JScript 也是可以寫類別來用的：<br>
+				<br>
+				<code>
+					class 類別名稱 extends 父類別{<br>
+					<br>
+					　　var 屬性 : 資料型態 = 初始值;<br>
+					<br>
+					　　function 方法() : 傳回型態{<br>
+					　　}<br>
+					<br>
+					　　function 類別名稱(){<br>
+					　　}<br>
+					<br>
+					}<br>
+				</code>
+				<br>
+				前面也能冠上 <code>public</code> 或 <code>private</code> 限制存取權限。<br>
+				<br>
+				也支援介面：<br>
+				<br>
+				<code>
+					interface 介面名稱{<br>
+					　function 方法();<br>
+					}<br>
+					<br>
+					class 類別名稱 implements 介面名稱{<br>
+					　function 方法(){<br>
+					　}<br>
+					}<br>
+				</code>
+				<br>
+				還有套件：<br>
+				<br>
+				<code>
+					package 命名空間{<br>
+					　class 類別名稱{<br>
+					　}<br>
+					}<br>
+					<br>
+					new 命名空間.類別名稱();<br>
+					<br>
+					import 命名空間;<br>
+					new 類別名稱();
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>泛型</h3>
+			<p>
+				JScript .NET 不支援泛型語法，因此無法正常操作像是 System.Collections.Generic 的類別。<br>
+				<br>
+				真的要用泛型的類別，只能先用 C# 重新包裝成不用泛型的類別，再編譯成 *.dll 給 JScript .NET 使用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Windows Forms 的事件處理</h3>
+			<p>
+				若 C# 的事件寫法為：<br>
+				<br>
+				<textarea class='brush:cs'>
+					button.Click += new EventHandler(button_click);
+
+					void button_click(object obj, EventArgs arg)
+					{
+						;
+					}
+                </textarea>
+				<br>
+				那麼在 JScript 就改為：<br>
+				<br>
+				<textarea class='brush:js'>
+					button.add_Click(button1_click);
+
+					function button1_click(o:Object, a:EventArgs)
+					{
+						;
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>error JS1259: 被參考的組件相依於另一個未被參考或找不到的組件</h3>
+			<p>
+				加入 <code>import Accessibility</code> 這行程式即可解決問題！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>error JS1183: 一個以上的方法或屬性符合此引數清單</h3>
+			<p>
+				這問題的解決辦法，就是不要把程式碼直接寫在全域範疇跑，看是要寫在 <code>(function(){})()</code> 裡面，或者寫在 <code>function xxx(){}</code> 裡面再呼叫 xxx() 執行程式。<br>
+				<br>
+				這是因為 ECMAScript 的全域範疇，其實是最頂級物件的區域範疇。在網頁瀏覽器的 JavaScript 就是 window 物件，在 .NET 的 JScript 則是 Object 物件。直接把程式碼寫在全域，變數和函式往往變成 Object 的成員，而不是獨立的領域範疇。只有把程式寫在函式裡面，才不會汙染區域範疇。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>error JS1112: 必須是類型名稱</h3>
+			<p>
+				這問題發生在物件的成員和指定的類別名稱相同：<br>
+				<br>
+				<code>
+					class Form1 extends Form{<br>
+					　function Form1(){<br>
+					　　<b>this.Size = new Size(640, 480);</b><br>
+					　}<br>
+					}<br>
+				</code>
+				<br>
+				這跟 ECMAScript 的作用域有關，在 this 也有 Size 的情況下，編譯器認為 new 的 Size 是指 this 的 Size，而不是 import 進來的 Size。<ins>1</ins><br>
+				<br>
+				所以解決辦法就是 new 後面的類別用完整命名空間：<br>
+				<br>
+				<code>this.Size = new System.Drawing.Size(640, 440);</code><br>
+				<br>
+				這問題在多型機制下也會發生，像是：<br>
+				<br>
+				<code>this.ClientSize = new Size(640, 440);</code><br>
+				<br>
+				這是 ECMAScript 特性上的問題，所以寫 JScript .NET 經常會發生這種事，規避不了。請習以為常，看到編譯器拋出這訊息，隨即補上完整命名空間就好，不用為此感到焦躁或挫折。<br>
+				<br>
+				如果就是很反感，那一律用完整命名空間寫程式吧！這樣寫 JScript .NET 程式的人非常非常多，你不會是少數派 :)<br>
+				<br>
+				其實 .NET Framework 的屬性和方法別用大寫開頭，而是小寫開頭，就不會有這鳥事了！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>print()</h3>
+			<p>
+				.NET 的 JScript 可以用 <code>print()</code> 來輸出，取代落落長的 Console.WriteLine()，這樣一來也不用 import System 了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>new</h3>
+			<p>
+				new 後面的類別，不需要參數的話，可以省略 () 符號，例如 <code>var button = new Button;</code> 或 <code>Application.Run(new Form);</code>。<br>
+				<br>
+				雖然這不是 JScript 才有的特性，ECMAScript 就是這樣定義。
+			</p>
+		</section>
+	</section>
+	<hr id='aspnet'>
+	<section>
+		<h2>如何執行 ASP.NET 程式</h2>
+		<p>
+			ASP.NET 算是另外一種程式設計，只是表述語言方面，可以用 C# 或 VB.NET 而已：<br>
+			<br>
+			<a href='http://docs.microsoft.com/zh-tw/aspnet/overview/'>ASP.NET overview</a><br>
+			<br>
+			ASP.NET 的程式設計手法有幾次進化，目前有三種寫法：類似傳統 ASP 的 Web Forms（新舊不完全相容）、ASP.NET 主打的 Web Pages（包含 Razor 標記語言）、.NET Framework 特性的 MVC（除了職責分離，已編譯的關係執行效率更好）。<br>
+			<br>
+			但是光有 .NET 並無法執行 ASP.NET，得在支援 ASP.NET 的網頁伺服器上跑。
+		</p>
+		<hr>
+		<section>
+			<h3>.NET Core</h3>
+			<p>
+				.NET Core 自帶 Kestrel 網頁伺服器，專案裡的 ASP.NET 程式直接用 dotnet 指令就能啟動系統、運行程式 👍
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Mono</h3>
+			<p>
+				Mono 自帶 XSP 網頁伺服器，直接在程式碼所在位置就能啟動與瀏覽。但不相容 ASP 舊語法，也不支援 ASP.NET 近年推出的新語法，只能寫 Web Forms 程式。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>.NET Framework</h3>
+			<p>
+				.NET Framework 必須另外安裝支援 ASP.NET 的網頁伺服器，麻煩的是，支援 ASP.NET 的產品不多，選擇很少 😭
+			</p>
+			<section>
+				<h4>IIS</h4>
+				<p>
+					Windows 10 不分家用版、專業版、企業版，都支援 IIS 功能！在「開啟或關閉 Windows 功能」勾選「Internet Information Services」的「World Wide Web 服務→ASP.NET 4.8」即可。<br>
+					<br>
+					建議也勾選「Web 管理工具」，以方便在「開始→Windows 系統管理工具→Internet Information Services (IIS) 管理員」用圖形化介面設定網站。
+				</p>
+			</section>
+			<section>
+				<h4>IIS Express</h4>
+				<p>
+					其它不提供 IIS 的家用版 Windows，可下載 IIS Express：<br>
+					<br>
+					<a href='http://www.microsoft.com/zh-TW/download/details.aspx?id=48264'>http://www.microsoft.com/zh-TW/download/details.aspx?id=48264</a><br>
+					<br>
+					安裝後，即可在 C:\Program Files\IIS Express\ 執行 iisexpress.exe 啟動支援 ASP.NET 的網頁伺服器。<br>
+					<br>
+					不過在那之前得設定才行！<br>
+					<br>
+					如果純粹只想練習或測試 ASP.NET 程式碼，沒打算對外連線的話<ins>2</ins>，請把下列資料夾裡面的檔案：<br>
+					<br>
+					<code>C:\Program Files\IIS Express\config\templates\PersonalWebServer\</code><br>
+					<br>
+					全部複製到：<br>
+					<br>
+					<code>C:\Users\[使用者名稱]\Documents\IISExpress\config\</code><br>
+					<br>
+					即可設定好一個只能用 localhost:8080 連線的網頁伺服器。<br>
+					<br>
+					然後把 ASP.NET 程式通通放在：<br>
+					<br>
+					<code>C:\Users\[使用者名稱]\Documents\My Web Sites\WebSite1\</code><br>
+					<br>
+					最後下 <code>iisexpress /site:WebSite1</code> 指令啟動 IIS，就能在網頁瀏覽器跑 ASP.NET 了！<br>
+					<br>
+					想修改位置甚至對外連線的話，編輯 config 資料夾的 apolicationhost.config 檔案，找 WebSite1 修改。但會遇到不少安全性的問題導致無法順利外連，請上網搜尋資料解決吧～
+				</p>
+			</section>
+			<section>
+				<h4>Abyss Web Server X1</h4>
+				<p>
+					不喜歡 IIS 的話，可以考慮免費的 Abyss Web Server X1：<br>
+					<br>
+					<a href='http://aprelium.com'>http://aprelium.com</a><br>
+					<br>
+					這款網頁伺服器雖然知名度不高，但也有十幾年經營歷史了，至今仍在更新。<br>
+					<br>
+					即使是 2019 年最新版 2.12，檔案也只有 4MB，能跑 Execute CGI、Perl CGI、PHP FastCGI、ASP.NET 4.0，非常好用的程式！
+				</p>
+				<figure>
+					<img src='../../images/overcast/20190418D.png' alt='插圖'>
+					<figcaption>ASP.NET 的設定</figcaption>
+				</figure>
+				<p>
+					有時候怎麼設定都無法正常使用 CGI 或 ASP.NET！有可能不是網頁伺服器的問題，而是網頁瀏覽器的快取有問題。清理一下看看，或許就能正常使用了！<br>
+					<br>
+					此外，輸出網頁時，預設使用 ANSI 編碼，所以要顯示多國文字的話，必須用具有 BOM 的 UTF-8 編碼保存，否則會亂碼。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='apireference'>
+	<section>
+		<h2>離線查閱 .NET API</h2>
+		<p>
+			Microsoft 的 API 文件寫得有夠好！不但容易查詢與辨讀，而且經常每個 method 就附上範例，立刻就能明白該如何應用。備註的部分更是精彩，能學到很多觀念，徹底了解為何使用、為何不使用。<br>
+			<br>
+			這麼好的文件，唯一缺點就是只提供線上閱讀，沒有打包下載的檔案。是有 PDF 可下載，但 API 的部分只有清單，點下去還是連到網站閱讀。<br>
+			<br>
+			沒有可供離線閱讀的文件，哪天需要在沒有網路的環境寫程式，可就麻煩了 😱<br>
+		<p>
+		<hr>
+		<section>
+			<h3>使用 Visual Studio Community 的 Help Viewer 即可離線下載</h3>
+			<p>
+				安裝 Visual Studio Community 時勾選 Help Viewer，就能在 Visual Studio Community 中叫出 Help Viewer，然後選擇下載 .NET API Reference，即可將整套文件安裝到電腦裡離線閱讀。<br>
+				<br>
+				Visual Studio Community 對學生、開放原始碼及個人開發人員是免費的！如果電腦跑得動的話，不妨使用這套威力強大無比的 IDE 寫 C# 開發 .NET 程式：<br>
+				<br>
+				<a href='http://visualstudio.microsoft.com/zh-hant/vs/community/'>http://visualstudio.microsoft.com/zh-hant/vs/community/</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>單獨啟動 Help Viewer 不透過 Visual Studio</h3>
+			<p>
+				建立捷徑，輸入項目的位置輸入：<br>
+				<br>
+				<code>"C:\Program Files (x86)\Microsoft Help Viewer\v2.3\HlpViewer.exe" /catalogName VisualStudio15</code><strong>（請視你使用的版號修改這串文字）</strong><br>
+				<br>
+				即可直接啟動 Help Viewer。<br>
+				<br>
+				<code>/catalogName</code> 參數後面，是 <code>C:\ProgramData\Microsoft\HelpLibrary2\Catalogs\</code> 裡面的資料夾名稱，它就叫做 VisualStudio15，並不是指定使用 Visual Studio 15 的意思。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>移除 Visual Studio 只留 Help Viewer</h3>
+			<section>
+				<h4>備份 Help Viewer</h4>
+				<p>
+					請複製這兩個資料夾：<br>
+					<br>
+					<code>
+						C:\Program Files (x86)\Microsoft Help Viewer<br>
+						C:\ProgramData\Microsoft\HelpLibrary2<br>
+					</code>
+					<br>
+					然後開啟登陸編輯程式，找到：<br>
+					<br>
+					<code>電腦\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Help</code><br>
+					<br>
+					將 Help 匯出為 *.reg 檔。
+				</p>
+			</section>
+			<section>
+				<h4>還原 Help Viewer</h4>
+				<p>
+					移除 Visual Studio，然後把複製的資料夾放回原位，再執行匯出的 *.reg 登錄檔，就能執行 Help Viewer 了。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='effective'>
+	<section>
+		<h2>Effective C#</h2>
+		<hr>
+		<section>
+			<h3>C# 語言慣用語法</h3>
+			<p>
+				偏好隱含型別的區域變數<br>
+				偏好 readonly 而非 const<br>
+				偏好 is 或 as 運算子而非型別轉換<br>
+				以內插字串取代 string.Format()<br>
+				對文化特定字串偏好 FormattableString<br>
+				避免字串型別 API<br>
+				以 delegate 表示 callback<br>
+				對事件叫用使用空條件運算子<br>
+				減少 boxing 與 unboxing<br>
+				只對基底類別更新使用 new 修飾詞
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>.NET 資源管理</h3>
+			<p>
+				認識 .NET 資源管理<br>
+				偏好成員初始化程序而非指派陳述<br>
+				對靜態類別成員進行適當的初始化<br>
+				減少重複的初始化邏輯<br>
+				避免建構不必要的物件<br>
+				絕不在建構元中呼叫虛擬函式<br>
+				實作標準的 Dispose 模式
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用泛型</h3>
+			<p>
+				定義最少與足夠的約束<br>
+				使用執行期型別檢查特化泛型演算法<br>
+				以 IComparable 與 IComparer 實作排序關係<br>
+				建構支援 Disposable 型別參數的泛型類別<br>
+				支援泛型的共變數與反變數<br>
+				使用 delegate 定義型別參數的方法約束<br>
+				勿於基底類別或界面建構泛型特化<br>
+				偏好泛型方法，除非型別參數是實例欄位<br>
+				除泛型界面外還要實作傳統界面<br>
+				以擴充方法加入最少的界面合約<br>
+				以擴充方法加強建構型別
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用 LINQ</h3>
+			<p>
+				偏好以 Iterator 方法回傳集合<br>
+				偏好查詢語法而非廻圈<br>
+				為序列建構可組合 API<br>
+				從動作、述詞與函式中解耦迭代<br>
+				被請求時產生序列項目<br>
+				使用函式參數解耦<br>
+				不要過載擴充方法<br>
+				認識查詢表示式如何對應方法呼叫<br>
+				在查詢中偏好惰性求值而非積極求值<br>
+				偏好 lambda 表示式而非方法<br>
+				避免在函式與動作中拋出例外<br>
+				區分提前與延遲執行<br>
+				避免捕捉昂貴的資源<br>
+				區分 IEnumerable 與 IQueryable 資料來源<br>
+				使用 Single() 與 First() 以強制查詢的語意結果<br>
+				避免修改限界變數
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>例外的最佳做法</h3>
+			<p>
+				以例外回報方法約定失敗<br>
+				以 using 與 try/final 清理資源<br>
+				建構完整的應用程式專屬例外類別<br>
+				偏好強例外保證<br>
+				偏好例外過濾而非 catch 與重新拋出<br>
+				利用例外過濾的副作用
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>More Effective C#</h2>
+		<hr>
+		<section>
+			<h3>處理資料型別</h3>
+			<p>
+				使用屬性取代可存取的資料成員<br>
+				可變動的資料優先使用隱藏屬性<br>
+				實值型別優先使其具不可變性<br>
+				區分實值與參考型別<br>
+				確保 0 是實值型別的有效狀態<br>
+				確保屬性運作如資料一般<br>
+				使用 Tuples 限制型別的範圍<br>
+				在匿名型別上定義區域函式<br>
+				了解多種相等概念之間的關係<br>
+				了解 GetHashCode() 的陷阱
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>API 設計</h3>
+			<p>
+				在你的 API 中避免轉換運算子<br>
+				使用選擇性引數減少方法的多載<br>
+				限制型別的可見性<br>
+				優先定義並實作介面進行繼承<br>
+				了解介面與 Virtual Method 之間差異<br>
+				為通知實作事件模式<br>
+				避免傳回內部類別物件的參考<br>
+				優先使用 Override 替代 Event Handler<br>
+				避免在基底類別中定義方法多載<br>
+				了解事件如何增進物件之間執行期的耦合<br>
+				只宣告 Nonvirtual Event<br>
+				建立清楚的、最少的，以及完整的方法群<br>
+				部分類別的建構函式、更動子與 Event handler 使用部分方法<br>
+				避免使用 ICloneable，因為它限制你的設計選擇<br>
+				Array 引數限制只使用 params 陣列<br>
+				在 Iterators 與 Async 方法中使用區域函式啟動立即錯誤回報
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以 Task 為基礎的非同步程式設計</h3>
+			<p>
+				非同步工作使用 Async 方法<br>
+				永遠不要寫 async void 方法<br>
+				避免結合同步與非同步方法<br>
+				避免執行緒配置及 Context Switchesv<br>
+				避免非必要的封送處理（Marshalling）Contextv<br>
+				使用 Task 物件合成非同步工作<br>
+				考慮實作 Task 取消協定（Task Cancellation Protocol）<br>
+				緩衝擴充的非同步回傳值
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>平行處理</h3>
+			<p>
+				學習 PLINQ 如何實作平行演算法<br>
+				建構有考慮例外情況的平行演算法<br>
+				使用執行緒區集取代建立執行緒<br>
+				使用 BackgroundWorker 做跨執行緒通訊<br>
+				了解 XAML 環境中的跨執行緒呼叫<br>
+				使用 lock() 作為同步處理的首選<br>
+				鎖定 Handles 使用最小可能的範圍<br>
+				避免在鎖定的區段呼叫不明的程式碼
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>動態程式設計</h3>
+			<p>
+				了解動態程式設計的利弊<br>
+				透過動態型別運用泛型引數執行期的型別<br>
+				Data-Driven 動態型別使用 DynamicObject 或 IDynamicMetaObjectProvider<br>
+				了解如何運用 Expression API<br>
+				在公開的 API 中減少動態物件的使用
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>參與全球 C# 社群</h3>
+			<p>
+				尋求最好的答案，而不是最受歡迎的答案<br>
+				參與規格及程式碼的訂定<br>
+				考慮用分析器自動化慣用法
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>LINQ 查詢語句、LINQ API、Collections API 的使用時機</h2>
+		<p>
+			對於查詢語句、LINQ API、集合的使用時機，我有自己的一套用法，雖然我的做法不一定對，但還是提供給各位斟酌看看，或許值得參考～
+		</p>
+		<hr>
+		<section>
+			<h3>LINQ 查詢語句</h3>
+			<p>
+				我不把查詢語句當 LINQ，而是當運算式來用，所以一定會把結果指派給變數：<br>
+				<br>
+				<textarea class='brush:cs'>
+					IEnumerable&lt;int&gt; a = from n in Enumerable.Range(1, 10) where n &gt; 5 select n;
+                </textarea>
+				<br>
+				如果沒有要把結果指派給變數，我不會使用查詢語句，會改用 LINQ API 或 Collections API 甚至 foreach 迴圈。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>LINQ API</h3>
+			<p>
+				當我想在一句程式碼就批次處理好資料，用 LINQ API：<br>
+				<br>
+				<textarea class='brush:cs'>
+					Enumerable.Range(1, 10).Where(x =&gt; x&gt;5).ToList().ForEach(Console.Write);
+                </textarea>
+				<br>
+				我不會在使用 LINQ API 時將結果傳回給變數，它就是函數式風格的程式設計，用完即丟，資料不用保存下來。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Collections API</h3>
+			<p>
+				操作的是要保存下來的資料，自然就是用集合一行一行讀寫和操作了：<br>
+				<br>
+				<textarea class='brush:cs'>
+					List&lt;int&gt; list = new List&lt;int&gt;(){1, 3, 5, 7, 9};
+					list.Add(2);
+					list.Add(4);
+					list.Add(6);
+					list.Add(8);
+					list.Sort();
+                </textarea>
+				<br>
+				我會盡量使用集合，展現物件導向程式設計的可讀性！查詢語句和 LINQ API 是那種寫起來很爽，讀起來很幹的程式碼，修改起來沒有物件導向的程式碼方便、穩妥。
+			</p>
+		</section>
+	</section>
+	<hr id='uppercamelcase'>
+	<section>
+		<h2>為什麼方法和屬性要大寫開頭？</h2>
+		<p>
+			因為 C# 和 .NET 之父 Anders Hejlsberg 就是 Turbo Pascal 和 Delphi 之父，便把這套 Pascal 命名法給帶進 .NET 了～<br>
+			<br>
+			Pascal 命名法的優點，就是不使用沒意義的 _ 符號隔開單字，而用大寫開頭隔開單字，然後每個單字大寫開頭，其它小寫，形成整齊劃一的命名格式：<br>
+			<br>
+			<samp>
+				FirstName<br>
+				LastName<br>
+			</samp>
+			<br>
+			相比之下，先小寫開頭，有另一個單字再用大寫隔開，變成有的命名全是小寫，有的命名摻雜大寫，整體上較不一致。<br>
+			<br>
+			使用慣例上，public 的方法和屬性才使用 Pascal 命名，private 的則依自己喜好決定。
+		</p>
+	</section>
+	<hr id='hungariannotation'>
+	<section>
+		<h2>為什麼介面要用 I 開頭？</h2>
+		<p>
+			C# 繼承類別和實作介面都用 : 符號，不像 Java 使用 extends 和 implements，為了讓 C# 能像 Java 區別是繼承類別還是實作介面，.NET 裡的介面一律 I 開頭。
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 如果看不懂為什麼，試想一下把 this.Size 的 this 省略，只剩 Size，就知道為什麼了！後面的 new Size() 對編譯器來說等於省略掉 this 的 Size。<br>
+			[2] 其實很多人鼓勵這麼做！純粹只想寫 ASP.NET 程式，但不想讓自己的電腦變成網際網路的伺服器，那就安裝 IIS Express，不要開啟 Windows 的 IIS 功能。寫好 ASP.NET 程式碼，再上傳或複製到正式的機器。
+		</p>
+	</footer>
+</article>

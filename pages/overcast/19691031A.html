@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('Python')</script>
+<article>
+	<header>
+		<h1>Python 應用範例集</h1>
+		<p>
+			這裡示範 Python 內建函式 (Built-in Functions, BIF)，在《基礎範例集》已示範過 <code>input() print() type() int() float() hex() oct() bin() str() chr() ord() ascii() bool() abs() complex() divmod() pow() round() range() enumerate() help()</code>，所以這裡只示範剩下的函式。<br>
+			<br>
+			對講究簡約的 Python 來說，指令盡量簡單，再靠內建函式加強功能，所以內建函式的重要性就跟指令一樣，是完成基本任務時不可或缺的。<br>
+			<br>
+			Python 將完成基本任務的功能寫成內建函式，直接呼叫使用。進階任務則寫成標準模組，需要時才載入使用。可見學習 Python 程式設計，首先學語法指令，接著學內建函式，然後學標準模組，照這順序學、或者三管齊下，很快就能掌握 Python 的威力，成為能解決大大小小問題的程式設計高手！<br>
+			<br>
+			會用模組的話，你能靠別人解決許多特定問題，會內建函式的話，你能憑自己解決大大小小的問題。
+		</p>
+	</header>
+	<hr id='bytes'>
+	<section>
+		<h2>bytes</h2>
+		<p>
+			在 Python 你可以直接寫出位元組資料，以 b 開頭，後面用 ASCII 表示法的字串，例如：
+		</p>
+		<table>
+			<tr><td>b'ABC'</td><td>字串 ABC</td></tr>
+			<tr><td>b'123'</td><td>字串 123</td></tr>
+			<tr><td>b'{'</td><td>整數 123</td></tr>
+			<tr><td>b'\x0f'</td><td>整數 15</td></tr>
+		</table>
+		<p>
+			不過，除非你把 ASCII 表背下來，知道整數的 123 要寫成 { 字元，不然還是沒辦法手寫位元組資料，所以要借助內建函式來轉換～
+		</p>
+		<hr>
+		<section>
+			<h3>bytes()</h3>
+			<p>
+				使用 <code>bytes()</code> 可以產生位元組的資料。<br>
+				<br>
+				<textarea class='brush:py'>
+					print(bytes(4))						  # 產生 4 bytes 的資料
+					print(bytes([4]))					  # 將 4 轉為位元組資料
+					print(bytes('ABC', encoding='UTF-8')) # 將字串編碼為 UTF-8 再以位元組傳回
+					print(bytes([4]) + b'\x0f')			  # 位元組資料的串接
+                </textarea>
+				<br>
+				<output>
+					b'\x00\x00\x00\x00'<br>
+					b'\x04'<br>
+					b'ABC'<br>
+					b'\x04\x0f'
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>bytearray()</h3>
+			<p>
+				bytes 是不可變的，所以想修改位元組資料的話，建議改用 bytearray 物件，它會暫存一些位元組資料，修改完再轉為 bytes 資料。<br>
+				<br>
+				<textarea class='brush:py'>
+					# 空位元組資料
+					a = bytearray()
+
+					# 追加資料
+					a.append(128)
+					a.append(255)
+					print(bytes(a))
+
+					# 替換資料
+					a = a.replace(b'\xff', b'\x00')
+					print(bytes(a))
+
+					# 移除資料
+					a.pop()
+					print(bytes(a))
+                </textarea>
+				<br>
+				<output>
+					b'\x80\xff'<br>
+					b'\x80\x00'<br>
+					b'\x80'
+				</output>
+				<br>
+				bytearray 和 bytes 支援 str 的操作方法，所以我們能在位元組的型態操作字串：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = bytearray(b'ABCDE')
+					print(a.find(b'C'))
+                </textarea>
+				<br>
+				<output>
+					2
+				</output>
+				<br>
+				你可能會想說，誰會吃飽沒事這樣操作字串？的確，平常不建議這樣做。通常從二進制檔案讀取到字串時，因為是位元組型態的字串，才適合這樣做。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>memoryview()</h3>
+			<p>
+				只檢視位元組資料的話，可以考慮用 <code>memoryview()</code>，它是唯讀的，操作方式很像陣列：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = memoryview(b'ABCDE')
+
+					print(a[0])
+					print(a[-1])
+					print(a[1:4])
+					print(bytes(a[1:4]))
+                </textarea>
+				<br>
+				<output>
+					65<br>
+					69<br>
+					&lt;memory at 0x0000022E9406E048&gt;<br>
+					b'BCD'
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>bytes 轉 int 或 str</h3>
+			<p>
+				<textarea class='brush:py'>
+					# bytes 轉 int
+					a = b'\xFF'
+					b = int.from_bytes(a, byteorder='big')
+					print(b)
+
+					# bytes 轉 str
+					a = b'ABC'
+					b = str(a, encoding='UTF-8')
+					print(b)
+                </textarea>
+				<br>
+				<output>
+					255<br>
+					ABC
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='str'>
+	<section>
+		<h2>str</h2>
+		<p>
+			即 string（字串）。<br>
+			<br>
+			雖然可用 str() 產生字串，但通常直接使用 <code>'</code> 或 <code>"</code> 引號，要轉其它資料為字串時才用函式。<br>
+			<br>
+			在 Python 沒有字元（char; character），只有長度為 1 的字串，所以用單引號或雙引號括起來的文字，地位是一樣的。由於單引號不用按 Shift，比較好打出來，我個人偏好單引號。PEP 8 Style Guide for Python Code 也沒指定哪一種較好，只要求保持一致，遇到要用 \ 字元顯示單引號或雙引號時，才混用單引號和雙引號，避免使用較難閱讀的 \ 字元。三引號的話，PEP 257 Docstring Conventions 建議使用雙引號。
+		</p>
+		<hr>
+		<section>
+			<h3>Example 1</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 'ABCDE'
+					print('CD' in a)	 # 檢查字串中是否包含某文字
+					print('FG' not in a) # 檢查字串中是否不含某文字
+
+					b = a * 2			 # 複製兩次 a 字串
+					print(b)
+
+					print(b[2:5])		 # 擷取字串中第三個到第四個文字
+					print(b[5:10:2])	 # 每間隔 2 字擷取字串中第五個到第九個文字
+
+					print(len(b))		 # 計算字串長度
+					print(min(b))		 # 計算字串中最小的文字
+					print(max(b))		 # 計算字串中最大的文字
+                </textarea>
+				<br>
+				<output>
+					True<br>
+					True<br>
+					ABCDEABCDE<br>
+					CDE<br>
+					ACE<br>
+					10<br>
+					A<br>
+					E
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 2</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 'ABC123'
+
+					print('都是字母或數字？', a.isalnum())
+					print('都是字母？', a.isalpha())
+					print('字母都是大寫？', a.isupper())
+					print('字母都是小寫？', a.islower())
+					print('都是可見字元？', a.isprintable())
+					print('都是空格字元？', a.isspace())
+					print('是否可做為合法的識別字？', a.isidentifier())
+					print('是否以 ABC 開頭？', a.startswith('ABC'))
+					print('是否以 ABC 結尾？', a.endswith('ABC'))
+
+					print('都是數字？', '零１２３四五六ⅦⅧⅨ拾佰仟万亿'.isnumeric())
+					print('都是阿拉伯數字？', '123４５６'.isdecimal(), '七八九'.isdecimal())
+					print('都能當數值？', '1'.isdigit(), '二'.isdigit(), b'3'.isdigit())
+                </textarea>
+				<br>
+				<output>
+					都是字母或數字？ True<br>
+					都是字母？ False<br>
+					字母都是大寫？ True<br>
+					字母都是小寫？ False<br>
+					都是可見字元？ True<br>
+					都是空格字元？ False<br>
+					是否可做為合法的識別字？ True<br>
+					是否以 ABC 開頭？ True<br>
+					是否以 ABC 結尾？ False<br>
+					都是數字？ True<br>
+					都是阿拉伯數字？ True False<br>
+					都能當數值？ True False True
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 3</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = '	ABC Abc abc' # 開頭是四個空白字元
+
+					print(a.upper()		 # 轉為大寫
+					print(a.lower()		 # 轉為小寫
+					print(a.strip()		 # 刪除頭尾空白
+                </textarea>
+				<br>
+				<output>
+					&nbsp; &nbsp; ABC ABC ABC<br>
+					&nbsp; &nbsp; abc abc abc<br>
+					ABC Abc abc
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 4</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 'AAA\tBBB\tCCC'
+
+					# 將 Tab 字元轉為用空白的間隔距離
+					print(a.expandtabs(2))
+					# 間隔距離並不是將 Tab 字元轉為幾個空白，而是每段字串的間隔長度。
+					print(a.expandtabs(3))
+                </textarea>
+				<br>
+				<output>
+					AAA BBB CCC<br>
+					AAA &nbsp; BBB &nbsp; CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 5</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 依指定文字將字串切割開來
+					for n in 'A:B:C:D:E'.split(':'):
+						print(n)
+
+					# 依指定文字將字串分成前中後三個部分
+					for n in '阿前阿中阿後'.partition('阿中'):
+						print(n)
+                </textarea>
+				<br>
+				<output>
+					A<br>
+					B<br>
+					C<br>
+					D<br>
+					E<br>
+					阿前<br>
+					阿中<br>
+					阿後
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 6</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 'AAABBBCCC'
+
+					print(a.index('C'))		   # 找出某文字的位置
+					print(a.count('C'))		   # 計算某文字的數量
+
+					print(a.index('BC', 3, 7)) # 範圍內找出某文字的位置（找不到會 Error）
+					print(a.count('BC', 3, 7)) # 範圍內找出某文字的次數（找不到會 Error）
+                </textarea>
+				<br>
+				<output>
+					6<br>
+					3<br>
+					5<br>
+					1
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 7</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 輸出格式化字串
+					print('帳號 {0} 密碼 {1}'.format('twideem', 'abc123'))	 # 指定第幾個參數
+					print('{} 加 {} 等於 {}'.format('1', '2', '3'))			 # 照參數順序
+					print('{name}'.format(name='Twideem'))					 # 關鍵字參數
+					print('{account[id]}'.format(account={'id': 'twideem'})) # 用 dict 當參數
+                </textarea>
+				<br>
+				<output>
+					名稱 twideem 密碼 abc123<br>
+					1 加 2 等於 3<br>
+					Twideem<br>
+					twideem
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='tuple'>
+	<section>
+		<h2>tuple</h2>
+		<hr>
+		<section>
+			<h3>基本用法</h3>
+			<p>
+				tuple 像前面章節「陣列」看到的 list 一樣，是照順序排列資料的串列，但無法增刪資料，所以也幾乎沒有可操作的功能：<br>
+				<br>
+				<textarea class='brush:py'>
+					# 標準寫法
+					a = ('A', 'AA', 'AAA')
+
+					# 省略寫法
+					b = 'B', 'BB', 'BBB'
+
+					# 用函式將 list 或 str 轉為 tuple
+					c = tuple(['C', 'CC', 'CCC'])
+					d = tuple('hello')
+
+					print(a[2])
+					print(b[2])
+					print(c[2])
+					print(d)
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC<br>
+					('h', 'e', 'l', 'l', 'o')
+				</output>
+				<br>
+				只有一筆資料，卻想寫成 tuple 的話，必須在資料後面加上 <code>,</code> 符號，不然直譯器會認為這是一筆 int 或 str：<br>
+				<br>
+				<textarea class='brush:py'>
+					a = 123  # 很顯然這樣寫是 int
+					b = 456, # 所以想表達一筆資料的 tuple 只好加個逗號了
+
+					print(a)
+					print(b)
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					(456,)
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>與 list 的區別：tuple 本身就是資料，而不是由資料組成的結構。</h3>
+			<p>
+				從資料的角度來區分，list 是無限串列，tuple 是有限串列，但這不是 Python 引進的原因。是為了讓群集 <code>item1, item2, ..</code> 能像字串 <code>"abc"</code> 一樣直接下語法給指令或函式，而不是每次都用 [] 包成串列，才引進了 tuple。像可變參數或資料交換都是 tuple 的妙用～<br>
+				<br>
+				所以使用 tuple 時，不要用 list 資料結構的角度去看它，tuple 不是將連續幾筆資料分散開來的結構，而是反過來，將分散開來的結構變成一筆連續的資料。舉例來說，與其想成 tuple 是不可變動的 list，不如想成 list 是用 tuple 資料組成的。<br>
+				<br>
+				雖然實作上 tuple 跟 list 明明都是集合物件，但意義上 tuple 是跟 str 同等級的「基本資料」，而不是跟 list 同等級的「集合物件」。
+			</p>
+		</section>
+	</section>
+	<hr id='list'>
+	<section>
+		<h2>list</h2>
+		<p>
+			在「陣列」的範例，已經看過 list 的用法，接下來補充其它用法。
+		</p>
+		<hr>
+		<section>
+			<h3>Example 1</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 傳回空串列並追加資料
+					a = list()
+					a.append('AAA')
+					a.insert(1, 'BBB')
+
+					print(a)
+                </textarea>
+				<br>
+				<output>
+					['AAA', 'BBB']
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 2</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = list('hello') # 將字串變成串列
+					a.sort()		  # 對串列進行排序
+					a.reverse()		  # 對串列順序反轉
+
+					print(a)
+                </textarea>
+				<br>
+				<output>
+					['o', 'l', 'l', 'h', 'e']
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 3</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE']
+					a.pop()			# 移除最後一筆資料
+					a.remove('BBB') # 移除某筆資料
+					del a[2]		# 刪除某一筆資料
+
+					print(len(a))	# 計算資料筆數
+					print(a)
+                </textarea>
+				<br>
+				<output>
+					2<br>
+					['AAA', 'CCC']
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='set'>
+	<section>
+		<h2>set</h2>
+		<p>
+			集合（set）是種「元素不會重複」的資料結構，且 Python 的 set 並不照資料先後順序排列，由於不知道資料的位置，也不需要 get(index) 或 [index]，想取得 set 的資料就是迭代。<br>
+			<br>
+			<textarea class='brush:py'>
+				# 集合
+				a = {'AAA', 'BBB', 'CCC'}
+				a.add('DDD')
+				a.add('AAA')
+
+				print(a)
+            </textarea>
+			<br>
+			<output>
+				{'DDD', 'BBB', 'CCC', 'AAA'}
+			</output>
+			<br>
+			想建立空集合的話，只能用 <code>set()</code>，不能用 {}。<br>
+			<br>
+			使用 <code>remove(資料)</code> 和 <code>clear()</code> 可以刪除資料，有趣的還有用 <code>pop()</code> 隨機刪除一筆資料。需要過濾重複資料，並且從資料中隨機挑選不重複資料時，用 set 和 pop() 會省事很多。<br>
+			<br>
+			<textarea class='brush:py'>
+				# 空集合
+				a = set()
+				a.add('兄弟象')
+				a.add('味全龍')
+				a.add('三商虎')
+				a.add('統一獅')
+
+				# 選秀順位
+				while a:
+					print(a.pop())
+            </textarea>
+			<br>
+			每次執行結果不太一樣，我的情形是：<br>
+			<br>
+			<output>
+				兄弟象<br>
+				三商虎<br>
+				統一獅<br>
+				味全龍
+			</output>
+		</p>
+	</section>
+	<hr id='dict'>
+	<section>
+		<h2>dict</h2>
+		<p>
+			指 dictionary（字典），是種鍵值對的資料結構。新增資料時，名稱已經存在的話，會取代舊的資料。
+		</p>
+		<hr>
+		<section>
+			<h3>Example 1</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 字典
+					a = {'name': 'Twideem Civs', 'email': 'twideem@outlook.com'}
+					print(a['name'])
+					print(a['email'])
+                </textarea>
+				<br>
+				<output>
+					Twideem Civs<br>
+					twideem@outlook.com
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 2</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 空字典
+					a = dict()
+					a['id'] = 'twideem'
+
+					print(a['id'])
+                </textarea>
+				<br>
+				<output>
+					twideem
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Example 3</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 字典的迭代
+					a = {'A':111, 'B':222, 'C':333}
+
+					for k, v in a.items():
+						print(v)
+                </textarea>
+				<br>
+				<output>
+					111<br>
+					222<br>
+					333
+				</output>
+			</p>
+		</section>
+		<hr>
+		<p>
+			dict 物件可用如下方式操作資料：<br>
+			<br>
+			<code>
+				clear()<br>
+				copy()<br>
+				fromkeys(iterable [,value])<br>
+				get(key [,default])<br>
+				items()<br>
+				keys()<br>
+				pop(key [,default])<br>
+				popitem()<br>
+				setdefault(key [,default])<br>
+				update([other])<br>
+				values()<br>
+			</code>
+			<br>
+			其中刪除資料的部分，主要還是用 <code>del</code> 指令，需要傳回刪除的資料才用 pop()。
+		</p>
+	</section>
+	<hr id='iterable'>
+	<section>
+		<h2>處理可迭代資料</h2>
+		<hr>
+		<section>
+			<h3>all、any</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 0, 1, 2
+
+					# 資料是否全部有效（全為 True）
+					print(all(a))
+
+					# 是否有任何一筆資料成立（任一 True）
+					print(any(a))
+                </textarea>
+				<br>
+				<output>
+					False<br>
+					True
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>filter</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 篩選資料
+					print(*filter(lambda x: x &gt; 5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+
+					# 看不懂的話，下面程式跟上面一樣：
+					def test(x):
+						if x &gt; 5:
+							return x
+
+					values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+					print(*filter(test, values))
+
+					# 對程式新手來說，較難懂的地方是傳入函式來設計篩選條件。
+					# 類似寫法在 C 語言就已出現，像 qsort() 和 bsearch() 要另外寫 compare()。
+					# 多練習幾次，還是能理解的。
+                </textarea>
+				<br>
+				<output>
+					6 7 8 9 10<br>
+					6 7 8 9 10
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>frozenset</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 凍結資料，防止資料被修改。
+					a = frozenset(['AAA', 'BBB', 'CCC'])
+					a[0] = 'ABC'
+                </textarea>
+				<br>
+				<output>
+					Traceback (most recent call last):<br>
+					&nbsp; File "sample.py", line 2, in &lt;module&gt;<br>
+					&nbsp; &nbsp; a[0] = 'ABC'<br>
+					TypeError: 'frozenset' object does not support item assignment
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>iter、next</h3>
+			<p>
+				<textarea class='brush:py'>
+					# 迭代器
+					n = iter(['AAA', 'BBB', 'CCC'])
+					print(next(n))
+					print(next(n))
+					print(next(n))
+
+					# 不是每次都會在 for.. in.. 迭代串列，在其他地方迭代時，就知道用處了。
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>min、max、sum</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 111, 222, 333
+
+					print(min(a)) # 取最小值
+					print(max(a)) # 取最大值
+					print(sum(a)) # 統計
+                </textarea>
+				<br>
+				<output>
+					111<br>
+					333<br>
+					666
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>slice</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 'A', 'B', 'C', 'D', 'E'
+					b = slice(2, 4)
+
+					print(a[b]) # 裁切
+                </textarea>
+				<br>
+				<output>
+					('C', 'D')
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>sorted、reversed</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 127, 0, 1, 2
+
+					# 排序
+					b = sorted(a)
+					print(*b)
+
+					# 反轉
+					c = reversed(a)
+					print(*c)
+                </textarea>
+				<br>
+				<output>
+					0 1 2 127<br>
+					2 1 0 127
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>zip</h3>
+			<p>
+				<textarea class='brush:py'>
+					a = 111, 222, 333
+					b = 444, 555, 666
+
+					# 緊湊
+					c = zip(a, b)
+					print(*c)
+                </textarea>
+				<br>
+				<output>
+					(111, 444) (222, 555) (333, 666)
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='object'>
+	<section>
+		<h2>處理物件與變數</h2>
+		<p>
+			與處理物件和檢視變數相關的內建函式有：<br>
+			<br>
+			<code>
+				callable(object)<br>
+				classmethod(function)<br>
+				dir([object])<br>
+				delattr(object, name)<br>
+				getattr(object, name[, default])<br>
+				globals()<br>
+				hasattr(object, name)<br>
+				hash(object)<br>
+				id(object)<br>
+				isinstance(object, classinfo)<br>
+				issubclass(class, classinfo)<br>
+				locals()<br>
+				object()<br>
+				property(fget=None, fset=None, fdel=None, doc=None)<br>
+				repr(object)<br>
+				setattr(object, name, value)<br>
+				staticmethod(function)<br>
+				super([type[, object-or-type]])<br>
+				vars([object])<br>
+				__import__(name, globals=None, locals=None, fromlist=(), level=0)<br>
+			</code>
+			<br>
+			沒興趣，以後再寫～
+		</p>
+	</section>
+	<hr id='expression'>
+	<section>
+		<h2>處理算式</h2>
+		<p>
+			Python 程式可以寫在純文字文件，無須編譯就能直接執行，但純文字文件不就是一種字串的格式嗎？換句話說，如果某個字串很像程式碼，是否可以送給 Python 執行？答案是可以的！先用 <code>compile()</code> 把字串編譯成 Python 程式，再用 <code>exec()</code> 執行。如果只是單純的算式，還可用 <code>eval()</code> 直接計算出結果，好嵌入 Python 的語法中使用。
+		</p>
+		<hr>
+		<section>
+			<h3>編譯寫成字串的 Python 程式並執行</h3>
+			<p>
+				<textarea class='brush:py'>
+					source = 'for n in range(3): print(n)'
+					code = compile(source, '', 'exec')
+					exec(code)
+                </textarea>
+				<br>
+				<output>
+					0<br>
+					1<br>
+					2
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>直接執行算式</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(eval('123+456'))
+                </textarea>
+				<br>
+				<output>
+					579
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='format'>
+	<section>
+		<h2>格式化數字</h2>
+		<p>
+			使用 <code>format()</code> 可將數值格式化成你想要的樣式，例如想要每三位數標上逗號的 123,456,789 整數，或者只取小數 2 位的浮點數。不過，格式化出來的是字串，無法拿來與數值進行數學運算。<br>
+			<br>
+			format() 第一個參數是數值，第二個參數是格式化的型式。格式化型式的語法：<br>
+			<br>
+			<code>填充字元 填充字元的位置 + 長度 , .小數位數 數字型態 </code><br>
+			<br>
+			填充字元表示數字不夠長度時，自動填上字元，例如 **123，你可以任意決定要用哪個字元來填充，但不能是字串。位置有 <code>&gt; &lt; ^</code> 左、右、中三種。<br>
+			<br>
+			<code>+</code> 表示啟用正負號，<code>,</code> 表示每三位數加上逗號。要注意的是，這些符號都算在長度裡面，例如 +123,456.789 長度是 12。這也是為何不叫「位數」而叫「長度」的原因。<br>
+			<br>
+			數的型態有 <code>b c d e E f g G n o s x X %</code>。
+		</p>
+		<hr>
+		<section>
+			<h3>數字型態</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(format(123, 'n'))		# 數值（number 的意思，等同 decimal 的 d。）
+					print(format('123', 's'))	# 字串
+					print(format(123, 'c'))		# 字元
+
+					print(format(123, 'd'))		# 十進位值（預設，可以省略。）
+					print(format(123, 'b'))		# 二進位值
+					print(format(123, 'o'))		# 八進位值
+					print(format(123, 'x'))		# 小寫十六進位值
+					print(format(123, 'X'))		# 大寫十六進位值
+
+					print(format(123.456, 'f')) # 小數
+					print(format(123, 'e'))		# 小寫指數
+					print(format(123, 'E'))		# 大寫指數
+					print(format(123.456, 'g')) # 一般格式化（平常是小數，太長改小寫指數。）
+					print(format(123.456, 'G')) # 一般格式化（平常是小數，太長改大寫指數。）
+					print(format(123, '%'))		# 百分比
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					123<br>
+					{<br>
+					<br>
+					123<br>
+					1111011<br>
+					173<br>
+					7b<br>
+					7B<br>
+					<br>
+					123.456000<br>
+					1.230000e+02<br>
+					1.230000E+02<br>
+					123.456<br>
+					123.456<br>
+					12300.000000%
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>位數</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(format(123456789, ',d')) # 每三位數使用逗號
+					print(format(123.456, '.2f'))  # 只取 2 個小數位數
+                </textarea>
+				<br>
+				<output>
+					123,456,789<br>
+					123.46
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>填充字元</h3>
+			<p>
+				<textarea class='brush:py'>
+					print(format(123, '*&gt;5d'))
+					print(format(123, '*&lt;5d'))
+					print(format(123, '*^5d'))
+                </textarea>
+				<br>
+				<output>
+					**123<br>
+					123**<br>
+					*123*
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='file'>
+	<section>
+		<h2>讀寫檔案</h2>
+		<p>
+			Python 讀寫檔案很簡單，一律用內建函式 <code>open()</code> 傳回檔案物件，再對物件操作 <code>write()</code> 寫入資料、<code>read()</code> 讀取資料、<code>close()</code> 關閉檔案即可：<br>
+			<br>
+			<textarea class='brush:py'>
+				# 寫入資料
+				file = open('text.txt', 'w')
+				file.write('ABC')
+				file.close()
+            </textarea>
+			<br>
+			<output class='editor'>
+				ABC
+			</output>
+			<br>
+			<textarea class='brush:py'>
+				# 讀取資料
+				file = open('text.txt', 'r')
+				print(file.read())
+				file.close()
+            </textarea>
+			<br>
+			<output>
+				ABC
+			</output>
+			<br>
+			open() 第二個參數是讀寫模式，有四種讀寫動作：<br>
+			<br>
+			<code>
+				r　read<br>
+				w　write<br>
+				a　append<br>
+				x　exclusive<br>
+			</code>
+			<br>
+			一個搭配選項：<br>
+			<br>
+			<code>
+				+　update<br>
+			</code>
+			<br>
+			兩種資料模式：<br>
+			<br>
+			<code>
+				b　binary<br>
+				t　text<br>
+			</code>
+			<br>
+			除了範例介紹的兩種寫法，其它常用的寫法如下：<br>
+			<br>
+			<samp>
+				想追加資料到文件的話，用 'a'。<br>
+				想建立新的可讀寫檔案，用 'w+'。<br>
+				想開啟舊的可讀寫檔案，且寫入的資料不想覆蓋舊的資料，用 'a+'。<br>
+				想開啟舊的可讀寫檔案，且要讓新寫入的資料要覆蓋檔案的舊資料，用 'r+'。<br>
+				'r' 和 't' 是預設，因此可省略。但 'rb' 的話就不是預設的 'rt' 了，必須寫出來。
+			</samp>
+		</p>
+		<hr>
+		<section>
+			<h3>讀寫純文字文件</h3>
+			<p>
+				上面寫法在檔案操作失敗時，不保證會執行 f.close() 關閉檔案，所以建議用自動關閉檔案的寫法：<br>
+				<br>
+				<textarea class='brush:py'>
+					# 寫入資料
+					with open('text.txt', 'w') as file:
+						file.write('AAA\n')
+						file.write('BBB\n')
+						file.write('CCC\n')
+                </textarea>
+				<br>
+				<output class='editor'>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				<textarea class='brush:py'>
+					# 讀取資料
+					with open('text.txt') as file:
+						print(file.read())
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				過去 Python 2 會用 try.. finally.. 的寫法保證關閉檔案，但自從 Python 3 引進 with.. as.. 後，已不建議這樣寫程式。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以隨機存取結構讀寫檔案</h3>
+			<p>
+				這是一種可以在文件中指定位置來讀寫資料的結構：<br>
+				<br>
+				<textarea class='brush:py'>
+					with open('data.dat', 'w+') as file:
+						# 寫入資料
+						file.seek(10)
+						file.write('AAA')
+						file.seek(20)
+						file.write('BBB')
+						file.seek(100)
+						file.write('CCC')
+						# 讀取資料
+						file.seek(100)
+						print(file.read(2))
+						file.seek(20)
+						print(file.read(3))
+                </textarea>
+				<br>
+				<output class='editor'>
+					<strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> AAA <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> BBB <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong> CCC
+				</output>
+				<br>
+				<output>
+					CC<br>
+					BBB
+				</output>
+				<br>
+				對比的是循序存取結構，一筆一筆或一行一行照順序讀寫資料。<br>
+				<br>
+				如果需要隨時隨地針對某筆資料做存取，隨機存取結構檔案是很好用的設計。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以二進制資料讀寫檔案</h3>
+			<p>
+				對訴求簡約的 Python 來說，想保存資料的話，盡量用純文字文件，以二進制資料讀寫檔案屬於進階程式設計。退而求其次，也應該採用隨機存取結構讀寫檔案。只有不得不的情況，才改用二進制檔案，否則只是自討沒趣。二進制是用在檔案結構的，不是用在資料保存。
+			</p>
+			<section>
+				<h4>複製二進制檔案</h4>
+				<p>
+					首先複製圖片，練習看看 'b' 參數的用處：<br>
+					<br>
+					<textarea class='brush:py'>
+						with open('1.png', 'rb') as image1, open('2.png', 'wb') as image2:
+							image2.write(image1.read())
+                    </textarea>
+					<br>
+					這只是練習，Python 內建複製檔案的模組了，平常不是這樣寫程式。
+				</p>
+			</section>
+			<section>
+				<h4>讀寫二進制檔案</h4>
+				<p>
+					動態型別的 Python 資料型態不多，要將資料轉為二進制是瑣碎的工作，所以藉由 struct 模組代勞：<br>
+					<br>
+					<textarea class='brush:py'>
+						import struct
+
+						with open('data.dat', 'wb') as file:
+							file.write(struct.pack('3si', b'ABC', 123))
+
+						with open('data.dat', 'rb') as file:
+							a = struct.unpack('3si', file.read())
+							print(a)
+
+						# 3si 是 3 個 char[] 和一個 int 的意思
+                    </textarea>
+					<br>
+					<output class='editor'>
+						ABC <strong>NUL</strong> { <strong>NUL</strong> <strong>NUL</strong> <strong>NUL</strong>
+					</output>
+					<br>
+					<output>
+						(b'ABC', 123)
+					</output>
+					<br>
+					以這種方式寫入的檔案，會是真正的二進制檔案，不是純文字文件。
+				</p>
+			</section>
+			<section>
+				<h4>以二進制格式讀寫純文字文件</h4>
+				<p>
+					這種程式不常見，既然是純文字文件，卻使用二進制的方式去讀寫資料，根本自找麻煩：<br>
+					<br>
+					<textarea class='brush:py'>
+						with open('text.txt', 'wb') as file:
+							file.write(b'ABC\n')
+							file.write(b'123\n')
+
+						with open('text.txt', 'rb') as file:
+							print(file.read())
+                    </textarea>
+					<br>
+					<output class='editor'>
+						ABC<br>
+						123
+					</output>
+					<br>
+					<output>
+						b'ABC\n123\n'
+					</output>
+					<br>
+					要手動處理 \r\n 換行<ins>1</ins>，或者載入的模組要求以 Python 的二進制字串格式處理資料時，才會這樣處理純文字文件。
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='breakpoint'>
+	<section>
+		<h2>breakpoint</h2>
+		<p>
+			<code>breakpoint()</code> 相當於 <code>import pdb; pdb.set_trace()</code> 的程式寫法，用來呼叫除錯器。除錯器的操作方式，請見 <a href='19691201A.html#pdb'>pdb</a> 模組的介紹。
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 因為 Python 一律使用 \n 換行，即使在 Windows 作業系統執行 Python，也會自動將 \r\n 轉為 \n。
+		</p>
+	</footer>
+</article>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>Sprite</h1>
+		<p>
+			Sprite 是一種連續圖像的電腦圖學技術，它把畫面中需要以動畫來展現的物體，另外裁切一小張的圖像來繪製，完成後再貼到畫面上，這樣就不用對整張畫面做繪圖的動作，降低電腦的計算負擔，是一種高速繪圖的技巧。<br>
+			<br>
+			本章節將介紹在 HTML5 的 Canvas 實作 Sprite 的方式，我們準備兩張圖，一張是背景：background.png，一張是動畫用的人物：sprite.png，以連續圖像的原理製作動畫。<br>
+			<br>
+			<img src='../../images/hypermount/19690518A_01.png' alt='插圖' width='420'> <img src='../../images/hypermount/19690518A_02.png' alt='插圖' width='140'><br>
+			<br>
+			準備好了的話，請按一下「<a href='#anchor' onclick='run()'>開始展示範例</a>」，檢視本章節所要示範的案例<ins>1</ins>……<br id='anchor'>
+			<script>
+				let background=new Image();
+				background.src='../../images/hypermount/19690518A_01.png';
+
+				let sprite=new Image();
+				sprite.src='../../images/hypermount/19690518A_02.png';
+
+				let breakline=document.createElement('br');;
+				$('p').appendChild(breakline);
+				breakline.style.display='none';
+
+				let canvas=document.createElement('canvas'),context=canvas.getContext('2d');
+				$('p').appendChild(canvas);
+				canvas.width=595;
+				canvas.height=297;
+				canvas.style.display='none';
+
+				let position=0;
+				let count=0;
+
+				function run()
+				{
+					breakline.style.display='inline';
+					canvas.style.display='inline';
+					setInterval(()=>{
+						if(position>300) position=300;
+
+						context.drawImage(background,0,0);
+
+						switch(count){
+							case 0:
+							count++;
+							context.drawImage(sprite,0,0,96,141,255,position,96,141);
+							break;
+
+							case 1:
+							count++;
+							context.drawImage(sprite,96,0,96,141,255,position+=9,96,141);
+							break;
+
+							case 2:
+							count++;
+							context.drawImage(sprite,0,0,96,141,255,position,96,141);
+							break;
+
+							case 3:
+							count=0;
+							context.drawImage(sprite,288,0,96,141,255,position+=9,96,141);
+						}
+					},250);
+				}
+			</script>
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>原始碼</h2>
+		<p>
+			<textarea class='brush:js'>
+				//全域變數
+				let count=0;
+				let position=0;
+
+				//載入背景圖片
+				let background=new Image();
+				background.src='background.png';
+
+				//載入前景圖片
+				let sprite=new Image();
+				sprite.src='sprite.png';
+
+				//建立畫布
+				let canvas=document.createElement('canvas');
+				document.body.appendChild(canvas);
+
+				//調整畫布大小
+				canvas.width=600;
+				canvas.height=300;
+
+				//先後將背景圖片與前景圖片描繪到畫布
+				function draw()
+				{
+					let context=canvas.getContext('2d');
+					context.drawImage(background,0,0);
+
+					switch(count){
+						case 0:
+						context.drawImage(sprite,0,0,96,141,272,position,96,141);
+						count++;
+						break;
+
+						case 1:
+						context.drawImage(sprite,96,0,96,141,272,position+=9,96,141);
+						count++;
+						break;
+
+						case 2:
+						context.drawImage(sprite,0,0,96,141,272,position,96,141);
+						count++;
+						break;
+
+						case 3:
+						count=0;
+						context.drawImage(sprite,288,0,96,141,272,position+=9,96,141);
+					}
+				}
+
+				//每 0.25 秒執行 draw()
+				setInterval(draw,250);
+            </textarea>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>範例下載</h2>
+		<p>
+			<a href='../../objects/downloads/19690518A.7z'>19690518A.7z</a>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 在 Microsoft Edge 開啟效率模式的話，動畫會累格。<br>
+			[*] 本圖像使用下列網站所提供的免費遊戲素材：<a href='http://etolier.webcrow.jp'>エトリエ素材</a>、<a href='http://fayforest.sakura.ne.jp'>森の奥の隠れ里</a>。
+		</p>
+	</footer>
+</article>

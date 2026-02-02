@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>button{height:24px;width:35px}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>初級英檢動詞練習</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>請選擇題型</h2>
+		<p>
+			請選擇單字的字首，以及出題的順序：<br>
+			<br>
+			<button onclick='change(0)'>A</button><button onclick='change(1)'>B</button><button onclick='change(2)'>C</button><button onclick='change(3)'>D</button><button onclick='change(4)'>E</button><button onclick='change(5)'>F</button><button onclick='change(6)'>G</button><button onclick='change(7)'>H</button><button onclick='change(8)'>I</button><button onclick='change(9)'>J</button><button onclick='change(10)'>K</button><button onclick='change(11)'>L</button><button onclick='change(12)'>M</button><button onclick='seq()' style='width:auto'>循序</button><br>
+			<button onclick='change(13)'>N</button><button onclick='change(14)'>O</button><button onclick='change(15)'>P</button><button onclick='change(16)'>Q</button><button onclick='change(17)'>R</button><button onclick='change(18)'>S</button><button onclick='change(19)'>T</button><button onclick='change(20)'>U</button><button onclick='change(21)'>V</button><button onclick='change(22)'>W</button><button disabled>X</button><button disabled>Y</button><button disabled>Z</button><button onclick='rand()' style='width:auto'>隨機</button>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2 style='color:#f69'>尚未選擇題型</h2>
+		<p>
+			請輸入「標題（紅字）」所示的英文單字，然後按 Enter：<br>
+			<br>
+			<input style='font-family:Courier New,monospace' onkeydown='answer()'> <span></span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>計分</h2>
+		<p>
+			累計答對題數：<span>0</span>　　累計答錯題數：<span>0</span>
+		</p>
+	</section>
+</article>
+<audio></audio>
+<audio></audio>
+<script>
+	let state=false;
+	let letter=0;
+	let word=-2;
+	let right=0;
+	let wrong=0;
+	let dict=[['接受','accept','達成','achieve','行動；表演','act','增加；添補','add','讚賞；欽佩','admire','承認；准許','admit','收養；採取；採納','adopt','推進','advance','勸告；建議','advise','影響','affect','老化；食物味道變醇熟','age','同意','agree','助益；扶持','aid','瞄準；意圖；以…為目標','aim','允許','allow','第一人稱單數現在式','am','回答','answer','道歉','apologize','看起來…；似乎；出現','appear','申請','apply','感激','appreciate','第二人稱現在式；第一三人稱複數現在式','are','爭論；爭吵','argue','安排；整理；排列','arrange','逮捕；阻止','arrest','到達；抵達','arrive','問；請求','ask','假定；以為','assume','攻擊','attack','出席；參加','attend','避免；逃避','avoid'],
+			  ['支持；擁護；後退','back','烘烤麵包','bake','烤肉','barbecue','狗吠叫','bark','以…為根據','base','洗澡','bathe','是；正在；被','be','攜帶；負荷；忍受；支撐；生小孩','bear','連續敲打；打敗','beat','成為','become','開始','begin','行為表現','behave','相信','believe','屬於','belong','叮咬','bite','責備','blame','擋住；阻礙','block','吹','blow','用木板遮蓋；上船或飛機；寄宿','board','煮熟；沸騰','boil','借入；向人借…','borrow','打擾；煩擾；困擾','bother','鞠躬；屈服','bow','打破（碎掉）','break','帶來','bring','廣播','broadcast','刷洗','brush','建造','build','燃燒；燒焦；燙傷','burn','爆炸','burst','扣上鈕扣','button','買','buy'],
+			  ['打電話','call','使平靜下來','calm','露營','camp','能；會；可以','can','取消','cancel','關心；照顧','care','搬運','carry','捕捉','catch','引起','cause','慶祝','celebrate','集中','center','改變','change','追逐','chase','欺騙；作弊','cheat','檢查；核對','check','歡呼；喝采','cheer','選','choose','要求；聲稱；主張','claim','鼓掌','clap','清理','clean','清除','clear','攀爬','climb','關','close','收集；募捐','collect','著色','color','梳理','comb','來','come','命令；指揮','command','發表評論','comment','比較','compare','抱怨','complain','完成','complete','（擔憂）關心','concern','證實；確認','confirm','弄糊塗','confuse','考慮；顧及','consider','接觸；聯絡','contact','包含（所有部分包含在更大容器裡）','contain','繼續','continue','承包','contract','控制；支配；管理','control','烹煮','cook','冰冷','cool','影印','copy','糾正','correct','花費；價值','cost','咳嗽','cough','can 的過去式','could','數；計算','count','蓋住','cover','創造；創作','create','歸信於…','credit','穿越過；橫跨；相交叉','cross','哭','cry','治癒','cure','使彎曲','curve','切','cut'],
+			  ['損害；毀壞','damage','跳舞','dance','約會；註明日期','date','破曉；某個時期的開始','dawn','處理；經銷','deal','辯論','debate','決定','decide','裝飾；佈置','decorate','減少','decrease','使延遲；使耽擱；使延期','delay','遞送；交付','deliver','否決；拒絕','deny','相信；依賴…而定','depend','描述；形容','describe','遺棄','desert','設計','design','渴望','desire','察覺（不應該存在）','detect','推定','determine','發展；培養','develop','撥號；打電話','dial','死','die','節食','diet','挖掘','dig','指導；指示','direct','消失不見','disappear','發現（原本就已存在）','discover','討論','discuss','分配；除法','divide','做；構成疑問句、否定句、肯定強調、代替動詞','do','加倍','double','懷疑','doubt','畫','draw','夢','dream','穿衣','dress','喝','drink','駕駛','drive','掉落','drop','弄乾','dry'],
+			  ['賺錢','earn','舒緩；減輕','ease','吃','eat','引起變化；實現計畫','effect','選舉','elect','寄電子郵件','e-mail','使害羞；使困窘','embarrass','強調；著重','emphasize','雇用正式職員','employ','使變空','empty','鼓舞；激勵','encourage','結束；終了','end','享受','enjoy','進入','enter','忌妒；羨慕','envy','相等於；比得上','equal','調查；診斷','examine','興奮','excite','原諒；寬恕；准許…離開','excuse','運動（鍛鍊身體為目的）','exercise','存在；生存','exist','離開','exit','預期','expect','體驗','experience','解釋','explain','輸出','export','表達','express'],
+			  ['面對','face','失敗','fail','跌落；下降','fall','偏好於…','favor','畏懼','fear','飼養；餵食動物','feed','感覺；東西摸起來','feel','作戰；打架；爭吵','fight','描寫；認為；計算','figure','填滿','fill','拍攝','film','找到','find','處以罰金','fine','因完成而結束','finish','點火；開除','fire','釣魚','fish','裝入；使適合；衣服很合身','fit','修理','fix','流動；湧出','flow','飛行','fly','對焦；聚集於一點','focus','跟隨','follow','愚弄','fool','強迫','force','忘記','forget','原諒；寬恕；豁免','forgive','形成某種情況；構成','form','釋放；解脫','free','使驚嚇；恐嚇','frighten','用油加熱食物（煎、炒、炸）','fry','產生功能；起作用；行使職務','function'],
+			  ['獲增','gain','使聚集；蒐集','gather','用手勢','gesture','得到','get','給','give','黏上','glue','去；走（注意過去式是 went）','go','迎接客人','greet','成長','grow','守衛','guard','猜測','guess','引導；引領','guide'],
+			  ['遞交；拿…給…','hand','拿…來用；用手操縱','handle','懸掛；吊死','hang','發生','happen','憎恨','hate','已經；有；吃喝','have','率領；以…為首來前進','head','被動聽到','hear','加熱','heat','幫忙','help','躲藏','hide','爬山；健行；遠足','hike','雇用（花錢請人幫忙）','hire','全力打；撞擊','hit','拿住；握持；舉行','hold','跳躍','hop','經辦；主持','host','打獵','hunt','匆忙；催促','hurry','受傷','hurt'],
+			  ['忽視','ignore','想像；幻想','imagine','輸入；進口；引進貨物','import','改善；改進','improve','包含（包含的是整體中一小部份）','include','在現有的狀況上增加','increase','因…所以表示會…','indicate','對…帶來影響','influence','堅持','insist','激勵；給予靈感','inspire','使人感興趣','interest','打岔','interrupt','訪問；面試','interview','介紹；引進人才','introduce','發明','invent','偵查','investigate','邀請；誘使','invite','熨','iron','BE 動詞第三人稱單數現在式','is'],
+			  ['慢跑','jog','加入','join','開玩笑','joke','仲裁','judge','跳（雙腳奮力跳）','jump'],
+			  ['留下','keep','踢','kick','殺','kill','吻','kiss','敲打','knock','知道','know'],
+			  ['缺乏','lack','降落','land','笑','laugh','放置；（鳥、蟲）下蛋','lay','領先；率領','lead','學習','learn','離開（告別、出發）；遺忘','leave','借出','lend','讓、使','let','舔','lick','撒謊；躺下','lie','舉；抬','lift','點亮；點火','light','喜歡','like','限制','limit','畫線；排成一列','line','連接；與…相關','link','排成表','list','聽','listen','住；生活','live','鎖','lock','看','look','遺失；輸','lose','喜愛','love'],
+			  ['郵寄','mail','保養；維修','maintain','主修','major','做；使','make','做記號','mark','在市場交易；銷售','market','結婚','marry','相配','match','要緊','matter','可以；能夠','may','意思是','mean','測量','measure','遇見','meet','微波加熱','microwave','介意','mind','錯過；想念','miss','弄錯','mistake','混合','mix','走秀；展示服裝','model','拖地','mop','用身體動作指示','motion','移動；遷移','move','必須；得','must'],
+			  ['釘住；固定','nail','命名','name','變窄；縮小','narrow','靠近','near','需要','need','築巢','nest','點頭；打瞌睡','nod','注意；提及；記下','note','注意到','notice','編上號碼','幾','看護','nurse'],
+			  ['服從','obey','反對','object','發生；想到','occur','提供；提議','offer','上油；潤滑','oil','同意；認可','okay','遺漏','omit','打開','open','運轉；操作','operate','點菜','order','組織；使井然有序','organize','擁有','own'],
+			  ['包裝；打包行李','pack','畫畫；粉刷','paint','赦免','pardon','停車','park','穿越；經過；及格','pass','黏貼','paste','暫停','pause','付錢；發薪','pay','打電話','phone','挑選；摘取','pick','野餐','picnic','描繪；想像','picture','堆疊起','pile','釘住','pin','擺放','place','計畫','plan','種植','plant','玩','play','使高興','please','放入口袋；侵吞公款','pocket','指','point','下毒','poison','汙染','pollute','定位（到適當的地方）','position','貼公告；郵寄','post','搽粉；弄成粉狀','powder','練習','practice','讚美','praise','祈禱','pray','寧可','prefer','準備','prepare','按；擠壓下去','press','施壓；迫使','pressure','標價','price','印刷；列印','print','生產製造','produce','安排節目；編寫程式','program','進展','progress','承諾','promise','出聲宣佈','pronounce','提議','propose','保護','protect','證實','prove','提供','provide','拉；扯','pull','用幫浦抽水','pump','懲罰','punish','購買','purchase','推；按','push','擺放','put','困惑','puzzle'],
+			  ['詢問','question','辭職；停止','quit'],
+			  ['賽跑','race','下雨','rain','增加；舉起；撫養','raise','排列；延伸；擴展…到','range','伸手去拿；抵達；與…取得聯繫','reach','讀書；看報','read','意識到','realize','接收到','receive','紀錄','record','康復','recover','回收','recycle','拒絕','refuse','把…視為敬重的對象','regard','後悔','regret','拒絕','reject','記得','remember','提醒；使想起','remind','租','rent','修理','repair','重複','repeat','答覆','reply','報告','report','需求','require','尊重','respect','休息','rest','造成','result','歸還；返回','return','回顧；評論（過去的經歷）','review','修訂','revise','騎；搭乘','ride','鈴聲響','ring','升起；上漲','rise','搶劫；剝奪','rob','搖晃；震撼','rock','滾動','roll','根植','root','划船','row','搓揉；摩擦','rub','毀滅','ruin','統治','rule','奔跑','run','衝；趕著；催促','rush'],
+			  ['航船','sail','嘗試；取樣','sample','滿足','satisfy','儲存；拯救；節省','save','說話','say','得分','score','遮蔽','screen','搜尋','search','使坐下；容納（人）','seat','看見；了解','see','尋求','seek','看來；似乎','seem','選擇','select','賣出','sell','郵寄；傳送；派遣','send','依感覺意識到；用機器偵測出','sense','區分開來；分居','separate','服務','serve','擺置；樹立','set','搖動；發抖；握手','shake','應該；要','shall','塑造成…形','shape','分享','share','發亮；閃耀','shine','運送','ship','射擊；拍照','shoot','購物','shop','shall 的過去式','should','大聲叫喊','shout','展現','show','淋浴','shower','關閉（使合起來）','shut','簽字','sign','唱歌','sing','下沉','sink','坐','sit','溜冰','skate','滑雪','ski','睡覺','sleep','滑動','slide','滑倒；鬆開','slip','緩慢下來','slow','聞到…味道','smell','微笑','smile','抽菸；冒煙','smoke','吃點心','snack','下雪','snow','抹肥皂','soap','解決','solve','聽起來','sound','說話','speak','超速','speed','拼字','spell','花費','spend','認出；玷汙','spot','跺腳；貼郵票；蓋章','stamp','站立','stand','主演','star','開始','start','停留','stay','竊取','steal','蒸；冒蒸氣','steam','踩踏','step','使停止','stop','儲放','store','著重；強調；發重音','stress','點火；打擊；罷工；發生疫情','strike','奮戰；掙扎','struggle','學習；攻讀','study','成功；繼…','succeed','暗示意見','suggest','適合','suit','供給','supply','支持','support','衝浪','surf','使驚訝','surprise','生還','survive','清掃','sweep','游泳','swim','搖擺','swing'],
+			  ['拿；領取；花費；上課；吃藥','take','講話','talk','用膠帶黏；錄影音','tape','把…定為目標','target','嚐','taste','教導','teach','撕破；刮傷','tear','打電話給…','telephone','告訴','tell','以…稱做','term','測驗','test','謝謝','thank','想','think','丟擲','throw','打雷','thunder','收拾；整理','tidy','繫結','tie','安排時間；計時','time','給小費；使翻倒、傾斜','tip','烤麵包；敬酒','toast','達到…頂點；覆蓋…過','top','總和為','total','接觸；摸','touch','描繪；追溯；查出','trace','跟蹤','track','買賣；交換','trade','培訓','train','困住；設陷阱','trap','廢棄；破壞；弄亂','trash','旅行','travel','珍視','treasure','請客；款待','treat','欺詐','trick','煩惱','trouble','信任；託付','trust','試圖','try','轉彎','turn','打字','type'],
+			  ['加底線','underline','懂；明白','understand','使用','use'],
+			  ['度假','vacation','估價；重視','value','檢視；仔細觀察；認為','view','拜訪；參觀','visit','投票','vote'],
+			  ['等待','wait','使醒來','wake','走路','walk','想要','want','暖和；加熱','warm','清洗','wash','浪費','waste','觀看','watch','澆水；流口水；流淚','water','揮手；揮動','wave','穿戴','wear','歡迎','welcome','變濕','wet','變寬','widen','將會','will','獲勝；贏得','win','希望','wish','好奇想知道','wonder','工作','work','擔心','worry','使受傷','wound','寫','write']];
+	$('audio').src='../../objects/audio/20000704A_01.mp3';
+	$('audio',1).src='../../objects/audio/20000704A_02.mp3';
+
+	function rand()
+	{
+		state=true;
+	}
+
+	function seq()
+	{
+		state=false;
+	}
+
+	function quest(x)
+	{
+		letter=x;
+
+		if(state){
+			word=Math.ceil(Math.random()*dict[letter].length);
+			if(word%2!==0) word+=1;
+		}
+		else word+=2;
+
+		if(word>=dict[letter].length) word=0;
+
+		$('h2',1).innerHTML=dict[letter][word];
+	}
+
+	function answer()
+	{
+		if(event.which==13){
+			if($('input').value==dict[letter][word+1]){
+				$('span').innerHTML='答對了！';
+				$('span',1).innerHTML=++right;
+				$('audio').play();
+				quest(letter);
+			}
+			else{
+				$('span').innerHTML=`不對哦～，${$('input').value} 不是正確答案 … <a href='javascript:cheat()'>告訴我答案</a>`;
+				$('span',2).innerHTML=++wrong;
+				$('audio',1).play();
+			}
+
+			$('input').value='';
+		}
+	}
+
+	function change(x)
+	{
+		word=-2;
+		quest(x);
+	}
+
+	function cheat()
+	{
+		$('span').innerHTML=`答案是：${dict[letter][word+1]}，請繼續作下一個題目。`;
+		quest(letter);
+	}
+
+	addEventListener('load',quest(0));
+</script>

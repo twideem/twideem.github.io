@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>總覽各版 ECMAScript 功能</h1>
+		<p>
+			～ <a href='#anchor1'>JavaScript</a> → <a href='#anchor2'>ECMAScript</a> → <a href='#anchor3'>ECMAScript 2</a> → <a href='#anchor4'>ECMAScript 3</a> → <a href='#anchor5'>ECMAScript 4</a> → <a href='#anchor6'>ECMAScript 5</a> → <a href='#anchor7'>ECMAScript 2015</a><br>
+			<br>
+			→ <a href='#anchor8'>ECMAScript 2016</a> → <a href='#anchor9'>ECMAScript 2017</a> → <a href='#anchor10'>ECMAScript 2018</a> → <a href='#anchor11'>ECMAScript 2019</a> → <a href='#anchor12'>ECMAScript 2020</a> → <a href='#anchor13'>ECMAScript 2021</a> → <a href='#anchor14'>ECMAScript 2022</a> → <a href='#anchor15'>ECMAScript 2023</a><br>
+			<br>
+			～ <a href='http://www.ecma-international.org/publications-and-standards/standards/ecma-262/'>ECMAScript Latest</a> … <a href='-2621356B.html'>My ECMAScript now</a>
+		</p>
+	</header>
+	<hr id='anchor1'>
+	<section>
+		<h2>JavaScript</h2>
+		<p>
+			網際網路迅速崛起的時代，最惱人的使用者體驗，就是提交資料給某個全球資訊網後，網速慢等了快十秒，總算看到下一頁時，竟然是回報填寫資料不正確的網頁。於是 Netscape Communications 研擬 Mocha 計畫，希望瀏覽器本身就能跑簡單的程式，分擔伺服器的工作，在遞交資料給伺服器前，瀏覽器自己就能先檢查資料。<br>
+			<br>
+			Netscape Communications 委派 Brendan Eich 開發一款新的程式語言，目標是能將原始碼直接寫在網頁裡面，而且沒寫過程式的人也能使用。<br>
+			<br>
+			沒幾天，Netscape Communications 對 HotJava 瀏覽器的 Applet 驚喜不已，決定與 Sun Microsystems 洽談，想讓自己的瀏覽器也能支援 Applet。雙方協議合作後，給 Brendan Eich 加入一個要求：「讓開發中的程式語言長得像 Java 吧！」<br>
+			<br>
+			Brendan Eich 參考 Self 程式語言的原型機制，以及 Scheme 程式語言的一級函數，只花約十天的時間，完成了一款弱型別的直譯式程式語言交差了事。<br>
+			<br>
+			1995 年 9 月先以 LiveScript 的名稱，搭載於 Netscape Navigator 2.0 測試版，12 月正式版時改名為 JavaScript。（至於 Mocha 即後來的 SpiderMonkey 引擎。）
+		</p>
+	</section>
+	<hr id='anchor2'>
+	<section>
+		<h2>ECMAScript</h2>
+		<p>
+			JavaScript 發明之初，只是一款可以操作些瀏覽器軟體本身的指令語言，簡簡單單一兩行程式，無需專業程式設計師背景，就能動態變化瀏覽器內容，顯著可見的效果讓 JavaScript 大受好評！大家都搶著在網頁寫個 JavaScript 來露一下身手：<br>
+			<br>
+			<textarea class='brush:js'>
+				window.status='歡迎光臨';
+            </textarea>
+			<br>
+			於是 1996 年 8 月 Microsoft 趕緊也抄了一個 JScript 來應戰，推出 Internet Explorer 3.0。<br>
+			<br>
+			1996 年 11 月，Netscape Communications 將 JavaScript 提交給 Ecma International，制定統一規範，專案代號為 ECMA-262。由於 JavaScript 有 Java 字樣，Sun Microsystems 為保護 Java 版權，在一起合作的 Netscape Communications 同意下，將 JavaScript 註冊商標，因此 Ecma International 另外取名為 ECMAScript。<br>
+			<br>
+			1997 年 6 月，ECMAScript 1.0 標準化正式定案。
+		</p>
+	</section>
+	<hr id='anchor3'>
+	<section>
+		<h2>ECMAScript 2</h2>
+		<p>
+			1998 年 6 月，修正規格書，以適用 ISO/IEC16262 標準化，發表 ECMAScript 2.0。
+		</p>
+	</section>
+	<hr id='anchor4'>
+	<section>
+		<h2>ECMAScript 3</h2>
+		<p>
+			於 1999 年 12 月發布。<br>
+			<br>
+			語言方面，更改了字串的內部設計、新增資料的格式化輸出、流程控制、例外處理等功能。<br>
+			<br>
+			API 方面內建 Regular expressions，並為該算式設計專屬字串符號 <code>/  /</code>。
+		</p>
+		<hr>
+		<section>
+			<h3>Structured programming</h3>
+			<p>
+				<textarea class='brush:js'>
+					var a=0;
+					var b=0;
+
+					function f1(x,y){
+						a=x;
+						b=y;
+					}
+
+					function f2(){
+						document.write(a+b);
+					}
+
+					f1(123,456);
+					f2();
+                </textarea>
+				<br>
+				<output>
+					579
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Object oriented programming</h3>
+			<p>
+				<textarea class='brush:js'>
+					function M(x){
+						var g=x||0;
+						this.set=function(x){
+							g=x;
+						};
+						this.get=function(){
+							return ++g;
+						};
+					}
+
+					var m1=new M(111);
+					document.write(m1.get());
+
+					var m2=new M();
+					m2.set(222);
+					document.write(m2.get());
+                </textarea>
+				<br>
+				<output>
+					112<br>
+					223
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Prototype programming</h3>
+			<p>
+				<textarea class='brush:js'>
+					var L=function(){};
+					L.prototype.a='Hello';
+					L.prototype.f=function(){
+						document.write(this.a+', world!');
+					};
+
+					var M=function(){};
+					M.prototype=new L();
+
+					var m=new M();
+					document.write(m.a);
+					m.f();
+                </textarea>
+				<br>
+				<output>
+					Hello<br>
+					Hello, world!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Closure with first class function</h3>
+			<p>
+				<textarea class='brush:js'>
+					function M(){
+						var a=123,b=456;
+						return{
+							f1:function(){
+								document.write(a+b);
+							},
+							f2:function(x,y){
+								a=x;
+								b=y;
+							}
+						}
+					}
+
+					var m1=new M();
+					var m2=new M();
+
+					m1.f1();
+					m2.f1();
+
+					m1.f2(111,111);
+					m2.f2(222,222);
+
+					m1.f1();
+					m2.f1();
+                </textarea>
+				<br>
+				<output>
+					579<br>
+					579<br>
+					222<br>
+					444
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor5'>
+	<section>
+		<h2>ECMAScript 4</h2>
+		<p>
+			2007 年 10 月時發布草案後，因為語法躍進幅度太大，與其說更新標準，不如說在汰舊標準，因此意見分歧，已到無法達成共識的地步，因此於 2008 年 8 月放棄，直接跳到 ECMAScript 5。<br>
+			<br>
+			Macromedia Flash 的 ActionScript 實作了 ECMAScript 4 的規格！因此好奇這是怎樣語法的話，可以藉由 ActionScript 一探究竟～<br>
+			<br>
+			基本上從 ActionScript 來看，ECMAScript 4 確實太笨重了：「程式碼寫起來有點像 Java 那樣囉嗦。」做為表述語言<ins>1</ins>，訴求是隨手就能寫一段程式來跑，而不是管理好大量程式碼才能跑，這種嚴重破壞 JavaScript 寫作效率的語言規範，確實沒有通過的必要。<br>
+			<br>
+			或許現在回頭看，靜態型別風格的 ECMAScript 4 規範得並不差，甚至令人欣賞與惋惜。但它只適合實作在編譯式的程式語言，拋出越多語法錯誤越好，像是 TypeScript，這語言能拋出精準、有用的訊息，在開發大型專案時幫助很大。直譯式的 JavaScript 則不適合，應該盡量容錯，越少錯誤越好～
+		</p>
+	</section>
+	<hr id='anchor6'>
+	<section>
+		<h2>ECMAScript 5</h2>
+		<p>
+			於 2009 年 12 月正式發布，離上一次版本有十年之久。<br>
+			<br>
+			由於接下來的 ECMAScript 2015 會有重大改變，因此 ECMAScript 5 主要特性不是更新語言，而是在相容 ECMAScript 3 的基礎上，導入 ECMAScript 4 裡面已被認可的新觀念，引導使用者將來能銜接到 ECMAScript 2015。<br>
+			<br>
+			ECMAScript 5 基本上只在 API 引進 ECMAScript 4 的新觀念（原型物件、擁抱函數式程式設計、遠離物件導向的類別），然後透過 strict mode（嚴格模式）彌補 ECMAScript 4 想解決沒有資料型態與區域變數所帶來的問題。<br>
+			<br>
+			總之，ECMAScript 5 最大的意義，就是 ECMAScript 3 的最終版本，為舊時代的技術進行最後的完善，使其在未來能延用下去。ECMAScript 2015 最大的意義，則是 ECMAScript 4 的修正版本，為新時代的開創做技術上的準備，填補過去的不足。
+		</p>
+		<hr>
+		<section>
+			<h3>Object literal</h3>
+			<p>
+				<textarea class='brush:js'>
+					var L={
+						a:123,
+						f:function(){
+							document.write(this.a);
+						}
+					};
+
+					var M=Object.create(L);
+
+					M.f();
+
+					M.a=456;
+
+					M.f();
+					L.f();
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					456<br>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array structure object</h3>
+			<p>
+				<textarea class='brush:js'>
+					var L=[789];
+
+					L.f=function(){
+						document.write(this[0]);
+					};
+
+					var M=Object.create(L);
+
+					M.f();
+
+					M[0]=987;
+
+					M.f();
+					L.f();
+                </textarea>
+				<br>
+				<output>
+					789<br>
+					987<br>
+					789
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor7'>
+	<section>
+		<h2>ECMAScript 2015 (ECMA-262 6th Edition)</h2>
+		<p>
+			於 2015 年 6 月正式發布！由於等功能全到位才制定新規範被嫌速度太慢，技術委員會<ins>3</ins> 決定往後採滾動發行，每年進行小幅度功能更新，所以這版不稱 ECMAScript 6，改用年份做為版號～<br>
+			<br>
+			ECMAScript 2015 一方面引進 ECMAScript 4 的新功能，一方面將功能設計成符合動態型別的語法，避免靜態型別的風格破壞 ECMAScript 優點。新的語法，可以把程式寫得完全不像過去 ECMAScript 3 的程式，像新的語言一樣，但寫這樣的程式，效率是大幅提高的，而不是降低，可謂設計得非常成功！<br>
+			<br>
+			可塑性也更高了！能用類似 Python 的寫法設計程式，也能繼續用 Java 和 C 風格寫程式，甚至像 Java 在模仿 Python 的方式寫程式也可以，讓更多人能用自己的習慣寫 JavaScript 程式，更好上手了！<br>
+			<br>
+			這次新增 <code>class</code>、<code>const</code>、<code>export</code>、<code>extends</code>、<code>import</code>、<code>let</code>、<code>of</code>、<code>yield</code> 關鍵字，以及 Set、Map、Promise、Fetch 物件功能，還有大量語法糖。詳細功能範例，請參考：<a href='http://es6-features.org'>http://es6-features.org</a>。
+		</p>
+		<hr>
+		<section>
+			<h3>Scope</h3>
+			<p>
+				<textarea class='brush:js'>
+					let a=123;
+					let a=456;
+                </textarea>
+				<br>
+				<output>
+					Uncaught SyntaxError: Identifier 'a' has already been declared
+				</output>
+				<br>
+				<textarea class='brush:js'>
+					if(true){
+						var a=123;
+						let b=456;
+					}
+
+					console.log(a);
+					console.log(b);
+                </textarea>
+				<br>
+				<output>
+					123<br>
+					Uncaught ReferenceError: b is not defined
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Classes</h3>
+			<p>
+				<textarea class='brush:js'>
+					class L
+					{
+						constructor(x,y)
+						{
+							this.a=x+y
+						}
+
+						f1()
+						{
+							document.write(this.a)
+						}
+
+						static f2()
+						{
+							document.write(123)
+						}
+
+						set f3(x)
+						{
+							this.a=x*x
+						}
+
+						get f4()
+						{
+							return this.a
+						}
+
+						*f5()
+						{
+							yield 111
+							yield 222
+							yield 333
+						}
+					}
+
+					class M extends L
+					{
+						f6()
+						{
+							super.a=456
+							super.f1()
+						}
+					}
+
+					const m=new M(3,7)
+					m.f1()
+					L.f2()
+					m.f3=9
+					document.write(m.f4)
+					for(let n of m.f5()) document.write(n)
+					m.f6()
+                </textarea>
+				<br>
+				<output>
+					10<br>
+					123<br>
+					81<br>
+					111222333<br>
+					456
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Module system</h3>
+			<section>
+				<h4>module.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						export function f1()
+						{
+							document.write('AAA')
+						}
+
+						export function f2()
+						{
+							document.write('BBB')
+						}
+
+						export function f3()
+						{
+							document.write('CCC')
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>test1.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						import {f1,f2,f3 as fff} from './module.js'
+
+						f1()
+						f2()
+						fff()
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>test2.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						import*as mod from './module.js'
+
+						mod.f3()
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Template literal</h3>
+			<section>
+				<h4>Multi line string</h4>
+				<p>
+					<textarea class='brush:js'>
+						let a=`
+							abc
+							123
+						`
+
+						document.write(a)
+                    </textarea>
+					<br>
+					<output>
+						abc 123
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>Expression interpolation</h4>
+				<p>
+					<textarea class='brush:js'>
+						let a='AAA',b='BBB',c='CCC'
+						let d=`${a} ${b} ${c}`
+
+						document.write(d)
+                    </textarea>
+					<br>
+					<output>
+						AAA BBB CCC
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Destructuring assignment</h3>
+			<p>
+				<textarea class='brush:js'>
+					let a,b,c
+					[a,b,c]=['AAA','BBB','CCC']
+
+					document.write(a)
+					document.write(b)
+					document.write(c)
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Default parameter</h3>
+			<p>
+				<textarea class='brush:js'>
+					function f(x,y=789)
+					{
+						document.write(x+y)
+					}
+
+					f(123)
+					f(123,456)
+                </textarea>
+				<br>
+				<output>
+					912<br>
+					579
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Rest parameter</h3>
+			<p>
+				<textarea class='brush:js'>
+					function f(x,...y)
+					{
+						document.write(x+y)
+					}
+
+					f(123,456)
+					f(123,456,789)
+                </textarea>
+				<br>
+				<output>
+					123 456<br>
+					123 456,789
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Arrow function</h3>
+			<p>
+				<textarea class='brush:js'>
+					//可當立即函式
+					((x)=&gt;{
+						document.write(++x)
+					})(111)
+
+					//只有一個參數時可以省略括號（多個的話不行）
+					(x=&gt;{
+						document.write(++x)
+					})(222)
+
+					//只一行敘述時不用大括號
+					(x=&gt;document.write(++x))(333)
+
+					//不用 return 即可傳回值
+					let a=(()=&gt;444+1)()
+					document.write(a)
+
+					//可當匿名函式
+					setTimeout(()=&gt;document.write(555),1)
+                </textarea>
+				<br>
+				<output>
+					112<br>
+					223<br>
+					334<br>
+					445<br>
+					555
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Method definitition</h3>
+			<p>
+				<textarea class='brush:js'>
+					let M={
+						f()
+						{
+							document.write('ABC')
+						}
+					}
+
+					M.f()
+                </textarea>
+				<br>
+				<output>
+					ABC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Generators</h3>
+			<p>
+				<textarea class='brush:js'>
+					function* f(x)
+					{
+						while(x&lt;100){
+							yield x
+							x+=x
+						}
+					}
+
+					for(let n of f(9)){
+						document.write(n)
+					}
+                </textarea>
+				<br>
+				<output>
+					9<br>
+					18<br>
+					36<br>
+					72
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Symbol</h3>
+			<p>
+				<textarea class='brush:js'>
+					let name=Symbol('NAME')
+					let number=Symbol('NUMBER')
+					let data={}
+
+					data[name]='Twideem Civs'
+					data[number]=58
+
+					document.write(data[name])
+					document.write(data[number])
+                </textarea>
+				<br>
+				<output>
+					Twideem Civs<br>
+					58
+				</output>
+				<br>
+				如果 data[] 裡面的鍵值未定義，例如 data[position]，會回報錯誤。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor8'>
+	<section>
+		<h2>ECMAScript 2016 (ECMA-262 7th Edition)</h2>
+		<p>
+			ECMAScript 2016 是採用滾動發行後第一次工作結果…更新幅度小到讓人不覺得有必要發行獨立的版本 XDDD<br>
+			<br>
+			這政策的改變，是因為技術委員會的成員結構發生改變，裡面一堆網際網路大廠的人馬，所以不見得是好事～<br>
+			<br>
+			做為一個標準化規範，每個版本都應該深思熟慮，經過下游業者再三試驗，確認這是 ECMAScript 需要的，才放行。現在以求新求變的節奏發布功能，不再去看下游業者使用的情況如何，而是技術委員會的上游廠商人馬自己內部說了算，ECMAScript language specification 變成為瀏覽器廠商背書用的：「請用這些功能，讓我們大廠好做事。」<br>
+			<br>
+			不過，滾動式發行的好處還是大於壞處！哪一項功能是業界最迫切需要的，明年就針對這項目做出規範，例如下一版的 async 和 await 就來得很是時候，及時把最重要的部分，提早規範出來給業界遵循和使用。<br>
+			<br>
+			<q>ECMAScript 2016 was the first ECMAScript edition released under Ecma TC39's new yearly release cadence and open development process. A plain-text source document was built from the ECMAScript 2015 source document to serve as the base for further development entirely on GitHub. Over the year of this standard's development, hundreds of pull requests and issues were filed representing thousands of bug fixes, editorial fixes and other improvements. Additionally, numerous software tools were developed to aid in this effort including Ecmarkup, Ecmarkdown, and Grammarkdown. ES2016 also included support for a new exponentiation operator and adds a new method to <b>Array.prototype</b> called <b>includes</b>.</q>
+		</p>
+	</section>
+	<hr id='anchor9'>
+	<section>
+		<h2>ECMAScript 2017 (ECMA-262 8th Edition)</h2>
+		<p>
+			<q>ECMAScript 2017 introduced Async Functions, Shared Memory, and Atomics along with smaller language and library enhancements, bug fixes, and editorial updates. Async functions improve the asynchronous programming experience by providing syntax for promise-returning functions. Shared Memory and Atomics introduce a new memory model that allows multi-agent programs to communicate using atomic operations that ensure a well-defined execution order even on parallel CPUs. It also included new static methods on Object: <b>Object.values</b>, <b>Object.entries</b>, and <b>Object.getOwnPropertyDescriptors</b>.</q>
+		</p>
+	</section>
+	<hr id='anchor10'>
+	<section>
+		<h2>ECMAScript 2018 (ECMA-262 9th Edition)</h2>
+		<p>
+			<q>ECMAScript 2018 introduced support for asynchronous iteration via the AsyncIterator protocol and async generators. It also included four new regular expression features: the <b>dotAll</b> flag, named capture groups, Unicode property escapes, and look-behind assertions. Lastly it included object rest and spread properties.</q>
+		</p>
+	</section>
+	<hr id='anchor11'>
+	<section>
+		<h2>ECMAScript 2019 (ECMA-262 10th Edition)</h2>
+		<p>
+			<q>ECMAScript 2019 introduced a few new built-in functions: <b>flat</b> and <b>flatMap</b> on <b>Array.prototype</b> for flattening arrays, <b>Object.fromEntries</b> for directly turning the return value of <b>Object.entries</b> into a new Object, and <b>trimStart</b> and <b>trimEnd</b> on <b>String.prototype</b> as better-named alternatives to the widely implemented but non-standard <b>String.prototype.trimLeft</b> and <b>trimRight</b> built-ins. In addition, it included a few minor updates to syntax and semantics. Updated syntax included optional catch binding parameters and allowing U+2028 (LINE SEPARATOR) and U+2029 (PARAGRAPH SEPARATOR) in string literals to align with JSON. Other updates included requiring that <b>Array.prototype.sort</b> be a stable sort, requiring that <b>JSON.stringify</b> return well-formed UTF-8 regardless of input, and clarifying <b>Function.prototype.toString</b> by requiring that it either return the corresponding original source text or a standard placeholder.</q>
+		</p>
+	</section>
+	<hr id='anchor12'>
+	<section>
+		<h2>ECMAScript 2020 (ECMA-262 11th Edition)</h2>
+		<p>
+			<q>ECMAScript 2020, the 11th edition, introduces the <b>matchAll</b> method for Strings, to produce an iterator for all match objects generated by a global regular expression; <b>import()</b>, a syntax to asynchronously import Modules with a dynamic specifier; <b>BigInt</b>, a new number primitive for working with arbitrary precision integers; <b>Promise.allSettled</b>, a new Promise combinator that does not short-circuit; <b>globalThis</b>, a universal way to access the global <b>this</b> value; dedicated <b>export*as ns from 'module'</b> syntax for use within modules; increased standardization of <b>for-in</b> enumeration order; <b>import.meta</b>, a host-populated object available in Modules that may contain contextual information about the Module; as well as adding two new syntax features to improve working with “nullish” values (<b>null</b> or <b>undefined</b>): nullish coalescing, a value selection operator; and optional chaining, a property access and function invocation operator that short-circuits if the value to access/invoke is nullish.</q>
+		</p>
+	</section>
+	<hr id='anchor13'>
+	<section>
+		<h2>ECMAScript 2021 (ECMA-262 12th Edition)</h2>
+		<p>
+			<q>This specification, the 12th edition, introduces the <b>replaceAll</b> method for Strings; <b>Promise.any</b>, a Promise combinator that short-circuits when an input value is fulfilled; <b>AggregateError</b>, a new Error type to represent multiple errors at once; logical assignment operators (<b>??=</b>, <b>&&=</b>, <b>||=</b>); <b>WeakRef</b>, for referring to a target object without preserving it from garbage collection, and <b>FinalizationRegistry</b>, to manage registration and unregistration of cleanup operations performed when target objects are garbage collected; separators for numeric literals (<b>1_000</b>); and <b>Array.prototype.sort</b> was made more precise, reducing the amount of cases that result in an implementation-defined sort order.</q>
+		</p>
+	</section>
+	<hr id='anchor14'>
+	<section>
+		<h2>ECMAScript 2022 (ECMA-262 13th Edition)</h2>
+		<p>
+			<q>ECMAScript 2022, the 13th edition, introduced top-level <b>await</b>, allowing the keyword to be used at the top level of modules; new class elements: public and private instance fields, public and private static fields, private instance methods and accessors, and private static methods and accessors; static blocks inside classes, to perform per-class evaluation initialization; the <b>#x in obj</b> syntax, to test for presence of private fields on objects; regular expression match indices via the <b>/d</b> flag, which provides start and end indices for matched substrings; the <b>cause</b> property on <b>Error</b> objects, which can be used to record a causation chain in errors; the <b>at</b> method for Strings, Arrays, and TypedArrays, which allows relative indexing; and <b>Object.hasOwn</b>, a convenient alternative to <b>Object.prototype.hasOwnProperty</b>.</q>
+		</p>
+	</section>
+	<hr id='anchor15'>
+	<section>
+		<h2>ECMAScript 2023 (ECMA-262 14th Edition)</h2>
+		<p>
+			<q>ECMAScript 2023, the 14th edition, introduced the <b>toSorted</b>, <b>toReversed</b>, <b>with</b>, <b>findLast</b>, and <b>findLastIndex</b> methods on <b>Array.prototype</b> and <b>TypedArray.prototype</b>, as well as the <b>toSpliced</b> method on <b>Array.prototype</b>; added support for <b>#!</b> comments at the beginning of files to better facilitate executable ECMAScript files; and allowed the use of most Symbols as keys in weak collections.</q>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 俗稱腳本語言。（<a href='appendix.html#-2621356A'>為什麼改稱表述語言</a>）<br>
+			[2] Ecma International, Technical Committee 39，簡稱 Ecma TC39，Ecma 第 39 組技術委員會，負責制定 ECMAScript。
+		</p>
+	</footer>
+</article>
