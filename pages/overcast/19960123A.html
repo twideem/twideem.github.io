@@ -99,7 +99,7 @@
 				<a href='#20030905A'>列印</a><br>
 				<br>
 				<a href='#20030224A'>複製物件</a><br>
-				<a href='#20050504A'>Observer pattern</a>（觀察者設計模式）
+				<a href='#20050504A'>Observer 設計模式</a>
 			</p>
 		</section>
 		<hr>
@@ -1153,7 +1153,9 @@
 			<br>
 			既然 StringBuilder 是特別用來變更內容用的，因此有更豐富的文字修改能力，可以方便開發者編輯字串內容。但不支援 Regular Expression，因此不是用來取代 String 的，而是輔助用的，適合用在插入與刪除的場合。<br>
 			<br>
-			最後，StringBuffer 其實與 StringBuilder 一樣，只差在支援多執行緒；如果設計上沒用到多執行緒，那使用 StringBuilder 有更佳的執行效能。
+			至於 StringBuffer，其實與 StringBuilder 一樣，只差在支援多執行緒；如果設計上沒用到多執行緒，那使用 StringBuilder 有更佳的執行效能。<br>
+			<br>
+			StringBuilder 和 StringBuffer 是很好的 Builder 設計模式案例。
 		</p>
 		<hr>
 		<section>
@@ -2017,7 +2019,7 @@
 	<section>
 		<h2>Collections 速成</h2>
 		<p>
-			如果你懂得根據資料的處理方式，善用合適的 Collection，可以簡化程式碼的結構，提升可讀性。例如既要過濾重複資料、又要排序資料，那直接用 TreeSet 一次搞定，要比先用 HashSet 過濾，再轉存到 ArrayList 讓 java.util.Collections.sort() 排序來得乾淨俐落！<br>
+			如果你懂得根據資料的處理方式，善用合適的 Collection，可以簡化程式碼的結構，提升可讀性。例如既要過濾重複資料、又要排序資料，那直接用 TreeSet 一次搞定，要比先用 HashSet 過濾，再轉存到 ArrayList 讓 java.util.Collections.sort()<ins>1</ins> 排序來得乾淨俐落！<br>
 			<br>
 			反過來，明明 Java 已經提供這些高效能演算法的資料結構，卻還自己土法煉鋼去處理，變成要敲二三十行的程式碼，錯失只需兩三行程式就能搞定的快感，而且處理時間可能要多兩三倍。
 		</p>
@@ -2046,7 +2048,7 @@
 				巡訪資料：<br>
 			<p>
 			<table>
-				<tr><td>Iterator</td><td>使用 hasNext() 和 next() 巡訪資料。</td></tr>
+				<tr><td>Iterator</td><td>使用 hasNext() 和 next() 巡訪資料，活生生的 Iterator 設計模式案例。</td></tr>
 			</table>
 			<p>
 				舊版做法：<br>
@@ -2168,7 +2170,7 @@
 					}
                 </textarea>
 				<br>
-				然而，這樣做是需要犧牲的！例如 Collection 介面並沒有 List 介面的 get(int)，因此雖然可以從 Set 介面替換為 List 介面，但既然使用 Collection 介面，就不認得 get(int)，因此只能用 iterator() 來巡訪資料<ins>1</ins>。<br>
+				然而，這樣做是需要犧牲的！例如 Collection 介面並沒有 List 介面的 get(int)，因此雖然可以從 Set 介面替換為 List 介面，但既然使用 Collection 介面，就不認得 get(int)，因此只能用 iterator() 來巡訪資料<ins>2</ins>。<br>
 				<br>
 				這是理所當然的，既然要能隨時互相替換，那就應該用彼此都有的方式來操作。<br>
 				<br>
@@ -2265,7 +2267,8 @@
 		<hr>
 		<footer>
 			<p>
-				[1] 頂多用 toArray() 轉成陣列再處理。
+				[1] 對 Collections.sort() 傳入一個 Comparator，體現了 Strategy 設計模式。<br>
+				[2] 頂多用 toArray() 轉成陣列再處理。
 			</p>
 		</footer>
 	</section>
@@ -2408,7 +2411,7 @@
 	<section>
 		<h2>純文字文件的寫入與讀取</h2>
 		<p>
-			檔案讀寫是 Java 最讓人津津樂道的物件導向經典案例！它有最基本功能的物件方便使用，事後用俗稱 decorator pattern（裝飾者模式）的設計，可以不斷堆加功能上去來滿足需求。<br>
+			檔案讀寫是 Java 最讓人津津樂道的物件導向經典案例！它有最基本功能的物件方便使用，事後用俗稱 decorator 設計模式的手法，可以不斷堆加功能上去來滿足需求。<br>
 			<br>
 			請在本章節好好看 Java 怎麼做，然後用同樣套路強化我們的類別！
 		</p>
@@ -3342,7 +3345,9 @@
 				Runtime.getRuntime().exec("CMD /C DEL /Q 資料夾");
             </textarea>
 			<br>
-			這種做法之所以不鼓勵，就是外部程式出錯時，無法在 Java 抓蟲除錯。只有一兩個功能的小程式，用用很可以，但不要濫用，要懂得做取捨～
+			這種做法之所以不鼓勵，就是外部程式出錯時，無法在 Java 抓蟲除錯。只有一兩個功能的小程式，用用很可以，但不要濫用，要懂得做取捨～<br>
+			<br>
+			Runtime.getRuntime() 是很典型的 Singleton 設計模式案例。
 		</p>
 	</section>
 	<hr id='20001009A'>
@@ -3436,7 +3441,8 @@
 		<hr>
 		<footer>
 			<p>
-				[*] 可進一步參考《<a href='20001016A.html'>Swing 速用表</a>》與《<a href='20001023A.html'>AWT 事件速用表</a>》。
+				[*] 可進一步參考《<a href='20001016A.html'>Swing 速用表</a>》與《<a href='20001023A.html'>AWT 事件速用表</a>》。<br>
+				[*] 在《AWT 事件速用表》中可以看到 Adapter 設計模式。
 			</p>
 		</footer>
 	</section>
@@ -4313,7 +4319,9 @@
 				<br>
 				可以用 <code>getTime()</code> 傳回 Date，用 <code>getTimeInMillis()</code> 傳回 long。<br>
 				<br>
-				有了 Calendar，Date 變成用來表示「時間點」，相當於一種時間專用的資料，而不是處理時間的工具箱。Date 和 Calendar 的關係，類似 Java 8 的 Instant 和 LocalDateTime。
+				有了 Calendar，Date 變成用來表示「時間點」，相當於一種時間專用的資料，而不是處理時間的工具箱。Date 和 Calendar 的關係，類似 Java 8 的 Instant 和 LocalDateTime。<br>
+				<br>
+				Calendar 展示了 factory method 設計模式！Calendar 其實是抽象類別，沒辦法 new，因此改用 getInstance()，根據使用者時區的不同，決定該 new 哪一個類別，可能是 GregorianCalendar 或 BuddhistCalendar 之類。
 			</p>
 		</section>
 		<hr>
@@ -4609,7 +4617,7 @@
 	</section>
 	<hr id='20050504A'>
 	<section>
-		<h2>Observer pattern</h2>
+		<h2>Observer 設計模式</h2>
 		<p>
 			Java 內建設計模式中的 Observer，它用來監視物件狀態，當物件狀態改變時，它會通知監視該物件的對象，讓監視者可以做出反應；本範例中 View 物件將監視 Model 物件。
 		</p>
