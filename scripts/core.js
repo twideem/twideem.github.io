@@ -12,7 +12,7 @@ function webhosting()
 }
 
 let _a=document.createElement('nav');
-_a.innerHTML=`[ <a href='${location.pathname.indexOf('pag')!=-1?'../../':''}home.html'>首頁</a> | <a href='${location.pathname.indexOf('pag')!=-1?'../../':''}about.html'>關於</a> ]`;
+_a.innerHTML=`[ <a href='${location.pathname.indexOf('pag')!=-1?'../../':''}home.html'>首頁</a> ]`;
 
 document.addEventListener('DOMContentLoaded',()=>{
 	document.documentElement.lang='zh-TW';
