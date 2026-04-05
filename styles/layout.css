@@ -69,8 +69,4 @@ ins,footer p,footer p a{color:#36c;margin:26px 0 12px 0}
 section footer{margin-left:30px}
 section section footer{margin-left:0}
 footer figure{margin:15px 0}
-nav{font-weight:bold;margin:0 auto -1px auto;width:683px;text-align:right}
-nav,nav a{color:#4c4c4c;font-size:13px}
-nav a{font-weight:normal}
-nav a:link,nav a:visited{color:#390}
-nav a:hover,nav a:active{color:#f93}
+nav{margin:0 auto -1px auto;width:683px;text-align:right}
