@@ -57,7 +57,7 @@ figcaption::after{content:'】'}
 table{border-collapse:collapse;border-spacing:0;margin:20px 0 20px 29px;width:95%}
 th{text-align:left}
 section td{vertical-align:top}
-td:nth-child(1){color:#396;width:25%}
+td:nth-child(1){color:#396;width:35%}
 td:nth-child(2){color:#999}
 td:only-of-type{color:inherit}
 section section section table{margin-left:43px}
