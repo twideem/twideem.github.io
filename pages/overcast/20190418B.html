@@ -1,0 +1,3066 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>table td:nth-child(1){width:55%}</style>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET')</script>
+<article>
+	<header>
+		<h1>用 C# 堆砌程式：API 範例集</h1>
+	</header>
+	<hr id='linq'>
+	<section>
+		<h2>LINQ</h2>
+		<p>
+			LINQ 全文是 Language Integrated Query，意思是把查詢功能整合到語言裡面。<br>
+			<br>
+			Microsoft 用兩種途徑，將查詢功能整合進語言裡：<br>
+			<br>
+			一、.NET 的 API，無論哪一種語言都能使用。<br>
+			二、C# 的語法：查詢語句。更簡潔而順手，但並未涵蓋 API 所有功能。<br>
+			<br>
+			有了這套查詢功能，無論要操作的資料來源是陣列、集合、資料庫、XML，都可以用一樣的寫法，而不是各自不同的 API 😳
+		</p>
+		<hr>
+		<section>
+			<h3>Enumerable</h3>
+			<table>
+				<tr><td>Enumerable.Aggregate()</td><td>將資料串處理成一筆資料</td></tr>
+				<tr><td>Enumerable.All()</td><td>資料是否全符合條件</td></tr>
+				<tr><td>Enumerable.Any()</td><td>是否有資料符合條件</td></tr>
+				<tr><td>Enumerable.Append()</td><td>添加一筆資料到尾端</td></tr>
+				<tr><td>Enumerable.AsEnumerable()</td><td>轉為 Enumerable 狀態</td></tr>
+				<tr><td>Enumerable.Average()</td><td>平均值</td></tr>
+				<tr><td>Enumerable.Cast&lt;型別&gt;()</td><td>轉換資料的型別</td></tr>
+				<tr><td>Enumerable.Concat()</td><td>加入一串資料</td></tr>
+				<tr><td>Enumerable.Contains()</td><td>是否包含資料</td></tr>
+				<tr><td>Enumerable.Count()</td><td>資料筆數</td></tr>
+				<tr><td>Enumerable.DefaultIfEmpty()</td><td>如果是空的就傳回預設資料</td></tr>
+				<tr><td>Enumerable.Distinct()</td><td>去除重複的資料</td></tr>
+				<tr><td>Enumerable.ElementAt()</td><td>取得某一筆資料</td></tr>
+				<tr><td>Enumerable.ElementAtOrDefault()</td><td>若沒資料則跳過不報錯</td></tr>
+				<tr><td>Enumerable.Empty&lt;T&gt;()</td><td>‎產生空的資料串</td></tr>
+				<tr><td>Enumerable.Except()</td><td>取得兩個 IEnumerable 差異的部分</td></tr>
+				<tr><td>Enumerable.First()</td><td>第一筆資料</td></tr>
+				<tr><td>Enumerable.FirstOrDefault()</td><td>第一筆資料或傳回預設值</td></tr>
+				<tr><td>Enumerable.GroupBy()</td><td>群組資料串</td></tr>
+				<tr><td>Enumerable.GroupJoin()</td><td>關聯並群組資料串</td></tr>
+				<tr><td>Enumerable.Intersect()</td><td>取得兩個 IEnumerable 相同的部分</td></tr>
+				<tr><td>Enumerable.Join()</td><td>依關聯性將外來資料串加入資料串</td></tr>
+				<tr><td>Enumerable.Last()</td><td>最後一筆資料</td></tr>
+				<tr><td>Enumerable.LastOrDefault()</td><td>最後一筆資料或傳回預設值</td></tr>
+				<tr><td>Enumerable.LongCount()</td><td>以 Int64 傳回資料筆數</td></tr>
+				<tr><td>Enumerable.Max()</td><td>最大值</td></tr>
+				<tr><td>Enumerable.Min()</td><td>最小值</td></tr>
+				<tr><td>Enumerable.OfType&lt;T&gt;()</td><td>選出 T 型別的資料</td></tr>
+				<tr><td>Enumerable.OrderBy()</td><td>遞增排序</td></tr>
+				<tr><td>Enumerable.OrderByDescending()</td><td>遞減排序</td></tr>
+				<tr><td>Enumerable.Prepend()</td><td>添加資料到前端</td></tr>
+				<tr><td>Enumerable.Range()</td><td>產生在指定之範圍內的整數序列</td></tr>
+				<tr><td>Enumerable.Repeat()</td><td>填入筆數資料</td></tr>
+				<tr><td>Enumerable.Reverse()</td><td>反轉資料順序</td></tr>
+				<tr><td>Enumerable.Select())</td><td>依條件選出資料</td></tr>
+				<tr><td>Enumerable.SelectMany()</td><td>從多個資料串中選出資料</td></tr>
+				<tr><td>Enumerable.SequenceEqual()</td><td>兩資料串是否相等</td></tr>
+				<tr><td>Enumerable.Single()</td><td>傳回只有一筆資料的資料串</td></tr>
+				<tr><td>Enumerable.SingleOrDefault()</td><td>傳回只有一筆資料的資料串或預設值</td></tr>
+				<tr><td>Enumerable.Skip()</td><td>跳過前幾筆資料</td></tr>
+				<tr><td>Enumerable.SkipWhile()</td><td>取得符合條件之後的資料</td></tr>
+				<tr><td>Enumerable.Sum()</td><td>資料總和</td></tr>
+				<tr><td>Enumerable.Take()</td><td>取得前幾筆資料</td></tr>
+				<tr><td>Enumerable.TakeWhile()</td><td>取得符合條件之前的資料</td></tr>
+				<tr><td>Enumerable.ThenBy()</td><td>以遞增順序處理資料</td></tr>
+				<tr><td>Enumerable.ThenByDescending()</td><td>以遞減順序處理資料</td></tr>
+				<tr><td>Enumerable.ToArray()</td><td>轉為陣列</td></tr>
+				<tr><td>Enumerable.ToDictionary()</td><td>轉為 Dictionary 物件</td></tr>
+				<tr><td>Enumerable.ToHashSet()</td><td>轉為 HashSet 物件</td></tr>
+				<tr><td>Enumerable.ToList()</td><td>轉為 List 物件</td></tr>
+				<tr><td>Enumerable.ToLookup()</td><td>轉為 Lookup 物件</td></tr>
+				<tr><td>Enumerable.Union()</td><td>加入兩資料串的差異部分</td></tr>
+				<tr><td>Enumerable.Where()</td><td>依條件過濾資料</td></tr>
+				<tr><td>Enumerable.Zip()</td><td>併聯兩資料串</td></tr>
+			</table>
+			<section>
+				<h4>綜合範例</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections.Generic;
+						using System.Linq;
+
+						class Launch
+						{
+							static void Main()
+							{
+								//建立一串資料
+								int[] array = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
+
+								//用 Take() 取得前五筆資料
+								array.Take(5).ToList().ForEach(Console.Write);
+
+								//用 Skip() 跳過前五筆資料
+								array.Skip(5).ToList().ForEach(Console.Write);
+
+								//用 TakeWhile() 取得小於 7 以前的資料
+								array.TakeWhile(x =&gt; x&lt;7).ToList().ForEach(Console.Write);
+
+								//用 SkipWhile() 取得小於 7 以後的資料
+								array.SkipWhile(x =&gt; x&lt;7).ToList().ForEach(Console.Write);
+
+								//用 Any() 判斷是否有資料大於 7
+								Console.Write(array.Any(x =&gt; x&gt;7));
+
+								//用 All() 判斷是否所有資料大於 0
+								Console.Write(array.All(x =&gt; x&gt;0));
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						13579<br>
+						246810<br>
+						135<br>
+						79246810<br>
+						True<br>
+						True
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>List.ForEach() 的委派和匿名函式</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Linq;
+
+						class Launch
+						{
+							static void f(int x)
+							{
+								Console.Write(x);
+							}
+
+							static void Main()
+							{
+								//委派
+								new[]{1, 3, 5, 7, 9}.ToList().ForEach(f);
+
+								//匿名函式
+								new[]{1, 3, 5, 7, 9}.ToList().ForEach(
+									delegate(int x)
+									{
+										Console.Write(x);
+									}
+								);
+
+								//λ 運算式
+								new[]{1, 3, 5, 7, 9}.ToList().ForEach(x =&gt; Console.Write(x));
+
+								//傳入函式
+								new[]{1, 3, 5, 7, 9}.ToList().ForEach(Console.Write);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						13579<br>
+						13579<br>
+						13579<br>
+						13579
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>ParallelEnumerable.ForAll() 多執行緒查詢</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections.Generic;
+						using System.Linq;
+
+						class Launch
+						{
+							static void Main()
+							{
+								new[]{1, 3, 5, 7, 9}.Select(x =&gt; x - 1).AsParallel().ForAll(Console.Write);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						04628　每次執行結果，順序不一定。適合用來求值，例如總和。
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='collections'>
+	<section>
+		<h2>集合</h2>
+		<p>
+			自從 C# 新增 LINQ，集合的部分用途很多被取代。<br>
+			<br>
+			但兩者應用場合不同，集合本質上不是資料的操作，而是資料的來源，如果要對同一批資料進行反覆的操作，使用集合物件比較有可讀性，或者要對某個資料體進行增刪的動作，使用集合物件比較有效率。<br>
+			<br>
+			LINQ 其實就像進一步操作集合物件的語法工具，所以我們應該隨上下文的語意切換 LINQ 和集合，而不是只認定其中一種、否定另外一種 🤗
+		</p>
+		<hr>
+		<section>
+			<h3>ArrayList 和 Hashtable</h3>
+			<p>
+				在 C# 還不支援泛型時，.NET Framework 最主要的資料結構類別是 System.Collections 的 ArrayList 和 Hashtable。<br>
+				<br>
+				最常用的就這兩個，其它還會用到的大概就 Queue 和 Stack 吧？<br>
+				<br>
+				後來引進 LINQ 時，這些類別並未實作其功能，只在新的 System.Collections.Generic 類別實作，因此漸漸用 List 和 Dictionary 取而代之，ArrayList 和 Hashtable 有種走入歷史的感覺～<br>
+				<br>
+				寫 C# 程式很難抗拒 LINQ 蜜糖般的誘惑，空有 ArrayList 和 Hashtable 資料結構，沒有 LINQ 接手各式演算法，就不像在寫 C# 程式了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>List </h3>
+			<p>
+				串列資料結構，適合讀取資料。<br>
+				<br>
+				<code>
+					Capacity<br>
+					Count<br>
+					Add()<br>
+					AddRange()<br>
+					AsReadOnly()<br>
+					BinarySearch()<br>
+					Clear()<br>
+					Contains()<br>
+					ConvertAll()<br>
+					CopyTo()<br>
+					Exists()<br>
+					Find()<br>
+					FindAll()<br>
+					FindIndex()<br>
+					FindLast()<br>
+					FindLastIndex()<br>
+					ForEach()<br>
+					GetEnumerator()<br>
+					GetRange()<br>
+					IndexOf()<br>
+					Insert()<br>
+					InsertRange()<br>
+					IsFixedSize()<br>
+					IsReadOnly()<br>
+					IsSynchronized()<br>
+					LastIndexOf()<br>
+					Remove()<br>
+					RemoveAll()<br>
+					RemoveAt()<br>
+					RemoveRange()<br>
+					Reverse()<br>
+					Sort()<br>
+					SyncRoot()<br>
+					ToArray()<br>
+					TrimExcess()<br>
+					TrueForAll()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>LinkedList</h3>
+			<p>
+				雙向鏈結串列資料結構，適合寫入資料。<br>
+				<br>
+				<code>
+					Count<br>
+					First<br>
+					Last<br>
+					AddAfter()<br>
+					AddBefore()<br>
+					AddFirst()<br>
+					AddLast()<br>
+					Clear()<br>
+					Contains()<br>
+					CopyTo()<br>
+					Find()<br>
+					FindLast()<br>
+					GetEnumerator()<br>
+					GetObjectData()<br>
+					OnDeserialization()<br>
+					Remove()<br>
+					RemoveFirst()<br>
+					RemoveLast()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>SortedSet</h3>
+			<p>
+				資料不重複的有序集合。<br>
+				<br>
+				<code>
+					Comparer<br>
+					Count<br>
+					Max<br>
+					Min<br>
+					Add()<br>
+					Clear()<br>
+					Contains()<br>
+					CopyTo()<br>
+					CreateSetComparer()<br>
+					ExceptWith()<br>
+					GetEnumerator()<br>
+					GetObjectData()<br>
+					GetViewBetween()<br>
+					IntersectWith()<br>
+					IsProperSubsetOf()<br>
+					IsProperSupersetOf()<br>
+					IsSubsetOf()<br>
+					IsSupersetOf()<br>
+					OnDeserialization()<br>
+					Overlaps()<br>
+					Remove()<br>
+					RemoveWhere()<br>
+					Reverse()<br>
+					SetEquals()<br>
+					SymmetricExceptWith()<br>
+					TryGetValue()<br>
+					UnionWith()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>HashSet</h3>
+			<p>
+				資料不重複的無序集合。<br>
+				<br>
+				<code>
+					Comparer<br>
+					Count<br>
+					Add()<br>
+					Clear()<br>
+					Contains()<br>
+					CopyTo()<br>
+					CreateSetComparer()<br>
+					EnsureCapacity()<br>
+					ExceptWith()<br>
+					GetEnumerator()<br>
+					GetObjectData()<br>
+					IntersectWith()<br>
+					IsProperSubsetOf()<br>
+					IsProperSupersetOf()<br>
+					IsSubsetOf()<br>
+					IsSupersetOf()<br>
+					OnDeserialization()<br>
+					Overlaps()<br>
+					Remove()<br>
+					RemoveWhere()<br>
+					SetEquals()<br>
+					SymmetricExceptWith()<br>
+					TrimExcess()<br>
+					TryGetValue()<br>
+					UnionWith()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Queue</h3>
+			<p>
+				佇列，先進先出資料結構。<br>
+				<br>
+				<code>
+					Count<br>
+					Clear()<br>
+					Contains()<br>
+					CopyTo()<br>
+					Dequeue()<br>
+					Enqueue()<br>
+					GetEnumerator()<br>
+					Peek()<br>
+					IsSynchronized()<br>
+					SyncRoot()<br>
+					ToArray()<br>
+					TrimExcess()<br>
+					TryDequeue()<br>
+					TryPeek()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Stack</h3>
+			<p>
+				堆疊，後進先出資料結構。<br>
+				<br>
+				<code>
+					Count<br>
+					Clear()<br>
+					Contains()<br>
+					CopyTo()<br>
+					GetEnumerator()<br>
+					IsSynchronized()<br>
+					Peek()<br>
+					Pop()<br>
+					Push()<br>
+					SyncRoot()<br>
+					ToArray()<br>
+					TrimExcess()<br>
+					TryPeek()<br>
+					TryPop()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Dictionary</h3>
+			<p>
+				無序鍵值對資料結構。<br>
+				<br>
+				<code>
+					Comparer<br>
+					Count<br>
+					Keys<br>
+					Values<br>
+					Add()<br>
+					Clear()<br>
+					ContainsKey()<br>
+					Contains()<br>
+					ContainsValue()<br>
+					CopyTo()<br>
+					EnsureCapacity()<br>
+					GetEnumerator()<br>
+					GetObjectData()<br>
+					IsFixedSize()<br>
+					IsReadOnly()<br>
+					IsSynchronized()<br>
+					OnDeserialization()<br>
+					Remove()<br>
+					SyncRoot()<br>
+					TrimExcess()<br>
+					TryAdd()<br>
+					TryGetValue()
+				</code>
+			</p>
+			<section>
+				<h4>基本用法</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections;
+						using System.Collections.Generic;
+
+						class Launch
+						{
+							static void Main()
+							{
+								Dictionary&lt;int, string&gt; dictionary = new Dictionary&lt;int, string&gt;();
+								dictionary.Add(1, "AAA");
+								dictionary.Add(2, "BBB");
+								dictionary.Add(3, "CCC");
+
+								IDictionaryEnumerator enumerator = dictionary.GetEnumerator();
+
+								while(enumerator.MoveNext())
+								{
+									Console.WriteLine("{0}:{1}", enumerator.Key, enumerator.Value);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						1:AAA<br>
+						2:BBB<br>
+						3:CCC
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>依值排序</h4>
+				<p>
+					這要用 LINQ 來完成：<br>
+					<br>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections.Generic;
+						using System.Linq;
+
+						class Launch
+						{
+							static void Main()
+							{
+								Dictionary&lt;int, string&gt; dictionary1 = new Dictionary&lt;int, string&gt;();
+								dictionary1.Add(1, "Hero");
+								dictionary1.Add(2, "Fighter");
+								dictionary1.Add(3, "Cleric");
+								dictionary1.Add(4, "Mage");
+
+								Dictionary&lt;int, string&gt; dictionary2 = dictionary1.OrderBy(x =&gt; x.Value).ToDictionary(x=&gt;x.Key, x=&gt;x.Value);
+
+								foreach(KeyValuePair&lt;int, string&gt; n in dictionary2)
+								{
+									Console.Write(n);
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						[3, Cleric][2, Fighter][1, Hero][4, Mage]
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>ForEach()</h4>
+				<p>
+					這可以用 C# 的「擴充」來實現：<br>
+					<br>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Collections.Generic;
+
+						static class LinqExtensions
+						{
+							public static void ForEach&lt;TKey, TValue&gt;(this Dictionary&lt;TKey, TValue&gt; dictionary, Action&lt;TKey, TValue&gt; action)
+							{
+								foreach(KeyValuePair&lt;TKey, TValue&gt; n in dictionary)
+								{
+									action(n.Key, n.Value);
+								}
+							}
+						}
+
+						class Launch
+						{
+							static void Main()
+							{
+								Dictionary&lt;int, string&gt; dictionary = new Dictionary&lt;int, string&gt;();
+								dictionary.Add(1, "AAA");
+								dictionary.Add(2, "BBB");
+								dictionary.Add(3, "CCC");
+
+								dictionary.ForEach((x, y) =&gt; Console.WriteLine(y));
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+					<br>
+					別忘了 LinqExtensions 可以單獨寫在一個 *.cs 檔案，C# 原本就能將類別分開寫的關係，Launch 無須 using 就能載入使用。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>SortedDictionary</h3>
+			<p>
+				無索引值的有序鍵值對資料結構。<br>
+				<br>
+				<code>
+					Comparer<br>
+					Count<br>
+					Item[]<br>
+					Keys<br>
+					Values<br>
+					Add()<br>
+					Clear()<br>
+					ContainsKey()<br>
+					ContainsValue()<br>
+					CopyTo()<br>
+					GetEnumerator()<br>
+					Remove()<br>
+					TryGetValue()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>SortedList</h3>
+			<p>
+				有索引值的有序鍵值對資料結構。<br>
+				<br>
+				<code>
+					Capacity<br>
+					Comparer<br>
+					Count<br>
+					Item[]<br>
+					Keys<br>
+					Values<br>
+					Add()<br>
+					Clear()<br>
+					ContainsKey()<br>
+					ContainsValue()<br>
+					GetEnumerator()<br>
+					IndexOfKey()<br>
+					IndexOfValue()<br>
+					Remove()<br>
+					RemoveAt()<br>
+					TrimExcess()<br>
+					TryGetValue()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>IEnumerable</h3>
+			<p>
+				<code>IEnumerable.GetEnumerator()</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>IEnumerator</h3>
+			<p>
+				<code>
+					IEnumerator.Current<br>
+					IEnumerator.Dispose()<br>
+					IEnumerator.MoveNext()<br>
+					IEnumerator.Reset()
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>語法糖</h3>
+			<p>
+				<code>
+					new List&lt;型態&gt;() { 資料, 資料, ... };<br>
+					new Dictionary&lt;型態, 型態&gt;() { {鍵, 值}, {鍵, 值}, ... };
+				</code>
+			</p>
+		</section>
+	</section>
+	<hr id='shuffle'>
+	<section>
+		<h2>打亂資料</h2>
+		<hr>
+		<section>
+			<h3>做法一：用 LINQ 的 OrderBy()</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Collections.Generic;
+					using System.Linq;
+
+					class Launch
+					{
+						static void Main()
+						{
+							Random random = new Random();
+
+							//陣列
+							int[] array = {111, 222, 333, 444, 555, 666, 777, 888, 999};
+							Console.WriteLine(array.OrderBy(random.Next).ToArray()[0]);
+
+							//集合
+							List&lt;int&gt; list = new List&lt;int&gt;(array);
+							Console.Write(list.OrderBy(random.Next).ToList()[0]);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					999<br>
+					333<br>
+					（每次執行結果不一樣）
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>做法二：為 IList 介面擴充 Shuffle()</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Collections.Generic;
+
+					static class Extensions
+					{
+						static Random random = new Random();
+
+						public static void Shuffle&lt;T&gt;(this IList&lt;T&gt; x)
+						{
+							for(int n=0; n&lt;x.Count; n++)
+							{
+								int a = random.Next(n);
+								T b = x[a];
+								x[a] = x[n];
+								x[n] = b;
+							}
+						}
+					}
+
+					class Launch
+					{
+						static void Main()
+						{
+							//陣列
+							string[] array = {"A", "B", "C", "D", "E"};
+							array.Shuffle();
+							foreach(string n in array)
+							{
+								Console.Write(n);
+							}
+
+							//集合
+							List&lt;string&gt; list = new List&lt;string&gt;(array);
+							list.Shuffle();
+							list.ForEach(Console.Write);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					DCAEBEDBAC（每次執行結果不一樣）
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>做法三：打亂集合的 Sort()</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Collections.Generic;
+
+					class Launch
+					{
+						static void Main()
+						{
+							List&lt;string&gt; list = new List&lt;string&gt;();
+							list.AddRange(new[]{"A", "B", "C", "D", "E"});
+
+							Random random = new Random();
+							list.Sort((x, y) =&gt; random.Next(-1, 2));
+
+							list.ForEach(Console.Write);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					ECADB（每次執行結果不一樣）
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='random'>
+	<section>
+		<h2>Random 的建議用法</h2>
+		<hr>
+		<section>
+			<h3>問題</h3>
+			<p>
+				如果建立 Random 類別時，沒有在建構式設定 seed 值，那麼 .NET 會傳入電腦時間做為 seed 值來產生亂數表。<br>
+				<br>
+				換句話說，在相同時間建立的 Random 物件，其亂數表是一樣的！如果你在同一時間內多次建立 Random 物件來呼叫 Next()，會發現得到的數值是重複的、固定的，而不是打亂的、變動的：<br>
+				<br>
+				<samp>
+					Random r1 = new Random();　　假設獲得亂數表：3 → 5 → 1 → 4 → 2 …<br>
+					Random r2 = new Random();　　假設獲得亂數表：3 → 5 → 1 → 4 → 2 …<br>
+					Random r3 = new Random();　　假設獲得亂數表：3 → 5 → 1 → 4 → 2 …<br>
+					<br>
+					r1.Next();　　　　　　　　　 傳回 r1 亂數表第一個數字：3<br>
+					r2.Next();　　　　　　　　　 傳回 r2 亂數表第一個數字：3<br>
+					r3.Next();　　　　　　　　　 傳回 r3 亂數表第一個數字：3<br>
+				</samp>
+				<br>
+				看似呼叫三次 Next()，其實是對一模一樣的三張亂數表，各取出第一個數字，結果通通都是 3。<br>
+				<br>
+				由於電腦每秒可以執行百萬指令，所以區區數行 new Random()，幾乎用的都是同一時間值做 seed 😐
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>建議</h3>
+			<p>
+				由於 Random 並沒有打亂 seed 的方法，只能在建構式 Random(Int32) 設定 seed，所以建議的用法，是早早就建立一個 Random 物件來重複使用，讓 Next() 照同一張亂數表的順序走：<br>
+				<br>
+				<samp>
+					Random r = new Random();　　 假設獲得亂數表：3 → 5 → 1 → 4 → 2 …<br>
+					<br>
+					r.Next();　　　　　　　　　　傳回亂數表第一個數字：3<br>
+					r.Next();　　　　　　　　　　傳回亂數表第二個數字：5<br>
+					r.Next();　　　　　　　　　　傳回亂數表第三個數字：1<br>
+				</samp>
+				<br>
+				還要注意的是，new Random() 不要放在迴圈內，也不要放在函式內。迴圈等於短時間內大量產生同樣亂數表的 Random 物件，函式經常會在短時間被重複呼叫，這樣一來裡面的 Random 其實也是用同樣時間值產生亂數表。這些都不叫建立一個 Random 物件來重複使用，等於 new 一堆 Random 物件來使用。宣告為類別的屬性來重複使用也有這樣陷阱，短時間內 new 一堆這個類別的話，就跟宣告在函式裡面的意思一樣～<br>
+				<br>
+				如果真的要建立多個 Random 物件，可以在每個物件之間呼叫 System.Threading 的 <code>Thread.Sleep(1)</code>，這樣時間就會錯開，變相用不一樣的時間值產生亂數表。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>其他</h3>
+			<p>
+				雖然照建議的用法操作 Random 物件能正常獲得亂數，但它依然不是真正的亂數，順序依然是固定的、有規則可循的。
+			</p>
+		</section>
+	</section>
+	<hr id='filesystem'>
+	<section>
+		<h2>操作檔案</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+				using System.IO;
+
+				class Launch
+				{
+					static void Main()
+					{
+						//建立資料夾
+						Directory.CreateDirectory("資料夾");
+
+						//建立檔案
+						File.Create("資料夾/檔案 1.dat").Close();
+						File.Create("資料夾/檔案 2.dat").Close();
+						File.Create("資料夾/檔案 3.dat").Close();
+
+						//複製檔案
+						File.Copy("資料夾/檔案 3.dat", "資料夾/檔案 4.dat");
+
+						//取得資料夾清單
+						string[] files = Directory.GetFiles("資料夾");
+						foreach(string n in files)
+						{
+							Console.WriteLine(n);
+						}
+
+						//刪除資料夾
+						Directory.Delete("資料夾", true);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				資料夾\檔案 1.dat<br>
+				資料夾\檔案 2.dat<br>
+				資料夾\檔案 3.dat<br>
+				資料夾\檔案 4.dat
+			</output>
+			<br>
+			File.Create() 會傳回 FileStream，以便讀寫檔案，因此隨後用 Close() 關閉檔案，才能對該檔案進行增刪的動作，否則等於檔案正在使用中。<br>
+			<br>
+			Directory.Delete() 可以 true 第二個參數，刪除不是空的資料夾。<br>
+			<br>
+			除了無須建立物件即可直接調用的 Directory 和 File，還有必須建立物件的 DirectoryInfo 和 FileInfo，以便對同一資料夾或檔案進行多次操作
+		</p>
+	</section>
+	<hr id='file'>
+	<section>
+		<h2>讀寫檔案資料</h2>
+		<hr>
+		<section>
+			<h3>使用 File 簡易讀寫</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//寫入資料
+							File.WriteAllText("sample.txt", "A");
+							File.AppendAllText("sample.txt", "BC");
+
+							//讀出資料
+							string[] lines = File.ReadAllLines("sample.txt");
+							foreach(string n in lines)
+							{
+								Console.WriteLine(n);
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					ABC
+				</output>
+				<br>
+				<output>
+					ABC
+				</output>
+				<br>
+				如果資料是 String 陣列或 List 串列，可以用 <code>WriteAllLines</code> 一次寫入新的檔案，用 <code>AppendAllLines</code> 一次附加資料到檔案，且每筆資料附加換行字元。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用 StreamWriter 和 StreamReader 分批讀寫</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//寫入資料
+							StreamWriter writer = new StreamWriter("sample.txt");
+							writer.WriteLine("AAA");
+							writer.WriteLine("BBB");
+							writer.WriteLine("CCC");
+							writer.Close();
+
+							//讀出資料
+							StreamReader reader = new StreamReader("sample.txt");
+							while(!reader.EndOfStream)
+							{
+								Console.WriteLine(reader.ReadLine());
+							}
+							reader.Close();
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用 FileStream 隨機存取</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+					using System.Text;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//寫入資料
+							FileStream file_stream1 = File.Create("sample.txt");
+
+							file_stream1.Seek(0, SeekOrigin.Begin);
+							file_stream1.Write(Encoding.UTF8.GetBytes("猜猜\n"), 0, 7); //中文字佔 3 bytes 大小，其他字元 1 byte，所以填 7，也就是 3+3+1。
+
+							file_stream1.Seek(7, SeekOrigin.Begin);
+							file_stream1.Write(Encoding.UTF8.GetBytes("我是誰"), 0, 9);
+
+							file_stream1.Close();
+
+							//從位置 10 讀出 6 bytes 資料
+							FileStream file_stream2 = new FileStream("sample.txt", FileMode.Open);
+
+							file_stream2.Seek(10, SeekOrigin.Begin);
+							byte[] bytes = new byte[6];
+							file_stream2.Read(bytes, 0, 6);
+
+							Console.Write(Encoding.UTF8.GetChars(bytes));
+
+							file_stream2.Close();
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					猜猜<br>
+					我是誰
+				</output>
+				<br>
+				<output>
+					是誰
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>使用 BinaryWriter 和 BinaryReader 讀寫數值資料</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//寫入資料
+							BinaryWriter writer = new BinaryWriter(File.Open("Sample.dat", FileMode.Create));
+							writer.Write(1);
+							writer.Write(22);
+							writer.Write(333);
+							writer.Close();
+
+							//讀出資料
+							BinaryReader reader = new BinaryReader(File.Open("Sample.dat", FileMode.Open));
+							int a = reader.ReadInt32();
+							int b = reader.ReadInt32();
+							int c = reader.ReadInt32();
+							reader.Close();
+							Console.Write(a + b + c);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					356
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='xml'>
+	<section>
+		<h2>XML</h2>
+		<hr>
+		<section>
+			<h3>新建 XML 文件</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System.Xml;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//建立新 XML 結構
+							XmlDocument document = new XmlDocument();
+							document.LoadXml("&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;html&gt;&lt;/html&gt;");
+
+							//新增元素
+							XmlElement element = document.CreateElement("body");
+							element.SetAttribute("style", "color:blue");
+							document.DocumentElement.AppendChild(element);
+
+							//新增節點
+							XmlNode node = document.CreateNode(XmlNodeType.Element, "p", ""); //Attribute CDATA Comment Document DocumentFragment DocumentType Element EndElement EndEntity Entity EntityReference None Notation ProcessingInstruction SignificantWhitespace Text Whitespace XmlDeclaration
+							node.InnerText = "Hello";
+							XmlAttribute attribute = document.CreateAttribute("style");
+							attribute.Value = "color:red";
+							node.Attributes.SetNamedItem(attribute);
+							element.AppendChild(node);
+
+							//儲存
+							document.Save("save.xml");
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+					&lt;html&gt;<br>
+					&nbsp; &lt;body style="color:blue"&gt;<br>
+					&nbsp; &nbsp; &lt;p style="color:red"&gt;Hello&lt;/p&gt;<br>
+					&nbsp; &lt;/body&gt;<br>
+					&lt;/html&gt;
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>讀取 XML 文件</h3>
+			<section>
+				<h4>sample.xml</h4>
+				<p>
+					<textarea class='brush:xml'>
+						&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+						&lt;html&gt;
+						&nbsp; &nbsp; &lt;body style='color:blue'&gt;
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;h1&gt;Homepage&lt;/h1&gt;
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Paragraph 1&lt;/p&gt;
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Paragraph 2&lt;/p&gt;
+						&nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Paragraph 3&lt;/p&gt;
+						&nbsp; &nbsp; &lt;/body&gt;
+						&lt;/html&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>launch.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Xml;
+
+						class Launch
+						{
+							static void Main()
+							{
+								//載入 XML
+								XmlDocument document = new XmlDocument();
+								document.Load("sample.xml");
+
+								//取得元素和內容
+								XmlNodeList nodes = document.SelectNodes("html/body/p");
+								foreach(XmlNode n in nodes)
+								{
+									Console.WriteLine(n.InnerText);
+								}
+
+								//取得屬性
+								XmlNode node = document.SelectSingleNode("html/body");
+								Console.Write(node.Attributes["style"].Value);
+
+								//修改內容
+								nodes[0].InnerText = "NULL";
+
+								//修改屬性
+								node.Attributes["style"].Value = "color:red";
+
+								//儲存
+								document.Save("save.xml");
+
+								//以 Tab 縮排儲存
+								//XmlWriterSettings settings = new XmlWriterSettings();
+								//settings.Indent = true;
+								//settings.IndentChars = ("\t");
+								//XmlWriter writer = XmlWriter.Create("save.xml", settings);
+								//document.Save(writer);
+							}
+						}
+                    </textarea>
+					<br>
+					<output>
+						Paragraph 1<br>
+						Paragraph 2<br>
+						Paragraph 3<br>
+						color:blue
+					</output>
+					<br>
+					<output class='editor'>
+						&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+						&lt;html&gt;<br>
+						&nbsp; &lt;body style="color:red"&gt;<br>
+						&nbsp; &nbsp; &lt;h1&gt;Homepage&lt;/h1&gt;<br>
+						&nbsp; &nbsp; &lt;p&gt;NULL&lt;/p&gt;<br>
+						&nbsp; &nbsp; &lt;p&gt;Paragraph 2&lt;/p&gt;<br>
+						&nbsp; &nbsp; &lt;p&gt;Paragraph 3&lt;/p&gt;<br>
+						&nbsp; &lt;/body&gt;<br>
+						&lt;/html&gt;
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='xpath'>
+	<section>
+		<h2>XPath（<a href='http://msdn.microsoft.com/zh-tw/library/bb399445(v=vs.120)'>本文轉貼自 MSDN</a>）</h2>
+		<p>
+			<code>./author</code><br>
+			目前內容中的所有 &lt;author&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
+			<br>
+			<code>author</code><br>
+			目前內容中的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>first.name</code><br>
+			目前內容中的所有 &lt;first.name&gt; 項目。<br>
+			<br>
+			<code>/bookstore</code><br>
+			這份文件的文件項目 (&lt;bookstore&gt;)。<br>
+			<br>
+			<code>//author</code><br>
+			文件中的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>book[/bookstore/@specialty=@style]</code><br>
+			所有 &lt;book&gt; 項目，其 style 屬性值等於文件根上之 &lt;bookstore&gt; 項目的 specialty 屬性值。<br>
+			<br>
+			<code>author/first-name</code><br>
+			當作 &lt;author&gt; 項目子系的所有 &lt;first-name&gt; 項目。<br>
+			<br>
+			<code>bookstore//title</code><br>
+			位於 &lt;bookstore&gt; 項目一或多層深的所有 &lt;title&gt; 項目 (任意子代)。請注意，其不同於下一資料列的運算式。<br>
+			<br>
+			<code>bookstore/*/title</code><br>
+			當作 &lt;bookstore&gt; 項目子系的所有 &lt;title&gt; 項目。<br>
+			<br>
+			<code>bookstore//book/excerpt//emph</code><br>
+			所有 &lt;emph&gt; 項目，其位於 &lt;book&gt; 項目的 &lt;excerpt&gt; 子系之任何位置，以及 &lt;bookstore&gt; 項目的任何位置。<br>
+			<br>
+			<code>.//title</code><br>
+			位於目前內容中一或多層深的所有 &lt;title&gt; 項目。請注意，唯有在此情況下，才需要使用句點標記法。<br>
+			<br>
+			<code>author/*</code><br>
+			當作 &lt;author&gt; 項目子系的所有項目。<br>
+			<br>
+			<code>book/*/last-name</code><br>
+			當作 &lt;book&gt; 項目子系的所有 &lt;last-name&gt; 項目。<br>
+			<br>
+			<code>*/*</code><br>
+			目前內容的所有孫代項目。<br>
+			<br>
+			<code>*[@specialty]</code><br>
+			含 specialty 屬性的所有項目。<br>
+			<br>
+			<code>@style</code><br>
+			目前內容的 style 屬性。<br>
+			<br>
+			<code>price/@exchange</code><br>
+			目前內容中所有 &lt;price&gt; 項目的 exchange 屬性。<br>
+			<br>
+			<code>price/@exchange/total</code><br>
+			傳回空節點集，因為屬性不含項目子系。XML 路徑語言 (XPath) 文法允許這個運算式，但其效果不大。<br>
+			<br>
+			<code>book[@style]</code><br>
+			內含目前內容之 style 屬性的所有 &lt;book&gt; 項目。<br>
+			<br>
+			<code>book/@style</code><br>
+			目前內容之所有 &lt;book&gt; 項目的 style 屬性。<br>
+			<br>
+			<code>@*</code><br>
+			目前項目內容的所有屬性。<br>
+			<br>
+			<code>./first-name</code><br>
+			目前內容節點中的所有 &lt;first-name&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
+			<br>
+			<code>first-name</code><br>
+			目前內容節點中的所有 &lt;first-name&gt; 項目。<br>
+			<br>
+			<code>author[1]</code><br>
+			目前內容節點中的第一個 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[first-name][3]</code><br>
+			具有 &lt;first-name&gt; 子系的第三個 &lt;author&gt; 項目。<br>
+			<br>
+			<code>my:book</code><br>
+			my 命名空間的 &lt;book&gt; 項目。<br>
+			<br>
+			<code>my:*</code><br>
+			my 命名空間的所有項目。<br>
+			<br>
+			<code>@my:*</code><br>
+			my 命名空間的所有屬性 (不含 my 命名空間項目上不合格的屬性)。<br>
+			請注意，索引與父代是相對的。請參考下列資料：<br>
+			&lt;x&gt;<br>
+			&nbsp; &lt;y/&gt;<br>
+			&nbsp; &lt;y/&gt;<br>
+			&lt;/x&gt;<br>
+			&lt;x&gt;<br>
+			&nbsp; &lt;y/&gt;<br>
+			&nbsp; &lt;y/&gt;<br>
+			&lt;/x&gt;<br>
+			<br>
+			<code>x/y[1]</code><br>
+			每一個 &lt;x&gt; 的第一個 &lt;y&gt; 子系。其等同於下一列的運算式。<br>
+			<br>
+			<code>x/y[position() = 1]</code><br>
+			每一個 &lt;x&gt; 的第一個 &lt;y&gt; 子系。<br>
+			<br>
+			<code>(x/y)[1]</code><br>
+			來自 &lt;x&gt; 項目整組 &lt;y&gt; 子系的第一個 &lt;y&gt;。<br>
+			<br>
+			<code>x[1]/y[2]</code><br>
+			第一個 &lt;x&gt; 的第二個 &lt;y&gt; 子系。<br>
+			如需其他範例，請參考＜XPath 的 XML 檔範例＞。<br>
+			<br>
+			<code>book[last()]</code><br>
+			目前內容節點的最後一個 &lt;book&gt; 項目。<br>
+			<br>
+			<code>book/author[last()]</code><br>
+			目前內容節點中每一個 &lt;book&gt; 項目的最後一個 &lt;author&gt; 子系。<br>
+			<br>
+			<code>(book/author)[last()]</code><br>
+			最後一個 &lt;author&gt; 項目，其來自目前內容節點之 &lt;book&gt; 項目的整組 &lt;author&gt; 子系。<br>
+			<br>
+			<code>book[excerpt]</code><br>
+			至少包含一個 &lt;excerpt&gt; 項目子系的所有 &lt;book&gt; 項目。<br>
+			<br>
+			<code>book[excerpt]/title</code><br>
+			當作 &lt;book&gt; 項目子系，且至少包含一個 &lt;excerpt&gt; 項目子系的所有 &lt;title&gt; 項目。<br>
+			<br>
+			<code>book[excerpt]/author[degree]</code><br>
+			至少包含一個 &lt;degree&gt; 項目子系，且當作至少包含一個 &lt;excerpt&gt; 項目之 &lt;book&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>book[author/degree]</code><br>
+			包含 &lt;author&gt; 子系 (至少包含一個 &lt;degree&gt; 子系) 的所有 &lt;book&gt; 項目。<br>
+			<br>
+			<code>author[degree][award]</code><br>
+			至少包含一個 &lt;degree&gt; 項目子系和至少一個 &lt;award&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[degree and award]</code><br>
+			至少包含一個 &lt;degree&gt; 項目子系和至少一個 &lt;award&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[(degree or award) and publication]</code><br>
+			至少包含一個 &lt;degree&gt; 或 &lt;award&gt; 和至少一個 &lt;publication&gt; 當作子系的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[degree and not(publication)]</code><br>
+			至少包含一個 &lt;degree&gt; 項目子系，且不包含 &lt;publication&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[not(degree or award) and publication]</code><br>
+			至少包含一個 &lt;publication&gt; 項目子系，且不包含 &lt;degree&gt; 也不包含 &lt;award&gt; 項目子系的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[last-name = "Bob"]</code><br>
+			至少包含一個 &lt;last-name&gt; 項目子系 (包含值 Bob) 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[last-name[1] = "Bob"]</code><br>
+			其中第一個 &lt;last-name&gt; 子項目之值為 Bob 的所有 &lt;author&gt; 項目。請注意，其等同於下一資料列的運算式。<br>
+			<br>
+			<code>author[last-name [position()=1]= "Bob"]</code><br>
+			其中第一個 &lt;last-name&gt; 子項目之值為 Bob 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>degree[@from != "Harvard"]</code><br>
+			其中 from 屬性不等於 "Harvard" 的所有 &lt;degree&gt; 項目。<br>
+			<br>
+			<code>author[. = "Matthew Bob"]</code><br>
+			其值為 Matthew Bob 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[last-name = "Bob" and ../price&gt;50]</code><br>
+			內含 &lt;last-name&gt; 子項目 (其值為 Bob) 和 &lt;price&gt; 同層級項目 (其值大於 50) 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>book[position() &lt;= 3]</code><br>
+			前三本書 (1、2、3)。<br>
+			<br>
+			<code>author[not(last-name = "Bob")]</code><br>
+			不包含 &lt;last-name&gt; 子項目 (包含值 Bob) 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[first-name = "Bob"]</code><br>
+			至少包含一個 &lt;first-name&gt; 子系 (包含值 Bob) 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>author[* = "Bob"]</code><br>
+			所有包含值為 Bob 之任何子項目的所有 author 項目。<br>
+			<br>
+			<code>author[last-name = "Bob" and first-name = "Joe"]</code><br>
+			內含 &lt;last-name&gt; 子項目 (含值 Bob) 和 &lt;first-name&gt; 子項目 (其值為 Joe) 的所有 &lt;author&gt; 項目。<br>
+			<br>
+			<code>price[@intl = "Canada"]</code><br>
+			內容節點中 intl 屬性等於 "Canada" 的所有 &lt;price&gt; 項目。<br>
+			<br>
+			<code>degree[position()&lt;3]</code><br>
+			內容節點子系的前兩個 &lt;degree&gt; 項目。<br>
+			<br>
+			<code>p/text()[2]</code><br>
+			內容節點中每個 &lt;p&gt; 項目的第二個文字節點。<br>
+			<br>
+			<code>ancestor::book[1]</code><br>
+			內容節點中最接近的 &lt;book&gt; 上階。<br>
+			<br>
+			<code>ancestor::book[author][1]</code><br>
+			內容節點的最接近 &lt;book&gt; 上階，且這個 &lt;book&gt; 項目將 &lt;author&gt; 項目當作子系。<br>
+			<br>
+			<code>ancestor::author[parent::book][1]</code><br>
+			目前內容中最接近的 &lt;author&gt; 上階，並且這個 &lt;author&gt; 項目是 &lt;book&gt; 項目的子系。<br>
+			<br>
+			<code>x | y/x</code><br>
+			聯集運算式。在下列 XML 檔中，選取值為 green 或 blue 的所有 &lt;x&gt; 元素：
+		</p>
+		<section>
+			<h4>XML 檔 (data1.xml)</h4>
+			<p>
+				<textarea class='brush:xml'>
+					&lt;?xml version='1.0'?&gt;
+					&lt;?xml-stylesheet type="text/xsl" href="union.xsl"?&gt;
+					&lt;root&gt;
+					  &lt;x&gt;green&lt;/x&gt;
+					  &lt;y&gt;
+						&lt;x&gt;blue&lt;/x&gt;
+						&lt;x&gt;blue&lt;/x&gt;
+					  &lt;/y&gt;
+					  &lt;z&gt;
+						&lt;x&gt;red&lt;/x&gt;
+						&lt;x&gt;red&lt;/x&gt;
+					  &lt;/z&gt;
+					  &lt;x&gt;green&lt;/x&gt;
+					&lt;/root&gt;
+                </textarea>
+			</p>
+		</section>
+		<section>
+			<h4>XSLT 檔 (union.xsl)</h4>
+			<p>
+				<textarea class='brush:xml'>
+					&lt;?xml version='1.0'?&gt;
+					&lt;xsl:stylesheet version="1.0"
+					  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+					&lt;xsl:template match="root"&gt;
+					  &lt;xsl:for-each select="x | y/x"&gt;
+						&lt;xsl:value-of select="."/&gt;,
+						&lt;xsl:if test="not(position()=last())"&gt;, &lt;/xsl:if&gt;
+					  &lt;/xsl:for-each&gt;
+					&lt;/xsl:template&gt;
+
+					&lt;/xsl:stylesheet&gt;
+                </textarea>
+			</p>
+		</section>
+		<section>
+			<h4>Formatted Output</h4>
+			<p>
+				<output>
+					green, blue, blue, green
+				</output>
+			</p>
+		</section>
+		<section>
+			<h4>Processor Output</h4>
+			<p>
+				<output>
+					&lt;?xml version="1.0" encoding="UTF-16"?&gt;green, blue, blue, green
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='sqlite'>
+	<section>
+		<h2>SQLite</h2>
+		<p>
+			由於下 SQL 處理資料的效率往往會有驚人的表現，當傳統的資料結構與演算法都解決不了問題時，不妨掛上 SQLite 的組件，改用 SQL 解決看看<ins>1</ins>！
+		</p>
+		<hr>
+		<section>
+			<h3>Microsoft.Data.Sqlite</h3>
+			<p>
+				.NET Framework 並未內建 SQLite 功能 😤<br>
+				<br>
+				請至 NuGet Gallery 下載 <a href='https://www.nuget.org/packages/Microsoft.Data.Sqlite/1.1.1/'>Microsoft.Data.Sqlite</a>，再到 SQLite 官網下載 Precompiled Binaries for Windows 的 <a href='https://www.sqlite.org/download.html'>64-bit DLL (x64) for SQLite</a>（不要下載到 32-bit），解開後將 sqlite3.dll 與 Microsoft.Data.Sqlite.dll 放在一起。<br>
+				<br>
+				範例程式如下：<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+					using Microsoft.Data.Sqlite;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//砍掉重練一個新的 sqlite.db 空白資料庫，好讓範例每次都能正常執行。
+							File.WriteAllBytes("sqlite.db", new byte[0]);
+
+							//指定資料庫檔案並開啟
+							SqliteConnection sqlite = new SqliteConnection("DataSource=sqlite.db");
+							sqlite.Open();
+
+							//寫入資料
+							SqliteCommand sql = sqlite.CreateCommand();
+							sql.CommandText = "CREATE TABLE MyTable(MyColumn TEXT)";
+							sql.ExecuteNonQuery();
+							sql.CommandText = "INSERT INTO MyTable(MyColumn) VALUES('Hello, SQLite!')";
+							sql.ExecuteNonQuery();
+
+							//讀取資料
+							sql.CommandText = "SELECT MyColumn FROM MyTable";
+							SqliteDataReader reader = sql.ExecuteReader();
+							reader.Read();
+							Console.Write(reader["MyColumn"].ToString());
+
+							//關閉資料庫
+							sqlite.Dispose();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					csc /r:Microsoft.Data.Sqlite.dll *.cs
+				</output>
+				<br>
+				<output>
+					Hello, SQLite!
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>System.Data.SQLite</h3>
+			<p>
+				另外還有 <a href='http://system.data.sqlite.org/index.html/doc/trunk/www/downloads.wiki'>System.Data.SQLite</a>，它不需要另外下載 sqlite3.dll，而是內建在 System.Data.SQLite.dll 裡面！請下載 Precompiled Binaries for 64-bit Windows (.NET Framework 4.6) 的 sqlite-netFx46-binary-bundle-x64-2015-1.0.115.5.zip，解開後的 System.Data.SQLite.dll 就等於一款資料庫系統。<br>
+				<br>
+				由於 .NET Framework 版的 Microsoft.Data.Sqlite 和 System.Data.SQLite 都已停止更新，因此不內建 SQLite 3 的 Microsoft.Data.Sqlite 會是更好的選擇，可以替換新版本的 sqlite3.dll，System.Data.SQLite 內建的 SQLite 版本停留在 2015 年。<br>
+				<br>
+				System.Data.SQLite 和 Microsoft.Data.Sqlite 是同樣原始碼的產品，所以兩者程式寫法一樣，只差在大小寫，一個是 Sqlite，一個是 SQLite：<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+					using System.Data.SQLite;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//砍掉重練一個新的 sqlite.db 空白資料庫，好讓範例每次都能正常執行。
+							SQLiteConnection.CreateFile("sqlite.db");
+
+							//指定資料庫檔案並開啟
+							SQLiteConnection sqlite = new SQLiteConnection("DataSource=sqlite.db");
+							sqlite.Open();
+
+							//寫入資料
+							SQLiteCommand sql = sqlite.CreateCommand();
+							sql.CommandText = "CREATE TABLE MyTable(MyColumn TEXT)";
+							sql.ExecuteNonQuery();
+							sql.CommandText = "INSERT INTO MyTable(MyColumn) VALUES('Hello, SQLite!')";
+							sql.ExecuteNonQuery();
+
+							//讀取資料
+							sql.CommandText = "SELECT MyColumn FROM MyTable";
+							SQLiteDataReader reader = sql.ExecuteReader();
+							reader.Read();
+							Console.Write(reader["MyColumn"].ToString());
+
+							//關閉資料庫
+							sqlite.Dispose();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					csc /r:System.Data.SQLite.dll *.cs
+				</output>
+				<br>
+				<output>
+					Hello, SQLite!
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='serializable'>
+	<section>
+		<h2>序列化</h2>
+		<p>
+			將物件轉為檔案或字串，往後再從檔案或字串還原為物件。
+		</p>
+		<hr>
+		<section>
+			<h3>序列化為二進制檔案</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+					using System.Runtime.Serialization.Formatters.Binary;
+
+					[Serializable] class Player
+					{
+						string name;
+						int number;
+
+						public Player(string x, int y)
+						{
+							name = x;
+							number = y;
+						}
+
+						public void play()
+						{
+							Console.Write("{0} {1}", name, number);
+						}
+					}
+
+					class Launch
+					{
+						static void Main()
+						{
+							Player player1 = new Player("Twideem Civs", 58);
+
+							//序列化
+							FileStream stream = new FileStream("player.dat", FileMode.Create, FileAccess.Write, FileShare.None);
+							BinaryFormatter formatter = new BinaryFormatter();
+							formatter.Serialize(stream, player1);
+							stream.Close();
+
+							//反序列化
+							stream = File.OpenRead("player.dat");
+							Player player2 = (Player)formatter.Deserialize(stream);
+							stream.Close();
+							player2.play();
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					00 01 00 00 00 FF FF FF FF 01 00 00 00 00 00 00 00 0C 02 00 00 00 3A 72 75 6E 2C 20 56 65 72 73 69 6F 6E 3D 30 2E 30 2E 30 2E 30 2C 20 43 75 6C 74 75 72 65 3D 6E 65 75 74 72 61 6C 2C 20 50 75 62 6C 69 63 4B 65 79 54 6F 6B 65 6E 3D 6E 75 6C 6C 05 01 00 00 00 06 50 6C 61 79 65 72 02 00 00 00 04 6E 61 6D 65 06 6E 75 6D 62 65 72 01 00 08 02 00 00 00 06 03 00 00 00 0C 54 77 69 64 65 65 6D 20 43 69 76 73 3A 00 00 00 0B
+				</output>
+				<br>
+				<output>
+					Twideem Civs<br>
+					58
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>序列化為 SOAP 格式</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+					using System.Runtime.Serialization.Formatters.Soap;
+
+					[Serializable] class Player
+					{
+						string name;
+						int number;
+
+						public Player(string x, int y)
+						{
+							name = x;
+							number = y;
+						}
+
+						public void play()
+						{
+							Console.Write("{0} {1}", name, number);
+						}
+					}
+
+					class Launch
+					{
+						static void Main()
+						{
+							Player player1 = new Player("Twideem Civs", 58);
+
+							//序列化
+							FileStream stream = new FileStream("player.xml", FileMode.Create, FileAccess.Write, FileShare.None);
+							SoapFormatter formatter = new SoapFormatter();
+							formatter.Serialize(stream, player1);
+							stream.Close();
+
+							//反序列化
+							stream = File.OpenRead("player.xml");
+							Player player2 = (Player)formatter.Deserialize(stream);
+							stream.Close();
+							player2.play();
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					&lt;SOAP-ENV:Envelope<br>
+					&nbsp;xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br>
+					&nbsp;xmlns:xsd="http://www.w3.org/2001/XMLSchema"<br>
+					&nbsp;xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"<br>
+					&nbsp;xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"<br>
+					&nbsp;xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0"<br>
+					&nbsp;SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"&gt;<br>
+					&lt;SOAP-ENV:Body&gt;<br>
+					&lt;a1:Player id="ref-1" xmlns:a1="http://schemas.microsoft.com/clr/asse<br>m/run%2C%20Version%3D0.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyTok<br>en%3Dnull"&gt;<br>
+					&lt;name id="ref-3"&gt;Twideem Civs&lt;/name&gt;<br>
+					&lt;number&gt;58&lt;/number&gt;<br>
+					&lt;/a1:Player&gt;<br>
+					&lt;/SOAP-ENV:Body&gt;<br>
+					&lt;/SOAP-ENV:Envelope&gt;
+				</output>
+				<br>
+				<output>
+					Twideem Civs<br>
+					58
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>序列化為 XML 格式</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Xml;
+					using System.Xml.Serialization;
+					using System.IO;
+
+					public class Player
+					{
+						public string name;
+						public int number;
+					}
+
+					class Launch
+					{
+						static void Main()
+						{
+							Player player1 = new Player();
+							player1.name = "Twideem Civs";
+							player1.number = 58;
+
+							//序列化
+							FileStream stream = new FileStream("player.xml", FileMode.Create, FileAccess.Write, FileShare.None);
+							XmlSerializer serializer = new XmlSerializer(typeof(Player));
+							serializer.Serialize(stream, player1);
+							stream.Close();
+
+							//反序列化
+							stream = File.OpenRead("player.xml");
+							Player player2 = (Player)serializer.Deserialize(stream);
+							stream.Close();
+							Console.WriteLine(player2.name);
+							Console.Write(player2.number);
+						}
+					}
+                </textarea>
+				<br>
+				<output class='editor'>
+					&lt;?xml version="1.0"?&gt;<br>
+					&lt;Player xmlns:xsd="http://www.w3.org/2001/XMLSchema"<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;<br>
+					&nbsp; &lt;name&gt;Twideem Civs&lt;/name&gt;<br>
+					&nbsp; &lt;number&gt;58&lt;/number&gt;<br>
+					&lt;/Player&gt;
+				</output>
+				<br>
+				<output>
+					Twideem Civs<br>
+					58
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>序列化為 JSON 字串</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Web.Script.Serialization;
+
+					class Player
+					{
+						public string name;
+						public int number;
+					}
+
+					class Launch
+					{
+						static void Main()
+						{
+							Player player1 = new Player();
+							player1.name = "Twideem Civs";
+							player1.number = 58;
+
+							JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+							//物件轉 JSON
+							string json = serializer.Serialize(player1);
+							Console.WriteLine(json);
+
+							//JSON 轉物件
+							Player player2 = serializer.Deserialize&lt;Player&gt;(json);
+							Console.WriteLine(player2.name);
+							Console.Write(player2.number);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					{"name":"Twideem Civs", "number":58}<br>
+					Twideem Civs<br>
+					58
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='zipfile'>
+	<section>
+		<h2>Zip 壓縮檔案</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System.IO.Compression;
+
+				class Launch
+				{
+					static void Main()
+					{
+						//壓縮
+						ZipFile.CreateFromDirectory("我的資料夾", "我的壓縮檔.zip");
+
+						//解壓縮
+						ZipFile.ExtractToDirectory("我的壓縮檔.zip", "新的資料夾");
+					}
+				}
+
+				//使用 ZipFile 需要參考 System.IO.Compression.FileSystem.dll 檔
+            </textarea>
+			<br>
+			<output>
+				csc /r:C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.IO.<br>
+				Compression.FileSystem.dll *.cs<br>
+				launch
+			</output>
+		</p>
+	</section>
+	<hr id='sound'>
+	<section>
+		<h2>播放音樂</h2>
+		<hr>
+		<section>
+			<h3>SoundPlayer</h3>
+			<p>
+				.NET Framework 只能播放 WAVE 格式 😨<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System.Media;
+
+					class Launch
+					{
+						static void Main()
+						{
+							SoundPlayer player = new SoundPlayer();
+							player.SoundLocation = "sound.wav";
+							player.Load();
+							player.PlaySync();
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>NAudio</h3>
+			<p>
+				想播放 MP3 格式，請至 NuGet Gallery 下載 <a href='http://www.nuget.org/packages/NAudio/1.10.0/'>NAudio 1.10.0</a> 組件，它能將 MP3 轉為 WAVE 格式給 SoundPlayer 播放…不過 NAudio 本身就能播放 WAVE 了。<br>
+				<br>
+				下載後，直接用壓縮軟體解開，然後將 net35 資料夾裡面的 NAudio.dll 跟你的 C# 程式碼放在一起。<br>
+				<br>
+				<textarea class='brush:cs'>
+					using NAudio.Wave;
+					using System.Threading;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//將 MP3 轉為 WAVE
+							Mp3FileReader mp3 = new Mp3FileReader("music.mp3");
+							WaveStream wave = WaveFormatConversionStream.CreatePcmStream(mp3);
+
+							//播放 WAVE
+							WaveOut waveout = new WaveOut();
+							waveout.Init(wave);
+							waveout.Play();
+							while(waveout.PlaybackState==PlaybackState.Playing)
+							{
+								Thread.Sleep(100);
+							}
+
+							//釋放占用資源
+							wave.Dispose();
+							mp3.Dispose();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					csc /r:NAudio.dll *.cs
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='process'>
+	<section>
+		<h2>調用外部程式功能</h2>
+		<hr>
+		<section>
+			<h3>範例一：Process.Start()</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System.Diagnostics;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//調用 7-Zip 壓縮檔案
+							Process.Start("C:/Program Files/7-Zip/7z.exe", "a 我的壓縮檔.7z 我的資料夾");
+
+							//調用 7-Zip 解壓檔案
+							Process.Start("C:/Program Files/7-Zip/7z.exe", "x 我的壓縮檔.7z");
+						}
+					}
+                </textarea>
+				<br>
+				如果有預設網頁瀏覽器，還可以下網址，用來開啟網站。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>範例二：Process.WaitForExit()</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System.Diagnostics;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//等檔案壓縮完後
+							Process process = Process.Start("C:/Program Files/7-Zip/7z.exe", "a 我的壓縮檔.7z 我的資料夾");
+							process.WaitForExit();
+
+							//再解壓檔案。
+							Process.Start("C:/Program Files/7-Zip/7z.exe", "x 我的壓縮檔.7z");
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>範例三：StartInfo.WindowStyle</h3>
+			<p>
+				在程式碼設定 StartInfo.WindowStyle 屬性為 ProcessWindowStyle.Hidden，然後編譯時下 /t:winexe 參數，這樣執行程式時，既不會跳出視窗、也不會顯示命令提示字元。<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System.Diagnostics;
+
+					class Launch
+					{
+						static void Main()
+						{
+							//不會顯示意外關閉的 Microsoft Edge 關閉方式
+							Process process1 = new Process();
+							process1.StartInfo.FileName = "TASKKILL";
+							process1.StartInfo.Arguments = "/IM msedge.exe";
+							process1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+							process1.Start();
+							process1.WaitForExit();
+
+							//快速關機
+							Process process2 = new Process();
+							process2.StartInfo.FileName = "SHUTDOWN";
+							process2.StartInfo.Arguments = "/S /HYBRID /T 0 /F";
+							process2.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+							process2.Start();
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					csc /t:winexe /out:快速關機.exe *.cs
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='kill'>
+	<section>
+		<h2>終止外部程式執行</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System.Diagnostics;
+
+				class Launch
+				{
+					static void Main()
+					{
+						//關閉所有 msedge.exe
+						foreach(Process n in Process.GetProcessesByName("msedge"))
+						{
+							n.Kill();
+							n.WaitForExit();
+						}
+					}
+				}
+            </textarea>
+			<br>
+			通常其它程式語言要傳入完整的名稱：msedge.exe，但 .NET Framework 必須省略後面的 .exe。
+		</p>
+	</section>
+	<hr id='sleep'>
+	<section>
+		<h2>暫停一段時間</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System.Threading;
+
+				class Launch
+				{
+					static void Main()
+					{
+						Thread.Sleep(3000);
+					}
+				}
+            </textarea>
+		</p>
+	</section>
+	<hr id='datetime'>
+	<section>
+		<h2>日期和時間</h2>
+		<hr>
+		<section>
+			<h3>取得年月日時分秒</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						static void Main()
+						{
+							DateTime now = DateTime.Now;
+							Console.WriteLine(now.Year + "年");
+							Console.WriteLine(now.Month + "月");
+							Console.WriteLine(now.Day + "日");
+							Console.WriteLine(now.Hour + "點");
+							Console.WriteLine(now.Minute + "分");
+							Console.Write(now.Second + "秒");
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					2019 年<br>
+					4 月<br>
+					18 日<br>
+					12 點<br>
+					34 分<br>
+					56 秒
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>計算間隔時間</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class Launch
+					{
+						static void Main()
+						{
+							DateTime start = DateTime.Now;
+
+							for(int n=1; n&lt;=50000; n++)
+							{
+								Console.Write(n);
+							}
+							Console.WriteLine();
+
+							DateTime end = DateTime.Now;
+
+							Console.Write(end - start);
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					123456789101112131415161718192021222324252627282930313233343444 (省略)<br>
+					00:00:01.4561230
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='cli'>
+	<section>
+		<h2>命令列程式設計</h2>
+		<hr>
+		<section>
+			<h3>取得程式後面的參數</h3>
+			<p>
+				<textarea class='brush:cs'>
+					class Launch
+					{
+						static void Main(string[] args)
+						{
+							System.Console.Write(arg[0]);
+							System.Console.Write(arg[1]);
+						}
+					}
+				</textarea>
+				<br>
+				<output>
+					Launch ABC 123<br>
+					ABC<br>
+					123
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>主控台功能</h3>
+			<table>
+				<tr><td>Console.BackgroundColor</td><td></td></tr>
+				<tr><td>Console.ForegroundColor</td><td></td></tr>
+				<tr><td>Console.Title</td><td></td></tr>
+				<tr><td>Console.Beep()</td><td></td></tr>
+				<tr><td>Console.Clear()</td><td></td></tr>
+				<tr><td>Console.GetCursorPosition()</td><td></td></tr>
+				<tr><td>Console.Read()</td><td>取得按下的鍵值</td></tr>
+				<tr><td>Console.ReadLine()</td><td>取得輸入的字串</td></tr>
+				<tr><td>Console.ReadKey()</td><td>按任意鍵</td></tr>
+				<tr><td>Console.SetBufferSize()</td><td></td></tr>
+				<tr><td>Console.SetCursorPosition()</td><td></td></tr>
+				<tr><td>Console.SetWindowPosition()</td><td></td></tr>
+				<tr><td>Console.SetWindowSize()</td><td></td></tr>
+				<tr><td>Console.RestColor()</td><td></td></tr>
+				<tr><td>Console.Write()</td><td></td></tr>
+				<tr><td>Console.WriteLine()</td><td></td></tr>
+			</table>
+		</section>
+	</section>
+	<hr id='xaml'>
+	<section>
+		<h2>使用者介面與程式碼分離的 WPF + XAML 視窗程式設計</h2>
+		<p>
+			WPF（Windows Presentation Foundation）是 .NET Framewrok 3.0 新增的 UI 框架，基於 XML 和向量繪圖技術，能將使用者介面另外寫成 XAML（eXtensible Application Markup Language），與程式碼分離。<br>
+			<br>
+			設計 WPF 程式，真正標準的做法，是把建立視窗的前置性作業寫在 *.csproj 專案檔，程式碼只要一行 InitializeComponent() 就好。不過這適合用 msbuild.exe 編譯，且 *.csproj 不適合手寫，通常由 Visual Studio .NET 代勞。<br>
+			<br>
+			本文示範的做法是用 csc.exe 編譯，所以載入 *.xaml 建立視窗的工作是寫在程式碼裡面。<br>
+			<br>
+			雖然很少人這樣寫 WPF 程式，但不失為一種做法，方便只用 Windows 10 內建的 .NET Framework 4.8 就能編譯出來～
+		</p>
+		<hr>
+		<section>
+			<h3>window.xaml</h3>
+			<p>
+				<textarea class='brush:xml'>
+					&lt;Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Title="Main" Width="320" Height="240"&gt;
+						&lt;Canvas&gt;
+							&lt;Button Name="Button1" Width="300" Height="30" Margin="2, 70"&gt;哈囉&lt;/Button&gt;
+							&lt;Button Name="Button2" Width="300" Height="30" Margin="2, 103"&gt;再見&lt;/Button&gt;
+						&lt;/Canvas&gt;
+					&lt;/Window&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>launch.cs</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.IO;
+					using System.Windows;
+					using System.Windows.Controls;
+					using System.Windows.Markup;
+
+					partial class Launch
+					{
+						Window window;
+						Button button1, button2;
+
+						Launch()
+						{
+							window = (Window)XamlReader.Load(new FileStream("window.xaml", FileMode.Open));
+
+							button1 = (Button)window.FindName("Button1");
+							button1.Click += new RoutedEventHandler(button1_click);
+
+							button2 = (Button)window.FindName("Button2");
+							button2.Click += new RoutedEventHandler(button2_click);
+
+							new Application().Run(window);
+						}
+
+						void button1_click(object sender, RoutedEventArgs e)
+						{
+							window.Title = "Hello!";
+						}
+
+						void button2_click(object sender, RoutedEventArgs e)
+						{
+							window.Title = "Bye~";
+						}
+
+						[STAThread] static void Main()
+						{
+							new Launch();
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>編譯</h3>
+			<p>
+				WPF 的編譯要手動載入多個組件，以 Windows 10 內建 .NET Framework 4.8 為例，這些組件是：<br>
+				<br>
+				<code>
+					C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Xaml.dll<br>
+					C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\PresentationCore.dll<br>
+					C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\PresentationFramework.dll<br>
+					C:\Windows\Microsoft.NET\Framework64\v4.0.30319\WPF\WindowsBase.dll<br>
+				</code>
+				<br>
+				因此可以這樣下指令：<br>
+				<br>
+				<output>
+					PATH=C:\Windows\Microsoft.NET\Framework64\v4.0.30319\<br>
+					csc /r:System.Xaml.dll, WPF\PresentationCore.dll, <br>WPF\PresentationFramework.dll, WPF\WindowsBase.dll /t:winexe *.cs
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>執行</h3>
+			<p>
+				<img src='../../images/overcast/20190418B.png' alt='插圖'>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>說明</h3>
+			<p>
+				通常 XAML 檔只用來配置外觀，不負責功能。<br>
+				<br>
+				如果想改變視窗介面的外觀與配置，只要修改 window.xaml 即可，不用重新編譯 launch.cs。<br>
+				<br>
+				需要更改功能時，才修改原始程式碼，重新編譯。<br>
+				<br>
+				真要在 XAML 寫功能的話，可使用 &lt;CODE&gt; 標籤寫功能程式，然後指定給控制項標籤的事件屬性。（不適用先前的範例，要重新修改程式才支援。）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>建議</h3>
+			<p>
+				如果沒有使用者介面與程式分離的需求，其實繼續用 Windows Forms 就好，不用轉換到 WPF。兩者需求不同，WPF 雖然是新的技術，但沒有新舊交替、取代 Windows Forms 的意思。<br>
+				<br>
+				如果一開始學的就是 WPF，某天想跟 Windows Forms 一樣，把使用者介面寫死在主程式裡面，其實也不用轉換技術，System.Windows.Controls 的元件可以直接寫進 Window 裡面，並不是非得 XAML 不可，像這樣：
+			</p>
+			<section>
+				<h4>frame.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System.Windows;
+						using System.Windows.Controls;
+
+						class Frame : Window
+						{
+							Button button;
+
+							public Frame()
+							{
+								Width = 320;
+								Height = 240;
+
+								button = new Button();
+								button.Content = "Eyes on me";
+								button.Width = 304;
+								button.Height = 30;
+								button.Click += new RoutedEventHandler((sender, e) =&gt; Title = "0.0");
+
+								Canvas canvas = new Canvas();
+								canvas.Children.Add(button);
+
+								Content = canvas;
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>launch.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Windows;
+
+						public class Launch
+						{
+							[STAThread] static void Main()
+							{
+								new Application().Run(new Frame());
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr id='cgi'>
+	<section>
+		<h2>CGI 程式設計</h2>
+		<hr>
+		<section>
+			<h3>列出所有可用資料</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+					using System.Collections;
+
+					class MainProgram
+					{
+						static void Main()
+						{
+							Console.WriteLine();
+							foreach(DictionaryEntry n in Environment.GetEnvironmentVariables())
+							{
+								Console.WriteLine("{0} = {1}", n.Key, n.Value);
+							}
+						}
+					}
+
+					//列出所有可用資料，再從中找靈感看怎麼寫 CGI 程式 🧐
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>以 UTF-8 字元編碼輸出文字</h3>
+			<p>
+				如果作業系統預設使用的字元編碼是 Big5，那 Console.Write() 也會使用 Big5 字元編碼輸出文字，使得網頁指定 UTF-8 字元編碼或者內容有日文的話會亂碼。<br>
+				<br>
+				解決辦法是用 <code>Console.OutputEncoding = System.Text.Encoding.UTF8;</code> 設定為 UTF-8。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Cookie 的存取</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class HTTPCookie
+					{
+						string[] strings;
+
+						public void SetCookie(string name, string value)
+						{
+							Console.WriteLine("Set-Cookie:{0}={1}; Expires=Thu, 31 Dec 2099 00:00:00 GMT", name, value);
+						}
+
+						public string GetValue(string name)
+						{
+							if(strings == null)
+							{
+								strings = Environment.GetEnvironmentVariable("HTTP_COOKIE").Split(';');
+							}
+							foreach(string n in strings)
+							{
+								string[] a = n.Split('=');
+								if(a[0].Trim() == name)
+								{
+									return a[1];
+								}
+							}
+							return "";
+						}
+
+						public void DeleteCookie(string name)
+						{
+							Console.WriteLine("Set-Cookie:{0}={0}; Expires=Thu, 01 Jan 1970 00:00:00 GMT", name);
+						}
+					}
+
+					class MainProgram
+					{
+						static void Main()
+						{
+							HTTPCookie httpcookie = new HTTPCookie();
+							httpcookie.SetCookie("name", "Twideem");
+							httpcookie.SetCookie("number", "58");
+							Console.WriteLine();
+							Console.WriteLine(httpcookie.GetValue("name"));
+							Console.Write(httpcookie.GetValue("number"));
+						}
+					}
+
+					//寫入 Cookie 是請求動作，要在 header 進行。讀出 Cookie 才在 body 進行。
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>GET 資料的接收</h3>
+			<section>
+				<h4>直接取得 GET 資料</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Web;
+
+						class MainProgram
+						{
+							static void Main()
+							{
+								Console.WriteLine();
+								Console.Write(HttpUtility.UrlDecode(Environment.GetEnvironmentVariable("QUERY_STRING")));
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>剖析 GET 資料</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Web;
+
+						class QueryString
+						{
+							string[] strings = HttpUtility.UrlDecode(Environment.GetEnvironmentVariable("QUERY_STRING")).Split('&');
+
+							public string GetValue(string key)
+							{
+								foreach(string n in strings)
+								{
+									string[] a = n.Split('=');
+									if(a[0] == key)
+									{
+										return a[1];
+									}
+								}
+								return "";
+							}
+						}
+
+						class MainProgram
+						{
+							static void Main()
+							{
+								QueryString querystring = new QueryString();
+								Console.WriteLine();
+								Console.WriteLine(querystring.GetValue("name"));
+								Console.Write(querystring.GetValue("number"));
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>POST 資料的接收</h3>
+			<section>
+				<h4>直接取得 POST 資料</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Web;
+
+						class MainProgram
+						{
+							static void Main()
+							{
+								Console.WriteLine();
+								Console.Write(HttpUtility.UrlDecode(Console.ReadLine()));
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>逐位元讀取並剖析 POST 資料</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.IO;
+						using System.Web;
+
+						class Content
+						{
+							string[] strings;
+
+							public Content()
+							{
+								int length = Convert.ToInt32(Environment.GetEnvironmentVariable("CONTENT_LENGTH"));
+								byte[] bytes = new byte[length];
+								BinaryReader binaryreader = new BinaryReader(Console.OpenStandardInput());
+								binaryreader.Read(bytes, 0, length);
+								string content = System.Text.Encoding.Default.GetString(bytes, 0, length);
+								strings = content.Split('&');
+							}
+
+							public string GetValue(string key)
+							{
+								foreach(string n in strings)
+								{
+									string[] a = n.Split('=');
+									if(a[0] == key)
+									{
+										return a[1];
+									}
+								}
+								return "";
+							}
+						}
+
+						class MainProgram
+						{
+							static void Main()
+							{
+								Console.WriteLine();
+								Content content = new Content();
+								Console.WriteLine(content.GetValue("name"));
+								Console.Write(content.GetValue("number"));
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>判斷 GET 或 POST</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System;
+
+					class MainProgram
+					{
+						static void Main()
+						{
+							Console.WriteLine();
+
+							if(Environment.GetEnvironmentVariable("REQUEST_METHOD") == "GET")
+							{
+								//GET
+							}
+
+							if(Environment.GetEnvironmentVariable("REQUEST_METHOD") == "POST")
+							{
+								//POST
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>轉址</h3>
+			<p>
+				第一種做法是寫在 HTTP 的 header，請求 URL redirect：<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System;
+
+					class MainProgram
+					{
+						static void Main()
+						{
+							Console.WriteLine("Location: http://127.0.0.1/redirect.html");
+							Console.Write();
+						}
+					}
+                </textarea>
+				<br>
+				第二種做法是用 HTML 來完成：<br>
+				<br>
+				<textarea class='brush:cs'>
+					using System;
+
+					class MainProgram
+					{
+						static void Main()
+						{
+							Console.WriteLine();
+							Console.WriteLine("&lt;meta http-equiv='refresh' content='3;url=http://127.0.0.1/index.html'&gt;");
+							Console.Write("&lt;p&gt;三秒後回到首頁…&lt;/p&gt;");
+						}
+					}
+                </textarea>
+				<br>
+				還有更多種做法，像是用 JavaScript 的 location.href="網址"，道理跟第二種一樣，就不贅述了～
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>上一頁的妙用</h3>
+			<p>
+				就像超鏈結文字 &lt;A/&gt; 或按鈕 &lt;BUTTON/&gt; 能夠原地執行伺服器的功能一樣，還能避免大量的下一頁，非常好用 👍
+			</p>
+			<section>
+				<h4>home.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;a href='perform.cgi'&gt;開啟記事本&lt;/a&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>perform.cgi</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System;
+						using System.Diagnostics;
+
+						class MainProgram
+						{
+							static void Main()
+							{
+								//返回上一頁
+								Console.Write("Content-Type: text/html\n\n&lt;script&gt;history.back()&lt;/script&gt;");
+
+								//跑一些程式
+								Process.Start("notepad");
+							}
+						}
+                    </textarea>
+				</p>
+			</section>
+			<p>
+				雖然用 location.replace() 是更好的選擇，但每次都能以這方式間接載入 CGI 網頁也挺煩的～
+			</p>
+		</section>
+	</section>
+	<hr id='httplistener'>
+	<section>
+		<h2>用 HTTPListener 開發後端</h2>
+		<hr>
+		<section>
+			<h3>以 GET 傳輸含中文資料並寫入檔案</h3>
+			<section>
+				<h4>backend.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System.Collections.Specialized;
+						using System.IO;
+						using System.Net;
+						using System.Text;
+						using System.Web;
+
+						class Service
+						{
+							static void Main()
+							{
+								HttpListener httplistener = new HttpListener();
+								httplistener.Prefixes.Add("http://127.0.0.1/");
+								httplistener.Start();
+
+								while(true)
+								{
+									HttpListenerContext context = httplistener.GetContext();
+
+									if(context.Request.QueryString["args"] != null)
+									{
+										string query = context.Request.Url.Query;
+										NameValueCollection cols = HttpUtility.ParseQueryString(query);
+										string text = cols.Get("args");
+										File.WriteAllText("data.txt", text);
+									}
+
+									context.Response.ContentType = "text/html; charset=utf-8";
+									byte[] bytes = Encoding.UTF8.GetBytes("&lt;p&gt;資料已儲存&lt;/p&gt;");
+									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+									context.Response.Close();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					編譯出來的程式，必須以系統管理員身分執行。
+				</p>
+			</section>
+			<section>
+				<h4>frontend.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;a href='http://127.0.0.1/?args=中文'&gt;Submit&lt;/a&gt;
+                    </textarea>
+					<br>
+					按下網頁的超鏈結文字會輸出 data.txt：<br>
+					<br>
+					<output class='editor'>
+						中文
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>以 POST 傳輸含中文資料並寫入檔案</h3>
+			<section>
+				<h4>backend.cs</h4>
+				<p>
+					<textarea class='brush:cs'>
+						using System.IO;
+						using System.Net;
+						using System.Text;
+
+						class Service
+						{
+							static void Main()
+							{
+								HttpListener listener = new HttpListener();
+								listener.Prefixes.Add("http://127.0.0.1/");
+								listener.Start();
+
+								while(true)
+								{
+									HttpListenerContext context = listener.GetContext();
+
+									if(context.Request.HttpMethod == "POST")
+									{
+										StreamReader stream = new StreamReader(context.Request.InputStream);
+										string text = stream.ReadToEnd();
+										File.WriteAllText("data.txt", WebUtility.UrlDecode(text));
+									}
+
+									context.Response.ContentType = "text/html; charset=utf-8";
+									byte[] bytes = Encoding.UTF8.GetBytes("&lt;p&gt;資料已儲存&lt;/p&gt;");
+									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+									context.Response.Close();
+								}
+							}
+						}
+                    </textarea>
+					<br>
+					編譯出來的程式，必須以系統管理員身分執行。
+				</p>
+			</section>
+			<section>
+				<h4>frontend.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;form action='http://127.0.0.1' method='post'&gt;
+							&lt;input name='args' value='中文'&gt;
+							&lt;input type='submit'&gt;
+						&lt;/form&gt;
+                    </textarea>
+					<br>
+					按下網頁的按鈕會輸出 data.txt：<br>
+					<br>
+					<output class='editor'>
+						args=中文
+					</output>
+				</p>
+			</section>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>用 HTTPListener 架網頁伺服器</h2>
+		<hr>
+		<section>
+			<h3>server.cs</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System.IO;
+					using System.Net;
+					using System.Text;
+
+					class Server
+					{
+						static void Main()
+						{
+							HttpListener httplistener = new HttpListener();
+							httplistener.Prefixes.Add("http://127.0.0.1/");
+							httplistener.Start();
+
+							while(true)
+							{
+								HttpListenerContext context = httplistener.GetContext();
+								context.Response.ContentType = "text/html; charset=utf-8";
+
+								if(context.Request.Url.LocalPath != "/favicon.ico")
+								{
+									byte[] bytes = File.ReadAllBytes(Directory.GetCurrentDirectory() + "/" + context.Request.Url.LocalPath);
+									context.Response.ContentLength64 = bytes.Length;
+									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+								}
+
+								context.Response.Close();
+							}
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>index.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;a href='page.html'&gt;page.html&lt;/a&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>page.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;a href='index.html'&gt;index.html&lt;/a&gt;
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<p>
+			編譯出來的程式，必須以系統管理員身分執行。<br>
+			<br>
+			然後開啟網頁瀏覽器，輸入 127.0.0.1/index.html。<br>
+			<br>
+			不能省略 index.html，因為程式碼沒寫！可根據 context.Request.Url.LocalPath 是否為 /，改寫為 /index.html 來實現。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>將 HTTPListener 後端監聽程式與網頁伺服器合併起來</h2>
+		<p>
+			每個 HTTPListener 用不同埠號錯開，再用 System.Threading.Thread 分頭執行：
+		</p>
+		<hr>
+		<section>
+			<h3>server.cs</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using System.IO;
+					using System.Net;
+					using System.Text;
+					using System.Threading;
+
+					class Server
+					{
+						static void Main()
+						{
+							//後端監聽程式
+							new Thread(() =&gt;
+							{
+								HttpListener listener = new HttpListener();
+								listener.Prefixes.Add("http://127.0.0.1:33405/");
+								listener.Start();
+								while(true)
+								{
+									HttpListenerContext context = listener.GetContext();
+									if(context.Request.HttpMethod == "POST")
+									{
+										File.WriteAllText("res.dat", WebUtility.UrlDecode(new StreamReader(context.Request.InputStream).ReadToEnd()));
+									}
+									context.Response.ContentType = "text/html; charset=utf-8";
+									byte[] bytes = Encoding.UTF8.GetBytes("&lt;h1&gt;資料已儲存&lt;/h1&gt;");
+									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+									context.Response.Close();
+								}
+							}).Start();
+
+							//網頁伺服器
+							new Thread(() =&gt;
+							{
+								HttpListener listener = new HttpListener();
+								listener.Prefixes.Add("http://127.0.0.1/");
+								listener.Start();
+								while(true)
+								{
+									HttpListenerContext context = listener.GetContext();
+									if(context.Request.Url.LocalPath != "/favicon.ico")
+									{
+										context.Response.ContentType = "text/html; charset=utf-8";
+										byte[] bytes = File.ReadAllBytes(Directory.GetCurrentDirectory() + context.Request.Url.LocalPath);
+										context.Response.ContentLength64 = bytes.Length;
+										context.Response.OutputStream.Write(bytes, 0, bytes.Length);
+									}
+									context.Response.Close();
+								}
+							}).Start();
+						}
+					}
+                </textarea>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>client.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;form action='http://127.0.0.1:33405' method='post'&gt;
+						&lt;input name='args' value='中文'&gt;
+						&lt;input type='submit'&gt;
+					&lt;/form&gt;
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='websocket'>
+	<section>
+		<h2>WebSocket 伺服器</h2>
+		<p>
+			雖然可以用 System.Net.Sockets 的 TcpListener 等相關類別實作 WebSocket，但能跑是能跑，後續得解決大小毛病，寫出一堆醜程式，所以還是交給第三方程式庫完善大小事吧！<br>
+			<br>
+			請至 NuGet Gallery 下載 <a href='http://www.nuget.org/packages/Fleck/'>Fleck</a> 組件，直接用壓縮軟體解開，然後將 net45 資料夾裡面的 Fleck.dll 跟你的 C# 程式碼放在一起。<br>
+		</p>
+		<hr>
+		<section>
+			<h3>server.cs</h3>
+			<p>
+				<textarea class='brush:cs'>
+					using Fleck;
+					using System;
+					using System.Collections.Generic;
+					using System.Linq;
+
+					class Server
+					{
+						static void Main()
+						{
+							WebSocketServer server = new WebSocketServer("ws://127.0.0.1");
+							List&lt;IWebSocketConnection&gt; sockets = new List&lt;IWebSocketConnection&gt;();
+
+							server.Start(x =&gt;
+							{
+								x.OnOpen = () =&gt;
+								{
+									Console.WriteLine("A client connected.");
+									sockets.Add(x);
+								};
+
+								x.OnClose = () =&gt;
+								{
+									Console.WriteLine("The client disconnected.");
+									sockets.Remove(x);
+								};
+
+								x.OnMessage = y =&gt;
+								{
+									//輸出取得的客戶端訊息
+									Console.WriteLine(y);
+									//送給客戶端訊息
+									sockets.ToList().ForEach(n =&gt; n.Send(y + " world"));
+								};
+							});
+
+							//伺服端常駐迴圈
+							string input = Console.ReadLine();
+							while(input != "exit")
+							{
+								foreach(IWebSocketConnection n in sockets.ToList())
+								{
+									n.Send(input);
+								}
+								input = Console.ReadLine();
+							}
+						}
+					}
+                </textarea>
+				<br>
+				<output>
+					csc.exe /r:Fleck.dll *.cs
+				</output>
+				<br>
+				執行 Server.exe 時需要動態連結 Fleck.dll，因此不要更改它的檔名，否則會出現「無法列印例外狀況字串，因為 Exception.ToString() 失敗。」錯誤訊息。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>client.html</h3>
+			<p>
+				<textarea class='brush:html'>
+					&lt;button onclick='f()'&gt;Click&lt;/button&gt;
+					&lt;script&gt;
+						let socket = new WebSocket('ws://127.0.0.1');
+
+						function f(){
+							socket.send('Hello');
+						}
+
+						socket.onmessage = function(x){
+							document.querySelector('button').innerHTML = x.data;
+						};
+					&lt;/script&gt;
+                </textarea>
+				<br>
+				按下網頁按鈕，主控台會顯示 Hello（客戶端發出的訊息），按鈕文字會變成 Hello world（伺服端發出的訊息）。
+			</p>
+		</section>
+		<hr>
+		<footer>
+			<p>
+				[*] 更多 Fleck 用法，請參訪 <a href='http://github.com/statianzo/Fleck'>GitHub</a>。
+			</p>
+		</footer>
+	</section>
+	<hr id='webclient'>
+	<section>
+		<h2>用 WebClient 取得網頁內容</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+				using System.Net;
+				using System.Text;
+
+				public class Launch
+				{
+					static void Main()
+					{
+						ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+						WebClient webclient = new WebClient();
+						byte[] data = webclient.DownloadData("http://twideem.github.io/readme.md");
+						string encoding = Encoding.UTF8.GetString(data);
+						Console.Write(encoding);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				# twideem.github.io<br>
+				<br>
+				在部落格和社群的時代，很少有網站繼續提供免費個人網頁的服務，所以用 GitHub Pages 讓我的個人網站繼續下去；雖然這項服務的本意是用來宣傳專案，不是架個人網站用～<br>
+				<br>
+				感謝 *GitHub*，也感謝一路走來，有 *奇摩*、*PC home Online*、*8d8d*、*Graffiti.net*、*Freewebs*、*Google 雲端硬碟代管網頁*、*Pancake.io* 提供免費又無廣告的網頁空間服務，讓我過足寫網頁文章的癮。
+			</output>
+		</p>
+	</section>
+	<hr id='uri'>
+	<section>
+		<h2>解析網址</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+				using System.Net;
+
+				class Launch
+				{
+					static void Main()
+					{
+						Uri uri = new Uri("http://twideem.github.io/test.html?name=twideem&number=58");
+						Console.WriteLine(uri.Scheme);
+						Console.WriteLine(uri.Host);
+						Console.WriteLine(uri.Port);
+						Console.WriteLine(uri.LocalPath);
+						Console.Write(uri.Query);
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				http<br>
+				twideem.github.io<br>
+				80<br>
+				/test.html<br>
+				?name=twideem&number=58
+			</output>
+		</p>
+	</section>
+	<hr id='dns'>
+	<section>
+		<h2>取得內網 IP 和主機名稱</h2>
+		<p>
+			<textarea class='brush:cs'>
+				using System;
+				using System.Net;
+
+				class Launch
+				{
+					static void Main()
+					{
+						//主機名稱
+						Console.WriteLine(Dns.GetHostName());
+
+						//內網 IP
+						IPHostEntry entry = Dns.GetHostEntry(Dns.GetHostName());
+						foreach(IPAddress n in entry.AddressList)
+						{
+							Console.WriteLine(n);
+						}
+					}
+				}
+            </textarea>
+			<br>
+			<output>
+				GA502IV<br>
+				fe80::8901:fb38:3265:d96d%15<br>
+				192.168.1.101
+			</output>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 有時我會覺得自己寫的應用軟體只是幫 SQLite 寫 GUI 而已，因為大部分工作都是在操作這款資料庫。
+		</p>
+	</footer>
+</article>

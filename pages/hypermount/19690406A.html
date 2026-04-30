@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<title>/</title>
+<link href='../../icon.png' rel='icon'>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>語言特性珍百景</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<hr>
+		<section>
+			<h3>容許外行人寫錯的 ECMAScript 3 語言特性</h3>
+			<p>
+				<a href='#anchor1'>可以先使用變數再宣告</a><br>
+				<a href='#anchor2'>Hoist</a><br>
+				<a href='#anchor3'>區塊不是一個獨立的區域</a><br>
+				<a href='#anchor4'>自動轉型</a><br>
+				<a href='#anchor5'>=== 與 !==</a><br>
+				<a href='#anchor6'>false</a><br>
+				<a href='#anchor7'>undefined、null、NaN</a><br>
+				<a href='#anchor8'>NaN 告訴我們 JavaScript 的數值是 double 型態</a><br>
+				<a href='#anchor9'>直接附加屬性</a><br>
+				<a href='#anchor10'>this</a><br>
+				<a href='#anchor11'>關於最上層物件 window</a><br>
+				<a href='#anchor12'>Closure</a><br>
+				<a href='#anchor15'>function f() 與 var f=function() 的區別</a><br>
+				<a href='#anchor16'>立即函式</a><br>
+				<a href='#anchor17'>函式串接</a><br>
+				<a href='#anchor18'>prototype</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>ECMAScript 5 的 Prototype 程式風格</h3>
+			<p>
+				<a href='#anchor19'>Prototype 程式風格</a><br>
+				<a href='#anchor20'>Object.getPrototypeOf()</a><br>
+				<a href='#anchor21'>Literal</a><br>
+				<a href='#anchor22'>a=true && f()</a><br>
+				<a href='#anchor23'>NaN != NaN</a><br>
+				<a href='#anchor24'>for.. in.. 不是強化迴圈</a><br>
+				<a href='#anchor25'>函數式 API</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>帶來衝擊性變化的 ECMAScript 6 新特性</h3>
+			<p>
+				<a href='#anchor26'>區域變數</a><br>
+				<a href='#anchor27'>常數</a><br>
+				<a href='#anchor28'>Symbol</a><br>
+				<a href='#anchor29'>預設參數</a><br>
+				<a href='#anchor30'>剩餘參數</a><br>
+				<a href='#anchor31'>箭頭函式</a><br>
+				<a href='#anchor32'>更簡潔的 object literal method 寫法</a><br>
+				<a href='#anchor33'>Generator</a><br>
+				<a href='#anchor34'>Iterator</a><br>
+				<a href='#anchor35'>for.. of.. 才是強化迴圈</a><br>
+				<a href='#anchor36'>類別</a><br>
+				<a href='#anchor37'>繼承</a><br>
+				<a href='#anchor38'>靜態方法</a><br>
+				<a href='#anchor39'>解構賦值</a><br>
+				<a href='#anchor40'>模塊</a><br>
+				<a href='#anchor41'>分號</a>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>後來 New yearly release cadence 的擠牙膏式小幅更新</h3>
+			<p>
+				<a href='#ecmascript2016'>指數運算子</a><br>
+				<a href='#ecmascript2017'>async 和 await</a><br>
+				<a href='#ecmascript2018'>剩餘屬性、其它</a>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor1'>
+	<section>
+		<h2>可以先使用變數再宣告</h2>
+		<p>
+			因為考量到：「編寫網頁的人雖然懂 HTML 語法，但不表示他懂程式設計。」因此當初在設計 JavaScript 時有許多「容錯」的機制。<br>
+			<br>
+			其中最經典的是「變數可以先使用再宣告」這見鬼的容錯設計：<br>
+			<br>
+			<textarea class='brush:js'>
+				a=123;
+				a++;
+				var a;
+				document.write(a);
+            </textarea>
+			<br>
+			顯示的是 124。<br>
+			<br>
+			這就是為何大多數的程式設計師會說 JavaScript 是種糟糕的程式語言。
+		</p>
+		<hr>
+		<footer>
+			<p>
+				[1] 而且他也不需要懂，因為他只是藉由 HTML 在網際網路發表他專業領域的文章，沒有道理先有程式設計的專業領域，才來發表其他專業領域的文章。
+			</p>
+		</footer>
+	</section>
+	<hr id='anchor2'>
+	<section>
+		<h2>Hoist</h2>
+		<p>
+			可以先使用變數再宣告，是因為 JavaScript 對於識別名稱採 hoist 的做法，也就是自動把散落的識別名稱，統一提放到最上頭。所以像下面程式的 n 與 a 變數：<br>
+			<br>
+			<textarea class='brush:js'>
+				function f(){
+					for(var n=0; n&lt;10; n++) var a=n;
+				}
+            </textarea>
+			<br>
+			其實對 JavaScript 來講是：<br>
+			<br>
+			<textarea class='brush:js'>
+				function f(){
+					var n,a;
+					for(n=0; n&lt;10; n++) a=n;
+				}
+            </textarea>
+			<br>
+			這樣的特性，常常整死傳統程式設計師！因為這表示 n 與 a 變數並不屬於 for 區塊，而是整個 f 函式的區域變數！當寫出來的 JavaScript 程式因此不小心覆寫了變數出問題時，根本不知道錯在哪裡…甚至以為是 JavaScript 的 Bug，傻傻地等瀏覽器修正 Orz<br>
+			<br>
+			如果識別名稱是函式，卻因為 hoist 的關係被覆寫，不知情的人在除錯時，恐怕會想放棄這一行～
+		</p>
+	</section>
+	<hr id='anchor3'>
+	<section>
+		<h2>區塊不是一個獨立的區域</h2>
+		<p>
+			習慣上，我們認為 { } 裡面的程式是個獨立的區塊，因此裡面的變數與大括號外面的變數是隔開的。但 JavaScript 並不是這麼回事……<br>
+			<br>
+			<textarea class='brush:js'>
+				{
+					var a=123;
+				}
+				a++;
+				document.write(a);
+            </textarea>
+			<br>
+			顯示的是 124。<br>
+			<br>
+			JavaScript 只有 function(){} 能實現與外界隔絕的區塊，或者說，JavaScript 沒有 block scoping（區塊範疇），只有 function scoping（函式範疇）。因此，確定要使用 block scoping 的話，通常採用「直接呼叫匿名函式」的手法來實現！
+		</p>
+	</section>
+	<hr id='anchor4'>
+	<section>
+		<h2>自動轉型</h2>
+		<p>
+			接下來這點超級重要！JavaScript 是「自動轉換資料型態」的程式語言，所以常常發生「123 等於 '123'」的情況，如果你不了解這點，你的 JavaScript 將破綻百出，要命的是除錯時完全摸不著頭緒。<br>
+			<br>
+			來看幾個範例，下面的程式因為自動轉型的關係，結果顯示 3：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a=['1','2' ,'3'];
+				document.write(a['2']);
+            </textarea>
+			<br>
+			所以看到下面「線路比較複雜一點」的程式，居然也能顯示 3，不用覺得奇怪：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a=['1','2' ,'3'];
+				document.write(a[a['1']]);
+            </textarea>
+			<br>
+			這是因為 a['1'] 傳回 '2'，所以這看起來複雜的程式跟 a['2'] 是一樣的意思。<br>
+			<br>
+			設計 JavaScript 程式，時時刻刻都需要考慮這樣情況的發生，尤其在函式中處理所接受參數時，更要留意自動轉型可能帶來的影響。<br>
+			<br>
+			有人因此懷念 Java 程式語言嚴格的型別檢查機制，但也有人善用 JavaScript 這樣的特性，寫出看上去相當清爽的語法結構。
+		</p>
+	</section>
+	<hr id='anchor5'>
+	<section>
+		<h2>=== 與 !==</h2>
+		<p>
+			JavaScript 的「自動轉換資料型態」誇張到連「比對兩資料是否相等」時照樣發生！<br>
+			<br>
+			<textarea class='brush:js'>
+				var a='1';
+				var b=1;
+				if(a==b) document.write('HELLO');
+            </textarea>
+			<br>
+			上面程式將顯示 HELLO，數值 1 與字串 1 居然是相等的。<br>
+			<br>
+			如果你不希望這樣的結果，請改用 === 或 !== 來比對資料，例如下面程式就不會跟你說 HELLO：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a='1';
+				var b=1;
+				if(a===b) document.write('HELLO');
+            </textarea>
+			<br>
+			題外話，真希望兩者顛倒過來，=== 是自動轉型比對，== 則跟傳統程式語言一樣～
+		</p>
+	</section>
+	<hr id='anchor6'>
+	<section>
+		<h2>false</h2>
+		<p>
+			JavaScript 將以下資料的值視為 false：<br>
+			<br>
+			<samp>
+				'' 與 ''<br>
+				0<br>
+				false<br>
+				NaN<br>
+				null<br>
+				undefined<br>
+			</samp>
+			<br>
+			所以我們常常設計出如下函式，代入並不覺得有什麼不妥的參數，卻發生摸不著頭緒的錯誤：<br>
+			<br>
+			<textarea class='brush:js'>
+				function f(x){
+					if(x) document.write(x);
+					else document.write('請輸入參數。');
+				}
+				f(0);
+            </textarea>
+			<br>
+			因為 0 是 false，所以 if(0) 不會是 true，於是不會將 x 顯示出來，反而要求你輸入參數。<br>
+			<br>
+			如果這不是你想要的結果，上述的程式寫得詳細一點就好：<br>
+			<br>
+			<textarea class='brush:js'>
+				function f(x){
+					if(x!==undefined) document.write(x);
+				}
+            </textarea>
+		</p>
+	</section>
+	<hr id='anchor7'>
+	<section>
+		<h2>undefined、null、NaN</h2>
+		<p>
+			其實 undefined 和 null 並不是「關鍵字」，比較像是「識別名稱」，這兩個識別名稱保存特殊的資料值。<br>
+			<br>
+			所以幸好 <code>undefined=='undefined'</code> 不是 true。<br>
+			<br>
+			NaN 詭異一點，它不是「關鍵字」也不是「識別名稱」，這組字母本身就是一種「資料值」了。<br>
+			<br>
+			但 NaN 這個值，卻不能拿來做比較運算……<br>
+			<br>
+			<textarea class='brush:js'>
+				if(NaN==NaN) document.write('等於')
+				else document.write('不等於')
+            </textarea>
+			<br>
+			顯示的是「不等於」，這還真的是見鬼了～<br>
+			<br>
+			所以在處理 NaN 的時候，注意！千萬要注意！請改用 isNaN() 來判斷是不是 NaN，不要用 == 和 === 來比較。
+		</p>
+	</section>
+	<hr id='anchor8'>
+	<section>
+		<h2>NaN 告訴我們 JavaScript 的數值是 double 型態</h2>
+		<p>
+			JavaScript 的數值型態會出現 NaN，告訴我們一件事：「數值其實是 double 資料型態。」因為這是 IEEE 754 浮點數標準的特有產物，它表示 Not a Number，用來處理「除以零」 或「與無限大值運算」之類的情況。<br>
+			<br>
+			所以要注意！JavaScript 沒有真正的整數，它是由「64 位元雙精度值」產生的。否則，搭上 JavaScript 從頭到尾都在自動轉型的特性，稍有不慎被自動進行了小數運算，就會發生一般程式設計 double 數值不夠精確的問題，導致計算錯誤或無窮迴圈，除錯時我們卻以為自己都在進行整數運算而摸不著頭緒。<br>
+			<br>
+			這點無解，只能自己多留意計算過程中是否混搭了整數與小數，是的話要多測試，判斷哪些地方該用 parseInt() 或 Math 的各式操作來解決問題：「因為 JavaScript 只有 double 數值，沒有其它～」
+		</p>
+	</section>
+	<hr id='anchor9'>
+	<section>
+		<h2>直接附加屬性</h2>
+		<p>
+			JavaScript 是具有很強表達能力的程式語言，其中一項就是「直接附加屬性」到程式結構上的語法特性。<br>
+			<br>
+			首先建立如下程式結構：<br>
+			<br>
+			<textarea class='brush:js'>
+				var M={
+					f:function(){
+						document.write(this.a);
+					}
+				};
+            </textarea>
+			<br>
+			看到這裡，你可能會問：「f() 函式設計錯誤，M 根本沒有 a 變數。」遺憾的是，JavaScript 並不認為這個函式語法錯誤，它只會說 a 是 undefined，但程式是合法的。<br>
+			<br>
+			不過這不是重點，讓我們接著看：<br>
+			<br>
+			<textarea class='brush:js'>
+				M.a=999;
+				M.f();
+            </textarea>
+			<br>
+			執行結果，居然顯示 999！也就是 M.a 這樣的寫法居然不會通知說 M 裡面並沒有 a 這筆變數，反而把 a 給添加到 M 裡面了！<br>
+			<br>
+			雖然這很方便，例如 HTML5 用來保存使用者資料的 localStorage，就能用這樣的方式，讓存取資料的程式碼變得簡潔、易懂：<br>
+			<br>
+			<textarea class='brush:js'>
+				localStorage.HP=100;
+				localStorage.MP=50;
+
+				function 治療術(){
+					if(localStorage.MP&gt;=10) localStorage.HP+=20;
+				}
+            </textarea>
+			<br>
+			否則你原本應該寫得這麼冗雜：<br>
+			<br>
+			<textarea class='brush:js'>
+				localStorage.setItem('HP',100);
+				localStorage.setItem('MP',50);
+
+				function 治療術(){
+					if(localStorage.getItem('MP')&gt;=10) localStorage.setItem('HP',localStorage.getItem('HP')+=20);
+				}
+            </textarea>
+			<br>
+			但如果是寫程式不小心打錯字時，這種非但不提醒說程式寫錯，反而「將錯就錯」的機制，往往造成我們發現程式計算結果不正常時，會有很長一段時間找不到除錯的源頭在哪：「你根本不會想到說居然是打錯字的原因，而且打錯字還造成新的變數，造成計算結果跑到另一筆變數去了。」
+		</p>
+	</section>
+	<hr id='anchor10'>
+	<section>
+		<h2>this</h2>
+		<p>
+			this 其實不是「物件本身」或「函式本身」，而是「呼叫端」。<br>
+			<br>
+			或者說，this 是相對於呼叫它的場合而來，不是絕對性地專屬於物件自身。<br>
+			<br>
+			所以，使用 this 指向自己旗下的成員時看似正常，是因為從物件內部使用 this 時，自己剛好是「呼叫端」。<br>
+			<br>
+			但如果呼叫 this 的場合不是從物件內部自身，那就無法如你所預期地計算結果；JavaScript 這樣富有表達力的程式語言，總會寫出讓人意想不到的程式結構。
+		</p>
+	</section>
+	<hr id='anchor11'>
+	<section>
+		<h2>關於最上層物件 window</h2>
+		<p>
+			window 做為最上層物件，除了可將 <code>window.alert()</code> 省略為 <code>alert()</code> 外，還有一個涵義，那就是全域變數其實都是 window 的屬性。<br>
+			<br>
+			例如在全域空間寫 <code>var a=123</code>，其實等於 <code>window.a=123</code>。<br>
+			<br>
+			由於 window 物件本身用了許多常見的識別名稱，像是 name、top、self、open()、close()、print()…，在全域空間宣告變數時，很容易就覆寫掉瀏覽器既有的程式功能。<br>
+			<br>
+			因此，常常會看到有人把 JavaScript 程式寫在匿名函式裡面來執行：<br>
+			<br>
+			<textarea class='brush:js'>
+				(function(){
+					// JavaScript 程式
+				})();
+            </textarea>
+		</p>
+	</section>
+	<hr id='anchor12'>
+	<section>
+		<h2>Closure</h2>
+		<hr>
+		<section>
+			<h3>原理</h3>
+			<p>
+				一個原本生命週期只存在於函式範疇的變數，在內部函式存取了外部函式的區域變數，而內部函式生命週期卻比外部函式來得長的情況下，延續了該區域變數的生命週期，這種現象就叫 closure，俗稱「閉包」。<br>
+				<br>
+				如下範例，在 F 物件裡，函式 closure() 延續了外部變數 g 的生命週期：<br>
+				<br>
+				<textarea class='brush:js'>
+					function F(){
+						var g=100;
+						function closure(){
+							return --g;
+						}
+						return closure;
+					}
+
+					var f=F();
+
+					document.write(f());
+					document.write(f());
+                </textarea>
+				<br>
+				<output>
+					99 98
+				</output>
+				<br>
+				從叫用兩次 f() 分別得到 99 與 98 來看，f 函式能夠保存計算的結果，但又只有 g 區域內能夠操作這筆資料，因此 closure 通常被物件導向思維的人充當 private 使用。但對早已習慣一級函數程式語言的人，則用在數學計算的場合，讓函數追蹤計算過程來推演下去的思維使用它。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>私有變數的應用</h3>
+			<p>
+				總之，有了 closure 這語言特性，我們便能設計出這樣的程式結構：<br>
+				<br>
+				<textarea class='brush:js'>
+					function F(){
+						var g;
+						return{
+							f1:function(x){
+								g=x;
+							},
+							f2:function(){
+								g+=1;
+							},
+							f3:function(){
+								return g;
+							}
+						}
+					}
+
+					var f=F();
+					f.f1(123);
+					f.f2();
+					document.write(f.f3());
+                </textarea>
+				<br>
+				<output>
+					124
+				</output>
+				<br>
+				如果你試圖存取 F 物件裡的變數 g：<br>
+				<br>
+				<textarea class='brush:js;first-line:20'>
+					f.g=456;
+					document.write(f.f3());
+                </textarea>
+				<br>
+				<output>
+					124
+				</output>
+				<br>
+				因為 f.g 是 f 物件的 g 屬性，並不是 F 物件的閉包 g，兩者是不一樣的資料。所以 f.f3() 照樣輸出 124，而不是 456。而閉包 g 只有內部函式能存取，無法經由 f 參考去存取，因此達到私有變數的效果。<br>
+				<br>
+				輸出 f.g 就可以清楚了解 g 屬性和 g 閉包，是兩筆各自存在的資料：<br>
+				<br>
+				<textarea class='brush:js;first-line:22'>
+					document.write(f.g);
+                </textarea>
+				<br>
+				<output>
+					456
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>各自保存獨立資料的物件</h3>
+			<p>
+				上一節範例單純示範函式物件的 closure 程式結構，宣告 f 物件時沒有使用 new 建立一個新的 F 物件。如果你需要建立多個資料獨立分開保存的 F 物件，就要用 new：<br>
+				<br>
+				<textarea class='brush:js'>
+					function F(){
+						var g;
+						return{
+							f1:function(x){
+								g=x;
+							},
+							f2:function(){
+								g+=1;
+							},
+							f3:function(){
+								return g;
+							}
+						}
+					}
+
+					var a=new F();
+					var b=new F();
+
+					a.f1(111);
+					document.write(a.f3());
+
+					b.f1(222);
+					b.f2();
+					document.write(b.f3());
+                </textarea>
+				<br>
+				<output>
+					111<br>
+					223
+				</output>
+				<br>
+				沒使用 new 的話，a 和 b 會指向同一個 F 物件，這樣就無法達成資料獨立保存在兩個不同物件的設計了。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>匿名 function 物件</h3>
+			<p>
+				承 Closure 的範例，像這種傳回的函式只有一個時，可以進一步使用「匿名函式」的技巧：<br>
+				<br>
+				<textarea class='brush:js'>
+                    function F(){
+                        var g=100;
+                        return function(){
+                            return --g;
+                        };
+                    }
+
+                    var f=F();
+
+                    document.writeln(f());
+                    document.writeln(f());
+                </textarea>
+				<br>
+				<output>
+					99 98
+				</output>
+				<br>
+				執行結果與 Closure 的範例一樣，只是程式結構簡化了！需要注意的是，第 5 行以 ; 結尾。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor15'>
+	<section>
+		<h2>function f() 與 var f=function() 的區別</h2>
+		<p>
+			<code>function f()</code> 是建立具名函式為 f，或者說 f 真的是函式本身。<br>
+			<br>
+			<code>var f=function()</code> 則是宣告 f 識別名稱然後指向後面那個匿名函式，或者說 f 是 reference（參照）。
+		</p>
+	</section>
+	<hr id='anchor16'>
+	<section>
+		<h2>立即函式</h2>
+		<p>
+			利用 JavaScript 的函式其實是物件的特性，可以在建立好函式時當場執行。只要把「函式表示式」包在 () 裡面成為一個優先運算的區塊，後面再使用一個 () 表示要呼叫這個區塊即可。這樣特性的語法結構如下：<br>
+			<br>
+			<code>(function(){})();</code><br>
+			<br>
+			底下是針對該語法結構的範例：<br>
+			<br>
+			<textarea class='brush:js'>
+				(function(){
+					document.write('Hello');
+				})();
+            </textarea>
+			<br>
+			<output>
+				Hello
+			</output>
+		</p>
+		<hr>
+		<section>
+			<h3>進階：區域變數與參數</h3>
+			<p>
+				底下範例，為 immediate function 設置了 x 參數，並且宣告一個 a 變數，然後代入 10 來執行 for 迴圈：<br>
+				<br>
+				<textarea class='brush:js'>
+					(function(x){
+						var a;
+						for(var n=0; n&lt;x; n++) a++;
+						document.write(a);
+					})(10);
+                </textarea>
+				<br>
+				<output>
+					10
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充：也可以變成這樣的語法結構</h3>
+			<p>
+				通常大家比較喜歡用這樣的方式來使用 immediate function：<br>
+				<br>
+				<code>(function(){}());</code><br>
+				<br>
+				也就是把語法結構的重點，擺在 function(){}() 表示這是直接呼叫的函式，再整個用 () 包起表示優先運算的區域。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor17'>
+	<section>
+		<h2>函式串接</h2>
+		<p>
+			要讓函式串接起來呼叫，每個函式最後寫上 return this; 即可。<br>
+			<br>
+			<textarea class='brush:js'>
+				var M={
+					a:0,
+					f1:function(){
+						this.a=1;
+						return this;
+					},
+					f2:function(){
+						this.a++;
+						return this;
+					},
+					f3:function(){
+						document.body.innerHTML=this.a;
+						return this;
+					}
+				};
+
+				M.f1().f2().f3();
+            </textarea>
+			<br>
+			<output>
+				4
+			</output>
+		</p>
+	</section>
+	<hr id='anchor18'>
+	<section>
+		<h2>prototype</h2>
+		<hr>
+		<section>
+			<h3>共用物件狀態與功能</h3>
+			<p>
+				prototype 是每個 JavaScript 物件共同繫結為 this 的屬性，這會形成一條 prototype 物件關係鏈，JavaScript 會自動循線追訪物件，調用其狀態與功能，達成共用程式的目的。<br>
+				<br>
+				聽不懂沒關係，先用實際例子來試試 prototype 吧！我們讓 JavaScript 內建的 Array 物件，新增一個 f() 函式：<br>
+				<br>
+				<textarea class='brush:js'>
+					Array.prototype.f=function(){
+						document.write('HELLO');
+					};
+                </textarea>
+				<br>
+				接著實際建立幾個 Array 物件並呼叫 f() 看看：<br>
+				<br>
+				<textarea class='brush:js'>
+					var a=new Array();
+					var b=[];
+					a.f();
+					b.f();
+                </textarea>
+				<br>
+				<output>
+					HELLO<br>
+					HELLO
+				</output>
+				<br>
+				a 與 b 兩者都顯示 HELLO 的訊息。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>共用與繼承</h3>
+			<p>
+				很多人將 prototype 視為 JavaScript 的繼承機制：<br>
+				<br>
+				<textarea class='brush:js'>
+					arguments.prototype=Array.prototype;
+                </textarea>
+				<br>
+				但這並不很正確，因為將變數或函式加入到 prototype 後，每個關聯到該 prototype 的物件將共用該變數或函式，並不是每個物件各自實作一份該變數與函式。或者說，prototype 類似一種 static，而不是 insctance。所以在使用 prototype 時，思考的是「是否共用變數與函式」，而不是「是否開放繼承」。<br>
+				<br>
+				從上一節範例，可以清楚了解 prototype 的應用：「它不是用來繼承的機制，而是可以擴充功能到既有物件的機制。」例如希望舊版 ECMAScript 可以相容新版 ECMAScript 擴增的規格，就可以從 prototype 來下手。或者你覺得手上有個基本的功能，認為它實用到應該擴充給每個 JavaScript 使用，那就加入到 Object.prototype！<br>
+				<br>
+				事實上，JavaScript 設計之初，Brendan Eich 就很不屑用物件導向來擴充程式碼，因為透過原型機制擴充語法功能更好！所以 prototype 是站在擴充語法的層次引進到 JavaScript，與 Java 用來整理原始碼的 extends 並不是一樣的層次。Java 的 extends 是在類別的層次上繼承程式碼，JavaScript 的 prototype 是在物件的層次上繼承狀態和功能。<br>
+				<br>
+				由於 JavaScript 沒有繼承，所以 prototype 被習慣 Java 程式語言的使用者當作一種繼承的機制，但無法站在 prototype 的層次來「擴充語法」，會寫不出 JavaScript 的剽悍風格。甚至更嚴重的是，始終無法了解 prototype 和繼承是兩回事：「是共用物件狀態與功能，不是繼承程式碼。」
+			</p>
+		</section>
+	</section>
+	<hr id='anchor19'>
+	<section>
+		<h2>Prototype 程式風格</h2>
+		<p>
+			ECMAScript 5 開始，針對 prototype 與 new 兩者混用所造成的弊端，提供許多有利於還原 prototype 風格的功能，讓 JavaScript 的物件導向程式設計可以變得更優雅…
+		</p>
+		<hr>
+		<section>
+			<h3>Object.create()</h3>
+			<section>
+				<h4>類似 new 的用法</h4>
+				<p>
+					<textarea class='brush:js'>
+						//製作類別
+						var Class={
+							field:'umm',
+							method:function(){
+								document.write(this.field);
+							},
+							init:function(x){
+								this.field=x;
+							}
+						};
+
+						//產生類別一
+						var class1=Object.create(Class);
+						class1.init('hello');
+
+						//產生類別二
+						var class2=Object.create(Class);
+						class2.init('bye');
+
+						//操作類別
+						class1.method();
+						class2.method();
+						Class.method();
+	                </textarea>
+					<br>
+					<output>
+						hello<br>
+						bye<br>
+						umm
+					</output>
+					<br>
+					class1 與 class2 共同擁有一樣的行為，卻各自擁有獨立的屬性值，修改各自的屬性值也不影響其它物件。<br>
+					<br>
+					但不適用以閉包做為私有變數的物件：<br>
+					<br>
+					<textarea class='brush:js'>
+						var A=(function(){
+							var a=123;
+							return{
+								f1:function(x){
+									a=x;
+								},
+								f2:function(){
+									document.write(a);
+								}
+							};
+						})();
+
+						var B=Object.create(A);
+
+						B.f1(456);
+						A.f2();
+	                </textarea>
+					<br>
+					<output>
+						456
+					</output>
+					<br>
+					B 修改閉包變數 a，A 的閉包變數也跟著修改了，並非各自擁有一份 a 屬性。只有將 var a 改為 this.a 才能各自擁有一份 a，但這樣就失去私有變數的作用了～
+				</p>
+			</section>
+			<section>
+				<h4>類似 extends 的用法</h4>
+				<p>
+					<textarea class='brush:js'>
+						//父類別
+						var Parent={
+							field:'umm',
+							method:function(){
+								document.write(this.field);
+							}
+						};
+
+						//子類別
+						var Sub=Object.create(Parent,{
+							//以覆寫的做法來初始化 field 的值
+							field:{
+								value:'hello'
+							},
+							//新增 hello 方法
+							hello:{
+								value:function(){
+									this.method(this.field);
+								}
+							}
+						});
+
+						//操作類別
+						Sub.hello();
+	                </textarea>
+					<br>
+					<output>
+						hello
+					</output>
+					<br>
+					這接近 Java 程式設計的 extends 寫法：<br>
+					<br>
+					<code>
+						class Parent{<br>
+						　　String field='umm';<br>
+						　　void method(){<br>
+						　　　　System.out.print(field);<br>
+						　　}<br>
+						}<br>
+						<br>
+						class Sub extends Parent{<br>
+						　　public Sub(){<br>
+						　　　　field='hello';<br>
+						　　}<br>
+						　　void hello(){<br>
+						　　　　method();<br>
+						　　}<br>
+						}<br>
+						<br>
+						Sub sub=new Sub();<br>
+						sub.hello();<br>
+					</code>
+					<br>
+					雖然 ECMAScript 6 已支援 extends 語法，可以讓 JavaScript 的程式寫得更像 Java，但它基於「建構函式（constructor function）」，而不是「物件語句（object literal）」，前者必須 new 出物件才能使用，後者直接就是物件。因此 Object.create() 還是有其存在價值，它搭配 object literal 的話，可以表現基於原型的程式設計風格（prototype based programming），extends 只能用來表現物件導向程式設計風格（object oriented programming）。
+				</p>
+			</section>
+			<section>
+				<h4>就是 prototype 的用法</h4>
+				<p>
+					由於 Object.create() 是基於 prototype，也就是物件繼承，不是類別繼承，因此要仿子類別繼承父類別，而用「建構函式」的話，需傳入 prototype：<br>
+					<br>
+					<textarea  class='brush:js'>
+						//父類別
+						function Parent(){}
+						Parent.prototype.method=function(){
+							document.write('Hello!');
+						};
+
+						//仿子類別繼承父類別
+						function Sub(){}
+						Sub.prototype=Object.create(Parent.prototype);
+
+						var sub=new Sub();
+						sub.method();
+	                </textarea>
+					<br>
+					看起來很彆扭，因為基於 prototype 的繼承，這樣寫也做得到：<br>
+					<br>
+					<textarea class='brush:js'>
+						Sub.prototype=Parent.prototype;
+	                </textarea>
+					<br>
+					只是這種寫法不完美，它並未真正繼承到屬性，所以用 Object.create()，它會臨時建立一個真正的物件，用真正的物件進行原型繼承，然後傳回，這樣就可以更完美繼承～<br>
+					<br>
+					無論如何，基於 prototype 的 Object.create()，還是應該用在物件才恰當：<br>
+					<br>
+					<textarea  class='brush:js'>
+						//父類別
+						function Parent(){}
+						Parent.prototype.method=function(){
+							document.write('Hello!');
+						};
+						var parent=new Parent();
+
+						//子物件繼承父物件
+						var sub=Object.create(parent);
+						sub.method();
+	                </textarea>
+					<br>
+					仿類別繼承的彆扭寫法，在 ECMAScript 6 推出新語法 <code>class</code> 和 <code>extends</code> 漂亮解決，不建議再寫彆扭的程式，請把 Object.create() 用在物件層次的繼承，不要用在仿類別層次的繼承。<br>
+					<br>
+					<code>var A={};</code> 這種「物件語句」寫法，直接就是一個物件出來，就跟 <code>var B=[];</code> 直接就是一個陣列出來一樣，所以盡量將 Object.create() 用在這上面，發揮 prototype 從物件層次上繼承的精神！
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>Function.bind()</h3>
+			<p>
+				bind() 會傳回一個函式物件，讓你將東西繫結到物件上，效果接近 new 一個物件，但比 new 厲害的是可以選擇作用域，而非只能用 this 做為函式物件的作用域：<br>
+				<br>
+				<textarea class='brush:js'>
+					var M=function(x){
+						var a=x;
+						return x;
+					};
+
+					var m1=M.bind(null,'hello');
+					var m2=M.bind(null,'bye');
+					document.write(m1());
+					document.write(m2());
+                </textarea>
+				<br>
+				<output>
+					hello<br>
+					bye
+				</output>
+				<br>
+				通常為了 new 一個物件，必須讓 JavaScript 的函式偽裝得像 Java 一樣有 field 有 method，但 JavaScript 的函式物件不見得要以這樣架構來執行。於是有人將 ECMAScript 5 新增的 bind() 來重新詮釋 JavaScript 該有的特質！
+			</p>
+		</section>
+	</section>
+	<hr id='anchor20'>
+	<section>
+		<h2>Object.getPrototypeOf()</h2>
+		<p>
+			Object.getPrototypeOf() 傳回物件的 prototype。
+		</p>
+	</section>
+	<hr id='anchor21'>
+	<section>
+		<h2>Literal</h2>
+		<p>
+			<code>new Array()</code> 可寫成 <code>[]</code><br>
+			<code>new Object()</code> 可寫成 <code>{}</code><br>
+			<code>new String('')</code> 可寫成 <code>''</code><br>
+			<code>new Number()</code> 可寫成 <code>()</code><br>
+			<code>function(){}</code> 可寫成 <code>(function(){})</code><br>
+			<br>
+			對於純物件導向來說，資料直接就是物件！因此：<br>
+			<br>
+			<textarea class='brush:js'>
+			    [1,9,8,0].sort().forEach(console.log);
+            </textarea>
+			<br>
+			像這樣直接使用 literal 對資料物件本身操作功能，程式寫起來會非常爽快！我個人將 literal 稱為符文，像畫符咒施展法術一樣神奇 (●'◡'●)<br>
+			<br>
+			其中 function(){} 在 ECMAScript 6 有新語法，請參考《<a href='#anchor31'>箭頭函式</a>》。
+		</p>
+	</section>
+	<hr id='anchor22'>
+	<section>
+		<h2>a=true && f()</h2>
+		<p>
+			由於 JavaScript 鼓勵使用 literal syntax，因此有時候連這樣的程式結構：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a=true;
+
+				var f=function(){
+					document.write('hello');
+				};
+
+				if(a){
+					f();
+				}
+            </textarea>
+			<br>
+			<output>
+				hello
+			</output>
+			<br>
+			也會被這樣來寫：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a=true;
+
+				var f=function(){
+					document.write('hello');
+				};
+
+				a && f();
+            </textarea>
+			<br>
+			<output>
+				hello
+			</output>
+			<br>
+			無論你接不接受這種寫作風格，你至少要知道這樣的程式會正常動作。
+		</p>
+	</section>
+	<hr id='anchor23'>
+	<section>
+		<h2>NaN != NaN</h2>
+		<p>
+			兩個值為 NaN 的 reference（變數名稱）或 instance（實體）無論怎麼比較，結果都是 false，甚至拿自己跟自己相比也是 false，因此要判斷是否為 NaN 時，通常建議用 isNaN()：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a=NaN;
+				var b=NaN;
+
+				document.write(a==b);
+				document.write(a==a);
+				document.write(isNaN(a)&&isNaN(b));
+            </textarea>
+			<br>
+			<output>
+				false<br>
+				false<br>
+				true
+			</output>
+			<br>
+			但這個世間就是會出天才，乾脆利用 NaN 時，自己跟自己比居然是 false 的情況，改用 != 來判斷一個變數是否為 NaN：<br>
+			<br>
+			<textarea class='brush:js'>
+				var a=NaN;
+
+				document.write(a!=a);
+            </textarea>
+			<br>
+			<output>
+				true
+			</output>
+			<br>
+			正常情況下，自己怎麼可能不等於自己？但如果自己真的不等於自己、a!=a 居然傳回 true 時，那就是 NaN。<br>
+			<br>
+			除非前後文交代得很清楚，例如 <code>if(a!=a) alert('NaN');</code>，否則很少人會願意讀到這樣的程式。但你還是得知道為什麼會這樣寫，因為在 JavaScript 就是有少數人偏好這種符文式寫作風格，明明沒有語意，卻覺得程式碼看起來比較一致性、比較整齊～<br>
+			<br>
+			不過，也有人是因為 isNaN() 並不可靠，所以才改用 NaN!=NaN。但那根本是自己的設計有問題，與其改用 NaN!=NaN 才能正常，還不如思考為什麼自己的設計跑 isNaN() 會不正常。的確 NaN!=NaN 是很棒的做法，也不會出問題，但留著不正常的設計不改，然後為 NaN!=NaN 沾沾自喜，很容易到後來還是搞砸了整個設計～
+		</p>
+	</section>
+	<hr id='anchor24'>
+	<section>
+		<h2>for.. in.. 不是強化迴圈</h2>
+		<p>
+			for.. in.. 其實是「for 迴圈」＋「in 迭代器」，跟 Java 的「強化迴圈（Enhanced for loop）」並不全然是一樣的設計！<br>
+			<br>
+			<textarea class='brush:js'>
+				var array=[1,9,8,0];
+
+				for(var n in array) document.write(n);
+            </textarea>
+			<br>
+			<output>
+				0 1 2 3
+			</output>
+			<br>
+			從上面的例子可以看到，<code>in araay</code> 傳給 <code>var n</code> 的是索引值。因此要逐元素存取陣列的值時：<br>
+			<br>
+			<textarea class='brush:js'>
+				var array=[1,9,8,0];
+
+				for(var n in array) document.write(array[n]);
+            </textarea>
+			<br>
+			<output>
+				1 9 8 0
+			</output>
+			<br>
+			這很明顯與 Java 的強化迴圈傳回情況不一樣。
+		</p>
+		<hr>
+		<section>
+			<h3>in 迭代器</h3>
+			<p>
+				有些人不知道 in 其實是語法指令（operator），可以單獨使用：<br>
+				<br>
+				<textarea class='brush:js'>
+					var array=[1,9,8,0];
+
+					document.write(0 in array);
+					document.write(3 in array);
+					document.write(4 in array);
+                </textarea>
+				<br>
+				<output>
+					true true false
+				</output>
+				<br>
+				0 和 3 因為都在 array 索引範圍內，所以「資料成立」傳回 true。4 因為 array[4] 的話是 undefined，所以傳回 false。<br>
+				<br>
+				除了陣列，原型物件也可用 in 迭代器：<br>
+				<br>
+				<textarea class='brush:js'>
+					var object={
+						user:'Twideem Civs',
+						email:'twideem@outlook.com'
+					};
+
+					document.write('user' in object);
+					document.write('email' in object);
+					document.write('connections' in object);
+                </textarea>
+				<br>
+				<output>
+					true true false
+				</output>
+				<br>
+				別緊張，其實原理很簡單：object.['user'] 與 object.['email'] 傳回 true，object.['connections'] 的話 undefined 所以傳回 false。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor25'>
+	<section>
+		<h2>函數式 API</h2>
+		<hr>
+		<section>
+			<h3>Array.prototype.forEach()</h3>
+			<p>
+				過去我們很常使用 for 迴圈來巡查陣列的內容：<br>
+				<br>
+				<textarea class='brush:js'>
+					//假設有個陣列。
+					var a=['t','w','i','d','e','e','m'];
+
+					//逐一取出陣列的值，轉為大寫字母然後輸出。
+					for(var n=0; n&lt;a.length; n++) document.write(a[n].toUpperCase());
+                </textarea>
+				<br>
+				<output>
+					TWIDEEM
+				</output>
+				<br>
+				現在這整個邏輯結構，直接裝在 forEach() 裡面來完成，不用再敲那重複的動作：<br>
+				<br>
+				<textarea class='brush:js'>
+					var a=['t','w','i','d','e','e','m'];
+
+					a.forEach(function(x){
+						document.write(x.toUpperCase());
+					});
+                </textarea>
+				<br>
+				<output>
+					TWIDEEM
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array.prototype.map()</h3>
+			<p>
+				我們也很常拿另一個陣列來保存某個需要經過加工的陣列：<br>
+				<br>
+				<textarea class='brush:js'>
+					//假設有個陣列。
+					var a=['t','w','i','d','e','e','m'];
+
+					//逐一將陣列 a 中的字元轉為大寫，然後儲存到另一個陣列 b 中。
+					var b=[];
+					for(var n=0; n&lt;a.length; n++) b[n]=a[n].toUpperCase();
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					T,W,I,D,E,E,M
+				</output>
+				<br>
+				現在可以這樣寫：<br>
+				<br>
+				<textarea class='brush:js'>
+					var a=['t','w','i','d','e','e','m'];
+
+					var b=[];
+					b=a.map(function(x){
+						return x.toUpperCase();
+					});
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					T,W,I,D,E,E,M
+				</output>
+				<br>
+				跟 forEach() 一樣，只是會傳回一個陣列，讓你映射到另一個陣列中。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array.prototype.filter()</h3>
+			<p>
+				過濾某個陣列的資料，擷取到另一個陣列，也是相當常做的事：<br>
+				<br>
+				<textarea class='brush:js'>
+					//假設有個陣列
+					var a=[3,1,4,1,5,9,2,6,5,3];
+
+					//我們想擷取小於 5 的部分做為新的陣列
+					var b=[];
+					for(var n=0; n&lt;a.length; n++){
+						if(a[n]&lt;5){
+							b.push(a[n]);
+						}
+					}
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					3,1,4,1,2,3
+				</output>
+				<br>
+				現在可以這樣寫：<br>
+				<br>
+				<textarea class='brush:js'>
+					var a=[3,1,4,1,5,9,2,6,5,3];
+
+					var b=[];
+					b=a.filter(function(x){
+						return x&lt;5;
+					});
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					3,1,4,1,2,3
+				</output>
+				<br>
+				跟 map() 很像，但不是加工後逐一對照到另一個陣列，而是過濾後擷取部分到另一個陣列。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array.prototype.some() 與 Array.prototype.every() 的妙用</h3>
+			<p>
+				如果你想用條件式檢查陣列中是否有符合的資料，有的話傳回 true 而不用再繼續下去，可用 some() 省略親手用 if 來判斷的工作：<br>
+				<br>
+				<textarea class='brush:js'>
+					//假設有個陣列。
+					var a=[3,1,4,1,5,9,2,6,5,3];
+
+					//檢查看看裡面是否有大於等於 5 的資料。
+					var b=a.some(function(x){
+						return x&gt;=5;
+					});
+
+					//輸出結果看看。
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					true
+				</output>
+				<br>
+				相反的，可用是否全部符合的 every()，來達到改傳回 false 的工作：<br>
+				<br>
+				<textarea class='brush:js'>
+					var a=[3,1,4,1,5,9,2,6,5,3];
+
+					var b=a.every(function(x){
+						return x&gt;=5;
+					});
+
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					false
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Array.prototype.reduce()</h3>
+			<p>
+				這個難了點，你可能要多研究個幾次才能搞懂，所以第一次看得霧煞煞的話，請不要氣餒～<br>
+				<br>
+				透過回呼函式來使用陣列，雖然是比較進階的做法，但其實還蠻實用的，因此 ECMAScript 將這樣的演算法抽象成 reduce() 函式來使用。<br>
+				<br>
+				怎麼用呢？首先來看 reduce() 接受的參數：<br>
+				<br>
+				<code>reduce(回呼函式格式,初始值)</code><br>
+				<br>
+				接著，我們要像 Java 程式語言實作 interface 一樣，為 reduce() 的「回呼函式格式」設計如下參數格式的函式物件：<br>
+				<br>
+				<code>function(previousValue,currentValue,index,array){};</code><br>
+				<br>
+				previousValue 參數用來代表前一次呼叫的結果。<br>
+				currentValue 參數用來代表這次呼叫時所得到的值。<br>
+				index 參數用來代表陣列的索引值。<br>
+				array 參數用來代表陣列。<br>
+				<br>
+				有了這些語法概念，實際運作的情況，讓我們用範例來了解：<br>
+				<br>
+				<textarea class='brush:js'>
+					//製作一個準備用在 reduce() 的回呼函式
+					var callback=function(previousValue,currentValue,index,array){
+						currentValue=previousValue+array[index];  //當前值=上次結果+第索引值的陣列
+						document.write(currentValue);  //輸出當前值
+						return currentValue;  //傳回當前值
+					};
+
+					//在陣列執行上面所設計的函式
+					[1,2,3].reduce(callback,5);
+                </textarea>
+				<br>
+				程式執行結果如下：<br>
+				<br>
+				<output>
+					6<br>
+					8<br>
+					11
+				</output>
+				<br>
+				如果怎麼看就是搞不懂範例結果怎麼來的，<a href='appendix.html#19690406A'>請點我參考進一步說明</a>。<br>
+				<br>
+				透過上面範例了解 reduce()，以後看到類似下面的程式，就知道其實只是拿陣列的資料進行回呼函式來做數學計算而已：<br>
+				<br>
+				<textarea class='brush:js'>
+					var sum=[1,2,3].reduce(function(previousValue,currentValue,index,array){
+						return currentValue=previousValue+array[index];
+					},5);
+
+					document.write(sum);
+                </textarea>
+				<br>
+				<output>
+					11
+				</output>
+				<br>
+				雖然了解 reduce() 運作原理後，其實整個語法很簡單，但不了解的人看到會覺得很困難。因此建議使用 reduce() 時，務必秉持一顆同理心，再三規劃整個函式內部算式的可讀性，盡量讓即使看不懂函式外部語法的人，也能從函式內部傳回值的算式，大致知道這函式在做什麼。<br>
+				<br>
+				其他 ECMAScript 5 功能，如果我們用了，對方卻看不懂，確實可以諷刺他不夠努力，請他多學點！但 reduce() 真要活用起來，不注意命名慣例與編排風格的話，樣子真的很嚇人～
+			</p>
+		</section>
+	</section>
+	<hr id='anchor26'>
+	<section>
+		<h2>區域變數</h2>
+		<p>
+			<textarea class='brush:js'>
+				{
+					let a='AAA';
+				}
+
+				document.write(a);
+            </textarea>
+			<br>
+			<output>
+				Uncaught ReferenceError: a is not defined
+			</output>
+			<br>
+			用 <code>var</code> 宣告的變數，是沒有區域性的，明明把變數宣告在 <code>{}</code> 裡面，卻能在 <code>{}</code> 外面存取到資料。想要宣告區域變數，只能建立一個函式，把變數宣告在裡面。<br>
+			<br>
+			現在有了 <code>let</code>，JavaScript 會檢查變數的生存範疇，而且不像 var 有容錯機制，let 會像靜態程式語言發出錯誤訊息。
+		</p>
+	</section>
+	<hr id='anchor27'>
+	<section>
+		<h2>常數</h2>
+		<p>
+			ECMAScript 6 正式將 <code>const</code> 列為標準語法。<br>
+			<br>
+			const 只適用於單純的變數，無法用在 object literal 裡面的變數，因為這屬於物件的屬性（object attribute），JavaScript 的態度是不需保護（not protected）。
+		</p>
+	</section>
+	<hr id='anchor28'>
+	<section>
+		<h2>Symbol</h2>
+		<p>
+			ECMAScript 6 新增了第六種資料型態，叫做 Symbol，用來建立獨一無二的關鍵值，就像 true 或 false 那樣的值，能做為程式設計時的關鍵字。當我們想嚴謹地撰寫程式碼時，這會是非常關鍵的語法功能！<br>
+			<br>
+			<code>let 識別字=Symbol('關鍵值');</code><br>
+			<br>
+			這議題需要從頭打好根基，不該三言兩語打發過去，所以請參考 MDN 詳盡的示範教學吧：<br>
+			<br>
+			<a href='http://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol/'>http://developer.mozilla.org/.../Reference/Symbol/</a><br>
+			<a href='http://developer.mozilla.org/zh-CN/docs/Glossary/Symbol'>http://developer.mozilla.org/.../Glossary/Symbol/</a>
+		</p>
+	</section>
+	<hr id='anchor29'>
+	<section>
+		<h2>預設參數</h2>
+		<p>
+			<textarea class='brush:js'>
+				function f(x='hello')
+				{
+					document.write(x);
+				}
+
+				f();
+				f('world');
+            </textarea>
+			<br>
+			<output>
+				hello<br>
+				world
+			</output>
+		</p>
+	</section>
+	<hr id='anchor30'>
+	<section>
+		<h2>不定參數</h2>
+		<p>
+			<textarea class='brush:js'>
+				function f(...rest)
+				{
+					let a=0;
+
+					for(let n of rest) a+=n;
+
+					return a;
+				}
+
+				document.write(f(1,2,3));
+				document.write(f(4,5));
+            </textarea>
+			<br>
+			<output>
+				6<br>
+				9
+			</output>
+		</p>
+	</section>
+	<hr id='anchor31'>
+	<section>
+		<h2>箭頭函式</h2>
+		<p>
+			引進 =&gt; 是為了 lambda 運算式，而不是當作 function() 的新寫法！<br>
+			<br>
+			兩者有許多不一樣的地方，像是 ()=&gt;{} 沒有自己的 this 和 arguments，而是傳入呼叫方的來用，也不能做為建構函式。<br>
+			<br>
+			所以，雖然 let M.f=()=&gt;{}; 的寫法可以代替 let M.f=function(){};，但執行上略有差異，不建議將舊程式的 funciton() 改成 ()=&gt;，以免出現相容性問題。<br>
+			<br>
+			新寫的程式碼全面改用 =&gt; 倒是沒問題。
+		</p>
+		<hr>
+		<section>
+			<h3>匿名函式</h3>
+			<p>
+				<textarea class='brush:js'>
+					((x,y)=&gt;{
+						document.write(x+y);
+					})(111,222);
+                </textarea>
+				<br>
+				<output>
+					333
+				</output>
+				<br>
+				相當於：<br>
+				<br>
+				<code>
+					(function(x,y){<br>
+					　　document.write(x+y);<br>
+					})(111,222);
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>立即函式</h3>
+			<p>
+				<textarea class='brush:js'>
+					(()=&gt;{
+						document.write('hello');
+					})();
+                </textarea>
+				<br>
+				<output>
+					hello
+				</output>
+				<br>
+				套用匿名函式的語法，做為簡化立即函式的寫法。
+			</p>
+		</section>
+	</section>
+	<hr id='anchor32'>
+	<section>
+		<h2>更簡潔的 object literal method 寫法</h2>
+		<p>
+			<textarea class='brush:js'>
+				let A={
+					f(){
+						document.write('hello');
+					}
+				};
+
+				A.f();
+            </textarea>
+			<br>
+			<output>
+				hello
+			</output>
+		</p>
+	</section>
+	<hr id='anchor33'>
+	<section>
+		<h2>Generator</h2>
+		<p>
+			傳統函式只能傳回一次資料，而 Generator 可以不斷送出資料。ECMAScript 6 使用 <code>function*</code> 語法表示 Generator，並使用 <code>yield</code> 送出資料，而不是 <code>return</code>。<br>
+			<br>
+			除此之外，傳統函式傳回值的型態就是 return 傳回資料的型態，而以 yield 送出的資料，則會放在一種串列資料結構裡面，這種資料結構稱為 generator，可以使用 for.. of.. 迭代。<br>
+			<br>
+			<textarea class='brush:js'>
+				function* f()
+				{
+					yield 'A';
+					yield 'AA';
+					yield 'AAA';
+				}
+
+				for(let n of f()) document.write(n);
+            </textarea>
+			<br>
+			<output>
+				A<br>
+				AA<br>
+				AAA
+			</output>
+		</p>
+	</section>
+	<hr id='anchor34'>
+	<section>
+		<h2>Iterator</h2>
+		<p>
+			ECMAScript 6 引進 object iteral express 機制，讓物件可以使用 for.. of.. 列舉屬性。為此增加了新的資料型態，叫做 Iterator 介面，以辨識那些物件可以列舉（iterable）。<br>
+			<br>
+			通常我們不會自己實作 Iterator 介面，而是使用 JavaScript 為我們準備好的 API 來享受迭代物件的好處，像是 Set 和 Map。所以你只要知道，現在多了 Iterator 資料型態，遇到需要傳入 Iterator 介面的物件為參數時會用到。<br>
+			<br>
+			可以做為 Iterator 的物件，呼叫 toString() 會顯示 [object xxx Iterator]。
+		</p>
+	</section>
+	<hr id='anchor35'>
+	<section>
+		<h2>for.. of.. 強化迴圈</h2>
+		<p>
+			<textarea class='brush:js'>
+				let a=['A','AA','AAA'];
+
+				for(let n of a) document.write(n);
+            </textarea>
+			<br>
+			<output>
+				A<br>
+				AA<br>
+				AAA
+			</output>
+			<br>
+			過去用 for in 迴圈的話，取得的是索引值 0、1、2，for of 迴圈可以取得鍵值。<br>
+			<br>
+			需要說明的是，鍵值不全然等於資料。以上面範例取得的 AAA 資料來說明，其實取得的資料是 <code>AAA:'AAA'</code> 這種「鍵值對（key-vluae pair）」型式，而且取得的是前面的 key 值（AAA），並不是後面的 value 資料（'AAA'）。只是若由 JavaScript 自動產生鍵值對格式的資料時，key 的名稱和 value 一樣而已。
+		</p>
+	</section>
+	<hr id='anchor36'>
+	<section>
+		<h2>類別</h2>
+		<p>
+			<textarea class='brush:js'>
+				class A
+				{
+					constructor(x,y)
+					{
+						this.h=x;
+						this.w=y;
+					}
+
+					f()
+					{
+						document.write(this.h*this.w);
+					}
+				}
+            </textarea>
+			<br>
+			相當於：<br>
+			<br>
+			<code>
+				function A(x,y)<br>
+				{<br>
+				　this.h=x;<br>
+				　this.w=y;<br>
+				　A.prototype.f=function(){<br>
+				　　document.write(this.h*this.w);<br>
+				　};<br>
+				}<br>
+			</code>
+			<br>
+			使用 <code>class</code> 描述的類別，如果沒有使用 <code>new</code> 來產生物件，會發出錯誤，解決過去直接覆寫函式的瑕疵。
+		</p>
+	</section>
+	<hr id='anchor37'>
+	<section>
+		<h2>繼承</h2>
+		<p>
+			<textarea class='brush:js'>
+				class B extends A
+				{
+					//程式碼寫在這裡
+				}
+            </textarea>
+		</p>
+	</section>
+	<hr id='anchor38'>
+	<section>
+		<h2>靜態方法</h2>
+		<p>
+			<textarea class='brush:js'>
+				class A
+				{
+					static f()
+					{
+						document.write('AAA');
+					}
+				}
+            </textarea>
+			<br>
+			不用 new 也能呼叫 A.f()。
+		</p>
+	</section>
+	<hr id='anchor39'>
+	<section>
+		<h2>解構賦值</h2>
+		<hr>
+		<section>
+			<h3>基本用法</h3>
+			<p>
+				<textarea class='brush:js'>
+					let [a,b,c]=['AAA','BBB','CCC'];
+
+					document.write(a);
+					document.write(b);
+					document.write(c);
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+				<br>
+				相當於：<br>
+				<br>
+				<code>
+					let a,b,c;<br>
+					a='AAA';<br>
+					b='BBB';<br>
+					c='CCC';
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>帶預設值</h3>
+			<p>
+				<textarea class='brush:js'>
+					let [a,b='BBB']=['AAA'];
+
+					document.write(a);
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB
+				</output>
+				<br>
+				相當於：<br>
+				<br>
+				<code>
+					let a,b='BBB';<br>
+					a='AAA';
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>跳過幾個值</h3>
+			<p>
+				<textarea class='brush:js'>
+					let [a,,c]=['AAA','BBB','CCC'];
+
+					document.write(a);
+					document.write(c);
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>整個放入迭代器</h3>
+			<p>
+				<textarea class='brush:js'>
+					let [...a]=['AAA','BBB','CCC','DDD','EEE'];
+
+					for(let n of a) document.write(n);
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC<br>
+					DDD<br>
+					EEE
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用於字串</h3>
+			<p>
+				<textarea class='brush:js'>
+					let [a,b,c]='def';
+
+					document.write(a);
+					document.write(b);
+					document.write(c);
+                </textarea>
+				<br>
+				<output>
+					d<br>
+					e<br>
+					f
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>用於鍵值對</h3>
+			<p>
+				<textarea class='brush:js'>
+					let {a,b,c}={a:'AAA',b:'BBB',c:'CCC'};
+
+					document.write(a);
+                </textarea>
+				<br>
+				<output>
+					AAA
+				</output>
+				<br>
+				<code>[]</code> 符號是照索引順序指定資料，<code>{}</code> 符號是根據鍵值指定資料。<br>
+				<br>
+				因此上面的範例，其實可以寫成這樣：<br>
+				<br>
+				<textarea class='brush:js'>
+					let {a,b,c}={b:'BBB',c:'CCC',a:'AAA'};
+
+					document.write(a);
+                </textarea>
+				<br>
+				只要找得到 key 就能將 value 填進去，順序怎麼排不重要，這提供了我們更全面的資料結構賦值方案！<br>
+				<br>
+				由於 JavaScript 的物件其實就是一種鍵值對的集合，因此也可將這個語法應用在物件身上，哪天藉此發明出更精妙的物件寫法也說不定。（目前則是以這種手法寫出來的物件像鬼畫符一樣根本看不懂是什麼）
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>從函式返回多筆資料</h3>
+			<p>
+				<textarea class='brush:js'>
+					function f()
+					{
+						let a='AAA',b='BBB',c='CCC';
+						return [a,b,c];
+					}
+
+					let [a,b,c]=f();
+
+					document.write(a);
+					document.write(b);
+					document.write(c);
+                </textarea>
+				<br>
+				<output>
+					AAA<br>
+					BBB<br>
+					CCC
+				</output>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>交換資料</h3>
+			<p>
+				<textarea class='brush:js'>
+					let a=111,b=222;
+
+					[a,b]=[b,a];
+
+					document.write(a);
+					document.write(b);
+                </textarea>
+				<br>
+				<output>
+					222<br>
+					111
+				</output>
+			</p>
+		</section>
+	</section>
+	<hr id='anchor40'>
+	<section>
+		<h2>模塊</h2>
+		<p>
+			ECMAScript 的模組系統相當複雜，有多種 export 語法、也有多種 import 語法：<br>
+			<br>
+			<code>
+				export let 變數,變數,…<br>
+				export let 變數=資料,…<br>
+				export function 函式(){}<br>
+				export class 類別{}<br>
+				export { 變數,變數,… }<br>
+				export { 變數 as 別名,… }<br>
+				export const { name1,name2:bar }=o<br>
+				export default 運算式<br>
+				export default function() { … }<br>
+				export default function 函式() { … }<br>
+				export { 功能 as default,… }<br>
+				export*from '模組'<br>
+				export*as 別名 from '模組'<br>
+				export { 功能,功能,… } from '模組'<br>
+				export { 功能 as 別名,… } from '模組'<br>
+				export { default,… } from '模組'<br>
+				<br>
+				import 預設 from '模組'<br>
+				import*as 命名空間 from '模組'<br>
+				import { 功能 } from '模組'<br>
+				import { 功能 as 別名 } from '模組'<br>
+				import { 功能,功能 } from '模組'<br>
+				import { foo,bar } from 'module-name/path/to/specific/un-exported/file'<br>
+				import { 功能,功能 as 別名,… } from '模組'<br>
+				import 預設,{ 功能 [,[…] ] } from '模組'<br>
+				import 預設,*as 命名空間 from '模組'<br>
+				import '模組'<br>
+				var 命名空間=import('模組')<br>
+			</code>
+			<br>
+			模組程式功能會自動啟用 strict mode 規則，並套上更多安全性限制，整個規定相當龜毛，剛接觸模組的人，設計時要勤於測試，不要像寫一般 *.js 那樣，只顧著寫，很少執行程式，否則你會不知道問題出在哪。<br>
+			<br>
+			default 是只有一個 export 的模組，這種模組在 import 時不需要 {} 符號括住功能項目…不是很吸引人的功能。
+		</p>
+	</section>
+	<hr id='anchor41'>
+	<section>
+		<h2>分號</h2>
+		<p>
+			過去 ECMAScript 3 的程式寫法長得像 Java 和 C 語言，因此使用 <code>;</code> 做為程式結尾。到了 ECMAScript 2015 開始長得像 Python，因此不再鼓勵使用 <code>;</code> 表示敘述結束。<br>
+			<br>
+			純粹只是寫法風格的改變，ECMAScript 2015 對於段落的規範還是跟以前一樣：「每一行程式就是一個敘述，可以不用加分號。」所以 () 和 [] 為開頭的程式依然存在沒有分行的問題，這時再把分號加在前面。<br>
+			<br>
+			<textarea class='brush:js'>
+				;(function(){
+					//
+				})()
+            </textarea>
+			<br>
+			寫 JavaScript 該不該用分號結尾，一直是這語言爭論最兇的話題。對此 Brendan Eich 曾在 2012 年發文《<a href='http://brendaneich.com/2012/04/the-infernal-semicolon/'>The infernal semicolon</a>》說：<br>
+			<br>
+			<q>ASI is (formally speaking) a syntactic error correction procedure. If you start to code as if it were a universal significant-newline rule,you will get into trouble.</q><br>
+			<br>
+			當初不加分號的設計，只是一種容錯機制，並不是語法規則。因此要加分號才對，不加的話要「容錯」啊！<br>
+			<br>
+			<q>...be careful not to use ASI as if it gave JS significant newlines.</q><br>
+			<br>
+			更明確表示不要使用自動分號插入！<br>
+			<br>
+			無論使不使用分號，都要尊重別人的技術觀點和風格喜好！ECMAScript 是可塑性高的程式語言，各種程式語言的使用者，都能用自己習慣的寫法設計 JavaScript 程式，才是這門語言的基本精神。
+		</p>
+	</section>
+	<hr id='ecmascript2016'>
+	<section>
+		<h2>指數運算子</h2>
+		<p>
+			<textarea class='brush:js'>
+				document.write(2**3);
+            </textarea>
+			<br>
+			<output>
+				8
+			</output>
+		</p>
+	</section>
+	<hr id='ecmascript2017'>
+	<section>
+		<h2>async 和 await</h2>
+		<p>
+			async 用來建立 Promise 非同步函式，await 用來在非同步函式中，等候並接收 Promise 的行為和結果。有這兩個語法，我們可以不寫 Promise 和 then() 而做到同樣的事～
+		</p>
+		<hr>
+		<section>
+			<h3>async</h3>
+			<p>
+				以前要製作非同步函式，得自己在函式裡面 return 一個 Promise 物件出來：<br>
+				<br>
+				<textarea class='brush:js'>
+					function f()
+					{
+						return Promise.resolve("Hello");
+					}
+
+					f().then(x=&gt;document.write(x));
+                </textarea>
+				<br>
+				<output>
+					Hello!<br>
+				</output>
+				<br>
+				現在可以用 <code>async</code> 宣告一個自己會傳回 Promise 的函式：<br>
+				<br>
+				<textarea class='brush:js'>
+					async function f()
+					{
+						return 'Hello!';
+					}
+
+					f().then(x=&gt;document.write(x));
+                </textarea>
+				<br>
+				然而，async 函式沒辦法把回呼函式轉成 Promise 物件傳回：例如常見的 setTimeout()，這時還是得另外 new 一個 Promise 物件包裝起來傳回！
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>await</h3>
+			<p>
+				在 async function 內部，可以使用 <code>await</code> 等候並接收另一個 async 函式或 Promise 的結果：<br>
+				<br>
+				<textarea class='brush:js'>
+					async function f1(x)
+					{
+						return x;
+					}
+
+					async function f2()
+					{
+						console.log(await f1(111));
+						console.log(await f1(222));
+						console.log(await f1(333));
+					}
+
+					f2();
+                </textarea>
+				<br>
+				<output>
+					111<br>
+					222<br>
+					333<br>
+				</output>
+				<br>
+				上面的 f2() 相當於：<br>
+				<br>
+				<textarea class='brush:js'>
+					function f2()
+					{
+						f1(111).then(console.log);
+						f1(222).then(console.log);
+						f1(333).then(console.log);
+					}
+                </textarea>
+			</p>
+		</section>
+	</section>
+	<hr id='ecmascript2018'>
+	<section>
+		<h2>剩餘屬性、其它</h2>
+		<p>
+			物件屬性可用 <code>...</code> 符號表示多個，能在函式參數傳入不定對象屬性的物件。<br>
+			<br>
+			RegExp 支援 <code>?&lt;&gt;</code>（named capture groups），<code>s</code> 匹配參數（dotALL flag），以及 <code>\D</code>（lookbehind assertions） 和 <code>\P</code>（Unicode property escapes）。<br>
+			<br>
+			在 Template literals 使用 <code>\u</code> 和 <code>\x</code> 能正常執行功能，而不是產生執行期錯誤。
+		</p>
+	</section>
+</article>

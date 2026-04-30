@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/editor.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/window.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>用 QuickJS 直譯 JavaScript 程式</h1>
+		<p>
+			創造出 FFmpeg、Tiny C Compiler、QEMU 的大神 Fabrice Bellard，在 2019 年又創造另一個神器了：QuickJS！一款嵌入式 JavaScript 引擎，而且符合 ECMAScript 2020 標準。<br>
+			<br>
+			它小巧（檔案小）、輕快（佔用系統資源低），執行效率卻高得驚人，跑分數一數二！<br>
+			<br>
+			做為可嵌入的 JavaScript 引擎，QuickJS 東西不多，很容易就能完全掌握它的所有程式功能，不失為 JavaScript 程式設計的入行工具<ins>1</ins>。<br>
+			<br>
+			但也因為這樣的關係，QuickJS 無論現在或未來，都不會有豐富的 API 可用。如果你想開發視窗應用程式、網路應用程式、電腦遊戲，那你不用期待 QuickJS 會內建相關 API、也不用找有沒有第三方模組可用，你該搜尋的資料是，怎樣將 QuickJS 嵌入到某某 GUI、WEB、GAME 框架裡面～
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>準備</h2>
+		<hr>
+		<section>
+			<h3>下載 QuickJS</h3>
+			<p>
+				請至 <a href='http://bellard.org/quickjs/binary_releases/'>http://bellard.org/quickjs/binary_releases/</a> 下載最新版！<br>
+				<br>
+				以 Windows 10 64 位元為例，我下載的是 quickjs-win-x86_64-2021-03-27.zip。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>Hello, world!</h3>
+			<p>
+				用記事本寫入如下程式，並儲存檔案為 main.js：<br>
+				<br>
+				<canvas width='569'>notepad('main.js','print(\'Hello, world!\');')</canvas><br>
+				<br>
+				進入命令提示字元，然後用 QuickJS 資料夾裡面的 <code>qjs.exe</code> 執行 main.js，沒問題的話會顯示 Hello, world!：<br>
+				<br>
+				<canvas width='569'>cmd('C:\\Users\\User\\Desktop>C:\\quickjs-win-i686-2021-03-27\\qjs main.js','Hello, world!','','C:\\Users\\User\\Desktop>_')</canvas>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>官方說明書</h3>
+			<p>
+				請連至 <a href='http://bellard.org/quickjs/quickjs.html'>http://bellard.org/quickjs/quickjs.html</a>，裡面說明了 QuickJS 有哪些功能、語法、程式庫。由於所有資料都在一份 HTML 文件，直接另存新檔就能保存在自己電腦隨時查閱。<br>
+				<br>
+				平板電腦或智慧手機想保存一份隨時查閱的話，建議改看 DPF 檔，因為網頁瀏覽器通常不允許開啟本機端的 HTML 檔案：<a href='http://bellard.org/quickjs/quickjs.pdf'>http://bellard.org/quickjs/quickjs.pdf</a>。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>目錄</h2>
+		<p>
+			<a href='#anchor1'>主控台輸出入</a><br>
+			<a href='#anchor2'>命令列參數</a><br>
+			<a href='#anchor3'>讀寫檔案、呼叫外部程式</a><br>
+			<a href='#anchor4'>逐行讀取檔案內容</a><br>
+			<a href='http://openmoji.org' title='點擊滑鼠參訪 OpenMoji 網站'><img src='../../images/overcast/20190711A_01.svg' alt='插圖' width='250' style='float:right;margin:-50px;transform:scaleX(-1)'></a>
+			<a href='#anchor5'>更多 std.open() 所傳回 FILE 物件的操作方法</a><br>
+			<a href='#anchor6'>os 模組的檔案讀寫</a><br>
+			<a href='#anchor7'>取得檔案訊息</a><br>
+			<a href='#anchor8'>載入其他 *.js 程式碼檔案</a><br>
+			<a href='#anchor9'>CGI</a><br>
+			<a href='#anchor10'>其它好用的模組功能</a><br>
+			<a href='#anchor11'>附錄</a>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>範例</h2>
+		<p>
+			QuickJS 符合 ECMAScript 標準，因此支援 ECMAScript 規範的物件，像是 Object、Array、String…之類，請盡量操作這些物件的方法來寫程式。<br>
+			<br>
+			這些資料很豐富，尤其是 Mozilla 寫的聖典《<a href='http://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference'>JavaScript Reference</a>》，只要看這份文件，就能使用所有物件！<br>
+			<br>
+			本文接下來只示範不屬於 ECMAScript 標準的功能…為什麼會需要另外增加標準外的功能？因為 ECMAScript 的 API，完全是以網頁瀏覽器的使用去制訂的，所以沒有主控台輸出入、檔案讀寫、檔案與資料夾增刪…等等與作業系統相關的功能。因此，做為直譯器，QuickJS 就必須彌補 ECMAScript 的不足，自行追加能讓程式設計師與作業系統互動的功能囉～<br>
+			<br>
+			QuickJS 的官方文件只適合資深程式設計師閱讀，新手的話，網路資料不多且雜亂無章，所以本文彙整一些範例，一看就知道該怎麼做，希望能幫助到剛接觸 QuickJS 的人。
+		</p>
+		<hr id='anchor1'>
+		<section>
+			<h3>主控台輸出入</h3>
+			<p>
+				<textarea class='brush:js'>
+					import * as std from 'std';
+
+					//顯示不換行訊息
+					std.puts('Input: ');
+
+					//取得使用者輸入資料
+					print(std.in.getline());
+                </textarea>
+				<br>
+				<output>
+					Input: abc123<br>
+					abc123
+				</output>
+				<br>
+				std.puts() 相當於 std.out.puts()，與 print() 不同之處在於結尾不會自動追加 '\n' 換行字元。
+			</p>
+		</section>
+		<hr id='anchor2'>
+		<section>
+			<h3>命令列參數</h3>
+			<p>
+				<textarea class='brush:js'>
+					print(scriptArgs[1] + scriptArgs[2]);
+                </textarea>
+				<br>
+				<output>
+					qjs main.js ABC 123<br>
+					ABC123
+				</output>
+				<br>
+				scriptArgs[0] 是 main.js。<br>
+				<br>
+				scriptArgs 是 QuickJS 唯一一個全域變數。<ins>2</ins>
+			</p>
+		</section>
+		<hr id='anchor3'>
+		<section>
+			<h3>讀寫檔案、呼叫外部程式</h3>
+			<p>
+				<textarea class='brush:js'>
+					import * as std from 'std';
+
+					//寫入檔案
+					let file = std.open('text.txt', 'w');
+					file.puts('ABC123');
+					file.close();
+
+					//直接讀取檔案文字
+					print(std.loadFile('text.txt'));
+
+					//執行外部程式
+					std.popen('notepad text.txt', 'r');
+                </textarea>
+				<br>
+				<output>
+					ABC123
+				</output>
+				<br>
+				<output class='editor'>
+					ABC123
+				</output>
+			</p>
+		</section>
+		<hr id='anchor4'>
+		<section>
+			<h3>逐行讀取檔案內容</h3>
+			<section>
+				<h4>text.txt</h4>
+				<p>
+					<textarea class='brush:txt'>
+						AAA
+						BBB
+						CCC
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						import * as std from 'std';
+
+						let file = std.open('text.txt', 'r');
+
+						while(!file.eof()){
+							print(file.getline());
+						}
+
+						file.close();
+                    </textarea>
+					<br>
+					<output>
+						AAA<br>
+						BBB<br>
+						CCC
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr id='anchor5'>
+		<section>
+			<h3>更多 std.open() 所傳回 FILE 物件的操作方法</h3>
+			<p>
+				<code>
+					puts(str)<br>
+					printf(fmt, ...args)<br>
+					flush()<br>
+					seek(offset, whence)<br>
+					tell()<br>
+					fileno()<br>
+					read(buffer, position, length)<br>
+					write(buffer, position, length)<br>
+					getByte()<br>
+					putByte(c)
+				</code>
+			</p>
+		</section>
+		<hr id='anchor6'>
+		<section>
+			<h3>os 模組的檔案讀寫</h3>
+			<p>
+				std 模組提供物件導向式的檔案讀寫功能，而 os 模組則提供程序導向式的檔案讀寫：<br>
+				<br>
+				<code>
+					os.open(filename, flags, mode=0o666)<br>
+					os.seek(fd, offset, whence)<br>
+					os.write(fd, buffer, offset, length)<br>
+					os.read(fd, buffer, offset, length)<br>
+					os.close(fd)<br>
+				</code>
+				<br>
+				不過，os.seek() 的位移量，依然是用 std 模組來存取：<br>
+				<br>
+				<code>
+					std.SEEK_SET<br>
+					std.SEEK_CUR<br>
+					std.SEEK_END
+				</code>
+			</p>
+		</section>
+		<hr id='anchor7'>
+		<section>
+			<h3>取得檔案訊息</h3>
+			<p>
+				<code>os.stat(path)</code> 可以取得資料夾或檔案的訊息。<br>
+				<br>
+				然而，這函式傳回的是 [obj, err] 陣列，所以必須先用索引值 0 取得表示訊息的物件，就能透過物件的 <code>dev、ino、mode、nlink、uid、gid、rdev、blocks、atime、mtime、ctime</code> 等屬性取得訊息：<br>
+				<br>
+				<textarea class='brush:js'>
+					import * as os from 'os';
+
+					print(os.stat('text.txt')[0].size);
+                </textarea>
+			</p>
+		</section>
+		<hr id='anchor8'>
+		<section>
+			<h3>載入其他 *.js 程式碼檔案</h3>
+			<section>
+				<h4>extra.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						function f(x, y){
+							print(x + y);
+						}
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>main.js</h4>
+				<p>
+					<textarea class='brush:js'>
+						import * as std from 'std';
+
+						std.loadScript('extra.js');
+
+						f(123, 456);
+                    </textarea>
+					<br>
+					<output>
+						579
+					</output>
+				</p>
+			</section>
+		</section>
+		<hr id='anchor9'>
+		<section>
+			<h3>CGI</h3>
+			<p>
+				自從 ECMAScript 6 引進能多行又能插值的 Backslash 字串，這語言變得很適合寫 CGI！<br>
+				<br>
+				然而，別說 2020 年代了，不可能有人想寫 CGI，即使願意幹這種落伍的事，ECMAScript 一向都是實作在網頁瀏覽器裡，很少有好用的直譯器可以用在 CGI 上。<br>
+				<br>
+				以嵌入到各裝置、各開發環境為訴求的 QuickJS，正好一拍即合！<br>
+				<br>
+				當你臨時需要一個網頁伺服器，而且前端後端都想用 JavaScript 語言時，不妨拿支援 CGI 的 HTTP Server + QuickJS 來應急吧！雖然開發效率不高，難以滿足大型商務網站的需求，但寫寫動態網頁的話，會是令人愉快的組合。
+			</p>
+			<section>
+				<h4>index.html</h4>
+				<p>
+					<textarea class='brush:html'>
+						&lt;form action='test.cgi' method='get'&gt;
+							&lt;input type='text' name='name' value='Twideem'&gt;
+							&lt;input type='text' name='number' value='58'&gt;
+							&lt;input type='submit'&gt;
+						&lt;/form&gt;
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>test.cgi</h4>
+				<p>
+					<textarea class='brush:js'>
+						#!C:\QuickJS\qjs --std
+
+						//輸出標頭時指定使用 HTML 格式顯示這份文件資料
+						print('Content-type: text/html');
+
+						//在伺服端讀寫檔案
+						let file = std.open('save.txt','w');
+						file.puts('Hello, world!');
+						file.close();
+						let text = std.loadFile('save.txt');
+
+						//取得填表資料並以 & 分割為陣列
+						let gets = std.getenv('QUERY_STRING').split('&');
+
+						//輸出 HTML，並透過字串插值將上面的變數填進去。
+						print(`
+						&lt;h1&gt;${text}&lt;/h1&gt;
+						&lt;p&gt;
+							${gets[0].split('=')[1]}&lt;br&gt;
+							${gets[1].split('=')[1]}
+						&lt;/p&gt;`);
+                    </textarea>
+				</p>
+			</section>
+			<section>
+				<h4>Web browser</h4>
+				<p>
+					<canvas>msedge('http://127.0.0.1','../../images/overcast/20190711A_02.png')</canvas><br>
+					<br>
+					<canvas>msedge('http://127.0.0.1/test.cgi?name=Twideem&number=58','../../images/overcast/20190711A_03.png')</canvas>
+				</p>
+			</section>
+			<p>
+				POST 的話，使用 <code>std.in.getline()</code> 取得資料。<br>
+				<br>
+				想把 QuickJS 的資料帶進 HTML 給 JavaScript 使用，只要變通一下，在 HTML 用 script 標籤宣告個變數，賦值為 QuickJS 的資料即可：<br>
+				<br>
+				<code>print(`&lt;script&gt;let save = '${std.loadFile('save.txt')}'&lt;/script&gt;`);</code><br>
+				<br>
+				這樣網頁瀏覽器的 JavaScript 就能透過 save 變數使用 QuickJS 的資料：<br>
+				<br>
+				<code>
+					print(`&lt;script&gt;<br>
+					　if(save == 'Hello, world!'){<br>
+					　　document.write('是在哈囉');<br>
+					　}<br>
+					&lt;/script&gt;`);<br>
+				</code>
+				<br>
+				反過來要把 JavaScript 的資料傳給 QuickJS，也是變通一下，用 location.href 把 JavaScript 的資料放在 URL 的參數，傳給 CGI 的 QuickJS 使用：<br>
+				<br>
+				<code>
+					let data = 'Hello, world!';<br>
+					location.href = `save.cgi?data=${data}`;<br>
+				</code>
+				<br>
+				要查看有哪些環境變數可用的話：<br>
+				<br>
+				<code>for(let n in std.getenviron()) print(n);</code><br>
+				<br>
+				要列出所有環境變數內容的話：<br>
+				<br>
+				<code>for(let n in std.getenviron()) print(`${n} = ${std.getenv(n)}`);</code>
+			</p>
+		</section>
+		<hr id='anchor10'>
+		<section>
+			<h3>其它好用的模組功能</h3>
+			<table>
+				<tr><td style='width:45%'>std.printf(fmt, ...args)</td><td>格式化輸出。</td></tr>
+				<tr><td>std.sprintf(fmt, ...args)</td><td>格式化字串。</td></tr>
+				<tr><td>std.exit()</td><td>結束程式。</td></tr>
+				<tr><td>std.gc()</td><td>記憶體回收。</td></tr>
+				<tr><td>std.in</td><td>對應 C 語言的 stdin 程式庫。</td></tr>
+				<tr><td>std.out</td><td>對應 C 語言的 stdout 程式庫。</td></tr>
+				<tr><td>std.err</td><td>對應 C 語言的 stderr 程式庫。</td></tr>
+				<tr><td>os.sleep(毫秒)</td><td>暫停一段時間。</td></tr>
+				<tr><td>os.remove(filename)</td><td>移除檔案。</td></tr>
+				<tr><td>os.rename(oldname, newname)</td><td>修改檔案名稱。</td></tr>
+				<tr><td>os.mkdir(path, mode=0o777)</td><td>建立資料夾</td></tr>
+				<tr><td>os.chdir(path)</td><td>切換資料夾。</td></tr>
+				<tr><td>os.readdir(path)</td><td>取得資料夾裡面的檔案清單，傳回 [str, err] 陣列。</td></tr>
+				<tr><td>os.utimes(path, atime, mtime)</td><td>修改檔案時間。</td></tr>
+				<tr><td>os.kill(pid, sig)</td><td>刪除行程。</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr id='anchor11'>
+	<section>
+		<h2>附錄</h2>
+		<hr>
+		<section>
+			<h3>qjs 直譯器</h3>
+			<section>
+				<h4>萬用字元</h4>
+				<p>
+					qjs 不接受萬用字元，所以無法用 *.js 一次執行所有程式檔。也無法下多個檔案給 qjs 批次執行，qjs 一次只執行一個程式檔。<br>
+					<br>
+					這並非設計上的短缺，而是刻意這樣設計的！QuickJS 設計的理念是，每發出一次 qjs 就代表一個 process，想執行多個程式檔，就多下一次 qjs。<br>
+					<br>
+					以 qjs 的啟動速度和執行效率，這不但沒有問題，這種做法反而表現出更優異的性能。<br>
+					<br>
+					QuickJS 在 os 模組提供了 qjs 之間相互溝通的功能，請自行參閱官方文件。
+				</p>
+			</section>
+			<section>
+				<h4>e 參數的妙用</h4>
+				<p>
+					不用直譯 *.js 程式檔、也不用進入 interactive mode，qjs 就可以直接跑一段運算式：<br>
+					<br>
+					<output>
+						qjs -e print(12+34-56*78/9) &gt; output.txt
+					</output>
+					<br>
+					<output class='editor'>
+						-439.3333333333333
+					</output>
+					<br>
+					像這樣搭配 DOS 模式的 &gt; 功能，可以讓其它程式語言把 qjs.exe 當指令調用，計算結果透過純文字文件讀取進來。<br>
+					<br>
+					不過只能跑簡單的運算式，並不能跑完整的 JavaScript 程式碼。例如要指派變數保存資料的話，不能用 let 或 var 宣告變數，而是直接寫個變數名稱，用全域物件的屬性來完成。
+				</p>
+			</section>
+			<section>
+				<h4>預設載入 std 和 os 模組</h4>
+				<p>
+					std 打包了 C 語言的 stdlib、stdin、stdout、stderr 基本功能，讓 JavaScript 能進行一些程式設計最主要的工作。<br>
+					<br>
+					os 提供了作業系統相關的功能，像是檔案系統、執行緒和同步、計時器。<br>
+					<br>
+					不想每次寫程式都 improt 這兩個模組的話，可以對 qjs 下 --std 參數：<br>
+					<br>
+					<output>
+						qjs --std main.js
+					</output>
+					<br>
+					注意！參數必須下在程式碼檔名前面。
+				</p>
+			</section>
+		</section>
+		<hr>
+		<section>
+			<h3>JS Bignum Extensions</h3>
+			<p>
+				Fabrice Bellard 藉由 QuickJS 為 JavaScript 導入他先前發明的 Bignum 數值功能，可以解決 ECMAScript 數值超過 999,999,999,999,999 後會自動四捨五入的問題，但依然符合 IEEE 754 標準。<br>
+				<br>
+				官網還特地示範 QuickJS 搭配 Bignum 可以計算圓周率到 10 億位數的能力。<br>
+				<br>
+				因此這功能千萬不要錯過！它能讓 JavaScript 在大數據與科學計算上跟上其他動態語言的腳步：<a href='http://bellard.org/quickjs/jsbignum.html'>http://bellard.org/quickjs/jsbignum.html</a>。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[1] 是入行，不是入門。入行的意思是正式踏入程式設計師的職業生涯。<br>
+			[2] 還有唯二兩個全域函式：print() 和 console.log()。
+		</p>
+	</footer>
+</article>

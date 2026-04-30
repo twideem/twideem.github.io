@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>Web storage</h1>
+		<p>
+			這是 HTML5 希望用來取代操作複雜、而且有安全疑慮的 HTTP cookie 資料儲存功能。<br>
+			<br>
+			Web storage 是內建於 JavaScript 的 API，用 <strong>物件.方法()</strong> 或 <strong>物件.屬性</strong> 的方式就能直接存取資料，不用處理通訊協定表頭的事，操作簡單！<br>
+			<br>
+			在儲存資料時，會以網站徑域做為識別名稱，以獨立的空間來保存資料，其他徑域的網站無法存取，安全性較高。<br>
+			<br>
+			最大的好處是資料容量更大，例如從 HTTP cookie 的 4KB 變成 5MB 可用，且沒有最多 20 筆資料的限制。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>基本用法</h2>
+		<p>
+			只要使用這樣簡單的程式碼：<br>
+			<br>
+			<code>localStorage.setItem('name','Twideem Civs');</code><br>
+			<br>
+			就能把「Twideem Civs」這筆資料，以「name」做為識別名稱，保存在使用者的電腦裝置上。<br>
+			<br>
+			當下次再連進同樣的網頁路徑，就可以透過如下的程式碼讀取資料：<br>
+			<br>
+			<code>localStorage.getItem('name');</code><br>
+			<br>
+			當然，不同網頁路徑的話，無法以這段程式碼讀得正確的資料。<br>
+			<br>
+			如果想清除一筆資料的話：<br>
+			<br>
+			<code>localStorage.removeItem('name');</code><br>
+			<br>
+			也能清空所有這個網頁保存在使用者電腦裝置的資料：<br>
+			<br>
+			<code>localStorage.clear();</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>進階範例</h2>
+		<p>
+			localStorage 在 JavaScript 是以原型物件的方式來使用，因此還可以這麼寫：<br>
+			<br>
+			<code>localStorage.name='Twideem Civs';</code><br>
+			<br>
+			讀取資料也可以這麼方便：<br>
+			<br>
+			<code>localStorage.name;</code><br>
+			<br>
+			差別在於 getItem() 與 setItem() 因為輸入的識別名稱是「字串」，所以可以使用更多字元當作識別名稱。而直接以 . 存取的話，必須遵守變數名稱的命名規則，否則會造成語法無法辨識，明明有這筆資料，卻無法進行讀取。<br>
+			<br>
+			所以也有人喜歡這樣寫：<br>
+			<br>
+			<code>
+				localStorage['name']='Twideem Civs';<br>
+				localStorage['name'];<br>
+			</code>
+			<br>
+			既然使用上述原型物件風格來讀寫資料了，那可能會喜歡以下面兩種方式來刪除一筆資料：<br>
+			<br>
+			<code>
+				delete localStorage.name;<br>
+				delete localStorage['name'];<br>
+			</code>
+			<br>
+			也可能吃飽撐著沒事幹，明明有 localStorage.clear()，卻這樣刪除所有資料：<br>
+			<br>
+			<code>for(n in localStorage) delete localStorage[n];</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>補充</h2>
+		<p>
+			如果資料是暫時性的，只希望在網站執行期間跨頁使用，並不打算真的保存在使用者的電腦裝置上，可以改用 sessionStorage，操作方式與 localStorage 一樣。
+		</p>
+	</section>
+</article>

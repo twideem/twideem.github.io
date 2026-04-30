@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>table td:nth-child(1){width:25%}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<article>
+	<header>
+		<h1>Regular Expressions（正規式）</h1>
+		<p>
+			regular 是「有規則可循的」，將這個規則性找出來，再套用到字串比對有沒有符合規則的資料，就是 regular expression。<br>
+			<br>
+			中文是字面上看不出什麼意思的「正規表示法」「正則表達式」，其實功能就是：「表達某種規律形式的詞句，以比對出符合這種規律形式的資料來用。」
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>語法</h2>
+		<hr>
+		<section>
+			<h3>符號</h3>
+			<table>
+				<tr><td>.</td><td>任意字元，包括空白字元</td></tr>
+				<tr><td>[]</td><td>字元集合</td></tr>
+				<tr><td>-</td><td>用在 [] 裡面表示字元範圍</td></tr>
+				<tr><td>()</td><td>用在 [] 裡面表示字串</td></tr>
+				<tr><td>|</td><td>或</td></tr>
+				<tr><td>^</td><td>以文字開頭，用在 [] 裡面表示否定</td></tr>
+				<tr><td>$</td><td>以文字結尾</td></tr>
+				<tr><td>?</td><td>0 或 1 次</td></tr>
+				<tr><td>*</td><td>0 或多次</td></tr>
+				<tr><td>+</td><td>1 或多次</td></tr>
+				<tr><td>{,}</td><td>幾次</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>跳脫字元</h3>
+			<table>
+				<tr><td>\e</td><td>Escape</td></tr>
+				<tr><td>\n</td><td>New line</td></tr>
+				<tr><td>\r</td><td>Enter</td></tr>
+				<tr><td>\t</td><td>Tab</td></tr>
+				<tr><td>\f</td><td>Form feed</td></tr>
+				<tr><td>\000 到 \777</td><td>以八進位值表示字元</td></tr>
+				<tr><td>\x00 到 \xFF</td><td>以十六進位表示字元</td></tr>
+				<tr><td>\符號</td><td>正規式用到符號</td></tr>
+				<tr><td>\d</td><td>相當於 [0-9]</td></tr>
+				<tr><td>\D</td><td>相當於 [^0-9]</td></tr>
+				<tr><td>\w</td><td>相當於 [0-9a-zA-Z_]</td></tr>
+				<tr><td>\W</td><td>相當於 [^0-9a-zA-Z_]</td></tr>
+				<tr><td>\s</td><td>相當於 [\f\n\r\t]</td></tr>
+				<tr><td>\S</td><td>相當於 [^\f\n\r\t]</td></tr>
+			</table>
+		</section>
+		<hr>
+		<section>
+			<h3>選項</h3>
+			<table>
+				<tr><td>g</td><td>匹配所有資料（不因匹配到資料就停止匹配其它資料）</td></tr>
+				<tr><td>i</td><td>不分大小寫</td></tr>
+				<tr><td>m</td><td>匹配多行資料</td></tr>
+				<tr><td>u</td><td>匹配 Unicode 字元</td></tr>
+			</table>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>實例</h2>
+		<table>
+			<tr><td>ABC</td><td>ABC</td></tr>
+			<tr><td>^ABC</td><td>以 ABC 開頭</td></tr>
+			<tr><td>ABC$</td><td>以 ABC 結尾</td></tr>
+			<tr><td>A.C</td><td>A + 任意一個字元 + C</td></tr>
+			<tr><td>A.*C</td><td>A + 任意多個字元 + C</td></tr>
+			<tr><td>ABC|DEF</td><td>ABC 或 DEF</td></tr>
+		</table>
+		<table>
+			<tr><td>[ABC]</td><td>A 或 B 或 C</td></tr>
+			<tr><td>A[XYZ]C</td><td>AXC AYC AZC</td></tr>
+			<tr><td>A[X-Z]C</td><td>AXC AYC AZC</td></tr>
+			<tr><td>A[^XYZ]C</td><td>A + XYZ 以外的字元 + C</td></tr>
+			<tr><td>[(ABC)]</td><td>ABC</td></tr>
+			<tr><td>[\u4e00-\u9fa5]</td><td>中文漢字，搜尋範圍是「一」到「龥」</td></tr>
+		</table>
+		<table>
+			<tr><td>A{3}</td><td>AAA</td></tr>
+			<tr><td>A{2,4}</td><td>AA AAA AAAA</td></tr>
+			<tr><td>A{2,}</td><td>最少兩個 A</td></tr>
+			<tr><td>A{,4}</td><td>最多四個 A</td></tr>
+			<tr><td>AB{3}C</td><td>ABBBC</td></tr>
+			<tr><td>A.{3}C</td><td>A + 任意三個字元 + C</td></tr>
+			<tr><td>A[XYZ]{3}C</td><td>A + 任意三個 X 或 Y 或 Z + C</td></tr>
+		</table>
+		<table>
+			<tr><td>AB?C</td><td>AC 或 ABC</td></tr>
+			<tr><td>AB+C</td><td>A + 多個 B + C</td></tr>
+			<tr><td>AB*C</td><td>AC 或 A + 多個 B + C</td></tr>
+		</table>
+	</section>
+</article>

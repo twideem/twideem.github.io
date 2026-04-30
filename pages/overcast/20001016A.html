@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<link href='../../styles/grid.css' rel='stylesheet'>
+<style>table td:nth-child(1){width:20%}</style>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>Swing 元件速用表</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>JComponent（通用元件）</h2>
+		<p>
+			JComponent 是 Swing 圖型元件共同繼承的元件，使每個元件有共通的操作方式，因此放在前面最先參考。
+		</p>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>add(<span title='java . awt . Component'>Component</span>)</span><br>加入元件。</td></tr>
+			<tr><td>float</td><td><span style='color:#396'>getAlignmentX()</span><br>取得水平方向的對齊方式，0.0 為左，0.5 為中，1.0 為右。</td></tr>
+			<tr><td>float</td><td><span style='color:#396'>getAlignmentY()</span><br>取得垂直方向的對齊方式，0.0 為上，0.5 為中，1.0 為下。</td></tr>
+			<tr><td><span title='java . awt . Component'>Component</span></td><td><span style='color:#396'> getComponentAt(int x, int y)</span><br>檢查座標位置使否有元件，有的話傳回該元件。</td></tr>
+			<tr><td><span title='java . awt . Component'>Component</span></td><td><span style='color:#396'> getComponentAt(<span title='java . awt . Point'>Point</span>)</span><br>檢查座標位置使否有元件，有的話傳回該元件。</td></tr>
+			<tr><td><span title='java . awt . Graphics'>Graphics</span></td><td><span style='color:#396'> getComponentGraphics(<span title='java . awt . Graphics'>Graphics</span>)</span><br>將元件的外貌以圖形傳回。</td></tr>
+			<tr><td><span title='java . util . Locale'>Locale</span></td><td><span style='color:#396'>getDefaultLocale()</span><br>取得時區語系。</td></tr>
+			<tr><td><span title='java . awt . Graphics'>Graphics</span></td><td><span style='color:#396'> getGraphics()</span><br>取得繪圖區間。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getHeight()</span><br>取得高度。</td></tr>
+			<tr><td><span title='java . awt . Point'>Point</span></td><td><span style='color:#396'>getLocation(<span title='java . awt . Point'>Point</span>)</span><br>取得左上角座標位置。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getName()</span><br>取得名稱。</td></tr>
+			<tr><td><span title='javax . swing . JRootPane'>JRootPane</span></td><td><span style='color:#396'>getRootPane()</span><br>傳回 JRootPane。</td></tr>
+			<tr><td><span title='java . awt . Dimension'>Dimension</span></td><td><span style='color:#396'>getSize()</span><br>取得目前尺寸。</td></tr>
+			<tr><td><span title='java . awt . Rectangle'>Rectangle</span></td><td><span style='color:#396'>getVisibleRect()</span><br>取得可見的矩形範圍。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getWidth()</span><br>取得寬度。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getX()</span><br>取得水平座標位置。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getY()</span><br>取得垂直座標位置。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>invalidate()</span><br>使元件無效。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isDisplayable()</span><br>元件是否為可見的；有些元件看不到，例如計時器。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isEnabled()</span><br>元件是否已經啟用。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isShowing()</span><br>元件是否已經顯示。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isValid()</span><br>元件是否有效。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>paint(<span title='java . awt . Graphics'>Graphics</span>)</span><br>繪圖區間繪製。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>remove(<span title='java.awt.Component'>Component</span>)</span><br>移除所指定元件。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>removeAll()</span><br>移除所有加入的元件。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>removeNotify()</span><br>銷毀元件。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>repaint()</span><br>重新繪製。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>requestFocus()</span><br>請求獲得駐點。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>revalidate()</span><br>使元件重新生效；相當於先 invalidate() 再 validate()。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setAlignmentX(float)</span><br>設定水平方向的對齊方式，0.0 為左，0.5 為中，1.0 為右。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setAlignmentY(float)</span><br>設定垂直方向的對齊方式，0.0 為上，0.5 為中，1.0 為下。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setBackground(<span title='java . awt . Color'>Color</span>)</span><br>設定背景顏色。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setBounds(int x, int y, int w, int h)</span><br>設定尺寸與位置。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setBorder(<span title='javax . swing . border . Border'>Border</span>)</span><br>設定邊框樣式</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setCursor(<span title='java . awt . Cursor'>Cursor</span>)</span><br>設定滑鼠游標。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDefaultLocale(<span title='java . util . Locale'>Locale</span>)</span><br>設定時區語系。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDoubleBuffered(boolean)</span><br>設定雙重緩衝繪圖機制。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setEnabled(boolean)</span><br>設定物件是否啟用。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setFont(<span title='java . awt . Font'>Font</span>)</span><br>設定字型。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setForeground(<span title='java . awt . Color'>Color</span>)</span><br>設定前景顏色。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setLayout(<span title='java . awt . LayoutManager'>LayoutManager</span>)</span><br>設定元件排列模式。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setName(String)</span><br>為元件命名。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setOpaque(boolean)</span><br>設定是否繪製邊界內的像素；設為 false 的話有透明效果。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSize(int w, int h)</span><br>設定長寬尺寸。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setToolTipText(String)</span><br>設定提示文字。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setUI(<span title='javax . swing . plaf . ComponentUI'>ComponentUI</span>)</span><br>設定物件外觀。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVisible(boolean)</span><br>設定物件是顯示或隱藏。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>updateUI()</span><br>更新物件的外觀。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>update(<span title='java . awt . Graphics'>Graphics</span>)</span><br>更新物件的顯示狀態。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>validate()</span><br>使元件生效。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JButton（按鈕）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>setDisabledIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定無作用時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定標籤位置的水平對齊方式：<br>SwingConstants.BOTTOM（往下對齊）<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.TOP（往上對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalTextPosition(int)</span><br>設定文字相對於圖案的水平位置關係。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconTextGap(int)</span><br>設定文字與圖案的間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMargin(<span title='java . awt . Insets'>Insets</span>)</span><br>設定間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setPressedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定按下時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setRolloverIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定滑鼠經過時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容；支援部分 HTML 語法。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalAlignment(int)</span><br>設定標籤位置的垂直對齊方式：<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.LEFT（向左對齊）<br>SwingConstants.RIGHT（向右對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalTextPosition(int)</span><br>設定文字相對於圖案的垂直位置關係。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JCheckBox（核取方塊）</h2>
+		<table class='grid'>
+			<tr><td>boolean</td><td><span style='color:#396'>isSelected()</span><br>是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDisabledIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定無作用時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定標籤位置的水平對齊方式：<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.LEFT（向左對齊）<br>SwingConstants.RIGHT（向右對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalTextPosition(int)</span><br>設定文字相對於圖案的水平位置關係。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconTextGap(int)</span><br>設定文字與圖案的間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMargin(<span title='java . awt . Insets'>Insets</span>)</span><br>設定間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setPressedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定按下時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setRolloverIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定滑鼠經過時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelected(boolean)</span><br>設定是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定被選取時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容；支援部分 HTML 語法。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalAlignment(int)</span><br>設定標籤位置的垂直對齊方式：<br>SwingConstants.BOTTOM（往下對齊）<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.TOP（往上對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalTextPosition(int)</span><br>設定文字相對於圖案的垂直位置關係。</td></tr>
+		</table>
+		<p>
+			通常核取方塊的應用場合，是允許在整群項目中複選多個出來。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JColorChooser（色彩選擇器）</h2>
+		<table class='grid'>
+			<tr><td><span title='java . awt . Color'>Color</span></td><td><span style='color:#396'>showDialog(<span title='java . awt . Component'>Component</span>, String, <span title='java . awt . Color'>Color</span>)</span><br>顯示選擇器。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JComboBox&lt;E&gt;（下拉式清單）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>addItem(E)</span><br>新增項目。</td></tr>
+			<tr><td>E</td><td><span style='color:#396'>getItemAt(int)</span><br>依索引值取得項目。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getItemCount</span><br>取得項目總數</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectedIndex()</span><br>取得被選取項目的索引值。</td></tr>
+			<tr><td>E</td><td><span style='color:#396'>getSelectedItem()</span><br>取得被選取的項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>insertItemAt(E, int)</span><br>插入項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>removeAllItems()</span><br>清除所有項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>removeItem(E)</span><br>移除項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>removiItemAt(int)</span><br>依索引值移除項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setEditable(boolean)</span><br>設定是否能編輯清單中的項目。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JDesktopPane（桌面）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>add(<span title='java . awt . Component'>Component</span>)</span><br>加入 JInternalFrame。</td></tr>
+			<tr><td><span title='javax . swing . JInternalFrame'>JInternalFrame</span>[]</td><td><span style='color:#396'>getAllFrames()</span><br>取得所有視窗。</td></tr>
+			<tr><td><span title='javax . swing . JInternalFrame'>JInternalFrame</span></td><td><span style='color:#396'>getSelectedFrame()</span><br>取得正被使用的視窗。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>remove(int)</span><br>移除第幾個視窗。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setComponentZOrder(<span title='java . awt . Component'>Component</span>, int)</span><br>設定視窗的重疊位置。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedFrame(<span title='javax . swing . JInternalFrame'>JInternalFrame</span>)</span><br>設定哪個視窗獲得駐點。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JEditorPane（圖文編輯器）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>copy()</span><br>複製文字內容到剪貼簿。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>cut()</span><br>剪下文字內容到剪貼簿。</td></tr>
+			<tr><td><span title='javax . swing . text . Document'>Document</span></td><td><span style='color:#396'>getDocument()</span><br>取得文件內容模型，藉以編輯文字。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectionEnd(int)</span><br>取得選取文字的結束位置。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectionStart(int)</span><br>取得選取文字的起點位置。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getSelectedText()</span><br>取得選取中的文字內容。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getText()</span><br>取得文字內容。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isEditable()</span><br>是否可編輯。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>paste()</span><br>從剪貼簿貼上文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>replaceSelection(String)</span><br>取代所選取文字的內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>select(int start, int end)</span><br>選取指定範圍內的文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>selectAll()</span><br>選取全部文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setEditable(boolean)</span><br>設定是否可輸入文字。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定文字對齊方式。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JFileChooser（檔案選擇器）</h2>
+		<table class='grid'>
+			<tr><td><span title='java . io . File'>File</span></td><td><span style='color:#396'>getSelectedFile()</span><br>取得檔案。</td></tr>
+			<tr><td><span title='java . io . File'>File</span>[]</td><td><span style='color:#396'>getSelectedFiles()</span><br>取得多個檔案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setCurrentDirectory(<span title='java . io . File'>File</span>)</span><br>設定預設的資料夾位置。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedFile(<span title='java . io . File'>File</span>)</span><br>設定預設的檔案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMultiSelectionEnabled(boolean)</span><br>設定是否選取多個檔案。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>showOpenDialog(<span title='java . awt . Component'>Component</span>)</span><br>顯示開啟檔案視窗。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>showSaveDialog(<span title='java . awt . Component'>Component</span>)</span><br>顯示儲存檔案視窗。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JFormattedTextField（格式化輸入欄；驗證型輸入欄）</h2>
+		<table class='grid'>
+			<tr><td>建構式</td><td><span style='color:#396'>JFormattedTextField(<span title='java . text . Format'>Format</span>)</span><br>可用 java.text.DateFormat（日期）或 java.text.NumberFormat（數字）的 getInstance() 來建立格式。</td></tr>
+			<tr><td>Object</td><td><span style='color:#396'>getValue()</span><br>取得輸入內容。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isEditValid()</span><br>檢查所輸入資料是否符合驗證。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setFocusLostBehavior(int)</span><br>設置為 JFormattedTextField.COMMIT 的話，不會清除驗證錯誤的資料。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setValue(Object)</span><br>設定輸入內容。</td></tr>
+		</table>
+		<p>
+			如果輸入的資料不符合格式，會自動清除或還原。而且會根據所指定的格式，改變資料的顯示方式，例如數字每三位數用 , 符號標示。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JFrame（視窗）</h2>
+		<table class='grid'>
+			<tr><td><span title='java . awt . Component'>Component</span></td><td><span style='color:#396'>getGlassPane()</span><br>取得容器的表層。</td></tr>
+			<tr><td><span title='java . awt . Container'>Container</span></td><td><span style='color:#396'>getContentPane()</span><br>取得容器。</td></tr>
+			<tr><td><span title='javax . swing . JLayeredPane'>JLayeredPane</span></td><td><span style='color:#396'>getLayeredPane()</span><br>取得疊層容器。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconImage(<span title='java . awt . Image'>Image</span>)</span><br>設定視窗標題列小圖示。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setJMenuBar(<span title='javax . swing . JMenuBar'>JMenuBar</span>)</span><br>設定功能表。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setResizable(boolean)</span><br>是否可調整尺寸</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JInternalFrame（子視窗）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>setFrameIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定視窗標題列小圖示。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isClosed()</span><br>視窗是否已關閉。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>moveToBack()</span><br>移到後面。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>moveToFront()</span><br>移到前面。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>reshape(int x, int y, int w, int h)</span><br>重新調整視窗位置與大小。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setClosable(boolean)</span><br>是否提供關閉鈕。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconifiable(boolean)</span><br>是否提供最小化鈕。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setJMenuBar(<span title='javax . swing . JMenuBar'>JMenuBar</span>)</span><br>設定功能表。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMaximizable(boolean)</span><br>是否提供最大化鈕。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setResizable(boolean)</span><br>是否可調整尺寸</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JLabel（標籤）</h2>
+		<table class='grid'>
+			<tr><td><span title='javax . swing . Icon'>Icon</span></td><td><span style='color:#396'>getIcon()</span><br>取得圖案。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getText()</span><br>取得文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDisplayedMnemonic(char)</span><br>設定哪個字做為 Alt+Key 快捷鍵記號。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定標籤位置的水平對齊方式。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalTextPosition(int)</span><br>設定文字相對於圖案的水平位置關係。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconTextGap(int)</span><br>設定文字與圖案的間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setLabelFor(<span title='java . awt . Component'>Component</span>)</span><br>設定哪個元件做為快捷鍵對象。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容；支援部分 HTML 語法。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalAlignment(int)</span><br>設定標籤位置的垂直對齊方式。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalTextPosition(int)</span><br>設定文字相對於圖案的垂直位置關係。</td></tr>
+		</table>
+		<p>
+			JLabel 並不只是文字標籤而已，也可以當作圖案貼紙。此外還具備使用 HTML 語法來展現文字的能力，以及輔助其它元件關聯到快捷鍵的功能。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JLayeredPane（疊層）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>add(<span title='java . awt . Component'>Component</span>, int)</span><br>將 Component 加入為第 int 層元件。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JList&lt;E&gt;（清單）</h2>
+		<table class='grid'>
+			<tr><td>int</td><td><span style='color:#396'>getSelectedIndex()</span><br>取得目前所選擇項目的索引值。</td></tr>
+			<tr><td>int[]</td><td><span style='color:#396'>getSelectedIndices()</span><br>取得所有選擇項目的索引值。</td></tr>
+			<tr><td>Object</td><td><span style='color:#396'>getSelectedValue()</span><br>取得目前所選擇的項目。</td></tr>
+			<tr><td>Object[]</td><td><span style='color:#396'>getSelectedValues()</span><br>取得所有選擇的項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectionBackground(<span title='java . awt . Color'>Color</span>)</span><br>設定選擇項目時的背景顏色。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectionForeground(<span title='java . awt . Color'>Color</span>)</span><br>設定選擇項目時的文字顏色。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectionInterval(int start, int end)</span><br>設定連續選擇的項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectionMode(int)</span><br>設定選擇模式，可用 javax.swing.ListSelectionModel 的常數來指定：<br>SINGLE_SELECTION（單選）<br>SINGLE_INTERVAL_SELECTION（連續選擇）<br>MULTIPLE_INTERVAL_SELECTION（跳躍選擇）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedIndex(int)</span><br>設定選擇第幾個項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedIndices(int[])</span><br>設定選擇哪幾個項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedValue(Object, boolean)</span><br>選擇指定的項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVisibleRowCount(int)</span><br>設定清單每次可檢視的欄位數。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setLayoutOrientation(int)</span><br>設定清單項目的排列方式，可用 JLsit 本身的常數來指定：<br>HORIZONTAL_WRAP（跨頁式水平排列）<br>VERTICAL（垂直排列）<br>VERTICAL_WRAP（跨頁式垂直排列）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setListDate(Object[])</span><br>選擇多個項目。</td></tr>
+		</table>
+		<p>
+			通常搭配 JScrollPane 來捲動。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JMenu（選單）</h2>
+		<table class='grid'>
+			<tr><td><span title='javax . swing . JMenuItem'>JMenuItem</span></td><td><span style='color:#396'>add(<span title='javax . swing . Action'>Action</span>)</span><br>用動作加入選單項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>add(<span title='javax . swing . JMenuItem'>JMenuItem</span>)</span><br>加入選單項目。</td></tr>
+			<tr><td><span title='javax . swing . JMenuItem'>JMenuItem</span></td><td><span style='color:#396'>add(String)</span><br>用文字加入選單項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>addSeparator()</span><br>加入分隔線。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JMenuBar（功能表）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>add(<span title='javax . swing . JMenu'>JMenu</span>)</span><br>加入選單。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMargin(<span title='java . awt . Insets'>Insets</span>)</span><br>設定間距。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JMenuItem（選單項目）</h2>
+		<table class='grid'>
+			<tr><td>建構式</td><td><span style='color:#396'>JMenuItem(<span title='javax . swing . Icon'>Icon</span>)</span><br>用圖示建立選單項目。</td></tr>
+			<tr><td>建構式</td><td><span style='color:#396'>JMenuItem(String)</span><br>用文字建立選單項目。</td></tr>
+			<tr><td>建構式</td><td><span style='color:#396'>JMenuItem(String, Icon)</span><br>用文字與圖示建立選單項目。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setAccelerator(<span title='javax . swing . KeyStroke'>KeyStroke</span>)</span><br>設置快捷鍵。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setAction(<span title='javax . swing . Action'>Action</span>)</span><br>連結事件。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JOptionPane（選項視窗）</h2>
+		<table class='grid'>
+			<tr><td>int</td><td><span style='color:#396'>showConfirmDialog(<span title='java . awt . Component'>Component</span>, Object, String, int)</span><br>顯示確認對話視窗。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>showInputDialog(<span title='java . awt . Component'>Component</span>, Object, String, int)</span><br>顯示輸入對話視窗。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>showMessageDialog(<span title='java . awt . Component'>Component</span>, Object, String, int)</span><br>顯示訊息對話視窗。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JPanel（元件容器；子面板）</h2>
+		<p>
+			看似沒有自己獨特的操作方式，用 <code>setLayout()</code> 決定元件排版模式，然後用 <code>add()</code> 加入元件，再用 <code>setBounds()</code> 設定好尺寸位置，最後加入到 JFrame 裡面，感覺很普通。<br>
+			<br>
+			但管理一群 Swing 的圖形元件時，就像子面板一樣非常好用。例如整群按鈕先用 JPanel 放在一塊，再加入到視窗，不僅日後更方便管理這些按鈕的排列，也能一次決定這整塊元件的去向。<br>
+			<br>
+			或者你想設計一個日曆或時鐘，就先把所有用到的元件都設計在 JPanel 裡面，日後再整塊 JPanel 拿來用，就是你專屬的 JCalendar 或 JClock 了。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JPasswordField（密碼輸入欄）</h2>
+		<table class='grid'>
+			<tr><td>String</td><td><span style='color:#396'>getPassword()</span><br>取得所輸入的密碼。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setEchoChar(char)</span><br>設定遮蔽符號。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JPopupMenu（滑鼠右鍵選單）</h2>
+		<table class='grid'>
+			<tr><td><span title='javax . swing . JMenuItem'>JMenuItem</span></td><td><span style='color:#396'>add(<span title='javax . swing . Action'>Action</span>)</span><br>依動作加入項目。</td></tr>
+			<tr><td><span title='javax . swing . JMenuItem'>JMenuItem</span></td><td><span style='color:#396'>add(<span title='javax . swing . JMenuItem'>JMenuItem</span>)</span><br>加入 JMenuItem。</td></tr>
+			<tr><td><span title='javax . swing . JMenuItem'>JMenuItem</span></td><td><span style='color:#396'>add(String)</span><br>加入文字。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>addSeparator()</span><br>加入分隔線。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>show(<span title='java . awt . Component'>Component</span>, int x, int y)</span><br>顯示選單。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JProgressBar（進度列）</h2>
+		<table class='grid'>
+			<tr><td>int</td><td><span style='color:#396'>getValue()</span><br>取得當前的值。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMaximum(int)</span><br>設定最大值。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMinimum(int)</span><br>設定最小值。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setOrientation(int)</span><br>設定為水平顯示或垂直顯示：<br>SwingConstants.HORIZONTAL（水平）<br>SwingConstants.VERTICAL（垂直）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setValue(int)</span><br>設定當前的值</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JRadioButton（圈選按鈕）</h2>
+		<table class='grid'>
+			<tr><td>boolean</td><td><span style='color:#396'>isSelected()</span><br>是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDisabledIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定無作用時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定標籤位置的水平對齊方式：<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.LEFT（向左對齊）<br>SwingConstants.RIGHT（向右對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalTextPosition(int)</span><br>設定文字相對於圖案的水平位置關係。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconTextGap(int)</span><br>設定文字與圖案的間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMargin(<span title='java . awt . Insets'>Insets</span>)</span><br>設定間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setPressedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定按下時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setRolloverIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定滑鼠經過時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelected(boolean)</span><br>設定是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定被選取時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容；支援部分 HTML 語法。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalAlignment(int)</span><br>設定標籤位置的垂直對齊方式：<br>SwingConstants.BOTTOM（往下對齊）<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.TOP（往上對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalTextPosition(int)</span><br>設定文字相對於圖案的垂直位置關係。</td></tr>
+		</table>
+		<p>
+			通常圈選按鈕的應用場合，是在整群項目中，只能單選一個出來。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JRootPane（表面容器）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>setDefaultButton(<span title='javax . swing . JButton'>JButton</span>)</span><br>設定預設按鈕，按 Enter 時直接觸發。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JScrollPane（捲動軸）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalScrollBarPolicy(int)</span><br>設定垂直捲動軸出現的時機：<br>JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS（顯示）<br>JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED（自動）<br>JScrollPane.HORIZONTAL_SCROLLBAR_NEVER（隱藏）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalScrollBarPolicy(int)</span><br>設定水平捲動軸出現的時機：<br>JScrollPane.VERTICAL_SCROLLBAR_ALWAYS（顯示）<br>JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED（自動）<br>JScrollPane.VERTICAL_SCROLLBAR_NEVER（隱藏）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setViewportView(<span title='java . awt . Component'>Component</span>)</span><br>設置元件。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JSeparator（線段）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>setOrientation(int)</span><br>設定為水平線段或垂直線段：<br>SwingConstants.HORIZONTAL（水平）<br>SwingConstants.VERTICAL（垂直）</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JSlider（滑動桿；刻度列）</h2>
+		<table class='grid'>
+			<tr><td>int</td><td><span style='color:#396'>getValue()</span><br>取得當前的值。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMaximum(int)</span><br>設定最大值。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMinimum(int)</span><br>設定最小值。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setOrientation(int)</span><br>設定為水平顯示或垂直顯示：<br>SwingConstants.HORIZONTAL（水平）<br>SwingConstants.VERTICAL（垂直）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setValue(int)</span><br>設定當前的值</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JSpinner（微調器）</h2>
+		<p>
+			（略）
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JSplitPane（分割板）</h2>
+		<table class='grid'>
+			<tr><td>建構式</td><td><span style='color:#396'>JSplitPane(int)</span><br>建立分割板同時指定排列方式：<br>JSplitPane.HORIZONTAL_SPLIT（水平）<br>JSplitPane.VERTICAL_SPLIT（垂直）<br>雖然有 setOrientation() 可以事後指定，但建構式比較不會出錯。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>resetToPreferredSizes()</span><br>重新排列面板尺寸。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDividerLocation(double)</span><br>設定分隔軸的原點位置。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDividerSize(int)</span><br>設定分隔軸的寬度。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setOneTouchExpandable(boolean)</span><br>是否可以展開與收起。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JTabbedPane（分頁）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>add(String, <span title='java . awt . Component'>Component</span>)</span><br>新增頁籤，並加入元件。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getTabCount()</span><br>取得分頁數量。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>remove(int)</span><br>移除第幾個頁籤。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedIndex(int)</span><br>跳到第幾個頁籤。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setTabPlacement(int)</span><br>設定頁籤標題的位置：<br>SwingConstants.BOTTOM（下）<br>SwingConstants.LEFT（左）<br>SwingConstants.RIGHT（右）<br>SwingConstants.TOP（上）<br></td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setTitleAt(int, String)</span><br>修改頁籤名稱。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JTable（表格）</h2>
+		<p>
+			操作複雜，請參考《<a href='19960123A.html#20001127A'>JTable</a>》的範例。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>JTextArea（純文字編輯器；多行）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>copy()</span><br>複製文字內容到剪貼簿。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>cut()</span><br>剪下文字內容到剪貼簿。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectionEnd(int)</span><br>取得選取文字的結束位置。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectionStart(int)</span><br>取得選取文字的起點位置。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getSelectedText()</span><br>取得選取中的文字內容。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getText()</span><br>取得文字內容。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isEditable()</span><br>是否可編輯。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>paste()</span><br>從剪貼簿貼上文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>replaceSelection(String)</span><br>取代所選取文字的內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>select(int start, int end)</span><br>選取指定範圍內的文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>selectAll()</span><br>選取全部文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setEditable(boolean)</span><br>設定是否可輸入文字。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定文字對齊方式。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JTextField（文字輸入欄；單行）</h2>
+		<table class='grid'>
+			<tr><td>String</td><td><span style='color:#396'>getText()</span><br>取得文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setColumns(int)</span><br>設定欄位寬度，即可輸入的字元數。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JTextPane（圖文容器）</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>copy()</span><br>複製文字內容到剪貼簿。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>cut()</span><br>剪下文字內容到剪貼簿。</td></tr>
+			<tr><td><span title='javax . swing . text . Document'>Document</span></td><td><span style='color:#396'>getDocument()</span><br>取得文件內容模型，藉以編輯文字。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectionEnd(int)</span><br>取得選取文字的結束位置。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getSelectionStart(int)</span><br>取得選取文字的起點位置。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getSelectedText()</span><br>取得選取中的文字內容。</td></tr>
+			<tr><td>String</td><td><span style='color:#396'>getText()</span><br>取得文字內容。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isEditable()</span><br>是否可編輯。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>paste()</span><br>從剪貼簿貼上文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>replaceSelection(String)</span><br>取代所選取文字的內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>select(int start, int end)</span><br>選取指定範圍內的文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>selectAll()</span><br>選取全部文字內容。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setEditable(boolean)</span><br>設定是否可輸入文字。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定文字對齊方式。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JToggleButton（開關式按鈕）</h2>
+		<table class='grid'>
+			<tr><td>boolean</td><td><span style='color:#396'>isSelected()</span><br>是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setDisabledIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定無作用時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalAlignment(int)</span><br>設定標籤位置的水平對齊方式：<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.LEFT（向左對齊）<br>SwingConstants.RIGHT（向右對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setHorizontalTextPosition(int)</span><br>設定文字相對於圖案的水平位置關係。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setIconTextGap(int)</span><br>設定文字與圖案的間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setMargin(<span title='java . awt . Insets'>Insets</span>)</span><br>設定間距。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setPressedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定按下時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setRolloverIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定滑鼠經過時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelected(boolean)</span><br>設定是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelectedIcon(<span title='javax . swing . Icon'>Icon</span>)</span><br>設定被選取時的圖案。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setText(String)</span><br>設定文字內容；支援部分 HTML 語法。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalAlignment(int)</span><br>設定標籤位置的垂直對齊方式：<br>SwingConstants.BOTTOM（往下對齊）<br>SwingConstants.CENTER（置中對齊）<br>SwingConstants.TOP（往上對齊）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setVerticalTextPosition(int)</span><br>設定文字相對於圖案的垂直位置關係。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JToolBar（工具列）</h2>
+		<table class='grid'>
+			<tr><td><span title='javax . swing . JButton'>JButton</span></td><td><span style='color:#396'>add(<span title='javax . swing . Action'>Action</span>)</span><br>依事件加入按鈕。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>addSeparator()</span><br>加入分隔線。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>addSeparator(<span title='java . awt . Dimension'>Dimension</span>)</span><br>加入分隔線到指定位置。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setOrientation(int)</span><br>設定排列方向：<br>SwingConstants.HORIZONTAL（水平）<br>SwingConstants.VERTICAL（垂直）</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setRollover(boolean)</span><br>是否啟用按鈕浮現效果。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setFloatable(boolean)</span><br>是否啟用工具列浮動效果。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>JTree（樹狀表）</h2>
+		<p>
+			（略）
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Border（外框）</h2>
+		<p>
+			（略）
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>ImageIcon（圖案）</h2>
+		<table class='grid'>
+			<tr><td>建構式</td><td><span style='color:#396'>ImageIcon(String)</span><br>依 String 所指的路徑與檔案來載入圖片。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>Timer（計時器）</h2>
+		<table class='grid'>
+			<tr><td>建構式</td><td><span style='color:#396'>Timer(int, <span title='java . awt . event . ActionListener'>ActionListener</span>)</span><br>int 毫秒時間後，執行 ActionListener 事件。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<section>
+		<h2>ButtonGroup</h2>
+		<table class='grid'>
+			<tr><td>void</td><td><span style='color:#396'>add(<span title='javax . swing . ButtonModel'>ButtonModel</span>)</span><br>加入按鈕。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>clearSelection()</span><br>清除所有被選取的按鈕。</td></tr>
+			<tr><td>int</td><td><span style='color:#396'>getButtonCount()</span><br>取得被選取的按鈕數目。</td></tr>
+			<tr><td><span title='java . util . Enumeration'>Enumeration</span><br>&lt;<span title='javax . swing . AbstractButton'>AbstractButton</span>&gt;</td><td><span style='color:#396'>getElements()</span><br>傳回被選取的按鈕。</td></tr>
+			<tr><td><span title='javax . swing . ButtonModel'>ButtonModel</span></td><td><span style='color:#396'>getSelection()</span><br>取得被選取的按鈕。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>setSelected(<span title='javax . swing . ButtonModel'>ButtonModel</span>, boolean)</span><br>設定按鈕是否選取。</td></tr>
+			<tr><td>boolean</td><td><span style='color:#396'>isSelected(<span title='javax . swing . ButtonModel'>ButtonModel</span>)</span><br>判斷按鈕是否被選取。</td></tr>
+			<tr><td>void</td><td><span style='color:#396'>remove(<span title='javax . swing . ButtonModel'>ButtonModel</span>)</span><br>移除按鈕。</td></tr>
+		</table>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 本文僅挑出個人覺得每個元件中較為實用的方法，並未全部列出。覺得本清單列出的功能不敷使用時，請查閱《Java SE Documentation》的「<a href='http://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html'>Swing API Specification</a>」。
+		</p>
+	</footer>
+</article>
