@@ -1,13 +1,11 @@
-function $(x,y)
-{
+function $(x,y){
 	if(x[0]=='#') return document.querySelector(x);
 	if(x[0]=='*') return document.querySelectorAll(x.substr(1));
 	if(y>=0) return document.querySelectorAll(x)[y];
 	return document.querySelector(x);
 }
 
-function webhosting()
-{
+function webhosting(){
 	return location.href.match('^h');
 }
 

@@ -70,8 +70,7 @@
 	</section>
 </article>
 <script>
-	function f1(w,x,y,z)
-	{
+	function f1(w,x,y,z){
 		if(w) f2(w);
 		else f3();
 
@@ -82,13 +81,11 @@
 		if(z) f2(z);
 	}
 
-	function f2(x)
-	{
+	function f2(x){
 		$('span',x).style.color='coral';
 	}
 
-	function f3()
-	{
+	function f3(){
 		$('*span').forEach(n=>n.style.color='#666');
 	}
 </script>

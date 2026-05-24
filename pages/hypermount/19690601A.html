@@ -44,8 +44,7 @@
 				}
 
 				//將圖片描繪到畫布
-				function draw()
-				{
+				function draw(){
 					displaypointer=1-displaypointer;
 					let context=surface[displaypointer].getContext('2d');
 					context.drawImage(background,0,0);

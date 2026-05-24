@@ -84,8 +84,7 @@
 <script>
 	let a=['剪刀','石頭','布'];
 
-	function f(x)
-	{
+	function f(x){
 		let g=Math.ceil(Math.random()*100);
 
 		if(g<50) $('span').innerHTML=`${a[x]} vs ${a[(x+1)%3]} = <span style='color:orangered'>你輸了～</span>`;

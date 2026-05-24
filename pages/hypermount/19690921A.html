@@ -72,13 +72,11 @@
 	</section>
 </article>
 <script>
-	function f1()
-	{
+	function f1(){
 		$('input').value=encodeURIComponent($('input').value).replace(/!/g,'%21').replace(/\'/g,'%27').replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/\*/g,'%2A');
 	}
 
-	function f2()
-	{
+	function f2(){
 		$('input').value=decodeURIComponent($('input').value).replace(/\+/g,' ');
 	}
 </script>

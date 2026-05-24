@@ -434,8 +434,7 @@
 		   '45% 普攻每击生成怒气':'<Affix AffixId="ac_rage_per_strike_percent_12" Class="resourceGeneration" AffixType="prefix" Tier="12"><DropParams Frequency="1"><ItemLevel LevelMin="190" LevelMax="300" /><Keywords OptionalKeywords="belt,amulet,ring" MandatoryKeywords="accessory" /><ItemRarity Magic="1" Rare="1" Set="1" Legendary="1" /></DropParams><MagicEffect EffectId="rage_per_strike_percent"><LoRoll ResourcePercentInt="36" /><HiRoll ResourcePercentInt="45" /></MagicEffect></Affix>',
 		   '45% 魔力回复':' <Affix AffixId="ac_willpower_regeneration_12" Class="resourceGeneration" AffixType="prefix" Tier="12"><DropParams Frequency="1"><ItemLevel LevelMin="190" LevelMax="300" /><Keywords OptionalKeywords="belt,amulet,ring" MandatoryKeywords="accessory" /><ItemRarity Magic="1" Rare="1" Set="1" Legendary="1" /></DropParams><MagicEffect EffectId="umbra_regen_percent"><LoRoll ResourcePercentFloat="36" /><HiRoll ResourcePercentFloat="45" /></MagicEffect></Affix>'};
 
-	function f1()
-	{
+	function f1(){
 		let g=$('textarea').value.indexOf('EffectId')+10;
 		let h=$('textarea').value.indexOf('"',g);
 		let effectid=$('textarea').value.substring(g,h);
@@ -454,8 +453,7 @@
 		$('textarea',1).value=`{\n  "EffectId":"${effectid}",\n  "EffectName":"${affixid}",\n  "MaxStack":1,\n  "Parameters":[${parameters}]\n}`;
 	}
 
-	function f2()
-	{
+	function f2(){
 		let g=event.target.textContent;
 		$('textarea').value=a[g];
 		$('button').textContent=g;

@@ -83,14 +83,12 @@
 <script>
 	let a;
 
-	function f1()
-	{
+	function f1(){
 		clearTimeout(a);
 		a=setTimeout(()=>$('div').style.visibility='visible',3000);
 	}
 
-	function f2()
-	{
+	function f2(){
 		$('div').style.visibility='hidden';
 		f1();
 	}

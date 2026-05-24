@@ -54,8 +54,7 @@
 	let width=15+scope*2;
 
 	//圖磚
-	function tile(x)
-	{
+	function tile(x){
 		switch(x){
 			case 0: return '　';
 			case 1: return '<span style=\'color:orange\'>人</span>';
@@ -68,8 +67,7 @@
 	}
 
 	//繪圖
-	function draw()
-	{
+	function draw(){
 		let g='';
 
 		for(let n=scope;n>=-scope;n--){
@@ -86,8 +84,7 @@
 	}
 
 	//移動
-	function move()
-	{
+	function move(){
 		switch(event.which){
 			case 37:
 			if(array[position-1]==0) position--;

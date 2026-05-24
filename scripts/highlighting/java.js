@@ -1,8 +1,7 @@
 (function(){
 	typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
 
-	function Brush()
-	{
+	function Brush(){
 		this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:'comments'},
 						{regex:SyntaxHighlighter.regexLib.multiLineCComments,css:'comments'},
 						{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},

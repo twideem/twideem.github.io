@@ -32,8 +32,7 @@
 	let string='(0-9)umber　(A)dd　(S)ubtract　(M)ultiply　(D)ivide　(E)auals　(C)lear　(B)ack';
 	let switching=false;
 
-	function append(x)
-	{
+	function append(x){
 		if(p.innerHTML==string||switching){
 			p.innerHTML='';
 			switching=false;
@@ -42,18 +41,15 @@
 		p.innerHTML+=x;
 	}
 
-	function clear()
-	{
+	function clear(){
 		p.innerHTML=string;
 	}
 
-	function error()
-	{
+	function error(){
 		p.innerHTML='0.0a';
 	}
 
-	function calc(x)
-	{
+	function calc(x){
 		try{
 			if(x==16) append(`=0x${Number(eval(p.innerHTML)).toString(16)}`);
 			else append(`=${eval(p.innerHTML)}`);
@@ -67,8 +63,7 @@
 		if(p.innerHTML=='=NaN') error();
 	}
 
-	function back()
-	{
+	function back(){
 		if(p.innerHTML!==string&&!switching){
 			p.innerHTML=p.innerHTML.substr(0,p.innerHTML.length-1);
 			if(p.innerHTML.length<=0) p.innerHTML=string;

@@ -40,14 +40,12 @@
 
 	let width=15;
 
-	function position()
-	{
+	function position(){
 		for(let n=0;n<array.length;n++) if(array[n]==1) return n;
 	}
 
 	//圖磚
-	function tile(x)
-	{
+	function tile(x){
 		switch(x){
 			case 0: return '　';
 			case 1: return '<span style=\'color:orange\'>人</span>';
@@ -59,8 +57,7 @@
 	}
 
 	//繪圖
-	function draw()
-	{
+	function draw(){
 		let g='';
 
 		for(let n=0;n<array.length;n++){
@@ -73,8 +70,7 @@
 	}
 
 	//移動
-	function move()
-	{
+	function move(){
 		let g=position();
 
 		switch(event.which){

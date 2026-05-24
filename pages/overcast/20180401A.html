@@ -30,8 +30,7 @@
 	</footer>
 </article>
 <script>
-	function f(x=location.search.slice(1)||',')
-	{
+	function f(x=location.search.slice(1)||','){
 		$('p',1).innerHTML='';
 		new Set($('textarea').value.split(x).sort()).forEach(n=>$('p',1).innerHTML+=`${n}<br>`);
 	}

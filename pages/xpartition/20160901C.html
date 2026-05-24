@@ -366,8 +366,7 @@
 			['預兆之','+15% 智力 +15% 法力','28 頭[法]、項、杖','item/lootmagicalaffixes/suffix/default/rare_%int%energy_02'],
 			['預言之','+20% 智力 +20% 法力','39 頭[法]、項、杖','item/lootmagicalaffixes/suffix/default/rare_%int%energy_03']]];
 
-	function f(x)
-	{
+	function f(x){
 		for(let n=0;n<x.length;n++) document.write(`【${x[n][0]}】${x[n][1]}（<span style='font-size:11px'>Lv.${x[n][2]}</span>）<br><code style='font-size:10px;white-space:nowrap'>${String.fromCharCode(x[n][3].length+12)} &nbsp; records\\${x[n][3].replace(/\//g,'\\')}.dbr</code><br>`);
 	}
 </script>

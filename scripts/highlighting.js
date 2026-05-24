@@ -26,8 +26,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 (function(){
 	typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
 
-	function Brush()
-	{
+	function Brush(){
 		function process(match){
 			var constructor=SyntaxHighlighter.Match,code=match[0],tag=new XRegExp('(&lt;|<)[\\s\\/\\?]*(?<name>[:\\w-\\.]+)','xg').exec(code),result=[];
 
@@ -58,15 +57,12 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 (function(){
 	typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
 
-	function Brush()
-	{
-		function getKeywordsCSS(str)
-		{
+	function Brush(){
+		function getKeywordsCSS(str){
 			return '\\b([a-z_]|)'+str.replace(/ /g,'(?=:)\\b|\\b([a-z_\\*]|\\*|)')+'(?=:)\\b';
 		}
 
-		function getValuesCSS(str)
-		{
+		function getValuesCSS(str){
 			return '\\b'+str.replace(/ /g,'(?!-)(?!:)\\b|\\b()')+'\:\\b';
 		}
 
@@ -92,8 +88,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 (function(){
 	typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
 
-	function Brush()
-	{
+	function Brush(){
 		var r=SyntaxHighlighter.regexLib;
 
 		this.regexList=[{regex:/^ *#!.*/g,css:'preprocessor'},
@@ -127,8 +122,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	typeof(exports)!='undefined'?exports.Brush=Brush:null;
 })();
 
-function lang(...x)
-{
+function lang(...x){
 	for(let n=0;n<x.length;n++){
 		let o=document.createElement('script');
 		o.src=`../../scripts/highlighting/${x[n].replace('.','dot').toLowerCase()}.js`;

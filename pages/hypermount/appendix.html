@@ -146,8 +146,7 @@
 				這時還不如利用事件可以覆寫的特性，改寫為：<br>
 				<br>
 				<textarea class='brush:js'>
-					function 地圖()
-					{
+					function 地圖(){
 						window.onkeydown=function(x){
 							switch(x.which){
 								case KEY_UP:
@@ -168,8 +167,7 @@
 						};
 					}
 
-					function 選單()
-					{
+					function 選單(){
 						window.onkeydown=function(x){
 							switch(x.which){
 								case KEY_UP:
@@ -190,8 +188,7 @@
 						};
 					}
 
-					function 戰場()
-					{
+					function 戰場(){
 						window.onkeydown=function(x){
 							switch(x.which){
 								case KEY_UP:
@@ -212,8 +209,7 @@
 						};
 					}
 
-					function 道具()
-					{
+					function 道具(){
 						window.onkeydown=function(x){
 							switch(x.which){
 								case KEY_UP:
@@ -240,8 +236,7 @@
 				<textarea class='brush:js'>
 					const KEY_ESC=27;
 
-					function 地圖()
-					{
+					function 地圖(){
 						window.onkeydown=function(x){
 							switch(x.which){
 								case KEY_UP:
@@ -343,13 +338,11 @@
 				如果要跑另外寫好的具名函式，請傳入「函式的參照」，而不是「呼叫函式」的觀念。所以要這樣寫才對…<br>
 				<br>
 				<textarea class='brush:js'>
-					function f1()
-					{
+					function f1(){
 						document.write('AAA');
 					}
 
-					function f2()
-					{
+					function f2(){
 						document.write('BBB');
 					}
 
@@ -432,18 +425,15 @@
 			<br>
 			<textarea class='brush:html'>
 				&lt;script&gt;
-					function dragstart()
-					{
+					function dragstart(){
 						event.dataTransfer.setData('id',event.target.id);
 					}
 
-					function dragover()
-					{
+					function dragover(){
 						event.preventDefault();
 					}
 
-					function drop()
-					{
+					function drop(){
 						event.preventDefault();
 						event.target.appendChild(document.getElementById(event.dataTransfer.getData('id')));
 					}

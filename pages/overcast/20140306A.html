@@ -9,8 +9,7 @@
 	(function(){
 		SyntaxHighlighter=SyntaxHighlighter||(typeof require!='undefined'?require('shCore').SyntaxHighlighter:null);
 
-		function Brush()
-		{
+		function Brush(){
 			this.regexList=[{regex:/\(\*[\s\S]*?\*\)/gm,css:'comments'},
 							{regex:/{(?!\$)[\s\S]*?}/gm,css:'comments'},
 							{regex:SyntaxHighlighter.regexLib.singleLineCComments,css:'comments'},

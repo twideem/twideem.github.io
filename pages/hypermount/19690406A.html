@@ -1319,8 +1319,7 @@
 		<h2>預設參數</h2>
 		<p>
 			<textarea class='brush:js'>
-				function f(x='hello')
-				{
+				function f(x='hello'){
 					document.write(x);
 				}
 
@@ -1339,8 +1338,7 @@
 		<h2>不定參數</h2>
 		<p>
 			<textarea class='brush:js'>
-				function f(...rest)
-				{
+				function f(...rest){
 					let a=0;
 
 					for(let n of rest) a+=n;
@@ -1439,8 +1437,7 @@
 			除此之外，傳統函式傳回值的型態就是 return 傳回資料的型態，而以 yield 送出的資料，則會放在一種串列資料結構裡面，這種資料結構稱為 generator，可以使用 for.. of.. 迭代。<br>
 			<br>
 			<textarea class='brush:js'>
-				function* f()
-				{
+				function* f(){
 					yield 'A';
 					yield 'AA';
 					yield 'AAA';
@@ -1493,16 +1490,13 @@
 		<h2>類別</h2>
 		<p>
 			<textarea class='brush:js'>
-				class A
-				{
-					constructor(x,y)
-					{
+				class A{
+					constructor(x,y){
 						this.h=x;
 						this.w=y;
 					}
 
-					f()
-					{
+					f(){
 						document.write(this.h*this.w);
 					}
 				}
@@ -1512,7 +1506,6 @@
 			<br>
 			<code>
 				function A(x,y)<br>
-				{<br>
 				　this.h=x;<br>
 				　this.w=y;<br>
 				　A.prototype.f=function(){<br>
@@ -1529,8 +1522,7 @@
 		<h2>繼承</h2>
 		<p>
 			<textarea class='brush:js'>
-				class B extends A
-				{
+				class B extends A{
 					//程式碼寫在這裡
 				}
             </textarea>
@@ -1541,10 +1533,8 @@
 		<h2>靜態方法</h2>
 		<p>
 			<textarea class='brush:js'>
-				class A
-				{
-					static f()
-					{
+				class A{
+					static f(){
 						document.write('AAA');
 					}
 				}
@@ -1697,8 +1687,7 @@
 			<h3>從函式返回多筆資料</h3>
 			<p>
 				<textarea class='brush:js'>
-					function f()
-					{
+					function f(){
 						let a='AAA',b='BBB',c='CCC';
 						return [a,b,c];
 					}
@@ -1832,8 +1821,7 @@
 				以前要製作非同步函式，得自己在函式裡面 return 一個 Promise 物件出來：<br>
 				<br>
 				<textarea class='brush:js'>
-					function f()
-					{
+					function f(){
 						return Promise.resolve("Hello");
 					}
 
@@ -1847,8 +1835,7 @@
 				現在可以用 <code>async</code> 宣告一個自己會傳回 Promise 的函式：<br>
 				<br>
 				<textarea class='brush:js'>
-					async function f()
-					{
+					async function f(){
 						return 'Hello!';
 					}
 
@@ -1865,13 +1852,11 @@
 				在 async function 內部，可以使用 <code>await</code> 等候並接收另一個 async 函式或 Promise 的結果：<br>
 				<br>
 				<textarea class='brush:js'>
-					async function f1(x)
-					{
+					async function f1(x){
 						return x;
 					}
 
-					async function f2()
-					{
+					async function f2(){
 						console.log(await f1(111));
 						console.log(await f1(222));
 						console.log(await f1(333));
@@ -1889,8 +1874,7 @@
 				上面的 f2() 相當於：<br>
 				<br>
 				<textarea class='brush:js'>
-					function f2()
-					{
+					function f2(){
 						f1(111).then(console.log);
 						f1(222).then(console.log);
 						f1(333).then(console.log);

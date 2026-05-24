@@ -11,15 +11,13 @@
 	<hr>
 	<p>
 		<textarea class='brush:js'>
-			function setCookie(key,value,day)
-			{
+			function setCookie(key,value,day){
 				let date=new Date();
 				date.setTime(date.getTime()+(1000*60*60*24*day));
 				document.cookie=key+'='+value+'; '+'expires='+date.toGMTString();
 			}
 
-			function getCookie(key)
-			{
+			function getCookie(key){
 				let cookies=document.cookie.split(';');
 				for(let n=0; n&lt;cookies.length; n++){
 					let cookie=cookies[n].trim();

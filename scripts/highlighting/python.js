@@ -1,8 +1,7 @@
 (function(){
 	typeof(require)!='undefined'?SyntaxHighlighter=require('shCore').SyntaxHighlighter:null;
 
-	function Brush()
-	{
+	function Brush(){
 		this.regexList=[{regex:SyntaxHighlighter.regexLib.singleLinePerlComments,css:'comments'},
 						{regex:/^\s*@\w+/gm,css:'decorator'},
 						{regex:SyntaxHighlighter.regexLib.singleQuotedString,css:'string'},

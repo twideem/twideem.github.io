@@ -69,18 +69,15 @@
 	$('audio').src='../../objects/audio/20000704A_01.mp3';
 	$('audio',1).src='../../objects/audio/20000704A_02.mp3';
 
-	function rand()
-	{
+	function rand(){
 		state=true;
 	}
 
-	function seq()
-	{
+	function seq(){
 		state=false;
 	}
 
-	function quest(x)
-	{
+	function quest(x){
 		letter=x;
 
 		if(state){
@@ -94,8 +91,7 @@
 		$('h2',1).innerHTML=dict[letter][word];
 	}
 
-	function answer()
-	{
+	function answer(){
 		if(event.which==13){
 			if($('input').value==dict[letter][word+1]){
 				$('span').innerHTML='答對了！';
@@ -113,14 +109,12 @@
 		}
 	}
 
-	function change(x)
-	{
+	function change(x){
 		word=-2;
 		quest(x);
 	}
 
-	function cheat()
-	{
+	function cheat(){
 		$('span').innerHTML=`答案是：${dict[letter][word+1]}，請繼續作下一個題目。`;
 		quest(letter);
 	}

@@ -313,45 +313,36 @@
 			<h3>Classes</h3>
 			<p>
 				<textarea class='brush:js'>
-					class L
-					{
-						constructor(x,y)
-						{
+					class L{
+						constructor(x,y){
 							this.a=x+y
 						}
 
-						f1()
-						{
+						f1(){
 							document.write(this.a)
 						}
 
-						static f2()
-						{
+						static f2(){
 							document.write(123)
 						}
 
-						set f3(x)
-						{
+						set f3(x){
 							this.a=x*x
 						}
 
-						get f4()
-						{
+						get f4(){
 							return this.a
 						}
 
-						*f5()
-						{
+						*f5(){
 							yield 111
 							yield 222
 							yield 333
 						}
 					}
 
-					class M extends L
-					{
-						f6()
-						{
+					class M extends L{
+						f6(){
 							super.a=456
 							super.f1()
 						}
@@ -382,18 +373,15 @@
 				<h4>module.js</h4>
 				<p>
 					<textarea class='brush:js'>
-						export function f1()
-						{
+						export function f1(){
 							document.write('AAA')
 						}
 
-						export function f2()
-						{
+						export function f2(){
 							document.write('BBB')
 						}
 
-						export function f3()
-						{
+						export function f3(){
 							document.write('CCC')
 						}
                     </textarea>
@@ -483,8 +471,7 @@
 			<h3>Default parameter</h3>
 			<p>
 				<textarea class='brush:js'>
-					function f(x,y=789)
-					{
+					function f(x,y=789){
 						document.write(x+y)
 					}
 
@@ -503,8 +490,7 @@
 			<h3>Rest parameter</h3>
 			<p>
 				<textarea class='brush:js'>
-					function f(x,...y)
-					{
+					function f(x,...y){
 						document.write(x+y)
 					}
 
@@ -559,8 +545,7 @@
 			<p>
 				<textarea class='brush:js'>
 					let M={
-						f()
-						{
+						f(){
 							document.write('ABC')
 						}
 					}
@@ -578,8 +563,7 @@
 			<h3>Generators</h3>
 			<p>
 				<textarea class='brush:js'>
-					function* f(x)
-					{
+					function* f(x){
 						while(x&lt;100){
 							yield x
 							x+=x

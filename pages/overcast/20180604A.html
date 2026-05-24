@@ -11,57 +11,48 @@
 	let b=[new Audio('../../objects/audio/20180604A_01.mp3'),
 		   new Audio('../../objects/audio/20180604A_02.mp3')];
 
-	function change()
-	{
+	function change(){
 		a[0].innerHTML=Number(a[1].value);
 		view(a[0].innerHTML);
 	}
 
-	function increment()
-	{
+	function increment(){
 		return Number(a[0].innerHTML)+1;
 	}
 
-	function knock()
-	{
+	function knock(){
 		a[0].innerHTML=increment();
 		b[0].currentTime=0;
 		b[0].play();
 		ring();
 	}
 
-	function lazurite()
-	{
+	function lazurite(){
 		a[0].style.backgroundColor='midnightblue';
 		a[0].style.color='mintcream';
 	}
 
-	function limit(x)
-	{
+	function limit(x){
 		a[2].value=x;
 	}
 
-	function load()
-	{
+	function load(){
 		a[0].innerHTML=localStorage.counts||0;
 		view(a[0].innerHTML);
 	}
 
-	function ring()
-	{
+	function ring(){
 		if(Number(a[0].innerHTML)%Number(a[2].value)==0){
 			b[1].currentTime=0;
 			b[1].play();
 		}
 	}
 
-	function save()
-	{
+	function save(){
 		localStorage.counts=a[0].innerHTML;
 	}
 
-	function view(x)
-	{
+	function view(x){
 		a[0].innerHTML=x;
 	}
 

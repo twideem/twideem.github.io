@@ -1,7 +1,6 @@
 let _b;
 
-function _f1(x)
-{
+function _f1(x){
 	let g=x.getContext('2d');
 	g.strokeStyle='#8be';
 	g.lineWidth=8;
@@ -14,8 +13,7 @@ function _f1(x)
 	return g;
 }
 
-function notepad(x,...y)
-{
+function notepad(x,...y){
 	_b.height=_b.width*0.563;
 	let g=_f1(_b);
 	g.font='normal 14px 細明體';
@@ -30,8 +28,7 @@ function notepad(x,...y)
 	for(let n in y) g.fillText(y[n],10,58+16*n);
 }
 
-function cmd(...x)
-{
+function cmd(...x){
 	_b.height=_b.width*0.563;
 	let g=_f1(_b);
 	g.font='normal 14px 細明體';
@@ -44,8 +41,7 @@ function cmd(...x)
 	for(let n in x) g.fillText(x[n],9,94+18*n);
 }
 
-function _f2(x,y)
-{
+function _f2(x,y){
 	_f1(x);
 	let g=x.getContext('2d');
 	g.fillRect(45,5,x.width-112,15);
@@ -57,8 +53,7 @@ function _f2(x,y)
 	return g;
 }
 
-function msedge(x,...y)
-{
+function msedge(x,...y){
 	if(y[0].match(/images/)){
 		let g=_b;
 		let h=new Image();

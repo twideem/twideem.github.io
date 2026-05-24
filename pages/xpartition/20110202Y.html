@@ -71,69 +71,58 @@
 	</footer>
 </article>
 <script>
-	let 晝夜=
-	{
+	let 晝夜={
 		cycles:3000,
 		element:document.body,
 		enabled:null,
 		state:'黎明',
 		weather:0,
 
-		黎明()
-		{
+		黎明(){
 			this.element.className='style1';
 			this.state='黎明';
 		},
 
-		晨曦()
-		{
+		晨曦(){
 			this.element.className='style2';
 			this.state='晨曦';
 		},
 
-		白天()
-		{
+		白天(){
 			this.element.className='style3';
 			this.state='白天';
 		},
 
-		黃昏()
-		{
+		黃昏(){
 			this.element.className='style4';
 			this.state='黃昏';
 		},
 
-		傍晚()
-		{
+		傍晚(){
 			this.element.className='style5';
 			this.state='傍晚';
 		},
 
-		深夜()
-		{
+		深夜(){
 			this.element.className='style6';
 			this.state='深夜';
 		},
 
-		晴朗()
-		{
+		晴朗(){
 			this.element.className='style31'
 			this.state='晴朗'
 		},
 
-		陰雨()
-		{
+		陰雨(){
 			this.element.className='style32';
 			this.state='陰雨';
 		},
 
-		夜燈()
-		{
+		夜燈(){
 			this.element.className='style61';
 		},
 
-		更迭()
-		{
+		更迭(){
 			this.enabled=window.setInterval(()=>{
 				晝夜.cycles+=1;
 
@@ -172,42 +161,34 @@
 			},20);
 		},
 
-		時()
-		{
+		時(){
 			return Math.floor(this.cycles/600);
 		},
 
-		分()
-		{
+		分(){
 			return Math.floor((this.cycles%600)/10);
 		},
 
-		秒()
-		{
+		秒(){
 			return Math.floor((this.cycles%600)/(10/60))%60;
 		},
 
-		狀態(x)
-		{
+		狀態(x){
 			if(x!==undefined) return this.state;
 			else if(this.state==x) return true;
 		},
 
-		靜止()
-		{
+		靜止(){
 			window.clearInterval(this.enabled);
 		}
 	};
 
-	let 自訂功能=
-	{
-		時鐘()
-		{
+	let 自訂功能={
+		時鐘(){
 			window.setInterval(()=>$('h2').innerHTML=`遊戲世界時間：${晝夜.時()} 點 ${晝夜.分()} 分`,20);
 		},
 
-		火把()
-		{
+		火把(){
 			if(晝夜.狀態()=='深夜') 晝夜.夜燈();
 		}
 	};

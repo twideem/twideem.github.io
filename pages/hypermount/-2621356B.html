@@ -65,12 +65,10 @@
 						&lt;script&gt;
 							let p=document.createElement('p');
 							document.body.appendChild(p);
-							function print(x)
-							{
+							function print(x){
 								p.innerHTML+=x+'&lt;br&gt;';
 							}
-							function clear()
-							{
+							function clear(){
 								p.innerHTML='';
 							}
 							document.clear=clear;
@@ -92,8 +90,7 @@
 		<h2>sleep()</h2>
 		<p>
 			<textarea class='brush:js'>
-				function sleep(seconds)
-				{
+				function sleep(seconds){
 					let start=new Date().getTime();
 					while(true){
 						if((new Date().getTime()-start)&gt;seconds*1000){
@@ -121,15 +118,13 @@
 			在巢狀 while 迴圈裡失靈時，改用 setTimeout() 搭配 Promeise：<br>
 			<br>
 			<textarea class='brush:js'>
-				async function sleep(seconds)
-				{
+				async function sleep(seconds){
 					return new Promise(function(x){
 						setTimeout(x,seconds*1000);
 					});
 				}
 
-				async function main()
-				{
+				async function main(){
 					document.write('AAA');
 					await sleep(1);
 					document.write('BBB');
@@ -213,26 +208,22 @@
 				document.body.appendChild(audio1);
 				document.body.appendChild(audio2);
 
-				function bgm(file)
-				{
+				function bgm(file){
 					audio1.src=file;
 					audio1.loop='loop';
 					audio1.currentTime=0;
 					audio1.play();
 				}
 
-				function pause()
-				{
+				function pause(){
 					audio1.pause();
 				}
 
-				function play()
-				{
+				function play(){
 					audio1.play();
 				}
 
-				function se(file,polyphony)
-				{
+				function se(file,polyphony){
 					if(polyphony){
 						let a=document.createElement('audio');
 						document.body.appendChild(a);
@@ -277,8 +268,7 @@
 			為了這目的重複使用 getOwnPropertyNames，不妨寫成函式來調用：<br>
 			<br>
 			<textarea class='brush:js'>
-				function dir(object)
-				{
+				function dir(object){
 					console.log(Object.getOwnPropertyNames(object).concat(Object.getOwnPropertyNames(object.prototype)).sort().join(' '));
 				}
 
@@ -318,8 +308,7 @@
 				<textarea class='brush:js'>
 					let a=123;
 
-					function f(x)
-					{
+					function f(x){
 						x=0;
 					}
 
@@ -338,8 +327,7 @@
 					// Object literals
 					let object={a:111,b:222,c:333};
 
-					function f1(x)
-					{
+					function f1(x){
 						x.a='aaa';
 						x.b='bbb';
 						x.c='ccc';
@@ -352,8 +340,7 @@
 					// Array
 					let array=[111,222,333];
 
-					function f2(x)
-					{
+					function f2(x){
 						x[0]='aaa';
 						x[1]='bbb';
 						x[2]='ccc';
@@ -384,8 +371,7 @@
 					// Object literals
 					let object={a:111,b:222,c:333};
 
-					function f1(x)
-					{
+					function f1(x){
 						x.a='aaa';
 						x.b='bbb';
 						x.c='ccc';
@@ -398,8 +384,7 @@
 					// Array
 					let array=[111,222,333];
 
-					function f2(x)
-					{
+					function f2(x){
 						x[0]='aaa';
 						x[1]='bbb';
 						x[2]='ccc';

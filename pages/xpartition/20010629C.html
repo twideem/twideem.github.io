@@ -366,13 +366,11 @@
 			<h3>Skill Id (9 bits)</h3>
 			<p>
 				<script>
-					function f1(x)
-					{
+					function f1(x){
 						return x+((x<10)?'&nbsp;':'')+((x<100)?'&nbsp;':'')+'　';
 					}
 
-					function f2(x)
-					{
+					function f2(x){
 						let g=['0','0','0','0','0','0','0','0','0'];
 						let h=x.toString(2);
 
@@ -381,13 +379,11 @@
 						return g.join('') + '　　';
 					}
 
-					function f3(x)
-					{
+					function f3(x){
 						return x+'<br>';
 					}
 
-					function f4(x,y)
-					{
+					function f4(x,y){
 						for(let n=x;n<x+y.length;n++) document.write(f1(n)+f2(n)+f3(y[n-x]));
 
 						if(x<251) document.write('<br>');

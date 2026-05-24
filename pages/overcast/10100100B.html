@@ -86,13 +86,11 @@
 	let a=$('canvas').getContext('2d');
 	a.fillStyle='#666';
 
-	function f1(x,y)
-	{
+	function f1(x,y){
 		a.fillRect(x*10,y*10,10,10);
 	}
 
-	function f2(x)
-	{
+	function f2(x){
 		a.clearRect(0,0,50,70);
 		x.forEach((y,z)=>{
 			if(y) f1(z%5,Math.floor(z/5));

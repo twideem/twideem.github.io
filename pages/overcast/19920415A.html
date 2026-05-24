@@ -1233,37 +1233,30 @@
 					['-3','爾','耳','邇','餌'],
 					['-4','二','貳']];
 
-	let Input=
-	{
+	let Input={
 		_position:0,
 
-		clear()
-		{
+		clear(){
 			$('textarea').value='';
 		},
 
-		append(x)
-		{
+		append(x){
 			$('textarea').value+=x;
 		},
 
-		replace(x,y,z)
-		{
+		replace(x,y,z){
 			$('textarea').value=$('textarea').value.replace(new RegExp(x,z),y);
 		},
 
-		position()
-		{
+		position(){
 			this._position=$('textarea').textLength;
 		},
 
-		reposition()
-		{
+		reposition(){
 			$('textarea').setSelectionRange(this._position,this._position);
 		},
 
-		convert()
-		{
+		convert(){
 			for(let n=0;n<Dictionary.length;n++){
 				if($('textarea').value.indexOf(Dictionary[n][0])>=0){
 					Input.replace(Dictionary[n][0]+'$',Dictionary[n][1],'i');
@@ -1273,8 +1266,7 @@
 			}
 		},
 
-		addKeyUpEventListener()
-		{
+		addKeyUpEventListener(){
 			$('textarea').onkeyup=function(x){
 				Candidate.clear();
 				Candidate.select(x);
@@ -1283,13 +1275,11 @@
 		}
 	};
 
-	let Candidate=
-	{
+	let Candidate={
 		_string:'',
 		_array:[],
 
-		clear()
-		{
+		clear(){
 			if(this._string!==''){
 				Input.replace(this._string,'','g');
 				Input.replace('[A-z0-9 ]$','','');
@@ -1297,8 +1287,7 @@
 			}
 		},
 
-		list(x)
-		{
+		list(x){
 			if(x.length>2){
 				this._array=x;
 				Input.position();
@@ -1311,8 +1300,7 @@
 			}
 		},
 
-		select(x)
-		{
+		select(x){
 			if(this._array.length>2){
 				//用 a-z 的鍵值 65-90 挑選 array[2]-array[27] 來取代 array[1] 所表示的字
 				if(x.which>=65&&x.which<this._array.length+63) Input.replace(this._array[1]+'$',this._array[x.which-63],'i');
@@ -1323,10 +1311,8 @@
 		}
 	};
 
-	let Debug=
-	{
-		f1()
-		{
+	let Debug={
+		f1(){
 			let g='';
 			for(let n=0;n<Dictionary.length;n++) for(let o=1;o<Dictionary[n].length;o++) g+=Dictionary[n][o]+', ';
 
@@ -1334,10 +1320,8 @@
 		}
 	};
 
-	let MyDictionary=
-	{
-		expand()
-		{
+	let MyDictionary={
+		expand(){
 			Dictionary.splice(16,0,['1j6','不']);
 		}
 	};
