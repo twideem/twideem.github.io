@@ -12,11 +12,25 @@
 	<header>
 		<h1>附錄：小秘訣</h1>
 	</header>
-	<hr id='addorremoveprograms'>
+	<hr id='magnify'>
 	<section>
-		<h2>在登錄檔刪除新增移除程式無效的項目</h2>
+		<h2>Windows 10 最恐怖的功能：放大鏡</h2>
 		<p>
-			HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall
+			Windows 10 最恐怖的功能，就是按 WIN 和 Num+ 會啟用放大鏡！<br>
+			<br>
+			平常不使用這個功能的人，不小心誤按出來的話，畫面很可能大到無法正常操作電腦，卻又不知道怎麼關閉。唯一能想到的，就是重新開機看看，但如果這時有尚未存檔的資料會前功盡棄，那就很想哭，進退兩難 QQ<br>
+			<br>
+			<strong>解法是按 WIN 和 Esc 關閉放大鏡。</strong><br>
+			<br>
+			這個功能沒辦法關閉，所以按 WIN 和 Num+ 就是一定會進入放大鏡模式！只能用學電腦的心態，事先知道有這功能，並且牢記是怎麼啟動的，以及如何關掉放大鏡模式～<br>
+			<br>
+			或者透過設定，能把危害程度降到最低：<br>
+			<br>
+			<strong>【設定】→「輕鬆存取」→「放大鏡」→「變更縮放增量」→「5%」</strong><br>
+			<br>
+			這樣就算不小心誤按出來，也不會放大多少，可以正常操作電腦，也很容易看到桌面有個放大鏡的小視窗，按 X 關掉就恢復正常：<br>
+			<br>
+			<img src='../../images/bluesky/20260527A.png' alt='插圖'>
 		</p>
 	</section>
 	<hr id='anchor1'>
@@ -47,7 +61,7 @@
 			<p>
 				在檔案總管的滑鼠右鍵清單點「內容」，把「目標」改成：<br>
 				<br>
-				explorer.exe ::{20D04FE0-3AEA-1069-A2D8-08002B30309D}<br>
+				<code>explorer.exe ::{20D04FE0-3AEA-1069-A2D8-08002B30309D}</code><br>
 				<br>
 				以後就會以我的電腦為預設位置。
 			</p>
@@ -56,14 +70,14 @@
 		<section>
 			<h3>自訂其他預設位置</h3>
 			<p>
-				explorer.exe /n, /e, 自訂路徑位置
+				<code>explorer.exe /n, /e, 自訂路徑位置</code>
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>Windows 10</h3>
 			<p>
-				進入檔案總管→檢視→選項→開啟檔案總管以→本機
+				【檔案總管】→「檢視」→「選項」→「開啟檔案總管以」→「本機」
 			</p>
 		</section>
 		<hr>
@@ -77,30 +91,30 @@
 	<section>
 		<h2>修改註冊的使用者</h2>
 		<p>
-			這是在安裝 Windows 時填寫的使用者資訊，有「姓名」和「公司」兩筆。<br>
+			過去在安裝 Windows 95/98/ME 時，會填寫使用者資訊，有「姓名」和「公司」兩筆，但現在的 Windows 並未直接提供修改這兩筆資料的程式。<br>
 			<br>
-			Windows 並未直接提供修改這兩筆資料的程式，必須使用「登錄編輯程式」修改。
+			登錄編輯程式：<br>
+			<br>
+			<code>
+				[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion]<br>
+				"RegisteredOrganization"="公司"<br>
+				"RegisteredOwner"="姓名"
+			</code>
+			<br>
+			除了上面的使用者名稱，還有下面這個，有些應用軟體是取得這個機碼的使用者名稱：<br>
+			<br>
+			<code>
+				[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion]<br>
+				"RegisteredOwner"="姓名"<br>
+			</code>
+			<br>
+			有時候甚至是這個：<br>
+			<br>
+			<code>
+				[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]<br>
+				"DefaultUserName"="姓名"
+			</code>
 		</p>
-		<hr>
-		<section>
-			<h3>Windows 95/98/ME</h3>
-			<p>
-				按「開始」→「執行」→「regedit」，開啟「登錄編輯程式」，切換到：<br>
-				<br>
-				HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion<br>
-				<br>
-				RegisteredOrganization 可修改公司，RegisteredOwner 可修改姓名。
-			</p>
-		</section>
-		<hr>
-		<section>
-			<h3>Windows XP/Vista/7/8/10</h3>
-			<p>
-				跟 Windows 9x 一樣，只是切換機碼時 Windows 改成 Windows NT 而已：<br>
-				<br>
-				HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion
-			</p>
-		</section>
 	</section>
 	<hr id='anchor5'>
 	<section>
@@ -129,7 +143,7 @@
 			<section>
 				<h4>Step 3</h4>
 				<p>
-					這樣就搜尋出使用這個資料夾的程式……不過，接下來就要靠自己經驗，判斷該關哪些程式不會當機～
+					這樣就搜尋出使用這個資料夾的程式…不過，接下來就要靠自己經驗，判斷該關哪些程式不會當機～
 				</p>
 			</section>
 		</section>
@@ -138,11 +152,15 @@
 	<section>
 		<h2>清除通知區域裡無效的舊圖示</h2>
 		<p>
-			用 regedit.exe 到：<br>
+			登錄編輯程式：<br>
 			<br>
-			HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify<br>
+			<code>
+				[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify]<br>
+				"IconStreams"=-<br>
+				"PastIconsStream"=-<br>
+			</code>
 			<br>
-			刪除 IconStreams 與 PastIconsStream，然後結束 explorer.exe 並重新執行。
+			然後結束 explorer.exe 並重新執行。
 		</p>
 	</section>
 	<hr id='anchor7'>
@@ -175,7 +193,7 @@
 		<section>
 			<h3>Windows 8</h3>
 			<p>
-				「螢幕右角」→「設定」→「控制台」→「系統及安全性」→「建立及格式化硬碟磁碟分割」→先把覺得容量較多的磁碟槽「壓縮」，再把多出來的空間配給其它磁碟槽。
+				【控制台】→「系統及安全性」→「建立及格式化硬碟磁碟分割」→先把覺得容量較多的磁碟槽「壓縮」，再把多出來的空間配給其它磁碟槽。
 			</p>
 		</section>
 	</section>
@@ -189,21 +207,21 @@
 		<section>
 			<h3>Windows 7</h3>
 			<p>
-				「開始」→「控制台」→「系統及安全性」→「備份與還原」→「建立系統映像」
+				【開始】→「控制台」→「系統及安全性」→「備份與還原」→「建立系統映像」
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>Windows 8</h3>
 			<p>
-				「螢幕右角」→「設定」→「控制台」→搜尋「Windows 7 檔案修復」→「建立系統映像」
+				【控制台】→搜尋「Windows 7 檔案修復」→「建立系統映像」
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>Windows 8.1</h3>
 			<p>
-				「螢幕右角」→「控制台」→「系統及安全性」→「檔案歷程紀錄」→「系統映像備份」（在視窗左下角不顯眼的地方）
+				【螢幕右角】→「控制台」→「系統及安全性」→「檔案歷程紀錄」→「系統映像備份」（在視窗左下角不顯眼的地方）
 			</p>
 		</section>
 	</section>
@@ -261,7 +279,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor11'>
+	<hr id='dos'>
 	<section>
 		<h2>DOS 指令</h2>
 		<hr>
@@ -294,7 +312,7 @@
 			</table>
 		</section>
 	</section>
-	<hr id='anchor12'>
+	<hr id='driveabcd'>
 	<section>
 		<h2>A、B、C、D 槽</h2>
 		<hr>
@@ -329,18 +347,61 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor13'>
+	<hr id='pointerspeed'>
+	<section>
+		<h2>滑鼠指標移動速度</h2>
+		<p>
+			1/11　0.03125<br>
+			2/11　0.0625<br>
+			3/11　0.25<br>
+			4/11　0.5<br>
+			5/11　0.75<br>
+			6/11　1.<br>
+			7/11　1.5<br>
+			8/11　2.<br>
+			9/11　2.5<br>
+			10/11　3.<br>
+			11/11　3.5
+		</p>
+	</section>
+	<hr id='addorremoveprograms'>
+	<section>
+		<h2>在登錄檔刪除新增移除程式無效的項目</h2>
+		<p>
+			登錄編輯程式：<br>
+			<br>
+			<code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall</code><br>
+			<br>
+			刪掉不要的機碼。
+		</p>
+	</section>
+	<hr id='networklistprofilename'>
+	<section>
+		<h2>修改網路連線的名稱</h2>
+		<p>
+			網路連線的名稱重複時，Windows 會自動在字尾加上 2 啊 3 啊的來區別，覺得難看想改的話…<br>
+			<br>
+			登錄編輯程式：<br>
+			<br>
+			<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\<br>Profiles\</code><br>
+			<br>
+			一個個找，在 ProfileName 看到想改的名稱就修改吧～
+		</p>
+	</section>
+	<hr id='administrator'>
 	<section>
 		<h2>啟用 Administrator 系統管理員帳戶</h2>
 		<p>
-			以系統管理員身分執行「命令提示字元」，然後輸入：<br>
+			以系統管理員身分執行命令提示字元：<br>
 			<br>
-			net user administrator /active:yes<br>
+			<output>
+				net user administrator /active:yes
+			</output>
 			<br>
 			即可登出使用者帳戶後，選擇名稱為 Administrator 的帳戶來登入。
 		</p>
 	</section>
-	<hr id='anchor14'>
+	<hr id='wifihotspot'>
 	<section>
 		<h2>將 Windows 7 電腦設為 Wi-Fi 熱點</h2>
 		<p>
@@ -350,18 +411,18 @@
 		<section>
 			<h3>Step 1:</h3>
 			<p>
-				「控制台」→「網路和網際網路」→「網路連線」→「內容」→「共用」→ 勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」」→ 在「家用網路連線」選擇「Wireless Network Connection」
+				【控制台】→「網路和網際網路」→「網路連線」→「內容」→「共用」→ 勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」」→ 在「家用網路連線」選擇「Wireless Network Connection」
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>Step 2:</h3>
 			<p>
-				「控制台」→「網路和網際網路」→「網路和共用中心」→「設定新的連線或網路」→「設定無線臨機操作 (電腦對電腦) 網路」→ 依照圖形使用者介面設定 SSID 和密碼
+				【控制台】→「網路和網際網路」→「網路和共用中心」→「設定新的連線或網路」→「設定無線臨機操作 (電腦對電腦) 網路」→ 依照圖形使用者介面設定 SSID 和密碼
 			</p>
 		</section>
 	</section>
-	<hr id='anchor15'>
+	<hr id='mousekeys'>
 	<section>
 		<h2>用鍵盤移動滑鼠</h2>
 		<hr>
@@ -395,7 +456,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor16'>
+	<hr id='virtualstore'>
 	<section>
 		<h2>相容模式的檔案儲存位置可能另外放</h2>
 		<p>
@@ -408,7 +469,7 @@
 			資料不同步的問題，就是出在這個地方。因為不是不同步，而是我們不知道相容模式把資料檔案另外搞個地方來保存，讓我們搞錯檔案了～
 		</p>
 	</section>
-	<hr id='anchor17'>
+	<hr id='switchtoalocalaccount'>
 	<section>
 		<h2>從 Microsoft 帳戶切換為本機帳戶</h2>
 		<p>
@@ -418,7 +479,7 @@
 		<section>
 			<h3>切換為本機帳戶</h3>
 			<p>
-				「螢幕右角」→「設定」→「控制台」→「使用者帳戶和家庭安全」→「使用者帳戶」→「在 [電腦設定] 中變更我的帳戶」→「 終止連結」→進行「切換至本機帳戶」的操作設定。
+				【控制台】→「使用者帳戶和家庭安全」→「使用者帳戶」→「在 [電腦設定] 中變更我的帳戶」→「 終止連結」→進行「切換至本機帳戶」的操作設定。
 			</p>
 		</section>
 		<hr>
@@ -436,40 +497,40 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor18'>
+	<hr id='programcompatibilityassistant'>
 	<section>
 		<h2>開除「程式相容性助理」</h2>
 		<p>
-			「螢幕右角」→「設定」→「控制台」→「系統及安全性」→「系統管理工具」→「服務」→「Program Compatibility Assistant Service」→把「啟動類型」設為「已停用」
+			【控制台】→「系統及安全性」→「系統管理工具」→「服務」→「Program Compatibility Assistant Service」→把「啟動類型」設為「已停用」
 		</p>
 	</section>
-	<hr id='anchor19'>
+	<hr id='windowsischeckingforasolutiontotheproblem'>
 	<section>
 		<h2>麥擱「正在尋找問題的解決方案」，從來就沒找到過 ╰(艹皿艹 )</h2>
 		<hr>
 		<section>
 			<h3>Windows 8</h3>
 			<p>
-				「螢幕右角」→「設定」→「控制台」→「系統及安全性」→「重要訊息中心」→「維護(M)」→「檢查問題報告的解決方案」→「設定」→「永遠不檢查解決方案」<br>
+				【控制台】→「系統及安全性」→「重要訊息中心」→「維護(M)」→「檢查問題報告的解決方案」→「設定」→「永遠不檢查解決方案」<br>
 				<br>
-				「螢幕右角」→「設定」→「控制台」→「系統及安全性」→「重要訊息中心」→「變更重要訊息中心設定」→取消「Windows 疑難排解」
+				【控制台】→「系統及安全性」→「重要訊息中心」→「變更重要訊息中心設定」→取消「Windows 疑難排解」
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>Windows 10</h3>
 			<p>
-				「設定」→「更新與安全性」→「疑難排解」→「不執行任何疑難排解員」
+				【設定】→「更新與安全性」→「疑難排解」→「不執行任何疑難排解員」
 			</p>
 		</section>
 	</section>
-	<hr id='anchor20'>
+	<hr id='maintenance'>
 	<section>
 		<h2>關閉 Windows 8 自動維護</h2>
 		<p>
 			算是重要訊息中心比較煩人的訊息。如果維護得完就算了，但怎麼過老久了它還沒維護完？總讓人覺得關掉算了：<br>
 			<br>
-			「螢幕右角」→「控制台」→「系統及安全性」→「排程工作」→依序展開「工作排程器程式庫\Microsoft\Windows\TaskScheduler」→停用「Idle Maintenance」「Regular Maintenance」
+			【螢幕右角】→「控制台」→「系統及安全性」→「排程工作」→依序展開「工作排程器程式庫\Microsoft\Windows\TaskScheduler」→停用「Idle Maintenance」「Regular Maintenance」
 		</p>
 		<hr>
 		<footer>
@@ -478,16 +539,18 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor21'>
+	<hr id='rasdial'>
 	<section>
 		<h2>讓 Windows 8 開機時自動連線 ADSL</h2>
 		<p>
 			在 Windows 8 的工作排程用 rasphone.exe 連線，並不會自動登入，而是每次都跳出帳號密碼視窗要你按連線，所以改用：<br>
 			<br>
-			rasdial.exe "連線名稱" "ADSL 帳號" "ADSL 密碼"
+			<output>
+				rasdial.exe "連線名稱" "ADSL 帳號" "ADSL 密碼"
+			</output>
 		</p>
 	</section>
-	<hr id='anchor22'>
+	<hr id='charms'>
 	<section>
 		<h2>Windows 8 Charms</h2>
 		<p>
@@ -501,12 +564,13 @@
 		<section>
 			<h3>修改 Windows 8 Charms 的延遲時間</h3>
 			<p>
-				進入 regedit.exe，找到：<br>
+				登錄編輯程式：<br>
 				<br>
-				HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi<br>
-				<br>
-				新增 DWORD 名稱為 CharmsBarDesktopDelay，數值資料為 0。<br>
-				新增 DWORD 名稱為 CharmsBarImmersiveDelay，數值資料為 0。<br>
+				<code>
+					[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\EdgeUi]<br>
+					"CharmsBarDesktopDelay"=dword:00000000<br>
+					"CharmsBarImmersiveDelay"=dword:00000000<br>
+				</code>
 				<br>
 				這樣滑鼠移到右下角，不用延遲時間就能跳出 Charms 了。
 			</p>
@@ -517,7 +581,7 @@
 			<p>
 				當視窗放到最大時，滑鼠會移到螢幕最右上角，通常是為了按 X 關閉視窗，但卻老是跳出 Windows 8 Charms。幸好可以關閉：<br>
 				<br>
-				「螢幕右角」→「設定」→「變更電腦設定」→「電腦與裝備」→「角落與邊緣」→「當我指向畫面右上角時，顯示常用鍵」→「關閉」
+				【螢幕右角】→「設定」→「變更電腦設定」→「電腦與裝備」→「角落與邊緣」→「當我指向畫面右上角時，顯示常用鍵」→「關閉」
 			</p>
 		</section>
 		<hr>
@@ -527,7 +591,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor23'>
+	<hr id='safemode'>
 	<section>
 		<h2>如何進入 Windows 8 的安全模式</h2>
 		<p>
@@ -555,7 +619,7 @@
 			<section>
 				<h4>Windows 8</h4>
 				<p>
-					「螢幕右角」→「控制台」→搜尋「Windows 7 檔案修復」→「建立系統修復光碟」
+					【螢幕右角】→「控制台」→搜尋「Windows 7 檔案修復」→「建立系統修復光碟」
 				</p>
 			</section>
 			<section>
@@ -573,19 +637,23 @@
 			<section>
 				<h4>啟用</h4>
 				<p>
-					「開始畫面」→「命令提示字元」→「以系統管理員身份執行」→輸入：<br>
+					以系統管理員身分執行命令提示字元：<br>
 					<br>
-					Bcdedit /set {bootmgr} displaybootmenu yes<br>
+					<output>
+						Bcdedit /set {bootmgr} displaybootmenu yes
+					</output>
 					<br>
-					→「重新開機按 F8 鍵」→選「Enable Safe Mode」
+					「重新開機按 F8 鍵」→選「Enable Safe Mode」
 				</p>
 			</section>
 			<section>
 				<h4>善後</h4>
 				<p>
-					由於先前是「啟用」安全模式的選單，所以如果維修好 Windows 8 以後，想恢復原來的狀態，請輸入：<br>
+					由於先前是「啟用」安全模式的選單，所以如果維修好 Windows 8 以後，必須恢復原來的狀態：<br>
 					<br>
-					Bcdedit /set {bootmgr} displaybootmenu no
+					<output>
+						Bcdedit /set {bootmgr} displaybootmenu no
+					</output>
 				</p>
 			</section>
 		</section>
@@ -601,7 +669,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor24'>
+	<hr id='wifihotspot2'>
 	<section>
 		<h2>在 Windows 8 設定 Wi-Fi 熱點</h2>
 		<p>
@@ -613,23 +681,25 @@
 			<section>
 				<h4>Step 1: 設定密碼</h4>
 				<p>
-					以系統管理員身分，啟動命令提示字元，輸入：<br>
+					以系統管理員身分執行命令提示字元：<br>
 					<br>
-					netsh wlan set hostednetwork mode=allow ssid=熱點名稱 key=熱點密碼
+					<output>
+						netsh wlan set hostednetwork mode=allow ssid=熱點名稱 key=熱點密碼
+					</output>
 				</p>
 			</section>
 			<section>
 				<h4>Step 2: 啟動熱點</h4>
 				<p>
-					繼續輸入：<br>
-					<br>
-					netsh wlan start hostednetwork
+					<output>
+						netsh wlan start hostednetwork
+					</output>
 				</p>
 			</section>
 			<section>
 				<h4>Step 3: 設定熱點</h4>
 				<p>
-					「控制台」→「網路和網際網路」→「網路連線」→「區域連線」→ 勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」 → 在「家用網路連線」選擇「區域連線* 12」
+					【控制台】→「網路和網際網路」→「網路連線」→「區域連線」→ 勾選「允許其他網路使用者透過這台電腦的網際網路連線來連線」 → 在「家用網路連線」選擇「區域連線* 12」
 				</p>
 			</section>
 		</section>
@@ -639,25 +709,31 @@
 			<section>
 				<h4>停止熱點</h4>
 				<p>
-					netsh wlan stop hostednetwork
+					<output>
+						netsh wlan stop hostednetwork
+					</output>
 				</p>
 			</section>
 			<section>
 				<h4>檢視熱點</h4>
 				<p>
-					netsh wlan show hostednetwork
+					<output>
+						netsh wlan show hostednetwork
+					</output>
 				</p>
 			</section>
 			<section>
 				<h4>重設密碼</h4>
 				<p>
-					netsh wlan set hostednetwork key=密碼<br>
-					netsh wlan refresh hostednetwork key
+					<output>
+						netsh wlan set hostednetwork key=密碼<br>
+						netsh wlan refresh hostednetwork key
+					</output>
 				</p>
 			</section>
 		</section>
 	</section>
-	<hr id='anchor25'>
+	<hr id='howtouse'>
 	<section>
 		<h2>如何在 Windows 10 找到各個傳統桌面功能</h2>
 		<p>
@@ -675,21 +751,21 @@
 			<p>
 				可以找到「事件檢視器」「裝置管理員」「磁碟管理」「電腦管理」等傳統桌面的功能。<br>
 				<br>
-				舊版 Windows 10 原本還有「控制台」，現在被拔掉了！只好：「開始」→「所有應用程式」→「Windows 系統」→「控制台」，費時費力。要快點叫出控制台的話，還有一招就是：在「檔案總管」的路徑列，按最前頭的第一個下拉式按鈕，就有「控制台」。
+				舊版 Windows 10 原本還有「控制台」，現在被拔掉了！只好：【開始】→「所有應用程式」→「Windows 系統」→「控制台」，費時費力。要快點叫出控制台的話，還有一招就是：在「檔案總管」的路徑列，按最前頭的第一個下拉式按鈕，就有「控制台」。
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>傳統桌面的「系統」</h3>
 			<p>
-				「檔案總管」→「本機」→「滑鼠右鍵選單」→「內容」
+				【檔案總管】→「本機」→「滑鼠右鍵選單」→「內容」
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>系統還原</h3>
 			<p>
-				「設定」→「系統」→「關於」→「系統保護」
+				【設定】→「系統」→「關於」→「系統保護」
 			</p>
 		</section>
 		<hr>
@@ -699,14 +775,14 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor26'>
+	<hr id='localaccount'>
 	<section>
 		<h2>建立與修改本機帳戶</h2>
 		<hr>
 		<section>
 			<h3>建立本機帳戶</h3>
 			<p>
-				「開始」→「設定」→「帳戶」→「家人與其他使用者」→「將其他人新增至此電腦」→「我沒有這位人員的登入訊息」→「新增沒有 Microsoft 帳戶的使用者」…
+				【開始】→「設定」→「帳戶」→「家人與其他使用者」→「將其他人新增至此電腦」→「我沒有這位人員的登入訊息」→「新增沒有 Microsoft 帳戶的使用者」…
 			</p>
 		</section>
 		<hr>
@@ -717,11 +793,24 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor27'>
+	<hr id='ultimateperformance'>
+	<section>
+		<h2>啟用終極效能電源計劃</h2>
+		<p>
+			Windows 10 並不是只有省電、平衡、高效能三種電源計劃，還有一種隱藏起來，必須輸入指令才能啟用的終極效能。<br>
+			<br>
+			命令提示字元：<br>
+			<br>
+			<output>
+				POWERCFG -DUPLICATESCHEME e9a42b02-d5df-448d-aa00-03f14749eb61
+			</output>
+		</p>
+	</section>
+	<hr id='logonscreen'>
 	<section>
 		<h2>從睡眠喚醒電腦時直接進入桌面而不是登入畫面</h2>
 		<p>
-			「開始」→「設定」→「帳戶」→「登入選項」→「Windows 應該在您離開多久之後要求您再次登入」（帳戶必須設定密碼才看得到這選項）→「永不」（設定後再把設定密碼為空即可解除密碼）
+			【開始】→「設定」→「帳戶」→「登入選項」→「Windows 應該在您離開多久之後要求您再次登入」（帳戶必須設定密碼才看得到這選項）→「永不」（設定後再把設定密碼為空即可解除密碼）
 		</p>
 		<hr>
 		<footer>
@@ -731,7 +820,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor28'>
+	<hr id='lockscreen'>
 	<section>
 		<h2>如何修改登入畫面的圖片</h2>
 		<p>
@@ -747,10 +836,12 @@
 			<br>
 			這問題可以透過關閉鎖定畫面，只留登入畫面來解決！因為進入登入畫面，看停留在哪個使用者帳戶，就會顯示該使用者設定的圖片。沒了鎖定畫面，開機後進入的一定是登入畫面，就不會看到 Windows 10 預設的圖片了～<br>
 			<br>
-			關閉鎖定畫面要寫登錄檔：<br>
+			登錄編輯程式：<br>
 			<br>
-			[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]<br>
-			"NoLockScreen"=dword:00000001<br>
+			<code>
+				[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]<br>
+				"NoLockScreen"=dword:00000001<br>
+			</code>
 			<br>
 			<strong>注意！寫入這筆登錄檔後，鎖定畫面的設定介面會顯示「*這些設定有一部分已隱藏或由您的組織管理。」而無法使用。所以，日後想更換鎖定畫面的圖片，必須再把 NoLockScreen 改為 0，就恢復正常了。</strong>
 		</p>
@@ -762,7 +853,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor29'>
+	<hr id='softwaredistribution'>
 	<section>
 		<h2>磁碟清理等超～～～～久</h2>
 		<p>
@@ -775,22 +866,22 @@
 			手動刪除再跑磁碟清理的清理系統檔，很快就工作完畢，把剩下的垃圾清理完畢。
 		</p>
 	</section>
-	<hr id='anchor30'>
+	<hr id='windowsdefender'>
 	<section>
 		<h2>刪除內建防毒軟體的保護歷程記錄</h2>
 		<p>
-			C:\ProgramData\Microsoft\Windows Defender\Scans<br>
+			刪除 C:\ProgramData\Microsoft\Windows Defender\Scans 裡面的檔案。<br>
 			<br>
-			事件檢視器 → 應用程式及服務紀錄檔 → Microsoft → Windows → Windows Defender → Operational → 清除記錄檔
+			【事件檢視器】→「應用程式及服務紀錄檔」→「Microsoft」→「Windows」→「Windows Defender」→「Operational」→「清除記錄檔」
 		</p>
 	</section>
-	<hr id='anchor31'>
+	<hr id='inputmethod1'>
 	<section>
 		<h2>讓 Modern UI 預設使用英數模式</h2>
 		<p>
 			雖然將微軟注音的預設輸入模式改為「英數模式」後，就能讓傳統桌面的應用軟體以英打開始，但開始畫面和工作列這些屬於 Modern UI 的部份，卻以 Windows 10 設定的語言區域決定預設輸入模式。<br>
 			<br>
-			這時可用登錄檔修改：<br>
+			登錄編輯程式：<br>
 			<br>
 			[HKEY_CURRENT_USER\Keyboard Layout\Preload]<br>
 			"1"="d0010404"<br>
@@ -800,7 +891,7 @@
 			"d0010404"="00000409"
 		</p>
 	</section>
-	<hr id='anchor32'>
+	<hr id='inputmethod2'>
 	<section>
 		<h2>如何讓微軟注音的候選詞排在上面</h2>
 		<p>
@@ -815,7 +906,27 @@
 			<samp>勾選「啟用個人化調整」→圈選「候選字順序依使用頻率調整」→取消勾選「啟用個人化調整」。</samp>
 		</p>
 	</section>
-	<hr id='anchor33'>
+	<hr id='inputmethod3'>
+	<section>
+		<h2>隱藏語言列</h2>
+		<p>
+			【設定】→「時間與語言」→「語言」→「鍵盤」→關閉「在桌面語言列可用時使用它」→「語言列選項」→「隱藏」。<br>
+			<br>
+			然後在「開啟或關閉系統圖示」中取消「輸入指示器」。
+		</p>
+	</section>
+	<hr id='inputmethod4'>
+	<section>
+		<h2>讓我針對每個應用程式視窗使用不同的輸入法</h2>
+		<p>
+			勾選這個，只是讓每個應用程式能有不同的 WIN + SPACE 狀態而已，也就是應用程式一可以是微軟注音、應用程式二可以是 US 鍵盤、應用程式三可以是新酷音，關閉的話一律是最後 WIN + SPACE 切換的那個狀態。<br>
+			<br>
+			然後 Windows 10 設計成每個應用程式都啟動自己的微軟注音或新酷音，所以微軟注音或新酷音的中英狀態，依然會每個應用程式都不一樣，沒辦法統一狀態。<br>
+			<br>
+			想統一中英模式狀態，只能將中文輸入法預設以中文模式啟動，然後以 WIN + SPACE 切換輸入法為微軟注音或新酷音其中一個，以及 US 鍵盤，讓中文輸入法的 WIN + SPACE 狀態就是用來輸入中文，US 鍵盤的狀態就是用來輸入英文。
+		</p>
+	</section>
+	<hr id='inputmethod5'>
 	<section>
 		<h2>版本 1803 的控制台沒有變更輸入法了</h2>
 		<p>
@@ -828,29 +939,35 @@
 			從 Windows 8 開始，Windows 的輸入法就變得很麻煩、很難用。好不容易找到變通方法，結果又把設定的方法改來改去。誰知道哪天又亂改亂動的，又不曉得怎樣設定輸入法了～
 		</p>
 	</section>
-	<hr id='anchor34'>
+	<hr id='taskband'>
 	<section>
 		<h2>關閉工作列預覽縮圖</h2>
 		<p>
-			[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]<br>
-			"ExtendedUIHoverTime"=dword:00009000<br>
+			登錄編輯程式：<br>
 			<br>
-			[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Taskband]<br>
-			"NumThumbnails"=dword:00000000
+			<code>
+				[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]<br>
+				"ExtendedUIHoverTime"=dword:00009000<br>
+				<br>
+				[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Taskband]<br>
+				"NumThumbnails"=dword:00000000
+			</code>
 		</p>
 	</section>
-	<hr id='anchor35'>
+	<hr id='savezoneinformation'>
 	<section>
 		<h2>可不可以不要再為每個檔案勾選「解除封鎖」 (#`Д´)ﾉ</h2>
 		<p>
 			網路來的檔案，得一個個用滑鼠開啟右鍵選單按「內容」→「一般」→「解除封鎖」，不能批次處理，實在有夠折騰人！<br>
 			<br>
-			像我經常會從網頁瀏覽器拉一堆 URL 檔案，一個個解除封鎖心情會很糟！<br>
+			像我經常會從網頁瀏覽器拉一堆 URL 檔案，一個個解除封鎖心情會很糟！所以我乾脆取消這功能算了～<br>
 			<br>
-			所以我乾脆取消這功能算了：<br>
+			登錄編輯程式：<br>
 			<br>
-			[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments]<br>
-			"SaveZoneInformation"=dword:00000001
+			<code>
+				[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments]<br>
+				"SaveZoneInformation"=dword:00000001
+			</code>
 		</p>
 		<hr>
 		<footer>
@@ -859,64 +976,89 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor36'>
+	<hr id='quickremoval'>
 	<section>
-		<h2>直接拔 USB 隨身碟，不用安全移除。</h2>
+		<h2>直接拔 USB 隨身碟，不用安全移除</h2>
 		<p>
-			滑鼠右鍵選單→內容→硬體→（隨身碟）→內容→變更設定→原則→快速移除…
+			「在硬碟圖示上按滑鼠右鍵選單」→「內容」→「硬體」→（隨身碟）→「內容」→「變更設定」→「原則」→「快速移除」…
 		</p>
 	</section>
-	<hr id='anchor37'>
+	<hr id='onedrive'>
 	<section>
 		<h2>關閉或解除安裝 OneDrive</h2>
 		<p>
-			以系統管理員身分執行命令提示字元，輸入：taskkill /f /im OneDrive.exe 終止程序，再輸入 %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall 解除安裝，最後用 regedit.exe 做如下設定：<br>
+			以系統管理員身分執行命令提示字元：<br>
 			<br>
-			[HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}]<br>
-			"System.IsPinnedToNameSpaceTree"=dword:00000000<br>
+			<output>
+				taskkill /f /im OneDrive.exe<br>
+				%SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
+			</output>
 			<br>
-			[HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}]<br>
-			"System.IsPinnedToNameSpaceTree"=dword:00000000<br>
+			登錄編輯程式：<br>
 			<br>
-			就能檔案總管側邊的 OneDrive 隱藏起來。<br>
+			<code>
+				[HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}]<br>
+				"System.IsPinnedToNameSpaceTree"=dword:00000000<br>
+				<br>
+				[HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}]<br>
+				"System.IsPinnedToNameSpaceTree"=dword:00000000<br>
+			</code>
 			<br>
-			或參考 Microsoft 官方文件《<a href='http://support.office.com/zh-tw/article/%E9%97%9C%E9%96%89%E6%88%96%E8%A7%A3%E9%99%A4%E5%AE%89%E8%A3%9D-OneDrive-f32a17ce-3336-40fe-9c38-6efb09f944b0'>關閉或解除安裝 OneDrive</a>》，但有點冗長。
+			也可參考 Microsoft 官方文件《<a href='http://support.office.com/zh-tw/article/%E9%97%9C%E9%96%89%E6%88%96%E8%A7%A3%E9%99%A4%E5%AE%89%E8%A3%9D-OneDrive-f32a17ce-3336-40fe-9c38-6efb09f944b0' target='_blank'>關閉或解除安裝 OneDrive</a>》，但有點冗長。
 		</p>
 	</section>
-	<hr id='anchor38'>
+	<hr id='windowsbackup'>
 	<section>
 		<h2>解除安裝 Windows 備份 APP</h2>
 		<p>
-			2023 年九月更新（KB5030211）後，Windows 10 多了「Windows 備份」這個 APP，即使在「設定」中關閉不使用，也會在工作管理員的應用程式歷程記錄中看到這東西資源使用率排第一，看了很想刪除。<br>
+			2023 年九月更新（KB5030211）後<ins>1</ins>，Windows 10 多了「Windows 備份」這個 APP，即使在「設定」中關閉不使用，也會在工作管理員的應用程式歷程記錄中看到這東西資源使用率排第一，看了很想刪除。<br>
 			<br>
-			<strong>然而，Windows 備份並不是獨立的 APP，而是 Windows 功能體驗套件<ins>1</ins> 的其中一個工具，想刪除的話得刪除整個 Windows 功能體驗套件，內含 emoji 面板、剪取工具、歷史剪貼簿之類的實用工具，確定你不需要這些工具才操作本文內容。</strong><br>
+			<strong>然而，Windows 備份並不是獨立的 APP，而是 Windows 功能體驗套件<ins>2</ins> 的其中一個工具，想刪除的話得刪除整個 Windows 功能體驗套件，內含 emoji 面板、剪取工具、歷史剪貼簿之類的實用工具，確定你不需要這些工具才操作本文內容。</strong><br>
 			<br>
-			首先我們要掃描出 Windows 功能體驗套件的名稱和版號！以系統管理員身份，進入命令提示字元，執行下面指令：<br>
+			首先我們要掃描出 Windows 功能體驗套件的名稱和版號！以系統管理員身分執行命令提示字元：<br>
 			<br>
-			DISM /Online /Get-Packages<br>
+			<output>
+				DISM /Online /Get-Packages
+			</output>
 			<br>
-			然後找類似如下的名稱，把版號最高的整行複製下來，可以按 Ctrl=F 搜尋：<br>
+			然後找類似如下的名稱，把版號最高的整行複製下來：<br>
 			<br>
-			Microsoft-Windows-UserExperience-Desktop-Package~31bf3856ad364e35~amd64~~10.0.19041.版號<br>
+			<code>Microsoft-Windows-UserExperience-Desktop-Package~31bf3856ad364e35~amd64~~10.0.19041.版號</code><br>
 			<br>
 			這樣就能輸入下面指令移除套件：<br>
 			<br>
-			DISM /Online /Remove-Package /PackageName:[套件名稱和版號]<br>
+			<output>
+				DISM /Online /Remove-Package /PackageName:[套件名稱和版號]
+			</output>
 			<br>
 			會以進度列顯示移除過程，然後詢問是否重新開機以完成解除安裝的工作。<br>
 			<br>
 			反悔想恢復的話：<br>
 			<br>
-			DISM /Online /Add-Capability /CapabilityName:Windows.Client.ShellComponents~~~~0.0.1.0
+			<output>
+				DISM /Online /Add-Capability /CapabilityName:Windows.Client.ShellComponents~~~~0.0.1.0
+			</output>
 		</p>
+		<hr>
+		<section>
+			<h3>PowerShell 做法</h3>
+			<p>
+				<output>
+					Get-WindowsPackage -Online | Where-Object {$_.PackageName -like "*Microsoft-Windows-UserExperience-Desktop-Package*"} | Select-Object -ExpandProperty PackageName<br>
+					<br>
+					Remove-WindowsPackage -Online -PackageName [掃描出來的套件名稱和版號]
+				</output>
+			</p>
+		</section>
 		<hr>
 		<footer>
 			<p>
-				[1] Microsoft Windows User Experience Desktop Package
+				[1] 2023/8/22 的 KB5029331 也會有 Windows 備份（預覽版），所以不要使用 19045.3393 這版號的 Windows 10，而是 19045.3324。<br>
+				[2] Microsoft Windows User Experience Desktop Package
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor39'>
+	<hr id='appx'>
 	<section>
 		<h2>移除 Microsoft Store 各式應用</h2>
 		<p>
@@ -1049,28 +1191,31 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor40'>
+	<hr id='3dobjects'>
 	<section>
 		<h2>移除檔案總管在本機時的 3D 物件資料夾</h2>
 		<p>
 			Windows 10 秋季創意者更新開始，檔案總管的本機，在資料夾分類多了「3D 物件」，用不到的人感覺很多餘。<br>
 			<br>
-			寫登錄檔：<br>
+			登錄編輯程式：<br>
 			<br>
-			[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\<br>FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag]<br>
-			"ThisPCPolicy"="Hide"<br>
+			<code>
+				[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\<br>
+				FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag]<br>
+				"ThisPCPolicy"="Hide"<br>
+			</code>
 			<br>
 			重新登入或下次開機時，就不會看見 3D 物件資料夾了。
 		</p>
 	</section>
-	<hr id='anchor41'>
+	<hr id='addorremoveprograms2'>
 	<section>
 		<h2>修復「新增移除程式」消失不見的發行者和安裝於</h2>
 		<p>
-			Alt→工具→資料夾選項→檢視→重設資料夾
+			「在新增移除程式按一下 Alt 鍵」→「工具」→「資料夾選項」→「檢視」→「重設資料夾」
 		</p>
 	</section>
-	<hr id='anchor42'>
+	<hr id='xboxgamebar'>
 	<section>
 		<h2>某軟體忽然沒聲音</h2>
 		<p>
@@ -1090,7 +1235,7 @@
 			大概不曉得按了什麼快捷鍵，不小心啟動 Xbox 遊戲列的關閉音效功能吧？怎麼按法我就不知道了。
 		</p>
 	</section>
-	<hr id='anchor43'>
+	<hr id='graphicssettings'>
 	<section>
 		<h2>版本 2004 無法切換內顯和獨顯</h2>
 		<p>
@@ -1098,37 +1243,27 @@
 			<br>
 			從 20H1 開始，這些設定被無視了！由 Windows 10 依據自己內部的設定進行，所以必須改用 Windows 10 提供的設定方式：<br>
 			<br>
-			設定 → 系統 → 顯示器 → 圖形設定 → 瀏覽  →（選擇想要設定的程式）→ 選項 → 省電 或 高效能<br>
+			【設定】→「系統」→「顯示器」→「圖形設定」→「瀏覽」→（選擇想要設定的程式）→「選項」→「省電」或「高效能」<br>
 			<br>
 			「省電」就是內建顯示晶片，「高效能」就是外接顯示卡。
 		</p>
 	</section>
-	<hr id='anchor44'>
+	<hr id='nvidiadrs'>
 	<section>
-		<h2>Windows 10 優化</h2>
+		<h2>Nvidia 控制面板無法套用新設定</h2>
 		<p>
-			C 槽→內容→工具→最佳化→已排程的最佳化：關閉<br>
+			Windows 10 在某次安全性更新後（可能是 2025 年二月），限制了 C:\ProgramData\NVIDIA Corporation 的存取權限，而且群組或使用者名稱並沒有 System 或使用者，根本無法有效設定權限。<br>
 			<br>
-			電源計畫→關閉硬碟前的時間→永不<br>
-			　　　　　允許喚醒計時器→停用<br>
-			<br>
-			裝置管理員→網路介面卡→電源管理→允許電腦關閉這個裝置以節省電源：取消勾選<br>
-			　　　　　→滑鼠及其他指標裝置→電源管理→允許這個裝置喚醒電腦：取消勾選<br>
-			　　　　　→鍵盤→電源管理→允許這個裝置喚醒電腦：取消勾選<br>
-			<br>
-			控制台→硬體和音效→電源選項：高效能<br>
-			　　　　　　　　　→讓電腦睡眠→永不<br>
-			<br>
-			勾選檔案總管的「在個別的處理程序開啟資料夾視窗」可解決「內容」檢視模式遇到影音檔案會卡頓的問題。
+			解法是刪除 C:\ProgramData\NVIDIA Corporation 的 Drs 資料夾，並重新建立一個 Drs 資料夾。沒有 Drs 資料夾的話，照樣無法套用新設定，因為 NVIDIA Corporation 本身就是無法存取的資料夾。
 		</p>
 	</section>
-	<hr id='anchor45'>
+	<hr id='safemode2'>
 	<section>
 		<h2>如何進入 Windows 10 的安全模式</h2>
 		<p>
 			跟 Windows 8 一樣，取消開機時按 F8 進安全模式的設計。但 Windows 10 提供圖形化介面，照步驟按就可以進安全模式：<br>
 			<br>
-			「開始」→「設定」→「更新與安全性」→「復原」→「立即重新啟動」→「疑難排解」→「進階選項」→「啟動設定」→「重新啟動」→「4) 啟用安全模式」<br>
+			【開始】→「設定」→「更新與安全性」→「復原」→「立即重新啟動」→「疑難排解」→「進階選項」→「啟動設定」→「重新啟動」→「4) 啟用安全模式」<br>
 			<br>
 			只是，通常進不去 Windows 才會想進安全模式<ins>1</ins>，Windows 8 和 Windows 10 卻是在進得去 Windows 的時候才能進安全模式。<br>
 			<br>
@@ -1143,7 +1278,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor46'>
+	<hr id='visualc++redistributable'>
 	<section>
 		<h2>各版最新 Visual C++ 可轉散發套件</h2>
 		<p>
@@ -1178,7 +1313,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor48'>
+	<hr id='registry'>
 	<section>
 		<h2>手工編輯登錄檔</h2>
 		<hr>
@@ -1189,12 +1324,12 @@
 				<br>
 				如果寫成登錄檔，就能一鍵搞定！以上面的例子來說，開啟「記事本」，照如下格式輸入：<br>
 				<br>
-				<code>
-					Windows Registry Editor Version 5.00<br>
-					<br>
-					[HKEY_USERS\.DEFAULT\Control Panel\Keyboard]<br>
-					"InitialKeyboardIndicators"="2"<br>
-				</code>
+				<textarea class='brush:txt'>
+					Windows Registry Editor Version 5.00
+
+					[HKEY_USERS\.DEFAULT\Control Panel\Keyboard]
+					"InitialKeyboardIndicators"="2"
+                </textarea>
 				<br>
 				然後儲存為 NumLock.reg 檔案，以後就能點兩下這個登錄檔來設定機碼的資料了！
 			</p>
@@ -1205,14 +1340,14 @@
 			<p>
 				上面例子寫入的資料是「字串」，其它最基本的，還有輸入十六進位值的 DWORD 值，以及二進位值，來看範例：<br>
 				<br>
-				<code>
-					Windows Registry Editor Version 5.00<br>
-					<br>
-					[HKEY_CURRENT_USER\Software\MyRegistry]<br>
-					"MyString"="ABCDE"<br>
-					"MyWord"=dword:0000d431<br>
-					"MyBinary"=hex:68,65,6c,6c,6f<br>
-				</code>
+				<textarea class='brush:txt'>
+					Windows Registry Editor Version 5.00
+
+					[HKEY_CURRENT_USER\Software\MyRegistry]
+					"MyString"="ABCDE"
+					"MyWord"=dword:0000d431
+					"MyBinary"=hex:68,65,6c,6c,6f
+                </textarea>
 				<br>
 				字串使用雙引號括住資料。十六進位值使用 <code>dword:</code> 開頭，後面輸入八個位數。二進位值使用 <code>hex:</code> 開頭，後面使用 <code>,</code> 一組一組接連寫入二進位資料。<br>
 				<br>
@@ -1225,20 +1360,20 @@
 			<p>
 				要刪除機碼中的某一筆登錄值，將其設為 - 號：<br>
 				<br>
-				<code>
-					Windows Registry Editor Version 5.00<br>
-					<br>
-					[HKEY_CURRENT_USER\Software\MyRegistry]<br>
-					"MyString"=-<br>
-				</code>
+				<textarea class='brush:txt'>
+					Windows Registry Editor Version 5.00
+
+					[HKEY_CURRENT_USER\Software\MyRegistry]
+					"MyString"=-
+                </textarea>
 				<br>
 				要刪除整個機碼，在開頭使用 - 號：<br>
 				<br>
-				<code>
+				<textarea class='brush:txt'>
 					Windows Registry Editor Version 5.00<br>
 					<br>
 					[-HKEY_CURRENT_USER\Software\MyRegistry]
-				</code>
+                </textarea>
 			</p>
 		</section>
 		<hr>
@@ -1249,7 +1384,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor49'>
+	<hr id='playlist'>
 	<section>
 		<h2>手工製作媒體播放清單</h2>
 		<hr>
@@ -1349,7 +1484,7 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor50'>
+	<hr id='soundcardrecord'>
 	<section>
 		<h2>開啟音效卡錄音功能</h2>
 		<p>
@@ -1366,7 +1501,7 @@
 			<section>
 				<h4>Step 1</h4>
 				<p>
-					滑鼠點擊「開始」→「控制台」→「硬體和音效」→「聲音」，然後在跳出的視窗，將頁籤切換到「錄製」，如圖：<br>
+					【開始】→「控制台」→「硬體和音效」→「聲音」，然後在跳出的視窗，將頁籤切換到「錄製」，如圖：<br>
 					<br>
 					<img src='../../images/bluesky/20120226A_01.png' alt='插圖'>
 				</p>
@@ -1397,7 +1532,7 @@
 			</section>
 		</section>
 	</section>
-	<hr id='anchor51'>
+	<hr id='rogspeaker'>
 	<section>
 		<h2>緩解 ROG Zephyrus 筆電重低音喇叭破音問題</h2>
 		<p>
@@ -1407,19 +1542,19 @@
 			<br>
 			所以解決辦法，就是別用 Smart AMP 假裝破喇叭是好喇叭，只用 Windows 預設的標準音質即可：<br>
 			<br>
-			「控制台」→「硬體和音效」→「聲音」→「喇叭」→「內容」→「進階」→取消「啟用音訊增強」的勾選<br>
+			【控制台】→「硬體和音效」→「聲音」→「喇叭」→「內容」→「進階」→取消「啟用音訊增強」的勾選<br>
 			<br>
 			這做法能解決重低音喇叭爆音的問題，缺點是 Sonic Sutio 3 設定的音質無法發揮作用。但我寧可聽 Windows 那廉價的聲音，也不想聽折磨人的噪音。
 		</p>
 	</section>
-	<hr id='anchor52'>
+	<hr id='graphicscard'>
 	<section>
-		<h2>在雙顯筆電中，強制使用獨立顯示卡，不要自動切換。</h2>
+		<h2>在雙顯筆電中，強制使用獨立顯示卡，不要自動切換</h2>
 		<hr>
 		<section>
 			<h3>Windows 8</h3>
 			<p>
-				「螢幕右角」→「設定」→「控制台」→「硬體和音效」→「NVIDIA 控制面板」→「管理 3D 設定」→「廣域設定」→「慣用的圖形處理器」→「高效能 NVIDIA 處理器」<br>
+				【控制台】→「硬體和音效」→「NVIDIA 控制面板」→「管理 3D 設定」→「廣域設定」→「慣用的圖形處理器」→「高效能 NVIDIA 處理器」<br>
 				<br>
 				然而，雙顯筆電的好處，就是省電長效，所以不建議這樣做。應該把「廣域設定」的部分，改為在「程式設定」中，一一挑選列出的遊戲軟體，個別將慣用的圖形處理器指定為獨立顯示卡即可。
 			</p>
@@ -1431,9 +1566,9 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor53'>
+	<hr id='ips'>
 	<section>
-		<h2>用 Windows 10 的夜間光線解決 IPS 面板螢幕過亮而刺眼的問題</h2>
+		<h2>用 Windows 10 的夜間光線緩解 IPS 面板螢幕過亮而刺眼的問題</h2>
 		<p>
 			IPS 面板的螢幕活像日光燈一樣，光線非常強烈，尤其是白色，看久了會很刺眼不舒服，眼睛像被辣到一樣流淚，因此濾藍光是很重要的！<br>
 			<br>
@@ -1441,11 +1576,11 @@
 			<br>
 			其實有個更好的做法！把螢幕的濾藍光關掉，改用 Windows 10 的「夜間光線」！然而這功能設計得很考驗益智能力，要「永久」啟動這個功能，必須先關掉幾點到幾點這段時間內才會變暗的「排程夜間光線」功能：<br>
 			<br>
-			「設定」→「系統」→「顯示器」→「夜間光線設定」→「排程夜間光線」→「關閉」<br>
+			【設定】→「系統」→「顯示器」→「夜間光線設定」→「排程夜間光線」→「關閉」<br>
 			<br>
 			然後按同一個畫面上方的「立即開啟」按鈕，並把「強度」調降為 10，這樣原本活像直接看日光燈的死白顏色，就會變得像牆壁粉刷一般的象牙白，看起來很舒服，不再辣眼睛。<br>
 			<br>
-			注意！不要從「設定」→「系統」→「顯示器」→「夜間光線」底下的切換開關，來開啟或關閉夜間光線！因為，這個開關應該正名為「排程夜間光線」，從這裡開啟夜間光線，會同時開啟「排程」，無法永久開啟夜間光線。<br>
+			注意！不要從【設定】→「系統」→「顯示器」→「夜間光線」底下的切換開關，來開啟或關閉夜間光線！因為，這個開關應該正名為「排程夜間光線」，從這裡開啟夜間光線，會同時開啟「排程」，無法永久開啟夜間光線。<br>
 			<br>
 			對了，記得設定一下螢幕的「色溫」，有濾藍光功能的螢幕通常預設為「暖色溫」，請改為「標準」，才不會嚴重偏黃而失真。只靠 Windows 10 的夜間光線讓顏色變暖就夠了，效果更自然，顏色不失真。
 		</p>
@@ -1456,7 +1591,7 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor54'>
+	<hr id='codecpack'>
 	<section>
 		<h2>安裝編碼包後影片出現綠影</h2>
 		<hr>
@@ -1506,21 +1641,21 @@
 			</p>
 		</footer>
 	</section>
-	<hr id='anchor55'>
+	<hr id='aegisub'>
 	<section>
 		<h2>Aegisub 設定集</h2>
 		<hr>
 		<section>
 			<h3>關閉拼字檢查</h3>
 			<p>
-				「View」→「Option」→「Interface」→取消「Enable syntax highlighting」的勾選
+				「View」→「Option」→「Interface」→ 取消「Enable syntax highlighting」的勾選
 			</p>
 		</section>
 		<hr>
 		<section>
 			<h3>自動掛載連結影音</h3>
 			<p>
-				「View」→「Option」→「General」→將「Automatically load linked files」設為「Always」
+				「View」→「Option」→「General」→ 將「Automatically load linked files」設為 Always
 			</p>
 		</section>
 		<hr>
@@ -1539,8 +1674,19 @@
 				注意要大寫！
 			</p>
 		</section>
+		<hr>
+		<section>
+			<h3>舊時間軸與時間平移</h3>
+			<p>
+				全選所有需要平移的片段。<br>
+				<br>
+				先「提前」時間為「片段已寫在字幕檔的開始時間」，好讓片段歸零。<br>
+				<br>
+				再「延後」時間為「挑定好預覽影片畫面下方顯示的時間」，就能套用新的時間軸。
+			</p>
+		</section>
 	</section>
-	<hr id='anchor56'>
+	<hr id='youtubedl'>
 	<section>
 		<h2>youtube-dl 設定集</h2>
 		<p>
@@ -1609,28 +1755,6 @@
 			</p>
 		</section>
 	</section>
-	<hr id='anchor57'>
-	<section>
-		<h2>啟用終極效能電源計劃</h2>
-		<p>
-			Windows 10 並不是只有省電、平衡、高效能三種電源計劃，還有一種隱藏起來，必須輸入指令才能啟用的終極效能：<br>
-			<br>
-			POWERCFG -DUPLICATESCHEME e9a42b02-d5df-448d-aa00-03f14749eb61
-		</p>
-	</section>
-	<hr id='networklistprofilename'>
-	<section>
-		<h2>修改網路連線的名稱</h2>
-		<p>
-			網路連線的名稱重複時，Windows 會自動在字尾加上 2 啊 3 啊的來區別。<br>
-			<br>
-			覺得難看想改的話：<br>
-			<br>
-			HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\<br>Profiles\<br>
-			<br>
-			一個個找，在 ProfileName 看到想改的名稱就修改吧～
-		</p>
-	</section>
 	<hr id='p2p'>
 	<section>
 		<h2>P2P 檔案共享軟體</h2>
@@ -1642,23 +1766,6 @@
 			雖然 P2P 是分享資料檔的技術，不是分享與下載盜版的技術，技術本身沒問題。但真要私下共享資料檔案的人，根本不會使用 P2P，而是用有金鑰保護的網路硬碟。反觀出現在 P2P 軟體的，幾乎都是盜版漫畫、影音、遊戲，哪有什麼共享的資料檔？所以只要有這類軟體，你就會哪天頭腦不清楚，下載盜版軟體和影音，赤裸裸的在監視者跟前犯法。<br>
 			<br>
 			所以本站決定移除相關連結，以免誤導使用者觸法被抓。
-		</p>
-	</section>
-	<hr id='pointerspeed'>
-	<section>
-		<h2>滑鼠指標移動速度</h2>
-		<p>
-			1/11　0.03125<br>
-			2/11　0.0625<br>
-			3/11　0.25<br>
-			4/11　0.5<br>
-			5/11　0.75<br>
-			6/11　1.<br>
-			7/11　1.5<br>
-			8/11　2.<br>
-			9/11　2.5<br>
-			10/11　3.<br>
-			11/11　3.5
 		</p>
 	</section>
 </article>
