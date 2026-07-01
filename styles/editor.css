@@ -1,0 +1,4 @@
+output.editor{background-color:#22c;color:#ddd}
+output.editor::before{content:'═══　檔案開頭　═══';display:block}
+output.editor::after{content:'═══　檔案結尾　═══';display:block}
+output.editor strong{background-color:#c22;color:#ddd}

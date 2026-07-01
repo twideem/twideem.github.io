@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/private.js'></script>
+<article>
+	<header>
+		<h1>儲存的 Big5 和 CR LF 純文字文件，卻顯示為 UTF-8 和 LF</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>這是什麼情形</h2>
+		<p>
+			如果儲存的 Big5 檔案，裡面沒有中文，只有英文，那麼文字編輯器打開來看時，可能會判讀為 UTF-8。<br>
+			<br>
+			如果儲存的 CR LF 檔案，裡面只有一行，那麼文字編輯器打開來看時，可能會判讀為 Unix 的 LF 換行。<br>
+			<br>
+			這是因為純文字文件本來就不包含這些訊息，只能根據特徵去判讀！
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>問題出在找不到 Big5 和 CR LF 的特徵</h2>
+		<p>
+			一個只有英文沒有中文的純文字文件，裡面根本沒有坐落在 Big5 字元編碼之間的字元可以辨識，內容全坐落在 ASCII 字元編碼之間，於是就以文字編輯器預設使用的字元編碼來顯示，預設 UTF-8 就顯示 UTF-8，預設 Big5 就顯示 Big5。畢竟 UTF-8 和 Big5 都可說是基於 ASCII 的擴充。<br>
+			<br>
+			只有一行的話，那這個檔案根本就沒有換行字元的存在，也就是裡面沒有 CR 也沒有 LF 可以判讀，既然沒有換行字元，文字編輯器就以預設的換行來顯示，預設 LF 就顯示 LF，預設 CR LF 就顯示 CR LF。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>沒事，不會有什麼問題</h2>
+		<p>
+			所以，你儲存檔案時，確實以指定的頁碼和換行格式儲存就好！<br>
+			<br>
+			文字編輯器顯示出的字元編碼和換行符號，跟你指定的並不一樣時，先看看這文件是否只有 ASCII 字元，或者只有一行，導致沒有特徵可以判讀到底是 UTF-8 還是 Big5、到底是 LR LF 還是 LF。<br>
+			<br>
+			反正這樣的純文字文件，既可以是 UTF-8 也可以是 Big5，既可以是 CR 也可以是 LF，歸類於哪一種，都不會帶來問題。
+		</p>
+	</section>
+</article>

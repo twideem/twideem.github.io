@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>鍵盤訊號偵測器</h1>
+	</header>
+	<hr>
+	<p>
+		請按任意鍵盤，畫面會顯示按鍵的編號。
+	</p>
+</article>
+<script>
+	addEventListener('keydown',x=>$('p').innerHTML=x.which);
+</script>

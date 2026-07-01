@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>明星職棒 5</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>利用修改打造心裡想要的球隊</h2>
+		<p>
+			《スーパーファミスタ 5》是日本野球遊戲少數可以任意自創球員的，能夠打造出心目中最理想的球隊進行遊戲。<br>
+			<br>
+			名字方面可用畫的，想把字畫得漂亮，可先用小畫家打出字型大小 11 的細明體字，放大 8 倍後就能一邊對照小畫家一邊把字畫上去。
+		</p>
+		<figure>
+			<img src='../../images/xpartition/19960229A_03.png' alt='插圖'>
+			<figcaption>細明體、11、800%、顯示格線</figcaption>
+		</figure>
+		<p>
+			可修改的姿勢也算豐富，按自己喜好把球員的姿勢改一改，會增加更多趣味性。但球隊的球衣如果有線條就不適合改，因為很多屬於獨特姿勢，遊戲並未針對每個球隊畫這些姿勢，使得圖像會有殘缺。<br>
+			<br>
+			自創球員有人數限制，因此要修改的對象若是內建球員，可以直接到 ROM 裡面去改，節省自創名額。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>修改技巧</h2>
+		<hr>
+		<section>
+			<h3>打擊者的資料結構</h3>
+			<p>
+				首先，建議用選手的「點、走、守、肩」數據順序，來尋找打擊者，然後照如下格式修改資料（以松井秀喜為例）：<br>
+				<br>
+				<code>
+					０Ａ　　０２　００　００　００　０Ｄ　００　００　０１　２Ｄ　０１　１４　３Ｃ<br>
+					チーム　打順　不明　　　　　　　　　　　　　姿勢　投打　率　　　　　本　　点<br>
+					０Ｆ　０Ｆ　１９　０１　０７　００　　　０７<br>
+					走　　守　　肩　　背番　人気　球棒顏色　守備
+				</code>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>投手的資料結構</h3>
+			<p>
+				首先，建議用選手的「最速、中速、右、左、下」數據順序，來尋找投手，然後照如下格式修改資料（以伊良部為例）：<br>
+				<br>
+				<code>
+					００　ＦＤ　００　１３　　　９Ｃ　８４　０８　０６　０８<br>
+					投　　防　　　　　スタミナ　最速　中速　右　　左　　下<br>
+				</code>
+				<br>
+				「投」指投球姿勢。遊戲的修改模式只能選「上」「橫」兩種，必須自行用記憶體修改程式，改成其它姿勢的數據。
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>修改數據</h2>
+		<hr>
+		<section>
+			<h3>打擊姿勢</h3>
+			<p>
+				<code>00</code>　　標準打法<br>
+				<code>01</code>　　鈴木一朗打法<br>
+				<code>02</code>　　王貞治打法<br>
+				<code>03</code>　　美式打法
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>投球姿勢</h3>
+			<p>
+				<code>00</code>　　右手標準投法<br>
+				<code>08</code>　　右手村田兆治投法<br>
+				<code>10</code>　　右手野茂英雄投法<br>
+				<code>20</code>　　右手下勾投法<br>
+				<code>40</code>　　右手側投法<br>
+				<code>80</code>　　左手標準投法<br>
+				<code>88</code>　　左手村田兆治投法<br>
+				<code>90</code>　　左手野茂英雄投法<br>
+				<code>A0</code>　　左手下勾投法<br>
+				<code>C0</code>　　左手側投法
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>球棒顏色</h3>
+			<p>
+				<code>00</code>　　木棒<br>
+				<code>01</code>　　紅色<br>
+				<code>02</code>　　藍色<br>
+				<code>03</code>　　黑色<br>
+				<code>04</code>　　金色<br>
+				<code>05</code>　　灰色<br>
+				<code>06</code>　　綠色<br>
+				<code>07</code>　　紫色
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>守備位置</h2>
+		<p>
+			1　　 投手<br>
+			2　　 捕手<br>
+			3　　 一壘手<br>
+			4　　 二壘手<br>
+			5　　 三壘手<br>
+			6　　 游擊手<br>
+			7　　 左外野手<br>
+			8　　 中外野手<br>
+			9　　 右外野手<br>
+			DH　　指定打擊
+		</p>
+	</section>
+</article>

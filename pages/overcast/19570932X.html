@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>用潛意識廣告背單字</h1>
+		<p>
+			1957 年九月，市場調查業者 James Vicary 在電影院做了實驗，在放送電影的過程中，每隔 5 秒鐘以 1/3000 秒的速度，讓人在察覺不到的狀態下，插入「喝可口可樂」或「吃爆米花」的字樣。六個星期下來，發現可口可樂銷售量成長 18.1%、爆米花則是 57.5%。<br>
+			<br>
+			這項實驗稱為 Subliminal stimuli（潛意識廣告），它表示人類除了在有意識的情況下表現出行為以外，其實也受無感知狀態下的刺激影響行為。<br>
+			<br>
+			這張網頁的程式，就是試看看這招能不能增強背單字的記憶能力　－－
+		</p>
+	</header>
+	<hr>
+	<section style='height:115px'>
+		<h2>顯示區（每 5 秒顯示一次訊息，每次 35 毫秒。）</h2>
+		<p>
+			<span style='color:#0099FF;font-family:courier;font-size:32px;font-weight:bold;line-height:110%'>
+				&#12288;<br>
+				&#12288;
+			</span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定欄（輸入兩個半形空白，會有換行效果，用來分隔英文單字與中文。）</h2>
+		<p>
+			<input placeholder='請輸入英文單字與翻譯' style='width:562px'>
+		</p>
+	</section>
+</article>
+<script>
+	let a;
+	let b='Coke  可樂';
+
+	($('input').onchange=function(){
+		clearInterval(a);
+		a=setInterval(()=>{
+			if($('input').value) b=$('input').value;
+
+			$('span').innerHTML=b.replace(/[\s]{2}/g,'　<br>');
+			setTimeout(()=>$('span').innerHTML='　<br>　',35);
+		},5000);
+	})();
+</script>

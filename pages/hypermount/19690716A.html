@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>RGB 和 HEX 轉換</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>HEX</h2>
+		<p>
+			H <input>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>RGB</h2>
+		<p>
+			<span style='color:red'>R</span> <input><br>
+			<span style='color:green'>G</span> <input><br>
+			<span style='color:blue'>B</span> <input>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 輸入後，按 Enter。
+		</p>
+	</footer>
+</article>
+<script>
+	$('input').onkeydown=function(x){
+		if(x.which==13){
+			let g=$('input').value.charAt(0)=='#'?1:0;
+			for(let n=1,o=0;n<=3;n++,o+=2) $('input',n).value=parseInt(`0x${$('input').value.substr(g+o,2)}`);
+		}
+	};
+
+	$('input',1).onkeydown=$('input',2).onkeydown=$('input',3).onkeydown=function(x){
+		if(x.which==13){
+			$('input').value='#';
+			for(let n=1;n<=3;n++) $('input').value+=parseInt($('input',n).value).toString(16).padStart(2,'0');
+		}
+	};
+</script>

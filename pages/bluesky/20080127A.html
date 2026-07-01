@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<style>body{background-color:#dcefff}</style>
+<script src='../../scripts/core.js'></script>
+<script src='../../scripts/highlighting.js'></script>
+<script>lang('.NET','Java')</script>
+<article>
+	<header>
+		<h1>jEdit 設定集</h1>
+	</header>
+	<hr>
+	<section>
+		<h2>Java 版本問題</h2>
+		<p>
+			使用 Java 14 或以上版號，跑 jEdit 5.6 或 jEdit 5.7，在點 jEdit 視窗標題列獲得駐點的情況下，將檔案拖曳進來，有高機率讓程式當掉。<br>
+			<br>
+			使用 Java 20 以後的版本，遇到單行文字過長，會有卡頓的情形，甚至會整個卡死不動。<br>
+			<br>
+			也就是說，到 jEdit 5.7 為止，不適合用最新的 Java，建議使用 <a href='https://www.azul.com/downloads/?version=java-13&os=windows&architecture=x86-64-bit&package=jre&show-old-builds=true#zulu' target='_blank'>Zulu 13.0.14</a>。<br>
+			<br>
+			希望預覽版的 jEdit 5.8 在正式推出後，有解決這問題，能用最新版的 Java 執行。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定文件使用的緩衝區編碼為 UTF-8</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Encoding → Default character encoding = UTF-8</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定文件使用的格式為 Unix</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → General → Default line separator = Unix(\n)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定顯示區域使用的字型為支援 Unicode 的字型</h2>
+		<p>
+			將字型放在 Java 的 lib\fonts 資料夾，重新啟動 jEdit，即可在挑選字型的清單找到它。<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Text Area → Text Font = DialogInput</code><br>
+			<br>
+			Java 以前不支援文字渲染，所以有些字型在舊版 jEdit 有字數過長時程式變慢的問題，建議使用 5.6 版。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>如何 Ctrl + Y 復原</h2>
+		<p>
+			<code>Ctrl + e</code>，然後按 <code>Ctrl + z</code>。<br>
+			<br>
+			不習慣的話，可修改 Shortcuts。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>避免自動對齊功能使用 Tab 字元</h2>
+		<p>
+			<code>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → global defaults → Soft (emulated with spaces) tabs = (核取)<br>
+				<br>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → Java → Use default settings
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>避免按 { 字元時自動縮排</h2>
+		<p>
+			<code>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → global defaults → Indent width = 1<br>
+				<br>
+				[功能表] → Utilities → Global Options → jEdit → Editing → Change settings for mode → Java → Use default settings
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>多行縮排</h2>
+		<p>
+			選取多行然後按 <code>Tab</code> 鍵，會整列增加縮排。<br>
+			<br>
+			選取多行然後按 <code>Shift + Tab</code> 鍵，則是整列減少縮排。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>縱向選取</h2>
+		<p>
+			按 <code>Alt + \</code> 後，可用 <code>Shift + 方向鍵</code> 縱向選取，適合多行修改。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>複合選取</h2>
+		<p>
+			按 <code>Ctrl + \</code> 後，可用 <code>Shift + 方向鍵</code> 跳躍式選取不同區塊來修改。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>複製當前行、移動當前行</h2>
+		<p>
+			這些功能放在 <code>[功能表] → Macros → Edting</code> 的 Duplicade Lin Belowe、Move Lines Down、Move Lines Up，請自行建立快捷鍵（Shortcut）。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>程式碼片段</h2>
+		<p>
+			jEdit 也有像 Visual Studio Code 的 Snippets 功能，敲簡單幾個字後按 Tab 鍵，會轉換成程式片段。請到如下位置設定：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Abbreviations</code><br>
+			<br>
+			預設按空白鍵轉換，但必須勾選 <code>Space bar expands abbrevs</code>。<br>
+			<br>
+			要修改成 Tab 鍵的話的話：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Shortcuts → Expand Abbreviation = Tab</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>自訂語法高亮度關鍵字</h2>
+		<p>
+			進入 jEdit 所在資料夾，再修改 modes 裡面各語法的 xml 檔。
+		</p>
+		<hr>
+		<section>
+			<h3>*.html 的 &lt;style>&lt;/style> 遇到含 : 字元的屬性就解析錯誤</h3>
+			<p>
+				jEdit 5.1.0 有這個問題，但 jEdit 5.2pre1 有解決。<br>
+				<br>
+				可以考慮把 html.xml 裡面的如下語法給刪除：<br>
+				<br>
+				&lt;!-- stylesheet --><br>
+				&lt;SEQ_REGEXP TYPE="MARKUP" DELEGATE="STYLE_TAG"<br>
+				&nbsp; &nbsp; HASH_CHAR="&lt;">&lt;(?=STYLE\b)&lt;/SEQ_REGEXP>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>讓 JavaScript 支援 Template literal 的多行字串與插值</h2>
+		<p>
+			編輯 modes 資料夾裡的 javascript.xml，加入下面高亮度標示起來的內容：<br>
+			<br>
+			<textarea class='brush:xml'>
+				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
+					...
+					&lt;SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION">
+						&lt;BEGIN>`&lt;/BEGIN>
+						&lt;END>`&lt;/END>
+					&lt;/SPAN>
+					...
+				&lt;/RULES>
+				&lt;RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\">
+					&lt;SPAN TYPE="LITERAL2" ESCAPE="\">
+						&lt;BEGIN>${&lt;/BEGIN>
+						&lt;END>}&lt;/END>
+					&lt;/SPAN>
+				&lt;/RULES>
+			</textarea>
+			<br>
+			如果你想讓變數名稱和 ${} 符號不同色的話，上面的設定修改為：<br>
+			<br>
+			<textarea class='brush:xml'>
+				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
+					...
+					&lt;SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION">
+						&lt;BEGIN>`&lt;/BEGIN>
+						&lt;END>`&lt;/END>
+					&lt;/SPAN>
+					...
+				&lt;/RULES>
+				&lt;RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\">
+					&lt;SPAN TYPE="LITERAL2" ESCAPE="\" DELEGATE="EXPRESSION">
+						&lt;BEGIN>${&lt;/BEGIN>
+						&lt;END>}&lt;/END>
+					&lt;/SPAN>
+				&lt;/RULES>
+				&lt;RULES SET="EXPRESSION" DEFAULT="LITERAL3" ESCAPE="\" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)" />
+			</textarea>
+			<br>
+			或者直接下載 Roman Tsourick 修正好的 javascript.xml，網址是：<br>
+			<br>
+			<a href='http://sourceforge.net/p/jedit/patches/613/'>http://sourceforge.net/p/jedit/patches/613/</a>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>套用第三方語法高亮度配色主題</h2>
+		<p>
+			jEidt 雖然能修改高亮度顏色，但資料與整個 jEdit 的組態檔放在一起，無法個別保存，不容易將自訂好的主題配色分享給他人套用。<br>
+			<br>
+			透過 Plugins 下載 <code>Editor Scheme</code> 即可解決這個缺憾，可以自行製作多種主題配色，而且已內建多套主題配色。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>顯示空白字元</h2>
+		<p>
+			用 Plugin Manager 下載 <code>WhiteSpace</code>。<br>
+			<br>
+			記得到 Plugin Options 設定預設開啟，順便調整顏色。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>取消 80 字元準線</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Text Area → Wrap guide = (不核取)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>開啟行號</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Gutter → Line numbering = (核取)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>設定行號的字型</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → Gutter → Gutter font = DialogInput</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>啟用摺疊功能</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Editing → Folding mode → indent</code><br>
+			<br>
+			設定為 explicit 是摺疊 {{{ 開頭和 }}} 結尾。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Folding markup</h2>
+		<p>
+			jEidt 有一套自己摺疊內容的語法，首先在文件開頭加入這段宣告：<br>
+			<br>
+			<code>&lt;!--:folding=explicit:collapseFolds=1:--></code><br>
+			<br>
+			然後將想要摺疊起來的內容，用下面所示標記包起來，就可以摺疊了：<br>
+			<br>
+			<code>
+				&lt;!--{{{ 註解 --><br>
+				<br>
+				&lt;!--}}}-->
+			</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>顯示檔案瀏覽器</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Docking → File Browser = Left</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>關閉預設的緩衝區選擇器</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → jEdit → View → Show buffer switcher = (不核取)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>頁簽式緩衝區選擇器</h2>
+		<p>
+			用 Plugin Manager 下載 <code>BufferTabs</code>。<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → BufferTabs → Enable BufferTabs by default = (核取)</code><br>
+			<br>
+			設定頁簽式緩衝區選擇器的位置：<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → BufferTabs → Location on BufferTabs = top</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>啟用 Java Swing 外觀</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Apperance</code>:<br>
+			<br>
+			1. <code>Draw window borders using Swing look & fell = (核取)</code><br>
+			2. <code>Draw dialog box borders using Swing look & fell = (核取)</code><br>
+			<br>
+			重新啟動 jEdit。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>更換工具列圖示</h2>
+		<p>
+			將下載回來的 JAR 檔案放到 JRE 的 <code>lib\ext</code> 裡面。<br>
+			<br>
+			例如 gnome_jedit_icons.jar 檔案。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>手動調整程式視窗大小</h2>
+		<p>
+			修改 <code>Documents and Settings\[User]\.jedit\perspective.xml</code>：<br>
+			<br>
+			<code>WIDTH="800" HEIGHT="600"</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>取消自動備份</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → Autosave & Backuspan = (全部空白)</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>開啟檔案時預設為作用中文件所在資料夾</h2>
+		<p>
+			<code>[功能表] → Utilities → Global Options → File System Browser → General→ Default path = Parent directory of current buffer</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>自動偵測與手動切換字元編碼</h2>
+		<hr>
+		<section>
+			<h3>自動</h3>
+			<p>
+				在 <code>[功能表] → Utilities → Global Options → Encodings → List of fallback encodings</code> 輸入會用到的字元編碼，像是 Big5 和 UTF-16，並勾選 <code>Auto-detect file encoding when possible</code>。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>手動</h3>
+			<p>
+				<code>[功能表] → File → Reload with Encoding</code><br>
+				<br>
+				可在 <code>[功能表] → Utilities → Global Options → Encodings → Selected encoding(s)</code> 設定可選的字元編碼。<br>
+				<br>
+				由於 MS950 是 jEdit 必定可選的字元編碼 ，因此不用設定 Big5 和 GB2312，只要留 UTF-16 即可。預設使用 UTF-8 的話，也不用設定 UTF-8。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>補充</h3>
+			<p>
+				jEdit 會記錄每個檔案自動偵測或手動切換後的字元編碼狀態，導致下次開始同一個檔案時，不再自動偵測正確的字元編碼，而是沿用上次使用的字元編碼。
+			</p>
+		</section>
+	</section>
+	<hr id='capturinggroup'>
+	<section>
+		<h2>Regular expressions 搜尋</h2>
+		<hr>
+		<section>
+			<h3>() 捕獲群組與 $1 變數</h3>
+			<p>
+				勾選這項目，除了可以用正規式搜尋，還可以讓正規式多重匹配後，用 <code>$1</code> 代表結果。 <br>
+				<br>
+				比如有段文字：<br>
+				<br>
+				<samp>PhelloAworldBR</samp><br>
+				<br>
+				在 Search for 用正規式的 () 多重匹配：<br>
+				<br>
+				<samp>(P|A|BR)</samp><br>
+				<br>
+				在 Replcace with 輸入：<br>
+				<br>
+				<samp>&lt;$1></samp><br>
+				<br>
+				在匹配結果前後加上 &lt; 和 > 符號，這樣就會取代為：<br>
+				<br>
+				<samp>&lt;P>hello&lt;A>world&lt;BR></samp>
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>$2 到 $9</h3>
+			<p>
+				如果有好幾組 () 匹配，可用 <code>$2</code> 到 <code>$9</code> 表示。<br>
+				<br>
+				比如有段文字：<br>
+				<br>
+				<samp>worldhello</samp><br>
+				<br>
+				在 Search for 用兩組正規式的 () 匹配，注意！要按照會找到的順序：<br>
+				<br>
+				<samp>(world)(hello)</samp><br>
+				<br>
+				第一個找到的 world 會放在 $1，第二找到的 hello 會放在 $2。於是在 Replcace with 輸入：<br>
+				<br>
+				<samp>$2 $1</samp><br>
+				<br>
+				便會取代為：<br>
+				<br>
+				<samp>hello world</samp>
+			</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		<h2>在 jEdit 開啟 URL 路徑格式的檔案</h2>
+		<p>
+			在 jEdit 按 Ctrl + O 開啟檔案時，會發現無法開啟 file:// 開頭、含 # & ? 符號的路徑。<br>
+			<br>
+			這問題可以改用 <code>[功能表] → Macros → Files → Open Path</code> 解決，有需要用到的人，不妨將這功能設定快捷鍵（Shortcut）。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>用網頁瀏覽器開啟正在編輯的 HTML 檔案</h2>
+		<p>
+			用 Plugin Manager 下載 <code>Console</code>。<br>
+			<br>
+			先設定快捷鍵：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → Shortcuts → Run Current Buffer</code><br>
+			<br>
+			然後設定指令，在：<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → Console → Compile & Run → Set compiler/interpreter for edit mode: html → Interpreter → Use custom command</code><br>
+			<br>
+			輸入：<br>
+			<br>
+			<code>$f</code><br>
+			<br>
+			就能以預設的網頁瀏覽器開啟 HTML 檔案來檢視。<br>
+			<br>
+			<em>
+				如果不想為此下載 Plugin 的話，可以自己寫個 Macro：<br>
+				<br>
+				Runtime.getRuntime().exec("C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe " + buffer.getPath());<br>
+				<br>
+				命名為 Run_Path.bsh，放在 jEdit 的 macros 資料夾裡，再建立快捷鍵即可。
+			</em>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>直譯或執行正在編輯的 JavaScript 檔案</h2>
+		<p>
+			到 Plugin Manager 下載 <code>Console</code>。<br>
+			<br>
+			先設定快捷鍵：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → Shortcuts → Run Current Buffer</code><br>
+			<br>
+			然後設定指令，以 Rhino 直譯 *.js 檔案為例，在：<br>
+			<br>
+			<code>[功能表] → Plugins → Plugin Options → Console → Compile & Run → Set compiler/interpreter for edit mode: javascript → Interpreter → Use custom command</code><br>
+			<br>
+			輸入：<br>
+			<br>
+			<code>java -cp ".;%JAVA_HOME%\lib\rhino.jar" org.mozilla.javascript.tools.shell.Main -version 200 -encoding UTF-8 $f</code><br>
+			<br>
+			就能按快捷鍵執行正在編輯的 JavaScript 程式碼。<br>
+			<br>
+			也可以把直譯命列寫在批次檔，跟每個 JavaScript 程式碼放在一起，改成執行批次檔裡面的命令，這時輸入的是：<br>
+			<br>
+			<code>$d\run.bat</code>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Docking 往左還是往右</h2>
+		<p>
+			如果平常縮起來，要用的時候才展開，那就往右靠！因為往左靠的話，會往右展開，這時 text area 也會往右邊挪移位置，導致原本關注好的閱讀文字失去焦點。往右靠，往左展開，不會造成 text area 的文字挪移，而是就地展開。<br>
+			<br>
+			如果永遠展開的話，沒有往右展開的問題，加上為了增加空間讓 docking 展開，會把視窗尺寸拉長，這樣還能把 text area 往螢幕中間位置挪移，更方便看文字。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>File System Browser 和 File Browser 的差別</h2>
+		<p>
+			File Browser 是 open file 或 save as 之類用的檔案對話視窗，用完會自動關閉。<br>
+			<br>
+			File System Browser 是可以 dock 到側邊欄用的視窗，這樣就會一直停留在側邊欄，方便反覆操作。<br>
+			<br>
+			然而，在 Utilities → Global Options → Docking 中，File System Browser 也是名叫 File Browser，只能說這是可以 dock 到側邊欄的 File Browser。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>HyperSearch 和 Markers 還有 Registers</h2>
+		<p>
+			除了 File Browser 可以 dock 到側邊欄，HyperSearch Results、Markers、Registers 也可以！<br>
+			<br>
+			HyperSearch Results 是搜尋內容時，產生一個清單，能直接看所有符合的搜尋結果，通盤了解該修改的情況，方便逐筆修改內容。然而，HyperSearch 出來的對話視窗，原本就不會點了自動關閉，而是一直留著，還可以視需要調整視窗大小、視需要拖曳來拖曳去放在不同位置，以免它擋到文字，或占用文字區域的空間，因此 dock 到側邊欄不見得比較好用。<br>
+			<br>
+			Markers 像是書籤一樣，你可以把文字檔案的不同行數，加入到 Markers 清單中，以便先到某一行修改文字後，可以點一下清單中的行數，快速回到想要的行，尤其是要在特定好幾個行跳來跳去修改時，非常好用。這原本是在功能表操作，但可以 dock 到側邊欄，滑鼠移過去就能點來用，順手很多。<br>
+			<br>
+			Registers 是複製貼上的內容檢視器，但沒那麼簡單，你可以在檢視器先修改複製的內容，在逐一貼上到想要的地方。這功能原本要點 Edit > More Clipboard > View Registers 叫出來，但也可以 dock 到側邊欄，滑鼠移過去點一下就能用。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>內建的 QuickNotepad 非常邪惡</h2>
+		<p>
+			<small>千萬不要用 QuickNotepad 打開任何檔案，它會把非 ASCII 字元編碼的檔案變成亂碼後儲存檔案，導致內容全毀！</small><br>
+			<br>
+			QuickNotepad 是 jEdit 內建的 Plugin，然而，它並不是一款簡易型文字編輯器，而是快速筆記板，主要用來 dock 在側邊欄，隨手寫一些文字內容用的。<br>
+			<br>
+			QuickNotepad 有個看起來像「開啟舊檔」的按鈕，但那更像是電玩遊戲的「讀取進度檔」，有 Save 1.txt、Save 2.txt、Save 3.txt⋯是專門給 QuickNotepad 讀寫資料用的檔案。因為那個按鈕叫做 Choose notepad file，而不叫 Open file，<strong>你只該用它來開啟 QuickNotepad 儲存的檔案，而不是用它開啟其它檔案來檢視。</strong><br>
+			<br>
+			用 QuickNotepad 來開啟舊檔的話，它會以 Windows 預設的 ASCII（Big5）編碼開啟檔案。如果你這個文字檔案使用 UTF-8，就會得到亂碼！然後在關閉 jEdit 時，因為 QuickNotepad 會自動把「進度存檔」儲存起來，於是把那堆亂碼寫入檔案，你這檔案的文字內容就全毀了～<br>
+			<br>
+			因為這東西有個 Notepad 的字樣，非常誤導人，以為是簡易型的文字編輯器。如果你平常沒在使用這功能，不清楚它其實是用來做什麼的，哪天就會犯傻用它來開啟檔案，所以強烈建議按 Plugins → Plugin Manager 把 QuickNotepad 移除，不要留著它，以免哪天帶來無可挽救的災情。<br>
+			<br>
+			但如果你經常一邊用 jEdit，又一邊開 Windows 記事本暫時保留一些待會要用的文字內容，那 QuickNotepad 還是不錯用的。只要平常有在用，知道這是怎樣的東西，就比較不會有犯傻用它來開啟檔案的，但還是要謹守這條原則：「死都別用它 Choose notepad file 的按鈕。」
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>提升 jEdit 啟動速度</h2>
+		<p>
+			先建立 <code>jedit.exe -nogui</code> 捷徑，放在開始功能表的「啟動」裡面，這樣每次開機就預熱執行，解決 jEdit 第一次啟動時間過長的問題。<br>
+			<br>
+			再建立 <code>jedit.exe -background</code> 捷徑，用來執行 jEdit，這樣會常駐在背景處理程序，每次執行都秒開。<br>
+			<br>
+			最後是用檔案關聯的方式開啟 jEdit 也能背景執行！使用登錄編輯程式，切換到 <code>HKEY_CLASSES_ROOT\Applications\jedit.exe\shell\open\command</code>，編輯裡面的字串，在 <code>"%1"</code> 前面加上 <code>-background</code>。然後搜尋所有用 jedit.exe 開啟的 xxx_auto_file，同樣在每個 "%1" 前面加上 -background。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>properties</h2>
+		<p>
+			jEdit 設定過的資料，會永遠留在 properties 組態檔裡面。即使把設定回復到原先的狀態、或者移除 plugin，組態檔依然會保留這些用不到的設定。長期設定下來，properties 檔案會變大，裡面有三分之二以上都是用不到的設定⋯什麼設定都想按看看、什麼 plugin 都想下載用看看，那十分之九都是殘留的設定值也不誇張。<br>
+			<br>
+			有潔癖的人，不妨每個階段，就保存一份 properties，以便日後還原到過去乾淨的狀態。<br>
+			<br>
+			雖然檔案大小不會很大，20KB ~ 100KB，但設定筆數 1000 行以上，對啟動速度多少有影響。<br>
+			<br>
+			沒隨便亂修改太多設定、也沒下載一堆 plugin 的話，正常應該 10KB 以下，400 行以下。超過的話不妨打開 properties 檔案看看，裡面是不是有一堆過去殘留下來的設定～
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>手動清除檔案游標位置</h2>
+		<p>
+			刪除 <code>recent.xml</code> 檔案。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>備份整個設定檔</h2>
+		<p>
+			將 <code>Documents and Settings\[User]\.jedit</code>（Windows XP）或 <code>[User]\AppData\Roaming\jEdit</code>（Windows Vista）資料夾保存起來，以後再放回去即可。
+		</p>
+	</section>
+</article>

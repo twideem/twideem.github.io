@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset='UTF-8'>
+<title>/</title>
+<link href='../../styles/layout.css' rel='stylesheet'>
+<script src='../../scripts/core.js'></script>
+<article>
+	<header>
+		<h1>RGB 色調計算式</h1>
+		<p>
+			本文以網路安全 30 色為例，如需更精密，請自行變換階數。
+		</p>
+	</header>
+	<hr>
+	<section>
+		<h2>RGB 色相環</h2>
+		<p>
+			<span style='font-size:16px'>
+				<span style='color:#999'>紫</span>　　　<span style='color:red'>紅</span>　　　<span style='color:#999'>黃</span><br>
+				　<span style='color:#999'>　↗　　　↘</span><br>
+				<span style='color:blue'>藍</span>　　　<span style='color:#999'>←</span>　　　<span style='color:green'>綠</span><br>
+				　　　　<span style='color:#999'>青</span>
+			</span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>RGB 相鄰色</h2>
+		<p>
+			如果有兩個顏色都是 0，各加 3。<br>
+			如果有兩個顏色都是 F，各減 3。<br>
+			否則的話，數值最低的顏色（非 0）加減 3。<br>
+			<br>
+			&nbsp; &nbsp; &nbsp; <span style='color:#FF0000'>FF0000</span><br>
+			<span style='color:#FF0033'>FF0033</span>&nbsp; &nbsp; &nbsp; <span style='color:#FF3300'>FF3300</span><br>
+			<span style='color:#FF0066'>FF0066</span>&nbsp; &nbsp; &nbsp; <span style='color:#FF6600'>FF6600</span><br>
+			<span style='color:#FF0099'>FF0099</span>&nbsp; &nbsp; &nbsp; <span style='color:#FF9900'>FF9900</span><br>
+			<span style='color:#FF00CC'>FF00CC</span>&nbsp; &nbsp; &nbsp; <span style='color:#FFCC00'>FFCC00</span><br>
+			<span style='color:#FF00FF'>FF00FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#FFFF00'>FFFF00</span><br>
+			<span style='color:#CC00FF'>CC00FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#CCFF00'>CCFF00</span><br>
+			<span style='color:#9900FF'>9900FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#99FF00'>99FF00</span><br>
+			<span style='color:#6600FF'>6600FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#66FF00'>66FF00</span><br>
+			<span style='color:#3300FF'>3300FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#33FF00'>33FF00</span><br>
+			<span style='color:#0000FF'>0000FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#00FF00'>00FF00</span><br>
+			<span style='color:#0033FF'>0033FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#00FF33'>00FF33</span><br>
+			<span style='color:#0066FF'>0066FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#00FF66'>00FF66</span><br>
+			<span style='color:#0099FF'>0099FF</span>&nbsp; &nbsp; &nbsp; <span style='color:#00FF99'>00FF99</span><br>
+			<span style='color:#00CCFF'>00CCFF</span>&nbsp; &nbsp; &nbsp; <span style='color:#00FFCC'>00FFCC</span><br>
+			&nbsp; &nbsp; &nbsp; <span style='color:#00FFFF'>00FFFF</span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>RGB 明度（顏色的亮度）</h2>
+		<p>
+			數值最高的顏色不動，其它兩顏色加減 3，越低顏色越濃厚，越高越淡薄。<br>
+			<br>
+			明亮→暗沉：<br>
+			<br>
+			<span style='color:#FFCCCC'>FFCCCC</span> <span style='color:#CCFFCC'>003300</span> <span style='color:#CCCCFF'>CCCCFF</span><br>
+			<span style='color:#FF9999'>FF9999</span> <span style='color:#99FF99'>006600</span> <span style='color:#9999FF'>9999FF</span><br>
+			<span style='color:#FF6666'>FF6666</span> <span style='color:#66FF66'>009900</span> <span style='color:#6666FF'>6666FF</span><br>
+			<span style='color:#FF3333'>FF3333</span> <span style='color:#33FF33'>00CC00</span> <span style='color:#3333FF'>3333FF</span><br>
+			<span style='color:#FF0000'>FF0000</span> <span style='color:#00FF00'>00FF00</span> <span style='color:#0000FF'>0000FF</span>
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>RGB 彩度（顏色的純度）</h2>
+		<p>
+			數值最高的顏色加減 3，越高越純，越低越濁。<br>
+			<br>
+			鮮豔→灰濁：<br>
+			<br>
+			<span style='color:#FF0000'>FF0000</span> <span style='color:#00FF00'>00FF00</span> <span style='color:#0000FF'>0000FF</span><br>
+			<span style='color:#CC0000'>CC0000</span> <span style='color:#00CC00'>00CC00</span> <span style='color:#0000CC'>0000CC</span><br>
+			<span style='color:#990000'>990000</span> <span style='color:#009900'>009900</span> <span style='color:#000099'>000099</span><br>
+			<span style='color:#660000'>660000</span> <span style='color:#006600'>006600</span> <span style='color:#000066'>000066</span><br>
+			<span style='color:#330000'>330000</span> <span style='color:#003300'>003300</span> <span style='color:#000033'>000033</span>
+		</p>
+	</section>
+	<hr>
+	<footer>
+		<p>
+			[*] 漸亮用公式：(RR,GG,BB+FF,FF,FF)/2　漸暗用公式：(RR,GG,BB-00,00,00)/2
+		</p>
+	</footer>
+</article>
