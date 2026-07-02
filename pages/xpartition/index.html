@@ -182,38 +182,30 @@
 </article>
 <script>
 	hide();
-
 	let a=0;
-
 	function f(){
 		show();
 		location.href='#anchor';
 	}
-
 	addEventListener('keydown',x=>{
 		switch(x.which){
 			case 38:
-			if(a<2) a++;
-			break;
-
+				if(a<2) a++;
+				break;
 			case 40:
-			if(a<4) a++;
-			break;
-
+				if(a<4) a++;
+				break;
 			case 37:
-			if(a==4||a==6) a++;
-			break;
-
+				if(a==4||a==6) a++;
+				break;
 			case 39:
-			if(a==5||a==7) a++;
-			break;
-
+				if(a==5||a==7) a++;
+				break;
 			case 66:
-			if(a==8) a++;
-			break;
-
+				if(a==8) a++;
+				break;
 			case 65:
-			if(a==9) f();
+				if(a==9) f();
 		}
 	});
 </script>

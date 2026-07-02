@@ -433,26 +433,21 @@
 		   '5% 护盾回复速率':'<Affix AffixId="ac_forceshield_regeneration_percent_pts_12" Class="forceshield_regeneration_percent" AffixType="prefix" Tier="12"><DropParams Frequency="1"><ItemLevel LevelMin="190" LevelMax="300" /><Keywords OptionalKeywords="belt,amulet,ring" MandatoryKeywords="accessory" /><ItemRarity Magic="1" Rare="1" Set="1" Legendary="1" /></DropParams><MagicEffect EffectId="forceshield_regeneration_percent"><LoRoll DefenseRegenerationPercentFloat="4" /><HiRoll DefenseRegenerationPercentFloat="5" /></MagicEffect></Affix>',
 		   '45% 普攻每击生成怒气':'<Affix AffixId="ac_rage_per_strike_percent_12" Class="resourceGeneration" AffixType="prefix" Tier="12"><DropParams Frequency="1"><ItemLevel LevelMin="190" LevelMax="300" /><Keywords OptionalKeywords="belt,amulet,ring" MandatoryKeywords="accessory" /><ItemRarity Magic="1" Rare="1" Set="1" Legendary="1" /></DropParams><MagicEffect EffectId="rage_per_strike_percent"><LoRoll ResourcePercentInt="36" /><HiRoll ResourcePercentInt="45" /></MagicEffect></Affix>',
 		   '45% 魔力回复':' <Affix AffixId="ac_willpower_regeneration_12" Class="resourceGeneration" AffixType="prefix" Tier="12"><DropParams Frequency="1"><ItemLevel LevelMin="190" LevelMax="300" /><Keywords OptionalKeywords="belt,amulet,ring" MandatoryKeywords="accessory" /><ItemRarity Magic="1" Rare="1" Set="1" Legendary="1" /></DropParams><MagicEffect EffectId="umbra_regen_percent"><LoRoll ResourcePercentFloat="36" /><HiRoll ResourcePercentFloat="45" /></MagicEffect></Affix>'};
-
 	function f1(){
 		let g=$('textarea').value.indexOf('EffectId')+10;
 		let h=$('textarea').value.indexOf('"',g);
 		let effectid=$('textarea').value.substring(g,h);
-
 		g=$('textarea').value.indexOf('AffixId')+9;
 		h=$('textarea').value.indexOf('"',g);
 		let affixid=$('textarea').value.substring(g,h);
-
 		g=$('textarea').value.indexOf('HiRoll')+7;
 		h=$('textarea').value.lastIndexOf('"');
 		let i=$('textarea').value.substring(g,h+1).replaceAll('"','').replaceAll('=',' ').split(' ');
 		let parameters='';
 		if(i.length==2) parameters=`{"semantic":"${i[0]}","value":${i[1]}}`;
 		else parameters=`{"semantic":"${i[0]}","value":${i[1]}},{"semantic":"${i[2]}","value":${i[3]}}`;
-
 		$('textarea',1).value=`{\n  "EffectId":"${effectid}",\n  "EffectName":"${affixid}",\n  "MaxStack":1,\n  "Parameters":[${parameters}]\n}`;
 	}
-
 	function f2(){
 		let g=event.target.textContent;
 		$('textarea').value=a[g];

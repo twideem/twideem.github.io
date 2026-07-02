@@ -35,12 +35,10 @@
 <script>
 	let a;
 	let b='Coke  可樂';
-
 	($('input').onchange=function(){
 		clearInterval(a);
 		a=setInterval(()=>{
 			if($('input').value) b=$('input').value;
-
 			$('span').innerHTML=b.replace(/[\s]{2}/g,'　<br>');
 			setTimeout(()=>$('span').innerHTML='　<br>　',35);
 		},5000);

@@ -408,7 +408,7 @@
 			<section>
 				<h4>使用 Visual Studio Community 的 Help Viewer 即可離線下載</h4>
 				<p>
-					<a href='http://visualstudio.microsoft.com/zh-hant/vs/community/'>Visual Studio Community</a> 對學生、開放原始碼及個人開發人員是免費的！如果電腦跑得動的話，不妨使用這套威力強大無比的 IDE 寫 C# 開發 .NET 程式。
+					<a href='http://visualstudio.microsoft.com/zh-hant/vs/community/' target='_blank'>Visual Studio Community</a> 對學生、開放原始碼及個人開發人員是免費的！如果電腦跑得動的話，不妨使用這套威力強大無比的 IDE 寫 C# 開發 .NET 程式。
 					<br>
 					安裝 Visual Studio Community 時勾選 Help Viewer，就能在 Visual Studio Community 中叫出 Help Viewer，然後選擇下載 .NET API Reference，即可將整套文件安裝到電腦裡離線閱讀。<br>
 				</p>
@@ -451,171 +451,142 @@
 					</p>
 				</section>
 			</section>
-			<hr>
 			<section>
-				<h3>Build your docs with docfx</h3>
+				<h4>年久失修</h4>
 				<p>
-					.NET 有個專門用來建立 API 文件的工具，叫做 docfx，本文介紹如何用它來產生 .NET Framework 的 API 文件。
+					目錄裡每個命名空間重複六次的問題，恐怕是不會修復了，只能改用「索引」直接輸入類別名稱規避問題。
 				</p>
-				<section>
-					<h4>準備</h4>
-					<p>
-						到 <a href='http://github.com/dotnet/docfx'>http://github.com/dotnet/docfx</a> 下載 docfx。<br>
-						<br>
-						檢查你電腦有沒有 C:\Program Files (x86)\Reference Assemblies，沒有的話，到 <a href='http://dotnet.microsoft.com/en-us/download/dotnet-framework/net48'>Download .NET Framework 4.8</a> 下載 Developer pack 和「中文 (繁體) 」語言包，安裝後就有了。
-					</p>
-				</section>
-				<section>
-					<h4>建立中文版文件</h4>
-					<p>
-						輸入指令，建立新的專案：<br>
-						<br>
-						<output>
-							docfx init -y
-						</output>
-						<br>
-						會得到以下檔案：<br>
-						<br>
-						<samp>
-							[docs]<br>
-							docfx.json<br>
-							index.md<br>
-							toc.yml<br>
-						</samp>
-						<br>
-						在專案中，新增名為 src 的資料夾，然後把 C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8 裡面的如下檔案複製到 src 資料夾裡面：<br>
-						<br>
-						<code>
-							mscorlib.dll<br>
-							System.Core.dll<br>
-							System.Data.dll<br>
-							System.dll<br>
-							System.Drawing.dll<br>
-							System.Net.Http.dll<br>
-							System.Windows.Forms.dll<br>
-							System.Xml.dll<br>
-						</code>
-						<br>
-						zh-Hant 資料夾裡面的如下檔案也複製到 src 資料夾裡面：<br>
-						<br>
-						<code>
-							mscorlib.xml<br>
-							System.Core.xml<br>
-							System.Data.xml<br>
-							System.Drawing.xml<br>
-							System.Net.Http.xml<br>
-							System.Windows.Forms.xml<br>
-							System.xml<br>
-							System.Xml.xml<br>
-						</code>
-						<br>
-						修改 <code>docfx.json</code> 檔案，將 metadata 的部分改為：<br>
-						<br>
-						<textarea class='brush:txt'>
-							"metadata": [
-							  {
-								"src": [
-								  {
-									"src": "src",
-									"files": [
-									  "*.dll"
-									]
-								  }
-								],
-								"dest": "api"
-							  }
-							],
-						</textarea>
-						<br>
-						然後輸入指令建立 api 資料夾，過程有黃色訊息的錯誤不用管它：<br>
-						<br>
-						<output>
-							docfx metadata docfx.json
-						</output>
-						<br>
-						再輸入指令產生 _site 資料夾：<br>
-						<br>
-						<output>
-							docfx metadata docfx.json
-						</output>
-						<br>
-						大功告成，用 docfx 自帶的 HTTP 伺服器功能，就能在網頁瀏覽器輸入 http://localhost:8080 閱讀 API 文件了：<br>
-						<br>
-						<output>
-							docfx serve _site
-						</output>
-					</p>
-				</section>
-				<section>
-					<h4>建立英文版 API 文件</h4>
-					<p>
-						首先輸入指令，建立新的專案：<br>
-						<br>
-						<output>
-							docfx init -y
-						</output>
-						<br>
-						會得到以下檔案：<br>
-						<br>
-						<samp>
-							[docs]<br>
-							docfx.json<br>
-							index.md<br>
-							toc.yml<br>
-						</samp>
-						<br>
-						修改 <code>docfx.json</code> 檔案，將 metadata 的部分改為：<br>
-						<br>
-						<textarea class='brush:txt'>
-							"metadata": [
-							  {
-							    "src": [
-							      {
-							        "src": "C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.8",
-							        "files": [
-							          "mscorlib.dll",
-							          "System.Core.dll",
-							          "System.Data.dll",
-							          "System.dll",
-							          "System.Drawing.dll",
-							          "System.Net.Http.dll",
-							          "System.Windows.Forms.dll",
-							          "System.Xml.dll"
-							        ]
-							      }
-							    ],
-							    "dest": "api"
-							  }
-							],
-						</textarea>
-						<br>
-						然後輸入指令建立 api 資料夾：<br>
-						<br>
-						<output>
-							docfx metadata docfx.json
-						</output>
-						<br>
-						再輸入指令產生 _site 資料夾：<br>
-						<br>
-						<output>
-							docfx metadata docfx.json
-						</output>
-						<br>
-						大功告成，用 docfx 自帶的 HTTP 伺服器功能，就能在網頁瀏覽器輸入 http://localhost:8080 閱讀 API 文件了：<br>
-						<br>
-						<output>
-							docfx serve _site
-						</output>
-					</p>
-				</section>
 			</section>
 		</section>
 		<hr>
-		<footer>
+		<section>
+			<h3>DocFX</h3>
 			<p>
-				[*] 目錄裡每個命名空間重複六次的問題，可以改用「索引」直接輸入類別名稱解決。
+				.NET 有個專門用來建立線上 API 文件的工具，叫做 DocFX，本文介紹如何用它來產生 .NET Framework 的 API 文件。
 			</p>
-		</footer>
+			<section>
+				<h4>準備</h4>
+				<p>
+					到 <a href='http://github.com/dotnet/docfx'>GitHub</a> 下載 docfx。<br>
+					<br>
+					檢查你電腦有沒有 C:\Program Files (x86)\Reference Assemblies，沒有的話，到 <a href='http://dotnet.microsoft.com/en-us/download/dotnet-framework/net48' target='_blank'>Download .NET Framework 4.8</a> 下載 Developer pack 和「中文 (繁體) 」語言包，安裝後就有了。
+				</p>
+			</section>
+			<section>
+				<h4>建立中文版文件</h4>
+				<p>
+					輸入指令，建立新的專案：<br>
+					<br>
+					<output>
+						docfx init -y
+					</output>
+					<br>
+					會得到以下檔案：<br>
+					<br>
+					<samp>
+						[docs]<br>
+						docfx.json<br>
+						index.md<br>
+						toc.yml<br>
+					</samp>
+					<br>
+					在專案中，新增名為 refasm 的資料夾，然後把 C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8 裡面的如下檔案複製到 refasm 資料夾裡面，我們要針對這些組件產生 API 文件：<br>
+					<br>
+					<code>
+						mscorlib.dll<br>
+						System.Core.dll<br>
+						System.Data.dll<br>
+						System.dll<br>
+						System.Drawing.dll<br>
+						System.Net.Http.dll<br>
+						System.Windows.Forms.dll<br>
+						System.Xml.dll<br>
+					</code>
+					<br>
+					zh-Hant 資料夾裡面的如下檔案也複製到 refasm 資料夾裡面，這些檔案用來產生中文說明內容：<br>
+					<br>
+					<code>
+						mscorlib.xml<br>
+						System.Core.xml<br>
+						System.Data.xml<br>
+						System.Drawing.xml<br>
+						System.Net.Http.xml<br>
+						System.Windows.Forms.xml<br>
+						System.xml<br>
+						System.Xml.xml<br>
+					</code>
+					<br>
+					雖然沒有涵蓋所有 .NET Framework 的組件，但這些足夠絕大多數開發場合了，日後視需要再自行追加 *.dll 和 *.xml 上去，重新製作一份 API 文件就好。<br>
+					<br>
+					然後修改 <code>docfx.json</code> 檔案，將 metadata 的部分改為：<br>
+					<br>
+					<textarea class='brush:txt'>
+						"metadata": [
+						  {
+							"src": [
+							  {
+								"src": "refasm",
+								"files": [
+								  "*.dll"
+								]
+							  }
+							],
+							"dest": "api"
+						  }
+						],
+					</textarea>
+					<br>
+					然後輸入指令建立 api 資料夾，過程有黃色文字的訊息不用管它：<br>
+					<br>
+					<output>
+						docfx metadata docfx.json
+					</output>
+					<br>
+					再輸入指令產生 _site 資料夾：<br>
+					<br>
+					<output>
+						docfx metadata docfx.json
+					</output>
+					<br>
+					大功告成，用 docfx 自帶的 HTTP 伺服器功能，就能在網頁瀏覽器輸入 http://localhost:8080 閱讀 API 文件了：<br>
+					<br>
+					<output>
+						docfx serve _site
+					</output>
+				</p>
+			</section>
+			<section>
+				<h4>建立英文版 API 文件</h4>
+				<p>
+					跟中文版差別在，不需要複製檔案到 refasm 資料夾，直接對 C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8 底下的檔案取出 metadata 即可，所以只要修改 <code>docfx.json</code> 檔案，將 metadata 的部分改為：<br>
+					<br>
+					<textarea class='brush:txt'>
+						"metadata": [
+						  {
+							"src": [
+							  {
+								"src": "C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.8",
+								"files": [
+								  "mscorlib.dll",
+								  "System.Core.dll",
+								  "System.Data.dll",
+								  "System.dll",
+								  "System.Drawing.dll",
+								  "System.Net.Http.dll",
+								  "System.Windows.Forms.dll",
+								  "System.Xml.dll"
+								]
+							  }
+							],
+							"dest": "api"
+						  }
+						],
+					</textarea>
+					<br>
+					中文版之所以複製到 refasm 資料夾，是為了讓中文版 *.xml 和 *.dll 放在一起，這樣 DocFX 才會取得中文說明。而英文版 *.xml 已經跟 *.dll 放在一起了，所以直接用 C:\Program Files (x86)\⋯\.NETFramework\v4.8 這現成的資料夾就好。
+				</p>
+			</section>
+		</section>
 	</section>
 	<hr id='effective'>
 	<section>

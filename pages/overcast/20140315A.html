@@ -31,7 +31,6 @@
 	let p=$('p',1);
 	let string='(0-9)umber　(A)dd　(S)ubtract　(M)ultiply　(D)ivide　(E)auals　(C)lear　(B)ack';
 	let switching=false;
-
 	function append(x){
 		if(p.innerHTML==string||switching){
 			p.innerHTML='';
@@ -40,15 +39,12 @@
 
 		p.innerHTML+=x;
 	}
-
 	function clear(){
 		p.innerHTML=string;
 	}
-
 	function error(){
 		p.innerHTML='0.0a';
 	}
-
 	function calc(x){
 		try{
 			if(x==16) append(`=0x${Number(eval(p.innerHTML)).toString(16)}`);
@@ -57,79 +53,64 @@
 		catch(y){
 			append('=無解');
 		}
-
 		switching=true;
-
 		if(p.innerHTML=='=NaN') error();
 	}
-
 	function back(){
 		if(p.innerHTML!==string&&!switching){
 			p.innerHTML=p.innerHTML.substr(0,p.innerHTML.length-1);
 			if(p.innerHTML.length&lt;=0) p.innerHTML=string;
 		}
 	}
-
 	addEventListener('keydown',x=>{
 		switch(x.which){
 			case 88:
-			append('x');
-			break;
-
+				append('x');
+				break;
 			case x.shiftKey&&65:
 			case x.shiftKey&&66:
 			case x.shiftKey&&67:
 			case x.shiftKey&&68:
 			case x.shiftKey&&69:
 			case x.shiftKey&&70:
-			append(String.fromCharCode(x.which).toLowerCase());
-			break;
-
+				append(String.fromCharCode(x.which).toLowerCase());
+				break;
 			case 61:
 			case 65:
 			case 187:
-			append('+');
-			break;
-
+				append('+');
+				break;
 			case 83:
 			case 173:
 			case 189:
-			append('-');
-			break;
-
+				append('-');
+				break;
 			case 77:
 			case 32:
 			case x.shiftKey&&56:
-			append('*');
-			break;
-
+				append('*');
+				break;
 			case 68:
 			case 191:
 			case 220:
-			append('/');
-			break;
-
+				append('/');
+				break;
 			case 82:
 			case x.shiftKey&&83:
-			append('%');
-			break;
-
+				append('%');
+				break;
 			case x.shiftKey&&54:
-			append('Math.pow(');
-			break;
-
+				append('Math.pow(');
+				break;
 			case 188:
-			append(',');
-			break;
-
+				append(',');
+				break;
 			case x.shiftKey&&57:
-			append('(');
-			break;
-
+				append('(');
+				break;
 			case x.shiftKey&&48:
-			append(')');
-			break;
-
+				append(')');
+				break;
 			case 48:
 			case 49:
 			case 50:
@@ -140,33 +121,27 @@
 			case 55:
 			case 56:
 			case 57:
-			append(x.which-48);
-			break;
-
+				append(x.which-48);
+				break;
 			case 190:
-			append('.');
-			break;
-
+				append('.');
+				break;
 			case 69:
 			case 13:
-			calc();
-			break;
-
+				calc();
+				break;
 			case 72:
-			calc(16);
-			break;
-
+				calc(16);
+				break;
 			case 67:
 			case 27:
-			clear();
-			break;
-
+				clear();
+				break;
 			case 66:
 			case 8:
 			case 37:
-			back();
+				back();
 		}
 	});
-
 	addEventListener('load',()=>p.innerHTML=string);
 </script>

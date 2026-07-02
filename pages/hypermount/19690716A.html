@@ -37,7 +37,6 @@
 			for(let n=1,o=0;n<=3;n++,o+=2) $('input',n).value=parseInt(`0x${$('input').value.substr(g+o,2)}`);
 		}
 	};
-
 	$('input',1).onkeydown=$('input',2).onkeydown=$('input',3).onkeydown=function(x){
 		if(x.which==13){
 			$('input').value='#';

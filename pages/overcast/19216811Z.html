@@ -112,16 +112,12 @@
 <script>
 	let a=15;
 	let b=true;
-
 	function f(){
 		if(a==5) b=true;
 		else if(a==17) b=false;
-
 		if(b) a++;
 		else a--;
-
 		return '二'.repeat(a)+'））⊂'+'弌'.repeat(20-a);
 	}
-
 	setInterval(()=>$('footer p q').innerHTML=f(),250);
 </script>

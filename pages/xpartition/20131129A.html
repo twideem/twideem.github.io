@@ -26,7 +26,6 @@
 </article>
 <script>
 	let a=$('canvas').getContext('2d');
-
 	a.fillStyle='#ccc';
 	a.fillRect(0,0,425,525);
 	a.lineWidth=2;
@@ -37,7 +36,6 @@
 		this.strokeRect((this.size)*x,this.size*y,this.size,this.size);
 		this.fillRect((this.size*x)+1,(this.size*y)+1,this.size-2,this.size-2);
 	};
-
 	let map=[[0,0,0,0,0,0,1,1,1,1,1,1,1,0,0],
 			 [0,0,0,0,0,0,1,0,0,0,0,0,1,1,1],
 			 [0,0,0,0,0,1,1,0,0,0,0,0,0,0,0],
@@ -53,15 +51,12 @@
 			 [0,0,0,0,0,0,1,0,0,1,1,1,1,1,0],
 			 [0,0,0,0,0,0,1,0,0,1,0,0,0,0,0],
 			 [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0]];
-
 	for(let n=1;n<=map[0].length;n++){
 		for(let o=1;o<=map.length;o++){
 			if(map[o-1][n-1]) a.draw(n,o);
 		}
 	}
-
 	let b=$('canvas',1).getContext('2d');
-
 	b.lineWidth=2;
 	b.strokeStyle='#333';
 	b.r=25;

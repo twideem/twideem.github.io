@@ -20,33 +20,37 @@
 </article>
 <script>
 	// 畫面
-	let h2=document.getElementsByTagName('p')[0];
-	h2.style.letterSpacing='4px';
-	h2.style.lineHeight='20px';
+	let h2 = document.getElementsByTagName('p')[0];
+	h2.style.letterSpacing = '4px';
+	h2.style.lineHeight = '20px';
 
 	// 陣列地圖相關數據
-	let array=[
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,0,0,0,0,0,2,2,2,2,2,2,2,2,2,
-		2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,
-		2,0,0,3,3,3,0,0,0,0,2,2,2,2,2,
-		2,0,0,0,3,3,0,0,0,0,0,2,2,2,2,
-		2,0,0,0,0,0,0,0,0,2,0,0,0,0,5,
-		2,0,0,0,0,0,1,0,0,2,2,2,2,2,2,
-		2,0,4,4,4,0,0,0,0,2,2,2,2,2,2,
-		2,0,4,0,0,0,0,0,0,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+	let array = [
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+		2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+		2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2,
+		2, 0, 0, 3, 3, 3, 0, 0, 0, 0, 2, 2, 2, 2, 2,
+		2, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 2, 2, 2, 2,
+		2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 5,
+		2, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2,
+		2, 0, 4, 4, 4, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2,
+		2, 0, 4, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2,
+		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
 	];
 
-	let width=15;
+	let width = 15;
 
-	function position(){
-		for(let n=0;n<array.length;n++) if(array[n]==1) return n;
+	function position() {
+		for (let n = 0; n < array.length; n++) {
+			if (array[n] == 1) {
+				return n;
+			}
+		}
 	}
 
 	// 圖磚
-	function tile(x){
-		switch(x){
+	function tile(x) {
+		switch (x) {
 			case 0: return '　';
 			case 1: return '<span style=\'color:orange\'>人</span>';
 			case 2: return '<span style=\'color:brown\'>土</span>';
@@ -57,56 +61,50 @@
 	}
 
 	// 繪圖
-	function draw(){
-		let g='';
-
-		for(let n=0;n<array.length;n++){
-			if(n%width==0&&n!==0) g+='<br>';
-
-			g+=tile(array[n]);
+	function draw() {
+		let g = '';
+		for (let n = 0; n < array.length; n++) {
+			if (n%width == 0 && n !== 0) {
+				g += '<br>';
+			}
+			g += tile(array[n]);
 		}
-
-		h2.innerHTML=g;
+		h2.innerHTML = g;
 	}
 
 	// 移動
-	function move(){
-		let g=position();
-
-		switch(event.which){
+	function move() {
+		let g = position();
+		switch (event.which) {
 			case 37:
-			if(array[g-1]==0){
-				array[g]=0;
-				array[g-1]=1;
-			}
-			break;
-
+				if (array[g - 1] == 0) {
+					array[g] = 0;
+					array[g - 1] = 1;
+				}
+				break;
 			case 38:
-			if(array[g-width]==0){
-				array[g]=0;
-				array[g-width]=1;
-			}
-			break;
-
+				if (array[g - width] == 0) {
+					array[g] = 0;
+					array[g - width] = 1;
+				}
+				break;
 			case 39:
-			if(array[g+1]==0){
-				array[g]=0;
-				array[g+1]=1;
-			}
-			break;
-
+				if (array[g + 1] == 0) {
+					array[g] = 0;
+					array[g + 1] = 1;
+				}
+				break;
 			case 40:
-			if(array[g+width]==0){
-				array[g]=0;
-				array[g+width]=1;
-			}
+				if (array[g + width] == 0) {
+					array[g] = 0;
+					array[g + width] = 1;
+				}
 		}
-
 		draw();
 	}
 
 	// 監測鍵盤反應狀態
-	window.onkeydown=move;
+	window.onkeydown = move;
 
 	// 初始動作
 	draw();

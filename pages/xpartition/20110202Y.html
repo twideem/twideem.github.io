@@ -77,60 +77,48 @@
 		enabled:null,
 		state:'黎明',
 		weather:0,
-
 		黎明(){
 			this.element.className='style1';
 			this.state='黎明';
 		},
-
 		晨曦(){
 			this.element.className='style2';
 			this.state='晨曦';
 		},
-
 		白天(){
 			this.element.className='style3';
 			this.state='白天';
 		},
-
 		黃昏(){
 			this.element.className='style4';
 			this.state='黃昏';
 		},
-
 		傍晚(){
 			this.element.className='style5';
 			this.state='傍晚';
 		},
-
 		深夜(){
 			this.element.className='style6';
 			this.state='深夜';
 		},
-
 		晴朗(){
 			this.element.className='style31'
 			this.state='晴朗'
 		},
-
 		陰雨(){
 			this.element.className='style32';
 			this.state='陰雨';
 		},
-
 		夜燈(){
 			this.element.className='style61';
 		},
-
 		更迭(){
 			this.enabled=window.setInterval(()=>{
 				晝夜.cycles+=1;
-
 				if(晝夜.cycles>=14400){
 					晝夜.cycles=0;
 					晝夜.weather=0;
 				}
-
 				if(晝夜.cycles>=0&&晝夜.cycles<2400) 晝夜.深夜();
 				else if(晝夜.cycles>=2400&&晝夜.cycles<3600) 晝夜.黎明();
 				else if(晝夜.cycles>=3600&&晝夜.cycles<4800) 晝夜.晨曦();
@@ -141,18 +129,15 @@
 						else if((Math.round(Math.random()*(100-1))+1)<=25) 晝夜.weather=2;
 						else 晝夜.weather=3;
 					}
-
 					switch(晝夜.weather){
 						case 1:
-						晝夜.晴朗();
-						break;
-
+							晝夜.晴朗();
+							break;
 						case 2:
-						晝夜.陰雨();
-						break;
-
+							晝夜.陰雨();
+							break;
 						case 3:
-						晝夜.白天();
+							晝夜.白天();
 					}
 				}
 				else if(晝夜.cycles>=9600&&晝夜.cycles<10800) (晝夜.weather!==2)?晝夜.黃昏():晝夜.陰雨();
@@ -160,34 +145,27 @@
 				else if(晝夜.cycles>=12000&&晝夜.cycles<14400) 晝夜.深夜();
 			},20);
 		},
-
 		時(){
 			return Math.floor(this.cycles/600);
 		},
-
 		分(){
 			return Math.floor((this.cycles%600)/10);
 		},
-
 		秒(){
 			return Math.floor((this.cycles%600)/(10/60))%60;
 		},
-
 		狀態(x){
 			if(x!==undefined) return this.state;
 			else if(this.state==x) return true;
 		},
-
 		靜止(){
 			window.clearInterval(this.enabled);
 		}
 	};
-
 	let 自訂功能={
 		時鐘(){
 			window.setInterval(()=>$('h2').innerHTML=`遊戲世界時間：${晝夜.時()} 點 ${晝夜.分()} 分`,20);
 		},
-
 		火把(){
 			if(晝夜.狀態()=='深夜') 晝夜.夜燈();
 		}

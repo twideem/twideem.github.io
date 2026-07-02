@@ -30,7 +30,6 @@
 </article>
 <script>
 	$('textarea').focus();
-
 	$('textarea').onkeyup=function(){
 		[/(1)/ig,/(2)/ig,/(3)/ig,/(4)/ig,/(5)/ig,/(6)/ig,/(7)/ig,/(8)/ig,/(9)/ig,/(0)/ig,/(\.)/ig].forEach((n,o)=>event.target.value=event.target.value.replace(n,['↙','↓','↘','←','蓄','→','↖','↑','↗','腳','拳'][o]));
 	};

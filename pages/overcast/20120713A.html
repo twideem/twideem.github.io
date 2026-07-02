@@ -73,18 +73,13 @@
 	function f1(w,x,y,z){
 		if(w) f2(w);
 		else f3();
-
 		if(x) f2(x);
-
 		if(y) f2(y);
-
 		if(z) f2(z);
 	}
-
 	function f2(x){
 		$('span',x).style.color='coral';
 	}
-
 	function f3(){
 		$('*span').forEach(n=>n.style.color='#666');
 	}

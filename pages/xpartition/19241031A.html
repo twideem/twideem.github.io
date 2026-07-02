@@ -83,10 +83,8 @@
 </article>
 <script>
 	let a=['剪刀','石頭','布'];
-
 	function f(x){
 		let g=Math.ceil(Math.random()*100);
-
 		if(g<50) $('span').innerHTML=`${a[x]} vs ${a[(x+1)%3]} = <span style='color:orangered'>你輸了～</span>`;
 		else if(g<75) $('span').innerHTML=`${a[x]} vs ${a[x]} = <span style='color:dodgerblue'>平手。</span>`;
 		else $('span').innerHTML=`${a[x]} vs ${a[(x+2)%3]} = <span style='color:yellowgreen'>你贏了！</span>`;

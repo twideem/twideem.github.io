@@ -24,17 +24,13 @@
 </article>
 <script>
 	let a='';
-
 	function f1(x){
 		$('div').style.color=x;
 	}
-
 	function f2(){
 		if(a) $('span',1).style.visibility='visible';
 		else $('span',1).style.visibility='hidden';
-
 		a=!a;
 	}
-
 	setInterval('f2()',500);
 </script>

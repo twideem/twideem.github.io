@@ -32,7 +32,6 @@
 			x=eval(x);
 			let g=Object.getOwnPropertyNames(x);
 			if(x.prototype) g=g.concat(Object.getOwnPropertyNames(x.prototype));
-
 			$('p',1).innerHTML=[...new Set(g.sort())].join('<br>');
 			if(x instanceof Window) $('p',1).innerHTML=$('p',1).innerHTML.replace(/(\$<br>)|(f<br>)|(webhosting<br>)/g,'');
 		}
@@ -41,7 +40,6 @@
 		}
 		$('input').value='';
 	}
-
 	$('input').onkeydown=function(x){
 		if(x.keyCode==13) f($('input').value);
 	};

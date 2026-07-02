@@ -21,13 +21,10 @@
 <script>
 	let a=location.search.slice(1)||180;
 	$('button').innerHTML=`倒數 ${Math.floor(a/60)} 分鐘等吃泡麵`;
-
 	let b=[new Audio('../../objects/audio/20180604A_01.mp3'),
 		   new Audio('../../objects/audio/20180604A_02.mp3')];
-
 	function f(){
 		$('button').disabled=true;
-
 		let g=setInterval(()=>{
 			if(a>1){
 				a--;
@@ -45,10 +42,8 @@
 				clearInterval(g);
 				onbeforeunload=null;
 			}
-
 			document.title=$('button').innerHTML;
 		},1000);
 	}
-
 	$('button').focus();
 </script>

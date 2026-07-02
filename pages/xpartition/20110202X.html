@@ -46,7 +46,6 @@
 <script>
 	let a=0;
 	let b=0;
-
 	// 防爆符
 	function f1(){
 		if(a<10){
@@ -60,7 +59,6 @@
 		}
 		else $('p').innerHTML=`<span style='color:orange'>武器已強化至極限。</span>`;
 	}
-
 	// 普通卷軸
 	function f2(){
 		if(a<10){
@@ -77,16 +75,12 @@
 		}
 		else $('p').innerHTML=`<span style='color:orange'>武器已強化至極限。</span>`;
 	}
-
 	// 星數
 	function f3(){
 		let g='';
-
 		for(let n=0;n<a;n++) g+='☆';
-
 		return `<span style='color:orange'>${g}</span>`;
 	}
-
 	// 快速設置機率組合
 	function f4(x){
 		$('*input').forEach((n,o)=>n.value=x[o]);

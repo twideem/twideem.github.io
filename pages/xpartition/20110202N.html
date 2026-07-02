@@ -25,37 +25,37 @@
 	*/
 
 	// 畫面
-	let h2=document.getElementsByTagName('p')[0];
-	h2.style.letterSpacing='4px';
-	h2.style.lineHeight='20px';
+	let h2 = document.getElementsByTagName('p')[0];
+	h2.style.letterSpacing = '4px';
+	h2.style.lineHeight = '20px';
 
 	// 陣列地圖相關數據
-	let array=[
-		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-		6,6,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,6,6,6,
-		6,6,6,2,0,0,0,0,0,2,2,2,2,2,2,2,2,2,6,6,6,
-		6,6,6,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,6,6,6,
-		6,6,6,2,0,0,3,3,3,0,0,0,0,2,2,2,2,2,6,6,6,
-		6,6,6,2,0,0,0,3,3,0,0,0,0,0,2,2,2,2,6,6,6,
-		6,6,6,2,0,0,0,0,0,0,0,0,2,0,0,0,0,5,6,6,6,
-		6,6,6,2,0,0,0,0,0,0,0,0,2,2,2,2,2,2,6,6,6,
-		6,6,6,2,0,4,4,4,0,0,0,0,2,2,2,2,2,2,6,6,6,
-		6,6,6,2,0,4,0,0,0,0,0,0,2,2,2,2,2,2,6,6,6,
-		6,6,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,6,6,6,
-		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
+	let array = [
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+		6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 0, 3, 3, 3, 0, 0, 0, 0, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 5, 6, 6, 6,
+		6, 6, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 4, 4, 4, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 0, 4, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6,
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6
 	];
 
-	let position=198;
-	let scope=3;
-	let width=15+scope*2;
+	let position = 198;
+	let scope = 3;
+	let width = 15 + scope * 2;
 
 	// 圖磚
-	function tile(x){
-		switch(x){
+	function tile(x) {
+		switch (x) {
 			case 0: return '　';
 			case 1: return '<span style=\'color:orange\'>人</span>';
 			case 2: return '<span style=\'color:brown\'>土</span>';
@@ -67,46 +67,53 @@
 	}
 
 	// 繪圖
-	function draw(){
-		let g='';
-
-		for(let n=scope;n>=-scope;n--){
-			for(let o=scope;o>=-scope;o--){
-				if(position-width*n-o==position) g+=tile(1);
-				else if(array[position-width*n-o]==undefined) g+='Ｘ';
-				else g+=tile(array[position-width*n-o]);
+	function draw() {
+		let g = '';
+		for (let n = scope; n >= - scope; n--) {
+			for (let o = scope; o >= - scope; o--) {
+				if (position - width * n - o == position) {
+					g += tile(1);
+				}
+				else if (array[position - width * n - o] == undefined) {
+					g += 'Ｘ';
+				}
+				else {
+					g += tile(array[position - width * n - o]);
+				}
 			}
-
-			g+='<br>';
+			g += '<br>';
 		}
-
-		h2.innerHTML=g;
+		h2.innerHTML = g;
 	}
 
 	// 移動
-	function move(){
-		switch(event.which){
+	function move() {
+		switch (event.which) {
 			case 37:
-			if(array[position-1]==0) position--;
-			break;
-
+				if (array[position - 1] == 0) {
+					position--;
+				}
+				break;
 			case 38:
-			if(array[position-width]==0) position-=width;
-			break;
-
+				if (array[position - width] == 0) {
+					position -= width;
+				}
+				break;
 			case 39:
-			if(array[position+1]==0) position++;
-			break;
-
+				if (array[position + 1] == 0) {
+					position++;
+				}
+				break;
 			case 40:
-			if(array[position+width]==0) position+=width;
+				if (array[position + width] == 0) {
+					position += width;
+				}
 		}
-
 		draw();
 	}
 
 	// 監測鍵盤反應狀態
-	window.onkeydown=move;
+	window.onkeydown = move;
 
 	// 初始動作
 	draw();

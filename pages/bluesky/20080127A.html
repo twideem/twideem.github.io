@@ -70,6 +70,17 @@
 	</section>
 	<hr>
 	<section>
+		<h2>減少錯誤縮排</h2>
+		<p>
+			使用預設的：<br>
+			<br>
+			<code>[功能表] → Utilities → Global Options → jEdit → Editing → Mode Settings → Automatic Indentation = Full</code><br>
+			<br>
+			設定為 Simple 的話，會連字元游標後面的空白或 Tab 都一起縮排，變成錯誤縮進。
+		</p>
+	</section>
+	<hr>
+	<section>
 		<h2>避免按 { 字元時自動縮排</h2>
 		<p>
 			<code>
@@ -148,7 +159,7 @@
 	<section>
 		<h2>讓 JavaScript 支援 Template literal 的多行字串與插值</h2>
 		<p>
-			編輯 modes 資料夾裡的 javascript.xml，加入下面高亮度標示起來的內容：<br>
+			編輯 modes 資料夾裡的 javascript.xml，如下修改內容：<br>
 			<br>
 			<textarea class='brush:xml'>
 				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
@@ -237,6 +248,8 @@
 		<p>
 			<code>[功能表] → Utilities → Global Options → Editing → Folding mode → indent</code><br>
 			<br>
+			這會根據縮排來摺疊，速度快又實用。<br>
+			<br>
 			設定為 explicit 是摺疊 {{{ 開頭和 }}} 結尾。
 		</p>
 	</section>
@@ -255,13 +268,6 @@
 				<br>
 				&lt;!--}}}-->
 			</code>
-		</p>
-	</section>
-	<hr>
-	<section>
-		<h2>顯示檔案瀏覽器</h2>
-		<p>
-			<code>[功能表] → Utilities → Global Options → Docking → File Browser = Left</code>
 		</p>
 	</section>
 	<hr>
