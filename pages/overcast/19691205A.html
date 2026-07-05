@@ -40,11 +40,11 @@
 				<h4>[USER]\Desktop\index.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;html>
-						  &lt;body>
-							&lt;a href='cgi-bin/hello.py'>Say hello&lt;/a>
-						  &lt;/body>
-						&lt;/html>
+						<html>
+						  <body>
+							<a href='cgi-bin/hello.py'>Say hello</a>
+						  </body>
+						</html>
 					</textarea>
 				</p>
 			</section>
@@ -54,11 +54,11 @@
 					<textarea class='brush:py'>
 						print('Content-type:text/html')
 						print()
-						print('&lt;html>')
-						print('  &lt;body>')
-						print(' &lt;p>Hello, CGI!&lt;/p>')
-						print('  &lt;/body>')
-						print('&lt;/html>')
+						print('<html>')
+						print('  <body>')
+						print(' <p>Hello, CGI!</p>')
+						print('  </body>')
+						print('</html>')
 					</textarea>
 				</p>
 			</section>
@@ -111,14 +111,14 @@
 				<h4>form.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;html>
-						  &lt;body>
-							&lt;form action='cgi-bin/request.py' method='get'>
-							  &lt;input type='text' name='field' value='Hi!'>
-							  &lt;input type='submit'>
-							&lt;/form>
-						  &lt;/body>
-						&lt;/html>
+						<html>
+						  <body>
+							<form action='cgi-bin/request.py' method='get'>
+							  <input type='text' name='field' value='Hi!'>
+							  <input type='submit'>
+							</form>
+						  </body>
+						</html>
 					</textarea>
 				</p>
 			</section>
@@ -252,14 +252,14 @@
 				sys.stdout = codecs.getwriter('utf8')(sys.stdout.buffer)
 
 				print()
-				print('&lt;html>')
-				print('  &lt;head>')
-				print(' &lt;meta charset="utf-8">')
-				print('  &lt;/head>')
-				print('  &lt;body>')
-				print(' &lt;p>哈囉！&lt;/p>')
-				print('  &lt;/body>')
-				print('&lt;/html>')
+				print('<html>')
+				print('  <head>')
+				print(' <meta charset="utf-8">')
+				print('  </head>')
+				print('  <body>')
+				print(' <p>哈囉！</p>')
+				print('  </body>')
+				print('</html>')
 			</textarea>
 			<br>
 			寫在另一個 *.py 檔，每次寫 CGI 再 import 就好。反正寫 CGI 一定會自己把功能重新打包成函式庫，放在裡面就好，並不麻煩。
@@ -435,14 +435,14 @@
 				<h4>http://127.0.0.1/homepage.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;html>
-						  &lt;head>
-							&lt;title>HOME PAGE&lt;/title>
-						  &lt;/head>
-						  &lt;body>
-							&lt;p>WELCOME&lt;/p>
-						  &lt;/body>
-						&lt;/html>
+						<html>
+						  <head>
+							<title>HOME PAGE</title>
+						  </head>
+						  <body>
+							<p>WELCOME</p>
+						  </body>
+						</html>
 					</textarea>
 				</p>
 			</section>
@@ -505,15 +505,15 @@
 					from urllib import request
 
 					# 向 localhost 請求執行 getString('ABC', 123)
-					soap = """&lt;?xml version="1.0" encoding="utf-8"?>
-					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-						&lt;soap:Body>
-							&lt;getString>
-								&lt;x>ABC&lt;/x>
-								&lt;y>123&lt;/y>
-							&lt;/getString>
-						&lt;/soap:Body>
-					&lt;/soap:Envelope>
+					soap = """<?xml version="1.0" encoding="utf-8"?>
+					<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+						<soap:Body>
+							<getString>
+								<x>ABC</x>
+								<y>123</y>
+							</getString>
+						</soap:Body>
+					</soap:Envelope>
 					"""
 					result = request.Request('http://localhost', data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
 					response = request.urlopen(result)
@@ -528,12 +528,12 @@
 					# 請求調出氣象局雨量站基本資料
 					from urllib import request
 					url = 'http://fhy.wra.gov.tw/dmchy/wra/webciacomponent/webservice/wraformalws.asmx?op=wsCwbRainStations'
-					soap = """&lt;?xml version="1.0" encoding="utf-8"?>
-					&lt;soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-						&lt;soap12:Body>
-							&lt;wsCwbRainStations xmlns="http://tempuri.org/" />
-						&lt;/soap12:Body>
-					&lt;/soap12:Envelope>
+					soap = """<?xml version="1.0" encoding="utf-8"?>
+					<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+						<soap12:Body>
+							<wsCwbRainStations xmlns="http://tempuri.org/" />
+						</soap12:Body>
+					</soap12:Envelope>
 					"""
 					result = request.Request(url, data=soap.encode('utf-8'), headers={'Content-Type':'text/xml'})
 

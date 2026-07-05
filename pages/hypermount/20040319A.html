@@ -34,8 +34,8 @@
 			底下範例將 Markdown 格式的文字寫在 HTML 的 P 標籤，然後用 Showdownjs 將它轉成 HTML 格式的內容後，直接覆寫到 P 標籤：<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;script src='showdown.min.js'>&lt;/script>
-				&lt;p>
+				<script src='showdown.min.js'></script>
+				<p>
 				# Chapter
 				## Section
 				* A
@@ -49,12 +49,12 @@
 				* B
 
 				  bbb
-				&lt;/p>
-				&lt;script>
+				</p>
+				<script>
 					var paragraph=document.querySelector('p');
 					var converter=new showdown.Converter();
 					paragraph.innerHTML=converter.makeHtml(paragraph.innerHTML);
-				&lt;/script>
+				</script>
 			</textarea>
 		</p>
 	</section>

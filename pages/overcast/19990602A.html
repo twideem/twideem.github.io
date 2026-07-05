@@ -114,15 +114,15 @@
 							array_list.add("大家好");
 							response.setContentType("text/html;charset=UTF-8");
 							PrintWriter out=response.getWriter();
-							out.println("&lt;!DOCTYPE html>");
-							out.println("&lt;html lang='zh-TW'>");
-							out.println("  &lt;head>");
-							out.println("    &lt;meta charset='utf-8'/>");
-							out.println("  &lt;/head>");
-							out.println("  &lt;body>");
-							out.println("    &lt;p>" + array_list.get(0) + "&lt;/p>");
-							out.println("  &lt;/body>");
-							out.println("&lt;/html>");
+							out.println("<!DOCTYPE html>");
+							out.println("<html lang='zh-TW'>");
+							out.println("  <head>");
+							out.println("    <meta charset='utf-8'/>");
+							out.println("  </head>");
+							out.println("  <body>");
+							out.println("    <p>" + array_list.get(0) + "</p>");
+							out.println("  </body>");
+							out.println("</html>");
 							out.close();
 						}
 					}
@@ -131,21 +131,21 @@
 				如果用 JSP 的話，則是以 HTML 語法為主，再把 Java 語法也當作標籤混夾在一起⋯<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;%@ page contentType="text/html;charset=utf-8" %>
-					&lt;%@ page import="java.util.ArrayList" %>
-					&lt;%
+					<%@ page contentType="text/html;charset=utf-8" %>
+					<%@ page import="java.util.ArrayList" %>
+					<%
 						ArrayList array_list = new ArrayList();
 						array_list.add("大家好");
 					%>
-					&lt;!DOCTYPE html>
-					&lt;html lang='zh-TW'>
-						&lt;head>
-							&lt;meta charset='utf-8'>
-						&lt;/head>
-						&lt;body>
-							&lt;p>&lt;%=array_list.get(0)%>&lt;/p>
-						&lt;/body>
-					&lt;/html>
+					<!DOCTYPE html>
+					<html lang='zh-TW'>
+						<head>
+							<meta charset='utf-8'>
+						</head>
+						<body>
+							<p><%=array_list.get(0)%></p>
+						</body>
+					</html>
 				</textarea>
 				<br>
 				開發動態網頁的話，直接以網頁本身來設計與修改，是比較直覺的。顯然將 Java 程式碼插入 HTML 語法的 JSP，要比將 HTML 語法混在 Java 程式碼裡的 Servlet，更能提高開發效率！<ins>1</ins>
@@ -158,23 +158,23 @@
 				<h4>以 JSP 設計 Dynamic HTML 的基本結構</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;%@ page contentType="text/html;charset=utf-8" %>
-						&lt;%@ page import="在這裡載入 JDK 套件" %>
-						&lt;%!
+						<%@ page contentType="text/html;charset=utf-8" %>
+						<%@ page import="在這裡載入 JDK 套件" %>
+						<%!
 							在這裡宣告 Java 函式
 						%>
-						&lt;%
+						<%
 							在這裡撰寫 Java 程式碼
 						%>
-						&lt;!DOCTYPE html>
-						&lt;html lang='zh-TW'>
-							&lt;head>
-								&lt;meta charset='utf-8'>
-							&lt;/head>
-							&lt;body>
-								&lt;p>&lt;%=在這裡輸出 Java 變數或函式%>&lt;/p>
-							&lt;/body>
-						&lt;/html>
+						<!DOCTYPE html>
+						<html lang='zh-TW'>
+							<head>
+								<meta charset='utf-8'>
+							</head>
+							<body>
+								<p><%=在這裡輸出 Java 變數或函式%></p>
+							</body>
+						</html>
 					</textarea>
 					<br>
 					<code>&lt;%= %></code> 相當於 <code>&lt;% out.print() %></code>。
@@ -184,17 +184,17 @@
 				<h4>把 JSP 當 Servlet 寫的基本範例</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;%@ page import="java.util.*" %>
-						&lt;%
-							out.println("&lt;!DOCTYPE html>");
-							out.println("&lt;html lang='zh-TW'>");
-							out.println("  &lt;head>");
-							out.println("    &lt;meta charset='utf-8'>");
-							out.println("  &lt;/head>");
-							out.println("  &lt;body>");
-							out.println("    &lt;p>Hello, world!&lt;/p>");
-							out.println("  &lt;/body>");
-							out.println("&lt;/html>");
+						<%@ page import="java.util.*" %>
+						<%
+							out.println("<!DOCTYPE html>");
+							out.println("<html lang='zh-TW'>");
+							out.println("  <head>");
+							out.println("    <meta charset='utf-8'>");
+							out.println("  </head>");
+							out.println("  <body>");
+							out.println("    <p>Hello, world!</p>");
+							out.println("  </body>");
+							out.println("</html>");
 						%>
 					</textarea>
 				</p>
@@ -203,7 +203,7 @@
 				<h4>註解掉某塊 JSP 程式碼</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;%-- 註解 --%>
+						<%-- 註解 --%>
 					</textarea>
 				</p>
 			</section>
@@ -235,15 +235,15 @@
 					<br>
 					[ WEB-INF\web.xml ]<br>
 					<textarea class='brush:xml'>
-						&lt;?xml version="1.0" encoding="UTF-8"?>
-						&lt;web-app>
-							&lt;context-param hello="world"/>
-						&lt;/web-app>
+						<?xml version="1.0" encoding="UTF-8"?>
+						<web-app>
+							<context-param hello="world"/>
+						</web-app>
 					</textarea>
 					<br>
 					[ helloworld.jsp ]<br>
 					<textarea class='brush:html'>
-						&lt;%=application.getInitParameter("hello")%>
+						<%=application.getInitParameter("hello")%>
 					</textarea>
 					<br>
 					[ browser ]<br>
@@ -262,26 +262,26 @@
 					<br>
 					[ WEB-INF\web.xml ]<br>
 					<textarea class='brush:xml'>
-						&lt;?xml version="1.0" encoding="UTF-8"?>
-						&lt;web-app>
-							&lt;servlet>
-								&lt;servlet-name>HelloWorld&lt;/servlet-name>
-								&lt;jsp-file>/helloworld.jsp&lt;/jsp-file>
-								&lt;init-param>
-									&lt;param-name>hello&lt;/param-name>
-									&lt;param-value>world&lt;/param-value>
-								&lt;/init-param>
-							&lt;/servlet>
-							&lt;servlet-mapping>
-								&lt;servlet-name>HelloWorld&lt;/servlet-name>
-								&lt;url-pattern>/helloworld.jsp&lt;/url-pattern>
-							&lt;/servlet-mapping>
-						&lt;/web-app>
+						<?xml version="1.0" encoding="UTF-8"?>
+						<web-app>
+							<servlet>
+								<servlet-name>HelloWorld</servlet-name>
+								<jsp-file>/helloworld.jsp</jsp-file>
+								<init-param>
+									<param-name>hello</param-name>
+									<param-value>world</param-value>
+								</init-param>
+							</servlet>
+							<servlet-mapping>
+								<servlet-name>HelloWorld</servlet-name>
+								<url-pattern>/helloworld.jsp</url-pattern>
+							</servlet-mapping>
+						</web-app>
 					</textarea>
 					<br>
 					[ helloworld.jsp ]<br>
 					<textarea class='brush:html'>
-						&lt;%=config.getInitParameter("hello")%>
+						<%=config.getInitParameter("hello")%>
 					</textarea>
 					<br>
 					[ browser ]<br>
@@ -445,8 +445,8 @@
 					在 hello.jsp 文件裡面，輸入如下程式碼：<br>
 					<br>
 					<textarea class='brush:java'>
-						&lt;%@ page import="java.sql.*" %>
-						&lt;%
+						<%@ page import="java.sql.*" %>
+						<%
 							try {
 								// 驅動 JDBC 程式
 								Class.forName("com.mysql.jdbc.Driver");

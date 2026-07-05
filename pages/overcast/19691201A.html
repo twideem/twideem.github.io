@@ -997,15 +997,15 @@
 			<h3>robben.xml</h3>
 			<p>
 				<textarea class='brush:xml'>
-					&lt;?xml version="1.0" encoding="UTF-8"?>
-					&lt;player name="Arjen Robben">
-						&lt;pace>9&lt;/pace>
-						&lt;dribbling>9&lt;/dribbling>
-						&lt;shooting>8&lt;/shooting>
-						&lt;defence>3&lt;/defence>
-						&lt;pass>8&lt;/pass>
-						&lt;health>6&lt;/health>
-					&lt;/player>
+					<?xml version="1.0" encoding="UTF-8"?>
+					<player name="Arjen Robben">
+						<pace>9</pace>
+						<dribbling>9</dribbling>
+						<shooting>8</shooting>
+						<defence>3</defence>
+						<pass>8</pass>
+						<health>6</health>
+					</player>
 				</textarea>
 			</p>
 		</section>
@@ -1106,16 +1106,16 @@
 
 					# 用字串快速寫一個標記語言來用
 					string = """
-					&lt;html>
-						&lt;body>
-							&lt;article>
-								&lt;h1>HEADER&lt;/h1>
-								&lt;p class='red'>PARAGRAPH 1&lt;/p>
-								&lt;p class='green'>PARAGRAPH 2&lt;/p>
-								&lt;p class='blue'>PARAGRAPH 3&lt;/p>
-							&lt;/article>
-						&lt;/body>
-					&lt;/html>
+					<html>
+						<body>
+							<article>
+								<h1>HEADER</h1>
+								<p class='red'>PARAGRAPH 1</p>
+								<p class='green'>PARAGRAPH 2</p>
+								<p class='blue'>PARAGRAPH 3</p>
+							</article>
+						</body>
+					</html>
 					"""
 					xml = ElementTree.fromstring(string)
 

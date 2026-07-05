@@ -354,7 +354,7 @@
 				陣列解構式是相當實用的語法功能，如果你想交換兩個變數的資料，只要這樣寫：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					$a = 111;
 					$b = 222;
 					[$a, $b] = [$b, $a];
@@ -397,7 +397,7 @@
 				除了雙引號，也可以用 <code>'</code> 單引號表示字串資料。但兩者仍有差異，例如雙引號字串能正常轉換跳脫字元，單引號字串會把倒斜線視為一般字元來顯示（\\ 和 \' 除外）：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					echo "AAA\nBBB\nCCC\n", 'AAA\nBBB\nCCC\n';
 				</textarea>
 				<br>
@@ -411,7 +411,7 @@
 				雙引號字串內的變數名稱，會直接輸出資料，單引號字串不會：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					$a = '123';
 					echo "$a", PHP_EOL, '$a';
 				</textarea>
@@ -540,7 +540,7 @@
 				PHP 支援匿名函式，因此可寫出立即函式：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					(function($x) {
 						echo 123 + $x;
 					})(456);
@@ -553,7 +553,7 @@
 				所以直接將函式寫在參數裡面不是問題：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					print((function() {
 						return 'ABC';
 					})());
@@ -566,7 +566,7 @@
 				函式也可以是物件：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					$f = function() {
 						echo 'ABC';
 					};
@@ -580,7 +580,7 @@
 				也支援 closure，不過比較麻煩，除了內部函式要使用 <code>use</code> 將想變成 closure 的變數寫出來，還得用 <code>&</code> 將變數宣告為傳址呼叫，才會是我們真正想要的：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					function closure() {
 						$x = 3;
 						return function() use (&$x) {
@@ -603,7 +603,7 @@
 				每執行幾次程式，就觸發一次函式：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					function hello() {
 						echo 'Hello!!';
 					}
@@ -846,7 +846,7 @@
 					<code>printf()</code> 提供格式化輸出的功能：<br>
 					<br>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						printf('歡迎光臨，%s，你是第 %d 位來賓。', 'abc', 123);
 					</textarea>
 					<br>
@@ -950,7 +950,7 @@
 				PHP 有自己更易用的實作方式，寫入用 <code>setcookie('識別名稱', '資料', 期限)</code>，讀取用 <code>$_COOKIE['識別名稱']</code>：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					# 授予十分鐘的私鑰
 					setcookie('privatekey', 'R2HmVQ91wjC8RJbDDsajZ8LZ', time() + 600);
 					# 取得私鑰
@@ -960,7 +960,7 @@
 				刪除 Cookie 的方式，則是把資料清空，或把期限設為過期：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					setcookie('privatekey', '', time() - 1);
 				</textarea>
 				<br>
@@ -1478,7 +1478,7 @@
 				將陣列的資料分拆到多個變數：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					list($a, $b, $c) = array('AAA', 'BBB', 'CCC');
 					echo $a, PHP_EOL,
 						 $b, PHP_EOL,
@@ -1494,7 +1494,7 @@
 				但 list() 的功能，可用陣列解構式完成：<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					[$a, $b, $c] = ['AAA', 'BBB', 'CCC'];
 					echo $a, PHP_EOL,
 						 $b, PHP_EOL,
@@ -1507,7 +1507,7 @@
 			<h3>變數解析</h3>
 			<p>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					$abc = 'ABC';
 					echo "{$abc}";
 					echo "${abc}";
@@ -1524,7 +1524,7 @@
 			<h3>preg_match(), preg_replace(), preg_split()</h3>
 			<p>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					$string = '庭院,深深,深幾許';
 					if (preg_match('/院/', $string))
 						echo '有院子嘛～';
@@ -1548,7 +1548,7 @@
 				<h4>寫入</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						$file = fopen('sample.txt', 'w');
 						fputs($file, "AAA\nBBB\nCCC");
 						fclose($file);
@@ -1577,7 +1577,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							$file = fopen('sample.txt', 'r');
 							echo fgets($file),
 								 fgets($file),
@@ -1597,7 +1597,7 @@
 				<h4>其它</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						file_put_contents('sample.txt', "AAA\nBBB\nCCC");
 						echo file_get_contents('sample.txt');
 					</textarea>
@@ -1629,7 +1629,7 @@
 				<h4>main.php</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						$ini = parse_ini_file('sample.ini');
 						echo $ini['user'], PHP_EOL,
 							 $ini['email'];
@@ -1654,11 +1654,11 @@
 					<h5>sample.xml</h5>
 					<p>
 						<textarea class='brush:xml'>
-							&lt;?xml version="1.0" encoding="UTF-8"?>
-							&lt;sample>
-								&lt;user>Twideem Civs&lt;/user>
-								&lt;email>twideem@outlook.com&lt;/email>
-							&lt;/sample>
+							<?xml version="1.0" encoding="UTF-8"?>
+							<sample>
+								<user>Twideem Civs</user>
+								<email>twideem@outlook.com</email>
+							</sample>
 						</textarea>
 					</p>
 				</section>
@@ -1666,7 +1666,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							$xml = simplexml_load_file('sample.xml');
 							echo $xml->user, PHP_EOL,
 								 $xml->email;
@@ -1683,12 +1683,12 @@
 				<h4>儲存 XML 檔</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
-						$xml = simplexml_load_string('&lt;?xml version="1.0" encoding="UTF-8"?>
-						&lt;sample>
-							&lt;user>User&lt;/user>
-							&lt;email>user@e.mail&lt;/email>
-						&lt;/sample>');
+						<?php
+						$xml = simplexml_load_string('<?xml version="1.0" encoding="UTF-8"?>
+						<sample>
+							<user>User</user>
+							<email>user@e.mail</email>
+						</sample>');
 						$xml->user = 'Twideem Civs';
 						$xml->email = 'twideem@outlook.com';
 						$xml->saveXML('sample.xml');
@@ -1709,13 +1709,13 @@
 					<h5>sample.xml</h5>
 					<p>
 						<textarea class='brush:xml'>
-							&lt;?xml version="1.0" encoding="UTF-8"?>
-							&lt;sample>
-								&lt;users>
-									&lt;user email="twideem@outlook.com">Twideem Civs&lt;/user>
-									&lt;user email="raideem@gmx.com">Raideem Toukin&lt;/user>
-								&lt;/users>
-							&lt;/sample>
+							<?xml version="1.0" encoding="UTF-8"?>
+							<sample>
+								<users>
+									<user email="twideem@outlook.com">Twideem Civs</user>
+									<user email="raideem@gmx.com">Raideem Toukin</user>
+								</users>
+							</sample>
 						</textarea>
 					</p>
 				</section>
@@ -1723,7 +1723,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							$xml = simplexml_load_file('sample.xml');
 							echo $xml->users->user[0], PHP_EOL,
 								 $xml->users->user[0]['email'], PHP_EOL,
@@ -1766,16 +1766,16 @@
 					<h5>document.xml</h5>
 					<p>
 						<textarea class='brush:xml'>
-							&lt;?xml version="1.0" encoding="UTF-8"?>
-							&lt;html>
-								&lt;article>
-									&lt;h1>Header&lt;/h1>
-									&lt;p>Paragraph 1&lt;/p>
-									&lt;p>Paragraph 2&lt;/p>
-									&lt;p>Paragraph 3&lt;/p>
-									&lt;img src="figure.png" width="640" alt="插圖"/>
-								&lt;/article>
-							&lt;/html>
+							<?xml version="1.0" encoding="UTF-8"?>
+							<html>
+								<article>
+									<h1>Header</h1>
+									<p>Paragraph 1</p>
+									<p>Paragraph 2</p>
+									<p>Paragraph 3</p>
+									<img src="figure.png" width="640" alt="插圖"/>
+								</article>
+							</html>
 						</textarea>
 					</p>
 				</section>
@@ -1783,7 +1783,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							# Load XML document
 							$dom = new DOMDocument();
 							$dom->load('document.xml');
@@ -1836,7 +1836,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							# Load XML document
 							$dom = new DOMDocument();
 							$dom->load('document.xml');
@@ -1872,7 +1872,7 @@
 				<h4>建立空白 XML 文件並新增元素和屬性</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						# Create XML document
 						$dom = new DOMDocument('1.0', 'UTF-8');
 						# Create root element
@@ -1911,7 +1911,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							# Load XML document
 							$dom = new DOMDocument();
 							$dom->load('document.xml');
@@ -1962,14 +1962,14 @@
 				<h4>湘北高等学校.xml</h4>
 				<p>
 					<textarea class='brush:xml'>
-						&lt;?xml version="1.0" encoding="UTF-8"?>
-						&lt;players>
-							&lt;player name="赤木剛憲" points="16"/>
-							&lt;player name="桜木花道" points="4"/>
-							&lt;player name="流川楓" points="32"/>
-							&lt;player name="三井寿" points="24"/>
-							&lt;player name="宮城リョータ" points="8"/>
-						&lt;/players>
+						<?xml version="1.0" encoding="UTF-8"?>
+						<players>
+							<player name="赤木剛憲" points="16"/>
+							<player name="桜木花道" points="4"/>
+							<player name="流川楓" points="32"/>
+							<player name="三井寿" points="24"/>
+							<player name="宮城リョータ" points="8"/>
+						</players>
 					</textarea>
 				</p>
 			</section>
@@ -1977,7 +1977,7 @@
 				<h4>main.php</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						# 載入 XML
 						$dom = new DOMDocument();
 						$dom->load('湘北高等学校.xml');
@@ -2010,7 +2010,7 @@
 			<h3>JSON</h3>
 			<p>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					# Array to JSON
 					$array1 = array('name'=>'Twideem Civs', 'email'=>'twideem@outlook.com');
 					echo json_encode($array1, JSON_UNESCAPED_UNICODE), PHP_EOL;
@@ -2063,7 +2063,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							$file = fopen('diablo.csv', 'r');
 							$csv = [];
 							while(!feof($file))
@@ -2093,7 +2093,7 @@
 					<h5>main.php</h5>
 					<p>
 						<textarea class='brush:php'>
-							&lt;?php
+							<?php
 							# 讀取
 							$csv = array_map('str_getcsv', file('diablo.csv'));
 							# 修改
@@ -2122,7 +2122,7 @@
 			<h3>偽 HEX 檔案</h3>
 			<p>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					# 寫入
 					$file = fopen('hex.txt', 'w');
 					$array = unpack('H*', 'abcdefg hijklmnop qrstuv wxyz');
@@ -2153,7 +2153,7 @@
 				fwrite() 或 fputs() 會將數值轉為字串再寫入檔案，就算 fopen() 第二個參數下了 'b' 也一樣。解法是用 pack() 將數值轉為 binary string 後再寫入～<br>
 				<br>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					# 寫入
 					$file = fopen('data.bin', 'w');
 					fwrite($file, pack('i', 1024768).PHP_EOL);
@@ -2189,7 +2189,7 @@
 				<h4>做法一：使用 opendir()、readdir()、closedir()</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						# 取得目錄裡面所有內容
 						function f($x, &$y=array()) {
 							if (is_dir($x)) {
@@ -2213,7 +2213,7 @@
 				<h4>做法二：使用 scandir()</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						# 取得目錄裡面所有內容
 						function f($x, &$y=array()) {
 							if (is_dir($x)) {
@@ -2236,7 +2236,7 @@
 				<h4>做法三：使用 glob()</h4>
 				<p>
 					<textarea class='brush:php'>
-						&lt;?php
+						<?php
 						function f($x) {
 							foreach (glob($x.'\*') as $n) {
 								if (is_dir($n))
@@ -2255,7 +2255,7 @@
 			<h3>列出能設定的 php.ini 項目</h3>
 			<p>
 				<textarea class='brush:php'>
-					&lt;?php
+					<?php
 					$array = ini_get_all();
 					foreach ($array as $key1=>$value1)
 						foreach ($value1 as $key2=>$value2)

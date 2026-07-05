@@ -46,12 +46,12 @@
 				在你網頁的 head 標籤裡面，加入如下標記，但必須自行根據你網頁的相對路徑調整檔案來源：<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;link href='styles/shCoreDefault.css' rel='stylesheet'>
-					&lt;script src='scripts/shCore.js'>&lt;/script>
-					&lt;script src='scripts/shBrushJava.js'>&lt;/script>
-					&lt;script>
+					<link href='styles/shCoreDefault.css' rel='stylesheet'>
+					<script src='scripts/shCore.js'></script>
+					<script src='scripts/shBrushJava.js'></script>
+					<script>
 						SyntaxHighlighter.all();
-					&lt;/script>
+					</script>
 				</textarea>
 			</p>
 		</section>
@@ -62,13 +62,13 @@
 				然後使用 pre 標籤來輸入 Java 程式範例，並指定 class 屬性為 brush:java，即能以高亮度來顯示程式碼。例如：<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;pre class='brush:java'>
+					<pre class='brush:java'>
 						public class HelloWorld {
 							public static vodi main(String[] args) {
 								System.out.print('Hello, world!');
 							}
 						}
-					&lt;/pre>
+					</pre>
 				</textarea>
 			</p>
 		</section>
@@ -112,13 +112,13 @@
 			將你想要的檔案加進去網頁後，再將 pre 的 class 屬性為 brush:xxx 即可。例如底下示範新增使用 Delphi 語言：<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;script src='scripts/shBrushDelphi.js'>&lt;/script>
-				&lt;pre class='brush:delphi'>
+				<script src='scripts/shBrushDelphi.js'></script>
+				<pre class='brush:delphi'>
 					program HelloWorld;
 					begin
 						writeln('Hello, world');
 					end.
-				&lt;/pre>
+				</pre>
 			</textarea>
 		</p>
 	</section>

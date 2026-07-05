@@ -437,7 +437,7 @@
 			<textarea class='brush:cs'>
 				using System;
 
-				class Class&lt;TYPE>
+				class Class<TYPE>
 				{
 					TYPE variable;
 
@@ -456,9 +456,9 @@
 				{
 					static void Main()
 					{
-						Class&lt;int> class1 = new Class&lt;int>(123);
+						Class<int> class1 = new Class<int>(123);
 						Console.WriteLine(class1.Get());
-						Class&lt;string> class2 = new Class&lt;string>("ABC");
+						Class<string> class2 = new Class<string>("ABC");
 						Console.Write(class2.Get());
 					}
 				}
@@ -767,7 +767,7 @@
 						return x * 3;
 					}
 
-					public static string Triple&lt;T>(this T x)
+					public static string Triple<T>(this T x)
 					{
 						return "TRIPLE";
 					}
@@ -898,7 +898,7 @@
 			<textarea class='brush:cs'>
 				using System;
 
-				class Indexer&lt;T>
+				class Indexer<T>
 				{
 					T[] index = new T[100];
 
@@ -920,7 +920,7 @@
 				{
 					static void Main()
 					{
-						Indexer&lt;string> indexer = new Indexer&lt;string>();
+						Indexer<string> indexer = new Indexer<string>();
 						indexer[0] = "indexer";
 						Console.Write(indexer[0]);
 					}
@@ -1410,13 +1410,13 @@
 						{
 							// 使用查詢語句處理資料然後用 foreach 輸出
 							int[] array = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
-							IEnumerable&lt;int> query1 = from n in array where n > 5 select n;
+							IEnumerable<int> query1 = from n in array where n > 5 select n;
 							foreach (int n in query1)
 							{
 								Console.Write(n);
 							}
 							// 用於 Dictionary
-							Dictionary&lt;string, int> dictionary = new Dictionary&lt;string, int>()
+							Dictionary<string, int> dictionary = new Dictionary<string, int>()
 							{
 								{"A", 111},
 								{"B", 222},
@@ -1424,7 +1424,7 @@
 								{"D", 444},
 								{"E", 555}
 							};
-							IEnumerable&lt;string> query2 = from n in dictionary
+							IEnumerable<string> query2 = from n in dictionary
 														 where n.Value >= 333
 														 select n.Key;
 							foreach (string n in query2)
@@ -1561,9 +1561,9 @@
 									new Player("石井健太郎", "SF"),
 									new Player("桜木花道", "PF")
 								};
-								IEnumerable&lt;IGrouping&lt;string, Player>> query =
+								IEnumerable<IGrouping<string, Player>> query =
 									from n in players group n by n.Position;
-								foreach (IGrouping&lt;string, Player> n1 in query)
+								foreach (IGrouping<string, Player> n1 in query)
 								{
 									Console.WriteLine(n1.Key);
 									foreach (Player n2 in n1)

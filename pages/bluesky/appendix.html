@@ -1073,14 +1073,14 @@
 					用純文字文件，以如下格式，製作你的播放清單：<br>
 					<br>
 					<textarea class='brush:xml'>
-						&lt;asx version='3.0'>
-							&lt;entry>
-								&lt;ref href='影片一.mp4'/>
-							&lt;/entry>
-							&lt;entry>
-								&lt;ref href='影片二.mp4'/>
-							&lt;/entry>
-						&lt;/asx>
+						<asx version='3.0'>
+							<entry>
+								<ref href='影片一.mp4'/>
+							</entry>
+							<entry>
+								<ref href='影片二.mp4'/>
+							</entry>
+						</asx>
 					</textarea>
 					<br>
 					然後儲存為 *.asx 檔案，即可播放。
@@ -1090,13 +1090,13 @@
 				<h4>指定從哪個時間開始播放、以及播放多久</h4>
 				<p>
 					<textarea class='brush:xml'>
-						&lt;asx version='3.0'>
-							&lt;entry>
-								&lt;ref href='影片.mp4'/>
-								&lt;starttime value='00:00:15.000'/>
-								&lt;duration value='00:00:03.000'/>
-							&lt;/entry>
-						&lt;/asx>
+						<asx version='3.0'>
+							<entry>
+								<ref href='影片.mp4'/>
+								<starttime value='00:00:15.000'/>
+								<duration value='00:00:03.000'/>
+							</entry>
+						</asx>
 					</textarea>
 					<br>
 					將從第 15 秒開始播放，且播放 3 秒鐘。
@@ -1108,12 +1108,12 @@
 					雖然新版 Windows 已支援 Unicode 檔名，但是在 ASX 使用非本在地的字元時，卻無法順利播放。這時只要告訴 ASX 使用哪種編碼即可，底下示範 UTF-8：<br>
 					<br>
 					<textarea class='brush:xml'>
-						&lt;asx version='3.0'>
-							&lt;param name='encoding' value='UTF-8'/>
-							&lt;entry>
-								&lt;ref href='センチメンタル.mp3'/>
-							&lt;/entry>
-						&lt;/asx>
+						<asx version='3.0'>
+							<param name='encoding' value='UTF-8'/>
+							<entry>
+								<ref href='センチメンタル.mp3'/>
+							</entry>
+						</asx>
 					</textarea>
 					<br>
 					當然，存檔時記得選 UTF-8 編碼。
@@ -1127,15 +1127,15 @@
 				Windows Media Player 9 開始，以 WPL（Windows Media Player Playlist）做為預設的播放清單格式。它可以建立動態播放清單，這是 ASX 與 M3U 格式無法做到的⋯但 WPL 不能做到的事更多，並沒有 M3U 和 ASX 好用。格式如下：<br>
 				<br>
 				<textarea class='brush:xml'>
-					&lt;?wpl version='1.0'?>
-					&lt;smil>
-						&lt;body>
-							&lt;seq>
-								&lt;media src='影片一.mp4'/>
-								&lt;media src='影片二.mp4'/>
-							&lt;/seq>
-						&lt;/body>
-					&lt;/smil>
+					<?wpl version='1.0'?>
+					<smil>
+						<body>
+							<seq>
+								<media src='影片一.mp4'/>
+								<media src='影片二.mp4'/>
+							</seq>
+						</body>
+					</smil>
 				</textarea>
 				<br>
 				儲存為 *.wpl 副檔名的檔案即可。

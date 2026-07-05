@@ -53,29 +53,29 @@
 		<h2>Hello, world! 和 print()、clear()</h2>
 		<p>
 			<textarea class='brush:txt'>
-				&lt;!DOCTYPE>
-				&lt;html>
-					&lt;head>
-						&lt;style>
+				<!DOCTYPE>
+				<html>
+					<head>
+						<style>
 							a {color:blue; cursor:pointer}
 							a:hover {color:orange}
-						&lt;/style>
-					&lt;/head>
-					&lt;body>
-						&lt;script>
+						</style>
+					</head>
+					<body>
+						<script>
 							let p = document.createElement('p');
 							document.body.appendChild(p);
 							function print(x) {
-								p.innerHTML += x + '&lt;br>';
+								p.innerHTML += x + '<br>';
 							}
 							function clear() {
 								p.innerHTML = '';
 							}
 							document.clear = clear;
-							print('&lt;a onclick="clear()">Hello, world!&lt;/a>');
-						&lt;/script>
-					&lt;/body>
-				&lt;/html>
+							print('<a onclick="clear()">Hello, world!</a>');
+						</script>
+					</body>
+				</html>
 			</textarea>
 			<br>
 			一律使用 A 標籤當 BUTTON 元件，但避開會在狀態烈顯示網址的 href 屬性，改用 onclick，因此事先透過 CSS 設定 A 標籤在沒有超鏈結時也有樣式。<br>

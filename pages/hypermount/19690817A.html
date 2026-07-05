@@ -59,39 +59,39 @@
 				<code>p:nth-of-type(2)</code> 的意思是指定第二個 p 元素，例如下面這個例子是成立的：<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;article>
-						&lt;p>111&lt;/p>
-						&lt;p>222&lt;/p> &lt;!-- 是 article 的第 2 個 p 元素沒錯 -->
-						&lt;p>333&lt;/p>
-					&lt;/article>
+					<article>
+						<p>111</p>
+						<p>222</p> <!-- 是 article 的第 2 個 p 元素沒錯 -->
+						<p>333</p>
+					</article>
 				</textarea>
 				<br>
 				但如下例子就不符合條件了：<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;article>
-						&lt;h1>111&lt;/h1>
-						&lt;p>222&lt;/p> &lt;!-- 這是 article 的第 1 個 p 元素 -->
-						&lt;i>333&lt;/i>
-					&lt;/article>
+					<article>
+						<h1>111</h1>
+						<p>222</p> <!-- 這是 article 的第 1 個 p 元素 -->
+						<i>333</i>
+					</article>
 				</textarea>
 				<br>
 				<code>p:nth-child(2)</code> 的意思是指定 p 元素，且它是某父元素的第二的子元素，因此下兩個例子都是成立的：<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;article>
-						&lt;p>111&lt;/p>
-						&lt;p>222&lt;/p> &lt;!-- 是 p 元素沒錯，而且是 article 的第 2 個元素。 -->
-						&lt;p>333&lt;/p>
-					&lt;/article>
+					<article>
+						<p>111</p>
+						<p>222</p> <!-- 是 p 元素沒錯，而且是 article 的第 2 個元素。 -->
+						<p>333</p>
+					</article>
 				</textarea>
 				<br>
 				<textarea class='brush:html'>
-					&lt;article>
-						&lt;h1>111&lt;/h1>
-						&lt;p>222&lt;/p> &lt;!-- 是 p 元素沒錯，而且是 article 的第 2 個元素。 -->
-						&lt;i>333&lt;/i>
-					&lt;/article>
+					<article>
+						<h1>111</h1>
+						<p>222</p> <!-- 是 p 元素沒錯，而且是 article 的第 2 個元素。 -->
+						<i>333</i>
+					</article>
 				</textarea>
 				<br>
 				用 -child 容易會錯意，所以建議用 -of-type 比較不會出錯。

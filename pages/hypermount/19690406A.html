@@ -112,7 +112,7 @@
 			<br>
 			<textarea class='brush:js'>
 				function f() {
-					for (var n = 0; n &lt; 10; n++) {
+					for (var n = 0; n < 10; n++) {
 						var a=n;
 					}
 				}
@@ -123,7 +123,7 @@
 			<textarea class='brush:js'>
 				function f() {
 					var n, a;
-					for (n = 0; n &lt; 10; n++) {
+					for (n = 0; n < 10; n++) {
 						a = n;
 					}
 				}
@@ -572,7 +572,7 @@
 				<textarea class='brush:js'>
 					(function(x) {
 						var a;
-						for (var n = 0; n &lt; x; n++) {
+						for (var n = 0; n < x; n++) {
 							a++;
 						}
 						document.write(a);
@@ -1089,7 +1089,7 @@
 					var a = ['t', 'w', 'i', 'd', 'e', 'e', 'm'];
 
 					// 逐一取出陣列的值，轉為大寫字母然後輸出。
-					for (var n = 0; n &lt; a.length; n++) {
+					for (var n = 0; n < a.length; n++) {
 						document.write(a[n].toUpperCase());
 					}
 				</textarea>
@@ -1125,7 +1125,7 @@
 
 					// 逐一將陣列 a 中的字元轉為大寫，然後儲存到另一個陣列 b 中。
 					var b = [];
-					for (var n = 0; n &lt; a.length; n++) {
+					for (var n = 0; n < a.length; n++) {
 						b[n] = a[n].toUpperCase();
 					}
 					document.write(b);
@@ -1166,8 +1166,8 @@
 
 					// 我們想擷取小於 5 的部分做為新的陣列
 					var b = [];
-					for (var n = 0; n &lt; a.length; n++) {
-						if (a[n] &lt; 5) {
+					for (var n = 0; n < a.length; n++) {
+						if (a[n] < 5) {
 							b.push(a[n]);
 						}
 					}
@@ -1185,7 +1185,7 @@
 
 					var b = [];
 					b = a.filter(function(x) {
-						return x &lt; 5;
+						return x < 5;
 					});
 					document.write(b);
 				</textarea>

@@ -209,9 +209,9 @@
 				電腦和作業系統不同，資料範圍也不同。如下程式碼可以取得各個資料型態的上限與下限：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;float.h>
-					#include &lt;limits.h>
-					#include &lt;stdio.h>
+					#include <float.h>
+					#include <limits.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -283,7 +283,7 @@
 			<h3>轉換資料型態</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -304,7 +304,7 @@
 				<h4>char[] 轉 char*</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -323,8 +323,8 @@
 				<h4>char* 轉 char[]</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <string.h>
 
 						main()
 						{
@@ -344,7 +344,7 @@
 				<h4>char 轉 int</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -365,7 +365,7 @@
 				<h4>int 轉 char</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -386,8 +386,8 @@
 				<h4>char* 轉 int</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						main()
 						{
@@ -406,7 +406,7 @@
 				<h4>int 轉 char*</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -426,8 +426,8 @@
 				<h4>char[] 轉 int</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						main()
 						{
@@ -446,7 +446,7 @@
 				<h4>int 轉 char[]</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -479,7 +479,7 @@
 				可以使用 <code>typedef</code> 為資料型態取另外的名稱：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -507,8 +507,8 @@
 				指標只能存放記憶體位址，你可以用 stdlib.h 的 <code>malloc()</code> 配置一塊記憶體空間來獲得位址：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -524,7 +524,7 @@
 				或者用 <code>&</code> 取址運算子，將另一個變數的記憶體位址傳給指標：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -546,8 +546,8 @@
 				<code>*</code> 單獨出現在變數前面時，叫做取值運算子，可以透過指標在記憶體位址存入或取出資料：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -569,7 +569,7 @@
 				宣告指標時，後面接的一定是記憶體位址！要嘛接取址運算子的變數，要嘛用 malloc() 獲得記憶體位址，要嘛接其它傳回指標的函式。如果設定一個 int 資料給指標的話，是直接指定記憶體位址編號給指標：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -588,7 +588,7 @@
 				「哪有人會幹這種事？想太多！」其實新手在不熟悉指標時，還真的會幹這種事。尤其是很少人像本文範例宣告指標時把 * 放在資料型態後面，幾乎所有人一律把 * 放在變數名稱前面：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -614,8 +614,8 @@
 				透過這功能，你可以在記憶體空間前後移動，存取其他資料：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -694,7 +694,7 @@
 					void 指標可以做為萬用資料型態！<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -719,7 +719,7 @@
 					有時候會看到 <code>char**</code> 這樣用了兩個 * 符號的指標，這表示保存 char* 型別位址的指標。把連續兩個 ** 隔開寫的話，就能理解這程式其實是什麼意思了：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -736,7 +736,7 @@
 					*** 的話依此類推，是保存 ** 型別位址的指標：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -781,7 +781,7 @@
 				通常用 #define 設計成巨集：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					#define LENGTH_OF_ARRAY(x) sizeof(x) / sizeof(*x)
 
@@ -800,7 +800,7 @@
 				無法設計成函式，因為把陣列做為函式參數時，會是個指標，導致只能取得陣列的第一個元素，因此如下的程式只會計算出錯誤的結果：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -829,7 +829,7 @@
 				陣列就像有語法糖的指標，所以陣列名稱就跟指標名稱一樣，會傳回變數的記憶體位址，於是陣列可以用指標的方式存取資料：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -853,7 +853,7 @@
 				既然陣列像是一種指標，那直接把陣列丟給指標就行了：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -877,8 +877,8 @@
 				雖然陣列像是一種指標，但指標可不是陣列，所以指標是沒辦法反過來用 &array[0] = pointer 轉陣列的，只能一筆一筆把指標的資料寫進陣列：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -903,8 +903,8 @@
 				如果只是希望能像陣列一樣，用索引值存取資料，指標倒是有支援 [] 語法：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -949,8 +949,8 @@
 				C 語言沒有字串型態，而是以 char 指標表現：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -974,7 +974,7 @@
 				由於這樣寫太複雜了，所以像上面的例子，通常改寫成字元陣列，再輸出不含索引值的陣列名稱，這樣就等於丟出陣列索引值 0 的記憶體位址，也就是指標開頭了：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -997,7 +997,7 @@
 				每次想使用字串，都寫成字元陣列的結構，未免太不方便了！因此 C 語言提供「雙引號」做為字串資料的運算符：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -1020,7 +1020,7 @@
 				習慣用字元陣列的話也是可以：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -1036,7 +1036,7 @@
 				不過只能在建立陣列時就給 "" 初值，否則像下面例子是錯的：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -1053,8 +1053,8 @@
 				想之後才給值的話，得先配置好陣列大小，再用 string.h 的 <code>strcpy()</code> 函式將字串複製過來：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1076,7 +1076,7 @@
 			<h3>以字串做為函式的傳回值或參數</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					char* f(char* x)
 					{
@@ -1103,8 +1103,8 @@
 					C 語言以雙引號刮起來的字串資料，沒辦法像其它語言用 + 串接，得用 string.h 的 <code>strcat()</code> 完成：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <string.h>
 
 						main()
 						{
@@ -1125,8 +1125,8 @@
 					strcat() 使用上有個限制，就是長度要夠，否則無法串接。因此底下寫法要避免：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <string.h>
 
 						main()
 						{
@@ -1149,9 +1149,9 @@
 					請乖乖配置足夠的長度：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <stdlib.h>
+						#include <string.h>
 
 						main()
 						{
@@ -1170,8 +1170,8 @@
 					或者：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <string.h>
 
 						main()
 						{
@@ -1194,8 +1194,8 @@
 			<h3>比較字串是否完全相同</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1219,8 +1219,8 @@
 			<h3>比較字串不相同處</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1242,8 +1242,8 @@
 			<h3>切割字串</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1273,9 +1273,9 @@
 				strncpy() 需要三個參數，第一個是用來保存結果的新字串，第二個是被拿來截取的字串，第三個是長度。那起點呢？被擷取的字串就是起點！而所謂字串就是字元陣列也就是指標位址，所以往後移動記憶體位址就等於設定起點了！<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <stdlib.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1297,8 +1297,8 @@
 			<h3>搜尋字串與開頭位置</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1330,8 +1330,8 @@
 				字串長度並不是資料長度，所以不該用 sizeof() 取得，應該用 string.h 的 <code>strlen()</code>：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					main()
 					{
@@ -1352,9 +1352,9 @@
 				C 語言並沒有提供替換字串的函式，必須用 strstr() 和 strcpy() 來實現。通常會自行寫一個函式來重複使用，請參考 GeeksforGeeks 網站的《<a href='http://www.geeksforgeeks.org/c-program-replace-word-text-another-given-word/'>C program to Replace a word in a text by another given word</a>》，程式碼摘錄於下：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <stdlib.h>
+					#include <string.h>
 
 					/*
 					Anuj Chauhan
@@ -1444,7 +1444,7 @@
 				雖然執行的程式只有一行時，不用加大括號，但 C 語言不像 Python 的條件判斷式使用 if.. elif.. else 三個關鍵字，C 語言的 else if 並不是 elif，而是在 else 後面再跑一個 if，每個 if 可以有多個 else，所以一個又一個 if.. else.. 下來，容易把 else 搞錯成不對的 if 分歧句：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -1497,7 +1497,7 @@
 					即使 case 到資料了，switch 還是會繼續往下一個 case 進行比對，因此透過這種特性，可以優雅的篩選資料：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -1542,7 +1542,7 @@
 					如果在函式中使用 switch 來傳回值，那 return 都已經結束整個函式的流程了，所以就不用再下 break 結束 switch 的流程：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						int f(int x)
 						{
@@ -1585,12 +1585,12 @@
 				ANSI C 時 for 不能宣告變數，所以會看到這樣的程式：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
 						int i;
-						for (i=1; i&lt;=3; i++) {
+						for (i = 1; i <= 3; i++) {
 							printf("%d\n", i);
 						}
 					}
@@ -1619,7 +1619,7 @@
 				程式總是由上往下一直執行下去，goto 可以讓你往上執行程式：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -1666,7 +1666,7 @@
 				<code>return</code> 雖然用來傳回資料，但同時也結束函式的執行，因此你想結束函式時，可以單獨使用 reutrn，即使函式是 void 也可以。<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int a;
 
@@ -1695,7 +1695,7 @@
 				C 語言的函式，參數為傳值呼叫，若把變數傳給函式當參數，會複製一份變數的值傳進去，而不是變數本身整個傳過去，相當於 <code>參數 = 變數</code> 這程式。所以修改參數的值，並不會影響到變數的值，等於有兩個不同的變數名稱：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					void f(int x)
 					{
@@ -1722,7 +1722,7 @@
 				若希望在函式修改的參數就是傳入的變數本身，可透過指標設計成傳址呼叫，寫成相當於 <code>指標 = &變數</code> 的程式：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					void f(int* x)
 					{
@@ -1746,7 +1746,7 @@
 				反過來說，資料已經宣告為指標的話，既然本身就是指標，那就不用加 <code>&</code>，直接將識別名稱傳進去即可：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					void f(int* x)
 					{
@@ -1769,7 +1769,7 @@
 				比較麻煩的是字串型態 char*，它已經是指標，所以要傳址的話，函式參數要宣告為指標的指標：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					void f(char** x)
 					{
@@ -1802,7 +1802,7 @@
 				首先示範一個正常傳回指標的函式：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int* f1()
 					{
@@ -1824,7 +1824,7 @@
 				然而 C 語言的函式使用自己一塊記憶體配置空間，它會釋放已經用過的指標空間，騰出來給下一個函式使用，因此另外一個函式也傳回指標的話，會出現資料被覆寫的情況：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int* f1()
 					{
@@ -1855,7 +1855,7 @@
 				這時要用 <code>static</code>：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int* f1()
 					{
@@ -1917,8 +1917,8 @@
 				雖然陣列就像指標，但指標可不是陣列！於是陣列轉指標傳回容易，傳回的指標想丟給陣列就困難了，可借助 string.h 的 <code>memcpy()</code> 函式幫忙：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <string.h>
 
 					int* f()
 					{
@@ -1948,7 +1948,7 @@
 				此外，函式竟然還會預設傳回 int 的 1，於是⋯<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					donothing()
 					{
@@ -1975,7 +1975,7 @@
 				void 並非沒有傳回值的意思，而是這個函式不需要傳回資料，也就是不代表它沒有傳回任何東西。視編譯器不同，有可能傳回除錯編號、有可能傳回記憶體位址、甚至是程式執行的結果：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int a;
 
@@ -1999,7 +1999,7 @@
 				當然，void 函式傳回的資料，是不能賦值給變數的，除非⋯<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					int a;
 
@@ -2035,7 +2035,7 @@
 				<h4>列舉資料</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						enum arrow {left, up, right, down};
 
@@ -2058,7 +2058,7 @@
 				<h4>列舉資料的同時宣告變數</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -2077,7 +2077,7 @@
 				<h4>列舉資料時設定初始值</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -2105,7 +2105,7 @@
 				<h4>製作結構</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						struct position
 						{
@@ -2135,7 +2135,7 @@
 				<h4>製作結構的同時宣告變數</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -2158,7 +2158,7 @@
 				<h4>宣告結構的同時直接賦值</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						struct position
 						{
@@ -2182,7 +2182,7 @@
 				<h4>結構指標</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						struct position
 						{
@@ -2213,7 +2213,7 @@
 				union 和 struct 語法是一樣的，差別在 union 配置資料的方式，並非為每一筆資料分配獨自的記憶體空間，而是每筆資料共用同一個記憶體開頭。看個範例：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -2249,7 +2249,7 @@
 				<h4>輸出字串</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -2266,7 +2266,7 @@
 				<h4>格式化輸出整數</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -2307,8 +2307,8 @@
 				<h4>輸入字串</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						main()
 						{
@@ -2328,7 +2328,7 @@
 				<h4>以格式化輸入取得整數</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{
@@ -2356,7 +2356,7 @@
 					在 MS-DOS 模式執行程式時，後面常常搭配一些參數。用 C 語言寫的程式，該怎樣接收使用者輸入的參數呢？請看如下範例：<br>
 					<br>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main(int argc, char* argv[])
 						{
@@ -2396,7 +2396,7 @@
 			<h3>在文字檔案寫入一行字串</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -2418,7 +2418,7 @@
 			<h3>在文字檔案寫入多行字串</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -2454,8 +2454,8 @@
 				<h4>main.c</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						main()
 						{
@@ -2489,8 +2489,8 @@
 				<h4>main.c</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						char* f()
 						{
@@ -2530,8 +2530,8 @@
 				<h4>main.c</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						main()
 						{
@@ -2571,8 +2571,8 @@
 				<h4>main.c</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
+						#include <stdio.h>
+						#include <stdlib.h>
 
 						main()
 						{
@@ -2600,7 +2600,7 @@
 			<h3>複製檔案</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -2624,7 +2624,7 @@
 			<h3>刪除檔案</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -2638,7 +2638,7 @@
 			<h3>更改檔名</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					main()
 					{
@@ -2654,7 +2654,7 @@
 				用 stdlib.h 的 <code>system()</code> 下作業系統指令：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdlib.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -2672,7 +2672,7 @@
 				用 stdlib.h 的 <code>system()</code> 下作業系統指令：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdlib.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -2705,8 +2705,8 @@
 				stdlib.h 裡面已經有 <code>qsort()</code>，可以讓我們更容易使用 Tony Hoare 發明的 Quicksort 演算法！但必須先設計一個比較大小的 compare() 函式傳給 qsort()，範例如下：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					int compare(const void* x, const void* y)
 					{
@@ -2717,7 +2717,7 @@
 					{
 						int array[] = {2, 6, 4, 9, 5};
 						qsort(array, 5, sizeof(int), compare);
-						for (int n = 0; n &lt; 5; n++) {
+						for (int n = 0; n < 5; n++) {
 							printf("%d", array[n]);
 						}
 					}
@@ -2730,8 +2730,8 @@
 				字串也可以：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					int compare(const void* str1, const void* str2)
 					{
@@ -2742,7 +2742,7 @@
 					{
 						char* array[] = {"CCC", "BBB", "AAA"};
 						qsort(array, 3, sizeof(char*), compare);
-						for (int n = 0; n &lt; 3; n++) {
+						for (int n = 0; n < 3; n++) {
 							puts(array[n]);
 						}
 					}
@@ -2760,8 +2760,8 @@
 				stdlib.h 裡面已經有 <code>bsearch()</code>，讓我們更容易使用 Binary search 演算法<ins>2</ins>！它會傳回搜尋到的第一個元素，但必須先設計一個比較大小的 compare() 函式傳給 bsearch()：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					int compare(const void* x, const void* y)
 					{
@@ -2786,9 +2786,9 @@
 				字串也可以：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
-					#include &lt;string.h>
+					#include <stdio.h>
+					#include <stdlib.h>
+					#include <string.h>
 
 					int compare(const void* str1, const void* str2)
 					{
@@ -2819,9 +2819,9 @@
 				<h4>0 到 MAX</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
-						#include &lt;time.h>
+						#include <stdio.h>
+						#include <stdlib.h>
+						#include <time.h>
 
 						main()
 						{
@@ -2839,9 +2839,9 @@
 				<h4>1 到 MAX</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
-						#include &lt;time.h>
+						#include <stdio.h>
+						#include <stdlib.h>
+						#include <time.h>
 
 						main()
 						{
@@ -2859,9 +2859,9 @@
 				<h4>MIN 到 MAX</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
-						#include &lt;time.h>
+						#include <stdio.h>
+						#include <stdlib.h>
+						#include <time.h>
 
 						main()
 						{
@@ -2885,9 +2885,9 @@
 				以字串陣列為例：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
-					#include &lt;time.h>
+					#include <stdio.h>
+					#include <stdlib.h>
+					#include <time.h>
 
 					int compare(const void* str1, const void* str2)
 					{
@@ -2899,7 +2899,7 @@
 						char* array[] = {"A", "B", "C", "D", "E"};
 						srand(time(NULL));
 						qsort(array, 5, sizeof(char*), compare);
-						for (int n = 0; n &lt; 5; n++) {
+						for (int n = 0; n < 5; n++) {
 							puts(array[n]);
 						}
 					}
@@ -2934,7 +2934,7 @@
 				這函式可是寫程式的大絕招！例如想播放音樂或影片，與其自己寫，倒不如下載個播放程式，然後：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdlib.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -2979,7 +2979,7 @@
 				<h4>other.c</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						void f()
 						{
@@ -3018,7 +3018,7 @@
 					<textarea class='brush:c'>
 						#ifndef SOURCE_H
 						#define SOURCE_H
-						#include &lt;stdio.h>
+						#include <stdio.h>
 						void f();
 						#endif
 					</textarea>
@@ -3063,8 +3063,8 @@
 			<h3>取得作業系統的環境變數</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -3084,8 +3084,8 @@
 				先用 <code>time()</code> 取得 1970 年 1 月 1 日 0 點 0 分 0 秒至今的秒數，再送給 <code>localtime()</code> 分析，並將分析結果保存在 tm 結構中，就能從 tm 結構分別取得想要的時間資訊：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;time.h>
+					#include <stdio.h>
+					#include <time.h>
 
 					main()
 					{
@@ -3117,8 +3117,8 @@
 			<h3>暫停幾秒再執行</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
-					#include &lt;stdlib.h>
+					#include <stdio.h>
+					#include <stdlib.h>
 
 					main()
 					{
@@ -3159,7 +3159,7 @@
 				用來替換文字，例如想讓 C 語言有 boolean 型態，以及 true 和 false 值可用的話：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 					#define boolean int
 					#define false 0
 					#define true 1
@@ -3180,7 +3180,7 @@
 				或者想讓 C 語言長得像 PASCAL 語言的話：<br>
 				<br>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 					#define begin {
 					#define end }
 
@@ -3252,7 +3252,7 @@
 			<h3>hello.c</h3>
 			<p>
 				<textarea class='brush:c'>
-					#include &lt;stdio.h>
+					#include <stdio.h>
 
 					__declspec(dllexport) void hello()
 					{
@@ -3517,9 +3517,9 @@
 				<h4>範例一</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <stdlib.h>
+						#include <string.h>
 
 						char* array[] = {"a", "b", "c", "d", "e"};
 
@@ -3554,9 +3554,9 @@
 				<h4>範例二</h4>
 				<p>
 					<textarea class='brush:c'>
-						#include &lt;stdio.h>
-						#include &lt;stdlib.h>
-						#include &lt;string.h>
+						#include <stdio.h>
+						#include <stdlib.h>
+						#include <string.h>
 
 						int main()
 						{
@@ -3700,7 +3700,7 @@
 					<textarea class='brush:c'>
 						#!C:\Progran Files\TCC\tcc.exe -run
 
-						#include &lt;stdio.h>
+						#include <stdio.h>
 
 						main()
 						{

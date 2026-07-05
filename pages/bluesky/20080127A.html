@@ -162,40 +162,40 @@
 			編輯 modes 資料夾裡的 javascript.xml，如下修改內容：<br>
 			<br>
 			<textarea class='brush:xml'>
-				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
+				<RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
 					...
-					&lt;SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION">
-						&lt;BEGIN>`&lt;/BEGIN>
-						&lt;END>`&lt;/END>
-					&lt;/SPAN>
+					<SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION">
+						<BEGIN>`</BEGIN>
+						<END>`</END>
+					</SPAN>
 					...
-				&lt;/RULES>
-				&lt;RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\">
-					&lt;SPAN TYPE="LITERAL2" ESCAPE="\">
-						&lt;BEGIN>${&lt;/BEGIN>
-						&lt;END>}&lt;/END>
-					&lt;/SPAN>
-				&lt;/RULES>
+				</RULES>
+				<RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\">
+					<SPAN TYPE="LITERAL2" ESCAPE="\">
+						<BEGIN>${</BEGIN>
+						<END>}</END>
+					</SPAN>
+				</RULES>
 			</textarea>
 			<br>
 			如果你想讓變數名稱和 ${} 符號不同色的話，上面的設定修改為：<br>
 			<br>
 			<textarea class='brush:xml'>
-				&lt;RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
+				<RULES IGNORE_CASE="FALSE" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)">
 					...
-					&lt;SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION">
-						&lt;BEGIN>`&lt;/BEGIN>
-						&lt;END>`&lt;/END>
-					&lt;/SPAN>
+					<SPAN TYPE="LITERAL1" ESCAPE="\" DELEGATE="EXPRESSION_INTERPOLATION">
+						<BEGIN>`</BEGIN>
+						<END>`</END>
+					</SPAN>
 					...
-				&lt;/RULES>
-				&lt;RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\">
-					&lt;SPAN TYPE="LITERAL2" ESCAPE="\" DELEGATE="EXPRESSION">
-						&lt;BEGIN>${&lt;/BEGIN>
-						&lt;END>}&lt;/END>
-					&lt;/SPAN>
-				&lt;/RULES>
-				&lt;RULES SET="EXPRESSION" DEFAULT="LITERAL3" ESCAPE="\" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)" />
+				</RULES>
+				<RULES SET="EXPRESSION_INTERPOLATION" DEFAULT="LITERAL1" ESCAPE="\">
+					<SPAN TYPE="LITERAL2" ESCAPE="\" DELEGATE="EXPRESSION">
+						<BEGIN>${</BEGIN>
+						<END>}</END>
+					</SPAN>
+				</RULES>
+				<RULES SET="EXPRESSION" DEFAULT="LITERAL3" ESCAPE="\" HIGHLIGHT_DIGITS="TRUE" DIGIT_RE="((0x|0b|0o)[\p{XDigit}]+[lL]?|[\p{Digit}]+(e[\p{Digit}]*)?[lLdDfF]?)" />
 			</textarea>
 			<br>
 			或者直接下載 Roman Tsourick 修正好的 javascript.xml，網址是：<br>

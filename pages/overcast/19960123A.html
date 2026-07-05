@@ -1215,7 +1215,7 @@
 						public static void main(String[] args) {
 							String a = "ABCDEFG";
 							char[] b = a.toCharArray();
-							for (int n = 0; n &lt; b.length; n++) {
+							for (int n = 0; n < b.length; n++) {
 								b[n] += 1;
 							}
 							System.out.println(b);
@@ -1239,7 +1239,7 @@
 						public static void main(String[] args) {
 							String a = "猜猜我是誰";
 							char[] b = a.toCharArray();
-							for (int n = 0; n &lt; b.length; n++) {
+							for (int n = 0; n < b.length; n++) {
 								System.out.println(b[n] + "\\u" + Integer.toHexString(b[n]) + "&amp;#" + (int)b[n] + ";");
 							}
 						}
@@ -1343,7 +1343,7 @@
 						public static void main(String[] args) {
 							StringBuilder string_builder = new StringBuilder();
 							string_builder.append("ABCDEFG");
-							List&lt;String> list = new ArrayList&lt;String>();
+							List<String> list = new ArrayList<String>();
 							list.add(string_builder.toString()); // 沒 toString() 將編譯失敗
 							System.out.print(list.get(0));
 						}
@@ -1785,7 +1785,7 @@
 							Pattern pattern = Pattern.compile(",");
 							// 開始分割字串
 							String[] strings = pattern.split("ABC,123,:)");
-							// 將陣列輸出							for (int n = 0; n &lt; strings.length; n++) {
+							// 將陣列輸出							for (int n = 0; n < strings.length; n++) {
 								System.out.println(strings[n]);
 							}
 						}
@@ -1891,7 +1891,7 @@
 						public class Main {
 							public static void main(String[] args) {
 								String[] a = {"AAA", "BBB", "CCC"};
-								for (int n = 0; n &lt; a.length; n++) {
+								for (int n = 0; n < a.length; n++) {
 									System.out.println(a[n].toLowerCase());
 								}
 							}
@@ -1943,9 +1943,9 @@
 
 						public class Main {
 							public static void main(String[] args) {
-								ArrayList&lt;String> array_list = new ArrayList&lt;String>();
+								ArrayList<String> array_list = new ArrayList<String>();
 								String[] strings = {"AAA", "BBB", "CCC"};
-								for (int n = 0; n &lt; strings.length; n++) {
+								for (int n = 0; n < strings.length; n++) {
 									array_list.add(strings[n]);
 								}
 							}
@@ -1960,7 +1960,7 @@
 
 						public class Main {
 							public static void main(String[] args) {
-								ArrayList&lt;String> array_list = new ArrayList&lt;String>();
+								ArrayList<String> array_list = new ArrayList<String>();
 								String[] strings = {"AAA", "BBB", "CCC"};
 								array_list.addAll(Arrays.asList(strings));
 							}
@@ -2078,7 +2078,7 @@
 						public class Main {
 							public static void main(String[] args) {
 								String[] a = {"A", "B", "C"};
-								Arrays.sort(a, new Comparator&lt;String>() {
+								Arrays.sort(a, new Comparator<String>() {
 									public int compare(String x, String y) {
 										return y.compareTo(x);
 									}
@@ -2108,7 +2108,7 @@
 						public class Main {
 							public static void main(String[] args) {
 								String[] a = {"A", "B", "C"};
-								Arrays.sort(a, new Comparator&lt;String>() {
+								Arrays.sort(a, new Comparator<String>() {
 									public int compare(String x, String y) {
 										return new Random().nextInt();
 									}
@@ -2194,11 +2194,11 @@
 
 					public class Main {
 						public static void main(String[] args) {
-							List&lt;String> list = new ArrayList&lt;String>();
+							List<String> list = new ArrayList<String>();
 							list.add("AAA");
 							list.add("BBB");
 							list.add("CCC");
-							Iterator&lt;String> iterator = list.iterator();
+							Iterator<String> iterator = list.iterator();
 							while (iterator.hasNext()) {
 								System.out.println(iterator.next().toLowerCase());
 							}
@@ -2221,11 +2221,11 @@
 
 					public class Main {
 						public static void main(String[] args) {
-							Set&lt;Integer> set = new TreeSet&lt;Integer>();
+							Set<Integer> set = new TreeSet<Integer>();
 							set.add(8);
 							set.add(4); // 雖然是第二筆，但會被自動排序在 8 的前面。
 							set.add(8); // 重複的資料，因此不會真的被加進去。
-							Iterator&lt;Integer> iterator = set.iterator();
+							Iterator<Integer> iterator = set.iterator();
 							while (iterator.hasNext()) {
 								System.out.println(iterator.next());
 							}
@@ -2254,11 +2254,11 @@
 
 					public class Main {
 						public static void main(String[] args) {
-							Collection&lt;String> collection = new HashSet&lt;String>();
+							Collection<String> collection = new HashSet<String>();
 							collection.add("AAA");
 							collection.add("BBB");
 							collection.add("CCC");
-							Iterator&lt;String> iterator = collection.iterator();
+							Iterator<String> iterator = collection.iterator();
 							while (iterator.hasNext()) {
 								System.out.println(iterator.next());
 							}
@@ -2275,11 +2275,11 @@
 
 					public class Main {
 						public static void main(String[] args) {
-							Collection&lt;String> collection = new ArrayList&lt;String>();
+							Collection<String> collection = new ArrayList<String>();
 							collection.add("AAA");
 							collection.add("BBB");
 							collection.add("CCC");
-							Iterator&lt;String> iterator = collection.iterator();
+							Iterator<String> iterator = collection.iterator();
 							while (iterator.hasNext()) {
 								System.out.println(iterator.next());
 							}
@@ -2322,7 +2322,7 @@
 
 					public class Main {
 						public static void main(String[] args) {
-							ArrayList&lt;String> array_list = new ArrayList&lt;String>();
+							ArrayList<String> array_list = new ArrayList<String>();
 							array_list.add("兄弟象");
 							array_list.add("味全龍");
 							array_list.add("統一獅");
@@ -2330,7 +2330,7 @@
 							array_list.add("時報鷹");
 							array_list.add("俊國熊");
 							Collections.shuffle(array_list);
-							Iterator&lt;String> iterator = array_list.iterator();
+							Iterator<String> iterator = array_list.iterator();
 							while (iterator.hasNext()) {
 								System.out.println(iterator.next());
 							}
@@ -2362,7 +2362,7 @@
 
 					public class Main {
 						public static void main(String[] args) {
-							List&lt;String> list = Arrays.asList("AAA", "BBB", "CCC");
+							List<String> list = Arrays.asList("AAA", "BBB", "CCC");
 							for (String n : list) {
 								System.out.print(n);
 							}
@@ -2452,7 +2452,7 @@
 								}
 								// 取得資料夾檔案清單。
 								String[] list = new File("C: ").list();
-								for (int n = 0; n &lt; list.length; n++) {
+								for (int n = 0; n < list.length; n++) {
 									System.out.print(list[n] + ", ");
 								}
 							}

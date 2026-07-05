@@ -102,9 +102,9 @@
 								// 用 Skip() 跳過前五筆資料
 								array.Skip(5).ToList().ForEach(Console.Write);
 								// 用 TakeWhile () 取得小於 7 以前的資料
-								array.TakeWhile (x => x &lt; 7).ToList().ForEach(Console.Write);
+								array.TakeWhile (x => x < 7).ToList().ForEach(Console.Write);
 								// 用 SkipWhile () 取得小於 7 以後的資料
-								array.SkipWhile (x => x &lt; 7).ToList().ForEach(Console.Write);
+								array.SkipWhile (x => x < 7).ToList().ForEach(Console.Write);
 								// 用 Any() 判斷是否有資料大於 7
 								Console.Write(array.Any(x => x > 7));
 								// 用 All() 判斷是否所有資料大於 0
@@ -448,7 +448,7 @@
 						{
 							static void Main()
 							{
-								Dictionary&lt;int, string> dictionary = new Dictionary&lt;int, string>();
+								Dictionary<int, string> dictionary = new Dictionary<int, string>();
 								dictionary.Add(1, "AAA");
 								dictionary.Add(2, "BBB");
 								dictionary.Add(3, "CCC");
@@ -482,13 +482,13 @@
 						{
 							static void Main()
 							{
-								Dictionary&lt;int, string> dictionary1 = new Dictionary&lt;int, string>();
+								Dictionary<int, string> dictionary1 = new Dictionary<int, string>();
 								dictionary1.Add(1, "Hero");
 								dictionary1.Add(2, "Fighter");
 								dictionary1.Add(3, "Cleric");
 								dictionary1.Add(4, "Mage");
-								Dictionary&lt;int, string> dictionary2 = dictionary1.OrderBy(x => x.Value).ToDictionary(x=>x.Key, x=>x.Value);
-								foreach (KeyValuePair&lt;int, string> n in dictionary2)
+								Dictionary<int, string> dictionary2 = dictionary1.OrderBy(x => x.Value).ToDictionary(x=>x.Key, x=>x.Value);
+								foreach (KeyValuePair<int, string> n in dictionary2)
 								{
 									Console.Write(n);
 								}
@@ -512,9 +512,9 @@
 
 						static class LinqExtensions
 						{
-							public static void ForEach&lt;TKey, TValue>(this Dictionary&lt;TKey, TValue> dictionary, Action&lt;TKey, TValue> action)
+							public static void ForEach<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, Action<TKey, TValue> action)
 							{
-								foreach (KeyValuePair&lt;TKey, TValue> n in dictionary)
+								foreach (KeyValuePair<TKey, TValue> n in dictionary)
 								{
 									action(n.Key, n.Value);
 								}
@@ -525,7 +525,7 @@
 						{
 							static void Main()
 							{
-								Dictionary&lt;int, string> dictionary = new Dictionary&lt;int, string>();
+								Dictionary<int, string> dictionary = new Dictionary<int, string>();
 								dictionary.Add(1, "AAA");
 								dictionary.Add(2, "BBB");
 								dictionary.Add(3, "CCC");
@@ -645,7 +645,7 @@
 							int[] array = {111, 222, 333, 444, 555, 666, 777, 888, 999};
 							Console.WriteLine(array.OrderBy(random.Next).ToArray()[0]);
 							// 集合
-							List&lt;int> list = new List&lt;int>(array);
+							List<int> list = new List<int>(array);
 							Console.Write(list.OrderBy(random.Next).ToList()[0]);
 						}
 					}
@@ -670,9 +670,9 @@
 					{
 						static Random random = new Random();
 
-						public static void Shuffle&lt;T>(this IList&lt;T> x)
+						public static void Shuffle<T>(this IList<T> x)
 						{
-							for (int n=0; n&lt;x.Count; n++)
+							for (int n=0; n<x.Count; n++)
 							{
 								int a = random.Next(n);
 								T b = x[a];
@@ -694,7 +694,7 @@
 								Console.Write(n);
 							}
 							// 集合
-							List&lt;string> list = new List&lt;string>(array);
+							List<string> list = new List<string>(array);
 							list.Shuffle();
 							list.ForEach(Console.Write);
 						}
@@ -718,7 +718,7 @@
 					{
 						static void Main()
 						{
-							List&lt;string> list = new List&lt;string>();
+							List<string> list = new List<string>();
 							list.AddRange(new[]{"A", "B", "C", "D", "E"});
 							Random random = new Random();
 							list.Sort((x, y) => random.Next(-1, 2));
@@ -1005,7 +1005,7 @@
 						{
 							// 建立新 XML 結構
 							XmlDocument document = new XmlDocument();
-							document.LoadXml("&lt;?xml version='1.0' encoding='UTF-8'?>&lt;html>&lt;/html>");
+							document.LoadXml("<?xml version='1.0' encoding='UTF-8'?><html></html>");
 							// 新增元素
 							XmlElement element = document.CreateElement("body");
 							element.SetAttribute("style", "color:blue");
@@ -1040,15 +1040,15 @@
 				<h4>sample.xml</h4>
 				<p>
 					<textarea class='brush:xml'>
-						&lt;?xml version='1.0' encoding='UTF-8'?>
-						&lt;html>
-						&nbsp; &nbsp; &lt;body style='color:blue'>
-						&nbsp; &nbsp; &nbsp; &nbsp; &lt;h1>Homepage&lt;/h1>
-						&nbsp; &nbsp; &nbsp; &nbsp; &lt;p>Paragraph 1&lt;/p>
-						&nbsp; &nbsp; &nbsp; &nbsp; &lt;p>Paragraph 2&lt;/p>
-						&nbsp; &nbsp; &nbsp; &nbsp; &lt;p>Paragraph 3&lt;/p>
-						&nbsp; &nbsp; &lt;/body>
-						&lt;/html>
+						<?xml version='1.0' encoding='UTF-8'?>
+						<html>
+						    <body style='color:blue'>
+						        <h1>Homepage</h1>
+						        <p>Paragraph 1</p>
+						        <p>Paragraph 2</p>
+						        <p>Paragraph 3</p>
+						    </body>
+						</html>
 					</textarea>
 				</p>
 			</section>
@@ -1317,20 +1317,20 @@
 			<h4>XML 檔 (data1.xml)</h4>
 			<p>
 				<textarea class='brush:xml'>
-					&lt;?xml version='1.0'?>
-					&lt;?xml-stylesheet type="text/xsl" href="union.xsl"?>
-					&lt;root>
-					  &lt;x>green&lt;/x>
-					  &lt;y>
-						&lt;x>blue&lt;/x>
-						&lt;x>blue&lt;/x>
-					  &lt;/y>
-					  &lt;z>
-						&lt;x>red&lt;/x>
-						&lt;x>red&lt;/x>
-					  &lt;/z>
-					  &lt;x>green&lt;/x>
-					&lt;/root>
+					<?xml version='1.0'?>
+					<?xml-stylesheet type="text/xsl" href="union.xsl"?>
+					<root>
+					  <x>green</x>
+					  <y>
+						<x>blue</x>
+						<x>blue</x>
+					  </y>
+					  <z>
+						<x>red</x>
+						<x>red</x>
+					  </z>
+					  <x>green</x>
+					</root>
 				</textarea>
 			</p>
 		</section>
@@ -1338,16 +1338,16 @@
 			<h4>XSLT 檔 (union.xsl)</h4>
 			<p>
 				<textarea class='brush:xml'>
-					&lt;?xml version='1.0'?>
-					&lt;xsl:stylesheet version="1.0"
+					<?xml version='1.0'?>
+					<xsl:stylesheet version="1.0"
 					  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-					&lt;xsl:template match="root">
-					  &lt;xsl:for-each select="x | y/x">
-						&lt;xsl:value-of select="."/>,
-						&lt;xsl:if test="not(position()=last())">, &lt;/xsl:if>
-					  &lt;/xsl:for-each>
-					&lt;/xsl:template>
-					&lt;/xsl:stylesheet>
+					<xsl:template match="root">
+					  <xsl:for-each select="x | y/x">
+						<xsl:value-of select="."/>,
+						<xsl:if test="not(position()=last())">, </xsl:if>
+					  </xsl:for-each>
+					</xsl:template>
+					</xsl:stylesheet>
 				</textarea>
 			</p>
 		</section>
@@ -1683,7 +1683,7 @@
 							string json = serializer.Serialize(player1);
 							Console.WriteLine(json);
 							// JSON 轉物件
-							Player player2 = serializer.Deserialize&lt;Player>(json);
+							Player player2 = serializer.Deserialize<Player>(json);
 							Console.WriteLine(player2.name);
 							Console.Write(player2.number);
 						}
@@ -1961,7 +1961,7 @@
 						static void Main()
 						{
 							DateTime start = DateTime.Now;
-							for (int n=1; n&lt;=50000; n++)
+							for (int n=1; n<=50000; n++)
 							{
 								Console.Write(n);
 							}
@@ -2044,12 +2044,12 @@
 			<h3>window.xaml</h3>
 			<p>
 				<textarea class='brush:xml'>
-					&lt;Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Title="Main" Width="320" Height="240">
-						&lt;Canvas>
-							&lt;Button Name="Button1" Width="300" Height="30" Margin="2, 70">哈囉&lt;/Button>
-							&lt;Button Name="Button2" Width="300" Height="30" Margin="2, 103">再見&lt;/Button>
-						&lt;/Canvas>
-					&lt;/Window>
+					<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Title="Main" Width="320" Height="240">
+						<Canvas>
+							<Button Name="Button1" Width="300" Height="30" Margin="2, 70">哈囉</Button>
+							<Button Name="Button2" Width="300" Height="30" Margin="2, 103">再見</Button>
+						</Canvas>
+					</Window>
 				</textarea>
 			</p>
 		</section>
@@ -2470,8 +2470,8 @@
 						static void Main()
 						{
 							Console.WriteLine();
-							Console.WriteLine("&lt;meta http-equiv='refresh' content='3;url=http://127.0.0.1/index.html'>");
-							Console.Write("&lt;p>三秒後回到首頁⋯&lt;/p>");
+							Console.WriteLine("<meta http-equiv='refresh' content='3;url=http://127.0.0.1/index.html'>");
+							Console.Write("<p>三秒後回到首頁⋯</p>");
 						}
 					}
 				</textarea>
@@ -2489,7 +2489,7 @@
 				<h4>home.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;a href='perform.cgi'>開啟記事本&lt;/a>
+						<a href='perform.cgi'>開啟記事本</a>
 					</textarea>
 				</p>
 			</section>
@@ -2505,7 +2505,7 @@
 							static void Main()
 							{
 								// 返回上一頁
-								Console.Write("Content-Type: text/html\n\n&lt;script>history.back()&lt;/script>");
+								Console.Write("Content-Type: text/html\n\n<script>history.back()</script>");
 								// 跑一些程式
 								Process.Start("notepad");
 							}
@@ -2552,7 +2552,7 @@
 										File.WriteAllText("data.txt", text);
 									}
 									context.Response.ContentType = "text/html; charset=utf-8";
-									byte[] bytes = Encoding.UTF8.GetBytes("&lt;p>資料已儲存&lt;/p>");
+									byte[] bytes = Encoding.UTF8.GetBytes("<p>資料已儲存</p>");
 									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
 									context.Response.Close();
 								}
@@ -2567,7 +2567,7 @@
 				<h4>frontend.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;a href='http://127.0.0.1/?args=中文'>Submit&lt;/a>
+						<a href='http://127.0.0.1/?args=中文'>Submit</a>
 					</textarea>
 					<br>
 					按下網頁的超鏈結文字會輸出 data.txt：<br>
@@ -2606,7 +2606,7 @@
 										File.WriteAllText("data.txt", WebUtility.UrlDecode(text));
 									}
 									context.Response.ContentType = "text/html; charset=utf-8";
-									byte[] bytes = Encoding.UTF8.GetBytes("&lt;p>資料已儲存&lt;/p>");
+									byte[] bytes = Encoding.UTF8.GetBytes("<p>資料已儲存</p>");
 									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
 									context.Response.Close();
 								}
@@ -2621,10 +2621,10 @@
 				<h4>frontend.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;form action='http://127.0.0.1' method='post'>
-							&lt;input name='args' value='中文'>
-							&lt;input type='submit'>
-						&lt;/form>
+						<form action='http://127.0.0.1' method='post'>
+							<input name='args' value='中文'>
+							<input type='submit'>
+						</form>
 					</textarea>
 					<br>
 					按下網頁的按鈕會輸出 data.txt：<br>
@@ -2677,7 +2677,7 @@
 			<h3>index.html</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;a href='page.html'>page.html&lt;/a>
+					<a href='page.html'>page.html</a>
 				</textarea>
 			</p>
 		</section>
@@ -2686,7 +2686,7 @@
 			<h3>page.html</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;a href='index.html'>index.html&lt;/a>
+					<a href='index.html'>index.html</a>
 				</textarea>
 			</p>
 		</section>
@@ -2733,7 +2733,7 @@
 										File.WriteAllText("res.dat", WebUtility.UrlDecode(new StreamReader(context.Request.InputStream).ReadToEnd()));
 									}
 									context.Response.ContentType = "text/html; charset=utf-8";
-									byte[] bytes = Encoding.UTF8.GetBytes("&lt;h1>資料已儲存&lt;/h1>");
+									byte[] bytes = Encoding.UTF8.GetBytes("<h1>資料已儲存</h1>");
 									context.Response.OutputStream.Write(bytes, 0, bytes.Length);
 									context.Response.Close();
 								}
@@ -2767,10 +2767,10 @@
 			<h3>client.html</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;form action='http://127.0.0.1:33405' method='post'>
-						&lt;input name='args' value='中文'>
-						&lt;input type='submit'>
-					&lt;/form>
+					<form action='http://127.0.0.1:33405' method='post'>
+						<input name='args' value='中文'>
+						<input type='submit'>
+					</form>
 				</textarea>
 			</p>
 		</section>
@@ -2798,7 +2798,7 @@
 						static void Main()
 						{
 							WebSocketServer server = new WebSocketServer("ws://127.0.0.1");
-							List&lt;IWebSocketConnection> sockets = new List&lt;IWebSocketConnection>();
+							List<IWebSocketConnection> sockets = new List<IWebSocketConnection>();
 							server.Start(x =>
 							{
 								x.OnOpen = () =>
@@ -2845,8 +2845,8 @@
 			<h3>client.html</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;button onclick='f()'>Click&lt;/button>
-					&lt;script>
+					<button onclick='f()'>Click</button>
+					<script>
 						let socket = new WebSocket('ws://127.0.0.1');
 
 						function f(){
@@ -2856,7 +2856,7 @@
 						socket.onmessage = function(x){
 							document.querySelector('button').innerHTML = x.data;
 						};
-					&lt;/script>
+					</script>
 				</textarea>
 				<br>
 				按下網頁按鈕，主控台會顯示 Hello（客戶端發出的訊息），按鈕文字會變成 Hello world（伺服端發出的訊息）。

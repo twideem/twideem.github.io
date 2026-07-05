@@ -26,6 +26,7 @@
 			<tr><td>Windows 10 Version 1804<td>.NET Framework 4.7.2<td>C# 5
 			<tr><td>Windows 10 Version 1903<td>.NET Framework 4.8<td>C# 5
 			<tr><td>Windows 11<td>.NET Framework 4.8<td>C# 5
+			<tr><td>Windows 11 22H2<td>.NET Framework 4.8.1<td>C# 5
 		</table>
 	</section>
 	<hr>
@@ -775,7 +776,7 @@
 				我不把查詢語句當 LINQ，而是當運算式來用，所以一定會把結果指派給變數：<br>
 				<br>
 				<textarea class='brush:cs'>
-					IEnumerable&lt;int> a = from n in Enumerable.Range(1, 10) where n > 5 select n;
+					IEnumerable<int> a = from n in Enumerable.Range(1, 10) where n > 5 select n;
 				</textarea>
 				<br>
 				如果沒有要把結果指派給變數，我不會使用查詢語句，會改用 LINQ API 或 Collections API 甚至 foreach 迴圈。
@@ -801,7 +802,7 @@
 				操作的是要保存下來的資料，自然就是用集合一行一行讀寫和操作了：<br>
 				<br>
 				<textarea class='brush:cs'>
-					List&lt;int> list = new List&lt;int>(){1, 3, 5, 7, 9};
+					List<int> list = new List<int>(){1, 3, 5, 7, 9};
 					list.Add(2);
 					list.Add(4);
 					list.Add(6);

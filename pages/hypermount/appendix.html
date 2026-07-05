@@ -424,7 +424,7 @@
 			在兩個 DIV 元素之間拖曳 P 元素：<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;script>
+				<script>
 					function dragstart() {
 						event.dataTransfer.setData('id', event.target.id);
 					}
@@ -437,16 +437,16 @@
 						event.preventDefault();
 						event.target.appendChild(document.getElementById(event.dataTransfer.getData('id')));
 					}
-				&lt;/script>
-				&lt;div id='division1' ondrop='drop()' ondragover='dragover()' style='width:150px;height:150px;border:1px solid black'>
-					&lt;p id='paragraph' draggable='true' ondragstart='dragstart()'>
-						朝辭白帝彩雲間&lt;br>
-						千里江陵一日還&lt;br>
-						兩岸猿聲啼不住&lt;br>
+				</script>
+				<div id='division1' ondrop='drop()' ondragover='dragover()' style='width:150px;height:150px;border:1px solid black'>
+					<p id='paragraph' draggable='true' ondragstart='dragstart()'>
+						朝辭白帝彩雲間<br>
+						千里江陵一日還<br>
+						兩岸猿聲啼不住<br>
 						輕舟已過萬重山
-					&lt;/p>
-				&lt;/div>
-				&lt;div id='division2' ondrop='drop()' ondragover='dragover()' style='width:150px;height:150px;border:1px solid black'>&lt;/div>
+					</p>
+				</div>
+				<div id='division2' ondrop='drop()' ondragover='dragover()' style='width:150px;height:150px;border:1px solid black'></div>
 			</textarea>
 		</p>
 	</section>
@@ -477,7 +477,7 @@
 				<h4>client.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;script>
+						<script>
 							let request = new XMLHttpRequest();
 
 							request.open('get', 'data.txt');
@@ -487,7 +487,7 @@
 							request.onload = function() {
 								document.write(request.responseText);
 							};
-						&lt;/script>
+						</script>
 					</textarea>
 				</p>
 			</section>
@@ -507,13 +507,13 @@
 				<h4>client.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;script>
+						<script>
 							fetch('data.txt').then(response => {
 								return response.text();
 							}).then(text => {
 								document.write(text);
 							});
-						&lt;/script>
+						</script>
 					</textarea>
 				</p>
 			</section>
@@ -528,10 +528,10 @@
 				<h4>data.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;section>
-							&lt;h1 style='color:orange'>Header&lt;/h1>
-							&lt;p>Paragraph&lt;/p>
-						&lt;/section>
+						<section>
+							<h1 style='color:orange'>Header</h1>
+							<p>Paragraph</p>
+						</section>
 					</textarea>
 				</p>
 			</section>
@@ -539,7 +539,7 @@
 				<h4>client.html</h4>
 				<p>
 					<textarea class='brush:html'>
-						&lt;script>
+						<script>
 							let request = new XMLHttpRequest();
 
 							request.responseType = 'document';
@@ -551,7 +551,7 @@
 							request.open('get', 'data.html');
 
 							request.send();
-						&lt;/script>
+						</script>
 					</textarea>
 				</p>
 			</section>
@@ -634,28 +634,28 @@
 			如果只是用了好幾個 H1 到 H6 等標籤，其實並不用包括在 HGROUP 裡面：<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;header>
-					&lt;h1>主標題&lt;/h1>
-					&lt;h2>副標題&lt;/h2>
-				&lt;/header>
+				<header>
+					<h1>主標題</h1>
+					<h2>副標題</h2>
+				</header>
 			</textarea>
 			<br>
 			但如果多個 H1 到 H6 等標籤外，還有其它種類的標籤，就適合放在 HGROUP 裡面來區隔：<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;header>
-					&lt;hgroup>
-						&lt;h1>主標題&lt;/h1>
-						&lt;h2>副標題&lt;/h2>
-					&lt;/hgroup>
-					&lt;nav>
-						&lt;ul>
-							&lt;li>選項&lt;/li>
-							&lt;li>選項&lt;/li>
-							&lt;li>選項&lt;/li>
-						&lt;/ul>
-					&lt;/nav>
-				&lt;/header>
+				<header>
+					<hgroup>
+						<h1>主標題</h1>
+						<h2>副標題</h2>
+					</hgroup>
+					<nav>
+						<ul>
+							<li>選項</li>
+							<li>選項</li>
+							<li>選項</li>
+						</ul>
+					</nav>
+				</header>
 			</textarea>
 		</p>
 	</section>
@@ -724,9 +724,9 @@
 			<h3>index.html</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;meta charset='utf-8'>
-					&lt;link href='style.css' rel='stylesheet'>
-					&lt;p>Hello, world!&lt;/p>
+					<meta charset='utf-8'>
+					<link href='style.css' rel='stylesheet'>
+					<p>Hello, world!</p>
 				</textarea>
 			</p>
 		</section>
@@ -761,7 +761,7 @@
 			<h3>用法</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;meta name='名稱' content='附加訊息'>
+					<meta name='名稱' content='附加訊息'>
 				</textarea>
 			</p>
 		</section>
@@ -795,9 +795,9 @@
 				META 除了藉由 NAME 屬性提供附加訊息，還有另外一個功能，就是用 HTTP-EQUIV 屬性提供參數給瀏覽器，以執行軟體本身的功能。<br>
 				<br>
 				<textarea class='brush:html'>
-					&lt;meta http-equiv='content-type' content='text/html; charset=UTF-8'>
-					&lt;meta http-equiv='default-style' content='text/css'>
-					&lt;meta http-equiv='refresh' content='10'>
+					<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+					<meta http-equiv='default-style' content='text/css'>
+					<meta http-equiv='refresh' content='10'>
 				</textarea>
 			</p>
 		</section>
@@ -806,11 +806,11 @@
 			<h3>在 JavaScript 取得 META 訊息</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;meta name='options' content='hello'>
-					&lt;script>
+					<meta name='options' content='hello'>
+					<script>
 						let elements = document.getElementsByName('options');
 						document.write(elements[0].content);
-					&lt;/script>
+					</script>
 				</textarea>
 			</p>
 		</section>
@@ -897,9 +897,9 @@
 			<h3>sample.html</h3>
 			<p>
 				<textarea class='brush:html'>
-					&lt;input type='file'>
-					&lt;p>&lt;/p>
-					&lt;script>
+					<input type='file'>
+					<p></p>
+					<script>
 						document.querySelector('input').oninput = function() {
 							let file_reader = new FileReader();
 							file_reader.readAsText(document.querySelector('input').files[0]);
@@ -907,7 +907,7 @@
 								document.querySelector('p').innerHTML = event.target.result;
 							};
 						};
-					&lt;/script>
+					</script>
 				</textarea>
 			</p>
 		</section>
@@ -946,7 +946,7 @@
 			本文只介紹讀寫純文字檔案的部分～<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;script>
+				<script>
 					async function save() {
 						let g = await window.showSaveFilePicker({
 							types: [{
@@ -964,9 +964,9 @@
 						let h = await g.getFile();
 						console.log(await h.text());
 					}
-				&lt;/script>
-				&lt;button onclick='save()'>Save&lt;/button>
-				&lt;button onclick='load()'>Load&lt;/button>
+				</script>
+				<button onclick='save()'>Save</button>
+				<button onclick='load()'>Load</button>
 			</textarea>
 		</p>
 	</section>
@@ -975,12 +975,12 @@
 		<h2>data- 標籤屬性和 dataset 物件</h2>
 		<p>
 			<textarea class='brush:html'>
-				&lt;p data-number='58' data-position='PG'>Twideem Civs&lt;/p>
-				&lt;script>
+				<p data-number='58' data-position='PG'>Twideem Civs</p>
+				<script>
 					let a = document.querySelector('p');
 					console.log(a.dataset.number);
 					console.log(a.dataset.position);
-				&lt;/script>
+				</script>
 			</textarea>
 			<br>
 			<output>
@@ -1018,29 +1018,29 @@
 			做法千奇百怪，我慣用的有四種：<br>
 			<br>
 			<textarea class='brush:html'>
-				&lt;!-- 傳統 Table 做法，適用於指定長寬。 -->
-				&lt;table style='background-color:#eee;height:150px;width:100%'>
-					&lt;tr>
-						&lt;td style='text-align:center;vertical-align:middle'>
+				<!-- 傳統 Table 做法，適用於指定長寬。 -->
+				<table style='background-color:#eee;height:150px;width:100%'>
+					<tr>
+						<td style='text-align:center;vertical-align:middle'>
 							Table
-						&lt;/td>
-					&lt;/tr>
-				&lt;/table>
+						</td>
+					</tr>
+				</table>
 
-				&lt;!-- 使用 Padding 技巧，適用於未指定高度。 -->
-				&lt;div style='background-color:#ddd;padding:75px;text-align:center'>
+				<!-- 使用 Padding 技巧，適用於未指定高度。 -->
+				<div style='background-color:#ddd;padding:75px;text-align:center'>
 					Padding
-				&lt;/div>
+				</div>
 
-				&lt;!-- 使用 Flex 樣式從中間開始排列。 -->
-				&lt;div style='background-color:#bbb;height:150px;display:flex;align-items:center;justify-content:center'>
+				<!-- 使用 Flex 樣式從中間開始排列。 -->
+				<div style='background-color:#bbb;height:150px;display:flex;align-items:center;justify-content:center'>
 					Flex
-				&lt;/div>
+				</div>
 
-				&lt;!-- 使用 Grid 樣式表現居中。 -->
-				&lt;div style='background-color:#ccc;height:150px;display:grid;place-items:center'>
+				<!-- 使用 Grid 樣式表現居中。 -->
+				<div style='background-color:#ccc;height:150px;display:grid;place-items:center'>
 					Grid
-				&lt;/div>
+				</div>
 			</textarea>
 		</p>
 	</section>

@@ -229,6 +229,11 @@
 			<tr><td>%~z1<td>檔案大小
 			<tr><td>%~t1<td>修改時間
 		</table>
+		<p>
+			如果要帶入所有參數給另一個程式指令，可用 <code>%*</code>，比如：<br>
+			<br>
+			<samp>@D:\Applications\Git\cmd\git.exe %*</samp>
+		</p>
 	</section>
 	<hr>
 	<section>
@@ -249,8 +254,10 @@
 			<p>
 				<code>
 					%變數名稱%<br>
-					%變數名稱:~開始位置,擷取字數%
+					%變數名稱:~開始位置,擷取字數%<br>
 				</code>
+				<br>
+				擷取字數可以用負號 <code>-</code> 表示從後面倒過來數。
 			</p>
 		</section>
 		<hr>

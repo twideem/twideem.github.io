@@ -67,15 +67,15 @@
 				<textarea class='brush:xml'>
 					Content-type:text/xml; charset=utf-8
 
-					&lt;?xml version="1.0" encoding="utf-8"?>
-					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-						&lt;soap:Body>
-							&lt;getString>
-								&lt;x>ABC&lt;/x>
-								&lt;y>123&lt;/y>
-							&lt;/getString>
-						&lt;/soap:Body>
-					&lt;/soap:Envelope>
+					<?xml version="1.0" encoding="utf-8"?>
+					<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+						<soap:Body>
+							<getString>
+								<x>ABC</x>
+								<y>123</y>
+							</getString>
+						</soap:Body>
+					</soap:Envelope>
 				</textarea>
 				<br>
 				接收者收到上面的 SOAP 後，經過 XML 的剖析，得知函式名稱為 getString，參數為 x 和 y，引數分別為 ABC 和 123，於是執行了做為 Web Service 服務的如下程式：<br>
@@ -92,14 +92,14 @@
 				<textarea class='brush:xml'>
 					Content-type:text/xml; charset=utf-8
 
-					&lt;?xml version="1.0" encoding="utf-8"?>
-					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-						&lt;soap:Body>
-							&lt;getStringResponse>
-								&lt;Return>ABC123&lt;/Return>
-							&lt;/getStringResponse>
-						&lt;/soap:Body>
-					&lt;/soap:Envelope>
+					<?xml version="1.0" encoding="utf-8"?>
+					<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+						<soap:Body>
+							<getStringResponse>
+								<Return>ABC123</Return>
+							</getStringResponse>
+						</soap:Body>
+					</soap:Envelope>
 				</textarea>
 				<br>
 				請求者也從收到的 SOAP 剖析資料，得到 ABC123，這樣就完成一個 Web Service 的服務。<br>
@@ -114,12 +114,12 @@
 				<textarea class='brush:xml'>
 					Content-type:text/xml; charset=utf-8
 
-					&lt;?xml version="1.0" encoding="utf-8"?>
-					&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-						&lt;soap:Body>
-							&lt;!-- request or response -->
-						&lt;/soap:Body>
-					&lt;/soap:Envelope>
+					<?xml version="1.0" encoding="utf-8"?>
+					<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+						<soap:Body>
+							<!-- request or response -->
+						</soap:Body>
+					</soap:Envelope>
 				</textarea>
 			</p>
 		</section>
