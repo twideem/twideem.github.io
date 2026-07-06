@@ -12,19 +12,6 @@
 	</header>
 	<hr>
 	<section>
-		<h2>Java 版本問題</h2>
-		<p>
-			使用 Java 14 或以上版號，跑 jEdit 5.6 或 jEdit 5.7，在點 jEdit 視窗標題列獲得駐點的情況下，將檔案拖曳進來，有高機率讓程式當掉。<br>
-			<br>
-			使用 Java 20 以後的版本，遇到單行文字過長，會有卡頓的情形，甚至會整個卡死不動。<br>
-			<br>
-			也就是說，到 jEdit 5.7 為止，不適合用最新的 Java，建議使用 <a href='https://www.azul.com/downloads/?version=java-13&os=windows&architecture=x86-64-bit&package=jre&show-old-builds=true#zulu' target='_blank'>Zulu 13.0.14</a>。<br>
-			<br>
-			希望預覽版的 jEdit 5.8 在正式推出後，有解決這問題，能用最新版的 Java 執行。
-		</p>
-	</section>
-	<hr>
-	<section>
 		<h2>設定文件使用的緩衝區編碼為 UTF-8</h2>
 		<p>
 			<code>[功能表] → Utilities → Global Options → jEdit → Encoding → Default character encoding = UTF-8</code>
@@ -562,6 +549,34 @@
 		<h2>備份整個設定檔</h2>
 		<p>
 			將 <code>Documents and Settings\[User]\.jedit</code>（Windows XP）或 <code>[User]\AppData\Roaming\jEdit</code>（Windows Vista）資料夾保存起來，以後再放回去即可。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>Java 版本問題</h2>
+		<p>
+			使用 Java 14 或以上版號，跑 jEdit 5.6 或 jEdit 5.7，在點 jEdit 視窗標題列獲得駐點的情況下，將檔案拖曳進來，有高機率讓程式當掉。<br>
+			<br>
+			使用 Java 20 以後的版本，遇到單行文字過長，會有卡頓的情形，甚至會整個卡死不動。<br>
+			<br>
+			也就是說，到 jEdit 5.7 為止，不適合用最新的 Java，建議使用 <a href='https://www.azul.com/downloads/?version=java-13&os=windows&architecture=x86-64-bit&package=jre&show-old-builds=true#zulu' target='_blank'>Zulu 13.0.14</a>。<br>
+			<br>
+			希望預覽版的 jEdit 5.8 在正式推出後，有解決這問題，能用最新版的 Java 執行。
+		</p>
+	</section>
+	<hr>
+	<section>
+		<h2>jEdot 版本問題</h2>
+		<p>
+			5.7 版的 Default line separator 有 BUG，下拉清單是空的，導致如果設定過 Global Options 的話，換行字元的設定會清空，變成作業系統預設的。<br>
+			<br>
+			這問題已在 <a href='https://github.com/jEdit-editor/jEdit/commit/9ee98a5cff6afdd8622d42b7db0c4af074c8063e'>GitHub</a> 修正，但是要等到 jEdit 5.8。<br>
+			<br>
+			在那之前，Windows 下希望預設的換行字元是 UNIX 的 \n，解決辦法是修改 startup.bsh，在裡面加入這行程式：<br>
+			<br>
+			<code>jEdit.setProperty("buffer.lineSeparator","\n");</code><br>
+			<br>
+			這樣就會在每次啟動 jEdit 時，將 buffer.lineSeparator=\n 寫入 properties 檔案裡面，等於每次都自動設定。
 		</p>
 	</section>
 </article>
