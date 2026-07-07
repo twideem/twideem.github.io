@@ -962,13 +962,13 @@
 	<section>
 		<h2>選取超過 15 個檔案就限制開啟</h2>
 		<p>
-			Windows Vista 開始，為了避免使用者一次執行太多檔案，最多只能一次開啟 15 個，這限制可以解除。<br>
+			Windows Vista 開始，為了避免使用者一次執行太多檔案，最多只能一次開啟 15 個，這限制可以修改，比如改成限制 100 個檔案。<br>
 			<br>
 			登錄編輯程式：<br>
 			<br>
 			<code>
 				[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
-				"MultipleInvokePromptMinimum"=dword:00000010
+				"MultipleInvokePromptMinimum"=dword:00000064
 			</code>
 		</p>
 	</section>
