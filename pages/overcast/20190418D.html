@@ -83,9 +83,9 @@
 					csc -analyzer:PolySharp.SourceGenerators.dll *.cs
 				</output>
 				<br>
-				就能交由它補上 .NET Framework 沒有的 API 原始碼，使用 C# 絕大多數新的語法。<br>
+				就能交由它補上 .NET Framework 沒有的 API 程式碼，正常使用 Roslyn 的更多 C# 新語法。<br>
 				<br>
-				唯一還是要自己補的程式碼，是 C# 8.0 的範圍，比如 var b = a[2..7]; 這樣的語法。程式碼如下，修改自 runtime/src/libraries/System.Private.CoreLib/src/<br>System/Runtime/CompilerServices/RuntimeHelpers.cs：<br>
+				唯一還是要自己補的程式碼，是 C# 8.0 的 range operator（範圍運算子），如下：<br>
 				<br>
 				<textarea class='brush:cs'>
 					// Licensed to the .NET Foundation under one or more agreements.
@@ -118,6 +118,8 @@
 						}
 					}
 				</textarea>
+				<br>
+				修改自 .NET Runtime 存放在 GitHub 的 <a href='https://github.com/dotnet/runtime/blob/main/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/RuntimeHelpers.cs'>RuntimeHelpers.cs</a>。
 			</p>
 		</section>
 		<hr>
