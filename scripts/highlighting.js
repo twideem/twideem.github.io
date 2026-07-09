@@ -91,7 +91,6 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 
 	function Brush(){
 		var r=SyntaxHighlighter.regexLib;
-
 		this.regexList=[{regex:/^ *#!.*/g,css:'preprocessor'},
 						{regex:r.singleLineCComments,css:'comments'},
 						{regex:r.multiLineCComments,css:'comments'},

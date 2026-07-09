@@ -66,11 +66,58 @@
 			<p>
 				雖然 .NET Framework 已不再更新，未來只會發展 .NET Core，但編譯器是獨立為 Roslyn 專案另外發展的，所以仍在更新版本，目前已到 C# 11。<br>
 				<br>
-				請至 NuGet Gallery 的 <a href='http://www.nuget.org/packages/Microsoft.Net.Compilers.Toolset/'>Microsoft.Net.Compilers.Toolset</a> 按 Download package 下載 *.nupkg 檔，不想安裝的話，可以用 ZIP 格式解壓開來，在 tasks 資料夾裡就有最新版本的 csc.exe。<br>
+				請至 NuGet Gallery 的 <a href='http://www.nuget.org/packages/Microsoft.Net.Compilers.Toolset'>Microsoft.Net.Compilers.Toolset</a> 按 Download package 下載 *.nupkg 檔，不想安裝的話，可以用 ZIP 格式解壓開來，在 tasks 資料夾裡就有最新版本的 csc.exe。<br>
 				<br>
 				跟 Java 用新版 JDK 編譯出來的程式沒辦法在舊版 JRE 跑不一樣，以新版 csc.exe 編譯出來的程式，跟舊版都是一樣的 CLR 4 規格，能正常在 .NET Framework 4.8 執行。<br>
 				<br>
-				但不是所有新語法都能在 .NET Framework 使用！從 Roslyn 2.11.0 的 C# 8 開始，有些語法得搭配 .NET Core 才有的新 API 功能，.NET Framework 必須 <a href='http://github.com/dotnet/runtime/tree/main/src/libraries'>抄程式碼</a> 補 API 的缺才能使用。
+				但不是所有新語法都能在 .NET Framework 使用！從 Roslyn 2.11.0 的 C# 8 開始，有些語法得搭配 .NET Core 才有的新 API 功能，已經不再更新的 .NET Framework 沒有，所以要再搭配 <a href='https://www.nuget.org/packages/PolySharp'>PolySharp</a>，它能為我們產生需要的程式碼，或者到 <a href='http://github.com/dotnet/runtime/tree/main/src/libraries'>GitHub</a> 抄程式碼補 API 的缺才能使用。
+			</p>
+		</section>
+		<hr>
+		<section>
+			<h3>如何使用 PolySharp</h3>
+			<p>
+				取出 PolySharp 的 PolySharp.SourceGenerators.dll，編譯時下參數：<br>
+				<br>
+				<output>
+					csc -analyzer:PolySharp.SourceGenerators.dll *.cs
+				</output>
+				<br>
+				就能交由它補上 .NET Framework 沒有的 API 原始碼，使用 C# 絕大多數新的語法。<br>
+				<br>
+				唯一還是要自己補的程式碼，是 C# 8.0 的範圍，比如 var b = a[2..7]; 這樣的語法。程式碼如下，修改自 runtime/src/libraries/System.Private.CoreLib/src/<br>System/Runtime/CompilerServices/RuntimeHelpers.cs：<br>
+				<br>
+				<textarea class='brush:cs'>
+					// Licensed to the .NET Foundation under one or more agreements.
+					// The .NET Foundation licenses this file to you under the MIT license.
+
+					namespace System.Runtime.CompilerServices
+					{
+						internal static partial class RuntimeHelpers
+						{
+							public static T[] GetSubArray<T>(T[] array, Range range)
+							{
+								if (array == null)
+								{
+									throw new ArgumentNullException(nameof(array));
+								}
+
+								(int offset, int length) = range.GetOffsetAndLength(array.Length);
+
+								if (length == 0)
+								{
+									return Array.Empty<T>();
+								}
+
+								T[] dest = new T[length];
+
+								Array.Copy(array, offset, dest, 0, length);
+
+								return dest;
+							}
+						}
+					}
+				</textarea>
 			</p>
 		</section>
 		<hr>
@@ -409,7 +456,7 @@
 			<section>
 				<h4>使用 Visual Studio Community 的 Help Viewer 即可離線下載</h4>
 				<p>
-					<a href='http://visualstudio.microsoft.com/zh-hant/vs/community/' target='_blank'>Visual Studio Community</a> 對學生、開放原始碼及個人開發人員是免費的！如果電腦跑得動的話，不妨使用這套威力強大無比的 IDE 寫 C# 開發 .NET 程式。
+					<a href='http://visualstudio.microsoft.com/zh-hant/vs/community/'>Visual Studio Community</a> 對學生、開放原始碼及個人開發人員是免費的！如果電腦跑得動的話，不妨使用這套威力強大無比的 IDE 寫 C# 開發 .NET 程式。
 					<br>
 					安裝 Visual Studio Community 時勾選 Help Viewer，就能在 Visual Studio Community 中叫出 Help Viewer，然後選擇下載 .NET API Reference，即可將整套文件安裝到電腦裡離線閱讀。<br>
 				</p>
@@ -470,7 +517,7 @@
 				<p>
 					到 <a href='http://github.com/dotnet/docfx'>GitHub</a> 下載 docfx。<br>
 					<br>
-					檢查你電腦有沒有 C:\Program Files (x86)\Reference Assemblies，沒有的話，到 <a href='http://dotnet.microsoft.com/en-us/download/dotnet-framework/net48' target='_blank'>Download .NET Framework 4.8</a> 下載 Developer pack 和「中文 (繁體) 」語言包，安裝後就有了。
+					檢查你電腦有沒有 C:\Program Files (x86)\Reference Assemblies，沒有的話，到 <a href='http://dotnet.microsoft.com/en-us/download/dotnet-framework/net48'>Download .NET Framework 4.8</a> 下載 Developer pack 和「中文 (繁體) 」語言包，安裝後就有了。
 				</p>
 			</section>
 			<section>
