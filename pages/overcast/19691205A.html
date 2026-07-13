@@ -192,12 +192,12 @@
 				import os
 
 				print('Set-Cookie:user=Twideem Civs')
-				print('Set-Cookie:email=twideem@outlook.com')
+				print('Set-Cookie:email=twideem@gmail.com')
 				print()
 				print(os.environ['HTTP_COOKIE'])
 			</textarea>
 			<br>
-			重新整理網頁，會顯示 email=twideem@outlook.com; user=Twideem Civs，對它進行剖析就能獲取資料。<br>
+			重新整理網頁，會顯示 email=twideem@gmail.com; user=Twideem Civs，對它進行剖析就能獲取資料。<br>
 			<br>
 			不過上述工作可用 http.cookies 模組代勞，降低複雜度。
 		</p>
@@ -210,7 +210,7 @@
 
 					cookie = cookies.SimpleCookie()
 					cookie['user'] = 'Twideem Civs'
-					cookie['email'] = 'twideem@outlook.com'
+					cookie['email'] = 'twideem@gmail.com'
 
 					print(cookie)
 					print()
@@ -291,12 +291,12 @@
 
 						message = MIMEText('Hello!')
 						message['Subject'] = Header('To Twideem Civs')
-						message['To'] = Header('twideem@outlook.com')
+						message['To'] = Header('twideem@gmail.com')
 
 						try:
 							smtp = SMTP('smtp.gmail.com', 587)
 							smtp.login('帳號@gmail.com', '密碼') # 請輸入自己 Gmail 的帳號密碼
-							smtp.sendmail('你的信箱', ['twideem@outlook.com'], message.as_string())
+							smtp.sendmail('你的信箱', ['twideem@gmail.com'], message.as_string())
 						finally:
 							smtp.quit()
 
@@ -314,13 +314,13 @@
 
 						message = MIMEText('Hello!')
 						message['Subject'] = Header('To Twideem Civs')
-						message['To'] = Header('twideem@outlook.com')
+						message['To'] = Header('twideem@gmail.com')
 
 						try:
 							smtp = SMTP('smtp.gmail.com', 587)
 							smtp.starttls()
 							smtp.login('帳號@gmail.com', '密碼')
-							smtp.sendmail('你的信箱', ['twideem@outlook.com'], message.as_string())
+							smtp.sendmail('你的信箱', ['twideem@gmail.com'], message.as_string())
 						finally:
 							smtp.quit()
 					</textarea>
@@ -336,13 +336,13 @@
 
 						message = MIMEText('Hello!')
 						message['Subject'] = Header('To Twideem Civs')
-						message['To'] = Header('twideem@outlook.com')
+						message['To'] = Header('twideem@gmail.com')
 
 						try:
 							smtp = SMTP_SSL()
 							smtp.connect('smtp.gmail.com', 465)
 							smtp.login('帳號@gmail.com', '密碼')
-							smtp.sendmail('你的信箱', ['twideem@outlook.com'], message.as_string())
+							smtp.sendmail('你的信箱', ['twideem@gmail.com'], message.as_string())
 						finally:
 							smtp.quit()
 					</textarea>
@@ -377,12 +377,12 @@
 
 						message = MIMEText('Hello!')
 						message['Subject'] = Header('To Twideem Civs')
-						message['To'] = Header('twideem@outlook.com')
+						message['To'] = Header('twideem@gmail.com')
 
 						smtp = SMTP('localhost', 25)
 
 						try:
-							smtp.sendmail('', ['twideem@outlook.com'], message.as_string())
+							smtp.sendmail('', ['twideem@gmail.com'], message.as_string())
 						finally:
 							smtp.quit()
 					</textarea>
@@ -398,7 +398,7 @@
 						b'MIME-Version: 1.0'<br>
 						b'Content-Transfer-Encoding: 7bit'<br>
 						b'Subject: To Twideem Civs'<br>
-						b'To: twideem@outlook.com'<br>
+						b'To: twideem@gmail.com'<br>
 						b'X-Peer: 127.0.0.1'<br>
 						b''<br>
 						b'Hello!'<br>

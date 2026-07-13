@@ -1621,7 +1621,7 @@
 				<p>
 					<textarea class='brush:txt'>
 						user = Twideem Civs
-						email = twideem@outlook.com
+						email = twideem@gmail.com
 					</textarea>
 				</p>
 			</section>
@@ -1637,7 +1637,7 @@
 					<br>
 					<output>
 						Twideem Civs<br>
-						twideem@outlook.com
+						twideem@gmail.com
 					</output>
 				</p>
 			</section>
@@ -1657,7 +1657,7 @@
 							<?xml version="1.0" encoding="UTF-8"?>
 							<sample>
 								<user>Twideem Civs</user>
-								<email>twideem@outlook.com</email>
+								<email>twideem@gmail.com</email>
 							</sample>
 						</textarea>
 					</p>
@@ -1674,7 +1674,7 @@
 						<br>
 						<output>
 							Twideem Civs<br>
-							twideem@outlook.com
+							twideem@gmail.com
 						</output>
 					</p>
 				</section>
@@ -1690,7 +1690,7 @@
 							<email>user@e.mail</email>
 						</sample>');
 						$xml->user = 'Twideem Civs';
-						$xml->email = 'twideem@outlook.com';
+						$xml->email = 'twideem@gmail.com';
 						$xml->saveXML('sample.xml');
 					</textarea>
 					<br>
@@ -1698,7 +1698,7 @@
 						&lt;?xml version='1.0' encoding='UTF-8'?><br>
 						&lt;sample><br>
 						　　&lt;user>Twideem Civs&lt;/user><br>
-						　　&lt;email>twideem@outlook.com&lt;/email><br>
+						　　&lt;email>twideem@gmail.com&lt;/email><br>
 						&lt;/sample>
 					</output>
 				</p>
@@ -1712,7 +1712,7 @@
 							<?xml version="1.0" encoding="UTF-8"?>
 							<sample>
 								<users>
-									<user email="twideem@outlook.com">Twideem Civs</user>
+									<user email="twideem@gmail.com">Twideem Civs</user>
 									<user email="raideem@gmx.com">Raideem Toukin</user>
 								</users>
 							</sample>
@@ -1733,7 +1733,7 @@
 						<br>
 						<output>
 							Twideem Civs<br>
-							twideem@outlook.com<br>
+							twideem@gmail.com<br>
 							Raideem Toukin<br>
 							raideem@gmx.com
 						</output>
@@ -2012,10 +2012,10 @@
 				<textarea class='brush:php'>
 					<?php
 					# Array to JSON
-					$array1 = array('name'=>'Twideem Civs', 'email'=>'twideem@outlook.com');
+					$array1 = array('name'=>'Twideem Civs', 'email'=>'twideem@gmail.com');
 					echo json_encode($array1, JSON_UNESCAPED_UNICODE), PHP_EOL;
 					# JSON to Array
-					$json2 = '{"name":"Twideem Civs","email":"twideem@outlook.com"}';
+					$json2 = '{"name":"Twideem Civs","email":"twideem@gmail.com"}';
 					$array2 = json_decode($json2, TRUE);
 					echo $array2['name'], PHP_EOL,
 						 $array2['email'], PHP_EOL;
@@ -2032,8 +2032,8 @@
 				</textarea>
 				<br>
 				<output>
-					{"name":"Twideem Civs","email":"twideem@outlook.com"}<br>
-					Twideem Civs twideem@outlook.com<br>
+					{"name":"Twideem Civs","email":"twideem@gmail.com"}<br>
+					Twideem Civs twideem@gmail.com<br>
 					{"password":"abc123"}<br>
 					abc123
 				</output>
