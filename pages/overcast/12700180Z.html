@@ -87,7 +87,7 @@
 				php.exe 內建網頁伺服器的功能，切換到存放網頁的目錄，輸入：<br>
 				<br>
 				<output>
-					php.exe -S 127.0.0.1:80
+					php -S 127.0.0.1:80
 				</output>
 				<br>
 				這樣就能用網頁瀏覽器，輸入 http://127.0.0.1 連上網頁。<br>
@@ -106,7 +106,7 @@
 				php.exe 也有 Shell 模式可用，提供直接以 PHP 語言寫程式的環境：<br>
 				<br>
 				<output>
-					php.exe -a
+					php -a
 				</output>
 			</p>
 		</section>
@@ -889,7 +889,7 @@
 				若以直譯器的方式執行 PHP 程式碼時，隨後附加參數：<br>
 				<br>
 				<output>
-					pnp.exe main.php -abc -123
+					pnp main.php -abc -123
 				</output>
 				<br>
 				那 PHP 程式碼可以用 <code>$argv[0]</code> <code>$argv[1]</code> 之類的系統變數取得參數。
