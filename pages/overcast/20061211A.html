@@ -34,7 +34,7 @@
 		</section>
 		<hr>
 		<section>
-			<h3>直譯 *.js 檔</h3>
+			<h3>直譯 .js 檔</h3>
 			<p>
 				<output>
 					java -jar rhino.jar *.js
@@ -46,12 +46,12 @@
 					java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js
 				</output>
 				<br>
-				此外，若 *.js 原始碼檔案使用不含 BOM 的 UTF-8 字元編碼，在 Windows 會有亂碼的問題。這時要下 <code>-encoding UTF-8</code> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino.jar，也可以下 <code>-Dfile.encoding=UTF-8</code> 參數給 java.exe。<br>
+				此外，若 .js 原始碼檔案使用不含 BOM 的 UTF-8 字元編碼，在 Windows 會有亂碼的問題。這時要下 <code>-encoding UTF-8</code> 參數給 org.mozilla.javascript.tools.shell.Main 或 rhino.jar，也可以下 <code>-Dfile.encoding=UTF-8</code> 參數給 java.exe。<br>
 				<br>
 				其他常用的參數有：
 			</p>
 			<table>
-				<tr><td>-e 檔案<td>執行 *.js 檔案。
+				<tr><td>-e 檔案<td>執行 .js 檔案。
 				<tr><td>-f 檔案<td>讀取純文字文件，並嘗試執行裡面的內容，類似 eval(String)。
 				<tr><td>-opt -1 到 9<td>設定編譯的最佳化程度，0 表示關閉最佳化，編譯速度最快，程式品質最差。依次從 1 到 9 提升最佳化程度。還可設定為 -1 表示直譯就好，不用編譯。
 				<tr><td>-strict<td>全域範疇預設使用 ECMAScript 5 的嚴格模式，但函式範疇還是要下 "strict mode"。
@@ -61,13 +61,13 @@
 		</section>
 		<hr>
 		<section>
-			<h3>編譯 *.js 為 *.class</h3>
+			<h3>編譯 .js 為 .class</h3>
 			<p>
 				<output>
 					java -cp rhino.jar org.mozilla.javascript.tools.jsc.Main script.js
 				</output>
 				<br>
-				編譯出來的 *.class 是 Rhino 的 NativeFunction 物件，所以只用 java.exe 無法執行，得掛載 Rhino：<br>
+				編譯出來的 .class 是 Rhino 的 NativeFunction 物件，所以只用 java.exe 無法執行，得掛載 Rhino：<br>
 				<br>
 				<output>
 					java -cp .;rhino.jar script
@@ -102,7 +102,7 @@
 				<a href='#index4'>調用 Java API 傳入 Java 的類別時</a><br>
 				<a href='#index5'>覆載物件方法與實作介面功能</a><br>
 				<a href='#index6'>多執行緒</a><br>
-				<a href='#index7'>在 *.js 中載入其它 *.js</a><br>
+				<a href='#index7'>在 .js 中載入其它 .js</a><br>
 				<a href='#index8'>最頂層物件</a><br>
 				<a href='#index9'>列出 JavaScript 物件的屬性和方法</a><br>
 				<a href='#index10'>Rhino 內建屬性和函式</a><br>
@@ -116,9 +116,9 @@
 				<a href='#index12'>在 Java 寫 JavaScript 程式</a><br>
 				<a href='#index13'>使用新版 Rhino 在 Java 寫 JavaScript 程式</a><br>
 				<a href='#index14'>從 Java 傳資料給 JavaScript 程式</a><br>
-				<a href='#index15'>在 Java 載入 *.js 檔案</a><br>
-				<a href='#index16'>直接用 JDK 執行 *.js 檔</a><br>
-				<a href='#index17'>在 JDK 6/7 將 *.js 編譯成 *.class</a><br>
+				<a href='#index15'>在 Java 載入 .js 檔案</a><br>
+				<a href='#index16'>直接用 JDK 執行 .js 檔</a><br>
+				<a href='#index17'>在 JDK 6/7 將 .js 編譯成 .class</a><br>
 				<a href='#index18'>進入 JDK 內建的 Interactive mode</a><br>
 				<a href='#index19'>如何取得 Java 內建 JavaScript 引擎的版本</a>
 			</p>
@@ -410,7 +410,7 @@
 	</section>
 	<hr id='index7'>
 	<section>
-		<h2>在 *.js 中載入其它 *.js</h2>
+		<h2>在 .js 中載入其它 .js</h2>
 		<p>
 			<code>load('檔名.js')</code>
 		</p>
@@ -423,7 +423,7 @@
 			<br>
 			既然最頂層物件不同，能呼叫的內建函式<ins>1</ins> 也不盡相同，例如沒有 setTimeout() 可用。<br>
 			<br>
-			內建函式能否執行，要看執行的環境。在 interactive mode 所有功能都用，而直譯器執行 *.js 有些功能無法作用，例如 readline()。<br>
+			內建函式能否執行，要看執行的環境。在 interactive mode 所有功能都用，而直譯器執行 .js 有些功能無法作用，例如 readline()。<br>
 			<br>
 			其實 Java API 能做到的，盡量用 API 去完成，往往比用內建函式省事～
 		</p>
@@ -488,7 +488,7 @@
 					123
 				</output>
 				<br>
-				要拖曳檔案給 JavaScript 程式碼，可在執行 *.js 的批次檔用 %1 到 %9 當作參數：<br>
+				要拖曳檔案給 JavaScript 程式碼，可在執行 .js 的批次檔用 %1 到 %9 當作參數：<br>
 				<br>
 				<output>
 					java -cp .;rhino.jar org.mozilla.javascript.tools.shell.Main *.js %1
@@ -575,7 +575,7 @@
 				<br>
 				它並不是載入類別來用，而是直接執行寫在 exec() 裡面的程式。<br>
 				<br>
-				當 JavaScript 無法正常使用 Java API 的功能，不得不用 Java 設計成 *.class 來調用時，這機制是很棒的選擇！
+				當 JavaScript 無法正常使用 Java API 的功能，不得不用 Java 設計成 .class 來調用時，這機制是很棒的選擇！
 			</p>
 			<section>
 				<h4>Sample.java</h4>
@@ -764,7 +764,7 @@
 	</section>
 	<hr id='index15'>
 	<section>
-		<h2>在 Java 載入 *.js 檔案</h2>
+		<h2>在 Java 載入 .js 檔案</h2>
 		<hr>
 		<section>
 			<h3>script.js</h3>
@@ -804,7 +804,7 @@
 	</section>
 	<hr id='index16'>
 	<section>
-		<h2>直接用 JDK 執行 *.js 檔</h2>
+		<h2>直接用 JDK 執行 .js 檔</h2>
 		<p>
 			JDK 提供 jrunscript.exe 程式，有 JavaScript 直譯器的功能！
 		</p>
@@ -833,9 +833,9 @@
 	</section>
 	<hr id='index17'>
 	<section>
-		<h2>在 JDK 6/7 將 *.js 編譯成 *.class</h2>
+		<h2>在 JDK 6/7 將 .js 編譯成 .class</h2>
 		<p>
-			雖然 Java SE 6/7 內建 Rhino 引擎，但只打包部分功能，並未提供所有功能。所以要將 *.js 編譯成 *.class，得自行下載 Rhino，才有 org.mozilla.javascript.tools.jsc。
+			雖然 Java SE 6/7 內建 Rhino 引擎，但只打包部分功能，並未提供所有功能。所以要將 .js 編譯成 .class，得自行下載 Rhino，才有 org.mozilla.javascript.tools.jsc。
 		</p>
 	</section>
 	<hr id='index18'>

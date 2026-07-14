@@ -135,11 +135,11 @@
 			<p>
 				檔案名稱不用與類別名稱相同。<br>
 				<br>
-				無論有多少個類別，都只會編譯有 Main() 的類別為 *.exe 執行檔，所用到的類別都會編譯在裡面，而不是每個類別都編譯出一個 *.class 檔。<br>
+				無論有多少個類別，都只會編譯有 Main() 的類別為 .exe 執行檔，所用到的類別都會編譯在裡面，而不是每個類別都編譯出一個 .class 檔。<br>
 				<br>
 				沒有 package 綁資料夾的規定，只有用巢狀 namespace 在語法上建立關係。<br>
 				<br>
-				變數和方法預設 private，但類別預設為 internal，表示同屬一整個程式底下的組件（Assemblies）都能存取，也就是同屬於一個 *.exe 或 *.dll 底下的，都能存取。換句話說，如果 library.dll 有個 internal 的類別、屬性、方法，那就無法在 program.exe 中存取使用，只有同屬 library.dll 裡面的可以。<br>
+				變數和方法預設 private，但類別預設為 internal，表示同屬一整個程式底下的組件（Assemblies）都能存取，也就是同屬於一個 .exe 或 .dll 底下的，都能存取。換句話說，如果 library.dll 有個 internal 的類別、屬性、方法，那就無法在 program.exe 中存取使用，只有同屬 library.dll 裡面的可以。<br>
 				<br>
 				介面只能宣告函式，不能建立變數，而且無法指定存取權限，一律視為 public。<br>
 				<br>
@@ -745,7 +745,7 @@
 				extern 傳回值 函式名稱(參數);<br>
 			</code>
 			<br>
-			程式庫除了 DLL 檔，也支援 Linux 常用的 shared object 檔（*.so），但 DllImport 要下更多參數解決差異性問題，請參考 System.Runtime.InteropServices.DllImport 的 API。
+			程式庫除了 DLL 檔，也支援 Linux 常用的 shared object 檔（.so），但 DllImport 要下更多參數解決差異性問題，請參考 System.Runtime.InteropServices.DllImport 的 API。
 		</p>
 	</section>
 	<hr id='extensionmethod'>

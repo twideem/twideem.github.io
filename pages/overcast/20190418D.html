@@ -66,7 +66,7 @@
 			<p>
 				雖然 .NET Framework 已不再更新，未來只會發展 .NET Core，但編譯器是獨立為 Roslyn 專案另外發展的，所以仍在更新版本，目前已到 C# 11。<br>
 				<br>
-				請至 NuGet Gallery 的 <a href='http://www.nuget.org/packages/Microsoft.Net.Compilers.Toolset'>Microsoft.Net.Compilers.Toolset</a> 按 Download package 下載 *.nupkg 檔，不想安裝的話，可以用 ZIP 格式解壓開來，在 tasks 資料夾裡就有最新版本的 csc.exe。<br>
+				請至 NuGet Gallery 的 <a href='http://www.nuget.org/packages/Microsoft.Net.Compilers.Toolset'>Microsoft.Net.Compilers.Toolset</a> 按 Download package 下載 .nupkg 檔，不想安裝的話，可以用 ZIP 格式解壓開來，在 tasks 資料夾裡就有最新版本的 csc.exe。<br>
 				<br>
 				跟 Java 用新版 JDK 編譯出來的程式沒辦法在舊版 JRE 跑不一樣，以新版 csc.exe 編譯出來的程式，跟舊版都是一樣的 CLR 4 規格，能正常在 .NET Framework 4.8 執行。<br>
 				<br>
@@ -146,7 +146,7 @@
 				gsudo.exe MyProgram.exe
 			</output>
 			<br>
-			把這樣的指令寫在 *.bat 批次檔，代替 MyProgram.exe 可執行檔作為啟動應用程式的檔案吧！
+			把這樣的指令寫在 .bat 批次檔，代替 MyProgram.exe 可執行檔作為啟動應用程式的檔案吧！
 		</p>
 	</section>
 	<hr id='jscript'>
@@ -257,7 +257,7 @@
 			<p>
 				JScript .NET 不支援泛型語法，因此無法正常操作像是 System.Collections.Generic 的類別。<br>
 				<br>
-				真的要用泛型的類別，只能先用 C# 重新包裝成不用泛型的類別，再編譯成 *.dll 給 JScript .NET 使用。
+				真的要用泛型的類別，只能先用 C# 重新包裝成不用泛型的類別，再編譯成 .dll 給 JScript .NET 使用。
 			</p>
 		</section>
 		<hr>
@@ -491,13 +491,13 @@
 						<br>
 						<code>電腦\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Help</code><br>
 						<br>
-						將 Help 匯出為 *.reg 檔。
+						將 Help 匯出為 .reg 檔。
 					</p>
 				</section>
 				<section>
 					<h5>還原 Help Viewer</h5>
 					<p>
-						移除 Visual Studio，然後把複製的資料夾放回原位，再執行匯出的 *.reg 登錄檔，就能執行 Help Viewer 了。
+						移除 Visual Studio，然後把複製的資料夾放回原位，再執行匯出的 .reg 登錄檔，就能執行 Help Viewer 了。
 					</p>
 				</section>
 			</section>
@@ -566,7 +566,7 @@
 						System.Xml.xml<br>
 					</code>
 					<br>
-					雖然沒有涵蓋所有 .NET Framework 的組件，但這些足夠絕大多數開發場合了，日後視需要再自行追加 *.dll 和 *.xml 上去，重新製作一份 API 文件就好。<br>
+					雖然沒有涵蓋所有 .NET Framework 的組件，但這些足夠絕大多數開發場合了，日後視需要再自行追加 .dll 和 .xml 上去，重新製作一份 API 文件就好。<br>
 					<br>
 					然後修改 <code>docfx.json</code> 檔案，將 metadata 的部分改為：<br>
 					<br>
@@ -633,7 +633,7 @@
 						],
 					</textarea>
 					<br>
-					中文版之所以複製到 refasm 資料夾，是為了讓中文版 *.xml 和 *.dll 放在一起，這樣 DocFX 才會取得中文說明。而英文版 *.xml 已經跟 *.dll 放在一起了，所以直接用 C:\Program Files (x86)\⋯\.NETFramework\v4.8 這現成的資料夾就好。
+					中文版之所以複製到 refasm 資料夾，是為了讓中文版 .xml 和 .dll 放在一起，這樣 DocFX 才會取得中文說明。而英文版 .xml 已經跟 .dll 放在一起了，所以直接用 C:\Program Files (x86)\⋯\.NETFramework\v4.8 這現成的資料夾就好。
 				</p>
 			</section>
 		</section>

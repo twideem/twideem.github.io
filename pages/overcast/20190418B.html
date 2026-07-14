@@ -540,7 +540,7 @@
 						CCC
 					</output>
 					<br>
-					別忘了 LinqExtensions 可以單獨寫在一個 *.cs 檔案，C# 原本就能將類別分開寫的關係，Program 無須 using 就能載入使用。
+					別忘了 LinqExtensions 可以單獨寫在一個 .cs 檔案，C# 原本就能將類別分開寫的關係，Program 無須 using 就能載入使用。
 				</p>
 			</section>
 		</section>
@@ -2033,9 +2033,9 @@
 		<p>
 			WPF（Windows Presentation Foundation）是 .NET Framewrok 3.0 新增的 UI 框架，基於 XML 和向量繪圖技術，能將使用者介面另外寫成 XAML（eXtensible Application Markup Language），與程式碼分離。<br>
 			<br>
-			設計 WPF 程式，真正標準的做法，是把建立視窗的前置性作業寫在 *.csproj 專案檔，程式碼只要一行 InitializeComponent() 就好。不過這適合用 msbuild.exe 編譯，且 *.csproj 不適合手寫，通常由 Visual Studio .NET 代勞。<br>
+			設計 WPF 程式，真正標準的做法，是把建立視窗的前置性作業寫在 .csproj 專案檔，程式碼只要一行 InitializeComponent() 就好。不過這適合用 msbuild.exe 編譯，且 .csproj 不適合手寫，通常由 Visual Studio .NET 代勞。<br>
 			<br>
-			本文示範的做法是用 csc.exe 編譯，所以載入 *.xaml 建立視窗的工作是寫在程式碼裡面。<br>
+			本文示範的做法是用 csc.exe 編譯，所以載入 .xaml 建立視窗的工作是寫在程式碼裡面。<br>
 			<br>
 			雖然很少人這樣寫 WPF 程式，但不失為一種做法，方便只用 Windows 10 內建的 .NET Framework 4.8 就能編譯出來～
 		</p>

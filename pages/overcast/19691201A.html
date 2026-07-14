@@ -1156,13 +1156,13 @@
 			<br>
 			gzip 是 GNU Project 推出的檔案壓縮工具，用來取代 UNIX 有專利限制的 compress 工具。由於 GNU 草創時有個精神，就是善用已存在的套件，不要重複造輪胎，所以 gzip 只能壓縮檔案，不能打包檔案：「打包已經有 tar 了。」<br>
 			<br>
-			於是早年玩 Linux 時，經常看到 *.tar.gz 的副檔名，就是先把多個檔案 tar，再對它 gzip。<br>
+			於是早年玩 Linux 時，經常看到 .tar.gz 的副檔名，就是先把多個檔案 tar，再對它 gzip。<br>
 			<br>
 			後來出現壓縮率更好的 bzip<ins>2</ins> 和 xz，gzip 已不再是 GNU/Linux 主要的壓縮格式。但為了相容舊機器，GNU/Linux 開放下載的程式，還是會另外提供 gzip 的檔案，能見度很高。
 		</p>
 		<hr>
 		<section>
-			<h3>*.tar</h3>
+			<h3>.tar</h3>
 			<p>
 				<textarea class='brush:py'>
 					import tarfile
@@ -1179,7 +1179,7 @@
 		</section>
 		<hr>
 		<section>
-			<h3>*.gz</h3>
+			<h3>.gz</h3>
 			<p>
 				<textarea class='brush:py'>
 					import gzip
@@ -1198,7 +1198,7 @@
 		</section>
 		<hr>
 		<section>
-			<h3>*.bz2</h3>
+			<h3>.bz2</h3>
 			<p>
 				<textarea class='brush:py'>
 					import bz2
@@ -1215,7 +1215,7 @@
 		</section>
 		<hr>
 		<section>
-			<h3>*.xz</h3>
+			<h3>.xz</h3>
 			<p>
 				<textarea class='brush:py'>
 					import lzma
@@ -1237,7 +1237,7 @@
 		<p>
 			Phil Katz 設計的 PKARC 軟體，因為侵犯了 System Enhancement Associates 公司的 ARC 專利，於是在 1989 年重新開發出 PKZIP，使用自己發明的 Deflate 無損壓縮演算法，還將格式免費開放使用，成為廣受歡迎的壓縮格式。1991 年，Nico Mak Computing 為 PKZIP 提供了直覺好用的圖形化介面，名為 WinZip，以共享軟體釋出，成為 Windows 時代每個人必裝的壓縮軟體，造就現在流傳最廣的壓縮格式。<br>
 			<br>
-			雖然隨著時代的進步，ZIP 格式已是落後的壓縮技術，但流傳最廣的關係，若不著重壓縮比率，只要求能把檔案快速壓縮成一個封裝檔案時，還是會採用 ZIP 格式，例如看漫畫軟體的 *.cbz、LibreOffice 的 *.odt、Java 的 *.jar，其實都是用 ZIP 格式的壓縮檔。
+			雖然隨著時代的進步，ZIP 格式已是落後的壓縮技術，但流傳最廣的關係，若不著重壓縮比率，只要求能把檔案快速壓縮成一個封裝檔案時，還是會採用 ZIP 格式，例如看漫畫軟體的 .cbz、LibreOffice 的 .odt、Java 的 .jar，其實都是用 ZIP 格式的壓縮檔。
 		</p>
 		<hr>
 		<section>
@@ -1345,7 +1345,7 @@
 	<section>
 		<h2>logging</h2>
 		<p>
-			對動態型別表述語言的 Python 來說，使用 *.log 檔案紀錄程式執行的動向，可事後獲得靜態型別檢查般的好處，藉由追蹤程式執行的動向，找出問題的環節在哪。<br>
+			對動態型別表述語言的 Python 來說，使用 .log 檔案紀錄程式執行的動向，可事後獲得靜態型別檢查般的好處，藉由追蹤程式執行的動向，找出問題的環節在哪。<br>
 			<br>
 			為程式寫日誌，就像寫程式要宣告資料型態屬於麻煩的差事，所以你不必因為 Python 內建 logging  這套好用的模組，就覺得寫程式非得用它嚴密監控程式不可。只在你的程式必須維持品質時再寫就好。<br>
 			<br>
@@ -1450,7 +1450,7 @@
 	<footer>
 		<p>
 			[1] 後來以毫秒數為單位，而變成浮點數。<br>
-			[2] 附帶一提，bzip 因為使用的演算法有專利問題，所以重新設計出 bzip2，不再使用了！因此經常看到的副檔名是 *.tar.bz2。
+			[2] 附帶一提，bzip 因為使用的演算法有專利問題，所以重新設計出 bzip2，不再使用了！因此經常看到的副檔名是 .tar.bz2。
 		</p>
 	</footer>
 </article>
