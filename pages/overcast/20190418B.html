@@ -1830,7 +1830,7 @@
 							// 等檔案壓縮完後
 							Process process = Process.Start("C:/Program Files/7-Zip/7z.exe", "a 我的壓縮檔.7z 我的資料夾");
 							process.WaitForExit();
-							// 再解壓檔案。
+							// 再解壓檔案
 							Process.Start("C:/Program Files/7-Zip/7z.exe", "x 我的壓縮檔.7z");
 						}
 					}
@@ -1872,6 +1872,10 @@
 				</output>
 			</p>
 		</section>
+		<hr>
+		<p>
+			但 Process 出狀況的機會遠比一般檔案讀寫來得高，比如找不到程式、參數有問題，所以建議寫在 try.. finally..，或者用 using() 區塊自動 Dispose，否則極有可能不會執行 Dispose()。
+		</p>
 	</section>
 	<hr id='kill'>
 	<section>
