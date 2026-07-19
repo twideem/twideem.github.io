@@ -30,19 +30,19 @@
 				<button onclick='猜拳(2)'>布</button>
 				<p>請猜拳！</p>
 				<script>
-					let 出拳=['剪刀','石頭','布'];
-					let 訊息=document.querySelector('p');
-					function 猜拳(玩家){
-						let 電腦 = Math.floor(Math.random()*3);
-						switch((玩家-電腦+3)%3){
+					let 出拳 = ['剪刀', '石頭', '布'];
+					let 訊息 = document.querySelector('p');
+					function 猜拳(玩家) {
+						let 電腦 = Math.floor(Math.random() * 3);
+						switch ((玩家 - 電腦 + 3)%3) {
 						case 0:
-							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[電腦]} = 平手。`;
+							訊息.innerHTML = `${出拳[玩家]} vs ${出拳[電腦]} = 平手。`;
 							break;
 						case 1:
-							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[電腦]} = 你贏了！`;
+							訊息.innerHTML = `${出拳[玩家]} vs ${出拳[電腦]} = 你贏了！`;
 							break;
 						case 2:
-							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[電腦]} = 你輸了～`;
+							訊息.innerHTML = `${出拳[玩家]} vs ${出拳[電腦]} = 你輸了～`;
 						}
 					}
 				</script>
@@ -56,16 +56,16 @@
 				<button onclick='猜拳(2)'>布</button>
 				<p>請猜拳！</p>
 				<script>
-					let 出拳=['剪刀','石頭','布'];
-					let 訊息=document.querySelector('p');
-					function 猜拳(玩家){
-						let 機率=Math.ceil(Math.random()*100);
-						if(機率<=50)
-							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[(玩家+1)%3]} = 你輸了～`;
-						else if(機率<=75)
-							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[玩家]} = 平手。`;
+					let 出拳 = ['剪刀', '石頭', '布'];
+					let 訊息 = document.querySelector('p');
+					function 猜拳(玩家) {
+						let 機率 = Math.ceil(Math.random() * 100);
+						if (機率 <= 50)
+							訊息.innerHTML = `${出拳[玩家]} vs ${出拳[(玩家+1)%3]} = 你輸了～`;
+						else if (機率 <= 75)
+							訊息.innerHTML = `${出拳[玩家]} vs ${出拳[玩家]} = 平手。`;
 						else
-							訊息.innerHTML=`${出拳[玩家]} vs ${出拳[(玩家+2)%3]} = 你贏了！`;
+							訊息.innerHTML = `${出拳[玩家]} vs ${出拳[(玩家+2)%3]} = 你贏了！`;
 					}
 				</script>
 			</textarea>
