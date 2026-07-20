@@ -1290,9 +1290,7 @@
 			<br>
 			既然 StringBuilder 是特別用來變更內容用的，因此有更豐富的文字修改能力，可以方便開發者編輯字串內容。但不支援 Regular Expression，因此不是用來取代 String 的，而是輔助用的，適合用在插入與刪除的場合。<br>
 			<br>
-			至於 StringBuffer，其實與 StringBuilder 一樣，只差在支援多執行緒；如果設計上沒用到多執行緒，那使用 StringBuilder 有更佳的執行效能。<br>
-			<br>
-			StringBuilder 和 StringBuffer 是很好的 Builder 設計模式案例。
+			至於 StringBuffer，其實與 StringBuilder 一樣，只差在支援多執行緒；如果設計上沒用到多執行緒，那使用 StringBuilder 有更佳的執行效能。
 		</p>
 		<hr>
 		<section>
@@ -1569,6 +1567,12 @@
 				</output>
 			</p>
 		</section>
+		<hr>
+		<footer>
+			<p>
+				[*] StringBuilder 和 StringBuffer 是很好的 builder 設計模式案例。
+			</p>
+		</footer>
 	</section>
 	<hr id='20050123'>
 	<section>
@@ -2140,7 +2144,7 @@
 	<section>
 		<h2>Collections 速成</h2>
 		<p>
-			如果你懂得根據資料的處理方式，善用合適的 Collection，可以簡化程式碼的結構，提升可讀性。例如既要過濾重複資料、又要排序資料，那直接用 TreeSet 一次搞定，要比先用 HashSet 過濾，再轉存到 ArrayList 讓 java.util.Collections.sort()<ins>1</ins> 排序來得乾淨俐落！<br>
+			如果你懂得根據資料的處理方式，善用合適的 Collection，可以簡化程式碼的結構，提升可讀性。例如既要過濾重複資料、又要排序資料，那直接用 TreeSet 一次搞定，要比先用 HashSet 過濾，再轉存到 ArrayList 讓 java.util.Collections.sort() 排序來得乾淨俐落！<br>
 			<br>
 			反過來，明明 Java 已經提供這些高效能演算法的資料結構，卻還自己土法煉鋼去處理，變成要敲二三十行的程式碼，錯失只需兩三行程式就能搞定的快感，而且處理時間可能要多兩三倍。
 		</p>
@@ -2169,7 +2173,7 @@
 				巡訪資料：<br>
 			<p>
 			<table>
-				<tr><td>Iterator<td>使用 hasNext() 和 next() 巡訪資料，活生生的 Iterator 設計模式案例。
+				<tr><td>Iterator<td>使用 hasNext() 和 next() 巡訪資料。
 			</table>
 			<p>
 				舊版做法：<br>
@@ -2287,7 +2291,7 @@
 					}
 				</textarea>
 				<br>
-				然而，這樣做是需要犧牲的！例如 Collection 介面並沒有 List 介面的 get(int)，因此雖然可以從 Set 介面替換為 List 介面，但既然使用 Collection 介面，就不認得 get(int)，因此只能用 iterator() 來巡訪資料<ins>2</ins>。<br>
+				然而，這樣做是需要犧牲的！例如 Collection 介面並沒有 List 介面的 get(int)，因此雖然可以從 Set 介面替換為 List 介面，但既然使用 Collection 介面，就不認得 get(int)，因此只能用 iterator() 來巡訪資料<ins>1</ins>。<br>
 				<br>
 				這是理所當然的，既然要能隨時互相替換，那就應該用彼此都有的方式來操作。<br>
 				<br>
@@ -2382,8 +2386,9 @@
 		<hr>
 		<footer>
 			<p>
-				[1] 對 Collections.sort() 傳入一個 Comparator，體現了 Strategy 設計模式。<br>
-				[2] 頂多用 toArray() 轉成陣列再處理。
+				[1] 頂多用 toArray() 轉成陣列再處理。<br>
+				[*] Iterator 和 Enumeration 是活生生的 iterator 設計模式。<br>
+				[*] 對 Collections.sort() 傳入一個 Comparator，體現了 strategy 設計模式。
 			</p>
 		</footer>
 	</section>
@@ -3445,10 +3450,14 @@
 				Runtime.getRuntime().exec("CMD /C DEL /Q 資料夾");
 			</textarea>
 			<br>
-			這種做法之所以不鼓勵，就是外部程式出錯時，無法在 Java 抓蟲除錯。只有一兩個功能的小程式，用用很可以，但不要濫用，要懂得做取捨～<br>
-			<br>
-			Runtime.getRuntime() 是很典型的 Singleton 設計模式案例。
+			這種做法之所以不鼓勵，就是外部程式出錯時，無法在 Java 抓蟲除錯。只有一兩個功能的小程式，用用很可以，但不要濫用，要懂得做取捨～
 		</p>
+		<hr>
+		<footer>
+			<p>
+				[*] Runtime.getRuntime() 是很典型的 singleton 設計模式案例。
+			</p>
+		</footer>
 	</section>
 	<hr id='20001009'>
 	<section>
@@ -3539,7 +3548,7 @@
 		<footer>
 			<p>
 				[*] 可進一步參考《<a href='20001016A.html'>Swing 速用表</a>》與《<a href='20001023A.html'>AWT 事件速用表</a>》。<br>
-				[*] 在《AWT 事件速用表》中可以看到 Adapter 設計模式。
+				[*] 在《AWT 事件速用表》中可以看到 adapter 設計模式。
 			</p>
 		</footer>
 	</section>
@@ -4483,7 +4492,7 @@
 			<p>
 				除非你嫌墨匣太多，否則建議安裝 <a href='http://sourceforge.net/projects/pdfcreator/'>PDFCreator</a> 充當印表機，在練習列印的功能時，將列印結果以 PDF 文件來儲存。或者 Windows Vista 開始內建的 Microsoft XPS Document Writer 也有同樣功能。<br>
 				<br>
-				這樣在執行列印功能時，就不用拿真的印表機來測試，列印的結果改用 PDF 文件或 XPS 文件來輸出與顯示：
+				這樣在執行列印功能時，就不用拿真的印表機來測試，列印的結果改用 PDF 文件或 XPS 文件來輸出與顯示～
 			</p>
 		</section>
 		<hr>
@@ -4626,6 +4635,13 @@
 				</textarea>
 			</p>
 		</section>
+		<hr>
+		<footer>
+			<p>
+				[*] 利用 interface 的特性，實作 print()，是 template method 的很好例子。<br>
+				[*] PrinterJob 的 setPrintable() 也是 strategy 設計模式的很好例子，藉由它跟 Collections.sort() 的差別，比如 stateful 和 stateless、callbacks 的延遲與同步，可以開闊你對這個設計模式的視野，用來作為最主要的物件導向程式設計手法。
+			</p>
+		</footer>
 	</section>
 	<hr id='20030224'>
 	<section>
@@ -4681,12 +4697,18 @@
 				</output>
 			</p>
 		</section>
+		<hr>
+		<footer>
+			<p>
+				[*] 但這是一種 prototype 設計模式的表現，但不能說是很好的例子，因為它設計不良。
+			</p>
+		</footer>
 	</section>
 	<hr id='20050504'>
 	<section>
 		<h2>Observer 設計模式</h2>
 		<p>
-			Java 內建設計模式中的 Observer，它用來監視物件狀態，當物件狀態改變時，它會通知監視該物件的對象，讓監視者可以做出反應；本範例中 View 物件將監視 Model 物件。
+			Java 內建設計模式中的 observer，它用來監視物件狀態，當物件狀態改變時，它會通知監視該物件的對象，讓監視者可以做出反應；本範例中 View 物件將監視 Model 物件。
 		</p>
 		<hr>
 		<section>
