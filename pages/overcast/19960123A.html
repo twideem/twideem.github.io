@@ -2247,7 +2247,7 @@
 		<section>
 			<h3>補充</h3>
 			<p>
-				為什麼使用 List list=new ArrayList() 或 Set set=new HashSet() 的方式來宣告參照？這是為了往後隨時可以抽換成其它類別。當我們發現所選的群集在處理資料並不適任時，就可以由 ArrayList 抽換成 LinkedList、或由 HashSet 抽換成 LinkedHashSet，而不影響程式其它部分。<br>
+				為什麼使用 List list = new ArrayList() 或 Set set = new HashSet() 的方式來宣告參照？這是為了往後隨時可以抽換成其它類別。當我們發現所選的群集在處理資料並不適任時，就可以由 ArrayList 抽換成 LinkedList、或由 HashSet 抽換成 LinkedHashSet，而不影響程式其它部分。<br>
 				<br>
 				當然，還可以更進一步！如果希望將來可以在 List 與 Set 中替換，那可以改用 Collection 介面，因為它是 List 與 Set 的共通介面：<br>
 				<br>
@@ -2379,8 +2379,6 @@
 					BBB<br>
 					CCC
 				</output>
-				<br>
-				如果可以再寫成 <code>List&lt;String> list = {"AAA","BBB","CCC"}</code> 就好了，可惜 Java 不支援。
 			</p>
 		</section>
 		<hr>
