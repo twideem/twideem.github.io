@@ -60,8 +60,8 @@ section td{vertical-align:top}
 td:nth-child(1){color:#396;width:35%}
 td:nth-child(2){color:#999}
 td:only-of-type{color:inherit}
-section section section table{margin-left:43px}
-section section section section table{margin-left:58px}
+section section section table{margin-left:44px}
+section section section section table{margin-left:59px}
 ins{text-decoration:none}
 ins::before{content:'['}
 ins::after{content:']'}
