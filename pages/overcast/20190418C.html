@@ -120,7 +120,11 @@
 	<section>
 		<h2>結束視窗應用程式</h2>
 		<p>
-			使用 System.Windows.Forms.Application 的 <code>Exit()</code> 方法結束視窗應用程式。
+			用 <code>Application.Exit()</code> 結束視窗應用程式。<br>
+			<br>
+			可以的話，建議使用 <code>this.Close()</code> 關閉視窗，它會呼叫 Application.Exit()。<br>
+			<br>
+			怕關閉不乾淨的話，可多一行 <code>Environment.Exit(Environment.ExitCode)</code> 結束程式。
 		</p>
 	</section>
 	<hr id='bounds'>
