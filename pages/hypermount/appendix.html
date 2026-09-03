@@ -73,13 +73,10 @@
 				<br>
 				<textarea class='brush:js'>
 					window.onkeydown = function() {     // 按下鍵盤事件
-
 						document.write('AAA');          // 首先顯示 AAA
-
 						window.onkeydown = function() { // 才顯示完就改寫 onkeydown 的內容
 							document.write('BBB');      // 以後改成顯示 BBB
 						};
-
 					};
 				</textarea>
 				<br>
@@ -479,11 +476,8 @@
 					<textarea class='brush:html'>
 						<script>
 							let request = new XMLHttpRequest();
-
 							request.open('get', 'data.txt');
-
 							request.send();
-
 							request.onload = function() {
 								document.write(request.responseText);
 							};
@@ -541,15 +535,11 @@
 					<textarea class='brush:html'>
 						<script>
 							let request = new XMLHttpRequest();
-
 							request.responseType = 'document';
-
 							request.onload = function() {
 								document.body.appendChild(a.responseXML.querySelector('section'));
 							};
-
 							request.open('get', 'data.html');
-
 							request.send();
 						</script>
 					</textarea>
